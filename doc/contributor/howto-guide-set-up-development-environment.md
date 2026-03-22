@@ -34,13 +34,13 @@ can be used with many IDEs.
 ## Compile the Code
 
 ```bash
-# TODO
+swift build
 ```
 
 ## Running the unit tests
 
 ```bash
-# TODO
+swift test
 ```
 
 ## Exhaustive builds and tests

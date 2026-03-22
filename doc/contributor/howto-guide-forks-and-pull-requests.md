@@ -10,7 +10,7 @@ used it in a while and want a refresher this might be useful.
 In this project we use the (more or less) standard
 [GitHub workflow][workflow-link]:
 
-You create a [fork][fork-link] of [google-cloud-rust][repo-link]. You can think
+You create a [fork][fork-link] of [google-cloud-swift][repo-link]. You can think
 of a "fork" as a full copy of the original repository, including all its history
 and branches. Then [clone][about-clone] that fork into your workstation:
 
@@ -177,6 +177,6 @@ contributor, or of a tool like dependabot. To do so, follow the
 [add-to-pr]: https://tighten.com/insights/adding-commits-to-a-pull-request/
 [fork-link]: https://guides.github.com/activities/forking/
 [mastering-issues]: https://guides.github.com/features/issues/
-[repo-link]: https://github.com/googleapis/google-cloud-rust.git
+[repo-link]: https://github.com/googleapis/google-cloud-swift.git
 [syncing-a-fork]: https://help.github.com/articles/syncing-a-fork/
 [workflow-link]: https://guides.github.com/introduction/flow/
