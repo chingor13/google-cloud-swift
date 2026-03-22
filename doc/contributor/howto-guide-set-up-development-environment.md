@@ -58,7 +58,8 @@ consider testing all the packages.
 ## Running lints and unit tests
 
 ```bash
-# TODO
+swift package --package-path Packages/GoogleCloudAUth plugin format-source-code
+swift package --package-path Packages/GoogleCloudAUth plugin lint-source-code
 git status # Shows any diffs created by `cargo fmt`
 ```
 
