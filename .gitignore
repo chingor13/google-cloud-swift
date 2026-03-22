@@ -18,6 +18,9 @@ Packages/*/.build/
 .swiftpm/xcode/package.xcworkspace/contents.xcwrappercontents
 .swiftpm/configuration/
 
+# The build directory for Rust
+target/
+
 # We use a few Python tools for development [^1]. Reserve `.env/` to install
 # these tools in a local Python virtual environment.
 /.venv/

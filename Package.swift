@@ -18,11 +18,21 @@ import PackageDescription
 
 let package = Package(
     name: "GoogleCloudSwift",
-    platforms: [.iOS(.v17), .macOS(.v14)],
+    platforms: [.iOS(.v17), .macOS(.v15)],
+    traits: [
+        "IntegrationTests"
+    ],
     dependencies: [
         // Reference subpackages via local paths
         .package(path: "./Packages/GoogleCloudAuth"),
         .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
     ],
-    targets: []
+    targets: [
+        .testTarget(
+            name: "IntegrationTests",
+            dependencies: [
+                .product(name: "GoogleCloudAuth", package: "GoogleCloudAuth")
+            ]
+        )
+    ]
 )
