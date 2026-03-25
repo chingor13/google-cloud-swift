@@ -41,7 +41,4 @@ jobs:
           swift-version: '6.2'
 
       - name: Format Swift Code
-        run: ./ci/format.sh
-
-      - name: Detect drift
-        run: git diff --exit-code
+        run: ./ci/lint.sh
