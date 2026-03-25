@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Copyright 2026 Google LLC
 #
@@ -35,14 +35,22 @@ fi
 errors=0
 packages=0
 
+echo "--- Formatting Root Package ---"
+if swift package plugin --allow-writing-to-package-directory format-source-code; then
+    echo "✓ Root Package passed"
+else
+    echo "✗ Root Package failed" >&2
+    errors=$((errors + 1))
+fi
+
 for package_dir in "${PACKAGES_DIR}"/*/; do
     [[ -f "${package_dir}/Package.swift" ]] || continue
 
     package_name="$(basename "${package_dir}")"
     packages=$((packages + 1))
-    echo "--- Linting ${package_name} ---"
+    echo "--- Formatting ${package_name} ---"
 
-    if swift package --package-path "${package_dir}" plugin lint-source-code; then
+    if swift package --package-path "${package_dir}" plugin --allow-writing-to-package-directory format-source-code; then
         echo "✓ ${package_name} passed"
     else
         echo "✗ ${package_name} failed" >&2
@@ -56,7 +64,7 @@ if [[ ${packages} -eq 0 ]]; then
 fi
 
 echo ""
-echo "${packages} package(s) linted, ${errors} failure(s)."
+echo "${packages} package(s) formatted, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1

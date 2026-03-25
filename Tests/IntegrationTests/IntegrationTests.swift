@@ -18,54 +18,54 @@ import Testing
 
 #if IntegrationTests
 
-    @Test func authHeaders() async throws {
-        let credentials = try Credentials()
-        let headers = try await credentials.headers()
+  @Test func authHeaders() async throws {
+    let credentials = try Credentials()
+    let headers = try await credentials.headers()
 
-        #expect(!headers.isEmpty)
+    #expect(!headers.isEmpty)
 
-        // Convert to dictionary for easy lookup
-        let headerDict = Dictionary(uniqueKeysWithValues: headers)
-        let authValue = try #require(headerDict["authorization"])
-        #expect(authValue.hasPrefix("Bearer "))
+    // Convert to dictionary for easy lookup
+    let headerDict = Dictionary(uniqueKeysWithValues: headers)
+    let authValue = try #require(headerDict["authorization"])
+    #expect(authValue.hasPrefix("Bearer "))
+  }
+
+  @Test func listSecretsWithAuth() async throws {
+    // Read the project ID from the environment, defaulting to "coryan-test" if not set
+    let projectId = ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] ?? "coryan-test"
+
+    let url = URL(
+      string: "https://secretmanager.googleapis.com/v1/projects/\(projectId)/secrets")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+
+    // Initialize credentials and inject headers
+    let credentials = try Credentials()
+    let headers = try await credentials.headers()
+    for (key, value) in headers {
+      request.setValue(value, forHTTPHeaderField: key)
     }
 
-    @Test func listSecretsWithAuth() async throws {
-        // Read the project ID from the environment, defaulting to "coryan-test" if not set
-        let projectId = ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] ?? "coryan-test"
+    // Execute the authenticated request
+    let (data, response) = try await URLSession.shared.data(for: request)
+    let httpResponse = try #require(response as? HTTPURLResponse)
 
-        let url = URL(
-            string: "https://secretmanager.googleapis.com/v1/projects/\(projectId)/secrets")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+    // We expect this to succeed with authentication (200 OK)
+    #expect(
+      httpResponse.statusCode == 200,
+      "Expected 200 OK with auth, but got \(httpResponse.statusCode)")
 
-        // Initialize credentials and inject headers
-        let credentials = try Credentials()
-        let headers = try await credentials.headers()
-        for (key, value) in headers {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
+    // Parse the success response
+    let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
 
-        // Execute the authenticated request
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let httpResponse = try #require(response as? HTTPURLResponse)
-
-        // We expect this to succeed with authentication (200 OK)
-        #expect(
-            httpResponse.statusCode == 200,
-            "Expected 200 OK with auth, but got \(httpResponse.statusCode)")
-
-        // Parse the success response
-        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-
-        // Print the JSON response
-        if let json = json {
-            print("Response JSON: \(json)")
-        }
-
-        // The response should be a JSON object, possibly with a 'secrets' array if there are any
-        // or simply an empty object if no secrets exist, but the request itself should succeed.
-        #expect(json != nil)
+    // Print the JSON response
+    if let json = json {
+      print("Response JSON: \(json)")
     }
+
+    // The response should be a JSON object, possibly with a 'secrets' array if there are any
+    // or simply an empty object if no secrets exist, but the request itself should succeed.
+    #expect(json != nil)
+  }
 
 #endif

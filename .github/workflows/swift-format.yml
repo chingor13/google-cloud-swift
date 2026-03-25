@@ -1,0 +1,33 @@
+name: Swift Format
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  format:
+    name: Verify Swift Formatting
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
+
+      - name: Install Dependencies
+        run: |
+            set -e
+            sudo apt update -y
+            sudo apt install -y libncurses6
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@7ca6abe6b3b0e8b5421b88be48feee39cbf52c6a # ratchet:swift-actions/setup-swift@v2.4
+        with:
+          swift-version: '6.2'
+
+      - name: Format Swift Code
+        run: ./ci/format.sh
+
+      - name: Detect drift
+        run: git diff --exit-code
