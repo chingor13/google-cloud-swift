@@ -17,25 +17,22 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudSwift",
+  name: "GoogleCloudWkt",
   platforms: [
     .macOS(.v15)
   ],
-  traits: [
-    "IntegrationTests"
+  products: [
+    .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"])
   ],
   dependencies: [
-    // Reference subpackages via local paths
-    .package(path: "./Packages/GoogleCloudAuth"),
-    .package(path: "./Packages/GoogleCloudWkt"),
-    .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
+    .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0")
   ],
   targets: [
+    .target(
+      name: "GoogleCloudWkt",
+    ),
     .testTarget(
-      name: "IntegrationTests",
-      dependencies: [
-        .product(name: "GoogleCloudAuth", package: "GoogleCloudAuth")
-      ]
-    )
+      name: "DurationTest",
+      dependencies: ["GoogleCloudWkt"]),
   ]
 )
