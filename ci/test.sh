@@ -36,6 +36,8 @@ pushd "${PACKAGES_DIR}/auth/rust_auth_core" >/dev/null
 cargo build --release
 cargo run --bin uniffi-bindgen -- generate --library "target/release/librust_auth_core.${DYLIB_EXT}" --language swift --out-dir ../Sources/RustAuthCoreBridge
 popd >/dev/null
+# Format the generated code
+swift-format -i packages/auth/Sources/RustAuthCoreBridge/rust_auth_core.swift
 # Organize headers for SPM
 cp "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreFFI/include/"
 rm "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.modulemap"
