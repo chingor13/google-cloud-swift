@@ -17,26 +17,16 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudSwift",
+  name: "GoogleCloudSecurityPublicCaV1",
   platforms: [
     .macOS(.v15)
   ],
-  traits: [
-    "IntegrationTests"
-  ],
-  dependencies: [
-    // Reference local packages via paths
-    .package(path: "./packages/auth"),
-    .package(path: "./packages/wkt"),
-    .package(path: "./generated/google/cloud/security/publicca/v1"),
-    .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
+  products: [
+    .library(name: "GoogleCloudSecurityPublicCaV1", targets: ["GoogleCloudSecurityPublicCaV1"])
   ],
   targets: [
-    .testTarget(
-      name: "IntegrationTests",
-      dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth")
-      ]
-    )
+    .target(
+      name: "GoogleCloudSecurityPublicCaV1"
+    ),
   ]
 )
