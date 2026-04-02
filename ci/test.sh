@@ -32,16 +32,16 @@ packages=0
 
 # --- Pre-build step: Rust FFI Bindings ---
 echo "--- Building Rust bindings for GoogleCloudAuth ---"
-pushd "${PACKAGES_DIR}/GoogleCloudAuth/rust_auth_core" >/dev/null
+pushd "${PACKAGES_DIR}/auth/rust_auth_core" >/dev/null
 cargo build --release
 cargo run --bin uniffi-bindgen -- generate --library "target/release/librust_auth_core.${DYLIB_EXT}" --language swift --out-dir ../Sources/RustAuthCoreBridge
 popd >/dev/null
 # Organize headers for SPM
-cp "${PACKAGES_DIR}/GoogleCloudAuth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/GoogleCloudAuth/Sources/RustAuthCoreFFI/include/"
-rm "${PACKAGES_DIR}/GoogleCloudAuth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/GoogleCloudAuth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.modulemap"
+cp "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreFFI/include/"
+rm "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.modulemap"
 
 # Make sure the Linux runtime linker can find the shared library
-export LD_LIBRARY_PATH="${PACKAGES_DIR}/GoogleCloudAuth/rust_auth_core/target/release:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${PACKAGES_DIR}/auth/rust_auth_core/target/release:${LD_LIBRARY_PATH:-}"
 
 echo "--- Testing Root Package ---"
 pushd "${REPO_ROOT}" >/dev/null

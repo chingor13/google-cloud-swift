@@ -26,15 +26,15 @@ let package = Package(
   ],
   dependencies: [
     // Reference subpackages via local paths
-    .package(path: "./packages/GoogleCloudAuth"),
-    .package(path: "./packages/GoogleCloudWkt"),
+    .package(path: "./packages/auth"),
+    .package(path: "./packages/wkt"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
   ],
   targets: [
     .testTarget(
       name: "IntegrationTests",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "GoogleCloudAuth")
+        .product(name: "GoogleCloudAuth", package: "auth")
       ]
     )
   ]
