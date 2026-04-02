@@ -1,0 +1,40 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+language: swift
+version: v0.9.1-0.20260328133821-a87086efbeec
+repo: googleapis/google-cloud-swift
+sources:
+  conformance:
+    commit: b407e8416e3893036aee5af9a12bd9b6a0e2b2e6
+    sha256: 55912546338433f465a552e9ef09930c63b9eb697053937416890cff83a8622d
+  discovery:
+    commit: 3910620cfc0751697395bdfa2a837354b24425fc
+    sha256: 8b4640b40b43dcdd7d3e88ce610cf3787db82d8ff54c8897bfeebfd17509c1b7
+  googleapis:
+    commit: 59d5f2b46924714af627ac29ea6de78641a00835
+    sha256: 82a521f299cee025f1ffc0bf2e593b66d8c98c0e1a9ea994964344436a4abb91
+  protobuf:
+    commit: b407e8416e3893036aee5af9a12bd9b6a0e2b2e6
+    sha256: 55912546338433f465a552e9ef09930c63b9eb697053937416890cff83a8622d
+    subpath: src
+release:
+  ignored_changes:
+    - .repo-metadata.json
+default:
+  output: generated/
+libraries:
+  - name: GoogleCloudSecurityPubliccaV1
+    apis:
+      - path: google/cloud/security/publicca/v1
+    copyright_year: "2026"
