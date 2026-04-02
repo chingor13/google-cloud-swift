@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Runs swift-format lint for every sub-package found under `packages/`.
-# New sub-packages are picked up automatically — no changes to this script
+# Runs swift-format lint for every local package found under `packages/`.
+# New local packages are picked up automatically — no changes to this script
 # are required when adding one.
 #
 # Unfortunately, there are no standard or community tools to do this
@@ -50,7 +50,7 @@ for package_dir in "${PACKAGES_DIR}"/*/; do
     packages=$((packages + 1))
     echo "--- Linting ${package_name} ---"
 
-    # For sub-packages, we run swift-format directly on the Sources and Tests directories
+    # For local packages, we run swift-format directly on the Sources and Tests directories
     # to avoid the SPM plugin forcefully feeding the generated Rust bridge files.
     if swift run swift-format lint -r "${package_dir}/Sources" "${package_dir}/Tests"; then
         echo "✓ ${package_name} passed"
@@ -61,7 +61,7 @@ for package_dir in "${PACKAGES_DIR}"/*/; do
 done
 
 if [[ ${packages} -eq 0 ]]; then
-    echo "No sub-packages found under ${PACKAGES_DIR}" >&2
+    echo "No local packages found under ${PACKAGES_DIR}" >&2
     exit 1
 fi
 

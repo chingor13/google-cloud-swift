@@ -25,7 +25,7 @@ let package = Package(
     "IntegrationTests"
   ],
   dependencies: [
-    // Reference subpackages via local paths
+    // Reference local packages via paths
     .package(path: "./packages/auth"),
     .package(path: "./packages/wkt"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),

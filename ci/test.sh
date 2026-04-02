@@ -73,7 +73,7 @@ if [[ -d "${PACKAGES_DIR}" ]]; then
 fi
 
 echo ""
-echo "Root package + ${packages} sub-package(s) tested, ${errors} failure(s)."
+echo "Root package + ${packages} local package(s) tested, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1
