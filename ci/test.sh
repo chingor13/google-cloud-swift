@@ -18,7 +18,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-PACKAGES_DIR="${REPO_ROOT}/Packages"
+PACKAGES_DIR="${REPO_ROOT}/packages"
 
 # Determine the correct dynamic library extension for the current OS
 if [[ "$(uname)" == "Darwin" ]]; then

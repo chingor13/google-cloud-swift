@@ -26,8 +26,8 @@ let package = Package(
   ],
   dependencies: [
     // Reference subpackages via local paths
-    .package(path: "./Packages/GoogleCloudAuth"),
-    .package(path: "./Packages/GoogleCloudWkt"),
+    .package(path: "./packages/GoogleCloudAuth"),
+    .package(path: "./packages/GoogleCloudWkt"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
   ],
   targets: [
