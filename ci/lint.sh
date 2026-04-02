@@ -52,17 +52,12 @@ for package_dir in "${PACKAGES_DIR}"/*/; do
 
     # For sub-packages, we run swift-format directly on the Sources and Tests directories
     # to avoid the SPM plugin forcefully feeding the generated Rust bridge files.
-    pushd "${package_dir}" >/dev/null
-
-    # Check if there are formatting errors by running swift-format directly.
-    # It automatically reads the .swift-format file which contains the ignorePaths.
-    if swift run swift-format lint -r Sources Tests; then
+    if swift run swift-format lint -r "${package_dir}/Sources" "${package_dir}/Tests"; then
         echo "✓ ${package_name} passed"
     else
         echo "✗ ${package_name} failed" >&2
         errors=$((errors + 1))
     fi
-    popd >/dev/null
 done
 
 if [[ ${packages} -eq 0 ]]; then

@@ -24,9 +24,7 @@ let package = Package(
   products: [
     .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"])
   ],
-  dependencies: [
-    .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0")
-  ],
+
   targets: [
     .target(
       name: "GoogleCloudWkt",

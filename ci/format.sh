@@ -50,7 +50,7 @@ for package_dir in "${PACKAGES_DIR}"/*/; do
     packages=$((packages + 1))
     echo "--- Formatting ${package_name} ---"
 
-    if swift package --package-path "${package_dir}" plugin --allow-writing-to-package-directory format-source-code; then
+    if swift run swift-format format -i -r "${package_dir}/Sources" "${package_dir}/Tests"; then
         echo "✓ ${package_name} passed"
     else
         echo "✗ ${package_name} failed" >&2
