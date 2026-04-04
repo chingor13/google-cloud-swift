@@ -43,6 +43,6 @@ let package = Package(
       dependencies: [
         .product(name: "GoogleCloudSecurityPublicCaV1", package: "v1")
       ]
-    )
+    ),
   ]
 )

@@ -27,6 +27,6 @@ let package = Package(
   targets: [
     .target(
       name: "GoogleCloudSecurityPublicCaV1"
-    ),
+    )
   ]
 )
