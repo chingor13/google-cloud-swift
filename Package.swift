@@ -37,6 +37,12 @@ let package = Package(
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "auth")
       ]
+    ),
+    .testTarget(
+      name: "ProtoJSON",
+      dependencies: [
+        .product(name: "GoogleCloudSecurityPublicCaV1", package: "v1")
+      ]
     )
   ]
 )
