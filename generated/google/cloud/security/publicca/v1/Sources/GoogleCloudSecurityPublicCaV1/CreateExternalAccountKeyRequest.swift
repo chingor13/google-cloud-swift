@@ -17,7 +17,7 @@
 /// a given project.
 ///
 /// [google.cloud.security.publicca.v1.ExternalAccountKey]: `ExternalAccountKey`
-public struct CreateExternalAccountKeyRequest: Codable, Equatable, CustomDebugStringConvertible {
+public struct CreateExternalAccountKeyRequest: Codable, Equatable {
   /// Required. The parent resource where this external_account_key will be
   /// created. Format: projects/\[project_id\]/locations/\[location\]. At present
   /// only the "global" location is supported.
@@ -28,8 +28,4 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable, CustomDebugSt
   /// output only and all values are ignored. For the purpose of the
   /// CreateExternalAccountKeyRequest, set it to a default/empty value.
   public let externalAccountKey: ExternalAccountKey?
-
-  public var debugDescription: String {
-    "CreateExternalAccountKeyRequest(parent: \(parent), externalAccountKey: \(externalAccountKey?.debugDescription ?? "nil"))"
-  }
 }
