@@ -15,6 +15,9 @@
     "limitations under the License."
   ],
   "version": 1,
+  "indentation": {
+    "spaces": 2
+  },
   "maximumBlankLines": 1,
   "rules": {
     "NoEmptyLinesOpeningClosingBraces": true
