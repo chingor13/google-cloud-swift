@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
+
 /// Creates a new
 /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey] in
 /// a given project.
-///
-/// [google.cloud.security.publicca.v1.ExternalAccountKey]: `ExternalAccountKey`
 public struct CreateExternalAccountKeyRequest: Codable, Equatable {
   /// Required. The parent resource where this external_account_key will be
-  /// created. Format: projects/\[project_id\]/locations/\[location\]. At present
+  /// created. Format: projects/[project_id]/locations/[location]. At present
   /// only the "global" location is supported.
   public let parent: String
 
@@ -28,4 +28,13 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable {
   /// output only and all values are ignored. For the purpose of the
   /// CreateExternalAccountKeyRequest, set it to a default/empty value.
   public let externalAccountKey: ExternalAccountKey?
+
+  /// Initialize a new instance of `CreateExternalAccountKeyRequest`.
+  public init(
+    parent: String = String(),
+    externalAccountKey: ExternalAccountKey? = nil,
+  ) {
+    self.parent = parent
+    self.externalAccountKey = externalAccountKey
+  }
 }
