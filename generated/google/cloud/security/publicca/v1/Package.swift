@@ -17,16 +17,14 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudSecurityPublicCaV1",
-  platforms: [
-    .macOS(.v15)
-  ],
+  name: "GoogleCloudSecurityPubliccaV1",
+  platforms: [.macOS(.v15), .iOS(.v18)],
   products: [
-    .library(name: "GoogleCloudSecurityPublicCaV1", targets: ["GoogleCloudSecurityPublicCaV1"])
+    .library(name: "GoogleCloudSecurityPubliccaV1", targets: ["GoogleCloudSecurityPubliccaV1"])
   ],
   targets: [
     .target(
-      name: "GoogleCloudSecurityPublicCaV1"
+      name: "GoogleCloudSecurityPubliccaV1"
     )
   ]
 )

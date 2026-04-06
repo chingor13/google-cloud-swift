@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 
-@testable import GoogleCloudSecurityPublicCaV1
+@testable import GoogleCloudSecurityPubliccaV1
 
 @Suite struct CreateExternalAccountKeyRequestTests {
   @Test func testJSONSerialization() throws {

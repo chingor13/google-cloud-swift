@@ -42,7 +42,7 @@ let package = Package(
     .testTarget(
       name: "ProtoJSON",
       dependencies: [
-        .product(name: "GoogleCloudSecurityPublicCaV1", package: "v1")
+        .product(name: "GoogleCloudSecurityPubliccaV1", package: "v1")
       ]
     ),
   ]
