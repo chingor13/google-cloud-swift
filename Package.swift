@@ -30,6 +30,7 @@ let package = Package(
     .package(path: "./packages/wkt"),
     .package(path: "./generated/google/cloud/security/publicca/v1"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
   ],
   targets: [
     .testTarget(
