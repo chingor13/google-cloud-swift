@@ -21,7 +21,7 @@ import Testing
   @Test func testJSONSerialization() throws {
     let key = ExternalAccountKey(
       name: "test-only-name",
-      keyID: "my-key-id",
+      keyId: "my-key-id",
       b64MacKey: "my-secret-key".data(using: .utf8)!
     )
 
@@ -38,7 +38,7 @@ import Testing
 
     // JSONEncoder escapes slashes by default
     let expectedJSON =
-      #"{"b64MacKey":"\#(expectedSecretBase64)","keyID":"my-key-id","name":"test-only-name"}"#
+      #"{"b64MacKey":"\#(expectedSecretBase64)","keyId":"my-key-id","name":"test-only-name"}"#
 
     #expect(jsonString == expectedJSON)
   }
@@ -46,14 +46,14 @@ import Testing
   @Test func testJSONDeserialization() throws {
     let expectedSecretBase64 = "my-secret-key".data(using: .utf8)!.base64EncodedString()
     let jsonString =
-      #"{"b64MacKey":"\#(expectedSecretBase64)","keyID":"my-key-id","name":"test-only-name"}"#
+      #"{"b64MacKey":"\#(expectedSecretBase64)","keyId":"my-key-id","name":"test-only-name"}"#
     let data = jsonString.data(using: .utf8)!
 
     let decoder = JSONDecoder()
     let key = try decoder.decode(ExternalAccountKey.self, from: data)
 
     #expect(key.name == "test-only-name")
-    #expect(key.keyID == "my-key-id")
+    #expect(key.keyId == "my-key-id")
     #expect(key.b64MacKey == "my-secret-key".data(using: .utf8)!)
   }
 }

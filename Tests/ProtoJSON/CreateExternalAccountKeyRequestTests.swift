@@ -21,7 +21,7 @@ import Testing
   @Test func testJSONSerialization() throws {
     let key = ExternalAccountKey(
       name: "test-only-name",
-      keyID: "my-key-id",
+      keyId: "my-key-id",
       b64MacKey: "my-secret-key".data(using: .utf8)!
     )
     let request = CreateExternalAccountKeyRequest(
@@ -39,7 +39,7 @@ import Testing
     let expectedSecretBase64 = "my-secret-key".data(using: .utf8)!.base64EncodedString()
 
     let expectedJSON =
-      #"{"externalAccountKey":{"b64MacKey":"\#(expectedSecretBase64)","keyID":"my-key-id","name":"test-only-name"},"parent":"projects/my-project/locations/global"}"#
+      #"{"externalAccountKey":{"b64MacKey":"\#(expectedSecretBase64)","keyId":"my-key-id","name":"test-only-name"},"parent":"projects/my-project/locations/global"}"#
 
     #expect(jsonString == expectedJSON)
   }
@@ -47,7 +47,7 @@ import Testing
   @Test func testJSONDeserialization() throws {
     let expectedSecretBase64 = "my-secret-key".data(using: .utf8)!.base64EncodedString()
     let jsonString =
-      #"{"externalAccountKey":{"b64MacKey":"\#(expectedSecretBase64)","keyID":"my-key-id","name":"test-only-name"},"parent":"projects/my-project/locations/global"}"#
+      #"{"externalAccountKey":{"b64MacKey":"\#(expectedSecretBase64)","keyId":"my-key-id","name":"test-only-name"},"parent":"projects/my-project/locations/global"}"#
     let data = jsonString.data(using: .utf8)!
 
     let decoder = JSONDecoder()
@@ -56,7 +56,7 @@ import Testing
     #expect(request.parent == "projects/my-project/locations/global")
     let key = try #require(request.externalAccountKey)
     #expect(key.name == "test-only-name")
-    #expect(key.keyID == "my-key-id")
+    #expect(key.keyId == "my-key-id")
     #expect(key.b64MacKey == "my-secret-key".data(using: .utf8)!)
   }
 
