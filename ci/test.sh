@@ -30,6 +30,12 @@ fi
 errors=0
 packages=0
 
+echo "--- SWIFT VERSION ---"
+swift --version
+echo "--- CARGO VERSION ---"
+cargo --version
+echo "--- VERSIONS ---"
+
 # --- Pre-build step: Rust FFI Bindings ---
 echo "--- Building Rust bindings for GoogleCloudAuth ---"
 pushd "${PACKAGES_DIR}/auth/rust_auth_core" >/dev/null
