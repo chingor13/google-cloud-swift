@@ -1,0 +1,254 @@
+# How-To Guide: Generated Code Maintenance
+
+This guide is intended for contributors to the `google-cloud-rust` SDK. It will
+walk you through the steps necessary to generate a new library, update libraries
+with new changes in the proto specifications, and refresh the generated code
+when the generator changes.
+
+## Prerequisites
+
+The generator and its unit tests use `protoc`, the Protobuf compiler. Ensure you
+have `protoc >= v23.0` installed and it is found via your `$PATH`.
+
+```bash
+protoc --version
+```
+
+If not, follow the steps in [Protocol Buffer Compiler Installation] to download
+a suitable version.
+
+Make sure your workstation has up-to-date versions of Rust and Go. Follow the
+instructions in [Set Up Development Environment].
+
+## Generate new library
+
+### Generate
+
+In this example we will use `google/cloud/kms/v1`. Change the pattern as needed.
+
+Create a new branch in your fork:
+
+```bash
+git checkout -b feat-google-cloud-kms-v1-generate-library
+```
+
+This command will generate the library, add the library to Cargo and git, and
+run the necessary tests:
+
+```bash
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+# add library to librarian.yaml
+go run github.com/googleapis/librarian/cmd/librarian@${V} add google/cloud/kms/v1
+# generate library
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-kms-v1
+```
+
+Commit all these changes and send a PR to merge them:
+
+```bash
+git add .
+git commit -m "feat(kms/v1): generate library"
+```
+
+### Troubleshooting
+
+**Note:** Ensure you are verifying against the version of `librarian` used in
+Swift (you can check the version in [librarian.yaml]).
+
+`librarian` uses an allowlist configured in [sdk.yaml] to manage libraries.
+Cloud APIs are automatically allowed for all languages except the ones in
+[sdk.yaml].
+
+**❌ If you get a "library is not allowed" error:**
+
+Check the [sdk.yaml] file:
+
+- **If the library is missing and it is not a Cloud API:** Add it, but enable it
+  _only_ for Rust.
+- **If the library is already there:** Verify that Rust is included in the
+  accepted languages for that specific library.
+
+If you still have issues, please contact librarian team.
+
+#### How to update an unlisted language:
+
+1. Send a PR adding the language to the [sdk.yaml] in librarian and merge it.
+1. Get latest librarian version
+   ```bash
+   go list -m -json github.com/googleapis/librarian@main | jq -r '.Version'
+   ```
+1. Send a PR to update the version field in [librarian.yaml].
+
+## Update the code generation sources
+
+Run:
+
+```bash
+git checkout -b chore-update-shas-circa-$(date +%Y-%m-%d)
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+go run github.com/googleapis/librarian/cmd/librarian@${V} update discovery
+go run github.com/googleapis/librarian/cmd/librarian@${V} update googleapis
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
+git commit -m"chore: update discovery and googleapis SHA circa $(date +%Y-%m-%d)" .
+```
+
+Then send a PR with whatever changed.
+
+Alternatively you can run `librarian update --all` to update all sources at
+once. Note that this includes `showcase` and `protojson-conformance`, though.
+
+## Refreshing the code
+
+### All libraries
+
+Run:
+
+```bash
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
+```
+
+Then run the unit tests and send a PR with whatever changed.
+
+### Single library
+
+When iterating, it can be useful to regenerate the code of a single library. Get
+the library name from librarian.yaml.
+
+Run:
+
+```bash
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-secretmanager-v1
+```
+
+## Formatting librarian.yaml
+
+If you make manual changes to `librarian.yaml`, you should run `librarian tidy`
+to automatically format and sort the file. This ensures consistency and
+readability.
+
+```bash
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+go run github.com/googleapis/librarian/cmd/librarian@${V} tidy
+```
+
+## Special cases
+
+### Making changes to `librarian`
+
+Clone the `librarian` directory:
+
+```bash
+git -C .. clone git@github.com:googleapis/librarian
+git -C ../librarian checkout -b fancy-rust-feature
+```
+
+Naturally you can choose to clone `librarian` into a different directory. Just
+change the commands that follow.
+
+You can make changes in the `librarian` directory as usual. To test them change
+the normal commands to use the directory where your librarian changes live. For
+example:
+
+```bash
+go -C ../librarian/cmd/librarian build && ../librarian/cmd/librarian/librarian -f generate --all
+```
+
+Once the changes work then send a PR in the librarian repo to make your changes.
+Wait for the PR to be approved and merged.
+
+Then finish your PR in `google-cloud-swift`.
+
+1. Update the librarian version in `librarian.yaml`:
+
+   ```bash
+   V=$(GOPROXY=direct go list -m -f '{{.Version}}' github.com/googleapis/librarian@main)
+   sed -i.bak "s;^version: .*;version: ${V};" librarian.yaml && rm librarian.yaml.bak
+   ```
+
+1. Update the generated code:
+
+   ```bash
+   V=$(sed -n 's/^version: *//p' librarian.yaml)
+   go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
+   ```
+
+Use a single PR to update the librarian version and any generated code.
+
+### Generating a library with customized directories
+
+We may need to customize the target or source directory for some generated
+libraries. For example, you may need to leave room for other crates in the same
+directory.
+
+1. Update the librarian.yaml with the correct configuration.
+
+```
+output: custom directory to generate code in
+```
+
+```
+channels > path: custom path to read protos from in googleapis
+```
+
+example:
+
+```
+  - name: google-cloud-api
+    version: 1.2.0
+    channels:
+      - path: google/api
+    copyright_year: "2025"
+    output: src/generated/api/types
+```
+
+2. run generate
+
+```
+bash
+V=$(sed -n 's/^version: *//p' librarian.yaml)
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-apps-script-type
+```
+
+3. Add the files to `git`, compile them, and run the tests:
+
+```bash
+typos && cargo fmt && cargo build && cargo test && cargo doc
+git add src/generated/cloud/api/types Cargo.toml Cargo.lock
+```
+
+4. Commit all these changes and send a PR to merge them:
+
+```bash
+git commit -m "feat(api/types): generate library"
+```
+
+### Testing library generation for an existing library
+
+Sometimes it may be useful to re-generate an existing library, to test the
+generation step, practice before generating a new library, or to test the
+documentation.
+
+We will use `websecurityscanner` as an example. Start by removing the existing
+library:
+
+```shell
+sed -i.bak  '/websecurityscanner/d' Cargo.toml
+rm Cargo.toml.bak
+git rm -fr src/generated/cloud/websecurityscanner/
+git commit -m"Remove for testing" Cargo.toml Cargo.lock src/generated/cloud/websecurityscanner/
+```
+
+Now add the library back (get the library name from librarian yaml):
+
+```shell
+go run github.com/googleapis/librarian/cmd/librarian@main generate google-cloud-websecurityscanner-v1
+```
+
+[add new dependency]: #add-new-dependency
+[generate new library]: #generate-new-library
+[librarian.yaml]: https://github.com/googleapis/google-cloud-swift/blob/main/librarian.yaml
+[protocol buffer compiler installation]: https://protobuf.dev/installation/
+[sdk.yaml]: https://github.com/googleapis/librarian/blob/main/internal/serviceconfig/sdk.yaml
+[set up development environment]: /doc/contributor/howto-guide-set-up-development-environment.md
