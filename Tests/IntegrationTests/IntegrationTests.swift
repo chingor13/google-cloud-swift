@@ -13,6 +13,10 @@
 // limitations under the License.
 
 import Foundation
+// On Linux `URLSession` and friends are found in `FoundationNetworking`, ugh.
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 import GoogleCloudAuth
 import Testing
 
