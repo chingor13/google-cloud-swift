@@ -21,13 +21,13 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable {
   /// Required. The parent resource where this external_account_key will be
   /// created. Format: projects/[project_id]/locations/[location]. At present
   /// only the "global" location is supported.
-  public let parent: String
+  public var parent: String
 
   /// Required. The external account key to create. This field only exists to
   /// future-proof the API. At present, all fields in ExternalAccountKey are
   /// output only and all values are ignored. For the purpose of the
   /// CreateExternalAccountKeyRequest, set it to a default/empty value.
-  public let externalAccountKey: ExternalAccountKey?
+  public var externalAccountKey: ExternalAccountKey?
 
   /// Initialize a new instance of `CreateExternalAccountKeyRequest`.
   public init(
