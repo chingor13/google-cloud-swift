@@ -46,3 +46,10 @@ libraries:
         - name: GoogleCloudGax
           path: packages/gax
           required_by_services: true
+  - name: GoogleType
+    apis:
+      - path: google/type
+    copyright_year: "2026"
+    swift:
+      include_list:
+        - expr.proto
