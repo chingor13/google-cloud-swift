@@ -18,6 +18,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudAuth
+import GoogleCloudSecurityPubliccaV1
 import Testing
 
 #if IntegrationTests
@@ -35,8 +36,9 @@ import Testing
   }
 
   @Test func listSecretsWithAuth() async throws {
-    // Read the project ID from the environment, defaulting to "coryan-test" if not set
-    let projectId = ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] ?? "coryan-test"
+    let projectId = try #require(
+      ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"],
+      "GOOGLE_CLOUD_PROJECT environment variable must be set")
 
     let url = URL(
       string: "https://secretmanager.googleapis.com/v1/projects/\(projectId)/secrets")!
@@ -70,6 +72,20 @@ import Testing
     // The response should be a JSON object, possibly with a 'secrets' array if there are any
     // or simply an empty object if no secrets exist, but the request itself should succeed.
     #expect(json != nil)
+  }
+
+  @Test func createExternalAccountKey() async throws {
+    let projectId = try #require(
+      ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"],
+      "GOOGLE_CLOUD_PROJECT environment variable must be set")
+
+    let client = try PublicCertificateAuthorityService();
+    let response = try await client.createExternalAccountKey(
+      request: CreateExternalAccountKeyRequest(
+        parent: "projects/\(projectId)/locations/global",
+      ),
+    )
+    print("Response \(response)")
   }
 
 #endif
