@@ -23,9 +23,17 @@ let package = Package(
   products: [
     .library(name: "GoogleCloudSecurityPubliccaV1", targets: ["GoogleCloudSecurityPubliccaV1"])
   ],
+  dependencies: [
+    .package(path: "../../packages/auth"),
+    .package(path: "../../packages/gax"),
+  ],
   targets: [
     .target(
-      name: "GoogleCloudSecurityPubliccaV1"
+      name: "GoogleCloudSecurityPubliccaV1",
+      dependencies: [
+        .product(name: "GoogleCloudAuth", package: "auth"),
+        .product(name: "GoogleCloudGax", package: "gax"),
+      ],
     )
   ]
 )

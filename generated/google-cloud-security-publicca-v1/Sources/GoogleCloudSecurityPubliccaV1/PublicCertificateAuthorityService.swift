@@ -15,17 +15,53 @@
 // limitations under the License.
 
 import Foundation
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+import GoogleCloudAuth
+import GoogleCloudGax
 
 /// Manages the resources required for ACME [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for
 /// the public certificate authority service.
 public class PublicCertificateAuthorityService {
+  let inner: GoogleCloudGax.HTTPClient
+
+  /// Creates a new `PublicCertificateAuthorityService` instance.
+  public init(
+    endpoint: String? = nil,
+    credentials: GoogleCloudAuth.Credentials? = nil,
+    session: URLSession? = nil,
+  ) throws {
+    let endpoint = endpoint ?? "https://publicca.googleapis.com"
+    self.inner = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
+  }
+
   /// Creates a new
   /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
   /// bound to the project.
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
   {
-    fatalError("Unimplemented")
+    let query = [
+      URLQueryItem(name: "$alt", value: "json")
+    ]
+    var req = try await self.inner.Request(
+      path: "/v1/\(request.parent)/externalAccountKeys", query: query)
+    req.httpMethod = "POST"
+    if let body = request.externalAccountKey {
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(body)
+    }
+    let (data, response) = try await self.inner.data(for: req)
+    if !(200..<300).contains(response.statusCode) {
+      throw RequestError.http(
+        HTTPDetails(
+          http_status_code: response.statusCode,
+          headers: [:],
+          payload: data,
+        ))
+    }
+    return try JSONDecoder().decode(ExternalAccountKey.self, from: data)
   }
 }

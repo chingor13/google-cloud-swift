@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.10.1-0.20260409165049-ce426fd24195
+version: v0.10.1-0.20260410130921-eb7c26b358d2
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -38,3 +38,11 @@ libraries:
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
+    swift:
+      dependencies:
+        - name: GoogleCloudAuth
+          path: packages/auth
+          required_by_services: true
+        - name: GoogleCloudGax
+          path: packages/gax
+          required_by_services: true
