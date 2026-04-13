@@ -1,0 +1,152 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+import GoogleCloudWkt
+import Testing
+
+struct WrappedValue: Codable {
+  let value: Value
+}
+
+@Test("Value default initializer")
+func valueInitDefault() {
+  let got = Value()
+  #expect(got == .null(NullValue()))
+}
+
+@Test("Value null initializer")
+func valueInitNull() {
+  let got = Value(null: NullValue())
+  #expect(got == .null(NullValue()))
+}
+
+@Test("Value number initializer")
+func valueInitNumber() {
+  let got = Value(number: 123.45)
+  #expect(got == .number(123.45))
+}
+
+@Test("Value string initializer")
+func valueInitString() {
+  let got = Value(string: "foo")
+  #expect(got == .string("foo"))
+}
+
+@Test("Value bool initializer")
+func valueInitBool() {
+  let gotTrue = Value(bool: true)
+  #expect(gotTrue == .bool(true))
+  let gotFalse = Value(bool: false)
+  #expect(gotFalse == .bool(false))
+}
+
+@Test("Value object initializer")
+func valueInitObject() {
+  // Empty dictionary
+  #expect(Value(object: [:]) == .object([:]))
+
+  // One value
+  #expect(Value(object: ["a": .string("b")]) == .object(["a": .string("b")]))
+
+  // Two values of different types
+  let twoValues: [String: Value] = ["a": .number(1), "b": .bool(true)]
+  #expect(Value(object: twoValues) == .object(twoValues))
+
+  // One value is null
+  #expect(Value(object: ["a": Value()]) == .object(["a": Value()]))
+}
+
+@Test("Value array initializer")
+func valueInitArray() {
+  // Empty array
+  #expect(Value(array: []) == .array([]))
+
+  // One value
+  #expect(Value(array: [.string("a")]) == .array([.string("a")]))
+
+  // Two values of different types
+  #expect(Value(array: [.number(1), .bool(true)]) == .array([.number(1), .bool(true)]))
+
+  // One non-null and one null value
+  #expect(Value(array: [.string("a"), Value()]) == .array([.string("a"), Value()]))
+}
+
+@Test(
+  "Value encoding",
+  arguments: [
+    (Value.null(NullValue()), "{\"value\":null}"),
+    (Value.number(123.45), "{\"value\":123.45}"),
+    (Value.string("foo"), "{\"value\":\"foo\"}"),
+    (Value.bool(true), "{\"value\":true}"),
+    (Value.bool(false), "{\"value\":false}"),
+    (Value.object(["a": .string("b")]), "{\"value\":{\"a\":\"b\"}}"),
+    (Value.array([.number(1), .number(2)]), "{\"value\":[1,2]}"),
+  ])
+func encodeValue(value: Value, expected: String) throws {
+  let wrapped = WrappedValue(value: value)
+  let encoder = JSONEncoder()
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+  #expect(got == expected)
+}
+
+@Test(
+  "Value decoding",
+  arguments: [
+    ("{\"value\":null}", Value()),
+    ("{\"value\":123.45}", Value.number(123.45)),
+    ("{\"value\":\"foo\"}", Value.string("foo")),
+    ("{\"value\":true}", Value.bool(true)),
+    ("{\"value\":false}", Value.bool(false)),
+    ("{\"value\":{\"a\":\"b\"}}", Value.object(["a": .string("b")])),
+    ("{\"value\":[1,2]}", Value.array([.number(1), .number(2)])),
+  ])
+func decodeValue(json: String, expected: Value) throws {
+  let data = json.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let got = try decoder.decode(WrappedValue.self, from: data)
+  #expect(got.value == expected)
+}
+
+struct WrappedNull: Codable {
+  let value: NullValue
+}
+
+@Test("NullValue decoding")
+func decodeNullValue() throws {
+  let json = "{\"value\": null}"
+  let data = json.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let got = try decoder.decode(WrappedNull.self, from: data)
+  #expect(got.value == NullValue())
+}
+
+@Test("NullValue decoding failure", arguments: ["{\"value\": 123}", "{\"value\": \"foo\"}"])
+func decodeNullValueFailure(json: String) throws {
+  let data = json.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  #expect(throws: (any Error).self) {
+    _ = try decoder.decode(WrappedNull.self, from: data)
+  }
+}
+
+@Test("NullValue encoding")
+func encodeNullValue() throws {
+  let wrapped = WrappedNull(value: NullValue())
+  let encoder = JSONEncoder()
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+  #expect(got == "{\"value\":null}")
+}
