@@ -20,13 +20,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PACKAGES_DIR="${REPO_ROOT}/packages"
 
-# Determine the correct dynamic library extension for the current OS
-if [[ "$(uname)" == "Darwin" ]]; then
-    DYLIB_EXT="dylib"
-else
-    DYLIB_EXT="so"
-fi
-
 errors=0
 packages=0
 
@@ -38,10 +31,8 @@ echo "--- VERSIONS ---"
 
 # --- Pre-build step: Rust FFI Bindings ---
 echo "--- Building Rust bindings for GoogleCloudAuth ---"
-pushd "${PACKAGES_DIR}/auth/rust_auth_core" >/dev/null
 cargo build --release
-cargo run --bin uniffi-bindgen -- generate --library "target/release/librust_auth_core.a" --language swift --out-dir ../Sources/RustAuthCoreBridge
-popd >/dev/null
+cargo run --bin uniffi-bindgen -- generate --library "target/release/librust_auth_core.a" --language swift --out-dir packages/auth/Sources/RustAuthCoreBridge
 # Format the generated code
 swift-format -i packages/auth/Sources/RustAuthCoreBridge/rust_auth_core.swift
 # Organize headers for SPM
