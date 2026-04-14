@@ -24,6 +24,8 @@ import GoogleCloudGax
 /// Manages the resources required for ACME [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for
 /// the public certificate authority service.
+///
+/// @Snippet(id: "PublicCertificateAuthorityServiceQuickstart")
 public class PublicCertificateAuthorityService {
   let inner: GoogleCloudGax.HTTPClient
 
