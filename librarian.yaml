@@ -33,19 +33,19 @@ release:
     - .repo-metadata.json
 default:
   output: generated/
+  swift:
+    dependencies:
+      - name: GoogleCloudAuth
+        path: packages/auth
+        required_by_services: true
+      - name: GoogleCloudGax
+        path: packages/gax
+        required_by_services: true
 libraries:
   - name: GoogleCloudSecurityPubliccaV1
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
-    swift:
-      dependencies:
-        - name: GoogleCloudAuth
-          path: packages/auth
-          required_by_services: true
-        - name: GoogleCloudGax
-          path: packages/gax
-          required_by_services: true
   - name: GoogleType
     apis:
       - path: google/type
