@@ -26,7 +26,7 @@ public enum RequestError: Error {
   /// ## Troubleshooting
   ///
   /// The most common cause for this error is to leave some critical field or fields in the request
-  /// uninitialzed or initialized to a value that produces invalid URL.
+  /// uninitialized or initialized to a value that produces invalid URL.
   ///
   /// Review the fields in your request object, which field is causing the problem varies by service
   /// and request, but the most common are `parent`, and `name`.
