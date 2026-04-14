@@ -40,6 +40,11 @@ let package = Package(
       path: "Tests",
       sources: ["EmptyTest.swift"]),
     .testTarget(
+      name: "FieldMaskTest",
+      dependencies: ["GoogleCloudWkt"],
+      path: "Tests",
+      sources: ["FieldMaskTest.swift"]),
+    .testTarget(
       name: "ValueTest",
       dependencies: ["GoogleCloudWkt"],
       path: "Tests",
