@@ -21,6 +21,25 @@ If you need to upgrade, consider:
 swiftly update
 ```
 
+## Installing Rust
+
+The auth library uses a Rust core. You will need to compile this code. We
+recommend that you follow the [Getting Started][getting-started-rust] guide.
+Once you have `cargo` and `rustup` installed the rest is relatively easy.
+
+You will need rust >= 1.94 (released around 2026-03-26). Check the version you
+have installed with:
+
+```shell
+rustc --version
+```
+
+If you need to upgrade, consider:
+
+```shell
+rustup update
+```
+
 ## Installing Go
 
 The code generator is implemented in [Go](https://go.dev). Follow the
@@ -31,28 +50,40 @@ The code generator is implemented in [Go](https://go.dev). Follow the
 Whatever works for you. Several team members use Visual Studio Code, but Swift
 can be used with many IDEs.
 
+## Compile the Rust core for auth
+
+```bash
+cargo build --release
+```
+
 ## Compile the Code
 
 ```bash
 swift build
 ```
 
-## Running the unit tests
+## Run the unit tests
 
 ```bash
 swift test
 ```
 
+## Run the unit tests for a specific package
+
+```bash
+swift test --package-path packages/gax
+```
+
 ## Exhaustive builds and tests
 
-Our repository is too large to build all the packages. The previous commands
-only build the default set of packages.
+Our repository will become too large to build all the packages. The previous
+commands only build the default set of packages.
 
 If you make a large change, for example, use a new version of the generator,
 consider testing all the packages.
 
 ```bash
-# TODO
+ci/test.sh
 ```
 
 ## Running lints and unit tests
@@ -93,7 +124,8 @@ as it says, enable the API and make sure that billing is enabled in your
 projects. To enable the APIs you can run this command:
 
 ```bash
-gcloud services enable workflows.googleapis.com firestore.googleapis.com speech.googleapis.com cloudkms.googleapis.com
+gcloud services enable workflows.googleapis.com firestore.googleapis.com speech.googleapis.com cloudkms.googleapis.com 
+gcloud services enable publicca.googleapis.com
 ```
 
 Verify this is working with something like:
@@ -133,7 +165,7 @@ gcloud iam service-accounts disable swift-sdk-test@${GOOGLE_CLOUD_PROJECT}.iam.g
 ### Running tests
 
 ```bash
-# TODO
+env GOOGLE_CLOUD_PROJECT="$(gcloud config get project)" swift test --traits IntegrationTests
 ```
 
 ## Miscellaneous Tools
@@ -218,6 +250,7 @@ git ls-files -z --
 ```
 
 [enable the secret manager api]: https://cloud.google.com/secret-manager/docs/configuring-secret-manager
+[getting-started-rust]: https://www.rust-lang.org/learn/get-started
 [getting-started-swift]: https://www.swift.org/install/
 [golang-install]: https://go.dev/doc/install
 [google cloud cli]: https://cloud.google.com/cli
