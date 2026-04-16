@@ -32,7 +32,7 @@ import Foundation
 /// encoded in JSON format as "3s", while 3 seconds and 1 nanosecond should
 /// be expressed in JSON format as "3.000000001s", and 3 seconds and 1
 /// microsecond should be expressed in JSON format as "3.000001s".
-public struct Duration {
+public struct Duration: Codable, Equatable, Sendable {
   public let seconds: Int64
   public let nanos: Int64
 
@@ -61,9 +61,7 @@ public struct Duration {
     self.seconds = seconds
     self.nanos = nanos
   }
-}
 
-extension Duration: Encodable {
   public func encode(to encoder: any Encoder) throws {
     if nanos == 0 {
       try String("\(seconds)s").encode(to: encoder)
@@ -79,9 +77,7 @@ extension Duration: Encodable {
     let nanosStr = formatNanos(nanos: nanos)
     try String("\(secondsStr).\(nanosStr)s").encode(to: encoder)
   }
-}
 
-extension Duration: Decodable {
   public init(from decoder: any Decoder) throws {
     let container = try decoder.singleValueContainer()
     let string = try container.decode(String.self)

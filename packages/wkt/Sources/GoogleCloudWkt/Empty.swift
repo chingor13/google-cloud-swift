@@ -23,6 +23,6 @@ import Foundation
 ///     }
 ///
 /// The JSON representation for `Empty` is empty JSON object `{}`.
-public struct Empty: Codable, Equatable {
+public struct Empty: Codable, Equatable, Sendable {
   public init() {}
 }

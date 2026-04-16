@@ -23,23 +23,19 @@ import Foundation
 ///
 /// For example, the FieldMask `paths: ["user.display_name", "photo"]` is
 /// represented in JSON as `"user.displayName,photo"`.
-public struct FieldMask: Equatable {
+public struct FieldMask: Codable, Equatable, Sendable {
   public let paths: [String]
 
   public init(paths: [String]) {
     self.paths = paths
   }
-}
 
-extension FieldMask: Encodable {
   public func encode(to encoder: any Encoder) throws {
     let camelCasePaths = paths.map { convertPathToCamelCase($0) }
     let joined = camelCasePaths.joined(separator: ",")
     try joined.encode(to: encoder)
   }
-}
 
-extension FieldMask: Decodable {
   public init(from decoder: any Decoder) throws {
     let container = try decoder.singleValueContainer()
     let string = try container.decode(String.self)
