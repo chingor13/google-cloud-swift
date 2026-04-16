@@ -21,7 +21,7 @@ struct WrappedFieldMask: Encodable {
 }
 
 @Test(
-  "Encoding JSON",
+  "FieldMask JSON encoding",
   arguments: [
     ([], "{\"value\":\"\"}"),
     (["user_id"], "{\"value\":\"userId\"}"),
@@ -43,7 +43,7 @@ struct WrappedFieldMaskDecode: Decodable {
 }
 
 @Test(
-  "Decoding JSON",
+  "FieldMask JSON decoding",
   arguments: [
     ("{\"value\":\"\"}", []),
     ("{\"value\":\"userId\"}", ["user_id"]),

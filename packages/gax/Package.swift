@@ -37,7 +37,6 @@ let package = Package(
     .testTarget(
       name: "GoogleCloudGaxTests",
       dependencies: ["GoogleCloudGax"],
-      path: "Tests"
-    ),
+      path: "Tests"),
   ]
 )

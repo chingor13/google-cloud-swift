@@ -17,7 +17,7 @@ import GoogleCloudWkt
 import Testing
 
 @Test(
-  "Initializer",
+  "Duration initializer",
   arguments: [(123, 456), (-123, -456), (123, 0), (-123, 0), (0, 456), (0, -456)])
 func initNormal(_ args: (Int64, Int64)) throws {
   let got = try GoogleCloudWkt.Duration(seconds: args.0, nanos: args.1)
@@ -25,7 +25,7 @@ func initNormal(_ args: (Int64, Int64)) throws {
   #expect(got.nanos == args.1)
 }
 
-@Test("Detect mismatched signs", arguments: [(123, -456), (-123, 456)])
+@Test("Duration detect mismatched signs", arguments: [(123, -456), (-123, 456)])
 func mismatchedSigns(_ args: (Int64, Int64)) throws {
   #expect(throws: GoogleCloudWkt.DurationError.mismatchedSigns) {
     try GoogleCloudWkt.Duration(seconds: args.0, nanos: args.1)
@@ -35,7 +35,7 @@ func mismatchedSigns(_ args: (Int64, Int64)) throws {
 let nanosPerSecond: Int64 = 1_000_000_000
 
 @Test(
-  "Detect out of range seconds",
+  "Duration detect out of range seconds",
   arguments: [GoogleCloudWkt.maxSeconds + 1, GoogleCloudWkt.minSeconds - 1])
 func outOfRangeSeconds(_ seconds: Int64) throws {
   #expect(throws: GoogleCloudWkt.DurationError.outOfRange) {
@@ -44,7 +44,7 @@ func outOfRangeSeconds(_ seconds: Int64) throws {
 }
 
 @Test(
-  "Detect out of range nanos",
+  "Duration detect out of range nanos",
   arguments: [nanosPerSecond, -nanosPerSecond])
 func outOfRangeNanos(_ nanos: Int64) throws {
   #expect(throws: GoogleCloudWkt.DurationError.outOfRange) {
@@ -57,7 +57,7 @@ struct WrappedDuration: Encodable {
 }
 
 @Test(
-  "Encoding JSON",
+  "Duration JSON Encoding",
   arguments: [
     (1, 0, "{\"value\":\"1s\"}"),
     (1, 1000, "{\"value\":\"1.000001s\"}"),
@@ -95,7 +95,7 @@ struct WrappedDurationDecode: Decodable {
 }
 
 @Test(
-  "Decoding JSON",
+  "Duration JSON Decoding",
   arguments: [
     ("{\"value\":\"1s\"}", 1, 0),
     ("{\"value\":\"1.001s\"}", 1, 1_000_000),

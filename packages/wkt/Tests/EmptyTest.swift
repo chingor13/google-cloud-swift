@@ -20,8 +20,8 @@ struct WrappedEmptyEncode: Encodable {
   let value: GoogleCloudWkt.Empty
 }
 
-@Test("Encoding JSON")
-func testEncodingJSON() throws {
+@Test("Empty JSON Encoding")
+func encodingJSON() throws {
   let wrapped = WrappedEmptyEncode(value: GoogleCloudWkt.Empty())
   let encoder = JSONEncoder()
   let data = try encoder.encode(wrapped)
@@ -33,8 +33,8 @@ struct WrappedEmptyDecode: Decodable {
   let value: GoogleCloudWkt.Empty
 }
 
-@Test("Decoding JSON")
-func testDecodingJSON() throws {
+@Test("Empty JSON Decoding")
+func decodingJSON() throws {
   let jsonString = "{\"value\":{}}"
   let data = jsonString.data(using: .utf8)!
   let decoder = JSONDecoder()

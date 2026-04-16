@@ -30,24 +30,8 @@ let package = Package(
       name: "GoogleCloudWkt",
     ),
     .testTarget(
-      name: "DurationTest",
+      name: "GoogleCloudWktTests",
       dependencies: ["GoogleCloudWkt"],
-      path: "Tests",
-      sources: ["DurationTest.swift"]),
-    .testTarget(
-      name: "EmptyTest",
-      dependencies: ["GoogleCloudWkt"],
-      path: "Tests",
-      sources: ["EmptyTest.swift"]),
-    .testTarget(
-      name: "FieldMaskTest",
-      dependencies: ["GoogleCloudWkt"],
-      path: "Tests",
-      sources: ["FieldMaskTest.swift"]),
-    .testTarget(
-      name: "ValueTest",
-      dependencies: ["GoogleCloudWkt"],
-      path: "Tests",
-      sources: ["ValueTest.swift"]),
+      path: "Tests"),
   ]
 )
