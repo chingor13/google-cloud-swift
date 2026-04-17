@@ -53,3 +53,4 @@ libraries:
     swift:
       include_list:
         - expr.proto
+        - month.proto
