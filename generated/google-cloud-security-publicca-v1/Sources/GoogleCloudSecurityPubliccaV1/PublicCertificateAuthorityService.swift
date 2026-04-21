@@ -45,9 +45,7 @@ public class PublicCertificateAuthorityService {
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
   {
-    let query = [
-      URLQueryItem(name: "$alt", value: "json")
-    ]
+    let query = [URLQueryItem(name: "$alt", value: "json")]
     var req = try await self.inner.Request(
       path: "/v1/\(request.parent)/externalAccountKeys", query: query)
     req.httpMethod = "POST"

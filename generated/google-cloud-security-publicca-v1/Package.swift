@@ -19,7 +19,7 @@ import PackageDescription
 
 let package = Package(
   name: "GoogleCloudSecurityPubliccaV1",
-  platforms: [.macOS(.v15), .iOS(.v18)],
+  platforms: [.macOS(.v15)],
   products: [
     .library(name: "GoogleCloudSecurityPubliccaV1", targets: ["GoogleCloudSecurityPubliccaV1"])
   ],

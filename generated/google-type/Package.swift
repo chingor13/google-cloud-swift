@@ -19,7 +19,7 @@ import PackageDescription
 
 let package = Package(
   name: "GoogleType",
-  platforms: [.macOS(.v15), .iOS(.v18)],
+  platforms: [.macOS(.v15)],
   products: [
     .library(name: "GoogleType", targets: ["GoogleType"])
   ],
