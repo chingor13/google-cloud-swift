@@ -62,29 +62,33 @@ public struct Duration: Codable, Equatable, Sendable {
     self.nanos = nanos
   }
 
+  public init(from decoder: any Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    let string = try container.decode(String.self)
+    self = try Duration.fromString(string: string)
+  }
+
   public func encode(to encoder: any Encoder) throws {
+    try toString().encode(to: encoder)
+  }
+
+  func toString() throws -> String {
     if nanos == 0 {
-      try String("\(seconds)s").encode(to: encoder)
-      return
+      return String("\(seconds)s")
     }
     if seconds < 0 || (seconds == 0 && nanos < 0) {
       let secondsStr = String(format: "%lld", abs(seconds))
       let nanosStr = formatNanos(nanos: abs(nanos))
-      try String("-\(secondsStr).\(nanosStr)s").encode(to: encoder)
-      return
+      return String("-\(secondsStr).\(nanosStr)s")
     }
     let secondsStr = String(format: "%lld", seconds)
     let nanosStr = formatNanos(nanos: nanos)
-    try String("\(secondsStr).\(nanosStr)s").encode(to: encoder)
+    return String("\(secondsStr).\(nanosStr)s")
   }
 
-  public init(from decoder: any Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    let string = try container.decode(String.self)
-
+  static func fromString(string: String) throws -> Self {
     guard string.hasSuffix("s") else {
-      throw DecodingError.dataCorruptedError(
-        in: container, debugDescription: "Duration string must end with 's'")
+      throw DurationError.invalidFormat
     }
     let withoutSuffix = string.dropLast()
 
@@ -92,38 +96,30 @@ public struct Duration: Codable, Equatable, Sendable {
     let unsignedStr = isNegative ? withoutSuffix.dropFirst() : withoutSuffix
 
     if unsignedStr.isEmpty {
-      throw DecodingError.dataCorruptedError(
-        in: container, debugDescription: "Duration string is empty")
+      throw DurationError.invalidFormat
     }
 
     let parts = unsignedStr.split(separator: ".", omittingEmptySubsequences: false)
     guard parts.count <= 2 else {
-      throw DecodingError.dataCorruptedError(
-        in: container, debugDescription: "Duration string has multiple decimals")
+      throw DurationError.invalidFormat
     }
 
     let secondsStr = parts[0].isEmpty ? "0" : String(parts[0])
     guard let seconds = Int64(secondsStr) else {
-      throw DecodingError.dataCorruptedError(
-        in: container, debugDescription: "Invalid seconds component")
+      throw DurationError.invalidFormat
     }
 
     var nanos: Int64 = 0
     if parts.count == 2 {
       let nanosStr = String(parts[1]).padding(toLength: 9, withPad: "0", startingAt: 0)
       guard let pNanos = Int64(nanosStr) else {
-        throw DecodingError.dataCorruptedError(
-          in: container, debugDescription: "Invalid nanoseconds component")
+        throw DurationError.invalidFormat
       }
       nanos = pNanos
     }
 
-    do {
-      try self.init(seconds: isNegative ? -seconds : seconds, nanos: isNegative ? -nanos : nanos)
-    } catch {
-      throw DecodingError.dataCorruptedError(
-        in: container, debugDescription: "Parsed values out of range or mismatched: \(error)")
-    }
+    return try self.init(
+      seconds: isNegative ? -seconds : seconds, nanos: isNegative ? -nanos : nanos)
   }
 }
 
@@ -139,12 +135,32 @@ func formatNanos(nanos: Int64) -> String {
   return result
 }
 
+// Makes `Duration` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension Duration: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.Duration"
+  }
+
+  public init(fromAny any: `Any`) throws {
+    guard case let .string(v)? = any.fields[`Any`.valueField] else {
+      throw AnyError.invalidValueField
+    }
+    self = try Self.fromString(string: v)
+  }
+
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: Value(string: try self.toString())]
+  }
+}
+
 /// An error type for the `Duration` initializer.
 public enum DurationError: Error {
   /// The seconds and nanosecond signs did no match.
   case mismatchedSigns
   /// The seconds or nanosecond components are out of range.
   case outOfRange
+  /// Invalid format when parsing a duration from a string.
+  case invalidFormat
 }
 
 /// The number of nanoseconds in a second.

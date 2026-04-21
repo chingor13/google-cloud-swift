@@ -130,6 +130,22 @@ public enum Value: Codable, Equatable, Sendable {
   }
 }
 
+// Makes `Value` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension Value: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.Value"
+  }
+  public init(fromAny any: `Any`) throws {
+    guard let v = any.fields[`Any`.valueField] else {
+      throw AnyError.missingValueField
+    }
+    self = v
+  }
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: self]
+  }
+}
+
 /// Represents a JSON object.
 ///
 /// An unordered key-value map, intending to perfectly capture the semantics of
@@ -142,8 +158,40 @@ public enum Value: Codable, Equatable, Sendable {
 /// type.
 public typealias Struct = [String: Value]
 
+// Makes `Struct` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension Struct: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.Struct"
+  }
+  public init(fromAny any: `Any`) throws {
+    guard case let .object(v) = any.fields[`Any`.valueField] else {
+      throw AnyError.invalidValueField
+    }
+    self = v
+  }
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: Value(object: self)]
+  }
+}
+
 /// Represents a JSON array.
 public typealias ListValue = [Value]
+
+// Makes `ListValue` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension ListValue: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.ListValue"
+  }
+  public init(fromAny any: `Any`) throws {
+    guard case let .array(v) = any.fields[`Any`.valueField] else {
+      throw AnyError.invalidValueField
+    }
+    self = v
+  }
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: Value(array: self)]
+  }
+}
 
 /// Represents a JSON null.
 public struct NullValue: Codable, Equatable, Sendable {

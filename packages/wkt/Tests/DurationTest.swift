@@ -128,3 +128,33 @@ func decodeJSON(_ args: (String, Int64, Int64)) throws {
   #expect(wrapped.value.seconds == args.1)
   #expect(wrapped.value.nanos == args.2)
 }
+
+@Test("Unpack Duration from Any")
+func durationAnyUnpack() throws {
+  let jsonString =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.45s"}}"#
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Duration")
+
+  let got = try Duration(fromAny: any)
+  let want = try Duration(seconds: 123, nanos: 450_000_000)
+  #expect(got == want)
+}
+
+@Test("Pack Duration into Any")
+func durationAnyPack() throws {
+  let input = try Duration(seconds: 123, nanos: 450_000_000)
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}"#
+  #expect(got == want)
+}

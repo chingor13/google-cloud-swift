@@ -41,3 +41,32 @@ func decodingJSON() throws {
   let wrapped = try decoder.decode(WrappedEmptyDecode.self, from: data)
   #expect(wrapped.value == Empty())
 }
+
+@Test("Unpack Duration from Any")
+func emptyAnyUnpack() throws {
+  let jsonString =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Empty")
+
+  let got = try Empty(fromAny: any)
+  #expect(got == Empty())
+}
+
+@Test("Pack Empty into Any")
+func emptyAnyPack() throws {
+  let input = Empty()
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
+  #expect(got == want)
+}

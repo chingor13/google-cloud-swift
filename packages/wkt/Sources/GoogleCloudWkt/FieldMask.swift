@@ -31,20 +31,45 @@ public struct FieldMask: Codable, Equatable, Sendable {
   }
 
   public func encode(to encoder: any Encoder) throws {
-    let camelCasePaths = paths.map { convertPathToCamelCase($0) }
-    let joined = camelCasePaths.joined(separator: ",")
+    let joined = self.toString()
     try joined.encode(to: encoder)
   }
 
   public init(from decoder: any Decoder) throws {
     let container = try decoder.singleValueContainer()
     let string = try container.decode(String.self)
+    self.paths = try Self.pathsFromString(string: string)
+  }
+
+  func toString() -> String {
+    let camelCasePaths = paths.map { convertPathToCamelCase($0) }
+    return camelCasePaths.joined(separator: ",")
+  }
+
+  static func pathsFromString(string: String) throws -> [String] {
     if string.isEmpty {
-      self.paths = []
-      return
+      return []
     }
     let camelCasePaths = string.split(separator: ",", omittingEmptySubsequences: false)
-    self.paths = camelCasePaths.map { convertPathToSnakeCase(String($0)) }
+    return camelCasePaths.map { convertPathToSnakeCase(String($0)) }
+  }
+}
+
+// Makes `FieldMask` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension FieldMask: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.FieldMask"
+  }
+
+  public init(fromAny any: `Any`) throws {
+    guard case let .string(v)? = any.fields[`Any`.valueField] else {
+      throw AnyError.invalidValueField
+    }
+    self.paths = try Self.pathsFromString(string: v)
+  }
+
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: Value(string: toString())]
   }
 }
 

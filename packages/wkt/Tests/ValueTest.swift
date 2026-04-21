@@ -120,6 +120,142 @@ func decodeValue(json: String, expected: Value) throws {
   #expect(got.value == expected)
 }
 
+@Test(
+  "Unpack Value from Any",
+  arguments: [
+    (#""value":null"#, Value()),
+    (#""value":123.45"#, Value.number(123.45)),
+    (#""value":"foo""#, Value.string("foo")),
+    (#""value":true"#, Value.bool(true)),
+    (#""value":false"#, Value.bool(false)),
+    (#""value":{"a":"b"}"#, Value.object(["a": .string("b")])),
+    (#""value":[1,2]"#, Value.array([.number(1), .number(2)])),
+  ])
+func valueAnyUnpack(fragment: String, want: Value) throws {
+  let expectedUrl = "type.googleapis.com/google.protobuf.Value"
+  let jsonString = "{\"content\":{\"@type\":\"\(expectedUrl)\",\(fragment)}}"
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == expectedUrl)
+
+  let got = try Value(fromAny: any)
+  #expect(got == want)
+}
+
+@Test(
+  "Pack Value into Any",
+  arguments: [
+    (Value.null(NullValue()), #""value":null"#),
+    (Value.number(123.45), #""value":123.45"#),
+    (Value.string("foo"), #""value":"foo""#),
+    (Value.bool(true), #""value":true"#),
+    (Value.bool(false), #""value":false"#),
+    (Value.object(["a": .string("b")]), #""value":{"a":"b"}"#),
+    (Value.array([.number(1), .number(2)]), #""value":[1,2]"#),
+  ])
+func valueAnyPack(input: Value, fragment: String) throws {
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    "{\"content\":{\"@type\":\"type.googleapis.com/google.protobuf.Value\",\(fragment)}}"
+  #expect(got == want)
+}
+
+@Test(
+  "Unpack Struct from Any",
+  arguments: [
+    (#""value":{}"#, [:]),
+    (
+      #""value":{"a":123.45,"b":"foo"}"#,
+      ["a": Value(number: 123.45), "b": Value(string: "foo")]
+    ),
+  ])
+func structAnyUnpack(fragment: String, want: Struct) throws {
+  let expectedUrl = "type.googleapis.com/google.protobuf.Struct"
+  let jsonString = "{\"content\":{\"@type\":\"\(expectedUrl)\",\(fragment)}}"
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == expectedUrl)
+
+  let got = try Struct(fromAny: any)
+  #expect(got == want)
+}
+
+@Test(
+  "Pack Struct into Any",
+  arguments: [
+    (#""value":{}"#, [:]),
+    (
+      #""value":{"a":123.45,"b":"foo"}"#,
+      ["a": Value(number: 123.45), "b": Value(string: "foo")]
+    ),
+  ])
+func structAnyPack(fragment: String, input: Struct) throws {
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    "{\"content\":{\"@type\":\"type.googleapis.com/google.protobuf.Struct\",\(fragment)}}"
+  #expect(got == want)
+}
+
+@Test(
+  "Unpack ListValue from Any",
+  arguments: [
+    (#""value":[]"#, []),
+    (
+      #""value":["a",123.45,"b"]"#,
+      [Value(string: "a"), Value(number: 123.45), Value(string: "b")]
+    ),
+  ])
+func listValueAnyUnpack(fragment: String, want: ListValue) throws {
+  let expectedUrl = "type.googleapis.com/google.protobuf.Struct"
+  let jsonString = "{\"content\":{\"@type\":\"\(expectedUrl)\",\(fragment)}}"
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == expectedUrl)
+
+  let got = try ListValue(fromAny: any)
+  #expect(got == want)
+}
+
+@Test(
+  "Pack ListValue into Any",
+  arguments: [
+    (#""value":[]"#, []),
+    (
+      #""value":["a",123.45,"b"]"#,
+      [Value(string: "a"), Value(number: 123.45), Value(string: "b")]
+    ),
+  ])
+func listValueAnyPack(fragment: String, input: ListValue) throws {
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    "{\"content\":{\"@type\":\"type.googleapis.com/google.protobuf.ListValue\",\(fragment)}}"
+  #expect(got == want)
+}
+
 struct WrappedNull: Codable {
   let value: NullValue
 }

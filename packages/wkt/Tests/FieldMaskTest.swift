@@ -57,3 +57,33 @@ func decodeJSON(_ json: String, _ expected: [String]) throws {
   let wrapped = try decoder.decode(WrappedFieldMaskDecode.self, from: data)
   #expect(wrapped.value.paths == expected)
 }
+
+@Test("Unpack FieldMask from Any")
+func fieldMaskAnyUnpack() throws {
+  let jsonString =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.FieldMask","value":"a,b,cD"}}"#
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.content
+  #expect(any.typeUrl == "type.googleapis.com/google.protobuf.FieldMask")
+
+  let got = try FieldMask(fromAny: any)
+  let want = FieldMask(paths: ["a", "b", "c_d"])
+  #expect(got == want)
+}
+
+@Test("Pack FieldMask into Any")
+func fieldMaskAnyPack() throws {
+  let input = FieldMask(paths: ["a", "b", "c_d"])
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(content: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+
+  let want =
+    #"{"content":{"@type":"type.googleapis.com/google.protobuf.FieldMask","value":"a,b,cD"}}"#
+  #expect(got == want)
+}

@@ -26,3 +26,24 @@ import Foundation
 public struct Empty: Codable, Equatable, Sendable {
   public init() {}
 }
+
+// Makes `Empty` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
+extension Empty: _AnyPackable {
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.protobuf.Empty"
+  }
+
+  public init(fromAny any: `Any`) throws {
+    guard case let .object(v)? = any.fields[`Any`.valueField] else {
+      throw AnyError.invalidValueField
+    }
+    if !v.isEmpty {
+      throw AnyError.invalidValueField
+    }
+    self = Empty()
+  }
+
+  public func _pack() throws -> Struct {
+    return [`Any`.valueField: Value(object: [:])]
+  }
+}
