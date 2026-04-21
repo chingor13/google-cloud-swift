@@ -41,6 +41,9 @@ default:
       - name: GoogleCloudGax
         path: packages/gax
         required_by_services: true
+      - name: GoogleCloudWkt
+        path: packages/wkt
+        api_package: google.protobuf
 libraries:
   - name: GoogleCloudSecurityPubliccaV1
     apis:
