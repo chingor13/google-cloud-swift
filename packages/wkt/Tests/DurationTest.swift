@@ -36,7 +36,7 @@ let nanosPerSecond: Int64 = 1_000_000_000
 
 @Test(
   "Duration detect out of range seconds",
-  arguments: [GoogleCloudWkt.maxSeconds + 1, GoogleCloudWkt.minSeconds - 1])
+  arguments: [GoogleCloudWkt.Duration.maxSeconds + 1, GoogleCloudWkt.Duration.minSeconds - 1])
 func outOfRangeSeconds(_ seconds: Int64) throws {
   #expect(throws: GoogleCloudWkt.DurationError.outOfRange) {
     try GoogleCloudWkt.Duration(seconds: seconds, nanos: 0)

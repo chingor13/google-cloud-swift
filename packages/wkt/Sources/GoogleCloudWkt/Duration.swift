@@ -33,6 +33,18 @@ import Foundation
 /// be expressed in JSON format as "3.000000001s", and 3 seconds and 1
 /// microsecond should be expressed in JSON format as "3.000001s".
 public struct Duration: Codable, Equatable, Sendable {
+  /// The maximum value for the `seconds` component, approximately 10,000 years.
+  public static let maxSeconds: Int64 = 315_576_000_000
+
+  /// The minimum value for the `seconds` component, approximately -10,000 years.
+  public static let minSeconds: Int64 = -maxSeconds
+
+  /// The maximum value for the `nanos` component.
+  public static let maxNanos: Int64 = nanosPerSecond - 1
+
+  /// The minimum value for the `nanos` component.
+  public static let minNanos: Int64 = -maxNanos
+
   public let seconds: Int64
   public let nanos: Int64
 
@@ -52,10 +64,10 @@ public struct Duration: Codable, Equatable, Sendable {
     if (seconds < 0 && nanos > 0) || (seconds > 0 && nanos < 0) {
       throw DurationError.mismatchedSigns
     }
-    if seconds < minSeconds || seconds > maxSeconds {
+    if seconds < Self.minSeconds || seconds > Self.maxSeconds {
       throw DurationError.outOfRange
     }
-    if nanos < minNanos || nanos > maxNanos {
+    if nanos < Self.minNanos || nanos > Self.maxNanos {
       throw DurationError.outOfRange
     }
     self.seconds = seconds
@@ -165,15 +177,3 @@ public enum DurationError: Error {
 
 /// The number of nanoseconds in a second.
 let nanosPerSecond: Int64 = 1_000_000_000
-
-/// The maximum value for the `seconds` component, approximately 10,000 years.
-public let maxSeconds: Int64 = 315_576_000_000
-
-/// The minimum value for the `seconds` component, approximately -10,000 years.
-public let minSeconds: Int64 = -maxSeconds
-
-/// The maximum value for the `nanos` component.
-public let maxNanos: Int64 = nanosPerSecond - 1
-
-/// The minimum value for the `nanos` component.
-public let minNanos: Int64 = -maxNanos
