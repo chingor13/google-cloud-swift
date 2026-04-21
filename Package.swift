@@ -47,7 +47,6 @@ let package = Package(
       dependencies: [
         .product(
           name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1")
-
       ]
     ),
     .testTarget(
@@ -55,5 +54,15 @@ let package = Package(
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt")
       ]),
+    .testTarget(
+      name: "QueryParameter",
+      dependencies: [
+        .product(name: "GoogleCloudGax", package: "gax"),
+        .product(name: "GoogleCloudWkt", package: "wkt"),
+        .product(
+          name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1"),
+      ],
+      path: "Tests/QueryParameter"
+    ),
   ]
 )
