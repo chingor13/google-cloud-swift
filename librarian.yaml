@@ -45,6 +45,10 @@ default:
         path: packages/wkt
         api_package: google.protobuf
 libraries:
+  - name: GoogleCloudLocation
+    apis:
+      - path: google/cloud/location
+    copyright_year: "2026"
   - name: GoogleCloudSecurityPubliccaV1
     apis:
       - path: google/cloud/security/publicca/v1
