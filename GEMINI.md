@@ -24,6 +24,8 @@ This document outlines critical rules, coding standards, and workflow practices 
 
 ## Testing Strategy
 
+- **Swift Testing Framework**: Always use `import Testing` for tests. Never use `import XCTest`.
+- **Test Organization**: Group all the unit tests for a class or struct under a `@Suite struct` structure, named for the struct or class under test.
 - **Targeted Testing**: Prefer testing packages individually instead of the entire monorepo tree to save build time. Use:
   ```bash
   swift test --package-path packages/${package_name}
