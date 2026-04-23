@@ -44,6 +44,9 @@ default:
       - name: GoogleCloudWkt
         path: packages/wkt
         api_package: google.protobuf
+      - name: GoogleType
+        path: generated/google-type
+        api_package: google.type
 libraries:
   - name: GoogleCloudLocation
     apis:
@@ -52,6 +55,10 @@ libraries:
   - name: GoogleCloudSecurityPubliccaV1
     apis:
       - path: google/cloud/security/publicca/v1
+    copyright_year: "2026"
+  - name: GoogleIamV1
+    apis:
+      - path: google/iam/v1
     copyright_year: "2026"
   - name: GoogleType
     apis:
