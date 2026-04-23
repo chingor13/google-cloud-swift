@@ -148,7 +148,7 @@ import Testing
       #"{"content":{"@type":"type.googleapis.com/google.protobuf.Timestamp","value":"2026-04-21T12:34:56.789123456Z"}}"#
     let data = jsonString.data(using: .utf8)!
     let decoder = JSONDecoder()
-    let wrapped = try decoder.decode(WrappedAny.self, from: data)
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
     let any = wrapped.content
     #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Timestamp")
 
@@ -161,7 +161,7 @@ import Testing
   func timestampAnyPack() throws {
     let input = try Timestamp(fromString: "2026-04-21T12:34:56.789123456Z")
     let any = try `Any`(fromMessage: input)
-    let wrapped = WrappedAny(content: any)
+    let wrapped = AnyTests.WrappedAny(content: any)
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
     let data = try encoder.encode(wrapped)
