@@ -16,42 +16,44 @@ import Foundation
 import GoogleCloudWkt
 import Testing
 
-struct WrappedAny: Codable {
-  let content: GoogleCloudWkt.`Any`
-}
+@Suite struct AnyTests {
+  struct WrappedAny: Codable {
+    let content: GoogleCloudWkt.`Any`
+  }
 
-// Storing an Any into an Any is probably a bad idea, but that won't stop them.
-@Test("Decoding Any")
-func testDecodingAny() throws {
-  let jsonString =
-    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Any","value":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}}"#
-  let data = jsonString.data(using: .utf8)!
-  let decoder = JSONDecoder()
-  let wrapped = try decoder.decode(WrappedAny.self, from: data)
-  let any = wrapped.content
-  #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Any")
+  // Storing an Any into an Any is probably a bad idea, but that won't stop them.
+  @Test("Decoding Any")
+  func testDecodingAny() throws {
+    let jsonString =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Any","value":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedAny.self, from: data)
+    let any = wrapped.content
+    #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Any")
 
-  let innerAny = try `Any`(fromAny: any)
-  #expect(innerAny.typeUrl == "type.googleapis.com/google.protobuf.Duration")
+    let innerAny = try `Any`(fromAny: any)
+    #expect(innerAny.typeUrl == "type.googleapis.com/google.protobuf.Duration")
 
-  let got = try Duration(fromAny: innerAny)
-  let want = try Duration(seconds: 123, nanos: 450_000_000)
-  #expect(got == want)
-}
+    let got = try Duration(fromAny: innerAny)
+    let want = try Duration(seconds: 123, nanos: 450_000_000)
+    #expect(got == want)
+  }
 
-// Storing an Any into an Any is probably a bad idea, but that won't stop them.
-@Test("Encoding Any")
-func testEncodingAny() throws {
-  let input = try Duration(seconds: 123, nanos: 450_000_000)
-  let innerAny = try `Any`(fromMessage: input)
-  let any = try `Any`(fromMessage: innerAny)
-  let wrapped = WrappedAny(content: any)
-  let encoder = JSONEncoder()
-  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-  let data = try encoder.encode(wrapped)
-  let got = String(data: data, encoding: .utf8)!
+  // Storing an Any into an Any is probably a bad idea, but that won't stop them.
+  @Test("Encoding Any")
+  func testEncodingAny() throws {
+    let input = try Duration(seconds: 123, nanos: 450_000_000)
+    let innerAny = try `Any`(fromMessage: input)
+    let any = try `Any`(fromMessage: innerAny)
+    let wrapped = WrappedAny(content: any)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(wrapped)
+    let got = String(data: data, encoding: .utf8)!
 
-  let want =
-    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Any","value":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}}"#
-  #expect(got == want)
+    let want =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Any","value":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}}"#
+    #expect(got == want)
+  }
 }

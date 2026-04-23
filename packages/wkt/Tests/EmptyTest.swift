@@ -16,57 +16,59 @@ import Foundation
 import GoogleCloudWkt
 import Testing
 
-struct WrappedEmptyEncode: Encodable {
-  let value: GoogleCloudWkt.Empty
-}
+@Suite struct EmptyTests {
+  struct WrappedEmptyEncode: Encodable {
+    let value: GoogleCloudWkt.Empty
+  }
 
-@Test("Empty JSON Encoding")
-func encodingJSON() throws {
-  let wrapped = WrappedEmptyEncode(value: GoogleCloudWkt.Empty())
-  let encoder = JSONEncoder()
-  let data = try encoder.encode(wrapped)
-  let jsonString = String(data: data, encoding: .utf8)
-  #expect(jsonString == "{\"value\":{}}")
-}
+  @Test("Empty JSON Encoding")
+  func encodingJSON() throws {
+    let wrapped = WrappedEmptyEncode(value: GoogleCloudWkt.Empty())
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(wrapped)
+    let jsonString = String(data: data, encoding: .utf8)
+    #expect(jsonString == "{\"value\":{}}")
+  }
 
-struct WrappedEmptyDecode: Decodable {
-  let value: GoogleCloudWkt.Empty
-}
+  struct WrappedEmptyDecode: Decodable {
+    let value: GoogleCloudWkt.Empty
+  }
 
-@Test("Empty JSON Decoding")
-func decodingJSON() throws {
-  let jsonString = "{\"value\":{}}"
-  let data = jsonString.data(using: .utf8)!
-  let decoder = JSONDecoder()
-  let wrapped = try decoder.decode(WrappedEmptyDecode.self, from: data)
-  #expect(wrapped.value == Empty())
-}
+  @Test("Empty JSON Decoding")
+  func decodingJSON() throws {
+    let jsonString = "{\"value\":{}}"
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedEmptyDecode.self, from: data)
+    #expect(wrapped.value == Empty())
+  }
 
-@Test("Unpack Duration from Any")
-func emptyAnyUnpack() throws {
-  let jsonString =
-    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
-  let data = jsonString.data(using: .utf8)!
-  let decoder = JSONDecoder()
-  let wrapped = try decoder.decode(WrappedAny.self, from: data)
-  let any = wrapped.content
-  #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Empty")
+  @Test("Unpack Empty from Any")
+  func emptyAnyUnpack() throws {
+    let jsonString =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Empty")
 
-  let got = try Empty(fromAny: any)
-  #expect(got == Empty())
-}
+    let got = try Empty(fromAny: any)
+    #expect(got == Empty())
+  }
 
-@Test("Pack Empty into Any")
-func emptyAnyPack() throws {
-  let input = Empty()
-  let any = try `Any`(fromMessage: input)
-  let wrapped = WrappedAny(content: any)
-  let encoder = JSONEncoder()
-  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-  let data = try encoder.encode(wrapped)
-  let got = String(data: data, encoding: .utf8)!
+  @Test("Pack Empty into Any")
+  func emptyAnyPack() throws {
+    let input = Empty()
+    let any = try `Any`(fromMessage: input)
+    let wrapped = AnyTests.WrappedAny(content: any)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(wrapped)
+    let got = String(data: data, encoding: .utf8)!
 
-  let want =
-    #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
-  #expect(got == want)
+    let want =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty","value":{}}}"#
+    #expect(got == want)
+  }
 }
