@@ -60,6 +60,10 @@ libraries:
     apis:
       - path: google/iam/v1
     copyright_year: "2026"
+  - name: GoogleRpc
+    apis:
+      - path: google/rpc
+    copyright_year: "2026"
   - name: GoogleType
     apis:
       - path: google/type
