@@ -46,9 +46,14 @@ public class PublicCertificateAuthorityService {
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
   {
+    let path = try { () throws -> String in
+      guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+        throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+      }
+      return "/v1/\(pathVariable0)/externalAccountKeys"
+    }()
     let query = [URLQueryItem(name: "$alt", value: "json")]
-    var req = try await self.inner.Request(
-      path: "/v1/\(request.parent)/externalAccountKeys", query: query)
+    var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     if let body = request.externalAccountKey {
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")

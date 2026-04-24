@@ -72,8 +72,14 @@ public class IAMPolicy {
   public func setIamPolicy(request: SetIamPolicyRequest) async throws
     -> Policy
   {
+    let path = try { () throws -> String in
+      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+      }
+      return "/v1/\(pathVariable0)"
+    }()
     let query = [URLQueryItem(name: "$alt", value: "json")]
-    var req = try await self.inner.Request(path: "/v1/\(request.resource)", query: query)
+    var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
     req.httpBody = try JSONEncoder().encode(request)
@@ -95,8 +101,14 @@ public class IAMPolicy {
   public func getIamPolicy(request: GetIamPolicyRequest) async throws
     -> Policy
   {
+    let path = try { () throws -> String in
+      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+      }
+      return "/v1/\(pathVariable0)"
+    }()
     let query = [URLQueryItem(name: "$alt", value: "json")]
-    var req = try await self.inner.Request(path: "/v1/\(request.resource)", query: query)
+    var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
     req.httpBody = try JSONEncoder().encode(request)
@@ -122,8 +134,14 @@ public class IAMPolicy {
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
   {
+    let path = try { () throws -> String in
+      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+      }
+      return "/v1/\(pathVariable0)"
+    }()
     let query = [URLQueryItem(name: "$alt", value: "json")]
-    var req = try await self.inner.Request(path: "/v1/\(request.resource)", query: query)
+    var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
     req.httpBody = try JSONEncoder().encode(request)
