@@ -44,6 +44,12 @@ default:
       - name: GoogleCloudWkt
         path: packages/wkt
         api_package: google.protobuf
+      - name: GoogleCloudLocation
+        path: generated/google-cloud-location
+        api_package: google.cloud.location
+      - name: GoogleIamV1
+        path: generated/google-iam-v1
+        api_package: google.iam.v1
       - name: GoogleType
         path: generated/google-type
         api_package: google.type
@@ -51,6 +57,10 @@ libraries:
   - name: GoogleCloudLocation
     apis:
       - path: google/cloud/location
+    copyright_year: "2026"
+  - name: GoogleCloudSecretmanagerV1
+    apis:
+      - path: google/cloud/secretmanager/v1
     copyright_year: "2026"
   - name: GoogleCloudSecurityPubliccaV1
     apis:
