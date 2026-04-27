@@ -62,6 +62,24 @@ cargo build --release
 swift build
 ```
 
+> [!NOTE] If you encounter an error like
+> `fatal: cannot use bare repository '...' (safe.bareRepository is 'explicit')`
+> when SwiftPM tries to fetch or update dependencies, you may need to update
+> your global git configuration:
+>
+> ```bash
+> git config --global safe.bareRepository all
+> ```
+>
+> **Why this happens:** SwiftPM creates and uses bare repositories in its local
+> cache to save space. However, when it runs Git commands against them, it
+> doesn't explicitly declare them as bare. If your environment enforces
+> `safe.bareRepository = explicit` (a common security policy), Git will refuse
+> to use them.
+>
+> **Why the fix works:** Setting it to `all` tells Git to trust all bare
+> repositories again, allowing SwiftPM to operate normally.
+
 ## Run the unit tests
 
 ```bash
@@ -119,9 +137,9 @@ project.
 ### One time set up
 
 We use [Secret Manager], [Workflows], and [KMS] to run integration tests. Follow
-the [Enable the Secret Manager API] guide to,
-as it says, enable the API and make sure that billing is enabled in your
-projects. To enable the APIs you can run this command:
+the [Enable the Secret Manager API] guide to, as it says, enable the API and
+make sure that billing is enabled in your projects. To enable the APIs you can
+run this command:
 
 ```bash
 gcloud services enable workflows.googleapis.com firestore.googleapis.com speech.googleapis.com cloudkms.googleapis.com 
