@@ -1,35 +1,28 @@
 name: Swift Unit Tests
-
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
-
+    branches: ["main"]
 jobs:
   test:
     name: Run Unit Tests
     runs-on: self-hosted
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
-
       - name: Install Dependencies
         run: |
-            set -e
-            sudo apt update -y
-            sudo apt install -y libncurses6
-
+          set -e
+          sudo apt update -y
+          sudo apt install -y libncurses6
       - name: Setup Swift
         uses: swift-actions/setup-swift@7ca6abe6b3b0e8b5421b88be48feee39cbf52c6a # ratchet:swift-actions/setup-swift@v2.4
         with:
           swift-version: '6.2'
-
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@631a55b12751854ce901bb631d5902ceb48146f7 # ratchet:dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.94'
-
       - name: Run Tests
         run: ./ci/test.sh
