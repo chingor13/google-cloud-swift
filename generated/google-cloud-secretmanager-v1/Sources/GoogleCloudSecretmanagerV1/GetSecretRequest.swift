@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.GetSecret][google.cloud.secretmanager.v1.SecretManagerService.GetSecret].
-public struct GetSecretRequest: Codable, Equatable {
+public struct GetSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret], in the format
   /// `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
@@ -33,5 +33,15 @@ public struct GetSecretRequest: Codable, Equatable {
     name: String = String(),
   ) {
     self.name = name
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.GetSecretRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

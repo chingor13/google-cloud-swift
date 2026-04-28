@@ -21,7 +21,7 @@ import GoogleType
 
 /// One delta entry for AuditConfig. Each individual change (only one
 /// exempted_member in each entry) to a AuditConfig will be a separate entry.
-public struct AuditConfigDelta: Codable, Equatable {
+public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The action that was performed on an audit configuration in a policy.
   /// Required
   public var action: AuditConfigDelta.Action
@@ -81,5 +81,15 @@ public struct AuditConfigDelta: Codable, Equatable {
       default: return nil
       }
     }
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.AuditConfigDelta"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

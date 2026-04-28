@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// The response message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].
-public struct ListLocationsResponse: Codable, Equatable {
+public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// A list of locations that matches the specified filter in the request.
   public var locations: [Location]
 
@@ -33,5 +33,15 @@ public struct ListLocationsResponse: Codable, Equatable {
   ) {
     self.locations = locations
     self.nextPageToken = nextPageToken
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.location.ListLocationsResponse"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

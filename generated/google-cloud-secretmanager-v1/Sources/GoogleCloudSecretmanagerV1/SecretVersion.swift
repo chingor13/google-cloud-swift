@@ -21,7 +21,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// A secret version resource in the Secret Manager API.
-public struct SecretVersion: Codable, Equatable {
+public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Output only. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] in the format
   /// `projects/*/secrets/*/versions/*`.
@@ -129,5 +129,15 @@ public struct SecretVersion: Codable, Equatable {
       default: return nil
       }
     }
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.SecretVersion"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

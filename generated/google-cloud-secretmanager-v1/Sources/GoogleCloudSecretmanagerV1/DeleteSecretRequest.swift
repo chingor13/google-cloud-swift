@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.DeleteSecret][google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret].
-public struct DeleteSecretRequest: Codable, Equatable {
+public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] to delete in the format
   /// `projects/*/secrets/*`.
@@ -40,5 +40,15 @@ public struct DeleteSecretRequest: Codable, Equatable {
   ) {
     self.name = name
     self.etag = etag
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.DeleteSecretRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

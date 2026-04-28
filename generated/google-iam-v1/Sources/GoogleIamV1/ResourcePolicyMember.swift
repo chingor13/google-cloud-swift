@@ -21,7 +21,7 @@ import GoogleType
 
 /// Output-only policy member strings of a Google Cloud resource's built-in
 /// identity.
-public struct ResourcePolicyMember: Codable, Equatable {
+public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// IAM policy binding member referring to a Google Cloud resource by
   /// user-assigned name (https://google.aip.dev/122). If a resource is deleted
   /// and recreated with the same name, the binding will be applicable to the new
@@ -47,5 +47,15 @@ public struct ResourcePolicyMember: Codable, Equatable {
   ) {
     self.iamPolicyNamePrincipal = iamPolicyNamePrincipal
     self.iamPolicyUidPrincipal = iamPolicyUidPrincipal
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.ResourcePolicyMember"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

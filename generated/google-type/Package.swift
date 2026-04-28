@@ -23,9 +23,15 @@ let package = Package(
   products: [
     .library(name: "GoogleType", targets: ["GoogleType"])
   ],
+  dependencies: [
+    .package(path: "../../packages/wkt")
+  ],
   targets: [
     .target(
       name: "GoogleType",
+      dependencies: [
+        .product(name: "GoogleCloudWkt", package: "wkt")
+      ],
     )
   ]
 )

@@ -26,7 +26,7 @@ import GoogleIamV1
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is made up of zero or more
 /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] that represent
 /// the secret data.
-public struct Secret: Codable, Equatable {
+public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Output only. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] in the format
   /// `projects/*/secrets/*`.
@@ -187,5 +187,15 @@ public struct Secret: Codable, Equatable {
     /// Input only. The TTL for the
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     indirect case ttl(GoogleCloudWkt.Duration?)
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.Secret"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

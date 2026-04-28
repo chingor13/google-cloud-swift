@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Request message for `SetIamPolicy` method.
-public struct SetIamPolicyRequest: Codable, Equatable {
+public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// REQUIRED: The resource for which the policy is being specified.
   /// See the operation documentation for the appropriate value for this field.
   public var resource: String
@@ -47,5 +47,15 @@ public struct SetIamPolicyRequest: Codable, Equatable {
     self.resource = resource
     self.policy = policy
     self.updateMask = updateMask
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.SetIamPolicyRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

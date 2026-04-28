@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// Describes violations in a client request. This error type focuses on the
 /// syntactic aspects of the request.
-public struct BadRequest: Codable, Equatable {
+public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Describes all violations in a client request.
   public var fieldViolations: [BadRequest.FieldViolation]
 
@@ -32,7 +32,7 @@ public struct BadRequest: Codable, Equatable {
   }
 
   /// A message type used to describe a single bad request field.
-  public struct FieldViolation: Codable, Equatable {
+  public struct FieldViolation: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// A path that leads to a field in the request body. The value will be a
     /// sequence of dot-separated identifiers that identify a protocol buffer
     /// field.
@@ -99,5 +99,23 @@ public struct BadRequest: Codable, Equatable {
       self.reason = reason
       self.localizedMessage = localizedMessage
     }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.rpc.BadRequest.FieldViolation"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.BadRequest" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

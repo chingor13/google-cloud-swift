@@ -16,9 +16,11 @@
 
 import Foundation
 
+import GoogleCloudWkt
+
 /// A representation of an ExternalAccountKey used for [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) within ACME.
-public struct ExternalAccountKey: Codable, Equatable {
+public struct ExternalAccountKey: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Output only. Resource name.
   /// projects/{project}/locations/{location}/externalAccountKeys/{key_id}
   public var name: String
@@ -42,5 +44,15 @@ public struct ExternalAccountKey: Codable, Equatable {
     self.name = name
     self.keyId = keyId
     self.b64MacKey = b64MacKey
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.security.publicca.v1.ExternalAccountKey"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

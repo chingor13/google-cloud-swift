@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Request message for `TestIamPermissions` method.
-public struct TestIamPermissionsRequest: Codable, Equatable {
+public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// REQUIRED: The resource for which the policy detail is being requested.
   /// See the operation documentation for the appropriate value for this field.
   public var resource: String
@@ -38,5 +38,15 @@ public struct TestIamPermissionsRequest: Codable, Equatable {
   ) {
     self.resource = resource
     self.permissions = permissions
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.TestIamPermissionsRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

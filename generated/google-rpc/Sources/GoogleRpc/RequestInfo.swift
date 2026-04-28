@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// Contains metadata about the request that clients can attach when filing a bug
 /// or providing other forms of feedback.
-public struct RequestInfo: Codable, Equatable {
+public struct RequestInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// An opaque string that should only be interpreted by the service generating
   /// it. For example, it can be used to identify requests in the service's logs.
   public var requestId: String
@@ -36,5 +36,13 @@ public struct RequestInfo: Codable, Equatable {
   ) {
     self.requestId = requestId
     self.servingData = servingData
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.RequestInfo" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

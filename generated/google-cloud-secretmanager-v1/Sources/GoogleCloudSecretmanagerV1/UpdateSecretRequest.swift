@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.UpdateSecret][google.cloud.secretmanager.v1.SecretManagerService.UpdateSecret].
-public struct UpdateSecretRequest: Codable, Equatable {
+public struct UpdateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. [Secret][google.cloud.secretmanager.v1.Secret] with updated field
   /// values.
   public var secret: Secret?
@@ -37,5 +37,15 @@ public struct UpdateSecretRequest: Codable, Equatable {
   ) {
     self.secret = secret
     self.updateMask = updateMask
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.UpdateSecretRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

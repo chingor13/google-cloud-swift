@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.10.2-0.20260424200608-699759677755
+version: v0.10.2-0.20260427201249-ed73195df0e9
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -41,12 +41,12 @@ default:
       - name: GoogleCloudGax
         path: packages/gax
         required_by_services: true
-      - name: GoogleCloudWkt
-        path: packages/wkt
-        api_package: google.protobuf
       - name: GoogleCloudLocation
         path: generated/google-cloud-location
         api_package: google.cloud.location
+      - name: GoogleCloudWkt
+        path: packages/wkt
+        api_package: google.protobuf
       - name: GoogleIamV1
         path: generated/google-iam-v1
         api_package: google.iam.v1

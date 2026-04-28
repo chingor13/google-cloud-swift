@@ -29,7 +29,7 @@ import GoogleCloudWkt
 ///
 /// Also see RetryInfo and Help types for other details about handling a
 /// quota failure.
-public struct QuotaFailure: Codable, Equatable {
+public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Describes all quota violations.
   public var violations: [QuotaFailure.Violation]
 
@@ -42,7 +42,7 @@ public struct QuotaFailure: Codable, Equatable {
 
   /// A message type used to describe a single quota violation.  For example, a
   /// daily quota or a custom quota that was exceeded.
-  public struct Violation: Codable, Equatable {
+  public struct Violation: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// The subject on which the quota check failed.
     /// For example, "clientip:<ip address of client>" or "project:<Google
     /// developer project id>".
@@ -142,5 +142,23 @@ public struct QuotaFailure: Codable, Equatable {
       self.quotaValue = quotaValue
       self.futureQuotaValue = futureQuotaValue
     }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.rpc.QuotaFailure.Violation"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.QuotaFailure" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

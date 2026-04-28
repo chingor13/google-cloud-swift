@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Configuration for encrypting secret payloads using customer-managed
 /// encryption keys (CMEK).
-public struct CustomerManagedEncryption: Codable, Equatable {
+public struct CustomerManagedEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. The resource name of the Cloud KMS CryptoKey used to encrypt
   /// secret payloads.
   ///
@@ -43,5 +43,15 @@ public struct CustomerManagedEncryption: Codable, Equatable {
     kmsKeyName: String = String(),
   ) {
     self.kmsKeyName = kmsKeyName
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.CustomerManagedEncryption"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

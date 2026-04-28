@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Encapsulates settings provided to GetIamPolicy.
-public struct GetPolicyOptions: Codable, Equatable {
+public struct GetPolicyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Optional. The maximum policy version that will be used to format the
   /// policy.
   ///
@@ -46,5 +46,15 @@ public struct GetPolicyOptions: Codable, Equatable {
     requestedPolicyVersion: Int32 = Int32(),
   ) {
     self.requestedPolicyVersion = requestedPolicyVersion
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.GetPolicyOptions"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

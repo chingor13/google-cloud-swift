@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP response.
-public struct HttpResponse: Codable, Equatable {
+public struct HttpResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The HTTP status code, such as 200 or 404.
   public var status: Int32
 
@@ -44,5 +44,13 @@ public struct HttpResponse: Codable, Equatable {
     self.reason = reason
     self.headers = headers
     self.body = body
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.HttpResponse" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

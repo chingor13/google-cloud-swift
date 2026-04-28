@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-public struct ReplicationStatus: Codable, Equatable {
+public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   public var replicationStatus: OneOf_ReplicationStatus?
@@ -40,7 +40,7 @@ public struct ReplicationStatus: Codable, Equatable {
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has an automatic replication policy.
-  public struct AutomaticStatus: Codable, Equatable {
+  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// Output only. The customer-managed encryption status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
     /// populated if customer-managed encryption is used.
@@ -52,6 +52,16 @@ public struct ReplicationStatus: Codable, Equatable {
     ) {
       self.customerManagedEncryption = customerManagedEncryption
     }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
   }
 
   /// The replication status of a
@@ -60,7 +70,7 @@ public struct ReplicationStatus: Codable, Equatable {
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has a user-managed replication policy.
-  public struct UserManagedStatus: Codable, Equatable {
+  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// Output only. The list of replica statuses for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus]
@@ -74,7 +84,7 @@ public struct ReplicationStatus: Codable, Equatable {
 
     /// Describes the status of a user-managed replica for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-    public struct ReplicaStatus: Codable, Equatable {
+    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
       public var location: String
@@ -92,6 +102,27 @@ public struct ReplicationStatus: Codable, Equatable {
         self.location = location
         self.customerManagedEncryption = customerManagedEncryption
       }
+
+      public static var _anyTypeUrl: String {
+        return
+          "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
     }
   }
 
@@ -114,5 +145,15 @@ public struct ReplicationStatus: Codable, Equatable {
     /// [Secret][google.cloud.secretmanager.v1.Secret] has a user-managed
     /// replication policy.
     indirect case userManaged(ReplicationStatus.UserManagedStatus?)
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Describes additional debugging info.
-public struct DebugInfo: Codable, Equatable {
+public struct DebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The stack trace entries indicating where the error occurred.
   public var stackEntries: [String]
 
@@ -33,5 +33,13 @@ public struct DebugInfo: Codable, Equatable {
   ) {
     self.stackEntries = stackEntries
     self.detail = detail
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.DebugInfo" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

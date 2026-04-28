@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
-public struct ListSecretsResponse: Codable, Equatable {
+public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The list of [Secrets][google.cloud.secretmanager.v1.Secret] sorted in
   /// reverse by create_time (newest first).
   public var secrets: [Secret]
@@ -47,5 +47,15 @@ public struct ListSecretsResponse: Codable, Equatable {
     self.secrets = secrets
     self.nextPageToken = nextPageToken
     self.totalSize = totalSize
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.ListSecretsResponse"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

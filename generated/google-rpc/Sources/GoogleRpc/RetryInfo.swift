@@ -31,7 +31,7 @@ import GoogleCloudWkt
 /// the delay between retries based on `retry_delay`, until either a maximum
 /// number of retries have been reached or a maximum retry delay cap has been
 /// reached.
-public struct RetryInfo: Codable, Equatable {
+public struct RetryInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Clients should wait at least this long between retrying the same request.
   public var retryDelay: GoogleCloudWkt.Duration?
 
@@ -40,5 +40,13 @@ public struct RetryInfo: Codable, Equatable {
     retryDelay: GoogleCloudWkt.Duration? = nil,
   ) {
     self.retryDelay = retryDelay
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.RetryInfo" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

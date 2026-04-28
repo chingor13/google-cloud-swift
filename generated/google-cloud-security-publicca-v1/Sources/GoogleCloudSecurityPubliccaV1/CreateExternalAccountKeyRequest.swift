@@ -16,10 +16,12 @@
 
 import Foundation
 
+import GoogleCloudWkt
+
 /// Creates a new
 /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey] in
 /// a given project.
-public struct CreateExternalAccountKeyRequest: Codable, Equatable {
+public struct CreateExternalAccountKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. The parent resource where this external_account_key will be
   /// created. Format: projects/[project_id]/locations/[location]. At present
   /// only the "global" location is supported.
@@ -38,5 +40,15 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable {
   ) {
     self.parent = parent
     self.externalAccountKey = externalAccountKey
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

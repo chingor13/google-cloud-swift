@@ -23,7 +23,7 @@ import GoogleCloudWkt
 /// For example, if an RPC failed because it required the Terms of Service to be
 /// acknowledged, it could list the terms of service violation in the
 /// PreconditionFailure message.
-public struct PreconditionFailure: Codable, Equatable {
+public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Describes all precondition violations.
   public var violations: [PreconditionFailure.Violation]
 
@@ -35,7 +35,7 @@ public struct PreconditionFailure: Codable, Equatable {
   }
 
   /// A message type used to describe a single precondition failure.
-  public struct Violation: Codable, Equatable {
+  public struct Violation: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// The type of PreconditionFailure. We recommend using a service-specific
     /// enum type to define the supported precondition violation subjects. For
     /// example, "TOS" for "Terms of Service violation".
@@ -62,5 +62,25 @@ public struct PreconditionFailure: Codable, Equatable {
       self.subject = subject
       self.description = description
     }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.rpc.PreconditionFailure.Violation"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.rpc.PreconditionFailure"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

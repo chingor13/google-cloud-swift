@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Response message for `TestIamPermissions` method.
-public struct TestIamPermissionsResponse: Codable, Equatable {
+public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// A subset of `TestPermissionsRequest.permissions` that the caller is
   /// allowed.
   public var permissions: [String]
@@ -30,5 +30,15 @@ public struct TestIamPermissionsResponse: Codable, Equatable {
     permissions: [String] = [],
   ) {
     self.permissions = permissions
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.TestIamPermissionsResponse"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

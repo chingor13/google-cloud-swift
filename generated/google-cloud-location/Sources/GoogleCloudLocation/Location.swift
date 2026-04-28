@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// A resource that represents Google Cloud Platform location.
-public struct Location: Codable, Equatable {
+public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Resource name for the location, which may vary between implementations.
   /// For example: `"projects/example-project/locations/us-east1"`
   public var name: String
@@ -53,5 +53,15 @@ public struct Location: Codable, Equatable {
     self.displayName = displayName
     self.labels = labels
     self.metadata = metadata
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.location.Location"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

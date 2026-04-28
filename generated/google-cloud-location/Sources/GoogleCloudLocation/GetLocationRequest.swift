@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// The request message for [Locations.GetLocation][google.cloud.location.Locations.GetLocation].
-public struct GetLocationRequest: Codable, Equatable {
+public struct GetLocationRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Resource name for the location.
   public var name: String
 
@@ -28,5 +28,15 @@ public struct GetLocationRequest: Codable, Equatable {
     name: String = String(),
   ) {
     self.name = name
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.location.GetLocationRequest"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

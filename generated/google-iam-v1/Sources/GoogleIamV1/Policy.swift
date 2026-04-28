@@ -92,7 +92,7 @@ import GoogleType
 ///
 /// For a description of IAM and its features, see the
 /// [IAM documentation](https://cloud.google.com/iam/docs/).
-public struct Policy: Codable, Equatable {
+public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Specifies the format of the policy.
   ///
   /// Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
@@ -160,5 +160,13 @@ public struct Policy: Codable, Equatable {
     self.bindings = bindings
     self.auditConfigs = auditConfigs
     self.etag = etag
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.Policy" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

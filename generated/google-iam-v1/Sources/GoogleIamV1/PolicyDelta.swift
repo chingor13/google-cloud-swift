@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// The difference delta between two policies.
-public struct PolicyDelta: Codable, Equatable {
+public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The delta for Bindings between two policies.
   public var bindingDeltas: [BindingDelta]
 
@@ -34,5 +34,13 @@ public struct PolicyDelta: Codable, Equatable {
   ) {
     self.bindingDeltas = bindingDeltas
     self.auditConfigDeltas = auditConfigDeltas
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.PolicyDelta" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

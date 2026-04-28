@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Associates `members`, or principals, with a `role`.
-public struct Binding: Codable, Equatable {
+public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Role that is assigned to the list of `members`, or principals.
   /// For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
   public var role: String
@@ -94,5 +94,13 @@ public struct Binding: Codable, Equatable {
     self.role = role
     self.members = members
     self.condition = condition
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.Binding" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

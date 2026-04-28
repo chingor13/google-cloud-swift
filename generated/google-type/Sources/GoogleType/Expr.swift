@@ -16,6 +16,8 @@
 
 import Foundation
 
+import GoogleCloudWkt
+
 /// Represents a textual expression in the Common Expression Language (CEL)
 /// syntax. CEL is a C-like expression language. The syntax and semantics of CEL
 /// are documented at https://github.com/google/cel-spec.
@@ -47,7 +49,7 @@ import Foundation
 /// The exact variables and functions that may be referenced within an expression
 /// are determined by the service that evaluates it. See the service
 /// documentation for additional information.
-public struct Expr: Codable, Equatable {
+public struct Expr: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Textual representation of an expression in Common Expression Language
   /// syntax.
   public var expression: String
@@ -76,5 +78,13 @@ public struct Expr: Codable, Equatable {
     self.title = title
     self.description = description
     self.location = location
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Expr" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

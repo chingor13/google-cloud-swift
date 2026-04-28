@@ -38,7 +38,7 @@ import GoogleType
 ///
 /// This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
 /// jose@example.com from DATA_READ logging.
-public struct AuditLogConfig: Codable, Equatable {
+public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The log type that this config enables.
   public var logType: AuditLogConfig.LogType
 
@@ -87,5 +87,15 @@ public struct AuditLogConfig: Codable, Equatable {
       default: return nil
       }
     }
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.iam.v1.AuditLogConfig"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

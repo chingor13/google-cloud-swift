@@ -21,7 +21,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// A policy that defines the replication and encryption configuration of data.
-public struct Replication: Codable, Equatable {
+public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The replication policy for this secret.
   public var replication: OneOf_Replication?
 
@@ -35,7 +35,7 @@ public struct Replication: Codable, Equatable {
   /// A replication policy that replicates the
   /// [Secret][google.cloud.secretmanager.v1.Secret] payload without any
   /// restrictions.
-  public struct Automatic: Codable, Equatable {
+  public struct Automatic: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// Optional. The customer-managed encryption configuration of the
     /// [Secret][google.cloud.secretmanager.v1.Secret]. If no configuration is
     /// provided, Google-managed default encryption is used.
@@ -53,13 +53,23 @@ public struct Replication: Codable, Equatable {
     ) {
       self.customerManagedEncryption = customerManagedEncryption
     }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.cloud.secretmanager.v1.Replication.Automatic"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
   }
 
   /// A replication policy that replicates the
   /// [Secret][google.cloud.secretmanager.v1.Secret] payload into the locations
   /// specified in
   /// [Replication.UserManaged.replicas][google.cloud.secretmanager.v1.Replication.UserManaged.replicas]
-  public struct UserManaged: Codable, Equatable {
+  public struct UserManaged: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// Required. The list of Replicas for this
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     ///
@@ -75,7 +85,7 @@ public struct Replication: Codable, Equatable {
 
     /// Represents a Replica for this
     /// [Secret][google.cloud.secretmanager.v1.Secret].
-    public struct Replica: Codable, Equatable {
+    public struct Replica: Codable, Equatable, GoogleCloudWkt._AnyPackable {
       /// The canonical IDs of the location to replicate data.
       /// For example: `"us-east1"`.
       public var location: String
@@ -99,6 +109,26 @@ public struct Replication: Codable, Equatable {
         self.location = location
         self.customerManagedEncryption = customerManagedEncryption
       }
+
+      public static var _anyTypeUrl: String {
+        return "type.googleapis.com/google.cloud.secretmanager.v1.Replication.UserManaged.Replica"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.cloud.secretmanager.v1.Replication.UserManaged"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
     }
   }
 
@@ -110,5 +140,15 @@ public struct Replication: Codable, Equatable {
     /// The [Secret][google.cloud.secretmanager.v1.Secret] will only be
     /// replicated into the locations specified.
     indirect case userManaged(Replication.UserManaged?)
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.Replication"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

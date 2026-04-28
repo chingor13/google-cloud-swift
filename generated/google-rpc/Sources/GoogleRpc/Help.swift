@@ -23,7 +23,7 @@ import GoogleCloudWkt
 /// For example, if a quota check failed with an error indicating the calling
 /// project hasn't enabled the accessed service, this can contain a URL pointing
 /// directly to the right place in the developer console to flip the bit.
-public struct Help: Codable, Equatable {
+public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// URL(s) pointing to additional information on handling the current error.
   public var links: [Help.Link]
 
@@ -35,7 +35,7 @@ public struct Help: Codable, Equatable {
   }
 
   /// Describes a URL link.
-  public struct Link: Codable, Equatable {
+  public struct Link: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     /// Describes what the link offers.
     public var description: String
 
@@ -50,5 +50,21 @@ public struct Help: Codable, Equatable {
       self.description = description
       self.url = url
     }
+
+    public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Help.Link" }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Help" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

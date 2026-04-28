@@ -25,7 +25,7 @@ import GoogleCloudWkt
 ///
 /// You can find out more about this error model and how to work with it in the
 /// [API Design Guide](https://cloud.google.com/apis/design/errors).
-public struct Status: Codable, Equatable {
+public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The status code, which should be an enum value of
   /// [google.rpc.Code][google.rpc.Code].
   public var code: Int32
@@ -49,5 +49,13 @@ public struct Status: Codable, Equatable {
     self.code = code
     self.message = message
     self.details = details
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Status" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

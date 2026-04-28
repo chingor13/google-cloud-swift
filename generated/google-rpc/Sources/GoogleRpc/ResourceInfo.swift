@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Describes the resource that is being accessed.
-public struct ResourceInfo: Codable, Equatable {
+public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// A name for the type of resource being accessed, e.g. "sql table",
   /// "cloud storage bucket", "file", "Google calendar"; or the type URL
   /// of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
@@ -52,5 +52,13 @@ public struct ResourceInfo: Codable, Equatable {
     self.resourceName = resourceName
     self.owner = owner
     self.description = description
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.ResourceInfo" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

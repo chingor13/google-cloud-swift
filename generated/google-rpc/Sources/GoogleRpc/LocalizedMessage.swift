@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// Provides a localized error message that is safe to return to the user
 /// which can be attached to an RPC error.
-public struct LocalizedMessage: Codable, Equatable {
+public struct LocalizedMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The locale used following the specification defined at
   /// https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
   /// Examples are: "en-US", "fr-CH", "es-MX"
@@ -36,5 +36,13 @@ public struct LocalizedMessage: Codable, Equatable {
   ) {
     self.locale = locale
     self.message = message
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.LocalizedMessage" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

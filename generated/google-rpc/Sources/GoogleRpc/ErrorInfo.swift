@@ -42,7 +42,7 @@ import GoogleCloudWkt
 ///         "availableRegions": "us-central1,us-east2"
 ///       }
 ///     }
-public struct ErrorInfo: Codable, Equatable {
+public struct ErrorInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The reason of the error. This is a constant value that identifies the
   /// proximate cause of the error. Error reasons are unique within a particular
   /// domain of errors. This should be at most 63 characters and match a
@@ -78,5 +78,13 @@ public struct ErrorInfo: Codable, Equatable {
     self.reason = reason
     self.domain = domain
     self.metadata = metadata
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.ErrorInfo" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

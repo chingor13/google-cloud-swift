@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP request.
-public struct HttpRequest: Codable, Equatable {
+public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The HTTP request method.
   public var method: String
 
@@ -44,5 +44,13 @@ public struct HttpRequest: Codable, Equatable {
     self.uri = uri
     self.headers = headers
     self.body = body
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.HttpRequest" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

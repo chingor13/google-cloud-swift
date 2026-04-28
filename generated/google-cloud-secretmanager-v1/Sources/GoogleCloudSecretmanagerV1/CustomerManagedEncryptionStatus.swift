@@ -21,7 +21,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// Describes the status of customer-managed encryption.
-public struct CustomerManagedEncryptionStatus: Codable, Equatable {
+public struct CustomerManagedEncryptionStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Required. The resource name of the Cloud KMS CryptoKeyVersion used to
   /// encrypt the secret payload, in the following format:
   /// `projects/*/locations/*/keyRings/*/cryptoKeys/*/versions/*`.
@@ -32,5 +32,15 @@ public struct CustomerManagedEncryptionStatus: Codable, Equatable {
     kmsKeyVersionName: String = String(),
   ) {
     self.kmsKeyVersionName = kmsKeyVersionName
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

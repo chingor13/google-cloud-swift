@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
-public struct ListSecretVersionsResponse: Codable, Equatable {
+public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The list of [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]
   /// sorted in reverse by create_time (newest first).
   public var versions: [SecretVersion]
@@ -48,5 +48,15 @@ public struct ListSecretVersionsResponse: Codable, Equatable {
     self.versions = versions
     self.nextPageToken = nextPageToken
     self.totalSize = totalSize
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.ListSecretVersionsResponse"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

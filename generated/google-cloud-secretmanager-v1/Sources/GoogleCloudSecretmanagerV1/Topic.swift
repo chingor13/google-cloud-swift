@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// A Pub/Sub topic which Secret Manager will publish to when control plane
 /// events occur on this secret.
-public struct Topic: Codable, Equatable {
+public struct Topic: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Identifier. The resource name of the Pub/Sub topic that will be published
   /// to, in the following format: `projects/*/topics/*`. For publication to
   /// succeed, the Secret Manager service agent must have the
@@ -35,5 +35,15 @@ public struct Topic: Codable, Equatable {
     name: String = String(),
   ) {
     self.name = name
+  }
+
+  public static var _anyTypeUrl: String {
+    return "type.googleapis.com/google.cloud.secretmanager.v1.Topic"
+  }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

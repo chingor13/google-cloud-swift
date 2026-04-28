@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP header.
-public struct HttpHeader: Codable, Equatable {
+public struct HttpHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The HTTP header key. It is case insensitive.
   public var key: String
 
@@ -33,5 +33,13 @@ public struct HttpHeader: Codable, Equatable {
   ) {
     self.key = key
     self.value = value
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.HttpHeader" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }

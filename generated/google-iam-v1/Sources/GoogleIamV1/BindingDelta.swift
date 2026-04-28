@@ -21,7 +21,7 @@ import GoogleType
 
 /// One delta entry for Binding. Each individual change (only one member in each
 /// entry) to a binding will be a separate entry.
-public struct BindingDelta: Codable, Equatable {
+public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The action that was performed on a Binding.
   /// Required
   public var action: BindingDelta.Action
@@ -78,5 +78,13 @@ public struct BindingDelta: Codable, Equatable {
       default: return nil
       }
     }
+  }
+
+  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.BindingDelta" }
+  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+  }
+  public func _pack() throws -> GoogleCloudWkt.Struct {
+    return try GoogleCloudWkt._slowAnySerialize(message: self)
   }
 }
