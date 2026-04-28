@@ -29,10 +29,12 @@ let package = Package(
     .package(path: "./packages/auth"),
     .package(path: "./packages/gax"),
     .package(path: "./packages/wkt"),
-    .package(path: "./generated/google-cloud-location"),
+    .package(path: "./generated/google-cloud-secretmanager-v1"),
     .package(path: "./generated/google-cloud-security-publicca-v1"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
+    // Used in the integration tests.
+    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.10.0"),
   ],
   targets: [
     .testTarget(
@@ -49,6 +51,17 @@ let package = Package(
         .product(
           name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1")
       ]
+    ),
+    .testTarget(
+      name: "ProtoBasedClient",
+      dependencies: [
+        .product(
+          name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
+        .product(
+          name: "GoogleCloudWkt", package: "wkt"),
+        .product(name: "CryptoSwift", package: "CryptoSwift"),
+      ],
+      exclude: ["README.md"],
     ),
     .testTarget(
       name: "Any",
