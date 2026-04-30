@@ -33,11 +33,14 @@ xcuserdata/
 DerivedData/
 *.xcscmblueprint
 
-# Many developers use VS Code
-.vscode
+# Many developers use VS Code, Zed
+.vscode/
 
 # Some developers use IntelliJ-type IDEs.
 .idea/
+
+# And zed.
+.zed/
 
 # Ignore terraform files.
 .terraform/

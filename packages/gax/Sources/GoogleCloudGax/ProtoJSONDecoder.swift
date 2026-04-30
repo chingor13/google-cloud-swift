@@ -1,0 +1,175 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+
+/// Decodes values using the ProtoJSON mapping.
+///
+/// The Google Cloud client libraries for Swift use HTTP+JSON as their primary transport.
+/// The ProtoJSON encoding differs from typical JSON in a number of ways, including:
+/// - Fields with a default value may be not present, that includes empty strings, empty repeated fields, and empty dictionaries.
+/// - In principle, integer types with 0 value may be omitted too.
+/// - Non-number floating point values (NaN, +Inf, -Inf) are represented as strings.
+/// - Many numeric types can be represented as strings as well as numbers.
+/// - Maps with numeric or boolean keys are serialized as string keys.
+///
+/// This decoder implements all the custom ProtoJSON rules using the native Swift JSON decoder.
+/// The key idea is to wrap the JSON decoder types in our own types to handle missing values and alternative representations.
+///
+/// Unfortunately the system types conforming to the `Decoder` protocol are not public, they cannot be named to implement
+/// any wrapper types. The approach is to use an `Interceptor<T>` type that implements `Decodable` and wraps the `any Decoder`
+/// it receives.
+public class ProtoJSONDecoder {
+  public init() {}
+
+  public func decode<T>(_ type: T.Type, from: Data) throws -> T where T: Decodable {
+    let decoder = JSONDecoder()
+    let proto = try decoder.decode(Interceptor<T>.self, from: from)
+    return proto.inner
+  }
+}
+
+/// Intercepts the decoding of `T` inserting the `Internal*` wrappers.
+fileprivate struct Interceptor<T: Decodable>: Decodable {
+  let inner: T
+
+  init(from: any Decoder) throws { self.inner = try T(from: InternalDecoder(impl: from)) }
+}
+
+/// Implements the `Decoder` protocol for ProtoJSON.
+///
+/// This wraps an implementation of the `Decoder` protocol and then applies the ProtoJSON rules.
+fileprivate struct InternalDecoder {
+  let impl: any Decoder
+
+  init(impl: any Decoder) { self.impl = impl }
+}
+
+// Implements the `Decoder` protocol.
+extension InternalDecoder: Decoder {
+  var codingPath: [any CodingKey] { self.impl.codingPath }
+  var userInfo: [CodingUserInfoKey: Any] { self.impl.userInfo }
+
+  public func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key>
+  where Key: CodingKey {
+    let impl = try self.impl.container(keyedBy: type)
+    return KeyedDecodingContainer(InternalKeyedContainer(impl))
+  }
+
+  public func singleValueContainer() throws -> any SingleValueDecodingContainer {
+    // TODO(https://github.com/googleapis/librarian/issues/5260) - wrap for special values
+    return try self.impl.singleValueContainer()
+  }
+
+  public func unkeyedContainer() throws -> any UnkeyedDecodingContainer {
+    let impl = try self.impl.unkeyedContainer()
+    return InternalUnkeyedDecodingContainer(impl)
+  }
+}
+
+fileprivate struct InternalKeyedContainer<K: CodingKey> {
+  let impl: KeyedDecodingContainer<K>
+
+  init(_ impl: KeyedDecodingContainer<K>) { self.impl = impl }
+
+  func decodeGeneric<T: Decodable>(_ type: T.Type, forKey key: Self.Key) throws -> T {
+    if !self.impl.contains(key) {
+      let decoder = DecodeToDefault()
+      return try T(from: decoder)
+    }
+    return try self.impl.decode(Interceptor<T>.self, forKey: key).inner
+  }
+}
+
+extension InternalKeyedContainer: KeyedDecodingContainerProtocol {
+  typealias Key = K
+  var allKeys: [K] { self.impl.allKeys }
+  var codingPath: [any CodingKey] { self.impl.codingPath }
+
+  // Contains always returns true because missing keys return the default value.
+  func contains(_ key: Key) -> Bool { return true }
+
+  func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Self.Key) throws
+    -> KeyedDecodingContainer<NestedKey>
+  where NestedKey: CodingKey {
+    if !self.impl.contains(key) {
+      return KeyedDecodingContainer(DecodeToDefaultKeyed<NestedKey>())
+    }
+    let impl = try self.impl.nestedContainer(keyedBy: type, forKey: key)
+    return KeyedDecodingContainer(InternalKeyedContainer<NestedKey>(impl))
+  }
+
+  func nestedUnkeyedContainer(forKey key: Self.Key) throws -> any UnkeyedDecodingContainer {
+    let impl = try self.impl.nestedUnkeyedContainer(forKey: key)
+    return InternalUnkeyedDecodingContainer(impl)
+  }
+
+  func superDecoder() throws -> any Decoder {
+    return try self.impl.superDecoder()
+  }
+
+  func superDecoder(forKey key: K) throws -> any Decoder {
+    return try self.impl.superDecoder(forKey: key)
+  }
+
+  func decode<T: Decodable>(_ type: T.Type, forKey key: Self.Key) throws -> T {
+    return try decodeGeneric(type, forKey: key)
+  }
+
+  func decodeNil(forKey key: K) throws -> Bool {
+    return try self.impl.decodeNil(forKey: key)
+  }
+}
+
+fileprivate struct InternalUnkeyedDecodingContainer {
+  var impl: any UnkeyedDecodingContainer
+
+  init(_ impl: any UnkeyedDecodingContainer) { self.impl = impl }
+}
+
+extension InternalUnkeyedDecodingContainer: UnkeyedDecodingContainer {
+  var isAtEnd: Bool { self.impl.isAtEnd }
+  var currentIndex: Int { self.impl.currentIndex }
+  var count: Int? { self.impl.count }
+  var codingPath: [any CodingKey] { self.impl.codingPath }
+
+  mutating func decodeNil() throws -> Bool {
+    return try self.impl.decodeNil()
+  }
+
+  mutating func decode<T: Decodable>(_ type: T.Type) throws -> T {
+    return try self.impl.decode(Interceptor<T>.self).inner
+  }
+
+  mutating func nestedUnkeyedContainer() throws -> any UnkeyedDecodingContainer {
+    let impl = try self.impl.nestedUnkeyedContainer()
+    return Self(impl)
+  }
+
+  mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws
+    -> KeyedDecodingContainer<NestedKey>
+  where NestedKey: CodingKey {
+    let impl = try self.impl.nestedContainer(keyedBy: type)
+    return KeyedDecodingContainer(InternalKeyedContainer(impl))
+  }
+
+  mutating func superDecoder() throws -> any Decoder {
+    return try self.impl.superDecoder()
+  }
+}
+
+/// An error indicating problems with
+public enum ProtoJSONError: Error {
+  case unsupportedType(String)
+}
