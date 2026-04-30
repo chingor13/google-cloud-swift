@@ -19,4 +19,6 @@ extend-exclude = [
   "testdata/**",
   # Generated libraries often contain typos coming from upstream protos.
   "generated/**",
+  # librarian.yaml contains SHAs that confuse `typos-cli`,
+  "librarian.yaml",
 ]
