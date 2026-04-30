@@ -14,6 +14,7 @@
 
 import Foundation
 import Testing
+import GoogleCloudGax
 
 // All the code is compiled by default. The driver to run the code is only enabled when the
 // `IntegrationTests` package trait is enabled.
@@ -21,7 +22,17 @@ import Testing
   @Suite struct ProtoBasedClient {
     @Test func globalEndpoint() async throws {
       await cleanupStaleSecrets()
-      try await GlobalEndpoint.run()
+      do {
+        try await GlobalEndpoint.run()
+      } catch let error as GoogleCloudGax.RequestError {
+        if case let .http(details) = error {
+          let p = String(data: details.payload, encoding: .utf8)!
+          print("### payload=\(p) error=\(error)")
+        }
+      } catch {
+        print("### error=\(error)")
+        throw error
+      }
     }
   }
 #endif

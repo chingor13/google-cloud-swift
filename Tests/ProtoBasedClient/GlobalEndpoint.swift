@@ -26,7 +26,7 @@ public enum GlobalEndpoint {
     print("Testing createSecret()")
     let create = try await client.createSecret(
       request: CreateSecretRequest(
-        parent: "projects\(projectId)", secretId: secretId,
+        parent: "projects/\(projectId)", secretId: secretId,
         secret: Secret(
           replication: Replication(replication: .automatic(Replication.Automatic())),
           labels: ["integration-test": "true"])
