@@ -97,8 +97,7 @@ extension InternalKeyedContainer: KeyedDecodingContainerProtocol {
   var allKeys: [K] { self.impl.allKeys }
   var codingPath: [any CodingKey] { self.impl.codingPath }
 
-  // Contains always returns true because missing keys return the default value.
-  func contains(_ key: Key) -> Bool { return true }
+  func contains(_ key: Key) -> Bool { impl.contains(key) }
 
   func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Self.Key) throws
     -> KeyedDecodingContainer<NestedKey>
