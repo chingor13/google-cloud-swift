@@ -50,7 +50,8 @@ let package = Package(
       dependencies: [
         .product(
           name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1")
-      ]
+      ],
+      exclude: ["protos/"],
     ),
     .testTarget(
       name: "ProtoBasedClient",

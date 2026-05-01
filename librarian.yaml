@@ -82,3 +82,15 @@ libraries:
       include_list:
         - expr.proto
         - month.proto
+  - name: TestsProtoJSON
+    copyright_year: "2026"
+    output: Tests/ProtoJSON/generated
+    roots:
+      - Tests/ProtoJSON/protos
+    skip_release: true
+    swift:
+      include_list:
+        - oneofs.proto
+      modules:
+        - output: Tests/ProtoJSON/generated
+          api_path: Tests/ProtoJSON/protos
