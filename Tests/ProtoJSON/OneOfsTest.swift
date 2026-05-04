@@ -15,9 +15,10 @@
 import Foundation
 import Testing
 
+import GoogleCloudGax
+
 @Suite struct OneOfsTests {
-  @Test(.disabled("TODO(https://github.com/googleapis/librarian/issues/5695)"))
-  func oneOfSerialization() throws {
+  @Test func oneOfSerialization() throws {
     let expectedJSON = #"{"stringContentsOne":"test-input"}"#
     let input = MessageWithOneOf(
       twoStrings: MessageWithOneOf.OneOf_TwoStrings.stringContentsOne("test-input")
@@ -28,7 +29,7 @@ import Testing
     let jsonString = String(data: data, encoding: .utf8)!
     #expect(jsonString == expectedJSON)
 
-    let decoder = JSONDecoder()
+    let decoder = ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithOneOf.self, from: data)
     #expect(input == roundtrip)
   }
