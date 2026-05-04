@@ -11,20 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: Install protoc
-description: Install the Protobuf compiler
+name: Install Swift
+description: Install the Swift toolchain and its dependencies
 runs:
   using: composite
   steps:
-    - name: Install protoc
+    - name: Install Swift Dependencies
+      shell: bash
       run: |
         set -e
-        curl -fsSL --retry 5 --retry-delay 15 -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v$VERSION/protoc-$VERSION-linux-x86_64.zip
-        sha512sum -c <(echo "$CHECKSUM /tmp/protoc.zip")
-        cd /usr/local
-        sudo unzip -o /tmp/protoc.zip
-        protoc --version
-      shell: bash
-      env:
-        VERSION: "31.0"
-        CHECKSUM: 45776e351baa6c2a9ba3b05a20d5302c5226db0579a6279a540592244d9de9b5f80c9905e90b6a1cebda12c3f8a2bd15450b46d967ba2e80dfc26fb246a84654
+        sudo apt -o Acquire::Retries=3 update -y
+        sudo apt -o Acquire::Retries=3 install -y libncurses6
+    - name: Set up Swift
+      uses: swift-actions/setup-swift@7ca6abe6b3b0e8b5421b88be48feee39cbf52c6a # ratchet:swift-actions/setup-swift@v2.4
+      with:
+        swift-version: "6.2"
