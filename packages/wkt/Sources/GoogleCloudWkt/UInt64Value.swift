@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// Wrapper message for double.
+/// Wrapper message for uint64.
 ///
-/// The JSON representation for DoubleValue is JSON number.
-public typealias DoubleValue = Swift.Double?
+/// The JSON representation for UInt64Value is JSON number.
+public typealias UInt64Value = Swift.UInt64?
 
-extension Swift.Double: _SupportsOptionalPacking {
+extension Swift.UInt64: _SupportsOptionalPacking {
   public static var _optionalAnyTypeUrl: String {
-    return "type.googleapis.com/google.protobuf.DoubleValue"
+    return "type.googleapis.com/google.protobuf.UInt64Value"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Double {
+  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.UInt64 {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return n
+    return UInt64(n)
   }
 
   public func _packOptional() throws -> Struct {
-    return [`Any`.valueField: Value(number: self)]
+    return [`Any`.valueField: Value(number: Double(self))]
   }
 }

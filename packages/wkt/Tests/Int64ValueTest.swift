@@ -1,0 +1,105 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+import GoogleCloudWkt
+import Testing
+
+@Suite struct Int64ValueTests {
+  struct WrappedInt64ValueEncode: Encodable {
+    let value: GoogleCloudWkt.Int64Value
+  }
+
+  @Test(
+    "Int64Value JSON Encoding",
+    arguments: [
+      (123, "{\"value\":123}"),
+      (0, "{\"value\":0}"),
+    ])
+  func encodeJSON(_ args: (Int64, String)) throws {
+    let wrapped = WrappedInt64ValueEncode(value: args.0)
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(wrapped)
+    let got = String(data: data, encoding: .utf8)!
+    #expect(got == args.1)
+  }
+
+  @Test("Int64Value JSON Encoding unset")
+  func encodeJSONUnset() throws {
+    let wrapped = WrappedInt64ValueEncode(value: nil)
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(wrapped)
+    let got = String(data: data, encoding: .utf8)!
+    #expect(got == "{}")
+  }
+
+  struct WrappedInt64ValueDecode: Decodable {
+    let value: GoogleCloudWkt.Int64Value
+  }
+
+  @Test(
+    "Int64Value JSON Decoding",
+    arguments: [
+      ("{\"value\":123}", 123),
+      ("{\"value\":0}", 0),
+    ])
+  func decodeJSON(_ args: (String, Int64)) throws {
+    let data = args.0.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedInt64ValueDecode.self, from: data)
+    #expect(wrapped.value == args.1)
+  }
+
+  @Test("Int64Value JSON Decoding unset")
+  func decodeJSONUnset() throws {
+    let data = "{}".data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedInt64ValueDecode.self, from: data)
+    #expect(wrapped.value == nil)
+  }
+
+  struct WrappedAny: Codable {
+    let content: GoogleCloudWkt.`Any`
+  }
+
+  @Test("Unpack Int64Value from Any")
+  func int64ValueAnyUnpack() throws {
+    let jsonString =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Int64Value","value":123}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(Int64ValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Int64Value")
+
+    let got = try Int64Value(fromAny: any)
+    let want = Int64(123)
+    #expect(got == want)
+  }
+
+  @Test("Pack Int64Value into Any")
+  func int64ValueAnyPack() throws {
+    let input = Int64Value(123)
+    let any = try `Any`(fromMessage: input)
+    let wrapped = Int64ValueTests.WrappedAny(content: any)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(wrapped)
+    let got = String(data: data, encoding: .utf8)!
+
+    let want =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Int64Value","value":123}}"#
+    #expect(got == want)
+  }
+}

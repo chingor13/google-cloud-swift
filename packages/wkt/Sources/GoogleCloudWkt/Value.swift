@@ -131,7 +131,7 @@ public enum Value: Codable, Equatable, Sendable {
 }
 
 // Makes `Value` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension Value: _AnyPackable {
+extension Value: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.Value"
   }
@@ -159,7 +159,7 @@ extension Value: _AnyPackable {
 public typealias Struct = [String: Value]
 
 // Makes `Struct` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension Struct: _AnyPackable {
+extension Struct: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.Struct"
   }
@@ -178,7 +178,7 @@ extension Struct: _AnyPackable {
 public typealias ListValue = [Value]
 
 // Makes `ListValue` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension ListValue: _AnyPackable {
+extension ListValue: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.ListValue"
   }

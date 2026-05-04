@@ -99,6 +99,29 @@ public protocol _AnyPackable {
   func _pack() throws -> Struct
 }
 
+/// An internal protocol for types that support being packed into and unpacked from an Optional inside `Any`.
+public protocol _SupportsOptionalPacking {
+  static var _optionalAnyTypeUrl: String { get }
+  static func _unpackOptional(fromAny any: `Any`) throws -> Self
+  func _packOptional() throws -> Struct
+}
+
+extension _SupportsOptionalPacking where Self: _AnyPackable {
+  public static var _optionalAnyTypeUrl: String {
+    return self._anyTypeUrl
+  }
+
+  public static func _unpackOptional(fromAny any: `Any`) throws -> Self {
+    return try Self(fromAny: any)
+  }
+
+  public func _packOptional() throws -> Struct {
+    return try self._pack()
+  }
+}
+
+extension `Any`: _SupportsOptionalPacking {}
+
 // Deserializes a message of type `M` from an `Any`.
 public func _slowAnyDeserialize<M: Decodable>(_ type: M.Type, from: `Any`) throws -> M {
   let encoder = JSONEncoder();
@@ -115,4 +138,21 @@ public func _slowAnySerialize<M: Encodable>(message: M) throws -> Struct {
   let data = try encoder.encode(message)
   let decoder = JSONDecoder()
   return try decoder.decode(Struct.self, from: data)
+}
+
+extension Optional: _AnyPackable where Wrapped: _SupportsOptionalPacking {
+  public static var _anyTypeUrl: String {
+    return Wrapped._optionalAnyTypeUrl
+  }
+
+  public init(fromAny any: `Any`) throws {
+    self = try .some(Wrapped._unpackOptional(fromAny: any))
+  }
+
+  public func _pack() throws -> Struct {
+    guard let value = self else {
+      throw AnyError.invalidValueField
+    }
+    return try value._packOptional()
+  }
 }

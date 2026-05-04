@@ -12,27 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// Wrapper message for double.
-///
-/// The JSON representation for DoubleValue is JSON number.
-public typealias DoubleValue = Swift.Double?
+import Foundation
 
-extension Swift.Double: _SupportsOptionalPacking {
+/// Wrapper message for float.
+///
+/// The JSON representation for FloatValue is JSON number.
+public typealias FloatValue = Swift.Float?
+
+extension Swift.Float: _SupportsOptionalPacking {
   public static var _optionalAnyTypeUrl: String {
-    return "type.googleapis.com/google.protobuf.DoubleValue"
+    return "type.googleapis.com/google.protobuf.FloatValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Double {
+  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Float {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return n
+    return Float(n)
   }
 
   public func _packOptional() throws -> Struct {
-    return [`Any`.valueField: Value(number: self)]
+    let rounded = Double(String(format: "%g", self)) ?? Double(self)
+    return [`Any`.valueField: Value(number: rounded)]
   }
 }

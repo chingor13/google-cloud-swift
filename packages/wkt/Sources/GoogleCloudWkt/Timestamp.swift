@@ -321,7 +321,7 @@ public struct Timestamp: Codable, Equatable, Sendable {
 }
 
 // Makes `Timestamp` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension Timestamp: _AnyPackable {
+extension Timestamp: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.Timestamp"
   }

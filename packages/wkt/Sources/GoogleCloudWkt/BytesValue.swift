@@ -12,27 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// Wrapper message for double.
-///
-/// The JSON representation for DoubleValue is JSON number.
-public typealias DoubleValue = Swift.Double?
+import Foundation
 
-extension Swift.Double: _SupportsOptionalPacking {
+/// Wrapper message for bytes.
+///
+/// The JSON representation for BytesValue is JSON string (base64 encoded).
+public typealias BytesValue = Foundation.Data?
+
+extension Foundation.Data: _SupportsOptionalPacking {
   public static var _optionalAnyTypeUrl: String {
-    return "type.googleapis.com/google.protobuf.DoubleValue"
+    return "type.googleapis.com/google.protobuf.BytesValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Double {
+  public static func _unpackOptional(fromAny any: `Any`) throws -> Foundation.Data {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
-    guard case let .number(n) = v else {
+    guard case let .string(s) = v else {
       throw AnyError.invalidValueField
     }
-    return n
+    guard let d = Data(base64Encoded: s) else {
+      throw AnyError.invalidValueField
+    }
+    return d
   }
 
   public func _packOptional() throws -> Struct {
-    return [`Any`.valueField: Value(number: self)]
+    return [`Any`.valueField: Value(string: self.base64EncodedString())]
   }
 }

@@ -28,7 +28,7 @@ public struct Empty: Codable, Equatable, Sendable {
 }
 
 // Makes `Empty` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension Empty: _AnyPackable {
+extension Empty: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.Empty"
   }

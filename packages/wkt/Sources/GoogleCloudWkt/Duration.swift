@@ -148,7 +148,7 @@ func formatNanos(nanos: Int64) -> String {
 }
 
 // Makes `Duration` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension Duration: _AnyPackable {
+extension Duration: _AnyPackable, _SupportsOptionalPacking {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.Duration"
   }
