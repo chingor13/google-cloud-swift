@@ -54,6 +54,23 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     self.dataCrc32C = dataCrc32C
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case data = "data"
+    case dataCrc32C = "dataCrc32c"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.data = try container.decode(Data.self, forKey: .data)
+    self.dataCrc32C = try container.decode(Int64?.self, forKey: .dataCrc32C)
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.data, forKey: .data)
+    try container.encode(self.dataCrc32C, forKey: .dataCrc32C)
+  }
+
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.SecretPayload"
   }

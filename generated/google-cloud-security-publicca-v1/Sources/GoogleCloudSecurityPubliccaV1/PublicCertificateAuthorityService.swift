@@ -54,7 +54,7 @@ public class PublicCertificateAuthorityService {
       }
       return "/v1/\(pathVariable0)/externalAccountKeys"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     if let body = request.externalAccountKey {
@@ -70,6 +70,6 @@ public class PublicCertificateAuthorityService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(ExternalAccountKey.self, from: data)
+    return try ProtoJSONDecoder().decode(ExternalAccountKey.self, from: data)
   }
 }

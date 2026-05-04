@@ -34,6 +34,50 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     self.replicationStatus = replicationStatus
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case automatic = "automatic"
+    case userManaged = "userManaged"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    var replicationStatus: OneOf_ReplicationStatus? = nil
+    let replicationStatusCheckAndSet = { (value: OneOf_ReplicationStatus) throws in
+      if replicationStatus != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'replicationStatus'"))
+      }
+      replicationStatus = value
+    }
+    if let automatic = try container.decodeIfPresent(
+      ReplicationStatus.AutomaticStatus?.self, forKey: .automatic)
+    {
+      try replicationStatusCheckAndSet(.automatic(automatic))
+    }
+    if let userManaged = try container.decodeIfPresent(
+      ReplicationStatus.UserManagedStatus?.self, forKey: .userManaged)
+    {
+      try replicationStatusCheckAndSet(.userManaged(userManaged))
+    }
+    self.replicationStatus = replicationStatus
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    if let choice = self.replicationStatus {
+      switch choice {
+      case .automatic(let value):
+        try container.encode(value, forKey: .automatic)
+      case .userManaged(let value):
+        try container.encode(value, forKey: .userManaged)
+      }
+    }
+  }
+
   /// The replication status of a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] using
   /// automatic replication.

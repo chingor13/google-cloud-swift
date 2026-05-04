@@ -32,6 +32,50 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     self.replication = replication
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case automatic = "automatic"
+    case userManaged = "userManaged"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    var replication: OneOf_Replication? = nil
+    let replicationCheckAndSet = { (value: OneOf_Replication) throws in
+      if replication != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'replication'"))
+      }
+      replication = value
+    }
+    if let automatic = try container.decodeIfPresent(
+      Replication.Automatic?.self, forKey: .automatic)
+    {
+      try replicationCheckAndSet(.automatic(automatic))
+    }
+    if let userManaged = try container.decodeIfPresent(
+      Replication.UserManaged?.self, forKey: .userManaged)
+    {
+      try replicationCheckAndSet(.userManaged(userManaged))
+    }
+    self.replication = replication
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    if let choice = self.replication {
+      switch choice {
+      case .automatic(let value):
+        try container.encode(value, forKey: .automatic)
+      case .userManaged(let value):
+        try container.encode(value, forKey: .userManaged)
+      }
+    }
+  }
+
   /// A replication policy that replicates the
   /// [Secret][google.cloud.secretmanager.v1.Secret] payload without any
   /// restrictions.

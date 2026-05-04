@@ -29,6 +29,112 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     self.complex = complex
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case null = "null"
+    case boolValue = "boolValue"
+    case bytesValue = "bytesValue"
+    case stringValue = "stringValue"
+    case floatValue = "floatValue"
+    case doubleValue = "doubleValue"
+    case int32 = "int32"
+    case int64 = "int64"
+    case `enum` = "enum"
+    case inner = "inner"
+    case duration = "duration"
+    case value = "value"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    var complex: OneOf_Complex? = nil
+    let complexCheckAndSet = { (value: OneOf_Complex) throws in
+      if complex != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'complex'"))
+      }
+      complex = value
+    }
+    if let null = try container.decodeIfPresent(GoogleCloudWkt.NullValue.self, forKey: .null) {
+      try complexCheckAndSet(.null(null))
+    }
+    if let boolValue = try container.decodeIfPresent(Bool.self, forKey: .boolValue) {
+      try complexCheckAndSet(.boolValue(boolValue))
+    }
+    if let bytesValue = try container.decodeIfPresent(Data.self, forKey: .bytesValue) {
+      try complexCheckAndSet(.bytesValue(bytesValue))
+    }
+    if let stringValue = try container.decodeIfPresent(String.self, forKey: .stringValue) {
+      try complexCheckAndSet(.stringValue(stringValue))
+    }
+    if let floatValue = try container.decodeIfPresent(Float.self, forKey: .floatValue) {
+      try complexCheckAndSet(.floatValue(floatValue))
+    }
+    if let doubleValue = try container.decodeIfPresent(Double.self, forKey: .doubleValue) {
+      try complexCheckAndSet(.doubleValue(doubleValue))
+    }
+    if let int32 = try container.decodeIfPresent(Int32.self, forKey: .int32) {
+      try complexCheckAndSet(.int32(int32))
+    }
+    if let int64 = try container.decodeIfPresent(Int64.self, forKey: .int64) {
+      try complexCheckAndSet(.int64(int64))
+    }
+    if let `enum` = try container.decodeIfPresent(
+      MessageWithComplexOneOf.TestEnum.self, forKey: .`enum`)
+    {
+      try complexCheckAndSet(.`enum`(`enum`))
+    }
+    if let inner = try container.decodeIfPresent(
+      MessageWithComplexOneOf.Inner?.self, forKey: .inner)
+    {
+      try complexCheckAndSet(.inner(inner))
+    }
+    if let duration = try container.decodeIfPresent(
+      GoogleCloudWkt.Duration?.self, forKey: .duration)
+    {
+      try complexCheckAndSet(.duration(duration))
+    }
+    if let value = try container.decodeIfPresent(GoogleCloudWkt.Value?.self, forKey: .value) {
+      try complexCheckAndSet(.value(value))
+    }
+    self.complex = complex
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    if let choice = self.complex {
+      switch choice {
+      case .null(let value):
+        try container.encode(value, forKey: .null)
+      case .boolValue(let value):
+        try container.encode(value, forKey: .boolValue)
+      case .bytesValue(let value):
+        try container.encode(value, forKey: .bytesValue)
+      case .stringValue(let value):
+        try container.encode(value, forKey: .stringValue)
+      case .floatValue(let value):
+        try container.encode(value, forKey: .floatValue)
+      case .doubleValue(let value):
+        try container.encode(value, forKey: .doubleValue)
+      case .int32(let value):
+        try container.encode(value, forKey: .int32)
+      case .int64(let value):
+        try container.encode(value, forKey: .int64)
+      case .`enum`(let value):
+        try container.encode(value, forKey: .`enum`)
+      case .inner(let value):
+        try container.encode(value, forKey: .inner)
+      case .duration(let value):
+        try container.encode(value, forKey: .duration)
+      case .value(let value):
+        try container.encode(value, forKey: .value)
+      }
+    }
+  }
+
   public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     public var strings: [String]
 

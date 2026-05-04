@@ -41,6 +41,137 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable 
     self.mixed = mixed
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case stringContents = "stringContents"
+    case stringContentsOne = "stringContentsOne"
+    case stringContentsTwo = "stringContentsTwo"
+    case messageValue = "messageValue"
+    case anotherMessage = "anotherMessage"
+    case string = "string"
+    case duration = "duration"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    var singleString: OneOf_SingleString? = nil
+    let singleStringCheckAndSet = { (value: OneOf_SingleString) throws in
+      if singleString != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'singleString'"))
+      }
+      singleString = value
+    }
+    if let stringContents = try container.decodeIfPresent(String.self, forKey: .stringContents) {
+      try singleStringCheckAndSet(.stringContents(stringContents))
+    }
+    self.singleString = singleString
+
+    var twoStrings: OneOf_TwoStrings? = nil
+    let twoStringsCheckAndSet = { (value: OneOf_TwoStrings) throws in
+      if twoStrings != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'twoStrings'"))
+      }
+      twoStrings = value
+    }
+    if let stringContentsOne = try container.decodeIfPresent(
+      String.self, forKey: .stringContentsOne)
+    {
+      try twoStringsCheckAndSet(.stringContentsOne(stringContentsOne))
+    }
+    if let stringContentsTwo = try container.decodeIfPresent(
+      String.self, forKey: .stringContentsTwo)
+    {
+      try twoStringsCheckAndSet(.stringContentsTwo(stringContentsTwo))
+    }
+    self.twoStrings = twoStrings
+
+    var oneMessage: OneOf_OneMessage? = nil
+    let oneMessageCheckAndSet = { (value: OneOf_OneMessage) throws in
+      if oneMessage != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'oneMessage'"))
+      }
+      oneMessage = value
+    }
+    if let messageValue = try container.decodeIfPresent(
+      MessageWithOneOf.Message?.self, forKey: .messageValue)
+    {
+      try oneMessageCheckAndSet(.messageValue(messageValue))
+    }
+    self.oneMessage = oneMessage
+
+    var mixed: OneOf_Mixed? = nil
+    let mixedCheckAndSet = { (value: OneOf_Mixed) throws in
+      if mixed != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'mixed'"))
+      }
+      mixed = value
+    }
+    if let anotherMessage = try container.decodeIfPresent(
+      MessageWithOneOf.Message?.self, forKey: .anotherMessage)
+    {
+      try mixedCheckAndSet(.anotherMessage(anotherMessage))
+    }
+    if let string = try container.decodeIfPresent(String.self, forKey: .string) {
+      try mixedCheckAndSet(.string(string))
+    }
+    if let duration = try container.decodeIfPresent(
+      GoogleCloudWkt.Duration?.self, forKey: .duration)
+    {
+      try mixedCheckAndSet(.duration(duration))
+    }
+    self.mixed = mixed
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    if let choice = self.singleString {
+      switch choice {
+      case .stringContents(let value):
+        try container.encode(value, forKey: .stringContents)
+      }
+    }
+
+    if let choice = self.twoStrings {
+      switch choice {
+      case .stringContentsOne(let value):
+        try container.encode(value, forKey: .stringContentsOne)
+      case .stringContentsTwo(let value):
+        try container.encode(value, forKey: .stringContentsTwo)
+      }
+    }
+
+    if let choice = self.oneMessage {
+      switch choice {
+      case .messageValue(let value):
+        try container.encode(value, forKey: .messageValue)
+      }
+    }
+
+    if let choice = self.mixed {
+      switch choice {
+      case .anotherMessage(let value):
+        try container.encode(value, forKey: .anotherMessage)
+      case .string(let value):
+        try container.encode(value, forKey: .string)
+      case .duration(let value):
+        try container.encode(value, forKey: .duration)
+      }
+    }
+  }
+
   public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     public var parent: String
 

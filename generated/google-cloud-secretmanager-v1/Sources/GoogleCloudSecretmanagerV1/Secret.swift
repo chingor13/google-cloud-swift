@@ -168,6 +168,86 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable {
     self.expiration = expiration
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case name = "name"
+    case replication = "replication"
+    case createTime = "createTime"
+    case labels = "labels"
+    case topics = "topics"
+    case expireTime = "expireTime"
+    case ttl = "ttl"
+    case etag = "etag"
+    case rotation = "rotation"
+    case versionAliases = "versionAliases"
+    case annotations = "annotations"
+    case versionDestroyTtl = "versionDestroyTtl"
+    case customerManagedEncryption = "customerManagedEncryption"
+    case tags = "tags"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.name = try container.decode(String.self, forKey: .name)
+    self.replication = try container.decode(Replication?.self, forKey: .replication)
+    self.createTime = try container.decode(GoogleCloudWkt.Timestamp?.self, forKey: .createTime)
+    self.labels = try container.decode([String: String].self, forKey: .labels)
+    self.topics = try container.decode([Topic].self, forKey: .topics)
+    self.etag = try container.decode(String.self, forKey: .etag)
+    self.rotation = try container.decode(Rotation?.self, forKey: .rotation)
+    self.versionAliases = try container.decode([String: Int64].self, forKey: .versionAliases)
+    self.annotations = try container.decode([String: String].self, forKey: .annotations)
+    self.versionDestroyTtl = try container.decode(
+      GoogleCloudWkt.Duration?.self, forKey: .versionDestroyTtl)
+    self.customerManagedEncryption = try container.decode(
+      CustomerManagedEncryption?.self, forKey: .customerManagedEncryption)
+    self.tags = try container.decode([String: String].self, forKey: .tags)
+
+    var expiration: OneOf_Expiration? = nil
+    let expirationCheckAndSet = { (value: OneOf_Expiration) throws in
+      if expiration != nil {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath,
+            debugDescription: "Multiple values set for oneof 'expiration'"))
+      }
+      expiration = value
+    }
+    if let expireTime = try container.decodeIfPresent(
+      GoogleCloudWkt.Timestamp?.self, forKey: .expireTime)
+    {
+      try expirationCheckAndSet(.expireTime(expireTime))
+    }
+    if let ttl = try container.decodeIfPresent(GoogleCloudWkt.Duration?.self, forKey: .ttl) {
+      try expirationCheckAndSet(.ttl(ttl))
+    }
+    self.expiration = expiration
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.name, forKey: .name)
+    try container.encode(self.replication, forKey: .replication)
+    try container.encode(self.createTime, forKey: .createTime)
+    try container.encode(self.labels, forKey: .labels)
+    try container.encode(self.topics, forKey: .topics)
+    try container.encode(self.etag, forKey: .etag)
+    try container.encode(self.rotation, forKey: .rotation)
+    try container.encode(self.versionAliases, forKey: .versionAliases)
+    try container.encode(self.annotations, forKey: .annotations)
+    try container.encode(self.versionDestroyTtl, forKey: .versionDestroyTtl)
+    try container.encode(self.customerManagedEncryption, forKey: .customerManagedEncryption)
+    try container.encode(self.tags, forKey: .tags)
+
+    if let choice = self.expiration {
+      switch choice {
+      case .expireTime(let value):
+        try container.encode(value, forKey: .expireTime)
+      case .ttl(let value):
+        try container.encode(value, forKey: .ttl)
+      }
+    }
+  }
+
   /// Expiration policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. If specified the
   /// [Secret][google.cloud.secretmanager.v1.Secret] and all

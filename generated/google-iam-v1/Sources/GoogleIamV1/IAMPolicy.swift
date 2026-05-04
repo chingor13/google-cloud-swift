@@ -76,9 +76,9 @@ public class IAMPolicy {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):setIamPolicy"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -92,7 +92,7 @@ public class IAMPolicy {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Policy.self, from: data)
+    return try ProtoJSONDecoder().decode(Policy.self, from: data)
   }
 
   /// Gets the access control policy for a resource.
@@ -105,9 +105,9 @@ public class IAMPolicy {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):getIamPolicy"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -121,7 +121,7 @@ public class IAMPolicy {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Policy.self, from: data)
+    return try ProtoJSONDecoder().decode(Policy.self, from: data)
   }
 
   /// Returns permissions that a caller has on the specified resource.
@@ -138,9 +138,9 @@ public class IAMPolicy {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):testIamPermissions"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -154,6 +154,6 @@ public class IAMPolicy {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
   }
 }

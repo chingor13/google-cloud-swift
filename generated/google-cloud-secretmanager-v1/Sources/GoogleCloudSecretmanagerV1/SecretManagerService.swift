@@ -58,7 +58,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)/secrets"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
     query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -74,7 +74,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(ListSecretsResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(ListSecretsResponse.self, from: data)
   }
 
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
@@ -88,7 +88,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)/secrets"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.secretId, prefix: "secretId"))
     var req = try await self.inner.Request(path: path, query: query)
@@ -106,7 +106,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Secret.self, from: data)
+    return try ProtoJSONDecoder().decode(Secret.self, from: data)
   }
 
   /// Creates a new [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]
@@ -119,9 +119,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):addVersion"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -135,7 +135,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(SecretVersion.self, from: data)
+    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
   }
 
   /// Gets metadata for a given [Secret][google.cloud.secretmanager.v1.Secret].
@@ -148,7 +148,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "GET"
     let (data, response) = try await self.inner.data(for: req)
@@ -160,7 +160,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Secret.self, from: data)
+    return try ProtoJSONDecoder().decode(Secret.self, from: data)
   }
 
   /// Updates metadata of an existing
@@ -174,7 +174,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
     var req = try await self.inner.Request(path: path, query: query)
@@ -192,7 +192,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Secret.self, from: data)
+    return try ProtoJSONDecoder().decode(Secret.self, from: data)
   }
 
   /// Deletes a [Secret][google.cloud.secretmanager.v1.Secret].
@@ -203,7 +203,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.etag, prefix: "etag"))
     var req = try await self.inner.Request(path: path, query: query)
@@ -230,7 +230,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)/versions"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
     query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -246,7 +246,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(ListSecretVersionsResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(ListSecretVersionsResponse.self, from: data)
   }
 
   /// Gets metadata for a
@@ -263,7 +263,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "GET"
     let (data, response) = try await self.inner.data(for: req)
@@ -275,7 +275,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(SecretVersion.self, from: data)
+    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
   }
 
   /// Accesses a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -290,9 +290,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):access"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "GET"
     let (data, response) = try await self.inner.data(for: req)
@@ -304,7 +304,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(AccessSecretVersionResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(AccessSecretVersionResponse.self, from: data)
   }
 
   /// Disables a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -319,9 +319,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):disable"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -335,7 +335,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(SecretVersion.self, from: data)
+    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
   }
 
   /// Enables a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -350,9 +350,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):enable"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -366,7 +366,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(SecretVersion.self, from: data)
+    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
   }
 
   /// Destroys a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -382,9 +382,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):destroy"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -398,7 +398,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(SecretVersion.self, from: data)
+    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
   }
 
   /// Sets the access control policy on the specified secret. Replaces any
@@ -415,9 +415,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):setIamPolicy"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -431,7 +431,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Policy.self, from: data)
+    return try ProtoJSONDecoder().decode(Policy.self, from: data)
   }
 
   /// Gets the access control policy for a secret.
@@ -443,9 +443,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):getIamPolicy"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.options, prefix: "options"))
     var req = try await self.inner.Request(path: path, query: query)
@@ -459,7 +459,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Policy.self, from: data)
+    return try ProtoJSONDecoder().decode(Policy.self, from: data)
   }
 
   /// Returns permissions that a caller has for the specified secret.
@@ -476,9 +476,9 @@ public class SecretManagerService {
       guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
         throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
       }
-      return "/v1/\(pathVariable0)"
+      return "/v1/\(pathVariable0):testIamPermissions"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -492,7 +492,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
   }
 
   /// Lists information about the supported locations for this service.
@@ -505,7 +505,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)/locations"
     }()
-    var query = [URLQueryItem(name: "$alt", value: "json")]
+    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     let encoder = GoogleCloudGax.QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
     query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -521,7 +521,7 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(ListLocationsResponse.self, from: data)
+    return try ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
   }
 
   /// Gets information about a location.
@@ -534,7 +534,7 @@ public class SecretManagerService {
       }
       return "/v1/\(pathVariable0)"
     }()
-    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
     var req = try await self.inner.Request(path: path, query: query)
     req.httpMethod = "GET"
     let (data, response) = try await self.inner.data(for: req)
@@ -546,6 +546,6 @@ public class SecretManagerService {
           payload: data,
         ))
     }
-    return try JSONDecoder().decode(Location.self, from: data)
+    return try ProtoJSONDecoder().decode(Location.self, from: data)
   }
 }
