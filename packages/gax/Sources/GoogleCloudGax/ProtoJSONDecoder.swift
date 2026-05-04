@@ -91,13 +91,21 @@ fileprivate struct InternalSingleValueContainer {
     throw DecodingError.dataCorruptedError(
       in: self, debugDescription: "Expected value of type \(type).")
   }
+
+  func decodeData() throws -> Data {
+    let string = try self.decode(String.self)
+    guard let data = Data(base64Encoded: string) else {
+      throw DecodingError.dataCorruptedError(
+        in: self, debugDescription: "Expected a base64 string.")
+    }
+    return data
+  }
 }
 
 extension InternalSingleValueContainer: SingleValueDecodingContainer {
   var codingPath: [any CodingKey] { impl.codingPath }
 
   func decodeNil() -> Bool { impl.decodeNil() }
-  func decode(type: String.Type) throws -> String { try impl.decode(type) }
 
   func decode(_ type: Bool.Type) throws -> Bool {
     if let value = try? impl.decode(type) {
@@ -129,7 +137,13 @@ extension InternalSingleValueContainer: SingleValueDecodingContainer {
   func decode(_ type: Float.Type) throws -> Float { try decodeGeneric(type) }
   func decode(_ type: Double.Type) throws -> Double { try decodeGeneric(type) }
 
-  func decode<T: Decodable>(_ type: T.Type) throws -> T { try impl.decode(type) }
+  func decode<T: Decodable>(_ type: T.Type) throws -> T {
+    // Data is encoded as a base64 string. It seems odd, but this is how one specializes
+    // the decoding of an specific type. For an example see:
+    //    https://github.com/swiftlang/swift-foundation/blob/3ab2e47da6a290dbdaefd07429b7a9645c5e592f/Sources/FoundationEssentials/JSON/JSONDecoder.swift#L644-L646    let string = try self.decode(String.self)
+    if type == Data.self { return try self.decodeData() as! T }
+    return try impl.decode(type)
+  }
 }
 
 fileprivate struct InternalKeyedContainer<K: CodingKey> {
@@ -142,7 +156,22 @@ fileprivate struct InternalKeyedContainer<K: CodingKey> {
       let decoder = DecodeToDefault()
       return try T(from: decoder)
     }
+    if type == Data.self {
+      // Data is encoded as a base64 string. It seems odd, but this is how one specializes
+      // the decoding of an specific type. For an example see:
+      //    https://github.com/swiftlang/swift-foundation/blob/3ab2e47da6a290dbdaefd07429b7a9645c5e592f/Sources/FoundationEssentials/JSON/JSONDecoder.swift#L644-L646    let string = try self.decode(String.self)
+      return try decodeData(forKey: key) as! T
+    }
     return try self.impl.decode(Interceptor<T>.self, forKey: key).inner
+  }
+
+  func decodeData(forKey key: Self.Key) throws -> Data {
+    let string = try self.decode(String.self, forKey: key)
+    guard let data = Data(base64Encoded: string) else {
+      throw DecodingError.dataCorruptedError(
+        forKey: key, in: self, debugDescription: "Expected a base64 encoded string")
+    }
+    return data
   }
 }
 
@@ -189,6 +218,15 @@ fileprivate struct InternalUnkeyedDecodingContainer {
   var impl: any UnkeyedDecodingContainer
 
   init(_ impl: any UnkeyedDecodingContainer) { self.impl = impl }
+
+  mutating func decodeData() throws -> Data {
+    let string = try self.decode(String.self)
+    guard let data = Data(base64Encoded: string) else {
+      throw DecodingError.dataCorruptedError(
+        in: self, debugDescription: "Expected a base64 string.")
+    }
+    return data
+  }
 }
 
 extension InternalUnkeyedDecodingContainer: UnkeyedDecodingContainer {
@@ -202,6 +240,7 @@ extension InternalUnkeyedDecodingContainer: UnkeyedDecodingContainer {
   }
 
   mutating func decode<T: Decodable>(_ type: T.Type) throws -> T {
+    if type == Data.self { return try self.decodeData() as! T }
     return try self.impl.decode(Interceptor<T>.self).inner
   }
 

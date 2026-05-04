@@ -15,6 +15,7 @@
 import Foundation
 import Testing
 
+import GoogleCloudGax
 @testable import GoogleCloudSecurityPubliccaV1
 
 @Suite struct ExternalAccountKeyTests {
@@ -49,7 +50,7 @@ import Testing
       #"{"b64MacKey":"\#(expectedSecretBase64)","keyId":"my-key-id","name":"test-only-name"}"#
     let data = jsonString.data(using: .utf8)!
 
-    let decoder = JSONDecoder()
+    let decoder = ProtoJSONDecoder()
     let key = try decoder.decode(ExternalAccountKey.self, from: data)
 
     #expect(key.name == "test-only-name")
