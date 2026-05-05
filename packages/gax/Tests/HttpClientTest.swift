@@ -74,7 +74,7 @@ import GoogleCloudAuth
     let session = URLSession(configuration: config)
 
     // Use anonymous credentials
-    let credentials = Credentials.anonymous()
+    let credentials = try Credentials(configuration: .anonymous)
 
     let client = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
 
