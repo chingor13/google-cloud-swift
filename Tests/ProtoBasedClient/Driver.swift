@@ -28,7 +28,10 @@ import GoogleCloudGax
         if case let .http(details) = error {
           let p = String(data: details.payload, encoding: .utf8)!
           print("### payload=\(p) error=\(error)")
+        } else {
+          print("### error=\(error)")
         }
+        throw error
       } catch {
         print("### error=\(error)")
         throw error

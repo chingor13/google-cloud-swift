@@ -29,6 +29,8 @@ let package = Package(
     .package(path: "./packages/auth"),
     .package(path: "./packages/gax"),
     .package(path: "./packages/wkt"),
+    .package(path: "./generated/google-cloud-location"),
+    .package(path: "./generated/google-iam-v1"),
     .package(path: "./generated/google-cloud-secretmanager-v1"),
     .package(path: "./generated/google-cloud-security-publicca-v1"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
@@ -58,6 +60,10 @@ let package = Package(
       dependencies: [
         .product(
           name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
+        .product(
+          name: "GoogleCloudLocation", package: "google-cloud-location"),
+        .product(
+          name: "GoogleIamV1", package: "google-iam-v1"),
         .product(
           name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "CryptoSwift", package: "CryptoSwift"),

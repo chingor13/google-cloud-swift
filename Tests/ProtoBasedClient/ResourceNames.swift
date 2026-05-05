@@ -16,6 +16,8 @@ import Foundation
 
 /// The environment variable used to get the GOOGLE_CLOUD_PROJECT
 fileprivate let googleCloudProject = "GOOGLE_CLOUD_PROJECT"
+/// The environment variable used to get the GOOGLE_CLOUD_PROJECT
+fileprivate let serviceAccountVar = "GOOGLE_CLOUD_SWIFT_TEST_SERVICE_ACCOUNT"
 
 /// The maximum length for a secret ID.
 fileprivate let secretIdLength = 64
@@ -27,7 +29,7 @@ fileprivate let prefix = "swift-sdk-testing-"
 
 fileprivate let alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-/// Fetches the project id from the environment to use in the tests.
+/// Fetches the project id to use in the tests.
 ///
 /// - Throws: a `ResourceNameError` if the project id is not set.
 func projectId() throws -> String {
@@ -35,6 +37,16 @@ func projectId() throws -> String {
     throw ResourceNameError.unsetEnvironmentVariable(googleCloudProject)
   }
   return id
+}
+
+/// Fetches the test service account to use in the tests.
+///
+/// - Throws: a `ResourceNameError` if the project id is not set.
+func testServiceAccount() throws -> String {
+  guard let account = ProcessInfo.processInfo.environment[serviceAccountVar] else {
+    throw ResourceNameError.unsetEnvironmentVariable(serviceAccountVar)
+  }
+  return account
 }
 
 /// Generates a random secret ID.
