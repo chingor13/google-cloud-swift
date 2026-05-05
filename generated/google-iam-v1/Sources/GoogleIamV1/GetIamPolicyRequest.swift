@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Request message for `GetIamPolicy` method.
-public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// REQUIRED: The resource for which the policy is being requested.
   /// See the operation documentation for the appropriate value for this field.
   public var resource: String

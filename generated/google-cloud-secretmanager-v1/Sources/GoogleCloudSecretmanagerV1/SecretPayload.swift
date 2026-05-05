@@ -23,7 +23,7 @@ import GoogleIamV1
 /// A secret payload resource in the Secret Manager API. This contains the
 /// sensitive secret payload that is associated with a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The secret data. Must be no larger than 64KiB.
   public var data: Data
 
@@ -62,7 +62,7 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.data = try container.decode(Data.self, forKey: .data)
-    self.dataCrc32C = try container.decode(Int64?.self, forKey: .dataCrc32C)
+    self.dataCrc32C = try container.decodeIfPresent(Int64.self, forKey: .dataCrc32C)
   }
 
   public func encode(to encoder: Encoder) throws {

@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Describes additional debugging info.
-public struct DebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct DebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The stack trace entries indicating where the error occurred.
   public var stackEntries: [String]
 

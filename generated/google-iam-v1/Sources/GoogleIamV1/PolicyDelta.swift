@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// The difference delta between two policies.
-public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The delta for Bindings between two policies.
   public var bindingDeltas: [BindingDelta]
 

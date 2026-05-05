@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP header.
-public struct HttpHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct HttpHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The HTTP header key. It is case insensitive.
   public var key: String
 

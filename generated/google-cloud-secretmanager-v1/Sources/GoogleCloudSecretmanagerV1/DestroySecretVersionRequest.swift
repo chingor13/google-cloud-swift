@@ -22,7 +22,8 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.DestroySecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DestroySecretVersion].
-public struct DestroySecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct DestroySecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+{
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to destroy in
   /// the format `projects/*/secrets/*/versions/*` or

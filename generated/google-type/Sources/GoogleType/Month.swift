@@ -17,7 +17,7 @@
 import Foundation
 
 /// Represents a month in the Gregorian calendar.
-public enum Month: Int, Codable, Equatable {
+public enum Month: Int, Codable, Equatable, Sendable {
   case unspecified = 0
   case january = 1
   case february = 2

@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
-public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the project associated with the
   /// [Secrets][google.cloud.secretmanager.v1.Secret], in the format `projects/*`
   /// or `projects/*/locations/*`

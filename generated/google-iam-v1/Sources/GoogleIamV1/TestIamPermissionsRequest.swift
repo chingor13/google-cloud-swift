@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Request message for `TestIamPermissions` method.
-public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// REQUIRED: The resource for which the policy detail is being requested.
   /// See the operation documentation for the appropriate value for this field.
   public var resource: String

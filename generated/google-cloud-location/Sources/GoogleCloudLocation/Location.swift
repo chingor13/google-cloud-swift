@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// A resource that represents Google Cloud Platform location.
-public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Resource name for the location, which may vary between implementations.
   /// For example: `"projects/example-project/locations/us-east1"`
   public var name: String

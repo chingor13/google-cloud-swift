@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// A message with a more complex `oneof` field.
-public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   public var complex: OneOf_Complex?
 
   /// Initialize a new instance of `MessageWithComplexOneOf`.
@@ -135,7 +135,7 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     public var strings: [String]
 
     /// Initialize a new instance of `Inner`.
@@ -156,7 +156,7 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public enum TestEnum: Int, Codable, Equatable {
+  public enum TestEnum: Int, Codable, Equatable, Sendable {
     case unspecified = 0
     case black = 1
 
@@ -180,7 +180,7 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public enum OneOf_Complex: Codable, Equatable {
+  public enum OneOf_Complex: Codable, Equatable, Sendable {
     case null(GoogleCloudWkt.NullValue)
     case boolValue(Bool)
     case bytesValue(Data)

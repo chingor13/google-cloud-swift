@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
-public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The list of [Secrets][google.cloud.secretmanager.v1.Secret] sorted in
   /// reverse by create_time (newest first).
   public var secrets: [Secret]

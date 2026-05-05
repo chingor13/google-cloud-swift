@@ -23,7 +23,7 @@ import GoogleCloudWkt
 /// For example, if a quota check failed with an error indicating the calling
 /// project hasn't enabled the accessed service, this can contain a URL pointing
 /// directly to the right place in the developer console to flip the bit.
-public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// URL(s) pointing to additional information on handling the current error.
   public var links: [Help.Link]
 
@@ -35,7 +35,7 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   }
 
   /// Describes a URL link.
-  public struct Link: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct Link: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Describes what the link offers.
     public var description: String
 

@@ -21,7 +21,9 @@ import GoogleCloudWkt
 /// Creates a new
 /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey] in
 /// a given project.
-public struct CreateExternalAccountKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct CreateExternalAccountKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Required. The parent resource where this external_account_key will be
   /// created. Format: projects/[project_id]/locations/[location]. At present
   /// only the "global" location is supported.

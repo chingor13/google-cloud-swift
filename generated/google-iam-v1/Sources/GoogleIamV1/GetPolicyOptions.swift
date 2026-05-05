@@ -20,7 +20,7 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Encapsulates settings provided to GetIamPolicy.
-public struct GetPolicyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct GetPolicyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Optional. The maximum policy version that will be used to format the
   /// policy.
   ///

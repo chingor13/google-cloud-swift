@@ -21,7 +21,7 @@ import GoogleType
 
 /// One delta entry for Binding. Each individual change (only one member in each
 /// entry) to a binding will be a separate entry.
-public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The action that was performed on a Binding.
   /// Required
   public var action: BindingDelta.Action
@@ -53,7 +53,7 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   }
 
   /// The type of action performed on a Binding in a policy.
-  public enum Action: Int, Codable, Equatable {
+  public enum Action: Int, Codable, Equatable, Sendable {
     case unspecified = 0
     case add = 1
     case remove = 2

@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Describes the resource that is being accessed.
-public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// A name for the type of resource being accessed, e.g. "sql table",
   /// "cloud storage bucket", "file", "Google calendar"; or the type URL
   /// of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".

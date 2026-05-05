@@ -23,7 +23,7 @@ import Foundation
 /// the most specific error code that applies.  For example, prefer
 /// `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
 /// Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
-public enum Code: Int, Codable, Equatable {
+public enum Code: Int, Codable, Equatable, Sendable {
   case ok = 0
   case cancelled = 1
   case unknown = 2

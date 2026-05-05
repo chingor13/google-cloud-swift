@@ -42,7 +42,7 @@ import GoogleCloudWkt
 ///         "availableRegions": "us-central1,us-east2"
 ///       }
 ///     }
-public struct ErrorInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ErrorInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The reason of the error. This is a constant value that identifies the
   /// proximate cause of the error. Error reasons are unique within a particular
   /// domain of errors. This should be at most 63 characters and match a

@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// Provides a localized error message that is safe to return to the user
 /// which can be attached to an RPC error.
-public struct LocalizedMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct LocalizedMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The locale used following the specification defined at
   /// https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
   /// Examples are: "en-US", "fr-CH", "es-MX"

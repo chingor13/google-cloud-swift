@@ -25,7 +25,7 @@ import GoogleIamV1
 /// Manager will send a Pub/Sub notification to the topics configured on the
 /// Secret. [Secret.topics][google.cloud.secretmanager.v1.Secret.topics] must be
 /// set to configure rotation.
-public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Optional. Timestamp in UTC at which the
   /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to rotate.
   /// Cannot be set to less than 300s (5 min) in the future and at most

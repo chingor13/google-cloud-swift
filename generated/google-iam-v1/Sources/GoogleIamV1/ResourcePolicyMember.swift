@@ -21,7 +21,7 @@ import GoogleType
 
 /// Output-only policy member strings of a Google Cloud resource's built-in
 /// identity.
-public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// IAM policy binding member referring to a Google Cloud resource by
   /// user-assigned name (https://google.aip.dev/122). If a resource is deleted
   /// and recreated with the same name, the binding will be applicable to the new

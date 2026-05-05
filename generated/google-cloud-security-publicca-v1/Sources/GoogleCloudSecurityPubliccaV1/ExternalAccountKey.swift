@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// A representation of an ExternalAccountKey used for [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) within ACME.
-public struct ExternalAccountKey: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ExternalAccountKey: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Output only. Resource name.
   /// projects/{project}/locations/{location}/externalAccountKeys/{key_id}
   public var name: String

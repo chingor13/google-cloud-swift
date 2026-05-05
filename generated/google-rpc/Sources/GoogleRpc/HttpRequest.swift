@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP request.
-public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The HTTP request method.
   public var method: String
 

@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   public var replicationStatus: OneOf_ReplicationStatus?
@@ -84,7 +84,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has an automatic replication policy.
-  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Output only. The customer-managed encryption status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
     /// populated if customer-managed encryption is used.
@@ -114,7 +114,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has a user-managed replication policy.
-  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Output only. The list of replica statuses for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus]
@@ -128,7 +128,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
     /// Describes the status of a user-managed replica for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
       public var location: String
@@ -172,7 +172,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
-  public enum OneOf_ReplicationStatus: Codable, Equatable {
+  public enum OneOf_ReplicationStatus: Codable, Equatable, Sendable {
     /// Describes the replication status of a
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] with
     /// automatic replication.

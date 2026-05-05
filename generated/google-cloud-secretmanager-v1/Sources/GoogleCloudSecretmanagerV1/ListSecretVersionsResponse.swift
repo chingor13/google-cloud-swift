@@ -22,7 +22,8 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
-public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+{
   /// The list of [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]
   /// sorted in reverse by create_time (newest first).
   public var versions: [SecretVersion]

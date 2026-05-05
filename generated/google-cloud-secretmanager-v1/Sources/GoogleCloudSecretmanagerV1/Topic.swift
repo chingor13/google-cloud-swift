@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// A Pub/Sub topic which Secret Manager will publish to when control plane
 /// events occur on this secret.
-public struct Topic: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Topic: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Identifier. The resource name of the Pub/Sub topic that will be published
   /// to, in the following format: `projects/*/topics/*`. For publication to
   /// succeed, the Secret Manager service agent must have the

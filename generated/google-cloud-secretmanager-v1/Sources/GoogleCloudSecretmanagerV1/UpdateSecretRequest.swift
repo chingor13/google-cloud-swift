@@ -22,7 +22,7 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.UpdateSecret][google.cloud.secretmanager.v1.SecretManagerService.UpdateSecret].
-public struct UpdateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct UpdateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. [Secret][google.cloud.secretmanager.v1.Secret] with updated field
   /// values.
   public var secret: Secret?

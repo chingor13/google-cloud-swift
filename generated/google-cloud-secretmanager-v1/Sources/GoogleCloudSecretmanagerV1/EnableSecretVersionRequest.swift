@@ -22,7 +22,8 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.EnableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.EnableSecretVersion].
-public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+{
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to enable in
   /// the format `projects/*/secrets/*/versions/*` or

@@ -38,7 +38,7 @@ import GoogleType
 ///
 /// This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
 /// jose@example.com from DATA_READ logging.
-public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The log type that this config enables.
   public var logType: AuditLogConfig.LogType
 
@@ -59,7 +59,7 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable {
 
   /// The list of valid permission types for which logging can be configured.
   /// Admin writes are always logged, and are not configurable.
-  public enum LogType: Int, Codable, Equatable {
+  public enum LogType: Int, Codable, Equatable, Sendable {
     case unspecified = 0
     case adminRead = 1
     case dataWrite = 2

@@ -92,7 +92,7 @@ import GoogleType
 ///
 /// For a description of IAM and its features, see the
 /// [IAM documentation](https://cloud.google.com/iam/docs/).
-public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Specifies the format of the policy.
   ///
   /// Valid values are `0`, `1`, and `3`. Requests that specify an invalid value

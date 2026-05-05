@@ -22,7 +22,8 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.DisableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DisableSecretVersion].
-public struct DisableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct DisableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+{
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to disable in
   /// the format `projects/*/secrets/*/versions/*` or

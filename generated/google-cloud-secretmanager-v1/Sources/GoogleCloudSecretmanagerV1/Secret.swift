@@ -26,7 +26,7 @@ import GoogleIamV1
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is made up of zero or more
 /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] that represent
 /// the secret data.
-public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Output only. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] in the format
   /// `projects/*/secrets/*`.
@@ -188,18 +188,19 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.name = try container.decode(String.self, forKey: .name)
-    self.replication = try container.decode(Replication?.self, forKey: .replication)
-    self.createTime = try container.decode(GoogleCloudWkt.Timestamp?.self, forKey: .createTime)
+    self.replication = try container.decodeIfPresent(Replication.self, forKey: .replication)
+    self.createTime = try container.decodeIfPresent(
+      GoogleCloudWkt.Timestamp.self, forKey: .createTime)
     self.labels = try container.decode([String: String].self, forKey: .labels)
     self.topics = try container.decode([Topic].self, forKey: .topics)
     self.etag = try container.decode(String.self, forKey: .etag)
-    self.rotation = try container.decode(Rotation?.self, forKey: .rotation)
+    self.rotation = try container.decodeIfPresent(Rotation.self, forKey: .rotation)
     self.versionAliases = try container.decode([String: Int64].self, forKey: .versionAliases)
     self.annotations = try container.decode([String: String].self, forKey: .annotations)
-    self.versionDestroyTtl = try container.decode(
-      GoogleCloudWkt.Duration?.self, forKey: .versionDestroyTtl)
-    self.customerManagedEncryption = try container.decode(
-      CustomerManagedEncryption?.self, forKey: .customerManagedEncryption)
+    self.versionDestroyTtl = try container.decodeIfPresent(
+      GoogleCloudWkt.Duration.self, forKey: .versionDestroyTtl)
+    self.customerManagedEncryption = try container.decodeIfPresent(
+      CustomerManagedEncryption.self, forKey: .customerManagedEncryption)
     self.tags = try container.decode([String: String].self, forKey: .tags)
 
     var expiration: OneOf_Expiration? = nil
@@ -259,7 +260,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// Conditions](https://cloud.google.com/secret-manager/docs/access-control#conditions)
   /// is recommended for granting time-based permissions because the operation
   /// can be reversed.
-  public enum OneOf_Expiration: Codable, Equatable {
+  public enum OneOf_Expiration: Codable, Equatable, Sendable {
     /// Optional. Timestamp in UTC when the
     /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to expire.
     /// This is always provided on output, regardless of what was sent on input.

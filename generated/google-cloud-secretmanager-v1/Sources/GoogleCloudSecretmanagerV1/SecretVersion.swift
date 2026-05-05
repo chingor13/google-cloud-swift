@@ -21,7 +21,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// A secret version resource in the Secret Manager API.
-public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Output only. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] in the format
   /// `projects/*/secrets/*/versions/*`.
@@ -101,7 +101,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   /// The state of a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion], indicating if
   /// it can be accessed.
-  public enum State: Int, Codable, Equatable {
+  public enum State: Int, Codable, Equatable, Sendable {
     case unspecified = 0
     case enabled = 1
     case disabled = 2

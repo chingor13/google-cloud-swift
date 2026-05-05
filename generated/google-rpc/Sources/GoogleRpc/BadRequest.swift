@@ -20,7 +20,7 @@ import GoogleCloudWkt
 
 /// Describes violations in a client request. This error type focuses on the
 /// syntactic aspects of the request.
-public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Describes all violations in a client request.
   public var fieldViolations: [BadRequest.FieldViolation]
 
@@ -32,7 +32,7 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable {
   }
 
   /// A message type used to describe a single bad request field.
-  public struct FieldViolation: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct FieldViolation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// A path that leads to a field in the request body. The value will be a
     /// sequence of dot-separated identifiers that identify a protocol buffer
     /// field.

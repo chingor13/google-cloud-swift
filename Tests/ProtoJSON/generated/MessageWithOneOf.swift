@@ -19,7 +19,7 @@ import Foundation
 import GoogleCloudWkt
 
 /// A message with several interesting `oneof` fields.
-public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   public var singleString: OneOf_SingleString?
 
   public var twoStrings: OneOf_TwoStrings?
@@ -172,7 +172,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable 
     }
   }
 
-  public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable {
+  public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     public var parent: String
 
     /// Initialize a new instance of `Message`.
@@ -193,20 +193,20 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable 
     }
   }
 
-  public enum OneOf_SingleString: Codable, Equatable {
+  public enum OneOf_SingleString: Codable, Equatable, Sendable {
     case stringContents(String)
   }
 
-  public enum OneOf_TwoStrings: Codable, Equatable {
+  public enum OneOf_TwoStrings: Codable, Equatable, Sendable {
     case stringContentsOne(String)
     case stringContentsTwo(String)
   }
 
-  public enum OneOf_OneMessage: Codable, Equatable {
+  public enum OneOf_OneMessage: Codable, Equatable, Sendable {
     indirect case messageValue(MessageWithOneOf.Message?)
   }
 
-  public enum OneOf_Mixed: Codable, Equatable {
+  public enum OneOf_Mixed: Codable, Equatable, Sendable {
     indirect case anotherMessage(MessageWithOneOf.Message?)
     case string(String)
     indirect case duration(GoogleCloudWkt.Duration?)
