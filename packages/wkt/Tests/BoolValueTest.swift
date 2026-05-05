@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct BoolValueTests {
   struct WrappedBoolValueEncode: Encodable {
-    let value: GoogleCloudWkt.BoolValue
+    let value: GoogleCloudWkt.BoolValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedBoolValueDecode: Decodable {
-    let value: GoogleCloudWkt.BoolValue
+    let value: GoogleCloudWkt.BoolValue?
   }
 
   @Test(

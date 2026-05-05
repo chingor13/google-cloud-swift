@@ -15,24 +15,24 @@
 /// Wrapper message for uint32.
 ///
 /// The JSON representation for UInt32Value is JSON number.
-public typealias UInt32Value = Swift.UInt32?
+public typealias UInt32Value = Swift.UInt32
 
-extension Swift.UInt32: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.UInt32: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.UInt32Value"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.UInt32 {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return UInt32(n)
+    self = UInt32(n)
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(number: Double(self))]
   }
 }

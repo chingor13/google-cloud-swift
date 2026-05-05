@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct BytesValueTests {
   struct WrappedBytesValueEncode: Encodable {
-    let value: GoogleCloudWkt.BytesValue
+    let value: GoogleCloudWkt.BytesValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedBytesValueDecode: Decodable {
-    let value: GoogleCloudWkt.BytesValue
+    let value: GoogleCloudWkt.BytesValue?
   }
 
   @Test(

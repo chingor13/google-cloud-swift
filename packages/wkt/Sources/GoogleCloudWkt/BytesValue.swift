@@ -17,14 +17,14 @@ import Foundation
 /// Wrapper message for bytes.
 ///
 /// The JSON representation for BytesValue is JSON string (base64 encoded).
-public typealias BytesValue = Foundation.Data?
+public typealias BytesValue = Foundation.Data
 
-extension Foundation.Data: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Foundation.Data: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.BytesValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Foundation.Data {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
@@ -34,10 +34,10 @@ extension Foundation.Data: _SupportsOptionalPacking {
     guard let d = Data(base64Encoded: s) else {
       throw AnyError.invalidValueField
     }
-    return d
+    self = d
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(string: self.base64EncodedString())]
   }
 }

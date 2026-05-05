@@ -15,24 +15,24 @@
 /// Wrapper message for string.
 ///
 /// The JSON representation for StringValue is JSON string.
-public typealias StringValue = Swift.String?
+public typealias StringValue = Swift.String
 
-extension Swift.String: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.String: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.StringValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.String {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .string(s) = v else {
       throw AnyError.invalidValueField
     }
-    return s
+    self = s
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(string: self)]
   }
 }

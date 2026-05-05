@@ -15,24 +15,24 @@
 /// Wrapper message for bool.
 ///
 /// The JSON representation for BoolValue is JSON boolean.
-public typealias BoolValue = Swift.Bool?
+public typealias BoolValue = Swift.Bool
 
-extension Swift.Bool: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.Bool: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.BoolValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Bool {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .bool(b) = v else {
       throw AnyError.invalidValueField
     }
-    return b
+    self = b
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(bool: self)]
   }
 }

@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct DoubleValueTests {
   struct WrappedDoubleValueEncode: Encodable {
-    let value: GoogleCloudWkt.DoubleValue
+    let value: GoogleCloudWkt.DoubleValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedDoubleValueDecode: Decodable {
-    let value: GoogleCloudWkt.DoubleValue
+    let value: GoogleCloudWkt.DoubleValue?
   }
 
   @Test(

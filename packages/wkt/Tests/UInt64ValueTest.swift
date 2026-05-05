@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct UInt64ValueTests {
   struct WrappedUInt64ValueEncode: Encodable {
-    let value: GoogleCloudWkt.UInt64Value
+    let value: GoogleCloudWkt.UInt64Value?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedUInt64ValueDecode: Decodable {
-    let value: GoogleCloudWkt.UInt64Value
+    let value: GoogleCloudWkt.UInt64Value?
   }
 
   @Test(

@@ -15,24 +15,24 @@
 /// Wrapper message for uint64.
 ///
 /// The JSON representation for UInt64Value is JSON number.
-public typealias UInt64Value = Swift.UInt64?
+public typealias UInt64Value = Swift.UInt64
 
-extension Swift.UInt64: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.UInt64: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.UInt64Value"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.UInt64 {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return UInt64(n)
+    self = UInt64(n)
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(number: Double(self))]
   }
 }

@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct StringValueTests {
   struct WrappedStringValueEncode: Encodable {
-    let value: GoogleCloudWkt.StringValue
+    let value: GoogleCloudWkt.StringValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedStringValueDecode: Decodable {
-    let value: GoogleCloudWkt.StringValue
+    let value: GoogleCloudWkt.StringValue?
   }
 
   @Test(

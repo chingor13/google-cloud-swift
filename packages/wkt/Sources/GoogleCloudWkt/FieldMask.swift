@@ -56,7 +56,7 @@ public struct FieldMask: Codable, Equatable, Sendable {
 }
 
 // Makes `FieldMask` conform to the `_AnyPackable` protocol, so we can pack and unpack them from `Any`.
-extension FieldMask: _AnyPackable, _SupportsOptionalPacking {
+extension FieldMask: _AnyPackable {
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.FieldMask"
   }

@@ -15,24 +15,24 @@
 /// Wrapper message for double.
 ///
 /// The JSON representation for DoubleValue is JSON number.
-public typealias DoubleValue = Swift.Double?
+public typealias DoubleValue = Swift.Double
 
-extension Swift.Double: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.Double: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.DoubleValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Double {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return n
+    self = n
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     return [`Any`.valueField: Value(number: self)]
   }
 }

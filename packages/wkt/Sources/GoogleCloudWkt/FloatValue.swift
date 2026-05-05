@@ -17,24 +17,24 @@ import Foundation
 /// Wrapper message for float.
 ///
 /// The JSON representation for FloatValue is JSON number.
-public typealias FloatValue = Swift.Float?
+public typealias FloatValue = Swift.Float
 
-extension Swift.Float: _SupportsOptionalPacking {
-  public static var _optionalAnyTypeUrl: String {
+extension Swift.Float: _AnyPackable {
+  public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.protobuf.FloatValue"
   }
 
-  public static func _unpackOptional(fromAny any: `Any`) throws -> Swift.Float {
+  public init(fromAny any: `Any`) throws {
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
     guard case let .number(n) = v else {
       throw AnyError.invalidValueField
     }
-    return Float(n)
+    self = Float(n)
   }
 
-  public func _packOptional() throws -> Struct {
+  public func _pack() throws -> Struct {
     let rounded = Double(String(format: "%g", self)) ?? Double(self)
     return [`Any`.valueField: Value(number: rounded)]
   }

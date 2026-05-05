@@ -18,7 +18,7 @@ import Testing
 
 @Suite struct FloatValueTests {
   struct WrappedFloatValueEncode: Encodable {
-    let value: GoogleCloudWkt.FloatValue
+    let value: GoogleCloudWkt.FloatValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedFloatValueDecode: Decodable {
-    let value: GoogleCloudWkt.FloatValue
+    let value: GoogleCloudWkt.FloatValue?
   }
 
   @Test(
