@@ -28,7 +28,7 @@ import GoogleCloudWkt
 /// a service. Service-specific metadata is provided through the
 /// [Location.metadata][google.cloud.location.Location.metadata] field.
 ///
-/// @Snippet(id: "LocationsQuickstart")
+/// @Snippet(path: "LocationsQuickstart")
 public class Locations {
   let inner: GoogleCloudGax.HTTPClient
 
@@ -43,6 +43,8 @@ public class Locations {
   }
 
   /// Lists information about the supported locations for this service.
+  ///
+  /// @Snippet(path: "Locations_ListLocations")
   public func listLocations(request: ListLocationsRequest) async throws
     -> ListLocationsResponse
   {
@@ -72,6 +74,8 @@ public class Locations {
   }
 
   /// Gets information about a location.
+  ///
+  /// @Snippet(path: "Locations_GetLocation")
   public func getLocation(request: GetLocationRequest) async throws
     -> Location
   {

@@ -28,7 +28,7 @@ import GoogleCloudWkt
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for
 /// the public certificate authority service.
 ///
-/// @Snippet(id: "PublicCertificateAuthorityServiceQuickstart")
+/// @Snippet(path: "PublicCertificateAuthorityServiceQuickstart")
 public class PublicCertificateAuthorityService {
   let inner: GoogleCloudGax.HTTPClient
 
@@ -45,6 +45,8 @@ public class PublicCertificateAuthorityService {
   /// Creates a new
   /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
   /// bound to the project.
+  ///
+  /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
   {

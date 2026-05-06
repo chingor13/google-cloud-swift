@@ -51,7 +51,7 @@ import GoogleType
 /// are created and deleted implicitly with the resources to which they are
 /// attached.
 ///
-/// @Snippet(id: "IAMPolicyQuickstart")
+/// @Snippet(path: "IAMPolicyQuickstart")
 public class IAMPolicy {
   let inner: GoogleCloudGax.HTTPClient
 
@@ -69,6 +69,8 @@ public class IAMPolicy {
   /// existing policy.
   ///
   /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+  ///
+  /// @Snippet(path: "IAMPolicy_SetIamPolicy")
   public func setIamPolicy(request: SetIamPolicyRequest) async throws
     -> Policy
   {
@@ -98,6 +100,8 @@ public class IAMPolicy {
   /// Gets the access control policy for a resource.
   /// Returns an empty policy if the resource exists and does not have a policy
   /// set.
+  ///
+  /// @Snippet(path: "IAMPolicy_GetIamPolicy")
   public func getIamPolicy(request: GetIamPolicyRequest) async throws
     -> Policy
   {
@@ -131,6 +135,8 @@ public class IAMPolicy {
   /// Note: This operation is designed to be used for building permission-aware
   /// UIs and command-line tools, not for authorization checking. This operation
   /// may "fail open" without warning.
+  ///
+  /// @Snippet(path: "IAMPolicy_TestIamPermissions")
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
   {

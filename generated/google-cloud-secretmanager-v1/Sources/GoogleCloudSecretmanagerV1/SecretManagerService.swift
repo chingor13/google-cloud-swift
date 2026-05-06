@@ -34,7 +34,7 @@ import GoogleIamV1
 /// * [Secret][google.cloud.secretmanager.v1.Secret]
 /// * [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]
 ///
-/// @Snippet(id: "SecretManagerServiceQuickstart")
+/// @Snippet(path: "SecretManagerServiceQuickstart")
 public class SecretManagerService {
   let inner: GoogleCloudGax.HTTPClient
 
@@ -49,6 +49,8 @@ public class SecretManagerService {
   }
 
   /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_ListSecrets")
   public func listSecrets(request: ListSecretsRequest) async throws
     -> ListSecretsResponse
   {
@@ -79,6 +81,8 @@ public class SecretManagerService {
 
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// @Snippet(path: "SecretManagerService_CreateSecret")
   public func createSecret(request: CreateSecretRequest) async throws
     -> Secret
   {
@@ -112,6 +116,8 @@ public class SecretManagerService {
   /// Creates a new [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]
   /// containing secret data and attaches it to an existing
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_AddSecretVersion")
   public func addSecretVersion(request: AddSecretVersionRequest) async throws
     -> SecretVersion
   {
@@ -139,6 +145,8 @@ public class SecretManagerService {
   }
 
   /// Gets metadata for a given [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_GetSecret")
   public func getSecret(request: GetSecretRequest) async throws
     -> Secret
   {
@@ -165,6 +173,8 @@ public class SecretManagerService {
 
   /// Updates metadata of an existing
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_UpdateSecret")
   public func updateSecret(request: UpdateSecretRequest) async throws
     -> Secret
   {
@@ -196,6 +206,8 @@ public class SecretManagerService {
   }
 
   /// Deletes a [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_DeleteSecret")
   public func deleteSecret(request: DeleteSecretRequest) async throws {
     let path = try { () throws -> String in
       guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
@@ -221,6 +233,8 @@ public class SecretManagerService {
 
   /// Lists [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]. This
   /// call does not return secret data.
+  ///
+  /// @Snippet(path: "SecretManagerService_ListSecretVersions")
   public func listSecretVersions(request: ListSecretVersionsRequest) async throws
     -> ListSecretVersionsResponse
   {
@@ -254,6 +268,8 @@ public class SecretManagerService {
   ///
   /// `projects/*/secrets/*/versions/latest` is an alias to the most recently
   /// created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// @Snippet(path: "SecretManagerService_GetSecretVersion")
   public func getSecretVersion(request: GetSecretVersionRequest) async throws
     -> SecretVersion
   {
@@ -283,6 +299,8 @@ public class SecretManagerService {
   ///
   /// `projects/*/secrets/*/versions/latest` is an alias to the most recently
   /// created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// @Snippet(path: "SecretManagerService_AccessSecretVersion")
   public func accessSecretVersion(request: AccessSecretVersionRequest) async throws
     -> AccessSecretVersionResponse
   {
@@ -312,6 +330,8 @@ public class SecretManagerService {
   /// Sets the [state][google.cloud.secretmanager.v1.SecretVersion.state] of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to
   /// [DISABLED][google.cloud.secretmanager.v1.SecretVersion.State.DISABLED].
+  ///
+  /// @Snippet(path: "SecretManagerService_DisableSecretVersion")
   public func disableSecretVersion(request: DisableSecretVersionRequest) async throws
     -> SecretVersion
   {
@@ -343,6 +363,8 @@ public class SecretManagerService {
   /// Sets the [state][google.cloud.secretmanager.v1.SecretVersion.state] of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to
   /// [ENABLED][google.cloud.secretmanager.v1.SecretVersion.State.ENABLED].
+  ///
+  /// @Snippet(path: "SecretManagerService_EnableSecretVersion")
   public func enableSecretVersion(request: EnableSecretVersionRequest) async throws
     -> SecretVersion
   {
@@ -375,6 +397,8 @@ public class SecretManagerService {
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to
   /// [DESTROYED][google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]
   /// and irrevocably destroys the secret data.
+  ///
+  /// @Snippet(path: "SecretManagerService_DestroySecretVersion")
   public func destroySecretVersion(request: DestroySecretVersionRequest) async throws
     -> SecretVersion
   {
@@ -408,6 +432,8 @@ public class SecretManagerService {
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] are enforced
   /// according to the policy set on the associated
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// @Snippet(path: "SecretManagerService_SetIamPolicy")
   public func setIamPolicy(request: SetIamPolicyRequest) async throws
     -> Policy
   {
@@ -436,6 +462,8 @@ public class SecretManagerService {
 
   /// Gets the access control policy for a secret.
   /// Returns empty policy if the secret exists and does not have a policy set.
+  ///
+  /// @Snippet(path: "SecretManagerService_GetIamPolicy")
   public func getIamPolicy(request: GetIamPolicyRequest) async throws
     -> Policy
   {
@@ -469,6 +497,8 @@ public class SecretManagerService {
   /// Note: This operation is designed to be used for building permission-aware
   /// UIs and command-line tools, not for authorization checking. This operation
   /// may "fail open" without warning.
+  ///
+  /// @Snippet(path: "SecretManagerService_TestIamPermissions")
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
   {
@@ -496,6 +526,8 @@ public class SecretManagerService {
   }
 
   /// Lists information about the supported locations for this service.
+  ///
+  /// @Snippet(path: "SecretManagerService_ListLocations")
   public func listLocations(request: ListLocationsRequest) async throws
     -> ListLocationsResponse
   {
@@ -525,6 +557,8 @@ public class SecretManagerService {
   }
 
   /// Gets information about a location.
+  ///
+  /// @Snippet(path: "SecretManagerService_GetLocation")
   public func getLocation(request: GetLocationRequest) async throws
     -> Location
   {
