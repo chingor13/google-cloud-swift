@@ -91,6 +91,7 @@ libraries:
     swift:
       include_list:
         - oneofs.proto
+        - primitive_types.proto
       modules:
         - output: Tests/ProtoJSON/generated
           api_path: Tests/ProtoJSON/protos
