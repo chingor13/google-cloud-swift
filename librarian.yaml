@@ -92,6 +92,7 @@ libraries:
       include_list:
         - oneofs.proto
         - primitive_types.proto
+        - struct_types.proto
         - well_known_types.proto
       modules:
         - output: Tests/ProtoJSON/generated
