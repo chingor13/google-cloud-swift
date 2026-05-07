@@ -50,8 +50,8 @@ let package = Package(
     .testTarget(
       name: "ProtoJSON",
       dependencies: [
-        .product(
-          name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1")
+        .product(name: "GoogleCloudGax", package: "gax"),
+        .product(name: "GoogleCloudWkt", package: "wkt"),
       ],
       exclude: ["protos/"],
     ),
