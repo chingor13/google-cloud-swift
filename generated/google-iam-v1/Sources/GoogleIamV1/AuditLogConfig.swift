@@ -46,6 +46,8 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable, S
   /// permission.
   /// Follows the same format of
   /// [Binding.members][google.iam.v1.Binding.members].
+  ///
+  /// [google.iam.v1.Binding.members]: <doc:Binding/members>
   public var exemptedMembers: [String]
 
   /// Initialize a new instance of `AuditLogConfig`.

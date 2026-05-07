@@ -22,10 +22,14 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.ListSecrets]: <doc:SecretManagerService/listSecrets(request:)>
 public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the project associated with the
   /// [Secrets][google.cloud.secretmanager.v1.Secret], in the format `projects/*`
   /// or `projects/*/locations/*`
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var parent: String
 
   /// Optional. The maximum number of results to be returned in a single page. If
@@ -35,6 +39,8 @@ public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Optional. Pagination token, returned earlier via
   /// [ListSecretsResponse.next_page_token][google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token].
+  ///
+  /// [google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token]: <doc:ListSecretsResponse/nextPageToken>
   public var pageToken: String
 
   /// Optional. Filter string, adhering to the rules in

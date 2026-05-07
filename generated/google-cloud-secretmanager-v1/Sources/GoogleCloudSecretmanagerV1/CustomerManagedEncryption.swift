@@ -36,6 +36,9 @@ public struct CustomerManagedEncryption: Codable, Equatable, GoogleCloudWkt._Any
   /// replication policy type, Cloud KMS CryptoKeys must reside in `global`.
   ///
   /// The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Replication.Automatic]: <doc:Replication/Automatic>
+  /// [google.cloud.secretmanager.v1.Replication.UserManaged]: <doc:Replication/UserManaged>
   public var kmsKeyName: String
 
   /// Initialize a new instance of `CustomerManagedEncryption`.

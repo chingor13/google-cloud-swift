@@ -19,6 +19,8 @@ import Foundation
 import GoogleCloudWkt
 
 /// The response message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].
+///
+/// [google.cloud.location.Locations.ListLocations]: <doc:Locations/listLocations(request:)>
 public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// A list of locations that matches the specified filter in the request.
   public var locations: [Location]

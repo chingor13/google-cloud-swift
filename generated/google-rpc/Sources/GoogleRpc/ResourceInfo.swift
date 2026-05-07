@@ -29,6 +29,8 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sen
   /// name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
   /// error is
   /// [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+  ///
+  /// [google.rpc.Code.PERMISSION_DENIED]: <doc:Code/permissionDenied>
   public var resourceName: String
 
   /// The owner of the resource (optional).

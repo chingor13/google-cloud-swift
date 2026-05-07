@@ -22,11 +22,16 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions]: <doc:SecretManagerService/listSecretVersions(request:)>
 public struct ListSecretVersionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] associated with the
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] to list, in
   /// the format `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var parent: String
 
   /// Optional. The maximum number of results to be returned in a single page. If

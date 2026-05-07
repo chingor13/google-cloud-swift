@@ -22,10 +22,14 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.GetSecret][google.cloud.secretmanager.v1.SecretManagerService.GetSecret].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.GetSecret]: <doc:SecretManagerService/getSecret(request:)>
 public struct GetSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret], in the format
   /// `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var name: String
 
   /// Initialize a new instance of `GetSecretRequest`.

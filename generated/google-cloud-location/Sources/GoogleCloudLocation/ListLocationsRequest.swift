@@ -19,6 +19,8 @@ import Foundation
 import GoogleCloudWkt
 
 /// The request message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].
+///
+/// [google.cloud.location.Locations.ListLocations]: <doc:Locations/listLocations(request:)>
 public struct ListLocationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The resource that owns the locations collection, if applicable.
   public var name: String

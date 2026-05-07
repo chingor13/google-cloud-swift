@@ -34,6 +34,9 @@ import GoogleIamV1
 /// * [Secret][google.cloud.secretmanager.v1.Secret]
 /// * [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]
 ///
+/// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+/// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+///
 /// @Snippet(path: "SecretManagerServiceQuickstart")
 public class SecretManagerService {
   let inner: GoogleCloudGax.HTTPClient
@@ -49,6 +52,8 @@ public class SecretManagerService {
   }
 
   /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_ListSecrets")
   public func listSecrets(request: ListSecretsRequest) async throws
@@ -81,6 +86,9 @@ public class SecretManagerService {
 
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_CreateSecret")
   public func createSecret(request: CreateSecretRequest) async throws
@@ -117,6 +125,9 @@ public class SecretManagerService {
   /// containing secret data and attaches it to an existing
   /// [Secret][google.cloud.secretmanager.v1.Secret].
   ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  ///
   /// @Snippet(path: "SecretManagerService_AddSecretVersion")
   public func addSecretVersion(request: AddSecretVersionRequest) async throws
     -> SecretVersion
@@ -146,6 +157,8 @@ public class SecretManagerService {
 
   /// Gets metadata for a given [Secret][google.cloud.secretmanager.v1.Secret].
   ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  ///
   /// @Snippet(path: "SecretManagerService_GetSecret")
   public func getSecret(request: GetSecretRequest) async throws
     -> Secret
@@ -173,6 +186,8 @@ public class SecretManagerService {
 
   /// Updates metadata of an existing
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_UpdateSecret")
   public func updateSecret(request: UpdateSecretRequest) async throws
@@ -207,6 +222,8 @@ public class SecretManagerService {
 
   /// Deletes a [Secret][google.cloud.secretmanager.v1.Secret].
   ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  ///
   /// @Snippet(path: "SecretManagerService_DeleteSecret")
   public func deleteSecret(request: DeleteSecretRequest) async throws {
     let path = try { () throws -> String in
@@ -233,6 +250,8 @@ public class SecretManagerService {
 
   /// Lists [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]. This
   /// call does not return secret data.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_ListSecretVersions")
   public func listSecretVersions(request: ListSecretVersionsRequest) async throws
@@ -269,6 +288,8 @@ public class SecretManagerService {
   /// `projects/*/secrets/*/versions/latest` is an alias to the most recently
   /// created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  ///
   /// @Snippet(path: "SecretManagerService_GetSecretVersion")
   public func getSecretVersion(request: GetSecretVersionRequest) async throws
     -> SecretVersion
@@ -300,6 +321,8 @@ public class SecretManagerService {
   /// `projects/*/secrets/*/versions/latest` is an alias to the most recently
   /// created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  ///
   /// @Snippet(path: "SecretManagerService_AccessSecretVersion")
   public func accessSecretVersion(request: AccessSecretVersionRequest) async throws
     -> AccessSecretVersionResponse
@@ -330,6 +353,10 @@ public class SecretManagerService {
   /// Sets the [state][google.cloud.secretmanager.v1.SecretVersion.state] of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to
   /// [DISABLED][google.cloud.secretmanager.v1.SecretVersion.State.DISABLED].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  /// [google.cloud.secretmanager.v1.SecretVersion.State.DISABLED]: <doc:SecretVersion/State/disabled>
+  /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   ///
   /// @Snippet(path: "SecretManagerService_DisableSecretVersion")
   public func disableSecretVersion(request: DisableSecretVersionRequest) async throws
@@ -363,6 +390,10 @@ public class SecretManagerService {
   /// Sets the [state][google.cloud.secretmanager.v1.SecretVersion.state] of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to
   /// [ENABLED][google.cloud.secretmanager.v1.SecretVersion.State.ENABLED].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  /// [google.cloud.secretmanager.v1.SecretVersion.State.ENABLED]: <doc:SecretVersion/State/enabled>
+  /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   ///
   /// @Snippet(path: "SecretManagerService_EnableSecretVersion")
   public func enableSecretVersion(request: EnableSecretVersionRequest) async throws
@@ -398,6 +429,10 @@ public class SecretManagerService {
   /// [DESTROYED][google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]
   /// and irrevocably destroys the secret data.
   ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  /// [google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]: <doc:SecretVersion/State/destroyed>
+  /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
+  ///
   /// @Snippet(path: "SecretManagerService_DestroySecretVersion")
   public func destroySecretVersion(request: DestroySecretVersionRequest) async throws
     -> SecretVersion
@@ -432,6 +467,9 @@ public class SecretManagerService {
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] are enforced
   /// according to the policy set on the associated
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_SetIamPolicy")
   public func setIamPolicy(request: SetIamPolicyRequest) async throws

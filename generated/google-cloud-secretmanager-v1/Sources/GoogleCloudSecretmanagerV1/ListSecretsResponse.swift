@@ -22,20 +22,29 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.ListSecrets]: <doc:SecretManagerService/listSecrets(request:)>
 public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The list of [Secrets][google.cloud.secretmanager.v1.Secret] sorted in
   /// reverse by create_time (newest first).
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var secrets: [Secret]
 
   /// A token to retrieve the next page of results. Pass this value in
   /// [ListSecretsRequest.page_token][google.cloud.secretmanager.v1.ListSecretsRequest.page_token]
   /// to retrieve the next page.
+  ///
+  /// [google.cloud.secretmanager.v1.ListSecretsRequest.page_token]: <doc:ListSecretsRequest/pageToken>
   public var nextPageToken: String
 
   /// The total number of [Secrets][google.cloud.secretmanager.v1.Secret] but 0
   /// when the
   /// [ListSecretsRequest.filter][google.cloud.secretmanager.v1.ListSecretsRequest.filter]
   /// field is set.
+  ///
+  /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var totalSize: Int32
 
   /// Initialize a new instance of `ListSecretsResponse`.

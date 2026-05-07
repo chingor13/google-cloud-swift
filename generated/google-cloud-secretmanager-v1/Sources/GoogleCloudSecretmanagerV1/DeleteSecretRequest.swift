@@ -22,15 +22,21 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.DeleteSecret][google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret]: <doc:SecretManagerService/deleteSecret(request:)>
 public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] to delete in the format
   /// `projects/*/secrets/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var name: String
 
   /// Optional. Etag of the [Secret][google.cloud.secretmanager.v1.Secret]. The
   /// request succeeds if it matches the etag of the currently stored secret
   /// object. If the etag is omitted, the request succeeds.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var etag: String
 
   /// Initialize a new instance of `DeleteSecretRequest`.

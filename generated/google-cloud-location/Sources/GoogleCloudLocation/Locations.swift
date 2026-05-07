@@ -28,6 +28,8 @@ import GoogleCloudWkt
 /// a service. Service-specific metadata is provided through the
 /// [Location.metadata][google.cloud.location.Location.metadata] field.
 ///
+/// [google.cloud.location.Location.metadata]: <doc:Location/metadata>
+///
 /// @Snippet(path: "LocationsQuickstart")
 public class Locations {
   let inner: GoogleCloudGax.HTTPClient

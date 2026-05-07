@@ -22,15 +22,21 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions]: <doc:SecretManagerService/listSecretVersions(request:)>
 public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
 {
   /// The list of [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]
   /// sorted in reverse by create_time (newest first).
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var versions: [SecretVersion]
 
   /// A token to retrieve the next page of results. Pass this value in
   /// [ListSecretVersionsRequest.page_token][google.cloud.secretmanager.v1.ListSecretVersionsRequest.page_token]
   /// to retrieve the next page.
+  ///
+  /// [google.cloud.secretmanager.v1.ListSecretVersionsRequest.page_token]: <doc:ListSecretVersionsRequest/pageToken>
   public var nextPageToken: String
 
   /// The total number of
@@ -38,6 +44,9 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   /// the
   /// [ListSecretsRequest.filter][google.cloud.secretmanager.v1.ListSecretsRequest.filter]
   /// field is set.
+  ///
+  /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var totalSize: Int32
 
   /// Initialize a new instance of `ListSecretVersionsResponse`.

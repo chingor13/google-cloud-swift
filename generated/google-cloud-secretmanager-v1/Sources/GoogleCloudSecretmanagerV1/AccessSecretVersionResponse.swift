@@ -22,12 +22,16 @@ import GoogleIamV1
 
 /// Response message for
 /// [SecretManagerService.AccessSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion]: <doc:SecretManagerService/accessSecretVersion(request:)>
 public struct AccessSecretVersionResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
 {
   /// The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] in the format
   /// `projects/*/secrets/*/versions/*` or
   /// `projects/*/locations/*/secrets/*/versions/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var name: String
 
   /// Secret payload

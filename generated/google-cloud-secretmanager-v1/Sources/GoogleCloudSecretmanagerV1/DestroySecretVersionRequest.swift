@@ -22,18 +22,24 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.DestroySecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DestroySecretVersion].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.DestroySecretVersion]: <doc:SecretManagerService/destroySecretVersion(request:)>
 public struct DestroySecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
 {
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to destroy in
   /// the format `projects/*/secrets/*/versions/*` or
   /// `projects/*/locations/*/secrets/*/versions/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var name: String
 
   /// Optional. Etag of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. The request
   /// succeeds if it matches the etag of the currently stored secret version
   /// object. If the etag is omitted, the request succeeds.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var etag: String
 
   /// Initialize a new instance of `DestroySecretVersionRequest`.

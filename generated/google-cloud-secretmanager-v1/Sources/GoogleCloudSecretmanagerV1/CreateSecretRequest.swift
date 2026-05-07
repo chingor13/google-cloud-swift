@@ -22,10 +22,14 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.CreateSecret][google.cloud.secretmanager.v1.SecretManagerService.CreateSecret].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.CreateSecret]: <doc:SecretManagerService/createSecret(request:)>
 public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the project to associate with the
   /// [Secret][google.cloud.secretmanager.v1.Secret], in the format `projects/*`
   /// or `projects/*/locations/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var parent: String
 
   /// Required. This must be unique within the project.
@@ -37,6 +41,8 @@ public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Required. A [Secret][google.cloud.secretmanager.v1.Secret] with initial
   /// field values.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var secret: Secret?
 
   /// Initialize a new instance of `CreateSecretRequest`.

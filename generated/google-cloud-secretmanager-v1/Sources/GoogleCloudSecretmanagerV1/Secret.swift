@@ -26,20 +26,29 @@ import GoogleIamV1
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is made up of zero or more
 /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] that represent
 /// the secret data.
+///
+/// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+/// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
 public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Output only. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] in the format
   /// `projects/*/secrets/*`.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var name: String
 
   /// Optional. Immutable. The replication policy of the secret data attached to
   /// the [Secret][google.cloud.secretmanager.v1.Secret].
   ///
   /// The replication policy cannot be changed after the Secret has been created.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var replication: Replication?
 
   /// Output only. The time at which the
   /// [Secret][google.cloud.secretmanager.v1.Secret] was created.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var createTime: GoogleCloudWkt.Timestamp?
 
   /// The labels assigned to this Secret.
@@ -61,11 +70,15 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable 
 
   /// Optional. Etag of the currently stored
   /// [Secret][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var etag: String
 
   /// Optional. Rotation policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. May be excluded if there is
   /// no rotation policy.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var rotation: Rotation?
 
   /// Optional. Mapping from version alias to version name.
@@ -112,6 +125,9 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable 
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] added
   /// afterwards. They do not apply retroactively to existing
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var customerManagedEncryption: CustomerManagedEncryption?
 
   /// Optional. Input only. Immutable. Mapping of Tag keys/values directly bound
@@ -135,6 +151,9 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable 
   /// Conditions](https://cloud.google.com/secret-manager/docs/access-control#conditions)
   /// is recommended for granting time-based permissions because the operation
   /// can be reversed.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var expiration: OneOf_Expiration?
 
   /// Initialize a new instance of `Secret`.
@@ -260,13 +279,20 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable 
   /// Conditions](https://cloud.google.com/secret-manager/docs/access-control#conditions)
   /// is recommended for granting time-based permissions because the operation
   /// can be reversed.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public enum OneOf_Expiration: Codable, Equatable, Sendable {
     /// Optional. Timestamp in UTC when the
     /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to expire.
     /// This is always provided on output, regardless of what was sent on input.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     indirect case expireTime(GoogleCloudWkt.Timestamp?)
     /// Input only. The TTL for the
     /// [Secret][google.cloud.secretmanager.v1.Secret].
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     indirect case ttl(GoogleCloudWkt.Duration?)
   }
 

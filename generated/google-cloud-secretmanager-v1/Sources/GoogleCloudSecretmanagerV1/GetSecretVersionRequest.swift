@@ -22,6 +22,8 @@ import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.GetSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.GetSecretVersion].
+///
+/// [google.cloud.secretmanager.v1.SecretManagerService.GetSecretVersion]: <doc:SecretManagerService/getSecretVersion(request:)>
 public struct GetSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] in the format
@@ -32,6 +34,8 @@ public struct GetSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   /// `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most
   /// recently created
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var name: String
 
   /// Initialize a new instance of `GetSecretVersionRequest`.

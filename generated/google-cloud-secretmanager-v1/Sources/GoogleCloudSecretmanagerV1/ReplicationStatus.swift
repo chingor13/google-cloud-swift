@@ -22,9 +22,13 @@ import GoogleIamV1
 
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+///
+/// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
 public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var replicationStatus: OneOf_ReplicationStatus?
 
   /// Initialize a new instance of `ReplicationStatus`.
@@ -84,10 +88,15 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has an automatic replication policy.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Output only. The customer-managed encryption status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
     /// populated if customer-managed encryption is used.
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public var customerManagedEncryption: CustomerManagedEncryptionStatus?
 
     /// Initialize a new instance of `AutomaticStatus`.
@@ -114,9 +123,14 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
   /// has a user-managed replication policy.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Output only. The list of replica statuses for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus]
 
     /// Initialize a new instance of `UserManagedStatus`.
@@ -128,6 +142,8 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
     /// Describes the status of a user-managed replica for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
@@ -136,6 +152,8 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
       /// Output only. The customer-managed encryption status of the
       /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
       /// populated if customer-managed encryption is used.
+      ///
+      /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
       public var customerManagedEncryption: CustomerManagedEncryptionStatus?
 
       /// Initialize a new instance of `ReplicaStatus`.
@@ -172,6 +190,8 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public enum OneOf_ReplicationStatus: Codable, Equatable, Sendable {
     /// Describes the replication status of a
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] with
@@ -180,6 +200,9 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Only populated if the parent
     /// [Secret][google.cloud.secretmanager.v1.Secret] has an automatic
     /// replication policy.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     indirect case automatic(ReplicationStatus.AutomaticStatus?)
     /// Describes the replication status of a
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] with
@@ -188,6 +211,9 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Only populated if the parent
     /// [Secret][google.cloud.secretmanager.v1.Secret] has a user-managed
     /// replication policy.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     indirect case userManaged(ReplicationStatus.UserManagedStatus?)
   }
 

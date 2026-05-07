@@ -19,6 +19,8 @@ import Foundation
 import GoogleCloudWkt
 
 /// The request message for [Locations.GetLocation][google.cloud.location.Locations.GetLocation].
+///
+/// [google.cloud.location.Locations.GetLocation]: <doc:Locations/getLocation(request:)>
 public struct GetLocationRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Resource name for the location.
   public var name: String

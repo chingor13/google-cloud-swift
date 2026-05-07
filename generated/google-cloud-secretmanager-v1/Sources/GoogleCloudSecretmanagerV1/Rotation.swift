@@ -25,6 +25,9 @@ import GoogleIamV1
 /// Manager will send a Pub/Sub notification to the topics configured on the
 /// Secret. [Secret.topics][google.cloud.secretmanager.v1.Secret.topics] must be
 /// set to configure rotation.
+///
+/// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+/// [google.cloud.secretmanager.v1.Secret.topics]: <doc:Secret/topics>
 public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// Optional. Timestamp in UTC at which the
   /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to rotate.
@@ -35,6 +38,10 @@ public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendabl
   /// MUST  be set if
   /// [rotation_period][google.cloud.secretmanager.v1.Rotation.rotation_period]
   /// is set.
+  ///
+  /// [google.cloud.secretmanager.v1.Rotation.next_rotation_time]: <doc:Rotation/nextRotationTime>
+  /// [google.cloud.secretmanager.v1.Rotation.rotation_period]: <doc:Rotation/rotationPeriod>
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public var nextRotationTime: GoogleCloudWkt.Timestamp?
 
   /// Input only. The Duration between rotation notifications. Must be in seconds
@@ -48,6 +55,9 @@ public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendabl
   /// [next_rotation_time][google.cloud.secretmanager.v1.Rotation.next_rotation_time]
   /// will be advanced by this period when the service automatically sends
   /// rotation notifications.
+  ///
+  /// [google.cloud.secretmanager.v1.Rotation.next_rotation_time]: <doc:Rotation/nextRotationTime>
+  /// [google.cloud.secretmanager.v1.Rotation.rotation_period]: <doc:Rotation/rotationPeriod>
   public var rotationPeriod: GoogleCloudWkt.Duration?
 
   /// Initialize a new instance of `Rotation`.

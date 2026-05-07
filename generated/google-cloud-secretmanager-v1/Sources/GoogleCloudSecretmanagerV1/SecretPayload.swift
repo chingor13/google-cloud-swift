@@ -23,6 +23,8 @@ import GoogleIamV1
 /// A secret payload resource in the Secret Manager API. This contains the
 /// sensitive secret payload that is associated with a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+///
+/// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
 public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
   /// The secret data. Must be no larger than 64KiB.
   public var data: Data
@@ -43,6 +45,11 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// The CRC32C value is encoded as a Int64 for compatibility, and can be
   /// safely downconverted to uint32 in languages that support this type.
   /// https://cloud.google.com/apis/design/design_patterns#integer_types
+  ///
+  /// [google.cloud.secretmanager.v1.SecretManagerService]: <doc:SecretManagerService>
+  /// [google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion]: <doc:SecretManagerService/accessSecretVersion(request:)>
+  /// [google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion]: <doc:SecretManagerService/addSecretVersion(request:)>
+  /// [google.cloud.secretmanager.v1.SecretPayload.data]: <doc:SecretPayload/data>
   public var dataCrc32C: Int64?
 
   /// Initialize a new instance of `SecretPayload`.

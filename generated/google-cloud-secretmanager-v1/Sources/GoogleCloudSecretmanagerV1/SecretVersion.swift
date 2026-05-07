@@ -29,10 +29,15 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] IDs in a
   /// [Secret][google.cloud.secretmanager.v1.Secret] start at 1 and are
   /// incremented for each subsequent version of the secret.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var name: String
 
   /// Output only. The time at which the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was created.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var createTime: GoogleCloudWkt.Timestamp?
 
   /// Output only. The time this
@@ -40,18 +45,28 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// Only present if [state][google.cloud.secretmanager.v1.SecretVersion.state]
   /// is
   /// [DESTROYED][google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  /// [google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]: <doc:SecretVersion/State/destroyed>
+  /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   public var destroyTime: GoogleCloudWkt.Timestamp?
 
   /// Output only. The current state of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var state: SecretVersion.State
 
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var replicationStatus: ReplicationStatus?
 
   /// Output only. Etag of the currently stored
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var etag: String
 
   /// Output only. True if payload checksum specified in
@@ -60,6 +75,10 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// [SecretManagerService][google.cloud.secretmanager.v1.SecretManagerService]
   /// on
   /// [SecretManagerService.AddSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion].
+  ///
+  /// [google.cloud.secretmanager.v1.SecretManagerService]: <doc:SecretManagerService>
+  /// [google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion]: <doc:SecretManagerService/addSecretVersion(request:)>
+  /// [google.cloud.secretmanager.v1.SecretPayload]: <doc:SecretPayload>
   public var clientSpecifiedPayloadChecksum: Bool
 
   /// Optional. Output only. Scheduled destroy time for secret version.
@@ -73,6 +92,9 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
   /// populated if customer-managed encryption is used and
   /// [Secret][google.cloud.secretmanager.v1.Secret] is a regionalized secret.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var customerManagedEncryption: CustomerManagedEncryptionStatus?
 
   /// Initialize a new instance of `SecretVersion`.
@@ -101,6 +123,8 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Se
   /// The state of a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion], indicating if
   /// it can be accessed.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public enum State: Int, Codable, Equatable, Sendable {
     case unspecified = 0
     case enabled = 1

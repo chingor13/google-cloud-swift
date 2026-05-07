@@ -46,6 +46,8 @@ public class PublicCertificateAuthorityService {
   /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
   /// bound to the project.
   ///
+  /// [google.cloud.security.publicca.v1.ExternalAccountKey]: <doc:ExternalAccountKey>
+  ///
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey

@@ -79,6 +79,8 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
   /// A replication policy that replicates the
   /// [Secret][google.cloud.secretmanager.v1.Secret] payload without any
   /// restrictions.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public struct Automatic: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Optional. The customer-managed encryption configuration of the
     /// [Secret][google.cloud.secretmanager.v1.Secret]. If no configuration is
@@ -89,6 +91,9 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
     /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] added
     /// afterwards. They do not apply retroactively to existing
     /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public var customerManagedEncryption: CustomerManagedEncryption?
 
     /// Initialize a new instance of `Automatic`.
@@ -113,11 +118,16 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
   /// [Secret][google.cloud.secretmanager.v1.Secret] payload into the locations
   /// specified in
   /// [Replication.UserManaged.replicas][google.cloud.secretmanager.v1.Replication.UserManaged.replicas]
+  ///
+  /// [google.cloud.secretmanager.v1.Replication.UserManaged.replicas]: <doc:Replication/UserManaged/replicas>
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   public struct UserManaged: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
     /// Required. The list of Replicas for this
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     ///
     /// Cannot be empty.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     public var replicas: [Replication.UserManaged.Replica]
 
     /// Initialize a new instance of `UserManaged`.
@@ -129,6 +139,8 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
 
     /// Represents a Replica for this
     /// [Secret][google.cloud.secretmanager.v1.Secret].
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     public struct Replica: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
       /// The canonical IDs of the location to replicate data.
       /// For example: `"us-east1"`.
@@ -143,6 +155,10 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
       /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] added
       /// afterwards. They do not apply retroactively to existing
       /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+      ///
+      /// [Replication.UserManaged.Replica]: <doc:Replication/UserManaged/Replica>
+      /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+      /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
       public var customerManagedEncryption: CustomerManagedEncryption?
 
       /// Initialize a new instance of `Replica`.
@@ -180,9 +196,13 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
   public enum OneOf_Replication: Codable, Equatable, Sendable {
     /// The [Secret][google.cloud.secretmanager.v1.Secret] will automatically be
     /// replicated without any restrictions.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     indirect case automatic(Replication.Automatic?)
     /// The [Secret][google.cloud.secretmanager.v1.Secret] will only be
     /// replicated into the locations specified.
+    ///
+    /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     indirect case userManaged(Replication.UserManaged?)
   }
 
