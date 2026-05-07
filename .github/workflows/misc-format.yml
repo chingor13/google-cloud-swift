@@ -43,8 +43,12 @@ jobs:
         run: |
           #!/usr/bin/env bash
           set -euv
-          V=$(sed -n 's/^version: *//p' librarian.yaml)
           # Make three attempts to avoid download flakes.
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version || \
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version || \
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version
+          # Now get the version and regenerate the code.
+          V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
           go install github.com/googleapis/librarian/cmd/librarian@${V}|| \
           go install github.com/googleapis/librarian/cmd/librarian@${V}|| \
           go install github.com/googleapis/librarian/cmd/librarian@${V}

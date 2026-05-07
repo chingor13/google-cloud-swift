@@ -36,11 +36,11 @@ This command will generate the library, add the library to Cargo and git, and
 run the necessary tests:
 
 ```bash
-V=$(sed -n 's/^version: *//p' librarian.yaml)
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
 # add library to librarian.yaml
 go run github.com/googleapis/librarian/cmd/librarian@${V} add google/cloud/kms/v1
 # generate library
-go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-kms-v1
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate GoogleCloudKmsV1
 ```
 
 Commit all these changes and send a PR to merge them:
@@ -85,7 +85,7 @@ Run:
 
 ```bash
 git checkout -b chore-update-shas-circa-$(date +%Y-%m-%d)
-V=$(sed -n 's/^version: *//p' librarian.yaml)
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
 go run github.com/googleapis/librarian/cmd/librarian@${V} update discovery
 go run github.com/googleapis/librarian/cmd/librarian@${V} update googleapis
 go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
@@ -104,7 +104,7 @@ once. Note that this includes `showcase` and `protojson-conformance`, though.
 Run:
 
 ```bash
-V=$(sed -n 's/^version: *//p' librarian.yaml)
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
 go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
 ```
 
@@ -118,7 +118,7 @@ the library name from librarian.yaml.
 Run:
 
 ```bash
-V=$(sed -n 's/^version: *//p' librarian.yaml)
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
 go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-secretmanager-v1
 ```
 
@@ -129,7 +129,7 @@ to automatically format and sort the file. This ensures consistency and
 readability.
 
 ```bash
-V=$(sed -n 's/^version: *//p' librarian.yaml)
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
 go run github.com/googleapis/librarian/cmd/librarian@${V} tidy
 ```
 
@@ -141,7 +141,7 @@ Clone the `librarian` directory:
 
 ```bash
 git -C .. clone git@github.com:googleapis/librarian
-git -C ../librarian checkout -b fancy-rust-feature
+git -C ../librarian checkout -b fancy-swift-feature
 ```
 
 Naturally you can choose to clone `librarian` into a different directory. Just
@@ -170,59 +170,10 @@ Then finish your PR in `google-cloud-swift`.
 1. Update the generated code:
 
    ```bash
-   V=$(sed -n 's/^version: *//p' librarian.yaml)
    go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
    ```
 
 Use a single PR to update the librarian version and any generated code.
-
-### Generating a library with customized directories
-
-We may need to customize the target or source directory for some generated
-libraries. For example, you may need to leave room for other crates in the same
-directory.
-
-1. Update the librarian.yaml with the correct configuration.
-
-```
-output: custom directory to generate code in
-```
-
-```
-channels > path: custom path to read protos from in googleapis
-```
-
-example:
-
-```
-  - name: google-cloud-api
-    version: 1.2.0
-    channels:
-      - path: google/api
-    copyright_year: "2025"
-    output: src/generated/api/types
-```
-
-2. run generate
-
-```
-bash
-V=$(sed -n 's/^version: *//p' librarian.yaml)
-go run github.com/googleapis/librarian/cmd/librarian@${V} generate google-cloud-apps-script-type
-```
-
-3. Add the files to `git`, compile them, and run the tests:
-
-```bash
-typos && cargo fmt && cargo build && cargo test && cargo doc
-git add src/generated/cloud/api/types Cargo.toml Cargo.lock
-```
-
-4. Commit all these changes and send a PR to merge them:
-
-```bash
-git commit -m "feat(api/types): generate library"
-```
 
 ### Testing library generation for an existing library
 
@@ -230,20 +181,20 @@ Sometimes it may be useful to re-generate an existing library, to test the
 generation step, practice before generating a new library, or to test the
 documentation.
 
-We will use `websecurityscanner` as an example. Start by removing the existing
+We will use `GoogleCloudSecretmanagerV1` as an example. Start by removing the existing
 library:
 
 ```shell
-sed -i.bak  '/websecurityscanner/d' Cargo.toml
-rm Cargo.toml.bak
-git rm -fr src/generated/cloud/websecurityscanner/
-git commit -m"Remove for testing" Cargo.toml Cargo.lock src/generated/cloud/websecurityscanner/
+git rm -fr generated/google-cloud-secretmanager-v1
+git commit -m"Remove for testing" generated/google-cloud-secretmanager-v1
 ```
 
 Now add the library back (get the library name from librarian yaml):
 
 ```shell
-go run github.com/googleapis/librarian/cmd/librarian@main generate google-cloud-websecurityscanner-v1
+V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
+go run github.com/googleapis/librarian/cmd/librarian@${V} add google/cloud/secretmanager/v1
+go run github.com/googleapis/librarian/cmd/librarian@${V} generate GoogleCloudSecretmanagerV1
 ```
 
 [add new dependency]: #add-new-dependency

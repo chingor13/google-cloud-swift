@@ -36,7 +36,15 @@ jobs:
       - name: Re-generate
         run: |
           set -e
-          V=$(sed -n 's/^version: *//p' librarian.yaml)
+          # Make three attempts to avoid download flakes.
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version || \
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version || \
+          go run github.com/googleapis/librarian/cmd/librarian@latest config get version
+          # Now get the version and regenerate the code.
+          V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)
+          go run github.com/googleapis/librarian/cmd/librarian@${V} version || \
+          go run github.com/googleapis/librarian/cmd/librarian@${V} version || \
+          go run github.com/googleapis/librarian/cmd/librarian@${V} version
           go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
       - name: Detect drift
         run: git diff --exit-code
