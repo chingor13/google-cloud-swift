@@ -25,6 +25,7 @@ import GoogleCloudWkt
       (#"{}"#, MessageWithValue()),
       (#"{"singular": null         }"#, MessageWithValue()),
       (#"{"singular": 42           }"#, MessageWithValue(singular: .number(42))),
+      (#"{"singular": "42"         }"#, MessageWithValue(singular: .string("42"))),
       (#"{"singular": "hello"      }"#, MessageWithValue(singular: .string("hello"))),
       (#"{"singular": true         }"#, MessageWithValue(singular: .bool(true))),
       (#"{"singular": {}           }"#, MessageWithValue(singular: .object([:]))),
