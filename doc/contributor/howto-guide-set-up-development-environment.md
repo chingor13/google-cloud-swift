@@ -183,7 +183,8 @@ gcloud iam service-accounts disable swift-sdk-test@${GOOGLE_CLOUD_PROJECT}.iam.g
 ### Running tests
 
 ```bash
-env GOOGLE_CLOUD_PROJECT="$(gcloud config get project)" swift test --traits IntegrationTests
+P_ID="$(gcloud config get project)" 
+env GOOGLE_CLOUD_PROJECT=${P_ID} GOOGLE_CLOUD_SWIFT_TEST_SERVICE_ACCOUNT=swift-sdk-test@${P_ID}.iam.gserviceaccount.com swift test --traits IntegrationTests
 ```
 
 ## Miscellaneous Tools
