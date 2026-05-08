@@ -58,6 +58,19 @@ public enum RequestError: Error {
   ///
   /// Check the error type, error message, and error details. Then consult the documentation for the service.
   case service(ServiceDetails)
+
+  /// The method is not implemented.
+  ///
+  /// ## Troubleshooting
+  ///
+  /// You probably called a method in a mock client and forgot to implement the method in the mock.
+  ///
+  /// To support mocking, the clients are classes that conform to a protocol. To avoid breaking changes when the
+  /// protocol gains new methods, the protocol throws this exception by default. The clients in the client library
+  /// always implement all the methods. The most common reason for this error is to miss (and use) a method in a mocked
+  /// client. If this is not the case, then the client library has a serious bug, please open an issue at
+  /// <https://github.com/googleapis/google-cloud-swift/issues>.
+  case unimplemented
 }
 
 /// The details for ``RequestError/http(_:)``.
