@@ -21,17 +21,31 @@ import GoogleCloudAuth
 
 /// Implements a HTTP-only client for the Swift SDK client libraries.
 public struct HTTPClient {
+  let endpoint: String
   let credentials: GoogleCloudAuth.Credentials
   let inner: URLSession
-  let endpoint: String
 
   // Creates a new client.
+  public init(from: ClientOptions, withDefaultEndpoint: String) throws {
+    self.credentials = try from.credentials ?? GoogleCloudAuth.Credentials()
+    self.endpoint = from.endpoint ?? withDefaultEndpoint
+    self.inner = URLSession(configuration: .ephemeral)
+  }
+
+  // Creates a new testing client.
+  init(testSession: URLSession, endpoint: String, credentials: Credentials? = nil) throws {
+    self.endpoint = endpoint
+    self.credentials = try credentials ?? GoogleCloudAuth.Credentials(configuration: .anonymous)
+    self.inner = testSession
+  }
+
+  // TODO(https://github.com/googleapis/librarian/issues/5929) - remove old initializers.
   public init(
-    endpoint: String, credentials: GoogleCloudAuth.Credentials? = nil, session: URLSession? = nil
+    endpoint: String, credentials: GoogleCloudAuth.Credentials? = nil, session: URLSession? = nil,
   ) throws {
     self.credentials = try credentials ?? GoogleCloudAuth.Credentials()
-    self.inner = session ?? URLSession(configuration: .ephemeral)
     self.endpoint = endpoint
+    self.inner = session ?? URLSession(configuration: .ephemeral)
   }
 
   public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {

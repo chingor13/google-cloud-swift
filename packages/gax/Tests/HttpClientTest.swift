@@ -73,10 +73,7 @@ import GoogleCloudAuth
     config.protocolClasses = [MockURLProtocol.self]
     let session = URLSession(configuration: config)
 
-    // Use anonymous credentials
-    let credentials = try Credentials(configuration: .anonymous)
-
-    let client = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
+    let client = try HTTPClient(testSession: session, endpoint: endpoint)
 
     var request = try await client.Request(path: path, query: query)
     request.httpMethod = "POST"
