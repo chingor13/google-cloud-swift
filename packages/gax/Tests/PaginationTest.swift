@@ -20,16 +20,9 @@ import Testing
 @Suite struct PaginatedResponseTest {
   struct Item: Codable, Equatable { var name: String }
 
-  struct ListItemsRequest: _PaginatedRequest {
-    public var pageSize: Int32
+  struct ListItemsRequest {
     public var pageToken: String
-    public init(
-      pageSize: Int32 = Int32(),
-      pageToken: String = String(),
-    ) {
-      self.pageSize = pageSize
-      self.pageToken = pageToken
-    }
+    public init(pageToken: String = String()) { self.pageToken = pageToken }
   }
 
   struct ListItemsResponse: _PaginatedResponse {
@@ -61,9 +54,14 @@ import Testing
       return response
     }
     public func listItems(byItem: ListItemsRequest) -> PaginatedResponseSequence<
-      Item, ListItemsRequest, ListItemsResponse
+      Item, ListItemsResponse
     > {
-      return PaginatedResponseSequence(listRpc: self.listItems, request: byItem)
+      let listRpc = { (token: String) async throws -> ListItemsResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listItems(request: request)
+      }
+      return PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 

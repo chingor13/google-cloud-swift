@@ -12,17 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// For internal use only. This protocol identifies request messages that adhere to the
-/// [AIP-158 pagination](https://google.aip.dev/158) standard.
-public protocol _PaginatedRequest {
-  /// Optional. The maximum number of results to be returned in a single page. If
-  /// set to 0, the server decides the number of results to return.
-  var pageSize: Int32 { get }
-
-  /// Optional. Pagination token returned in a previous list request.
-  var pageToken: String { get set }
-}
-
 /// For internal use only. This protocol identifies response messages that adhere to the
 /// [AIP-158 pagination](https://google.aip.dev/158) standard.
 public protocol _PaginatedResponse<Item> {
@@ -35,24 +24,22 @@ public protocol _PaginatedResponse<Item> {
 
 /// A sequence that manages cursor-based pagination automatically.
 public final class PaginatedResponseSequence<
-  Item: Decodable, RequestType: _PaginatedRequest, ResponseType: _PaginatedResponse<Item>
+  Item: Decodable, ResponseType: _PaginatedResponse<Item>
 >:
   AsyncSequence
 {
   public typealias Element = Item
-  public typealias ListRpc = (RequestType) async throws -> ResponseType
+  public typealias ListRpc = (String) async throws -> ResponseType
 
   private let listRpc: ListRpc
-  private let baseRequest: RequestType
 
   // Creates a new paginated response sequence.
-  public init(listRpc: @escaping ListRpc, request: RequestType) {
+  public init(listRpc: @escaping ListRpc) {
     self.listRpc = listRpc
-    self.baseRequest = request
   }
 
   public func makeAsyncIterator() -> _ItemIterator {
-    _ItemIterator(listRpc: listRpc, request: baseRequest)
+    _ItemIterator(listRpc: listRpc)
   }
 
   public final class _ItemIterator: AsyncIteratorProtocol {
@@ -60,11 +47,9 @@ public final class PaginatedResponseSequence<
     private var buffer: [Item] = []
     private var nextToken: String = String()
     private var hasReachedEnd = false
-    private let baseRequest: RequestType
 
-    init(listRpc: @escaping ListRpc, request: RequestType) {
+    init(listRpc: @escaping ListRpc) {
       self.listRpc = listRpc
-      self.baseRequest = request
     }
 
     public func next() async throws -> Item? {
@@ -76,10 +61,8 @@ public final class PaginatedResponseSequence<
       // 2. Stop if we've previously determined there's no more data.
       guard !hasReachedEnd else { return nil }
 
-      // 3. Fetch the next page. Copy the request and set the pageToken.
-      var mutableRequest = baseRequest
-      mutableRequest.pageToken = nextToken
-      let response = try await listRpc(mutableRequest)
+      // 3. Fetch the next page using the page token from the previous response.
+      let response = try await listRpc(nextToken)
       buffer = response._getPaginatedItems()
 
       // 4. Update the token. If there is no next token, remember that we
