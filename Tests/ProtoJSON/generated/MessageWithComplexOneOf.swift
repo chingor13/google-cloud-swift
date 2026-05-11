@@ -42,6 +42,7 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     case inner = "inner"
     case duration = "duration"
     case value = "value"
+    case optionalDouble = "optionalDouble"
   }
 
   public init(from decoder: Decoder) throws {
@@ -99,6 +100,11 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     if let value = try container.decodeIfPresent(GoogleCloudWkt.Value?.self, forKey: .value) {
       try complexCheckAndSet(.value(value))
     }
+    if let optionalDouble = try container.decodeIfPresent(
+      GoogleCloudWkt.DoubleValue?.self, forKey: .optionalDouble)
+    {
+      try complexCheckAndSet(.optionalDouble(optionalDouble))
+    }
     self.complex = complex
   }
 
@@ -131,6 +137,8 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
         try container.encode(value, forKey: .duration)
       case .value(let value):
         try container.encode(value, forKey: .value)
+      case .optionalDouble(let value):
+        try container.encode(value, forKey: .optionalDouble)
       }
     }
   }
@@ -193,6 +201,7 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case inner(MessageWithComplexOneOf.Inner?)
     indirect case duration(GoogleCloudWkt.Duration?)
     indirect case value(GoogleCloudWkt.Value?)
+    indirect case optionalDouble(GoogleCloudWkt.DoubleValue?)
   }
 
   public static var _anyTypeUrl: String {

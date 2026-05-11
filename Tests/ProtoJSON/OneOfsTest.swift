@@ -16,15 +16,33 @@ import Foundation
 import Testing
 
 import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct OneOfsTests {
-  @Test func oneOfSerialization() throws {
-    let expectedJSON = #"{"stringContentsOne":"test-input"}"#
-    let input = MessageWithOneOf(
-      twoStrings: MessageWithOneOf.OneOf_TwoStrings.stringContentsOne("test-input")
-    )
+  @Test(
+    "OneOf serialization",
+    arguments: [
+      (#"{"stringContents":"test"}"#, MessageWithOneOf(singleString: .stringContents("test"))),
+      (#"{"stringContentsOne":"test"}"#, MessageWithOneOf(twoStrings: .stringContentsOne("test"))),
+      (#"{"stringContentsTwo":"test"}"#, MessageWithOneOf(twoStrings: .stringContentsTwo("test"))),
+      (
+        #"{"messageValue":{"parent":"test"}}"#,
+        MessageWithOneOf(oneMessage: .messageValue(MessageWithOneOf.Message(parent: "test")))
+      ),
+      (
+        #"{"anotherMessage":{"parent":"test"}}"#,
+        MessageWithOneOf(mixed: .anotherMessage(MessageWithOneOf.Message(parent: "test")))
+      ),
+      (#"{"string":"test"}"#, MessageWithOneOf(mixed: .string("test"))),
+      (
+        #"{"duration":"10s"}"#,
+        MessageWithOneOf(mixed: .duration(try! Duration(seconds: 10, nanos: 0)))
+      ),
+    ]
+  )
+  func oneOfSerialization(expectedJSON: String, input: MessageWithOneOf) throws {
     let encoder = JSONEncoder()
-    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]  // For predictable output
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
     let data = try encoder.encode(input)
     let jsonString = String(data: data, encoding: .utf8)!
     #expect(jsonString == expectedJSON)
@@ -32,5 +50,56 @@ import GoogleCloudGax
     let decoder = ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithOneOf.self, from: data)
     #expect(input == roundtrip)
+  }
+
+  @Test(
+    "ComplexOneOf serialization",
+    arguments: [
+      (#"{"boolValue":true}"#, MessageWithComplexOneOf(complex: .boolValue(true))),
+      (#"{"bytesValue":"AQID"}"#, MessageWithComplexOneOf(complex: .bytesValue(Data([1, 2, 3])))),
+      (#"{"stringValue":"test"}"#, MessageWithComplexOneOf(complex: .stringValue("test"))),
+      (#"{"floatValue":1.5}"#, MessageWithComplexOneOf(complex: .floatValue(1.5))),
+      (#"{"doubleValue":2.5}"#, MessageWithComplexOneOf(complex: .doubleValue(2.5))),
+      (#"{"int32":42}"#, MessageWithComplexOneOf(complex: .int32(42))),
+      (#"{"int64":42}"#, MessageWithComplexOneOf(complex: .int64(42))),
+      (#"{"enum":1}"#, MessageWithComplexOneOf(complex: .enum(.black))),
+      (
+        #"{"inner":{"strings":["a","b"]}}"#,
+        MessageWithComplexOneOf(
+          complex: .inner(MessageWithComplexOneOf.Inner(strings: ["a", "b"])))
+      ),
+      (
+        #"{"duration":"10s"}"#,
+        MessageWithComplexOneOf(complex: .duration(try! Duration(seconds: 10, nanos: 0)))
+      ),
+      (#"{"value":"hello"}"#, MessageWithComplexOneOf(complex: .value(.string("hello")))),
+      (#"{"optionalDouble":1.5}"#, MessageWithComplexOneOf(complex: .optionalDouble(1.5))),
+    ]
+  )
+  func complexOneOfSerialization(expectedJSON: String, input: MessageWithComplexOneOf) throws {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(input)
+    let jsonString = String(data: data, encoding: .utf8)!
+    #expect(jsonString == expectedJSON)
+
+    let decoder = ProtoJSONDecoder()
+    let roundtrip = try decoder.decode(MessageWithComplexOneOf.self, from: data)
+    #expect(input == roundtrip)
+  }
+
+  // TODO(https://github.com/googleapis/librarian/issues/5260) - review if this is right.
+  @Test func complexOneOfSerialization_null() throws {
+    let input = MessageWithComplexOneOf(complex: .null(NullValue()))
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(input)
+    let jsonString = String(data: data, encoding: .utf8)!
+    #expect(jsonString == #"{"null":null}"#)
+
+    let decoder = ProtoJSONDecoder()
+    let roundtrip = try decoder.decode(MessageWithComplexOneOf.self, from: data)
+    // Currently decodes to nil because decodeIfPresent returns nil for null values.
+    #expect(roundtrip == MessageWithComplexOneOf(complex: nil))
   }
 }
