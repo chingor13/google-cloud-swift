@@ -18,6 +18,9 @@ import Foundation
 ///
 /// Use this type to override the client configuration during a single request.
 public struct RequestOptions: Sendable {
+  /// Create an instance without any overrides.
+  public init() {}
+
   /// Override specific values using the `Then` idiom.
   ///
   /// ## Example

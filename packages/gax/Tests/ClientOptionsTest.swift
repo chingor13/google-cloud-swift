@@ -18,12 +18,18 @@ import Foundation
 #endif
 import Testing
 
-@testable import GoogleCloudGax
+import GoogleCloudGax
 
 @Suite struct ClientOptionsTests {
   @Test func then() {
     let got = ClientOptions().with { $0.endpoint = "test-only" }
     #expect(got.endpoint == "test-only")
+    #expect(got.credentials == nil)
+  }
+
+  @Test func defaults() {
+    let got = ClientOptions()
+    #expect(got.endpoint == nil)
     #expect(got.credentials == nil)
   }
 }

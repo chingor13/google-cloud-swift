@@ -23,6 +23,9 @@ import GoogleCloudAuth
 ///
 /// Use this type to configure clients in the Google Cloud client libraries for Swift libraries.
 public struct ClientOptions: Sendable {
+  /// Create an instance without any overrides.
+  public init() {}
+
   /// Override specific values using the `Then` idiom.
   ///
   /// ## Example
