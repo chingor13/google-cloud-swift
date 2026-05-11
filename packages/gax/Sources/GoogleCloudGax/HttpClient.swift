@@ -39,15 +39,6 @@ public struct HTTPClient {
     self.inner = testSession
   }
 
-  // TODO(https://github.com/googleapis/librarian/issues/5929) - remove old initializers.
-  public init(
-    endpoint: String, credentials: GoogleCloudAuth.Credentials? = nil, session: URLSession? = nil,
-  ) throws {
-    self.credentials = try credentials ?? GoogleCloudAuth.Credentials()
-    self.endpoint = endpoint
-    self.inner = session ?? URLSession(configuration: .ephemeral)
-  }
-
   public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {
     guard var components = URLComponents(string: "\(self.endpoint)\(path)") else {
       throw RequestError.binding("bad URL with endpoint=\(self.endpoint) and path=\(path)")
