@@ -90,6 +90,7 @@ libraries:
     skip_release: true
     swift:
       include_list:
+        - enums.proto
         - oneofs.proto
         - primitive_types.proto
         - struct_types.proto
