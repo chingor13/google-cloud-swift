@@ -35,11 +35,29 @@ fi
 errors=0
 packages=0
 
+echo "--- SWIFT VERSION ---"
+swift --version
+echo "--- CARGO VERSION ---"
+cargo --version
+echo "--- VERSIONS ---"
+
+# --- Pre-build step: Rust FFI Bindings ---
+echo "--- Building Rust bindings for GoogleCloudAuth ---"
+cargo build --release
+
 echo "--- Linting Root Package ---"
 if swift package plugin lint-source-code; then
     echo "✓ Root Package passed"
 else
     echo "✗ Root Package failed" >&2
+    errors=$((errors + 1))
+fi
+# Compile with `warnings-as-errors` to keep the code clean.
+echo "--- Check warnings in root package ---"
+if swift build --build-tests -Xswiftc -warnings-as-errors --traits IntegrationTests; then
+    echo "✓ root passed"
+else
+    echo "✗ root failed" >&2
     errors=$((errors + 1))
 fi
 
@@ -58,7 +76,16 @@ for package_dir in "${PACKAGES_DIR}"/*/; do
         echo "✗ ${package_name} failed" >&2
         errors=$((errors + 1))
     fi
+
+    # Compile with `warnings-as-errors` to keep the code clean.
+    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path ${package_dir}; then
+        echo "✓ ${package_name} passed"
+    else
+        echo "✗ ${package_name} failed" >&2
+        errors=$((errors + 1))
+    fi
 done
+
 
 if [[ ${packages} -eq 0 ]]; then
     echo "No local packages found under ${PACKAGES_DIR}" >&2

@@ -26,5 +26,9 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
       - name: Install Swift
         uses: ./.github/actions/install-swift
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@631a55b12751854ce901bb631d5902ceb48146f7 # ratchet:dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.94"
       - name: Format Swift Code
         run: ./ci/lint.sh
