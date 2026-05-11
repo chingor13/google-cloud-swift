@@ -20,7 +20,7 @@ import GoogleCloudSecurityPubliccaV1
 import Foundation
 
 func sample() async throws {
-  let client = try PublicCertificateAuthorityService()
+  let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
   let response = try await client.createExternalAccountKey(
     request: CreateExternalAccountKeyRequest( /* set fields */)
   )

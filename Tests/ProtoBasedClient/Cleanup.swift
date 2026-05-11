@@ -25,7 +25,7 @@ func cleanupStaleSecrets() async {
 
 func cleanupStaleSecretsImpl() async throws {
   let projectId = try projectId();
-  let client = try SecretManagerService()
+  let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
   let page = try await client.listSecrets(
     request: ListSecretsRequest(parent: "projects/\(projectId)"))
 

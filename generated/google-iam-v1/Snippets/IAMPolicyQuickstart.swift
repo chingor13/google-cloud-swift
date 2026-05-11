@@ -20,7 +20,7 @@ import GoogleIamV1
 import Foundation
 
 func sample() async throws {
-  let client = try IAMPolicy()
+  let client = try GoogleIamV1.Clients.IAMPolicyClient()
   let response = try await client.setIamPolicy(
     request: SetIamPolicyRequest( /* set fields */)
   )

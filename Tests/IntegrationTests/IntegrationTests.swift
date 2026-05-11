@@ -79,7 +79,7 @@ import Testing
       ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"],
       "GOOGLE_CLOUD_PROJECT environment variable must be set")
 
-    let client = try PublicCertificateAuthorityService();
+    let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
     let response = try await client.createExternalAccountKey(
       request: CreateExternalAccountKeyRequest(
         parent: "projects/\(projectId)/locations/global",

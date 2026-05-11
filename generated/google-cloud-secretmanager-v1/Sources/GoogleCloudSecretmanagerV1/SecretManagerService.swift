@@ -38,51 +38,13 @@ import GoogleIamV1
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
 ///
 /// @Snippet(path: "SecretManagerServiceQuickstart")
-public class SecretManagerService {
-  let inner: GoogleCloudGax.HTTPClient
-
-  /// Creates a new `SecretManagerService` instance.
-  public init(
-    endpoint: String? = nil,
-    credentials: GoogleCloudAuth.Credentials? = nil,
-    session: URLSession? = nil,
-  ) throws {
-    let endpoint = endpoint ?? "https://secretmanager.googleapis.com"
-    self.inner = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
-  }
-
+public protocol SecretManagerService {
   /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_ListSecrets")
-  public func listSecrets(request: ListSecretsRequest) async throws
-    -> ListSecretsResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)/secrets"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
-    query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
-    query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(ListSecretsResponse.self, from: data)
-  }
+  func listSecrets(request: ListSecretsRequest) async throws -> ListSecretsResponse
 
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
@@ -91,35 +53,7 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_CreateSecret")
-  public func createSecret(request: CreateSecretRequest) async throws
-    -> Secret
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)/secrets"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.secretId, prefix: "secretId"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    if let body = request.secret {
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(body)
-    }
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Secret.self, from: data)
-  }
+  func createSecret(request: CreateSecretRequest) async throws -> Secret
 
   /// Creates a new [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]
   /// containing secret data and attaches it to an existing
@@ -129,60 +63,14 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_AddSecretVersion")
-  public func addSecretVersion(request: AddSecretVersionRequest) async throws
-    -> SecretVersion
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):addVersion"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
-  }
+  func addSecretVersion(request: AddSecretVersionRequest) async throws -> SecretVersion
 
   /// Gets metadata for a given [Secret][google.cloud.secretmanager.v1.Secret].
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_GetSecret")
-  public func getSecret(request: GetSecretRequest) async throws
-    -> Secret
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Secret.self, from: data)
-  }
+  func getSecret(request: GetSecretRequest) async throws -> Secret
 
   /// Updates metadata of an existing
   /// [Secret][google.cloud.secretmanager.v1.Secret].
@@ -190,63 +78,14 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_UpdateSecret")
-  public func updateSecret(request: UpdateSecretRequest) async throws
-    -> Secret
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.secret.map({ $0.name }), !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.secret.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "PATCH"
-    if let body = request.secret {
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(body)
-    }
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Secret.self, from: data)
-  }
+  func updateSecret(request: UpdateSecretRequest) async throws -> Secret
 
   /// Deletes a [Secret][google.cloud.secretmanager.v1.Secret].
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   ///
   /// @Snippet(path: "SecretManagerService_DeleteSecret")
-  public func deleteSecret(request: DeleteSecretRequest) async throws {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.etag, prefix: "etag"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "DELETE"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-  }
+  func deleteSecret(request: DeleteSecretRequest) async throws
 
   /// Lists [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]. This
   /// call does not return secret data.
@@ -254,33 +93,8 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_ListSecretVersions")
-  public func listSecretVersions(request: ListSecretVersionsRequest) async throws
+  func listSecretVersions(request: ListSecretVersionsRequest) async throws
     -> ListSecretVersionsResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)/versions"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
-    query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
-    query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(ListSecretVersionsResponse.self, from: data)
-  }
 
   /// Gets metadata for a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -291,29 +105,7 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_GetSecretVersion")
-  public func getSecretVersion(request: GetSecretVersionRequest) async throws
-    -> SecretVersion
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
-  }
+  func getSecretVersion(request: GetSecretVersionRequest) async throws -> SecretVersion
 
   /// Accesses a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   /// This call returns the secret data.
@@ -324,29 +116,8 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_AccessSecretVersion")
-  public func accessSecretVersion(request: AccessSecretVersionRequest) async throws
+  func accessSecretVersion(request: AccessSecretVersionRequest) async throws
     -> AccessSecretVersionResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):access"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(AccessSecretVersionResponse.self, from: data)
-  }
 
   /// Disables a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
@@ -359,31 +130,7 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   ///
   /// @Snippet(path: "SecretManagerService_DisableSecretVersion")
-  public func disableSecretVersion(request: DisableSecretVersionRequest) async throws
-    -> SecretVersion
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):disable"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
-  }
+  func disableSecretVersion(request: DisableSecretVersionRequest) async throws -> SecretVersion
 
   /// Enables a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
@@ -396,31 +143,7 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   ///
   /// @Snippet(path: "SecretManagerService_EnableSecretVersion")
-  public func enableSecretVersion(request: EnableSecretVersionRequest) async throws
-    -> SecretVersion
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):enable"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
-  }
+  func enableSecretVersion(request: EnableSecretVersionRequest) async throws -> SecretVersion
 
   /// Destroys a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
@@ -434,31 +157,7 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
   ///
   /// @Snippet(path: "SecretManagerService_DestroySecretVersion")
-  public func destroySecretVersion(request: DestroySecretVersionRequest) async throws
-    -> SecretVersion
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):destroy"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(SecretVersion.self, from: data)
-  }
+  func destroySecretVersion(request: DestroySecretVersionRequest) async throws -> SecretVersion
 
   /// Sets the access control policy on the specified secret. Replaces any
   /// existing policy.
@@ -472,61 +171,13 @@ public class SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_SetIamPolicy")
-  public func setIamPolicy(request: SetIamPolicyRequest) async throws
-    -> Policy
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):setIamPolicy"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Policy.self, from: data)
-  }
+  func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy
 
   /// Gets the access control policy for a secret.
   /// Returns empty policy if the secret exists and does not have a policy set.
   ///
   /// @Snippet(path: "SecretManagerService_GetIamPolicy")
-  public func getIamPolicy(request: GetIamPolicyRequest) async throws
-    -> Policy
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):getIamPolicy"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.options, prefix: "options"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Policy.self, from: data)
-  }
+  func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy
 
   /// Returns permissions that a caller has for the specified secret.
   /// If the secret does not exist, this call returns an empty set of
@@ -537,87 +188,545 @@ public class SecretManagerService {
   /// may "fail open" without warning.
   ///
   /// @Snippet(path: "SecretManagerService_TestIamPermissions")
-  public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):testIamPermissions"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
-  }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "SecretManagerService_ListLocations")
-  public func listLocations(request: ListLocationsRequest) async throws
-    -> ListLocationsResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)/locations"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
-    query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
-    query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
-  }
+  func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecretManagerService_GetLocation")
-  public func getLocation(request: GetLocationRequest) async throws
-    -> Location
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
+  func getLocation(request: GetLocationRequest) async throws -> Location
+}
+
+extension Clients {
+  /// The recommended implementation for ``SecretManagerService``.
+  public class SecretManagerServiceClient: SecretManagerService {
+    let inner: GoogleCloudGax.HTTPClient
+
+    /// Creates a new `SecretManagerServiceClient` instance.
+    public init(
+      endpoint: String? = nil,
+      credentials: GoogleCloudAuth.Credentials? = nil,
+      session: URLSession? = nil,
+    ) throws {
+      let endpoint = endpoint ?? "https://secretmanager.googleapis.com"
+      self.inner = try GoogleCloudGax.HTTPClient(
+        endpoint: endpoint, credentials: credentials, session: session)
     }
-    return try ProtoJSONDecoder().decode(Location.self, from: data)
+
+    /// See `SecretManagerService.listSecrets`
+    public func listSecrets(request: ListSecretsRequest) async throws -> ListSecretsResponse {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)/secrets"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
+      query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
+      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListSecretsResponse.self, from: data)
+    }
+
+    /// See `SecretManagerService.createSecret`
+    public func createSecret(request: CreateSecretRequest) async throws -> Secret {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)/secrets"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.secretId, prefix: "secretId"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      if let body = request.secret {
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpBody = try JSONEncoder().encode(body)
+      }
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+    }
+
+    /// See `SecretManagerService.addSecretVersion`
+    public func addSecretVersion(request: AddSecretVersionRequest) async throws -> SecretVersion {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):addVersion"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+    }
+
+    /// See `SecretManagerService.getSecret`
+    public func getSecret(request: GetSecretRequest) async throws -> Secret {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+    }
+
+    /// See `SecretManagerService.updateSecret`
+    public func updateSecret(request: UpdateSecretRequest) async throws -> Secret {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.secret.map({ $0.name }), !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.secret.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "PATCH"
+      if let body = request.secret {
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpBody = try JSONEncoder().encode(body)
+      }
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+    }
+
+    /// See `SecretManagerService.deleteSecret`
+    public func deleteSecret(request: DeleteSecretRequest) async throws {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.etag, prefix: "etag"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "DELETE"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+    }
+
+    /// See `SecretManagerService.listSecretVersions`
+    public func listSecretVersions(request: ListSecretVersionsRequest) async throws
+      -> ListSecretVersionsResponse
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)/versions"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
+      query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
+      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        ListSecretVersionsResponse.self, from: data)
+    }
+
+    /// See `SecretManagerService.getSecretVersion`
+    public func getSecretVersion(request: GetSecretVersionRequest) async throws -> SecretVersion {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+    }
+
+    /// See `SecretManagerService.accessSecretVersion`
+    public func accessSecretVersion(request: AccessSecretVersionRequest) async throws
+      -> AccessSecretVersionResponse
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):access"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        AccessSecretVersionResponse.self, from: data)
+    }
+
+    /// See `SecretManagerService.disableSecretVersion`
+    public func disableSecretVersion(request: DisableSecretVersionRequest) async throws
+      -> SecretVersion
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):disable"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+    }
+
+    /// See `SecretManagerService.enableSecretVersion`
+    public func enableSecretVersion(request: EnableSecretVersionRequest) async throws
+      -> SecretVersion
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):enable"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+    }
+
+    /// See `SecretManagerService.destroySecretVersion`
+    public func destroySecretVersion(request: DestroySecretVersionRequest) async throws
+      -> SecretVersion
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):destroy"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+    }
+
+    /// See `SecretManagerService.setIamPolicy`
+    public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):setIamPolicy"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+    }
+
+    /// See `SecretManagerService.getIamPolicy`
+    public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):getIamPolicy"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.options, prefix: "options"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+    }
+
+    /// See `SecretManagerService.testIamPermissions`
+    public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+      -> TestIamPermissionsResponse
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):testIamPermissions"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        TestIamPermissionsResponse.self, from: data)
+    }
+
+    /// See `SecretManagerService.listLocations`
+    public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)/locations"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
+      query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
+      query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
+    }
+
+    /// See `SecretManagerService.getLocation`
+    public func getLocation(request: GetLocationRequest) async throws -> Location {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Location.self, from: data)
+    }
+  }
+}
+
+// Default implementations
+extension SecretManagerService {
+  public func listSecrets(request: ListSecretsRequest) async throws -> ListSecretsResponse {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func createSecret(request: CreateSecretRequest) async throws -> Secret {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func addSecretVersion(request: AddSecretVersionRequest) async throws -> SecretVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getSecret(request: GetSecretRequest) async throws -> Secret {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func updateSecret(request: UpdateSecretRequest) async throws -> Secret {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func deleteSecret(request: DeleteSecretRequest) async throws {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func listSecretVersions(request: ListSecretVersionsRequest) async throws
+    -> ListSecretVersionsResponse
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getSecretVersion(request: GetSecretVersionRequest) async throws -> SecretVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func accessSecretVersion(request: AccessSecretVersionRequest) async throws
+    -> AccessSecretVersionResponse
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func disableSecretVersion(request: DisableSecretVersionRequest) async throws
+    -> SecretVersion
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func enableSecretVersion(request: EnableSecretVersionRequest) async throws -> SecretVersion
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func destroySecretVersion(request: DestroySecretVersionRequest) async throws
+    -> SecretVersion
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+    -> TestIamPermissionsResponse
+  {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getLocation(request: GetLocationRequest) async throws -> Location {
+    throw GoogleCloudGax.RequestError.unimplemented
   }
 }

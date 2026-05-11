@@ -31,74 +31,92 @@ import GoogleCloudWkt
 /// [google.cloud.location.Location.metadata]: <doc:Location/metadata>
 ///
 /// @Snippet(path: "LocationsQuickstart")
-public class Locations {
-  let inner: GoogleCloudGax.HTTPClient
-
-  /// Creates a new `Locations` instance.
-  public init(
-    endpoint: String? = nil,
-    credentials: GoogleCloudAuth.Credentials? = nil,
-    session: URLSession? = nil,
-  ) throws {
-    let endpoint = endpoint ?? "https://cloud.googleapis.com"
-    self.inner = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
-  }
-
+public protocol Locations {
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "Locations_ListLocations")
-  public func listLocations(request: ListLocationsRequest) async throws
-    -> ListLocationsResponse
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    let encoder = GoogleCloudGax.QueryParameterEncoder()
-    query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
-    query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
-    query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
-  }
+  func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Locations_GetLocation")
-  public func getLocation(request: GetLocationRequest) async throws
-    -> Location
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0)"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "GET"
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
+  func getLocation(request: GetLocationRequest) async throws -> Location
+}
+
+extension Clients {
+  /// The recommended implementation for ``Locations``.
+  public class LocationsClient: Locations {
+    let inner: GoogleCloudGax.HTTPClient
+
+    /// Creates a new `LocationsClient` instance.
+    public init(
+      endpoint: String? = nil,
+      credentials: GoogleCloudAuth.Credentials? = nil,
+      session: URLSession? = nil,
+    ) throws {
+      let endpoint = endpoint ?? "https://cloud.googleapis.com"
+      self.inner = try GoogleCloudGax.HTTPClient(
+        endpoint: endpoint, credentials: credentials, session: session)
     }
-    return try ProtoJSONDecoder().decode(Location.self, from: data)
+
+    /// See `Locations.listLocations`
+    public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
+      query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
+      query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
+    }
+
+    /// See `Locations.getLocation`
+    public func getLocation(request: GetLocationRequest) async throws -> Location {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Location.self, from: data)
+    }
+  }
+}
+
+// Default implementations
+extension Locations {
+  public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getLocation(request: GetLocationRequest) async throws -> Location {
+    throw GoogleCloudGax.RequestError.unimplemented
   }
 }

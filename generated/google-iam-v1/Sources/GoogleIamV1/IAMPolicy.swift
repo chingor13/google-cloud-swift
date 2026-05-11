@@ -52,81 +52,21 @@ import GoogleType
 /// attached.
 ///
 /// @Snippet(path: "IAMPolicyQuickstart")
-public class IAMPolicy {
-  let inner: GoogleCloudGax.HTTPClient
-
-  /// Creates a new `IAMPolicy` instance.
-  public init(
-    endpoint: String? = nil,
-    credentials: GoogleCloudAuth.Credentials? = nil,
-    session: URLSession? = nil,
-  ) throws {
-    let endpoint = endpoint ?? "https://iam-meta-api.googleapis.com"
-    self.inner = try HTTPClient(endpoint: endpoint, credentials: credentials, session: session)
-  }
-
+public protocol IAMPolicy {
   /// Sets the access control policy on the specified resource. Replaces any
   /// existing policy.
   ///
   /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
   ///
   /// @Snippet(path: "IAMPolicy_SetIamPolicy")
-  public func setIamPolicy(request: SetIamPolicyRequest) async throws
-    -> Policy
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):setIamPolicy"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Policy.self, from: data)
-  }
+  func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy
 
   /// Gets the access control policy for a resource.
   /// Returns an empty policy if the resource exists and does not have a policy
   /// set.
   ///
   /// @Snippet(path: "IAMPolicy_GetIamPolicy")
-  public func getIamPolicy(request: GetIamPolicyRequest) async throws
-    -> Policy
-  {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):getIamPolicy"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(Policy.self, from: data)
-  }
+  func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy
 
   /// Returns permissions that a caller has on the specified resource.
   /// If the resource does not exist, this will return an empty set of
@@ -137,29 +77,117 @@ public class IAMPolicy {
   /// may "fail open" without warning.
   ///
   /// @Snippet(path: "IAMPolicy_TestIamPermissions")
+  func testIamPermissions(request: TestIamPermissionsRequest) async throws
+    -> TestIamPermissionsResponse
+}
+
+extension Clients {
+  /// The recommended implementation for ``IAMPolicy``.
+  public class IAMPolicyClient: IAMPolicy {
+    let inner: GoogleCloudGax.HTTPClient
+
+    /// Creates a new `IAMPolicyClient` instance.
+    public init(
+      endpoint: String? = nil,
+      credentials: GoogleCloudAuth.Credentials? = nil,
+      session: URLSession? = nil,
+    ) throws {
+      let endpoint = endpoint ?? "https://iam-meta-api.googleapis.com"
+      self.inner = try GoogleCloudGax.HTTPClient(
+        endpoint: endpoint, credentials: credentials, session: session)
+    }
+
+    /// See `IAMPolicy.setIamPolicy`
+    public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):setIamPolicy"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+    }
+
+    /// See `IAMPolicy.getIamPolicy`
+    public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):getIamPolicy"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+    }
+
+    /// See `IAMPolicy.testIamPermissions`
+    public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+      -> TestIamPermissionsResponse
+    {
+      let path = try { () throws -> String in
+        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):testIamPermissions"
+      }()
+      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, response) = try await self.inner.data(for: req)
+      if !(200..<300).contains(response.statusCode) {
+        throw GoogleCloudGax.RequestError.http(
+          GoogleCloudGax.HTTPDetails(
+            http_status_code: response.statusCode,
+            headers: [:],
+            payload: data,
+          ))
+      }
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        TestIamPermissionsResponse.self, from: data)
+    }
+  }
+}
+
+// Default implementations
+extension IAMPolicy {
+  public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+  public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
   {
-    let path = try { () throws -> String in
-      guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-        throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-      }
-      return "/v1/\(pathVariable0):testIamPermissions"
-    }()
-    let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-    var req = try await self.inner.Request(path: path, query: query)
-    req.httpMethod = "POST"
-    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try JSONEncoder().encode(request)
-    let (data, response) = try await self.inner.data(for: req)
-    if !(200..<300).contains(response.statusCode) {
-      throw RequestError.http(
-        HTTPDetails(
-          http_status_code: response.statusCode,
-          headers: [:],
-          payload: data,
-        ))
-    }
-    return try ProtoJSONDecoder().decode(TestIamPermissionsResponse.self, from: data)
+    throw GoogleCloudGax.RequestError.unimplemented
   }
 }

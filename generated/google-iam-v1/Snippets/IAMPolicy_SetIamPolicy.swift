@@ -9,7 +9,7 @@ import GoogleType
 import GoogleIamV1
 import Foundation
 
-func sample(client: IAMPolicy) async throws {
+func sample(client: some IAMPolicy) async throws {
   let response = try await client.setIamPolicy(
     request: SetIamPolicyRequest( /* set fields */)
   )
@@ -21,7 +21,7 @@ func sample(client: IAMPolicy) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try IAMPolicy()
+      let client = try GoogleIamV1.Clients.IAMPolicyClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

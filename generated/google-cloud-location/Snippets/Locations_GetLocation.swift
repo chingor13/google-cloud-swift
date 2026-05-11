@@ -8,7 +8,7 @@ import GoogleCloudWkt
 import GoogleCloudLocation
 import Foundation
 
-func sample(client: Locations) async throws {
+func sample(client: some Locations) async throws {
   let response = try await client.getLocation(
     request: GetLocationRequest( /* set fields */)
   )
@@ -20,7 +20,7 @@ func sample(client: Locations) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try Locations()
+      let client = try GoogleCloudLocation.Clients.LocationsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

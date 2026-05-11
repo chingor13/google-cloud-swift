@@ -10,7 +10,7 @@ import GoogleIamV1
 import GoogleCloudSecretmanagerV1
 import Foundation
 
-func sample(client: SecretManagerService) async throws {
+func sample(client: some SecretManagerService) async throws {
   let response = try await client.getSecret(
     request: GetSecretRequest( /* set fields */)
   )
@@ -22,7 +22,7 @@ func sample(client: SecretManagerService) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try SecretManagerService()
+      let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

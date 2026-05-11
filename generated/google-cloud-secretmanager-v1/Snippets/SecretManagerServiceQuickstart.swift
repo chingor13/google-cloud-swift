@@ -20,7 +20,7 @@ import GoogleCloudSecretmanagerV1
 import Foundation
 
 func sample() async throws {
-  let client = try SecretManagerService()
+  let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
   let response = try await client.listSecrets(
     request: ListSecretsRequest( /* set fields */)
   )

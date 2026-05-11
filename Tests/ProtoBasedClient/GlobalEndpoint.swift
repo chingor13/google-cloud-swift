@@ -23,7 +23,7 @@ public enum GlobalEndpoint {
   static public func run() async throws {
     let projectId = try projectId()
     let secretId = randomSecretId()
-    let client = try SecretManagerService()
+    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
 
     print("Testing createSecret()")
     let create = try await client.createSecret(

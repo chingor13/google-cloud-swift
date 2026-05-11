@@ -8,7 +8,7 @@ import GoogleCloudWkt
 import GoogleCloudSecurityPubliccaV1
 import Foundation
 
-func sample(client: PublicCertificateAuthorityService) async throws {
+func sample(client: some PublicCertificateAuthorityService) async throws {
   let response = try await client.createExternalAccountKey(
     request: CreateExternalAccountKeyRequest( /* set fields */)
   )
@@ -20,7 +20,8 @@ func sample(client: PublicCertificateAuthorityService) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try PublicCertificateAuthorityService()
+      let client = try GoogleCloudSecurityPubliccaV1.Clients
+        .PublicCertificateAuthorityServiceClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")
