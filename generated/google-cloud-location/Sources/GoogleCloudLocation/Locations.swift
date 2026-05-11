@@ -49,14 +49,9 @@ extension Clients {
     let inner: GoogleCloudGax.HTTPClient
 
     /// Creates a new `LocationsClient` instance.
-    public init(
-      endpoint: String? = nil,
-      credentials: GoogleCloudAuth.Credentials? = nil,
-      session: URLSession? = nil,
-    ) throws {
-      let endpoint = endpoint ?? "https://cloud.googleapis.com"
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       self.inner = try GoogleCloudGax.HTTPClient(
-        endpoint: endpoint, credentials: credentials, session: session)
+        from: options, withDefaultEndpoint: "https://cloud.googleapis.com")
     }
 
     /// See `Locations.listLocations`

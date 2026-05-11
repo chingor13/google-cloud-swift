@@ -208,14 +208,9 @@ extension Clients {
     let inner: GoogleCloudGax.HTTPClient
 
     /// Creates a new `SecretManagerServiceClient` instance.
-    public init(
-      endpoint: String? = nil,
-      credentials: GoogleCloudAuth.Credentials? = nil,
-      session: URLSession? = nil,
-    ) throws {
-      let endpoint = endpoint ?? "https://secretmanager.googleapis.com"
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       self.inner = try GoogleCloudGax.HTTPClient(
-        endpoint: endpoint, credentials: credentials, session: session)
+        from: options, withDefaultEndpoint: "https://secretmanager.googleapis.com")
     }
 
     /// See `SecretManagerService.listSecrets`
