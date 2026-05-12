@@ -31,7 +31,9 @@ import GoogleCloudWkt
 /// the delay between retries based on `retry_delay`, until either a maximum
 /// number of retries have been reached or a maximum retry delay cap has been
 /// reached.
-public struct RetryInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct RetryInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Clients should wait at least this long between retrying the same request.
   public var retryDelay: GoogleCloudWkt.Duration?
 

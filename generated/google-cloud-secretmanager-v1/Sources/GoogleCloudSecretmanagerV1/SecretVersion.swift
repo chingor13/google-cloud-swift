@@ -21,7 +21,9 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// A secret version resource in the Secret Manager API.
-public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Output only. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] in the format
   /// `projects/*/secrets/*/versions/*`.

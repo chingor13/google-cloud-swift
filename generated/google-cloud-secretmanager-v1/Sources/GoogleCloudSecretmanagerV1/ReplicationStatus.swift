@@ -24,7 +24,9 @@ import GoogleIamV1
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
 ///
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
@@ -91,7 +93,9 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     /// Output only. The customer-managed encryption status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
     /// populated if customer-managed encryption is used.
@@ -126,7 +130,9 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     /// Output only. The list of replica statuses for the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     ///
@@ -144,7 +150,9 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     ///
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
       public var location: String

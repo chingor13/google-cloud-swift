@@ -24,7 +24,8 @@ import GoogleIamV1
 /// [SecretManagerService.DisableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DisableSecretVersion].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.DisableSecretVersion]: <doc:SecretManagerService/disableSecretVersion(request:)>
-public struct DisableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+public struct DisableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
 {
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to disable in

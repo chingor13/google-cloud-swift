@@ -20,7 +20,8 @@ import GoogleCloudWkt
 import GoogleType
 
 /// Response message for `TestIamPermissions` method.
-public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
 {
   /// A subset of `TestPermissionsRequest.permissions` that the caller is
   /// allowed.

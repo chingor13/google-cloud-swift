@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for `enum` fields.
-public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: MessageWithEnum.TestEnum
 

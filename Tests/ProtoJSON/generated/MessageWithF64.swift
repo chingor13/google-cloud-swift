@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for f64.
-public struct MessageWithF64: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithF64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: Double
 

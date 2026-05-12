@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for Value.
-public struct MessageWithValue: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: GoogleCloudWkt.Value?
 

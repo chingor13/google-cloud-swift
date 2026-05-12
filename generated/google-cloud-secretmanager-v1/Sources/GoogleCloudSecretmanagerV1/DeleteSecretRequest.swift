@@ -24,7 +24,9 @@ import GoogleIamV1
 /// [SecretManagerService.DeleteSecret][google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret]: <doc:SecretManagerService/deleteSecret(request:)>
-public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Required. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] to delete in the format
   /// `projects/*/secrets/*`.

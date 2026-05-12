@@ -21,7 +21,9 @@ import GoogleType
 
 /// One delta entry for AuditConfig. Each individual change (only one
 /// exempted_member in each entry) to a AuditConfig will be a separate entry.
-public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The action that was performed on an audit configuration in a policy.
   /// Required
   public var action: AuditConfigDelta.Action

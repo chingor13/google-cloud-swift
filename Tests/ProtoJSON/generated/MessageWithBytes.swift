@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for bytes.
-public struct MessageWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: Data
 

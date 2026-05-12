@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A message with several interesting `oneof` fields.
-public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   public var singleString: OneOf_SingleString?
 
   public var twoStrings: OneOf_TwoStrings?
@@ -172,7 +174,9 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     public var parent: String
 
     /// Initialize a new instance of `Message`.

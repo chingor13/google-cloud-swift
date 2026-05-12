@@ -15,6 +15,7 @@
 // limitations under the License.
 
 import Foundation
+import GoogleCloudGax
 
 import GoogleCloudLocation
 import GoogleCloudWkt
@@ -24,7 +25,9 @@ import GoogleIamV1
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions]: <doc:SecretManagerService/listSecretVersions(request:)>
-public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  GoogleCloudGax._PaginatedResponse,
+  Sendable
 {
   /// The list of [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]
   /// sorted in reverse by create_time (newest first).
@@ -68,5 +71,9 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   }
   public func _pack() throws -> GoogleCloudWkt.Struct {
     return try GoogleCloudWkt._slowAnySerialize(message: self)
+  }
+
+  public func _getPaginatedItems() -> [SecretVersion] {
+    return self.versions
   }
 }

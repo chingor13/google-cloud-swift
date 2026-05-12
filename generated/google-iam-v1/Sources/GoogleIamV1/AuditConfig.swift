@@ -70,7 +70,9 @@ import GoogleType
 /// For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
 /// logging. It also exempts `jose@example.com` from DATA_READ logging, and
 /// `aliya@example.com` from DATA_WRITE logging.
-public struct AuditConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct AuditConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Specifies a service that will be enabled for audit logging.
   /// For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
   /// `allServices` is a special value that covers all services.

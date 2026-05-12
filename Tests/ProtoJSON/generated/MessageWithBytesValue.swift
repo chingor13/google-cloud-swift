@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for google.protobuf.BytesValue.
-public struct MessageWithBytesValue: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithBytesValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: GoogleCloudWkt.BytesValue?
 

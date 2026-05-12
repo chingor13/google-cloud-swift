@@ -29,7 +29,9 @@ import GoogleIamV1
 ///
 /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Output only. The resource name of the
   /// [Secret][google.cloud.secretmanager.v1.Secret] in the format
   /// `projects/*/secrets/*`.

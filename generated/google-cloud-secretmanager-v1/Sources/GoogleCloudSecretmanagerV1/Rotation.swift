@@ -28,7 +28,9 @@ import GoogleIamV1
 ///
 /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
 /// [google.cloud.secretmanager.v1.Secret.topics]: <doc:Secret/topics>
-public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Optional. Timestamp in UTC at which the
   /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to rotate.
   /// Cannot be set to less than 300s (5 min) in the future and at most

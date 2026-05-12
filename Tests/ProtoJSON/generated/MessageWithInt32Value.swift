@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for google.protobuf.Int32Value.
-public struct MessageWithInt32Value: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithInt32Value: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: GoogleCloudWkt.Int32Value?
 

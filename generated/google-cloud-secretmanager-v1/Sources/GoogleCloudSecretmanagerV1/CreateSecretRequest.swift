@@ -24,7 +24,9 @@ import GoogleIamV1
 /// [SecretManagerService.CreateSecret][google.cloud.secretmanager.v1.SecretManagerService.CreateSecret].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.CreateSecret]: <doc:SecretManagerService/createSecret(request:)>
-public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Required. The resource name of the project to associate with the
   /// [Secret][google.cloud.secretmanager.v1.Secret], in the format `projects/*`
   /// or `projects/*/locations/*`.

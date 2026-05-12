@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A message with a more complex `oneof` field.
-public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   public var complex: OneOf_Complex?
 
   /// Initialize a new instance of `MessageWithComplexOneOf`.
@@ -143,7 +145,9 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     public var strings: [String]
 
     /// Initialize a new instance of `Inner`.

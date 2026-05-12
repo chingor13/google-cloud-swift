@@ -24,7 +24,9 @@ import GoogleIamV1
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.ListSecrets]: <doc:SecretManagerService/listSecrets(request:)>
-public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct ListSecretsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Required. The resource name of the project associated with the
   /// [Secrets][google.cloud.secretmanager.v1.Secret], in the format `projects/*`
   /// or `projects/*/locations/*`

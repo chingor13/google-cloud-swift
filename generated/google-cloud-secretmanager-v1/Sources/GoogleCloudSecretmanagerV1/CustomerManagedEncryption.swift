@@ -22,7 +22,9 @@ import GoogleIamV1
 
 /// Configuration for encrypting secret payloads using customer-managed
 /// encryption keys (CMEK).
-public struct CustomerManagedEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct CustomerManagedEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Required. The resource name of the Cloud KMS CryptoKey used to encrypt
   /// secret payloads.
   ///

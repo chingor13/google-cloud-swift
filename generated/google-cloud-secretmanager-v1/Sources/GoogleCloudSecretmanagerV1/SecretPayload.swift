@@ -25,7 +25,9 @@ import GoogleIamV1
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
 ///
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The secret data. Must be no larger than 64KiB.
   public var data: Data
 

@@ -15,13 +15,17 @@
 // limitations under the License.
 
 import Foundation
+import GoogleCloudGax
 
 import GoogleCloudWkt
 
 /// The response message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].
 ///
 /// [google.cloud.location.Locations.ListLocations]: <doc:Locations/listLocations(request:)>
-public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  GoogleCloudGax._PaginatedResponse,
+  Sendable
+{
   /// A list of locations that matches the specified filter in the request.
   public var locations: [Location]
 
@@ -45,5 +49,9 @@ public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   }
   public func _pack() throws -> GoogleCloudWkt.Struct {
     return try GoogleCloudWkt._slowAnySerialize(message: self)
+  }
+
+  public func _getPaginatedItems() -> [Location] {
+    return self.locations
   }
 }

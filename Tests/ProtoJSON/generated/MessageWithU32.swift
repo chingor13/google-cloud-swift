@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for u32.
-public struct MessageWithU32: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithU32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: UInt32
 

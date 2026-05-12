@@ -49,7 +49,9 @@ import GoogleCloudWkt
 /// The exact variables and functions that may be referenced within an expression
 /// are determined by the service that evaluates it. See the service
 /// documentation for additional information.
-public struct Expr: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct Expr: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Textual representation of an expression in Common Expression Language
   /// syntax.
   public var expression: String

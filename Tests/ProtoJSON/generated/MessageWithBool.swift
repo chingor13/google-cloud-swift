@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for bool.
-public struct MessageWithBool: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithBool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: Bool
 

@@ -38,7 +38,9 @@ import GoogleType
 ///
 /// This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
 /// jose@example.com from DATA_READ logging.
-public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The log type that this config enables.
   public var logType: AuditLogConfig.LogType
 

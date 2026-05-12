@@ -24,7 +24,8 @@ import GoogleIamV1
 /// [SecretManagerService.EnableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.EnableSecretVersion].
 ///
 /// [google.cloud.secretmanager.v1.SecretManagerService.EnableSecretVersion]: <doc:SecretManagerService/enableSecretVersion(request:)>
-public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable
+public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
 {
   /// Required. The resource name of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] to enable in

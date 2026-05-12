@@ -21,7 +21,9 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 /// A policy that defines the replication and encryption configuration of data.
-public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The replication policy for this secret.
   public var replication: OneOf_Replication?
 
@@ -81,7 +83,9 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
   /// restrictions.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public struct Automatic: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct Automatic: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     /// Optional. The customer-managed encryption configuration of the
     /// [Secret][google.cloud.secretmanager.v1.Secret]. If no configuration is
     /// provided, Google-managed default encryption is used.
@@ -121,7 +125,9 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
   ///
   /// [google.cloud.secretmanager.v1.Replication.UserManaged.replicas]: <doc:Replication/UserManaged/replicas>
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public struct UserManaged: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct UserManaged: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     /// Required. The list of Replicas for this
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     ///
@@ -141,7 +147,9 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable, Send
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     ///
     /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-    public struct Replica: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+    public struct Replica: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
       /// The canonical IDs of the location to replicate data.
       /// For example: `"us-east1"`.
       public var location: String

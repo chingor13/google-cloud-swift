@@ -25,7 +25,9 @@ import GoogleCloudWkt
 ///
 /// You can find out more about this error model and how to work with it in the
 /// [API Design Guide](https://cloud.google.com/apis/design/errors).
-public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The status code, which should be an enum value of
   /// [google.rpc.Code][google.rpc.Code].
   ///

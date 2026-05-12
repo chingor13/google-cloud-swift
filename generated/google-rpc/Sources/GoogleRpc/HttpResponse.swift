@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// Represents an HTTP response.
-public struct HttpResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct HttpResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// The HTTP status code, such as 200 or 404.
   public var status: Int32
 

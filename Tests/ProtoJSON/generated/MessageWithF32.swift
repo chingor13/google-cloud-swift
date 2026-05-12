@@ -19,7 +19,9 @@ import Foundation
 import GoogleCloudWkt
 
 /// A test message for f32.
-public struct MessageWithF32: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct MessageWithF32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// A singular field.
   public var singular: Float
 

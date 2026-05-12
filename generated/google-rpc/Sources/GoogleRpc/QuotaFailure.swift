@@ -29,7 +29,9 @@ import GoogleCloudWkt
 ///
 /// Also see RetryInfo and Help types for other details about handling a
 /// quota failure.
-public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+  Sendable
+{
   /// Describes all quota violations.
   public var violations: [QuotaFailure.Violation]
 
@@ -42,7 +44,9 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sen
 
   /// A message type used to describe a single quota violation.  For example, a
   /// daily quota or a custom quota that was exceeded.
-  public struct Violation: Codable, Equatable, GoogleCloudWkt._AnyPackable, Sendable {
+  public struct Violation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
     /// The subject on which the quota check failed.
     /// For example, "clientip:<ip address of client>" or "project:<Google
     /// developer project id>".
