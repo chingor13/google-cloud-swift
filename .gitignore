@@ -18,6 +18,8 @@ Packages/*/.build/
 .swiftpm/xcode/package.xcworkspace/contents.xcwrappercontents
 .swiftpm/configuration/
 
+*/**/Package.resolved
+
 # The build directory for Rust
 target/
 
