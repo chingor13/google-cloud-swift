@@ -50,6 +50,9 @@ default:
       - name: GoogleIamV1
         path: generated/google-iam-v1
         api_package: google.iam.v1
+      - name: GoogleRpc
+        path: generated/google-rpc
+        api_package: google.rpc
       - name: GoogleType
         path: generated/google-type
         api_package: google.type
@@ -69,6 +72,10 @@ libraries:
   - name: GoogleIamV1
     apis:
       - path: google/iam/v1
+    copyright_year: "2026"
+  - name: GoogleLongrunning
+    apis:
+      - path: google/longrunning
     copyright_year: "2026"
   - name: GoogleRpc
     apis:
