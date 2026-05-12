@@ -39,6 +39,17 @@ public protocol PublicCertificateAuthorityService {
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
+
+  /// Creates a new
+  /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
+  /// bound to the project.
+  ///
+  /// [google.cloud.security.publicca.v1.ExternalAccountKey]: <doc:ExternalAccountKey>
+  ///
+  /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
+  func createExternalAccountKey(
+    request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> ExternalAccountKey
 }
 
 extension Clients {
@@ -53,9 +64,9 @@ extension Clients {
     }
 
     /// See `PublicCertificateAuthorityService.createExternalAccountKey`
-    public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
-      -> ExternalAccountKey
-    {
+    public func createExternalAccountKey(
+      request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> ExternalAccountKey {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -88,6 +99,12 @@ extension PublicCertificateAuthorityService {
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> ExternalAccountKey
   {
+    try await self.createExternalAccountKey(request: request, options: .init())
+  }
+
+  public func createExternalAccountKey(
+    request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> ExternalAccountKey {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }

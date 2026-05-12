@@ -41,6 +41,20 @@ public protocol Locations {
   ///
   /// @Snippet(path: "Locations_GetLocation")
   func getLocation(request: GetLocationRequest) async throws -> Location
+
+  /// Lists information about the supported locations for this service.
+  ///
+  /// @Snippet(path: "Locations_ListLocations")
+  func listLocations(
+    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> ListLocationsResponse
+
+  /// Gets information about a location.
+  ///
+  /// @Snippet(path: "Locations_GetLocation")
+  func getLocation(
+    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Location
 }
 
 extension Clients {
@@ -55,7 +69,9 @@ extension Clients {
     }
 
     /// See `Locations.listLocations`
-    public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+    public func listLocations(
+      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> ListLocationsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -82,19 +98,21 @@ extension Clients {
     }
 
     /// Lists information about the supported locations for this service.
-    public func listLocations(byItem: ListLocationsRequest) throws -> some AsyncSequence<
-      Location, Error
-    > {
+    public func listLocations(
+      byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> some AsyncSequence<Location, Error> {
       let listRpc = { (token: String) async throws -> ListLocationsResponse in
         var request = byItem
         request.pageToken = token
-        return try await self.listLocations(request: request)
+        return try await self.listLocations(request: request, options: options)
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// See `Locations.getLocation`
-    public func getLocation(request: GetLocationRequest) async throws -> Location {
+    public func getLocation(
+      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> Location {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -121,19 +139,37 @@ extension Clients {
 // Default implementations
 extension Locations {
   public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+    try await self.listLocations(request: request, options: .init())
+  }
+
+  public func listLocations(
+    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> ListLocationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  /// Lists information about the supported locations for this service.
   public func listLocations(byItem: ListLocationsRequest) throws -> some AsyncSequence<
     Location, Error
   > {
+    try self.listLocations(byItem: byItem, options: .init())
+  }
+
+  public func listLocations(
+    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> some AsyncSequence<Location, Error> {
     let listRpc = { (token: String) async throws -> ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
+
   public func getLocation(request: GetLocationRequest) async throws -> Location {
+    try await self.getLocation(request: request, options: .init())
+  }
+
+  public func getLocation(
+    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Location {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }

@@ -79,6 +79,38 @@ public protocol IAMPolicy {
   /// @Snippet(path: "IAMPolicy_TestIamPermissions")
   func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
+
+  /// Sets the access control policy on the specified resource. Replaces any
+  /// existing policy.
+  ///
+  /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+  ///
+  /// @Snippet(path: "IAMPolicy_SetIamPolicy")
+  func setIamPolicy(
+    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Policy
+
+  /// Gets the access control policy for a resource.
+  /// Returns an empty policy if the resource exists and does not have a policy
+  /// set.
+  ///
+  /// @Snippet(path: "IAMPolicy_GetIamPolicy")
+  func getIamPolicy(
+    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Policy
+
+  /// Returns permissions that a caller has on the specified resource.
+  /// If the resource does not exist, this will return an empty set of
+  /// permissions, not a `NOT_FOUND` error.
+  ///
+  /// Note: This operation is designed to be used for building permission-aware
+  /// UIs and command-line tools, not for authorization checking. This operation
+  /// may "fail open" without warning.
+  ///
+  /// @Snippet(path: "IAMPolicy_TestIamPermissions")
+  func testIamPermissions(
+    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> TestIamPermissionsResponse
 }
 
 extension Clients {
@@ -93,7 +125,9 @@ extension Clients {
     }
 
     /// See `IAMPolicy.setIamPolicy`
-    public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+    public func setIamPolicy(
+      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -118,7 +152,9 @@ extension Clients {
     }
 
     /// See `IAMPolicy.getIamPolicy`
-    public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+    public func getIamPolicy(
+      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -143,9 +179,9 @@ extension Clients {
     }
 
     /// See `IAMPolicy.testIamPermissions`
-    public func testIamPermissions(request: TestIamPermissionsRequest) async throws
-      -> TestIamPermissionsResponse
-    {
+    public func testIamPermissions(
+      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> TestIamPermissionsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -175,14 +211,34 @@ extension Clients {
 // Default implementations
 extension IAMPolicy {
   public func setIamPolicy(request: SetIamPolicyRequest) async throws -> Policy {
+    try await self.setIamPolicy(request: request, options: .init())
+  }
+
+  public func setIamPolicy(
+    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
+
   public func getIamPolicy(request: GetIamPolicyRequest) async throws -> Policy {
+    try await self.getIamPolicy(request: request, options: .init())
+  }
+
+  public func getIamPolicy(
+    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
+
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> TestIamPermissionsResponse
   {
+    try await self.testIamPermissions(request: request, options: .init())
+  }
+
+  public func testIamPermissions(
+    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }
