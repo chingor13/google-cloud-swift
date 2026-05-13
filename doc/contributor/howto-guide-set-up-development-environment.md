@@ -268,6 +268,40 @@ git ls-files -z --
     xargs -0 terraform fmt
 ```
 
+## Troubleshooting
+
+### Issue: `swift build` fails with "Invalid manifest... error: extra argument 'traits' in call"
+
+This may happen if your swift install somehow gets interrupted. Your machine may be pointing to the system's default Apple-provided toolchain talking, not Swiftly's.
+
+**How to Diagnose**
+
+Run `swift --version` in your terminal and check the output format.
+
+If you see `swift-driver` and swiftlang in parentheses, you are using the Apple system toolchain. e.g:
+
+```
+$ swift --version
+swift-driver version: 1.127.14.1 Apple Swift version 6.2.1 (swiftlang-6.2.1.4.8 clang-1700.4.4.1)
+Target: arm64-apple-macosx15.0
+```
+
+A correct installation should look something like this:
+
+```
+Apple Swift version 6.3.1 (swift-6.3.1-RELEASE)
+Target: arm64-apple-macosx15.0
+```
+
+**How to Fix**
+
+To fix, run the following:
+
+```
+swiftly install latest
+swiftly link
+```
+
 [enable the secret manager api]: https://cloud.google.com/secret-manager/docs/configuring-secret-manager
 [getting-started-rust]: https://www.rust-lang.org/learn/get-started
 [getting-started-swift]: https://www.swift.org/install/
