@@ -14,35 +14,35 @@
 
 import Foundation
 import GoogleCloudWkt
+import GoogleCloudSecretmanagerV1
 import Testing
 
 // Verify `Any` can be used with a struct defined outside the `GoogleCloudWkt`  package.
 //
-// Eventually `TestMessage` will be replaced with a generated message. We use an integration test to
-// avoid a cyclic dependency between the `GoogleCloudWkt` package and the generated library.
+// We use an integration test to avoid a cyclic dependency between the `GoogleCloudWkt` package and the generated library.
+// `GoogleCloudSecretmanagerV1` was chosen since it has a simple structure, so it's easy to construct test data for it.
 
 struct WrappedAny: Codable {
   let value: GoogleCloudWkt.`Any`
 }
 
-@Test("Any decoding TestMessage")
-func testDecodingMessage() throws {
+@Test("Any decoding GetSecretRequest")
+func testDecodingGetSecretRequestMessage() throws {
   let jsonString =
-    #"{"value":{"@type":"type.googleapis.com/test.TestMessage","keyId":"test-key-id","name":"test-name","someNumber":42}}"#
+    #"{"value":{"@type":"type.googleapis.com/google.cloud.secretmanager.v1.GetSecretRequest","name":"projects/test-project/secrets/my-secret"}}"#
   let data = jsonString.data(using: .utf8)!
   let decoder = JSONDecoder()
   let wrapped = try decoder.decode(WrappedAny.self, from: data)
   let any = wrapped.value
-  #expect(any.typeUrl == "type.googleapis.com/test.TestMessage")
-
-  let got = try TestMessage(fromAny: any)
-  let want = TestMessage(name: "test-name", keyId: "test-key-id", someNumber: 42)
+  #expect(any.typeUrl == "type.googleapis.com/google.cloud.secretmanager.v1.GetSecretRequest")
+  let got = try GetSecretRequest(fromAny: any)
+  let want = GetSecretRequest(name: "projects/test-project/secrets/my-secret")
   #expect(got == want)
 }
 
-@Test("Any encoding TestMessage")
-func testEncodingMessage() throws {
-  let input = TestMessage(name: "test-name", keyId: "test-key-id", someNumber: 42)
+@Test("Any encoding GetSecretRequest")
+func testEncodingGetSecretRequestMessage() throws {
+  let input = GetSecretRequest(name: "projects/test-project/secrets/my-secret")
   let any = try `Any`(fromMessage: input)
   let wrapped = WrappedAny(value: any)
   let encoder = JSONEncoder()
@@ -51,39 +51,45 @@ func testEncodingMessage() throws {
   let got = String(data: data, encoding: .utf8)!
 
   let want =
-    #"{"value":{"@type":"type.googleapis.com/test.TestMessage","keyId":"test-key-id","name":"test-name","someNumber":42}}"#
+    #"{"value":{"@type":"type.googleapis.com/google.cloud.secretmanager.v1.GetSecretRequest","name":"projects/test-project/secrets/my-secret"}}"#
   #expect(got == want)
 }
 
-/// A synthetic test message.
-///
-/// The idea is to validate the code with this message. Eventually we will
-/// modify the generator to generate the extension / protocol definitions.
-/// and then we can test with a real message.
-public struct TestMessage: Codable, Equatable {
-  public var name: String
-  public var keyId: String
-  public var someNumber: Int32
-
-  public init(
-    name: String = String(),
-    keyId: String = String(),
-    someNumber: Int32 = Int32(),
-  ) {
-    self.name = name
-    self.keyId = keyId
-    self.someNumber = someNumber
-  }
+@Test("Any decoding ListSecretVersionsRequest")
+func testDecodingListSecretVersionsRequestMessage() throws {
+  let jsonString =
+    #"{"value":{"@type":"type.googleapis.com/google.cloud.secretmanager.v1.ListSecretVersionsRequest","filter":"state:ENABLED","pageSize":10,"pageToken":"token123","parent":"projects/test-project/secrets/my-secret"}}"#
+  let data = jsonString.data(using: .utf8)!
+  let decoder = JSONDecoder()
+  let wrapped = try decoder.decode(WrappedAny.self, from: data)
+  let any = wrapped.value
+  #expect(
+    any.typeUrl == "type.googleapis.com/google.cloud.secretmanager.v1.ListSecretVersionsRequest")
+  let got = try ListSecretVersionsRequest(fromAny: any)
+  let want = ListSecretVersionsRequest(
+    parent: "projects/test-project/secrets/my-secret",
+    pageSize: 10,
+    pageToken: "token123",
+    filter: "state:ENABLED"
+  )
+  #expect(got == want)
 }
 
-extension TestMessage: GoogleCloudWkt._AnyPackable {
-  public static var _anyTypeUrl: String { get { return "type.googleapis.com/test.TestMessage" } }
-
-  public init(fromAny any: GoogleCloudWkt.`Any`) throws {
-    self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
-  }
-
-  public func _pack() throws -> Struct {
-    return try GoogleCloudWkt._slowAnySerialize(message: self)
-  }
+@Test("Any encoding ListSecretVersionsRequest")
+func testEncodingListSecretVersionsRequestMessage() throws {
+  let input = ListSecretVersionsRequest(
+    parent: "projects/test-project/secrets/my-secret",
+    pageSize: 10,
+    pageToken: "token123",
+    filter: "state:ENABLED"
+  )
+  let any = try `Any`(fromMessage: input)
+  let wrapped = WrappedAny(value: any)
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+  let data = try encoder.encode(wrapped)
+  let got = String(data: data, encoding: .utf8)!
+  let want =
+    #"{"value":{"@type":"type.googleapis.com/google.cloud.secretmanager.v1.ListSecretVersionsRequest","filter":"state:ENABLED","pageSize":10,"pageToken":"token123","parent":"projects/test-project/secrets/my-secret"}}"#
+  #expect(got == want)
 }

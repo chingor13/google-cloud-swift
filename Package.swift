@@ -73,7 +73,8 @@ let package = Package(
     .testTarget(
       name: "Any",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "wkt"),
+        .product(name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1")
       ]),
     .testTarget(
       name: "QueryParameter",
