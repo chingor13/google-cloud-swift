@@ -45,6 +45,10 @@ public protocol Operations {
   /// @Snippet(path: "Operations_ListOperations")
   func listOperations(request: ListOperationsRequest) async throws -> ListOperationsResponse
 
+  /// Lists operations that match the specified filter in the request. If the
+  /// server doesn't support this method, it returns `UNIMPLEMENTED`.
+  func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<Operation, Error>
+
   /// Gets the latest state of a long-running operation.  Clients can use this
   /// method to poll the operation result at intervals as recommended by the API
   /// service.
@@ -86,6 +90,12 @@ public protocol Operations {
   func listOperations(
     request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> ListOperationsResponse
+
+  /// Lists operations that match the specified filter in the request. If the
+  /// server doesn't support this method, it returns `UNIMPLEMENTED`.
+  func listOperations(
+    byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<Operation, Error>
 
   /// Gets the latest state of a long-running operation.  Clients can use this
   /// method to poll the operation result at intervals as recommended by the API
@@ -175,7 +185,7 @@ extension Clients {
     /// server doesn't support this method, it returns `UNIMPLEMENTED`.
     public func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> some AsyncSequence<Operation, Error> {
+    ) throws -> any AsyncSequence<Operation, Error> {
       let listRpc = { (token: String) async throws -> ListOperationsResponse in
         var request = byItem
         request.pageToken = token
@@ -274,7 +284,7 @@ extension Operations {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listOperations(byItem: ListOperationsRequest) throws -> some AsyncSequence<
+  public func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
     Operation, Error
   > {
     try self.listOperations(byItem: byItem, options: .init())
@@ -282,7 +292,7 @@ extension Operations {
 
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> some AsyncSequence<Operation, Error> {
+  ) throws -> any AsyncSequence<Operation, Error> {
     let listRpc = { (token: String) async throws -> ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

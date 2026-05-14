@@ -46,6 +46,11 @@ public protocol SecretManagerService {
   /// @Snippet(path: "SecretManagerService_ListSecrets")
   func listSecrets(request: ListSecretsRequest) async throws -> ListSecretsResponse
 
+  /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  func listSecrets(byItem: ListSecretsRequest) throws -> any AsyncSequence<Secret, Error>
+
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
   ///
@@ -95,6 +100,14 @@ public protocol SecretManagerService {
   /// @Snippet(path: "SecretManagerService_ListSecretVersions")
   func listSecretVersions(request: ListSecretVersionsRequest) async throws
     -> ListSecretVersionsResponse
+
+  /// Lists [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]. This
+  /// call does not return secret data.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  func listSecretVersions(byItem: ListSecretVersionsRequest) throws -> any AsyncSequence<
+    SecretVersion, Error
+  >
 
   /// Gets metadata for a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -196,6 +209,11 @@ public protocol SecretManagerService {
   /// @Snippet(path: "SecretManagerService_ListLocations")
   func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse
 
+  /// Lists information about the supported locations for this service.
+  func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<
+    GoogleCloudLocation.Location, Error
+  >
+
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecretManagerService_GetLocation")
@@ -209,6 +227,13 @@ public protocol SecretManagerService {
   func listSecrets(
     request: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> ListSecretsResponse
+
+  /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  func listSecrets(
+    byItem: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<Secret, Error>
 
   /// Creates a new [Secret][google.cloud.secretmanager.v1.Secret] containing no
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
@@ -270,6 +295,14 @@ public protocol SecretManagerService {
   func listSecretVersions(
     request: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> ListSecretVersionsResponse
+
+  /// Lists [SecretVersions][google.cloud.secretmanager.v1.SecretVersion]. This
+  /// call does not return secret data.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  func listSecretVersions(
+    byItem: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<SecretVersion, Error>
 
   /// Gets metadata for a
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -387,6 +420,11 @@ public protocol SecretManagerService {
     request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> ListLocationsResponse
 
+  /// Lists information about the supported locations for this service.
+  func listLocations(
+    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Error>
+
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecretManagerService_GetLocation")
@@ -440,7 +478,7 @@ extension Clients {
     /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
     public func listSecrets(
       byItem: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> some AsyncSequence<Secret, Error> {
+    ) throws -> any AsyncSequence<Secret, Error> {
       let listRpc = { (token: String) async throws -> ListSecretsResponse in
         var request = byItem
         request.pageToken = token
@@ -625,7 +663,7 @@ extension Clients {
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public func listSecretVersions(
       byItem: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> some AsyncSequence<SecretVersion, Error> {
+    ) throws -> any AsyncSequence<SecretVersion, Error> {
       let listRpc = { (token: String) async throws -> ListSecretVersionsResponse in
         var request = byItem
         request.pageToken = token
@@ -880,7 +918,7 @@ extension Clients {
     /// Lists information about the supported locations for this service.
     public func listLocations(
       byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> some AsyncSequence<GoogleCloudLocation.Location, Error> {
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Error> {
       let listRpc = { (token: String) async throws -> ListLocationsResponse in
         var request = byItem
         request.pageToken = token
@@ -928,13 +966,13 @@ extension SecretManagerService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listSecrets(byItem: ListSecretsRequest) throws -> some AsyncSequence<Secret, Error> {
+  public func listSecrets(byItem: ListSecretsRequest) throws -> any AsyncSequence<Secret, Error> {
     try self.listSecrets(byItem: byItem, options: .init())
   }
 
   public func listSecrets(
     byItem: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> some AsyncSequence<Secret, Error> {
+  ) throws -> any AsyncSequence<Secret, Error> {
     let listRpc = { (token: String) async throws -> ListSecretsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1003,7 +1041,7 @@ extension SecretManagerService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listSecretVersions(byItem: ListSecretVersionsRequest) throws -> some AsyncSequence<
+  public func listSecretVersions(byItem: ListSecretVersionsRequest) throws -> any AsyncSequence<
     SecretVersion, Error
   > {
     try self.listSecretVersions(byItem: byItem, options: .init())
@@ -1011,7 +1049,7 @@ extension SecretManagerService {
 
   public func listSecretVersions(
     byItem: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> some AsyncSequence<SecretVersion, Error> {
+  ) throws -> any AsyncSequence<SecretVersion, Error> {
     let listRpc = { (token: String) async throws -> ListSecretVersionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1117,7 +1155,7 @@ extension SecretManagerService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listLocations(byItem: ListLocationsRequest) throws -> some AsyncSequence<
+  public func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<
     GoogleCloudLocation.Location, Error
   > {
     try self.listLocations(byItem: byItem, options: .init())
@@ -1125,7 +1163,7 @@ extension SecretManagerService {
 
   public func listLocations(
     byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> some AsyncSequence<GoogleCloudLocation.Location, Error> {
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Error> {
     let listRpc = { (token: String) async throws -> ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

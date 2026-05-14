@@ -37,6 +37,9 @@ public protocol Locations {
   /// @Snippet(path: "Locations_ListLocations")
   func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse
 
+  /// Lists information about the supported locations for this service.
+  func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<Location, Error>
+
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Locations_GetLocation")
@@ -48,6 +51,11 @@ public protocol Locations {
   func listLocations(
     request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> ListLocationsResponse
+
+  /// Lists information about the supported locations for this service.
+  func listLocations(
+    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<Location, Error>
 
   /// Gets information about a location.
   ///
@@ -100,7 +108,7 @@ extension Clients {
     /// Lists information about the supported locations for this service.
     public func listLocations(
       byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> some AsyncSequence<Location, Error> {
+    ) throws -> any AsyncSequence<Location, Error> {
       let listRpc = { (token: String) async throws -> ListLocationsResponse in
         var request = byItem
         request.pageToken = token
@@ -148,7 +156,7 @@ extension Locations {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listLocations(byItem: ListLocationsRequest) throws -> some AsyncSequence<
+  public func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<
     Location, Error
   > {
     try self.listLocations(byItem: byItem, options: .init())
@@ -156,7 +164,7 @@ extension Locations {
 
   public func listLocations(
     byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> some AsyncSequence<Location, Error> {
+  ) throws -> any AsyncSequence<Location, Error> {
     let listRpc = { (token: String) async throws -> ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
