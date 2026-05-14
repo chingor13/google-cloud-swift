@@ -22,3 +22,6 @@ extend-exclude = [
   # librarian.yaml contains SHAs that confuse `typos-cli`,
   "librarian.yaml",
 ]
+
+[default.extend-words]
+IZ = "IZ"
