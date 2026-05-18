@@ -116,94 +116,32 @@ public protocol IAMPolicy {
 extension Clients {
   /// The recommended implementation for ``IAMPolicy``.
   public class IAMPolicyClient: IAMPolicy {
-    let inner: GoogleCloudGax.HTTPClient
+    let inner: any IAMPolicyStub
 
     /// Creates a new `IAMPolicyClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try GoogleCloudGax.HTTPClient(
-        from: options, withDefaultEndpoint: "https://iam-meta-api.googleapis.com")
+      self.inner = try IAMPolicyTransport(options)
     }
 
     /// See `IAMPolicy.setIamPolicy`
     public func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> Policy {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0):setIamPolicy"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "POST"
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      try await self.inner.setIamPolicy(request: request, options: options)
     }
 
     /// See `IAMPolicy.getIamPolicy`
     public func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> Policy {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0):getIamPolicy"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "POST"
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      try await self.inner.getIamPolicy(request: request, options: options)
     }
 
     /// See `IAMPolicy.testIamPermissions`
     public func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> TestIamPermissionsResponse {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0):testIamPermissions"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "POST"
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
-        TestIamPermissionsResponse.self, from: data)
+      try await self.inner.testIamPermissions(request: request, options: options)
     }
   }
 }

@@ -141,44 +141,18 @@ public protocol Operations {
 extension Clients {
   /// The recommended implementation for ``Operations``.
   public class OperationsClient: Operations {
-    let inner: GoogleCloudGax.HTTPClient
+    let inner: any OperationsStub
 
     /// Creates a new `OperationsClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try GoogleCloudGax.HTTPClient(
-        from: options, withDefaultEndpoint: "https://longrunning.googleapis.com")
+      self.inner = try OperationsTransport(options)
     }
 
     /// See `Operations.listOperations`
     public func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> ListOperationsResponse {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0)"
-      }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      let encoder = GoogleCloudGax.QueryParameterEncoder()
-      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
-      query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
-      query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
-      query.append(
-        contentsOf: try encoder.encode(request.returnPartialSuccess, prefix: "returnPartialSuccess")
-      )
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListOperationsResponse.self, from: data)
+      try await self.inner.listOperations(request: request, options: options)
     }
 
     /// Lists operations that match the specified filter in the request. If the
@@ -198,75 +172,21 @@ extension Clients {
     public func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> Operation {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0)"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Operation.self, from: data)
+      try await self.inner.getOperation(request: request, options: options)
     }
 
     /// See `Operations.deleteOperation`
     public func deleteOperation(
       request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0)"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "DELETE"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      try await self.inner.deleteOperation(request: request, options: options)
     }
 
     /// See `Operations.cancelOperation`
     public func cancelOperation(
       request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0):cancel"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "POST"
-      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      try await self.inner.cancelOperation(request: request, options: options)
     }
   }
 }

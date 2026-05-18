@@ -55,41 +55,18 @@ public protocol PublicCertificateAuthorityService {
 extension Clients {
   /// The recommended implementation for ``PublicCertificateAuthorityService``.
   public class PublicCertificateAuthorityServiceClient: PublicCertificateAuthorityService {
-    let inner: GoogleCloudGax.HTTPClient
+    let inner: any PublicCertificateAuthorityServiceStub
 
     /// Creates a new `PublicCertificateAuthorityServiceClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try GoogleCloudGax.HTTPClient(
-        from: options, withDefaultEndpoint: "https://publicca.googleapis.com")
+      self.inner = try PublicCertificateAuthorityServiceTransport(options)
     }
 
     /// See `PublicCertificateAuthorityService.createExternalAccountKey`
     public func createExternalAccountKey(
       request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> ExternalAccountKey {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
-        }
-        return "/v1/\(pathVariable0)/externalAccountKeys"
-      }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
-      var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "POST"
-      if let body = request.externalAccountKey {
-        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.httpBody = try JSONEncoder().encode(body)
-      }
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ExternalAccountKey.self, from: data)
+      try await self.inner.createExternalAccountKey(request: request, options: options)
     }
   }
 }
