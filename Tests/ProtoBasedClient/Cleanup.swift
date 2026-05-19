@@ -26,13 +26,13 @@ func cleanupStaleSecrets() async {
 func cleanupStaleSecretsImpl() async throws {
   let projectId = try projectId();
   let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
-  let page = try await client.listSecrets(
-    request: ListSecretsRequest(parent: "projects/\(projectId)"))
+  let secrets = try client.listSecrets(
+    byItem: ListSecretsRequest(parent: "projects/\(projectId)"))
 
   // Wait at least 48 hours before deleting the resources.
   let slack = UInt64(48 * 3600)
   let deadline = UInt64(Date().timeIntervalSince1970) - slack
-  for secret in page.secrets {
+  for try await secret in secrets {
     guard let v = secret.labels["integration-test"], v == "true" else {
       continue
     }

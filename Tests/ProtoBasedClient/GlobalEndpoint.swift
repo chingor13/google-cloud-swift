@@ -63,9 +63,14 @@ public enum GlobalEndpoint {
     print("update = \(update)")
 
     print("\nTesting listSecrets()")
-    let page = try await client.listSecrets(
-      request: ListSecretsRequest(parent: "projects/\(projectId)"))
-    print("page count = \(page.secrets.count)")
+    let secrets = try client.listSecrets(
+      byItem: ListSecretsRequest(parent: "projects/\(projectId)"))
+    var count: UInt64 = 0
+    for try await secret in secrets {
+      print("  secret = \(secret)")
+      count += 1
+    }
+    print("item count = \(count)")
 
     print("\nTesting deleteSecret()")
     try await client.deleteSecret(request: DeleteSecretRequest(name: get.name))
@@ -108,9 +113,11 @@ public enum GlobalEndpoint {
     print("enabledVersion state = \(enabledVersion.state)")
 
     print("\nTesting listSecretVersions()")
-    let versionsPage = try await client.listSecretVersions(
-      request: ListSecretVersionsRequest(parent: secretName))
-    print("versionsPage count = \(versionsPage.versions.count)")
+    let versions = try client.listSecretVersions(
+      byItem: ListSecretVersionsRequest(parent: secretName))
+    for try await version in versions {
+      print("  version = \(version)")
+    }
 
     print("\nTesting destroySecretVersion()")
     let destroyedVersion = try await client.destroySecretVersion(
@@ -147,11 +154,20 @@ public enum GlobalEndpoint {
   static private func testLocations(client: SecretManagerService, projectId: String) async throws {
     print("\nTesting location operations")
     print("Testing listLocations()")
-    let locations = try await client.listLocations(
-      request: ListLocationsRequest(name: "projects/\(projectId)"))
-    print("locations count = \(locations.locations.count)")
+    var count: Int64 = 0
+    var first: Location? = nil
+    let locations = try client.listLocations(
+      byItem: ListLocationsRequest(name: "projects/\(projectId)"))
+    for try await location in locations {
+      print("  location = \(location)")
+      count += 1
+      if first == nil {
+        first = location
+      }
+    }
+    print("locations count = \(count)")
 
-    if let firstLocation = locations.locations.first {
+    if let firstLocation = first {
       print("Testing getLocation() for \(firstLocation.name)")
       let location = try await client.getLocation(
         request: GetLocationRequest(name: firstLocation.name))
