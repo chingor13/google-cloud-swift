@@ -19,7 +19,7 @@ import Testing
 
 @Suite struct ExponentialBackoffTests {
   @Test func defaults() throws {
-    let backoff = try ExponentialBackoff()
+    let backoff = ExponentialBackoff()
     #expect(backoff.initialDelay > .seconds(0))
     #expect(backoff.maximumDelay <= .seconds(60) * 60 * 24)
     #expect(backoff.scaling == 2.0)
@@ -95,7 +95,7 @@ import Testing
   }
 
   @Test func jitterRange() throws {
-    let backoff = try ExponentialBackoff()
+    let backoff = ExponentialBackoff()
     let state = RetryState().with { $0.attemptCount = 1 }
     for _ in 0..<100 {
       let d = backoff.backoffDelay(for: state)

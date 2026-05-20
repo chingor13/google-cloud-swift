@@ -14,7 +14,23 @@
 
 import Foundation
 
-/// Defines the protocol implemented by all backoff strategies.
+/// Defines the protocol implemented by all retry backoff strategies.
+///
+/// The client libraries automatically retry RPCs based on the ``RetryPolicy`` configured for the
+/// request or client. Even when the policy determines that an operation is safe to retry, the
+/// client library does not retry failed requests immediately, as (1) the service may need time to
+/// recover, and (2) clients often experience simultaneous failures and must avoid coordinated
+/// retries that overload the service.
+///
+/// Application developers use `BackoffPolicy` to configure the delays between retry attempts. The
+/// most common implementation of this protocol is ``ExponentialBackoff``, which implements the
+/// truncated [exponential backoff] with jitter algorithm.
+///
+/// Some application may need slight variations on this algorithm, maybe with logging or tracing.
+/// Using a policy offers greater flexibility than just a set of configuration parameters.
+///
+/// [Exponential backoff]: https://en.wikipedia.org/wiki/Exponential_backoff
+/// [idempotent]: https://en.wikipedia.org/wiki/Idempotence
 public protocol BackoffPolicy: Sendable {
   /// Returns the backoff delay on a failure.
   ///

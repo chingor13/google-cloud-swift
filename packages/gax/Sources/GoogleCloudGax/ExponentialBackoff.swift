@@ -44,17 +44,33 @@ public struct ExponentialBackoffConfig: Sendable {
   }
 }
 
-/// Implements truncated exponential backoff with jitter.
+/// Implements truncated [exponential backoff] with jitter.
+///
+/// This class conforms to the ``BackoffPolicy`` protocol. It implements an exponential backoff
+/// algorithm, where the delay between attempts grows exponentially on each attempt, typically
+/// doubling. That quickly smears the retry attempts over time. To minimize the chances of
+/// simultaneous retry attempts, each delay has randomized jitter. Finally, the delay is truncated
+/// if it grows beyond some maximum delay.
+///
+/// [Exponential backoff]: https://en.wikipedia.org/wiki/Exponential_backoff
 public final class ExponentialBackoff: BackoffPolicy, Sendable {
   public let initialDelay: Duration
   public let maximumDelay: Duration
   public let scaling: Double
 
+  /// Create a new exponential backoff policy with the default configuration.
+  public init() {
+    let d = try! ExponentialBackoff(config: ExponentialBackoffConfig())
+    self.initialDelay = d.initialDelay
+    self.maximumDelay = d.maximumDelay
+    self.scaling = d.scaling
+  }
+
   /// Create a new exponential backoff policy from a configuration.
   ///
   /// - Parameter config: The configuration to use.
   /// - Throws: ``ExponentialBackoffError`` if the configuration is invalid.
-  public init(config: ExponentialBackoffConfig = ExponentialBackoffConfig()) throws {
+  public init(config: ExponentialBackoffConfig) throws {
     if config.scaling < 1.0 {
       throw ExponentialBackoffError.invalidScalingFactor(config.scaling)
     }
