@@ -16,6 +16,7 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
+import Logging
 
 import GoogleCloudAuth
 
@@ -59,4 +60,20 @@ public struct ClientOptions: Sendable {
   ///
   /// [Application Default Credentials]: https://docs.cloud.google.com/docs/authentication/client-libraries
   public var credentials: Credentials? = nil
+
+  /// Enables logging and sets the logger.
+  ///
+  /// When logging is enabled, the client will log the full contents of each request, response, and
+  /// error using the this logger. The `Logger` type is defined in Apple's [swift-log] package.
+  /// Consult the documentation of this package for details on how to initialize and configure a
+  /// logger.
+  ///
+  /// > Warning: Consider the contents of these requests and responses before enabling them in
+  /// production environments, as the request or responses may include sensitive data.
+  ///
+  /// The requests, responses, and errors are all logged as the `.debug` level. The in addition
+  /// to any metadata already set by the application
+  ///
+  /// [swift-log]: https://swiftpackageindex.com/apple/swift-log/
+  public var logger: Logger? = nil
 }

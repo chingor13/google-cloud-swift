@@ -25,13 +25,15 @@ let package = Package(
     .library(name: "GoogleCloudGax", targets: ["GoogleCloudGax"])
   ],
   dependencies: [
-    .package(path: "../auth")
+    .package(path: "../auth"),
+    .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudGax",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth")
+        .product(name: "GoogleCloudAuth", package: "auth"),
+        .product(name: "Logging", package: "swift-log"),
       ]
     ),
     .testTarget(
