@@ -17,19 +17,18 @@ import Synchronization
 
 /// A `CircuitBreaker` throttler rejects retry attempts if the success rate is too low.
 ///
-/// This class implements the [gRPC throttler] algorithm. The throttler works
-/// by tracking the number of available "tokens" for a retry attempt. If this
-/// number goes below a threshold **all** retry attempts are throttled.
-///
-/// Retry failures decrement the number of tokens by a given cost. Completed
-/// requests (successfully or not) increase the tokens by `1`.
-///
-/// Note: the number of tokens may go below the throttling threshold as
-/// multiple concurrent requests may fail and decrease the token count.
-///
-/// Note: throttling only applies to retry attempts, the initial requests is
-/// never throttled. This may increases the token count even if all retry
+/// This class implements the [gRPC throttler] algorithm. The throttler works by tracking the number
+/// of available "tokens" for a retry attempt. If this number goes below a threshold **all** retry
 /// attempts are throttled.
+///
+/// Retry failures decrement the number of tokens by a given cost. Completed requests (successfully
+/// or not) increase the tokens by `1`.
+///
+/// Note: the number of tokens may go below the throttling threshold as multiple concurrent requests
+/// may fail and decrease the token count.
+///
+/// Note: throttling only applies to retry attempts, the initial requests is never throttled. This
+/// may increases the token count even if all retry attempts are throttled.
 ///
 /// [gRPC throttler]: https://github.com/grpc/proposal/blob/master/A6-client-retries.md
 public final class CircuitBreaker: RetryThrottler, Sendable {
@@ -46,6 +45,17 @@ public final class CircuitBreaker: RetryThrottler, Sendable {
   private let errorCost: UInt64
   private let state: Mutex<State>
 
+  /// Creates a new instance with the default configuration.
+  ///
+  /// The default uses 100 initial tokens, each error costs 10 tokens, and the circuit breaker is
+  /// triggered if the number of tokens goes below 50.
+  public init() {
+    self.maxTokens = 100
+    self.minTokens = 50
+    self.errorCost = 10
+    self.state = Mutex(State(curTokens: 100))
+  }
+
   /// Creates a new instance.
   ///
   /// - Parameters:
@@ -53,7 +63,7 @@ public final class CircuitBreaker: RetryThrottler, Sendable {
   ///   - minTokens: Stops accepting retry attempts when the number of tokens is at or below this value.
   ///   - errorCost: Decrease the token count by this value on failed request attempts.
   /// - Throws: ``RetryThrottlerError/tooFewMinTokens`` if `minTokens` > `tokens`.
-  public init(tokens: UInt64 = 100, minTokens: UInt64 = 50, errorCost: UInt64 = 10) throws {
+  public init(tokens: UInt64, minTokens: UInt64, errorCost: UInt64) throws {
     if minTokens > tokens {
       throw RetryThrottlerError.tooFewMinTokens(min: minTokens, initial: tokens)
     }

@@ -16,24 +16,23 @@ import Foundation
 
 /// Implementations of this protocol prevent a client from sending too many retries.
 ///
-/// The client libraries can be configured to automatically retry RPCs. Most
-/// often retries are only enabled if (1) the request was never sent and the
-/// local error is recoverable, or (2) the failure is a transient errors
-/// **and** the RPC is [idempotent].
+/// The client libraries can be configured to automatically retry RPCs. Most often retries are only
+/// enabled if (1) the request was never sent and the local error is recoverable, or (2) the failure
+/// is a transient errors **and** the RPC is [idempotent].
 ///
-/// Retry strategies that do not throttle themselves can slow down recovery when
-/// the service is overloaded, or when recovering from a large incident. This is
-/// also known as "retry storms": the retry attempts can grow to be more than
-/// the normal traffic and hinder recovery.
+/// Retry strategies that do not throttle themselves can slow down recovery when (a) the service is
+/// overloaded, or (b) when recovering from a large incident. This is also known as "retry storms":
+/// the retry attempts can grow to be more than the normal traffic and hinder recovery. Note that
+/// exponential backoff does not solve this problem: under service overload smearing the retries
+/// still keeps the service overloaded.
 ///
-/// Advanced applications may want to configure a retry throttler to
-/// [Address Cascading Failures] and when [Handling Overload] conditions.
-/// This module contains the traits and some implementations of retry throttling
-/// strategies.
+/// Advanced applications may want to configure a retry throttler to [Address Cascading Failures]
+/// and when [Handling Overload] conditions. This module contains the traits and some
+/// implementations of retry throttling strategies.
 ///
-/// Typically applications should create one retry throttler and share it
-/// across multiple clients.
+/// Typically applications should create one retry throttler and share it across multiple clients.
 ///
+/// [idempotent]: https://en.wikipedia.org/wiki/Idempotence
 /// [Handling Overload]: https://sre.google/sre-book/handling-overload/
 /// [Address Cascading Failures]: https://sre.google/sre-book/addressing-cascading-failures/
 public protocol RetryThrottler: Sendable {

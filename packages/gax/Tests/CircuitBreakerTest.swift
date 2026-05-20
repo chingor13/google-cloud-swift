@@ -22,6 +22,7 @@ import GoogleCloudGax
     #expect(throws: RetryThrottlerError.tooFewMinTokens(min: 200, initial: 100)) {
       try CircuitBreaker(tokens: 100, minTokens: 200, errorCost: 1)
     }
+    let _ = CircuitBreaker()
   }
 
   @Test func basics() throws {

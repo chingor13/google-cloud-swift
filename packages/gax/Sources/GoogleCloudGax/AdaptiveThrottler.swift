@@ -17,32 +17,28 @@ import Synchronization
 
 /// Implements a probabilistic throttler based on observed failure rates.
 ///
-/// This is an implementation of the [Adaptive Throttling] strategy described
-/// in [Site Reliability Engineering] book. The basic idea is to
-/// *stochastically* reject some of the retry attempts, with a rejection
-/// probability that increases as the number of failures increases, and
-/// decreases with the number of successful requests.
+/// This is an implementation of the [Adaptive Throttling] strategy described in [Site Reliability
+/// Engineering] book. The basic idea is to *stochastically* reject some of the retry attempts, with
+/// a rejection probability that increases as the number of failures increases, and decreases with
+/// the number of successful requests.
 ///
 /// The rejection rate probability is defined by:
 ///
-/// ```norust
+/// ```
 /// threshold = (requests - factor * accepts) / (requests + 1)
 /// rejection_probability = max(0, threshold)
 /// ```
 ///
-/// Where `requests` is the number of requests completed, and `accepts` is the
-/// number of requests accepted by the service, including requests that fail due
-/// to parameter validation, authorization checks, or any non-transient
-/// failures.
+/// Where `requests` is the number of requests completed, and `accepts` is the number of requests
+/// accepted by the service, including requests that fail due to parameter validation, authorization
+/// checks, or any non-transient failures.
 ///
-/// Note that `accepts <= requests` but the `threshold` value might be negative
-/// as `factor` can be higher than `1.0`. In fact, the SRE book recommends using
-/// `2.0` as the initial factor.
+/// Note that `accepts <= requests` but the `threshold` value might be negative as `factor` can be
+/// higher than `1.0`. In fact, the SRE book recommends using `2.0` as the initial factor.
 ///
-/// Setting `factor` to lower values makes the algorithm reject retry attempts
-/// with higher probability. For example, setting it to zero would reject some
-/// retry attempts even if all requests have succeeded. Setting `factor` to
-/// higher values allows more retry attempts.
+/// Setting `factor` to lower values makes the algorithm reject retry attempts with higher
+/// probability. For example, setting it to zero would reject some retry attempts even if all
+/// requests have succeeded. Setting `factor` to higher values allows more retry attempts.
 ///
 /// [Site Reliability Engineering]: https://sre.google/sre-book/table-of-contents/
 /// [Adaptive Throttling]: https://sre.google/sre-book/handling-overload/
@@ -55,12 +51,17 @@ public final class AdaptiveThrottler: RetryThrottler, Sendable {
   private let factor: Double
   private let state = Mutex(State())
 
+  /// Creates a new adaptive throttler with a factor of 2.
+  public init() {
+    self.factor = 2.0
+  }
+
   /// Creates a new adaptive throttler with the given `factor`.
   ///
   /// - Parameter factor: A factor to adjust the relative weight of transient
   ///   failures vs. accepted requests.
   /// - Throws: ``RetryThrottlerError/scalingOutOfRange`` if `factor` is negative.
-  public init(factor: Double = 2.0) throws {
+  public init(factor: Double) throws {
     if factor < 0.0 {
       throw RetryThrottlerError.scalingOutOfRange(factor)
     }

@@ -25,6 +25,10 @@ import Testing
     let _ = try AdaptiveThrottler(factor: 0.0)
   }
 
+  @Test func defaults() throws {
+    let _ = AdaptiveThrottler()
+  }
+
   @Test func basics() throws {
     let throttler = try AdaptiveThrottler(factor: 2.0)
     let error = RequestError.unimplemented
