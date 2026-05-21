@@ -107,8 +107,7 @@ extension ProtoJSONDecoderTest {
     let error = #expect(throws: DecodingError.self) {
       try decoder.decode(OptionalPrimitives.self, from: input.data(using: .utf8)!)
     }
-    print("\(error!)")
-    #expect({ if case .dataCorrupted = error { true } else { false } }())
+    #expect({ if case .dataCorrupted = error { true } else { false } }(), "\(error)")
   }
 
   @Test func decodeOptionalBadString() throws {
