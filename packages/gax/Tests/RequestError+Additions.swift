@@ -20,8 +20,10 @@ extension RequestError: Equatable {
     case (.binding(let l), .binding(let r)): return l == r
     case (.badResponseType, .badResponseType): return true
     case (.http(let l), .http(let r)): return l == r
+    case (.io(let l), .io(let r)): return l == r
     case (.service(let l), .service(let r)): return l == r
     case (.unimplemented, .unimplemented): return true
+    case (.exhausted(let l), .exhausted(let r)): return l == r
     default: return false
     }
   }
@@ -37,5 +39,11 @@ extension HTTPDetails: Equatable {
 extension ServiceDetails: Equatable {
   public static func == (lhs: ServiceDetails, rhs: ServiceDetails) -> Bool {
     return lhs.code == rhs.code && lhs.message == rhs.message
+  }
+}
+
+extension LimitedElapsedTimeError: Equatable {
+  public static func == (lhs: LimitedElapsedTimeError, rhs: LimitedElapsedTimeError) -> Bool {
+    return lhs.maximumDuration == rhs.maximumDuration && lhs.source == rhs.source
   }
 }

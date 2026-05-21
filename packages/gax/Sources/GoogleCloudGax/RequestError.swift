@@ -40,6 +40,20 @@ public enum RequestError: Error {
   /// for this error is using an `ftp`, or `file` endpoint that just happens to work.
   case badResponseType
 
+  /// The request failed with some type of I/O error, before getting a status code.
+  ///
+  /// ## Troubleshooting
+  ///
+  /// This indicates that the transport failed before getting a status code. For example, because
+  /// the connection was interrupted.
+  ///
+  /// This is an unavoidable problem in distributed systems. The remote service (or load balancers)
+  /// may restart, the network elements may fail, the kernel may run out of resources for
+  /// networking, and so on. The client library automatically retries these errors **if** the
+  /// operation isidempotent. For non-idempotent operations, it is unsafe to retry the request and
+  /// the application must handle the error.
+  case io(String)
+
   /// The HTTP transport failed before getting a full error from the service.
   ///
   /// ## Troubleshooting
@@ -58,6 +72,17 @@ public enum RequestError: Error {
   ///
   /// Check the error type, error message, and error details. Then consult the documentation for the service.
   case service(ServiceDetails)
+
+  /// The retry policy is exhausted before sending a request.
+  ///
+  /// ## Troubleshooting
+  ///
+  /// You have configured a retry policy with a time limit (generally a good idea), which expired
+  /// before any request was sent. Most likely the retry policy time limit is too short. Increase
+  /// the policy time limit as needed. Rarely, the CPU in your machine is overloaded and the task
+  /// was suspended before the request could be sent. Review your application deployment and CPU
+  /// requirements to match the needs of your application.
+  indirect case exhausted(LimitedElapsedTimeError)
 
   /// The method is not implemented.
   ///
@@ -110,5 +135,20 @@ public struct ServiceDetails: Sendable {
   ) {
     self.code = code
     self.message = message
+  }
+}
+
+/// The details for ``RequestError/exhausted(_:)``.
+public struct LimitedElapsedTimeError: Error, Sendable {
+  /// The maximum duration allowed by the policy.
+  public let maximumDuration: Duration
+
+  /// The last error before the policy was exhausted.
+  public let source: RequestError
+
+  /// Create a new `LimitedElapsedTimeError`.
+  public init(maximumDuration: Duration, source: RequestError) {
+    self.maximumDuration = maximumDuration
+    self.source = source
   }
 }
