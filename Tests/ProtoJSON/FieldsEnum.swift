@@ -34,4 +34,19 @@ import GoogleCloudGax
     let got = try decoder.decode(MessageWithEnum.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
+
+  @Test("Use enum with @unknown")
+  func useEnum() throws {
+    let decoder = ProtoJSONDecoder()
+    let got = try decoder.decode(MessageWithEnum.self, from: "{}".data(using: .utf8)!)
+    #expect(got.singular == .unspecified)
+    switch got.singular {
+    case .unspecified:
+      #expect(Bool(true), "\(got)")
+    case .red, .green, .blue:
+      #expect(Bool(false), "\(got)")
+    @unknown default:
+      #expect(Bool(true), "\(got)")
+    }
+  }
 }

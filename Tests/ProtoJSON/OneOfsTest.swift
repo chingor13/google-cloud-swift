@@ -102,4 +102,18 @@ import GoogleCloudWkt
     // Currently decodes to nil because decodeIfPresent returns nil for null values.
     #expect(roundtrip == MessageWithComplexOneOf(complex: nil))
   }
+
+  @Test("Use oneof with @unknown")
+  func useOneof() throws {
+    let decoder = ProtoJSONDecoder()
+    let got = try decoder.decode(
+      MessageWithOneOf.self, from: #"{"stringContents":"test"}"#.data(using: .utf8)!)
+    #expect(got.singleString == .stringContents("test"))
+    switch got.singleString! {
+    case .stringContents(let s):
+      #expect(s == "test", "\(got)")
+    @unknown default:
+      #expect(Bool(false), "\(got)")
+    }
+  }
 }
