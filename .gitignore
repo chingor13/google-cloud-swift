@@ -51,3 +51,6 @@ terraform.tfstate
 # Ignore code coverage output files.
 cobertura.xml
 coverage.out
+
+# macOS
+.DS_Store
