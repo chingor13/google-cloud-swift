@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudWkt
 
@@ -59,7 +60,12 @@ extension Clients {
 
     /// Creates a new `PublicCertificateAuthorityServiceClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try PublicCertificateAuthorityServiceTransport(options)
+      var inner: any PublicCertificateAuthorityServiceStub =
+        try PublicCertificateAuthorityServiceTransport(options)
+      if let logger = options.logger {
+        inner = PublicCertificateAuthorityServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
     }
 
     /// See `PublicCertificateAuthorityService.createExternalAccountKey`

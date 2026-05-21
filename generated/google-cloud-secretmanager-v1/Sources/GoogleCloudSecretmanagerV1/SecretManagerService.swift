@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudLocation
 import GoogleCloudWkt
@@ -440,7 +441,11 @@ extension Clients {
 
     /// Creates a new `SecretManagerServiceClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try SecretManagerServiceTransport(options)
+      var inner: any SecretManagerServiceStub = try SecretManagerServiceTransport(options)
+      if let logger = options.logger {
+        inner = SecretManagerServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
     }
 
     /// See `SecretManagerService.listSecrets`

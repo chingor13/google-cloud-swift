@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudLocation
 import GoogleCloudWkt

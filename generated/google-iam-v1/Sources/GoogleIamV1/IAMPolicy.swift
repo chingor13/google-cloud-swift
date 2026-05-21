@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudWkt
 import GoogleType
@@ -120,7 +121,11 @@ extension Clients {
 
     /// Creates a new `IAMPolicyClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try IAMPolicyTransport(options)
+      var inner: any IAMPolicyStub = try IAMPolicyTransport(options)
+      if let logger = options.logger {
+        inner = IAMPolicyLogging(inner, logger: logger)
+      }
+      self.inner = inner
     }
 
     /// See `IAMPolicy.setIamPolicy`

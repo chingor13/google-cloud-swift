@@ -29,6 +29,7 @@ let package = Package(
     .package(path: "../../generated/google-cloud-location"),
     .package(path: "../../packages/wkt"),
     .package(path: "../../generated/google-iam-v1"),
+    .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
@@ -39,6 +40,7 @@ let package = Package(
         .product(name: "GoogleCloudLocation", package: "google-cloud-location"),
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "GoogleIamV1", package: "google-iam-v1"),
+        .product(name: "Logging", package: "swift-log"),
       ],
     )
   ]

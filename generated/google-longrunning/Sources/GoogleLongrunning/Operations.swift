@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudWkt
 import GoogleRpc
@@ -145,7 +146,11 @@ extension Clients {
 
     /// Creates a new `OperationsClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try OperationsTransport(options)
+      var inner: any OperationsStub = try OperationsTransport(options)
+      if let logger = options.logger {
+        inner = OperationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
     }
 
     /// See `Operations.listOperations`

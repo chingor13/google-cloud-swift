@@ -21,6 +21,7 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
+import Logging
 
 import GoogleCloudWkt
 
@@ -72,7 +73,11 @@ extension Clients {
 
     /// Creates a new `LocationsClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try LocationsTransport(options)
+      var inner: any LocationsStub = try LocationsTransport(options)
+      if let logger = options.logger {
+        inner = LocationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
     }
 
     /// See `Locations.listLocations`

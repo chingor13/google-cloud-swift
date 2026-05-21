@@ -37,6 +37,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     // Used in the integration tests.
     .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.10.0"),
+    .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .testTarget(
@@ -67,6 +68,7 @@ let package = Package(
         .product(
           name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "CryptoSwift", package: "CryptoSwift"),
+        .product(name: "InMemoryLogging", package: "swift-log"),
       ],
       exclude: ["README.md"],
     ),
@@ -74,7 +76,7 @@ let package = Package(
       name: "Any",
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1")
+        .product(name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
       ]),
     .testTarget(
       name: "QueryParameter",
