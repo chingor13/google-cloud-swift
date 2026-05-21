@@ -76,4 +76,35 @@ public struct ClientOptions: Sendable {
   ///
   /// [swift-log]: https://swiftpackageindex.com/apple/swift-log/
   public var logger: Logger? = nil
+
+  /// Configures the client's retry policy.
+  ///
+  /// The client libraries automatically retry requests when they are idempotent. The default uses
+  /// ``Aip194Strict``.
+  public var retry_policy: any RetryPolicy = defaultRetryPolicy()
+
+  /// Configures the client's backoff policy.
+  ///
+  /// By default the clients use [Exponential backoff] with jitter. The specific parameters are not
+  /// documented as they may change over time.
+  public var backoff_policy: any BackoffPolicy = defaultBackoffPolicy()
+
+  /// Configures the client's retry throttler.
+  ///
+  /// By default the clients use an ``AdaptiveThrottler`` with the default configuration.
+  public var retry_throttler: any RetryThrottler = defaultRetryThrottler()
+}
+
+func defaultRetryPolicy() -> any RetryPolicy {
+  // TODO(https://github.com/googleapis/librarian/issues/5264) - use a policy based on AIP-194 with
+  // some limits
+  AlwaysRetry()
+}
+
+func defaultBackoffPolicy() -> any BackoffPolicy {
+  ExponentialBackoff()
+}
+
+func defaultRetryThrottler() -> any RetryThrottler {
+  AdaptiveThrottler()
 }
