@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleRpc
 
 /// The request message for
 /// [Operations.CancelOperation][google.longrunning.Operations.CancelOperation].

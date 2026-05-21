@@ -16,8 +16,6 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudWkt
-import GoogleRpc
 import GoogleLongrunning
 import Foundation
 

@@ -21,11 +21,10 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
-import Logging
-
 import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleIamV1
+import Logging
 
 extension Clients {
   final class SecretManagerServiceLogging: SecretManagerServiceStub {

@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// Provides the configuration for logging a type of permissions.
 /// Example:

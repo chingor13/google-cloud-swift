@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// Request message for
 /// [SecretManagerService.CreateSecret][google.cloud.secretmanager.v1.SecretManagerService.CreateSecret].

@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// A policy that defines the replication and encryption configuration of data.
 public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,

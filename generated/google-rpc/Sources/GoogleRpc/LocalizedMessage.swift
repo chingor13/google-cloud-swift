@@ -15,7 +15,6 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
 
 /// Provides a localized error message that is safe to return to the user

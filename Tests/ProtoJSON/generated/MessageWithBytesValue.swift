@@ -15,7 +15,6 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
 
 /// A test message for google.protobuf.BytesValue.

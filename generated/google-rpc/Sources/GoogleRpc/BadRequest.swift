@@ -15,7 +15,6 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
 
 /// Describes violations in a client request. This error type focuses on the

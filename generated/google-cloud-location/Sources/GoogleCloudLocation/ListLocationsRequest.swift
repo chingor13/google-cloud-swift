@@ -15,7 +15,6 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
 
 /// The request message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].

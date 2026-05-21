@@ -15,7 +15,6 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
 
 /// Provides links to documentation or for performing an out of band action.

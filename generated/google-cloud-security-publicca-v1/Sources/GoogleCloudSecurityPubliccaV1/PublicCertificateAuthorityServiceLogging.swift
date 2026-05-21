@@ -21,9 +21,8 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
-import Logging
-
 import GoogleCloudWkt
+import Logging
 
 extension Clients {
   final class PublicCertificateAuthorityServiceLogging: PublicCertificateAuthorityServiceStub {

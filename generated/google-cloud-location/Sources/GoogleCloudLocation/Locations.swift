@@ -21,9 +21,8 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
-import Logging
-
 import GoogleCloudWkt
+import Logging
 
 /// An abstract interface that provides location-related information for
 /// a service. Service-specific metadata is provided through the

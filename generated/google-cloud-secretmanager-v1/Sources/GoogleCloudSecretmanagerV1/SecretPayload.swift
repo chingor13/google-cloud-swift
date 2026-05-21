@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// A secret payload resource in the Secret Manager API. This contains the
 /// sensitive secret payload that is associated with a

@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleRpc
 
 /// A message representing the message types used by a long-running operation.
 ///

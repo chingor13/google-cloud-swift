@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// A secret version resource in the Secret Manager API.
 public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,

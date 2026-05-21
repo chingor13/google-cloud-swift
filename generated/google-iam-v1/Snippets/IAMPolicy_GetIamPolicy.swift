@@ -16,8 +16,6 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudWkt
-import GoogleType
 import GoogleIamV1
 import Foundation
 

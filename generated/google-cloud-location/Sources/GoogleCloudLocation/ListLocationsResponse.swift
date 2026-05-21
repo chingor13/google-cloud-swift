@@ -16,7 +16,6 @@
 
 import Foundation
 import GoogleCloudGax
-
 import GoogleCloudWkt
 
 /// The response message for [Locations.ListLocations][google.cloud.location.Locations.ListLocations].

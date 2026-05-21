@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].

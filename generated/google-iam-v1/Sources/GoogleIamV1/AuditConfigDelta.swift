@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// One delta entry for AuditConfig. Each individual change (only one
 /// exempted_member in each entry) to a AuditConfig will be a separate entry.

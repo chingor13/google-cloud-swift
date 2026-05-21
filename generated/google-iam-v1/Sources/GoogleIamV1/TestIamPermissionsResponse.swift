@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// Response message for `TestIamPermissions` method.
 public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,

@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleRpc
 
 /// The request message for
 /// [Operations.WaitOperation][google.longrunning.Operations.WaitOperation].

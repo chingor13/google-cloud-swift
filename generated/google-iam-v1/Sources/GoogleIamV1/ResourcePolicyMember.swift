@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// Output-only policy member strings of a Google Cloud resource's built-in
 /// identity.

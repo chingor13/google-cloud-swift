@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// The difference delta between two policies.
 public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,

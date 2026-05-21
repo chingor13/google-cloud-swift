@@ -21,10 +21,8 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
-import Logging
-
 import GoogleCloudWkt
-import GoogleType
+import Logging
 
 extension Clients {
   final class IAMPolicyLogging: IAMPolicyStub {

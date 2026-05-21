@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// The rotation time and period for a
 /// [Secret][google.cloud.secretmanager.v1.Secret]. At next_rotation_time, Secret

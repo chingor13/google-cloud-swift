@@ -16,9 +16,7 @@
 
 import Foundation
 import GoogleCloudGax
-
 import GoogleCloudWkt
-import GoogleRpc
 
 /// The response message for
 /// [Operations.ListOperations][google.longrunning.Operations.ListOperations].

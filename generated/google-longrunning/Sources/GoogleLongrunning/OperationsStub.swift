@@ -21,10 +21,8 @@ import Foundation
 
 import GoogleCloudAuth
 import GoogleCloudGax
-import Logging
-
 import GoogleCloudWkt
-import GoogleRpc
+import Logging
 
 extension Clients {
   protocol OperationsStub {

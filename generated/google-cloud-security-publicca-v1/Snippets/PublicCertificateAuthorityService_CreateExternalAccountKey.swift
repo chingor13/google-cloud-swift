@@ -16,7 +16,6 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudWkt
 import GoogleCloudSecurityPubliccaV1
 import Foundation
 

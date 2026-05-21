@@ -18,6 +18,7 @@
 // snippet.show
 import GoogleIamV1
 import Foundation
+import GoogleCloudWkt
 
 func sample() async throws {
   let client = try GoogleIamV1.Clients.IAMPolicyClient()

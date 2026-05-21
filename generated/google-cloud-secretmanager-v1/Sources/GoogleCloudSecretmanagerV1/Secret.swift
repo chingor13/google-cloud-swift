@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is a logical secret whose
 /// value and versions can be accessed.

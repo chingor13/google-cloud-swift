@@ -18,6 +18,7 @@
 // snippet.show
 import GoogleLongrunning
 import Foundation
+import GoogleCloudWkt
 
 func sample() async throws {
   let client = try GoogleLongrunning.Clients.OperationsClient()

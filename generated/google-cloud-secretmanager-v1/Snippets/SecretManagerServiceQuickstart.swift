@@ -18,6 +18,7 @@
 // snippet.show
 import GoogleCloudSecretmanagerV1
 import Foundation
+import GoogleCloudWkt
 
 func sample() async throws {
   let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()

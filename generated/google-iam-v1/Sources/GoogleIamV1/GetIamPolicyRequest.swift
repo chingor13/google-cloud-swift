@@ -15,9 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
 import GoogleCloudWkt
-import GoogleType
 
 /// Request message for `GetIamPolicy` method.
 public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,

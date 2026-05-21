@@ -16,9 +16,6 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudLocation
-import GoogleCloudWkt
-import GoogleIamV1
 import GoogleCloudSecretmanagerV1
 import Foundation
 

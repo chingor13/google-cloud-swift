@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// A Pub/Sub topic which Secret Manager will publish to when control plane
 /// events occur on this secret.

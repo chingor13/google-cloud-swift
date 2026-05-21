@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// Configuration for encrypting secret payloads using customer-managed
 /// encryption keys (CMEK).

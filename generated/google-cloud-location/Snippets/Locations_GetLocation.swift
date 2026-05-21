@@ -16,7 +16,6 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudWkt
 import GoogleCloudLocation
 import Foundation
 

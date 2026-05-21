@@ -15,10 +15,7 @@
 // limitations under the License.
 
 import Foundation
-
-import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
 
 /// Describes the status of customer-managed encryption.
 public struct CustomerManagedEncryptionStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
