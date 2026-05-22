@@ -52,7 +52,7 @@ public enum RequestError: Error {
   /// networking, and so on. The client library automatically retries these errors **if** the
   /// operation isidempotent. For non-idempotent operations, it is unsafe to retry the request and
   /// the application must handle the error.
-  case io(String)
+  case io(any Error)
 
   /// The HTTP transport failed before getting a full error from the service.
   ///

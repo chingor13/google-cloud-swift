@@ -40,3 +40,8 @@ func idempotentState() -> RetryState {
 func nonIdempotentState() -> RetryState {
   RetryState(idempotent: false)
 }
+
+func mockIOError() -> RequestError {
+  // The inner error is not important for the tests.
+  RequestError.io(RequestError.unimplemented)
+}

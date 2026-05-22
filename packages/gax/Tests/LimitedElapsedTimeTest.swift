@@ -19,7 +19,7 @@ import Testing
 @Suite struct LimitedElapsedTimeTests {
   @Test func limitedElapsedTimeError() {
     let limit = Duration.seconds(123) + .milliseconds(567)
-    let source = RequestError.io("source")
+    let source = mockIOError()
     let err = LimitedElapsedTimeError(maximumDuration: limit, source: source)
     #expect(err.maximumDuration == limit)
     #expect(err.source == source)
@@ -35,7 +35,7 @@ import Testing
     let limit = Duration.seconds(60)
     let policy = mock.withTimeLimit(limit)
     let state = RetryState(idempotent: true)
-    let error = RequestError.io("transient")
+    let error = mockIOError()
 
     #expect(policy.onError(state: state, error: error) == .retry(error))
     #expect(policy.remainingTime(state: state) != nil)
@@ -51,7 +51,7 @@ import Testing
     let stateBefore = RetryState(idempotent: true).with {
       $0.start = .now - .seconds(50)
     }
-    let error = RequestError.io("unavailable")
+    let error = mockIOError()
     #expect(policy.onThrottle(state: stateBefore, error: error) == .retry(error))
 
     // After the policy expires the inner result is always "exhausted".
@@ -64,7 +64,7 @@ import Testing
   }
 
   @Test func testLimitedTimeOnThrottleExhausted() {
-    let error = RequestError.io("unavailable")
+    let error = mockIOError()
     let mock = MockPolicy(onThrottle: { _, _ in .exhausted(error) })
     let limit = Duration.seconds(60)
     let policy = mock.withTimeLimit(limit)
@@ -80,7 +80,7 @@ import Testing
     let mock = MockPolicy(onError: { _, e in .retry(e) })
     let limit = Duration.seconds(60)
     let policy = mock.withTimeLimit(limit)
-    let error = RequestError.io("transient")
+    let error = mockIOError()
 
     let stateBefore = RetryState(idempotent: true).with {
       $0.start = .now - .seconds(10)
@@ -94,7 +94,7 @@ import Testing
   }
 
   @Test func testLimitedTimeInnerPermanent() {
-    let error = RequestError.io("transient")
+    let error = mockIOError()
     let mock = MockPolicy(onError: { _, e in .permanent(e) })
     let limit = Duration.seconds(60)
     let policy = mock.withTimeLimit(limit)
@@ -111,7 +111,7 @@ import Testing
   }
 
   @Test func testLimitedTimeInnerExhausted() {
-    let error = RequestError.io("transient")
+    let error = mockIOError()
     let mock = MockPolicy(onError: { _, e in .exhausted(e) })
     let limit = Duration.seconds(60)
     let policy = mock.withTimeLimit(limit)

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
 import GoogleCloudGax
 
 extension RequestError: Equatable {
@@ -20,7 +21,11 @@ extension RequestError: Equatable {
     case (.binding(let l), .binding(let r)): return l == r
     case (.badResponseType, .badResponseType): return true
     case (.http(let l), .http(let r)): return l == r
-    case (.io(let l), .io(let r)): return l == r
+    case (.io(let l), .io(let r)):
+      if let el = l as? RequestError, let er = r as? RequestError {
+        return el == er
+      }
+      return false
     case (.service(let l), .service(let r)): return l == r
     case (.unimplemented, .unimplemented): return true
     case (.exhausted(let l), .exhausted(let r)): return l == r
