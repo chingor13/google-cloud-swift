@@ -26,6 +26,7 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../auth"),
+    .package(path: "../../generated/google-rpc"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
@@ -33,12 +34,16 @@ let package = Package(
       name: "GoogleCloudGax",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "auth"),
+        .product(name: "GoogleRpc", package: "google-rpc"),
         .product(name: "Logging", package: "swift-log"),
       ]
     ),
     .testTarget(
       name: "GoogleCloudGaxTests",
-      dependencies: ["GoogleCloudGax"],
+      dependencies: [
+        "GoogleCloudGax",
+        .product(name: "GoogleRpc", package: "google-rpc"),
+      ],
       path: "Tests"),
   ]
 )
