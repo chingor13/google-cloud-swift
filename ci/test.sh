@@ -25,19 +25,7 @@ packages=0
 
 echo "--- SWIFT VERSION ---"
 swift --version
-echo "--- CARGO VERSION ---"
-cargo --version
 echo "--- VERSIONS ---"
-
-# --- Pre-build step: Rust FFI Bindings ---
-echo "--- Building Rust bindings for GoogleCloudAuth ---"
-cargo build --release
-cargo run --bin uniffi-bindgen -- generate --library "target/release/librust_auth_core.a" --language swift --out-dir packages/auth/Sources/RustAuthCoreBridge
-# Format the generated code
-swift-format -i packages/auth/Sources/RustAuthCoreBridge/rust_auth_core.swift
-# Organize headers for SPM
-cp "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreFFI/include/"
-rm "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.h" "${PACKAGES_DIR}/auth/Sources/RustAuthCoreBridge/rust_auth_coreFFI.modulemap"
 
 echo "--- Testing Root Package ---"
 pushd "${REPO_ROOT}" >/dev/null

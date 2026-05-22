@@ -32,8 +32,7 @@ Create a new branch in your fork:
 git checkout -b feat-google-cloud-kms-v1-generate-library
 ```
 
-This command will generate the library, add the library to Cargo and git, and
-run the necessary tests:
+This command will generate the library, and format the code:
 
 ```bash
 V=$(go run github.com/googleapis/librarian/cmd/librarian@latest config get version)

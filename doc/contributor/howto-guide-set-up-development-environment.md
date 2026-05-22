@@ -21,25 +21,6 @@ If you need to upgrade, consider:
 swiftly update
 ```
 
-## Installing Rust
-
-The auth library uses a Rust core. You will need to compile this code. We
-recommend that you follow the [Getting Started][getting-started-rust] guide.
-Once you have `cargo` and `rustup` installed the rest is relatively easy.
-
-You will need rust >= 1.94 (released around 2026-03-26). Check the version you
-have installed with:
-
-```shell
-rustc --version
-```
-
-If you need to upgrade, consider:
-
-```shell
-rustup update
-```
-
 ## Installing Go
 
 The code generator is implemented in [Go](https://go.dev). Follow the
@@ -49,12 +30,6 @@ The code generator is implemented in [Go](https://go.dev). Follow the
 
 Whatever works for you. Several team members use Visual Studio Code, but Swift
 can be used with many IDEs.
-
-## Compile the Rust core for auth
-
-```bash
-cargo build --release
-```
 
 ## Compile the Code
 
@@ -195,22 +170,6 @@ may prefer to install these tools locally to fix formatting problems.
 
 Typically we do not format these files for generated code, so local runs
 requires skipping the generated files.
-
-### Format TOML files
-
-We use `taplo` to format the hand-crafted TOML files. Install with:
-
-```bash
-cargo install taplo-cli
-```
-
-use with:
-
-```bash
-git ls-files -z -- \
-    '*.toml' ':!:**/testdata/**' ':!:**/generated/**' | \
-    xargs -0 taplo fmt
-```
 
 ### Detect typos in comments and code
 

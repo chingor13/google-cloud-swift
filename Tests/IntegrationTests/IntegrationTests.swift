@@ -31,7 +31,7 @@ import Testing
 
     // Convert to dictionary for easy lookup
     let headerDict = Dictionary(uniqueKeysWithValues: headers)
-    let authValue = try #require(headerDict["authorization"])
+    let authValue = try #require(headerDict["Authorization"])
     #expect(authValue.hasPrefix("Bearer "))
   }
 
