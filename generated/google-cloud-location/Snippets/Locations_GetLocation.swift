@@ -16,8 +16,9 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudLocation
 import Foundation
+import GoogleCloudLocation
+import GoogleCloudWkt
 
 func sample(client: some Locations) async throws {
   let response = try await client.getLocation(

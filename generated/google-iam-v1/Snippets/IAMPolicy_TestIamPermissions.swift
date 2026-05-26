@@ -16,8 +16,9 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleIamV1
 import Foundation
+import GoogleIamV1
+import GoogleCloudWkt
 
 func sample(client: some IAMPolicy) async throws {
   let response = try await client.testIamPermissions(

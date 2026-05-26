@@ -16,8 +16,8 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleIamV1
 import Foundation
+import GoogleIamV1
 import GoogleCloudWkt
 
 func sample() async throws {

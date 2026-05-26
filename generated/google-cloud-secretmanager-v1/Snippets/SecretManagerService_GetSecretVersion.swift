@@ -16,8 +16,11 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudSecretmanagerV1
 import Foundation
+import GoogleCloudSecretmanagerV1
+import GoogleCloudLocation
+import GoogleCloudWkt
+import GoogleIamV1
 
 func sample(
   client: some SecretManagerService, projectId: String, secretId: String, secretVersionId: String

@@ -16,8 +16,9 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleLongrunning
 import Foundation
+import GoogleLongrunning
+import GoogleCloudWkt
 
 func sample(client: some Operations) async throws {
   let response = try await client.getOperation(

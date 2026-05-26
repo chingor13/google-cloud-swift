@@ -16,8 +16,9 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleCloudSecurityPubliccaV1
 import Foundation
+import GoogleCloudSecurityPubliccaV1
+import GoogleCloudWkt
 
 func sample(client: some PublicCertificateAuthorityService, projectId: String, locationId: String)
   async throws

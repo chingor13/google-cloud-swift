@@ -16,8 +16,8 @@
 // limitations under the License.
 
 // snippet.show
-import GoogleLongrunning
 import Foundation
+import GoogleLongrunning
 import GoogleCloudWkt
 
 func sample() async throws {
