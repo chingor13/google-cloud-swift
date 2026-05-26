@@ -35,7 +35,8 @@ public protocol Locations {
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "Locations_ListLocations")
-  func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse
+  func listLocations(request: ListLocationsRequest) async throws
+    -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
   func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<Location, Error>
@@ -43,14 +44,14 @@ public protocol Locations {
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Locations_GetLocation")
-  func getLocation(request: GetLocationRequest) async throws -> Location
+  func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "Locations_ListLocations")
   func listLocations(
     request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ListLocationsResponse
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
   func listLocations(
@@ -62,7 +63,7 @@ public protocol Locations {
   /// @Snippet(path: "Locations_GetLocation")
   func getLocation(
     request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> Location
+  ) async throws -> GoogleCloudLocation.Location
 }
 
 extension Clients {
@@ -82,7 +83,7 @@ extension Clients {
     /// See `Locations.listLocations`
     public func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse {
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
 
@@ -90,7 +91,7 @@ extension Clients {
     public func listLocations(
       byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Location, Error> {
-      let listRpc = { (token: String) async throws -> ListLocationsResponse in
+      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
@@ -101,7 +102,7 @@ extension Clients {
     /// See `Locations.getLocation`
     public func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location {
+    ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
   }
@@ -109,13 +110,15 @@ extension Clients {
 
 // Default implementations
 extension Locations {
-  public func listLocations(request: ListLocationsRequest) async throws -> ListLocationsResponse {
+  public func listLocations(request: ListLocationsRequest) async throws
+    -> GoogleCloudLocation.ListLocationsResponse
+  {
     try await self.listLocations(request: request, options: .init())
   }
 
   public func listLocations(
     request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ListLocationsResponse {
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -128,19 +131,20 @@ extension Locations {
   public func listLocations(
     byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Location, Error> {
-    let listRpc = { (token: String) async throws -> ListLocationsResponse in
+    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
-  public func getLocation(request: GetLocationRequest) async throws -> Location {
+  public func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
+  {
     try await self.getLocation(request: request, options: .init())
   }
 
   public func getLocation(
     request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> Location {
+  ) async throws -> GoogleCloudLocation.Location {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }

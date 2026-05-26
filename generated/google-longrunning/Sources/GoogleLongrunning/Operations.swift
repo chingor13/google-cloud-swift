@@ -42,7 +42,8 @@ public protocol Operations {
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
   ///
   /// @Snippet(path: "Operations_ListOperations")
-  func listOperations(request: ListOperationsRequest) async throws -> ListOperationsResponse
+  func listOperations(request: ListOperationsRequest) async throws
+    -> GoogleLongrunning.ListOperationsResponse
 
   /// Lists operations that match the specified filter in the request. If the
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
@@ -53,7 +54,7 @@ public protocol Operations {
   /// service.
   ///
   /// @Snippet(path: "Operations_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> Operation
+  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
 
   /// Deletes a long-running operation. This method indicates that the client is
   /// no longer interested in the operation result. It does not cancel the
@@ -88,7 +89,7 @@ public protocol Operations {
   /// @Snippet(path: "Operations_ListOperations")
   func listOperations(
     request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse
 
   /// Lists operations that match the specified filter in the request. If the
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
@@ -103,7 +104,7 @@ public protocol Operations {
   /// @Snippet(path: "Operations_GetOperation")
   func getOperation(
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> Operation
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Deletes a long-running operation. This method indicates that the client is
   /// no longer interested in the operation result. It does not cancel the
@@ -154,7 +155,7 @@ extension Clients {
     /// See `Operations.listOperations`
     public func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListOperationsResponse {
+    ) async throws -> GoogleLongrunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
 
@@ -163,7 +164,7 @@ extension Clients {
     public func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Error> {
-      let listRpc = { (token: String) async throws -> ListOperationsResponse in
+      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
@@ -174,7 +175,7 @@ extension Clients {
     /// See `Operations.getOperation`
     public func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Operation {
+    ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
 
@@ -196,14 +197,15 @@ extension Clients {
 
 // Default implementations
 extension Operations {
-  public func listOperations(request: ListOperationsRequest) async throws -> ListOperationsResponse
+  public func listOperations(request: ListOperationsRequest) async throws
+    -> GoogleLongrunning.ListOperationsResponse
   {
     try await self.listOperations(request: request, options: .init())
   }
 
   public func listOperations(
     request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ListOperationsResponse {
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -216,19 +218,20 @@ extension Operations {
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Operation, Error> {
-    let listRpc = { (token: String) async throws -> ListOperationsResponse in
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
-  public func getOperation(request: GetOperationRequest) async throws -> Operation {
+  public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  {
     try await self.getOperation(request: request, options: .init())
   }
 
   public func getOperation(
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> Operation {
+  ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 

@@ -30,23 +30,23 @@ extension Clients {
   protocol SecretManagerServiceStub {
     func listSecrets(
       request: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListSecretsResponse
+    ) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse
 
     func createSecret(
       request: CreateSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret
 
     func addSecretVersion(
       request: AddSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     func getSecret(
       request: GetSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret
 
     func updateSecret(
       request: UpdateSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret
 
     func deleteSecret(
       request: DeleteSecretRequest, options: GoogleCloudGax.RequestOptions
@@ -54,47 +54,47 @@ extension Clients {
 
     func listSecretVersions(
       request: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListSecretVersionsResponse
+    ) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse
 
     func getSecretVersion(
       request: GetSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     func accessSecretVersion(
       request: AccessSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> AccessSecretVersionResponse
+    ) async throws -> GoogleCloudSecretmanagerV1.AccessSecretVersionResponse
 
     func disableSecretVersion(
       request: DisableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     func enableSecretVersion(
       request: EnableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     func destroySecretVersion(
       request: DestroySecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy
+    ) async throws -> GoogleIamV1.Policy
 
     func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy
+    ) async throws -> GoogleIamV1.Policy
 
     func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> TestIamPermissionsResponse
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
     func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location
+    ) async throws -> GoogleCloudLocation.Location
   }
 
   class SecretManagerServiceTransport: SecretManagerServiceStub {
@@ -107,7 +107,7 @@ extension Clients {
 
     public func listSecrets(
       request: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListSecretsResponse {
+    ) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -130,12 +130,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListSecretsResponse.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.ListSecretsResponse.self, from: data)
     }
 
     public func createSecret(
       request: CreateSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret {
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -160,12 +161,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
     public func addSecretVersion(
       request: AddSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion {
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -186,12 +188,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func getSecret(
       request: GetSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret {
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -210,12 +213,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
     public func updateSecret(
       request: UpdateSecretRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Secret {
+    ) async throws -> GoogleCloudSecretmanagerV1.Secret {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.secret.map({ $0.name }), !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.secret.name' is not set or is empty")
@@ -240,7 +244,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Secret.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
     public func deleteSecret(
@@ -270,7 +275,7 @@ extension Clients {
 
     public func listSecretVersions(
       request: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListSecretVersionsResponse {
+    ) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -294,12 +299,12 @@ extension Clients {
           ))
       }
       return try GoogleCloudGax.ProtoJSONDecoder().decode(
-        ListSecretVersionsResponse.self, from: data)
+        GoogleCloudSecretmanagerV1.ListSecretVersionsResponse.self, from: data)
     }
 
     public func getSecretVersion(
       request: GetSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion {
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -318,12 +323,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func accessSecretVersion(
       request: AccessSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> AccessSecretVersionResponse {
+    ) async throws -> GoogleCloudSecretmanagerV1.AccessSecretVersionResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -343,12 +349,12 @@ extension Clients {
           ))
       }
       return try GoogleCloudGax.ProtoJSONDecoder().decode(
-        AccessSecretVersionResponse.self, from: data)
+        GoogleCloudSecretmanagerV1.AccessSecretVersionResponse.self, from: data)
     }
 
     public func disableSecretVersion(
       request: DisableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion {
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -369,12 +375,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func enableSecretVersion(
       request: EnableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion {
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -395,12 +402,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func destroySecretVersion(
       request: DestroySecretVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> SecretVersion {
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -421,12 +429,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(SecretVersion.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy {
+    ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -447,12 +456,12 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
     }
 
     public func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy {
+    ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -473,12 +482,12 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
     }
 
     public func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> TestIamPermissionsResponse {
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -500,12 +509,12 @@ extension Clients {
           ))
       }
       return try GoogleCloudGax.ProtoJSONDecoder().decode(
-        TestIamPermissionsResponse.self, from: data)
+        GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }
 
     public func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse {
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -528,12 +537,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudLocation.ListLocationsResponse.self, from: data)
     }
 
     public func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location {
+    ) async throws -> GoogleCloudLocation.Location {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -552,7 +562,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Location.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudLocation.Location.self, from: data)
     }
   }
 }

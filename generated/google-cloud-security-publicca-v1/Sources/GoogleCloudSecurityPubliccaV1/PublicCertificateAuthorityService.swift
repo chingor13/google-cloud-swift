@@ -38,7 +38,7 @@ public protocol PublicCertificateAuthorityService {
   ///
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
-    -> ExternalAccountKey
+    -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
 
   /// Creates a new
   /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
@@ -49,7 +49,7 @@ public protocol PublicCertificateAuthorityService {
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   func createExternalAccountKey(
     request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ExternalAccountKey
+  ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
 }
 
 extension Clients {
@@ -70,7 +70,7 @@ extension Clients {
     /// See `PublicCertificateAuthorityService.createExternalAccountKey`
     public func createExternalAccountKey(
       request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ExternalAccountKey {
+    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
       try await self.inner.createExternalAccountKey(request: request, options: options)
     }
   }
@@ -79,14 +79,14 @@ extension Clients {
 // Default implementations
 extension PublicCertificateAuthorityService {
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
-    -> ExternalAccountKey
+    -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
   {
     try await self.createExternalAccountKey(request: request, options: .init())
   }
 
   public func createExternalAccountKey(
     request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> ExternalAccountKey {
+  ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }

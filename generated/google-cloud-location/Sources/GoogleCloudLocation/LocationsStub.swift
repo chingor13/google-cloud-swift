@@ -28,11 +28,11 @@ extension Clients {
   protocol LocationsStub {
     func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location
+    ) async throws -> GoogleCloudLocation.Location
   }
 
   class LocationsTransport: LocationsStub {
@@ -45,7 +45,7 @@ extension Clients {
 
     public func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse {
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -68,12 +68,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListLocationsResponse.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudLocation.ListLocationsResponse.self, from: data)
     }
 
     public func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location {
+    ) async throws -> GoogleCloudLocation.Location {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -92,7 +93,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Location.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleCloudLocation.Location.self, from: data)
     }
   }
 }

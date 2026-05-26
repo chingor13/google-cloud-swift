@@ -60,14 +60,14 @@ extension Clients {
 
     public func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListLocationsResponse {
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
           (r: ListLocationsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ListLocationsResponse
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
@@ -75,13 +75,14 @@ extension Clients {
 
     public func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Location {
+    ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Location
+          (r: GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
         })

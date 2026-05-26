@@ -28,11 +28,11 @@ extension Clients {
   protocol OperationsStub {
     func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListOperationsResponse
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
     func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Operation
+    ) async throws -> GoogleLongrunning.Operation
 
     func deleteOperation(
       request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
@@ -53,7 +53,7 @@ extension Clients {
 
     public func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ListOperationsResponse {
+    ) async throws -> GoogleLongrunning.ListOperationsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -79,12 +79,13 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(ListOperationsResponse.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleLongrunning.ListOperationsResponse.self, from: data)
     }
 
     public func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Operation {
+    ) async throws -> GoogleLongrunning.Operation {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -103,7 +104,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Operation.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+        GoogleLongrunning.Operation.self, from: data)
     }
 
     public func deleteOperation(

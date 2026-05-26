@@ -28,15 +28,15 @@ extension Clients {
   protocol IAMPolicyStub {
     func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy
+    ) async throws -> GoogleIamV1.Policy
 
     func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy
+    ) async throws -> GoogleIamV1.Policy
 
     func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> TestIamPermissionsResponse
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
   }
 
   class IAMPolicyTransport: IAMPolicyStub {
@@ -49,7 +49,7 @@ extension Clients {
 
     public func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy {
+    ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -70,12 +70,12 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
     }
 
     public func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> Policy {
+    ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -96,12 +96,12 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(Policy.self, from: data)
+      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
     }
 
     public func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> TestIamPermissionsResponse {
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       let path = try { () throws -> String in
         guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
@@ -123,7 +123,7 @@ extension Clients {
           ))
       }
       return try GoogleCloudGax.ProtoJSONDecoder().decode(
-        TestIamPermissionsResponse.self, from: data)
+        GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }
   }
 }

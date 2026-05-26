@@ -60,14 +60,14 @@ extension Clients {
 
     public func createExternalAccountKey(
       request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> ExternalAccountKey {
+    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "createExternalAccountKey",
         action: {
           (r: CreateExternalAccountKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ExternalAccountKey
+            -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
           in
           return try await self.inner.createExternalAccountKey(request: r, options: o)
         })
