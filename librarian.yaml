@@ -97,12 +97,6 @@ libraries:
       - Tests/ProtoJSON/protos
     skip_release: true
     swift:
-      include_list:
-        - enums.proto
-        - oneofs.proto
-        - primitive_types.proto
-        - struct_types.proto
-        - well_known_types.proto
       modules:
         - output: Tests/ProtoJSON/generated
           api_path: Tests/ProtoJSON/protos
