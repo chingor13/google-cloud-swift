@@ -18,46 +18,43 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-PACKAGES_DIR="${REPO_ROOT}/packages"
-
-errors=0
-packages=0
 
 echo "--- SWIFT VERSION ---"
 swift --version
 echo "--- VERSIONS ---"
 
-echo "--- Testing Root Package ---"
-pushd "${REPO_ROOT}" >/dev/null
-if swift test; then
-    echo "✓ Root Package tests passed"
-else
-    echo "✗ Root Package tests failed" >&2
-    errors=$((errors + 1))
-fi
-popd >/dev/null
+errors=0
+count=0
 
-if [[ -d "${PACKAGES_DIR}" ]]; then
-    for package_dir in "${PACKAGES_DIR}"/*/; do
-        [[ -f "${package_dir}/Package.swift" ]] || continue
+# macOS ships with Bash 3.x, which does not support readfile. Use a plain
+# assignment as a workaround, and set IFS to avoid breaking on spaces.
+IFS=$'\n'
+packages=($(git ls-files -- 'Package.swift' 'packages/*Package.swift' | xargs -I{} dirname {} | sort))
+unset IFS
+for dir in "${packages[@]}"; do
+    [[ -f "${dir}/Package.swift" ]] || continue
+    count=$((count + 1))
 
-        package_name="$(basename "${package_dir}")"
-        packages=$((packages + 1))
-        echo "--- Testing ${package_name} ---"
+    echo "--- Building ${dir} ---"
+    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+        echo "✓ ${dir} built"
+    else
+        echo "✗ ${dir} failed to build" >&2
+        errors=$((errors + 1))
+        continue
+    fi
 
-        pushd "${package_dir}" >/dev/null
-        if swift test; then
-            echo "✓ ${package_name} passed"
-        else
-            echo "✗ ${package_name} failed" >&2
-            errors=$((errors + 1))
-        fi
-        popd >/dev/null
-    done
-fi
+    echo "--- Testing ${dir} ---"
+    if swift test -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+        echo "✓ ${dir} passed"
+    else
+        echo "✗ ${dir} failed" >&2
+        errors=$((errors + 1))
+    fi
+done
 
 echo ""
-echo "Root package + ${packages} local package(s) tested, ${errors} failure(s)."
+echo "${count} local package(s) tested, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1

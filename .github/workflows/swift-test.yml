@@ -15,3 +15,13 @@ jobs:
         uses: ./.github/actions/install-swift
       - name: Run Tests
         run: ./ci/test.sh
+  generated:
+    name: Build Generated Code
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
+      - name: Install Swift
+        uses: ./.github/actions/install-swift
+      - name: Build Generated Code
+        run: ./ci/generated.sh

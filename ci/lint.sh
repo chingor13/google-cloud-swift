@@ -32,62 +32,36 @@ if [[ ! -d "${PACKAGES_DIR}" ]]; then
     exit 1
 fi
 
-errors=0
-packages=0
-
 echo "--- SWIFT VERSION ---"
 swift --version
 echo "--- VERSIONS ---"
 
-echo "--- Linting Root Package ---"
-if swift package plugin lint-source-code; then
-    echo "✓ Root Package passed"
-else
-    echo "✗ Root Package failed" >&2
-    errors=$((errors + 1))
-fi
-# Compile with `warnings-as-errors` to keep the code clean.
-echo "--- Check warnings in root package ---"
-if swift build --build-tests -Xswiftc -warnings-as-errors --traits IntegrationTests; then
-    echo "✓ root passed"
-else
-    echo "✗ root failed" >&2
-    errors=$((errors + 1))
-fi
+errors=0
+count=0
 
-for package_dir in "${PACKAGES_DIR}"/*/; do
-    [[ -f "${package_dir}/Package.swift" ]] || continue
+# macOS ships with Bash 3.x, which does not support readfile. Use a plain
+# assignment as a workaround, and set IFS to avoid breaking on spaces.
+IFS=$'\n'
+packages=($(git ls-files -- '*Package.swift' | xargs -I{} dirname {} | sort))
+unset IFS
+for dir in "${packages[@]}"; do
+    [[ -f "${dir}/Package.swift" ]] || continue
+    count=$((count + 1))
 
-    package_name="$(basename "${package_dir}")"
-    packages=$((packages + 1))
-    echo "--- Linting ${package_name} ---"
+    echo "--- Linting ${dir} ---"
 
     # For local packages, we run swift-format directly on the Sources and Tests directories
     # to avoid the SPM plugin forcefully feeding the generated Rust bridge files.
-    if swift run swift-format lint -r "${package_dir}/Sources" "${package_dir}/Tests"; then
-        echo "✓ ${package_name} passed"
+    if swift run swift-format lint -r "${dir}/Sources" "${dir}/Tests"; then
+        echo "✓ ${dir} passed"
     else
-        echo "✗ ${package_name} failed" >&2
-        errors=$((errors + 1))
-    fi
-
-    # Compile with `warnings-as-errors` to keep the code clean.
-    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path ${package_dir}; then
-        echo "✓ ${package_name} passed"
-    else
-        echo "✗ ${package_name} failed" >&2
+        echo "✗ ${dir} failed" >&2
         errors=$((errors + 1))
     fi
 done
 
-
-if [[ ${packages} -eq 0 ]]; then
-    echo "No local packages found under ${PACKAGES_DIR}" >&2
-    exit 1
-fi
-
 echo ""
-echo "${packages} package(s) linted, ${errors} failure(s)."
+echo "${count} local package(s) linted, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1

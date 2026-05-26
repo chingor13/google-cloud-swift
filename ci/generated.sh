@@ -14,40 +14,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Runs swift-format lint for every local package found under `packages/`.
-# New local packages are picked up automatically — no changes to this script
-# are required when adding one.
-#
-# Unfortunately, there are no standard or community tools to do this
-# automatically in the Swift ecosystem.
-
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
+echo "--- SWIFT VERSION ---"
+swift --version
+echo "--- VERSIONS ---"
+
 errors=0
 count=0
 
-# macOS ships with Bash 3.x, which does not support readfile. Use a plain
-# assignment as a workaround, and set IFS to avoid breaking on spaces.
-IFS=$'\n'
-packages=($(git ls-files -- '*Package.swift' | xargs -I{} dirname {} | sort))
-unset IFS
-for dir in "${packages[@]}"; do
+# This is a subset of the generated code, because it is too slow to build
+# everything.
+generated=(
+  "generated/google-cloud-secretmanager-v1"
+  "generated/google-cloud-security-publicca-v1"
+)
+for dir in "${generated[@]}"; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
 
-    if swift run swift-format format -i -r "${dir}/Sources" "${dir}/Tests"; then
-        echo "✓ ${dir} passed"
+    echo "--- Building ${dir} ---"
+    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+        echo "✓ ${dir} built"
     else
-        echo "✗ ${dir} failed" >&2
+        echo "✗ ${dir} failed to build" >&2
         errors=$((errors + 1))
     fi
 done
 
 echo ""
-echo "${count} package(s) formatted, ${errors} failure(s)."
+echo "${count} local package(s) tested, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1
