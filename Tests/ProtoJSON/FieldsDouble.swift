@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct DoubleFields {
   @Test(
@@ -40,7 +39,7 @@ import GoogleCloudGax
       (#"{"map":      {"a": "1.5"}   }"#, MessageWithF64(map: ["a": 1.5])),
     ])
   func deserialize(input: String, want: MessageWithF64) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithF64.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
@@ -67,7 +66,7 @@ import GoogleCloudGax
       ),
     ]
   ) func deserializeNaN(input: String, value: @Sendable (MessageWithF64) -> Float64?) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithF64.self, from: input.data(using: .utf8)!)
     #expect(value(got).map({ $0.isNaN }) ?? false, "got=\(got)")
   }

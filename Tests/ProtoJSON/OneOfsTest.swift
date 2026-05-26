@@ -14,8 +14,6 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
 import GoogleCloudWkt
 
 @Suite struct OneOfsTests {
@@ -47,7 +45,7 @@ import GoogleCloudWkt
     let jsonString = String(data: data, encoding: .utf8)!
     #expect(jsonString == expectedJSON)
 
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithOneOf.self, from: data)
     #expect(input == roundtrip)
   }
@@ -83,7 +81,7 @@ import GoogleCloudWkt
     let jsonString = String(data: data, encoding: .utf8)!
     #expect(jsonString == expectedJSON)
 
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithComplexOneOf.self, from: data)
     #expect(input == roundtrip)
   }
@@ -97,7 +95,7 @@ import GoogleCloudWkt
     let jsonString = String(data: data, encoding: .utf8)!
     #expect(jsonString == #"{"null":null}"#)
 
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithComplexOneOf.self, from: data)
     // Currently decodes to nil because decodeIfPresent returns nil for null values.
     #expect(roundtrip == MessageWithComplexOneOf(complex: nil))
@@ -105,7 +103,7 @@ import GoogleCloudWkt
 
   @Test("Use oneof with @unknown")
   func useOneof() throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(
       MessageWithOneOf.self, from: #"{"stringContents":"test"}"#.data(using: .utf8)!)
     #expect(got.singleString == .stringContents("test"))

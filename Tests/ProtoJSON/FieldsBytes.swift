@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct BytesFields {
   @Test(
@@ -34,7 +33,7 @@ import GoogleCloudGax
       (#"{"map":      {"a": "NDI="} }"#, MessageWithBytes(map: ["a": Data("42".utf8)])),
     ])
   func deserialize(input: String, want: MessageWithBytes) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithBytes.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

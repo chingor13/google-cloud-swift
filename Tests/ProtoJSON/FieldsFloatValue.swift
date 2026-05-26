@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct FieldsFloatValue {
   @Test(
@@ -31,7 +30,7 @@ import GoogleCloudGax
       (#"{"map":      {"a": 4.2 }  }"#, MessageWithFloatValue(map: ["a": 4.2])),
     ])
   func deserialize(input: String, want: MessageWithFloatValue) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithFloatValue.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

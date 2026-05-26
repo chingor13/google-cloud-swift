@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct FieldsEnum {
   @Test(
@@ -30,14 +29,14 @@ import GoogleCloudGax
       (#"{"map": {"a": 2}}"#, MessageWithEnum(map: ["a": .green])),
     ])
   func deserialize(input: String, want: MessageWithEnum) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithEnum.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 
   @Test("Use enum with @unknown")
   func useEnum() throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithEnum.self, from: "{}".data(using: .utf8)!)
     #expect(got.singular == .unspecified)
     switch got.singular {

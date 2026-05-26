@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-@testable import GoogleCloudGax
+import GoogleCloudWkt
 
 extension ProtoJSONDecoderTest {
   // Only test the types that appear in sidekick messages
@@ -81,7 +80,7 @@ extension ProtoJSONDecoderTest {
       ),
     ])
   func decodeRepeated(input: String, want: RepeatedPrimitives) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(RepeatedPrimitives.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
@@ -101,7 +100,7 @@ extension ProtoJSONDecoderTest {
       #"{"fieldData":   ["bad"] }"#,
     ])
   func decodeRepeatedBad(input: String) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let error = #expect(throws: DecodingError.self) {
       try decoder.decode(RepeatedPrimitives.self, from: input.data(using: .utf8)!)
     }
@@ -110,7 +109,7 @@ extension ProtoJSONDecoderTest {
 
   @Test func decodeRepeatedBadString() throws {
     let input = #"{"fieldData":   [42] }"#
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let error = #expect(throws: DecodingError.self) {
       try decoder.decode(RepeatedPrimitives.self, from: input.data(using: .utf8)!)
     }

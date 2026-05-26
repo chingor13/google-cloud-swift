@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct FieldsStringValue {
   @Test(
@@ -28,7 +27,7 @@ import GoogleCloudGax
       (#"{"map":      {"a": "42" } }"#, MessageWithStringValue(map: ["a": "42"])),
     ])
   func deserialize(input: String, want: MessageWithStringValue) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithStringValue.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

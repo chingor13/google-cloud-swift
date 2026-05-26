@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-@testable import GoogleCloudGax
+import GoogleCloudWkt
 
 extension ProtoJSONDecoderTest {
   // Only test the types that appear in sidekick messages
@@ -82,7 +81,7 @@ extension ProtoJSONDecoderTest {
       (#"{"fieldDouble": "42"   }"#, OptionalPrimitives().with { $0.fieldDouble = 42 }),
     ])
   func decodeOptionals(input: String, want: OptionalPrimitives) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(OptionalPrimitives.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
@@ -103,7 +102,7 @@ extension ProtoJSONDecoderTest {
       #"{"fieldData":   "bad" }"#,
     ])
   func decodeOptionalBad(input: String) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let error = #expect(throws: DecodingError.self) {
       try decoder.decode(OptionalPrimitives.self, from: input.data(using: .utf8)!)
     }
@@ -112,7 +111,7 @@ extension ProtoJSONDecoderTest {
 
   @Test func decodeOptionalBadString() throws {
     let input = #"{"fieldString": 42 }"#
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let error = #expect(throws: DecodingError.self) {
       try decoder.decode(OptionalPrimitives.self, from: input.data(using: .utf8)!)
     }

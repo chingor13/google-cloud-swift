@@ -14,8 +14,6 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
 import GoogleCloudWkt
 
 @Suite struct FieldsFieldMask {
@@ -48,7 +46,7 @@ import GoogleCloudWkt
       ),
     ])
   func deserialize(input: String, want: MessageWithFieldMask) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithFieldMask.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

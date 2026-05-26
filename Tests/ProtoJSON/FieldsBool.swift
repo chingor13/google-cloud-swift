@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct BoolFields {
   @Test(
@@ -36,7 +35,7 @@ import GoogleCloudGax
       (#"{"mapValue": {"a": "true"} }"#, MessageWithBool(mapValue: ["a": true])),
     ])
   func deserialize(input: String, want: MessageWithBool) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithBool.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

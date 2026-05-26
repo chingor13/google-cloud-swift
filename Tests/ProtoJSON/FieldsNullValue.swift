@@ -14,8 +14,6 @@
 
 import Foundation
 import Testing
-
-import GoogleCloudGax
 import GoogleCloudWkt
 
 @Suite struct FieldsNullValue {
@@ -31,7 +29,7 @@ import GoogleCloudWkt
       (#"{"map":      {"a": null} }"#, MessageWithNullValue(map: ["a": NullValue()])),
     ])
   func deserialize(input: String, want: MessageWithNullValue) throws {
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithNullValue.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }

@@ -14,8 +14,7 @@
 
 import Foundation
 import Testing
-
-@testable import GoogleCloudGax
+import GoogleCloudWkt
 
 @Suite struct ProtoJSONDecoderTest {
   @Test func decodeMissingMapNested() throws {
@@ -24,7 +23,7 @@ import Testing
         "repeatedMessage":[ {}, {} ]
       }
       """
-    let decoder = ProtoJSONDecoder()
+    let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(MessageWithRepeated.self, from: input.data(using: .utf8)!)
     let want = MessageWithRepeated(
       repeatedMessage: [
