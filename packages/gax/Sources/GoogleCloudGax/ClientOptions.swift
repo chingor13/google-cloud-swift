@@ -79,14 +79,13 @@ public struct ClientOptions: Sendable {
 
   /// Configures the client's retry policy.
   ///
-  /// The client libraries automatically retry requests when they are idempotent. The default uses
-  /// ``Aip194Strict``.
+  /// ``BaseRetryPolicy`` with a limit of 60 seconds or 10 attempts. Whichever limit is reached
+  /// first stops the retry loop.
   public var retryPolicy: any RetryPolicy = defaultRetryPolicy()
 
   /// Configures the client's backoff policy.
   ///
-  /// By default the clients use [Exponential backoff] with jitter. The specific parameters are not
-  /// documented as they may change over time.
+  /// By default the clients use ``ExponentialBackoff`` with the default initialization.
   public var backoffPolicy: any BackoffPolicy = defaultBackoffPolicy()
 
   /// Configures the client's retry throttler.
@@ -96,9 +95,7 @@ public struct ClientOptions: Sendable {
 }
 
 func defaultRetryPolicy() -> any RetryPolicy {
-  // TODO(https://github.com/googleapis/librarian/issues/5264) - use a policy based on AIP-194 with
-  // some limits
-  AlwaysRetry()
+  BaseRetryPolicy().withTimeLimit(.seconds(60)).withAttemptLimit(10)
 }
 
 func defaultBackoffPolicy() -> any BackoffPolicy {
