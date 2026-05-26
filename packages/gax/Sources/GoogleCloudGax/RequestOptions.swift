@@ -43,12 +43,12 @@ public struct RequestOptions: Sendable {
   /// Overrides the default retry policy.
   ///
   /// Without an override, the request uses the retry policy configured in the client.
-  public var retry_policy: (any RetryPolicy)? = nil
+  public var retryPolicy: (any RetryPolicy)? = nil
 
   /// Overrides the default backoff policy for a request.
   ///
   /// Without an override, the request uses the backoff policy configured in the client.
-  public var backoff_policy: (any BackoffPolicy)? = nil
+  public var backoffPolicy: (any BackoffPolicy)? = nil
 
   /// Overrides the default retry trottler for a request.
   ///
@@ -57,5 +57,5 @@ public struct RequestOptions: Sendable {
   /// It is very rare to use more than one retry throttler in a single client. The one exception may
   /// be when the requests may be logically grouped by some backend resource, say a database or
   /// storage system instance, where one may expect they suffer from independent overload conditions.
-  public var retry_throttler: (any RetryThrottler)? = nil
+  public var retryThrottler: (any RetryThrottler)? = nil
 }

@@ -81,18 +81,18 @@ public struct ClientOptions: Sendable {
   ///
   /// The client libraries automatically retry requests when they are idempotent. The default uses
   /// ``Aip194Strict``.
-  public var retry_policy: any RetryPolicy = defaultRetryPolicy()
+  public var retryPolicy: any RetryPolicy = defaultRetryPolicy()
 
   /// Configures the client's backoff policy.
   ///
   /// By default the clients use [Exponential backoff] with jitter. The specific parameters are not
   /// documented as they may change over time.
-  public var backoff_policy: any BackoffPolicy = defaultBackoffPolicy()
+  public var backoffPolicy: any BackoffPolicy = defaultBackoffPolicy()
 
   /// Configures the client's retry throttler.
   ///
   /// By default the clients use an ``AdaptiveThrottler`` with the default configuration.
-  public var retry_throttler: any RetryThrottler = defaultRetryThrottler()
+  public var retryThrottler: any RetryThrottler = defaultRetryThrottler()
 }
 
 func defaultRetryPolicy() -> any RetryPolicy {
