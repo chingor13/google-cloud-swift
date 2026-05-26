@@ -104,7 +104,7 @@ public func _slowAnyDeserialize<M: Decodable>(_ type: M.Type, from: `Any`) throw
   let encoder = JSONEncoder();
   encoder.outputFormatting = [.withoutEscapingSlashes]
   let data = try encoder.encode(from.fields)
-  let decoder = JSONDecoder()
+  let decoder = _ProtoJSONDecoder()
   return try decoder.decode(M.self, from: data)
 }
 
@@ -113,6 +113,6 @@ public func _slowAnySerialize<M: Encodable>(message: M) throws -> Struct {
   let encoder = JSONEncoder()
   encoder.outputFormatting = [.withoutEscapingSlashes]
   let data = try encoder.encode(message)
-  let decoder = JSONDecoder()
+  let decoder = _ProtoJSONDecoder()
   return try decoder.decode(Struct.self, from: data)
 }
