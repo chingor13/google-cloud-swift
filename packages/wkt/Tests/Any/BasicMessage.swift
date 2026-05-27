@@ -35,6 +35,19 @@ extension AnyTests {
     #expect(inner == BasicMessage(field0: "0", field1: "1"))
   }
 
+  @Test func decodeBasicMessageMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","field0":"0","field1":"1"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try BasicMessage(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test func decodeBasicMessageMissing() throws {
     let jsonString =
       #"{"content":{"@type":"type.googleapis.com/test.BasicMessage","field0":"0"}}"#

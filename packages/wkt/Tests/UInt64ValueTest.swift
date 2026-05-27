@@ -88,6 +88,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func uint64ValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":123}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(UInt64ValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try UInt64Value(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack UInt64Value into Any")
   func uint64ValueAnyPack() throws {
     let input = UInt64Value(123)

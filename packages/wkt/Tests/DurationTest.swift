@@ -143,6 +143,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func durationAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":"123.45s"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try Duration(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack Duration into Any")
   func durationAnyPack() throws {
     let input = try Duration(seconds: 123, nanos: 450_000_000)

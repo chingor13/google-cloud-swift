@@ -62,6 +62,9 @@ extension FieldMask: _AnyPackable {
   }
 
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard case let .string(v)? = any.fields[`Any`.valueField] else {
       throw AnyError.invalidValueField
     }

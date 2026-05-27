@@ -145,6 +145,18 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func valueAnyUnpackMismatchedUrl() throws {
+    let jsonString = #"{"content":{"@type":"bad","value":"unused"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try Value(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test(
     "Pack Value into Any",
     arguments: [
@@ -191,6 +203,18 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func structAnyUnpackMismatchedUrl() throws {
+    let jsonString = #"{"content":{"@type":"bad","value":"unused"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try Struct(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test(
     "Pack Struct into Any",
     arguments: [
@@ -223,7 +247,7 @@ import Testing
       ),
     ])
   func listValueAnyUnpack(fragment: String, want: ListValue) throws {
-    let expectedUrl = "type.googleapis.com/google.protobuf.Struct"
+    let expectedUrl = "type.googleapis.com/google.protobuf.ListValue"
     let jsonString = "{\"content\":{\"@type\":\"\(expectedUrl)\",\(fragment)}}"
     let data = jsonString.data(using: .utf8)!
     let decoder = JSONDecoder()
@@ -233,6 +257,18 @@ import Testing
 
     let got = try ListValue(fromAny: any)
     #expect(got == want)
+  }
+
+  @Test func listValueAnyUnpackMismatchedUrl() throws {
+    let jsonString = #"{"content":{"@type":"bad","value":"unused"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try ListValue(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
   }
 
   @Test(

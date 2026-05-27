@@ -74,6 +74,19 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func fieldMaskAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":"a,b,cD"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try FieldMask(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack FieldMask into Any")
   func fieldMaskAnyPack() throws {
     let input = FieldMask(paths: ["a", "b", "c_d"])

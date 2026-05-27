@@ -88,6 +88,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func int32ValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":123}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(Int32ValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try Int32Value(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack Int32Value into Any")
   func int32ValueAnyPack() throws {
     let input = Int32Value(123)

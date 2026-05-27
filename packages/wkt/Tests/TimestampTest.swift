@@ -157,6 +157,19 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func timestampAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":"2026-04-21T12:34:56.789123456Z"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try Timestamp(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack Timestamp into Any")
   func timestampAnyPack() throws {
     let input = try Timestamp(fromString: "2026-04-21T12:34:56.789123456Z")

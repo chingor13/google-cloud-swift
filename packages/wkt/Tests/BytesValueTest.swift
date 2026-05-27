@@ -88,6 +88,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func bytesValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":"aGVsbG8="}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(BytesValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try BytesValue(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack BytesValue into Any")
   func bytesValueAnyPack() throws {
     let input = BytesValue(Data("hello".utf8))

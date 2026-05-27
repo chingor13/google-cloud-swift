@@ -88,6 +88,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func boolValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":true}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(BoolValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try BoolValue(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack BoolValue into Any")
   func boolValueAnyPack() throws {
     let input = BoolValue(true)

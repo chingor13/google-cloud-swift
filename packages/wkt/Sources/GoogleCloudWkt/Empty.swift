@@ -34,6 +34,9 @@ extension Empty: _AnyPackable {
   }
 
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard case let .object(v)? = any.fields[`Any`.valueField] else {
       throw AnyError.invalidValueField
     }

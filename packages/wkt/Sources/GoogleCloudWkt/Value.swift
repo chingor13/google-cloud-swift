@@ -137,6 +137,9 @@ extension Value: _AnyPackable {
     return "type.googleapis.com/google.protobuf.Value"
   }
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }
@@ -165,6 +168,9 @@ extension Struct: _AnyPackable {
     return "type.googleapis.com/google.protobuf.Struct"
   }
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard case let .object(v) = any.fields[`Any`.valueField] else {
       throw AnyError.invalidValueField
     }
@@ -184,6 +190,9 @@ extension ListValue: _AnyPackable {
     return "type.googleapis.com/google.protobuf.ListValue"
   }
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard case let .array(v) = any.fields[`Any`.valueField] else {
       throw AnyError.invalidValueField
     }

@@ -71,6 +71,9 @@ extension `Any`: _AnyPackable {
     return "type.googleapis.com/google.protobuf.Any"
   }
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard case var .object(fields)? = any.fields["value"] else {
       throw AnyError.invalidValueField
     }
@@ -100,7 +103,12 @@ public protocol _AnyPackable {
 }
 
 // Deserializes a message of type `M` from an `Any`.
-public func _slowAnyDeserialize<M: Decodable>(_ type: M.Type, from: `Any`) throws -> M {
+public func _slowAnyDeserialize<M: Decodable & _AnyPackable>(
+  _ type: M.Type, from: `Any`
+) throws -> M {
+  if M._anyTypeUrl != from._type {
+    throw AnyError.mismatchedTypeUrl
+  }
   let encoder = JSONEncoder();
   encoder.outputFormatting = [.withoutEscapingSlashes]
   let data = try encoder.encode(from.fields)

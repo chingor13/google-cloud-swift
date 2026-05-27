@@ -88,6 +88,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func floatValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":123.45}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(FloatValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try FloatValue(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack FloatValue into Any")
   func floatValueAnyPack() throws {
     let input = FloatValue(123.45)

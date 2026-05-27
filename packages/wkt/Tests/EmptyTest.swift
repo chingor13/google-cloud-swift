@@ -57,6 +57,19 @@ import Testing
     #expect(got == Empty())
   }
 
+  @Test func emptyAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":{}}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) {
+      let _ = try Empty(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack Empty into Any")
   func emptyAnyPack() throws {
     let input = Empty()

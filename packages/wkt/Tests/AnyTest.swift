@@ -40,6 +40,19 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func testDecodingAnyMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"123.450s"}}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.mismatchedTypeUrl) {
+      let _ = try `Any`(fromAny: any)
+    }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   // Storing an Any into an Any is probably a bad idea, but that won't stop them.
   @Test("Encoding Any")
   func testEncodingAny() throws {

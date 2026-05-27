@@ -23,6 +23,9 @@ extension Swift.Double: _AnyPackable {
   }
 
   public init(fromAny any: `Any`) throws {
+    if Self._anyTypeUrl != any._type {
+      throw AnyError.mismatchedTypeUrl
+    }
     guard let v = any.fields[`Any`.valueField] else {
       throw AnyError.missingValueField
     }

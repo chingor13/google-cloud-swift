@@ -89,6 +89,17 @@ import Testing
     #expect(got == want)
   }
 
+  @Test func doubleValueAnyUnpackMismatchedUrl() throws {
+    let jsonString =
+      #"{"content":{"@type":"bad","value":123.45}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(DoubleValueTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    let error = #expect(throws: AnyError.self) { let _ = try DoubleValue(fromAny: any) }
+    #expect(error == .mismatchedTypeUrl)
+  }
+
   @Test("Pack DoubleValue into Any")
   func doubleValueAnyPack() throws {
     let input = DoubleValue(123.45)
