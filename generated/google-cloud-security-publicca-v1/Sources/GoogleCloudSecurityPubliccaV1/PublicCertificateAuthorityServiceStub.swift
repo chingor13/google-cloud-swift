@@ -64,7 +64,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecurityPubliccaV1.ExternalAccountKey.self, from: data)
     }
   }

@@ -68,7 +68,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.ListLocationsResponse.self, from: data)
     }
 
@@ -93,7 +93,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.Location.self, from: data)
     }
   }

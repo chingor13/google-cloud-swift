@@ -70,7 +70,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
     }
 
     public func getIamPolicy(
@@ -96,7 +97,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
     }
 
     public func testIamPermissions(
@@ -122,7 +124,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }
   }

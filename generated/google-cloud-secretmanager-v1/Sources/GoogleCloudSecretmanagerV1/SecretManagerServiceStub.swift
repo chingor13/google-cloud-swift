@@ -130,7 +130,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.ListSecretsResponse.self, from: data)
     }
 
@@ -161,7 +161,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
@@ -188,7 +188,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
@@ -213,7 +213,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
@@ -244,7 +244,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.Secret.self, from: data)
     }
 
@@ -298,7 +298,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.ListSecretVersionsResponse.self, from: data)
     }
 
@@ -323,7 +323,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
@@ -348,7 +348,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.AccessSecretVersionResponse.self, from: data)
     }
 
@@ -375,7 +375,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
@@ -402,7 +402,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
@@ -429,7 +429,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
@@ -456,7 +456,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
     }
 
     public func getIamPolicy(
@@ -482,7 +483,8 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(GoogleIamV1.Policy.self, from: data)
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
     }
 
     public func testIamPermissions(
@@ -508,7 +510,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }
 
@@ -537,7 +539,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.ListLocationsResponse.self, from: data)
     }
 
@@ -562,7 +564,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.Location.self, from: data)
     }
   }

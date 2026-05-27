@@ -79,7 +79,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleLongrunning.ListOperationsResponse.self, from: data)
     }
 
@@ -104,7 +104,7 @@ extension Clients {
             payload: data,
           ))
       }
-      return try GoogleCloudGax.ProtoJSONDecoder().decode(
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleLongrunning.Operation.self, from: data)
     }
 
