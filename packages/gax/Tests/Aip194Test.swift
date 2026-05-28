@@ -49,7 +49,7 @@ import Testing
   }
 
   static func unavailable() -> RequestError {
-    .service(ServiceDetails(code: GoogleRpc.Code.unavailable.rawValue, message: "UNAVAILABLE"))
+    .service(ServiceError(code: GoogleRpc.Code.unavailable, message: "UNAVAILABLE"))
   }
 
   static func unknownAnd503() -> RequestError {
@@ -59,7 +59,7 @@ import Testing
 
   static func permissionDenied() -> RequestError {
     .service(
-      ServiceDetails(code: GoogleRpc.Code.permissionDenied.rawValue, message: "PERMISSION_DENIED"))
+      ServiceError(code: GoogleRpc.Code.permissionDenied, message: "PERMISSION_DENIED"))
   }
 
   static func httpUnavailable() -> RequestError {

@@ -20,13 +20,11 @@ import Testing
 
 @Suite struct RetryLoopTest {
   func permanent() -> RequestError {
-    RequestError.service(
-      ServiceDetails(code: Code.permissionDenied.rawValue, message: "oh-oh"))
+    RequestError.service(ServiceError(code: Code.permissionDenied, message: "oh-oh"))
   }
 
   func transient() -> RequestError {
-    RequestError.service(
-      ServiceDetails(code: Code.unavailable.rawValue, message: "try-again"))
+    RequestError.service(ServiceError(code: Code.unavailable, message: "try-again"))
   }
 
   @Test func immediateSuccess() async throws {
@@ -117,7 +115,7 @@ import Testing
     var attempts = 0
     let loop = _RetryLoop(
       retryPolicy: MockPolicy(onError: { _, e in
-        if case .service(let details) = e, details.code == 14 {
+        if case .service(let details) = e, details.code == .unavailable {
           return .retry(e)
         }
         return .permanent(e)

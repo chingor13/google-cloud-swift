@@ -41,8 +41,8 @@ extension HTTPDetails: Equatable {
   }
 }
 
-extension ServiceDetails: Equatable {
-  public static func == (lhs: ServiceDetails, rhs: ServiceDetails) -> Bool {
+extension ServiceError: Equatable {
+  public static func == (lhs: ServiceError, rhs: ServiceError) -> Bool {
     return lhs.code == rhs.code && lhs.message == rhs.message
   }
 }

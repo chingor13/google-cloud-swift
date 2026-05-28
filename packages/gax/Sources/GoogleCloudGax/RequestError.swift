@@ -71,7 +71,7 @@ public enum RequestError: Error {
   /// ## Troubleshooting
   ///
   /// Check the error type, error message, and error details. Then consult the documentation for the service.
-  case service(ServiceDetails)
+  case service(ServiceError)
 
   /// The retry policy is exhausted before sending a request.
   ///
@@ -118,23 +118,6 @@ public struct HTTPDetails: Sendable {
     self.http_status_code = http_status_code
     self.headers = headers
     self.payload = payload
-  }
-}
-
-/// The details for ``RequestError/service(_:)``.
-public struct ServiceDetails: Sendable {
-  /// The status code.
-  public let code: Int
-  /// The error message.
-  public let message: String
-
-  /// Create a a new `ServiceDetails`.
-  public init(
-    code: Int,
-    message: String,
-  ) {
-    self.code = code
-    self.message = message
   }
 }
 

@@ -62,7 +62,7 @@ import Testing
 
   private func tooManyRequests() -> RequestError {
     .service(
-      ServiceDetails(code: GoogleRpc.Code.resourceExhausted.rawValue, message: "RESOURCE_EXHAUSTED")
+      ServiceError(code: GoogleRpc.Code.resourceExhausted, message: "RESOURCE_EXHAUSTED")
     )
   }
 
@@ -71,11 +71,10 @@ import Testing
   }
 
   private func permanent() -> RequestError {
-    .service(
-      ServiceDetails(code: GoogleRpc.Code.permissionDenied.rawValue, message: "PERMISSION_DENIED"))
+    .service(ServiceError(code: GoogleRpc.Code.permissionDenied, message: "PERMISSION_DENIED"))
   }
 
   private func transient() -> RequestError {
-    .service(ServiceDetails(code: GoogleRpc.Code.unavailable.rawValue, message: "UNAVAILABLE"))
+    .service(ServiceError(code: GoogleRpc.Code.unavailable, message: "UNAVAILABLE"))
   }
 }

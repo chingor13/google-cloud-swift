@@ -28,7 +28,7 @@ final public class Aip194: RetryPolicy {
   public init() {}
 
   public func onError(state: RetryState, error: RequestError) -> RetryResult {
-    if let code = error.serviceCode, code == GoogleRpc.Code.unavailable.rawValue {
+    if let code = error.serviceCode, code == GoogleRpc.Code.unavailable {
       return .retry(error)
     }
 
@@ -51,7 +51,7 @@ extension RequestError {
     return nil
   }
 
-  fileprivate var serviceCode: Int? {
+  fileprivate var serviceCode: GoogleRpc.Code? {
     if case .service(let details) = self {
       return details.code
     }

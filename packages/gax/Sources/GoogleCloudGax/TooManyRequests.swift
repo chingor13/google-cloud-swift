@@ -59,7 +59,7 @@ extension RetryPolicy {
 extension RequestError {
   fileprivate var isResourceExhausted: Bool {
     if case .service(let details) = self {
-      return details.code == GoogleRpc.Code.resourceExhausted.rawValue
+      return details.code == GoogleRpc.Code.resourceExhausted
     }
     return false
   }
