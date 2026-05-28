@@ -86,10 +86,6 @@ libraries:
     apis:
       - path: google/type
     copyright_year: "2026"
-    swift:
-      include_list:
-        - expr.proto
-        - month.proto
   - name: TestsProtoJSON
     copyright_year: "2026"
     output: Tests/ProtoJSON/generated
