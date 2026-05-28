@@ -21,11 +21,13 @@ import GoogleCloudLocation
 import GoogleCloudWkt
 
 func sample(client: some Locations) async throws {
-  let response = try await client.listLocations(
-    request: ListLocationsRequest(/* set fields */
+  let items = try client.listLocations(
+    byItem: ListLocationsRequest(/* set fields */
     )
   )
-  print("Success: \(response)")
+  for try await item in items {
+    print("  \(item)")
+  }
 }
 // snippet.hide
 

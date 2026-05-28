@@ -21,11 +21,13 @@ import GoogleLongrunning
 import GoogleCloudWkt
 
 func sample(client: some Operations) async throws {
-  let response = try await client.listOperations(
-    request: ListOperationsRequest(/* set fields */
+  let items = try client.listOperations(
+    byItem: ListOperationsRequest(/* set fields */
     )
   )
-  print("Success: \(response)")
+  for try await item in items {
+    print("  \(item)")
+  }
 }
 // snippet.hide
 

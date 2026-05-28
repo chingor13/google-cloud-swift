@@ -23,11 +23,13 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 func sample(client: some SecretManagerService) async throws {
-  let response = try await client.listLocations(
-    request: ListLocationsRequest(/* set fields */
+  let items = try client.listLocations(
+    byItem: ListLocationsRequest(/* set fields */
     )
   )
-  print("Success: \(response)")
+  for try await item in items {
+    print("  \(item)")
+  }
 }
 // snippet.hide
 

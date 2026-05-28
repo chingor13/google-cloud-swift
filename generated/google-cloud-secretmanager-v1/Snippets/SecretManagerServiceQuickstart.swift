@@ -22,12 +22,16 @@ import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleIamV1
 
-func sample() async throws {
+func sample(projectId: String, ) async throws {
   let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
-  let response = try await client.listSecrets(
-    request: ListSecretsRequest( /* set fields */)
+  let items = try client.listSecrets(
+    byItem: ListSecretsRequest(
+      parent: "projects/\(projectId)",
+    )
   )
-  print("Success: \(response)")
+  for try await item in items {
+    print("  \(item)")
+  }
 }
 // snippet.hide
 
@@ -35,7 +39,7 @@ func sample() async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      try await sample()
+      try await sample(projectId: "[placeholder]", )
     } catch {
       print("Error: \(error)")
     }

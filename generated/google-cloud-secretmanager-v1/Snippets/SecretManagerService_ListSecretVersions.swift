@@ -23,12 +23,14 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
-  let response = try await client.listSecretVersions(
-    request: ListSecretVersionsRequest(
+  let items = try client.listSecretVersions(
+    byItem: ListSecretVersionsRequest(
       parent: "projects/\(projectId)/secrets/\(secretId)",
     )
   )
-  print("Success: \(response)")
+  for try await item in items {
+    print("  \(item)")
+  }
 }
 // snippet.hide
 
