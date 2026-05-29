@@ -25,11 +25,13 @@ import GoogleCloudWkt
 import Logging
 
 extension Clients {
-  final class IAMPolicyRetry: IAMPolicyStub {
-    let inner: any IAMPolicyStub
+  final class PublicCertificateAuthorityServiceRetry: PublicCertificateAuthorityServiceStub {
+    let inner: any PublicCertificateAuthorityServiceStub
     let options: GoogleCloudGax.ClientOptions
 
-    public init(_ inner: any IAMPolicyStub, options: GoogleCloudGax.ClientOptions) {
+    public init(
+      _ inner: any PublicCertificateAuthorityServiceStub, options: GoogleCloudGax.ClientOptions
+    ) {
       self.inner = inner
       self.options = options
     }
@@ -51,46 +53,18 @@ extension Clients {
       return try await loop.run(attempt: attempt)
     }
 
-    public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
+    public func createExternalAccountKey(
+      request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Policy
+          (r: CreateExternalAccountKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
           in
-          return try await self.inner.setIamPolicy(request: r, options: o)
-        })
-    }
-
-    public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self._intercept(
-        request: request,
-        options: options,
-        idempotent: false,
-        action: {
-          (r: GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Policy
-          in
-          return try await self.inner.getIamPolicy(request: r, options: o)
-        })
-    }
-
-    public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      try await self._intercept(
-        request: request,
-        options: options,
-        idempotent: false,
-        action: {
-          (r: TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> TestIamPermissionsResponse
-          in
-          return try await self.inner.testIamPermissions(request: r, options: o)
+          return try await self.inner.createExternalAccountKey(request: r, options: o)
         })
     }
   }

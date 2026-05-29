@@ -25,11 +25,11 @@ import GoogleCloudWkt
 import Logging
 
 extension Clients {
-  final class OperationsRetry: OperationsStub {
-    let inner: any OperationsStub
+  final class IAMPolicyRetry: IAMPolicyStub {
+    let inner: any IAMPolicyStub
     let options: GoogleCloudGax.ClientOptions
 
-    public init(_ inner: any OperationsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any IAMPolicyStub, options: GoogleCloudGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
@@ -51,58 +51,48 @@ extension Clients {
       return try await loop.run(attempt: attempt)
     }
 
-    public func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self._intercept(
-        request: request,
-        options: options,
-        idempotent: true,
-        action: {
-          (r: ListOperationsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ListOperationsResponse
-          in
-          return try await self.inner.listOperations(request: r, options: o)
-        })
-    }
-
-    public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self._intercept(
-        request: request,
-        options: options,
-        idempotent: true,
-        action: {
-          (r: GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Operation
-          in
-          return try await self.inner.getOperation(request: r, options: o)
-        })
-    }
-
-    public func deleteOperation(
-      request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
+    public func setIamPolicy(
+      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteOperationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
-          return try await self.inner.deleteOperation(request: r, options: o)
+          (r: SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
+          in
+          return try await self.inner.setIamPolicy(request: r, options: o)
         })
     }
 
-    public func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
+    public func getIamPolicy(
+      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CancelOperationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
-          return try await self.inner.cancelOperation(request: r, options: o)
+          (r: GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
+          in
+          return try await self.inner.getIamPolicy(request: r, options: o)
+        })
+    }
+
+    public func testIamPermissions(
+      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+      try await self._intercept(
+        request: request,
+        options: options,
+        idempotent: false,
+        action: {
+          (r: TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.TestIamPermissionsResponse
+          in
+          return try await self.inner.testIamPermissions(request: r, options: o)
         })
     }
   }

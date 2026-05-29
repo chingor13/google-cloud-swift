@@ -62,7 +62,7 @@ extension Clients {
         idempotent: true,
         action: {
           (r: ListSecretsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ListSecretsResponse
+            -> GoogleCloudSecretmanagerV1.ListSecretsResponse
           in
           return try await self.inner.listSecrets(request: r, options: o)
         })
@@ -76,7 +76,8 @@ extension Clients {
         options: options,
         idempotent: false,
         action: {
-          (r: CreateSecretRequest, o: GoogleCloudGax.RequestOptions) async throws -> Secret
+          (r: CreateSecretRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecretmanagerV1.Secret
           in
           return try await self.inner.createSecret(request: r, options: o)
         })
@@ -91,7 +92,7 @@ extension Clients {
         idempotent: false,
         action: {
           (r: AddSecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> SecretVersion
+            -> GoogleCloudSecretmanagerV1.SecretVersion
           in
           return try await self.inner.addSecretVersion(request: r, options: o)
         })
@@ -105,7 +106,8 @@ extension Clients {
         options: options,
         idempotent: true,
         action: {
-          (r: GetSecretRequest, o: GoogleCloudGax.RequestOptions) async throws -> Secret
+          (r: GetSecretRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecretmanagerV1.Secret
           in
           return try await self.inner.getSecret(request: r, options: o)
         })
@@ -119,7 +121,8 @@ extension Clients {
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateSecretRequest, o: GoogleCloudGax.RequestOptions) async throws -> Secret
+          (r: UpdateSecretRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecretmanagerV1.Secret
           in
           return try await self.inner.updateSecret(request: r, options: o)
         })
@@ -146,7 +149,7 @@ extension Clients {
         idempotent: true,
         action: {
           (r: ListSecretVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ListSecretVersionsResponse
+            -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse
           in
           return try await self.inner.listSecretVersions(request: r, options: o)
         })
@@ -161,7 +164,7 @@ extension Clients {
         idempotent: true,
         action: {
           (r: GetSecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> SecretVersion
+            -> GoogleCloudSecretmanagerV1.SecretVersion
           in
           return try await self.inner.getSecretVersion(request: r, options: o)
         })
@@ -176,7 +179,7 @@ extension Clients {
         idempotent: true,
         action: {
           (r: AccessSecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> AccessSecretVersionResponse
+            -> GoogleCloudSecretmanagerV1.AccessSecretVersionResponse
           in
           return try await self.inner.accessSecretVersion(request: r, options: o)
         })
@@ -191,7 +194,7 @@ extension Clients {
         idempotent: false,
         action: {
           (r: DisableSecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> SecretVersion
+            -> GoogleCloudSecretmanagerV1.SecretVersion
           in
           return try await self.inner.disableSecretVersion(request: r, options: o)
         })
@@ -206,7 +209,7 @@ extension Clients {
         idempotent: false,
         action: {
           (r: EnableSecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> SecretVersion
+            -> GoogleCloudSecretmanagerV1.SecretVersion
           in
           return try await self.inner.enableSecretVersion(request: r, options: o)
         })
@@ -221,7 +224,7 @@ extension Clients {
         idempotent: false,
         action: {
           (r: DestroySecretVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> SecretVersion
+            -> GoogleCloudSecretmanagerV1.SecretVersion
           in
           return try await self.inner.destroySecretVersion(request: r, options: o)
         })
@@ -235,7 +238,8 @@ extension Clients {
         options: options,
         idempotent: false,
         action: {
-          (r: SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Policy
+          (r: SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
         })
@@ -249,7 +253,8 @@ extension Clients {
         options: options,
         idempotent: true,
         action: {
-          (r: GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Policy
+          (r: GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
         })
@@ -264,7 +269,7 @@ extension Clients {
         idempotent: false,
         action: {
           (r: TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> TestIamPermissionsResponse
+            -> GoogleIamV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
         })
@@ -279,7 +284,7 @@ extension Clients {
         idempotent: true,
         action: {
           (r: ListLocationsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ListLocationsResponse
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
@@ -293,7 +298,8 @@ extension Clients {
         options: options,
         idempotent: true,
         action: {
-          (r: GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Location
+          (r: GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
         })

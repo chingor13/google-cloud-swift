@@ -25,13 +25,11 @@ import GoogleCloudWkt
 import Logging
 
 extension Clients {
-  final class PublicCertificateAuthorityServiceRetry: PublicCertificateAuthorityServiceStub {
-    let inner: any PublicCertificateAuthorityServiceStub
+  final class LocationsRetry: LocationsStub {
+    let inner: any LocationsStub
     let options: GoogleCloudGax.ClientOptions
 
-    public init(
-      _ inner: any PublicCertificateAuthorityServiceStub, options: GoogleCloudGax.ClientOptions
-    ) {
+    public init(_ inner: any LocationsStub, options: GoogleCloudGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
@@ -53,18 +51,33 @@ extension Clients {
       return try await loop.run(attempt: attempt)
     }
 
-    public func createExternalAccountKey(
-      request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
+    public func listLocations(
+      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        idempotent: true,
         action: {
-          (r: CreateExternalAccountKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> ExternalAccountKey
+          (r: ListLocationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
-          return try await self.inner.createExternalAccountKey(request: r, options: o)
+          return try await self.inner.listLocations(request: r, options: o)
+        })
+    }
+
+    public func getLocation(
+      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudLocation.Location {
+      try await self._intercept(
+        request: request,
+        options: options,
+        idempotent: true,
+        action: {
+          (r: GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudLocation.Location
+          in
+          return try await self.inner.getLocation(request: r, options: o)
         })
     }
   }
