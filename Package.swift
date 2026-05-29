@@ -29,6 +29,7 @@ let package = Package(
     .package(path: "./packages/auth"),
     .package(path: "./packages/gax"),
     .package(path: "./packages/wkt"),
+    .package(path: "./guide"),
     .package(path: "./generated/google-cloud-location"),
     .package(path: "./generated/google-iam-v1"),
     .package(path: "./generated/google-cloud-secretmanager-v1"),
