@@ -29,7 +29,7 @@ public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPacka
   ///
   /// Example:
   /// `principal://parametermanager.googleapis.com/projects/12345/name/locations/us-central1-a/parameters/my-parameter`
-  public var iamPolicyNamePrincipal: String
+  public var iamPolicyNamePrincipal: Swift.String
 
   /// IAM policy binding member referring to a Google Cloud resource by
   /// system-assigned unique identifier (https://google.aip.dev/148#uid). If a
@@ -38,12 +38,12 @@ public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPacka
   ///
   /// Example:
   /// `principal://parametermanager.googleapis.com/projects/12345/uid/locations/us-central1-a/parameters/a918fed5`
-  public var iamPolicyUidPrincipal: String
+  public var iamPolicyUidPrincipal: Swift.String
 
   /// Initialize a new instance of `ResourcePolicyMember`.
   public init(
-    iamPolicyNamePrincipal: String = String(),
-    iamPolicyUidPrincipal: String = String(),
+    iamPolicyNamePrincipal: Swift.String = Swift.String(),
+    iamPolicyUidPrincipal: Swift.String = Swift.String(),
   ) {
     self.iamPolicyNamePrincipal = iamPolicyNamePrincipal
     self.iamPolicyUidPrincipal = iamPolicyUidPrincipal

@@ -65,7 +65,9 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
       singleString = value
     }
-    if let stringContents = try container.decodeIfPresent(String.self, forKey: .stringContents) {
+    if let stringContents = try container.decodeIfPresent(
+      Swift.String.self, forKey: .stringContents)
+    {
       try singleStringCheckAndSet(.stringContents(stringContents))
     }
     self.singleString = singleString
@@ -81,12 +83,12 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       twoStrings = value
     }
     if let stringContentsOne = try container.decodeIfPresent(
-      String.self, forKey: .stringContentsOne)
+      Swift.String.self, forKey: .stringContentsOne)
     {
       try twoStringsCheckAndSet(.stringContentsOne(stringContentsOne))
     }
     if let stringContentsTwo = try container.decodeIfPresent(
-      String.self, forKey: .stringContentsTwo)
+      Swift.String.self, forKey: .stringContentsTwo)
     {
       try twoStringsCheckAndSet(.stringContentsTwo(stringContentsTwo))
     }
@@ -124,7 +126,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       try mixedCheckAndSet(.anotherMessage(anotherMessage))
     }
-    if let string = try container.decodeIfPresent(String.self, forKey: .string) {
+    if let string = try container.decodeIfPresent(Swift.String.self, forKey: .string) {
       try mixedCheckAndSet(.string(string))
     }
     if let duration = try container.decodeIfPresent(
@@ -176,11 +178,11 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var parent: String
+    public var parent: Swift.String
 
     /// Initialize a new instance of `Message`.
     public init(
-      parent: String = String(),
+      parent: Swift.String = Swift.String(),
     ) {
       self.parent = parent
     }
@@ -197,12 +199,12 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   }
 
   public enum OneOf_SingleString: Codable, Equatable, Sendable {
-    case stringContents(String)
+    case stringContents(Swift.String)
   }
 
   public enum OneOf_TwoStrings: Codable, Equatable, Sendable {
-    case stringContentsOne(String)
-    case stringContentsTwo(String)
+    case stringContentsOne(Swift.String)
+    case stringContentsTwo(Swift.String)
   }
 
   public enum OneOf_OneMessage: Codable, Equatable, Sendable {
@@ -211,7 +213,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public enum OneOf_Mixed: Codable, Equatable, Sendable {
     indirect case anotherMessage(MessageWithOneOf.Message?)
-    case string(String)
+    case string(Swift.String)
     indirect case duration(GoogleCloudWkt.Duration?)
   }
 

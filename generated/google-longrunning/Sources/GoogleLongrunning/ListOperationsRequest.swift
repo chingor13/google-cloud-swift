@@ -25,16 +25,16 @@ public struct ListOperationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The name of the operation's parent resource.
-  public var name: String
+  public var name: Swift.String
 
   /// The standard list filter.
-  public var filter: String
+  public var filter: Swift.String
 
   /// The standard list page size.
-  public var pageSize: Int32
+  public var pageSize: Swift.Int32
 
   /// The standard list page token.
-  public var pageToken: String
+  public var pageToken: Swift.String
 
   /// When set to `true`, operations that are reachable are returned as normal,
   /// and those that are unreachable are returned in the
@@ -46,15 +46,15 @@ public struct ListOperationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// This field is not by default supported and will result in an
   /// `UNIMPLEMENTED` error if set unless explicitly documented otherwise in
   /// service or product specific documentation.
-  public var returnPartialSuccess: Bool
+  public var returnPartialSuccess: Swift.Bool
 
   /// Initialize a new instance of `ListOperationsRequest`.
   public init(
-    name: String = String(),
-    filter: String = String(),
-    pageSize: Int32 = Int32(),
-    pageToken: String = String(),
-    returnPartialSuccess: Bool = Bool(),
+    name: Swift.String = Swift.String(),
+    filter: Swift.String = Swift.String(),
+    pageSize: Swift.Int32 = Swift.Int32(),
+    pageToken: Swift.String = Swift.String(),
+    returnPartialSuccess: Swift.Bool = Swift.Bool(),
   ) {
     self.name = name
     self.filter = filter

@@ -42,8 +42,8 @@ extension Clients {
     public func createExternalAccountKey(
       request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.parent as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
         }
         return "/v1/\(pathVariable0)/externalAccountKeys"

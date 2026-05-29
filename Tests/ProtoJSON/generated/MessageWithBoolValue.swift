@@ -28,13 +28,13 @@ public struct MessageWithBoolValue: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public var repeated: [GoogleCloudWkt.BoolValue]
 
   /// Test google.protobuf.BoolValue as map values.
-  public var map: [String: GoogleCloudWkt.BoolValue]
+  public var map: [Swift.String: GoogleCloudWkt.BoolValue]
 
   /// Initialize a new instance of `MessageWithBoolValue`.
   public init(
     singular: GoogleCloudWkt.BoolValue? = nil,
     repeated: [GoogleCloudWkt.BoolValue] = [],
-    map: [String: GoogleCloudWkt.BoolValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.BoolValue] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

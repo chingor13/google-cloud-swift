@@ -22,24 +22,24 @@ public struct MessageWithF64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Double
+  public var singular: Swift.Double
 
   /// An optional field.
-  public var option: Double?
+  public var option: Swift.Double?
 
   /// A repeated field.
-  public var repeated: [Double]
+  public var repeated: [Swift.Double]
 
   /// A map field, doubles cannot be keys, so we only need to test them as
   /// values.
-  public var map: [String: Double]
+  public var map: [Swift.String: Swift.Double]
 
   /// Initialize a new instance of `MessageWithF64`.
   public init(
-    singular: Double = Double(),
-    option: Double? = nil,
-    repeated: [Double] = [],
-    map: [String: Double] = [:],
+    singular: Swift.Double = Swift.Double(),
+    option: Swift.Double? = nil,
+    repeated: [Swift.Double] = [],
+    map: [Swift.String: Swift.Double] = [:],
   ) {
     self.singular = singular
     self.option = option

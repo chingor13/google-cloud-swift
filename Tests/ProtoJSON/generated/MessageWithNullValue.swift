@@ -31,14 +31,14 @@ public struct MessageWithNullValue: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public var repeated: [GoogleCloudWkt.NullValue]
 
   /// A map field, messages cannot be keys.
-  public var map: [String: GoogleCloudWkt.NullValue]
+  public var map: [Swift.String: GoogleCloudWkt.NullValue]
 
   /// Initialize a new instance of `MessageWithNullValue`.
   public init(
     singular: GoogleCloudWkt.NullValue = GoogleCloudWkt.NullValue(),
     `optional`: GoogleCloudWkt.NullValue? = nil,
     repeated: [GoogleCloudWkt.NullValue] = [],
-    map: [String: GoogleCloudWkt.NullValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.NullValue] = [:],
   ) {
     self.singular = singular
     self.`optional` = `optional`
@@ -59,7 +59,7 @@ public struct MessageWithNullValue: Codable, Equatable, GoogleCloudWkt._AnyPacka
     self.`optional` = try container.decodeIfPresent(
       GoogleCloudWkt.NullValue.self, forKey: .`optional`)
     self.repeated = try container.decode([GoogleCloudWkt.NullValue].self, forKey: .repeated)
-    self.map = try container.decode([String: GoogleCloudWkt.NullValue].self, forKey: .map)
+    self.map = try container.decode([Swift.String: GoogleCloudWkt.NullValue].self, forKey: .map)
   }
 
   public func encode(to encoder: Encoder) throws {

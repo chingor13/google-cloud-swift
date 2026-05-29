@@ -24,7 +24,7 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A name for the type of resource being accessed, e.g. "sql table",
   /// "cloud storage bucket", "file", "Google calendar"; or the type URL
   /// of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
-  public var resourceType: String
+  public var resourceType: Swift.String
 
   /// The name of the resource being accessed.  For example, a shared calendar
   /// name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
@@ -32,24 +32,24 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
   ///
   /// [google.rpc.Code.PERMISSION_DENIED]: <doc:Code/permissionDenied>
-  public var resourceName: String
+  public var resourceName: Swift.String
 
   /// The owner of the resource (optional).
   /// For example, "user:<owner email>" or "project:<Google developer project
   /// id>".
-  public var owner: String
+  public var owner: Swift.String
 
   /// Describes what error is encountered when accessing this resource.
   /// For example, updating a cloud project may require the `writer` permission
   /// on the developer console project.
-  public var description: String
+  public var description: Swift.String
 
   /// Initialize a new instance of `ResourceInfo`.
   public init(
-    resourceType: String = String(),
-    resourceName: String = String(),
-    owner: String = String(),
-    description: String = String(),
+    resourceType: Swift.String = Swift.String(),
+    resourceName: Swift.String = Swift.String(),
+    owner: Swift.String = Swift.String(),
+    description: Swift.String = Swift.String(),
   ) {
     self.resourceType = resourceType
     self.resourceName = resourceName

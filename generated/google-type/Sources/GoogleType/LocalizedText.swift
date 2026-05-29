@@ -22,18 +22,18 @@ public struct LocalizedText: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Localized string in the language corresponding to `language_code' below.
-  public var text: String
+  public var text: Swift.String
 
   /// The text's BCP-47 language code, such as "en-US" or "sr-Latn".
   ///
   /// For more information, see
   /// http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-  public var languageCode: String
+  public var languageCode: Swift.String
 
   /// Initialize a new instance of `LocalizedText`.
   public init(
-    text: String = String(),
-    languageCode: String = String(),
+    text: Swift.String = Swift.String(),
+    languageCode: Swift.String = Swift.String(),
   ) {
     self.text = text
     self.languageCode = languageCode

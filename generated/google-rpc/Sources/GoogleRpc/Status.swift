@@ -31,7 +31,7 @@ public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.rpc.Code][google.rpc.Code].
   ///
   /// [google.rpc.Code]: <doc:Code>
-  public var code: Int32
+  public var code: Swift.Int32
 
   /// A developer-facing error message, which should be in English. Any
   /// user-facing error message should be localized and sent in the
@@ -39,7 +39,7 @@ public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// by the client.
   ///
   /// [google.rpc.Status.details]: <doc:Status/details>
-  public var message: String
+  public var message: Swift.String
 
   /// A list of messages that carry the error details.  There is a common set of
   /// message types for APIs to use.
@@ -47,8 +47,8 @@ public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Status`.
   public init(
-    code: Int32 = Int32(),
-    message: String = String(),
+    code: Swift.Int32 = Swift.Int32(),
+    message: Swift.String = Swift.String(),
     details: [GoogleCloudWkt.`Any`] = [],
   ) {
     self.code = code

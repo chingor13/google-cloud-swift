@@ -28,13 +28,13 @@ public struct MessageWithFloatValue: Codable, Equatable, GoogleCloudWkt._AnyPack
   public var repeated: [GoogleCloudWkt.FloatValue]
 
   /// Test google.protobuf.FloatValue as amap values.
-  public var map: [String: GoogleCloudWkt.FloatValue]
+  public var map: [Swift.String: GoogleCloudWkt.FloatValue]
 
   /// Initialize a new instance of `MessageWithFloatValue`.
   public init(
     singular: GoogleCloudWkt.FloatValue? = nil,
     repeated: [GoogleCloudWkt.FloatValue] = [],
-    map: [String: GoogleCloudWkt.FloatValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.FloatValue] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

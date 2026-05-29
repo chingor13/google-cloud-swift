@@ -31,14 +31,14 @@ public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var repeated: [MessageWithEnum.TestEnum]
 
   /// A map field, enums cannot be keys. We only need to test them as values.
-  public var map: [String: MessageWithEnum.TestEnum]
+  public var map: [Swift.String: MessageWithEnum.TestEnum]
 
   /// Initialize a new instance of `MessageWithEnum`.
   public init(
     singular: MessageWithEnum.TestEnum = MessageWithEnum.TestEnum(),
     `optional`: MessageWithEnum.TestEnum? = nil,
     repeated: [MessageWithEnum.TestEnum] = [],
-    map: [String: MessageWithEnum.TestEnum] = [:],
+    map: [Swift.String: MessageWithEnum.TestEnum] = [:],
   ) {
     self.singular = singular
     self.`optional` = `optional`
@@ -59,7 +59,7 @@ public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.`optional` = try container.decodeIfPresent(
       MessageWithEnum.TestEnum.self, forKey: .`optional`)
     self.repeated = try container.decode([MessageWithEnum.TestEnum].self, forKey: .repeated)
-    self.map = try container.decode([String: MessageWithEnum.TestEnum].self, forKey: .map)
+    self.map = try container.decode([Swift.String: MessageWithEnum.TestEnum].self, forKey: .map)
   }
 
   public func encode(to encoder: Encoder) throws {

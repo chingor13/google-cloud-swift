@@ -77,23 +77,23 @@ public struct Quaternion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The x component.
-  public var x: Double
+  public var x: Swift.Double
 
   /// The y component.
-  public var y: Double
+  public var y: Swift.Double
 
   /// The z component.
-  public var z: Double
+  public var z: Swift.Double
 
   /// The scalar component.
-  public var w: Double
+  public var w: Swift.Double
 
   /// Initialize a new instance of `Quaternion`.
   public init(
-    x: Double = Double(),
-    y: Double = Double(),
-    z: Double = Double(),
-    w: Double = Double(),
+    x: Swift.Double = Swift.Double(),
+    y: Swift.Double = Swift.Double(),
+    z: Swift.Double = Swift.Double(),
+    w: Swift.Double = Swift.Double(),
   ) {
     self.x = x
     self.y = y

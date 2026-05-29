@@ -26,7 +26,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The server-assigned name, which is only unique within the same service that
   /// originally returns it. If you use the default HTTP mapping, the
   /// `name` should be a resource name ending with `operations/{unique_id}`.
-  public var name: String
+  public var name: Swift.String
 
   /// Service-specific metadata associated with the operation.  It typically
   /// contains progress information and common metadata such as create time.
@@ -37,7 +37,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// If the value is `false`, it means the operation is still in progress.
   /// If `true`, the operation is completed, and either `error` or `response` is
   /// available.
-  public var done: Bool
+  public var done: Swift.Bool
 
   /// The operation result, which can be either an `error` or a valid `response`.
   /// If `done` == `false`, neither `error` nor `response` is set.
@@ -47,9 +47,9 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Operation`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
     metadata: GoogleCloudWkt.`Any`? = nil,
-    done: Bool = Bool(),
+    done: Swift.Bool = Swift.Bool(),
     result: OneOf_Result? = nil,
   ) {
     self.name = name
@@ -68,9 +68,9 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.name = try container.decode(String.self, forKey: .name)
+    self.name = try container.decode(Swift.String.self, forKey: .name)
     self.metadata = try container.decodeIfPresent(GoogleCloudWkt.`Any`.self, forKey: .metadata)
-    self.done = try container.decode(Bool.self, forKey: .done)
+    self.done = try container.decode(Swift.Bool.self, forKey: .done)
 
     var result: OneOf_Result? = nil
     let resultCheckAndSet = { (value: OneOf_Result) throws in

@@ -23,15 +23,15 @@ public struct TimeZone: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// IANA Time Zone Database time zone, e.g. "America/New_York".
-  public var id: String
+  public var id: Swift.String
 
   /// Optional. IANA Time Zone Database version number, e.g. "2019a".
-  public var version: String
+  public var version: Swift.String
 
   /// Initialize a new instance of `TimeZone`.
   public init(
-    id: String = String(),
-    version: String = String(),
+    id: Swift.String = Swift.String(),
+    version: Swift.String = Swift.String(),
   ) {
     self.id = id
     self.version = version

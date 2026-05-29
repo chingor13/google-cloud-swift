@@ -30,14 +30,14 @@ public struct AccessSecretVersionResponse: Codable, Equatable, GoogleCloudWkt._A
   /// `projects/*/locations/*/secrets/*/versions/*`.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: String
+  public var name: Swift.String
 
   /// Secret payload
   public var payload: SecretPayload?
 
   /// Initialize a new instance of `AccessSecretVersionResponse`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
     payload: SecretPayload? = nil,
   ) {
     self.name = name

@@ -25,11 +25,11 @@ public struct GetOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// The name of the operation resource.
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `GetOperationRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }

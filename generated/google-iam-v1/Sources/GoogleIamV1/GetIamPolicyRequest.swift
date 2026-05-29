@@ -23,7 +23,7 @@ public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// REQUIRED: The resource for which the policy is being requested.
   /// See the operation documentation for the appropriate value for this field.
-  public var resource: String
+  public var resource: Swift.String
 
   /// OPTIONAL: A `GetPolicyOptions` object for specifying options to
   /// `GetIamPolicy`.
@@ -31,7 +31,7 @@ public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Initialize a new instance of `GetIamPolicyRequest`.
   public init(
-    resource: String = String(),
+    resource: Swift.String = Swift.String(),
     options: GetPolicyOptions? = nil,
   ) {
     self.resource = resource

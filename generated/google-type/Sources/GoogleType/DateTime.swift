@@ -46,30 +46,30 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
   /// datetime without a year.
-  public var year: Int32
+  public var year: Swift.Int32
 
   /// Required. Month of year. Must be from 1 to 12.
-  public var month: Int32
+  public var month: Swift.Int32
 
   /// Required. Day of month. Must be from 1 to 31 and valid for the year and
   /// month.
-  public var day: Int32
+  public var day: Swift.Int32
 
   /// Required. Hours of day in 24 hour format. Should be from 0 to 23. An API
   /// may choose to allow the value "24:00:00" for scenarios like business
   /// closing time.
-  public var hours: Int32
+  public var hours: Swift.Int32
 
   /// Required. Minutes of hour of day. Must be from 0 to 59.
-  public var minutes: Int32
+  public var minutes: Swift.Int32
 
   /// Required. Seconds of minutes of the time. Must normally be from 0 to 59. An
   /// API may allow the value 60 if it allows leap-seconds.
-  public var seconds: Int32
+  public var seconds: Swift.Int32
 
   /// Required. Fractions of seconds in nanoseconds. Must be from 0 to
   /// 999,999,999.
-  public var nanos: Int32
+  public var nanos: Swift.Int32
 
   /// Optional. Specifies either the UTC offset or the time zone of the DateTime.
   /// Choose carefully between them, considering that time zone data may change
@@ -80,13 +80,13 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `DateTime`.
   public init(
-    year: Int32 = Int32(),
-    month: Int32 = Int32(),
-    day: Int32 = Int32(),
-    hours: Int32 = Int32(),
-    minutes: Int32 = Int32(),
-    seconds: Int32 = Int32(),
-    nanos: Int32 = Int32(),
+    year: Swift.Int32 = Swift.Int32(),
+    month: Swift.Int32 = Swift.Int32(),
+    day: Swift.Int32 = Swift.Int32(),
+    hours: Swift.Int32 = Swift.Int32(),
+    minutes: Swift.Int32 = Swift.Int32(),
+    seconds: Swift.Int32 = Swift.Int32(),
+    nanos: Swift.Int32 = Swift.Int32(),
     timeOffset: OneOf_TimeOffset? = nil,
   ) {
     self.year = year
@@ -113,13 +113,13 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.year = try container.decode(Int32.self, forKey: .year)
-    self.month = try container.decode(Int32.self, forKey: .month)
-    self.day = try container.decode(Int32.self, forKey: .day)
-    self.hours = try container.decode(Int32.self, forKey: .hours)
-    self.minutes = try container.decode(Int32.self, forKey: .minutes)
-    self.seconds = try container.decode(Int32.self, forKey: .seconds)
-    self.nanos = try container.decode(Int32.self, forKey: .nanos)
+    self.year = try container.decode(Swift.Int32.self, forKey: .year)
+    self.month = try container.decode(Swift.Int32.self, forKey: .month)
+    self.day = try container.decode(Swift.Int32.self, forKey: .day)
+    self.hours = try container.decode(Swift.Int32.self, forKey: .hours)
+    self.minutes = try container.decode(Swift.Int32.self, forKey: .minutes)
+    self.seconds = try container.decode(Swift.Int32.self, forKey: .seconds)
+    self.nanos = try container.decode(Swift.Int32.self, forKey: .nanos)
 
     var timeOffset: OneOf_TimeOffset? = nil
     let timeOffsetCheckAndSet = { (value: OneOf_TimeOffset) throws in

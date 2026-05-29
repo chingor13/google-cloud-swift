@@ -29,12 +29,12 @@ public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   public var locations: [Location]
 
   /// The standard List next-page token.
-  public var nextPageToken: String
+  public var nextPageToken: Swift.String
 
   /// Initialize a new instance of `ListLocationsResponse`.
   public init(
     locations: [Location] = [],
-    nextPageToken: String = String(),
+    nextPageToken: Swift.String = Swift.String(),
   ) {
     self.locations = locations
     self.nextPageToken = nextPageToken

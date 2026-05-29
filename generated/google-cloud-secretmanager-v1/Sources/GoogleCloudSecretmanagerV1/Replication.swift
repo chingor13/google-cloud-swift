@@ -149,7 +149,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       /// The canonical IDs of the location to replicate data.
       /// For example: `"us-east1"`.
-      public var location: String
+      public var location: Swift.String
 
       /// Optional. The customer-managed encryption configuration of the
       /// [User-Managed Replica][Replication.UserManaged.Replica]. If no
@@ -168,7 +168,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
       /// Initialize a new instance of `Replica`.
       public init(
-        location: String = String(),
+        location: Swift.String = Swift.String(),
         customerManagedEncryption: CustomerManagedEncryption? = nil,
       ) {
         self.location = location

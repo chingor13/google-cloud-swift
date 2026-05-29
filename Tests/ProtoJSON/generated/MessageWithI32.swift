@@ -22,31 +22,31 @@ public struct MessageWithI32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Int32
+  public var singular: Swift.Int32
 
   /// An optional field.
-  public var option: Int32?
+  public var option: Swift.Int32?
 
   /// A repeated field.
-  public var repeated: [Int32]
+  public var repeated: [Swift.Int32]
 
   /// Test i32 as values.
-  public var mapValue: [String: Int32]
+  public var mapValue: [Swift.String: Swift.Int32]
 
   /// Test i32 as keys.
-  public var mapKey: [Int32: String]
+  public var mapKey: [Swift.Int32: Swift.String]
 
   /// Test i32 as both keys and values.
-  public var mapKeyValue: [Int32: Int32]
+  public var mapKeyValue: [Swift.Int32: Swift.Int32]
 
   /// Initialize a new instance of `MessageWithI32`.
   public init(
-    singular: Int32 = Int32(),
-    option: Int32? = nil,
-    repeated: [Int32] = [],
-    mapValue: [String: Int32] = [:],
-    mapKey: [Int32: String] = [:],
-    mapKeyValue: [Int32: Int32] = [:],
+    singular: Swift.Int32 = Swift.Int32(),
+    option: Swift.Int32? = nil,
+    repeated: [Swift.Int32] = [],
+    mapValue: [Swift.String: Swift.Int32] = [:],
+    mapKey: [Swift.Int32: Swift.String] = [:],
+    mapKeyValue: [Swift.Int32: Swift.Int32] = [:],
   ) {
     self.singular = singular
     self.option = option

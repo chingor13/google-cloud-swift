@@ -31,7 +31,7 @@ public struct AddSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var parent: String
+  public var parent: Swift.String
 
   /// Required. The secret payload of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -41,7 +41,7 @@ public struct AddSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
 
   /// Initialize a new instance of `AddSecretVersionRequest`.
   public init(
-    parent: String = String(),
+    parent: Swift.String = Swift.String(),
     payload: SecretPayload? = nil,
   ) {
     self.parent = parent

@@ -46,8 +46,8 @@ extension Clients {
     public func listLocations(
       request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0)"
@@ -75,8 +75,8 @@ extension Clients {
     public func getLocation(
       request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0)"

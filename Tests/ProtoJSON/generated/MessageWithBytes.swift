@@ -22,24 +22,24 @@ public struct MessageWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Data
+  public var singular: Foundation.Data
 
   /// An optional field.
-  public var option: Data?
+  public var option: Foundation.Data?
 
   /// A repeated field.
-  public var repeated: [Data]
+  public var repeated: [Foundation.Data]
 
   /// A map field, bytes cannot be keys, so we only need to test them as
   /// values.
-  public var map: [String: Data]
+  public var map: [Swift.String: Foundation.Data]
 
   /// Initialize a new instance of `MessageWithBytes`.
   public init(
-    singular: Data = Data(),
-    option: Data? = nil,
-    repeated: [Data] = [],
-    map: [String: Data] = [:],
+    singular: Foundation.Data = Foundation.Data(),
+    option: Foundation.Data? = nil,
+    repeated: [Foundation.Data] = [],
+    map: [Swift.String: Foundation.Data] = [:],
   ) {
     self.singular = singular
     self.option = option

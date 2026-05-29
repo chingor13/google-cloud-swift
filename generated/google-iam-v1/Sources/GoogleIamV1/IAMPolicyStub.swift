@@ -50,8 +50,8 @@ extension Clients {
     public func setIamPolicy(
       request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
         }
         return "/v1/\(pathVariable0):setIamPolicy"
@@ -77,8 +77,8 @@ extension Clients {
     public func getIamPolicy(
       request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
         }
         return "/v1/\(pathVariable0):getIamPolicy"
@@ -104,8 +104,8 @@ extension Clients {
     public func testIamPermissions(
       request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.resource as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
         }
         return "/v1/\(pathVariable0):testIamPermissions"

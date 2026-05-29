@@ -41,14 +41,14 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// the latest revision.
   ///
   /// All new revisions **must** be backward compatible with old revisions.
-  public var revision: Int32
+  public var revision: Swift.Int32
 
   /// Required. CLDR region code of the country/region of the address. This
   /// is never inferred and it is up to the user to ensure the value is
   /// correct. See http://cldr.unicode.org/ and
   /// http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
   /// for details. Example: "CH" for Switzerland.
-  public var regionCode: String
+  public var regionCode: Swift.String
 
   /// Optional. BCP-47 language code of the contents of this address (if
   /// known). This is often the UI language of the input form or is expected
@@ -62,20 +62,20 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// possibly incorrect default).
   ///
   /// Examples: "zh-Hant", "ja", "ja-Latn", "en".
-  public var languageCode: String
+  public var languageCode: Swift.String
 
   /// Optional. Postal code of the address. Not all countries use or require
   /// postal codes to be present, but where they are used, they may trigger
   /// additional validation with other parts of the address (e.g. state/zip
   /// validation in the U.S.A.).
-  public var postalCode: String
+  public var postalCode: Swift.String
 
   /// Optional. Additional, country-specific, sorting code. This is not used
   /// in most regions. Where it is used, the value is either a string like
   /// "CEDEX", optionally followed by a number (e.g. "CEDEX 7"), or just a number
   /// alone, representing the "sector code" (Jamaica), "delivery area indicator"
   /// (Malawi) or "post office indicator" (e.g. Côte d'Ivoire).
-  public var sortingCode: String
+  public var sortingCode: Swift.String
 
   /// Optional. Highest administrative subdivision which is used for postal
   /// addresses of a country or region.
@@ -84,17 +84,17 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// community (e.g. "Barcelona" and not "Catalonia").
   /// Many countries don't use an administrative area in postal addresses. E.g.
   /// in Switzerland this should be left unpopulated.
-  public var administrativeArea: String
+  public var administrativeArea: Swift.String
 
   /// Optional. Generally refers to the city/town portion of the address.
   /// Examples: US city, IT comune, UK post town.
   /// In regions of the world where localities are not well defined or do not fit
   /// into this structure well, leave locality empty and use address_lines.
-  public var locality: String
+  public var locality: Swift.String
 
   /// Optional. Sublocality of the address.
   /// For example, this can be neighborhoods, boroughs, districts.
-  public var sublocality: String
+  public var sublocality: Swift.String
 
   /// Unstructured address lines describing the lower levels of an address.
   ///
@@ -118,29 +118,29 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// then geocoding is the recommended way to handle completely unstructured
   /// addresses (as opposed to guessing which parts of the address should be
   /// localities or administrative areas).
-  public var addressLines: [String]
+  public var addressLines: [Swift.String]
 
   /// Optional. The recipient at the address.
   /// This field may, under certain circumstances, contain multiline information.
   /// For example, it might contain "care of" information.
-  public var recipients: [String]
+  public var recipients: [Swift.String]
 
   /// Optional. The name of the organization at the address.
-  public var organization: String
+  public var organization: Swift.String
 
   /// Initialize a new instance of `PostalAddress`.
   public init(
-    revision: Int32 = Int32(),
-    regionCode: String = String(),
-    languageCode: String = String(),
-    postalCode: String = String(),
-    sortingCode: String = String(),
-    administrativeArea: String = String(),
-    locality: String = String(),
-    sublocality: String = String(),
-    addressLines: [String] = [],
-    recipients: [String] = [],
-    organization: String = String(),
+    revision: Swift.Int32 = Swift.Int32(),
+    regionCode: Swift.String = Swift.String(),
+    languageCode: Swift.String = Swift.String(),
+    postalCode: Swift.String = Swift.String(),
+    sortingCode: Swift.String = Swift.String(),
+    administrativeArea: Swift.String = Swift.String(),
+    locality: Swift.String = Swift.String(),
+    sublocality: Swift.String = Swift.String(),
+    addressLines: [Swift.String] = [],
+    recipients: [Swift.String] = [],
+    organization: Swift.String = Swift.String(),
   ) {
     self.revision = revision
     self.regionCode = regionCode

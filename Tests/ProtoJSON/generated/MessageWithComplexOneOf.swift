@@ -62,25 +62,25 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     if let null = try container.decodeIfPresent(GoogleCloudWkt.NullValue.self, forKey: .null) {
       try complexCheckAndSet(.null(null))
     }
-    if let boolValue = try container.decodeIfPresent(Bool.self, forKey: .boolValue) {
+    if let boolValue = try container.decodeIfPresent(Swift.Bool.self, forKey: .boolValue) {
       try complexCheckAndSet(.boolValue(boolValue))
     }
-    if let bytesValue = try container.decodeIfPresent(Data.self, forKey: .bytesValue) {
+    if let bytesValue = try container.decodeIfPresent(Foundation.Data.self, forKey: .bytesValue) {
       try complexCheckAndSet(.bytesValue(bytesValue))
     }
-    if let stringValue = try container.decodeIfPresent(String.self, forKey: .stringValue) {
+    if let stringValue = try container.decodeIfPresent(Swift.String.self, forKey: .stringValue) {
       try complexCheckAndSet(.stringValue(stringValue))
     }
-    if let floatValue = try container.decodeIfPresent(Float.self, forKey: .floatValue) {
+    if let floatValue = try container.decodeIfPresent(Swift.Float.self, forKey: .floatValue) {
       try complexCheckAndSet(.floatValue(floatValue))
     }
-    if let doubleValue = try container.decodeIfPresent(Double.self, forKey: .doubleValue) {
+    if let doubleValue = try container.decodeIfPresent(Swift.Double.self, forKey: .doubleValue) {
       try complexCheckAndSet(.doubleValue(doubleValue))
     }
-    if let int32 = try container.decodeIfPresent(Int32.self, forKey: .int32) {
+    if let int32 = try container.decodeIfPresent(Swift.Int32.self, forKey: .int32) {
       try complexCheckAndSet(.int32(int32))
     }
-    if let int64 = try container.decodeIfPresent(Int64.self, forKey: .int64) {
+    if let int64 = try container.decodeIfPresent(Swift.Int64.self, forKey: .int64) {
       try complexCheckAndSet(.int64(int64))
     }
     if let `enum` = try container.decodeIfPresent(
@@ -147,11 +147,11 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
   public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var strings: [String]
+    public var strings: [Swift.String]
 
     /// Initialize a new instance of `Inner`.
     public init(
-      strings: [String] = [],
+      strings: [Swift.String] = [],
     ) {
       self.strings = strings
     }
@@ -193,13 +193,13 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
 
   public enum OneOf_Complex: Codable, Equatable, Sendable {
     case null(GoogleCloudWkt.NullValue)
-    case boolValue(Bool)
-    case bytesValue(Data)
-    case stringValue(String)
-    case floatValue(Float)
-    case doubleValue(Double)
-    case int32(Int32)
-    case int64(Int64)
+    case boolValue(Swift.Bool)
+    case bytesValue(Foundation.Data)
+    case stringValue(Swift.String)
+    case floatValue(Swift.Float)
+    case doubleValue(Swift.Double)
+    case int32(Swift.Int32)
+    case int64(Swift.Int64)
     case `enum`(MessageWithComplexOneOf.TestEnum)
     indirect case inner(MessageWithComplexOneOf.Inner?)
     indirect case duration(GoogleCloudWkt.Duration?)

@@ -39,11 +39,11 @@ public struct GetPolicyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// To learn which resources support conditions in their IAM policies, see the
   /// [IAM
   /// documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-  public var requestedPolicyVersion: Int32
+  public var requestedPolicyVersion: Swift.Int32
 
   /// Initialize a new instance of `GetPolicyOptions`.
   public init(
-    requestedPolicyVersion: Int32 = Int32(),
+    requestedPolicyVersion: Swift.Int32 = Swift.Int32(),
   ) {
     self.requestedPolicyVersion = requestedPolicyVersion
   }

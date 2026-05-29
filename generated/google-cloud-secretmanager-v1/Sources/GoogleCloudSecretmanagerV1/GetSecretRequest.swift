@@ -29,11 +29,11 @@ public struct GetSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `GetSecretRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }

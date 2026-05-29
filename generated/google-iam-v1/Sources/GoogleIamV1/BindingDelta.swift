@@ -30,12 +30,12 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Role that is assigned to `members`.
   /// For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
   /// Required
-  public var role: String
+  public var role: Swift.String
 
   /// A single identity requesting access for a Google Cloud resource.
   /// Follows the same format of Binding.members.
   /// Required
-  public var member: String
+  public var member: Swift.String
 
   /// The condition that is associated with this binding.
   public var condition: GoogleType.Expr?
@@ -43,8 +43,8 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Initialize a new instance of `BindingDelta`.
   public init(
     action: BindingDelta.Action = BindingDelta.Action(),
-    role: String = String(),
-    member: String = String(),
+    role: Swift.String = Swift.String(),
+    member: Swift.String = Swift.String(),
     condition: GoogleType.Expr? = nil,
   ) {
     self.action = action

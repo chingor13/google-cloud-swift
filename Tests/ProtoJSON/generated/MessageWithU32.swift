@@ -22,31 +22,31 @@ public struct MessageWithU32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: UInt32
+  public var singular: Swift.UInt32
 
   /// An optional field.
-  public var option: UInt32?
+  public var option: Swift.UInt32?
 
   /// A repeated field.
-  public var repeated: [UInt32]
+  public var repeated: [Swift.UInt32]
 
   /// Test u32 as values.
-  public var mapValue: [String: UInt32]
+  public var mapValue: [Swift.String: Swift.UInt32]
 
   /// Test u32 as keys.
-  public var mapKey: [UInt32: String]
+  public var mapKey: [Swift.UInt32: Swift.String]
 
   /// Test u32 as both keys and values.
-  public var mapKeyValue: [UInt32: UInt32]
+  public var mapKeyValue: [Swift.UInt32: Swift.UInt32]
 
   /// Initialize a new instance of `MessageWithU32`.
   public init(
-    singular: UInt32 = UInt32(),
-    option: UInt32? = nil,
-    repeated: [UInt32] = [],
-    mapValue: [String: UInt32] = [:],
-    mapKey: [UInt32: String] = [:],
-    mapKeyValue: [UInt32: UInt32] = [:],
+    singular: Swift.UInt32 = Swift.UInt32(),
+    option: Swift.UInt32? = nil,
+    repeated: [Swift.UInt32] = [],
+    mapValue: [Swift.String: Swift.UInt32] = [:],
+    mapKey: [Swift.UInt32: Swift.String] = [:],
+    mapKeyValue: [Swift.UInt32: Swift.UInt32] = [:],
   ) {
     self.singular = singular
     self.option = option

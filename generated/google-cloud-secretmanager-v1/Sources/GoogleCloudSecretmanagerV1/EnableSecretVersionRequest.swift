@@ -30,7 +30,7 @@ public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._An
   /// `projects/*/locations/*/secrets/*/versions/*`.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: String
+  public var name: Swift.String
 
   /// Optional. Etag of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. The request
@@ -38,12 +38,12 @@ public struct EnableSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._An
   /// object. If the etag is omitted, the request succeeds.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var etag: String
+  public var etag: Swift.String
 
   /// Initialize a new instance of `EnableSecretVersionRequest`.
   public init(
-    name: String = String(),
-    etag: String = String(),
+    name: Swift.String = Swift.String(),
+    etag: Swift.String = Swift.String(),
   ) {
     self.name = name
     self.etag = etag

@@ -145,13 +145,13 @@ public struct Color: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The amount of red in the color as a value in the interval [0, 1].
-  public var red: Float
+  public var red: Swift.Float
 
   /// The amount of green in the color as a value in the interval [0, 1].
-  public var green: Float
+  public var green: Swift.Float
 
   /// The amount of blue in the color as a value in the interval [0, 1].
-  public var blue: Float
+  public var blue: Swift.Float
 
   /// The fraction of this color that should be applied to the pixel. That is,
   /// the final pixel color is defined by the equation:
@@ -168,9 +168,9 @@ public struct Color: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Color`.
   public init(
-    red: Float = Float(),
-    green: Float = Float(),
-    blue: Float = Float(),
+    red: Swift.Float = Swift.Float(),
+    green: Swift.Float = Swift.Float(),
+    blue: Swift.Float = Swift.Float(),
     alpha: GoogleCloudWkt.FloatValue? = nil,
   ) {
     self.red = red

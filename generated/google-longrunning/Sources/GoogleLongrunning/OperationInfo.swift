@@ -38,7 +38,7 @@ public struct OperationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// message name must be used (e.g. `google.protobuf.Struct`).
   ///
   /// Note: Altering this value constitutes a breaking change.
-  public var responseType: String
+  public var responseType: Swift.String
 
   /// Required. The message name of the metadata type for this long-running
   /// operation.
@@ -47,12 +47,12 @@ public struct OperationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// message name must be used (e.g. `google.protobuf.Struct`).
   ///
   /// Note: Altering this value constitutes a breaking change.
-  public var metadataType: String
+  public var metadataType: Swift.String
 
   /// Initialize a new instance of `OperationInfo`.
   public init(
-    responseType: String = String(),
-    metadataType: String = String(),
+    responseType: Swift.String = Swift.String(),
+    metadataType: Swift.String = Swift.String(),
   ) {
     self.responseType = responseType
     self.metadataType = metadataType

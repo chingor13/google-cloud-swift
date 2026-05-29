@@ -26,15 +26,15 @@ public struct LatLng: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The latitude in degrees. It must be in the range [-90.0, +90.0].
-  public var latitude: Double
+  public var latitude: Swift.Double
 
   /// The longitude in degrees. It must be in the range [-180.0, +180.0].
-  public var longitude: Double
+  public var longitude: Swift.Double
 
   /// Initialize a new instance of `LatLng`.
   public init(
-    latitude: Double = Double(),
-    longitude: Double = Double(),
+    latitude: Swift.Double = Swift.Double(),
+    longitude: Swift.Double = Swift.Double(),
   ) {
     self.latitude = latitude
     self.longitude = longitude

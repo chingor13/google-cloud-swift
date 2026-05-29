@@ -22,31 +22,31 @@ public struct MessageWithI64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Int64
+  public var singular: Swift.Int64
 
   /// An optional field.
-  public var option: Int64?
+  public var option: Swift.Int64?
 
   /// A repeated field.
-  public var repeated: [Int64]
+  public var repeated: [Swift.Int64]
 
   /// Test i64 as values.
-  public var mapValue: [String: Int64]
+  public var mapValue: [Swift.String: Swift.Int64]
 
   /// Test i64 as keys.
-  public var mapKey: [Int64: String]
+  public var mapKey: [Swift.Int64: Swift.String]
 
   /// Test i64 as both keys and values.
-  public var mapKeyValue: [Int64: Int64]
+  public var mapKeyValue: [Swift.Int64: Swift.Int64]
 
   /// Initialize a new instance of `MessageWithI64`.
   public init(
-    singular: Int64 = Int64(),
-    option: Int64? = nil,
-    repeated: [Int64] = [],
-    mapValue: [String: Int64] = [:],
-    mapKey: [Int64: String] = [:],
-    mapKeyValue: [Int64: Int64] = [:],
+    singular: Swift.Int64 = Swift.Int64(),
+    option: Swift.Int64? = nil,
+    repeated: [Swift.Int64] = [],
+    mapValue: [Swift.String: Swift.Int64] = [:],
+    mapKey: [Swift.Int64: Swift.String] = [:],
+    mapKeyValue: [Swift.Int64: Swift.Int64] = [:],
   ) {
     self.singular = singular
     self.option = option

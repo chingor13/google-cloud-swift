@@ -28,13 +28,13 @@ public struct MessageWithStringValue: Codable, Equatable, GoogleCloudWkt._AnyPac
   public var repeated: [GoogleCloudWkt.StringValue]
 
   /// Test string as map values.
-  public var map: [String: GoogleCloudWkt.StringValue]
+  public var map: [Swift.String: GoogleCloudWkt.StringValue]
 
   /// Initialize a new instance of `MessageWithStringValue`.
   public init(
     singular: GoogleCloudWkt.StringValue? = nil,
     repeated: [GoogleCloudWkt.StringValue] = [],
-    map: [String: GoogleCloudWkt.StringValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.StringValue] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

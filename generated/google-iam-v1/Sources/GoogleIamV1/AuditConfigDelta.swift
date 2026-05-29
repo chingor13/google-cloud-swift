@@ -30,24 +30,24 @@ public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
   /// `allServices` is a special value that covers all services.
   /// Required
-  public var service: String
+  public var service: Swift.String
 
   /// A single identity that is exempted from "data access" audit
   /// logging for the `service` specified above.
   /// Follows the same format of Binding.members.
-  public var exemptedMember: String
+  public var exemptedMember: Swift.String
 
   /// Specifies the log_type that was be enabled. ADMIN_ACTIVITY is always
   /// enabled, and cannot be configured.
   /// Required
-  public var logType: String
+  public var logType: Swift.String
 
   /// Initialize a new instance of `AuditConfigDelta`.
   public init(
     action: AuditConfigDelta.Action = AuditConfigDelta.Action(),
-    service: String = String(),
-    exemptedMember: String = String(),
-    logType: String = String(),
+    service: Swift.String = Swift.String(),
+    exemptedMember: Swift.String = Swift.String(),
+    logType: Swift.String = Swift.String(),
   ) {
     self.action = action
     self.service = service

@@ -35,11 +35,11 @@ public struct GetSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `GetSecretVersionRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }

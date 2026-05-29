@@ -53,27 +53,27 @@ public struct Expr: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Textual representation of an expression in Common Expression Language
   /// syntax.
-  public var expression: String
+  public var expression: Swift.String
 
   /// Optional. Title for the expression, i.e. a short string describing
   /// its purpose. This can be used e.g. in UIs which allow to enter the
   /// expression.
-  public var title: String
+  public var title: Swift.String
 
   /// Optional. Description of the expression. This is a longer text which
   /// describes the expression, e.g. when hovered over it in a UI.
-  public var description: String
+  public var description: Swift.String
 
   /// Optional. String indicating the location of the expression for error
   /// reporting, e.g. a file name and a position in the file.
-  public var location: String
+  public var location: Swift.String
 
   /// Initialize a new instance of `Expr`.
   public init(
-    expression: String = String(),
-    title: String = String(),
-    description: String = String(),
-    location: String = String(),
+    expression: Swift.String = Swift.String(),
+    title: Swift.String = Swift.String(),
+    description: Swift.String = Swift.String(),
+    location: Swift.String = Swift.String(),
   ) {
     self.expression = expression
     self.title = title

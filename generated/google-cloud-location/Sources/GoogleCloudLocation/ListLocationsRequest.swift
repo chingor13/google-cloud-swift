@@ -24,23 +24,23 @@ public struct ListLocationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The resource that owns the locations collection, if applicable.
-  public var name: String
+  public var name: Swift.String
 
   /// The standard list filter.
-  public var filter: String
+  public var filter: Swift.String
 
   /// The standard list page size.
-  public var pageSize: Int32
+  public var pageSize: Swift.Int32
 
   /// The standard list page token.
-  public var pageToken: String
+  public var pageToken: Swift.String
 
   /// Initialize a new instance of `ListLocationsRequest`.
   public init(
-    name: String = String(),
-    filter: String = String(),
-    pageSize: Int32 = Int32(),
-    pageToken: String = String(),
+    name: Swift.String = Swift.String(),
+    filter: Swift.String = Swift.String(),
+    pageSize: Swift.Int32 = Swift.Int32(),
+    pageToken: Swift.String = Swift.String(),
   ) {
     self.name = name
     self.filter = filter

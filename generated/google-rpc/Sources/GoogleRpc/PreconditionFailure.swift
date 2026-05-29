@@ -42,24 +42,24 @@ public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// The type of PreconditionFailure. We recommend using a service-specific
     /// enum type to define the supported precondition violation subjects. For
     /// example, "TOS" for "Terms of Service violation".
-    public var type: String
+    public var type: Swift.String
 
     /// The subject, relative to the type, that failed.
     /// For example, "google.com/cloud" relative to the "TOS" type would indicate
     /// which terms of service is being referenced.
-    public var subject: String
+    public var subject: Swift.String
 
     /// A description of how the precondition failed. Developers can use this
     /// description to understand how to fix the failure.
     ///
     /// For example: "Terms of service not accepted".
-    public var description: String
+    public var description: Swift.String
 
     /// Initialize a new instance of `Violation`.
     public init(
-      type: String = String(),
-      subject: String = String(),
-      description: String = String(),
+      type: Swift.String = Swift.String(),
+      subject: Swift.String = Swift.String(),
+      description: Swift.String = Swift.String(),
     ) {
       self.type = type
       self.subject = subject

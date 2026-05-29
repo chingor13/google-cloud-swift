@@ -24,7 +24,7 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Role that is assigned to the list of `members`, or principals.
   /// For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-  public var role: String
+  public var role: Swift.String
 
   /// Specifies the principals requesting access for a Google Cloud resource.
   /// `members` can have the following values:
@@ -70,7 +70,7 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///    users of that domain. For example, `google.com` or `example.com`.
   ///
   ///
-  public var members: [String]
+  public var members: [Swift.String]
 
   /// The condition that is associated with this binding.
   ///
@@ -88,8 +88,8 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Binding`.
   public init(
-    role: String = String(),
-    members: [String] = [],
+    role: Swift.String = Swift.String(),
+    members: [Swift.String] = [],
     condition: GoogleType.Expr? = nil,
   ) {
     self.role = role

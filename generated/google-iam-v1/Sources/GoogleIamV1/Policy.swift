@@ -118,7 +118,7 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// To learn which resources support conditions in their IAM policies, see the
   /// [IAM
   /// documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-  public var version: Int32
+  public var version: Swift.Int32
 
   /// Associates a list of `members`, or principals, with a `role`. Optionally,
   /// may specify a `condition` that determines how and when the `bindings` are
@@ -147,14 +147,14 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// whenever you call `setIamPolicy`. If you omit this field, then IAM allows
   /// you to overwrite a version `3` policy with a version `1` policy, and all of
   /// the conditions in the version `3` policy are lost.
-  public var etag: Data
+  public var etag: Foundation.Data
 
   /// Initialize a new instance of `Policy`.
   public init(
-    version: Int32 = Int32(),
+    version: Swift.Int32 = Swift.Int32(),
     bindings: [Binding] = [],
     auditConfigs: [AuditConfig] = [],
-    etag: Data = Data(),
+    etag: Foundation.Data = Foundation.Data(),
   ) {
     self.version = version
     self.bindings = bindings

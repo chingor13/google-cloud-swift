@@ -25,7 +25,7 @@ public struct WaitOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The name of the operation resource to wait on.
-  public var name: String
+  public var name: Swift.String
 
   /// The maximum duration to wait before timing out. If left blank, the wait
   /// will be at most the time permitted by the underlying HTTP/RPC protocol.
@@ -34,7 +34,7 @@ public struct WaitOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// Initialize a new instance of `WaitOperationRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
     timeout: GoogleCloudWkt.Duration? = nil,
   ) {
     self.name = name

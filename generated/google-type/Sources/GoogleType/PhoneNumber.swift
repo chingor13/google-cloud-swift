@@ -55,7 +55,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// field is normally only set in conjunction with an E.164 number. It is held
   /// separately from the E.164 number to allow for short code extensions in the
   /// future.
-  public var `extension`: String
+  public var `extension`: Swift.String
 
   /// Required.  Either a regular number, or a short code.  New fields may be
   /// added to the oneof below in the future, so clients should ignore phone
@@ -64,7 +64,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `PhoneNumber`.
   public init(
-    `extension`: String = String(),
+    `extension`: Swift.String = Swift.String(),
     kind: OneOf_Kind? = nil,
   ) {
     self.`extension` = `extension`
@@ -79,7 +79,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.`extension` = try container.decode(String.self, forKey: .`extension`)
+    self.`extension` = try container.decode(Swift.String.self, forKey: .`extension`)
 
     var kind: OneOf_Kind? = nil
     let kindCheckAndSet = { (value: OneOf_Kind) throws in
@@ -91,7 +91,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
       kind = value
     }
-    if let e164Number = try container.decodeIfPresent(String.self, forKey: .e164Number) {
+    if let e164Number = try container.decodeIfPresent(Swift.String.self, forKey: .e164Number) {
       try kindCheckAndSet(.e164Number(e164Number))
     }
     if let shortCode = try container.decodeIfPresent(
@@ -133,16 +133,16 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// Reference(s):
     ///  - http://www.unicode.org/reports/tr35/#unicode_region_subtag
-    public var regionCode: String
+    public var regionCode: Swift.String
 
     /// Required. The short code digits, without a leading plus ('+') or country
     /// calling code, e.g. "611".
-    public var number: String
+    public var number: Swift.String
 
     /// Initialize a new instance of `ShortCode`.
     public init(
-      regionCode: String = String(),
-      number: String = String(),
+      regionCode: Swift.String = Swift.String(),
+      number: Swift.String = Swift.String(),
     ) {
       self.regionCode = regionCode
       self.number = number
@@ -178,7 +178,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///  - https://www.itu.int/rec/T-REC-E.164-201011-I
     ///  - https://en.wikipedia.org/wiki/E.164.
     ///  - https://en.wikipedia.org/wiki/List_of_country_calling_codes
-    case e164Number(String)
+    case e164Number(Swift.String)
     /// A short code.
     ///
     /// Reference(s):

@@ -37,22 +37,22 @@ public struct Date: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
   /// a year.
-  public var year: Int32
+  public var year: Swift.Int32
 
   /// Month of a year. Must be from 1 to 12, or 0 to specify a year without a
   /// month and day.
-  public var month: Int32
+  public var month: Swift.Int32
 
   /// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0
   /// to specify a year by itself or a year and month where the day isn't
   /// significant.
-  public var day: Int32
+  public var day: Swift.Int32
 
   /// Initialize a new instance of `Date`.
   public init(
-    year: Int32 = Int32(),
-    month: Int32 = Int32(),
-    day: Int32 = Int32(),
+    year: Swift.Int32 = Swift.Int32(),
+    month: Swift.Int32 = Swift.Int32(),
+    day: Swift.Int32 = Swift.Int32(),
   ) {
     self.year = year
     self.month = month

@@ -22,24 +22,24 @@ public struct HttpResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP status code, such as 200 or 404.
-  public var status: Int32
+  public var status: Swift.Int32
 
   /// The HTTP reason phrase, such as "OK" or "Not Found".
-  public var reason: String
+  public var reason: Swift.String
 
   /// The HTTP response headers. The ordering of the headers is significant.
   /// Multiple headers with the same key may present for the response.
   public var headers: [HttpHeader]
 
   /// The HTTP response body. If the body is not expected, it should be empty.
-  public var body: Data
+  public var body: Foundation.Data
 
   /// Initialize a new instance of `HttpResponse`.
   public init(
-    status: Int32 = Int32(),
-    reason: String = String(),
+    status: Swift.Int32 = Swift.Int32(),
+    reason: Swift.String = Swift.String(),
     headers: [HttpHeader] = [],
-    body: Data = Data(),
+    body: Foundation.Data = Foundation.Data(),
   ) {
     self.status = status
     self.reason = reason

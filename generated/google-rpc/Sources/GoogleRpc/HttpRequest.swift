@@ -22,24 +22,24 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP request method.
-  public var method: String
+  public var method: Swift.String
 
   /// The HTTP request URI.
-  public var uri: String
+  public var uri: Swift.String
 
   /// The HTTP request headers. The ordering of the headers is significant.
   /// Multiple headers with the same key may present for the request.
   public var headers: [HttpHeader]
 
   /// The HTTP request body. If the body is not expected, it should be empty.
-  public var body: Data
+  public var body: Foundation.Data
 
   /// Initialize a new instance of `HttpRequest`.
   public init(
-    method: String = String(),
-    uri: String = String(),
+    method: Swift.String = Swift.String(),
+    uri: Swift.String = Swift.String(),
     headers: [HttpHeader] = [],
-    body: Data = Data(),
+    body: Foundation.Data = Foundation.Data(),
   ) {
     self.method = method
     self.uri = uri

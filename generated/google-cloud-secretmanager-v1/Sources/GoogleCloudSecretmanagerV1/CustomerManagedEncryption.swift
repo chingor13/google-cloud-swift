@@ -38,11 +38,11 @@ public struct CustomerManagedEncryption: Codable, Equatable, GoogleCloudWkt._Any
   ///
   /// [google.cloud.secretmanager.v1.Replication.Automatic]: <doc:Replication/Automatic>
   /// [google.cloud.secretmanager.v1.Replication.UserManaged]: <doc:Replication/UserManaged>
-  public var kmsKeyName: String
+  public var kmsKeyName: Swift.String
 
   /// Initialize a new instance of `CustomerManagedEncryption`.
   public init(
-    kmsKeyName: String = String(),
+    kmsKeyName: Swift.String = Swift.String(),
   ) {
     self.kmsKeyName = kmsKeyName
   }

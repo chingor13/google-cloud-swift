@@ -31,30 +31,30 @@ public struct ListSecretVersionsRequest: Codable, Equatable, GoogleCloudWkt._Any
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var parent: String
+  public var parent: Swift.String
 
   /// Optional. The maximum number of results to be returned in a single page. If
   /// set to 0, the server decides the number of results to return. If the
   /// number is greater than 25000, it is capped at 25000.
-  public var pageSize: Int32
+  public var pageSize: Swift.Int32
 
   /// Optional. Pagination token, returned earlier via
   /// ListSecretVersionsResponse.next_page_token][].
-  public var pageToken: String
+  public var pageToken: Swift.String
 
   /// Optional. Filter string, adhering to the rules in
   /// [List-operation
   /// filtering](https://cloud.google.com/secret-manager/docs/filtering). List
   /// only secret versions matching the filter. If filter is empty, all secret
   /// versions are listed.
-  public var filter: String
+  public var filter: Swift.String
 
   /// Initialize a new instance of `ListSecretVersionsRequest`.
   public init(
-    parent: String = String(),
-    pageSize: Int32 = Int32(),
-    pageToken: String = String(),
-    filter: String = String(),
+    parent: Swift.String = Swift.String(),
+    pageSize: Swift.Int32 = Swift.Int32(),
+    pageToken: Swift.String = Swift.String(),
+    filter: Swift.String = Swift.String(),
   ) {
     self.parent = parent
     self.pageSize = pageSize

@@ -24,11 +24,11 @@ public struct GetLocationRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Resource name for the location.
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `GetLocationRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }

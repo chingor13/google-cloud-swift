@@ -31,7 +31,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: String
+  public var name: Swift.String
 
   /// Output only. The time at which the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was created.
@@ -66,7 +66,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var etag: String
+  public var etag: Swift.String
 
   /// Output only. True if payload checksum specified in
   /// [SecretPayload][google.cloud.secretmanager.v1.SecretPayload] object has
@@ -78,7 +78,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretManagerService]: <doc:SecretManagerService>
   /// [google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion]: <doc:SecretManagerService/addSecretVersion(request:)>
   /// [google.cloud.secretmanager.v1.SecretPayload]: <doc:SecretPayload>
-  public var clientSpecifiedPayloadChecksum: Bool
+  public var clientSpecifiedPayloadChecksum: Swift.Bool
 
   /// Optional. Output only. Scheduled destroy time for secret version.
   /// This is a part of the Delayed secret version destroy feature. For a
@@ -98,13 +98,13 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `SecretVersion`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
     createTime: GoogleCloudWkt.Timestamp? = nil,
     destroyTime: GoogleCloudWkt.Timestamp? = nil,
     state: SecretVersion.State = SecretVersion.State(),
     replicationStatus: ReplicationStatus? = nil,
-    etag: String = String(),
-    clientSpecifiedPayloadChecksum: Bool = Bool(),
+    etag: Swift.String = Swift.String(),
+    clientSpecifiedPayloadChecksum: Swift.Bool = Swift.Bool(),
     scheduledDestroyTime: GoogleCloudWkt.Timestamp? = nil,
     customerManagedEncryption: CustomerManagedEncryptionStatus? = nil,
   ) {

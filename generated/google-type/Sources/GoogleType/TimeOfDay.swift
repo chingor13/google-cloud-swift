@@ -28,24 +28,24 @@ public struct TimeOfDay: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
   /// to allow the value "24:00:00" for scenarios like business closing time.
-  public var hours: Int32
+  public var hours: Swift.Int32
 
   /// Minutes of hour of day. Must be from 0 to 59.
-  public var minutes: Int32
+  public var minutes: Swift.Int32
 
   /// Seconds of minutes of the time. Must normally be from 0 to 59. An API may
   /// allow the value 60 if it allows leap-seconds.
-  public var seconds: Int32
+  public var seconds: Swift.Int32
 
   /// Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
-  public var nanos: Int32
+  public var nanos: Swift.Int32
 
   /// Initialize a new instance of `TimeOfDay`.
   public init(
-    hours: Int32 = Int32(),
-    minutes: Int32 = Int32(),
-    seconds: Int32 = Int32(),
-    nanos: Int32 = Int32(),
+    hours: Swift.Int32 = Swift.Int32(),
+    minutes: Swift.Int32 = Swift.Int32(),
+    seconds: Swift.Int32 = Swift.Int32(),
+    nanos: Swift.Int32 = Swift.Int32(),
   ) {
     self.hours = hours
     self.minutes = minutes

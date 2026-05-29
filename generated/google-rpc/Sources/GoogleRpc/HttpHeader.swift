@@ -22,15 +22,15 @@ public struct HttpHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP header key. It is case insensitive.
-  public var key: String
+  public var key: Swift.String
 
   /// The HTTP header value.
-  public var value: String
+  public var value: Swift.String
 
   /// Initialize a new instance of `HttpHeader`.
   public init(
-    key: String = String(),
-    value: String = String(),
+    key: Swift.String = Swift.String(),
+    value: Swift.String = Swift.String(),
   ) {
     self.key = key
     self.value = value

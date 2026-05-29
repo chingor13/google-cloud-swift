@@ -26,7 +26,7 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The secret data. Must be no larger than 64KiB.
-  public var data: Data
+  public var data: Foundation.Data
 
   /// Optional. If specified,
   /// [SecretManagerService][google.cloud.secretmanager.v1.SecretManagerService]
@@ -49,12 +49,12 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion]: <doc:SecretManagerService/accessSecretVersion(request:)>
   /// [google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion]: <doc:SecretManagerService/addSecretVersion(request:)>
   /// [google.cloud.secretmanager.v1.SecretPayload.data]: <doc:SecretPayload/data>
-  public var dataCrc32C: Int64?
+  public var dataCrc32C: Swift.Int64?
 
   /// Initialize a new instance of `SecretPayload`.
   public init(
-    data: Data = Data(),
-    dataCrc32C: Int64? = nil,
+    data: Foundation.Data = Foundation.Data(),
+    dataCrc32C: Swift.Int64? = nil,
   ) {
     self.data = data
     self.dataCrc32C = dataCrc32C
@@ -67,8 +67,8 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.data = try container.decode(Data.self, forKey: .data)
-    self.dataCrc32C = try container.decodeIfPresent(Int64.self, forKey: .dataCrc32C)
+    self.data = try container.decode(Foundation.Data.self, forKey: .data)
+    self.dataCrc32C = try container.decodeIfPresent(Swift.Int64.self, forKey: .dataCrc32C)
   }
 
   public func encode(to encoder: Encoder) throws {

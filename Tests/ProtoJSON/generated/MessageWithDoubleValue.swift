@@ -28,13 +28,13 @@ public struct MessageWithDoubleValue: Codable, Equatable, GoogleCloudWkt._AnyPac
   public var repeated: [GoogleCloudWkt.DoubleValue]
 
   /// Test google.protobuf.DoubleValue as map values.
-  public var map: [String: GoogleCloudWkt.DoubleValue]
+  public var map: [Swift.String: GoogleCloudWkt.DoubleValue]
 
   /// Initialize a new instance of `MessageWithDoubleValue`.
   public init(
     singular: GoogleCloudWkt.DoubleValue? = nil,
     repeated: [GoogleCloudWkt.DoubleValue] = [],
-    map: [String: GoogleCloudWkt.DoubleValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.DoubleValue] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

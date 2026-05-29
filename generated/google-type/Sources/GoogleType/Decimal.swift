@@ -87,11 +87,11 @@ public struct Decimal: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Services **should** error with `400 Bad Request` (`INVALID_ARGUMENT` in
   /// gRPC) if the service receives a value outside of the supported range.
-  public var value: String
+  public var value: Swift.String
 
   /// Initialize a new instance of `Decimal`.
   public init(
-    value: String = String(),
+    value: Swift.String = Swift.String(),
   ) {
     self.value = value
   }

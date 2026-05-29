@@ -25,11 +25,11 @@ public struct CancelOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// The name of the operation resource to be cancelled.
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `CancelOperationRequest`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }

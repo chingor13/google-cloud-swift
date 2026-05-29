@@ -28,13 +28,13 @@ public struct MessageWithInt64Value: Codable, Equatable, GoogleCloudWkt._AnyPack
   public var repeated: [GoogleCloudWkt.Int64Value]
 
   /// Test google.protobuf.Int64Value as values.
-  public var map: [String: GoogleCloudWkt.Int64Value]
+  public var map: [Swift.String: GoogleCloudWkt.Int64Value]
 
   /// Initialize a new instance of `MessageWithInt64Value`.
   public init(
     singular: GoogleCloudWkt.Int64Value? = nil,
     repeated: [GoogleCloudWkt.Int64Value] = [],
-    map: [String: GoogleCloudWkt.Int64Value] = [:],
+    map: [Swift.String: GoogleCloudWkt.Int64Value] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

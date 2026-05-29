@@ -29,14 +29,14 @@ public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// or `projects/*/locations/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var parent: String
+  public var parent: Swift.String
 
   /// Required. This must be unique within the project.
   ///
   /// A secret ID is a string with a maximum length of 255 characters and can
   /// contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
   /// underscore (`_`) characters.
-  public var secretId: String
+  public var secretId: Swift.String
 
   /// Required. A [Secret][google.cloud.secretmanager.v1.Secret] with initial
   /// field values.
@@ -46,8 +46,8 @@ public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Initialize a new instance of `CreateSecretRequest`.
   public init(
-    parent: String = String(),
-    secretId: String = String(),
+    parent: Swift.String = Swift.String(),
+    secretId: Swift.String = Swift.String(),
     secret: Secret? = nil,
   ) {
     self.parent = parent

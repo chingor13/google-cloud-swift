@@ -28,13 +28,13 @@ public struct MessageWithUInt32Value: Codable, Equatable, GoogleCloudWkt._AnyPac
   public var repeated: [GoogleCloudWkt.UInt32Value]
 
   /// Test google.protobuf.UInt32Value as map values.
-  public var map: [String: GoogleCloudWkt.UInt32Value]
+  public var map: [Swift.String: GoogleCloudWkt.UInt32Value]
 
   /// Initialize a new instance of `MessageWithUInt32Value`.
   public init(
     singular: GoogleCloudWkt.UInt32Value? = nil,
     repeated: [GoogleCloudWkt.UInt32Value] = [],
-    map: [String: GoogleCloudWkt.UInt32Value] = [:],
+    map: [Swift.String: GoogleCloudWkt.UInt32Value] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

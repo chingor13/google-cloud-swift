@@ -31,14 +31,14 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public var repeated: [MessageWithRecursion.Level0]
 
   /// A map field, messages cannot be keys.
-  public var map: [String: MessageWithRecursion.Level0]
+  public var map: [Swift.String: MessageWithRecursion.Level0]
 
   /// Initialize a new instance of `MessageWithRecursion`.
   public init(
     singular: MessageWithRecursion.Level0? = nil,
     `optional`: MessageWithRecursion.Level0? = nil,
     repeated: [MessageWithRecursion.Level0] = [],
-    map: [String: MessageWithRecursion.Level0] = [:],
+    map: [Swift.String: MessageWithRecursion.Level0] = [:],
   ) {
     self.singular = singular.map { GoogleCloudWkt.Recursive(value: $0) }
     self.`optional` = `optional`.map { GoogleCloudWkt.Recursive(value: $0) }
@@ -60,7 +60,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
     self.`optional` = try container.decodeIfPresent(
       GoogleCloudWkt.Recursive<MessageWithRecursion.Level0>.self, forKey: .`optional`)
     self.repeated = try container.decode([MessageWithRecursion.Level0].self, forKey: .repeated)
-    self.map = try container.decode([String: MessageWithRecursion.Level0].self, forKey: .map)
+    self.map = try container.decode([Swift.String: MessageWithRecursion.Level0].self, forKey: .map)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -124,11 +124,11 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public struct NonRecursive: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var value: String
+    public var value: Swift.String
 
     /// Initialize a new instance of `NonRecursive`.
     public init(
-      value: String = String(),
+      value: Swift.String = Swift.String(),
     ) {
       self.value = value
     }

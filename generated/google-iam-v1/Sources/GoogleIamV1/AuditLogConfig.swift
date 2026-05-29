@@ -48,12 +48,12 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [Binding.members][google.iam.v1.Binding.members].
   ///
   /// [google.iam.v1.Binding.members]: <doc:Binding/members>
-  public var exemptedMembers: [String]
+  public var exemptedMembers: [Swift.String]
 
   /// Initialize a new instance of `AuditLogConfig`.
   public init(
     logType: AuditLogConfig.LogType = AuditLogConfig.LogType(),
-    exemptedMembers: [String] = [],
+    exemptedMembers: [Swift.String] = [],
   ) {
     self.logType = logType
     self.exemptedMembers = exemptedMembers

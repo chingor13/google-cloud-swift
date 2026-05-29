@@ -22,24 +22,24 @@ public struct MessageWithF32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Float
+  public var singular: Swift.Float
 
   /// An optional field.
-  public var option: Float?
+  public var option: Swift.Float?
 
   /// A repeated field.
-  public var repeated: [Float]
+  public var repeated: [Swift.Float]
 
   /// A map field, floats cannot be keys, so we only need to test them as
   /// values.
-  public var map: [String: Float]
+  public var map: [Swift.String: Swift.Float]
 
   /// Initialize a new instance of `MessageWithF32`.
   public init(
-    singular: Float = Float(),
-    option: Float? = nil,
-    repeated: [Float] = [],
-    map: [String: Float] = [:],
+    singular: Swift.Float = Swift.Float(),
+    option: Swift.Float? = nil,
+    repeated: [Swift.Float] = [],
+    map: [Swift.String: Swift.Float] = [:],
   ) {
     self.singular = singular
     self.option = option

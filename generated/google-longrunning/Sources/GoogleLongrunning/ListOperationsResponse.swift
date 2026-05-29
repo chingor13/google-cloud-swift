@@ -30,19 +30,19 @@ public struct ListOperationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
   public var operations: [Operation]
 
   /// The standard List next-page token.
-  public var nextPageToken: String
+  public var nextPageToken: Swift.String
 
   /// Unordered list. Unreachable resources. Populated when the request sets
   /// `ListOperationsRequest.return_partial_success` and reads across
   /// collections e.g. when attempting to list all resources across all supported
   /// locations.
-  public var unreachable: [String]
+  public var unreachable: [Swift.String]
 
   /// Initialize a new instance of `ListOperationsResponse`.
   public init(
     operations: [Operation] = [],
-    nextPageToken: String = String(),
-    unreachable: [String] = [],
+    nextPageToken: Swift.String = Swift.String(),
+    unreachable: [Swift.String] = [],
   ) {
     self.operations = operations
     self.nextPageToken = nextPageToken

@@ -22,15 +22,15 @@ public struct DebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The stack trace entries indicating where the error occurred.
-  public var stackEntries: [String]
+  public var stackEntries: [Swift.String]
 
   /// Additional debugging information provided by the server.
-  public var detail: String
+  public var detail: Swift.String
 
   /// Initialize a new instance of `DebugInfo`.
   public init(
-    stackEntries: [String] = [],
-    detail: String = String(),
+    stackEntries: [Swift.String] = [],
+    detail: Swift.String = Swift.String(),
   ) {
     self.stackEntries = stackEntries
     self.detail = detail

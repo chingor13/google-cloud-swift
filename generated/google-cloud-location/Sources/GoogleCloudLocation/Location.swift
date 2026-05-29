@@ -23,19 +23,19 @@ public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Resource name for the location, which may vary between implementations.
   /// For example: `"projects/example-project/locations/us-east1"`
-  public var name: String
+  public var name: Swift.String
 
   /// The canonical id for this location. For example: `"us-east1"`.
-  public var locationId: String
+  public var locationId: Swift.String
 
   /// The friendly name for this location, typically a nearby city name.
   /// For example, "Tokyo".
-  public var displayName: String
+  public var displayName: Swift.String
 
   /// Cross-service attributes for the location. For example
   ///
   ///     {"cloud.googleapis.com/region": "us-east1"}
-  public var labels: [String: String]
+  public var labels: [Swift.String: Swift.String]
 
   /// Service-specific metadata. For example the available capacity at the given
   /// location.
@@ -43,10 +43,10 @@ public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Location`.
   public init(
-    name: String = String(),
-    locationId: String = String(),
-    displayName: String = String(),
-    labels: [String: String] = [:],
+    name: Swift.String = Swift.String(),
+    locationId: Swift.String = Swift.String(),
+    displayName: Swift.String = Swift.String(),
+    labels: [Swift.String: Swift.String] = [:],
     metadata: GoogleCloudWkt.`Any`? = nil,
   ) {
     self.name = name

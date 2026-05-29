@@ -37,7 +37,7 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   /// to retrieve the next page.
   ///
   /// [google.cloud.secretmanager.v1.ListSecretVersionsRequest.page_token]: <doc:ListSecretVersionsRequest/pageToken>
-  public var nextPageToken: String
+  public var nextPageToken: Swift.String
 
   /// The total number of
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] but 0 when
@@ -47,13 +47,13 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var totalSize: Int32
+  public var totalSize: Swift.Int32
 
   /// Initialize a new instance of `ListSecretVersionsResponse`.
   public init(
     versions: [SecretVersion] = [],
-    nextPageToken: String = String(),
-    totalSize: Int32 = Int32(),
+    nextPageToken: Swift.String = Swift.String(),
+    totalSize: Swift.Int32 = Swift.Int32(),
   ) {
     self.versions = versions
     self.nextPageToken = nextPageToken

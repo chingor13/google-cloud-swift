@@ -23,7 +23,7 @@ public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// REQUIRED: The resource for which the policy is being specified.
   /// See the operation documentation for the appropriate value for this field.
-  public var resource: String
+  public var resource: Swift.String
 
   /// REQUIRED: The complete policy to be applied to the `resource`. The size of
   /// the policy is limited to a few 10s of KB. An empty policy is a
@@ -40,7 +40,7 @@ public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Initialize a new instance of `SetIamPolicyRequest`.
   public init(
-    resource: String = String(),
+    resource: Swift.String = Swift.String(),
     policy: Policy? = nil,
     updateMask: GoogleCloudWkt.FieldMask? = nil,
   ) {

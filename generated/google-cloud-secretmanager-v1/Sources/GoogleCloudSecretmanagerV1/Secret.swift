@@ -34,7 +34,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `projects/*/secrets/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var name: String
+  public var name: Swift.String
 
   /// Optional. Immutable. The replication policy of the secret data attached to
   /// the [Secret][google.cloud.secretmanager.v1.Secret].
@@ -61,7 +61,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`
   ///
   /// No more than 64 labels can be assigned to a given resource.
-  public var labels: [String: String]
+  public var labels: [Swift.String: Swift.String]
 
   /// Optional. A list of up to 10 Pub/Sub topics to which messages are published
   /// when control plane operations are called on the secret or its versions.
@@ -71,7 +71,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [Secret][google.cloud.secretmanager.v1.Secret].
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var etag: String
+  public var etag: Swift.String
 
   /// Optional. Rotation policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. May be excluded if there is
@@ -91,7 +91,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Version-Alias pairs will be viewable via GetSecret and modifiable via
   /// UpdateSecret. Access by alias is only be supported on
   /// GetSecretVersion and AccessSecretVersion.
-  public var versionAliases: [String: Int64]
+  public var versionAliases: [Swift.String: Swift.Int64]
 
   /// Optional. Custom metadata about the secret.
   ///
@@ -105,7 +105,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// alphanumerics in between these symbols.
   ///
   /// The total size of annotation keys and values must be less than 16KiB.
-  public var annotations: [String: String]
+  public var annotations: [Swift.String: Swift.String]
 
   /// Optional. Secret Version TTL after destruction request
   ///
@@ -137,7 +137,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Tags are used to organize and group resources.
   ///
   /// Tags can be used to control policy evaluation for the resource.
-  public var tags: [String: String]
+  public var tags: [Swift.String: Swift.String]
 
   /// Expiration policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. If specified the
@@ -157,18 +157,18 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Initialize a new instance of `Secret`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
     replication: Replication? = nil,
     createTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [String: String] = [:],
+    labels: [Swift.String: Swift.String] = [:],
     topics: [Topic] = [],
-    etag: String = String(),
+    etag: Swift.String = Swift.String(),
     rotation: Rotation? = nil,
-    versionAliases: [String: Int64] = [:],
-    annotations: [String: String] = [:],
+    versionAliases: [Swift.String: Swift.Int64] = [:],
+    annotations: [Swift.String: Swift.String] = [:],
     versionDestroyTtl: GoogleCloudWkt.Duration? = nil,
     customerManagedEncryption: CustomerManagedEncryption? = nil,
-    tags: [String: String] = [:],
+    tags: [Swift.String: Swift.String] = [:],
     expiration: OneOf_Expiration? = nil,
   ) {
     self.name = name
@@ -205,21 +205,22 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.name = try container.decode(String.self, forKey: .name)
+    self.name = try container.decode(Swift.String.self, forKey: .name)
     self.replication = try container.decodeIfPresent(Replication.self, forKey: .replication)
     self.createTime = try container.decodeIfPresent(
       GoogleCloudWkt.Timestamp.self, forKey: .createTime)
-    self.labels = try container.decode([String: String].self, forKey: .labels)
+    self.labels = try container.decode([Swift.String: Swift.String].self, forKey: .labels)
     self.topics = try container.decode([Topic].self, forKey: .topics)
-    self.etag = try container.decode(String.self, forKey: .etag)
+    self.etag = try container.decode(Swift.String.self, forKey: .etag)
     self.rotation = try container.decodeIfPresent(Rotation.self, forKey: .rotation)
-    self.versionAliases = try container.decode([String: Int64].self, forKey: .versionAliases)
-    self.annotations = try container.decode([String: String].self, forKey: .annotations)
+    self.versionAliases = try container.decode(
+      [Swift.String: Swift.Int64].self, forKey: .versionAliases)
+    self.annotations = try container.decode([Swift.String: Swift.String].self, forKey: .annotations)
     self.versionDestroyTtl = try container.decodeIfPresent(
       GoogleCloudWkt.Duration.self, forKey: .versionDestroyTtl)
     self.customerManagedEncryption = try container.decodeIfPresent(
       CustomerManagedEncryption.self, forKey: .customerManagedEncryption)
-    self.tags = try container.decode([String: String].self, forKey: .tags)
+    self.tags = try container.decode([Swift.String: Swift.String].self, forKey: .tags)
 
     var expiration: OneOf_Expiration? = nil
     let expirationCheckAndSet = { (value: OneOf_Expiration) throws in

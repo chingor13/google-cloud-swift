@@ -49,7 +49,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// The subject on which the quota check failed.
     /// For example, "clientip:<ip address of client>" or "project:<Google
     /// developer project id>".
-    public var subject: String
+    public var subject: Swift.String
 
     /// A description of how the quota check failed. Clients can use this
     /// description to find more about the quota configuration in the service's
@@ -58,7 +58,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// For example: "Service disabled" or "Daily Limit for read operations
     /// exceeded".
-    public var description: String
+    public var description: Swift.String
 
     /// The API Service from which the `QuotaFailure.Violation` orginates. In
     /// some cases, Quota issues originate from an API Service other than the one
@@ -73,7 +73,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// occurs when the Kubernetes Engine API creates VMs in the Compute Engine
     /// API (compute.googleapis.com), this field would be
     /// "compute.googleapis.com".
-    public var apiService: String
+    public var apiService: Swift.String
 
     /// The metric of the violated quota. A quota metric is a named counter to
     /// measure usage, such as API requests or CPUs. When an activity occurs in a
@@ -82,13 +82,13 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// For example, "compute.googleapis.com/cpus_per_vm_family",
     /// "storage.googleapis.com/internet_egress_bandwidth".
-    public var quotaMetric: String
+    public var quotaMetric: Swift.String
 
     /// The id of the violated quota. Also know as "limit name", this is the
     /// unique identifier of a quota in the context of an API service.
     ///
     /// For example, "CPUS-PER-VM-FAMILY-per-project-region".
-    public var quotaId: String
+    public var quotaId: Swift.String
 
     /// The dimensions of the violated quota. Every non-global quota is enforced
     /// on a set of dimensions. While quota metric defines what to count, the
@@ -106,14 +106,14 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// When a quota is enforced globally, the quota_dimensions would always be
     /// empty.
-    public var quotaDimensions: [String: String]
+    public var quotaDimensions: [Swift.String: Swift.String]
 
     /// The enforced quota value at the time of the `QuotaFailure`.
     ///
     /// For example, if the enforced quota value at the time of the
     /// `QuotaFailure` on the number of CPUs is "10", then the value of this
     /// field would reflect this quantity.
-    public var quotaValue: Int64
+    public var quotaValue: Swift.Int64
 
     /// The new quota value being rolled out at the time of the violation. At the
     /// completion of the rollout, this value will be enforced in place of
@@ -123,18 +123,18 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// For example, if at the time of the violation a rollout is in progress
     /// changing the number of CPUs quota from 10 to 20, 20 would be the value of
     /// this field.
-    public var futureQuotaValue: Int64?
+    public var futureQuotaValue: Swift.Int64?
 
     /// Initialize a new instance of `Violation`.
     public init(
-      subject: String = String(),
-      description: String = String(),
-      apiService: String = String(),
-      quotaMetric: String = String(),
-      quotaId: String = String(),
-      quotaDimensions: [String: String] = [:],
-      quotaValue: Int64 = Int64(),
-      futureQuotaValue: Int64? = nil,
+      subject: Swift.String = Swift.String(),
+      description: Swift.String = Swift.String(),
+      apiService: Swift.String = Swift.String(),
+      quotaMetric: Swift.String = Swift.String(),
+      quotaId: Swift.String = Swift.String(),
+      quotaDimensions: [Swift.String: Swift.String] = [:],
+      quotaValue: Swift.Int64 = Swift.Int64(),
+      futureQuotaValue: Swift.Int64? = nil,
     ) {
       self.subject = subject
       self.description = description

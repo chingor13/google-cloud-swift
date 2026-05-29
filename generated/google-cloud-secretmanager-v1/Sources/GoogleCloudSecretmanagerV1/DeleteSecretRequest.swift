@@ -29,19 +29,19 @@ public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// `projects/*/secrets/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var name: String
+  public var name: Swift.String
 
   /// Optional. Etag of the [Secret][google.cloud.secretmanager.v1.Secret]. The
   /// request succeeds if it matches the etag of the currently stored secret
   /// object. If the etag is omitted, the request succeeds.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var etag: String
+  public var etag: Swift.String
 
   /// Initialize a new instance of `DeleteSecretRequest`.
   public init(
-    name: String = String(),
-    etag: String = String(),
+    name: Swift.String = Swift.String(),
+    etag: Swift.String = Swift.String(),
   ) {
     self.name = name
     self.etag = etag

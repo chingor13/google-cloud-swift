@@ -54,8 +54,8 @@ extension Clients {
     public func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0)"
@@ -86,8 +86,8 @@ extension Clients {
     public func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0)"
@@ -111,8 +111,8 @@ extension Clients {
     public func deleteOperation(
       request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0)"
@@ -134,8 +134,8 @@ extension Clients {
     public func cancelOperation(
       request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
-      let path = try { () throws -> String in
-        guard let pathVariable0 = request.name as String?, !pathVariable0.isEmpty else {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
         }
         return "/v1/\(pathVariable0):cancel"

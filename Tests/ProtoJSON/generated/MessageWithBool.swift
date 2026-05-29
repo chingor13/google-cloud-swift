@@ -22,31 +22,31 @@ public struct MessageWithBool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Bool
+  public var singular: Swift.Bool
 
   /// An optional field.
-  public var option: Bool?
+  public var option: Swift.Bool?
 
   /// A repeated field.
-  public var repeated: [Bool]
+  public var repeated: [Swift.Bool]
 
   /// Test bool as map values.
-  public var mapValue: [String: Bool]
+  public var mapValue: [Swift.String: Swift.Bool]
 
   /// Test bool as map keys.
-  public var mapKey: [Bool: String]
+  public var mapKey: [Swift.Bool: Swift.String]
 
   /// Test bool as map key and value.
-  public var mapKeyValue: [Bool: Bool]
+  public var mapKeyValue: [Swift.Bool: Swift.Bool]
 
   /// Initialize a new instance of `MessageWithBool`.
   public init(
-    singular: Bool = Bool(),
-    option: Bool? = nil,
-    repeated: [Bool] = [],
-    mapValue: [String: Bool] = [:],
-    mapKey: [Bool: String] = [:],
-    mapKeyValue: [Bool: Bool] = [:],
+    singular: Swift.Bool = Swift.Bool(),
+    option: Swift.Bool? = nil,
+    repeated: [Swift.Bool] = [],
+    mapValue: [Swift.String: Swift.Bool] = [:],
+    mapKey: [Swift.Bool: Swift.String] = [:],
+    mapKeyValue: [Swift.Bool: Swift.Bool] = [:],
   ) {
     self.singular = singular
     self.option = option

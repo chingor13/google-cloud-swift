@@ -152,7 +152,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
-      public var location: String
+      public var location: Swift.String
 
       /// Output only. The customer-managed encryption status of the
       /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
@@ -163,7 +163,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
       /// Initialize a new instance of `ReplicaStatus`.
       public init(
-        location: String = String(),
+        location: Swift.String = Swift.String(),
         customerManagedEncryption: CustomerManagedEncryptionStatus? = nil,
       ) {
         self.location = location

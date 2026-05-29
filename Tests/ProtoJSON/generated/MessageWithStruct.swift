@@ -31,14 +31,14 @@ public struct MessageWithStruct: Codable, Equatable, GoogleCloudWkt._AnyPackable
   public var repeated: [GoogleCloudWkt.Struct]
 
   /// A map field, messages cannot be keys.
-  public var map: [String: GoogleCloudWkt.Struct]
+  public var map: [Swift.String: GoogleCloudWkt.Struct]
 
   /// Initialize a new instance of `MessageWithStruct`.
   public init(
     singular: GoogleCloudWkt.Struct? = nil,
     `optional`: GoogleCloudWkt.Struct? = nil,
     repeated: [GoogleCloudWkt.Struct] = [],
-    map: [String: GoogleCloudWkt.Struct] = [:],
+    map: [Swift.String: GoogleCloudWkt.Struct] = [:],
   ) {
     self.singular = singular
     self.`optional` = `optional`
@@ -58,7 +58,7 @@ public struct MessageWithStruct: Codable, Equatable, GoogleCloudWkt._AnyPackable
     self.singular = try container.decodeIfPresent(GoogleCloudWkt.Struct.self, forKey: .singular)
     self.`optional` = try container.decodeIfPresent(GoogleCloudWkt.Struct.self, forKey: .`optional`)
     self.repeated = try container.decode([GoogleCloudWkt.Struct].self, forKey: .repeated)
-    self.map = try container.decode([String: GoogleCloudWkt.Struct].self, forKey: .map)
+    self.map = try container.decode([Swift.String: GoogleCloudWkt.Struct].self, forKey: .map)
   }
 
   public func encode(to encoder: Encoder) throws {

@@ -23,11 +23,11 @@ public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._An
 {
   /// A subset of `TestPermissionsRequest.permissions` that the caller is
   /// allowed.
-  public var permissions: [String]
+  public var permissions: [Swift.String]
 
   /// Initialize a new instance of `TestIamPermissionsResponse`.
   public init(
-    permissions: [String] = [],
+    permissions: [Swift.String] = [],
   ) {
     self.permissions = permissions
   }

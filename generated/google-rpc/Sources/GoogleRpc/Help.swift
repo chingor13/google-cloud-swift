@@ -40,15 +40,15 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Describes what the link offers.
-    public var description: String
+    public var description: Swift.String
 
     /// The URL of the link.
-    public var url: String
+    public var url: Swift.String
 
     /// Initialize a new instance of `Link`.
     public init(
-      description: String = String(),
-      url: String = String(),
+      description: Swift.String = Swift.String(),
+      url: Swift.String = Swift.String(),
     ) {
       self.description = description
       self.url = url

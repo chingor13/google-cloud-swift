@@ -37,7 +37,7 @@ public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// to retrieve the next page.
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.page_token]: <doc:ListSecretsRequest/pageToken>
-  public var nextPageToken: String
+  public var nextPageToken: Swift.String
 
   /// The total number of [Secrets][google.cloud.secretmanager.v1.Secret] but 0
   /// when the
@@ -46,13 +46,13 @@ public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var totalSize: Int32
+  public var totalSize: Swift.Int32
 
   /// Initialize a new instance of `ListSecretsResponse`.
   public init(
     secrets: [Secret] = [],
-    nextPageToken: String = String(),
-    totalSize: Int32 = Int32(),
+    nextPageToken: Swift.String = Swift.String(),
+    totalSize: Swift.Int32 = Swift.Int32(),
   ) {
     self.secrets = secrets
     self.nextPageToken = nextPageToken

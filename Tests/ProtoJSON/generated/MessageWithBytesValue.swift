@@ -29,13 +29,13 @@ public struct MessageWithBytesValue: Codable, Equatable, GoogleCloudWkt._AnyPack
 
   /// A map field, google.protobuf.BytesValue cannot be keys, so we only need to
   /// test them as values.
-  public var map: [String: GoogleCloudWkt.BytesValue]
+  public var map: [Swift.String: GoogleCloudWkt.BytesValue]
 
   /// Initialize a new instance of `MessageWithBytesValue`.
   public init(
     singular: GoogleCloudWkt.BytesValue? = nil,
     repeated: [GoogleCloudWkt.BytesValue] = [],
-    map: [String: GoogleCloudWkt.BytesValue] = [:],
+    map: [Swift.String: GoogleCloudWkt.BytesValue] = [:],
   ) {
     self.singular = singular
     self.repeated = repeated

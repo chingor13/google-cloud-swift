@@ -27,11 +27,11 @@ public struct Topic: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// succeed, the Secret Manager service agent must have the
   /// `pubsub.topic.publish` permission on the topic. The Pub/Sub Publisher role
   /// (`roles/pubsub.publisher`) includes this permission.
-  public var name: String
+  public var name: Swift.String
 
   /// Initialize a new instance of `Topic`.
   public init(
-    name: String = String(),
+    name: Swift.String = Swift.String(),
   ) {
     self.name = name
   }
