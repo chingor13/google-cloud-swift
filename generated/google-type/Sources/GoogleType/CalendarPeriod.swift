@@ -19,21 +19,54 @@ import Foundation
 /// A `CalendarPeriod` represents the abstract concept of a time period that has
 /// a canonical start. Grammatically, "the start of the current
 /// `CalendarPeriod`." All calendar times begin at midnight UTC.
-public enum CalendarPeriod: Int, Codable, Equatable, Sendable {
-  case unspecified = 0
-  case day = 1
-  case week = 2
-  case fortnight = 3
-  case month = 4
-  case quarter = 5
-  case half = 6
-  case year = 7
+public enum CalendarPeriod: Codable, Equatable, Sendable {
+  case unspecified
+  case day
+  case week
+  case fortnight
+  case month
+  case quarter
+  case half
+  case year
+  /// Encodes an unknown integer value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownIntValue(Int)
+  /// Encodes an unknown string value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownStringValue(String)
 
   public init() {
     self = .unspecified
   }
 
-  public var stringValue: String {
+  /// Returns the integer value associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+  public var intValue: Int? {
+    switch self {
+    case .unspecified: return 0
+    case .day: return 1
+    case .week: return 2
+    case .fortnight: return 3
+    case .month: return 4
+    case .quarter: return 5
+    case .half: return 6
+    case .year: return 7
+    case .unknownIntValue(let v): return v
+    case .unknownStringValue: return nil
+    }
+  }
+
+  /// Returns the string value (or name) associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+  public var stringValue: String? {
     switch self {
     case .unspecified: return "CALENDAR_PERIOD_UNSPECIFIED"
     case .day: return "DAY"
@@ -43,10 +76,15 @@ public enum CalendarPeriod: Int, Codable, Equatable, Sendable {
     case .quarter: return "QUARTER"
     case .half: return "HALF"
     case .year: return "YEAR"
+    case .unknownIntValue: return nil
+    case .unknownStringValue(let v): return v
     }
   }
 
-  public init?(stringValue: String) {
+  /// Initialize from a string value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+  public init(stringValue: String) {
     switch stringValue {
     case "CALENDAR_PERIOD_UNSPECIFIED": self = .unspecified
     case "DAY": self = .day
@@ -56,7 +94,58 @@ public enum CalendarPeriod: Int, Codable, Equatable, Sendable {
     case "QUARTER": self = .quarter
     case "HALF": self = .half
     case "YEAR": self = .year
-    default: return nil
+    default: self = .unknownStringValue(stringValue)
+    }
+  }
+
+  /// Initialize from an integer value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+  public init(intValue: Int) {
+    switch intValue {
+    case 0: self = .unspecified
+    case 1: self = .day
+    case 2: self = .week
+    case 3: self = .fortnight
+    case 4: self = .month
+    case 5: self = .quarter
+    case 6: self = .half
+    case 7: self = .year
+    default: self = .unknownIntValue(intValue)
+    }
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    if let v = try? container.decode(Int.self) {
+      self.init(intValue: v)
+      return
+    }
+    if let s = try? container.decode(String.self) {
+      if let v = Int(s) {
+        self.init(intValue: v)
+      } else {
+        self.init(stringValue: s)
+      }
+      return
+    }
+    throw DecodingError.dataCorruptedError(
+      in: container, debugDescription: "Expected enum value, must be integer or string.")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .unspecified: return try container.encode(0)
+    case .day: return try container.encode(1)
+    case .week: return try container.encode(2)
+    case .fortnight: return try container.encode(3)
+    case .month: return try container.encode(4)
+    case .quarter: return try container.encode(5)
+    case .half: return try container.encode(6)
+    case .year: return try container.encode(7)
+    case .unknownIntValue(let v): return try container.encode(v)
+    case .unknownStringValue(let v): return try container.encode(v)
     }
   }
 }

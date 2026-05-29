@@ -61,32 +61,109 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The list of valid permission types for which logging can be configured.
   /// Admin writes are always logged, and are not configurable.
-  public enum LogType: Int, Codable, Equatable, Sendable {
-    case unspecified = 0
-    case adminRead = 1
-    case dataWrite = 2
-    case dataRead = 3
+  public enum LogType: Codable, Equatable, Sendable {
+    case unspecified
+    case adminRead
+    case dataWrite
+    case dataRead
+    /// Encodes an unknown integer value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownIntValue(Int)
+    /// Encodes an unknown string value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownStringValue(String)
 
     public init() {
       self = .unspecified
     }
 
-    public var stringValue: String {
+    /// Returns the integer value associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+    public var intValue: Int? {
+      switch self {
+      case .unspecified: return 0
+      case .adminRead: return 1
+      case .dataWrite: return 2
+      case .dataRead: return 3
+      case .unknownIntValue(let v): return v
+      case .unknownStringValue: return nil
+      }
+    }
+
+    /// Returns the string value (or name) associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+    public var stringValue: String? {
       switch self {
       case .unspecified: return "LOG_TYPE_UNSPECIFIED"
       case .adminRead: return "ADMIN_READ"
       case .dataWrite: return "DATA_WRITE"
       case .dataRead: return "DATA_READ"
+      case .unknownIntValue: return nil
+      case .unknownStringValue(let v): return v
       }
     }
 
-    public init?(stringValue: String) {
+    /// Initialize from a string value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+    public init(stringValue: String) {
       switch stringValue {
       case "LOG_TYPE_UNSPECIFIED": self = .unspecified
       case "ADMIN_READ": self = .adminRead
       case "DATA_WRITE": self = .dataWrite
       case "DATA_READ": self = .dataRead
-      default: return nil
+      default: self = .unknownStringValue(stringValue)
+      }
+    }
+
+    /// Initialize from an integer value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+    public init(intValue: Int) {
+      switch intValue {
+      case 0: self = .unspecified
+      case 1: self = .adminRead
+      case 2: self = .dataWrite
+      case 3: self = .dataRead
+      default: self = .unknownIntValue(intValue)
+      }
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+      if let v = try? container.decode(Int.self) {
+        self.init(intValue: v)
+        return
+      }
+      if let s = try? container.decode(String.self) {
+        if let v = Int(s) {
+          self.init(intValue: v)
+        } else {
+          self.init(stringValue: s)
+        }
+        return
+      }
+      throw DecodingError.dataCorruptedError(
+        in: container, debugDescription: "Expected enum value, must be integer or string.")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      switch self {
+      case .unspecified: return try container.encode(0)
+      case .adminRead: return try container.encode(1)
+      case .dataWrite: return try container.encode(2)
+      case .dataRead: return try container.encode(3)
+      case .unknownIntValue(let v): return try container.encode(v)
+      case .unknownStringValue(let v): return try container.encode(v)
       }
     }
   }

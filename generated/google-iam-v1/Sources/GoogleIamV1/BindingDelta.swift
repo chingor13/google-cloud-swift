@@ -54,29 +54,103 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   }
 
   /// The type of action performed on a Binding in a policy.
-  public enum Action: Int, Codable, Equatable, Sendable {
-    case unspecified = 0
-    case add = 1
-    case remove = 2
+  public enum Action: Codable, Equatable, Sendable {
+    case unspecified
+    case add
+    case remove
+    /// Encodes an unknown integer value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownIntValue(Int)
+    /// Encodes an unknown string value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownStringValue(String)
 
     public init() {
       self = .unspecified
     }
 
-    public var stringValue: String {
+    /// Returns the integer value associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+    public var intValue: Int? {
+      switch self {
+      case .unspecified: return 0
+      case .add: return 1
+      case .remove: return 2
+      case .unknownIntValue(let v): return v
+      case .unknownStringValue: return nil
+      }
+    }
+
+    /// Returns the string value (or name) associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+    public var stringValue: String? {
       switch self {
       case .unspecified: return "ACTION_UNSPECIFIED"
       case .add: return "ADD"
       case .remove: return "REMOVE"
+      case .unknownIntValue: return nil
+      case .unknownStringValue(let v): return v
       }
     }
 
-    public init?(stringValue: String) {
+    /// Initialize from a string value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+    public init(stringValue: String) {
       switch stringValue {
       case "ACTION_UNSPECIFIED": self = .unspecified
       case "ADD": self = .add
       case "REMOVE": self = .remove
-      default: return nil
+      default: self = .unknownStringValue(stringValue)
+      }
+    }
+
+    /// Initialize from an integer value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+    public init(intValue: Int) {
+      switch intValue {
+      case 0: self = .unspecified
+      case 1: self = .add
+      case 2: self = .remove
+      default: self = .unknownIntValue(intValue)
+      }
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+      if let v = try? container.decode(Int.self) {
+        self.init(intValue: v)
+        return
+      }
+      if let s = try? container.decode(String.self) {
+        if let v = Int(s) {
+          self.init(intValue: v)
+        } else {
+          self.init(stringValue: s)
+        }
+        return
+      }
+      throw DecodingError.dataCorruptedError(
+        in: container, debugDescription: "Expected enum value, must be integer or string.")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      switch self {
+      case .unspecified: return try container.encode(0)
+      case .add: return try container.encode(1)
+      case .remove: return try container.encode(2)
+      case .unknownIntValue(let v): return try container.encode(v)
+      case .unknownStringValue(let v): return try container.encode(v)
       }
     }
   }

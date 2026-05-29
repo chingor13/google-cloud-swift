@@ -23,30 +23,72 @@ import Foundation
 /// the most specific error code that applies.  For example, prefer
 /// `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
 /// Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
-public enum Code: Int, Codable, Equatable, Sendable {
-  case ok = 0
-  case cancelled = 1
-  case unknown = 2
-  case invalidArgument = 3
-  case deadlineExceeded = 4
-  case notFound = 5
-  case alreadyExists = 6
-  case permissionDenied = 7
-  case resourceExhausted = 8
-  case failedPrecondition = 9
-  case aborted = 10
-  case outOfRange = 11
-  case unimplemented = 12
-  case `internal` = 13
-  case unavailable = 14
-  case dataLoss = 15
-  case unauthenticated = 16
+public enum Code: Codable, Equatable, Sendable {
+  case ok
+  case cancelled
+  case unknown
+  case invalidArgument
+  case deadlineExceeded
+  case notFound
+  case alreadyExists
+  case permissionDenied
+  case resourceExhausted
+  case failedPrecondition
+  case aborted
+  case outOfRange
+  case unimplemented
+  case `internal`
+  case unavailable
+  case dataLoss
+  case unauthenticated
+  /// Encodes an unknown integer value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownIntValue(Int)
+  /// Encodes an unknown string value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownStringValue(String)
 
   public init() {
     self = .ok
   }
 
-  public var stringValue: String {
+  /// Returns the integer value associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+  public var intValue: Int? {
+    switch self {
+    case .ok: return 0
+    case .cancelled: return 1
+    case .unknown: return 2
+    case .invalidArgument: return 3
+    case .deadlineExceeded: return 4
+    case .notFound: return 5
+    case .alreadyExists: return 6
+    case .permissionDenied: return 7
+    case .resourceExhausted: return 8
+    case .failedPrecondition: return 9
+    case .aborted: return 10
+    case .outOfRange: return 11
+    case .unimplemented: return 12
+    case .`internal`: return 13
+    case .unavailable: return 14
+    case .dataLoss: return 15
+    case .unauthenticated: return 16
+    case .unknownIntValue(let v): return v
+    case .unknownStringValue: return nil
+    }
+  }
+
+  /// Returns the string value (or name) associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+  public var stringValue: String? {
     switch self {
     case .ok: return "OK"
     case .cancelled: return "CANCELLED"
@@ -65,10 +107,15 @@ public enum Code: Int, Codable, Equatable, Sendable {
     case .unavailable: return "UNAVAILABLE"
     case .dataLoss: return "DATA_LOSS"
     case .unauthenticated: return "UNAUTHENTICATED"
+    case .unknownIntValue: return nil
+    case .unknownStringValue(let v): return v
     }
   }
 
-  public init?(stringValue: String) {
+  /// Initialize from a string value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+  public init(stringValue: String) {
     switch stringValue {
     case "OK": self = .ok
     case "CANCELLED": self = .cancelled
@@ -87,7 +134,76 @@ public enum Code: Int, Codable, Equatable, Sendable {
     case "INTERNAL": self = .`internal`
     case "UNAVAILABLE": self = .unavailable
     case "DATA_LOSS": self = .dataLoss
-    default: return nil
+    default: self = .unknownStringValue(stringValue)
+    }
+  }
+
+  /// Initialize from an integer value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+  public init(intValue: Int) {
+    switch intValue {
+    case 0: self = .ok
+    case 1: self = .cancelled
+    case 2: self = .unknown
+    case 3: self = .invalidArgument
+    case 4: self = .deadlineExceeded
+    case 5: self = .notFound
+    case 6: self = .alreadyExists
+    case 7: self = .permissionDenied
+    case 16: self = .unauthenticated
+    case 8: self = .resourceExhausted
+    case 9: self = .failedPrecondition
+    case 10: self = .aborted
+    case 11: self = .outOfRange
+    case 12: self = .unimplemented
+    case 13: self = .`internal`
+    case 14: self = .unavailable
+    case 15: self = .dataLoss
+    default: self = .unknownIntValue(intValue)
+    }
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    if let v = try? container.decode(Int.self) {
+      self.init(intValue: v)
+      return
+    }
+    if let s = try? container.decode(String.self) {
+      if let v = Int(s) {
+        self.init(intValue: v)
+      } else {
+        self.init(stringValue: s)
+      }
+      return
+    }
+    throw DecodingError.dataCorruptedError(
+      in: container, debugDescription: "Expected enum value, must be integer or string.")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .ok: return try container.encode(0)
+    case .cancelled: return try container.encode(1)
+    case .unknown: return try container.encode(2)
+    case .invalidArgument: return try container.encode(3)
+    case .deadlineExceeded: return try container.encode(4)
+    case .notFound: return try container.encode(5)
+    case .alreadyExists: return try container.encode(6)
+    case .permissionDenied: return try container.encode(7)
+    case .resourceExhausted: return try container.encode(8)
+    case .failedPrecondition: return try container.encode(9)
+    case .aborted: return try container.encode(10)
+    case .outOfRange: return try container.encode(11)
+    case .unimplemented: return try container.encode(12)
+    case .`internal`: return try container.encode(13)
+    case .unavailable: return try container.encode(14)
+    case .dataLoss: return try container.encode(15)
+    case .unauthenticated: return try container.encode(16)
+    case .unknownIntValue(let v): return try container.encode(v)
+    case .unknownStringValue(let v): return try container.encode(v)
     }
   }
 }

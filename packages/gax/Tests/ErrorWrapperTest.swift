@@ -91,7 +91,7 @@ import GoogleRpc
     }
 
     let serviceError = ServiceError(wrapper: wrapper)
-    #expect(serviceError.code == .unknown)
+    #expect(serviceError.code == .unknownStringValue("SOME_UNKNOWN_STATUS"))
     #expect(serviceError.message == "unknown status message")
   }
 

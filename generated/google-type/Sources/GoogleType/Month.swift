@@ -17,26 +17,64 @@
 import Foundation
 
 /// Represents a month in the Gregorian calendar.
-public enum Month: Int, Codable, Equatable, Sendable {
-  case unspecified = 0
-  case january = 1
-  case february = 2
-  case march = 3
-  case april = 4
-  case may = 5
-  case june = 6
-  case july = 7
-  case august = 8
-  case september = 9
-  case october = 10
-  case november = 11
-  case december = 12
+public enum Month: Codable, Equatable, Sendable {
+  case unspecified
+  case january
+  case february
+  case march
+  case april
+  case may
+  case june
+  case july
+  case august
+  case september
+  case october
+  case november
+  case december
+  /// Encodes an unknown integer value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownIntValue(Int)
+  /// Encodes an unknown string value.
+  ///
+  /// The most common cause for an unknown values is for the service to send
+  /// a value unknown to the library. We recommend you update your library to
+  /// the latest version.
+  case unknownStringValue(String)
 
   public init() {
     self = .unspecified
   }
 
-  public var stringValue: String {
+  /// Returns the integer value associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+  public var intValue: Int? {
+    switch self {
+    case .unspecified: return 0
+    case .january: return 1
+    case .february: return 2
+    case .march: return 3
+    case .april: return 4
+    case .may: return 5
+    case .june: return 6
+    case .july: return 7
+    case .august: return 8
+    case .september: return 9
+    case .october: return 10
+    case .november: return 11
+    case .december: return 12
+    case .unknownIntValue(let v): return v
+    case .unknownStringValue: return nil
+    }
+  }
+
+  /// Returns the string value (or name) associated with the enumeration.
+  ///
+  /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+  public var stringValue: String? {
     switch self {
     case .unspecified: return "MONTH_UNSPECIFIED"
     case .january: return "JANUARY"
@@ -51,10 +89,15 @@ public enum Month: Int, Codable, Equatable, Sendable {
     case .october: return "OCTOBER"
     case .november: return "NOVEMBER"
     case .december: return "DECEMBER"
+    case .unknownIntValue: return nil
+    case .unknownStringValue(let v): return v
     }
   }
 
-  public init?(stringValue: String) {
+  /// Initialize from a string value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+  public init(stringValue: String) {
     switch stringValue {
     case "MONTH_UNSPECIFIED": self = .unspecified
     case "JANUARY": self = .january
@@ -69,7 +112,68 @@ public enum Month: Int, Codable, Equatable, Sendable {
     case "OCTOBER": self = .october
     case "NOVEMBER": self = .november
     case "DECEMBER": self = .december
-    default: return nil
+    default: self = .unknownStringValue(stringValue)
+    }
+  }
+
+  /// Initialize from an integer value.
+  ///
+  /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+  public init(intValue: Int) {
+    switch intValue {
+    case 0: self = .unspecified
+    case 1: self = .january
+    case 2: self = .february
+    case 3: self = .march
+    case 4: self = .april
+    case 5: self = .may
+    case 6: self = .june
+    case 7: self = .july
+    case 8: self = .august
+    case 9: self = .september
+    case 10: self = .october
+    case 11: self = .november
+    case 12: self = .december
+    default: self = .unknownIntValue(intValue)
+    }
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    if let v = try? container.decode(Int.self) {
+      self.init(intValue: v)
+      return
+    }
+    if let s = try? container.decode(String.self) {
+      if let v = Int(s) {
+        self.init(intValue: v)
+      } else {
+        self.init(stringValue: s)
+      }
+      return
+    }
+    throw DecodingError.dataCorruptedError(
+      in: container, debugDescription: "Expected enum value, must be integer or string.")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .unspecified: return try container.encode(0)
+    case .january: return try container.encode(1)
+    case .february: return try container.encode(2)
+    case .march: return try container.encode(3)
+    case .april: return try container.encode(4)
+    case .may: return try container.encode(5)
+    case .june: return try container.encode(6)
+    case .july: return try container.encode(7)
+    case .august: return try container.encode(8)
+    case .september: return try container.encode(9)
+    case .october: return try container.encode(10)
+    case .november: return try container.encode(11)
+    case .december: return try container.encode(12)
+    case .unknownIntValue(let v): return try container.encode(v)
+    case .unknownStringValue(let v): return try container.encode(v)
     }
   }
 }

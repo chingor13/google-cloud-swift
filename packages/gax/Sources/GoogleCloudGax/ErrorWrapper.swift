@@ -48,8 +48,8 @@ extension ServiceError {
   init(
     wrapper: ErrorWrapper,
   ) {
-    if let s = wrapper.error.status, let code = GoogleRpc.Code.init(stringValue: s) {
-      self.code = code
+    if let s = wrapper.error.status {
+      self.code = GoogleRpc.Code.init(stringValue: s)
     } else {
       self.code = .unknown
     }
