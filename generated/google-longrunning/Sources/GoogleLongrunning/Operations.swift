@@ -146,6 +146,7 @@ extension Clients {
     /// Creates a new `OperationsClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       var inner: any OperationsStub = try OperationsTransport(options)
+      inner = OperationsRetry(inner, options: options)
       if let logger = options.logger {
         inner = OperationsLogging(inner, logger: logger)
       }

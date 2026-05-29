@@ -120,6 +120,7 @@ extension Clients {
     /// Creates a new `IAMPolicyClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       var inner: any IAMPolicyStub = try IAMPolicyTransport(options)
+      inner = IAMPolicyRetry(inner, options: options)
       if let logger = options.logger {
         inner = IAMPolicyLogging(inner, logger: logger)
       }

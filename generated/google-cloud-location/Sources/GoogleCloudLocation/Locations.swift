@@ -74,6 +74,7 @@ extension Clients {
     /// Creates a new `LocationsClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       var inner: any LocationsStub = try LocationsTransport(options)
+      inner = LocationsRetry(inner, options: options)
       if let logger = options.logger {
         inner = LocationsLogging(inner, logger: logger)
       }

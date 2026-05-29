@@ -448,6 +448,7 @@ extension Clients {
     /// Creates a new `SecretManagerServiceClient` instance.
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       var inner: any SecretManagerServiceStub = try SecretManagerServiceTransport(options)
+      inner = SecretManagerServiceRetry(inner, options: options)
       if let logger = options.logger {
         inner = SecretManagerServiceLogging(inner, logger: logger)
       }

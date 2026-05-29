@@ -61,6 +61,7 @@ extension Clients {
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
       var inner: any PublicCertificateAuthorityServiceStub =
         try PublicCertificateAuthorityServiceTransport(options)
+      inner = PublicCertificateAuthorityServiceRetry(inner, options: options)
       if let logger = options.logger {
         inner = PublicCertificateAuthorityServiceLogging(inner, logger: logger)
       }
