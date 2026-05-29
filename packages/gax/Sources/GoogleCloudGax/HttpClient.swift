@@ -55,11 +55,39 @@ public struct HTTPClient {
     return request
   }
 
-  public func data(for: URLRequest) async throws -> (Data, HTTPURLResponse) {
-    let (data, response) = try await self.inner.data(for: `for`)
+  public func rpc(for request: URLRequest) async -> Result<(Data, HTTPURLResponse), RequestError> {
+    do {
+      let (data, response) = try await self.data(for: request)
+      if !(200..<300).contains(response.statusCode) {
+        return .failure(Self.parseError(data: data, response: response))
+      }
+      return .success((data, response))
+    } catch let e as RequestError {
+      return .failure(e)
+    } catch let e {
+      return .failure(.io(e))
+    }
+  }
+
+  public func data(for request: URLRequest) async throws -> (Data, HTTPURLResponse) {
+    let (data, response) = try await self.inner.data(for: request)
     guard let httpResponse = response as? HTTPURLResponse else {
       throw RequestError.badResponseType
     }
     return (data, httpResponse)
+  }
+
+  static func parseError(data: Data, response: HTTPURLResponse) -> RequestError {
+    if let s = response.value(forHTTPHeaderField: "Content-Type"), s.contains("application/json") {
+      if let w = ErrorWrapper(data: data, response: response) {
+        return RequestError.service(ServiceError(wrapper: w))
+      }
+    }
+    return GoogleCloudGax.RequestError.http(
+      GoogleCloudGax.HTTPDetails(
+        http_status_code: response.statusCode,
+        headers: [:],
+        payload: data,
+      ))
   }
 }
