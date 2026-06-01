@@ -61,15 +61,7 @@ extension Clients {
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
       req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.Policy.self, from: data)
     }
@@ -88,15 +80,7 @@ extension Clients {
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
       req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.Policy.self, from: data)
     }
@@ -115,15 +99,7 @@ extension Clients {
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
       req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }

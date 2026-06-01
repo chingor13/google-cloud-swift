@@ -70,15 +70,7 @@ extension Clients {
       )
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleLongrunning.ListOperationsResponse.self, from: data)
     }
@@ -95,15 +87,7 @@ extension Clients {
       let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleLongrunning.Operation.self, from: data)
     }
@@ -120,15 +104,7 @@ extension Clients {
       let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      _ = try await self.inner.rpc(for: req).get()
     }
 
     public func cancelOperation(
@@ -145,15 +121,7 @@ extension Clients {
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
       req.httpBody = try JSONEncoder().encode(request)
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      _ = try await self.inner.rpc(for: req).get()
     }
   }
 }

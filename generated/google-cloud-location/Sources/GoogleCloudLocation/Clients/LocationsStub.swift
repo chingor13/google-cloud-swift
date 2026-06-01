@@ -59,15 +59,7 @@ extension Clients {
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.ListLocationsResponse.self, from: data)
     }
@@ -84,15 +76,7 @@ extension Clients {
       let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
-      let (data, response) = try await self.inner.data(for: req)
-      if !(200..<300).contains(response.statusCode) {
-        throw GoogleCloudGax.RequestError.http(
-          GoogleCloudGax.HTTPDetails(
-            http_status_code: response.statusCode,
-            headers: [:],
-            payload: data,
-          ))
-      }
+      let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudLocation.Location.self, from: data)
     }
