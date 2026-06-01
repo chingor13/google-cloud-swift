@@ -169,14 +169,14 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
 
       var options: OneOf_Options? = nil
-      let optionsCheckAndSet = { (value: OneOf_Options) throws in
+      let optionsCheckAndSet = {
         if options != nil {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath,
               debugDescription: "Multiple values set for oneof 'options'"))
         }
-        options = value
+        options = $0
       }
       if let linearBuckets = try container.decodeIfPresent(
         Distribution.BucketOptions.Linear?.self, forKey: .linearBuckets)

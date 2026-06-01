@@ -20,6 +20,7 @@ import Foundation
 import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(client: some Executions) async throws {
 }

@@ -54,14 +54,14 @@ public struct JwtLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.valuePrefix = try container.decode(Swift.String.self, forKey: .valuePrefix)
 
     var `in`: OneOf_In? = nil
-    let inCheckAndSet = { (value: OneOf_In) throws in
+    let inCheckAndSet = {
       if `in` != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath, debugDescription: "Multiple values set for oneof '`in`'"
           ))
       }
-      `in` = value
+      `in` = $0
     }
     if let header = try container.decodeIfPresent(Swift.String.self, forKey: .header) {
       try inCheckAndSet(.header(header))

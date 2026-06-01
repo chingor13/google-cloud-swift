@@ -21,6 +21,7 @@ import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(client: some WorkerPools) async throws {
   let response = try await client.getOperation(

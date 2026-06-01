@@ -47,7 +47,9 @@ public protocol Operations {
 
   /// Lists operations that match the specified filter in the request. If the
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-  func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<Operation, Error>
+  func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<Operation, Swift.Error>
 
   /// Gets the latest state of a long-running operation.  Clients can use this
   /// method to poll the operation result at intervals as recommended by the API
@@ -95,7 +97,7 @@ public protocol Operations {
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
   func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Operation, Error>
+  ) throws -> any AsyncSequence<Operation, Swift.Error>
 
   /// Gets the latest state of a long-running operation.  Clients can use this
   /// method to poll the operation result at intervals as recommended by the API
@@ -164,7 +166,7 @@ extension Clients {
     /// server doesn't support this method, it returns `UNIMPLEMENTED`.
     public func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Error> {
+    ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
@@ -210,15 +212,15 @@ extension Operations {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
-    Operation, Error
-  > {
+  public func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<Operation, Swift.Error> {
     try self.listOperations(byItem: byItem, options: .init())
   }
 
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Operation, Error> {
+  ) throws -> any AsyncSequence<Operation, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

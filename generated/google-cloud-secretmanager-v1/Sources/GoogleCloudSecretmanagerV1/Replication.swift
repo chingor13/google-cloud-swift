@@ -40,14 +40,14 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     var replication: OneOf_Replication? = nil
-    let replicationCheckAndSet = { (value: OneOf_Replication) throws in
+    let replicationCheckAndSet = {
       if replication != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'replication'"))
       }
-      replication = value
+      replication = $0
     }
     if let automatic = try container.decodeIfPresent(
       Replication.Automatic?.self, forKey: .automatic)

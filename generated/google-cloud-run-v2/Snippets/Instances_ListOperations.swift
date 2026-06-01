@@ -20,6 +20,7 @@ import Foundation
 import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(client: some Instances) async throws {
   let items = try client.listOperations(

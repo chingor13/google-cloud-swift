@@ -52,4 +52,8 @@ public struct ListInstancesResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   public func _getPaginatedItems() -> [Instance] {
     return self.instances
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

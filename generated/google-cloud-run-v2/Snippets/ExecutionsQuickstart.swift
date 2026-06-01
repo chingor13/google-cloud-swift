@@ -20,6 +20,7 @@ import Foundation
 import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(projectId: String, locationId: String, jobId: String, ) async throws {
   let client = try GoogleCloudRunV2.Clients.ExecutionsClient()

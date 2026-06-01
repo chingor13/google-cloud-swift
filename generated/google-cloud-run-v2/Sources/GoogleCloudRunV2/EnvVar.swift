@@ -47,14 +47,14 @@ public struct EnvVar: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.name = try container.decode(Swift.String.self, forKey: .name)
 
     var values: OneOf_Values? = nil
-    let valuesCheckAndSet = { (value: OneOf_Values) throws in
+    let valuesCheckAndSet = {
       if values != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'values'"))
       }
-      values = value
+      values = $0
     }
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .value) {
       try valuesCheckAndSet(.value(value))

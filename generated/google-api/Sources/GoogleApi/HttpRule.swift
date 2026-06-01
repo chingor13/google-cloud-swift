@@ -356,14 +356,14 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.additionalBindings = try container.decode([HttpRule].self, forKey: .additionalBindings)
 
     var pattern: OneOf_Pattern? = nil
-    let patternCheckAndSet = { (value: OneOf_Pattern) throws in
+    let patternCheckAndSet = {
       if pattern != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'pattern'"))
       }
-      pattern = value
+      pattern = $0
     }
     if let `get` = try container.decodeIfPresent(Swift.String.self, forKey: .`get`) {
       try patternCheckAndSet(.`get`(`get`))

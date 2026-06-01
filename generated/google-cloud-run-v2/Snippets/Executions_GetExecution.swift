@@ -20,6 +20,7 @@ import Foundation
 import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(
   client: some Executions, projectId: String, locationId: String, jobId: String, executionId: String

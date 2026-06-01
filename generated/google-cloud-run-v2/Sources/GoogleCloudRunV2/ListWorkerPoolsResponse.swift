@@ -52,4 +52,8 @@ public struct ListWorkerPoolsResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
   public func _getPaginatedItems() -> [WorkerPool] {
     return self.workerPools
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

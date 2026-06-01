@@ -72,4 +72,8 @@ public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   public func _getPaginatedItems() -> [Secret] {
     return self.secrets
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

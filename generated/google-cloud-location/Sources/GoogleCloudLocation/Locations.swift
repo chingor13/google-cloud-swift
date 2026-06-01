@@ -39,7 +39,9 @@ public protocol Locations {
     -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
-  func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<Location, Error>
+  func listLocations(
+    byItem: ListLocationsRequest
+  ) throws -> any AsyncSequence<Location, Swift.Error>
 
   /// Gets information about a location.
   ///
@@ -56,7 +58,7 @@ public protocol Locations {
   /// Lists information about the supported locations for this service.
   func listLocations(
     byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Location, Error>
+  ) throws -> any AsyncSequence<Location, Swift.Error>
 
   /// Gets information about a location.
   ///
@@ -91,7 +93,7 @@ extension Clients {
     /// Lists information about the supported locations for this service.
     public func listLocations(
       byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Location, Error> {
+    ) throws -> any AsyncSequence<Location, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
         request.pageToken = token
@@ -123,15 +125,15 @@ extension Locations {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listLocations(byItem: ListLocationsRequest) throws -> any AsyncSequence<
-    Location, Error
-  > {
+  public func listLocations(
+    byItem: ListLocationsRequest
+  ) throws -> any AsyncSequence<Location, Swift.Error> {
     try self.listLocations(byItem: byItem, options: .init())
   }
 
   public func listLocations(
     byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Location, Error> {
+  ) throws -> any AsyncSequence<Location, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

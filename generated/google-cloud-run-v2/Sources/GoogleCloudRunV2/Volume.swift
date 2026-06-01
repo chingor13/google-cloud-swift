@@ -49,14 +49,14 @@ public struct Volume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.name = try container.decode(Swift.String.self, forKey: .name)
 
     var volumeType: OneOf_VolumeType? = nil
-    let volumeTypeCheckAndSet = { (value: OneOf_VolumeType) throws in
+    let volumeTypeCheckAndSet = {
       if volumeType != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'volumeType'"))
       }
-      volumeType = value
+      volumeType = $0
     }
     if let secret = try container.decodeIfPresent(SecretVolumeSource?.self, forKey: .secret) {
       try volumeTypeCheckAndSet(.secret(secret))

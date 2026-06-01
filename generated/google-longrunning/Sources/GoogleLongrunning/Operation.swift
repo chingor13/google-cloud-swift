@@ -73,14 +73,14 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.done = try container.decode(Swift.Bool.self, forKey: .done)
 
     var result: OneOf_Result? = nil
-    let resultCheckAndSet = { (value: OneOf_Result) throws in
+    let resultCheckAndSet = {
       if result != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'result'"))
       }
-      result = value
+      result = $0
     }
     if let error = try container.decodeIfPresent(GoogleRpc.Status?.self, forKey: .error) {
       try resultCheckAndSet(.error(error))

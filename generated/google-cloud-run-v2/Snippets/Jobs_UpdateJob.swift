@@ -21,6 +21,7 @@ import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
+import GoogleRpc
 
 func sample(client: some Jobs, projectId: String, locationId: String, jobId: String) async throws {
 }

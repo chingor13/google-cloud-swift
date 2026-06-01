@@ -52,4 +52,8 @@ public struct ListTasksResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable
   public func _getPaginatedItems() -> [Task] {
     return self.tasks
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

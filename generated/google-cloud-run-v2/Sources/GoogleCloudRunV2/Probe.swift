@@ -77,14 +77,14 @@ public struct Probe: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.failureThreshold = try container.decode(Swift.Int32.self, forKey: .failureThreshold)
 
     var probeType: OneOf_ProbeType? = nil
-    let probeTypeCheckAndSet = { (value: OneOf_ProbeType) throws in
+    let probeTypeCheckAndSet = {
       if probeType != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'probeType'"))
       }
-      probeType = value
+      probeType = $0
     }
     if let httpGet = try container.decodeIfPresent(HTTPGetAction?.self, forKey: .httpGet) {
       try probeTypeCheckAndSet(.httpGet(httpGet))

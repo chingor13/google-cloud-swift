@@ -39,14 +39,14 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     var sourceType: OneOf_SourceType? = nil
-    let sourceTypeCheckAndSet = { (value: OneOf_SourceType) throws in
+    let sourceTypeCheckAndSet = {
       if sourceType != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'sourceType'"))
       }
-      sourceType = value
+      sourceType = $0
     }
     if let cloudStorageSource = try container.decodeIfPresent(
       SourceCode.CloudStorageSource?.self, forKey: .cloudStorageSource)

@@ -73,4 +73,8 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   public func _getPaginatedItems() -> [SecretVersion] {
     return self.versions
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

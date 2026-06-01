@@ -52,4 +52,8 @@ public struct ListRevisionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   public func _getPaginatedItems() -> [Revision] {
     return self.revisions
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

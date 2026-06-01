@@ -24,6 +24,7 @@ import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
+import GoogleRpc
 import Logging
 
 extension Clients {

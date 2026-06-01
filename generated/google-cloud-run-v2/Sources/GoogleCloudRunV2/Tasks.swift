@@ -40,7 +40,9 @@ public protocol Tasks {
   func listTasks(request: ListTasksRequest) async throws -> GoogleCloudRunV2.ListTasksResponse
 
   /// Lists Tasks from an Execution of a Job.
-  func listTasks(byItem: ListTasksRequest) throws -> any AsyncSequence<Task, Error>
+  func listTasks(
+    byItem: ListTasksRequest
+  ) throws -> any AsyncSequence<Task, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -53,9 +55,9 @@ public protocol Tasks {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
-    GoogleLongrunning.Operation, Error
-  >
+  func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -95,7 +97,7 @@ public protocol Tasks {
   /// Lists Tasks from an Execution of a Job.
   func listTasks(
     byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Task, Error>
+  ) throws -> any AsyncSequence<Task, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -111,7 +113,7 @@ public protocol Tasks {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -173,7 +175,7 @@ extension Clients {
     /// Lists Tasks from an Execution of a Job.
     public func listTasks(
       byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Task, Error> {
+    ) throws -> any AsyncSequence<Task, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListTasksResponse in
         var request = byItem
         request.pageToken = token
@@ -194,7 +196,7 @@ extension Clients {
     /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
     public func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error> {
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
@@ -250,13 +252,15 @@ extension Tasks {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listTasks(byItem: ListTasksRequest) throws -> any AsyncSequence<Task, Error> {
+  public func listTasks(
+    byItem: ListTasksRequest
+  ) throws -> any AsyncSequence<Task, Swift.Error> {
     try self.listTasks(byItem: byItem, options: .init())
   }
 
   public func listTasks(
     byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Task, Error> {
+  ) throws -> any AsyncSequence<Task, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListTasksResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -275,15 +279,15 @@ extension Tasks {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
-    GoogleLongrunning.Operation, Error
-  > {
+  public func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     try self.listOperations(byItem: byItem, options: .init())
   }
 
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error> {
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

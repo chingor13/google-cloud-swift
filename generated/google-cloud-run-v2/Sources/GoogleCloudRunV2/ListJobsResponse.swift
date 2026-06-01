@@ -52,4 +52,8 @@ public struct ListJobsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public func _getPaginatedItems() -> [Job] {
     return self.jobs
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

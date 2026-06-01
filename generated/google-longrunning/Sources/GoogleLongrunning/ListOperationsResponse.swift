@@ -62,4 +62,8 @@ public struct ListOperationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
   public func _getPaginatedItems() -> [Operation] {
     return self.operations
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

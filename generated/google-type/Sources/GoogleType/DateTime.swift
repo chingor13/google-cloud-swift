@@ -122,14 +122,14 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.nanos = try container.decode(Swift.Int32.self, forKey: .nanos)
 
     var timeOffset: OneOf_TimeOffset? = nil
-    let timeOffsetCheckAndSet = { (value: OneOf_TimeOffset) throws in
+    let timeOffsetCheckAndSet = {
       if timeOffset != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'timeOffset'"))
       }
-      timeOffset = value
+      timeOffset = $0
     }
     if let utcOffset = try container.decodeIfPresent(
       GoogleCloudWkt.Duration?.self, forKey: .utcOffset)

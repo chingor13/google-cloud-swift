@@ -114,14 +114,14 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     self.client = try container.decode(Swift.String.self, forKey: .client)
 
     var source: OneOf_Source? = nil
-    let sourceCheckAndSet = { (value: OneOf_Source) throws in
+    let sourceCheckAndSet = {
       if source != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'source'"))
       }
-      source = value
+      source = $0
     }
     if let storageSource = try container.decodeIfPresent(
       StorageSource?.self, forKey: .storageSource)
@@ -131,14 +131,14 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     self.source = source
 
     var buildType: OneOf_BuildType? = nil
-    let buildTypeCheckAndSet = { (value: OneOf_BuildType) throws in
+    let buildTypeCheckAndSet = {
       if buildType != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'buildType'"))
       }
-      buildType = value
+      buildType = $0
     }
     if let buildpackBuild = try container.decodeIfPresent(
       SubmitBuildRequest.BuildpacksBuild?.self, forKey: .buildpackBuild)

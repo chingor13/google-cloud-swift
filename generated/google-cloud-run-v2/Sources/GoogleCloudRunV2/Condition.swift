@@ -83,14 +83,14 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.severity = try container.decode(Condition.Severity.self, forKey: .severity)
 
     var reasons: OneOf_Reasons? = nil
-    let reasonsCheckAndSet = { (value: OneOf_Reasons) throws in
+    let reasonsCheckAndSet = {
       if reasons != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'reasons'"))
       }
-      reasons = value
+      reasons = $0
     }
     if let reason = try container.decodeIfPresent(Condition.CommonReason.self, forKey: .reason) {
       try reasonsCheckAndSet(.reason(reason))

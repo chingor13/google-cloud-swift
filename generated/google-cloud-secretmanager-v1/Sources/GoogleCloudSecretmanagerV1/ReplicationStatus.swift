@@ -46,14 +46,14 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     var replicationStatus: OneOf_ReplicationStatus? = nil
-    let replicationStatusCheckAndSet = { (value: OneOf_ReplicationStatus) throws in
+    let replicationStatusCheckAndSet = {
       if replicationStatus != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'replicationStatus'"))
       }
-      replicationStatus = value
+      replicationStatus = $0
     }
     if let automatic = try container.decodeIfPresent(
       ReplicationStatus.AutomaticStatus?.self, forKey: .automatic)

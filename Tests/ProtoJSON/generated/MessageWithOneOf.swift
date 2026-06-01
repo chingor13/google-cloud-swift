@@ -56,14 +56,14 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     var singleString: OneOf_SingleString? = nil
-    let singleStringCheckAndSet = { (value: OneOf_SingleString) throws in
+    let singleStringCheckAndSet = {
       if singleString != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'singleString'"))
       }
-      singleString = value
+      singleString = $0
     }
     if let stringContents = try container.decodeIfPresent(
       Swift.String.self, forKey: .stringContents)
@@ -73,14 +73,14 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.singleString = singleString
 
     var twoStrings: OneOf_TwoStrings? = nil
-    let twoStringsCheckAndSet = { (value: OneOf_TwoStrings) throws in
+    let twoStringsCheckAndSet = {
       if twoStrings != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'twoStrings'"))
       }
-      twoStrings = value
+      twoStrings = $0
     }
     if let stringContentsOne = try container.decodeIfPresent(
       Swift.String.self, forKey: .stringContentsOne)
@@ -95,14 +95,14 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.twoStrings = twoStrings
 
     var oneMessage: OneOf_OneMessage? = nil
-    let oneMessageCheckAndSet = { (value: OneOf_OneMessage) throws in
+    let oneMessageCheckAndSet = {
       if oneMessage != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'oneMessage'"))
       }
-      oneMessage = value
+      oneMessage = $0
     }
     if let messageValue = try container.decodeIfPresent(
       MessageWithOneOf.Message?.self, forKey: .messageValue)
@@ -112,14 +112,14 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.oneMessage = oneMessage
 
     var mixed: OneOf_Mixed? = nil
-    let mixedCheckAndSet = { (value: OneOf_Mixed) throws in
+    let mixedCheckAndSet = {
       if mixed != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'mixed'"))
       }
-      mixed = value
+      mixed = $0
     }
     if let anotherMessage = try container.decodeIfPresent(
       MessageWithOneOf.Message?.self, forKey: .anotherMessage)

@@ -223,14 +223,14 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.tags = try container.decode([Swift.String: Swift.String].self, forKey: .tags)
 
     var expiration: OneOf_Expiration? = nil
-    let expirationCheckAndSet = { (value: OneOf_Expiration) throws in
+    let expirationCheckAndSet = {
       if expiration != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'expiration'"))
       }
-      expiration = value
+      expiration = $0
     }
     if let expireTime = try container.decodeIfPresent(
       GoogleCloudWkt.Timestamp?.self, forKey: .expireTime)

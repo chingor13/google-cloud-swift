@@ -82,14 +82,14 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.`extension` = try container.decode(Swift.String.self, forKey: .`extension`)
 
     var kind: OneOf_Kind? = nil
-    let kindCheckAndSet = { (value: OneOf_Kind) throws in
+    let kindCheckAndSet = {
       if kind != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath, debugDescription: "Multiple values set for oneof 'kind'"
           ))
       }
-      kind = value
+      kind = $0
     }
     if let e164Number = try container.decodeIfPresent(Swift.String.self, forKey: .e164Number) {
       try kindCheckAndSet(.e164Number(e164Number))

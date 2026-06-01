@@ -58,4 +58,8 @@ public struct ListServicesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public func _getPaginatedItems() -> [Service] {
     return self.services
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

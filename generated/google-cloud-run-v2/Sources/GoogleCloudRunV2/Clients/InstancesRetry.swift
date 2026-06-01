@@ -23,6 +23,7 @@ import GoogleCloudAuth
 import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
+import GoogleRpc
 import Logging
 
 extension Clients {

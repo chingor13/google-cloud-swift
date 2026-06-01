@@ -50,14 +50,14 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     var complex: OneOf_Complex? = nil
-    let complexCheckAndSet = { (value: OneOf_Complex) throws in
+    let complexCheckAndSet = {
       if complex != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'complex'"))
       }
-      complex = value
+      complex = $0
     }
     if let null = try container.decodeIfPresent(GoogleCloudWkt.NullValue.self, forKey: .null) {
       try complexCheckAndSet(.null(null))

@@ -50,14 +50,14 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
       Swift.String.self, forKey: .breakglassJustification)
 
     var binauthzMethod: OneOf_BinauthzMethod? = nil
-    let binauthzMethodCheckAndSet = { (value: OneOf_BinauthzMethod) throws in
+    let binauthzMethodCheckAndSet = {
       if binauthzMethod != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'binauthzMethod'"))
       }
-      binauthzMethod = value
+      binauthzMethod = $0
     }
     if let useDefault = try container.decodeIfPresent(Swift.Bool.self, forKey: .useDefault) {
       try binauthzMethodCheckAndSet(.useDefault(useDefault))

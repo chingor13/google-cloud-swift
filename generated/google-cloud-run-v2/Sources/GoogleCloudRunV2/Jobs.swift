@@ -24,6 +24,7 @@ import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
+import GoogleRpc
 import Logging
 
 /// Cloud Run Job Control Plane API.
@@ -34,6 +35,10 @@ public protocol Jobs {
   ///
   /// @Snippet(path: "Jobs_CreateJob")
   func createJob(request: CreateJobRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Creates a Job.
+  func createJob(withPolling: CreateJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
 
   /// Gets information about a Job.
   ///
@@ -46,22 +51,37 @@ public protocol Jobs {
   func listJobs(request: ListJobsRequest) async throws -> GoogleCloudRunV2.ListJobsResponse
 
   /// Lists Jobs. Results are sorted by creation time, descending.
-  func listJobs(byItem: ListJobsRequest) throws -> any AsyncSequence<Job, Error>
+  func listJobs(
+    byItem: ListJobsRequest
+  ) throws -> any AsyncSequence<Job, Swift.Error>
 
   /// Updates a Job.
   ///
   /// @Snippet(path: "Jobs_UpdateJob")
   func updateJob(request: UpdateJobRequest) async throws -> GoogleLongrunning.Operation
 
+  /// Updates a Job.
+  func updateJob(withPolling: UpdateJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
+
   /// Deletes a Job.
   ///
   /// @Snippet(path: "Jobs_DeleteJob")
   func deleteJob(request: DeleteJobRequest) async throws -> GoogleLongrunning.Operation
 
+  /// Deletes a Job.
+  func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
+
   /// Triggers creation of a new Execution of this Job.
   ///
   /// @Snippet(path: "Jobs_RunJob")
   func runJob(request: RunJobRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Triggers creation of a new Execution of this Job.
+  func runJob(withPolling: RunJobRequest) async throws -> any GoogleCloudGax.PollableOperation<
+    Execution
+  >
 
   /// Gets the IAM Access Control policy currently in effect for the given Job.
   /// This result does not include any inherited policies.
@@ -94,9 +114,9 @@ public protocol Jobs {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
-    GoogleLongrunning.Operation, Error
-  >
+  func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -126,6 +146,11 @@ public protocol Jobs {
     request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 
+  /// Creates a Job.
+  func createJob(
+    withPolling: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job>
+
   /// Gets information about a Job.
   ///
   /// @Snippet(path: "Jobs_GetJob")
@@ -143,7 +168,7 @@ public protocol Jobs {
   /// Lists Jobs. Results are sorted by creation time, descending.
   func listJobs(
     byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Job, Error>
+  ) throws -> any AsyncSequence<Job, Swift.Error>
 
   /// Updates a Job.
   ///
@@ -152,6 +177,11 @@ public protocol Jobs {
     request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 
+  /// Updates a Job.
+  func updateJob(
+    withPolling: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job>
+
   /// Deletes a Job.
   ///
   /// @Snippet(path: "Jobs_DeleteJob")
@@ -159,12 +189,22 @@ public protocol Jobs {
     request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 
+  /// Deletes a Job.
+  func deleteJob(
+    withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job>
+
   /// Triggers creation of a new Execution of this Job.
   ///
   /// @Snippet(path: "Jobs_RunJob")
   func runJob(
     request: RunJobRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
+
+  /// Triggers creation of a new Execution of this Job.
+  func runJob(
+    withPolling: RunJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
 
   /// Gets the IAM Access Control policy currently in effect for the given Job.
   /// This result does not include any inherited policies.
@@ -205,7 +245,7 @@ public protocol Jobs {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -257,6 +297,57 @@ extension Clients {
       try await self.inner.createJob(request: request, options: options)
     }
 
+    /// Creates a Job.
+    public func createJob(
+      withPolling: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+      let extractStatus = {
+        (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Job>.State
+        in
+        guard op.done else {
+          return .init(done: false, result: nil)
+        }
+
+        switch op.result {
+        case .response(let anyValue):
+          guard let anyValueUnwrapped = anyValue else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but response value was missing")))
+          }
+          let response = try Job(fromAny: anyValueUnwrapped)
+          return .init(done: true, result: .success(response))
+        case .error(let status):
+          guard let statusUnwrapped = status else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but error value was missing")))
+          }
+          let error = GoogleCloudGax.RequestError.service(
+            GoogleCloudGax.ServiceError(
+              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+              message: statusUnwrapped.message))
+          return .init(done: true, result: .failure(error))
+        case .none:
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+        }
+      }
+      let rawOp = try await self.createJob(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// See `Jobs.getJob`
     public func getJob(
       request: GetJobRequest, options: GoogleCloudGax.RequestOptions
@@ -274,7 +365,7 @@ extension Clients {
     /// Lists Jobs. Results are sorted by creation time, descending.
     public func listJobs(
       byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Job, Error> {
+    ) throws -> any AsyncSequence<Job, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListJobsResponse in
         var request = byItem
         request.pageToken = token
@@ -290,6 +381,57 @@ extension Clients {
       try await self.inner.updateJob(request: request, options: options)
     }
 
+    /// Updates a Job.
+    public func updateJob(
+      withPolling: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+      let extractStatus = {
+        (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Job>.State
+        in
+        guard op.done else {
+          return .init(done: false, result: nil)
+        }
+
+        switch op.result {
+        case .response(let anyValue):
+          guard let anyValueUnwrapped = anyValue else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but response value was missing")))
+          }
+          let response = try Job(fromAny: anyValueUnwrapped)
+          return .init(done: true, result: .success(response))
+        case .error(let status):
+          guard let statusUnwrapped = status else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but error value was missing")))
+          }
+          let error = GoogleCloudGax.RequestError.service(
+            GoogleCloudGax.ServiceError(
+              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+              message: statusUnwrapped.message))
+          return .init(done: true, result: .failure(error))
+        case .none:
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+        }
+      }
+      let rawOp = try await self.updateJob(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// See `Jobs.deleteJob`
     public func deleteJob(
       request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
@@ -297,11 +439,113 @@ extension Clients {
       try await self.inner.deleteJob(request: request, options: options)
     }
 
+    /// Deletes a Job.
+    public func deleteJob(
+      withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+      let extractStatus = {
+        (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Job>.State
+        in
+        guard op.done else {
+          return .init(done: false, result: nil)
+        }
+
+        switch op.result {
+        case .response(let anyValue):
+          guard let anyValueUnwrapped = anyValue else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but response value was missing")))
+          }
+          let response = try Job(fromAny: anyValueUnwrapped)
+          return .init(done: true, result: .success(response))
+        case .error(let status):
+          guard let statusUnwrapped = status else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but error value was missing")))
+          }
+          let error = GoogleCloudGax.RequestError.service(
+            GoogleCloudGax.ServiceError(
+              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+              message: statusUnwrapped.message))
+          return .init(done: true, result: .failure(error))
+        case .none:
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+        }
+      }
+      let rawOp = try await self.deleteJob(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// See `Jobs.runJob`
     public func runJob(
       request: RunJobRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.runJob(request: request, options: options)
+    }
+
+    /// Triggers creation of a new Execution of this Job.
+    public func runJob(
+      withPolling: RunJobRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+      let extractStatus = {
+        (op: GoogleLongrunning.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+        guard op.done else {
+          return .init(done: false, result: nil)
+        }
+
+        switch op.result {
+        case .response(let anyValue):
+          guard let anyValueUnwrapped = anyValue else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but response value was missing")))
+          }
+          let response = try Execution(fromAny: anyValueUnwrapped)
+          return .init(done: true, result: .success(response))
+        case .error(let status):
+          guard let statusUnwrapped = status else {
+            return .init(
+              done: true,
+              result: .failure(
+                GoogleCloudGax.RequestError.binding(
+                  "Operation completed but error value was missing")))
+          }
+          let error = GoogleCloudGax.RequestError.service(
+            GoogleCloudGax.ServiceError(
+              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+              message: statusUnwrapped.message))
+          return .init(done: true, result: .failure(error))
+        case .none:
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+        }
+      }
+      let rawOp = try await self.runJob(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// See `Jobs.getIamPolicy`
@@ -337,7 +581,7 @@ extension Clients {
     /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
     public func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error> {
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
@@ -381,6 +625,22 @@ extension Jobs {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func createJob(withPolling: CreateJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
+  {
+    try await self.createJob(withPolling: withPolling, options: .init())
+  }
+
+  public func createJob(
+    withPolling: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+      throw GoogleCloudGax.RequestError.unimplemented
+    }
+    return GoogleCloudGax._PollableOperationImpl(
+      initialState: .init(done: false, result: nil), poll: poll)
+  }
+
   public func getJob(request: GetJobRequest) async throws -> GoogleCloudRunV2.Job {
     try await self.getJob(request: request, options: .init())
   }
@@ -401,13 +661,15 @@ extension Jobs {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listJobs(byItem: ListJobsRequest) throws -> any AsyncSequence<Job, Error> {
+  public func listJobs(
+    byItem: ListJobsRequest
+  ) throws -> any AsyncSequence<Job, Swift.Error> {
     try self.listJobs(byItem: byItem, options: .init())
   }
 
   public func listJobs(
     byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Job, Error> {
+  ) throws -> any AsyncSequence<Job, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListJobsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -424,6 +686,22 @@ extension Jobs {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func updateJob(withPolling: UpdateJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
+  {
+    try await self.updateJob(withPolling: withPolling, options: .init())
+  }
+
+  public func updateJob(
+    withPolling: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+      throw GoogleCloudGax.RequestError.unimplemented
+    }
+    return GoogleCloudGax._PollableOperationImpl(
+      initialState: .init(done: false, result: nil), poll: poll)
+  }
+
   public func deleteJob(request: DeleteJobRequest) async throws -> GoogleLongrunning.Operation {
     try await self.deleteJob(request: request, options: .init())
   }
@@ -434,6 +712,22 @@ extension Jobs {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Job>
+  {
+    try await self.deleteJob(withPolling: withPolling, options: .init())
+  }
+
+  public func deleteJob(
+    withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Job> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Job>.State in
+      throw GoogleCloudGax.RequestError.unimplemented
+    }
+    return GoogleCloudGax._PollableOperationImpl(
+      initialState: .init(done: false, result: nil), poll: poll)
+  }
+
   public func runJob(request: RunJobRequest) async throws -> GoogleLongrunning.Operation {
     try await self.runJob(request: request, options: .init())
   }
@@ -442,6 +736,22 @@ extension Jobs {
     request: RunJobRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func runJob(withPolling: RunJobRequest) async throws -> any GoogleCloudGax
+    .PollableOperation<Execution>
+  {
+    try await self.runJob(withPolling: withPolling, options: .init())
+  }
+
+  public func runJob(
+    withPolling: RunJobRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      throw GoogleCloudGax.RequestError.unimplemented
+    }
+    return GoogleCloudGax._PollableOperationImpl(
+      initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
@@ -488,15 +798,15 @@ extension Jobs {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listOperations(byItem: ListOperationsRequest) throws -> any AsyncSequence<
-    GoogleLongrunning.Operation, Error
-  > {
+  public func listOperations(
+    byItem: ListOperationsRequest
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     try self.listOperations(byItem: byItem, options: .init())
   }
 
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Error> {
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

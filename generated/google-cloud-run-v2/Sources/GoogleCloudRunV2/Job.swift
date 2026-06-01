@@ -281,14 +281,14 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.etag = try container.decode(Swift.String.self, forKey: .etag)
 
     var createExecution: OneOf_CreateExecution? = nil
-    let createExecutionCheckAndSet = { (value: OneOf_CreateExecution) throws in
+    let createExecutionCheckAndSet = {
       if createExecution != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'createExecution'"))
       }
-      createExecution = value
+      createExecution = $0
     }
     if let startExecutionToken = try container.decodeIfPresent(
       Swift.String.self, forKey: .startExecutionToken)

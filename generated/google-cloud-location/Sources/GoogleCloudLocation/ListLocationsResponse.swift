@@ -53,4 +53,8 @@ public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   public func _getPaginatedItems() -> [Location] {
     return self.locations
   }
+
+  public func _nextPageToken() -> Swift.String {
+    return self.nextPageToken
+  }
 }

@@ -115,14 +115,14 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Swift.Bool.self, forKey: .gpuZonalRedundancyDisabled)
 
     var retries: OneOf_Retries? = nil
-    let retriesCheckAndSet = { (value: OneOf_Retries) throws in
+    let retriesCheckAndSet = {
       if retries != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'retries'"))
       }
-      retries = value
+      retries = $0
     }
     if let maxRetries = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxRetries) {
       try retriesCheckAndSet(.maxRetries(maxRetries))

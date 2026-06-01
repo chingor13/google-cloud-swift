@@ -160,14 +160,14 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       [Swift.String: BackendRule].self, forKey: .overridesByRequestProtocol)
 
     var authentication: OneOf_Authentication? = nil
-    let authenticationCheckAndSet = { (value: OneOf_Authentication) throws in
+    let authenticationCheckAndSet = {
       if authentication != nil {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath,
             debugDescription: "Multiple values set for oneof 'authentication'"))
       }
-      authentication = value
+      authentication = $0
     }
     if let jwtAudience = try container.decodeIfPresent(Swift.String.self, forKey: .jwtAudience) {
       try authenticationCheckAndSet(.jwtAudience(jwtAudience))
