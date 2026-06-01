@@ -32,6 +32,9 @@ default:
   output: generated/
   swift:
     dependencies:
+      - name: GoogleApi
+        path: generated/google-api
+        api_package: google.api
       - name: GoogleCloudAuth
         path: packages/auth
         required_by_services: true
@@ -47,6 +50,9 @@ default:
       - name: GoogleIamV1
         path: generated/google-iam-v1
         api_package: google.iam.v1
+      - name: GoogleLongrunning
+        path: generated/google-longrunning
+        api_package: google.longrunning
       - name: GoogleRpc
         path: generated/google-rpc
         api_package: google.rpc
@@ -65,6 +71,10 @@ libraries:
   - name: GoogleCloudLocation
     apis:
       - path: google/cloud/location
+    copyright_year: "2026"
+  - name: GoogleCloudRunV2
+    apis:
+      - path: google/cloud/run/v2
     copyright_year: "2026"
   - name: GoogleCloudSecretmanagerV1
     apis:
