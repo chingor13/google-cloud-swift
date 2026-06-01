@@ -57,6 +57,20 @@ import Testing
     #expect(got == Empty())
   }
 
+  @Test("Unpack Empty from empty Any (no value field)")
+  func emptyAnyUnpackNoValue() throws {
+    let jsonString =
+      #"{"content":{"@type":"type.googleapis.com/google.protobuf.Empty"}}"#
+    let data = jsonString.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    let wrapped = try decoder.decode(AnyTests.WrappedAny.self, from: data)
+    let any = wrapped.content
+    #expect(any.typeUrl == "type.googleapis.com/google.protobuf.Empty")
+
+    let got = try Empty(fromAny: any)
+    #expect(got == Empty())
+  }
+
   @Test func emptyAnyUnpackMismatchedUrl() throws {
     let jsonString =
       #"{"content":{"@type":"bad","value":{}}}"#

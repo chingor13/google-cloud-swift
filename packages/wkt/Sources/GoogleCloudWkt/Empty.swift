@@ -37,6 +37,10 @@ extension Empty: _AnyPackable {
     if Self._anyTypeUrl != any._type {
       throw AnyError.mismatchedTypeUrl
     }
+    if any.fields.isEmpty {
+      self = Empty()
+      return
+    }
     guard case let .object(v)? = any.fields[`Any`.valueField] else {
       throw AnyError.invalidValueField
     }
