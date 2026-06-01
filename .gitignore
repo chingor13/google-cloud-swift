@@ -54,3 +54,6 @@ coverage.out
 
 # macOS
 .DS_Store
+
+# Use as a common build cache.
+.build-cache/

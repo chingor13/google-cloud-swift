@@ -64,8 +64,38 @@ swift test
 ## Run the unit tests for a specific package
 
 ```bash
-swift test --package-path packages/gax
+swift test --quiet --package-path packages/gax
 ```
+
+## Sharing a build cache
+
+By default, when using `--package-path` does not reuse the build results for
+common libraries like `swift-crypto` or `gax`. You can add a build cache using
+`--scratch-path` to a common directory.
+
+For example, if using `bash`, you set this in your startup scripts:
+
+```bash
+alias sbuild='swift build --scratch-path $(git rev-parse --show-toplevel)/.build-cache'
+alias stest='swift test --scratch-path $(git rev-parse --show-toplevel)/.build-cache'
+```
+
+Then use these aliases to speed up testing:
+
+```bash
+stest --package-path packages/wkt
+```
+
+or to verify the generated code compiles:
+
+```bash
+stest --package-path generated/google-cloud-secretmanager-v1
+```
+
+You can customize these aliases even further. Consider
+
+- Add `-Xswiftc -warnings-as-errors` to catch build problems earlier
+- Add `--quiet` to `stest` to reduce the noise and only see test failures
 
 ## Exhaustive builds and tests
 
