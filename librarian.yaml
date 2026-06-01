@@ -97,6 +97,10 @@ libraries:
       modules:
         - output: packages/wkt/Sources/GoogleCloudWkt/generated
           api_path: google/protobuf
+  - name: GoogleCloudWorkflowsV1
+    apis:
+      - path: google/cloud/workflows/v1
+    copyright_year: "2026"
   - name: GoogleIamV1
     apis:
       - path: google/iam/v1
