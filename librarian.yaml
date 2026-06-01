@@ -84,6 +84,10 @@ libraries:
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
+  - name: GoogleCloudTpuV2
+    apis:
+      - path: google/cloud/tpu/v2
+    copyright_year: "2026"
   - name: GoogleCloudWkt
     copyright_year: "2026"
     output: packages/wkt/Sources/GoogleCloudWkt/generated
