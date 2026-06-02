@@ -88,6 +88,12 @@ libraries:
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
+  - name: GoogleCloudSqlV1
+    apis:
+      - path: google/cloud/sql/v1
+    copyright_year: "2026"
+    swift:
+      per_service_traits: true
   - name: GoogleCloudTpuV2
     apis:
       - path: google/cloud/tpu/v2
