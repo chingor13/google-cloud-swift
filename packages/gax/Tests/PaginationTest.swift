@@ -37,7 +37,10 @@ import Testing
     }
 
     public func _getPaginatedItems() -> [Item] {
-      return items
+      return self.items
+    }
+    public func _nextPageToken() -> String {
+      return self.nextPageToken
     }
   }
 

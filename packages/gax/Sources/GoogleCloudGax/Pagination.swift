@@ -17,7 +17,7 @@
 public protocol _PaginatedResponse<Item> {
   associatedtype Item: Decodable
 
-  var nextPageToken: String { get }
+  func _nextPageToken() -> String
 
   func _getPaginatedItems() -> [Item]
 }
@@ -67,7 +67,7 @@ public final class PaginatedResponseSequence<
 
       // 4. Update the token. If there is no next token, remember that we
       // don't need to fetch any more pages.
-      nextToken = response.nextPageToken
+      nextToken = response._nextPageToken()
       if nextToken.isEmpty {
         hasReachedEnd = true
       }
