@@ -38,6 +38,9 @@ default:
       - name: GoogleCloudAuth
         path: packages/auth
         required_by_services: true
+      - name: GoogleCloudCommon
+        path: generated/google-cloud-common
+        api_package: google.cloud.common
       - name: GoogleCloudGax
         path: packages/gax
         required_by_services: true
@@ -67,6 +70,10 @@ libraries:
   - name: GoogleApi
     apis:
       - path: google/api
+    copyright_year: "2026"
+  - name: GoogleCloudCommon
+    apis:
+      - path: google/cloud/common
     copyright_year: "2026"
   - name: GoogleCloudEdgecontainerV1
     apis:
