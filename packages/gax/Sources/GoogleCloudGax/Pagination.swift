@@ -15,7 +15,7 @@
 /// For internal use only. This protocol identifies response messages that adhere to the
 /// [AIP-158 pagination](https://google.aip.dev/158) standard.
 public protocol _PaginatedResponse<Item> {
-  associatedtype Item: Decodable
+  associatedtype Item
 
   func _nextPageToken() -> String
 
@@ -23,9 +23,7 @@ public protocol _PaginatedResponse<Item> {
 }
 
 /// A sequence that manages cursor-based pagination automatically.
-public final class PaginatedResponseSequence<
-  Item: Decodable, ResponseType: _PaginatedResponse<Item>
->:
+public final class PaginatedResponseSequence<Item, ResponseType: _PaginatedResponse<Item>>:
   AsyncSequence
 {
   public typealias Element = Item
