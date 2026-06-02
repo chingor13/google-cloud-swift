@@ -22,7 +22,7 @@ import Testing
     var message: String
   }
 
-  class MockPoller<ResponseType: Decodable> {
+  class MockPoller<ResponseType> {
     public var responses: [_PollableOperationImpl<ResponseType>.State] = []
     public var pollCount = 0
 
@@ -126,5 +126,22 @@ import Testing
     }
     #expect(pollCount == 1)
     #expect(sleepProvider.sleepCount == 1)
+  }
+
+  @Test func voidOperationPolling() async throws {
+    let results = [
+      _PollableOperationImpl<Void>.State(done: false, result: nil),
+      _PollableOperationImpl<Void>.State(done: true, result: .success(())),
+    ]
+    let pollProvider = MockPoller<Void>()
+    pollProvider.responses = results
+    let sleepProvider = MockSleeper()
+    let op = _PollableOperationImpl<Void>(
+      initialState: _PollableOperationImpl<Void>.State(done: false, result: nil),
+      poll: pollProvider.poll, sleep: sleepProvider.sleep)
+
+    try await op.wait()
+    #expect(pollProvider.pollCount == 2)
+    #expect(sleepProvider.sleepCount == 2)
   }
 }

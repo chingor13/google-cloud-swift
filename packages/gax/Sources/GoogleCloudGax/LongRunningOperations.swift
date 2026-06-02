@@ -20,7 +20,7 @@ import Foundation
 /// This protocol defines the contract for waiting on the final result of such an operation.
 public protocol PollableOperation<ResponseType> {
   /// The type of the response message returned when the long-running operation completes.
-  associatedtype ResponseType: Decodable
+  associatedtype ResponseType
 
   /// Waits for the long-running operation to complete, returning the final response.
   ///
@@ -33,7 +33,7 @@ public protocol PollableOperation<ResponseType> {
 ///
 /// This class implements a generic polling loop with a backoff policy to avoid overloading the
 /// server with status requests.
-public final class _PollableOperationImpl<ResponseType: Decodable>: PollableOperation {
+public final class _PollableOperationImpl<ResponseType>: PollableOperation {
   /// Represents the current state of the long-running operation.
   public struct State {
     /// A Boolean value indicating whether the operation has finished.
