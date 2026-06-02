@@ -44,6 +44,18 @@ import GoogleCloudGax
       }
     }
 
+    @Test func longRunningOperations() async throws {
+      await cleanupStaleSecrets()
+      do {
+        try await LongrunningOperations.run()
+      } catch let e as GoogleCloudGax.RequestError {
+        try reportRequestError(#function, error: e)
+      } catch {
+        print("### error=\(error)")
+        throw error
+      }
+    }
+
     func reportRequestError(_ name: String, error: GoogleCloudGax.RequestError) throws {
       if case let .http(details) = error {
         let p = String(data: details.payload, encoding: .utf8)!

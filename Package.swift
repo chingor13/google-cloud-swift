@@ -34,6 +34,7 @@ let package = Package(
     .package(path: "./generated/google-iam-v1"),
     .package(path: "./generated/google-cloud-secretmanager-v1"),
     .package(path: "./generated/google-cloud-security-publicca-v1"),
+    .package(path: "./generated/google-cloud-workflows-v1"),
     .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     // Used in the integration tests.
@@ -62,6 +63,8 @@ let package = Package(
       dependencies: [
         .product(
           name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
+        .product(
+          name: "GoogleCloudWorkflowsV1", package: "google-cloud-workflows-v1"),
         .product(
           name: "GoogleCloudLocation", package: "google-cloud-location"),
         .product(
