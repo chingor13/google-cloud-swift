@@ -86,7 +86,7 @@ public protocol FunctionService {
   /// given function is used by some trigger, the trigger will be updated to
   /// remove this function.
   func deleteFunction(withPolling: DeleteFunctionRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
 
   /// Returns a signed URL for uploading a function source code.
   /// For more information about the signed URL usage see:
@@ -253,7 +253,7 @@ public protocol FunctionService {
   /// remove this function.
   func deleteFunction(
     withPolling: DeleteFunctionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Returns a signed URL for uploading a function source code.
   /// For more information about the signed URL usage see:
@@ -544,25 +544,17 @@ extension Clients {
     /// remove this function.
     public func deleteFunction(
       withPolling: DeleteFunctionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -585,8 +577,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteFunction(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -794,16 +785,15 @@ extension FunctionService {
   }
 
   public func deleteFunction(withPolling: DeleteFunctionRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
   {
     try await self.deleteFunction(withPolling: withPolling, options: .init())
   }
 
   public func deleteFunction(
     withPolling: DeleteFunctionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(

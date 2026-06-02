@@ -75,7 +75,7 @@ public protocol Workflows {
   /// This method also cancels and deletes all running executions of the
   /// workflow.
   func deleteWorkflow(withPolling: DeleteWorkflowRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
 
   /// Updates an existing workflow.
   /// Running this method has no impact on already running executions of the
@@ -201,7 +201,7 @@ public protocol Workflows {
   /// workflow.
   func deleteWorkflow(
     withPolling: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Updates an existing workflow.
   /// Running this method has no impact on already running executions of the
@@ -404,25 +404,17 @@ extension Clients {
     /// workflow.
     public func deleteWorkflow(
       withPolling: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -445,8 +437,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteWorkflow(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -680,16 +671,15 @@ extension Workflows {
   }
 
   public func deleteWorkflow(withPolling: DeleteWorkflowRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
   {
     try await self.deleteWorkflow(withPolling: withPolling, options: .init())
   }
 
   public func deleteWorkflow(
     withPolling: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(

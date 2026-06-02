@@ -82,7 +82,7 @@ public protocol EdgeContainer {
 
   /// Deletes a single Cluster.
   func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
 
   /// Generates an access token for a Cluster.
   ///
@@ -137,7 +137,7 @@ public protocol EdgeContainer {
 
   /// Deletes a single NodePool.
   func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
 
   /// Lists Machines in a given project and location.
   ///
@@ -190,7 +190,7 @@ public protocol EdgeContainer {
 
   /// Deletes a single VPN connection.
   func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+    -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Gets the server config.
   ///
@@ -315,7 +315,7 @@ public protocol EdgeContainer {
   /// Deletes a single Cluster.
   func deleteCluster(
     withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Generates an access token for a Cluster.
   ///
@@ -384,7 +384,7 @@ public protocol EdgeContainer {
   /// Deletes a single NodePool.
   func deleteNodePool(
     withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Lists Machines in a given project and location.
   ///
@@ -446,7 +446,7 @@ public protocol EdgeContainer {
   /// Deletes a single VPN connection.
   func deleteVpnConnection(
     withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Gets the server config.
   ///
@@ -744,25 +744,17 @@ extension Clients {
     /// Deletes a single Cluster.
     public func deleteCluster(
       withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -785,8 +777,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteCluster(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -960,25 +951,17 @@ extension Clients {
     /// Deletes a single NodePool.
     public func deleteNodePool(
       withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -1001,8 +984,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteNodePool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -1131,25 +1113,17 @@ extension Clients {
     /// Deletes a single VPN connection.
     public func deleteVpnConnection(
       withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -1172,8 +1146,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteVpnConnection(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -1396,16 +1369,15 @@ extension EdgeContainer {
   }
 
   public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
   {
     try await self.deleteCluster(withPolling: withPolling, options: .init())
   }
 
   public func deleteCluster(
     withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(
@@ -1545,16 +1517,15 @@ extension EdgeContainer {
   }
 
   public func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
   {
     try await self.deleteNodePool(withPolling: withPolling, options: .init())
   }
 
   public func deleteNodePool(
     withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(
@@ -1682,16 +1653,15 @@ extension EdgeContainer {
   }
 
   public func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+    -> any GoogleCloudGax.PollableOperation<Void>
   {
     try await self.deleteVpnConnection(withPolling: withPolling, options: .init())
   }
 
   public func deleteVpnConnection(
     withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(

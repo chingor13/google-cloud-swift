@@ -52,7 +52,7 @@ public protocol TagHolds {
 
   /// Deletes a TagHold.
   func deleteTagHold(withPolling: DeleteTagHoldRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
 
   /// Lists TagHolds under a TagValue.
   ///
@@ -96,7 +96,7 @@ public protocol TagHolds {
   /// Deletes a TagHold.
   func deleteTagHold(
     withPolling: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Lists TagHolds under a TagValue.
   ///
@@ -204,25 +204,17 @@ extension Clients {
     /// Deletes a TagHold.
     public func deleteTagHold(
       withPolling: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
       let extractStatus = {
         (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         guard op.done else {
           return .init(done: false, result: nil)
         }
 
         switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try GoogleCloudWkt.Empty(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
+        case .response:
+          return .init(done: true, result: .success(()))
         case .error(let status):
           guard let statusUnwrapped = status else {
             return .init(
@@ -245,8 +237,7 @@ extension Clients {
       }
       let rawOp = try await self.deleteTagHold(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
         let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
         return try extractStatus(op)
       }
@@ -325,16 +316,15 @@ extension TagHolds {
   }
 
   public func deleteTagHold(withPolling: DeleteTagHoldRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<GoogleCloudWkt.Empty>
+    .PollableOperation<Void>
   {
     try await self.deleteTagHold(withPolling: withPolling, options: .init())
   }
 
   public func deleteTagHold(
     withPolling: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudWkt.Empty> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GoogleCloudWkt.Empty>.State in
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax._PollableOperationImpl(
