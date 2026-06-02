@@ -68,6 +68,10 @@ libraries:
     apis:
       - path: google/api
     copyright_year: "2026"
+  - name: GoogleCloudEdgecontainerV1
+    apis:
+      - path: google/cloud/edgecontainer/v1
+    copyright_year: "2026"
   - name: GoogleCloudLocation
     apis:
       - path: google/cloud/location
