@@ -72,6 +72,10 @@ libraries:
     apis:
       - path: google/cloud/location
     copyright_year: "2026"
+  - name: GoogleCloudResourcemanagerV3
+    apis:
+      - path: google/cloud/resourcemanager/v3
+    copyright_year: "2026"
   - name: GoogleCloudRunV2
     apis:
       - path: google/cloud/run/v2
