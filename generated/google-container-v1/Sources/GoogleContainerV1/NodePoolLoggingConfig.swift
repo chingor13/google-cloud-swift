@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// NodePoolLoggingConfig specifies logging configuration for nodepools.
+/// NodePoolLoggingConfig specifies logging configuration for node pools.
 public struct NodePoolLoggingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

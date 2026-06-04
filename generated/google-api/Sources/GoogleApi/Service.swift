@@ -136,11 +136,7 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var metrics: [MetricDescriptor]
 
   /// Defines the monitored resources used by this service. This is required
-  /// by the [Service.monitoring][google.api.Service.monitoring] and
-  /// [Service.logging][google.api.Service.logging] configurations.
-  ///
-  /// [google.api.Service.logging]: <doc:Service/logging>
-  /// [google.api.Service.monitoring]: <doc:Service/monitoring>
+  /// by the `Service.monitoring` and `Service.logging` configurations.
   public var monitoredResources: [MonitoredResourceDescriptor]
 
   /// Billing configuration.

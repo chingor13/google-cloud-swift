@@ -82,8 +82,20 @@ public struct AddonsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Configuration for the Lustre CSI driver.
   public var lustreCsiDriverConfig: LustreCsiDriverConfig?
 
+  /// Optional. Configuration for the Pod Snapshot feature.
+  public var podSnapshotConfig: PodSnapshotConfig?
+
+  /// Configuration for the Slurm Operator.
+  public var slurmOperatorConfig: SlurmOperatorConfig?
+
   /// Optional. Configuration for the slice controller add-on.
   public var sliceControllerConfig: SliceControllerConfig?
+
+  /// Optional. Configuration for the AgentSandbox addon.
+  public var agentSandboxConfig: AgentSandboxConfig?
+
+  /// Optional. Configuration for NodeReadinessController add-on.
+  public var nodeReadinessConfig: NodeReadinessConfig?
 
   /// Initialize a new instance of `AddonsConfig`.
   public init(
@@ -103,7 +115,11 @@ public struct AddonsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     rayOperatorConfig: RayOperatorConfig? = nil,
     highScaleCheckpointingConfig: HighScaleCheckpointingConfig? = nil,
     lustreCsiDriverConfig: LustreCsiDriverConfig? = nil,
+    podSnapshotConfig: PodSnapshotConfig? = nil,
+    slurmOperatorConfig: SlurmOperatorConfig? = nil,
     sliceControllerConfig: SliceControllerConfig? = nil,
+    agentSandboxConfig: AgentSandboxConfig? = nil,
+    nodeReadinessConfig: NodeReadinessConfig? = nil,
   ) {
     self.httpLoadBalancing = httpLoadBalancing
     self.horizontalPodAutoscaling = horizontalPodAutoscaling
@@ -121,7 +137,11 @@ public struct AddonsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.rayOperatorConfig = rayOperatorConfig
     self.highScaleCheckpointingConfig = highScaleCheckpointingConfig
     self.lustreCsiDriverConfig = lustreCsiDriverConfig
+    self.podSnapshotConfig = podSnapshotConfig
+    self.slurmOperatorConfig = slurmOperatorConfig
     self.sliceControllerConfig = sliceControllerConfig
+    self.agentSandboxConfig = agentSandboxConfig
+    self.nodeReadinessConfig = nodeReadinessConfig
   }
 
   public static var _anyTypeUrl: String {

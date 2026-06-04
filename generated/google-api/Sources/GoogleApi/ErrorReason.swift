@@ -60,6 +60,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
   case locationPolicyViolated
   case missingOrigin
   case overloadedCredentials
+  case locationOrgPolicyViolated
+  case tlsOrgPolicyViolated
+  case emulatorQuotaExceeded
+  case credentialAndroidAppInvalid
+  case iamPermissionDenied
+  case jwtTokenInvalid
+  case credentialTypeUnsupported
+  case accountTypeUnsupported
+  case endpointUsageRestrictionViolated
+  case tlsCipherRestrictionViolated
+  case mcpServerDisabled
   /// Encodes an unknown integer value.
   ///
   /// The most common cause for an unknown values is for the service to send
@@ -115,6 +126,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case .locationPolicyViolated: return 31
     case .missingOrigin: return 33
     case .overloadedCredentials: return 34
+    case .locationOrgPolicyViolated: return 35
+    case .tlsOrgPolicyViolated: return 36
+    case .emulatorQuotaExceeded: return 38
+    case .credentialAndroidAppInvalid: return 39
+    case .iamPermissionDenied: return 41
+    case .jwtTokenInvalid: return 42
+    case .credentialTypeUnsupported: return 43
+    case .accountTypeUnsupported: return 44
+    case .endpointUsageRestrictionViolated: return 45
+    case .tlsCipherRestrictionViolated: return 46
+    case .mcpServerDisabled: return 47
     case .unknownIntValue(let v): return v
     case .unknownStringValue: return nil
     }
@@ -158,6 +180,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case .locationPolicyViolated: return "LOCATION_POLICY_VIOLATED"
     case .missingOrigin: return "MISSING_ORIGIN"
     case .overloadedCredentials: return "OVERLOADED_CREDENTIALS"
+    case .locationOrgPolicyViolated: return "LOCATION_ORG_POLICY_VIOLATED"
+    case .tlsOrgPolicyViolated: return "TLS_ORG_POLICY_VIOLATED"
+    case .emulatorQuotaExceeded: return "EMULATOR_QUOTA_EXCEEDED"
+    case .credentialAndroidAppInvalid: return "CREDENTIAL_ANDROID_APP_INVALID"
+    case .iamPermissionDenied: return "IAM_PERMISSION_DENIED"
+    case .jwtTokenInvalid: return "JWT_TOKEN_INVALID"
+    case .credentialTypeUnsupported: return "CREDENTIAL_TYPE_UNSUPPORTED"
+    case .accountTypeUnsupported: return "ACCOUNT_TYPE_UNSUPPORTED"
+    case .endpointUsageRestrictionViolated: return "ENDPOINT_USAGE_RESTRICTION_VIOLATED"
+    case .tlsCipherRestrictionViolated: return "TLS_CIPHER_RESTRICTION_VIOLATED"
+    case .mcpServerDisabled: return "MCP_SERVER_DISABLED"
     case .unknownIntValue: return nil
     case .unknownStringValue(let v): return v
     }
@@ -201,6 +234,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case "LOCATION_POLICY_VIOLATED": self = .locationPolicyViolated
     case "MISSING_ORIGIN": self = .missingOrigin
     case "OVERLOADED_CREDENTIALS": self = .overloadedCredentials
+    case "LOCATION_ORG_POLICY_VIOLATED": self = .locationOrgPolicyViolated
+    case "TLS_ORG_POLICY_VIOLATED": self = .tlsOrgPolicyViolated
+    case "EMULATOR_QUOTA_EXCEEDED": self = .emulatorQuotaExceeded
+    case "CREDENTIAL_ANDROID_APP_INVALID": self = .credentialAndroidAppInvalid
+    case "IAM_PERMISSION_DENIED": self = .iamPermissionDenied
+    case "JWT_TOKEN_INVALID": self = .jwtTokenInvalid
+    case "CREDENTIAL_TYPE_UNSUPPORTED": self = .credentialTypeUnsupported
+    case "ACCOUNT_TYPE_UNSUPPORTED": self = .accountTypeUnsupported
+    case "ENDPOINT_USAGE_RESTRICTION_VIOLATED": self = .endpointUsageRestrictionViolated
+    case "TLS_CIPHER_RESTRICTION_VIOLATED": self = .tlsCipherRestrictionViolated
+    case "MCP_SERVER_DISABLED": self = .mcpServerDisabled
     default: self = .unknownStringValue(stringValue)
     }
   }
@@ -243,6 +287,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case 31: self = .locationPolicyViolated
     case 33: self = .missingOrigin
     case 34: self = .overloadedCredentials
+    case 35: self = .locationOrgPolicyViolated
+    case 36: self = .tlsOrgPolicyViolated
+    case 38: self = .emulatorQuotaExceeded
+    case 39: self = .credentialAndroidAppInvalid
+    case 41: self = .iamPermissionDenied
+    case 42: self = .jwtTokenInvalid
+    case 43: self = .credentialTypeUnsupported
+    case 44: self = .accountTypeUnsupported
+    case 45: self = .endpointUsageRestrictionViolated
+    case 46: self = .tlsCipherRestrictionViolated
+    case 47: self = .mcpServerDisabled
     default: self = .unknownIntValue(intValue)
     }
   }
@@ -301,6 +356,17 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case .locationPolicyViolated: return try container.encode(31)
     case .missingOrigin: return try container.encode(33)
     case .overloadedCredentials: return try container.encode(34)
+    case .locationOrgPolicyViolated: return try container.encode(35)
+    case .tlsOrgPolicyViolated: return try container.encode(36)
+    case .emulatorQuotaExceeded: return try container.encode(38)
+    case .credentialAndroidAppInvalid: return try container.encode(39)
+    case .iamPermissionDenied: return try container.encode(41)
+    case .jwtTokenInvalid: return try container.encode(42)
+    case .credentialTypeUnsupported: return try container.encode(43)
+    case .accountTypeUnsupported: return try container.encode(44)
+    case .endpointUsageRestrictionViolated: return try container.encode(45)
+    case .tlsCipherRestrictionViolated: return try container.encode(46)
+    case .mcpServerDisabled: return try container.encode(47)
     case .unknownIntValue(let v): return try container.encode(v)
     case .unknownStringValue(let v): return try container.encode(v)
     }

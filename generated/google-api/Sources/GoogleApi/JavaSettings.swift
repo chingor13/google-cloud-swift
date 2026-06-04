@@ -29,9 +29,10 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example of a YAML configuration::
   ///
-  ///  publishing:
-  ///    java_settings:
-  ///      library_package: com.google.cloud.pubsub.v1
+  ///     publishing:
+  ///       library_settings:
+  ///         java_settings:
+  ///           library_package: com.google.cloud.pubsub.v1
   public var libraryPackage: Swift.String
 
   /// Configure the Java class name to use instead of the service's for its
@@ -43,11 +44,11 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example of a YAML configuration::
   ///
-  ///  publishing:
-  ///    java_settings:
-  ///      service_class_names:
-  ///        - google.pubsub.v1.Publisher: TopicAdmin
-  ///        - google.pubsub.v1.Subscriber: SubscriptionAdmin
+  ///     publishing:
+  ///       java_settings:
+  ///         service_class_names:
+  ///           - google.pubsub.v1.Publisher: TopicAdmin
+  ///           - google.pubsub.v1.Subscriber: SubscriptionAdmin
   public var serviceClassNames: [Swift.String: Swift.String]
 
   /// Some settings.

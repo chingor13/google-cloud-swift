@@ -119,6 +119,9 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Specifies the node drain configuration for this node pool.
   public var nodeDrainConfig: NodePool.NodeDrainConfig?
 
+  /// Optional. Specifies the maintenance policy for the node pool.
+  public var maintenancePolicy: NodePool.NodePoolMaintenancePolicy?
+
   /// Initialize a new instance of `NodePool`.
   public init(
     name: Swift.String = Swift.String(),
@@ -143,6 +146,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     queuedProvisioning: NodePool.QueuedProvisioning? = nil,
     bestEffortProvisioning: BestEffortProvisioning? = nil,
     nodeDrainConfig: NodePool.NodeDrainConfig? = nil,
+    maintenancePolicy: NodePool.NodePoolMaintenancePolicy? = nil,
   ) {
     self.name = name
     self.config = config
@@ -166,6 +170,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.queuedProvisioning = queuedProvisioning
     self.bestEffortProvisioning = bestEffortProvisioning
     self.nodeDrainConfig = nodeDrainConfig
+    self.maintenancePolicy = maintenancePolicy
   }
 
   /// These upgrade settings control the level of parallelism and the level of
@@ -602,7 +607,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public struct QueuedProvisioning: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    /// Denotes that this nodepool is QRM specific, meaning nodes can be only
+    /// Denotes that this node pool is QRM specific, meaning nodes can be only
     /// obtained through queuing via the Cluster Autoscaler ProvisioningRequest
     /// API.
     public var enabled: Swift.Bool
@@ -626,22 +631,96 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   }
 
   /// NodeDrainConfig contains the node drain related configurations for this
-  /// nodepool.
+  /// node pool.
   public struct NodeDrainConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
+    /// The duration of the PDB timeout period for node drain.
+    public var pdbTimeoutDuration: GoogleCloudWkt.Duration?
+
+    /// The duration of the grace termination period for node drain.
+    public var graceTerminationDuration: GoogleCloudWkt.Duration?
+
     /// Whether to respect PDB during node pool deletion.
     public var respectPdbDuringNodePoolDeletion: Swift.Bool?
 
     /// Initialize a new instance of `NodeDrainConfig`.
     public init(
+      pdbTimeoutDuration: GoogleCloudWkt.Duration? = nil,
+      graceTerminationDuration: GoogleCloudWkt.Duration? = nil,
       respectPdbDuringNodePoolDeletion: Swift.Bool? = nil,
     ) {
+      self.pdbTimeoutDuration = pdbTimeoutDuration
+      self.graceTerminationDuration = graceTerminationDuration
       self.respectPdbDuringNodePoolDeletion = respectPdbDuringNodePoolDeletion
     }
 
     public static var _anyTypeUrl: String {
       return "type.googleapis.com/google.container.v1.NodePool.NodeDrainConfig"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// Defines the maintenance exclusion for the node pool.
+  public struct ExclusionUntilEndOfSupport: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. Indicates whether the exclusion is enabled.
+    public var enabled: Swift.Bool
+
+    /// Output only. The start time of the maintenance exclusion. It is output
+    /// only. It is the exclusion creation time.
+    public var startTime: GoogleCloudWkt.Timestamp?
+
+    /// Output only. The end time of the maintenance exclusion. It is output
+    /// only. It is the cluster control plane version's end of support time, or
+    /// end of extended support time when the cluster is on extended support
+    /// channel.
+    public var endTime: GoogleCloudWkt.Timestamp?
+
+    /// Initialize a new instance of `ExclusionUntilEndOfSupport`.
+    public init(
+      enabled: Swift.Bool = Swift.Bool(),
+      startTime: GoogleCloudWkt.Timestamp? = nil,
+      endTime: GoogleCloudWkt.Timestamp? = nil,
+    ) {
+      self.enabled = enabled
+      self.startTime = startTime
+      self.endTime = endTime
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.container.v1.NodePool.ExclusionUntilEndOfSupport"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// Defines the maintenance policy for the node pool.
+  public struct NodePoolMaintenancePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. The exclusion until end of support for the node pool.
+    public var exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport?
+
+    /// Initialize a new instance of `NodePoolMaintenancePolicy`.
+    public init(
+      exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport? = nil,
+    ) {
+      self.exclusionUntilEndOfSupport = exclusionUntilEndOfSupport
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.container.v1.NodePool.NodePoolMaintenancePolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

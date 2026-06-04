@@ -62,6 +62,16 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// NOTE: Set the "desired_node_pool" field as well.
   public var desiredImageType: Swift.String
 
+  /// The desired name of the image to use for this node.
+  /// This is used to create clusters using a custom image.
+  /// NOTE: Set the "desired_node_pool" field as well.
+  public var desiredImage: Swift.String
+
+  /// The project containing the desired image to use for this node.
+  /// This is used to create clusters using a custom image.
+  /// NOTE: Set the "desired_node_pool" field as well.
+  public var desiredImageProject: Swift.String
+
   /// Configuration of etcd encryption.
   public var desiredDatabaseEncryption: DatabaseEncryption?
 
@@ -290,6 +300,10 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Enable/Disable Secret Manager Config.
   public var desiredSecretManagerConfig: SecretManagerConfig?
 
+  /// Deprecated: Compliance Posture is no longer supported.
+  /// For more details, see
+  /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
+  ///
   /// Enable/Disable Compliance Posture features for the cluster.
   public var desiredCompliancePostureConfig: CompliancePostureConfig?
 
@@ -348,11 +362,27 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The desired network tier configuration for the cluster.
   public var desiredNetworkTierConfig: NetworkTierConfig?
 
+  /// Configuration for sync Secret Manager secrets as k8s secrets.
+  public var desiredSecretSyncConfig: SecretSyncConfig?
+
   /// The desired privileged admission config for the cluster.
   public var desiredPrivilegedAdmissionConfig: PrivilegedAdmissionConfig?
 
+  /// The desired control plane egress control config for the cluster.
+  public var desiredControlPlaneEgress: ControlPlaneEgress?
+
   /// The desired managed open telemetry configuration.
   public var desiredManagedOpentelemetryConfig: ManagedOpenTelemetryConfig?
+
+  /// The desired autopilot cluster policies that to be enforced in the cluster.
+  public var desiredAutopilotClusterPolicyConfig: ClusterPolicyConfig?
+
+  /// The desired managed machine learning diagnostics configuration.
+  public var desiredManagedMachineLearningDiagnosticsConfig:
+    ManagedMachineLearningDiagnosticsConfig?
+
+  /// Optional. The desired NodeCreationConfig for the cluster.
+  public var desiredNodeCreationConfig: NodeCreationConfig?
 
   /// Initialize a new instance of `ClusterUpdate`.
   public init(
@@ -361,6 +391,8 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     desiredAddonsConfig: AddonsConfig? = nil,
     desiredNodePoolId: Swift.String = Swift.String(),
     desiredImageType: Swift.String = Swift.String(),
+    desiredImage: Swift.String = Swift.String(),
+    desiredImageProject: Swift.String = Swift.String(),
     desiredDatabaseEncryption: DatabaseEncryption? = nil,
     desiredWorkloadIdentityConfig: WorkloadIdentityConfig? = nil,
     desiredMeshCertificates: MeshCertificates? = nil,
@@ -428,14 +460,21 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     desiredAnonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil,
     gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil,
     desiredNetworkTierConfig: NetworkTierConfig? = nil,
+    desiredSecretSyncConfig: SecretSyncConfig? = nil,
     desiredPrivilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil,
+    desiredControlPlaneEgress: ControlPlaneEgress? = nil,
     desiredManagedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil,
+    desiredAutopilotClusterPolicyConfig: ClusterPolicyConfig? = nil,
+    desiredManagedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig? = nil,
+    desiredNodeCreationConfig: NodeCreationConfig? = nil,
   ) {
     self.desiredNodeVersion = desiredNodeVersion
     self.desiredMonitoringService = desiredMonitoringService
     self.desiredAddonsConfig = desiredAddonsConfig
     self.desiredNodePoolId = desiredNodePoolId
     self.desiredImageType = desiredImageType
+    self.desiredImage = desiredImage
+    self.desiredImageProject = desiredImageProject
     self.desiredDatabaseEncryption = desiredDatabaseEncryption
     self.desiredWorkloadIdentityConfig = desiredWorkloadIdentityConfig
     self.desiredMeshCertificates = desiredMeshCertificates
@@ -503,8 +542,14 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.desiredAnonymousAuthenticationConfig = desiredAnonymousAuthenticationConfig
     self.gkeAutoUpgradeConfig = gkeAutoUpgradeConfig
     self.desiredNetworkTierConfig = desiredNetworkTierConfig
+    self.desiredSecretSyncConfig = desiredSecretSyncConfig
     self.desiredPrivilegedAdmissionConfig = desiredPrivilegedAdmissionConfig
+    self.desiredControlPlaneEgress = desiredControlPlaneEgress
     self.desiredManagedOpentelemetryConfig = desiredManagedOpentelemetryConfig
+    self.desiredAutopilotClusterPolicyConfig = desiredAutopilotClusterPolicyConfig
+    self.desiredManagedMachineLearningDiagnosticsConfig =
+      desiredManagedMachineLearningDiagnosticsConfig
+    self.desiredNodeCreationConfig = desiredNodeCreationConfig
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -513,6 +558,8 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case desiredAddonsConfig = "desiredAddonsConfig"
     case desiredNodePoolId = "desiredNodePoolId"
     case desiredImageType = "desiredImageType"
+    case desiredImage = "desiredImage"
+    case desiredImageProject = "desiredImageProject"
     case desiredDatabaseEncryption = "desiredDatabaseEncryption"
     case desiredWorkloadIdentityConfig = "desiredWorkloadIdentityConfig"
     case desiredMeshCertificates = "desiredMeshCertificates"
@@ -581,8 +628,14 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case desiredAnonymousAuthenticationConfig = "desiredAnonymousAuthenticationConfig"
     case gkeAutoUpgradeConfig = "gkeAutoUpgradeConfig"
     case desiredNetworkTierConfig = "desiredNetworkTierConfig"
+    case desiredSecretSyncConfig = "desiredSecretSyncConfig"
     case desiredPrivilegedAdmissionConfig = "desiredPrivilegedAdmissionConfig"
+    case desiredControlPlaneEgress = "desiredControlPlaneEgress"
     case desiredManagedOpentelemetryConfig = "desiredManagedOpentelemetryConfig"
+    case desiredAutopilotClusterPolicyConfig = "desiredAutopilotClusterPolicyConfig"
+    case desiredManagedMachineLearningDiagnosticsConfig =
+      "desiredManagedMachineLearningDiagnosticsConfig"
+    case desiredNodeCreationConfig = "desiredNodeCreationConfig"
   }
 
   public init(from decoder: Decoder) throws {
@@ -594,6 +647,8 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       AddonsConfig.self, forKey: .desiredAddonsConfig)
     self.desiredNodePoolId = try container.decode(Swift.String.self, forKey: .desiredNodePoolId)
     self.desiredImageType = try container.decode(Swift.String.self, forKey: .desiredImageType)
+    self.desiredImage = try container.decode(Swift.String.self, forKey: .desiredImage)
+    self.desiredImageProject = try container.decode(Swift.String.self, forKey: .desiredImageProject)
     self.desiredDatabaseEncryption = try container.decodeIfPresent(
       DatabaseEncryption.self, forKey: .desiredDatabaseEncryption)
     self.desiredWorkloadIdentityConfig = try container.decodeIfPresent(
@@ -723,10 +778,21 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       GkeAutoUpgradeConfig.self, forKey: .gkeAutoUpgradeConfig)
     self.desiredNetworkTierConfig = try container.decodeIfPresent(
       NetworkTierConfig.self, forKey: .desiredNetworkTierConfig)
+    self.desiredSecretSyncConfig = try container.decodeIfPresent(
+      SecretSyncConfig.self, forKey: .desiredSecretSyncConfig)
     self.desiredPrivilegedAdmissionConfig = try container.decodeIfPresent(
       PrivilegedAdmissionConfig.self, forKey: .desiredPrivilegedAdmissionConfig)
+    self.desiredControlPlaneEgress = try container.decodeIfPresent(
+      ControlPlaneEgress.self, forKey: .desiredControlPlaneEgress)
     self.desiredManagedOpentelemetryConfig = try container.decodeIfPresent(
       ManagedOpenTelemetryConfig.self, forKey: .desiredManagedOpentelemetryConfig)
+    self.desiredAutopilotClusterPolicyConfig = try container.decodeIfPresent(
+      ClusterPolicyConfig.self, forKey: .desiredAutopilotClusterPolicyConfig)
+    self.desiredManagedMachineLearningDiagnosticsConfig = try container.decodeIfPresent(
+      ManagedMachineLearningDiagnosticsConfig.self,
+      forKey: .desiredManagedMachineLearningDiagnosticsConfig)
+    self.desiredNodeCreationConfig = try container.decodeIfPresent(
+      NodeCreationConfig.self, forKey: .desiredNodeCreationConfig)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -736,6 +802,8 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.desiredAddonsConfig, forKey: .desiredAddonsConfig)
     try container.encode(self.desiredNodePoolId, forKey: .desiredNodePoolId)
     try container.encode(self.desiredImageType, forKey: .desiredImageType)
+    try container.encode(self.desiredImage, forKey: .desiredImage)
+    try container.encode(self.desiredImageProject, forKey: .desiredImageProject)
     try container.encode(self.desiredDatabaseEncryption, forKey: .desiredDatabaseEncryption)
     try container.encode(self.desiredWorkloadIdentityConfig, forKey: .desiredWorkloadIdentityConfig)
     try container.encode(self.desiredMeshCertificates, forKey: .desiredMeshCertificates)
@@ -829,10 +897,18 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       self.desiredAnonymousAuthenticationConfig, forKey: .desiredAnonymousAuthenticationConfig)
     try container.encode(self.gkeAutoUpgradeConfig, forKey: .gkeAutoUpgradeConfig)
     try container.encode(self.desiredNetworkTierConfig, forKey: .desiredNetworkTierConfig)
+    try container.encode(self.desiredSecretSyncConfig, forKey: .desiredSecretSyncConfig)
     try container.encode(
       self.desiredPrivilegedAdmissionConfig, forKey: .desiredPrivilegedAdmissionConfig)
+    try container.encode(self.desiredControlPlaneEgress, forKey: .desiredControlPlaneEgress)
     try container.encode(
       self.desiredManagedOpentelemetryConfig, forKey: .desiredManagedOpentelemetryConfig)
+    try container.encode(
+      self.desiredAutopilotClusterPolicyConfig, forKey: .desiredAutopilotClusterPolicyConfig)
+    try container.encode(
+      self.desiredManagedMachineLearningDiagnosticsConfig,
+      forKey: .desiredManagedMachineLearningDiagnosticsConfig)
+    try container.encode(self.desiredNodeCreationConfig, forKey: .desiredNodeCreationConfig)
   }
 
   public static var _anyTypeUrl: String {

@@ -35,6 +35,9 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// net.core.wmem_max
   /// net.core.optmem_max
   /// net.core.somaxconn
+  /// net.ipv4.neigh.default.gc_thresh1
+  /// net.ipv4.neigh.default.gc_thresh2
+  /// net.ipv4.neigh.default.gc_thresh3
   /// net.ipv4.tcp_rmem
   /// net.ipv4.tcp_wmem
   /// net.ipv4.tcp_tw_reuse
@@ -50,6 +53,8 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// net.netfilter.nf_conntrack_tcp_timeout_time_wait
   /// net.netfilter.nf_conntrack_tcp_timeout_established
   /// net.netfilter.nf_conntrack_acct
+  /// kernel.keys.maxkeys
+  /// kernel.keys.maxbytes
   /// kernel.shmmni
   /// kernel.shmmax
   /// kernel.shmall
@@ -104,6 +109,10 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// for more details.
   public var transparentHugepageDefrag: LinuxNodeConfig.TransparentHugepageDefrag
 
+  /// Optional. Allow users to run arbitrary bash script or container on the
+  /// node.
+  public var customNodeInit: LinuxNodeConfig.CustomNodeInit?
+
   /// Optional. Enables and configures swap space on nodes.
   /// If omitted, swap is disabled.
   public var swapConfig: LinuxNodeConfig.SwapConfig?
@@ -112,6 +121,9 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// When enabled, the node pool will be provisioned with a Container-Optimized
   /// OS image that enforces kernel module signature verification.
   public var nodeKernelModuleLoading: LinuxNodeConfig.NodeKernelModuleLoading?
+
+  /// Optional. The accurate time configuration for the node pool.
+  public var accurateTimeConfig: LinuxNodeConfig.AccurateTimeConfig?
 
   /// Initialize a new instance of `LinuxNodeConfig`.
   public init(
@@ -122,16 +134,20 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       LinuxNodeConfig.TransparentHugepageEnabled(),
     transparentHugepageDefrag: LinuxNodeConfig.TransparentHugepageDefrag =
       LinuxNodeConfig.TransparentHugepageDefrag(),
+    customNodeInit: LinuxNodeConfig.CustomNodeInit? = nil,
     swapConfig: LinuxNodeConfig.SwapConfig? = nil,
     nodeKernelModuleLoading: LinuxNodeConfig.NodeKernelModuleLoading? = nil,
+    accurateTimeConfig: LinuxNodeConfig.AccurateTimeConfig? = nil,
   ) {
     self.sysctls = sysctls
     self.cgroupMode = cgroupMode
     self.hugepages = hugepages
     self.transparentHugepageEnabled = transparentHugepageEnabled
     self.transparentHugepageDefrag = transparentHugepageDefrag
+    self.customNodeInit = customNodeInit
     self.swapConfig = swapConfig
     self.nodeKernelModuleLoading = nodeKernelModuleLoading
+    self.accurateTimeConfig = accurateTimeConfig
   }
 
   /// Hugepages amount in both 2m and 1g size
@@ -172,6 +188,88 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     public static var _anyTypeUrl: String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.HugepagesConfig"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// Support for running custom init code while bootstrapping nodes.
+  public struct CustomNodeInit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. The init script to be executed on the node.
+    public var initScript: LinuxNodeConfig.CustomNodeInit.InitScript?
+
+    /// Initialize a new instance of `CustomNodeInit`.
+    public init(
+      initScript: LinuxNodeConfig.CustomNodeInit.InitScript? = nil,
+    ) {
+      self.initScript = initScript
+    }
+
+    /// InitScript provide a simply bash script to be executed on the node.
+    public struct InitScript: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// The Cloud Storage URI for storing the init script.
+      /// Format: gs://BUCKET_NAME/OBJECT_NAME
+      /// The service account on the node pool must have read access to the
+      /// object.
+      /// User can't configure both gcs_uri and gcp_secret_manager_secret_uri.
+      public var gcsUri: Swift.String
+
+      /// The generation of the init script stored in Gloud Storage.
+      /// This is the required field to identify the version of the
+      /// init script.
+      /// User can get the genetaion from
+      /// `gcloud storage objects describe gs://BUCKET_NAME/OBJECT_NAME
+      /// --format="value(generation)"` or from the "Version history" tab of the
+      /// object in the Cloud Console UI.
+      public var gcsGeneration: Swift.Int64
+
+      /// Optional. The optional arguments line to be passed to the init script.
+      public var args: [Swift.String]
+
+      /// The resource name of the secret manager secret hosting the init script.
+      /// Both global and regional secrets are supported with format below:
+      /// Global secret: projects/{project}/secrets/{secret}/versions/{version}
+      /// Regional secret:
+      /// projects/{project}/locations/{location}/secrets/{secret}/versions/{version}
+      /// Example: projects/1234567890/secrets/script_1/versions/1.
+      /// Accept version number only, not support version alias.
+      /// User can't configure both gcp_secret_manager_secret_uri and gcs_uri.
+      public var gcpSecretManagerSecretUri: Swift.String
+
+      /// Initialize a new instance of `InitScript`.
+      public init(
+        gcsUri: Swift.String = Swift.String(),
+        gcsGeneration: Swift.Int64 = Swift.Int64(),
+        args: [Swift.String] = [],
+        gcpSecretManagerSecretUri: Swift.String = Swift.String(),
+      ) {
+        self.gcsUri = gcsUri
+        self.gcsGeneration = gcsGeneration
+        self.args = args
+        self.gcpSecretManagerSecretUri = gcpSecretManagerSecretUri
+      }
+
+      public static var _anyTypeUrl: String {
+        return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit.InitScript"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
@@ -509,7 +607,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       self.policy = policy
     }
 
-    /// Defines the kernel module loading policy for nodes in the nodepool.
+    /// Defines the kernel module loading policy for nodes in the node pool.
     public enum Policy: Codable, Equatable, Sendable {
       case unspecified
       case enforceSignedModules
@@ -613,6 +711,32 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     public static var _anyTypeUrl: String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// AccurateTimeConfig contains configuration for the accurate time
+  /// synchronization feature.
+  public struct AccurateTimeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Enables enhanced time synchronization using PTP-KVM.
+    public var enablePtpKvmTimeSync: Swift.Bool?
+
+    /// Initialize a new instance of `AccurateTimeConfig`.
+    public init(
+      enablePtpKvmTimeSync: Swift.Bool? = nil,
+    ) {
+      self.enablePtpKvmTimeSync = enablePtpKvmTimeSync
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.container.v1.LinuxNodeConfig.AccurateTimeConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

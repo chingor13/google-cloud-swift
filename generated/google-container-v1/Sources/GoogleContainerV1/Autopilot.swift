@@ -31,15 +31,21 @@ public struct Autopilot: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// admission control.
   public var privilegedAdmissionConfig: PrivilegedAdmissionConfig?
 
+  /// ClusterPolicyConfig denotes cluster level policies that are enforced for
+  /// the cluster.
+  public var clusterPolicyConfig: ClusterPolicyConfig?
+
   /// Initialize a new instance of `Autopilot`.
   public init(
     enabled: Swift.Bool = Swift.Bool(),
     workloadPolicyConfig: WorkloadPolicyConfig? = nil,
     privilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil,
+    clusterPolicyConfig: ClusterPolicyConfig? = nil,
   ) {
     self.enabled = enabled
     self.workloadPolicyConfig = workloadPolicyConfig
     self.privilegedAdmissionConfig = privilegedAdmissionConfig
+    self.clusterPolicyConfig = clusterPolicyConfig
   }
 
   public static var _anyTypeUrl: String {

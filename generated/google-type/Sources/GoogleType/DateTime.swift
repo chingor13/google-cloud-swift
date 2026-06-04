@@ -30,8 +30,8 @@ import GoogleCloudWkt
 ///
 /// The date is relative to the Proleptic Gregorian Calendar.
 ///
-/// If year is 0, the DateTime is considered not to have a specific year. month
-/// and day must have valid, non-zero values.
+/// If year, month, or day are 0, the DateTime is considered not to have a
+/// specific year, month, or day respectively.
 ///
 /// This type may also be used to represent a physical time if all the date and
 /// time fields are set and either case of the `time_offset` oneof is set.
@@ -48,27 +48,28 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// datetime without a year.
   public var year: Swift.Int32
 
-  /// Required. Month of year. Must be from 1 to 12.
+  /// Optional. Month of year. Must be from 1 to 12, or 0 if specifying a
+  /// datetime without a month.
   public var month: Swift.Int32
 
-  /// Required. Day of month. Must be from 1 to 31 and valid for the year and
-  /// month.
+  /// Optional. Day of month. Must be from 1 to 31 and valid for the year and
+  /// month, or 0 if specifying a datetime without a day.
   public var day: Swift.Int32
 
-  /// Required. Hours of day in 24 hour format. Should be from 0 to 23. An API
-  /// may choose to allow the value "24:00:00" for scenarios like business
-  /// closing time.
+  /// Optional. Hours of day in 24 hour format. Should be from 0 to 23, defaults
+  /// to 0 (midnight). An API may choose to allow the value "24:00:00" for
+  /// scenarios like business closing time.
   public var hours: Swift.Int32
 
-  /// Required. Minutes of hour of day. Must be from 0 to 59.
+  /// Optional. Minutes of hour of day. Must be from 0 to 59, defaults to 0.
   public var minutes: Swift.Int32
 
-  /// Required. Seconds of minutes of the time. Must normally be from 0 to 59. An
-  /// API may allow the value 60 if it allows leap-seconds.
+  /// Optional. Seconds of minutes of the time. Must normally be from 0 to 59,
+  /// defaults to 0. An API may allow the value 60 if it allows leap-seconds.
   public var seconds: Swift.Int32
 
-  /// Required. Fractions of seconds in nanoseconds. Must be from 0 to
-  /// 999,999,999.
+  /// Optional. Fractions of seconds in nanoseconds. Must be from 0 to
+  /// 999,999,999, defaults to 0.
   public var nanos: Swift.Int32
 
   /// Optional. Specifies either the UTC offset or the time zone of the DateTime.

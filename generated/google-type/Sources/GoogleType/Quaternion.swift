@@ -17,6 +17,8 @@
 import Foundation
 import GoogleCloudWkt
 
+/// A quaternion, represented by four 64-bit floating point values.
+///
 /// A quaternion is defined as the quotient of two directed lines in a
 /// three-dimensional space or equivalently as the quotient of two Euclidean
 /// vectors (https://en.wikipedia.org/wiki/Quaternion).
@@ -34,7 +36,7 @@ import GoogleCloudWkt
 /// where x, y, z, and w are real numbers, and i, j, and k are three imaginary
 /// numbers.
 ///
-/// Our naming choice `(x, y, z, w)` comes from the desire to avoid confusion for
+/// The naming choice `(x, y, z, w)` comes from the desire to avoid confusion for
 /// those interested in the geometric properties of the quaternion in the 3D
 /// Cartesian space. Other texts often use alternative names or subscripts, such
 /// as `(a, b, c, d)`, `(1, i, j, k)`, or `(0, 1, 2, 3)`, which are perhaps
@@ -72,7 +74,6 @@ import GoogleCloudWkt
 /// it would produce a unique representation. It is thus recommended that `w` be
 /// kept positive, which can be achieved by changing all the signs when `w` is
 /// negative.
-///
 public struct Quaternion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

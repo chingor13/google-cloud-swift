@@ -26,10 +26,10 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example:
   ///
-  ///    publishing:
-  ///      method_settings:
-  ///      - selector: google.storage.control.v2.StorageControl.CreateFolder
-  ///        # method settings for CreateFolder...
+  ///     publishing:
+  ///       method_settings:
+  ///       - selector: google.storage.control.v2.StorageControl.CreateFolder
+  ///         # method settings for CreateFolder...
   public var selector: Swift.String
 
   /// Describes settings to use for long-running operations when generating
@@ -38,14 +38,14 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example of a YAML configuration::
   ///
-  ///    publishing:
-  ///      method_settings:
-  ///      - selector: google.cloud.speech.v2.Speech.BatchRecognize
-  ///        long_running:
-  ///          initial_poll_delay: 60s # 1 minute
-  ///          poll_delay_multiplier: 1.5
-  ///          max_poll_delay: 360s # 6 minutes
-  ///          total_poll_timeout: 54000s # 90 minutes
+  ///     publishing:
+  ///       method_settings:
+  ///       - selector: google.cloud.speech.v2.Speech.BatchRecognize
+  ///         long_running:
+  ///           initial_poll_delay: 60s # 1 minute
+  ///           poll_delay_multiplier: 1.5
+  ///           max_poll_delay: 360s # 6 minutes
+  ///           total_poll_timeout: 54000s # 90 minutes
   public var longRunning: MethodSettings.LongRunning?
 
   /// List of top-level fields of the request message, that should be
@@ -54,22 +54,37 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example of a YAML configuration:
   ///
-  ///    publishing:
-  ///      method_settings:
-  ///      - selector: google.example.v1.ExampleService.CreateExample
-  ///        auto_populated_fields:
-  ///        - request_id
+  ///     publishing:
+  ///       method_settings:
+  ///       - selector: google.example.v1.ExampleService.CreateExample
+  ///         auto_populated_fields:
+  ///         - request_id
   public var autoPopulatedFields: [Swift.String]
+
+  /// Batching configuration for an API method in client libraries.
+  ///
+  /// Example of a YAML configuration:
+  ///
+  ///     publishing:
+  ///       method_settings:
+  ///       - selector: google.example.v1.ExampleService.BatchCreateExample
+  ///         batching:
+  ///           element_count_threshold: 1000
+  ///           request_byte_threshold: 100000000
+  ///           delay_threshold_millis: 10
+  public var batching: BatchingConfigProto?
 
   /// Initialize a new instance of `MethodSettings`.
   public init(
     selector: Swift.String = Swift.String(),
     longRunning: MethodSettings.LongRunning? = nil,
     autoPopulatedFields: [Swift.String] = [],
+    batching: BatchingConfigProto? = nil,
   ) {
     self.selector = selector
     self.longRunning = longRunning
     self.autoPopulatedFields = autoPopulatedFields
+    self.batching = batching
   }
 
   /// Describes settings to use when generating API methods that use the

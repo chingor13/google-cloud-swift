@@ -58,6 +58,18 @@
     /// instance. This value cannot be the same as the preferred_zone field.
     public var preferredSecondaryZone: Swift.String?
 
+    /// Optional. Specifies the instance settings that will be overridden from the
+    /// source instance. This field is only applicable for cross project PITRs.
+    public var targetInstanceSettings: DatabaseInstance?
+
+    /// Optional. Specifies the instance settings that will be cleared from the
+    /// source instance. This field is only applicable for cross project PITRs.
+    public var targetInstanceClearSettingsFieldNames: [Swift.String]
+
+    /// Optional. The region of the target instance where the datasource will be
+    /// restored. For example: "us-central1".
+    public var region: Swift.String?
+
     /// Initialize a new instance of `PointInTimeRestoreContext`.
     public init(
       datasource: Swift.String? = nil,
@@ -67,6 +79,9 @@
       allocatedIpRange: Swift.String? = nil,
       preferredZone: Swift.String? = nil,
       preferredSecondaryZone: Swift.String? = nil,
+      targetInstanceSettings: DatabaseInstance? = nil,
+      targetInstanceClearSettingsFieldNames: [Swift.String] = [],
+      region: Swift.String? = nil,
     ) {
       self.datasource = datasource
       self.pointInTime = pointInTime
@@ -75,6 +90,9 @@
       self.allocatedIpRange = allocatedIpRange
       self.preferredZone = preferredZone
       self.preferredSecondaryZone = preferredSecondaryZone
+      self.targetInstanceSettings = targetInstanceSettings
+      self.targetInstanceClearSettingsFieldNames = targetInstanceClearSettingsFieldNames
+      self.region = region
     }
 
     public static var _anyTypeUrl: String {

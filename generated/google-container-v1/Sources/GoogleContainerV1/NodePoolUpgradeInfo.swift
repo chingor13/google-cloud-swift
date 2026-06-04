@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// NodePoolUpgradeInfo contains the upgrade information of a nodepool.
+/// NodePoolUpgradeInfo contains the upgrade information of a node pool.
 public struct NodePoolUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
@@ -36,10 +36,10 @@ public struct NodePoolUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// The list of past auto upgrades.
   public var upgradeDetails: [UpgradeDetails]
 
-  /// The nodepool's current minor version's end of standard support timestamp.
+  /// The node pool's current minor version's end of standard support timestamp.
   public var endOfStandardSupportTimestamp: Swift.String?
 
-  /// The nodepool's current minor version's end of extended support timestamp.
+  /// The node pool's current minor version's end of extended support timestamp.
   public var endOfExtendedSupportTimestamp: Swift.String?
 
   /// Initialize a new instance of `NodePoolUpgradeInfo`.

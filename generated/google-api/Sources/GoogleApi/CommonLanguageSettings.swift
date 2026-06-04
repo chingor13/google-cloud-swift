@@ -29,6 +29,8 @@ public struct CommonLanguageSettings: Codable, Equatable, GoogleCloudWkt._AnyPac
   public var destinations: [ClientLibraryDestination]
 
   /// Configuration for which RPCs should be generated in the GAPIC client.
+  ///
+  /// Note: This field should not be used in most cases.
   public var selectiveGapicGeneration: SelectiveGapicGeneration?
 
   /// Initialize a new instance of `CommonLanguageSettings`.

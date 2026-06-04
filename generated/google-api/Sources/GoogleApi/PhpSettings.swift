@@ -24,11 +24,27 @@ public struct PhpSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Some settings.
   public var common: CommonLanguageSettings?
 
+  /// The package name to use in Php. Clobbers the php_namespace option
+  /// set in the protobuf. This should be used **only** by APIs
+  /// who have already set the language_settings.php.package_name" field
+  /// in gapic.yaml. API teams should use the protobuf php_namespace option
+  /// where possible.
+  ///
+  /// Example of a YAML configuration::
+  ///
+  ///     publishing:
+  ///       library_settings:
+  ///         php_settings:
+  ///           library_package: Google\Cloud\PubSub\V1
+  public var libraryPackage: Swift.String
+
   /// Initialize a new instance of `PhpSettings`.
   public init(
     common: CommonLanguageSettings? = nil,
+    libraryPackage: Swift.String = Swift.String(),
   ) {
     self.common = common
+    self.libraryPackage = libraryPackage
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.PhpSettings" }

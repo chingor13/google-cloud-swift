@@ -101,14 +101,27 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// for available image types.
   public var imageType: Swift.String
 
-  /// The map of Kubernetes labels (key/value pairs) to be applied to each node.
-  /// These will added in addition to any default label(s) that
-  /// Kubernetes may apply to the node.
-  /// In case of conflict in label keys, the applied set may differ depending on
-  /// the Kubernetes version -- it's best to assume the behavior is undefined
-  /// and conflicts should be avoided.
-  /// For more information, including usage and the valid values, see:
-  /// https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  /// The node image configuration to use for this node pool.  Note that this is
+  /// only applicable for node pools using image_type=CUSTOM.
+  public var nodeImageConfig: CustomImageConfig?
+
+  /// The Kubernetes labels (key/value pairs) to apply to each node. The values
+  /// in this field are added to the set of default labels Kubernetes applies to
+  /// nodes.
+  ///
+  /// This field has the following restrictions:
+  ///
+  /// * Labels must use a valid Kubernetes syntax and character set, as defined
+  ///   in
+  ///   https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set.
+  /// * This field supports up to 1,024 total characters in a single request.
+  ///
+  /// Depending on the Kubernetes version, keys in this field might conflict with
+  /// the keys of the default labels, which might change which of your labels
+  /// are applied to the nodes. Assume that the behavior is unpredictable and
+  /// avoid label key conflicts. For more information about the default labels,
+  /// see:
+  /// https://kubernetes.io/docs/reference/labels-annotations-taints/
   public var labels: [Swift.String: Swift.String]
 
   /// The number of local SSD disks to be attached to the node.
@@ -279,6 +292,9 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// default behavior, i.e. according to the chosen autoscaling profile.
   public var consolidationDelay: GoogleCloudWkt.Duration?
 
+  /// Optional. The taint configuration for the node pool.
+  public var taintConfig: TaintConfig?
+
   /// Initialize a new instance of `NodeConfig`.
   public init(
     machineType: Swift.String = Swift.String(),
@@ -287,6 +303,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     serviceAccount: Swift.String = Swift.String(),
     metadata: [Swift.String: Swift.String] = [:],
     imageType: Swift.String = Swift.String(),
+    nodeImageConfig: CustomImageConfig? = nil,
     labels: [Swift.String: Swift.String] = [:],
     localSsdCount: Swift.Int32 = Swift.Int32(),
     tags: [Swift.String] = [],
@@ -328,6 +345,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     flexStart: Swift.Bool? = nil,
     bootDisk: BootDisk? = nil,
     consolidationDelay: GoogleCloudWkt.Duration? = nil,
+    taintConfig: TaintConfig? = nil,
   ) {
     self.machineType = machineType
     self.diskSizeGb = diskSizeGb
@@ -335,6 +353,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.serviceAccount = serviceAccount
     self.metadata = metadata
     self.imageType = imageType
+    self.nodeImageConfig = nodeImageConfig
     self.labels = labels
     self.localSsdCount = localSsdCount
     self.tags = tags
@@ -376,6 +395,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.flexStart = flexStart
     self.bootDisk = bootDisk
     self.consolidationDelay = consolidationDelay
+    self.taintConfig = taintConfig
   }
 
   /// LocalSsdEncryptionMode specifies the method used for encrypting the Local

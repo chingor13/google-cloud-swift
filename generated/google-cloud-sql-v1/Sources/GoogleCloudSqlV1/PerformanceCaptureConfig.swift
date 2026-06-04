@@ -18,30 +18,31 @@
   import Foundation
   import GoogleCloudWkt
 
-  /// Performance Capture configuration.
+  /// Performance capture configuration.
   public struct PerformanceCaptureConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    /// Optional. Enable or disable the Performance Capture feature.
+    /// Optional. Enables or disables the performance capture feature.
     public var enabled: Swift.Bool?
 
-    /// Optional. The time interval in seconds between any two probes.
+    /// Optional. Specifies the interval in seconds between consecutive probes that
+    /// check if any trigger condition thresholds have been reached.
     public var probingIntervalSeconds: Swift.Int32?
 
-    /// Optional. The minimum number of consecutive readings above threshold that
-    /// triggers instance state capture.
+    /// Optional. Specifies the minimum number of consecutive probe threshold that
+    /// triggers performance capture.
     public var probeThreshold: Swift.Int32?
 
-    /// Optional. The minimum number of server threads running to trigger the
-    /// capture on primary.
+    /// Optional. Specifies the minimum number of MySQL `Threads_running` to
+    /// trigger the performance capture on the primary instance.
     public var runningThreadsThreshold: Swift.Int32?
 
-    /// Optional. The minimum number of seconds replica must be lagging behind
-    /// primary to trigger capture on replica.
+    /// Optional. Specifies the minimum number of seconds replica must be lagging
+    /// behind primary instance to trigger the performance capture on replica.
     public var secondsBehindSourceThreshold: Swift.Int32?
 
-    /// Optional. The amount of time in seconds that a transaction needs to have
-    /// been open before the watcher starts recording it.
+    /// Optional. Specifies the amount of time in seconds that a transaction needs
+    /// to have been open before the watcher starts recording it.
     public var transactionDurationThreshold: Swift.Int32?
 
     /// Initialize a new instance of `PerformanceCaptureConfig`.

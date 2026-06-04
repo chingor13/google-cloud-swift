@@ -207,6 +207,7 @@
       case enhancedBackup
       case repairReadPool
       case createReadPool
+      case preCheckMajorVersionUpgrade
       /// Encodes an unknown integer value.
       ///
       /// The most common cause for an unknown values is for the service to send
@@ -281,6 +282,7 @@
         case .enhancedBackup: return 51
         case .repairReadPool: return 52
         case .createReadPool: return 53
+        case .preCheckMajorVersionUpgrade: return 54
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
         }
@@ -343,6 +345,7 @@
         case .enhancedBackup: return "ENHANCED_BACKUP"
         case .repairReadPool: return "REPAIR_READ_POOL"
         case .createReadPool: return "CREATE_READ_POOL"
+        case .preCheckMajorVersionUpgrade: return "PRE_CHECK_MAJOR_VERSION_UPGRADE"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
         }
@@ -405,6 +408,7 @@
         case "ENHANCED_BACKUP": self = .enhancedBackup
         case "REPAIR_READ_POOL": self = .repairReadPool
         case "CREATE_READ_POOL": self = .createReadPool
+        case "PRE_CHECK_MAJOR_VERSION_UPGRADE": self = .preCheckMajorVersionUpgrade
         default: self = .unknownStringValue(stringValue)
         }
       }
@@ -466,6 +470,7 @@
         case 51: self = .enhancedBackup
         case 52: self = .repairReadPool
         case 53: self = .createReadPool
+        case 54: self = .preCheckMajorVersionUpgrade
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -543,6 +548,7 @@
         case .enhancedBackup: return try container.encode(51)
         case .repairReadPool: return try container.encode(52)
         case .createReadPool: return try container.encode(53)
+        case .preCheckMajorVersionUpgrade: return try container.encode(54)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

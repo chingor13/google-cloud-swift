@@ -97,6 +97,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The state of the upgrade.
   public enum State: Codable, Equatable, Sendable {
     case unspecified
+    case scheduled
     case started
     case succeeded
     case failed
@@ -124,6 +125,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public var intValue: Int? {
       switch self {
       case .unspecified: return 0
+      case .scheduled: return 1
       case .started: return 3
       case .succeeded: return 4
       case .failed: return 5
@@ -139,6 +141,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public var stringValue: String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
+      case .scheduled: return "SCHEDULED"
       case .started: return "STARTED"
       case .succeeded: return "SUCCEEDED"
       case .failed: return "FAILED"
@@ -154,6 +157,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public init(stringValue: String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
+      case "SCHEDULED": self = .scheduled
       case "STARTED": self = .started
       case "SUCCEEDED": self = .succeeded
       case "FAILED": self = .failed
@@ -168,6 +172,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
+      case 1: self = .scheduled
       case 3: self = .started
       case 4: self = .succeeded
       case 5: self = .failed
@@ -198,6 +203,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       var container = encoder.singleValueContainer()
       switch self {
       case .unspecified: return try container.encode(0)
+      case .scheduled: return try container.encode(1)
       case .started: return try container.encode(3)
       case .succeeded: return try container.encode(4)
       case .failed: return try container.encode(5)

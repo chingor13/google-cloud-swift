@@ -228,7 +228,7 @@
 
     /// Credentials for the database connection.
     public enum OneOf_UserPassword: Codable, Equatable, Sendable {
-      /// Optional. When set to true, the API caller identity associated with the
+      /// Optional. When set to `true`, the API caller identity associated with the
       /// request is used for database authentication. The API caller must be an
       /// IAM user in the database.
       case autoIamAuthn(Swift.Bool)

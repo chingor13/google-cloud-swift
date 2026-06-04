@@ -26,7 +26,7 @@
     /// Optional. This is the project ID of consumer service project of this
     /// consumer endpoint.
     ///
-    /// Optional. This is only applicable if consumer_network is a shared vpc
+    /// This is only applicable if `consumer_network` is a shared VPC
     /// network.
     public var consumerProject: Swift.String
 

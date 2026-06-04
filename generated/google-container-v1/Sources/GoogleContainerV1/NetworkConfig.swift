@@ -89,6 +89,9 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [ClusterUpdate.desired_default_enable_private_nodes][google.container.v1.ClusterUpdate.desired_default_enable_private_nodes]
   public var defaultEnablePrivateNodes: Swift.Bool?
 
+  /// Optional. DataplaneV2Config specifies the DPv2 configuration.
+  public var dataplaneV2Config: DataplaneV2Config?
+
   /// Disable L4 load balancer VPC firewalls to enable firewall policies.
   public var disableL4LbFirewallReconciliation: Swift.Bool?
 
@@ -110,6 +113,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     inTransitEncryptionConfig: InTransitEncryptionConfig? = nil,
     enableCiliumClusterwideNetworkPolicy: Swift.Bool? = nil,
     defaultEnablePrivateNodes: Swift.Bool? = nil,
+    dataplaneV2Config: DataplaneV2Config? = nil,
     disableL4LbFirewallReconciliation: Swift.Bool? = nil,
   ) {
     self.network = network
@@ -128,6 +132,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.inTransitEncryptionConfig = inTransitEncryptionConfig
     self.enableCiliumClusterwideNetworkPolicy = enableCiliumClusterwideNetworkPolicy
     self.defaultEnablePrivateNodes = defaultEnablePrivateNodes
+    self.dataplaneV2Config = dataplaneV2Config
     self.disableL4LbFirewallReconciliation = disableL4LbFirewallReconciliation
   }
 
@@ -148,6 +153,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case inTransitEncryptionConfig = "inTransitEncryptionConfig"
     case enableCiliumClusterwideNetworkPolicy = "enableCiliumClusterwideNetworkPolicy"
     case defaultEnablePrivateNodes = "defaultEnablePrivateNodes"
+    case dataplaneV2Config = "dataplaneV2Config"
     case disableL4LbFirewallReconciliation = "disableL4LbFirewallReconciliation"
   }
 
@@ -181,6 +187,8 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Swift.Bool.self, forKey: .enableCiliumClusterwideNetworkPolicy)
     self.defaultEnablePrivateNodes = try container.decodeIfPresent(
       Swift.Bool.self, forKey: .defaultEnablePrivateNodes)
+    self.dataplaneV2Config = try container.decodeIfPresent(
+      DataplaneV2Config.self, forKey: .dataplaneV2Config)
     self.disableL4LbFirewallReconciliation = try container.decodeIfPresent(
       Swift.Bool.self, forKey: .disableL4LbFirewallReconciliation)
   }
@@ -204,6 +212,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(
       self.enableCiliumClusterwideNetworkPolicy, forKey: .enableCiliumClusterwideNetworkPolicy)
     try container.encode(self.defaultEnablePrivateNodes, forKey: .defaultEnablePrivateNodes)
+    try container.encode(self.dataplaneV2Config, forKey: .dataplaneV2Config)
     try container.encode(
       self.disableL4LbFirewallReconciliation, forKey: .disableL4LbFirewallReconciliation)
   }

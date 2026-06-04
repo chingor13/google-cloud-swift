@@ -64,12 +64,16 @@
     case postgres17
     case mysql8041
     case mysql8042
+    case sqlserver2025Standard
+    case sqlserver2025Enterprise
+    case sqlserver2025Express
     case mysql8043
     case mysql8044
     case mysql8045
     case mysql8046
     case postgres18
     case mysql97
+    case postgres19
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -137,12 +141,16 @@
       case .postgres17: return 408
       case .mysql8041: return 488
       case .mysql8042: return 489
+      case .sqlserver2025Standard: return 549
+      case .sqlserver2025Enterprise: return 550
+      case .sqlserver2025Express: return 551
       case .mysql8043: return 553
       case .mysql8044: return 554
       case .mysql8045: return 555
       case .mysql8046: return 556
       case .postgres18: return 557
       case .mysql97: return 654
+      case .postgres19: return 684
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -198,12 +206,16 @@
       case .postgres17: return "POSTGRES_17"
       case .mysql8041: return "MYSQL_8_0_41"
       case .mysql8042: return "MYSQL_8_0_42"
+      case .sqlserver2025Standard: return "SQLSERVER_2025_STANDARD"
+      case .sqlserver2025Enterprise: return "SQLSERVER_2025_ENTERPRISE"
+      case .sqlserver2025Express: return "SQLSERVER_2025_EXPRESS"
       case .mysql8043: return "MYSQL_8_0_43"
       case .mysql8044: return "MYSQL_8_0_44"
       case .mysql8045: return "MYSQL_8_0_45"
       case .mysql8046: return "MYSQL_8_0_46"
       case .postgres18: return "POSTGRES_18"
       case .mysql97: return "MYSQL_9_7"
+      case .postgres19: return "POSTGRES_19"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -257,6 +269,7 @@
       case "POSTGRES_16": self = .postgres16
       case "POSTGRES_17": self = .postgres17
       case "POSTGRES_18": self = .postgres18
+      case "POSTGRES_19": self = .postgres19
       case "SQLSERVER_2019_STANDARD": self = .sqlserver2019Standard
       case "SQLSERVER_2019_ENTERPRISE": self = .sqlserver2019Enterprise
       case "SQLSERVER_2019_EXPRESS": self = .sqlserver2019Express
@@ -265,6 +278,9 @@
       case "SQLSERVER_2022_ENTERPRISE": self = .sqlserver2022Enterprise
       case "SQLSERVER_2022_EXPRESS": self = .sqlserver2022Express
       case "SQLSERVER_2022_WEB": self = .sqlserver2022Web
+      case "SQLSERVER_2025_STANDARD": self = .sqlserver2025Standard
+      case "SQLSERVER_2025_ENTERPRISE": self = .sqlserver2025Enterprise
+      case "SQLSERVER_2025_EXPRESS": self = .sqlserver2025Express
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -317,6 +333,7 @@
       case 272: self = .postgres16
       case 408: self = .postgres17
       case 557: self = .postgres18
+      case 684: self = .postgres19
       case 26: self = .sqlserver2019Standard
       case 27: self = .sqlserver2019Enterprise
       case 28: self = .sqlserver2019Express
@@ -325,6 +342,9 @@
       case 200: self = .sqlserver2022Enterprise
       case 201: self = .sqlserver2022Express
       case 202: self = .sqlserver2022Web
+      case 549: self = .sqlserver2025Standard
+      case 550: self = .sqlserver2025Enterprise
+      case 551: self = .sqlserver2025Express
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -395,12 +415,16 @@
       case .postgres17: return try container.encode(408)
       case .mysql8041: return try container.encode(488)
       case .mysql8042: return try container.encode(489)
+      case .sqlserver2025Standard: return try container.encode(549)
+      case .sqlserver2025Enterprise: return try container.encode(550)
+      case .sqlserver2025Express: return try container.encode(551)
       case .mysql8043: return try container.encode(553)
       case .mysql8044: return try container.encode(554)
       case .mysql8045: return try container.encode(555)
       case .mysql8046: return try container.encode(556)
       case .postgres18: return try container.encode(557)
       case .mysql97: return try container.encode(654)
+      case .postgres19: return try container.encode(684)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

@@ -64,6 +64,12 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// operation. The default is no deadline.
   public var operationDeadline: Swift.Double
 
+  /// Path translation specifies how to combine the backend address with the
+  /// request path in order to produce the appropriate forwarding URL for the
+  /// request. See [PathTranslation][google.api.BackendRule.PathTranslation] for
+  /// more details.
+  ///
+  /// [google.api.BackendRule.PathTranslation]: <doc:BackendRule/PathTranslation>
   public var pathTranslation: BackendRule.PathTranslation
 
   /// The protocol used for sending a request to the backend.
@@ -94,6 +100,13 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The map between request protocol and the backend address.
   public var overridesByRequestProtocol: [Swift.String: BackendRule]
 
+  /// The load balancing policy used for connection to the application backend.
+  ///
+  /// Defined as an arbitrary string to accomondate custom load balancing
+  /// policies supported by the underlying channel, but suggest most users use
+  /// one of the standard policies, such as the default, "RoundRobin".
+  public var loadBalancingPolicy: Swift.String
+
   /// Authentication settings used by the backend.
   ///
   /// These are typically used to provide service management functionality to
@@ -120,6 +133,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     pathTranslation: BackendRule.PathTranslation = BackendRule.PathTranslation(),
     `protocol`: Swift.String = Swift.String(),
     overridesByRequestProtocol: [Swift.String: BackendRule] = [:],
+    loadBalancingPolicy: Swift.String = Swift.String(),
     authentication: OneOf_Authentication? = nil,
   ) {
     self.selector = selector
@@ -130,6 +144,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.pathTranslation = pathTranslation
     self.`protocol` = `protocol`
     self.overridesByRequestProtocol = overridesByRequestProtocol
+    self.loadBalancingPolicy = loadBalancingPolicy
     self.authentication = authentication
   }
 
@@ -144,6 +159,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case disableAuth = "disableAuth"
     case `protocol` = "protocol"
     case overridesByRequestProtocol = "overridesByRequestProtocol"
+    case loadBalancingPolicy = "loadBalancingPolicy"
   }
 
   public init(from decoder: Decoder) throws {
@@ -158,6 +174,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.`protocol` = try container.decode(Swift.String.self, forKey: .`protocol`)
     self.overridesByRequestProtocol = try container.decode(
       [Swift.String: BackendRule].self, forKey: .overridesByRequestProtocol)
+    self.loadBalancingPolicy = try container.decode(Swift.String.self, forKey: .loadBalancingPolicy)
 
     var authentication: OneOf_Authentication? = nil
     let authenticationCheckAndSet = {
@@ -188,6 +205,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.pathTranslation, forKey: .pathTranslation)
     try container.encode(self.`protocol`, forKey: .`protocol`)
     try container.encode(self.overridesByRequestProtocol, forKey: .overridesByRequestProtocol)
+    try container.encode(self.loadBalancingPolicy, forKey: .loadBalancingPolicy)
 
     if let choice = self.authentication {
       switch choice {

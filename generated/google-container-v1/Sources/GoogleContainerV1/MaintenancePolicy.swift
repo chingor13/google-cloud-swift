@@ -31,13 +31,18 @@ public struct MaintenancePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// resource version and include it with requests to set the policy.
   public var resourceVersion: Swift.String
 
+  /// Optional. The upgrade disruption budget for the cluster control plane.
+  public var disruptionBudget: DisruptionBudget?
+
   /// Initialize a new instance of `MaintenancePolicy`.
   public init(
     window: MaintenanceWindow? = nil,
     resourceVersion: Swift.String = Swift.String(),
+    disruptionBudget: DisruptionBudget? = nil,
   ) {
     self.window = window
     self.resourceVersion = resourceVersion
+    self.disruptionBudget = disruptionBudget
   }
 
   public static var _anyTypeUrl: String {

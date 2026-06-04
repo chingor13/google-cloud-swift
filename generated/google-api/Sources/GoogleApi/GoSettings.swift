@@ -28,10 +28,12 @@ public struct GoSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// service names and values are the name to be used for the service client
   /// and call options.
   ///
-  /// publishing:
-  ///   go_settings:
-  ///     renamed_services:
-  ///       Publisher: TopicAdmin
+  /// Example:
+  ///
+  ///     publishing:
+  ///       go_settings:
+  ///         renamed_services:
+  ///           Publisher: TopicAdmin
   public var renamedServices: [Swift.String: Swift.String]
 
   /// Initialize a new instance of `GoSettings`.

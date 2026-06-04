@@ -76,8 +76,8 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Specifying port is supported.
       /// Wildcards are NOT supported.
       /// Examples:
-      /// - my.customdomain.com
-      /// - 10.0.1.2:5000
+      /// - `my.customdomain.com`
+      /// - `10.0.1.2:5000`
       public var fqdns: [Swift.String]
 
       /// Certificate access config. The following are supported:
@@ -231,11 +231,11 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Defines the host name of the registry server, which will be used to
     /// create configuration file as /etc/containerd/hosts.d/<server>/hosts.toml.
     /// It supports fully qualified domain names (FQDN) and IP addresses:
-    /// Specifying port is supported.
+    /// Specifying port is supported, while scheme and path are NOT supported.
     /// Wildcards are NOT supported.
     /// Examples:
-    /// - my.customdomain.com
-    /// - 10.0.1.2:5000
+    /// - `my.customdomain.com`
+    /// - `10.0.1.2:5000`
     public var server: Swift.String
 
     /// HostConfig configures a list of host-specific configurations for the
@@ -394,12 +394,14 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Host configures the registry host/mirror.
-      /// It supports fully qualified domain names (FQDN) and IP addresses:
-      /// Specifying port is supported.
+      /// It supports fully qualified domain names (FQDNs) and IP addresses.
+      /// Specifying scheme, port or path is supported. Scheme can only be http
+      /// or https.
       /// Wildcards are NOT supported.
       /// Examples:
-      /// - my.customdomain.com
-      /// - 10.0.1.2:5000
+      /// - `my.customdomain.com`
+      /// - `https://my.customdomain.com/path`
+      /// - `10.0.1.2:5000`
       public var host: Swift.String
 
       /// Capabilities represent the capabilities of the registry host,

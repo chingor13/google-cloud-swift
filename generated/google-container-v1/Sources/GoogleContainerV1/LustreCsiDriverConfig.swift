@@ -37,13 +37,22 @@ public struct LustreCsiDriverConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// that has the `gke-support-enabled` flag.
   public var enableLegacyLustrePort: Swift.Bool
 
+  /// When set to true, this disables multi-NIC support for the Lustre CSI
+  /// driver.
+  /// By default, GKE enables multi-NIC support, which allows the Lustre
+  /// CSI driver to automatically detect and configure all suitable network
+  /// interfaces on a node to maximize I/O performance for demanding workloads.
+  public var disableMultiNic: Swift.Bool
+
   /// Initialize a new instance of `LustreCsiDriverConfig`.
   public init(
     enabled: Swift.Bool = Swift.Bool(),
     enableLegacyLustrePort: Swift.Bool = Swift.Bool(),
+    disableMultiNic: Swift.Bool = Swift.Bool(),
   ) {
     self.enabled = enabled
     self.enableLegacyLustrePort = enableLegacyLustrePort
+    self.disableMultiNic = disableMultiNic
   }
 
   public static var _anyTypeUrl: String {

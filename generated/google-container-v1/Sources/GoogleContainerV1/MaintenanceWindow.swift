@@ -39,6 +39,7 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
   private enum CodingKeys: String, CodingKey {
     case dailyMaintenanceWindow = "dailyMaintenanceWindow"
     case recurringWindow = "recurringWindow"
+    case recurringMaintenanceWindow = "recurringMaintenanceWindow"
     case maintenanceExclusions = "maintenanceExclusions"
   }
 
@@ -67,6 +68,11 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
     {
       try policyCheckAndSet(.recurringWindow(recurringWindow))
     }
+    if let recurringMaintenanceWindow = try container.decodeIfPresent(
+      RecurringMaintenanceWindow?.self, forKey: .recurringMaintenanceWindow)
+    {
+      try policyCheckAndSet(.recurringMaintenanceWindow(recurringMaintenanceWindow))
+    }
     self.policy = policy
   }
 
@@ -80,6 +86,8 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
         try container.encode(value, forKey: .dailyMaintenanceWindow)
       case .recurringWindow(let value):
         try container.encode(value, forKey: .recurringWindow)
+      case .recurringMaintenanceWindow(let value):
+        try container.encode(value, forKey: .recurringMaintenanceWindow)
       }
     }
   }
@@ -91,6 +99,11 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// maintenance to occur. The time windows may be overlapping. If no
     /// maintenance windows are set, maintenance can occur at any time.
     indirect case recurringWindow(RecurringTimeWindow?)
+    /// RecurringMaintenanceWindow specifies some number of recurring time
+    /// periods for maintenance to occur. The time windows may be overlapping.
+    /// If no maintenance windows are set, maintenance can occur at any time.
+    /// Alternative to RecurringWindow, with renamed fields.
+    indirect case recurringMaintenanceWindow(RecurringMaintenanceWindow?)
   }
 
   public static var _anyTypeUrl: String {

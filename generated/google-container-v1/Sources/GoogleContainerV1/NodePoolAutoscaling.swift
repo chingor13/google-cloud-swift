@@ -36,7 +36,7 @@ public struct NodePoolAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Can this node pool be deleted automatically.
   public var autoprovisioned: Swift.Bool
 
-  /// Location policy used when scaling up a nodepool.
+  /// Location policy used when scaling up a node pool.
   public var locationPolicy: NodePoolAutoscaling.LocationPolicy
 
   /// Minimum number of nodes in the node pool. Must be greater than or equal
@@ -71,7 +71,7 @@ public struct NodePoolAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackab
   }
 
   /// Location policy specifies how zones are picked when scaling up the
-  /// nodepool.
+  /// node pool.
   public enum LocationPolicy: Codable, Equatable, Sendable {
     case unspecified
     case balanced

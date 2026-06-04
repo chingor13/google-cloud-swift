@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// BootDisk specifies the boot disk configuration for nodepools.
+/// BootDisk specifies the boot disk configuration for node pools.
 public struct BootDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

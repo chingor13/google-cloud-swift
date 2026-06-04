@@ -97,6 +97,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     case unknown
     case encrypted
     case decrypted
+    case allObjectsEncryptionEnabled
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -122,6 +123,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .unknown: return 0
       case .encrypted: return 1
       case .decrypted: return 2
+      case .allObjectsEncryptionEnabled: return 3
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -135,6 +137,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .unknown: return "UNKNOWN"
       case .encrypted: return "ENCRYPTED"
       case .decrypted: return "DECRYPTED"
+      case .allObjectsEncryptionEnabled: return "ALL_OBJECTS_ENCRYPTION_ENABLED"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -148,6 +151,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case "UNKNOWN": self = .unknown
       case "ENCRYPTED": self = .encrypted
       case "DECRYPTED": self = .decrypted
+      case "ALL_OBJECTS_ENCRYPTION_ENABLED": self = .allObjectsEncryptionEnabled
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -160,6 +164,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case 0: self = .unknown
       case 1: self = .encrypted
       case 2: self = .decrypted
+      case 3: self = .allObjectsEncryptionEnabled
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -188,6 +193,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .unknown: return try container.encode(0)
       case .encrypted: return try container.encode(1)
       case .decrypted: return try container.encode(2)
+      case .allObjectsEncryptionEnabled: return try container.encode(3)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }
@@ -203,6 +209,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     case decryptionPending
     case decryptionError
     case encrypted
+    case allObjectsEncryptionEnabled
+    case allObjectsEncryptionPending
+    case allObjectsEncryptionError
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -232,6 +241,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .decryptionPending: return 5
       case .decryptionError: return 6
       case .encrypted: return 7
+      case .allObjectsEncryptionEnabled: return 8
+      case .allObjectsEncryptionPending: return 9
+      case .allObjectsEncryptionError: return 10
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -249,6 +261,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .decryptionPending: return "CURRENT_STATE_DECRYPTION_PENDING"
       case .decryptionError: return "CURRENT_STATE_DECRYPTION_ERROR"
       case .encrypted: return "CURRENT_STATE_ENCRYPTED"
+      case .allObjectsEncryptionEnabled: return "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED"
+      case .allObjectsEncryptionPending: return "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING"
+      case .allObjectsEncryptionError: return "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -266,6 +281,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case "CURRENT_STATE_ENCRYPTION_ERROR": self = .encryptionError
       case "CURRENT_STATE_DECRYPTION_PENDING": self = .decryptionPending
       case "CURRENT_STATE_DECRYPTION_ERROR": self = .decryptionError
+      case "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED": self = .allObjectsEncryptionEnabled
+      case "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING": self = .allObjectsEncryptionPending
+      case "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR": self = .allObjectsEncryptionError
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -282,6 +300,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case 4: self = .encryptionError
       case 5: self = .decryptionPending
       case 6: self = .decryptionError
+      case 8: self = .allObjectsEncryptionEnabled
+      case 9: self = .allObjectsEncryptionPending
+      case 10: self = .allObjectsEncryptionError
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -314,6 +335,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case .decryptionPending: return try container.encode(5)
       case .decryptionError: return try container.encode(6)
       case .encrypted: return try container.encode(7)
+      case .allObjectsEncryptionEnabled: return try container.encode(8)
+      case .allObjectsEncryptionPending: return try container.encode(9)
+      case .allObjectsEncryptionError: return try container.encode(10)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

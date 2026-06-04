@@ -195,6 +195,10 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// be OOM killed individually instead of as a group.
   public var singleProcessOomKill: Swift.Bool?
 
+  /// Optional. Contains configuration options to modify node-level parameters
+  /// for container restart behavior.
+  public var crashLoopBackOff: NodeKubeletConfig.CrashLoopBackOffConfig?
+
   /// Optional. shutdown_grace_period_seconds is the maximum allowed grace period
   /// (in seconds) the total duration that the node should delay the shutdown
   /// during a graceful shutdown. This is the total grace period for pod
@@ -235,6 +239,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     evictionMaxPodGracePeriodSeconds: Swift.Int32 = Swift.Int32(),
     maxParallelImagePulls: Swift.Int32 = Swift.Int32(),
     singleProcessOomKill: Swift.Bool? = nil,
+    crashLoopBackOff: NodeKubeletConfig.CrashLoopBackOffConfig? = nil,
     shutdownGracePeriodSeconds: Swift.Int32? = nil,
     shutdownGracePeriodCriticalPodsSeconds: Swift.Int32? = nil,
   ) {
@@ -258,8 +263,45 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     self.evictionMaxPodGracePeriodSeconds = evictionMaxPodGracePeriodSeconds
     self.maxParallelImagePulls = maxParallelImagePulls
     self.singleProcessOomKill = singleProcessOomKill
+    self.crashLoopBackOff = crashLoopBackOff
     self.shutdownGracePeriodSeconds = shutdownGracePeriodSeconds
     self.shutdownGracePeriodCriticalPodsSeconds = shutdownGracePeriodCriticalPodsSeconds
+  }
+
+  /// Contains config to modify node-level parameters for container restart
+  /// behavior.
+  public struct CrashLoopBackOffConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. The maximum duration the backoff delay can accrue to for
+    /// container restarts, minimum 1 second, maximum 300 seconds. If not set,
+    /// defaults to the internal crashloopbackoff maximum.
+    ///
+    /// The string must be a sequence of decimal numbers, each with optional
+    /// fraction and a unit suffix, such as "300ms".
+    /// Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+    ///
+    /// See
+    /// https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#configurable-container-restart-delay
+    /// for more details.
+    public var maxContainerRestartPeriod: Swift.String
+
+    /// Initialize a new instance of `CrashLoopBackOffConfig`.
+    public init(
+      maxContainerRestartPeriod: Swift.String = Swift.String(),
+    ) {
+      self.maxContainerRestartPeriod = maxContainerRestartPeriod
+    }
+
+    public static var _anyTypeUrl: String {
+      return "type.googleapis.com/google.container.v1.NodeKubeletConfig.CrashLoopBackOffConfig"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
   }
 
   public static var _anyTypeUrl: String {

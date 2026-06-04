@@ -363,7 +363,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Fleet information for the cluster.
   public var fleet: Fleet?
 
-  /// Enable/Disable Security Posture API features for the cluster.
+  /// Optional. Enable/Disable Security Posture API features for the cluster.
   public var securityPostureConfig: SecurityPostureConfig?
 
   /// Configuration for all cluster's control plane endpoints.
@@ -381,6 +381,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Secret CSI driver configuration.
   public var secretManagerConfig: SecretManagerConfig?
 
+  /// Optional. Deprecated: Compliance Posture is no longer supported.
+  /// For more details, see
+  /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
+  ///
   /// Enable/Disable Compliance Posture features for the cluster.
   public var compliancePostureConfig: CompliancePostureConfig?
 
@@ -404,8 +408,23 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// health checks.
   public var anonymousAuthenticationConfig: AnonymousAuthenticationConfig?
 
+  /// Optional. Configuration for scheduled upgrades.
+  public var scheduleUpgradeConfig: ScheduleUpgradeConfig?
+
+  /// Configuration for sync Secret Manager secrets as k8s secrets.
+  public var secretSyncConfig: SecretSyncConfig?
+
   /// Configuration for Managed OpenTelemetry pipeline.
   public var managedOpentelemetryConfig: ManagedOpenTelemetryConfig?
+
+  /// Configuration for control plane egress control.
+  public var controlPlaneEgress: ControlPlaneEgress?
+
+  /// Configuration for Managed Machine Learning Diagnostics.
+  public var managedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig?
+
+  /// Optional. Configuration for Node Creation Mode.
+  public var nodeCreationConfig: NodeCreationConfig?
 
   /// Initialize a new instance of `Cluster`.
   public init(
@@ -487,7 +506,12 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     rbacBindingConfig: RBACBindingConfig? = nil,
     gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil,
     anonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil,
+    scheduleUpgradeConfig: ScheduleUpgradeConfig? = nil,
+    secretSyncConfig: SecretSyncConfig? = nil,
     managedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil,
+    controlPlaneEgress: ControlPlaneEgress? = nil,
+    managedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig? = nil,
+    nodeCreationConfig: NodeCreationConfig? = nil,
   ) {
     self.name = name
     self.description = description
@@ -567,7 +591,12 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.rbacBindingConfig = rbacBindingConfig
     self.gkeAutoUpgradeConfig = gkeAutoUpgradeConfig
     self.anonymousAuthenticationConfig = anonymousAuthenticationConfig
+    self.scheduleUpgradeConfig = scheduleUpgradeConfig
+    self.secretSyncConfig = secretSyncConfig
     self.managedOpentelemetryConfig = managedOpentelemetryConfig
+    self.controlPlaneEgress = controlPlaneEgress
+    self.managedMachineLearningDiagnosticsConfig = managedMachineLearningDiagnosticsConfig
+    self.nodeCreationConfig = nodeCreationConfig
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -649,7 +678,12 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case rbacBindingConfig = "rbacBindingConfig"
     case gkeAutoUpgradeConfig = "gkeAutoUpgradeConfig"
     case anonymousAuthenticationConfig = "anonymousAuthenticationConfig"
+    case scheduleUpgradeConfig = "scheduleUpgradeConfig"
+    case secretSyncConfig = "secretSyncConfig"
     case managedOpentelemetryConfig = "managedOpentelemetryConfig"
+    case controlPlaneEgress = "controlPlaneEgress"
+    case managedMachineLearningDiagnosticsConfig = "managedMachineLearningDiagnosticsConfig"
+    case nodeCreationConfig = "nodeCreationConfig"
   }
 
   public init(from decoder: Decoder) throws {
@@ -768,8 +802,19 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       GkeAutoUpgradeConfig.self, forKey: .gkeAutoUpgradeConfig)
     self.anonymousAuthenticationConfig = try container.decodeIfPresent(
       AnonymousAuthenticationConfig.self, forKey: .anonymousAuthenticationConfig)
+    self.scheduleUpgradeConfig = try container.decodeIfPresent(
+      ScheduleUpgradeConfig.self, forKey: .scheduleUpgradeConfig)
+    self.secretSyncConfig = try container.decodeIfPresent(
+      SecretSyncConfig.self, forKey: .secretSyncConfig)
     self.managedOpentelemetryConfig = try container.decodeIfPresent(
       ManagedOpenTelemetryConfig.self, forKey: .managedOpentelemetryConfig)
+    self.controlPlaneEgress = try container.decodeIfPresent(
+      ControlPlaneEgress.self, forKey: .controlPlaneEgress)
+    self.managedMachineLearningDiagnosticsConfig = try container.decodeIfPresent(
+      ManagedMachineLearningDiagnosticsConfig.self, forKey: .managedMachineLearningDiagnosticsConfig
+    )
+    self.nodeCreationConfig = try container.decodeIfPresent(
+      NodeCreationConfig.self, forKey: .nodeCreationConfig)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -853,7 +898,14 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.rbacBindingConfig, forKey: .rbacBindingConfig)
     try container.encode(self.gkeAutoUpgradeConfig, forKey: .gkeAutoUpgradeConfig)
     try container.encode(self.anonymousAuthenticationConfig, forKey: .anonymousAuthenticationConfig)
+    try container.encode(self.scheduleUpgradeConfig, forKey: .scheduleUpgradeConfig)
+    try container.encode(self.secretSyncConfig, forKey: .secretSyncConfig)
     try container.encode(self.managedOpentelemetryConfig, forKey: .managedOpentelemetryConfig)
+    try container.encode(self.controlPlaneEgress, forKey: .controlPlaneEgress)
+    try container.encode(
+      self.managedMachineLearningDiagnosticsConfig, forKey: .managedMachineLearningDiagnosticsConfig
+    )
+    try container.encode(self.nodeCreationConfig, forKey: .nodeCreationConfig)
   }
 
   /// The current status of the cluster.

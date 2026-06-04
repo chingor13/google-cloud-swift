@@ -177,6 +177,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   public enum AutopilotGeneralProfile: Codable, Equatable, Sendable {
     case unspecified
     case noPerformance
+    case `none`
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -201,6 +202,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch self {
       case .unspecified: return 0
       case .noPerformance: return 1
+      case .`none`: return 2
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -213,6 +215,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch self {
       case .unspecified: return "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED"
       case .noPerformance: return "NO_PERFORMANCE"
+      case .`none`: return "NONE"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -225,6 +228,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch stringValue {
       case "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED": self = .unspecified
       case "NO_PERFORMANCE": self = .noPerformance
+      case "NONE": self = .`none`
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -236,6 +240,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch intValue {
       case 0: self = .unspecified
       case 1: self = .noPerformance
+      case 2: self = .`none`
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -263,6 +268,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch self {
       case .unspecified: return try container.encode(0)
       case .noPerformance: return try container.encode(1)
+      case .`none`: return try container.encode(2)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

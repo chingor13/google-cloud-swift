@@ -24,6 +24,7 @@
     case legalIssue
     case operationalIssue
     case kmsKeyIssue
+    case projectAbuse
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -51,6 +52,7 @@
       case .legalIssue: return 3
       case .operationalIssue: return 4
       case .kmsKeyIssue: return 5
+      case .projectAbuse: return 8
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -66,6 +68,7 @@
       case .legalIssue: return "LEGAL_ISSUE"
       case .operationalIssue: return "OPERATIONAL_ISSUE"
       case .kmsKeyIssue: return "KMS_KEY_ISSUE"
+      case .projectAbuse: return "PROJECT_ABUSE"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -81,6 +84,7 @@
       case "LEGAL_ISSUE": self = .legalIssue
       case "OPERATIONAL_ISSUE": self = .operationalIssue
       case "KMS_KEY_ISSUE": self = .kmsKeyIssue
+      case "PROJECT_ABUSE": self = .projectAbuse
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -95,6 +99,7 @@
       case 3: self = .legalIssue
       case 4: self = .operationalIssue
       case 5: self = .kmsKeyIssue
+      case 8: self = .projectAbuse
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -125,6 +130,7 @@
       case .legalIssue: return try container.encode(3)
       case .operationalIssue: return try container.encode(4)
       case .kmsKeyIssue: return try container.encode(5)
+      case .projectAbuse: return try container.encode(8)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

@@ -259,7 +259,7 @@ public protocol ClusterManager {
   func fetchClusterUpgradeInfo(request: FetchClusterUpgradeInfoRequest) async throws
     -> GoogleContainerV1.ClusterUpgradeInfo
 
-  /// Fetch upgrade information of a specific nodepool.
+  /// Fetch upgrade information of a specific node pool.
   ///
   /// @Snippet(path: "ClusterManager_FetchNodePoolUpgradeInfo")
   func fetchNodePoolUpgradeInfo(request: FetchNodePoolUpgradeInfoRequest) async throws
@@ -550,7 +550,7 @@ public protocol ClusterManager {
     request: FetchClusterUpgradeInfoRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleContainerV1.ClusterUpgradeInfo
 
-  /// Fetch upgrade information of a specific nodepool.
+  /// Fetch upgrade information of a specific node pool.
   ///
   /// @Snippet(path: "ClusterManager_FetchNodePoolUpgradeInfo")
   func fetchNodePoolUpgradeInfo(

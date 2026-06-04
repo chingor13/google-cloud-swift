@@ -21,7 +21,10 @@ import GoogleCloudWkt
 public struct LocalizedText: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Localized string in the language corresponding to `language_code' below.
+  /// Localized string in the language corresponding to
+  /// [language_code][google.type.LocalizedText.language_code] below.
+  ///
+  /// [google.type.LocalizedText.language_code]: <doc:LocalizedText/languageCode>
   public var text: Swift.String
 
   /// The text's BCP-47 language code, such as "en-US" or "sr-Latn".

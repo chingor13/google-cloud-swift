@@ -71,7 +71,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   public var networkPerformanceConfig: NodeNetworkConfig.NetworkPerformanceConfig?
 
   /// [PRIVATE FIELD]
-  /// Pod CIDR size overprovisioning config for the nodepool.
+  /// Pod CIDR size overprovisioning config for the node pool.
   ///
   /// Pod CIDR size per node depends on max_pods_per_node. By default, the value
   /// of max_pods_per_node is rounded off to next power of 2 and we then double
@@ -101,17 +101,26 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Format: projects/{project}/regions/{region}/subnetworks/{subnetwork}
   /// If the cluster is associated with multiple subnetworks, the subnetwork can
   /// be either:
-  /// 1. A user supplied subnetwork name/full path during node pool creation.
-  ///    Example1: my-subnet
-  ///    Example2: projects/gke-project/regions/us-central1/subnetworks/my-subnet
-  /// 2. A subnetwork path picked based on the IP utilization during node pool
-  ///    creation and is immutable.
+  /// - A user supplied subnetwork name during node pool creation (e.g.,
+  /// `my-subnet`). The name must be between 1 and 63 characters long, start
+  /// with a letter, contain only letters, numbers, and hyphens, and end with a
+  /// letter or a number.
+  /// - A full subnetwork path during node pool creation, such as
+  /// `projects/gke-project/regions/us-central1/subnetworks/my-subnet`
+  /// - A subnetwork path picked based on the IP utilization during node pool
+  /// creation and is immutable.
   public var subnetwork: Swift.String
 
   /// Output only. The network tier configuration for the node pool inherits from
   /// the cluster-level configuration and remains immutable throughout the node
   /// pool's lifecycle, including during upgrades.
   public var networkTierConfig: NetworkTierConfig?
+
+  /// Immutable. The accelerator network profile for the node pool. For now the
+  /// only valid value is "auto". If specified, the network configuration of the
+  /// nodes in this node pool will be managed by this profile for the supported
+  /// machine types, zone, etc.
+  public var acceleratorNetworkProfile: Swift.String
 
   /// Initialize a new instance of `NodeNetworkConfig`.
   public init(
@@ -126,6 +135,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     podIpv4RangeUtilization: Swift.Double = Swift.Double(),
     subnetwork: Swift.String = Swift.String(),
     networkTierConfig: NetworkTierConfig? = nil,
+    acceleratorNetworkProfile: Swift.String = Swift.String(),
   ) {
     self.createPodRange = createPodRange
     self.podRange = podRange
@@ -138,6 +148,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     self.podIpv4RangeUtilization = podIpv4RangeUtilization
     self.subnetwork = subnetwork
     self.networkTierConfig = networkTierConfig
+    self.acceleratorNetworkProfile = acceleratorNetworkProfile
   }
 
   /// Configuration of all network bandwidth tiers

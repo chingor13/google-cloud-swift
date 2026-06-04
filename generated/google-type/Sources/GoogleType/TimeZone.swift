@@ -22,10 +22,10 @@ import GoogleCloudWkt
 public struct TimeZone: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// IANA Time Zone Database time zone, e.g. "America/New_York".
+  /// IANA Time Zone Database time zone. For example "America/New_York".
   public var id: Swift.String
 
-  /// Optional. IANA Time Zone Database version number, e.g. "2019a".
+  /// Optional. IANA Time Zone Database version number. For example "2019a".
   public var version: Swift.String
 
   /// Initialize a new instance of `TimeZone`.

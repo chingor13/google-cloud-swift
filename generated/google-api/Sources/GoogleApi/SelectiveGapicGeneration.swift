@@ -19,6 +19,8 @@ import GoogleCloudWkt
 
 /// This message is used to configure the generation of a subset of the RPCs in
 /// a service for client libraries.
+///
+/// Note: This feature should not be used in most cases.
 public struct SelectiveGapicGeneration: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

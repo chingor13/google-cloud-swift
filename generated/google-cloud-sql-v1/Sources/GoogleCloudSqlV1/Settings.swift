@@ -200,6 +200,10 @@
     /// Optional. The read pool auto-scale configuration for the instance.
     public var readPoolAutoScaleConfig: ReadPoolAutoScaleConfig?
 
+    /// Optional. Whether the replica is in accelerated mode. This feature is in
+    /// private preview and requires allowlisting to take effect.
+    public var acceleratedReplicaMode: GoogleCloudWkt.BoolValue?
+
     /// Optional. Cloud SQL for MySQL auto-upgrade configuration. When this
     /// parameter is set to true, auto-upgrade is enabled for MySQL 8.0 minor
     /// versions. The MySQL version must be 8.0.35 or higher.
@@ -259,6 +263,7 @@
       connectionPoolConfig: ConnectionPoolConfig? = nil,
       finalBackupConfig: FinalBackupConfig? = nil,
       readPoolAutoScaleConfig: ReadPoolAutoScaleConfig? = nil,
+      acceleratedReplicaMode: GoogleCloudWkt.BoolValue? = nil,
       autoUpgradeEnabled: Swift.Bool? = nil,
       entraidConfig: SqlServerEntraIdConfig? = nil,
       dataApiAccess: Settings.DataApiAccess? = nil,
@@ -305,6 +310,7 @@
       self.connectionPoolConfig = connectionPoolConfig
       self.finalBackupConfig = finalBackupConfig
       self.readPoolAutoScaleConfig = readPoolAutoScaleConfig
+      self.acceleratedReplicaMode = acceleratedReplicaMode
       self.autoUpgradeEnabled = autoUpgradeEnabled
       self.entraidConfig = entraidConfig
       self.dataApiAccess = dataApiAccess

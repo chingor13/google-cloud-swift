@@ -63,6 +63,14 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// `projects/*/locations/*/clusters/*/nodePools/*`.
   public var name: Swift.String
 
+  /// The desired name of the image name to use for this node.
+  /// This is used to create clusters using a custom image.
+  public var image: Swift.String
+
+  /// The project containing the desired image to use for this node pool.
+  /// This is used to create clusters using a custom image.
+  public var imageProject: Swift.String
+
   /// The desired list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
   /// in which the node pool's nodes should be located. Changing the locations
@@ -197,6 +205,9 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// default behavior, i.e. according to the chosen autoscaling profile.
   public var consolidationDelay: GoogleCloudWkt.Duration?
 
+  /// The taint configuration for the node pool.
+  public var taintConfig: TaintConfig?
+
   /// Initialize a new instance of `UpdateNodePoolRequest`.
   public init(
     projectId: Swift.String = Swift.String(),
@@ -206,6 +217,8 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     nodeVersion: Swift.String = Swift.String(),
     imageType: Swift.String = Swift.String(),
     name: Swift.String = Swift.String(),
+    image: Swift.String = Swift.String(),
+    imageProject: Swift.String = Swift.String(),
     locations: [Swift.String] = [],
     workloadMetadataConfig: WorkloadMetadataConfig? = nil,
     upgradeSettings: NodePool.UpgradeSettings? = nil,
@@ -236,6 +249,7 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     bootDisk: BootDisk? = nil,
     nodeDrainConfig: NodePool.NodeDrainConfig? = nil,
     consolidationDelay: GoogleCloudWkt.Duration? = nil,
+    taintConfig: TaintConfig? = nil,
   ) {
     self.projectId = projectId
     self.zone = zone
@@ -244,6 +258,8 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     self.nodeVersion = nodeVersion
     self.imageType = imageType
     self.name = name
+    self.image = image
+    self.imageProject = imageProject
     self.locations = locations
     self.workloadMetadataConfig = workloadMetadataConfig
     self.upgradeSettings = upgradeSettings
@@ -274,6 +290,7 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     self.bootDisk = bootDisk
     self.nodeDrainConfig = nodeDrainConfig
     self.consolidationDelay = consolidationDelay
+    self.taintConfig = taintConfig
   }
 
   public static var _anyTypeUrl: String {
