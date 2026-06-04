@@ -18,6 +18,9 @@ import Foundation
 fileprivate let googleCloudProject = "GOOGLE_CLOUD_PROJECT"
 /// The environment variable used to get the GOOGLE_CLOUD_PROJECT
 fileprivate let serviceAccountVar = "GOOGLE_CLOUD_SWIFT_TEST_SERVICE_ACCOUNT"
+/// The environment variable to set the default location
+fileprivate let locationVar = "GOOGLE_CLOUD_LOCATION"
+fileprivate let defaultLocation = "us-central1"
 
 /// The maximum length for a secret ID.
 fileprivate let secretIdLength = 64
@@ -35,6 +38,14 @@ fileprivate let alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 func projectId() throws -> String {
   guard let id = ProcessInfo.processInfo.environment[googleCloudProject] else {
     throw ResourceNameError.unsetEnvironmentVariable(googleCloudProject)
+  }
+  return id
+}
+
+/// Fetches the location to use in the tests. Defaults to `us-central1`.
+func locationId() -> String {
+  guard let id = ProcessInfo.processInfo.environment[locationVar] else {
+    return defaultLocation
   }
   return id
 }

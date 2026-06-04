@@ -20,24 +20,24 @@ import GoogleCloudWorkflowsV1
 /// Run tests for LROs.
 public enum LongrunningOperations {
   static public func run() async throws {
-    let projectId = try #require(
-      ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"],
-      "GOOGLE_CLOUD_PROJECT environment variable must be set")
+    let project = try projectId()
+    let location = locationId()
 
-    try await createAndDeleteWorkflow(projectId: projectId)
+    try await createAndDeleteWorkflow(projectId: project, location: location)
   }
 
-  static private func createAndDeleteWorkflow(projectId: String) async throws {
+  static private func createAndDeleteWorkflow(projectId: String, location: String) async throws {
     let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
     let workflowId =
       "test_wf_\(UUID().uuidString.replacingOccurrences(of: "-", with: "_").prefix(20))"
-    let parent = "projects/\(projectId)/locations/us-central1"
+    let parent = "projects/\(projectId)/locations/\(location)"
 
     print("Testing createWorkflow()")
     let create = CreateWorkflowRequest(
       parent: parent,
       workflow: Workflow(
         description: "Test workflow created by integration test",
+        labels: ["integration-test": "true"],
         sourceCode: .sourceContents(
           """
           - init:

@@ -14,6 +14,7 @@
 
 import Foundation
 import GoogleCloudSecretmanagerV1
+import GoogleCloudWorkflowsV1
 
 func cleanupStaleSecrets() async {
   do {
@@ -41,5 +42,35 @@ func cleanupStaleSecretsImpl() async throws {
     }
     try await client.deleteSecret(
       request: DeleteSecretRequest(name: secret.name, etag: secret.etag))
+  }
+}
+
+func cleanUpStaleWorkflows() async {
+  do {
+    try await cleanUpStaleWorkflowsImpl()
+  } catch {
+    print("Error cleaning up stale workflows: \(error)")
+  }
+}
+
+func cleanUpStaleWorkflowsImpl() async throws {
+  let projectId = try projectId();
+  let location = locationId();
+  let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+  let workflows = try client.listWorkflows(
+    byItem: ListWorkflowsRequest(parent: "projects/\(projectId)/locations/\(location)"))
+
+  // Wait at least 48 hours before deleting the resources.
+  let slack = UInt64(48 * 3600)
+  let deadline = UInt64(Date().timeIntervalSince1970) - slack
+  for try await workflow in workflows {
+    guard let v = workflow.labels["integration-test"], v == "true" else {
+      continue
+    }
+    guard let t = workflow.createTime, t.seconds < deadline else {
+      continue
+    }
+    // Start deletion and don't wait for it to complete.
+    _ = try await client.deleteWorkflow(request: DeleteWorkflowRequest(name: workflow.name))
   }
 }

@@ -45,7 +45,7 @@ import GoogleCloudGax
     }
 
     @Test func longRunningOperations() async throws {
-      await cleanupStaleSecrets()
+      await cleanUpStaleWorkflows()
       do {
         try await LongrunningOperations.run()
       } catch let e as GoogleCloudGax.RequestError {
