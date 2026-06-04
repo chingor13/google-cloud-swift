@@ -42,4 +42,9 @@
       }
     }
   }
+#else
+  @main
+  struct SnippetRunner {
+    static func main() {}
+  }
 #endif
