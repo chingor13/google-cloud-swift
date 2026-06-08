@@ -113,6 +113,10 @@ libraries:
     copyright_year: "2026"
     swift:
       per_service_traits: true
+  - name: GoogleCloudStorageinsightsV1
+    apis:
+      - path: google/cloud/storageinsights/v1
+    copyright_year: "2026"
   - name: GoogleCloudTpuV2
     apis:
       - path: google/cloud/tpu/v2
