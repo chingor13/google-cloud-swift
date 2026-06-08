@@ -154,6 +154,10 @@ libraries:
     apis:
       - path: google/rpc
     copyright_year: "2026"
+  - name: GoogleStoragetransferV1
+    apis:
+      - path: google/storagetransfer/v1
+    copyright_year: "2026"
   - name: GoogleType
     apis:
       - path: google/type
