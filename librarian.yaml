@@ -142,6 +142,10 @@ libraries:
     apis:
       - path: google/container/v1
     copyright_year: "2026"
+  - name: GoogleDevtoolsArtifactregistryV1
+    apis:
+      - path: google/devtools/artifactregistry/v1
+    copyright_year: "2026"
   - name: GoogleIamV1
     apis:
       - path: google/iam/v1
