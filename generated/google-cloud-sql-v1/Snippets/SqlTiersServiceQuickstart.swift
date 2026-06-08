@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlTiersServiceClient()
     let response = try await client.list(
-      request: SqlTiersListRequest(/* set fields */
-      )
+      request: SqlTiersListRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

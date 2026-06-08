@@ -24,24 +24,29 @@
     Sendable
   {
     /// Required. Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Required. Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Required. The context for request to perform the pre-check major version
     /// upgrade operation.
-    public var body: InstancesPreCheckMajorVersionUpgradeRequest?
+    public var body: InstancesPreCheckMajorVersionUpgradeRequest? = nil
 
     /// Initialize a new instance of `SqlInstancesPreCheckMajorVersionUpgradeRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      body: InstancesPreCheckMajorVersionUpgradeRequest? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.body = body
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesPreCheckMajorVersionUpgradeRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -30,14 +30,14 @@ public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// reverse by create_time (newest first).
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var secrets: [Secret]
+  public var secrets: [Secret] = []
 
   /// A token to retrieve the next page of results. Pass this value in
   /// [ListSecretsRequest.page_token][google.cloud.secretmanager.v1.ListSecretsRequest.page_token]
   /// to retrieve the next page.
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.page_token]: <doc:ListSecretsRequest/pageToken>
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// The total number of [Secrets][google.cloud.secretmanager.v1.Secret] but 0
   /// when the
@@ -46,17 +46,22 @@ public struct ListSecretsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var totalSize: Swift.Int32
+  public var totalSize: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `ListSecretsResponse`.
-  public init(
-    secrets: [Secret] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    totalSize: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.secrets = secrets
-    self.nextPageToken = nextPageToken
-    self.totalSize = totalSize
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListSecretsResponse().with { $0.secrets = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

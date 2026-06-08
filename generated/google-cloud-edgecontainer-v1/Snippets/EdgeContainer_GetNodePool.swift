@@ -28,10 +28,11 @@ func sample(
   nodePoolId: String
 ) async throws {
   let response = try await client.getNodePool(
-    request: GetNodePoolRequest(
-      name:
-        "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)/nodePools/\(nodePoolId)",
-    )
+    request: GetNodePoolRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)/nodePools/\(nodePoolId)"
+      }
   )
   print("Success: \(response)")
 }

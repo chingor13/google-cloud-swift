@@ -24,7 +24,7 @@ public struct ListTagHoldsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// A possibly paginated list of TagHolds.
-  public var tagHolds: [TagHold]
+  public var tagHolds: [TagHold] = []
 
   /// Pagination token.
   ///
@@ -37,15 +37,22 @@ public struct ListTagHoldsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// the list returned is the last page in the result set.
   ///
   /// Pagination tokens have a limited lifetime.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagHoldsResponse`.
-  public init(
-    tagHolds: [TagHold] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.tagHolds = tagHolds
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagHoldsResponse().with { $0.tagHolds = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

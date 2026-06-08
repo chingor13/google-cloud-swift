@@ -24,29 +24,32 @@
     Sendable
   {
     /// List of server CA certificates for the instance.
-    public var caCerts: [SslCert]
+    public var caCerts: [SslCert] = []
 
     /// List of server certificates for the instance, signed by the corresponding
     /// CA from the `ca_certs` list.
-    public var serverCerts: [SslCert]
+    public var serverCerts: [SslCert] = []
 
     /// The `sha1_fingerprint` of the active certificate from `server_certs`.
-    public var activeVersion: Swift.String
+    public var activeVersion: Swift.String = Swift.String()
 
     /// This is always `sql#instancesListServerCertificates`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `InstancesListServerCertificatesResponse`.
-    public init(
-      caCerts: [SslCert] = [],
-      serverCerts: [SslCert] = [],
-      activeVersion: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.caCerts = caCerts
-      self.serverCerts = serverCerts
-      self.activeVersion = activeVersion
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesListServerCertificatesResponse().with { $0.caCerts = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

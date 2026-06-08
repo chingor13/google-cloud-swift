@@ -25,18 +25,25 @@ public struct LocalizedMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The locale used following the specification defined at
   /// https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
   /// Examples are: "en-US", "fr-CH", "es-MX"
-  public var locale: Swift.String
+  public var locale: Swift.String = Swift.String()
 
   /// The localized error message in the above locale.
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// Initialize a new instance of `LocalizedMessage`.
-  public init(
-    locale: Swift.String = Swift.String(),
-    message: Swift.String = Swift.String(),
-  ) {
-    self.locale = locale
-    self.message = message
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LocalizedMessage().with { $0.locale = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.LocalizedMessage" }

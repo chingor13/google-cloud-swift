@@ -24,8 +24,8 @@ import GoogleRpc
 
 func sample(client: some TagBindings) async throws {
   let items = try client.listEffectiveTags(
-    byItem: ListEffectiveTagsRequest(/* set fields */
-    )
+    byItem: ListEffectiveTagsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

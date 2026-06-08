@@ -27,42 +27,43 @@ public struct ListFunctionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// listing functions in all locations, if one or more location(s) are
   /// unreachable, the response will contain functions from all reachable
   /// locations along with the names of any unreachable locations.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Maximum number of functions to return per call. The largest allowed
   /// page_size is 1,000, if the page_size is omitted or specified as greater
   /// than 1,000 then it will be replaced as 1,000. The size of the list
   /// response can be less than specified when used with filters.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The value returned by the last
   /// `ListFunctionsResponse`; indicates that
   /// this is a continuation of a prior `ListFunctions` call, and that the
   /// system should return the next page of data.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// The filter for Functions that match the filter expression,
   /// following the syntax outlined in https://google.aip.dev/160.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// The sorting order of the resources returned. Value should be a comma
   /// separated list of fields. The default sorting order is ascending.
   /// See https://google.aip.dev/132#ordering.
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListFunctionsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.filter = filter
-    self.orderBy = orderBy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListFunctionsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

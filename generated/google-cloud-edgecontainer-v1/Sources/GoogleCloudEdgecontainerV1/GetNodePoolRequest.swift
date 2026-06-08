@@ -22,13 +22,22 @@ public struct GetNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Required. The resource name of the node pool.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetNodePoolRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetNodePoolRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

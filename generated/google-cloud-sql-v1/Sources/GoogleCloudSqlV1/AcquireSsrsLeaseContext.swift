@@ -24,29 +24,32 @@
   {
     /// The username to be used as the setup login to connect to the database
     /// server for SSRS setup.
-    public var setupLogin: Swift.String?
+    public var setupLogin: Swift.String? = nil
 
     /// The username to be used as the service login to connect to the report
     /// database for SSRS setup.
-    public var serviceLogin: Swift.String?
+    public var serviceLogin: Swift.String? = nil
 
     /// The report database to be used for SSRS setup.
-    public var reportDatabase: Swift.String?
+    public var reportDatabase: Swift.String? = nil
 
     /// Lease duration needed for SSRS setup.
-    public var duration: GoogleCloudWkt.Duration?
+    public var duration: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `AcquireSsrsLeaseContext`.
-    public init(
-      setupLogin: Swift.String? = nil,
-      serviceLogin: Swift.String? = nil,
-      reportDatabase: Swift.String? = nil,
-      duration: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.setupLogin = setupLogin
-      self.serviceLogin = serviceLogin
-      self.reportDatabase = reportDatabase
-      self.duration = duration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AcquireSsrsLeaseContext().with { $0.setupLogin = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

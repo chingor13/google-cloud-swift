@@ -24,58 +24,51 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Flag to enable verifying connection only
-    public var verifyConnectionOnly: Swift.Bool
+    public var verifyConnectionOnly: Swift.Bool = Swift.Bool()
 
     /// External sync mode
-    public var syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode
+    public var syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode =
+      SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode()
 
     /// Optional. Flag to verify settings required by replication setup only
-    public var verifyReplicationOnly: Swift.Bool
+    public var verifyReplicationOnly: Swift.Bool = Swift.Bool()
 
     /// Optional. MigrationType configures the migration to use physical files or
     /// logical dump files. If not set, then the logical dump file configuration is
     /// used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
-    public var migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType
+    public var migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType =
+      SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType()
 
     /// Optional. Parallel level for initial data sync. Only applicable for
     /// PostgreSQL.
-    public var syncParallelLevel: ExternalSyncParallelLevel
+    public var syncParallelLevel: ExternalSyncParallelLevel = ExternalSyncParallelLevel()
 
     /// Optional. Migrate only the specified objects from the source instance. If
     /// this field is empty, then migrate all objects.
-    public var selectedObjects: [ExternalSyncSelectedObject]
+    public var selectedObjects: [ExternalSyncSelectedObject] = []
 
-    public var syncConfig: OneOf_SyncConfig?
+    public var syncConfig: OneOf_SyncConfig? = nil
 
     /// Initialize a new instance of `SqlInstancesVerifyExternalSyncSettingsRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      verifyConnectionOnly: Swift.Bool = Swift.Bool(),
-      syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode =
-        SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode(),
-      verifyReplicationOnly: Swift.Bool = Swift.Bool(),
-      migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType =
-        SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType(),
-      syncParallelLevel: ExternalSyncParallelLevel = ExternalSyncParallelLevel(),
-      selectedObjects: [ExternalSyncSelectedObject] = [],
-      syncConfig: OneOf_SyncConfig? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.verifyConnectionOnly = verifyConnectionOnly
-      self.syncMode = syncMode
-      self.verifyReplicationOnly = verifyReplicationOnly
-      self.migrationType = migrationType
-      self.syncParallelLevel = syncParallelLevel
-      self.selectedObjects = selectedObjects
-      self.syncConfig = syncConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesVerifyExternalSyncSettingsRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

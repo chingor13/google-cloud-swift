@@ -22,18 +22,31 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithListValue()),
       (#"{"singular": null         }"#, MessageWithListValue()),
-      (#"{"singular": []           }"#, MessageWithListValue(singular: [])),
-      (#"{"singular": [42]         }"#, MessageWithListValue(singular: [.number(42)])),
-      (#"{"singular": ["hello"]    }"#, MessageWithListValue(singular: [.string("hello")])),
+      (#"{"singular": []           }"#, MessageWithListValue().with { $0.singular = [] }),
+      (
+        #"{"singular": [42]         }"#, MessageWithListValue().with { $0.singular = [.number(42)] }
+      ),
+      (
+        #"{"singular": ["hello"]    }"#,
+        MessageWithListValue().with { $0.singular = [.string("hello")] }
+      ),
       (
         #"{"singular": [42, "hello"]}"#,
-        MessageWithListValue(singular: [.number(42), .string("hello")])
+        MessageWithListValue().with { $0.singular = [.number(42), .string("hello")] }
       ),
-      (#"{"optional": [42]         }"#, MessageWithListValue(optional: [.number(42)])),
+      (
+        #"{"optional": [42]         }"#, MessageWithListValue().with { $0.optional = [.number(42)] }
+      ),
       (#"{"repeated": []           }"#, MessageWithListValue()),
-      (#"{"repeated": [[42]]       }"#, MessageWithListValue(repeated: [[.number(42)]])),
+      (
+        #"{"repeated": [[42]]       }"#,
+        MessageWithListValue().with { $0.repeated = [[.number(42)]] }
+      ),
       (#"{"map":      {}           }"#, MessageWithListValue()),
-      (#"{"map":      {"a": [42] } }"#, MessageWithListValue(map: ["a": [.number(42)]])),
+      (
+        #"{"map":      {"a": [42] } }"#,
+        MessageWithListValue().with { $0.map = ["a": [.number(42)]] }
+      ),
     ])
   func deserialize(input: String, want: MessageWithListValue) throws {
     let decoder = _ProtoJSONDecoder()

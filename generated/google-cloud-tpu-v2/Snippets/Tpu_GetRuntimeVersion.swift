@@ -27,9 +27,11 @@ func sample(client: some Tpu, projectId: String, locationId: String, runtimeVers
   async throws
 {
   let response = try await client.getRuntimeVersion(
-    request: GetRuntimeVersionRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/runtimeVersions/\(runtimeVersionId)",
-    )
+    request: GetRuntimeVersionRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/runtimeVersions/\(runtimeVersionId)"
+      }
   )
   print("Success: \(response)")
 }

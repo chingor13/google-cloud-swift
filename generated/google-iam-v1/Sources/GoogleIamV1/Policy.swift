@@ -118,7 +118,7 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// To learn which resources support conditions in their IAM policies, see the
   /// [IAM
   /// documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-  public var version: Swift.Int32
+  public var version: Swift.Int32 = Swift.Int32()
 
   /// Associates a list of `members`, or principals, with a `role`. Optionally,
   /// may specify a `condition` that determines how and when the `bindings` are
@@ -130,10 +130,10 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// different roles to `user:alice@example.com`, and not to any other
   /// principal, then you can add another 1,450 principals to the `bindings` in
   /// the `Policy`.
-  public var bindings: [Binding]
+  public var bindings: [Binding] = []
 
   /// Specifies cloud audit logging configuration for this policy.
-  public var auditConfigs: [AuditConfig]
+  public var auditConfigs: [AuditConfig] = []
 
   /// `etag` is used for optimistic concurrency control as a way to help
   /// prevent simultaneous updates of a policy from overwriting each other.
@@ -147,19 +147,22 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// whenever you call `setIamPolicy`. If you omit this field, then IAM allows
   /// you to overwrite a version `3` policy with a version `1` policy, and all of
   /// the conditions in the version `3` policy are lost.
-  public var etag: Foundation.Data
+  public var etag: Foundation.Data = Foundation.Data()
 
   /// Initialize a new instance of `Policy`.
-  public init(
-    version: Swift.Int32 = Swift.Int32(),
-    bindings: [Binding] = [],
-    auditConfigs: [AuditConfig] = [],
-    etag: Foundation.Data = Foundation.Data(),
-  ) {
-    self.version = version
-    self.bindings = bindings
-    self.auditConfigs = auditConfigs
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Policy().with { $0.version = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.Policy" }

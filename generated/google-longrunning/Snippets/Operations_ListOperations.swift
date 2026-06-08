@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some Operations) async throws {
   let items = try client.listOperations(
-    byItem: ListOperationsRequest(/* set fields */
-    )
+    byItem: ListOperationsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

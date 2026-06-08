@@ -23,7 +23,7 @@
     Sendable
   {
     /// This is always `sql#demoteMasterContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Verify the GTID consistency for demote operation. Default value:
     /// `True`. Setting this flag to `false` enables you to bypass the GTID
@@ -32,32 +32,33 @@
     /// future replication failures. Change the value only if you know the reason
     /// for the GTID divergence and are confident that doing so will not cause any
     /// replication issues.
-    public var verifyGtidConsistency: GoogleCloudWkt.BoolValue?
+    public var verifyGtidConsistency: GoogleCloudWkt.BoolValue? = nil
 
     /// The name of the instance which will act as on-premises primary instance
     /// in the replication setup.
-    public var masterInstanceName: Swift.String
+    public var masterInstanceName: Swift.String = Swift.String()
 
     /// Configuration specific to read-replicas replicating from the on-premises
     /// primary instance.
-    public var replicaConfiguration: DemoteMasterConfiguration?
+    public var replicaConfiguration: DemoteMasterConfiguration? = nil
 
     /// Flag to skip replication setup on the instance.
-    public var skipReplicationSetup: Swift.Bool
+    public var skipReplicationSetup: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `DemoteMasterContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      verifyGtidConsistency: GoogleCloudWkt.BoolValue? = nil,
-      masterInstanceName: Swift.String = Swift.String(),
-      replicaConfiguration: DemoteMasterConfiguration? = nil,
-      skipReplicationSetup: Swift.Bool = Swift.Bool(),
-    ) {
-      self.kind = kind
-      self.verifyGtidConsistency = verifyGtidConsistency
-      self.masterInstanceName = masterInstanceName
-      self.replicaConfiguration = replicaConfiguration
-      self.skipReplicationSetup = skipReplicationSetup
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DemoteMasterContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

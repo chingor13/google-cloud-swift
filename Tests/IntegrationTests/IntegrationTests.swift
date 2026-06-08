@@ -81,9 +81,9 @@ import Testing
 
     let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
     let response = try await client.createExternalAccountKey(
-      request: CreateExternalAccountKeyRequest(
-        parent: "projects/\(projectId)/locations/global",
-      ),
+      request: CreateExternalAccountKeyRequest().with {
+        $0.parent = "projects/\(projectId)/locations/global"
+      }
     )
     print("Response \(response)")
   }

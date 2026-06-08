@@ -25,7 +25,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resource name of the metric descriptor.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The metric type, including its DNS name prefix. The type is not
   /// URL-encoded. All user-defined metric types have the DNS name
@@ -35,7 +35,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///     "custom.googleapis.com/invoice/paid/amount"
   ///     "external.googleapis.com/prometheus/up"
   ///     "appengine.googleapis.com/http/server/response_latencies"
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// The set of labels that can be used to describe a specific
   /// instance of this metric type. For example, the
@@ -43,15 +43,15 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// type has a label for the HTTP response code, `response_code`, so
   /// you can look at latencies for successful responses or just
   /// for responses that failed.
-  public var labels: [LabelDescriptor]
+  public var labels: [LabelDescriptor] = []
 
   /// Whether the metric records instantaneous values, changes to a value, etc.
   /// Some combinations of `metric_kind` and `value_type` might not be supported.
-  public var metricKind: MetricDescriptor.MetricKind
+  public var metricKind: MetricDescriptor.MetricKind = MetricDescriptor.MetricKind()
 
   /// Whether the measurement is an integer, a floating-point number, etc.
   /// Some combinations of `metric_kind` and `value_type` might not be supported.
-  public var valueType: MetricDescriptor.ValueType
+  public var valueType: MetricDescriptor.ValueType = MetricDescriptor.ValueType()
 
   /// The units in which the metric value is reported. It is only applicable
   /// if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -155,22 +155,22 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// * `10^2.%` indicates a metric contains a ratio, typically in the range
   ///    0..1, that will be multiplied by 100 and displayed as a percentage
   ///    (so a metric value `0.03` means "3 percent").
-  public var unit: Swift.String
+  public var unit: Swift.String = Swift.String()
 
   /// A detailed description of the metric, which can be used in documentation.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// A concise name for the metric, which can be displayed in user interfaces.
   /// Use sentence case without an ending period, for example "Request count".
   /// This field is optional but it is recommended to be set for any metrics
   /// associated with user-visible concepts, such as Quota.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Optional. Metadata which can be used to guide usage of the metric.
-  public var metadata: MetricDescriptor.MetricDescriptorMetadata?
+  public var metadata: MetricDescriptor.MetricDescriptorMetadata? = nil
 
   /// Optional. The launch stage of the metric definition.
-  public var launchStage: LaunchStage
+  public var launchStage: LaunchStage = LaunchStage()
 
   /// Read-only. If present, then a [time
   /// series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -180,33 +180,22 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// monitored resource types listed here.
   ///
   /// [google.api.MonitoredResourceDescriptor]: <doc:MonitoredResourceDescriptor>
-  public var monitoredResourceTypes: [Swift.String]
+  public var monitoredResourceTypes: [Swift.String] = []
 
   /// Initialize a new instance of `MetricDescriptor`.
-  public init(
-    name: Swift.String = Swift.String(),
-    type: Swift.String = Swift.String(),
-    labels: [LabelDescriptor] = [],
-    metricKind: MetricDescriptor.MetricKind = MetricDescriptor.MetricKind(),
-    valueType: MetricDescriptor.ValueType = MetricDescriptor.ValueType(),
-    unit: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-    metadata: MetricDescriptor.MetricDescriptorMetadata? = nil,
-    launchStage: LaunchStage = LaunchStage(),
-    monitoredResourceTypes: [Swift.String] = [],
-  ) {
-    self.name = name
-    self.type = type
-    self.labels = labels
-    self.metricKind = metricKind
-    self.valueType = valueType
-    self.unit = unit
-    self.description = description
-    self.displayName = displayName
-    self.metadata = metadata
-    self.launchStage = launchStage
-    self.monitoredResourceTypes = monitoredResourceTypes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MetricDescriptor().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Additional annotations that can be used to guide the usage of a metric.
@@ -218,35 +207,37 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// instead.
     ///
     /// [google.api.MetricDescriptor.launch_stage]: <doc:MetricDescriptor/launchStage>
-    public var launchStage: LaunchStage
+    public var launchStage: LaunchStage = LaunchStage()
 
     /// The sampling period of metric data points. For metrics which are written
     /// periodically, consecutive data points are stored at this time interval,
     /// excluding data loss due to errors. Metrics with a higher granularity have
     /// a smaller sampling period.
-    public var samplePeriod: GoogleCloudWkt.Duration?
+    public var samplePeriod: GoogleCloudWkt.Duration? = nil
 
     /// The delay of data points caused by ingestion. Data points older than this
     /// age are guaranteed to be ingested and available to be read, excluding
     /// data loss due to errors.
-    public var ingestDelay: GoogleCloudWkt.Duration?
+    public var ingestDelay: GoogleCloudWkt.Duration? = nil
 
     /// The scope of the timeseries data of the metric.
     public var timeSeriesResourceHierarchyLevel:
-      [MetricDescriptor.MetricDescriptorMetadata.TimeSeriesResourceHierarchyLevel]
+      [MetricDescriptor.MetricDescriptorMetadata.TimeSeriesResourceHierarchyLevel] = []
 
     /// Initialize a new instance of `MetricDescriptorMetadata`.
-    public init(
-      launchStage: LaunchStage = LaunchStage(),
-      samplePeriod: GoogleCloudWkt.Duration? = nil,
-      ingestDelay: GoogleCloudWkt.Duration? = nil,
-      timeSeriesResourceHierarchyLevel: [MetricDescriptor.MetricDescriptorMetadata
-        .TimeSeriesResourceHierarchyLevel] = [],
-    ) {
-      self.launchStage = launchStage
-      self.samplePeriod = samplePeriod
-      self.ingestDelay = ingestDelay
-      self.timeSeriesResourceHierarchyLevel = timeSeriesResourceHierarchyLevel
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MetricDescriptorMetadata().with { $0.launchStage = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The resource hierarchy level of the timeseries data of a metric.

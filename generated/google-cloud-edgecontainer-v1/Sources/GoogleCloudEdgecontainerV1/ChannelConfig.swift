@@ -22,13 +22,22 @@ public struct ChannelConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. Default version for this release channel, e.g.: "1.4.0".
-  public var defaultVersion: Swift.String
+  public var defaultVersion: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ChannelConfig`.
-  public init(
-    defaultVersion: Swift.String = Swift.String(),
-  ) {
-    self.defaultVersion = defaultVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ChannelConfig().with { $0.defaultVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

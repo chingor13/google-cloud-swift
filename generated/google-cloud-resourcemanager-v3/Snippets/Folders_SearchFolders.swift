@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Folders) async throws {
   let items = try client.searchFolders(
-    byItem: SearchFoldersRequest(/* set fields */
-    )
+    byItem: SearchFoldersRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

@@ -26,13 +26,22 @@ public struct HorizontalPodAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyP
   /// Whether the Horizontal Pod Autoscaling feature is enabled in the cluster.
   /// When enabled, it ensures that metrics are collected into Stackdriver
   /// Monitoring.
-  public var disabled: Swift.Bool
+  public var disabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `HorizontalPodAutoscaling`.
-  public init(
-    disabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.disabled = disabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HorizontalPodAutoscaling().with { $0.disabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.truncateLog(
-      request: SqlInstancesTruncateLogRequest(/* set fields */
-      )
+      request: SqlInstancesTruncateLogRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

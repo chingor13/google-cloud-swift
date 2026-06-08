@@ -25,13 +25,22 @@
   {
     /// Required. Contains details about the pre-check major version upgrade
     /// operation.
-    public var preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext?
+    public var preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext? = nil
 
     /// Initialize a new instance of `InstancesPreCheckMajorVersionUpgradeRequest`.
-    public init(
-      preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext? = nil,
-    ) {
-      self.preCheckMajorVersionUpgradeContext = preCheckMajorVersionUpgradeContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesPreCheckMajorVersionUpgradeRequest().with { $0.preCheckMajorVersionUpgradeContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

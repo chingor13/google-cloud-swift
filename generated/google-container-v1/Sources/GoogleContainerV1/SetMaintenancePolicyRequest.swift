@@ -23,38 +23,39 @@ public struct SetMaintenancePolicyRequest: Codable, Equatable, GoogleCloudWkt._A
 {
   /// Required. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Required. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Required. The name of the cluster to update.
-  public var clusterId: Swift.String
+  public var clusterId: Swift.String = Swift.String()
 
   /// Required. The maintenance policy to be set for the cluster. An empty field
   /// clears the existing maintenance policy.
-  public var maintenancePolicy: MaintenancePolicy?
+  public var maintenancePolicy: MaintenancePolicy? = nil
 
   /// The name (project, location, cluster name) of the cluster to set
   /// maintenance policy.
   /// Specified in the format `projects/*/locations/*/clusters/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SetMaintenancePolicyRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    clusterId: Swift.String = Swift.String(),
-    maintenancePolicy: MaintenancePolicy? = nil,
-    name: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.clusterId = clusterId
-    self.maintenancePolicy = maintenancePolicy
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SetMaintenancePolicyRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -46,58 +46,53 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
   /// datetime without a year.
-  public var year: Swift.Int32
+  public var year: Swift.Int32 = Swift.Int32()
 
   /// Optional. Month of year. Must be from 1 to 12, or 0 if specifying a
   /// datetime without a month.
-  public var month: Swift.Int32
+  public var month: Swift.Int32 = Swift.Int32()
 
   /// Optional. Day of month. Must be from 1 to 31 and valid for the year and
   /// month, or 0 if specifying a datetime without a day.
-  public var day: Swift.Int32
+  public var day: Swift.Int32 = Swift.Int32()
 
   /// Optional. Hours of day in 24 hour format. Should be from 0 to 23, defaults
   /// to 0 (midnight). An API may choose to allow the value "24:00:00" for
   /// scenarios like business closing time.
-  public var hours: Swift.Int32
+  public var hours: Swift.Int32 = Swift.Int32()
 
   /// Optional. Minutes of hour of day. Must be from 0 to 59, defaults to 0.
-  public var minutes: Swift.Int32
+  public var minutes: Swift.Int32 = Swift.Int32()
 
   /// Optional. Seconds of minutes of the time. Must normally be from 0 to 59,
   /// defaults to 0. An API may allow the value 60 if it allows leap-seconds.
-  public var seconds: Swift.Int32
+  public var seconds: Swift.Int32 = Swift.Int32()
 
   /// Optional. Fractions of seconds in nanoseconds. Must be from 0 to
   /// 999,999,999, defaults to 0.
-  public var nanos: Swift.Int32
+  public var nanos: Swift.Int32 = Swift.Int32()
 
   /// Optional. Specifies either the UTC offset or the time zone of the DateTime.
   /// Choose carefully between them, considering that time zone data may change
   /// in the future (for example, a country modifies their DST start/end dates,
   /// and future DateTimes in the affected range had already been stored).
   /// If omitted, the DateTime is considered to be in local time.
-  public var timeOffset: OneOf_TimeOffset?
+  public var timeOffset: OneOf_TimeOffset? = nil
 
   /// Initialize a new instance of `DateTime`.
-  public init(
-    year: Swift.Int32 = Swift.Int32(),
-    month: Swift.Int32 = Swift.Int32(),
-    day: Swift.Int32 = Swift.Int32(),
-    hours: Swift.Int32 = Swift.Int32(),
-    minutes: Swift.Int32 = Swift.Int32(),
-    seconds: Swift.Int32 = Swift.Int32(),
-    nanos: Swift.Int32 = Swift.Int32(),
-    timeOffset: OneOf_TimeOffset? = nil,
-  ) {
-    self.year = year
-    self.month = month
-    self.day = day
-    self.hours = hours
-    self.minutes = minutes
-    self.seconds = seconds
-    self.nanos = nanos
-    self.timeOffset = timeOffset
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DateTime().with { $0.year = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

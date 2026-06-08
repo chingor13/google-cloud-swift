@@ -21,43 +21,40 @@ public struct Type_: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The fully qualified message name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The list of fields.
-  public var fields: [Field]
+  public var fields: [Field] = []
 
   /// The list of types appearing in `oneof` definitions in this type.
-  public var oneofs: [Swift.String]
+  public var oneofs: [Swift.String] = []
 
   /// The protocol buffer options.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// The source context.
-  public var sourceContext: SourceContext?
+  public var sourceContext: SourceContext? = nil
 
   /// The source syntax.
-  public var syntax: Syntax
+  public var syntax: Syntax = Syntax()
 
   /// The source edition string, only valid when syntax is SYNTAX_EDITIONS.
-  public var edition: Swift.String
+  public var edition: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Type_`.
-  public init(
-    name: Swift.String = Swift.String(),
-    fields: [Field] = [],
-    oneofs: [Swift.String] = [],
-    options: [Option] = [],
-    sourceContext: SourceContext? = nil,
-    syntax: Syntax = Syntax(),
-    edition: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.fields = fields
-    self.oneofs = oneofs
-    self.options = options
-    self.sourceContext = sourceContext
-    self.syntax = syntax
-    self.edition = edition
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Type_().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Type" }

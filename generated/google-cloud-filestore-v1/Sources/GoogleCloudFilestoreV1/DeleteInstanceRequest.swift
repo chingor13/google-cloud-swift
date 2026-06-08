@@ -23,19 +23,26 @@ public struct DeleteInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The instance resource name, in the format
   /// `projects/{project_id}/locations/{location}/instances/{instance_id}`
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// If set to true, all snapshots of the instance will also be deleted.
   /// (Otherwise, the request will only work if the instance has no snapshots.)
-  public var force: Swift.Bool
+  public var force: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `DeleteInstanceRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    force: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.force = force
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteInstanceRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

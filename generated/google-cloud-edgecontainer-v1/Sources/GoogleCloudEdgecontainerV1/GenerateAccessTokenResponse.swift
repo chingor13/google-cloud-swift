@@ -22,18 +22,25 @@ public struct GenerateAccessTokenResponse: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Output only. Access token to authenticate to k8s api-server.
-  public var accessToken: Swift.String
+  public var accessToken: Swift.String = Swift.String()
 
   /// Output only. Timestamp at which the token will expire.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `GenerateAccessTokenResponse`.
-  public init(
-    accessToken: Swift.String = Swift.String(),
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.accessToken = accessToken
-    self.expireTime = expireTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateAccessTokenResponse().with { $0.accessToken = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

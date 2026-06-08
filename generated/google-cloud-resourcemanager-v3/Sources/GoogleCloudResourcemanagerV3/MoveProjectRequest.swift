@@ -26,18 +26,25 @@ public struct MoveProjectRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Required. The name of the project to move.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. The new parent to move the Project under.
-  public var destinationParent: Swift.String
+  public var destinationParent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `MoveProjectRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    destinationParent: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.destinationParent = destinationParent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MoveProjectRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

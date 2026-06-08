@@ -23,13 +23,22 @@ public struct CreateFolderRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Required. The folder being created, only the display name and parent will
   /// be consulted. All other fields will be ignored.
-  public var folder: Folder?
+  public var folder: Folder? = nil
 
   /// Initialize a new instance of `CreateFolderRequest`.
-  public init(
-    folder: Folder? = nil,
-  ) {
-    self.folder = folder
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateFolderRequest().with { $0.folder = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

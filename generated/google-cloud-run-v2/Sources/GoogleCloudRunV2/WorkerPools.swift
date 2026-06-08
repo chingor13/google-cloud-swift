@@ -324,7 +324,8 @@ extension Clients {
       let rawOp = try await self.createWorkerPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<WorkerPool>.State in
-        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        let op = try await self.getOperation(
+          request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
       return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
@@ -408,7 +409,8 @@ extension Clients {
       let rawOp = try await self.updateWorkerPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<WorkerPool>.State in
-        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        let op = try await self.getOperation(
+          request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
       return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
@@ -466,7 +468,8 @@ extension Clients {
       let rawOp = try await self.deleteWorkerPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<WorkerPool>.State in
-        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        let op = try await self.getOperation(
+          request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
       return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)

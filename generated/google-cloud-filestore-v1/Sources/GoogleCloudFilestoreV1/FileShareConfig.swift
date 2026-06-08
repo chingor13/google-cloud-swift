@@ -25,31 +25,34 @@ public struct FileShareConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// basic service tier and 1-63 characters for all other service tiers.
   /// Must use lowercase letters, numbers, or underscores `[a-z0-9_]`. Must
   /// start with a letter. Immutable.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// File share capacity in gigabytes (GB).
   /// Filestore defines 1 GB as 1024^3 bytes.
-  public var capacityGb: Swift.Int64
+  public var capacityGb: Swift.Int64 = Swift.Int64()
 
   /// Nfs Export Options.
   /// There is a limit of 10 export options per file share.
-  public var nfsExportOptions: [NfsExportOptions]
+  public var nfsExportOptions: [NfsExportOptions] = []
 
   /// The source that this file share has been restored from. Empty if the file
   /// share is created from scratch.
-  public var source: OneOf_Source?
+  public var source: OneOf_Source? = nil
 
   /// Initialize a new instance of `FileShareConfig`.
-  public init(
-    name: Swift.String = Swift.String(),
-    capacityGb: Swift.Int64 = Swift.Int64(),
-    nfsExportOptions: [NfsExportOptions] = [],
-    source: OneOf_Source? = nil,
-  ) {
-    self.name = name
-    self.capacityGb = capacityGb
-    self.nfsExportOptions = nfsExportOptions
-    self.source = source
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = FileShareConfig().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

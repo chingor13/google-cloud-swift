@@ -22,28 +22,33 @@ public struct VolumeMount: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. This must match the Name of a Volume.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. Path within the container at which the volume should be mounted.
   /// Must not contain ':'. For Cloud SQL volumes, it can be left empty, or must
   /// otherwise be `/cloudsql`. All instances defined in the Volume will be
   /// available as `/cloudsql/[instance]`. For more information on Cloud SQL
   /// volumes, visit https://cloud.google.com/sql/docs/mysql/connect-run
-  public var mountPath: Swift.String
+  public var mountPath: Swift.String = Swift.String()
 
   /// Optional. Path within the volume from which the container's volume should
   /// be mounted. Defaults to "" (volume's root).
-  public var subPath: Swift.String
+  public var subPath: Swift.String = Swift.String()
 
   /// Initialize a new instance of `VolumeMount`.
-  public init(
-    name: Swift.String = Swift.String(),
-    mountPath: Swift.String = Swift.String(),
-    subPath: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.mountPath = mountPath
-    self.subPath = subPath
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = VolumeMount().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

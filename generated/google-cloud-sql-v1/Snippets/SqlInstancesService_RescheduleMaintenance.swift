@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.rescheduleMaintenance(
-      request: SqlInstancesRescheduleMaintenanceRequest(/* set fields */
-      )
+      request: SqlInstancesRescheduleMaintenanceRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

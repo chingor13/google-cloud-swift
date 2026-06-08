@@ -23,13 +23,22 @@
     Sendable
   {
     /// Generated cert
-    public var ephemeralCert: SslCert?
+    public var ephemeralCert: SslCert? = nil
 
     /// Initialize a new instance of `GenerateEphemeralCertResponse`.
-    public init(
-      ephemeralCert: SslCert? = nil,
-    ) {
-      self.ephemeralCert = ephemeralCert
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = GenerateEphemeralCertResponse().with { $0.ephemeralCert = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

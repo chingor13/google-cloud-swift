@@ -31,18 +31,25 @@ public struct UpdateProjectRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Required. The new definition of the project.
-  public var project: Project?
+  public var project: Project? = nil
 
   /// Optional. An update mask to selectively update fields.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `UpdateProjectRequest`.
-  public init(
-    project: Project? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.project = project
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateProjectRequest().with { $0.project = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

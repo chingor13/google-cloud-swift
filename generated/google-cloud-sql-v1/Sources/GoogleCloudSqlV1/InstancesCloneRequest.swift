@@ -23,13 +23,22 @@
     Sendable
   {
     /// Required. Contains details about the clone operation.
-    public var cloneContext: CloneContext?
+    public var cloneContext: CloneContext? = nil
 
     /// Initialize a new instance of `InstancesCloneRequest`.
-    public init(
-      cloneContext: CloneContext? = nil,
-    ) {
-      self.cloneContext = cloneContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesCloneRequest().with { $0.cloneContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let items = try client.listUsableSubnetworks(
-    byItem: ListUsableSubnetworksRequest(/* set fields */
-    )
+    byItem: ListUsableSubnetworksRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

@@ -30,21 +30,28 @@ public struct Interval: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If specified, a Timestamp matching this interval will have to be the same
   /// or after the start.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Optional. Exclusive end of the interval.
   ///
   /// If specified, a Timestamp matching this interval will have to be before the
   /// end.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `Interval`.
-  public init(
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.startTime = startTime
-    self.endTime = endTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Interval().with { $0.startTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Interval" }

@@ -22,7 +22,7 @@ public struct PhpSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// The package name to use in Php. Clobbers the php_namespace option
   /// set in the protobuf. This should be used **only** by APIs
@@ -36,15 +36,22 @@ public struct PhpSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///       library_settings:
   ///         php_settings:
   ///           library_package: Google\Cloud\PubSub\V1
-  public var libraryPackage: Swift.String
+  public var libraryPackage: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PhpSettings`.
-  public init(
-    common: CommonLanguageSettings? = nil,
-    libraryPackage: Swift.String = Swift.String(),
-  ) {
-    self.common = common
-    self.libraryPackage = libraryPackage
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PhpSettings().with { $0.common = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.PhpSettings" }

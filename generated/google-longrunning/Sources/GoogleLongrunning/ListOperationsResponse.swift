@@ -27,26 +27,31 @@ public struct ListOperationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// A list of operations that matches the specified filter in the request.
-  public var operations: [Operation]
+  public var operations: [Operation] = []
 
   /// The standard List next-page token.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Unordered list. Unreachable resources. Populated when the request sets
   /// `ListOperationsRequest.return_partial_success` and reads across
   /// collections e.g. when attempting to list all resources across all supported
   /// locations.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListOperationsResponse`.
-  public init(
-    operations: [Operation] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.operations = operations
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListOperationsResponse().with { $0.operations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

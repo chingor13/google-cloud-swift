@@ -22,53 +22,52 @@ public struct DotnetSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// Map from original service names to renamed versions.
   /// This is used when the default generated types
   /// would cause a naming conflict. (Neither name is
   /// fully-qualified.)
   /// Example: Subscriber to SubscriberServiceApi.
-  public var renamedServices: [Swift.String: Swift.String]
+  public var renamedServices: [Swift.String: Swift.String] = [:]
 
   /// Map from full resource types to the effective short name
   /// for the resource. This is used when otherwise resource
   /// named from different services would cause naming collisions.
   /// Example entry:
   /// "datalabeling.googleapis.com/Dataset": "DataLabelingDataset"
-  public var renamedResources: [Swift.String: Swift.String]
+  public var renamedResources: [Swift.String: Swift.String] = [:]
 
   /// List of full resource types to ignore during generation.
   /// This is typically used for API-specific Location resources,
   /// which should be handled by the generator as if they were actually
   /// the common Location resources.
   /// Example entry: "documentai.googleapis.com/Location"
-  public var ignoredResources: [Swift.String]
+  public var ignoredResources: [Swift.String] = []
 
   /// Namespaces which must be aliased in snippets due to
   /// a known (but non-generator-predictable) naming collision
-  public var forcedNamespaceAliases: [Swift.String]
+  public var forcedNamespaceAliases: [Swift.String] = []
 
   /// Method signatures (in the form "service.method(signature)")
   /// which are provided separately, so shouldn't be generated.
   /// Snippets *calling* these methods are still generated, however.
-  public var handwrittenSignatures: [Swift.String]
+  public var handwrittenSignatures: [Swift.String] = []
 
   /// Initialize a new instance of `DotnetSettings`.
-  public init(
-    common: CommonLanguageSettings? = nil,
-    renamedServices: [Swift.String: Swift.String] = [:],
-    renamedResources: [Swift.String: Swift.String] = [:],
-    ignoredResources: [Swift.String] = [],
-    forcedNamespaceAliases: [Swift.String] = [],
-    handwrittenSignatures: [Swift.String] = [],
-  ) {
-    self.common = common
-    self.renamedServices = renamedServices
-    self.renamedResources = renamedResources
-    self.ignoredResources = ignoredResources
-    self.forcedNamespaceAliases = forcedNamespaceAliases
-    self.handwrittenSignatures = handwrittenSignatures
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DotnetSettings().with { $0.common = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.DotnetSettings" }

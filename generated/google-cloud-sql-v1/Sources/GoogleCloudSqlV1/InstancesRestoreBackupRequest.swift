@@ -23,45 +23,46 @@
     Sendable
   {
     /// Parameters required to perform the restore backup operation.
-    public var restoreBackupContext: RestoreBackupContext?
+    public var restoreBackupContext: RestoreBackupContext? = nil
 
     /// The name of the backup that's used to restore a Cloud SQL instance:
     /// Format:  projects/{project-id}/backups/{backup-uid}. Only one of
     /// restore_backup_context, backup, backupdr_backup can be passed to the input.
-    public var backup: Swift.String
+    public var backup: Swift.String = Swift.String()
 
     /// The name of the backup that's used to restore a Cloud SQL instance:
     /// Format:
     /// "projects/{project-id}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup-uid}".
     /// Only one of restore_backup_context, backup, backupdr_backup can be
     /// passed to the input.
-    public var backupdrBackup: Swift.String
+    public var backupdrBackup: Swift.String = Swift.String()
 
     /// Optional. By using this parameter, Cloud SQL overrides any instance
     /// settings stored in the backup you are restoring from. You can't change the
     /// instance's major database version and you can only increase the disk size.
     /// You can use this field to restore new instances only. This field is not
     /// applicable for restore to existing instances.
-    public var restoreInstanceSettings: DatabaseInstance?
+    public var restoreInstanceSettings: DatabaseInstance? = nil
 
     /// Optional. This field has the same purpose as restore_instance_settings,
     /// changes any instance settings stored in the backup you are restoring from.
     /// With the difference that these fields are cleared in the settings.
-    public var restoreInstanceClearOverridesFieldNames: [Swift.String]
+    public var restoreInstanceClearOverridesFieldNames: [Swift.String] = []
 
     /// Initialize a new instance of `InstancesRestoreBackupRequest`.
-    public init(
-      restoreBackupContext: RestoreBackupContext? = nil,
-      backup: Swift.String = Swift.String(),
-      backupdrBackup: Swift.String = Swift.String(),
-      restoreInstanceSettings: DatabaseInstance? = nil,
-      restoreInstanceClearOverridesFieldNames: [Swift.String] = [],
-    ) {
-      self.restoreBackupContext = restoreBackupContext
-      self.backup = backup
-      self.backupdrBackup = backupdrBackup
-      self.restoreInstanceSettings = restoreInstanceSettings
-      self.restoreInstanceClearOverridesFieldNames = restoreInstanceClearOverridesFieldNames
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesRestoreBackupRequest().with { $0.restoreBackupContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

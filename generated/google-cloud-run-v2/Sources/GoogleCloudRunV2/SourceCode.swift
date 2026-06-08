@@ -22,13 +22,22 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The source type.
-  public var sourceType: OneOf_SourceType?
+  public var sourceType: OneOf_SourceType? = nil
 
   /// Initialize a new instance of `SourceCode`.
-  public init(
-    sourceType: OneOf_SourceType? = nil,
-  ) {
-    self.sourceType = sourceType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SourceCode().with { $0.cloudStorageSource = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -72,23 +81,28 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Required. The Cloud Storage bucket name.
-    public var bucket: Swift.String
+    public var bucket: Swift.String = Swift.String()
 
     /// Required. The Cloud Storage object name.
-    public var object: Swift.String
+    public var object: Swift.String = Swift.String()
 
     /// Optional. The Cloud Storage object generation.
-    public var generation: Swift.Int64
+    public var generation: Swift.Int64 = Swift.Int64()
 
     /// Initialize a new instance of `CloudStorageSource`.
-    public init(
-      bucket: Swift.String = Swift.String(),
-      object: Swift.String = Swift.String(),
-      generation: Swift.Int64 = Swift.Int64(),
-    ) {
-      self.bucket = bucket
-      self.object = object
-      self.generation = generation
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CloudStorageSource().with { $0.bucket = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

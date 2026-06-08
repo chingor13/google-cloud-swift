@@ -24,13 +24,22 @@ public struct WindowsNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// OSVersion specifies the Windows node config to be used on the node.
-  public var osVersion: WindowsNodeConfig.OSVersion
+  public var osVersion: WindowsNodeConfig.OSVersion = WindowsNodeConfig.OSVersion()
 
   /// Initialize a new instance of `WindowsNodeConfig`.
-  public init(
-    osVersion: WindowsNodeConfig.OSVersion = WindowsNodeConfig.OSVersion(),
-  ) {
-    self.osVersion = osVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WindowsNodeConfig().with { $0.osVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible OS version that can be used.

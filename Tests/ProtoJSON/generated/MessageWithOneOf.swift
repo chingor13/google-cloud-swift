@@ -21,25 +21,28 @@ import GoogleCloudWkt
 public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  public var singleString: OneOf_SingleString?
+  public var singleString: OneOf_SingleString? = nil
 
-  public var twoStrings: OneOf_TwoStrings?
+  public var twoStrings: OneOf_TwoStrings? = nil
 
-  public var oneMessage: OneOf_OneMessage?
+  public var oneMessage: OneOf_OneMessage? = nil
 
-  public var mixed: OneOf_Mixed?
+  public var mixed: OneOf_Mixed? = nil
 
   /// Initialize a new instance of `MessageWithOneOf`.
-  public init(
-    singleString: OneOf_SingleString? = nil,
-    twoStrings: OneOf_TwoStrings? = nil,
-    oneMessage: OneOf_OneMessage? = nil,
-    mixed: OneOf_Mixed? = nil,
-  ) {
-    self.singleString = singleString
-    self.twoStrings = twoStrings
-    self.oneMessage = oneMessage
-    self.mixed = mixed
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithOneOf().with { $0.stringContents = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -178,13 +181,22 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public struct Message: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var parent: Swift.String
+    public var parent: Swift.String = Swift.String()
 
     /// Initialize a new instance of `Message`.
-    public init(
-      parent: Swift.String = Swift.String(),
-    ) {
-      self.parent = parent
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Message().with { $0.parent = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

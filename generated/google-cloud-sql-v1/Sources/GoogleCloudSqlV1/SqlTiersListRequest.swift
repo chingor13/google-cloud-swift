@@ -23,13 +23,22 @@
     Sendable
   {
     /// Project ID of the project for which to list tiers.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlTiersListRequest`.
-    public init(
-      project: Swift.String = Swift.String(),
-    ) {
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlTiersListRequest().with { $0.project = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

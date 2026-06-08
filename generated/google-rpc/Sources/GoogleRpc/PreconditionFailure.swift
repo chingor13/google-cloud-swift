@@ -26,13 +26,22 @@ public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Describes all precondition violations.
-  public var violations: [PreconditionFailure.Violation]
+  public var violations: [PreconditionFailure.Violation] = []
 
   /// Initialize a new instance of `PreconditionFailure`.
-  public init(
-    violations: [PreconditionFailure.Violation] = [],
-  ) {
-    self.violations = violations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PreconditionFailure().with { $0.violations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// A message type used to describe a single precondition failure.
@@ -42,28 +51,33 @@ public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// The type of PreconditionFailure. We recommend using a service-specific
     /// enum type to define the supported precondition violation subjects. For
     /// example, "TOS" for "Terms of Service violation".
-    public var type: Swift.String
+    public var type: Swift.String = Swift.String()
 
     /// The subject, relative to the type, that failed.
     /// For example, "google.com/cloud" relative to the "TOS" type would indicate
     /// which terms of service is being referenced.
-    public var subject: Swift.String
+    public var subject: Swift.String = Swift.String()
 
     /// A description of how the precondition failed. Developers can use this
     /// description to understand how to fix the failure.
     ///
     /// For example: "Terms of service not accepted".
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// Initialize a new instance of `Violation`.
-    public init(
-      type: Swift.String = Swift.String(),
-      subject: Swift.String = Swift.String(),
-      description: Swift.String = Swift.String(),
-    ) {
-      self.type = type
-      self.subject = subject
-      self.description = description
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Violation().with { $0.type = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -22,13 +22,22 @@ public struct NodePoolDefaults: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Subset of NodeConfig message that has defaults.
-  public var nodeConfigDefaults: NodeConfigDefaults?
+  public var nodeConfigDefaults: NodeConfigDefaults? = nil
 
   /// Initialize a new instance of `NodePoolDefaults`.
-  public init(
-    nodeConfigDefaults: NodeConfigDefaults? = nil,
-  ) {
-    self.nodeConfigDefaults = nodeConfigDefaults
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePoolDefaults().with { $0.nodeConfigDefaults = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

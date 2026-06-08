@@ -22,13 +22,22 @@ public struct NetworkTierConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Network tier configuration.
-  public var networkTier: NetworkTierConfig.NetworkTier
+  public var networkTier: NetworkTierConfig.NetworkTier = NetworkTierConfig.NetworkTier()
 
   /// Initialize a new instance of `NetworkTierConfig`.
-  public init(
-    networkTier: NetworkTierConfig.NetworkTier = NetworkTierConfig.NetworkTier(),
-  ) {
-    self.networkTier = networkTier
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkTierConfig().with { $0.networkTier = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Network tier configuration.

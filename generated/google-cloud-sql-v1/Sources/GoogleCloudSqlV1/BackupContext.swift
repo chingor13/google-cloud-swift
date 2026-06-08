@@ -23,24 +23,29 @@
     Sendable
   {
     /// The identifier of the backup.
-    public var backupId: Swift.Int64
+    public var backupId: Swift.Int64 = Swift.Int64()
 
     /// This is always `sql#backupContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The name of the backup.
     /// Format: projects/{project}/backups/{backup}
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Initialize a new instance of `BackupContext`.
-    public init(
-      backupId: Swift.Int64 = Swift.Int64(),
-      kind: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-    ) {
-      self.backupId = backupId
-      self.kind = kind
-      self.name = name
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BackupContext().with { $0.backupId = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -23,13 +23,22 @@
     Sendable
   {
     /// Contains details about the demoteMaster operation.
-    public var demoteMasterContext: DemoteMasterContext?
+    public var demoteMasterContext: DemoteMasterContext? = nil
 
     /// Initialize a new instance of `InstancesDemoteMasterRequest`.
-    public init(
-      demoteMasterContext: DemoteMasterContext? = nil,
-    ) {
-      self.demoteMasterContext = demoteMasterContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesDemoteMasterRequest().with { $0.demoteMasterContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

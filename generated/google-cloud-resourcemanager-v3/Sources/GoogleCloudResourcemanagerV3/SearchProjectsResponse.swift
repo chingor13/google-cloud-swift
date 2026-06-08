@@ -33,7 +33,7 @@ public struct SearchProjectsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// The list of Projects that matched the list filter query. This list can
   /// be paginated.
-  public var projects: [Project]
+  public var projects: [Project] = []
 
   /// Pagination token.
   ///
@@ -46,15 +46,22 @@ public struct SearchProjectsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// the list returned is the last page in the result set.
   ///
   /// Pagination tokens have a limited lifetime.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SearchProjectsResponse`.
-  public init(
-    projects: [Project] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.projects = projects
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SearchProjectsResponse().with { $0.projects = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

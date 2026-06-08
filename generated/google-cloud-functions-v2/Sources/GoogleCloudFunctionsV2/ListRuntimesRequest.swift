@@ -23,19 +23,26 @@ public struct ListRuntimesRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Required. The project and location from which the runtimes should be
   /// listed, specified in the format `projects/*/locations/*`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The filter for Runtimes that match the filter expression,
   /// following the syntax outlined in https://google.aip.dev/160.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListRuntimesRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.filter = filter
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListRuntimesRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

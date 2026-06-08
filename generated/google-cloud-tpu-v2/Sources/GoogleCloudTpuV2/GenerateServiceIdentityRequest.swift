@@ -25,13 +25,22 @@ public struct GenerateServiceIdentityRequest: Codable, Equatable, GoogleCloudWkt
   Sendable
 {
   /// Required. The parent resource name.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GenerateServiceIdentityRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateServiceIdentityRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

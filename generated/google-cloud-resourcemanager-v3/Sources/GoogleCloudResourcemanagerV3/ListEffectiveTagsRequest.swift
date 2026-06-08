@@ -24,26 +24,31 @@ public struct ListEffectiveTagsRequest: Codable, Equatable, GoogleCloudWkt._AnyP
   /// Required. The full resource name of a resource for which you want to list
   /// the effective tags. E.g.
   /// "//cloudresourcemanager.googleapis.com/projects/123"
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The maximum number of effective tags to return in the response.
   /// The server allows a maximum of 300 effective tags to return in a single
   /// page. If unspecified, the server will use 100 as the default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to
   /// `ListEffectiveTags` that indicates from where this listing should continue.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListEffectiveTagsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListEffectiveTagsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

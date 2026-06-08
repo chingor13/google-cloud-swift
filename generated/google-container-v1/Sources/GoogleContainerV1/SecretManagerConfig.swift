@@ -22,18 +22,25 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Enable/Disable Secret Manager Config.
-  public var enabled: Swift.Bool?
+  public var enabled: Swift.Bool? = nil
 
   /// Rotation config for secret manager.
-  public var rotationConfig: SecretManagerConfig.RotationConfig?
+  public var rotationConfig: SecretManagerConfig.RotationConfig? = nil
 
   /// Initialize a new instance of `SecretManagerConfig`.
-  public init(
-    enabled: Swift.Bool? = nil,
-    rotationConfig: SecretManagerConfig.RotationConfig? = nil,
-  ) {
-    self.enabled = enabled
-    self.rotationConfig = rotationConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecretManagerConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// RotationConfig is config for secret manager auto rotation.
@@ -41,19 +48,26 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Whether the rotation is enabled.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// The interval between two consecutive rotations. Default rotation interval
     /// is 2 minutes.
-    public var rotationInterval: GoogleCloudWkt.Duration?
+    public var rotationInterval: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `RotationConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      rotationInterval: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.enabled = enabled
-      self.rotationInterval = rotationInterval
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RotationConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

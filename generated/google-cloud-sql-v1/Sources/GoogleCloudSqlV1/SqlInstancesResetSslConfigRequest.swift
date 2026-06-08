@@ -23,24 +23,29 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Optional. Reset SSL mode to use.
-    public var mode: SqlInstancesResetSslConfigRequest.ResetSslMode
+    public var mode: SqlInstancesResetSslConfigRequest.ResetSslMode =
+      SqlInstancesResetSslConfigRequest.ResetSslMode()
 
     /// Initialize a new instance of `SqlInstancesResetSslConfigRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      mode: SqlInstancesResetSslConfigRequest.ResetSslMode =
-        SqlInstancesResetSslConfigRequest.ResetSslMode(),
-    ) {
-      self.instance = instance
-      self.project = project
-      self.mode = mode
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesResetSslConfigRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Reset SSL mode to selectively refresh the SSL materials.

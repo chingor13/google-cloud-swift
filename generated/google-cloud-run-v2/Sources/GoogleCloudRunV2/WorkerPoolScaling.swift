@@ -22,13 +22,22 @@ public struct WorkerPoolScaling: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Optional. The total number of instances in manual scaling mode.
-  public var manualInstanceCount: Swift.Int32?
+  public var manualInstanceCount: Swift.Int32? = nil
 
   /// Initialize a new instance of `WorkerPoolScaling`.
-  public init(
-    manualInstanceCount: Swift.Int32? = nil,
-  ) {
-    self.manualInstanceCount = manualInstanceCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkerPoolScaling().with { $0.manualInstanceCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

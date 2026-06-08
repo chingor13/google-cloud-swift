@@ -57,20 +57,20 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// service, such as `calendar.googleapis.com`. The service name
   /// typically goes through DNS verification to make sure the owner
   /// of the service also owns the DNS name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The product title for this service, it is the name displayed in Google
   /// Cloud Console.
-  public var title: Swift.String
+  public var title: Swift.String = Swift.String()
 
   /// The Google project that owns this service.
-  public var producerProjectId: Swift.String
+  public var producerProjectId: Swift.String = Swift.String()
 
   /// A unique ID for a specific instance of this message, typically assigned
   /// by the client for tracking purpose. Must be no longer than 63 characters
   /// and only lower case letters, digits, '.', '_' and '-' are allowed. If
   /// empty, the server may choose to generate one instead.
-  public var id: Swift.String
+  public var id: Swift.String = Swift.String()
 
   /// A list of API interfaces exported by this service. Only the `name` field
   /// of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by
@@ -79,7 +79,7 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// interface here which cannot be resolved against the associated IDL files.
   ///
   /// [google.protobuf.Api]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWkt.Api
-  public var apis: [GoogleCloudWkt.Api]
+  public var apis: [GoogleCloudWkt.Api] = []
 
   /// A list of all proto message types included in this API service.
   /// Types referenced directly or indirectly by the `apis` are automatically
@@ -89,7 +89,7 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   ///     types:
   ///     - name: google.protobuf.Int32
-  public var types: [GoogleCloudWkt.Type_]
+  public var types: [GoogleCloudWkt.Type_] = []
 
   /// A list of all enum types included in this API service.  Enums referenced
   /// directly or indirectly by the `apis` are automatically included.  Enums
@@ -98,128 +98,87 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   ///     enums:
   ///     - name: google.someapi.v1.SomeEnum
-  public var enums: [GoogleCloudWkt.Enum]
+  public var enums: [GoogleCloudWkt.Enum] = []
 
   /// Additional API documentation.
-  public var documentation: Documentation?
+  public var documentation: Documentation? = nil
 
   /// API backend configuration.
-  public var backend: Backend?
+  public var backend: Backend? = nil
 
   /// HTTP configuration.
-  public var http: Http?
+  public var http: Http? = nil
 
   /// Quota configuration.
-  public var quota: Quota?
+  public var quota: Quota? = nil
 
   /// Auth configuration.
-  public var authentication: Authentication?
+  public var authentication: Authentication? = nil
 
   /// Context configuration.
-  public var context: Context?
+  public var context: Context? = nil
 
   /// Configuration controlling usage of this service.
-  public var usage: Usage?
+  public var usage: Usage? = nil
 
   /// Configuration for network endpoints.  If this is empty, then an endpoint
   /// with the same name as the service is automatically generated to service all
   /// defined APIs.
-  public var endpoints: [Endpoint]
+  public var endpoints: [Endpoint] = []
 
   /// Configuration for the service control plane.
-  public var control: Control?
+  public var control: Control? = nil
 
   /// Defines the logs used by this service.
-  public var logs: [LogDescriptor]
+  public var logs: [LogDescriptor] = []
 
   /// Defines the metrics used by this service.
-  public var metrics: [MetricDescriptor]
+  public var metrics: [MetricDescriptor] = []
 
   /// Defines the monitored resources used by this service. This is required
   /// by the `Service.monitoring` and `Service.logging` configurations.
-  public var monitoredResources: [MonitoredResourceDescriptor]
+  public var monitoredResources: [MonitoredResourceDescriptor] = []
 
   /// Billing configuration.
-  public var billing: Billing?
+  public var billing: Billing? = nil
 
   /// Logging configuration.
-  public var logging: Logging?
+  public var logging: Logging? = nil
 
   /// Monitoring configuration.
-  public var monitoring: Monitoring?
+  public var monitoring: Monitoring? = nil
 
   /// System parameter configuration.
-  public var systemParameters: SystemParameters?
+  public var systemParameters: SystemParameters? = nil
 
   /// Output only. The source information for this configuration if available.
-  public var sourceInfo: SourceInfo?
+  public var sourceInfo: SourceInfo? = nil
 
   /// Settings for [Google Cloud Client
   /// libraries](https://cloud.google.com/apis/docs/cloud-client-libraries)
   /// generated from APIs defined as protocol buffers.
-  public var publishing: Publishing?
+  public var publishing: Publishing? = nil
 
   /// Obsolete. Do not use.
   ///
   /// This field has no semantic meaning. The service config compiler always
   /// sets this field to `3`.
-  public var configVersion: GoogleCloudWkt.UInt32Value?
+  public var configVersion: GoogleCloudWkt.UInt32Value? = nil
 
   /// Initialize a new instance of `Service`.
-  public init(
-    name: Swift.String = Swift.String(),
-    title: Swift.String = Swift.String(),
-    producerProjectId: Swift.String = Swift.String(),
-    id: Swift.String = Swift.String(),
-    apis: [GoogleCloudWkt.Api] = [],
-    types: [GoogleCloudWkt.Type_] = [],
-    enums: [GoogleCloudWkt.Enum] = [],
-    documentation: Documentation? = nil,
-    backend: Backend? = nil,
-    http: Http? = nil,
-    quota: Quota? = nil,
-    authentication: Authentication? = nil,
-    context: Context? = nil,
-    usage: Usage? = nil,
-    endpoints: [Endpoint] = [],
-    control: Control? = nil,
-    logs: [LogDescriptor] = [],
-    metrics: [MetricDescriptor] = [],
-    monitoredResources: [MonitoredResourceDescriptor] = [],
-    billing: Billing? = nil,
-    logging: Logging? = nil,
-    monitoring: Monitoring? = nil,
-    systemParameters: SystemParameters? = nil,
-    sourceInfo: SourceInfo? = nil,
-    publishing: Publishing? = nil,
-    configVersion: GoogleCloudWkt.UInt32Value? = nil,
-  ) {
-    self.name = name
-    self.title = title
-    self.producerProjectId = producerProjectId
-    self.id = id
-    self.apis = apis
-    self.types = types
-    self.enums = enums
-    self.documentation = documentation
-    self.backend = backend
-    self.http = http
-    self.quota = quota
-    self.authentication = authentication
-    self.context = context
-    self.usage = usage
-    self.endpoints = endpoints
-    self.control = control
-    self.logs = logs
-    self.metrics = metrics
-    self.monitoredResources = monitoredResources
-    self.billing = billing
-    self.logging = logging
-    self.monitoring = monitoring
-    self.systemParameters = systemParameters
-    self.sourceInfo = sourceInfo
-    self.publishing = publishing
-    self.configVersion = configVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Service().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Service" }

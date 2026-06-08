@@ -22,13 +22,22 @@ public struct SandboxConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Type of the sandbox to use for the node.
-  public var type: SandboxConfig.Type_
+  public var type: SandboxConfig.Type_ = SandboxConfig.Type_()
 
   /// Initialize a new instance of `SandboxConfig`.
-  public init(
-    type: SandboxConfig.Type_ = SandboxConfig.Type_(),
-  ) {
-    self.type = type
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SandboxConfig().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible types of sandboxes.

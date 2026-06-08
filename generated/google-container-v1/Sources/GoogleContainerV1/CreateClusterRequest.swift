@@ -24,33 +24,36 @@ public struct CreateClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the parent field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the parent field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Required. A [cluster
   /// resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.locations.clusters)
-  public var cluster: Cluster?
+  public var cluster: Cluster? = nil
 
   /// The parent (project and location) where the cluster will be created.
   /// Specified in the format `projects/*/locations/*`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateClusterRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    cluster: Cluster? = nil,
-    parent: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.cluster = cluster
-    self.parent = parent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateClusterRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

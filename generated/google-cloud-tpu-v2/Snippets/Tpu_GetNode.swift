@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some Tpu, projectId: String, locationId: String, nodeId: String) async throws {
   let response = try await client.getNode(
-    request: GetNodeRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/nodes/\(nodeId)",
-    )
+    request: GetNodeRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/nodes/\(nodeId)" }
   )
   print("Success: \(response)")
 }

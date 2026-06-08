@@ -23,27 +23,32 @@ public struct CreateFunctionRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The project and location in which the function should be created,
   /// specified in the format `projects/*/locations/*`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. Function to be created.
-  public var function: Function?
+  public var function: Function? = nil
 
   /// The ID to use for the function, which will become the final component of
   /// the function's resource name.
   ///
   /// This value should be 4-63 characters, and valid characters
   /// are /[a-z][0-9]-/.
-  public var functionId: Swift.String
+  public var functionId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateFunctionRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    function: Function? = nil,
-    functionId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.function = function
-    self.functionId = functionId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateFunctionRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

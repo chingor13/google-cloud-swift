@@ -25,13 +25,22 @@ public struct ServiceMesh: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The Mesh resource name. Format:
   /// `projects/{project}/locations/global/meshes/{mesh}`, where `{project}` can
   /// be project id or number.
-  public var mesh: Swift.String
+  public var mesh: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ServiceMesh`.
-  public init(
-    mesh: Swift.String = Swift.String(),
-  ) {
-    self.mesh = mesh
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServiceMesh().with { $0.mesh = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

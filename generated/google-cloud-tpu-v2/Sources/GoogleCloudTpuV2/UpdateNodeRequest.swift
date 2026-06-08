@@ -26,18 +26,25 @@ public struct UpdateNodeRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Required. Mask of fields from [Node][Tpu.Node] to update.
   /// Supported fields: [description, tags, labels, metadata,
   /// network_config.enable_external_ips].
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Required. The node. Only fields specified in update_mask are updated.
-  public var node: Node?
+  public var node: Node? = nil
 
   /// Initialize a new instance of `UpdateNodeRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    node: Node? = nil,
-  ) {
-    self.updateMask = updateMask
-    self.node = node
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateNodeRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

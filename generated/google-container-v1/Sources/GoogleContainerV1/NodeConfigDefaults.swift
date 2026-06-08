@@ -22,30 +22,33 @@ public struct NodeConfigDefaults: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// GCFS (Google Container File System, also known as Riptide) options.
-  public var gcfsConfig: GcfsConfig?
+  public var gcfsConfig: GcfsConfig? = nil
 
   /// Logging configuration for node pools.
-  public var loggingConfig: NodePoolLoggingConfig?
+  public var loggingConfig: NodePoolLoggingConfig? = nil
 
   /// Parameters for containerd customization.
-  public var containerdConfig: ContainerdConfig?
+  public var containerdConfig: ContainerdConfig? = nil
 
   /// NodeKubeletConfig controls the defaults for new node-pools.
   ///
   /// Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
-  public var nodeKubeletConfig: NodeKubeletConfig?
+  public var nodeKubeletConfig: NodeKubeletConfig? = nil
 
   /// Initialize a new instance of `NodeConfigDefaults`.
-  public init(
-    gcfsConfig: GcfsConfig? = nil,
-    loggingConfig: NodePoolLoggingConfig? = nil,
-    containerdConfig: ContainerdConfig? = nil,
-    nodeKubeletConfig: NodeKubeletConfig? = nil,
-  ) {
-    self.gcfsConfig = gcfsConfig
-    self.loggingConfig = loggingConfig
-    self.containerdConfig = containerdConfig
-    self.nodeKubeletConfig = nodeKubeletConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeConfigDefaults().with { $0.gcfsConfig = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

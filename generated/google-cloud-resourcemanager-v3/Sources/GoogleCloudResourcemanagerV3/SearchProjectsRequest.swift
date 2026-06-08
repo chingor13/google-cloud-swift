@@ -58,27 +58,32 @@ public struct SearchProjectsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   ///
   /// If no query is specified, the call will return projects for which the user
   /// has the `resourcemanager.projects.get` permission.
-  public var query: Swift.String
+  public var query: Swift.String = Swift.String()
 
   /// Optional. A pagination token returned from a previous call to
   /// [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
   /// indicates from where listing should continue.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. The maximum number of projects to return in the response.
   /// The server can return fewer projects than requested.
   /// If unspecified, server picks an appropriate default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `SearchProjectsRequest`.
-  public init(
-    query: Swift.String = Swift.String(),
-    pageToken: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.query = query
-    self.pageToken = pageToken
-    self.pageSize = pageSize
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SearchProjectsRequest().with { $0.query = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

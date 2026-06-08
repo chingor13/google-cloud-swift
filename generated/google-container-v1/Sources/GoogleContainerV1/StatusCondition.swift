@@ -25,23 +25,28 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Machine-friendly representation of the condition
   /// Deprecated. Use canonical_code instead.
-  public var code: StatusCondition.Code
+  public var code: StatusCondition.Code = StatusCondition.Code()
 
   /// Human-friendly representation of the condition
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// Canonical code of the condition.
-  public var canonicalCode: GoogleRpc.Code
+  public var canonicalCode: GoogleRpc.Code = GoogleRpc.Code()
 
   /// Initialize a new instance of `StatusCondition`.
-  public init(
-    code: StatusCondition.Code = StatusCondition.Code(),
-    message: Swift.String = Swift.String(),
-    canonicalCode: GoogleRpc.Code = GoogleRpc.Code(),
-  ) {
-    self.code = code
-    self.message = message
-    self.canonicalCode = canonicalCode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = StatusCondition().with { $0.code = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Code for each condition

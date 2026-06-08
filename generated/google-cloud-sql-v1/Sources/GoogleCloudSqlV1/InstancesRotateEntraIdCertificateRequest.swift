@@ -24,13 +24,22 @@
     Sendable
   {
     /// Optional. Contains details about the rotate server certificate operation.
-    public var rotateEntraIdCertificateContext: RotateEntraIdCertificateContext?
+    public var rotateEntraIdCertificateContext: RotateEntraIdCertificateContext? = nil
 
     /// Initialize a new instance of `InstancesRotateEntraIdCertificateRequest`.
-    public init(
-      rotateEntraIdCertificateContext: RotateEntraIdCertificateContext? = nil,
-    ) {
-      self.rotateEntraIdCertificateContext = rotateEntraIdCertificateContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesRotateEntraIdCertificateRequest().with { $0.rotateEntraIdCertificateContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -24,39 +24,42 @@
   {
     /// Required. The parent that owns this collection of backups.
     /// Format: projects/{project}
-    public var parent: Swift.String
+    public var parent: Swift.String = Swift.String()
 
     /// The maximum number of backups to return per response. The service might
     /// return fewer backups than this value. If a value for this parameter isn't
     /// specified, then, at most, 500 backups are returned. The maximum value is
     /// 2,000. Any values that you set, which are greater than 2,000, are changed
     /// to 2,000.
-    public var pageSize: Swift.Int32
+    public var pageSize: Swift.Int32 = Swift.Int32()
 
     /// A page token, received from a previous `ListBackups` call.
     /// Provide this to retrieve the subsequent page.
     ///
     /// When paginating, all other parameters provided to `ListBackups` must match
     /// the call that provided the page token.
-    public var pageToken: Swift.String
+    public var pageToken: Swift.String = Swift.String()
 
     /// Multiple filter queries are separated by spaces. For example,
     /// 'instance:abc AND type:FINAL, 'location:us',
     /// 'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
     /// type, instance, backupInterval.startTime (creation time), or location.
-    public var filter: Swift.String
+    public var filter: Swift.String = Swift.String()
 
     /// Initialize a new instance of `ListBackupsRequest`.
-    public init(
-      parent: Swift.String = Swift.String(),
-      pageSize: Swift.Int32 = Swift.Int32(),
-      pageToken: Swift.String = Swift.String(),
-      filter: Swift.String = Swift.String(),
-    ) {
-      self.parent = parent
-      self.pageSize = pageSize
-      self.pageToken = pageToken
-      self.filter = filter
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ListBackupsRequest().with { $0.parent = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

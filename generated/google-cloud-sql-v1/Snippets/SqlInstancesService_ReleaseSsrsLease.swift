@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.releaseSsrsLease(
-      request: SqlInstancesReleaseSsrsLeaseRequest(/* set fields */
-      )
+      request: SqlInstancesReleaseSsrsLeaseRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

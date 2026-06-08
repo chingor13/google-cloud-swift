@@ -28,7 +28,7 @@ public struct VisibilityRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// A comma-separated list of visibility labels that apply to the `selector`.
   /// Any of the listed labels can be used to grant the visibility.
@@ -45,15 +45,22 @@ public struct VisibilityRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Removing INTERNAL from this restriction will break clients that rely on
   /// this method and only had access to it through INTERNAL.
-  public var restriction: Swift.String
+  public var restriction: Swift.String = Swift.String()
 
   /// Initialize a new instance of `VisibilityRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    restriction: Swift.String = Swift.String(),
-  ) {
-    self.selector = selector
-    self.restriction = restriction
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = VisibilityRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.VisibilityRule" }

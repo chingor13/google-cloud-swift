@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some TagValues, tagValueId: String) async throws {
   let response = try await client.getTagValue(
-    request: GetTagValueRequest(
-      name: "tagValues/\(tagValueId)",
-    )
+    request: GetTagValueRequest()
+      .with { $0.name = "tagValues/\(tagValueId)" }
   )
   print("Success: \(response)")
 }

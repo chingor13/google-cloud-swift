@@ -22,43 +22,40 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// minor_target_version indicates the target version for minor upgrade.
-  public var minorTargetVersion: Swift.String?
+  public var minorTargetVersion: Swift.String? = nil
 
   /// patch_target_version indicates the target version for patch upgrade.
-  public var patchTargetVersion: Swift.String?
+  public var patchTargetVersion: Swift.String? = nil
 
   /// The auto upgrade status.
-  public var autoUpgradeStatus: [ClusterUpgradeInfo.AutoUpgradeStatus]
+  public var autoUpgradeStatus: [ClusterUpgradeInfo.AutoUpgradeStatus] = []
 
   /// The auto upgrade paused reason.
-  public var pausedReason: [ClusterUpgradeInfo.AutoUpgradePausedReason]
+  public var pausedReason: [ClusterUpgradeInfo.AutoUpgradePausedReason] = []
 
   /// The list of past auto upgrades.
-  public var upgradeDetails: [UpgradeDetails]
+  public var upgradeDetails: [UpgradeDetails] = []
 
   /// The cluster's current minor version's end of standard support timestamp.
-  public var endOfStandardSupportTimestamp: Swift.String?
+  public var endOfStandardSupportTimestamp: Swift.String? = nil
 
   /// The cluster's current minor version's end of extended support timestamp.
-  public var endOfExtendedSupportTimestamp: Swift.String?
+  public var endOfExtendedSupportTimestamp: Swift.String? = nil
 
   /// Initialize a new instance of `ClusterUpgradeInfo`.
-  public init(
-    minorTargetVersion: Swift.String? = nil,
-    patchTargetVersion: Swift.String? = nil,
-    autoUpgradeStatus: [ClusterUpgradeInfo.AutoUpgradeStatus] = [],
-    pausedReason: [ClusterUpgradeInfo.AutoUpgradePausedReason] = [],
-    upgradeDetails: [UpgradeDetails] = [],
-    endOfStandardSupportTimestamp: Swift.String? = nil,
-    endOfExtendedSupportTimestamp: Swift.String? = nil,
-  ) {
-    self.minorTargetVersion = minorTargetVersion
-    self.patchTargetVersion = patchTargetVersion
-    self.autoUpgradeStatus = autoUpgradeStatus
-    self.pausedReason = pausedReason
-    self.upgradeDetails = upgradeDetails
-    self.endOfStandardSupportTimestamp = endOfStandardSupportTimestamp
-    self.endOfExtendedSupportTimestamp = endOfExtendedSupportTimestamp
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterUpgradeInfo().with { $0.minorTargetVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// AutoUpgradeStatus indicates the status of auto upgrade.

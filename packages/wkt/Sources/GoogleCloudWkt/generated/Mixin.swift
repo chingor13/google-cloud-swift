@@ -100,19 +100,26 @@ public struct Mixin: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The fully qualified name of the interface which is included.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// If non-empty specifies a path under which inherited HTTP paths
   /// are rooted.
-  public var root: Swift.String
+  public var root: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Mixin`.
-  public init(
-    name: Swift.String = Swift.String(),
-    root: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.root = root
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Mixin().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Mixin" }

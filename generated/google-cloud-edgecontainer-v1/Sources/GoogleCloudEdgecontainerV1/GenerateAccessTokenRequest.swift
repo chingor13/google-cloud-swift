@@ -22,13 +22,22 @@ public struct GenerateAccessTokenRequest: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Required. The resource name of the cluster.
-  public var cluster: Swift.String
+  public var cluster: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GenerateAccessTokenRequest`.
-  public init(
-    cluster: Swift.String = Swift.String(),
-  ) {
-    self.cluster = cluster
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateAccessTokenRequest().with { $0.cluster = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

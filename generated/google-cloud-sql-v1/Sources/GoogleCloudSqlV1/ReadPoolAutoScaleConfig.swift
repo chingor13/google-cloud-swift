@@ -23,44 +23,41 @@
     Sendable
   {
     /// Indicates whether read pool auto scaling is enabled.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// Minimum number of read pool nodes to be maintained.
-    public var minNodeCount: Swift.Int32?
+    public var minNodeCount: Swift.Int32? = nil
 
     /// Maximum number of read pool nodes to be maintained.
-    public var maxNodeCount: Swift.Int32?
+    public var maxNodeCount: Swift.Int32? = nil
 
     /// Optional. Target metrics for read pool auto scaling.
-    public var targetMetrics: [ReadPoolAutoScaleConfig.TargetMetric]
+    public var targetMetrics: [ReadPoolAutoScaleConfig.TargetMetric] = []
 
     /// Indicates whether read pool auto scaling supports scale in operations
     /// (removing nodes).
-    public var disableScaleIn: Swift.Bool?
+    public var disableScaleIn: Swift.Bool? = nil
 
     /// The cooldown period for scale-in operations.
-    public var scaleInCooldownSeconds: Swift.Int32?
+    public var scaleInCooldownSeconds: Swift.Int32? = nil
 
     /// The cooldown period for scale-out operations.
-    public var scaleOutCooldownSeconds: Swift.Int32?
+    public var scaleOutCooldownSeconds: Swift.Int32? = nil
 
     /// Initialize a new instance of `ReadPoolAutoScaleConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      minNodeCount: Swift.Int32? = nil,
-      maxNodeCount: Swift.Int32? = nil,
-      targetMetrics: [ReadPoolAutoScaleConfig.TargetMetric] = [],
-      disableScaleIn: Swift.Bool? = nil,
-      scaleInCooldownSeconds: Swift.Int32? = nil,
-      scaleOutCooldownSeconds: Swift.Int32? = nil,
-    ) {
-      self.enabled = enabled
-      self.minNodeCount = minNodeCount
-      self.maxNodeCount = maxNodeCount
-      self.targetMetrics = targetMetrics
-      self.disableScaleIn = disableScaleIn
-      self.scaleInCooldownSeconds = scaleInCooldownSeconds
-      self.scaleOutCooldownSeconds = scaleOutCooldownSeconds
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ReadPoolAutoScaleConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Target metric for read pool auto scaling.
@@ -68,18 +65,25 @@
       Sendable
     {
       /// The metric name to be used for auto scaling.
-      public var metric: Swift.String?
+      public var metric: Swift.String? = nil
 
       /// The target value for the metric.
-      public var targetValue: Swift.Float?
+      public var targetValue: Swift.Float? = nil
 
       /// Initialize a new instance of `TargetMetric`.
-      public init(
-        metric: Swift.String? = nil,
-        targetValue: Swift.Float? = nil,
-      ) {
-        self.metric = metric
-        self.targetValue = targetValue
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = TargetMetric().with { $0.metric = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

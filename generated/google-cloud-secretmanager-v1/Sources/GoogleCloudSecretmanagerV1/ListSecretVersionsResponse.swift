@@ -30,14 +30,14 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   /// sorted in reverse by create_time (newest first).
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var versions: [SecretVersion]
+  public var versions: [SecretVersion] = []
 
   /// A token to retrieve the next page of results. Pass this value in
   /// [ListSecretVersionsRequest.page_token][google.cloud.secretmanager.v1.ListSecretVersionsRequest.page_token]
   /// to retrieve the next page.
   ///
   /// [google.cloud.secretmanager.v1.ListSecretVersionsRequest.page_token]: <doc:ListSecretVersionsRequest/pageToken>
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// The total number of
   /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] but 0 when
@@ -47,17 +47,22 @@ public struct ListSecretVersionsResponse: Codable, Equatable, GoogleCloudWkt._An
   ///
   /// [google.cloud.secretmanager.v1.ListSecretsRequest.filter]: <doc:ListSecretsRequest/filter>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var totalSize: Swift.Int32
+  public var totalSize: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `ListSecretVersionsResponse`.
-  public init(
-    versions: [SecretVersion] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    totalSize: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.versions = versions
-    self.nextPageToken = nextPageToken
-    self.totalSize = totalSize
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListSecretVersionsResponse().with { $0.versions = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

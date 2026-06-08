@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let response = try await client.setMaintenancePolicy(
-    request: SetMaintenancePolicyRequest(/* set fields */
-    )
+    request: SetMaintenancePolicyRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

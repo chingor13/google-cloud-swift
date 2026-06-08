@@ -22,13 +22,22 @@ public struct ClientCertificateConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Issue a client certificate.
-  public var issueClientCertificate: Swift.Bool
+  public var issueClientCertificate: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ClientCertificateConfig`.
-  public init(
-    issueClientCertificate: Swift.Bool = Swift.Bool(),
-  ) {
-    self.issueClientCertificate = issueClientCertificate
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClientCertificateConfig().with { $0.issueClientCertificate = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,18 +23,25 @@
     Sendable
   {
     /// KMS key version used to encrypt the Cloud SQL instance resource
-    public var kmsKeyVersionName: Swift.String
+    public var kmsKeyVersionName: Swift.String = Swift.String()
 
     /// This is always `sql#diskEncryptionStatus`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `DiskEncryptionStatus`.
-    public init(
-      kmsKeyVersionName: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.kmsKeyVersionName = kmsKeyVersionName
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DiskEncryptionStatus().with { $0.kmsKeyVersionName = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

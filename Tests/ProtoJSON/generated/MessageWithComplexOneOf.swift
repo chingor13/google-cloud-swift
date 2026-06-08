@@ -21,13 +21,22 @@ import GoogleCloudWkt
 public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  public var complex: OneOf_Complex?
+  public var complex: OneOf_Complex? = nil
 
   /// Initialize a new instance of `MessageWithComplexOneOf`.
-  public init(
-    complex: OneOf_Complex? = nil,
-  ) {
-    self.complex = complex
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithComplexOneOf().with { $0.null = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -147,13 +156,22 @@ public struct MessageWithComplexOneOf: Codable, Equatable, GoogleCloudWkt._AnyPa
   public struct Inner: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var strings: [Swift.String]
+    public var strings: [Swift.String] = []
 
     /// Initialize a new instance of `Inner`.
-    public init(
-      strings: [Swift.String] = [],
-    ) {
-      self.strings = strings
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Inner().with { $0.strings = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

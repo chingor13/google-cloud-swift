@@ -25,26 +25,31 @@ public struct NodeManagement: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A flag that specifies whether node auto-upgrade is enabled for the node
   /// pool. If enabled, node auto-upgrade helps keep the nodes in your node pool
   /// up to date with the latest release version of Kubernetes.
-  public var autoUpgrade: Swift.Bool
+  public var autoUpgrade: Swift.Bool = Swift.Bool()
 
   /// A flag that specifies whether the node auto-repair is enabled for the node
   /// pool. If enabled, the nodes in this node pool will be monitored and, if
   /// they fail health checks too many times, an automatic repair action will be
   /// triggered.
-  public var autoRepair: Swift.Bool
+  public var autoRepair: Swift.Bool = Swift.Bool()
 
   /// Specifies the Auto Upgrade knobs for the node pool.
-  public var upgradeOptions: AutoUpgradeOptions?
+  public var upgradeOptions: AutoUpgradeOptions? = nil
 
   /// Initialize a new instance of `NodeManagement`.
-  public init(
-    autoUpgrade: Swift.Bool = Swift.Bool(),
-    autoRepair: Swift.Bool = Swift.Bool(),
-    upgradeOptions: AutoUpgradeOptions? = nil,
-  ) {
-    self.autoUpgrade = autoUpgrade
-    self.autoRepair = autoRepair
-    self.upgradeOptions = upgradeOptions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeManagement().with { $0.autoUpgrade = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

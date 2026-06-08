@@ -25,21 +25,28 @@ public struct Option: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// descriptor.proto), this is the short name. For example, `"map_entry"`.
   /// For custom options, it should be the fully-qualified name. For example,
   /// `"google.api.http"`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The option's value packed in an Any message. If the value is a primitive,
   /// the corresponding wrapper type defined in google/protobuf/wrappers.proto
   /// should be used. If the value is an enum, it should be stored as an int32
   /// value using the google.protobuf.Int32Value type.
-  public var value: `Any`?
+  public var value: `Any`? = nil
 
   /// Initialize a new instance of `Option`.
-  public init(
-    name: Swift.String = Swift.String(),
-    value: `Any`? = nil,
-  ) {
-    self.name = name
-    self.value = value
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Option().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Option" }

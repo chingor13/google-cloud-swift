@@ -23,19 +23,26 @@
     Sendable
   {
     /// This is always `sql#rotateServerCaContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The fingerprint of the next version to be rotated to. If left unspecified,
     /// will be rotated to the most recently added server CA version.
-    public var nextVersion: Swift.String
+    public var nextVersion: Swift.String = Swift.String()
 
     /// Initialize a new instance of `RotateServerCaContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      nextVersion: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.nextVersion = nextVersion
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RotateServerCaContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

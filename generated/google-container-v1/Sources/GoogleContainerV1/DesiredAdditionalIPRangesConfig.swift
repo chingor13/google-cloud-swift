@@ -24,13 +24,22 @@ public struct DesiredAdditionalIPRangesConfig: Codable, Equatable, GoogleCloudWk
 {
   /// List of additional IP ranges configs where each AdditionalIPRangesConfig
   /// corresponds to one subnetwork's IP ranges
-  public var additionalIpRangesConfigs: [AdditionalIPRangesConfig]
+  public var additionalIpRangesConfigs: [AdditionalIPRangesConfig] = []
 
   /// Initialize a new instance of `DesiredAdditionalIPRangesConfig`.
-  public init(
-    additionalIpRangesConfigs: [AdditionalIPRangesConfig] = [],
-  ) {
-    self.additionalIpRangesConfigs = additionalIpRangesConfigs
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DesiredAdditionalIPRangesConfig().with { $0.additionalIpRangesConfigs = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

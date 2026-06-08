@@ -22,23 +22,28 @@ public struct Quota: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Name of the quota metric.
-  public var metric: Swift.String
+  public var metric: Swift.String = Swift.String()
 
   /// Quota limit for this metric.
-  public var limit: Swift.Double
+  public var limit: Swift.Double = Swift.Double()
 
   /// Current usage of this metric.
-  public var usage: Swift.Double
+  public var usage: Swift.Double = Swift.Double()
 
   /// Initialize a new instance of `Quota`.
-  public init(
-    metric: Swift.String = Swift.String(),
-    limit: Swift.Double = Swift.Double(),
-    usage: Swift.Double = Swift.Double(),
-  ) {
-    self.metric = metric
-    self.limit = limit
-    self.usage = usage
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Quota().with { $0.metric = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

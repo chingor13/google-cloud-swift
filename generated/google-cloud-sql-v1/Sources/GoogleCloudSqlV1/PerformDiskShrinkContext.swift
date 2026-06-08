@@ -23,13 +23,22 @@
     Sendable
   {
     /// The target disk shrink size in GigaBytes.
-    public var targetSizeGb: Swift.Int64
+    public var targetSizeGb: Swift.Int64 = Swift.Int64()
 
     /// Initialize a new instance of `PerformDiskShrinkContext`.
-    public init(
-      targetSizeGb: Swift.Int64 = Swift.Int64(),
-    ) {
-      self.targetSizeGb = targetSizeGb
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PerformDiskShrinkContext().with { $0.targetSizeGb = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

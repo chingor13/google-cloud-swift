@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Folders) async throws {
   let response = try await client.testIamPermissions(
-    request: TestIamPermissionsRequest(/* set fields */
-    )
+    request: TestIamPermissionsRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

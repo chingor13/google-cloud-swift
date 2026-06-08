@@ -23,8 +23,8 @@
 
   func sample(client: some SqlSslCertsService) async throws {
     let response = try await client.delete(
-      request: SqlSslCertsDeleteRequest(/* set fields */
-      )
+      request: SqlSslCertsDeleteRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

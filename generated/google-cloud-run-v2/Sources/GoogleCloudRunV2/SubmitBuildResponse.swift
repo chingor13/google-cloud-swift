@@ -23,24 +23,29 @@ public struct SubmitBuildResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Cloud Build operation to be polled via CloudBuild API.
-  public var buildOperation: GoogleLongrunning.Operation?
+  public var buildOperation: GoogleLongrunning.Operation? = nil
 
   /// URI of the base builder image in Artifact Registry being used in the build.
   /// Used to opt into automatic base image updates.
-  public var baseImageUri: Swift.String
+  public var baseImageUri: Swift.String = Swift.String()
 
   /// Warning message for the base image.
-  public var baseImageWarning: Swift.String
+  public var baseImageWarning: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SubmitBuildResponse`.
-  public init(
-    buildOperation: GoogleLongrunning.Operation? = nil,
-    baseImageUri: Swift.String = Swift.String(),
-    baseImageWarning: Swift.String = Swift.String(),
-  ) {
-    self.buildOperation = buildOperation
-    self.baseImageUri = baseImageUri
-    self.baseImageWarning = baseImageWarning
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SubmitBuildResponse().with { $0.buildOperation = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -25,13 +25,22 @@ public struct GenerateServiceIdentityResponse: Codable, Equatable, GoogleCloudWk
   Sendable
 {
   /// ServiceIdentity that was created or retrieved.
-  public var identity: ServiceIdentity?
+  public var identity: ServiceIdentity? = nil
 
   /// Initialize a new instance of `GenerateServiceIdentityResponse`.
-  public init(
-    identity: ServiceIdentity? = nil,
-  ) {
-    self.identity = identity
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateServiceIdentityResponse().with { $0.identity = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

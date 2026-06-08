@@ -24,9 +24,8 @@ import GoogleLongrunning
 
 func sample(client: some Organizations, organizationId: String) async throws {
   let response = try await client.getOrganization(
-    request: GetOrganizationRequest(
-      name: "organizations/\(organizationId)",
-    )
+    request: GetOrganizationRequest()
+      .with { $0.name = "organizations/\(organizationId)" }
   )
   print("Success: \(response)")
 }

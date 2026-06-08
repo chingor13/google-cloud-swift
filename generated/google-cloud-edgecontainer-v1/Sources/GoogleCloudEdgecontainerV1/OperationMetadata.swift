@@ -22,57 +22,50 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The time the operation was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The time the operation finished running.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Server-defined resource path for the target of the operation.
-  public var target: Swift.String
+  public var target: Swift.String = Swift.String()
 
   /// The verb executed by the operation.
-  public var verb: Swift.String
+  public var verb: Swift.String = Swift.String()
 
   /// Human-readable status of the operation, if any.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Identifies whether the user has requested cancellation of the operation.
   /// Operations that have successfully been cancelled have [Operation.error][]
   /// value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
   /// corresponding to `Code.CANCELLED`.
-  public var requestedCancellation: Swift.Bool
+  public var requestedCancellation: Swift.Bool = Swift.Bool()
 
   /// API version used to start the operation.
-  public var apiVersion: Swift.String
+  public var apiVersion: Swift.String = Swift.String()
 
   /// Warnings that do not block the operation, but still hold relevant
   /// information for the end user to receive.
-  public var warnings: [Swift.String]
+  public var warnings: [Swift.String] = []
 
   /// Machine-readable status of the operation, if any.
-  public var statusReason: OperationMetadata.StatusReason
+  public var statusReason: OperationMetadata.StatusReason = OperationMetadata.StatusReason()
 
   /// Initialize a new instance of `OperationMetadata`.
-  public init(
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-    target: Swift.String = Swift.String(),
-    verb: Swift.String = Swift.String(),
-    statusMessage: Swift.String = Swift.String(),
-    requestedCancellation: Swift.Bool = Swift.Bool(),
-    apiVersion: Swift.String = Swift.String(),
-    warnings: [Swift.String] = [],
-    statusReason: OperationMetadata.StatusReason = OperationMetadata.StatusReason(),
-  ) {
-    self.createTime = createTime
-    self.endTime = endTime
-    self.target = target
-    self.verb = verb
-    self.statusMessage = statusMessage
-    self.requestedCancellation = requestedCancellation
-    self.apiVersion = apiVersion
-    self.warnings = warnings
-    self.statusReason = statusReason
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = OperationMetadata().with { $0.createTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Indicates the reason for the status of the operation.

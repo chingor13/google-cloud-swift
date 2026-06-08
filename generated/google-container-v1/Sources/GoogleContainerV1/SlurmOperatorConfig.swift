@@ -23,13 +23,22 @@ public struct SlurmOperatorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// When enabled, it runs a Slurm Operator that manages the set of compute pods
   /// for Slurm Cluster.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `SlurmOperatorConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SlurmOperatorConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

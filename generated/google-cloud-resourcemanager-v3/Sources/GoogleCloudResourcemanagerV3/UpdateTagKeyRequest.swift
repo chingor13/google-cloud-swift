@@ -25,26 +25,31 @@ public struct UpdateTagKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// `etag` fields can be updated by this request. If the `etag` field is not
   /// empty, it must match the `etag` field of the existing tag key. Otherwise,
   /// `ABORTED` will be returned.
-  public var tagKey: TagKey?
+  public var tagKey: TagKey? = nil
 
   /// Fields to be updated. The mask may only contain `description` or
   /// `etag`. If omitted entirely, both `description` and `etag` are assumed to
   /// be significant.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Set as true to perform validations necessary for updating the resource, but
   /// not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UpdateTagKeyRequest`.
-  public init(
-    tagKey: TagKey? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.tagKey = tagKey
-    self.updateMask = updateMask
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateTagKeyRequest().with { $0.tagKey = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

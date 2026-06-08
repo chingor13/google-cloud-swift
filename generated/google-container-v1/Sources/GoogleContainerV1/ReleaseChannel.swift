@@ -27,13 +27,22 @@ public struct ReleaseChannel: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// channel specifies which release channel the cluster is subscribed to.
-  public var channel: ReleaseChannel.Channel
+  public var channel: ReleaseChannel.Channel = ReleaseChannel.Channel()
 
   /// Initialize a new instance of `ReleaseChannel`.
-  public init(
-    channel: ReleaseChannel.Channel = ReleaseChannel.Channel(),
-  ) {
-    self.channel = channel
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ReleaseChannel().with { $0.channel = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible values for 'channel'.

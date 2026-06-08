@@ -27,7 +27,7 @@
     /// already exists, the request succeeds, but the operation fails. If
     /// `fileType` is `SQL` and the filename ends with .gz,
     /// the contents are compressed.
-    public var uri: Swift.String
+    public var uri: Swift.String = Swift.String()
 
     /// Databases to be exported. <br /> `MySQL instances:` If
     /// `fileType` is `SQL` and no database is specified, all
@@ -44,87 +44,81 @@
     /// `csvExportOptions.selectQuery` property. <br /> `SQL Server
     /// instances:` You must specify one database to be exported, and the
     /// `fileType` must be `BAK`.
-    public var databases: [Swift.String]
+    public var databases: [Swift.String] = []
 
     /// This is always `sql#exportContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Options for exporting data as SQL statements.
-    public var sqlExportOptions: ExportContext.SqlExportOptions?
+    public var sqlExportOptions: ExportContext.SqlExportOptions? = nil
 
     /// Options for exporting data as CSV. `MySQL` and `PostgreSQL`
     /// instances only.
-    public var csvExportOptions: ExportContext.SqlCsvExportOptions?
+    public var csvExportOptions: ExportContext.SqlCsvExportOptions? = nil
 
     /// The file type for the specified uri.
-    public var fileType: SqlFileType
+    public var fileType: SqlFileType = SqlFileType()
 
     /// Whether to perform a serverless export.
-    public var offload: GoogleCloudWkt.BoolValue?
+    public var offload: GoogleCloudWkt.BoolValue? = nil
 
     /// Options for exporting data as BAK files.
-    public var bakExportOptions: ExportContext.SqlBakExportOptions?
+    public var bakExportOptions: ExportContext.SqlBakExportOptions? = nil
 
     /// Optional. Export parameters specific to SQL Server TDE certificates
-    public var tdeExportOptions: ExportContext.SqlTdeExportOptions?
+    public var tdeExportOptions: ExportContext.SqlTdeExportOptions? = nil
 
     /// Initialize a new instance of `ExportContext`.
-    public init(
-      uri: Swift.String = Swift.String(),
-      databases: [Swift.String] = [],
-      kind: Swift.String = Swift.String(),
-      sqlExportOptions: ExportContext.SqlExportOptions? = nil,
-      csvExportOptions: ExportContext.SqlCsvExportOptions? = nil,
-      fileType: SqlFileType = SqlFileType(),
-      offload: GoogleCloudWkt.BoolValue? = nil,
-      bakExportOptions: ExportContext.SqlBakExportOptions? = nil,
-      tdeExportOptions: ExportContext.SqlTdeExportOptions? = nil,
-    ) {
-      self.uri = uri
-      self.databases = databases
-      self.kind = kind
-      self.sqlExportOptions = sqlExportOptions
-      self.csvExportOptions = csvExportOptions
-      self.fileType = fileType
-      self.offload = offload
-      self.bakExportOptions = bakExportOptions
-      self.tdeExportOptions = tdeExportOptions
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ExportContext().with { $0.uri = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public struct SqlCsvExportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The select query used to extract the data.
-      public var selectQuery: Swift.String
+      public var selectQuery: Swift.String = Swift.String()
 
       /// Specifies the character that should appear before a data character that
       /// needs to be escaped.
-      public var escapeCharacter: Swift.String
+      public var escapeCharacter: Swift.String = Swift.String()
 
       /// Specifies the quoting character to be used when a data value is quoted.
-      public var quoteCharacter: Swift.String
+      public var quoteCharacter: Swift.String = Swift.String()
 
       /// Specifies the character that separates columns within each row (line) of
       /// the file.
-      public var fieldsTerminatedBy: Swift.String
+      public var fieldsTerminatedBy: Swift.String = Swift.String()
 
       /// This is used to separate lines. If a line does not contain all fields,
       /// the rest of the columns are set to their default values.
-      public var linesTerminatedBy: Swift.String
+      public var linesTerminatedBy: Swift.String = Swift.String()
 
       /// Initialize a new instance of `SqlCsvExportOptions`.
-      public init(
-        selectQuery: Swift.String = Swift.String(),
-        escapeCharacter: Swift.String = Swift.String(),
-        quoteCharacter: Swift.String = Swift.String(),
-        fieldsTerminatedBy: Swift.String = Swift.String(),
-        linesTerminatedBy: Swift.String = Swift.String(),
-      ) {
-        self.selectQuery = selectQuery
-        self.escapeCharacter = escapeCharacter
-        self.quoteCharacter = quoteCharacter
-        self.fieldsTerminatedBy = fieldsTerminatedBy
-        self.linesTerminatedBy = linesTerminatedBy
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlCsvExportOptions().with { $0.selectQuery = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -144,37 +138,36 @@
       /// Tables to export, or that were exported, from the specified database. If
       /// you specify tables, specify one and only one database. For PostgreSQL
       /// instances, you can specify only one table.
-      public var tables: [Swift.String]
+      public var tables: [Swift.String] = []
 
       /// Export only schemas.
-      public var schemaOnly: GoogleCloudWkt.BoolValue?
+      public var schemaOnly: GoogleCloudWkt.BoolValue? = nil
 
-      public var mysqlExportOptions: ExportContext.SqlExportOptions.MysqlExportOptions?
+      public var mysqlExportOptions: ExportContext.SqlExportOptions.MysqlExportOptions? = nil
 
       /// Optional. The number of threads to use for parallel export.
-      public var threads: GoogleCloudWkt.Int32Value?
+      public var threads: GoogleCloudWkt.Int32Value? = nil
 
       /// Optional. Whether or not the export should be parallel.
-      public var parallel: GoogleCloudWkt.BoolValue?
+      public var parallel: GoogleCloudWkt.BoolValue? = nil
 
       /// Optional. Options for exporting from a Cloud SQL for PostgreSQL instance.
-      public var postgresExportOptions: ExportContext.SqlExportOptions.PostgresExportOptions?
+      public var postgresExportOptions: ExportContext.SqlExportOptions.PostgresExportOptions? = nil
 
       /// Initialize a new instance of `SqlExportOptions`.
-      public init(
-        tables: [Swift.String] = [],
-        schemaOnly: GoogleCloudWkt.BoolValue? = nil,
-        mysqlExportOptions: ExportContext.SqlExportOptions.MysqlExportOptions? = nil,
-        threads: GoogleCloudWkt.Int32Value? = nil,
-        parallel: GoogleCloudWkt.BoolValue? = nil,
-        postgresExportOptions: ExportContext.SqlExportOptions.PostgresExportOptions? = nil,
-      ) {
-        self.tables = tables
-        self.schemaOnly = schemaOnly
-        self.mysqlExportOptions = mysqlExportOptions
-        self.threads = threads
-        self.parallel = parallel
-        self.postgresExportOptions = postgresExportOptions
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlExportOptions().with { $0.tables = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       /// Options for exporting from MySQL.
@@ -187,13 +180,22 @@
         /// `2`, the CHANGE MASTER TO statement is written as a SQL comment and
         /// has no effect. If set to any value other than `1`, --set-gtid-purged
         /// is set to OFF.
-        public var masterData: GoogleCloudWkt.Int32Value?
+        public var masterData: GoogleCloudWkt.Int32Value? = nil
 
         /// Initialize a new instance of `MysqlExportOptions`.
-        public init(
-          masterData: GoogleCloudWkt.Int32Value? = nil,
-        ) {
-          self.masterData = masterData
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = MysqlExportOptions().with { $0.masterData = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -215,19 +217,26 @@
         /// Optional. Use this option to include DROP <code>&lt;object&gt;</code>
         /// SQL statements. Use these statements to delete database objects before
         /// running the import operation.
-        public var clean: GoogleCloudWkt.BoolValue?
+        public var clean: GoogleCloudWkt.BoolValue? = nil
 
         /// Optional. Option to include an IF EXISTS SQL statement with each DROP
         /// statement produced by clean.
-        public var ifExists: GoogleCloudWkt.BoolValue?
+        public var ifExists: GoogleCloudWkt.BoolValue? = nil
 
         /// Initialize a new instance of `PostgresExportOptions`.
-        public init(
-          clean: GoogleCloudWkt.BoolValue? = nil,
-          ifExists: GoogleCloudWkt.BoolValue? = nil,
-        ) {
-          self.clean = clean
-          self.ifExists = ifExists
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = PostgresExportOptions().with { $0.clean = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -258,54 +267,51 @@
       Sendable
     {
       /// Whether or not the export should be striped.
-      public var striped: GoogleCloudWkt.BoolValue?
+      public var striped: GoogleCloudWkt.BoolValue? = nil
 
       /// Option for specifying how many stripes to use for the export.
       /// If blank, and the value of the striped field is true,
       /// the number of stripes is automatically chosen.
-      public var stripeCount: GoogleCloudWkt.Int32Value?
+      public var stripeCount: GoogleCloudWkt.Int32Value? = nil
 
       /// Type of this bak file will be export, FULL or DIFF, SQL Server only
-      public var bakType: BakType
+      public var bakType: BakType = BakType()
 
       /// Deprecated: copy_only is deprecated. Use differential_base instead
-      public var copyOnly: GoogleCloudWkt.BoolValue?
+      public var copyOnly: GoogleCloudWkt.BoolValue? = nil
 
       /// Whether or not the backup can be used as a differential base
       /// copy_only backup can not be served as differential base
-      public var differentialBase: GoogleCloudWkt.BoolValue?
+      public var differentialBase: GoogleCloudWkt.BoolValue? = nil
 
       /// Optional. The begin timestamp when transaction log will be included in
       /// the export operation. [RFC 3339](https://tools.ietf.org/html/rfc3339)
       /// format (for example, `2023-10-01T16:19:00.094`) in UTC. When omitted, all
       /// available logs from the beginning of retention period will be included.
       /// Only applied to Cloud SQL for SQL Server.
-      public var exportLogStartTime: GoogleCloudWkt.Timestamp?
+      public var exportLogStartTime: GoogleCloudWkt.Timestamp? = nil
 
       /// Optional. The end timestamp when transaction log will be included in the
       /// export operation. [RFC 3339](https://tools.ietf.org/html/rfc3339) format
       /// (for example, `2023-10-01T16:19:00.094`) in UTC. When omitted, all
       /// available logs until current time will be included. Only applied to Cloud
       /// SQL for SQL Server.
-      public var exportLogEndTime: GoogleCloudWkt.Timestamp?
+      public var exportLogEndTime: GoogleCloudWkt.Timestamp? = nil
 
       /// Initialize a new instance of `SqlBakExportOptions`.
-      public init(
-        striped: GoogleCloudWkt.BoolValue? = nil,
-        stripeCount: GoogleCloudWkt.Int32Value? = nil,
-        bakType: BakType = BakType(),
-        copyOnly: GoogleCloudWkt.BoolValue? = nil,
-        differentialBase: GoogleCloudWkt.BoolValue? = nil,
-        exportLogStartTime: GoogleCloudWkt.Timestamp? = nil,
-        exportLogEndTime: GoogleCloudWkt.Timestamp? = nil,
-      ) {
-        self.striped = striped
-        self.stripeCount = stripeCount
-        self.bakType = bakType
-        self.copyOnly = copyOnly
-        self.differentialBase = differentialBase
-        self.exportLogStartTime = exportLogStartTime
-        self.exportLogEndTime = exportLogEndTime
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlBakExportOptions().with { $0.striped = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -326,32 +332,35 @@
       /// in the form gs://bucketName/fileName.
       /// The instance must have write access to the bucket.
       /// Applicable only for SQL Server instances.
-      public var certificatePath: Swift.String
+      public var certificatePath: Swift.String = Swift.String()
 
       /// Required. Path to the TDE certificate private key
       /// in the form gs://bucketName/fileName.
       /// The instance must have write access to the location.
       /// Applicable only for SQL Server instances.
-      public var privateKeyPath: Swift.String
+      public var privateKeyPath: Swift.String = Swift.String()
 
       /// Required. Password that encrypts the private key.
-      public var privateKeyPassword: Swift.String
+      public var privateKeyPassword: Swift.String = Swift.String()
 
       /// Required. Certificate name.
       /// Applicable only for SQL Server instances.
-      public var name: Swift.String
+      public var name: Swift.String = Swift.String()
 
       /// Initialize a new instance of `SqlTdeExportOptions`.
-      public init(
-        certificatePath: Swift.String = Swift.String(),
-        privateKeyPath: Swift.String = Swift.String(),
-        privateKeyPassword: Swift.String = Swift.String(),
-        name: Swift.String = Swift.String(),
-      ) {
-        self.certificatePath = certificatePath
-        self.privateKeyPath = privateKeyPath
-        self.privateKeyPassword = privateKeyPassword
-        self.name = name
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlTdeExportOptions().with { $0.certificatePath = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

@@ -23,23 +23,28 @@
     Sendable
   {
     /// Name of the binary log file for a Cloud SQL instance.
-    public var binLogFileName: Swift.String
+    public var binLogFileName: Swift.String = Swift.String()
 
     /// Position (offset) within the binary log file.
-    public var binLogPosition: Swift.Int64
+    public var binLogPosition: Swift.Int64 = Swift.Int64()
 
     /// This is always `sql#binLogCoordinates`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `BinLogCoordinates`.
-    public init(
-      binLogFileName: Swift.String = Swift.String(),
-      binLogPosition: Swift.Int64 = Swift.Int64(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.binLogFileName = binLogFileName
-      self.binLogPosition = binLogPosition
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BinLogCoordinates().with { $0.binLogFileName = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

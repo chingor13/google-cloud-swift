@@ -25,34 +25,35 @@
   {
     /// List of columns included in the result. This also includes the data type
     /// of the column.
-    public var columns: [Column]
+    public var columns: [Column] = []
 
     /// Rows returned by the SQL statement.
-    public var rows: [Row]
+    public var rows: [Row] = []
 
     /// Message related to the SQL execution result.
-    public var message: Swift.String
+    public var message: Swift.String = Swift.String()
 
     /// Set to true if the SQL execution's result is truncated due to size limits
     /// or an error retrieving results.
-    public var partialResult: Swift.Bool
+    public var partialResult: Swift.Bool = Swift.Bool()
 
     /// If results were truncated due to an error, details of that error.
-    public var status: GoogleRpc.Status?
+    public var status: GoogleRpc.Status? = nil
 
     /// Initialize a new instance of `QueryResult`.
-    public init(
-      columns: [Column] = [],
-      rows: [Row] = [],
-      message: Swift.String = Swift.String(),
-      partialResult: Swift.Bool = Swift.Bool(),
-      status: GoogleRpc.Status? = nil,
-    ) {
-      self.columns = columns
-      self.rows = rows
-      self.message = message
-      self.partialResult = partialResult
-      self.status = status
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = QueryResult().with { $0.columns = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

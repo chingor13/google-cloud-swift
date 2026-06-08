@@ -23,23 +23,28 @@ public struct UsableSubnetworkSecondaryRange: Codable, Equatable, GoogleCloudWkt
 {
   /// The name associated with this subnetwork secondary range, used when adding
   /// an alias IP range to a VM instance.
-  public var rangeName: Swift.String
+  public var rangeName: Swift.String = Swift.String()
 
   /// The range of IP addresses belonging to this subnetwork secondary range.
-  public var ipCidrRange: Swift.String
+  public var ipCidrRange: Swift.String = Swift.String()
 
   /// This field is to determine the status of the secondary range programmably.
-  public var status: UsableSubnetworkSecondaryRange.Status
+  public var status: UsableSubnetworkSecondaryRange.Status = UsableSubnetworkSecondaryRange.Status()
 
   /// Initialize a new instance of `UsableSubnetworkSecondaryRange`.
-  public init(
-    rangeName: Swift.String = Swift.String(),
-    ipCidrRange: Swift.String = Swift.String(),
-    status: UsableSubnetworkSecondaryRange.Status = UsableSubnetworkSecondaryRange.Status(),
-  ) {
-    self.rangeName = rangeName
-    self.ipCidrRange = ipCidrRange
-    self.status = status
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UsableSubnetworkSecondaryRange().with { $0.rangeName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Status shows the current usage of a secondary IP range.

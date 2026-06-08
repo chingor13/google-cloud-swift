@@ -24,26 +24,26 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The Cloud Build name of the latest successful deployment of
   /// the function.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The Cloud Storage bucket URI where the function source code is located.
-  public var sourceLocation: Swift.String
+  public var sourceLocation: Swift.String = Swift.String()
 
   /// Optional. The name of the function (as defined in source code) that will be
   /// executed. Defaults to the resource name suffix, if not specified. For
   /// backward compatibility, if function with given name is not found, then the
   /// system will try to use function named "function".
-  public var functionTarget: Swift.String
+  public var functionTarget: Swift.String = Swift.String()
 
   /// Optional. Artifact Registry URI to store the built image.
-  public var imageUri: Swift.String
+  public var imageUri: Swift.String = Swift.String()
 
   /// Optional. The base image used to build the function.
-  public var baseImage: Swift.String
+  public var baseImage: Swift.String = Swift.String()
 
   /// Optional. Sets whether the function will receive automatic base image
   /// updates.
-  public var enableAutomaticUpdates: Swift.Bool
+  public var enableAutomaticUpdates: Swift.Bool = Swift.Bool()
 
   /// Optional. Name of the Cloud Build Custom Worker Pool that should be used to
   /// build the Cloud Run function. The format of this field is
@@ -51,37 +51,30 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `{project}` and `{region}` are the project id and region respectively where
   /// the worker pool is defined and `{workerPool}` is the short name of the
   /// worker pool.
-  public var workerPool: Swift.String
+  public var workerPool: Swift.String = Swift.String()
 
   /// Optional. User-provided build-time environment variables for the function
-  public var environmentVariables: [Swift.String: Swift.String]
+  public var environmentVariables: [Swift.String: Swift.String] = [:]
 
   /// Optional. Service account to be used for building the container. The format
   /// of this field is
   /// `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Initialize a new instance of `BuildConfig`.
-  public init(
-    name: Swift.String = Swift.String(),
-    sourceLocation: Swift.String = Swift.String(),
-    functionTarget: Swift.String = Swift.String(),
-    imageUri: Swift.String = Swift.String(),
-    baseImage: Swift.String = Swift.String(),
-    enableAutomaticUpdates: Swift.Bool = Swift.Bool(),
-    workerPool: Swift.String = Swift.String(),
-    environmentVariables: [Swift.String: Swift.String] = [:],
-    serviceAccount: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.sourceLocation = sourceLocation
-    self.functionTarget = functionTarget
-    self.imageUri = imageUri
-    self.baseImage = baseImage
-    self.enableAutomaticUpdates = enableAutomaticUpdates
-    self.workerPool = workerPool
-    self.environmentVariables = environmentVariables
-    self.serviceAccount = serviceAccount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BuildConfig().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

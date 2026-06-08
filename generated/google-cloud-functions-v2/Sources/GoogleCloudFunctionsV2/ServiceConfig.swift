@@ -25,12 +25,12 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Output only. Name of the service associated with a Function.
   /// The format of this field is
   /// `projects/{project}/locations/{region}/services/{service}`
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// The function execution timeout. Execution is considered failed and
   /// can be terminated if the function is not completed at the end of the
   /// timeout period. Defaults to 60 seconds.
-  public var timeoutSeconds: Swift.Int32
+  public var timeoutSeconds: Swift.Int32 = Swift.Int32()
 
   /// The amount of memory available for a function.
   /// Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is
@@ -38,17 +38,17 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// See
   /// https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go
   /// a full description.
-  public var availableMemory: Swift.String
+  public var availableMemory: Swift.String = Swift.String()
 
   /// The number of CPUs used in a single container instance.
   /// Default value is calculated from available memory.
   /// Supports the same values as Cloud Run, see
   /// https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements
   /// Example: "1" indicates 1 vCPU
-  public var availableCpu: Swift.String
+  public var availableCpu: Swift.String = Swift.String()
 
   /// Environment variables that shall be available during function execution.
-  public var environmentVariables: [Swift.String: Swift.String]
+  public var environmentVariables: [Swift.String: Swift.String] = [:]
 
   /// The limit on the maximum number of function instances that may coexist at a
   /// given time.
@@ -62,7 +62,7 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// See the [Max
   /// Instances](https://cloud.google.com/functions/docs/max-instances) Guide for
   /// more details.
-  public var maxInstanceCount: Swift.Int32
+  public var maxInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// The limit on the minimum number of function instances that may coexist at a
   /// given time.
@@ -73,99 +73,72 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// number of instances are kept running in idle state always. This can help
   /// with cold start times when jump in incoming request count occurs after the
   /// idle instance would have been stopped in the default case.
-  public var minInstanceCount: Swift.Int32
+  public var minInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// The Serverless VPC Access connector that this cloud function can connect
   /// to. The format of this field is `projects/*/locations/*/connectors/*`.
-  public var vpcConnector: Swift.String
+  public var vpcConnector: Swift.String = Swift.String()
 
   /// The egress settings for the connector, controlling what traffic is diverted
   /// through it.
-  public var vpcConnectorEgressSettings: ServiceConfig.VpcConnectorEgressSettings
+  public var vpcConnectorEgressSettings: ServiceConfig.VpcConnectorEgressSettings =
+    ServiceConfig.VpcConnectorEgressSettings()
 
   /// The ingress settings for the function, controlling what traffic can reach
   /// it.
-  public var ingressSettings: ServiceConfig.IngressSettings
+  public var ingressSettings: ServiceConfig.IngressSettings = ServiceConfig.IngressSettings()
 
   /// Output only. URI of the Service deployed.
-  public var uri: Swift.String
+  public var uri: Swift.String = Swift.String()
 
   /// The email of the service's service account. If empty, defaults to
   /// `{project_number}-compute@developer.gserviceaccount.com`.
-  public var serviceAccountEmail: Swift.String
+  public var serviceAccountEmail: Swift.String = Swift.String()
 
   /// Whether 100% of traffic is routed to the latest revision.
   /// On CreateFunction and UpdateFunction, when set to true, the revision being
   /// deployed will serve 100% of traffic, ignoring any traffic split settings,
   /// if any. On GetFunction, true will be returned if the latest revision is
   /// serving 100% of traffic.
-  public var allTrafficOnLatestRevision: Swift.Bool
+  public var allTrafficOnLatestRevision: Swift.Bool = Swift.Bool()
 
   /// Secret environment variables configuration.
-  public var secretEnvironmentVariables: [SecretEnvVar]
+  public var secretEnvironmentVariables: [SecretEnvVar] = []
 
   /// Secret volumes configuration.
-  public var secretVolumes: [SecretVolume]
+  public var secretVolumes: [SecretVolume] = []
 
   /// Output only. The name of service revision.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Sets the maximum number of concurrent requests that each instance
   /// can receive. Defaults to 1.
-  public var maxInstanceRequestConcurrency: Swift.Int32
+  public var maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32()
 
   /// Security level configure whether the function only accepts https.
   /// This configuration is only applicable to 1st Gen functions with Http
   /// trigger. By default https is optional for 1st Gen functions; 2nd Gen
   /// functions are https ONLY.
-  public var securityLevel: ServiceConfig.SecurityLevel
+  public var securityLevel: ServiceConfig.SecurityLevel = ServiceConfig.SecurityLevel()
 
   /// Optional. The binary authorization policy to be checked when deploying the
   /// Cloud Run service.
-  public var binaryAuthorizationPolicy: Swift.String
+  public var binaryAuthorizationPolicy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ServiceConfig`.
-  public init(
-    service: Swift.String = Swift.String(),
-    timeoutSeconds: Swift.Int32 = Swift.Int32(),
-    availableMemory: Swift.String = Swift.String(),
-    availableCpu: Swift.String = Swift.String(),
-    environmentVariables: [Swift.String: Swift.String] = [:],
-    maxInstanceCount: Swift.Int32 = Swift.Int32(),
-    minInstanceCount: Swift.Int32 = Swift.Int32(),
-    vpcConnector: Swift.String = Swift.String(),
-    vpcConnectorEgressSettings: ServiceConfig.VpcConnectorEgressSettings =
-      ServiceConfig.VpcConnectorEgressSettings(),
-    ingressSettings: ServiceConfig.IngressSettings = ServiceConfig.IngressSettings(),
-    uri: Swift.String = Swift.String(),
-    serviceAccountEmail: Swift.String = Swift.String(),
-    allTrafficOnLatestRevision: Swift.Bool = Swift.Bool(),
-    secretEnvironmentVariables: [SecretEnvVar] = [],
-    secretVolumes: [SecretVolume] = [],
-    revision: Swift.String = Swift.String(),
-    maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32(),
-    securityLevel: ServiceConfig.SecurityLevel = ServiceConfig.SecurityLevel(),
-    binaryAuthorizationPolicy: Swift.String = Swift.String(),
-  ) {
-    self.service = service
-    self.timeoutSeconds = timeoutSeconds
-    self.availableMemory = availableMemory
-    self.availableCpu = availableCpu
-    self.environmentVariables = environmentVariables
-    self.maxInstanceCount = maxInstanceCount
-    self.minInstanceCount = minInstanceCount
-    self.vpcConnector = vpcConnector
-    self.vpcConnectorEgressSettings = vpcConnectorEgressSettings
-    self.ingressSettings = ingressSettings
-    self.uri = uri
-    self.serviceAccountEmail = serviceAccountEmail
-    self.allTrafficOnLatestRevision = allTrafficOnLatestRevision
-    self.secretEnvironmentVariables = secretEnvironmentVariables
-    self.secretVolumes = secretVolumes
-    self.revision = revision
-    self.maxInstanceRequestConcurrency = maxInstanceRequestConcurrency
-    self.securityLevel = securityLevel
-    self.binaryAuthorizationPolicy = binaryAuthorizationPolicy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServiceConfig().with { $0.service = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Available egress settings.

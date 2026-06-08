@@ -29,22 +29,29 @@ public struct DeleteSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// `projects/*/secrets/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. Etag of the [Secret][google.cloud.secretmanager.v1.Secret]. The
   /// request succeeds if it matches the etag of the currently stored secret
   /// object. If the etag is omitted, the request succeeds.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DeleteSecretRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteSecretRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

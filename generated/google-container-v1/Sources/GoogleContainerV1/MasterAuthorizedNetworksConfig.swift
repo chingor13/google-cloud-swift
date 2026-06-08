@@ -25,29 +25,32 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWkt
   Sendable
 {
   /// Whether or not master authorized networks is enabled.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// cidr_blocks define up to 50 external networks that could access
   /// Kubernetes master through HTTPS.
-  public var cidrBlocks: [MasterAuthorizedNetworksConfig.CidrBlock]
+  public var cidrBlocks: [MasterAuthorizedNetworksConfig.CidrBlock] = []
 
   /// Whether master is accessible via Google Compute Engine Public IP addresses.
-  public var gcpPublicCidrsAccessEnabled: Swift.Bool?
+  public var gcpPublicCidrsAccessEnabled: Swift.Bool? = nil
 
   /// Whether master authorized networks is enforced on private endpoint or not.
-  public var privateEndpointEnforcementEnabled: Swift.Bool?
+  public var privateEndpointEnforcementEnabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `MasterAuthorizedNetworksConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    cidrBlocks: [MasterAuthorizedNetworksConfig.CidrBlock] = [],
-    gcpPublicCidrsAccessEnabled: Swift.Bool? = nil,
-    privateEndpointEnforcementEnabled: Swift.Bool? = nil,
-  ) {
-    self.enabled = enabled
-    self.cidrBlocks = cidrBlocks
-    self.gcpPublicCidrsAccessEnabled = gcpPublicCidrsAccessEnabled
-    self.privateEndpointEnforcementEnabled = privateEndpointEnforcementEnabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MasterAuthorizedNetworksConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// CidrBlock contains an optional name and one CIDR block.
@@ -55,18 +58,25 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWkt
     Sendable
   {
     /// display_name is an optional field for users to identify CIDR blocks.
-    public var displayName: Swift.String
+    public var displayName: Swift.String = Swift.String()
 
     /// cidr_block must be specified in CIDR notation.
-    public var cidrBlock: Swift.String
+    public var cidrBlock: Swift.String = Swift.String()
 
     /// Initialize a new instance of `CidrBlock`.
-    public init(
-      displayName: Swift.String = Swift.String(),
-      cidrBlock: Swift.String = Swift.String(),
-    ) {
-      self.displayName = displayName
-      self.cidrBlock = cidrBlock
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CidrBlock().with { $0.displayName = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

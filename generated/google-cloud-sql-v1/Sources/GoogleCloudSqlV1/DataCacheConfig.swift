@@ -23,13 +23,22 @@
     Sendable
   {
     /// Whether data cache is enabled for the instance.
-    public var dataCacheEnabled: Swift.Bool
+    public var dataCacheEnabled: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `DataCacheConfig`.
-    public init(
-      dataCacheEnabled: Swift.Bool = Swift.Bool(),
-    ) {
-      self.dataCacheEnabled = dataCacheEnabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DataCacheConfig().with { $0.dataCacheEnabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

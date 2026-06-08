@@ -23,23 +23,28 @@
     Sendable
   {
     /// Required. The target database version to upgrade to.
-    public var targetDatabaseVersion: SqlDatabaseVersion
+    public var targetDatabaseVersion: SqlDatabaseVersion = SqlDatabaseVersion()
 
     /// Output only. The responses from the precheck operation.
-    public var preCheckResponse: [PreCheckResponse]
+    public var preCheckResponse: [PreCheckResponse] = []
 
     /// Optional. This is always `sql#preCheckMajorVersionUpgradeContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `PreCheckMajorVersionUpgradeContext`.
-    public init(
-      targetDatabaseVersion: SqlDatabaseVersion = SqlDatabaseVersion(),
-      preCheckResponse: [PreCheckResponse] = [],
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.targetDatabaseVersion = targetDatabaseVersion
-      self.preCheckResponse = preCheckResponse
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PreCheckMajorVersionUpgradeContext().with { $0.targetDatabaseVersion = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

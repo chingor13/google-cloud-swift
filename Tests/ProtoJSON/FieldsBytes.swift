@@ -22,15 +22,24 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithBytes()),
       (#"{"singular": ""            }"#, MessageWithBytes()),
-      (#"{"singular": "NDI="        }"#, MessageWithBytes(singular: Data("42".utf8))),
+      (#"{"singular": "NDI="        }"#, MessageWithBytes().with { $0.singular = Data("42".utf8) }),
       (#"{"option":   null          }"#, MessageWithBytes()),
-      (#"{"option":   ""            }"#, MessageWithBytes(option: Data())),
-      (#"{"option":   "NDI="        }"#, MessageWithBytes(option: Data("42".utf8))),
+      (#"{"option":   ""            }"#, MessageWithBytes().with { $0.option = Data() }),
+      (#"{"option":   "NDI="        }"#, MessageWithBytes().with { $0.option = Data("42".utf8) }),
       (#"{"repeated": []            }"#, MessageWithBytes()),
-      (#"{"repeated": ["NDI="]      }"#, MessageWithBytes(repeated: [Data("42".utf8)])),
-      (#"{"repeated": ["NDI=", ""]  }"#, MessageWithBytes(repeated: [Data("42".utf8), Data()])),
+      (
+        #"{"repeated": ["NDI="]      }"#,
+        MessageWithBytes().with { $0.repeated = [Data("42".utf8)] }
+      ),
+      (
+        #"{"repeated": ["NDI=", ""]  }"#,
+        MessageWithBytes().with { $0.repeated = [Data("42".utf8), Data()] }
+      ),
       (#"{"map":      {}            }"#, MessageWithBytes()),
-      (#"{"map":      {"a": "NDI="} }"#, MessageWithBytes(map: ["a": Data("42".utf8)])),
+      (
+        #"{"map":      {"a": "NDI="} }"#,
+        MessageWithBytes().with { $0.map = ["a": Data("42".utf8)] }
+      ),
     ])
   func deserialize(input: String, want: MessageWithBytes) throws {
     let decoder = _ProtoJSONDecoder()

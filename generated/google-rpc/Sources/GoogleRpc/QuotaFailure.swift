@@ -32,13 +32,22 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Describes all quota violations.
-  public var violations: [QuotaFailure.Violation]
+  public var violations: [QuotaFailure.Violation] = []
 
   /// Initialize a new instance of `QuotaFailure`.
-  public init(
-    violations: [QuotaFailure.Violation] = [],
-  ) {
-    self.violations = violations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = QuotaFailure().with { $0.violations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// A message type used to describe a single quota violation.  For example, a
@@ -49,7 +58,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// The subject on which the quota check failed.
     /// For example, "clientip:<ip address of client>" or "project:<Google
     /// developer project id>".
-    public var subject: Swift.String
+    public var subject: Swift.String = Swift.String()
 
     /// A description of how the quota check failed. Clients can use this
     /// description to find more about the quota configuration in the service's
@@ -58,7 +67,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// For example: "Service disabled" or "Daily Limit for read operations
     /// exceeded".
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// The API Service from which the `QuotaFailure.Violation` orginates. In
     /// some cases, Quota issues originate from an API Service other than the one
@@ -73,7 +82,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// occurs when the Kubernetes Engine API creates VMs in the Compute Engine
     /// API (compute.googleapis.com), this field would be
     /// "compute.googleapis.com".
-    public var apiService: Swift.String
+    public var apiService: Swift.String = Swift.String()
 
     /// The metric of the violated quota. A quota metric is a named counter to
     /// measure usage, such as API requests or CPUs. When an activity occurs in a
@@ -82,13 +91,13 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// For example, "compute.googleapis.com/cpus_per_vm_family",
     /// "storage.googleapis.com/internet_egress_bandwidth".
-    public var quotaMetric: Swift.String
+    public var quotaMetric: Swift.String = Swift.String()
 
     /// The id of the violated quota. Also know as "limit name", this is the
     /// unique identifier of a quota in the context of an API service.
     ///
     /// For example, "CPUS-PER-VM-FAMILY-per-project-region".
-    public var quotaId: Swift.String
+    public var quotaId: Swift.String = Swift.String()
 
     /// The dimensions of the violated quota. Every non-global quota is enforced
     /// on a set of dimensions. While quota metric defines what to count, the
@@ -106,14 +115,14 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// When a quota is enforced globally, the quota_dimensions would always be
     /// empty.
-    public var quotaDimensions: [Swift.String: Swift.String]
+    public var quotaDimensions: [Swift.String: Swift.String] = [:]
 
     /// The enforced quota value at the time of the `QuotaFailure`.
     ///
     /// For example, if the enforced quota value at the time of the
     /// `QuotaFailure` on the number of CPUs is "10", then the value of this
     /// field would reflect this quantity.
-    public var quotaValue: Swift.Int64
+    public var quotaValue: Swift.Int64 = Swift.Int64()
 
     /// The new quota value being rolled out at the time of the violation. At the
     /// completion of the rollout, this value will be enforced in place of
@@ -123,27 +132,22 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// For example, if at the time of the violation a rollout is in progress
     /// changing the number of CPUs quota from 10 to 20, 20 would be the value of
     /// this field.
-    public var futureQuotaValue: Swift.Int64?
+    public var futureQuotaValue: Swift.Int64? = nil
 
     /// Initialize a new instance of `Violation`.
-    public init(
-      subject: Swift.String = Swift.String(),
-      description: Swift.String = Swift.String(),
-      apiService: Swift.String = Swift.String(),
-      quotaMetric: Swift.String = Swift.String(),
-      quotaId: Swift.String = Swift.String(),
-      quotaDimensions: [Swift.String: Swift.String] = [:],
-      quotaValue: Swift.Int64 = Swift.Int64(),
-      futureQuotaValue: Swift.Int64? = nil,
-    ) {
-      self.subject = subject
-      self.description = description
-      self.apiService = apiService
-      self.quotaMetric = quotaMetric
-      self.quotaId = quotaId
-      self.quotaDimensions = quotaDimensions
-      self.quotaValue = quotaValue
-      self.futureQuotaValue = futureQuotaValue
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Violation().with { $0.subject = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

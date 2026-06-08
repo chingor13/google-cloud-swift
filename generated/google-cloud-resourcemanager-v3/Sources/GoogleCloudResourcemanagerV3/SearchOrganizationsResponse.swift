@@ -25,22 +25,29 @@ public struct SearchOrganizationsResponse: Codable, Equatable, GoogleCloudWkt._A
 {
   /// The list of Organizations that matched the search query, possibly
   /// paginated.
-  public var organizations: [Organization]
+  public var organizations: [Organization] = []
 
   /// A pagination token to be used to retrieve the next page of results. If the
   /// result is too large to fit within the page size specified in the request,
   /// this field will be set with a token that can be used to fetch the next page
   /// of results. If this field is empty, it indicates that this response
   /// contains the last page of results.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SearchOrganizationsResponse`.
-  public init(
-    organizations: [Organization] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.organizations = organizations
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SearchOrganizationsResponse().with { $0.organizations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

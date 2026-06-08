@@ -23,40 +23,41 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The name of the network for the TPU node. It must be a preexisting Google
   /// Compute Engine network. If none is provided, "default" will be used.
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// The name of the subnetwork for the TPU node. It must be a preexisting
   /// Google Compute Engine subnetwork. If none is provided, "default" will be
   /// used.
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// Indicates that external IP addresses would be associated with the TPU
   /// workers. If set to false, the specified subnetwork or network should have
   /// Private Google Access enabled.
-  public var enableExternalIps: Swift.Bool
+  public var enableExternalIps: Swift.Bool = Swift.Bool()
 
   /// Allows the TPU node to send and receive packets with non-matching
   /// destination or source IPs. This is required if you plan to use the TPU
   /// workers to forward routes.
-  public var canIpForward: Swift.Bool
+  public var canIpForward: Swift.Bool = Swift.Bool()
 
   /// Optional. Specifies networking queue count for TPU VM instance's network
   /// interface.
-  public var queueCount: Swift.Int32
+  public var queueCount: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `NetworkConfig`.
-  public init(
-    network: Swift.String = Swift.String(),
-    subnetwork: Swift.String = Swift.String(),
-    enableExternalIps: Swift.Bool = Swift.Bool(),
-    canIpForward: Swift.Bool = Swift.Bool(),
-    queueCount: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.network = network
-    self.subnetwork = subnetwork
-    self.enableExternalIps = enableExternalIps
-    self.canIpForward = canIpForward
-    self.queueCount = queueCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkConfig().with { $0.network = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

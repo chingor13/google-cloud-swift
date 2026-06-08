@@ -157,15 +157,15 @@ import GoogleRpc
 
     let wantDetails: [StatusDetail] = [
       .help(
-        Help(
-          links: [
-            Help.Link(
-              description: "Google developers console API activation",
-              url:
+        Help().with {
+          $0.links = [
+            Help.Link().with {
+              $0.description = "Google developers console API activation"
+              $0.url =
                 "https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project"
-            )
+            }
           ]
-        ))
+        })
     ]
 
     #expect(serviceError.details == wantDetails)

@@ -23,13 +23,22 @@ public struct NodeLabels: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Map of node label keys and node label values.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `NodeLabels`.
-  public init(
-    labels: [Swift.String: Swift.String] = [:],
-  ) {
-    self.labels = labels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeLabels().with { $0.labels = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

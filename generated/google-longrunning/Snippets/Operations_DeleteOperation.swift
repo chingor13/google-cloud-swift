@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some Operations) async throws {
   try await client.deleteOperation(
-    request: DeleteOperationRequest(/* set fields */
-    )
+    request: DeleteOperationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success (no response expected)")
 }

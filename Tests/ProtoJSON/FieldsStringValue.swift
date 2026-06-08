@@ -21,10 +21,10 @@ import GoogleCloudWkt
     "StringValue fields deserialize",
     arguments: [
       (#"{}"#, MessageWithStringValue()),
-      (#"{"singular": "42"         }"#, MessageWithStringValue(singular: "42")),
+      (#"{"singular": "42"         }"#, MessageWithStringValue().with { $0.singular = "42" }),
       (#"{"repeated": []           }"#, MessageWithStringValue()),
-      (#"{"repeated": ["42"]       }"#, MessageWithStringValue(repeated: ["42"])),
-      (#"{"map":      {"a": "42" } }"#, MessageWithStringValue(map: ["a": "42"])),
+      (#"{"repeated": ["42"]       }"#, MessageWithStringValue().with { $0.repeated = ["42"] }),
+      (#"{"map":      {"a": "42" } }"#, MessageWithStringValue().with { $0.map = ["a": "42"] }),
     ])
   func deserialize(input: String, want: MessageWithStringValue) throws {
     let decoder = _ProtoJSONDecoder()

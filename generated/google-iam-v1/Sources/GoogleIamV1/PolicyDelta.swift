@@ -22,18 +22,25 @@ public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The delta for Bindings between two policies.
-  public var bindingDeltas: [BindingDelta]
+  public var bindingDeltas: [BindingDelta] = []
 
   /// The delta for AuditConfigs between two policies.
-  public var auditConfigDeltas: [AuditConfigDelta]
+  public var auditConfigDeltas: [AuditConfigDelta] = []
 
   /// Initialize a new instance of `PolicyDelta`.
-  public init(
-    bindingDeltas: [BindingDelta] = [],
-    auditConfigDeltas: [AuditConfigDelta] = [],
-  ) {
-    self.bindingDeltas = bindingDeltas
-    self.auditConfigDeltas = auditConfigDeltas
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PolicyDelta().with { $0.bindingDeltas = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.PolicyDelta" }

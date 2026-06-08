@@ -24,28 +24,31 @@
     Sendable
   {
     /// This is always `sql#restoreBackupContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The ID of the backup run to restore from.
-    public var backupRunId: Swift.Int64
+    public var backupRunId: Swift.Int64 = Swift.Int64()
 
     /// The ID of the instance that the backup was taken from.
-    public var instanceId: Swift.String
+    public var instanceId: Swift.String = Swift.String()
 
     /// The full project ID of the source instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `RestoreBackupContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      backupRunId: Swift.Int64 = Swift.Int64(),
-      instanceId: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.backupRunId = backupRunId
-      self.instanceId = instanceId
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RestoreBackupContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

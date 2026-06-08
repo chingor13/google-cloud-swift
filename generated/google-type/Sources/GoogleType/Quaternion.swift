@@ -78,28 +78,31 @@ public struct Quaternion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The x component.
-  public var x: Swift.Double
+  public var x: Swift.Double = Swift.Double()
 
   /// The y component.
-  public var y: Swift.Double
+  public var y: Swift.Double = Swift.Double()
 
   /// The z component.
-  public var z: Swift.Double
+  public var z: Swift.Double = Swift.Double()
 
   /// The scalar component.
-  public var w: Swift.Double
+  public var w: Swift.Double = Swift.Double()
 
   /// Initialize a new instance of `Quaternion`.
-  public init(
-    x: Swift.Double = Swift.Double(),
-    y: Swift.Double = Swift.Double(),
-    z: Swift.Double = Swift.Double(),
-    w: Swift.Double = Swift.Double(),
-  ) {
-    self.x = x
-    self.y = y
-    self.z = z
-    self.w = w
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Quaternion().with { $0.x = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Quaternion" }

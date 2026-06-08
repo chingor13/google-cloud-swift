@@ -23,17 +23,24 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
 {
   /// Exceptions to maintenance window. Non-emergency maintenance should not
   /// occur in these windows.
-  public var maintenanceExclusions: [Swift.String: TimeWindow]
+  public var maintenanceExclusions: [Swift.String: TimeWindow] = [:]
 
-  public var policy: OneOf_Policy?
+  public var policy: OneOf_Policy? = nil
 
   /// Initialize a new instance of `MaintenanceWindow`.
-  public init(
-    maintenanceExclusions: [Swift.String: TimeWindow] = [:],
-    policy: OneOf_Policy? = nil,
-  ) {
-    self.maintenanceExclusions = maintenanceExclusions
-    self.policy = policy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaintenanceWindow().with { $0.dailyMaintenanceWindow = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

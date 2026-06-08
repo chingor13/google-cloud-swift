@@ -83,13 +83,13 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// vm.swappiness
   /// vm.watermark_scale_factor
   /// vm.min_free_kbytes
-  public var sysctls: [Swift.String: Swift.String]
+  public var sysctls: [Swift.String: Swift.String] = [:]
 
   /// cgroup_mode specifies the cgroup mode to be used on the node.
-  public var cgroupMode: LinuxNodeConfig.CgroupMode
+  public var cgroupMode: LinuxNodeConfig.CgroupMode = LinuxNodeConfig.CgroupMode()
 
   /// Optional. Amounts for 2M and 1G hugepages
-  public var hugepages: LinuxNodeConfig.HugepagesConfig?
+  public var hugepages: LinuxNodeConfig.HugepagesConfig? = nil
 
   /// Optional. Transparent hugepage support for anonymous memory can be entirely
   /// disabled (mostly for debugging purposes) or only enabled inside
@@ -98,7 +98,8 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// See https://docs.kernel.org/admin-guide/mm/transhuge.html
   /// for more details.
-  public var transparentHugepageEnabled: LinuxNodeConfig.TransparentHugepageEnabled
+  public var transparentHugepageEnabled: LinuxNodeConfig.TransparentHugepageEnabled =
+    LinuxNodeConfig.TransparentHugepageEnabled()
 
   /// Optional. Defines the transparent hugepage defrag configuration on the
   /// node. VM hugepage allocation can be managed by either limiting
@@ -107,47 +108,39 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// See https://docs.kernel.org/admin-guide/mm/transhuge.html
   /// for more details.
-  public var transparentHugepageDefrag: LinuxNodeConfig.TransparentHugepageDefrag
+  public var transparentHugepageDefrag: LinuxNodeConfig.TransparentHugepageDefrag =
+    LinuxNodeConfig.TransparentHugepageDefrag()
 
   /// Optional. Allow users to run arbitrary bash script or container on the
   /// node.
-  public var customNodeInit: LinuxNodeConfig.CustomNodeInit?
+  public var customNodeInit: LinuxNodeConfig.CustomNodeInit? = nil
 
   /// Optional. Enables and configures swap space on nodes.
   /// If omitted, swap is disabled.
-  public var swapConfig: LinuxNodeConfig.SwapConfig?
+  public var swapConfig: LinuxNodeConfig.SwapConfig? = nil
 
   /// Optional. Configuration for kernel module loading on nodes.
   /// When enabled, the node pool will be provisioned with a Container-Optimized
   /// OS image that enforces kernel module signature verification.
-  public var nodeKernelModuleLoading: LinuxNodeConfig.NodeKernelModuleLoading?
+  public var nodeKernelModuleLoading: LinuxNodeConfig.NodeKernelModuleLoading? = nil
 
   /// Optional. The accurate time configuration for the node pool.
-  public var accurateTimeConfig: LinuxNodeConfig.AccurateTimeConfig?
+  public var accurateTimeConfig: LinuxNodeConfig.AccurateTimeConfig? = nil
 
   /// Initialize a new instance of `LinuxNodeConfig`.
-  public init(
-    sysctls: [Swift.String: Swift.String] = [:],
-    cgroupMode: LinuxNodeConfig.CgroupMode = LinuxNodeConfig.CgroupMode(),
-    hugepages: LinuxNodeConfig.HugepagesConfig? = nil,
-    transparentHugepageEnabled: LinuxNodeConfig.TransparentHugepageEnabled =
-      LinuxNodeConfig.TransparentHugepageEnabled(),
-    transparentHugepageDefrag: LinuxNodeConfig.TransparentHugepageDefrag =
-      LinuxNodeConfig.TransparentHugepageDefrag(),
-    customNodeInit: LinuxNodeConfig.CustomNodeInit? = nil,
-    swapConfig: LinuxNodeConfig.SwapConfig? = nil,
-    nodeKernelModuleLoading: LinuxNodeConfig.NodeKernelModuleLoading? = nil,
-    accurateTimeConfig: LinuxNodeConfig.AccurateTimeConfig? = nil,
-  ) {
-    self.sysctls = sysctls
-    self.cgroupMode = cgroupMode
-    self.hugepages = hugepages
-    self.transparentHugepageEnabled = transparentHugepageEnabled
-    self.transparentHugepageDefrag = transparentHugepageDefrag
-    self.customNodeInit = customNodeInit
-    self.swapConfig = swapConfig
-    self.nodeKernelModuleLoading = nodeKernelModuleLoading
-    self.accurateTimeConfig = accurateTimeConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LinuxNodeConfig().with { $0.sysctls = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Hugepages amount in both 2m and 1g size
@@ -155,18 +148,25 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. Amount of 2M hugepages
-    public var hugepageSize2M: Swift.Int32?
+    public var hugepageSize2M: Swift.Int32? = nil
 
     /// Optional. Amount of 1G hugepages
-    public var hugepageSize1G: Swift.Int32?
+    public var hugepageSize1G: Swift.Int32? = nil
 
     /// Initialize a new instance of `HugepagesConfig`.
-    public init(
-      hugepageSize2M: Swift.Int32? = nil,
-      hugepageSize1G: Swift.Int32? = nil,
-    ) {
-      self.hugepageSize2M = hugepageSize2M
-      self.hugepageSize1G = hugepageSize1G
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = HugepagesConfig().with { $0.hugepageSize2M = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -202,13 +202,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. The init script to be executed on the node.
-    public var initScript: LinuxNodeConfig.CustomNodeInit.InitScript?
+    public var initScript: LinuxNodeConfig.CustomNodeInit.InitScript? = nil
 
     /// Initialize a new instance of `CustomNodeInit`.
-    public init(
-      initScript: LinuxNodeConfig.CustomNodeInit.InitScript? = nil,
-    ) {
-      self.initScript = initScript
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CustomNodeInit().with { $0.initScript = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// InitScript provide a simply bash script to be executed on the node.
@@ -220,7 +229,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// The service account on the node pool must have read access to the
       /// object.
       /// User can't configure both gcs_uri and gcp_secret_manager_secret_uri.
-      public var gcsUri: Swift.String
+      public var gcsUri: Swift.String = Swift.String()
 
       /// The generation of the init script stored in Gloud Storage.
       /// This is the required field to identify the version of the
@@ -229,10 +238,10 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// `gcloud storage objects describe gs://BUCKET_NAME/OBJECT_NAME
       /// --format="value(generation)"` or from the "Version history" tab of the
       /// object in the Cloud Console UI.
-      public var gcsGeneration: Swift.Int64
+      public var gcsGeneration: Swift.Int64 = Swift.Int64()
 
       /// Optional. The optional arguments line to be passed to the init script.
-      public var args: [Swift.String]
+      public var args: [Swift.String] = []
 
       /// The resource name of the secret manager secret hosting the init script.
       /// Both global and regional secrets are supported with format below:
@@ -242,19 +251,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Example: projects/1234567890/secrets/script_1/versions/1.
       /// Accept version number only, not support version alias.
       /// User can't configure both gcp_secret_manager_secret_uri and gcs_uri.
-      public var gcpSecretManagerSecretUri: Swift.String
+      public var gcpSecretManagerSecretUri: Swift.String = Swift.String()
 
       /// Initialize a new instance of `InitScript`.
-      public init(
-        gcsUri: Swift.String = Swift.String(),
-        gcsGeneration: Swift.Int64 = Swift.Int64(),
-        args: [Swift.String] = [],
-        gcpSecretManagerSecretUri: Swift.String = Swift.String(),
-      ) {
-        self.gcsUri = gcsUri
-        self.gcsGeneration = gcsGeneration
-        self.args = args
-        self.gcpSecretManagerSecretUri = gcpSecretManagerSecretUri
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = InitScript().with { $0.gcsUri = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -284,24 +296,29 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. Enables or disables swap for the node pool.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// Optional. If omitted, swap space is encrypted by default.
-    public var encryptionConfig: LinuxNodeConfig.SwapConfig.EncryptionConfig?
+    public var encryptionConfig: LinuxNodeConfig.SwapConfig.EncryptionConfig? = nil
 
     /// Optional. Defines the backing storage for the swap space.
     /// If omitted, defaults to the 'boot_disk_profile'.
-    public var performanceProfile: OneOf_PerformanceProfile?
+    public var performanceProfile: OneOf_PerformanceProfile? = nil
 
     /// Initialize a new instance of `SwapConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      encryptionConfig: LinuxNodeConfig.SwapConfig.EncryptionConfig? = nil,
-      performanceProfile: OneOf_PerformanceProfile? = nil,
-    ) {
-      self.enabled = enabled
-      self.encryptionConfig = encryptionConfig
-      self.performanceProfile = performanceProfile
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SwapConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -369,13 +386,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       /// Optional. If true, swap space will not be encrypted.
       /// Defaults to false (encrypted).
-      public var disabled: Swift.Bool?
+      public var disabled: Swift.Bool? = nil
 
       /// Initialize a new instance of `EncryptionConfig`.
-      public init(
-        disabled: Swift.Bool? = nil,
-      ) {
-        self.disabled = disabled
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = EncryptionConfig().with { $0.disabled = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -395,13 +421,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       /// Optional. Specifies the size of the swap space. If omitted, GKE
       /// determines an optimal size based on node memory.
-      public var swapSize: OneOf_SwapSize?
+      public var swapSize: OneOf_SwapSize? = nil
 
       /// Initialize a new instance of `BootDiskProfile`.
-      public init(
-        swapSize: OneOf_SwapSize? = nil,
-      ) {
-        self.swapSize = swapSize
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = BootDiskProfile().with { $0.swapSizeGib = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       private enum CodingKeys: String, CodingKey {
@@ -472,13 +507,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Specifies the size of the swap space to be provisioned.
-      public var swapSize: OneOf_SwapSize?
+      public var swapSize: OneOf_SwapSize? = nil
 
       /// Initialize a new instance of `EphemeralLocalSsdProfile`.
-      public init(
-        swapSize: OneOf_SwapSize? = nil,
-      ) {
-        self.swapSize = swapSize
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = EphemeralLocalSsdProfile().with { $0.swapSizeGib = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       private enum CodingKeys: String, CodingKey {
@@ -549,13 +593,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The number of physical local NVMe SSD disks to attach.
-      public var diskCount: Swift.Int64
+      public var diskCount: Swift.Int64 = Swift.Int64()
 
       /// Initialize a new instance of `DedicatedLocalSsdProfile`.
-      public init(
-        diskCount: Swift.Int64 = Swift.Int64(),
-      ) {
-        self.diskCount = diskCount
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = DedicatedLocalSsdProfile().with { $0.diskCount = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -597,14 +650,23 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Set the node module loading policy for nodes in the node pool.
-    public var policy: LinuxNodeConfig.NodeKernelModuleLoading.Policy
+    public var policy: LinuxNodeConfig.NodeKernelModuleLoading.Policy = LinuxNodeConfig
+      .NodeKernelModuleLoading.Policy()
 
     /// Initialize a new instance of `NodeKernelModuleLoading`.
-    public init(
-      policy: LinuxNodeConfig.NodeKernelModuleLoading.Policy = LinuxNodeConfig
-        .NodeKernelModuleLoading.Policy(),
-    ) {
-      self.policy = policy
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NodeKernelModuleLoading().with { $0.policy = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Defines the kernel module loading policy for nodes in the node pool.
@@ -726,13 +788,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Enables enhanced time synchronization using PTP-KVM.
-    public var enablePtpKvmTimeSync: Swift.Bool?
+    public var enablePtpKvmTimeSync: Swift.Bool? = nil
 
     /// Initialize a new instance of `AccurateTimeConfig`.
-    public init(
-      enablePtpKvmTimeSync: Swift.Bool? = nil,
-    ) {
-      self.enablePtpKvmTimeSync = enablePtpKvmTimeSync
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AccurateTimeConfig().with { $0.enablePtpKvmTimeSync = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

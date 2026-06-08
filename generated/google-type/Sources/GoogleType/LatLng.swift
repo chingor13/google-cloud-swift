@@ -26,18 +26,25 @@ public struct LatLng: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The latitude in degrees. It must be in the range [-90.0, +90.0].
-  public var latitude: Swift.Double
+  public var latitude: Swift.Double = Swift.Double()
 
   /// The longitude in degrees. It must be in the range [-180.0, +180.0].
-  public var longitude: Swift.Double
+  public var longitude: Swift.Double = Swift.Double()
 
   /// Initialize a new instance of `LatLng`.
-  public init(
-    latitude: Swift.Double = Swift.Double(),
-    longitude: Swift.Double = Swift.Double(),
-  ) {
-    self.latitude = latitude
-    self.longitude = longitude
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LatLng().with { $0.latitude = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.LatLng" }

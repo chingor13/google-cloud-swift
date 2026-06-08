@@ -23,13 +23,22 @@
     Sendable
   {
     /// The number of threads per physical core.
-    public var threadsPerCore: Swift.Int32
+    public var threadsPerCore: Swift.Int32 = Swift.Int32()
 
     /// Initialize a new instance of `AdvancedMachineFeatures`.
-    public init(
-      threadsPerCore: Swift.Int32 = Swift.Int32(),
-    ) {
-      self.threadsPerCore = threadsPerCore
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AdvancedMachineFeatures().with { $0.threadsPerCore = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

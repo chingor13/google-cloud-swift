@@ -24,14 +24,14 @@ public struct Folder: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The resource name of the folder.
   /// Its format is `folders/{folder_id}`, for example: "folders/1234".
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. The folder's parent's resource name.
   /// Updates to the folder's parent must be performed using
   /// [MoveFolder][google.cloud.resourcemanager.v3.Folders.MoveFolder].
   ///
   /// [google.cloud.resourcemanager.v3.Folders.MoveFolder]: <doc:Folders/moveFolder(request:)>
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The folder's display name.
   /// A folder's display name must be unique amongst its siblings. For example,
@@ -40,7 +40,7 @@ public struct Folder: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// letters, digits, spaces, hyphens and underscores and can be no longer
   /// than 30 characters. This is captured by the regular expression:
   /// `[\p{L}\p{N}]([\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?`.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Output only. The lifecycle state of the folder.
   /// Updates to the state must be performed using
@@ -49,41 +49,36 @@ public struct Folder: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.resourcemanager.v3.Folders.DeleteFolder]: <doc:Folders/deleteFolder(request:)>
   /// [google.cloud.resourcemanager.v3.Folders.UndeleteFolder]: <doc:Folders/undeleteFolder(request:)>
-  public var state: Folder.State
+  public var state: Folder.State = Folder.State()
 
   /// Output only. Timestamp when the folder was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Timestamp when the folder was last modified.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Timestamp when the folder was requested to be deleted.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. A checksum computed by the server based on the current value
   /// of the folder resource. This may be sent on update and delete requests to
   /// ensure the client has an up-to-date value before proceeding.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Folder`.
-  public init(
-    name: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-    state: Folder.State = Folder.State(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.parent = parent
-    self.displayName = displayName
-    self.state = state
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Folder().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Folder lifecycle states.

@@ -24,19 +24,26 @@ public struct ListTasksResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The resulting list of Tasks.
-  public var tasks: [Task]
+  public var tasks: [Task] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListTasks request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTasksResponse`.
-  public init(
-    tasks: [Task] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.tasks = tasks
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTasksResponse().with { $0.tasks = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

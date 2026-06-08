@@ -24,7 +24,7 @@ public struct WorkerPoolRevisionTemplate: Codable, Equatable, GoogleCloudWkt._An
 {
   /// Optional. The unique name for the revision. If this field is omitted, it
   /// will be automatically generated based on the WorkerPool name.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Optional. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -37,7 +37,7 @@ public struct WorkerPoolRevisionTemplate: Codable, Equatable, GoogleCloudWkt._An
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 WorkerPoolRevisionTemplate.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Optional. Unstructured key value map that may be set by external tools to
   /// store and arbitrary metadata. They are not queryable and should be
@@ -50,76 +50,62 @@ public struct WorkerPoolRevisionTemplate: Codable, Equatable, GoogleCloudWkt._An
   ///
   /// This field follows Kubernetes annotations' namespacing, limits, and
   /// rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Optional. VPC Access configuration to use for this Revision. For more
   /// information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
   /// Optional. Email address of the IAM service account associated with the
   /// revision of the service. The service account represents the identity of the
   /// running revision, and determines what permissions the revision has. If not
   /// provided, the revision will use the project's default service account.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Holds list of the containers that defines the unit of execution for this
   /// Revision.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// Optional. A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// A reference to a customer managed encryption key (CMEK) to use to encrypt
   /// this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// Optional. Enables service mesh connectivity.
-  public var serviceMesh: ServiceMesh?
+  public var serviceMesh: ServiceMesh? = nil
 
   /// Optional. The action to take if the encryption key is revoked.
-  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction
+  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction =
+    EncryptionKeyRevocationAction()
 
   /// Optional. If encryption_key_revocation_action is SHUTDOWN, the duration
   /// before shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration?
+  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil
 
   /// Optional. The node selector for the revision template.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. True if GPU zonal redundancy is disabled on this worker pool.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `WorkerPoolRevisionTemplate`.
-  public init(
-    revision: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    vpcAccess: VpcAccess? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    encryptionKey: Swift.String = Swift.String(),
-    serviceMesh: ServiceMesh? = nil,
-    encryptionKeyRevocationAction: EncryptionKeyRevocationAction = EncryptionKeyRevocationAction(),
-    encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil,
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-  ) {
-    self.revision = revision
-    self.labels = labels
-    self.annotations = annotations
-    self.vpcAccess = vpcAccess
-    self.serviceAccount = serviceAccount
-    self.containers = containers
-    self.volumes = volumes
-    self.encryptionKey = encryptionKey
-    self.serviceMesh = serviceMesh
-    self.encryptionKeyRevocationAction = encryptionKeyRevocationAction
-    self.encryptionKeyShutdownDuration = encryptionKeyShutdownDuration
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkerPoolRevisionTemplate().with { $0.revision = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

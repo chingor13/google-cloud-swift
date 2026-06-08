@@ -24,32 +24,35 @@
     Sendable
   {
     /// Hour of day - 0 to 23. Specify in the UTC time zone.
-    public var hour: GoogleCloudWkt.Int32Value?
+    public var hour: GoogleCloudWkt.Int32Value? = nil
 
     /// Day of week - `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`,
     /// `SATURDAY`, or `SUNDAY`. Specify in the UTC time zone.
     /// Returned in output as an integer, 1 to 7, where `1` equals Monday.
-    public var day: GoogleCloudWkt.Int32Value?
+    public var day: GoogleCloudWkt.Int32Value? = nil
 
     /// Maintenance timing settings: `canary`, `stable`, or `week5`.
     /// For more information, see [About maintenance on Cloud SQL
     /// instances](https://cloud.google.com/sql/docs/mysql/maintenance).
-    public var updateTrack: SqlUpdateTrack
+    public var updateTrack: SqlUpdateTrack = SqlUpdateTrack()
 
     /// This is always `sql#maintenanceWindow`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `MaintenanceWindow`.
-    public init(
-      hour: GoogleCloudWkt.Int32Value? = nil,
-      day: GoogleCloudWkt.Int32Value? = nil,
-      updateTrack: SqlUpdateTrack = SqlUpdateTrack(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.hour = hour
-      self.day = day
-      self.updateTrack = updateTrack
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MaintenanceWindow().with { $0.hour = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

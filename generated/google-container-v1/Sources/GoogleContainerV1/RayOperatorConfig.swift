@@ -22,23 +22,28 @@ public struct RayOperatorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Whether the Ray Operator addon is enabled for this cluster.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Optional. Logging configuration for Ray clusters.
-  public var rayClusterLoggingConfig: RayClusterLoggingConfig?
+  public var rayClusterLoggingConfig: RayClusterLoggingConfig? = nil
 
   /// Optional. Monitoring configuration for Ray clusters.
-  public var rayClusterMonitoringConfig: RayClusterMonitoringConfig?
+  public var rayClusterMonitoringConfig: RayClusterMonitoringConfig? = nil
 
   /// Initialize a new instance of `RayOperatorConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    rayClusterLoggingConfig: RayClusterLoggingConfig? = nil,
-    rayClusterMonitoringConfig: RayClusterMonitoringConfig? = nil,
-  ) {
-    self.enabled = enabled
-    self.rayClusterLoggingConfig = rayClusterLoggingConfig
-    self.rayClusterMonitoringConfig = rayClusterMonitoringConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RayOperatorConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

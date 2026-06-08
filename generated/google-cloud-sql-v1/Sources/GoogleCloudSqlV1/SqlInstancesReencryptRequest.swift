@@ -23,23 +23,28 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Reencrypt body that users request
-    public var body: InstancesReencryptRequest?
+    public var body: InstancesReencryptRequest? = nil
 
     /// Initialize a new instance of `SqlInstancesReencryptRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      body: InstancesReencryptRequest? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.body = body
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesReencryptRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

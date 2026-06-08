@@ -24,8 +24,8 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService) async throws {
   let response = try await client.disableSecretVersion(
-    request: DisableSecretVersionRequest(/* set fields */
-    )
+    request: DisableSecretVersionRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

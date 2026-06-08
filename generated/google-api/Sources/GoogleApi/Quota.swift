@@ -72,19 +72,26 @@ public struct Quota: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// List of QuotaLimit definitions for the service.
-  public var limits: [QuotaLimit]
+  public var limits: [QuotaLimit] = []
 
   /// List of MetricRule definitions, each one mapping a selected method to one
   /// or more metrics.
-  public var metricRules: [MetricRule]
+  public var metricRules: [MetricRule] = []
 
   /// Initialize a new instance of `Quota`.
-  public init(
-    limits: [QuotaLimit] = [],
-    metricRules: [MetricRule] = [],
-  ) {
-    self.limits = limits
-    self.metricRules = metricRules
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Quota().with { $0.limits = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Quota" }

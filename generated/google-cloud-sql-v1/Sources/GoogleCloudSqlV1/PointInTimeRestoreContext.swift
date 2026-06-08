@@ -26,18 +26,18 @@
     /// The Backup and Disaster Recovery (DR) Service Datasource URI.
     /// Format:
     /// projects/{project}/locations/{region}/backupVaults/{backupvault}/dataSources/{datasource}.
-    public var datasource: Swift.String?
+    public var datasource: Swift.String? = nil
 
     /// Required. The date and time to which you want to restore the instance.
-    public var pointInTime: GoogleCloudWkt.Timestamp?
+    public var pointInTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Target instance name.
-    public var targetInstance: Swift.String?
+    public var targetInstance: Swift.String? = nil
 
     /// Optional. The resource link for the VPC network from which the Cloud SQL
     /// instance is accessible for private IP. For example,
     /// `/projects/myProject/global/networks/default`.
-    public var privateNetwork: Swift.String?
+    public var privateNetwork: Swift.String? = nil
 
     /// Optional. The name of the allocated IP range for the internal IP Cloud SQL
     /// instance. For example: "google-managed-services-default". If you set this,
@@ -46,53 +46,44 @@
     /// 1035](https://tools.ietf.org/html/rfc1035) standards. Specifically, the
     /// name must be 1-63 characters long and match the regular expression
     /// [a-z]([-a-z0-9]*[a-z0-9])?. Reserved for future use.
-    public var allocatedIpRange: Swift.String?
+    public var allocatedIpRange: Swift.String? = nil
 
     /// Optional. Point-in-time recovery of an instance to the specified zone. If
     /// no zone is specified, then clone to the same primary zone as the source
     /// instance.
-    public var preferredZone: Swift.String?
+    public var preferredZone: Swift.String? = nil
 
     /// Optional. Point-in-time recovery of a regional instance in the specified
     /// zones. If not specified, clone to the same secondary zone as the source
     /// instance. This value cannot be the same as the preferred_zone field.
-    public var preferredSecondaryZone: Swift.String?
+    public var preferredSecondaryZone: Swift.String? = nil
 
     /// Optional. Specifies the instance settings that will be overridden from the
     /// source instance. This field is only applicable for cross project PITRs.
-    public var targetInstanceSettings: DatabaseInstance?
+    public var targetInstanceSettings: DatabaseInstance? = nil
 
     /// Optional. Specifies the instance settings that will be cleared from the
     /// source instance. This field is only applicable for cross project PITRs.
-    public var targetInstanceClearSettingsFieldNames: [Swift.String]
+    public var targetInstanceClearSettingsFieldNames: [Swift.String] = []
 
     /// Optional. The region of the target instance where the datasource will be
     /// restored. For example: "us-central1".
-    public var region: Swift.String?
+    public var region: Swift.String? = nil
 
     /// Initialize a new instance of `PointInTimeRestoreContext`.
-    public init(
-      datasource: Swift.String? = nil,
-      pointInTime: GoogleCloudWkt.Timestamp? = nil,
-      targetInstance: Swift.String? = nil,
-      privateNetwork: Swift.String? = nil,
-      allocatedIpRange: Swift.String? = nil,
-      preferredZone: Swift.String? = nil,
-      preferredSecondaryZone: Swift.String? = nil,
-      targetInstanceSettings: DatabaseInstance? = nil,
-      targetInstanceClearSettingsFieldNames: [Swift.String] = [],
-      region: Swift.String? = nil,
-    ) {
-      self.datasource = datasource
-      self.pointInTime = pointInTime
-      self.targetInstance = targetInstance
-      self.privateNetwork = privateNetwork
-      self.allocatedIpRange = allocatedIpRange
-      self.preferredZone = preferredZone
-      self.preferredSecondaryZone = preferredSecondaryZone
-      self.targetInstanceSettings = targetInstanceSettings
-      self.targetInstanceClearSettingsFieldNames = targetInstanceClearSettingsFieldNames
-      self.region = region
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PointInTimeRestoreContext().with { $0.datasource = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

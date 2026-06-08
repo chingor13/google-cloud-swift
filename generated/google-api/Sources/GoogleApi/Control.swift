@@ -29,18 +29,25 @@ public struct Control: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The service controller environment to use. If empty, no control plane
   /// features (like quota and billing) will be enabled. The recommended value
   /// for most services is servicecontrol.googleapis.com.
-  public var environment: Swift.String
+  public var environment: Swift.String = Swift.String()
 
   /// Defines policies applying to the API methods of the service.
-  public var methodPolicies: [MethodPolicy]
+  public var methodPolicies: [MethodPolicy] = []
 
   /// Initialize a new instance of `Control`.
-  public init(
-    environment: Swift.String = Swift.String(),
-    methodPolicies: [MethodPolicy] = [],
-  ) {
-    self.environment = environment
-    self.methodPolicies = methodPolicies
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Control().with { $0.environment = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Control" }

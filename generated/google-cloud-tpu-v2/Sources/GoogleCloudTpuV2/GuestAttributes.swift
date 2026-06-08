@@ -24,18 +24,25 @@ public struct GuestAttributes: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The path to be queried. This can be the default namespace ('/') or a
   /// nested namespace ('/\<namespace\>/') or a specified key
   /// ('/\<namespace\>/\<key\>')
-  public var queryPath: Swift.String
+  public var queryPath: Swift.String = Swift.String()
 
   /// The value of the requested queried path.
-  public var queryValue: GuestAttributesValue?
+  public var queryValue: GuestAttributesValue? = nil
 
   /// Initialize a new instance of `GuestAttributes`.
-  public init(
-    queryPath: Swift.String = Swift.String(),
-    queryValue: GuestAttributesValue? = nil,
-  ) {
-    self.queryPath = queryPath
-    self.queryValue = queryValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GuestAttributes().with { $0.queryPath = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

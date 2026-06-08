@@ -35,29 +35,32 @@ public struct AuthenticationRule: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// The requirements for OAuth credentials.
-  public var oauth: OAuthRequirements?
+  public var oauth: OAuthRequirements? = nil
 
   /// If true, the service accepts API keys without any other credential.
   /// This flag only applies to HTTP and gRPC requests.
-  public var allowWithoutCredential: Swift.Bool
+  public var allowWithoutCredential: Swift.Bool = Swift.Bool()
 
   /// Requirements for additional authentication providers.
-  public var requirements: [AuthRequirement]
+  public var requirements: [AuthRequirement] = []
 
   /// Initialize a new instance of `AuthenticationRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    oauth: OAuthRequirements? = nil,
-    allowWithoutCredential: Swift.Bool = Swift.Bool(),
-    requirements: [AuthRequirement] = [],
-  ) {
-    self.selector = selector
-    self.oauth = oauth
-    self.allowWithoutCredential = allowWithoutCredential
-    self.requirements = requirements
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuthenticationRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

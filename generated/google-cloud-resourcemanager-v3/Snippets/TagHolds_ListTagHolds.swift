@@ -24,9 +24,8 @@ import GoogleRpc
 
 func sample(client: some TagHolds, tagValueId: String) async throws {
   let items = try client.listTagHolds(
-    byItem: ListTagHoldsRequest(
-      parent: "tagValues/\(tagValueId)",
-    )
+    byItem: ListTagHoldsRequest()
+      .with { $0.parent = "tagValues/\(tagValueId)" }
   )
   for try await item in items {
     print("  \(item)")

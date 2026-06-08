@@ -32,7 +32,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
   ///
   /// This field cannot be changed after the node pool has been created.
-  public var createPodRange: Swift.Bool
+  public var createPodRange: Swift.Bool = Swift.Bool()
 
   /// The ID of the secondary range for pod IPs.
   /// If `create_pod_range` is true, this ID is used for the new range.
@@ -42,7 +42,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
   ///
   /// This field cannot be changed after the node pool has been created.
-  public var podRange: Swift.String
+  public var podRange: Swift.String = Swift.String()
 
   /// The IP address range for pod IPs in this node pool.
   ///
@@ -60,15 +60,15 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
   ///
   /// This field cannot be changed after the node pool has been created.
-  public var podIpv4CidrBlock: Swift.String
+  public var podIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Whether nodes have internal IP addresses only.
   /// If enable_private_nodes is not specified, then the value is derived from
   /// [Cluster.NetworkConfig.default_enable_private_nodes][]
-  public var enablePrivateNodes: Swift.Bool?
+  public var enablePrivateNodes: Swift.Bool? = nil
 
   /// Network bandwidth tier configuration.
-  public var networkPerformanceConfig: NodeNetworkConfig.NetworkPerformanceConfig?
+  public var networkPerformanceConfig: NodeNetworkConfig.NetworkPerformanceConfig? = nil
 
   /// [PRIVATE FIELD]
   /// Pod CIDR size overprovisioning config for the node pool.
@@ -82,20 +82,20 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// power of 2)
   /// Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
   /// overprovisioning is disabled.
-  public var podCidrOverprovisionConfig: PodCIDROverprovisionConfig?
+  public var podCidrOverprovisionConfig: PodCIDROverprovisionConfig? = nil
 
   /// We specify the additional node networks for this node pool using this list.
   /// Each node network corresponds to an additional interface
-  public var additionalNodeNetworkConfigs: [AdditionalNodeNetworkConfig]
+  public var additionalNodeNetworkConfigs: [AdditionalNodeNetworkConfig] = []
 
   /// We specify the additional pod networks for this node pool using this list.
   /// Each pod network corresponds to an additional alias IP range for the node
-  public var additionalPodNetworkConfigs: [AdditionalPodNetworkConfig]
+  public var additionalPodNetworkConfigs: [AdditionalPodNetworkConfig] = []
 
   /// Output only. The utilization of the IPv4 range for the pod.
   /// The ratio is Usage/[Total number of IPs in the secondary range],
   /// Usage=numNodes*numZones*podIPsPerNode.
-  public var podIpv4RangeUtilization: Swift.Double
+  public var podIpv4RangeUtilization: Swift.Double = Swift.Double()
 
   /// Optional. The subnetwork name/path for the node pool.
   /// Format: projects/{project}/regions/{region}/subnetworks/{subnetwork}
@@ -109,46 +109,33 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// `projects/gke-project/regions/us-central1/subnetworks/my-subnet`
   /// - A subnetwork path picked based on the IP utilization during node pool
   /// creation and is immutable.
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// Output only. The network tier configuration for the node pool inherits from
   /// the cluster-level configuration and remains immutable throughout the node
   /// pool's lifecycle, including during upgrades.
-  public var networkTierConfig: NetworkTierConfig?
+  public var networkTierConfig: NetworkTierConfig? = nil
 
   /// Immutable. The accelerator network profile for the node pool. For now the
   /// only valid value is "auto". If specified, the network configuration of the
   /// nodes in this node pool will be managed by this profile for the supported
   /// machine types, zone, etc.
-  public var acceleratorNetworkProfile: Swift.String
+  public var acceleratorNetworkProfile: Swift.String = Swift.String()
 
   /// Initialize a new instance of `NodeNetworkConfig`.
-  public init(
-    createPodRange: Swift.Bool = Swift.Bool(),
-    podRange: Swift.String = Swift.String(),
-    podIpv4CidrBlock: Swift.String = Swift.String(),
-    enablePrivateNodes: Swift.Bool? = nil,
-    networkPerformanceConfig: NodeNetworkConfig.NetworkPerformanceConfig? = nil,
-    podCidrOverprovisionConfig: PodCIDROverprovisionConfig? = nil,
-    additionalNodeNetworkConfigs: [AdditionalNodeNetworkConfig] = [],
-    additionalPodNetworkConfigs: [AdditionalPodNetworkConfig] = [],
-    podIpv4RangeUtilization: Swift.Double = Swift.Double(),
-    subnetwork: Swift.String = Swift.String(),
-    networkTierConfig: NetworkTierConfig? = nil,
-    acceleratorNetworkProfile: Swift.String = Swift.String(),
-  ) {
-    self.createPodRange = createPodRange
-    self.podRange = podRange
-    self.podIpv4CidrBlock = podIpv4CidrBlock
-    self.enablePrivateNodes = enablePrivateNodes
-    self.networkPerformanceConfig = networkPerformanceConfig
-    self.podCidrOverprovisionConfig = podCidrOverprovisionConfig
-    self.additionalNodeNetworkConfigs = additionalNodeNetworkConfigs
-    self.additionalPodNetworkConfigs = additionalPodNetworkConfigs
-    self.podIpv4RangeUtilization = podIpv4RangeUtilization
-    self.subnetwork = subnetwork
-    self.networkTierConfig = networkTierConfig
-    self.acceleratorNetworkProfile = acceleratorNetworkProfile
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeNetworkConfig().with { $0.createPodRange = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration of all network bandwidth tiers
@@ -156,13 +143,22 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     Sendable
   {
     /// Specifies the total network bandwidth tier for the NodePool.
-    public var totalEgressBandwidthTier: NodeNetworkConfig.NetworkPerformanceConfig.Tier?
+    public var totalEgressBandwidthTier: NodeNetworkConfig.NetworkPerformanceConfig.Tier? = nil
 
     /// Initialize a new instance of `NetworkPerformanceConfig`.
-    public init(
-      totalEgressBandwidthTier: NodeNetworkConfig.NetworkPerformanceConfig.Tier? = nil,
-    ) {
-      self.totalEgressBandwidthTier = totalEgressBandwidthTier
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NetworkPerformanceConfig().with { $0.totalEgressBandwidthTier = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Node network tier

@@ -24,40 +24,39 @@ public struct ListSnapshotsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Required. The instance for which to retrieve snapshot information,
   /// in the format
   /// `projects/{project_id}/locations/{location}/instances/{instance_id}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The maximum number of items to return.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The next_page_token value to use if there are additional
   /// results to retrieve for this list request.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Sort results. Supported values are "name", "name desc" or "" (unsorted).
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// List filter.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Optional. If true, allow partial responses for multi-regional Aggregated
   /// List requests.
-  public var returnPartialSuccess: Swift.Bool
+  public var returnPartialSuccess: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListSnapshotsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    returnPartialSuccess: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.orderBy = orderBy
-    self.filter = filter
-    self.returnPartialSuccess = returnPartialSuccess
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListSnapshotsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -29,7 +29,7 @@ public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPacka
   ///
   /// Example:
   /// `principal://parametermanager.googleapis.com/projects/12345/name/locations/us-central1-a/parameters/my-parameter`
-  public var iamPolicyNamePrincipal: Swift.String
+  public var iamPolicyNamePrincipal: Swift.String = Swift.String()
 
   /// IAM policy binding member referring to a Google Cloud resource by
   /// system-assigned unique identifier (https://google.aip.dev/148#uid). If a
@@ -38,15 +38,22 @@ public struct ResourcePolicyMember: Codable, Equatable, GoogleCloudWkt._AnyPacka
   ///
   /// Example:
   /// `principal://parametermanager.googleapis.com/projects/12345/uid/locations/us-central1-a/parameters/a918fed5`
-  public var iamPolicyUidPrincipal: Swift.String
+  public var iamPolicyUidPrincipal: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ResourcePolicyMember`.
-  public init(
-    iamPolicyNamePrincipal: Swift.String = Swift.String(),
-    iamPolicyUidPrincipal: Swift.String = Swift.String(),
-  ) {
-    self.iamPolicyNamePrincipal = iamPolicyNamePrincipal
-    self.iamPolicyUidPrincipal = iamPolicyUidPrincipal
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourcePolicyMember().with { $0.iamPolicyNamePrincipal = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -26,36 +26,39 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The server-assigned name, which is only unique within the same service that
   /// originally returns it. If you use the default HTTP mapping, the
   /// `name` should be a resource name ending with `operations/{unique_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Service-specific metadata associated with the operation.  It typically
   /// contains progress information and common metadata such as create time.
   /// Some services might not provide such metadata.  Any method that returns a
   /// long-running operation should document the metadata type, if any.
-  public var metadata: GoogleCloudWkt.`Any`?
+  public var metadata: GoogleCloudWkt.`Any`? = nil
 
   /// If the value is `false`, it means the operation is still in progress.
   /// If `true`, the operation is completed, and either `error` or `response` is
   /// available.
-  public var done: Swift.Bool
+  public var done: Swift.Bool = Swift.Bool()
 
   /// The operation result, which can be either an `error` or a valid `response`.
   /// If `done` == `false`, neither `error` nor `response` is set.
   /// If `done` == `true`, exactly one of `error` or `response` can be set.
   /// Some services might not provide the result.
-  public var result: OneOf_Result?
+  public var result: OneOf_Result? = nil
 
   /// Initialize a new instance of `Operation`.
-  public init(
-    name: Swift.String = Swift.String(),
-    metadata: GoogleCloudWkt.`Any`? = nil,
-    done: Swift.Bool = Swift.Bool(),
-    result: OneOf_Result? = nil,
-  ) {
-    self.name = name
-    self.metadata = metadata
-    self.done = done
-    self.result = result
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Operation().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

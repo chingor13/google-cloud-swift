@@ -23,13 +23,22 @@ public struct GetJSONWebKeysResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// The public component of the keys used by the cluster to sign token
   /// requests.
-  public var keys: [Jwk]
+  public var keys: [Jwk] = []
 
   /// Initialize a new instance of `GetJSONWebKeysResponse`.
-  public init(
-    keys: [Jwk] = [],
-  ) {
-    self.keys = keys
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetJSONWebKeysResponse().with { $0.keys = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,34 +23,36 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Name of the execution.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Creation timestamp of the execution.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Creation timestamp of the execution.
-  public var completionTime: GoogleCloudWkt.Timestamp?
+  public var completionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The deletion time of the execution. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Status for the execution completion.
-  public var completionStatus: ExecutionReference.CompletionStatus
+  public var completionStatus: ExecutionReference.CompletionStatus =
+    ExecutionReference.CompletionStatus()
 
   /// Initialize a new instance of `ExecutionReference`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    completionTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    completionStatus: ExecutionReference.CompletionStatus = ExecutionReference.CompletionStatus(),
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.completionTime = completionTime
-    self.deleteTime = deleteTime
-    self.completionStatus = completionStatus
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ExecutionReference().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible execution completion status.

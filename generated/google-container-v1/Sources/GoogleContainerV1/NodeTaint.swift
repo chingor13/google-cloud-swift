@@ -27,23 +27,28 @@ public struct NodeTaint: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Key for taint.
-  public var key: Swift.String
+  public var key: Swift.String = Swift.String()
 
   /// Value for taint.
-  public var value: Swift.String
+  public var value: Swift.String = Swift.String()
 
   /// Effect for taint.
-  public var effect: NodeTaint.Effect
+  public var effect: NodeTaint.Effect = NodeTaint.Effect()
 
   /// Initialize a new instance of `NodeTaint`.
-  public init(
-    key: Swift.String = Swift.String(),
-    value: Swift.String = Swift.String(),
-    effect: NodeTaint.Effect = NodeTaint.Effect(),
-  ) {
-    self.key = key
-    self.value = value
-    self.effect = effect
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeTaint().with { $0.key = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible values for Effect in taint.

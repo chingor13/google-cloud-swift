@@ -27,23 +27,28 @@ public struct ListQueuedResourcesResponse: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// The listed queued resources.
-  public var queuedResources: [QueuedResource]
+  public var queuedResources: [QueuedResource] = []
 
   /// The next page token or empty if none.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListQueuedResourcesResponse`.
-  public init(
-    queuedResources: [QueuedResource] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.queuedResources = queuedResources
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListQueuedResourcesResponse().with { $0.queuedResources = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

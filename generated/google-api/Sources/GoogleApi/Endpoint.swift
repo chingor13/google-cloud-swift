@@ -42,19 +42,19 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The canonical name of this endpoint.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Aliases for this endpoint, these will be served by the same UrlMap as the
   /// parent endpoint, and will be provisioned in the GCP stack for the Regional
   /// Endpoints.
-  public var aliases: [Swift.String]
+  public var aliases: [Swift.String] = []
 
   /// The specification of an Internet routable address of API frontend that will
   /// handle requests to this [API
   /// Endpoint](https://cloud.google.com/apis/design/glossary). It should be
   /// either a valid IPv4 address or a fully-qualified domain name. For example,
   /// "8.8.8.8" or "myservice.appspot.com".
-  public var target: Swift.String
+  public var target: Swift.String = Swift.String()
 
   /// Allowing
   /// [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka
@@ -62,19 +62,22 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// receive and respond to HTTP OPTIONS requests. The response will be used by
   /// the browser to determine whether the subsequent cross-origin request is
   /// allowed to proceed.
-  public var allowCors: Swift.Bool
+  public var allowCors: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `Endpoint`.
-  public init(
-    name: Swift.String = Swift.String(),
-    aliases: [Swift.String] = [],
-    target: Swift.String = Swift.String(),
-    allowCors: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.aliases = aliases
-    self.target = target
-    self.allowCors = allowCors
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Endpoint().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Endpoint" }

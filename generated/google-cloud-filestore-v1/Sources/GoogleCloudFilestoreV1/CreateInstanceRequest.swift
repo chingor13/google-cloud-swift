@@ -24,26 +24,31 @@ public struct CreateInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// Required. The instance's project and location, in the format
   /// `projects/{project_id}/locations/{location}`. In Filestore,
   /// locations map to Google Cloud zones, for example **us-west1-b**.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The name of the instance to create.
   /// The name must be unique for the specified project and location.
-  public var instanceId: Swift.String
+  public var instanceId: Swift.String = Swift.String()
 
   /// Required. An [instance resource][google.cloud.filestore.v1.Instance]
   ///
   /// [google.cloud.filestore.v1.Instance]: <doc:Instance>
-  public var instance: Instance?
+  public var instance: Instance? = nil
 
   /// Initialize a new instance of `CreateInstanceRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    instanceId: Swift.String = Swift.String(),
-    instance: Instance? = nil,
-  ) {
-    self.parent = parent
-    self.instanceId = instanceId
-    self.instance = instance
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateInstanceRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

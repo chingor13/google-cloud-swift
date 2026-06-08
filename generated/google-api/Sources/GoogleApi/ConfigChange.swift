@@ -35,36 +35,37 @@ public struct ConfigChange: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
   /// - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
   /// - logging.producer_destinations[0]
-  public var element: Swift.String
+  public var element: Swift.String = Swift.String()
 
   /// Value of the changed object in the old Service configuration,
   /// in JSON format. This field will not be populated if ChangeType == ADDED.
-  public var oldValue: Swift.String
+  public var oldValue: Swift.String = Swift.String()
 
   /// Value of the changed object in the new Service configuration,
   /// in JSON format. This field will not be populated if ChangeType == REMOVED.
-  public var newValue: Swift.String
+  public var newValue: Swift.String = Swift.String()
 
   /// The type for this change, either ADDED, REMOVED, or MODIFIED.
-  public var changeType: ChangeType
+  public var changeType: ChangeType = ChangeType()
 
   /// Collection of advice provided for this change, useful for determining the
   /// possible impact of this change.
-  public var advices: [Advice]
+  public var advices: [Advice] = []
 
   /// Initialize a new instance of `ConfigChange`.
-  public init(
-    element: Swift.String = Swift.String(),
-    oldValue: Swift.String = Swift.String(),
-    newValue: Swift.String = Swift.String(),
-    changeType: ChangeType = ChangeType(),
-    advices: [Advice] = [],
-  ) {
-    self.element = element
-    self.oldValue = oldValue
-    self.newValue = newValue
-    self.changeType = changeType
-    self.advices = advices
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ConfigChange().with { $0.element = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.ConfigChange" }

@@ -25,49 +25,46 @@
     /// Optional. The name of an existing database user to connect to the database.
     /// When `auto_iam_authn` is set to true, this field is ignored and the API
     /// caller's IAM user is used.
-    public var user: Swift.String
+    public var user: Swift.String = Swift.String()
 
     /// Required. SQL statements to run on the database. It can be a single
     /// statement or a sequence of statements separated by semicolons.
-    public var sqlStatement: Swift.String
+    public var sqlStatement: Swift.String = Swift.String()
 
     /// Optional. Name of the database on which the statement will be executed.
-    public var database: Swift.String
+    public var database: Swift.String = Swift.String()
 
     /// Optional. The maximum number of rows returned per SQL statement.
-    public var rowLimit: Swift.Int64
+    public var rowLimit: Swift.Int64 = Swift.Int64()
 
     /// Optional. Controls how the API should respond when the SQL execution result
     /// is incomplete due to the size limit or another error. The default mode is
     /// to throw an error.
-    public var partialResultMode: ExecuteSqlPayload.PartialResultMode
+    public var partialResultMode: ExecuteSqlPayload.PartialResultMode =
+      ExecuteSqlPayload.PartialResultMode()
 
     /// Optional. Specifies the name of the application that is making the request.
     /// This field is used for telemetry. Only alphanumeric characters, dashes, and
     /// underscores are allowed. The maximum length is 32 characters.
-    public var application: Swift.String
+    public var application: Swift.String = Swift.String()
 
     /// Credentials for the database connection.
-    public var userPassword: OneOf_UserPassword?
+    public var userPassword: OneOf_UserPassword? = nil
 
     /// Initialize a new instance of `ExecuteSqlPayload`.
-    public init(
-      user: Swift.String = Swift.String(),
-      sqlStatement: Swift.String = Swift.String(),
-      database: Swift.String = Swift.String(),
-      rowLimit: Swift.Int64 = Swift.Int64(),
-      partialResultMode: ExecuteSqlPayload.PartialResultMode =
-        ExecuteSqlPayload.PartialResultMode(),
-      application: Swift.String = Swift.String(),
-      userPassword: OneOf_UserPassword? = nil,
-    ) {
-      self.user = user
-      self.sqlStatement = sqlStatement
-      self.database = database
-      self.rowLimit = rowLimit
-      self.partialResultMode = partialResultMode
-      self.application = application
-      self.userPassword = userPassword
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ExecuteSqlPayload().with { $0.user = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

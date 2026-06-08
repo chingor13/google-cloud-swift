@@ -31,7 +31,7 @@ public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.rpc.Code][google.rpc.Code].
   ///
   /// [google.rpc.Code]: <doc:Code>
-  public var code: Swift.Int32
+  public var code: Swift.Int32 = Swift.Int32()
 
   /// A developer-facing error message, which should be in English. Any
   /// user-facing error message should be localized and sent in the
@@ -39,21 +39,26 @@ public struct Status: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// by the client.
   ///
   /// [google.rpc.Status.details]: <doc:Status/details>
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// A list of messages that carry the error details.  There is a common set of
   /// message types for APIs to use.
-  public var details: [GoogleCloudWkt.`Any`]
+  public var details: [GoogleCloudWkt.`Any`] = []
 
   /// Initialize a new instance of `Status`.
-  public init(
-    code: Swift.Int32 = Swift.Int32(),
-    message: Swift.String = Swift.String(),
-    details: [GoogleCloudWkt.`Any`] = [],
-  ) {
-    self.code = code
-    self.message = message
-    self.details = details
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Status().with { $0.code = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Status" }

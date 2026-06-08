@@ -24,7 +24,7 @@ public struct ListEffectiveTagsResponse: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// A possibly paginated list of effective tags for the specified resource.
-  public var effectiveTags: [EffectiveTag]
+  public var effectiveTags: [EffectiveTag] = []
 
   /// Pagination token.
   ///
@@ -37,15 +37,22 @@ public struct ListEffectiveTagsResponse: Codable, Equatable, GoogleCloudWkt._Any
   /// the list returned is the last page in the result set.
   ///
   /// Pagination tokens have a limited lifetime.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListEffectiveTagsResponse`.
-  public init(
-    effectiveTags: [EffectiveTag] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.effectiveTags = effectiveTags
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListEffectiveTagsResponse().with { $0.effectiveTags = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -25,69 +25,58 @@ public struct SecurityBulletinEvent: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// The resource type (node/control plane) that has the vulnerability. Multiple
   /// notifications (1 notification per resource type) will be sent for a
   /// vulnerability that affects > 1 resource type.
-  public var resourceTypeAffected: Swift.String
+  public var resourceTypeAffected: Swift.String = Swift.String()
 
   /// The ID of the bulletin corresponding to the vulnerability.
-  public var bulletinId: Swift.String
+  public var bulletinId: Swift.String = Swift.String()
 
   /// The CVEs associated with this bulletin.
-  public var cveIds: [Swift.String]
+  public var cveIds: [Swift.String] = []
 
   /// The severity of this bulletin as it relates to GKE.
-  public var severity: Swift.String
+  public var severity: Swift.String = Swift.String()
 
   /// The URI link to the bulletin on the website for more information.
-  public var bulletinUri: Swift.String
+  public var bulletinUri: Swift.String = Swift.String()
 
   /// A brief description of the bulletin. See the bulletin pointed to by the
   /// bulletin_uri field for an expanded description.
-  public var briefDescription: Swift.String
+  public var briefDescription: Swift.String = Swift.String()
 
   /// The GKE minor versions affected by this vulnerability.
-  public var affectedSupportedMinors: [Swift.String]
+  public var affectedSupportedMinors: [Swift.String] = []
 
   /// The GKE versions where this vulnerability is patched.
-  public var patchedVersions: [Swift.String]
+  public var patchedVersions: [Swift.String] = []
 
   /// This represents a version selected from the patched_versions field that
   /// the cluster receiving this notification should most likely want to upgrade
   /// to based on its current version. Note that if this notification is being
   /// received by a given cluster, it means that this version is currently
   /// available as an upgrade target in that cluster's location.
-  public var suggestedUpgradeTarget: Swift.String
+  public var suggestedUpgradeTarget: Swift.String = Swift.String()
 
   /// If this field is specified, it means there are manual steps that the user
   /// must take to make their clusters safe.
-  public var manualStepsRequired: Swift.Bool
+  public var manualStepsRequired: Swift.Bool = Swift.Bool()
 
   /// The GKE versions where this vulnerability is mitigated.
-  public var mitigatedVersions: [Swift.String]
+  public var mitigatedVersions: [Swift.String] = []
 
   /// Initialize a new instance of `SecurityBulletinEvent`.
-  public init(
-    resourceTypeAffected: Swift.String = Swift.String(),
-    bulletinId: Swift.String = Swift.String(),
-    cveIds: [Swift.String] = [],
-    severity: Swift.String = Swift.String(),
-    bulletinUri: Swift.String = Swift.String(),
-    briefDescription: Swift.String = Swift.String(),
-    affectedSupportedMinors: [Swift.String] = [],
-    patchedVersions: [Swift.String] = [],
-    suggestedUpgradeTarget: Swift.String = Swift.String(),
-    manualStepsRequired: Swift.Bool = Swift.Bool(),
-    mitigatedVersions: [Swift.String] = [],
-  ) {
-    self.resourceTypeAffected = resourceTypeAffected
-    self.bulletinId = bulletinId
-    self.cveIds = cveIds
-    self.severity = severity
-    self.bulletinUri = bulletinUri
-    self.briefDescription = briefDescription
-    self.affectedSupportedMinors = affectedSupportedMinors
-    self.patchedVersions = patchedVersions
-    self.suggestedUpgradeTarget = suggestedUpgradeTarget
-    self.manualStepsRequired = manualStepsRequired
-    self.mitigatedVersions = mitigatedVersions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecurityBulletinEvent().with { $0.resourceTypeAffected = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -86,13 +86,22 @@ public struct Decimal: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Services **should** error with `400 Bad Request` (`INVALID_ARGUMENT` in
   /// gRPC) if the service receives a value outside of the supported range.
-  public var value: Swift.String
+  public var value: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Decimal`.
-  public init(
-    value: Swift.String = Swift.String(),
-  ) {
-    self.value = value
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Decimal().with { $0.value = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Decimal" }

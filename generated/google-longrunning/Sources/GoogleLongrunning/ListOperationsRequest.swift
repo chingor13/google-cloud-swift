@@ -25,16 +25,16 @@ public struct ListOperationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The name of the operation's parent resource.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The standard list filter.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// The standard list page size.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The standard list page token.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// When set to `true`, operations that are reachable are returned as normal,
   /// and those that are unreachable are returned in the
@@ -46,21 +46,22 @@ public struct ListOperationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// This field is not by default supported and will result in an
   /// `UNIMPLEMENTED` error if set unless explicitly documented otherwise in
   /// service or product specific documentation.
-  public var returnPartialSuccess: Swift.Bool
+  public var returnPartialSuccess: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListOperationsRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    returnPartialSuccess: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.filter = filter
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.returnPartialSuccess = returnPartialSuccess
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListOperationsRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

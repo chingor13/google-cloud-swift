@@ -26,13 +26,22 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// URL(s) pointing to additional information on handling the current error.
-  public var links: [Help.Link]
+  public var links: [Help.Link] = []
 
   /// Initialize a new instance of `Help`.
-  public init(
-    links: [Help.Link] = [],
-  ) {
-    self.links = links
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Help().with { $0.links = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes a URL link.
@@ -40,18 +49,25 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Describes what the link offers.
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// The URL of the link.
-    public var url: Swift.String
+    public var url: Swift.String = Swift.String()
 
     /// Initialize a new instance of `Link`.
-    public init(
-      description: Swift.String = Swift.String(),
-      url: Swift.String = Swift.String(),
-    ) {
-      self.description = description
-      self.url = url
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Link().with { $0.description = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Help.Link" }

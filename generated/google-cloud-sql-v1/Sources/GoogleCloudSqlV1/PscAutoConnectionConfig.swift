@@ -28,7 +28,7 @@
     ///
     /// This is only applicable if `consumer_network` is a shared VPC
     /// network.
-    public var consumerProject: Swift.String
+    public var consumerProject: Swift.String = Swift.String()
 
     /// Optional. The consumer network of this consumer endpoint. This must be a
     /// resource path that includes both the host project and the network name.
@@ -37,30 +37,31 @@
     ///
     /// The consumer host project of this network might be different from the
     /// consumer service project.
-    public var consumerNetwork: Swift.String
+    public var consumerNetwork: Swift.String = Swift.String()
 
     /// The IP address of the consumer endpoint.
-    public var ipAddress: Swift.String?
+    public var ipAddress: Swift.String? = nil
 
     /// The connection status of the consumer endpoint.
-    public var status: Swift.String?
+    public var status: Swift.String? = nil
 
     /// The connection policy status of the consumer network.
-    public var consumerNetworkStatus: Swift.String?
+    public var consumerNetworkStatus: Swift.String? = nil
 
     /// Initialize a new instance of `PscAutoConnectionConfig`.
-    public init(
-      consumerProject: Swift.String = Swift.String(),
-      consumerNetwork: Swift.String = Swift.String(),
-      ipAddress: Swift.String? = nil,
-      status: Swift.String? = nil,
-      consumerNetworkStatus: Swift.String? = nil,
-    ) {
-      self.consumerProject = consumerProject
-      self.consumerNetwork = consumerNetwork
-      self.ipAddress = ipAddress
-      self.status = status
-      self.consumerNetworkStatus = consumerNetworkStatus
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PscAutoConnectionConfig().with { $0.consumerProject = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

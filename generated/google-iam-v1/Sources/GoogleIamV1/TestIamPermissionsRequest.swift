@@ -23,21 +23,28 @@ public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWkt._Any
 {
   /// REQUIRED: The resource for which the policy detail is being requested.
   /// See the operation documentation for the appropriate value for this field.
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// The set of permissions to check for the `resource`. Permissions with
   /// wildcards (such as '*' or 'storage.*') are not allowed. For more
   /// information see
   /// [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-  public var permissions: [Swift.String]
+  public var permissions: [Swift.String] = []
 
   /// Initialize a new instance of `TestIamPermissionsRequest`.
-  public init(
-    resource: Swift.String = Swift.String(),
-    permissions: [Swift.String] = [],
-  ) {
-    self.resource = resource
-    self.permissions = permissions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TestIamPermissionsRequest().with { $0.resource = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

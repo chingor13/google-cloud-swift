@@ -25,53 +25,48 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// The number of elements of a field collected into a batch which, if
   /// exceeded, causes the batch to be sent.
-  public var elementCountThreshold: Swift.Int32
+  public var elementCountThreshold: Swift.Int32 = Swift.Int32()
 
   /// The aggregated size of the batched field which, if exceeded, causes the
   /// batch to be sent. This size is computed by aggregating the sizes of the
   /// request field to be batched, not of the entire request message.
-  public var requestByteThreshold: Swift.Int64
+  public var requestByteThreshold: Swift.Int64 = Swift.Int64()
 
   /// The duration after which a batch should be sent, starting from the addition
   /// of the first message to that batch.
-  public var delayThreshold: GoogleCloudWkt.Duration?
+  public var delayThreshold: GoogleCloudWkt.Duration? = nil
 
   /// The maximum number of elements collected in a batch that could be accepted
   /// by server.
-  public var elementCountLimit: Swift.Int32
+  public var elementCountLimit: Swift.Int32 = Swift.Int32()
 
   /// The maximum size of the request that could be accepted by server.
-  public var requestByteLimit: Swift.Int32
+  public var requestByteLimit: Swift.Int32 = Swift.Int32()
 
   /// The maximum number of elements allowed by flow control.
-  public var flowControlElementLimit: Swift.Int32
+  public var flowControlElementLimit: Swift.Int32 = Swift.Int32()
 
   /// The maximum size of data allowed by flow control.
-  public var flowControlByteLimit: Swift.Int32
+  public var flowControlByteLimit: Swift.Int32 = Swift.Int32()
 
   /// The behavior to take when the flow control limit is exceeded.
-  public var flowControlLimitExceededBehavior: FlowControlLimitExceededBehaviorProto
+  public var flowControlLimitExceededBehavior: FlowControlLimitExceededBehaviorProto =
+    FlowControlLimitExceededBehaviorProto()
 
   /// Initialize a new instance of `BatchingSettingsProto`.
-  public init(
-    elementCountThreshold: Swift.Int32 = Swift.Int32(),
-    requestByteThreshold: Swift.Int64 = Swift.Int64(),
-    delayThreshold: GoogleCloudWkt.Duration? = nil,
-    elementCountLimit: Swift.Int32 = Swift.Int32(),
-    requestByteLimit: Swift.Int32 = Swift.Int32(),
-    flowControlElementLimit: Swift.Int32 = Swift.Int32(),
-    flowControlByteLimit: Swift.Int32 = Swift.Int32(),
-    flowControlLimitExceededBehavior: FlowControlLimitExceededBehaviorProto =
-      FlowControlLimitExceededBehaviorProto(),
-  ) {
-    self.elementCountThreshold = elementCountThreshold
-    self.requestByteThreshold = requestByteThreshold
-    self.delayThreshold = delayThreshold
-    self.elementCountLimit = elementCountLimit
-    self.requestByteLimit = requestByteLimit
-    self.flowControlElementLimit = flowControlElementLimit
-    self.flowControlByteLimit = flowControlByteLimit
-    self.flowControlLimitExceededBehavior = flowControlLimitExceededBehavior
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BatchingSettingsProto().with { $0.elementCountThreshold = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

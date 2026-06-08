@@ -23,34 +23,34 @@
     Sendable
   {
     /// This is always `sql#instance`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The current serving state of the Cloud SQL instance.
-    public var state: DatabaseInstance.SqlInstanceState
+    public var state: DatabaseInstance.SqlInstanceState = DatabaseInstance.SqlInstanceState()
 
     /// The database engine type and version. The `databaseVersion` field cannot
     /// be changed after instance creation.
-    public var databaseVersion: SqlDatabaseVersion
+    public var databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion()
 
     /// The user settings.
-    public var settings: Settings?
+    public var settings: Settings? = nil
 
     /// This field is deprecated and will be removed from a future version of the
     /// API. Use the `settings.settingsVersion` field instead.
-    public var etag: Swift.String
+    public var etag: Swift.String = Swift.String()
 
     /// The name and status of the failover replica.
-    public var failoverReplica: DatabaseInstance.SqlFailoverReplica?
+    public var failoverReplica: DatabaseInstance.SqlFailoverReplica? = nil
 
     /// The name of the instance which will act as primary in the replication
     /// setup.
-    public var masterInstanceName: Swift.String
+    public var masterInstanceName: Swift.String = Swift.String()
 
     /// The replicas of the instance.
-    public var replicaNames: [Swift.String]
+    public var replicaNames: [Swift.String] = []
 
     /// The maximum disk size of the instance in bytes.
-    public var maxDiskSize: GoogleCloudWkt.Int64Value?
+    public var maxDiskSize: GoogleCloudWkt.Int64Value? = nil
 
     /// The current disk usage of the instance in bytes. This property has been
     /// deprecated. Use the
@@ -58,35 +58,35 @@
     /// Monitoring API instead. Please see [this
     /// announcement](https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ)
     /// for details.
-    public var currentDiskSize: GoogleCloudWkt.Int64Value?
+    public var currentDiskSize: GoogleCloudWkt.Int64Value? = nil
 
     /// The assigned IP addresses for the instance.
-    public var ipAddresses: [IpMapping]
+    public var ipAddresses: [IpMapping] = []
 
     /// SSL configuration.
-    public var serverCaCert: SslCert?
+    public var serverCaCert: SslCert? = nil
 
     /// The instance type.
-    public var instanceType: SqlInstanceType
+    public var instanceType: SqlInstanceType = SqlInstanceType()
 
     /// The project ID of the project containing the Cloud SQL instance. The Google
     /// apps domain is prefixed if applicable.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// The IPv6 address assigned to the instance.
     /// (Deprecated) This property was applicable only
     /// to First Generation instances.
-    public var ipv6Address: Swift.String
+    public var ipv6Address: Swift.String = Swift.String()
 
     /// The service account email address assigned to the instance.\This
     /// property is read-only.
-    public var serviceAccountEmailAddress: Swift.String
+    public var serviceAccountEmailAddress: Swift.String = Swift.String()
 
     /// Configuration specific to on-premises instances.
-    public var onPremisesConfiguration: OnPremisesConfiguration?
+    public var onPremisesConfiguration: OnPremisesConfiguration? = nil
 
     /// Configuration specific to failover replicas and read replicas.
-    public var replicaConfiguration: ReplicaConfiguration?
+    public var replicaConfiguration: ReplicaConfiguration? = nil
 
     /// The backend type.
     /// `SECOND_GEN`: Cloud SQL database instance.
@@ -94,19 +94,19 @@
     ///
     /// This property is read-only; use the `tier` property in the `settings`
     /// object to determine the database type.
-    public var backendType: SqlBackendType
+    public var backendType: SqlBackendType = SqlBackendType()
 
     /// The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// If the instance state is SUSPENDED, the reason for the suspension.
-    public var suspensionReason: [SqlSuspensionReason]
+    public var suspensionReason: [SqlSuspensionReason] = []
 
     /// Connection name of the Cloud SQL instance used in connection strings.
-    public var connectionName: Swift.String
+    public var connectionName: Swift.String = Swift.String()
 
     /// Name of the Cloud SQL instance. This does not include the project ID.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The geographical region of the Cloud SQL instance.
     ///
@@ -116,41 +116,41 @@
     ///
     /// For example,  `asia-east1`, `europe-west1`, and  `us-central1`.
     /// The default value is `us-central1`.
-    public var region: Swift.String
+    public var region: Swift.String = Swift.String()
 
     /// The Compute Engine zone that the instance is currently serving from. This
     /// value could be different from the zone that was specified when the instance
     /// was created if the instance has failed over to its secondary zone. WARNING:
     /// Changing this might restart the instance.
-    public var gceZone: Swift.String
+    public var gceZone: Swift.String = Swift.String()
 
     /// The Compute Engine zone that the failover instance is currently serving
     /// from for a regional instance. This value could be different
     /// from the zone that was specified when the instance
     /// was created if the instance has failed over to its secondary/failover zone.
-    public var secondaryGceZone: Swift.String
+    public var secondaryGceZone: Swift.String = Swift.String()
 
     /// Disk encryption configuration specific to an instance.
-    public var diskEncryptionConfiguration: DiskEncryptionConfiguration?
+    public var diskEncryptionConfiguration: DiskEncryptionConfiguration? = nil
 
     /// Disk encryption status specific to an instance.
-    public var diskEncryptionStatus: DiskEncryptionStatus?
+    public var diskEncryptionStatus: DiskEncryptionStatus? = nil
 
     /// Initial root password. Use only on creation. You must set root passwords
     /// before you can connect to PostgreSQL instances.
-    public var rootPassword: Swift.String
+    public var rootPassword: Swift.String = Swift.String()
 
     /// The start time of any upcoming scheduled maintenance for this instance.
-    public var scheduledMaintenance: DatabaseInstance.SqlScheduledMaintenance?
+    public var scheduledMaintenance: DatabaseInstance.SqlScheduledMaintenance? = nil
 
     /// This status indicates whether the instance satisfies PZS.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzs: GoogleCloudWkt.BoolValue?
+    public var satisfiesPzs: GoogleCloudWkt.BoolValue? = nil
 
     /// Output only. Stores the current database version running on the instance
     /// including minor version such as `MYSQL_8_0_18`.
-    public var databaseInstalledVersion: Swift.String
+    public var databaseInstalledVersion: Swift.String = Swift.String()
 
     /// This field represents the report generated by the proactive database
     /// wellness job for OutOfDisk issues.
@@ -158,59 +158,59 @@
     ///   *  the proactive database wellness job for OOD.
     /// *  Readers:
     ///   *  the proactive database wellness job
-    public var outOfDiskReport: DatabaseInstance.SqlOutOfDiskReport?
+    public var outOfDiskReport: DatabaseInstance.SqlOutOfDiskReport? = nil
 
     /// Output only. The time when the instance was created in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var createTime: GoogleCloudWkt.Timestamp?
+    public var createTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Output only. List all maintenance versions applicable on the instance
-    public var availableMaintenanceVersions: [Swift.String]
+    public var availableMaintenanceVersions: [Swift.String] = []
 
     /// The current software version on the instance.
-    public var maintenanceVersion: Swift.String
+    public var maintenanceVersion: Swift.String = Swift.String()
 
     /// Output only. All database versions that are available for upgrade.
-    public var upgradableDatabaseVersions: [AvailableDatabaseVersion]
+    public var upgradableDatabaseVersions: [AvailableDatabaseVersion] = []
 
-    public var sqlNetworkArchitecture: DatabaseInstance.SqlNetworkArchitecture?
+    public var sqlNetworkArchitecture: DatabaseInstance.SqlNetworkArchitecture? = nil
 
     /// Output only. The link to service attachment of PSC instance.
-    public var pscServiceAttachmentLink: Swift.String?
+    public var pscServiceAttachmentLink: Swift.String? = nil
 
     /// Output only. The dns name of the instance.
-    public var dnsName: Swift.String?
+    public var dnsName: Swift.String? = nil
 
     /// Output only. DEPRECATED: please use write_endpoint instead.
-    public var primaryDnsName: Swift.String?
+    public var primaryDnsName: Swift.String? = nil
 
     /// Output only. The dns name of the primary instance in a replication group.
-    public var writeEndpoint: Swift.String?
+    public var writeEndpoint: Swift.String? = nil
 
     /// Optional. A primary instance and disaster recovery (DR) replica pair.
     /// A DR replica is a cross-region replica that you designate
     /// for failover in the event that the primary instance
     /// experiences regional failure.
     /// Applicable to MySQL and PostgreSQL.
-    public var replicationCluster: ReplicationCluster?
+    public var replicationCluster: ReplicationCluster? = nil
 
     /// Gemini instance configuration.
-    public var geminiConfig: GeminiInstanceConfig?
+    public var geminiConfig: GeminiInstanceConfig? = nil
 
     /// Output only. This status indicates whether the instance satisfies PZI.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzi: GoogleCloudWkt.BoolValue?
+    public var satisfiesPzi: GoogleCloudWkt.BoolValue? = nil
 
     /// Input only. Whether Cloud SQL is enabled to switch storing point-in-time
     /// recovery log files from a data disk to Cloud Storage.
-    public var switchTransactionLogsToCloudStorageEnabled: GoogleCloudWkt.BoolValue?
+    public var switchTransactionLogsToCloudStorageEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Input only. Determines whether an in-place major version upgrade of
     /// replicas happens when an in-place major version upgrade of a primary
     /// instance is initiated.
-    public var includeReplicasForMajorVersionUpgrade: GoogleCloudWkt.BoolValue?
+    public var includeReplicasForMajorVersionUpgrade: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. Input only. Immutable. Tag keys and tag values that are bound to
     /// this instance. You must represent each item in the map as:
@@ -224,123 +224,32 @@
     ///
     /// For more information on tag creation and management, see
     /// https://cloud.google.com/resource-manager/docs/tags/tags-overview.
-    public var tags: [Swift.String: Swift.String]
+    public var tags: [Swift.String: Swift.String] = [:]
 
     /// The number of read pool nodes in a read pool.
-    public var nodeCount: Swift.Int32?
+    public var nodeCount: Swift.Int32? = nil
 
     /// Output only. Entries containing information about each read pool node of
     /// the read pool.
-    public var nodes: [DatabaseInstance.PoolNodeConfig]
+    public var nodes: [DatabaseInstance.PoolNodeConfig] = []
 
     /// Output only. The list of DNS names used by this instance.
-    public var dnsNames: [DnsNameMapping]
+    public var dnsNames: [DnsNameMapping] = []
 
     /// Initialize a new instance of `DatabaseInstance`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      state: DatabaseInstance.SqlInstanceState = DatabaseInstance.SqlInstanceState(),
-      databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion(),
-      settings: Settings? = nil,
-      etag: Swift.String = Swift.String(),
-      failoverReplica: DatabaseInstance.SqlFailoverReplica? = nil,
-      masterInstanceName: Swift.String = Swift.String(),
-      replicaNames: [Swift.String] = [],
-      maxDiskSize: GoogleCloudWkt.Int64Value? = nil,
-      currentDiskSize: GoogleCloudWkt.Int64Value? = nil,
-      ipAddresses: [IpMapping] = [],
-      serverCaCert: SslCert? = nil,
-      instanceType: SqlInstanceType = SqlInstanceType(),
-      project: Swift.String = Swift.String(),
-      ipv6Address: Swift.String = Swift.String(),
-      serviceAccountEmailAddress: Swift.String = Swift.String(),
-      onPremisesConfiguration: OnPremisesConfiguration? = nil,
-      replicaConfiguration: ReplicaConfiguration? = nil,
-      backendType: SqlBackendType = SqlBackendType(),
-      selfLink: Swift.String = Swift.String(),
-      suspensionReason: [SqlSuspensionReason] = [],
-      connectionName: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-      region: Swift.String = Swift.String(),
-      gceZone: Swift.String = Swift.String(),
-      secondaryGceZone: Swift.String = Swift.String(),
-      diskEncryptionConfiguration: DiskEncryptionConfiguration? = nil,
-      diskEncryptionStatus: DiskEncryptionStatus? = nil,
-      rootPassword: Swift.String = Swift.String(),
-      scheduledMaintenance: DatabaseInstance.SqlScheduledMaintenance? = nil,
-      satisfiesPzs: GoogleCloudWkt.BoolValue? = nil,
-      databaseInstalledVersion: Swift.String = Swift.String(),
-      outOfDiskReport: DatabaseInstance.SqlOutOfDiskReport? = nil,
-      createTime: GoogleCloudWkt.Timestamp? = nil,
-      availableMaintenanceVersions: [Swift.String] = [],
-      maintenanceVersion: Swift.String = Swift.String(),
-      upgradableDatabaseVersions: [AvailableDatabaseVersion] = [],
-      sqlNetworkArchitecture: DatabaseInstance.SqlNetworkArchitecture? = nil,
-      pscServiceAttachmentLink: Swift.String? = nil,
-      dnsName: Swift.String? = nil,
-      primaryDnsName: Swift.String? = nil,
-      writeEndpoint: Swift.String? = nil,
-      replicationCluster: ReplicationCluster? = nil,
-      geminiConfig: GeminiInstanceConfig? = nil,
-      satisfiesPzi: GoogleCloudWkt.BoolValue? = nil,
-      switchTransactionLogsToCloudStorageEnabled: GoogleCloudWkt.BoolValue? = nil,
-      includeReplicasForMajorVersionUpgrade: GoogleCloudWkt.BoolValue? = nil,
-      tags: [Swift.String: Swift.String] = [:],
-      nodeCount: Swift.Int32? = nil,
-      nodes: [DatabaseInstance.PoolNodeConfig] = [],
-      dnsNames: [DnsNameMapping] = [],
-    ) {
-      self.kind = kind
-      self.state = state
-      self.databaseVersion = databaseVersion
-      self.settings = settings
-      self.etag = etag
-      self.failoverReplica = failoverReplica
-      self.masterInstanceName = masterInstanceName
-      self.replicaNames = replicaNames
-      self.maxDiskSize = maxDiskSize
-      self.currentDiskSize = currentDiskSize
-      self.ipAddresses = ipAddresses
-      self.serverCaCert = serverCaCert
-      self.instanceType = instanceType
-      self.project = project
-      self.ipv6Address = ipv6Address
-      self.serviceAccountEmailAddress = serviceAccountEmailAddress
-      self.onPremisesConfiguration = onPremisesConfiguration
-      self.replicaConfiguration = replicaConfiguration
-      self.backendType = backendType
-      self.selfLink = selfLink
-      self.suspensionReason = suspensionReason
-      self.connectionName = connectionName
-      self.name = name
-      self.region = region
-      self.gceZone = gceZone
-      self.secondaryGceZone = secondaryGceZone
-      self.diskEncryptionConfiguration = diskEncryptionConfiguration
-      self.diskEncryptionStatus = diskEncryptionStatus
-      self.rootPassword = rootPassword
-      self.scheduledMaintenance = scheduledMaintenance
-      self.satisfiesPzs = satisfiesPzs
-      self.databaseInstalledVersion = databaseInstalledVersion
-      self.outOfDiskReport = outOfDiskReport
-      self.createTime = createTime
-      self.availableMaintenanceVersions = availableMaintenanceVersions
-      self.maintenanceVersion = maintenanceVersion
-      self.upgradableDatabaseVersions = upgradableDatabaseVersions
-      self.sqlNetworkArchitecture = sqlNetworkArchitecture
-      self.pscServiceAttachmentLink = pscServiceAttachmentLink
-      self.dnsName = dnsName
-      self.primaryDnsName = primaryDnsName
-      self.writeEndpoint = writeEndpoint
-      self.replicationCluster = replicationCluster
-      self.geminiConfig = geminiConfig
-      self.satisfiesPzi = satisfiesPzi
-      self.switchTransactionLogsToCloudStorageEnabled = switchTransactionLogsToCloudStorageEnabled
-      self.includeReplicasForMajorVersionUpgrade = includeReplicasForMajorVersionUpgrade
-      self.tags = tags
-      self.nodeCount = nodeCount
-      self.nodes = nodes
-      self.dnsNames = dnsNames
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DatabaseInstance().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public struct SqlFailoverReplica: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -349,20 +258,27 @@
       /// The name of the failover replica. If specified at instance creation, a
       /// failover replica is created for the instance. The name
       /// doesn't include the project ID.
-      public var name: Swift.String
+      public var name: Swift.String = Swift.String()
 
       /// The availability status of the failover replica. A false status indicates
       /// that the failover replica is out of sync. The primary instance can only
       /// failover to the failover replica when the status is true.
-      public var available: GoogleCloudWkt.BoolValue?
+      public var available: GoogleCloudWkt.BoolValue? = nil
 
       /// Initialize a new instance of `SqlFailoverReplica`.
-      public init(
-        name: Swift.String = Swift.String(),
-        available: GoogleCloudWkt.BoolValue? = nil,
-      ) {
-        self.name = name
-        self.available = available
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlFailoverReplica().with { $0.name = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -381,27 +297,30 @@
       Sendable
     {
       /// The start time of any upcoming scheduled maintenance for this instance.
-      public var startTime: GoogleCloudWkt.Timestamp?
+      public var startTime: GoogleCloudWkt.Timestamp? = nil
 
-      public var canDefer: Swift.Bool
+      public var canDefer: Swift.Bool = Swift.Bool()
 
       /// If the scheduled maintenance can be rescheduled.
-      public var canReschedule: Swift.Bool
+      public var canReschedule: Swift.Bool = Swift.Bool()
 
       /// Maintenance cannot be rescheduled to start beyond this deadline.
-      public var scheduleDeadlineTime: GoogleCloudWkt.Timestamp?
+      public var scheduleDeadlineTime: GoogleCloudWkt.Timestamp? = nil
 
       /// Initialize a new instance of `SqlScheduledMaintenance`.
-      public init(
-        startTime: GoogleCloudWkt.Timestamp? = nil,
-        canDefer: Swift.Bool = Swift.Bool(),
-        canReschedule: Swift.Bool = Swift.Bool(),
-        scheduleDeadlineTime: GoogleCloudWkt.Timestamp? = nil,
-      ) {
-        self.startTime = startTime
-        self.canDefer = canDefer
-        self.canReschedule = canReschedule
-        self.scheduleDeadlineTime = scheduleDeadlineTime
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlScheduledMaintenance().with { $0.startTime = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -425,22 +344,29 @@
       ///   *  the proactive database wellness job for OOD.
       /// *  Readers:
       ///   *  the proactive database wellness job
-      public var sqlOutOfDiskState: DatabaseInstance.SqlOutOfDiskReport.SqlOutOfDiskState?
+      public var sqlOutOfDiskState: DatabaseInstance.SqlOutOfDiskReport.SqlOutOfDiskState? = nil
 
       /// The minimum recommended increase size in GigaBytes
       /// This field is consumed by the frontend
       /// *  Writers:
       ///   *  the proactive database wellness job for OOD.
       /// *  Readers:
-      public var sqlMinRecommendedIncreaseSizeGb: Swift.Int32?
+      public var sqlMinRecommendedIncreaseSizeGb: Swift.Int32? = nil
 
       /// Initialize a new instance of `SqlOutOfDiskReport`.
-      public init(
-        sqlOutOfDiskState: DatabaseInstance.SqlOutOfDiskReport.SqlOutOfDiskState? = nil,
-        sqlMinRecommendedIncreaseSizeGb: Swift.Int32? = nil,
-      ) {
-        self.sqlOutOfDiskState = sqlOutOfDiskState
-        self.sqlMinRecommendedIncreaseSizeGb = sqlMinRecommendedIncreaseSizeGb
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlOutOfDiskReport().with { $0.sqlOutOfDiskState = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       /// This enum lists all possible states regarding out-of-disk issues.
@@ -562,52 +488,47 @@
     {
       /// Output only. The name of the read pool node, to be used for retrieving
       /// metrics and logs.
-      public var name: Swift.String?
+      public var name: Swift.String? = nil
 
       /// Output only. The zone of the read pool node.
-      public var gceZone: Swift.String?
+      public var gceZone: Swift.String? = nil
 
       /// Output only. Mappings containing IP addresses that can be used to connect
       /// to the read pool node.
-      public var ipAddresses: [IpMapping]
+      public var ipAddresses: [IpMapping] = []
 
       /// Output only. The DNS name of the read pool node.
-      public var dnsName: Swift.String?
+      public var dnsName: Swift.String? = nil
 
       /// Output only. The current state of the read pool node.
-      public var state: DatabaseInstance.SqlInstanceState?
+      public var state: DatabaseInstance.SqlInstanceState? = nil
 
       /// Output only. The list of DNS names used by this read pool node.
-      public var dnsNames: [DnsNameMapping]
+      public var dnsNames: [DnsNameMapping] = []
 
       /// Output only. The Private Service Connect (PSC) service attachment of the
       /// read pool node.
-      public var pscServiceAttachmentLink: Swift.String?
+      public var pscServiceAttachmentLink: Swift.String? = nil
 
       /// Output only. The list of settings for requested automatically-setup
       /// Private Service Connect (PSC) consumer endpoints that can be used to
       /// connect to this read pool node.
-      public var pscAutoConnections: [PscAutoConnectionConfig]
+      public var pscAutoConnections: [PscAutoConnectionConfig] = []
 
       /// Initialize a new instance of `PoolNodeConfig`.
-      public init(
-        name: Swift.String? = nil,
-        gceZone: Swift.String? = nil,
-        ipAddresses: [IpMapping] = [],
-        dnsName: Swift.String? = nil,
-        state: DatabaseInstance.SqlInstanceState? = nil,
-        dnsNames: [DnsNameMapping] = [],
-        pscServiceAttachmentLink: Swift.String? = nil,
-        pscAutoConnections: [PscAutoConnectionConfig] = [],
-      ) {
-        self.name = name
-        self.gceZone = gceZone
-        self.ipAddresses = ipAddresses
-        self.dnsName = dnsName
-        self.state = state
-        self.dnsNames = dnsNames
-        self.pscServiceAttachmentLink = pscServiceAttachmentLink
-        self.pscAutoConnections = pscAutoConnections
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = PoolNodeConfig().with { $0.name = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

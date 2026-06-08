@@ -23,7 +23,19 @@ public struct UndeleteFolderMetadata: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// Initialize a new instance of `UndeleteFolderMetadata`.
-  public init() {
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UndeleteFolderMetadata().with { $0.<placeholder> = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

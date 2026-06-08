@@ -25,19 +25,26 @@ public struct ListFoldersResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// A possibly paginated list of folders that are direct descendants of
   /// the specified parent resource.
-  public var folders: [Folder]
+  public var folders: [Folder] = []
 
   /// A pagination token returned from a previous call to `ListFolders`
   /// that indicates from where listing should continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListFoldersResponse`.
-  public init(
-    folders: [Folder] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.folders = folders
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListFoldersResponse().with { $0.folders = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

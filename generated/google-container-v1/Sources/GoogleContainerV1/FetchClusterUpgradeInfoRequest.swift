@@ -24,18 +24,25 @@ public struct FetchClusterUpgradeInfoRequest: Codable, Equatable, GoogleCloudWkt
   /// Required. The name (project, location, cluster) of the cluster to get.
   /// Specified in the format `projects/*/locations/*/clusters/*` or
   /// `projects/*/zones/*/clusters/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// API request version that initiates this operation.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Initialize a new instance of `FetchClusterUpgradeInfoRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.version = version
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = FetchClusterUpgradeInfoRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,13 +23,22 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The runtimes that match the request.
-  public var runtimes: [ListRuntimesResponse.Runtime]
+  public var runtimes: [ListRuntimesResponse.Runtime] = []
 
   /// Initialize a new instance of `ListRuntimesResponse`.
-  public init(
-    runtimes: [ListRuntimesResponse.Runtime] = [],
-  ) {
-    self.runtimes = runtimes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListRuntimesResponse().with { $0.runtimes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes a runtime and any special information (e.g., deprecation status)
@@ -38,43 +47,40 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
     Sendable
   {
     /// The name of the runtime, e.g., 'go113', 'nodejs12', etc.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The user facing name, eg 'Go 1.13', 'Node.js 12', etc.
-    public var displayName: Swift.String
+    public var displayName: Swift.String = Swift.String()
 
     /// The stage of life this runtime is in, e.g., BETA, GA, etc.
-    public var stage: ListRuntimesResponse.RuntimeStage
+    public var stage: ListRuntimesResponse.RuntimeStage = ListRuntimesResponse.RuntimeStage()
 
     /// Warning messages, e.g., a deprecation warning.
-    public var warnings: [Swift.String]
+    public var warnings: [Swift.String] = []
 
     /// The environment for the runtime.
-    public var environment: Environment
+    public var environment: Environment = Environment()
 
     /// Deprecation date for the runtime.
-    public var deprecationDate: GoogleType.Date?
+    public var deprecationDate: GoogleType.Date? = nil
 
     /// Decommission date for the runtime.
-    public var decommissionDate: GoogleType.Date?
+    public var decommissionDate: GoogleType.Date? = nil
 
     /// Initialize a new instance of `Runtime`.
-    public init(
-      name: Swift.String = Swift.String(),
-      displayName: Swift.String = Swift.String(),
-      stage: ListRuntimesResponse.RuntimeStage = ListRuntimesResponse.RuntimeStage(),
-      warnings: [Swift.String] = [],
-      environment: Environment = Environment(),
-      deprecationDate: GoogleType.Date? = nil,
-      decommissionDate: GoogleType.Date? = nil,
-    ) {
-      self.name = name
-      self.displayName = displayName
-      self.stage = stage
-      self.warnings = warnings
-      self.environment = environment
-      self.deprecationDate = deprecationDate
-      self.decommissionDate = decommissionDate
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Runtime().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

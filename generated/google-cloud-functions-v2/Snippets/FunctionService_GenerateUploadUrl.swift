@@ -26,8 +26,8 @@ import GoogleRpc
 
 func sample(client: some FunctionService) async throws {
   let response = try await client.generateUploadUrl(
-    request: GenerateUploadUrlRequest(/* set fields */
-    )
+    request: GenerateUploadUrlRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

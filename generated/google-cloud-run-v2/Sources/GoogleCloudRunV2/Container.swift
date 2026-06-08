@@ -26,29 +26,29 @@ public struct Container: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Name of the container specified as a DNS_LABEL (RFC 1123).
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. Name of the container image in Dockerhub, Google Artifact
   /// Registry, or Google Container Registry. If the host is not provided,
   /// Dockerhub is assumed.
-  public var image: Swift.String
+  public var image: Swift.String = Swift.String()
 
   /// Optional. Location of the source.
-  public var sourceCode: SourceCode?
+  public var sourceCode: SourceCode? = nil
 
   /// Entrypoint array. Not executed within a shell.
   /// The docker image's ENTRYPOINT is used if this is not provided.
-  public var command: [Swift.String]
+  public var command: [Swift.String] = []
 
   /// Arguments to the entrypoint.
   /// The docker image's CMD is used if this is not provided.
-  public var args: [Swift.String]
+  public var args: [Swift.String] = []
 
   /// List of environment variables to set in the container.
-  public var env: [EnvVar]
+  public var env: [EnvVar] = []
 
   /// Compute Resource requirements by this container.
-  public var resources: ResourceRequirements?
+  public var resources: ResourceRequirements? = nil
 
   /// List of ports to expose from the container. Only a single port can be
   /// specified. The specified ports must be listening on all interfaces
@@ -56,74 +56,53 @@ public struct Container: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If omitted, a port number will be chosen and passed to the container
   /// through the PORT environment variable for the container to listen on.
-  public var ports: [ContainerPort]
+  public var ports: [ContainerPort] = []
 
   /// Volume to mount into the container's filesystem.
-  public var volumeMounts: [VolumeMount]
+  public var volumeMounts: [VolumeMount] = []
 
   /// Container's working directory.
   /// If not specified, the container runtime's default will be used, which
   /// might be configured in the container image.
-  public var workingDir: Swift.String
+  public var workingDir: Swift.String = Swift.String()
 
   /// Periodic probe of container liveness.
   /// Container will be restarted if the probe fails.
-  public var livenessProbe: Probe?
+  public var livenessProbe: Probe? = nil
 
   /// Startup probe of application within the container.
   /// All other probes are disabled if a startup probe is provided, until it
   /// succeeds. Container will not be added to service endpoints if the probe
   /// fails.
-  public var startupProbe: Probe?
+  public var startupProbe: Probe? = nil
 
   /// Readiness probe to be used for health checks.
-  public var readinessProbe: Probe?
+  public var readinessProbe: Probe? = nil
 
   /// Names of the containers that must start before this container.
-  public var dependsOn: [Swift.String]
+  public var dependsOn: [Swift.String] = []
 
   /// Base image for this container. Only supported for services. If set, it
   /// indicates that the service is enrolled into automatic base image update.
-  public var baseImageUri: Swift.String
+  public var baseImageUri: Swift.String = Swift.String()
 
   /// Output only. The build info of the container image.
-  public var buildInfo: BuildInfo?
+  public var buildInfo: BuildInfo? = nil
 
   /// Initialize a new instance of `Container`.
-  public init(
-    name: Swift.String = Swift.String(),
-    image: Swift.String = Swift.String(),
-    sourceCode: SourceCode? = nil,
-    command: [Swift.String] = [],
-    args: [Swift.String] = [],
-    env: [EnvVar] = [],
-    resources: ResourceRequirements? = nil,
-    ports: [ContainerPort] = [],
-    volumeMounts: [VolumeMount] = [],
-    workingDir: Swift.String = Swift.String(),
-    livenessProbe: Probe? = nil,
-    startupProbe: Probe? = nil,
-    readinessProbe: Probe? = nil,
-    dependsOn: [Swift.String] = [],
-    baseImageUri: Swift.String = Swift.String(),
-    buildInfo: BuildInfo? = nil,
-  ) {
-    self.name = name
-    self.image = image
-    self.sourceCode = sourceCode
-    self.command = command
-    self.args = args
-    self.env = env
-    self.resources = resources
-    self.ports = ports
-    self.volumeMounts = volumeMounts
-    self.workingDir = workingDir
-    self.livenessProbe = livenessProbe
-    self.startupProbe = startupProbe
-    self.readinessProbe = readinessProbe
-    self.dependsOn = dependsOn
-    self.baseImageUri = baseImageUri
-    self.buildInfo = buildInfo
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Container().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

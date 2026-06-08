@@ -28,18 +28,25 @@ public struct UpdateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// values.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var secret: Secret?
+  public var secret: Secret? = nil
 
   /// Required. Specifies the fields to be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `UpdateSecretRequest`.
-  public init(
-    secret: Secret? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.secret = secret
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateSecretRequest().with { $0.secret = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

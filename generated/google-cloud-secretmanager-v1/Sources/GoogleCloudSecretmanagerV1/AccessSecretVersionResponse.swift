@@ -30,18 +30,25 @@ public struct AccessSecretVersionResponse: Codable, Equatable, GoogleCloudWkt._A
   /// `projects/*/locations/*/secrets/*/versions/*`.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Secret payload
-  public var payload: SecretPayload?
+  public var payload: SecretPayload? = nil
 
   /// Initialize a new instance of `AccessSecretVersionResponse`.
-  public init(
-    name: Swift.String = Swift.String(),
-    payload: SecretPayload? = nil,
-  ) {
-    self.name = name
-    self.payload = payload
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AccessSecretVersionResponse().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

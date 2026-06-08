@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Tpu) async throws {
   let response = try await client.getGuestAttributes(
-    request: GetGuestAttributesRequest(/* set fields */
-    )
+    request: GetGuestAttributesRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

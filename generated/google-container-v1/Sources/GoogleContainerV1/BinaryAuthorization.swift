@@ -24,19 +24,27 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// This field is deprecated. Leave this unset and instead configure
   /// BinaryAuthorization using evaluation_mode. If evaluation_mode is set to
   /// anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Mode of operation for binauthz policy evaluation. If unspecified, defaults
   /// to DISABLED.
-  public var evaluationMode: BinaryAuthorization.EvaluationMode
+  public var evaluationMode: BinaryAuthorization.EvaluationMode =
+    BinaryAuthorization.EvaluationMode()
 
   /// Initialize a new instance of `BinaryAuthorization`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    evaluationMode: BinaryAuthorization.EvaluationMode = BinaryAuthorization.EvaluationMode(),
-  ) {
-    self.enabled = enabled
-    self.evaluationMode = evaluationMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BinaryAuthorization().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Binary Authorization mode of operation.

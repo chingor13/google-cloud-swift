@@ -33,7 +33,7 @@
     /// field, returned to the user as information. This field can exist even if a
     /// standalone instance doesn't have a DR replica yet or the DR replica is
     /// deleted.
-    public var psaWriteEndpoint: Swift.String
+    public var psaWriteEndpoint: Swift.String = Swift.String()
 
     /// Optional. If the instance is a primary instance, then this field identifies
     /// the disaster recovery (DR) replica. A DR replica is an optional
@@ -41,21 +41,26 @@
     /// read replica, then the field is not set. Set this field to a replica name
     /// to designate a DR replica for a primary instance. Remove the replica name
     /// to remove the DR replica designation.
-    public var failoverDrReplicaName: Swift.String
+    public var failoverDrReplicaName: Swift.String = Swift.String()
 
     /// Output only. Read-only field that indicates whether the replica is a DR
     /// replica. This field is not set if the instance is a primary instance.
-    public var drReplica: Swift.Bool
+    public var drReplica: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `ReplicationCluster`.
-    public init(
-      psaWriteEndpoint: Swift.String = Swift.String(),
-      failoverDrReplicaName: Swift.String = Swift.String(),
-      drReplica: Swift.Bool = Swift.Bool(),
-    ) {
-      self.psaWriteEndpoint = psaWriteEndpoint
-      self.failoverDrReplicaName = failoverDrReplicaName
-      self.drReplica = drReplica
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ReplicationCluster().with { $0.psaWriteEndpoint = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

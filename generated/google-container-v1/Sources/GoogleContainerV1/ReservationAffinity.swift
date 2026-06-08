@@ -24,26 +24,31 @@ public struct ReservationAffinity: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Corresponds to the type of reservation consumption.
-  public var consumeReservationType: ReservationAffinity.Type_
+  public var consumeReservationType: ReservationAffinity.Type_ = ReservationAffinity.Type_()
 
   /// Corresponds to the label key of a reservation resource. To target a
   /// SPECIFIC_RESERVATION by name, specify
   /// "compute.googleapis.com/reservation-name" as the key and specify the name
   /// of your reservation as its value.
-  public var key: Swift.String
+  public var key: Swift.String = Swift.String()
 
   /// Corresponds to the label value(s) of reservation resource(s).
-  public var values: [Swift.String]
+  public var values: [Swift.String] = []
 
   /// Initialize a new instance of `ReservationAffinity`.
-  public init(
-    consumeReservationType: ReservationAffinity.Type_ = ReservationAffinity.Type_(),
-    key: Swift.String = Swift.String(),
-    values: [Swift.String] = [],
-  ) {
-    self.consumeReservationType = consumeReservationType
-    self.key = key
-    self.values = values
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ReservationAffinity().with { $0.consumeReservationType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Indicates whether to consume capacity from a reservation or not.

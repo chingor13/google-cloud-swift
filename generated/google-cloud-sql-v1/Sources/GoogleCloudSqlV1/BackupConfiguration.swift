@@ -24,66 +24,55 @@
   {
     /// Start time for the daily backup configuration in UTC timezone in the 24
     /// hour format - `HH:MM`.
-    public var startTime: Swift.String
+    public var startTime: Swift.String = Swift.String()
 
     /// Whether this configuration is enabled.
-    public var enabled: GoogleCloudWkt.BoolValue?
+    public var enabled: GoogleCloudWkt.BoolValue? = nil
 
     /// This is always `sql#backupConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// (MySQL only) Whether binary log is enabled. If backup configuration is
     /// disabled, binarylog must be disabled as well.
-    public var binaryLogEnabled: GoogleCloudWkt.BoolValue?
+    public var binaryLogEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Reserved for future use.
-    public var replicationLogArchivingEnabled: GoogleCloudWkt.BoolValue?
+    public var replicationLogArchivingEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Location of the backup
-    public var location: Swift.String
+    public var location: Swift.String = Swift.String()
 
     /// Whether point in time recovery is enabled.
-    public var pointInTimeRecoveryEnabled: GoogleCloudWkt.BoolValue?
+    public var pointInTimeRecoveryEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Backup retention settings.
-    public var backupRetentionSettings: BackupRetentionSettings?
+    public var backupRetentionSettings: BackupRetentionSettings? = nil
 
     /// The number of days of transaction logs we retain for point in time
     /// restore, from 1-7.
-    public var transactionLogRetentionDays: GoogleCloudWkt.Int32Value?
+    public var transactionLogRetentionDays: GoogleCloudWkt.Int32Value? = nil
 
     /// Output only. This value contains the storage location of transactional logs
     /// used to perform point-in-time recovery (PITR) for the database.
-    public var transactionalLogStorageState: BackupConfiguration.TransactionalLogStorageState?
+    public var transactionalLogStorageState: BackupConfiguration.TransactionalLogStorageState? = nil
 
     /// Output only. Backup tier that manages the backups for the instance.
-    public var backupTier: BackupConfiguration.BackupTier?
+    public var backupTier: BackupConfiguration.BackupTier? = nil
 
     /// Initialize a new instance of `BackupConfiguration`.
-    public init(
-      startTime: Swift.String = Swift.String(),
-      enabled: GoogleCloudWkt.BoolValue? = nil,
-      kind: Swift.String = Swift.String(),
-      binaryLogEnabled: GoogleCloudWkt.BoolValue? = nil,
-      replicationLogArchivingEnabled: GoogleCloudWkt.BoolValue? = nil,
-      location: Swift.String = Swift.String(),
-      pointInTimeRecoveryEnabled: GoogleCloudWkt.BoolValue? = nil,
-      backupRetentionSettings: BackupRetentionSettings? = nil,
-      transactionLogRetentionDays: GoogleCloudWkt.Int32Value? = nil,
-      transactionalLogStorageState: BackupConfiguration.TransactionalLogStorageState? = nil,
-      backupTier: BackupConfiguration.BackupTier? = nil,
-    ) {
-      self.startTime = startTime
-      self.enabled = enabled
-      self.kind = kind
-      self.binaryLogEnabled = binaryLogEnabled
-      self.replicationLogArchivingEnabled = replicationLogArchivingEnabled
-      self.location = location
-      self.pointInTimeRecoveryEnabled = pointInTimeRecoveryEnabled
-      self.backupRetentionSettings = backupRetentionSettings
-      self.transactionLogRetentionDays = transactionLogRetentionDays
-      self.transactionalLogStorageState = transactionalLogStorageState
-      self.backupTier = backupTier
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BackupConfiguration().with { $0.startTime = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// This value contains the storage location of the transactional logs

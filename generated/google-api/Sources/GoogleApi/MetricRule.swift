@@ -28,7 +28,7 @@ public struct MetricRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Metrics to update when the selected methods are called, and the associated
   /// cost applied to each metric.
@@ -36,15 +36,22 @@ public struct MetricRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The key of the map is the metric name, and the values are the amount
   /// increased for the metric against which the quota limits are defined.
   /// The value must not be negative.
-  public var metricCosts: [Swift.String: Swift.Int64]
+  public var metricCosts: [Swift.String: Swift.Int64] = [:]
 
   /// Initialize a new instance of `MetricRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    metricCosts: [Swift.String: Swift.Int64] = [:],
-  ) {
-    self.selector = selector
-    self.metricCosts = metricCosts
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MetricRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.MetricRule" }

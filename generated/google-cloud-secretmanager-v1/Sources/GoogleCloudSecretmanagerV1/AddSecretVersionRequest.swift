@@ -31,21 +31,28 @@ public struct AddSecretVersionRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The secret payload of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var payload: SecretPayload?
+  public var payload: SecretPayload? = nil
 
   /// Initialize a new instance of `AddSecretVersionRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    payload: SecretPayload? = nil,
-  ) {
-    self.parent = parent
-    self.payload = payload
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AddSecretVersionRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

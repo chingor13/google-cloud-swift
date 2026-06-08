@@ -20,30 +20,33 @@ import GoogleCloudWkt
 public struct CreateInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
-  public var instance: Instance?
+  public var instance: Instance? = nil
 
   /// Required. The unique identifier for the Instance. It must begin with
   /// letter, and cannot end with hyphen; must contain fewer than 50 characters.
   /// The name of the instance becomes {parent}/instances/{instance_id}.
-  public var instanceId: Swift.String
+  public var instanceId: Swift.String = Swift.String()
 
   /// Optional. Indicates that the request should be validated and default values
   /// populated, without persisting the request or creating any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateInstanceRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    instance: Instance? = nil,
-    instanceId: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.instance = instance
-    self.instanceId = instanceId
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateInstanceRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -39,7 +39,7 @@ public struct MonitoredResourceDescriptor: Codable, Equatable, GoogleCloudWkt._A
   /// {project_id} is a project ID that provides API-specific context for
   /// accessing the type.  APIs that do not use project information can use the
   /// resource name format `"monitoredResourceDescriptors/{type}"`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. The monitored resource type. For example, the type
   /// `"cloudsql_database"` represents databases in Google Cloud SQL.
@@ -47,41 +47,40 @@ public struct MonitoredResourceDescriptor: Codable, Equatable, GoogleCloudWkt._A
   ///  types](https://cloud.google.com/monitoring/api/resources)
   /// and [Logging resource
   /// types](https://cloud.google.com/logging/docs/api/v2/resource-list).
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// Optional. A concise name for the monitored resource type that might be
   /// displayed in user interfaces. It should be a Title Cased Noun Phrase,
   /// without any article or other determiners. For example,
   /// `"Google Cloud SQL Database"`.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Optional. A detailed description of the monitored resource type that might
   /// be used in documentation.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Required. A set of labels used to describe instances of this monitored
   /// resource type. For example, an individual Google Cloud SQL database is
   /// identified by values for the labels `"database_id"` and `"zone"`.
-  public var labels: [LabelDescriptor]
+  public var labels: [LabelDescriptor] = []
 
   /// Optional. The launch stage of the monitored resource definition.
-  public var launchStage: LaunchStage
+  public var launchStage: LaunchStage = LaunchStage()
 
   /// Initialize a new instance of `MonitoredResourceDescriptor`.
-  public init(
-    name: Swift.String = Swift.String(),
-    type: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    labels: [LabelDescriptor] = [],
-    launchStage: LaunchStage = LaunchStage(),
-  ) {
-    self.name = name
-    self.type = type
-    self.displayName = displayName
-    self.description = description
-    self.labels = labels
-    self.launchStage = launchStage
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MonitoredResourceDescriptor().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

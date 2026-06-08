@@ -22,18 +22,25 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// Experimental features to be included during client library generation.
-  public var experimentalFeatures: PythonSettings.ExperimentalFeatures?
+  public var experimentalFeatures: PythonSettings.ExperimentalFeatures? = nil
 
   /// Initialize a new instance of `PythonSettings`.
-  public init(
-    common: CommonLanguageSettings? = nil,
-    experimentalFeatures: PythonSettings.ExperimentalFeatures? = nil,
-  ) {
-    self.common = common
-    self.experimentalFeatures = experimentalFeatures
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PythonSettings().with { $0.common = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Experimental features to be included during client library generation.
@@ -46,29 +53,34 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// enabled. By default, asynchronous REST clients will not be generated.
     /// This feature will be enabled by default 1 month after launching the
     /// feature in preview packages.
-    public var restAsyncIoEnabled: Swift.Bool
+    public var restAsyncIoEnabled: Swift.Bool = Swift.Bool()
 
     /// Enables generation of protobuf code using new types that are more
     /// Pythonic which are included in `protobuf>=5.29.x`. This feature will be
     /// enabled by default 1 month after launching the feature in preview
     /// packages.
-    public var protobufPythonicTypesEnabled: Swift.Bool
+    public var protobufPythonicTypesEnabled: Swift.Bool = Swift.Bool()
 
     /// Disables generation of an unversioned Python package for this client
     /// library. This means that the module names will need to be versioned in
     /// import statements. For example `import google.cloud.library_v2` instead
     /// of `import google.cloud.library`.
-    public var unversionedPackageDisabled: Swift.Bool
+    public var unversionedPackageDisabled: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `ExperimentalFeatures`.
-    public init(
-      restAsyncIoEnabled: Swift.Bool = Swift.Bool(),
-      protobufPythonicTypesEnabled: Swift.Bool = Swift.Bool(),
-      unversionedPackageDisabled: Swift.Bool = Swift.Bool(),
-    ) {
-      self.restAsyncIoEnabled = restAsyncIoEnabled
-      self.protobufPythonicTypesEnabled = protobufPythonicTypesEnabled
-      self.unversionedPackageDisabled = unversionedPackageDisabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ExperimentalFeatures().with { $0.restAsyncIoEnabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

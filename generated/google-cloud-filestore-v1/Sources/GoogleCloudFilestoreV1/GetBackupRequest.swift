@@ -23,13 +23,22 @@ public struct GetBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Required. The backup resource name, in the format
   /// `projects/{project_number}/locations/{location}/backups/{backup_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetBackupRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetBackupRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -24,11 +24,11 @@ public struct SearchFoldersRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Optional. The maximum number of folders to return in the response. The
   /// server can return fewer folders than requested. If unspecified, server
   /// picks an appropriate default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to
   /// `SearchFolders` that indicates from where search should continue.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. Search criteria used to select the folders to return.
   /// If no search criteria is specified then all accessible folders will be
@@ -61,17 +61,22 @@ public struct SearchFoldersRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Folder resources that have `folders/123` as a parent resource.
   /// * Query `displayName=\\"Test String\\"` returns Folder resources with
   /// display names that include both "Test" and "String".
-  public var query: Swift.String
+  public var query: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SearchFoldersRequest`.
-  public init(
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    query: Swift.String = Swift.String(),
-  ) {
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.query = query
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SearchFoldersRequest().with { $0.pageSize = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

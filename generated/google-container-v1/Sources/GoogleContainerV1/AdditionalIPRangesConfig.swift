@@ -26,26 +26,31 @@ public struct AdditionalIPRangesConfig: Codable, Equatable, GoogleCloudWkt._AnyP
   /// just the name.
   /// Example1: my-subnet
   /// Example2: projects/gke-project/regions/us-central1/subnetworks/my-subnet
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// List of secondary ranges names within this subnetwork that can be used for
   /// pod IPs.
   /// Example1: gke-pod-range1
   /// Example2: gke-pod-range1,gke-pod-range2
-  public var podIpv4RangeNames: [Swift.String]
+  public var podIpv4RangeNames: [Swift.String] = []
 
   /// Draining status of the additional subnet.
-  public var status: AdditionalIPRangesConfig.Status
+  public var status: AdditionalIPRangesConfig.Status = AdditionalIPRangesConfig.Status()
 
   /// Initialize a new instance of `AdditionalIPRangesConfig`.
-  public init(
-    subnetwork: Swift.String = Swift.String(),
-    podIpv4RangeNames: [Swift.String] = [],
-    status: AdditionalIPRangesConfig.Status = AdditionalIPRangesConfig.Status(),
-  ) {
-    self.subnetwork = subnetwork
-    self.podIpv4RangeNames = podIpv4RangeNames
-    self.status = status
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdditionalIPRangesConfig().with { $0.subnetwork = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Additional subnet with DRAINING status will not be selected during new node

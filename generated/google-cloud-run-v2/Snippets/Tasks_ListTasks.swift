@@ -25,10 +25,11 @@ func sample(
   client: some Tasks, projectId: String, locationId: String, jobId: String, executionId: String
 ) async throws {
   let items = try client.listTasks(
-    byItem: ListTasksRequest(
-      parent:
-        "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)",
-    )
+    byItem: ListTasksRequest()
+      .with {
+        $0.parent =
+          "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some Jobs, projectId: String, locationId: String, jobId: String) async throws {
   let response = try await client.getJob(
-    request: GetJobRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)",
-    )
+    request: GetJobRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)" }
   )
   print("Success: \(response)")
 }

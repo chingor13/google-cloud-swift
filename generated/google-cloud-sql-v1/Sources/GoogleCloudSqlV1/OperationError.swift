@@ -23,23 +23,28 @@
     Sendable
   {
     /// This is always `sql#operationError`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Identifies the specific error that occurred.
-    public var code: Swift.String
+    public var code: Swift.String = Swift.String()
 
     /// Additional information about the error encountered.
-    public var message: Swift.String
+    public var message: Swift.String = Swift.String()
 
     /// Initialize a new instance of `OperationError`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      code: Swift.String = Swift.String(),
-      message: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.code = code
-      self.message = message
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = OperationError().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

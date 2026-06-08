@@ -24,23 +24,28 @@ public struct ListClustersResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Clusters in the location.
-  public var clusters: [Cluster]
+  public var clusters: [Cluster] = []
 
   /// A token to retrieve next page of results.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListClustersResponse`.
-  public init(
-    clusters: [Cluster] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.clusters = clusters
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListClustersResponse().with { $0.clusters = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

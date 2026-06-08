@@ -31,23 +31,28 @@ public struct Property: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The name of the property (a.k.a key).
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The type of this property.
-  public var type: Property.PropertyType
+  public var type: Property.PropertyType = Property.PropertyType()
 
   /// The description of the property
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Property`.
-  public init(
-    name: Swift.String = Swift.String(),
-    type: Property.PropertyType = Property.PropertyType(),
-    description: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.type = type
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Property().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Supported data type of the property values

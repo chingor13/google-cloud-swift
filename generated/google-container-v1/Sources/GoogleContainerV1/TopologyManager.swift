@@ -43,7 +43,7 @@ public struct TopologyManager: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The default policy value is 'none' if unspecified.
   /// Details about each strategy can be found
   /// [here](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/#topology-manager-policies).
-  public var policy: Swift.String
+  public var policy: Swift.String = Swift.String()
 
   /// The Topology Manager aligns resources in following scopes:
   ///
@@ -53,15 +53,22 @@ public struct TopologyManager: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The default scope is 'container' if unspecified.
   /// See
   /// https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/#topology-manager-scopes
-  public var scope: Swift.String
+  public var scope: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TopologyManager`.
-  public init(
-    policy: Swift.String = Swift.String(),
-    scope: Swift.String = Swift.String(),
-  ) {
-    self.policy = policy
-    self.scope = scope
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TopologyManager().with { $0.policy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

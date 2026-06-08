@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some TagKeys, tagKeyId: String) async throws {
   let response = try await client.getNamespacedTagKey(
-    request: GetNamespacedTagKeyRequest(
-      name: "tagKeys/\(tagKeyId)",
-    )
+    request: GetNamespacedTagKeyRequest()
+      .with { $0.name = "tagKeys/\(tagKeyId)" }
   )
   print("Success: \(response)")
 }

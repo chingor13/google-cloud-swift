@@ -22,18 +22,25 @@ public struct BatchingConfigProto: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// The thresholds which trigger a batched request to be sent.
-  public var thresholds: BatchingSettingsProto?
+  public var thresholds: BatchingSettingsProto? = nil
 
   /// The request and response fields used in batching.
-  public var batchDescriptor: BatchingDescriptorProto?
+  public var batchDescriptor: BatchingDescriptorProto? = nil
 
   /// Initialize a new instance of `BatchingConfigProto`.
-  public init(
-    thresholds: BatchingSettingsProto? = nil,
-    batchDescriptor: BatchingDescriptorProto? = nil,
-  ) {
-    self.thresholds = thresholds
-    self.batchDescriptor = batchDescriptor
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BatchingConfigProto().with { $0.thresholds = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,39 +23,40 @@ public struct RepoSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// ID of the project that owns the Cloud Source Repository. If omitted, the
   /// project ID requesting the build is assumed.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Name of the Cloud Source Repository.
-  public var repoName: Swift.String
+  public var repoName: Swift.String = Swift.String()
 
   /// Directory, relative to the source root, in which to run the build.
   ///
   /// This must be a relative path. If a step's `dir` is specified and is an
   /// absolute path, this value is ignored for that step's execution.
   /// eg. helloworld (no leading slash allowed)
-  public var dir: Swift.String
+  public var dir: Swift.String = Swift.String()
 
   /// Only trigger a build if the revision regex does NOT match the revision
   /// regex.
-  public var invertRegex: Swift.Bool
+  public var invertRegex: Swift.Bool = Swift.Bool()
 
   /// A revision within the Cloud Source Repository must be specified in
   /// one of these ways.
-  public var revision: OneOf_Revision?
+  public var revision: OneOf_Revision? = nil
 
   /// Initialize a new instance of `RepoSource`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    repoName: Swift.String = Swift.String(),
-    dir: Swift.String = Swift.String(),
-    invertRegex: Swift.Bool = Swift.Bool(),
-    revision: OneOf_Revision? = nil,
-  ) {
-    self.projectId = projectId
-    self.repoName = repoName
-    self.dir = dir
-    self.invertRegex = invertRegex
-    self.revision = revision
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RepoSource().with { $0.branchName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

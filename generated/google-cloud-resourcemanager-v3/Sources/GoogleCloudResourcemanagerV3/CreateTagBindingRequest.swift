@@ -22,19 +22,26 @@ public struct CreateTagBindingRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Required. The TagBinding to be created.
-  public var tagBinding: TagBinding?
+  public var tagBinding: TagBinding? = nil
 
   /// Optional. Set to true to perform the validations necessary for creating the
   /// resource, but not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateTagBindingRequest`.
-  public init(
-    tagBinding: TagBinding? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.tagBinding = tagBinding
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateTagBindingRequest().with { $0.tagBinding = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

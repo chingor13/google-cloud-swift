@@ -56,13 +56,22 @@ public struct Billing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// There can be multiple consumer destinations per service, each one must have
   /// a different monitored resource type. A metric can be used in at most
   /// one consumer destination.
-  public var consumerDestinations: [Billing.BillingDestination]
+  public var consumerDestinations: [Billing.BillingDestination] = []
 
   /// Initialize a new instance of `Billing`.
-  public init(
-    consumerDestinations: [Billing.BillingDestination] = [],
-  ) {
-    self.consumerDestinations = consumerDestinations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Billing().with { $0.consumerDestinations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration of a specific billing destination (Currently only support
@@ -75,22 +84,29 @@ public struct Billing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// section.
     ///
     /// [google.api.Service.monitored_resources]: <doc:Service/monitoredResources>
-    public var monitoredResource: Swift.String
+    public var monitoredResource: Swift.String = Swift.String()
 
     /// Names of the metrics to report to this billing destination.
     /// Each name must be defined in
     /// [Service.metrics][google.api.Service.metrics] section.
     ///
     /// [google.api.Service.metrics]: <doc:Service/metrics>
-    public var metrics: [Swift.String]
+    public var metrics: [Swift.String] = []
 
     /// Initialize a new instance of `BillingDestination`.
-    public init(
-      monitoredResource: Swift.String = Swift.String(),
-      metrics: [Swift.String] = [],
-    ) {
-      self.monitoredResource = monitoredResource
-      self.metrics = metrics
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BillingDestination().with { $0.monitoredResource = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

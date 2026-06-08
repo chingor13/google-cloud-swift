@@ -27,7 +27,7 @@ public struct AuthProvider: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `AuthRequirement.provider_id`.
   ///
   /// Example: "bookstore_auth".
-  public var id: Swift.String
+  public var id: Swift.String = Swift.String()
 
   /// Identifies the principal that issued the JWT. See
   /// https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -35,7 +35,7 @@ public struct AuthProvider: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Example: https://securetoken.google.com
   /// Example: 1234567-compute@developer.gserviceaccount.com
-  public var issuer: Swift.String
+  public var issuer: Swift.String = Swift.String()
 
   /// URL of the provider's public key set to validate signature of the JWT. See
   /// [OpenID
@@ -49,7 +49,7 @@ public struct AuthProvider: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///  service account).
   ///
   /// Example: https://www.googleapis.com/oauth2/v1/certs
-  public var jwksUri: Swift.String
+  public var jwksUri: Swift.String = Swift.String()
 
   /// The list of JWT
   /// [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -68,11 +68,11 @@ public struct AuthProvider: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   ///     audiences: bookstore_android.apps.googleusercontent.com,
   ///                bookstore_web.apps.googleusercontent.com
-  public var audiences: Swift.String
+  public var audiences: Swift.String = Swift.String()
 
   /// Redirect URL if JWT token is required but not present or is expired.
   /// Implement authorizationUrl of securityDefinitions in OpenAPI spec.
-  public var authorizationUrl: Swift.String
+  public var authorizationUrl: Swift.String = Swift.String()
 
   /// Defines the locations to extract the JWT.  For now it is only used by the
   /// Cloud Endpoints to store the OpenAPI extension [x-google-jwt-locations]
@@ -92,23 +92,22 @@ public struct AuthProvider: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///      value_prefix: "Bearer "
   ///    - header: x-goog-iap-jwt-assertion
   ///    - query: access_token
-  public var jwtLocations: [JwtLocation]
+  public var jwtLocations: [JwtLocation] = []
 
   /// Initialize a new instance of `AuthProvider`.
-  public init(
-    id: Swift.String = Swift.String(),
-    issuer: Swift.String = Swift.String(),
-    jwksUri: Swift.String = Swift.String(),
-    audiences: Swift.String = Swift.String(),
-    authorizationUrl: Swift.String = Swift.String(),
-    jwtLocations: [JwtLocation] = [],
-  ) {
-    self.id = id
-    self.issuer = issuer
-    self.jwksUri = jwksUri
-    self.audiences = audiences
-    self.authorizationUrl = authorizationUrl
-    self.jwtLocations = jwtLocations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuthProvider().with { $0.id = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.AuthProvider" }

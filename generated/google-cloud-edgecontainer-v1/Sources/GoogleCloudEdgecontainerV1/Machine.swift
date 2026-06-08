@@ -23,16 +23,16 @@ public struct Machine: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the machine.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time when the node pool was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time when the node pool was last updated.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this resource.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Canonical resource name of the node that this machine is responsible for
   /// hosting e.g.
@@ -42,37 +42,32 @@ public struct Machine: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For control plane nodes hosted on edge machines, this will return
   /// the following format:
   ///   "projects/{project}/locations/{location}/clusters/{cluster_id}/controlPlaneNodes/{node}".
-  public var hostedNode: Swift.String
+  public var hostedNode: Swift.String = Swift.String()
 
   /// The Google Distributed Cloud Edge zone of this machine.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Output only. The software version of the machine.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Output only. Whether the machine is disabled. If disabled, the machine is
   /// unable to enter service.
-  public var disabled: Swift.Bool
+  public var disabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `Machine`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    hostedNode: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-    disabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.labels = labels
-    self.hostedNode = hostedNode
-    self.zone = zone
-    self.version = version
-    self.disabled = disabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Machine().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -26,22 +26,29 @@ public struct GetWorkflowRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 {
   /// Required. Name of the workflow for which information should be retrieved.
   /// Format: projects/{project}/locations/{location}/workflows/{workflow}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. The revision of the workflow to retrieve. If the revision_id is
   /// empty, the latest revision is retrieved.
   /// The format is "000001-a4d", where the first six characters define
   /// the zero-padded decimal revision number. They are followed by a hyphen and
   /// three hexadecimal characters.
-  public var revisionId: Swift.String
+  public var revisionId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetWorkflowRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    revisionId: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.revisionId = revisionId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetWorkflowRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

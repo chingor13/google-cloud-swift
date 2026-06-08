@@ -24,30 +24,33 @@ public struct ListInstancesRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Required. The location and project to list resources on.
   /// Format: projects/{project}/locations/{location}, where {project} can be
   /// project id or number.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. Maximum number of Instances to return in this call.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A page token received from a previous call to ListInstances.
   /// All other parameters must match.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. If true, returns deleted (but unexpired) resources along with
   /// active ones.
-  public var showDeleted: Swift.Bool
+  public var showDeleted: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListInstancesRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    showDeleted: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.showDeleted = showDeleted
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListInstancesRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

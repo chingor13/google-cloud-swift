@@ -22,13 +22,22 @@ public struct EnvVarSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Selects a secret and a specific version from Cloud Secret Manager.
-  public var secretKeyRef: SecretKeySelector?
+  public var secretKeyRef: SecretKeySelector? = nil
 
   /// Initialize a new instance of `EnvVarSource`.
-  public init(
-    secretKeyRef: SecretKeySelector? = nil,
-  ) {
-    self.secretKeyRef = secretKeyRef
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EnvVarSource().with { $0.secretKeyRef = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

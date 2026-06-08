@@ -24,33 +24,36 @@ public struct CancelOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the operation resides. This field has been deprecated and replaced
   /// by the name field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Deprecated. The server-assigned `name` of the operation.
   /// This field has been deprecated and replaced by the name field.
-  public var operationId: Swift.String
+  public var operationId: Swift.String = Swift.String()
 
   /// The name (project, location, operation id) of the operation to cancel.
   /// Specified in the format `projects/*/locations/*/operations/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CancelOperationRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    operationId: Swift.String = Swift.String(),
-    name: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.operationId = operationId
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CancelOperationRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

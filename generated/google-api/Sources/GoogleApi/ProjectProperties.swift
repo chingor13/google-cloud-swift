@@ -37,13 +37,22 @@ public struct ProjectProperties: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// List of per consumer project-specific properties.
-  public var properties: [Property]
+  public var properties: [Property] = []
 
   /// Initialize a new instance of `ProjectProperties`.
-  public init(
-    properties: [Property] = [],
-  ) {
-    self.properties = properties
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ProjectProperties().with { $0.properties = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

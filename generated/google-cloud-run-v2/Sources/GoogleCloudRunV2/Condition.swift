@@ -26,40 +26,39 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://github.com/knative/serving/blob/main/docs/spec/errors.md#error-conditions-and-reporting
   /// Types common to all resources include:
   /// * "Ready": True when the Resource is ready.
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// State of the condition.
-  public var state: Condition.State
+  public var state: Condition.State = Condition.State()
 
   /// Human readable message indicating details about the current status.
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// Last time the condition transitioned from one status to another.
-  public var lastTransitionTime: GoogleCloudWkt.Timestamp?
+  public var lastTransitionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// How to interpret failures of this condition, one of Error, Warning, Info
-  public var severity: Condition.Severity
+  public var severity: Condition.Severity = Condition.Severity()
 
   /// The reason for this condition. Depending on the condition type,
   /// it will populate one of these fields.
   /// Successful conditions cannot have a reason.
-  public var reasons: OneOf_Reasons?
+  public var reasons: OneOf_Reasons? = nil
 
   /// Initialize a new instance of `Condition`.
-  public init(
-    type: Swift.String = Swift.String(),
-    state: Condition.State = Condition.State(),
-    message: Swift.String = Swift.String(),
-    lastTransitionTime: GoogleCloudWkt.Timestamp? = nil,
-    severity: Condition.Severity = Condition.Severity(),
-    reasons: OneOf_Reasons? = nil,
-  ) {
-    self.type = type
-    self.state = state
-    self.message = message
-    self.lastTransitionTime = lastTransitionTime
-    self.severity = severity
-    self.reasons = reasons
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Condition().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

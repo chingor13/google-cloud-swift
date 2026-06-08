@@ -23,9 +23,8 @@
 
   func sample(client: some SqlBackupsService, projectId: String, backupId: String) async throws {
     let response = try await client.deleteBackup(
-      request: DeleteBackupRequest(
-        name: "projects/\(projectId)/backups/\(backupId)",
-      )
+      request: DeleteBackupRequest()
+        .with { $0.name = "projects/\(projectId)/backups/\(backupId)" }
     )
     print("Success: \(response)")
   }

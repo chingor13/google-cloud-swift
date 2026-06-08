@@ -26,18 +26,25 @@ public struct ListLocationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// A list of locations that matches the specified filter in the request.
-  public var locations: [Location]
+  public var locations: [Location] = []
 
   /// The standard List next-page token.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListLocationsResponse`.
-  public init(
-    locations: [Location] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.locations = locations
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListLocationsResponse().with { $0.locations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

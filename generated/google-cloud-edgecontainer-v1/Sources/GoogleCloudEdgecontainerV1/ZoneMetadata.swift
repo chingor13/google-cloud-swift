@@ -22,23 +22,28 @@ public struct ZoneMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Quota for resources in this zone.
-  public var quota: [Quota]
+  public var quota: [Quota] = []
 
   /// The map keyed by rack name and has value of RackType.
-  public var rackTypes: [Swift.String: ZoneMetadata.RackType]
+  public var rackTypes: [Swift.String: ZoneMetadata.RackType] = [:]
 
   /// Config data for the zone.
-  public var configData: ConfigData?
+  public var configData: ConfigData? = nil
 
   /// Initialize a new instance of `ZoneMetadata`.
-  public init(
-    quota: [Quota] = [],
-    rackTypes: [Swift.String: ZoneMetadata.RackType] = [:],
-    configData: ConfigData? = nil,
-  ) {
-    self.quota = quota
-    self.rackTypes = rackTypes
-    self.configData = configData
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ZoneMetadata().with { $0.quota = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Type of the rack.

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.stopReplica(
-      request: SqlInstancesStopReplicaRequest(/* set fields */
-      )
+      request: SqlInstancesStopReplicaRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

@@ -22,13 +22,22 @@ public struct ListNodePoolsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// A list of node pools for a cluster.
-  public var nodePools: [NodePool]
+  public var nodePools: [NodePool] = []
 
   /// Initialize a new instance of `ListNodePoolsResponse`.
-  public init(
-    nodePools: [NodePool] = [],
-  ) {
-    self.nodePools = nodePools
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListNodePoolsResponse().with { $0.nodePools = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

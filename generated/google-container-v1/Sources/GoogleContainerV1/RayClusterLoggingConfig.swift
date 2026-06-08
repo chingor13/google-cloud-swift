@@ -22,13 +22,22 @@ public struct RayClusterLoggingConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Enable log collection for Ray clusters.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `RayClusterLoggingConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RayClusterLoggingConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

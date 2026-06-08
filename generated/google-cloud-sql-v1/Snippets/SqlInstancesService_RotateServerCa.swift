@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.rotateServerCa(
-      request: SqlInstancesRotateServerCaRequest(/* set fields */
-      )
+      request: SqlInstancesRotateServerCaRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

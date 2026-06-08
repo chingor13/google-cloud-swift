@@ -26,7 +26,7 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// The medium on which the data is stored. Acceptable values today is only
   /// MEMORY or none. When none, the default will currently be backed by memory
   /// but could change over time. +optional
-  public var medium: EmptyDirVolumeSource.Medium
+  public var medium: EmptyDirVolumeSource.Medium = EmptyDirVolumeSource.Medium()
 
   /// Limit on the storage usable by this EmptyDir volume.
   /// The size limit is also applicable for memory medium.
@@ -37,15 +37,22 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// https://cloud.google.com/run/docs/configuring/in-memory-volumes#configure-volume.
   /// Info in Kubernetes:
   /// https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
-  public var sizeLimit: Swift.String
+  public var sizeLimit: Swift.String = Swift.String()
 
   /// Initialize a new instance of `EmptyDirVolumeSource`.
-  public init(
-    medium: EmptyDirVolumeSource.Medium = EmptyDirVolumeSource.Medium(),
-    sizeLimit: Swift.String = Swift.String(),
-  ) {
-    self.medium = medium
-    self.sizeLimit = sizeLimit
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EmptyDirVolumeSource().with { $0.medium = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The different types of medium supported for EmptyDir.

@@ -24,21 +24,28 @@ public struct GRPCAction: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. Port number of the gRPC service. Number must be in the range 1 to
   /// 65535. If not specified, defaults to the exposed port of the container,
   /// which is the value of container.ports[0].containerPort.
-  public var port: Swift.Int32
+  public var port: Swift.Int32 = Swift.Int32()
 
   /// Optional. Service is the name of the service to place in the gRPC
   /// HealthCheckRequest (see
   /// https://github.com/grpc/grpc/blob/master/doc/health-checking.md ). If this
   /// is not specified, the default behavior is defined by gRPC.
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GRPCAction`.
-  public init(
-    port: Swift.Int32 = Swift.Int32(),
-    service: Swift.String = Swift.String(),
-  ) {
-    self.port = port
-    self.service = service
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GRPCAction().with { $0.port = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

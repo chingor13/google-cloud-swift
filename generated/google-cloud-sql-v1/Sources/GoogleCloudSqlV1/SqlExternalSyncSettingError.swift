@@ -24,24 +24,29 @@
   {
     /// Can be `sql#externalSyncSettingError` or
     /// `sql#externalSyncSettingWarning`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Identifies the specific error that occurred.
-    public var type: SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType
+    public var type: SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType =
+      SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType()
 
     /// Additional information about the error encountered.
-    public var detail: Swift.String
+    public var detail: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlExternalSyncSettingError`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      type: SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType =
-        SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType(),
-      detail: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.type = type
-      self.detail = detail
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlExternalSyncSettingError().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public enum SqlExternalSyncSettingErrorType: Codable, Equatable, Sendable {

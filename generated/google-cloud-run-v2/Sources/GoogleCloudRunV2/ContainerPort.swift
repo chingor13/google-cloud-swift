@@ -23,19 +23,26 @@ public struct ContainerPort: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// If specified, used to specify which protocol to use.
   /// Allowed values are "http1" and "h2c".
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Port number the container listens on.
   /// This must be a valid TCP port number, 0 < container_port < 65536.
-  public var containerPort: Swift.Int32
+  public var containerPort: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `ContainerPort`.
-  public init(
-    name: Swift.String = Swift.String(),
-    containerPort: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.name = name
-    self.containerPort = containerPort
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ContainerPort().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

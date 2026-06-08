@@ -23,13 +23,22 @@ public struct DefaultSnatStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Disables cluster default sNAT rules.
-  public var disabled: Swift.Bool
+  public var disabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `DefaultSnatStatus`.
-  public init(
-    disabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.disabled = disabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DefaultSnatStatus().with { $0.disabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

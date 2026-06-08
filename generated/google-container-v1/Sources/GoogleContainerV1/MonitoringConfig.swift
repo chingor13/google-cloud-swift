@@ -22,24 +22,29 @@ public struct MonitoringConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Monitoring components configuration
-  public var componentConfig: MonitoringComponentConfig?
+  public var componentConfig: MonitoringComponentConfig? = nil
 
   /// Enable Google Cloud Managed Service for Prometheus
   /// in the cluster.
-  public var managedPrometheusConfig: ManagedPrometheusConfig?
+  public var managedPrometheusConfig: ManagedPrometheusConfig? = nil
 
   /// Configuration of Advanced Datapath Observability features.
-  public var advancedDatapathObservabilityConfig: AdvancedDatapathObservabilityConfig?
+  public var advancedDatapathObservabilityConfig: AdvancedDatapathObservabilityConfig? = nil
 
   /// Initialize a new instance of `MonitoringConfig`.
-  public init(
-    componentConfig: MonitoringComponentConfig? = nil,
-    managedPrometheusConfig: ManagedPrometheusConfig? = nil,
-    advancedDatapathObservabilityConfig: AdvancedDatapathObservabilityConfig? = nil,
-  ) {
-    self.componentConfig = componentConfig
-    self.managedPrometheusConfig = managedPrometheusConfig
-    self.advancedDatapathObservabilityConfig = advancedDatapathObservabilityConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MonitoringConfig().with { $0.componentConfig = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

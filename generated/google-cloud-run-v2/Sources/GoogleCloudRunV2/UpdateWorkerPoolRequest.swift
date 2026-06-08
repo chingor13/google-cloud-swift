@@ -22,19 +22,19 @@ public struct UpdateWorkerPoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Optional. The list of fields to be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Required. The WorkerPool to be updated.
-  public var workerPool: WorkerPool?
+  public var workerPool: WorkerPool? = nil
 
   /// Optional. Indicates that the request should be validated and default values
   /// populated, without persisting the request or updating any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Optional. If set to true, and if the WorkerPool does not exist, it will
   /// create a new one. The caller must have 'run.workerpools.create' permissions
   /// if this is set to true and the WorkerPool does not exist.
-  public var allowMissing: Swift.Bool
+  public var allowMissing: Swift.Bool = Swift.Bool()
 
   /// Optional. If set to true, a new revision will be created from the template
   /// even if the system doesn't detect any changes from the previously deployed
@@ -44,21 +44,22 @@ public struct UpdateWorkerPoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
   /// recreated or reinitialized. For example if the image is specified by label,
   /// but the underlying image digest has changed) or if the container performs
   /// deployment initialization work that needs to be performed again.
-  public var forceNewRevision: Swift.Bool
+  public var forceNewRevision: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UpdateWorkerPoolRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    workerPool: WorkerPool? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-    allowMissing: Swift.Bool = Swift.Bool(),
-    forceNewRevision: Swift.Bool = Swift.Bool(),
-  ) {
-    self.updateMask = updateMask
-    self.workerPool = workerPool
-    self.validateOnly = validateOnly
-    self.allowMissing = allowMissing
-    self.forceNewRevision = forceNewRevision
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateWorkerPoolRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

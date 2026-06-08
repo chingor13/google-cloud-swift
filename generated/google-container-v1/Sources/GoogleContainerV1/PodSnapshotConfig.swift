@@ -22,13 +22,22 @@ public struct PodSnapshotConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Whether or not the Pod Snapshots feature is enabled.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `PodSnapshotConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PodSnapshotConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

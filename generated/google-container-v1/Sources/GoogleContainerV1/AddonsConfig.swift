@@ -24,124 +24,93 @@ public struct AddonsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Configuration for the HTTP (L7) load balancing controller addon, which
   /// makes it easy to set up HTTP load balancers for services in a cluster.
-  public var httpLoadBalancing: HttpLoadBalancing?
+  public var httpLoadBalancing: HttpLoadBalancing? = nil
 
   /// Configuration for the horizontal pod autoscaling feature, which
   /// increases or decreases the number of replica pods a replication controller
   /// has based on the resource usage of the existing pods.
-  public var horizontalPodAutoscaling: HorizontalPodAutoscaling?
+  public var horizontalPodAutoscaling: HorizontalPodAutoscaling? = nil
 
   /// Configuration for the Kubernetes Dashboard.
   /// This addon is deprecated, and will be disabled in 1.15. It is recommended
   /// to use the Cloud Console to manage and monitor your Kubernetes clusters,
   /// workloads and applications. For more information, see:
   /// https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards
-  public var kubernetesDashboard: KubernetesDashboard?
+  public var kubernetesDashboard: KubernetesDashboard? = nil
 
   /// Configuration for NetworkPolicy. This only tracks whether the addon
   /// is enabled or not on the Master, it does not track whether network policy
   /// is enabled for the nodes.
-  public var networkPolicyConfig: NetworkPolicyConfig?
+  public var networkPolicyConfig: NetworkPolicyConfig? = nil
 
   /// Configuration for the Cloud Run addon, which allows the user to use a
   /// managed Knative service.
-  public var cloudRunConfig: CloudRunConfig?
+  public var cloudRunConfig: CloudRunConfig? = nil
 
   /// Configuration for NodeLocalDNS, a dns cache running on cluster nodes
-  public var dnsCacheConfig: DnsCacheConfig?
+  public var dnsCacheConfig: DnsCacheConfig? = nil
 
   /// Configuration for the ConfigConnector add-on, a Kubernetes
   /// extension to manage hosted Google Cloud services through the Kubernetes
   /// API.
-  public var configConnectorConfig: ConfigConnectorConfig?
+  public var configConnectorConfig: ConfigConnectorConfig? = nil
 
   /// Configuration for the Compute Engine Persistent Disk CSI driver.
-  public var gcePersistentDiskCsiDriverConfig: GcePersistentDiskCsiDriverConfig?
+  public var gcePersistentDiskCsiDriverConfig: GcePersistentDiskCsiDriverConfig? = nil
 
   /// Configuration for the Filestore CSI driver.
-  public var gcpFilestoreCsiDriverConfig: GcpFilestoreCsiDriverConfig?
+  public var gcpFilestoreCsiDriverConfig: GcpFilestoreCsiDriverConfig? = nil
 
   /// Configuration for the Backup for GKE agent addon.
-  public var gkeBackupAgentConfig: GkeBackupAgentConfig?
+  public var gkeBackupAgentConfig: GkeBackupAgentConfig? = nil
 
   /// Configuration for the Cloud Storage Fuse CSI driver.
-  public var gcsFuseCsiDriverConfig: GcsFuseCsiDriverConfig?
+  public var gcsFuseCsiDriverConfig: GcsFuseCsiDriverConfig? = nil
 
   /// Optional. Configuration for the StatefulHA add-on.
-  public var statefulHaConfig: StatefulHAConfig?
+  public var statefulHaConfig: StatefulHAConfig? = nil
 
   /// Configuration for the Cloud Storage Parallelstore CSI driver.
-  public var parallelstoreCsiDriverConfig: ParallelstoreCsiDriverConfig?
+  public var parallelstoreCsiDriverConfig: ParallelstoreCsiDriverConfig? = nil
 
   /// Optional. Configuration for Ray Operator addon.
-  public var rayOperatorConfig: RayOperatorConfig?
+  public var rayOperatorConfig: RayOperatorConfig? = nil
 
   /// Configuration for the High Scale Checkpointing add-on.
-  public var highScaleCheckpointingConfig: HighScaleCheckpointingConfig?
+  public var highScaleCheckpointingConfig: HighScaleCheckpointingConfig? = nil
 
   /// Configuration for the Lustre CSI driver.
-  public var lustreCsiDriverConfig: LustreCsiDriverConfig?
+  public var lustreCsiDriverConfig: LustreCsiDriverConfig? = nil
 
   /// Optional. Configuration for the Pod Snapshot feature.
-  public var podSnapshotConfig: PodSnapshotConfig?
+  public var podSnapshotConfig: PodSnapshotConfig? = nil
 
   /// Configuration for the Slurm Operator.
-  public var slurmOperatorConfig: SlurmOperatorConfig?
+  public var slurmOperatorConfig: SlurmOperatorConfig? = nil
 
   /// Optional. Configuration for the slice controller add-on.
-  public var sliceControllerConfig: SliceControllerConfig?
+  public var sliceControllerConfig: SliceControllerConfig? = nil
 
   /// Optional. Configuration for the AgentSandbox addon.
-  public var agentSandboxConfig: AgentSandboxConfig?
+  public var agentSandboxConfig: AgentSandboxConfig? = nil
 
   /// Optional. Configuration for NodeReadinessController add-on.
-  public var nodeReadinessConfig: NodeReadinessConfig?
+  public var nodeReadinessConfig: NodeReadinessConfig? = nil
 
   /// Initialize a new instance of `AddonsConfig`.
-  public init(
-    httpLoadBalancing: HttpLoadBalancing? = nil,
-    horizontalPodAutoscaling: HorizontalPodAutoscaling? = nil,
-    kubernetesDashboard: KubernetesDashboard? = nil,
-    networkPolicyConfig: NetworkPolicyConfig? = nil,
-    cloudRunConfig: CloudRunConfig? = nil,
-    dnsCacheConfig: DnsCacheConfig? = nil,
-    configConnectorConfig: ConfigConnectorConfig? = nil,
-    gcePersistentDiskCsiDriverConfig: GcePersistentDiskCsiDriverConfig? = nil,
-    gcpFilestoreCsiDriverConfig: GcpFilestoreCsiDriverConfig? = nil,
-    gkeBackupAgentConfig: GkeBackupAgentConfig? = nil,
-    gcsFuseCsiDriverConfig: GcsFuseCsiDriverConfig? = nil,
-    statefulHaConfig: StatefulHAConfig? = nil,
-    parallelstoreCsiDriverConfig: ParallelstoreCsiDriverConfig? = nil,
-    rayOperatorConfig: RayOperatorConfig? = nil,
-    highScaleCheckpointingConfig: HighScaleCheckpointingConfig? = nil,
-    lustreCsiDriverConfig: LustreCsiDriverConfig? = nil,
-    podSnapshotConfig: PodSnapshotConfig? = nil,
-    slurmOperatorConfig: SlurmOperatorConfig? = nil,
-    sliceControllerConfig: SliceControllerConfig? = nil,
-    agentSandboxConfig: AgentSandboxConfig? = nil,
-    nodeReadinessConfig: NodeReadinessConfig? = nil,
-  ) {
-    self.httpLoadBalancing = httpLoadBalancing
-    self.horizontalPodAutoscaling = horizontalPodAutoscaling
-    self.kubernetesDashboard = kubernetesDashboard
-    self.networkPolicyConfig = networkPolicyConfig
-    self.cloudRunConfig = cloudRunConfig
-    self.dnsCacheConfig = dnsCacheConfig
-    self.configConnectorConfig = configConnectorConfig
-    self.gcePersistentDiskCsiDriverConfig = gcePersistentDiskCsiDriverConfig
-    self.gcpFilestoreCsiDriverConfig = gcpFilestoreCsiDriverConfig
-    self.gkeBackupAgentConfig = gkeBackupAgentConfig
-    self.gcsFuseCsiDriverConfig = gcsFuseCsiDriverConfig
-    self.statefulHaConfig = statefulHaConfig
-    self.parallelstoreCsiDriverConfig = parallelstoreCsiDriverConfig
-    self.rayOperatorConfig = rayOperatorConfig
-    self.highScaleCheckpointingConfig = highScaleCheckpointingConfig
-    self.lustreCsiDriverConfig = lustreCsiDriverConfig
-    self.podSnapshotConfig = podSnapshotConfig
-    self.slurmOperatorConfig = slurmOperatorConfig
-    self.sliceControllerConfig = sliceControllerConfig
-    self.agentSandboxConfig = agentSandboxConfig
-    self.nodeReadinessConfig = nodeReadinessConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AddonsConfig().with { $0.httpLoadBalancing = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

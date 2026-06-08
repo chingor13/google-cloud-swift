@@ -24,13 +24,22 @@ public struct WorkloadMetadataConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// Mode is the configuration for how to expose metadata to workloads running
   /// on the node pool.
-  public var mode: WorkloadMetadataConfig.Mode
+  public var mode: WorkloadMetadataConfig.Mode = WorkloadMetadataConfig.Mode()
 
   /// Initialize a new instance of `WorkloadMetadataConfig`.
-  public init(
-    mode: WorkloadMetadataConfig.Mode = WorkloadMetadataConfig.Mode(),
-  ) {
-    self.mode = mode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkloadMetadataConfig().with { $0.mode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Mode is the configuration for how to expose metadata to workloads running

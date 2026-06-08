@@ -22,18 +22,25 @@ public struct RuntimeVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resource name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The runtime version.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Initialize a new instance of `RuntimeVersion`.
-  public init(
-    name: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.version = version
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RuntimeVersion().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

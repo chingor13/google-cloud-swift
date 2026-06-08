@@ -22,30 +22,33 @@ public struct ReplicaConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The replica state.
-  public var state: ReplicaConfig.State
+  public var state: ReplicaConfig.State = ReplicaConfig.State()
 
   /// Output only. Additional information about the replication state, if
   /// available.
-  public var stateReasons: [ReplicaConfig.StateReason]
+  public var stateReasons: [ReplicaConfig.StateReason] = []
 
   /// Optional. The peer instance.
-  public var peerInstance: Swift.String
+  public var peerInstance: Swift.String = Swift.String()
 
   /// Output only. The timestamp of the latest replication snapshot taken on the
   /// active instance and is already replicated safely.
-  public var lastActiveSyncTime: GoogleCloudWkt.Timestamp?
+  public var lastActiveSyncTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `ReplicaConfig`.
-  public init(
-    state: ReplicaConfig.State = ReplicaConfig.State(),
-    stateReasons: [ReplicaConfig.StateReason] = [],
-    peerInstance: Swift.String = Swift.String(),
-    lastActiveSyncTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.state = state
-    self.stateReasons = stateReasons
-    self.peerInstance = peerInstance
-    self.lastActiveSyncTime = lastActiveSyncTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ReplicaConfig().with { $0.state = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The replica state.

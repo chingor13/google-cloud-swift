@@ -79,24 +79,24 @@ public struct Documentation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// text. It becomes the overview of the service displayed in Google Cloud
   /// Console.
   /// NOTE: This field is equivalent to the standard field `description`.
-  public var summary: Swift.String
+  public var summary: Swift.String = Swift.String()
 
   /// The top level pages for the documentation set.
-  public var pages: [Page]
+  public var pages: [Page] = []
 
   /// A list of documentation rules that apply to individual API elements.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [DocumentationRule]
+  public var rules: [DocumentationRule] = []
 
   /// The URL to the root of documentation.
-  public var documentationRootUrl: Swift.String
+  public var documentationRootUrl: Swift.String = Swift.String()
 
   /// Specifies the service root url if the default one (the service name
   /// from the yaml file) is not suitable. This can be seen in any fully
   /// specified service urls as well as sections that show a base that other
   /// urls are relative to.
-  public var serviceRootUrl: Swift.String
+  public var serviceRootUrl: Swift.String = Swift.String()
 
   /// Declares a single overview page. For example:
   /// <pre><code>documentation:
@@ -111,23 +111,22 @@ public struct Documentation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///     content: &#40;== include overview.md ==&#41;
   /// </code></pre>
   /// Note: you cannot specify both `overview` field and `pages` field.
-  public var overview: Swift.String
+  public var overview: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Documentation`.
-  public init(
-    summary: Swift.String = Swift.String(),
-    pages: [Page] = [],
-    rules: [DocumentationRule] = [],
-    documentationRootUrl: Swift.String = Swift.String(),
-    serviceRootUrl: Swift.String = Swift.String(),
-    overview: Swift.String = Swift.String(),
-  ) {
-    self.summary = summary
-    self.pages = pages
-    self.rules = rules
-    self.documentationRootUrl = documentationRootUrl
-    self.serviceRootUrl = serviceRootUrl
-    self.overview = overview
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Documentation().with { $0.summary = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Documentation" }

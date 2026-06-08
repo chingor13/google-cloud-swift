@@ -23,9 +23,8 @@ import GoogleCloudWkt
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
   let response = try await client.createExternalAccountKey(
-    request: CreateExternalAccountKeyRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)",
-    )
+    request: CreateExternalAccountKeyRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
   )
   print("Success: \(response)")
 }

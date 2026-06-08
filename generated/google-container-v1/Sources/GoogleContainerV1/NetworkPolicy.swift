@@ -23,18 +23,25 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The selected network policy provider.
-  public var provider: NetworkPolicy.Provider
+  public var provider: NetworkPolicy.Provider = NetworkPolicy.Provider()
 
   /// Whether network policy is enabled on the cluster.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `NetworkPolicy`.
-  public init(
-    provider: NetworkPolicy.Provider = NetworkPolicy.Provider(),
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.provider = provider
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkPolicy().with { $0.provider = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Allowed Network Policy providers.

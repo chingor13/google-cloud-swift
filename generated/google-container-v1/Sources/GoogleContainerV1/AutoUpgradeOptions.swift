@@ -25,19 +25,26 @@ public struct AutoUpgradeOptions: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// Output only. This field is set when upgrades are about to commence
   /// with the approximate start time for the upgrades, in
   /// [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  public var autoUpgradeStartTime: Swift.String
+  public var autoUpgradeStartTime: Swift.String = Swift.String()
 
   /// Output only. This field is set when upgrades are about to commence
   /// with the description of the upgrade.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AutoUpgradeOptions`.
-  public init(
-    autoUpgradeStartTime: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-  ) {
-    self.autoUpgradeStartTime = autoUpgradeStartTime
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AutoUpgradeOptions().with { $0.autoUpgradeStartTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

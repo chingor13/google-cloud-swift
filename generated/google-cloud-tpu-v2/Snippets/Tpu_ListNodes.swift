@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some Tpu, projectId: String, locationId: String) async throws {
   let items = try client.listNodes(
-    byItem: ListNodesRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)",
-    )
+    byItem: ListNodesRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
   )
   for try await item in items {
     print("  \(item)")

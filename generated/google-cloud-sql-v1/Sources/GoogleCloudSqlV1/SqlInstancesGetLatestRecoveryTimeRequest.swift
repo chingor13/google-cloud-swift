@@ -24,24 +24,29 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// The timestamp used to identify the time when the source instance is
     /// deleted. If this instance is deleted, then you must set the timestamp.
-    public var sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp?
+    public var sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `SqlInstancesGetLatestRecoveryTimeRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.sourceInstanceDeletionTime = sourceInstanceDeletionTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesGetLatestRecoveryTimeRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlConnectServiceClient()
     let response = try await client.getConnectSettings(
-      request: GetConnectSettingsRequest(/* set fields */
-      )
+      request: GetConnectSettingsRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

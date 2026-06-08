@@ -22,13 +22,22 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The Cloud Function environments this location supports.
-  public var environments: [Environment]
+  public var environments: [Environment] = []
 
   /// Initialize a new instance of `LocationMetadata`.
-  public init(
-    environments: [Environment] = [],
-  ) {
-    self.environments = environments
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LocationMetadata().with { $0.environments = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

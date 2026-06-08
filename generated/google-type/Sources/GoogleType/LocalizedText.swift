@@ -25,21 +25,28 @@ public struct LocalizedText: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [language_code][google.type.LocalizedText.language_code] below.
   ///
   /// [google.type.LocalizedText.language_code]: <doc:LocalizedText/languageCode>
-  public var text: Swift.String
+  public var text: Swift.String = Swift.String()
 
   /// The text's BCP-47 language code, such as "en-US" or "sr-Latn".
   ///
   /// For more information, see
   /// http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-  public var languageCode: Swift.String
+  public var languageCode: Swift.String = Swift.String()
 
   /// Initialize a new instance of `LocalizedText`.
-  public init(
-    text: Swift.String = Swift.String(),
-    languageCode: Swift.String = Swift.String(),
-  ) {
-    self.text = text
-    self.languageCode = languageCode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LocalizedText().with { $0.text = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.LocalizedText" }

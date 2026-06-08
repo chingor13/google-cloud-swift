@@ -23,18 +23,25 @@ public struct SecurityPostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Sets which mode to use for Security Posture features.
-  public var mode: SecurityPostureConfig.Mode?
+  public var mode: SecurityPostureConfig.Mode? = nil
 
   /// Sets which mode to use for vulnerability scanning.
-  public var vulnerabilityMode: SecurityPostureConfig.VulnerabilityMode?
+  public var vulnerabilityMode: SecurityPostureConfig.VulnerabilityMode? = nil
 
   /// Initialize a new instance of `SecurityPostureConfig`.
-  public init(
-    mode: SecurityPostureConfig.Mode? = nil,
-    vulnerabilityMode: SecurityPostureConfig.VulnerabilityMode? = nil,
-  ) {
-    self.mode = mode
-    self.vulnerabilityMode = vulnerabilityMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecurityPostureConfig().with { $0.mode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Mode defines enablement mode for GKE Security posture features.

@@ -24,25 +24,30 @@ public struct SystemParameter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Define the name of the parameter, such as "api_key" . It is case sensitive.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Define the HTTP header name to use for the parameter. It is case
   /// insensitive.
-  public var httpHeader: Swift.String
+  public var httpHeader: Swift.String = Swift.String()
 
   /// Define the URL query parameter name to use for the parameter. It is case
   /// sensitive.
-  public var urlQueryParameter: Swift.String
+  public var urlQueryParameter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SystemParameter`.
-  public init(
-    name: Swift.String = Swift.String(),
-    httpHeader: Swift.String = Swift.String(),
-    urlQueryParameter: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.httpHeader = httpHeader
-    self.urlQueryParameter = urlQueryParameter
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SystemParameter().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.SystemParameter" }

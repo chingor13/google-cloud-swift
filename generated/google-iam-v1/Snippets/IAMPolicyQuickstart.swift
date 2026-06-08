@@ -23,8 +23,8 @@ import GoogleCloudWkt
 func sample() async throws {
   let client = try GoogleIamV1.Clients.IAMPolicyClient()
   let response = try await client.setIamPolicy(
-    request: SetIamPolicyRequest(/* set fields */
-    )
+    request: SetIamPolicyRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

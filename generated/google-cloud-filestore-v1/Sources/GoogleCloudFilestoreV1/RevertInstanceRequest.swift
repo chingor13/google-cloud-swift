@@ -24,20 +24,27 @@ public struct RevertInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The resource name of the instance, in the format
   /// `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. The snapshot resource ID, in the format 'my-snapshot', where the
   /// specified ID is the {snapshot_id} of the fully qualified name like
   /// `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
-  public var targetSnapshotId: Swift.String
+  public var targetSnapshotId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `RevertInstanceRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    targetSnapshotId: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.targetSnapshotId = targetSnapshotId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RevertInstanceRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -32,13 +32,22 @@ public struct TypeReference: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// user input), use the wildcard `"*"` to denote this behavior.
   ///
   /// See [AIP-202](https://google.aip.dev/202#type-references) for more details.
-  public var typeName: Swift.String
+  public var typeName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TypeReference`.
-  public init(
-    typeName: Swift.String = Swift.String(),
-  ) {
-    self.typeName = typeName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TypeReference().with { $0.typeName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.TypeReference" }

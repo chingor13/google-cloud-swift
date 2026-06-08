@@ -23,24 +23,29 @@ public struct GCSVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Cloud Storage Bucket name.
-  public var bucket: Swift.String
+  public var bucket: Swift.String = Swift.String()
 
   /// If true, the volume will be mounted as read only for all mounts.
-  public var readOnly: Swift.Bool
+  public var readOnly: Swift.Bool = Swift.Bool()
 
   /// A list of additional flags to pass to the gcsfuse CLI.
   /// Options should be specified without the leading "--".
-  public var mountOptions: [Swift.String]
+  public var mountOptions: [Swift.String] = []
 
   /// Initialize a new instance of `GCSVolumeSource`.
-  public init(
-    bucket: Swift.String = Swift.String(),
-    readOnly: Swift.Bool = Swift.Bool(),
-    mountOptions: [Swift.String] = [],
-  ) {
-    self.bucket = bucket
-    self.readOnly = readOnly
-    self.mountOptions = mountOptions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GCSVolumeSource().with { $0.bucket = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

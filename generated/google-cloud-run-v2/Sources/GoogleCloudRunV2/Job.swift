@@ -27,16 +27,16 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Format:
   /// projects/{project}/locations/{location}/jobs/{job}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the Execution. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Unstructured key value map that can be used to organize and categorize
   /// objects.
@@ -50,7 +50,7 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 Job.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Unstructured key value map that may
   /// be set by external tools to store and arbitrary metadata.
@@ -64,33 +64,33 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// <p>This field follows Kubernetes annotations' namespacing, limits, and
   /// rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The deletion time. It is only populated as a response to a
   /// Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. Email address of the last authenticated modifier.
-  public var lastModifier: Swift.String
+  public var lastModifier: Swift.String = Swift.String()
 
   /// Arbitrary identifier for the API client.
-  public var client: Swift.String
+  public var client: Swift.String = Swift.String()
 
   /// Arbitrary version identifier for the API client.
-  public var clientVersion: Swift.String
+  public var clientVersion: Swift.String = Swift.String()
 
   /// The launch stage as defined by [Google Cloud Platform
   /// Launch Stages](https://cloud.google.com/terms/launch-stages).
@@ -102,33 +102,33 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// For example, if ALPHA is provided as input, but only BETA and GA-level
   /// features are used, this field will be BETA on output.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Settings for the Binary Authorization feature.
-  public var binaryAuthorization: BinaryAuthorization?
+  public var binaryAuthorization: BinaryAuthorization? = nil
 
   /// Required. The template used to create executions for this Job.
-  public var template: ExecutionTemplate?
+  public var template: ExecutionTemplate? = nil
 
   /// Output only. The generation of this Job. See comments in `reconciling` for
   /// additional information on reconciliation process in Cloud Run.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The Condition of this Job, containing its readiness status,
   /// and detailed error information in case it did not reach the desired state.
-  public var terminalCondition: Condition?
+  public var terminalCondition: Condition? = nil
 
   /// Output only. The Conditions of all other associated sub-resources. They
   /// contain additional diagnostics information in case the Job does not reach
   /// its desired state. See comments in `reconciling` for additional information
   /// on reconciliation process in Cloud Run.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. Number of executions created for this job.
-  public var executionCount: Swift.Int32
+  public var executionCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. Name of the last created execution.
-  public var latestCreatedExecution: ExecutionReference?
+  public var latestCreatedExecution: ExecutionReference? = nil
 
   /// Output only. Returns true if the Job is currently being acted upon by the
   /// system to bring it into the desired state.
@@ -151,70 +151,31 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `latest_succeeded_execution` will have the state of the last succeeded
   /// execution or empty for newly created Job. Additional information on the
   /// failure can be found in `terminal_condition` and `conditions`.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Optional. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
-  public var createExecution: OneOf_CreateExecution?
+  public var createExecution: OneOf_CreateExecution? = nil
 
   /// Initialize a new instance of `Job`.
-  public init(
-    name: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    creator: Swift.String = Swift.String(),
-    lastModifier: Swift.String = Swift.String(),
-    client: Swift.String = Swift.String(),
-    clientVersion: Swift.String = Swift.String(),
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    binaryAuthorization: BinaryAuthorization? = nil,
-    template: ExecutionTemplate? = nil,
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    terminalCondition: Condition? = nil,
-    conditions: [Condition] = [],
-    executionCount: Swift.Int32 = Swift.Int32(),
-    latestCreatedExecution: ExecutionReference? = nil,
-    reconciling: Swift.Bool = Swift.Bool(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-    createExecution: OneOf_CreateExecution? = nil,
-  ) {
-    self.name = name
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.creator = creator
-    self.lastModifier = lastModifier
-    self.client = client
-    self.clientVersion = clientVersion
-    self.launchStage = launchStage
-    self.binaryAuthorization = binaryAuthorization
-    self.template = template
-    self.observedGeneration = observedGeneration
-    self.terminalCondition = terminalCondition
-    self.conditions = conditions
-    self.executionCount = executionCount
-    self.latestCreatedExecution = latestCreatedExecution
-    self.reconciling = reconciling
-    self.satisfiesPzs = satisfiesPzs
-    self.etag = etag
-    self.createExecution = createExecution
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Job().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

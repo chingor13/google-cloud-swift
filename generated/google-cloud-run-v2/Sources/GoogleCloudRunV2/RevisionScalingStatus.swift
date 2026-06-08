@@ -22,13 +22,22 @@ public struct RevisionScalingStatus: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The current number of min instances provisioned for this revision.
-  public var desiredMinInstanceCount: Swift.Int32
+  public var desiredMinInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `RevisionScalingStatus`.
-  public init(
-    desiredMinInstanceCount: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.desiredMinInstanceCount = desiredMinInstanceCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RevisionScalingStatus().with { $0.desiredMinInstanceCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

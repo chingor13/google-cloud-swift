@@ -23,19 +23,26 @@ public struct ListClustersResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
 {
   /// A list of clusters in the project in the specified zone, or
   /// across all ones.
-  public var clusters: [Cluster]
+  public var clusters: [Cluster] = []
 
   /// If any zones are listed here, the list of clusters returned
   /// may be missing those zones.
-  public var missingZones: [Swift.String]
+  public var missingZones: [Swift.String] = []
 
   /// Initialize a new instance of `ListClustersResponse`.
-  public init(
-    clusters: [Cluster] = [],
-    missingZones: [Swift.String] = [],
-  ) {
-    self.clusters = clusters
-    self.missingZones = missingZones
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListClustersResponse().with { $0.clusters = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

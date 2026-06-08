@@ -25,25 +25,30 @@
     Sendable
   {
     /// A list of backups.
-    public var backups: [Backup]
+    public var backups: [Backup] = []
 
     /// A token, which can be sent as `page_token` to retrieve the next page.
     /// If this field is omitted, then there aren't subsequent pages.
-    public var nextPageToken: Swift.String
+    public var nextPageToken: Swift.String = Swift.String()
 
     /// If a region isn't unavailable or if an unknown error occurs, then a warning
     /// message is returned.
-    public var warnings: [ApiWarning]
+    public var warnings: [ApiWarning] = []
 
     /// Initialize a new instance of `ListBackupsResponse`.
-    public init(
-      backups: [Backup] = [],
-      nextPageToken: Swift.String = Swift.String(),
-      warnings: [ApiWarning] = [],
-    ) {
-      self.backups = backups
-      self.nextPageToken = nextPageToken
-      self.warnings = warnings
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ListBackupsResponse().with { $0.backups = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

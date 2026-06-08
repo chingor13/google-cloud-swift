@@ -24,13 +24,22 @@
   {
     /// User supplied name.  Must be a distinct name from the other certificates
     /// for this instance.
-    public var commonName: Swift.String
+    public var commonName: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SslCertsInsertRequest`.
-    public init(
-      commonName: Swift.String = Swift.String(),
-    ) {
-      self.commonName = commonName
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SslCertsInsertRequest().with { $0.commonName = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -64,24 +64,29 @@ public struct HttpBody: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP Content-Type header value specifying the content type of the body.
-  public var contentType: Swift.String
+  public var contentType: Swift.String = Swift.String()
 
   /// The HTTP request/response body as raw binary.
-  public var data: Foundation.Data
+  public var data: Foundation.Data = Foundation.Data()
 
   /// Application specific response metadata. Must be set in the first response
   /// for streaming APIs.
-  public var extensions: [GoogleCloudWkt.`Any`]
+  public var extensions: [GoogleCloudWkt.`Any`] = []
 
   /// Initialize a new instance of `HttpBody`.
-  public init(
-    contentType: Swift.String = Swift.String(),
-    data: Foundation.Data = Foundation.Data(),
-    extensions: [GoogleCloudWkt.`Any`] = [],
-  ) {
-    self.contentType = contentType
-    self.data = data
-    self.extensions = extensions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HttpBody().with { $0.contentType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.HttpBody" }

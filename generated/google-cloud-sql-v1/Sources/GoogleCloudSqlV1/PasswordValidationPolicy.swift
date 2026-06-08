@@ -26,47 +26,45 @@
     Sendable
   {
     /// Minimum number of characters allowed.
-    public var minLength: GoogleCloudWkt.Int32Value?
+    public var minLength: GoogleCloudWkt.Int32Value? = nil
 
     /// The complexity of the password.
-    public var complexity: PasswordValidationPolicy.Complexity
+    public var complexity: PasswordValidationPolicy.Complexity =
+      PasswordValidationPolicy.Complexity()
 
     /// Number of previous passwords that cannot be reused.
-    public var reuseInterval: GoogleCloudWkt.Int32Value?
+    public var reuseInterval: GoogleCloudWkt.Int32Value? = nil
 
     /// Disallow username as a part of the password.
-    public var disallowUsernameSubstring: GoogleCloudWkt.BoolValue?
+    public var disallowUsernameSubstring: GoogleCloudWkt.BoolValue? = nil
 
     /// Minimum interval after which the password can be changed. This flag is only
     /// supported for PostgreSQL.
-    public var passwordChangeInterval: GoogleCloudWkt.Duration?
+    public var passwordChangeInterval: GoogleCloudWkt.Duration? = nil
 
     /// Whether to enable the password policy or not. When enabled, passwords must
     /// meet complexity requirements. Keep this policy enabled to help prevent
     /// unauthorized access. Disabling this policy allows weak passwords.
-    public var enablePasswordPolicy: GoogleCloudWkt.BoolValue?
+    public var enablePasswordPolicy: GoogleCloudWkt.BoolValue? = nil
 
     /// This field is deprecated and will be removed in a future version of the
     /// API.
-    public var disallowCompromisedCredentials: GoogleCloudWkt.BoolValue?
+    public var disallowCompromisedCredentials: GoogleCloudWkt.BoolValue? = nil
 
     /// Initialize a new instance of `PasswordValidationPolicy`.
-    public init(
-      minLength: GoogleCloudWkt.Int32Value? = nil,
-      complexity: PasswordValidationPolicy.Complexity = PasswordValidationPolicy.Complexity(),
-      reuseInterval: GoogleCloudWkt.Int32Value? = nil,
-      disallowUsernameSubstring: GoogleCloudWkt.BoolValue? = nil,
-      passwordChangeInterval: GoogleCloudWkt.Duration? = nil,
-      enablePasswordPolicy: GoogleCloudWkt.BoolValue? = nil,
-      disallowCompromisedCredentials: GoogleCloudWkt.BoolValue? = nil,
-    ) {
-      self.minLength = minLength
-      self.complexity = complexity
-      self.reuseInterval = reuseInterval
-      self.disallowUsernameSubstring = disallowUsernameSubstring
-      self.passwordChangeInterval = passwordChangeInterval
-      self.enablePasswordPolicy = enablePasswordPolicy
-      self.disallowCompromisedCredentials = disallowCompromisedCredentials
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PasswordValidationPolicy().with { $0.minLength = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The complexity choices of the password.

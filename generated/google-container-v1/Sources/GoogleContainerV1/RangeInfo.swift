@@ -22,18 +22,25 @@ public struct RangeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. Name of a range.
-  public var rangeName: Swift.String
+  public var rangeName: Swift.String = Swift.String()
 
   /// Output only. The utilization of the range.
-  public var utilization: Swift.Double
+  public var utilization: Swift.Double = Swift.Double()
 
   /// Initialize a new instance of `RangeInfo`.
-  public init(
-    rangeName: Swift.String = Swift.String(),
-    utilization: Swift.Double = Swift.Double(),
-  ) {
-    self.rangeName = rangeName
-    self.utilization = utilization
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RangeInfo().with { $0.rangeName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

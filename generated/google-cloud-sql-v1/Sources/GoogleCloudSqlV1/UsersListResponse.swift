@@ -23,23 +23,28 @@
     Sendable
   {
     /// This is always `sql#usersList`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// List of user resources in the instance.
-    public var items: [User]
+    public var items: [User] = []
 
     /// Unused.
-    public var nextPageToken: Swift.String
+    public var nextPageToken: Swift.String = Swift.String()
 
     /// Initialize a new instance of `UsersListResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      items: [User] = [],
-      nextPageToken: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.items = items
-      self.nextPageToken = nextPageToken
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UsersListResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

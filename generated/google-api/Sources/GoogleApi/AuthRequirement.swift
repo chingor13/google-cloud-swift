@@ -30,7 +30,7 @@ public struct AuthRequirement: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///     provider_id: bookstore_auth
   ///
   /// [google.api.AuthProvider.id]: <doc:AuthProvider/id>
-  public var providerId: Swift.String
+  public var providerId: Swift.String = Swift.String()
 
   /// NOTE: This will be deprecated soon, once AuthProvider.audiences is
   /// implemented and accepted in all the runtime components.
@@ -51,15 +51,22 @@ public struct AuthRequirement: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.api.Service.name]: <doc:Service/name>
   /// [google.protobuf.Api.name]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWkt.Api/name
-  public var audiences: Swift.String
+  public var audiences: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AuthRequirement`.
-  public init(
-    providerId: Swift.String = Swift.String(),
-    audiences: Swift.String = Swift.String(),
-  ) {
-    self.providerId = providerId
-    self.audiences = audiences
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuthRequirement().with { $0.providerId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.AuthRequirement" }

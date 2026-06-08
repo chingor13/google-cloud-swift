@@ -24,14 +24,14 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The Cloud Build name of the latest successful deployment of
   /// the function.
-  public var build: Swift.String
+  public var build: Swift.String = Swift.String()
 
   /// The runtime in which to run the function. Required when deploying a new
   /// function, optional when updating an existing function. For a complete
   /// list of possible choices, see the
   /// [`gcloud` command
   /// reference](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime).
-  public var runtime: Swift.String
+  public var runtime: Swift.String = Swift.String()
 
   /// The name of the function (as defined in source code) that will be
   /// executed. Defaults to the resource name suffix, if not specified. For
@@ -39,13 +39,13 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// system will try to use function named "function".
   /// For Node.js this is name of a function exported by the module specified
   /// in `source_location`.
-  public var entryPoint: Swift.String
+  public var entryPoint: Swift.String = Swift.String()
 
   /// The location of the function source code.
-  public var source: Source?
+  public var source: Source? = nil
 
   /// Output only. A permanent fixed identifier for source.
-  public var sourceProvenance: SourceProvenance?
+  public var sourceProvenance: SourceProvenance? = nil
 
   /// Name of the Cloud Build Custom Worker Pool that should be used to build the
   /// function. The format of this field is
@@ -59,10 +59,10 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// (service-<project_number>@gcf-admin-robot.iam.gserviceaccount.com) must be
   /// granted the role Cloud Build Custom Workers Builder
   /// (roles/cloudbuild.customworkers.builder) in the project.
-  public var workerPool: Swift.String
+  public var workerPool: Swift.String = Swift.String()
 
   /// User-provided build-time environment variables for the function
-  public var environmentVariables: [Swift.String: Swift.String]
+  public var environmentVariables: [Swift.String: Swift.String] = [:]
 
   /// Docker Registry to use for this deployment. This configuration is only
   /// applicable to 1st Gen functions, 2nd Gen functions can only use Artifact
@@ -75,7 +75,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// If unspecified, it defaults to `ARTIFACT_REGISTRY`.
   /// If `docker_repository` field is specified, this field should either be left
   /// unspecified or set to `ARTIFACT_REGISTRY`.
-  public var dockerRegistry: BuildConfig.DockerRegistry
+  public var dockerRegistry: BuildConfig.DockerRegistry = BuildConfig.DockerRegistry()
 
   /// Repository in Artifact Registry to which the function docker image will be
   /// pushed after it is built by Cloud Build. If specified by user, it is
@@ -86,40 +86,29 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// It must match the pattern
   /// `projects/{project}/locations/{location}/repositories/{repository}`.
   /// Repository format must be 'DOCKER'.
-  public var dockerRepository: Swift.String
+  public var dockerRepository: Swift.String = Swift.String()
 
   /// Service account to be used for building the container. The format of this
   /// field is `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// This controls when security patches are applied to the runtime environment.
-  public var runtimeUpdatePolicy: OneOf_RuntimeUpdatePolicy?
+  public var runtimeUpdatePolicy: OneOf_RuntimeUpdatePolicy? = nil
 
   /// Initialize a new instance of `BuildConfig`.
-  public init(
-    build: Swift.String = Swift.String(),
-    runtime: Swift.String = Swift.String(),
-    entryPoint: Swift.String = Swift.String(),
-    source: Source? = nil,
-    sourceProvenance: SourceProvenance? = nil,
-    workerPool: Swift.String = Swift.String(),
-    environmentVariables: [Swift.String: Swift.String] = [:],
-    dockerRegistry: BuildConfig.DockerRegistry = BuildConfig.DockerRegistry(),
-    dockerRepository: Swift.String = Swift.String(),
-    serviceAccount: Swift.String = Swift.String(),
-    runtimeUpdatePolicy: OneOf_RuntimeUpdatePolicy? = nil,
-  ) {
-    self.build = build
-    self.runtime = runtime
-    self.entryPoint = entryPoint
-    self.source = source
-    self.sourceProvenance = sourceProvenance
-    self.workerPool = workerPool
-    self.environmentVariables = environmentVariables
-    self.dockerRegistry = dockerRegistry
-    self.dockerRepository = dockerRepository
-    self.serviceAccount = serviceAccount
-    self.runtimeUpdatePolicy = runtimeUpdatePolicy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BuildConfig().with { $0.automaticUpdatePolicy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

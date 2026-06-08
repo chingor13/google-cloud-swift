@@ -23,8 +23,8 @@
 
   func sample(client: some SqlConnectService) async throws {
     let response = try await client.getConnectSettings(
-      request: GetConnectSettingsRequest(/* set fields */
-      )
+      request: GetConnectSettingsRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

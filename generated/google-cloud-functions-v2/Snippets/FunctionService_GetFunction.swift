@@ -28,9 +28,8 @@ func sample(client: some FunctionService, projectId: String, locationId: String,
   async throws
 {
   let response = try await client.getFunction(
-    request: GetFunctionRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/functions/\(functionId)",
-    )
+    request: GetFunctionRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/functions/\(functionId)" }
   )
   print("Success: \(response)")
 }

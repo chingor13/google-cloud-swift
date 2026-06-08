@@ -30,12 +30,12 @@ public struct Usage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Other Google APIs should include
   /// "serviceusage.googleapis.com/tos/universal". Additional ToS can be
   /// included based on the business needs.
-  public var requirements: [Swift.String]
+  public var requirements: [Swift.String] = []
 
   /// A list of usage rules that apply to individual API methods.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [UsageRule]
+  public var rules: [UsageRule] = []
 
   /// The full resource name of a channel used for sending notifications to the
   /// service producer.
@@ -45,17 +45,22 @@ public struct Usage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// channel. To use Google Cloud Pub/Sub as the channel, this must be the name
   /// of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
   /// documented in https://cloud.google.com/pubsub/docs/overview.
-  public var producerNotificationChannel: Swift.String
+  public var producerNotificationChannel: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Usage`.
-  public init(
-    requirements: [Swift.String] = [],
-    rules: [UsageRule] = [],
-    producerNotificationChannel: Swift.String = Swift.String(),
-  ) {
-    self.requirements = requirements
-    self.rules = rules
-    self.producerNotificationChannel = producerNotificationChannel
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Usage().with { $0.requirements = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Usage" }

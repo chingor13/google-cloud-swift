@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.performDiskShrink(
-      request: SqlInstancesPerformDiskShrinkRequest(/* set fields */
-      )
+      request: SqlInstancesPerformDiskShrinkRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

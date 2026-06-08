@@ -24,20 +24,27 @@ public struct BestEffortProvisioning: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// When this is enabled, cluster/node pool creations will ignore non-fatal
   /// errors like stockout to best provision as many nodes as possible right now
   /// and eventually bring up all target number of nodes
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Minimum number of nodes to be provisioned to be considered as succeeded,
   /// and the rest of nodes will be provisioned gradually and eventually when
   /// stockout issue has been resolved.
-  public var minProvisionNodes: Swift.Int32
+  public var minProvisionNodes: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `BestEffortProvisioning`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    minProvisionNodes: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.enabled = enabled
-    self.minProvisionNodes = minProvisionNodes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BestEffortProvisioning().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

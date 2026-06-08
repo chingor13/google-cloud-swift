@@ -22,28 +22,31 @@ public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleCloud
   Sendable
 {
   /// Output only. Client certificate to authenticate to k8s api-server.
-  public var clientCertificate: Swift.String
+  public var clientCertificate: Swift.String = Swift.String()
 
   /// Output only. Client private key to authenticate to k8s api-server.
-  public var clientKey: Swift.String
+  public var clientKey: Swift.String = Swift.String()
 
   /// Output only. Client's identity.
-  public var userId: Swift.String
+  public var userId: Swift.String = Swift.String()
 
   /// Output only. Timestamp at which this credential will expire.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `GenerateOfflineCredentialResponse`.
-  public init(
-    clientCertificate: Swift.String = Swift.String(),
-    clientKey: Swift.String = Swift.String(),
-    userId: Swift.String = Swift.String(),
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.clientCertificate = clientCertificate
-    self.clientKey = clientKey
-    self.userId = userId
-    self.expireTime = expireTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateOfflineCredentialResponse().with { $0.clientCertificate = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -27,9 +27,10 @@ func sample(
   client: some EdgeContainer, projectId: String, locationId: String, vpnConnectionId: String
 ) async throws {
   let response = try await client.getVpnConnection(
-    request: GetVpnConnectionRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/vpnConnections/\(vpnConnectionId)",
-    )
+    request: GetVpnConnectionRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/vpnConnections/\(vpnConnectionId)"
+      }
   )
   print("Success: \(response)")
 }

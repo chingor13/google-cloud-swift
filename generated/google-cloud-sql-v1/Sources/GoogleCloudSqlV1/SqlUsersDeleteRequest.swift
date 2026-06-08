@@ -22,28 +22,31 @@
     Sendable
   {
     /// Host of the user in the instance.
-    public var host: Swift.String
+    public var host: Swift.String = Swift.String()
 
     /// Database instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Name of the user in the instance.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlUsersDeleteRequest`.
-    public init(
-      host: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.host = host
-      self.instance = instance
-      self.name = name
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlUsersDeleteRequest().with { $0.host = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

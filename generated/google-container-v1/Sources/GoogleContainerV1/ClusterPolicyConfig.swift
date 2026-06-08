@@ -23,29 +23,32 @@ public struct ClusterPolicyConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Denotes that preventing creation and mutation of resources in GKE
   /// managed namespaces and cluster-scoped GKE managed resources .
-  public var noSystemMutation: Swift.Bool?
+  public var noSystemMutation: Swift.Bool? = nil
 
   /// Denotes preventing impersonation and CSRs for GKE System users.
-  public var noSystemImpersonation: Swift.Bool?
+  public var noSystemImpersonation: Swift.Bool? = nil
 
   /// Denotes preventing unsafe webhooks.
-  public var noUnsafeWebhooks: Swift.Bool?
+  public var noUnsafeWebhooks: Swift.Bool? = nil
 
   /// Denotes preventing standard node pools and requiring only autopilot node
   /// pools.
-  public var noStandardNodePools: Swift.Bool?
+  public var noStandardNodePools: Swift.Bool? = nil
 
   /// Initialize a new instance of `ClusterPolicyConfig`.
-  public init(
-    noSystemMutation: Swift.Bool? = nil,
-    noSystemImpersonation: Swift.Bool? = nil,
-    noUnsafeWebhooks: Swift.Bool? = nil,
-    noStandardNodePools: Swift.Bool? = nil,
-  ) {
-    self.noSystemMutation = noSystemMutation
-    self.noSystemImpersonation = noSystemImpersonation
-    self.noUnsafeWebhooks = noUnsafeWebhooks
-    self.noStandardNodePools = noStandardNodePools
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterPolicyConfig().with { $0.noSystemMutation = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -30,7 +30,7 @@ public struct EvictionSignals: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// 100Ki, 10Mi, 5Gi. Valid units are Ki, Mi, Gi. Must be >= 100Mi and <= 50%
   /// of the node's memory. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var memoryAvailable: Swift.String
+  public var memoryAvailable: Swift.String = Swift.String()
 
   /// Optional. Amount of storage available on filesystem that kubelet uses for
   /// volumes, daemon logs, etc. Defines the amount of "nodefs.available" signal
@@ -38,7 +38,7 @@ public struct EvictionSignals: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// takses percentage value for now. Sample format: "30%". Must be >= 10% and
   /// <= 50%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var nodefsAvailable: Swift.String
+  public var nodefsAvailable: Swift.String = Swift.String()
 
   /// Optional. Amount of inodes available on filesystem that kubelet uses for
   /// volumes, daemon logs, etc. Defines the amount of "nodefs.inodesFree" signal
@@ -46,7 +46,7 @@ public struct EvictionSignals: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// only. It takses percentage value for now. Sample format: "30%". Must be >=
   /// 5% and <= 50%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var nodefsInodesFree: Swift.String
+  public var nodefsInodesFree: Swift.String = Swift.String()
 
   /// Optional. Amount of storage available on filesystem that container runtime
   /// uses for storing images layers. If the container filesystem and image
@@ -56,7 +56,7 @@ public struct EvictionSignals: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// takses percentage value for now. Sample format: "30%". Must be >= 15% and
   /// <= 50%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var imagefsAvailable: Swift.String
+  public var imagefsAvailable: Swift.String = Swift.String()
 
   /// Optional. Amount of inodes available on filesystem that container runtime
   /// uses for storing images layers. Defines the amount of "imagefs.inodesFree"
@@ -64,30 +64,29 @@ public struct EvictionSignals: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// config. Linux only. It takses percentage value for now. Sample format:
   /// "30%". Must be >= 5% and <= 50%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var imagefsInodesFree: Swift.String
+  public var imagefsInodesFree: Swift.String = Swift.String()
 
   /// Optional. Amount of PID available for pod allocation. Defines the amount of
   /// "pid.available" signal in kubelet. Default is unset, if not specified in
   /// the kubelet config. It takses percentage value for now. Sample format:
   /// "30%". Must be >= 10% and <= 50%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var pidAvailable: Swift.String
+  public var pidAvailable: Swift.String = Swift.String()
 
   /// Initialize a new instance of `EvictionSignals`.
-  public init(
-    memoryAvailable: Swift.String = Swift.String(),
-    nodefsAvailable: Swift.String = Swift.String(),
-    nodefsInodesFree: Swift.String = Swift.String(),
-    imagefsAvailable: Swift.String = Swift.String(),
-    imagefsInodesFree: Swift.String = Swift.String(),
-    pidAvailable: Swift.String = Swift.String(),
-  ) {
-    self.memoryAvailable = memoryAvailable
-    self.nodefsAvailable = nodefsAvailable
-    self.nodefsInodesFree = nodefsInodesFree
-    self.imagefsAvailable = imagefsAvailable
-    self.imagefsInodesFree = imagefsInodesFree
-    self.pidAvailable = pidAvailable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EvictionSignals().with { $0.memoryAvailable = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

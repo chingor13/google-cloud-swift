@@ -23,20 +23,27 @@
     Sendable
   {
     /// Optional. This is always `sql#rotateEntraIdCertificateContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Optional. The fingerprint of the next version to be rotated to. If left
     /// unspecified, will be rotated to the most recently added server certificate
     /// version.
-    public var nextVersion: Swift.String
+    public var nextVersion: Swift.String = Swift.String()
 
     /// Initialize a new instance of `RotateEntraIdCertificateContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      nextVersion: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.nextVersion = nextVersion
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RotateEntraIdCertificateContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

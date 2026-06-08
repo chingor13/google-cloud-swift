@@ -23,18 +23,25 @@
     Sendable
   {
     /// This is always `sql#sslCertsList`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// List of client certificates for the instance.
-    public var items: [SslCert]
+    public var items: [SslCert] = []
 
     /// Initialize a new instance of `SslCertsListResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      items: [SslCert] = [],
-    ) {
-      self.kind = kind
-      self.items = items
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SslCertsListResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

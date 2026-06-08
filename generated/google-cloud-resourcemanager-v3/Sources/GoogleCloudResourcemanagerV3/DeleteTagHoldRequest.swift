@@ -23,19 +23,26 @@ public struct DeleteTagHoldRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
 {
   /// Required. The resource name of the TagHold to delete. Must be of the form:
   /// `tagValues/{tag-value-id}/tagHolds/{tag-hold-id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. Set to true to perform the validations necessary for deleting the
   /// resource, but not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `DeleteTagHoldRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteTagHoldRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

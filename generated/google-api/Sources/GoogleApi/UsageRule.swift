@@ -28,7 +28,7 @@ public struct UsageRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Use this rule to configure unregistered calls for the service. Unregistered
   /// calls are calls that do not contain consumer project identity.
@@ -36,23 +36,28 @@ public struct UsageRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// WARNING: By default, API methods do not allow unregistered calls, and each
   /// method call must be identified by a consumer project identity.
-  public var allowUnregisteredCalls: Swift.Bool
+  public var allowUnregisteredCalls: Swift.Bool = Swift.Bool()
 
   /// If true, the selected method should skip service control and the control
   /// plane features, such as quota and billing, will not be available.
   /// This flag is used by Google Cloud Endpoints to bypass checks for internal
   /// methods, such as service health check methods.
-  public var skipServiceControl: Swift.Bool
+  public var skipServiceControl: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UsageRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    allowUnregisteredCalls: Swift.Bool = Swift.Bool(),
-    skipServiceControl: Swift.Bool = Swift.Bool(),
-  ) {
-    self.selector = selector
-    self.allowUnregisteredCalls = allowUnregisteredCalls
-    self.skipServiceControl = skipServiceControl
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UsageRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.UsageRule" }

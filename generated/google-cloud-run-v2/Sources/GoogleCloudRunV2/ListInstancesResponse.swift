@@ -24,19 +24,26 @@ public struct ListInstancesResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The resulting list of Instances.
-  public var instances: [Instance]
+  public var instances: [Instance] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListInstances request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListInstancesResponse`.
-  public init(
-    instances: [Instance] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.instances = instances
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListInstancesResponse().with { $0.instances = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

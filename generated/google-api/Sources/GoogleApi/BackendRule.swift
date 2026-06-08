@@ -27,7 +27,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// The address of the API backend.
   ///
@@ -51,18 +51,18 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// to specify the protocol version.
   ///
   /// [google.api.BackendRule.protocol]: <doc:BackendRule/`protocol`>
-  public var address: Swift.String
+  public var address: Swift.String = Swift.String()
 
   /// The number of seconds to wait for a response from a request. The default
   /// varies based on the request protocol and deployment environment.
-  public var deadline: Swift.Double
+  public var deadline: Swift.Double = Swift.Double()
 
   /// Deprecated, do not use.
-  public var minDeadline: Swift.Double
+  public var minDeadline: Swift.Double = Swift.Double()
 
   /// The number of seconds to wait for the completion of a long running
   /// operation. The default is no deadline.
-  public var operationDeadline: Swift.Double
+  public var operationDeadline: Swift.Double = Swift.Double()
 
   /// Path translation specifies how to combine the backend address with the
   /// request path in order to produce the appropriate forwarding URL for the
@@ -70,7 +70,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// more details.
   ///
   /// [google.api.BackendRule.PathTranslation]: <doc:BackendRule/PathTranslation>
-  public var pathTranslation: BackendRule.PathTranslation
+  public var pathTranslation: BackendRule.PathTranslation = BackendRule.PathTranslation()
 
   /// The protocol used for sending a request to the backend.
   /// The supported values are "http/1.1" and "h2".
@@ -95,17 +95,17 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// for more details on the supported values.
   ///
   /// [google.api.BackendRule.address]: <doc:BackendRule/address>
-  public var `protocol`: Swift.String
+  public var `protocol`: Swift.String = Swift.String()
 
   /// The map between request protocol and the backend address.
-  public var overridesByRequestProtocol: [Swift.String: BackendRule]
+  public var overridesByRequestProtocol: [Swift.String: BackendRule] = [:]
 
   /// The load balancing policy used for connection to the application backend.
   ///
   /// Defined as an arbitrary string to accomondate custom load balancing
   /// policies supported by the underlying channel, but suggest most users use
   /// one of the standard policies, such as the default, "RoundRobin".
-  public var loadBalancingPolicy: Swift.String
+  public var loadBalancingPolicy: Swift.String = Swift.String()
 
   /// Authentication settings used by the backend.
   ///
@@ -121,31 +121,22 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Refer to https://developers.google.com/identity/protocols/OpenIDConnect for
   /// JWT ID token.
-  public var authentication: OneOf_Authentication?
+  public var authentication: OneOf_Authentication? = nil
 
   /// Initialize a new instance of `BackendRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    address: Swift.String = Swift.String(),
-    deadline: Swift.Double = Swift.Double(),
-    minDeadline: Swift.Double = Swift.Double(),
-    operationDeadline: Swift.Double = Swift.Double(),
-    pathTranslation: BackendRule.PathTranslation = BackendRule.PathTranslation(),
-    `protocol`: Swift.String = Swift.String(),
-    overridesByRequestProtocol: [Swift.String: BackendRule] = [:],
-    loadBalancingPolicy: Swift.String = Swift.String(),
-    authentication: OneOf_Authentication? = nil,
-  ) {
-    self.selector = selector
-    self.address = address
-    self.deadline = deadline
-    self.minDeadline = minDeadline
-    self.operationDeadline = operationDeadline
-    self.pathTranslation = pathTranslation
-    self.`protocol` = `protocol`
-    self.overridesByRequestProtocol = overridesByRequestProtocol
-    self.loadBalancingPolicy = loadBalancingPolicy
-    self.authentication = authentication
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BackendRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

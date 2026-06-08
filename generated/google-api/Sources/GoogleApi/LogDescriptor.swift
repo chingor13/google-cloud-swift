@@ -32,32 +32,35 @@ public struct LogDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// include the following characters: upper- and lower-case alphanumeric
   /// characters [A-Za-z0-9], and punctuation characters including
   /// slash, underscore, hyphen, period [/_-.].
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The set of labels that are available to describe a specific log entry.
   /// Runtime requests that contain labels not specified here are
   /// considered invalid.
-  public var labels: [LabelDescriptor]
+  public var labels: [LabelDescriptor] = []
 
   /// A human-readable description of this log. This information appears in
   /// the documentation and can contain details.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// The human-readable name for this log. This information appears on
   /// the user interface and should be concise.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `LogDescriptor`.
-  public init(
-    name: Swift.String = Swift.String(),
-    labels: [LabelDescriptor] = [],
-    description: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.labels = labels
-    self.description = description
-    self.displayName = displayName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LogDescriptor().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.LogDescriptor" }

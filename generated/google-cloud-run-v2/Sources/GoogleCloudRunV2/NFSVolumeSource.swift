@@ -22,23 +22,28 @@ public struct NFSVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Hostname or IP address of the NFS server
-  public var server: Swift.String
+  public var server: Swift.String = Swift.String()
 
   /// Path that is exported by the NFS server.
-  public var path: Swift.String
+  public var path: Swift.String = Swift.String()
 
   /// If true, the volume will be mounted as read only for all mounts.
-  public var readOnly: Swift.Bool
+  public var readOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `NFSVolumeSource`.
-  public init(
-    server: Swift.String = Swift.String(),
-    path: Swift.String = Swift.String(),
-    readOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.server = server
-    self.path = path
-    self.readOnly = readOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NFSVolumeSource().with { $0.server = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

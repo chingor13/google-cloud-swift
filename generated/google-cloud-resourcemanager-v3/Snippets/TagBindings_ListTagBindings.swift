@@ -24,9 +24,8 @@ import GoogleRpc
 
 func sample(client: some TagBindings, parent: String) async throws {
   let items = try client.listTagBindings(
-    byItem: ListTagBindingsRequest(
-      parent: "\(parent)",
-    )
+    byItem: ListTagBindingsRequest()
+      .with { $0.parent = "\(parent)" }
   )
   for try await item in items {
     print("  \(item)")

@@ -24,13 +24,22 @@ public struct Backend: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A list of API backend rules that apply to individual API methods.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [BackendRule]
+  public var rules: [BackendRule] = []
 
   /// Initialize a new instance of `Backend`.
-  public init(
-    rules: [BackendRule] = [],
-  ) {
-    self.rules = rules
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Backend().with { $0.rules = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Backend" }

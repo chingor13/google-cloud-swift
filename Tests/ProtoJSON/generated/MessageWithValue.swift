@@ -22,28 +22,31 @@ public struct MessageWithValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.Value?
+  public var singular: GoogleCloudWkt.Value? = nil
 
   /// An optional field.
-  public var `optional`: GoogleCloudWkt.Value?
+  public var `optional`: GoogleCloudWkt.Value? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWkt.Value]
+  public var repeated: [GoogleCloudWkt.Value] = []
 
   /// A map field, messages cannot be keys.
-  public var map: [Swift.String: GoogleCloudWkt.Value]
+  public var map: [Swift.String: GoogleCloudWkt.Value] = [:]
 
   /// Initialize a new instance of `MessageWithValue`.
-  public init(
-    singular: GoogleCloudWkt.Value? = nil,
-    `optional`: GoogleCloudWkt.Value? = nil,
-    repeated: [GoogleCloudWkt.Value] = [],
-    map: [Swift.String: GoogleCloudWkt.Value] = [:],
-  ) {
-    self.singular = singular
-    self.`optional` = `optional`
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithValue().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

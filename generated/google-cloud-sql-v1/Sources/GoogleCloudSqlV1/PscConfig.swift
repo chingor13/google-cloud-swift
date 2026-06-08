@@ -23,7 +23,7 @@
     Sendable
   {
     /// Whether PSC connectivity is enabled for this instance.
-    public var pscEnabled: Swift.Bool?
+    public var pscEnabled: Swift.Bool? = nil
 
     /// Optional. The list of consumer projects that are allow-listed for PSC
     /// connections to this instance. This instance can be connected to with PSC
@@ -31,24 +31,24 @@
     ///
     /// Each consumer project in this list may be represented by a project number
     /// (numeric) or by a project id (alphanumeric).
-    public var allowedConsumerProjects: [Swift.String]
+    public var allowedConsumerProjects: [Swift.String] = []
 
     /// Optional. The list of settings for requested Private Service Connect
     /// consumer endpoints that can be used to connect to this Cloud SQL instance.
-    public var pscAutoConnections: [PscAutoConnectionConfig]
+    public var pscAutoConnections: [PscAutoConnectionConfig] = []
 
     /// Optional. The network attachment of the consumer network that the
     /// Private Service Connect enabled Cloud SQL instance is
     /// authorized to connect via PSC interface.
     /// format: projects/PROJECT/regions/REGION/networkAttachments/ID
-    public var networkAttachmentUri: Swift.String
+    public var networkAttachmentUri: Swift.String = Swift.String()
 
     /// Optional. Indicates whether PSC DNS automation is enabled for this
     /// instance. When enabled, Cloud SQL provisions a universal DNS record across
     /// all networks configured with Private Service Connect (PSC)
     /// auto-connections. This will default to true for new instances when Private
     /// Service Connect is enabled.
-    public var pscAutoDnsEnabled: Swift.Bool?
+    public var pscAutoDnsEnabled: Swift.Bool? = nil
 
     /// Optional. Indicates whether PSC write endpoint DNS automation is enabled
     /// for this instance. When enabled, Cloud SQL provisions a universal global
@@ -57,23 +57,22 @@
     /// This feature is only supported for Enterprise Plus edition.
     /// This will default to true for new Enterprise Plus instances when
     /// `psc_auto_dns_enabled` is enabled.
-    public var pscWriteEndpointDnsEnabled: Swift.Bool?
+    public var pscWriteEndpointDnsEnabled: Swift.Bool? = nil
 
     /// Initialize a new instance of `PscConfig`.
-    public init(
-      pscEnabled: Swift.Bool? = nil,
-      allowedConsumerProjects: [Swift.String] = [],
-      pscAutoConnections: [PscAutoConnectionConfig] = [],
-      networkAttachmentUri: Swift.String = Swift.String(),
-      pscAutoDnsEnabled: Swift.Bool? = nil,
-      pscWriteEndpointDnsEnabled: Swift.Bool? = nil,
-    ) {
-      self.pscEnabled = pscEnabled
-      self.allowedConsumerProjects = allowedConsumerProjects
-      self.pscAutoConnections = pscAutoConnections
-      self.networkAttachmentUri = networkAttachmentUri
-      self.pscAutoDnsEnabled = pscAutoDnsEnabled
-      self.pscWriteEndpointDnsEnabled = pscWriteEndpointDnsEnabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PscConfig().with { $0.pscEnabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

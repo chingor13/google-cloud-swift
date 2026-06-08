@@ -24,62 +24,53 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the node pool.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time when the node pool was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time when the node pool was last updated.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this resource.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Name of the Google Distributed Cloud Edge zone where this node pool will be
   /// created. For example: `us-central1-edge-customer-a`.
-  public var nodeLocation: Swift.String
+  public var nodeLocation: Swift.String = Swift.String()
 
   /// Required. The number of nodes in the pool.
-  public var nodeCount: Swift.Int32
+  public var nodeCount: Swift.Int32 = Swift.Int32()
 
   /// Only machines matching this filter will be allowed to join the node pool.
   /// The filtering language accepts strings like "name=<name>", and is
   /// documented in more detail in [AIP-160](https://google.aip.dev/160).
-  public var machineFilter: Swift.String
+  public var machineFilter: Swift.String = Swift.String()
 
   /// Optional. Local disk encryption options. This field is only used when
   /// enabling CMEK support.
-  public var localDiskEncryption: NodePool.LocalDiskEncryption?
+  public var localDiskEncryption: NodePool.LocalDiskEncryption? = nil
 
   /// Output only. The lowest release version among all worker nodes.
-  public var nodeVersion: Swift.String
+  public var nodeVersion: Swift.String = Swift.String()
 
   /// Optional. Configuration for each node in the NodePool
-  public var nodeConfig: NodePool.NodeConfig?
+  public var nodeConfig: NodePool.NodeConfig? = nil
 
   /// Initialize a new instance of `NodePool`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    nodeLocation: Swift.String = Swift.String(),
-    nodeCount: Swift.Int32 = Swift.Int32(),
-    machineFilter: Swift.String = Swift.String(),
-    localDiskEncryption: NodePool.LocalDiskEncryption? = nil,
-    nodeVersion: Swift.String = Swift.String(),
-    nodeConfig: NodePool.NodeConfig? = nil,
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.labels = labels
-    self.nodeLocation = nodeLocation
-    self.nodeCount = nodeCount
-    self.machineFilter = machineFilter
-    self.localDiskEncryption = localDiskEncryption
-    self.nodeVersion = nodeVersion
-    self.nodeConfig = nodeConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePool().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration for CMEK support for edge machine local disk encryption.
@@ -90,40 +81,41 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}
     /// to use for protecting node local disks. If not specified, a
     /// Google-managed key will be used instead.
-    public var kmsKey: Swift.String
+    public var kmsKey: Swift.String = Swift.String()
 
     /// Output only. The Cloud KMS CryptoKeyVersion currently in use for
     /// protecting node local disks. Only applicable if kms_key is set.
-    public var kmsKeyActiveVersion: Swift.String
+    public var kmsKeyActiveVersion: Swift.String = Swift.String()
 
     /// Output only. Availability of the Cloud KMS CryptoKey. If not
     /// `KEY_AVAILABLE`, then nodes may go offline as they cannot access their
     /// local data. This can be caused by a lack of permissions to use the key,
     /// or if the key is disabled or deleted.
-    public var kmsKeyState: KmsKeyState
+    public var kmsKeyState: KmsKeyState = KmsKeyState()
 
     /// Output only. Error status returned by Cloud KMS when using this key. This
     /// field may be populated only if `kms_key_state` is not
     /// `KMS_KEY_STATE_KEY_AVAILABLE`. If populated, this field contains the
     /// error status reported by Cloud KMS.
-    public var kmsStatus: GoogleRpc.Status?
+    public var kmsStatus: GoogleRpc.Status? = nil
 
     /// Output only. The current resource state associated with the cmek.
-    public var resourceState: ResourceState
+    public var resourceState: ResourceState = ResourceState()
 
     /// Initialize a new instance of `LocalDiskEncryption`.
-    public init(
-      kmsKey: Swift.String = Swift.String(),
-      kmsKeyActiveVersion: Swift.String = Swift.String(),
-      kmsKeyState: KmsKeyState = KmsKeyState(),
-      kmsStatus: GoogleRpc.Status? = nil,
-      resourceState: ResourceState = ResourceState(),
-    ) {
-      self.kmsKey = kmsKey
-      self.kmsKeyActiveVersion = kmsKeyActiveVersion
-      self.kmsKeyState = kmsKeyState
-      self.kmsStatus = kmsStatus
-      self.resourceState = resourceState
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = LocalDiskEncryption().with { $0.kmsKey = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -142,22 +134,29 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. The Kubernetes node labels
-    public var labels: [Swift.String: Swift.String]
+    public var labels: [Swift.String: Swift.String] = [:]
 
     /// Optional. Name for the storage schema of worker nodes.
     ///
     /// Warning: Configurable node local storage schema feature is an
     /// experimental feature, and is not recommended for general use
     /// in production clusters/nodepools.
-    public var nodeStorageSchema: Swift.String
+    public var nodeStorageSchema: Swift.String = Swift.String()
 
     /// Initialize a new instance of `NodeConfig`.
-    public init(
-      labels: [Swift.String: Swift.String] = [:],
-      nodeStorageSchema: Swift.String = Swift.String(),
-    ) {
-      self.labels = labels
-      self.nodeStorageSchema = nodeStorageSchema
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NodeConfig().with { $0.labels = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

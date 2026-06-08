@@ -23,8 +23,8 @@
 
   func sample(client: some SqlDatabasesService) async throws {
     let response = try await client.delete(
-      request: SqlDatabasesDeleteRequest(/* set fields */
-      )
+      request: SqlDatabasesDeleteRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

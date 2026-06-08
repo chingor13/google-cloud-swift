@@ -24,40 +24,39 @@
     Sendable
   {
     /// This is always `sql#demoteMasterMysqlReplicaConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The username for the replication connection.
-    public var username: Swift.String
+    public var username: Swift.String = Swift.String()
 
     /// The password for the replication connection.
-    public var password: Swift.String
+    public var password: Swift.String = Swift.String()
 
     /// PEM representation of the replica's private key. The corresponding public
     /// key is encoded in the client's certificate. The format of the replica's
     /// private key can be either PKCS #1 or PKCS #8.
-    public var clientKey: Swift.String
+    public var clientKey: Swift.String = Swift.String()
 
     /// PEM representation of the replica's x509 certificate.
-    public var clientCertificate: Swift.String
+    public var clientCertificate: Swift.String = Swift.String()
 
     /// PEM representation of the trusted CA's x509 certificate.
-    public var caCertificate: Swift.String
+    public var caCertificate: Swift.String = Swift.String()
 
     /// Initialize a new instance of `DemoteMasterMySqlReplicaConfiguration`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      username: Swift.String = Swift.String(),
-      password: Swift.String = Swift.String(),
-      clientKey: Swift.String = Swift.String(),
-      clientCertificate: Swift.String = Swift.String(),
-      caCertificate: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.username = username
-      self.password = password
-      self.clientKey = clientKey
-      self.clientCertificate = clientCertificate
-      self.caCertificate = caCertificate
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DemoteMasterMySqlReplicaConfiguration().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

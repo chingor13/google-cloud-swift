@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlInstancesServiceClient()
     let response = try await client.addServerCa(
-      request: SqlInstancesAddServerCaRequest(/* set fields */
-      )
+      request: SqlInstancesAddServerCaRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

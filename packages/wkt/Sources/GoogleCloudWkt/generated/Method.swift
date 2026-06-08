@@ -21,43 +21,40 @@ public struct Method: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The simple name of this method.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// A URL of the input message type.
-  public var requestTypeUrl: Swift.String
+  public var requestTypeUrl: Swift.String = Swift.String()
 
   /// If true, the request is streamed.
-  public var requestStreaming: Swift.Bool
+  public var requestStreaming: Swift.Bool = Swift.Bool()
 
   /// The URL of the output message type.
-  public var responseTypeUrl: Swift.String
+  public var responseTypeUrl: Swift.String = Swift.String()
 
   /// If true, the response is streamed.
-  public var responseStreaming: Swift.Bool
+  public var responseStreaming: Swift.Bool = Swift.Bool()
 
   /// Any metadata attached to the method.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// The source syntax of this method.
-  public var syntax: Syntax
+  public var syntax: Syntax = Syntax()
 
   /// Initialize a new instance of `Method`.
-  public init(
-    name: Swift.String = Swift.String(),
-    requestTypeUrl: Swift.String = Swift.String(),
-    requestStreaming: Swift.Bool = Swift.Bool(),
-    responseTypeUrl: Swift.String = Swift.String(),
-    responseStreaming: Swift.Bool = Swift.Bool(),
-    options: [Option] = [],
-    syntax: Syntax = Syntax(),
-  ) {
-    self.name = name
-    self.requestTypeUrl = requestTypeUrl
-    self.requestStreaming = requestStreaming
-    self.responseTypeUrl = responseTypeUrl
-    self.responseStreaming = responseStreaming
-    self.options = options
-    self.syntax = syntax
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Method().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Method" }

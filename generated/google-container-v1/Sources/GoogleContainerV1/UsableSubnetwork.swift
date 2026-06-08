@@ -24,37 +24,38 @@ public struct UsableSubnetwork: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Subnetwork Name.
   /// Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// Network Name.
   /// Example: projects/my-project/global/networks/my-network
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// The range of internal addresses that are owned by this subnetwork.
-  public var ipCidrRange: Swift.String
+  public var ipCidrRange: Swift.String = Swift.String()
 
   /// Secondary IP ranges.
-  public var secondaryIpRanges: [UsableSubnetworkSecondaryRange]
+  public var secondaryIpRanges: [UsableSubnetworkSecondaryRange] = []
 
   /// A human readable status message representing the reasons for cases where
   /// the caller cannot use the secondary ranges under the subnet. For example if
   /// the secondary_ip_ranges is empty due to a permission issue, an insufficient
   /// permission message will be given by status_message.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UsableSubnetwork`.
-  public init(
-    subnetwork: Swift.String = Swift.String(),
-    network: Swift.String = Swift.String(),
-    ipCidrRange: Swift.String = Swift.String(),
-    secondaryIpRanges: [UsableSubnetworkSecondaryRange] = [],
-    statusMessage: Swift.String = Swift.String(),
-  ) {
-    self.subnetwork = subnetwork
-    self.network = network
-    self.ipCidrRange = ipCidrRange
-    self.secondaryIpRanges = secondaryIpRanges
-    self.statusMessage = statusMessage
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UsableSubnetwork().with { $0.subnetwork = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

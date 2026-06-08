@@ -24,26 +24,31 @@ public struct ListTagKeysRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// Required. The resource name of the TagKey's parent.
   /// Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
   /// `projects/{project_number}`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The maximum number of TagKeys to return in the response. The
   /// server allows a maximum of 300 TagKeys to return. If unspecified, the
   /// server will use 100 as the default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to `ListTagKey`
   /// that indicates where this listing should continue from.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagKeysRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagKeysRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

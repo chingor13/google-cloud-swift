@@ -22,23 +22,28 @@ public struct MessageWithDoubleValue: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.DoubleValue?
+  public var singular: GoogleCloudWkt.DoubleValue? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWkt.DoubleValue]
+  public var repeated: [GoogleCloudWkt.DoubleValue] = []
 
   /// Test google.protobuf.DoubleValue as map values.
-  public var map: [Swift.String: GoogleCloudWkt.DoubleValue]
+  public var map: [Swift.String: GoogleCloudWkt.DoubleValue] = [:]
 
   /// Initialize a new instance of `MessageWithDoubleValue`.
-  public init(
-    singular: GoogleCloudWkt.DoubleValue? = nil,
-    repeated: [GoogleCloudWkt.DoubleValue] = [],
-    map: [Swift.String: GoogleCloudWkt.DoubleValue] = [:],
-  ) {
-    self.singular = singular
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithDoubleValue().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

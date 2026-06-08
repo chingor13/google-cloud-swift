@@ -28,10 +28,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// * Lowercase letters, numbers, and hyphens only.
   /// * Must start with a letter.
   /// * Must end with a number or a letter.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// An optional description of this cluster.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// The number of nodes to create in this cluster. You must ensure that your
   /// Compute Engine [resource
@@ -44,7 +44,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// auto-generated name. Do not use this and a node_pool at the same time.
   ///
   /// This field is deprecated, use node_pool.initial_node_count instead.
-  public var initialNodeCount: Swift.Int32
+  public var initialNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Parameters used in creating the cluster's nodes.
   /// For requests, this field should only be used in lieu of a
@@ -57,14 +57,14 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If unspecified, the defaults are used.
   /// This field is deprecated, use node_pool.config instead.
-  public var nodeConfig: NodeConfig?
+  public var nodeConfig: NodeConfig? = nil
 
   /// The authentication information for accessing the master endpoint.
   /// If unspecified, the defaults are used:
   /// For clusters before v1.12, if master_auth is unspecified, `username` will
   /// be set to "admin", a random password will be generated, and a client
   /// certificate will be issued.
-  public var masterAuth: MasterAuth?
+  public var masterAuth: MasterAuth? = nil
 
   /// The logging service the cluster should use to write logs.
   /// Currently available options:
@@ -77,7 +77,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If left as an empty string,`logging.googleapis.com/kubernetes` will be
   /// used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
-  public var loggingService: Swift.String
+  public var loggingService: Swift.String = Swift.String()
 
   /// The monitoring service the cluster should use to write metrics.
   /// Currently available options:
@@ -90,32 +90,32 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
   /// used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
-  public var monitoringService: Swift.String
+  public var monitoringService: Swift.String = Swift.String()
 
   /// The name of the Google Compute Engine
   /// [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
   /// to which the cluster is connected. If left unspecified, the `default`
   /// network will be used.
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// The IP address range of the container pods in this cluster, in
   /// [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
   /// notation (e.g. `10.96.0.0/14`). Leave blank to have
   /// one automatically chosen or specify a `/14` block in `10.0.0.0/8`.
-  public var clusterIpv4Cidr: Swift.String
+  public var clusterIpv4Cidr: Swift.String = Swift.String()
 
   /// Configurations for the various addons available to run in the cluster.
-  public var addonsConfig: AddonsConfig?
+  public var addonsConfig: AddonsConfig? = nil
 
   /// The name of the Google Compute Engine
   /// [subnetwork](https://cloud.google.com/compute/docs/subnetworks)
   /// to which the cluster is connected.
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// The node pools associated with this cluster.
   /// This field should not be set if "node_config" or "initial_node_count" are
   /// specified.
-  public var nodePools: [NodePool]
+  public var nodePools: [NodePool] = []
 
   /// The list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
@@ -128,7 +128,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Warning: changing cluster locations will update the
   /// [NodePool.Locations](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations)
   /// of all node pools and will result in nodes being added and/or removed.
-  public var locations: [Swift.String]
+  public var locations: [Swift.String] = []
 
   /// Kubernetes alpha features are enabled on this cluster. This includes alpha
   /// API groups (e.g. v1alpha1) and features that may not be production ready in
@@ -136,28 +136,28 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The cluster has no SLA for uptime and master/node upgrades are disabled.
   /// Alpha enabled clusters are automatically deleted thirty days after
   /// creation.
-  public var enableKubernetesAlpha: Swift.Bool
+  public var enableKubernetesAlpha: Swift.Bool = Swift.Bool()
 
   /// The list of user specified Kubernetes feature gates.
   /// Each string represents the activation status of a feature gate (e.g.
   /// "featureX=true" or "featureX=false")
-  public var alphaClusterFeatureGates: [Swift.String]
+  public var alphaClusterFeatureGates: [Swift.String] = []
 
   /// The resource labels for the cluster to use to annotate any related
   /// Google Compute Engine resources.
-  public var resourceLabels: [Swift.String: Swift.String]
+  public var resourceLabels: [Swift.String: Swift.String] = [:]
 
   /// The fingerprint of the set of labels for this cluster.
-  public var labelFingerprint: Swift.String
+  public var labelFingerprint: Swift.String = Swift.String()
 
   /// Configuration for the legacy ABAC authorization mode.
-  public var legacyAbac: LegacyAbac?
+  public var legacyAbac: LegacyAbac? = nil
 
   /// Configuration options for the NetworkPolicy feature.
-  public var networkPolicy: NetworkPolicy?
+  public var networkPolicy: NetworkPolicy? = nil
 
   /// Configuration for cluster IP allocation.
-  public var ipAllocationPolicy: IPAllocationPolicy?
+  public var ipAllocationPolicy: IPAllocationPolicy? = nil
 
   /// The configuration options for master authorized networks feature.
   ///
@@ -166,43 +166,43 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.authorized_networks_config]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/authorizedNetworksConfig>
-  public var masterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig?
+  public var masterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil
 
   /// Configure the maintenance policy for this cluster.
-  public var maintenancePolicy: MaintenancePolicy?
+  public var maintenancePolicy: MaintenancePolicy? = nil
 
   /// Configuration for Binary Authorization.
-  public var binaryAuthorization: BinaryAuthorization?
+  public var binaryAuthorization: BinaryAuthorization? = nil
 
   /// Cluster-level autoscaling configuration.
-  public var autoscaling: ClusterAutoscaling?
+  public var autoscaling: ClusterAutoscaling? = nil
 
   /// Configuration for cluster networking.
-  public var networkConfig: NetworkConfig?
+  public var networkConfig: NetworkConfig? = nil
 
   /// The default constraint on the maximum number of pods that can be run
   /// simultaneously on a node in the node pool of this cluster. Only honored
   /// if cluster created with IP Alias support.
-  public var defaultMaxPodsConstraint: MaxPodsConstraint?
+  public var defaultMaxPodsConstraint: MaxPodsConstraint? = nil
 
   /// Configuration for exporting resource usages. Resource usage export is
   /// disabled when this config is unspecified.
-  public var resourceUsageExportConfig: ResourceUsageExportConfig?
+  public var resourceUsageExportConfig: ResourceUsageExportConfig? = nil
 
   /// Configuration controlling RBAC group membership information.
-  public var authenticatorGroupsConfig: AuthenticatorGroupsConfig?
+  public var authenticatorGroupsConfig: AuthenticatorGroupsConfig? = nil
 
   /// Configuration for private cluster.
-  public var privateClusterConfig: PrivateClusterConfig?
+  public var privateClusterConfig: PrivateClusterConfig? = nil
 
   /// Configuration of etcd encryption.
-  public var databaseEncryption: DatabaseEncryption?
+  public var databaseEncryption: DatabaseEncryption? = nil
 
   /// Cluster-level Vertical Pod Autoscaling configuration.
-  public var verticalPodAutoscaling: VerticalPodAutoscaling?
+  public var verticalPodAutoscaling: VerticalPodAutoscaling? = nil
 
   /// Shielded Nodes configuration.
-  public var shieldedNodes: ShieldedNodes?
+  public var shieldedNodes: ShieldedNodes? = nil
 
   /// Release channel configuration. If left unspecified on cluster creation and
   /// a version is specified, the cluster is enrolled in the most mature release
@@ -210,36 +210,36 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// REGULAR, and finally RAPID). Otherwise, if no release channel
   /// configuration and no version is specified, the cluster is enrolled in the
   /// REGULAR channel with its default version.
-  public var releaseChannel: ReleaseChannel?
+  public var releaseChannel: ReleaseChannel? = nil
 
   /// Configuration for the use of Kubernetes Service Accounts in IAM policies.
-  public var workloadIdentityConfig: WorkloadIdentityConfig?
+  public var workloadIdentityConfig: WorkloadIdentityConfig? = nil
 
   /// Configuration for issuance of mTLS keys and certificates to Kubernetes
   /// pods.
-  public var meshCertificates: MeshCertificates?
+  public var meshCertificates: MeshCertificates? = nil
 
   /// Configuration for the fine-grained cost management feature.
-  public var costManagementConfig: CostManagementConfig?
+  public var costManagementConfig: CostManagementConfig? = nil
 
   /// Notification configuration of the cluster.
-  public var notificationConfig: NotificationConfig?
+  public var notificationConfig: NotificationConfig? = nil
 
   /// Configuration of Confidential Nodes.
   /// All the nodes in the cluster will be Confidential VM once enabled.
-  public var confidentialNodes: ConfidentialNodes?
+  public var confidentialNodes: ConfidentialNodes? = nil
 
   /// Configuration for Identity Service component.
-  public var identityServiceConfig: IdentityServiceConfig?
+  public var identityServiceConfig: IdentityServiceConfig? = nil
 
   /// Output only. Server-defined URL for the resource.
-  public var selfLink: Swift.String
+  public var selfLink: Swift.String = Swift.String()
 
   /// Output only. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field is deprecated, use location
   /// instead.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Output only. The IP address of this cluster's master endpoint.
   /// The endpoint can be accessed from the internet at
@@ -247,7 +247,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// See the `masterAuth` property of this resource for username and
   /// password information.
-  public var endpoint: Swift.String
+  public var endpoint: Swift.String = Swift.String()
 
   /// The initial Kubernetes version for this cluster.  Valid versions are those
   /// found in validMasterVersions returned by getServerConfig.  The version can
@@ -262,341 +262,184 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
   /// - "1.X.Y-gke.N": picks an explicit Kubernetes version
   /// - "","-": picks the default Kubernetes version
-  public var initialClusterVersion: Swift.String
+  public var initialClusterVersion: Swift.String = Swift.String()
 
   /// Output only. The current software version of the master endpoint.
-  public var currentMasterVersion: Swift.String
+  public var currentMasterVersion: Swift.String = Swift.String()
 
   /// Output only. Deprecated, use
   /// [NodePools.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools)
   /// instead. The current version of the node software components. If they are
   /// currently at multiple versions because they're in the process of being
   /// upgraded, this reflects the minimum version of all nodes.
-  public var currentNodeVersion: Swift.String
+  public var currentNodeVersion: Swift.String = Swift.String()
 
   /// Output only. The time the cluster was created, in
   /// [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  public var createTime: Swift.String
+  public var createTime: Swift.String = Swift.String()
 
   /// Output only. The current status of this cluster.
-  public var status: Cluster.Status
+  public var status: Cluster.Status = Cluster.Status()
 
   /// Output only. Deprecated. Use conditions instead.
   /// Additional information about the current status of this
   /// cluster, if available.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. The size of the address space on each node for hosting
   /// containers. This is provisioned from within the `container_ipv4_cidr`
   /// range. This field will only be set when cluster is in route-based network
   /// mode.
-  public var nodeIpv4CidrSize: Swift.Int32
+  public var nodeIpv4CidrSize: Swift.Int32 = Swift.Int32()
 
   /// Output only. The IP address range of the Kubernetes services in
   /// this cluster, in
   /// [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
   /// notation (e.g. `1.2.3.4/29`). Service addresses are
   /// typically put in the last `/16` from the container CIDR.
-  public var servicesIpv4Cidr: Swift.String
+  public var servicesIpv4Cidr: Swift.String = Swift.String()
 
   /// Output only. Deprecated. Use node_pools.instance_group_urls.
-  public var instanceGroupUrls: [Swift.String]
+  public var instanceGroupUrls: [Swift.String] = []
 
   /// Output only. The number of nodes currently in the cluster. Deprecated.
   /// Call Kubernetes API directly to retrieve node information.
-  public var currentNodeCount: Swift.Int32
+  public var currentNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The time the cluster will be automatically
   /// deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  public var expireTime: Swift.String
+  public var expireTime: Swift.String = Swift.String()
 
   /// Output only. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   /// or
   /// [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   /// in which the cluster resides.
-  public var location: Swift.String
+  public var location: Swift.String = Swift.String()
 
   /// Enable the ability to use Cloud TPUs in this cluster.
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
-  public var enableTpu: Swift.Bool
+  public var enableTpu: Swift.Bool = Swift.Bool()
 
   /// Output only. The IP address range of the Cloud TPUs in this cluster, in
   /// [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
   /// notation (e.g. `1.2.3.4/29`).
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
-  public var tpuIpv4CidrBlock: Swift.String
+  public var tpuIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Which conditions caused the current cluster state.
-  public var conditions: [StatusCondition]
+  public var conditions: [StatusCondition] = []
 
   /// Autopilot configuration for the cluster.
-  public var autopilot: Autopilot?
+  public var autopilot: Autopilot? = nil
 
   /// Output only. Unique id for the cluster.
-  public var id: Swift.String
+  public var id: Swift.String = Swift.String()
 
   /// Default NodePool settings for the entire cluster. These settings are
   /// overridden if specified on the specific NodePool object.
-  public var nodePoolDefaults: NodePoolDefaults?
+  public var nodePoolDefaults: NodePoolDefaults? = nil
 
   /// Logging configuration for the cluster.
-  public var loggingConfig: LoggingConfig?
+  public var loggingConfig: LoggingConfig? = nil
 
   /// Monitoring configuration for the cluster.
-  public var monitoringConfig: MonitoringConfig?
+  public var monitoringConfig: MonitoringConfig? = nil
 
   /// Node pool configs that apply to all auto-provisioned node pools
   /// in autopilot clusters and node auto-provisioning enabled clusters.
-  public var nodePoolAutoConfig: NodePoolAutoConfig?
+  public var nodePoolAutoConfig: NodePoolAutoConfig? = nil
 
   /// The config for pod autoscaling.
-  public var podAutoscaling: PodAutoscaling?
+  public var podAutoscaling: PodAutoscaling? = nil
 
   /// This checksum is computed by the server based on the value of cluster
   /// fields, and may be sent on update requests to ensure the client has an
   /// up-to-date value before proceeding.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Fleet information for the cluster.
-  public var fleet: Fleet?
+  public var fleet: Fleet? = nil
 
   /// Optional. Enable/Disable Security Posture API features for the cluster.
-  public var securityPostureConfig: SecurityPostureConfig?
+  public var securityPostureConfig: SecurityPostureConfig? = nil
 
   /// Configuration for all cluster's control plane endpoints.
-  public var controlPlaneEndpointsConfig: ControlPlaneEndpointsConfig?
+  public var controlPlaneEndpointsConfig: ControlPlaneEndpointsConfig? = nil
 
   /// Beta APIs Config
-  public var enableK8SBetaApis: K8sBetaAPIConfig?
+  public var enableK8SBetaApis: K8sBetaAPIConfig? = nil
 
   /// GKE Enterprise Configuration.
   ///
   /// Deprecated: GKE Enterprise features are now available without an Enterprise
   /// tier.
-  public var enterpriseConfig: EnterpriseConfig?
+  public var enterpriseConfig: EnterpriseConfig? = nil
 
   /// Secret CSI driver configuration.
-  public var secretManagerConfig: SecretManagerConfig?
+  public var secretManagerConfig: SecretManagerConfig? = nil
 
   /// Optional. Deprecated: Compliance Posture is no longer supported.
   /// For more details, see
   /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
   ///
   /// Enable/Disable Compliance Posture features for the cluster.
-  public var compliancePostureConfig: CompliancePostureConfig?
+  public var compliancePostureConfig: CompliancePostureConfig? = nil
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool?
+  public var satisfiesPzs: Swift.Bool? = nil
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzi: Swift.Bool?
+  public var satisfiesPzi: Swift.Bool? = nil
 
   /// The Custom keys configuration for the cluster.
-  public var userManagedKeysConfig: UserManagedKeysConfig?
+  public var userManagedKeysConfig: UserManagedKeysConfig? = nil
 
   /// RBACBindingConfig allows user to restrict ClusterRoleBindings an
   /// RoleBindings that can be created.
-  public var rbacBindingConfig: RBACBindingConfig?
+  public var rbacBindingConfig: RBACBindingConfig? = nil
 
   /// Configuration for GKE auto upgrades.
-  public var gkeAutoUpgradeConfig: GkeAutoUpgradeConfig?
+  public var gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil
 
   /// Configuration for limiting anonymous access to all endpoints except the
   /// health checks.
-  public var anonymousAuthenticationConfig: AnonymousAuthenticationConfig?
+  public var anonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil
 
   /// Optional. Configuration for scheduled upgrades.
-  public var scheduleUpgradeConfig: ScheduleUpgradeConfig?
+  public var scheduleUpgradeConfig: ScheduleUpgradeConfig? = nil
 
   /// Configuration for sync Secret Manager secrets as k8s secrets.
-  public var secretSyncConfig: SecretSyncConfig?
+  public var secretSyncConfig: SecretSyncConfig? = nil
 
   /// Configuration for Managed OpenTelemetry pipeline.
-  public var managedOpentelemetryConfig: ManagedOpenTelemetryConfig?
+  public var managedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil
 
   /// Configuration for control plane egress control.
-  public var controlPlaneEgress: ControlPlaneEgress?
+  public var controlPlaneEgress: ControlPlaneEgress? = nil
 
   /// Configuration for Managed Machine Learning Diagnostics.
-  public var managedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig?
+  public var managedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig? = nil
 
   /// Optional. Configuration for Node Creation Mode.
-  public var nodeCreationConfig: NodeCreationConfig?
+  public var nodeCreationConfig: NodeCreationConfig? = nil
 
   /// Initialize a new instance of `Cluster`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    initialNodeCount: Swift.Int32 = Swift.Int32(),
-    nodeConfig: NodeConfig? = nil,
-    masterAuth: MasterAuth? = nil,
-    loggingService: Swift.String = Swift.String(),
-    monitoringService: Swift.String = Swift.String(),
-    network: Swift.String = Swift.String(),
-    clusterIpv4Cidr: Swift.String = Swift.String(),
-    addonsConfig: AddonsConfig? = nil,
-    subnetwork: Swift.String = Swift.String(),
-    nodePools: [NodePool] = [],
-    locations: [Swift.String] = [],
-    enableKubernetesAlpha: Swift.Bool = Swift.Bool(),
-    alphaClusterFeatureGates: [Swift.String] = [],
-    resourceLabels: [Swift.String: Swift.String] = [:],
-    labelFingerprint: Swift.String = Swift.String(),
-    legacyAbac: LegacyAbac? = nil,
-    networkPolicy: NetworkPolicy? = nil,
-    ipAllocationPolicy: IPAllocationPolicy? = nil,
-    masterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil,
-    maintenancePolicy: MaintenancePolicy? = nil,
-    binaryAuthorization: BinaryAuthorization? = nil,
-    autoscaling: ClusterAutoscaling? = nil,
-    networkConfig: NetworkConfig? = nil,
-    defaultMaxPodsConstraint: MaxPodsConstraint? = nil,
-    resourceUsageExportConfig: ResourceUsageExportConfig? = nil,
-    authenticatorGroupsConfig: AuthenticatorGroupsConfig? = nil,
-    privateClusterConfig: PrivateClusterConfig? = nil,
-    databaseEncryption: DatabaseEncryption? = nil,
-    verticalPodAutoscaling: VerticalPodAutoscaling? = nil,
-    shieldedNodes: ShieldedNodes? = nil,
-    releaseChannel: ReleaseChannel? = nil,
-    workloadIdentityConfig: WorkloadIdentityConfig? = nil,
-    meshCertificates: MeshCertificates? = nil,
-    costManagementConfig: CostManagementConfig? = nil,
-    notificationConfig: NotificationConfig? = nil,
-    confidentialNodes: ConfidentialNodes? = nil,
-    identityServiceConfig: IdentityServiceConfig? = nil,
-    selfLink: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    endpoint: Swift.String = Swift.String(),
-    initialClusterVersion: Swift.String = Swift.String(),
-    currentMasterVersion: Swift.String = Swift.String(),
-    currentNodeVersion: Swift.String = Swift.String(),
-    createTime: Swift.String = Swift.String(),
-    status: Cluster.Status = Cluster.Status(),
-    statusMessage: Swift.String = Swift.String(),
-    nodeIpv4CidrSize: Swift.Int32 = Swift.Int32(),
-    servicesIpv4Cidr: Swift.String = Swift.String(),
-    instanceGroupUrls: [Swift.String] = [],
-    currentNodeCount: Swift.Int32 = Swift.Int32(),
-    expireTime: Swift.String = Swift.String(),
-    location: Swift.String = Swift.String(),
-    enableTpu: Swift.Bool = Swift.Bool(),
-    tpuIpv4CidrBlock: Swift.String = Swift.String(),
-    conditions: [StatusCondition] = [],
-    autopilot: Autopilot? = nil,
-    id: Swift.String = Swift.String(),
-    nodePoolDefaults: NodePoolDefaults? = nil,
-    loggingConfig: LoggingConfig? = nil,
-    monitoringConfig: MonitoringConfig? = nil,
-    nodePoolAutoConfig: NodePoolAutoConfig? = nil,
-    podAutoscaling: PodAutoscaling? = nil,
-    etag: Swift.String = Swift.String(),
-    fleet: Fleet? = nil,
-    securityPostureConfig: SecurityPostureConfig? = nil,
-    controlPlaneEndpointsConfig: ControlPlaneEndpointsConfig? = nil,
-    enableK8SBetaApis: K8sBetaAPIConfig? = nil,
-    enterpriseConfig: EnterpriseConfig? = nil,
-    secretManagerConfig: SecretManagerConfig? = nil,
-    compliancePostureConfig: CompliancePostureConfig? = nil,
-    satisfiesPzs: Swift.Bool? = nil,
-    satisfiesPzi: Swift.Bool? = nil,
-    userManagedKeysConfig: UserManagedKeysConfig? = nil,
-    rbacBindingConfig: RBACBindingConfig? = nil,
-    gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil,
-    anonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil,
-    scheduleUpgradeConfig: ScheduleUpgradeConfig? = nil,
-    secretSyncConfig: SecretSyncConfig? = nil,
-    managedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil,
-    controlPlaneEgress: ControlPlaneEgress? = nil,
-    managedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig? = nil,
-    nodeCreationConfig: NodeCreationConfig? = nil,
-  ) {
-    self.name = name
-    self.description = description
-    self.initialNodeCount = initialNodeCount
-    self.nodeConfig = nodeConfig
-    self.masterAuth = masterAuth
-    self.loggingService = loggingService
-    self.monitoringService = monitoringService
-    self.network = network
-    self.clusterIpv4Cidr = clusterIpv4Cidr
-    self.addonsConfig = addonsConfig
-    self.subnetwork = subnetwork
-    self.nodePools = nodePools
-    self.locations = locations
-    self.enableKubernetesAlpha = enableKubernetesAlpha
-    self.alphaClusterFeatureGates = alphaClusterFeatureGates
-    self.resourceLabels = resourceLabels
-    self.labelFingerprint = labelFingerprint
-    self.legacyAbac = legacyAbac
-    self.networkPolicy = networkPolicy
-    self.ipAllocationPolicy = ipAllocationPolicy
-    self.masterAuthorizedNetworksConfig = masterAuthorizedNetworksConfig
-    self.maintenancePolicy = maintenancePolicy
-    self.binaryAuthorization = binaryAuthorization
-    self.autoscaling = autoscaling
-    self.networkConfig = networkConfig
-    self.defaultMaxPodsConstraint = defaultMaxPodsConstraint
-    self.resourceUsageExportConfig = resourceUsageExportConfig
-    self.authenticatorGroupsConfig = authenticatorGroupsConfig
-    self.privateClusterConfig = privateClusterConfig
-    self.databaseEncryption = databaseEncryption
-    self.verticalPodAutoscaling = verticalPodAutoscaling
-    self.shieldedNodes = shieldedNodes
-    self.releaseChannel = releaseChannel
-    self.workloadIdentityConfig = workloadIdentityConfig
-    self.meshCertificates = meshCertificates
-    self.costManagementConfig = costManagementConfig
-    self.notificationConfig = notificationConfig
-    self.confidentialNodes = confidentialNodes
-    self.identityServiceConfig = identityServiceConfig
-    self.selfLink = selfLink
-    self.zone = zone
-    self.endpoint = endpoint
-    self.initialClusterVersion = initialClusterVersion
-    self.currentMasterVersion = currentMasterVersion
-    self.currentNodeVersion = currentNodeVersion
-    self.createTime = createTime
-    self.status = status
-    self.statusMessage = statusMessage
-    self.nodeIpv4CidrSize = nodeIpv4CidrSize
-    self.servicesIpv4Cidr = servicesIpv4Cidr
-    self.instanceGroupUrls = instanceGroupUrls
-    self.currentNodeCount = currentNodeCount
-    self.expireTime = expireTime
-    self.location = location
-    self.enableTpu = enableTpu
-    self.tpuIpv4CidrBlock = tpuIpv4CidrBlock
-    self.conditions = conditions
-    self.autopilot = autopilot
-    self.id = id
-    self.nodePoolDefaults = nodePoolDefaults
-    self.loggingConfig = loggingConfig
-    self.monitoringConfig = monitoringConfig
-    self.nodePoolAutoConfig = nodePoolAutoConfig
-    self.podAutoscaling = podAutoscaling
-    self.etag = etag
-    self.fleet = fleet
-    self.securityPostureConfig = securityPostureConfig
-    self.controlPlaneEndpointsConfig = controlPlaneEndpointsConfig
-    self.enableK8SBetaApis = enableK8SBetaApis
-    self.enterpriseConfig = enterpriseConfig
-    self.secretManagerConfig = secretManagerConfig
-    self.compliancePostureConfig = compliancePostureConfig
-    self.satisfiesPzs = satisfiesPzs
-    self.satisfiesPzi = satisfiesPzi
-    self.userManagedKeysConfig = userManagedKeysConfig
-    self.rbacBindingConfig = rbacBindingConfig
-    self.gkeAutoUpgradeConfig = gkeAutoUpgradeConfig
-    self.anonymousAuthenticationConfig = anonymousAuthenticationConfig
-    self.scheduleUpgradeConfig = scheduleUpgradeConfig
-    self.secretSyncConfig = secretSyncConfig
-    self.managedOpentelemetryConfig = managedOpentelemetryConfig
-    self.controlPlaneEgress = controlPlaneEgress
-    self.managedMachineLearningDiagnosticsConfig = managedMachineLearningDiagnosticsConfig
-    self.nodeCreationConfig = nodeCreationConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Cluster().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

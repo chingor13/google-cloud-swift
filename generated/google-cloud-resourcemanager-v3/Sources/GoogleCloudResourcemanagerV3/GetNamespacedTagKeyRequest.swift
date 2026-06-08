@@ -25,13 +25,22 @@ public struct GetNamespacedTagKeyRequest: Codable, Equatable, GoogleCloudWkt._An
   /// `{parentId}/{tagKeyShort}`, such as `42/foo` for a key with short name
   /// "foo" under the organization with ID 42 or `r2-d2/bar` for a key with short
   /// name "bar" under the project `r2-d2`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetNamespacedTagKeyRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetNamespacedTagKeyRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

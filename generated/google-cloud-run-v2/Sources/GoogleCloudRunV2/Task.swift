@@ -22,16 +22,16 @@ public struct Task: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The unique name of this Task.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the Task. The value is a
   /// UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Output only. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -39,195 +39,140 @@ public struct Task: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// team, component, environment, state, etc. For more information, visit
   /// https://cloud.google.com/resource-manager/docs/creating-managing-labels or
   /// https://cloud.google.com/run/docs/configuring/labels
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Unstructured key value map that may
   /// be set by external tools to store and arbitrary metadata.
   /// They are not queryable and should be preserved
   /// when modifying objects.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. Represents time when the task was created by the system.
   /// It is not guaranteed to be set in happens-before order across separate
   /// operations.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Represents time when the task was scheduled to run by the
   /// system. It is not guaranteed to be set in happens-before order across
   /// separate operations.
-  public var scheduledTime: GoogleCloudWkt.Timestamp?
+  public var scheduledTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Represents time when the task started to run.
   /// It is not guaranteed to be set in happens-before order across separate
   /// operations.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Represents time when the Task was completed. It is not
   /// guaranteed to be set in happens-before order across separate operations.
-  public var completionTime: GoogleCloudWkt.Timestamp?
+  public var completionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the deletion time. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted. It is only populated as a response to a Delete
   /// request.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The name of the parent Job.
-  public var job: Swift.String
+  public var job: Swift.String = Swift.String()
 
   /// Output only. The name of the parent Execution.
-  public var execution: Swift.String
+  public var execution: Swift.String = Swift.String()
 
   /// Holds the single container that defines the unit of execution for this
   /// task.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// Number of retries allowed per Task, before marking this Task failed.
-  public var maxRetries: Swift.Int32
+  public var maxRetries: Swift.Int32 = Swift.Int32()
 
   /// Max allowed time duration the Task may be active before the system will
   /// actively try to mark it failed and kill associated containers. This applies
   /// per attempt of a task, meaning each retry can run for the full timeout.
-  public var timeout: GoogleCloudWkt.Duration?
+  public var timeout: GoogleCloudWkt.Duration? = nil
 
   /// Email address of the IAM service account associated with the Task of a
   /// Job. The service account represents the identity of the
   /// running task, and determines what permissions the task has. If
   /// not provided, the task will use the project's default service account.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// The execution environment being used to host this Task.
-  public var executionEnvironment: ExecutionEnvironment
+  public var executionEnvironment: ExecutionEnvironment = ExecutionEnvironment()
 
   /// Output only. Indicates whether the resource's reconciliation is still in
   /// progress. See comments in `Job.reconciling` for additional information on
   /// reconciliation process in Cloud Run.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Output only. The Condition of this Task, containing its readiness status,
   /// and detailed error information in case it did not reach the desired state.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. The generation of this Task. See comments in `Job.reconciling`
   /// for additional information on reconciliation process in Cloud Run.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. Index of the Task, unique per execution, and beginning at 0.
-  public var index: Swift.Int32
+  public var index: Swift.Int32 = Swift.Int32()
 
   /// Output only. The number of times this Task was retried.
   /// Tasks are retried when they fail up to the maxRetries limit.
-  public var retried: Swift.Int32
+  public var retried: Swift.Int32 = Swift.Int32()
 
   /// Output only. Result of the last attempt of this Task.
-  public var lastAttemptResult: TaskAttemptResult?
+  public var lastAttemptResult: TaskAttemptResult? = nil
 
   /// Output only. A reference to a customer managed encryption key (CMEK) to use
   /// to encrypt this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// Output only. VPC Access configuration to use for this Task. For more
   /// information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
   /// Output only. URI where logs for this execution can be found in Cloud
   /// Console.
-  public var logUri: Swift.String
+  public var logUri: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. The node selector for the task.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. Output only. True if GPU zonal redundancy is disabled on this
   /// task.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
   /// Output only. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Task`.
-  public init(
-    name: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    scheduledTime: GoogleCloudWkt.Timestamp? = nil,
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    completionTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    job: Swift.String = Swift.String(),
-    execution: Swift.String = Swift.String(),
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    maxRetries: Swift.Int32 = Swift.Int32(),
-    timeout: GoogleCloudWkt.Duration? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    executionEnvironment: ExecutionEnvironment = ExecutionEnvironment(),
-    reconciling: Swift.Bool = Swift.Bool(),
-    conditions: [Condition] = [],
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    index: Swift.Int32 = Swift.Int32(),
-    retried: Swift.Int32 = Swift.Int32(),
-    lastAttemptResult: TaskAttemptResult? = nil,
-    encryptionKey: Swift.String = Swift.String(),
-    vpcAccess: VpcAccess? = nil,
-    logUri: Swift.String = Swift.String(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.scheduledTime = scheduledTime
-    self.startTime = startTime
-    self.completionTime = completionTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.job = job
-    self.execution = execution
-    self.containers = containers
-    self.volumes = volumes
-    self.maxRetries = maxRetries
-    self.timeout = timeout
-    self.serviceAccount = serviceAccount
-    self.executionEnvironment = executionEnvironment
-    self.reconciling = reconciling
-    self.conditions = conditions
-    self.observedGeneration = observedGeneration
-    self.index = index
-    self.retried = retried
-    self.lastAttemptResult = lastAttemptResult
-    self.encryptionKey = encryptionKey
-    self.vpcAccess = vpcAccess
-    self.logUri = logUri
-    self.satisfiesPzs = satisfiesPzs
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Task().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.Task" }

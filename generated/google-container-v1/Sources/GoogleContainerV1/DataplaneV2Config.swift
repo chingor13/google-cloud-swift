@@ -22,13 +22,22 @@ public struct DataplaneV2Config: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Optional. Scalability mode for the cluster.
-  public var scalabilityMode: DataplaneV2Config.ScalabilityMode?
+  public var scalabilityMode: DataplaneV2Config.ScalabilityMode? = nil
 
   /// Initialize a new instance of `DataplaneV2Config`.
-  public init(
-    scalabilityMode: DataplaneV2Config.ScalabilityMode? = nil,
-  ) {
-    self.scalabilityMode = scalabilityMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DataplaneV2Config().with { $0.scalabilityMode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Options on how to scale the cluster.

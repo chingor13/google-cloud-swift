@@ -27,13 +27,22 @@ public struct DeleteWorkflowRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. Name of the workflow to be deleted.
   /// Format: projects/{project}/locations/{location}/workflows/{workflow}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DeleteWorkflowRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteWorkflowRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

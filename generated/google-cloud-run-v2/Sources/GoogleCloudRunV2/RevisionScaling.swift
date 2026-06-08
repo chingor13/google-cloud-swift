@@ -23,21 +23,28 @@ public struct RevisionScaling: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Optional. Minimum number of serving instances that this resource should
   /// have.
-  public var minInstanceCount: Swift.Int32
+  public var minInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// Optional. Maximum number of serving instances that this resource should
   /// have. When unspecified, the field is set to the server default value of
   /// 100. For more information see
   /// https://cloud.google.com/run/docs/configuring/max-instances
-  public var maxInstanceCount: Swift.Int32
+  public var maxInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `RevisionScaling`.
-  public init(
-    minInstanceCount: Swift.Int32 = Swift.Int32(),
-    maxInstanceCount: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.minInstanceCount = minInstanceCount
-    self.maxInstanceCount = maxInstanceCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RevisionScaling().with { $0.minInstanceCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

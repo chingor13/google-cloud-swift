@@ -23,19 +23,26 @@ public struct CreateTagValueRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The TagValue to be created. Only fields `short_name`,
   /// `description`, and `parent` are considered during the creation request.
-  public var tagValue: TagValue?
+  public var tagValue: TagValue? = nil
 
   /// Optional. Set as true to perform the validations necessary for creating the
   /// resource, but not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateTagValueRequest`.
-  public init(
-    tagValue: TagValue? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.tagValue = tagValue
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateTagValueRequest().with { $0.tagValue = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

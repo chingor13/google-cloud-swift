@@ -27,34 +27,35 @@ public struct ListInstancesRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// **us-west1-b**. To retrieve instance information for all locations, use "-"
   /// for the
   /// `{location}` value.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The maximum number of items to return.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The next_page_token value to use if there are additional
   /// results to retrieve for this list request.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Sort results. Supported values are "name", "name desc" or "" (unsorted).
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// List filter.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListInstancesRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.orderBy = orderBy
-    self.filter = filter
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListInstancesRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

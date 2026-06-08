@@ -23,11 +23,11 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
 {
   /// A non-parameterized string describing an operation stage.
   /// Unset for single-stage operations.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Status of an operation stage.
   /// Unset for single-stage operations.
-  public var status: Operation.Status
+  public var status: Operation.Status = Operation.Status()
 
   /// Progress metric bundle, for example:
   ///   metrics: [{name: "nodes done",     int_value: 15},
@@ -35,22 +35,25 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// or
   ///   metrics: [{name: "progress",       double_value: 0.56},
   ///             {name: "progress scale", double_value: 1.0}]
-  public var metrics: [OperationProgress.Metric]
+  public var metrics: [OperationProgress.Metric] = []
 
   /// Substages of an operation or a stage.
-  public var stages: [OperationProgress]
+  public var stages: [OperationProgress] = []
 
   /// Initialize a new instance of `OperationProgress`.
-  public init(
-    name: Swift.String = Swift.String(),
-    status: Operation.Status = Operation.Status(),
-    metrics: [OperationProgress.Metric] = [],
-    stages: [OperationProgress] = [],
-  ) {
-    self.name = name
-    self.status = status
-    self.metrics = metrics
-    self.stages = stages
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = OperationProgress().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Progress metric is (string, int|float|string) pair.
@@ -58,18 +61,25 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
     Sendable
   {
     /// Required. Metric name, e.g., "nodes total", "percent done".
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Strictly one of the values is required.
-    public var value: OneOf_Value?
+    public var value: OneOf_Value? = nil
 
     /// Initialize a new instance of `Metric`.
-    public init(
-      name: Swift.String = Swift.String(),
-      value: OneOf_Value? = nil,
-    ) {
-      self.name = name
-      self.value = value
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Metric().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

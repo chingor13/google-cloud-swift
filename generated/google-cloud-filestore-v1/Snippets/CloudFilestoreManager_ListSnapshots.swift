@@ -28,9 +28,8 @@ func sample(
   client: some CloudFilestoreManager, projectId: String, locationId: String, instanceId: String
 ) async throws {
   let items = try client.listSnapshots(
-    byItem: ListSnapshotsRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)",
-    )
+    byItem: ListSnapshotsRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
   )
   for try await item in items {
     print("  \(item)")

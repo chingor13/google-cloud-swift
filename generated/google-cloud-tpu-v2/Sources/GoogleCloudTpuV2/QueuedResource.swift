@@ -24,45 +24,42 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. Immutable. The name of the QueuedResource.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time when the QueuedResource was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Optional. The queueing policy of the QueuedRequest.
-  public var queueingPolicy: QueuedResource.QueueingPolicy?
+  public var queueingPolicy: QueuedResource.QueueingPolicy? = nil
 
   /// Output only. State of the QueuedResource request.
-  public var state: QueuedResourceState?
+  public var state: QueuedResourceState? = nil
 
   /// Optional. Name of the reservation in which the resource should be
   /// provisioned. Format:
   /// projects/{project}/locations/{zone}/reservations/{reservation}
-  public var reservationName: Swift.String
+  public var reservationName: Swift.String = Swift.String()
 
   /// Resource specification.
-  public var resource: OneOf_Resource?
+  public var resource: OneOf_Resource? = nil
 
   /// Tier specifies the required tier.
-  public var tier: OneOf_Tier?
+  public var tier: OneOf_Tier? = nil
 
   /// Initialize a new instance of `QueuedResource`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    queueingPolicy: QueuedResource.QueueingPolicy? = nil,
-    state: QueuedResourceState? = nil,
-    reservationName: Swift.String = Swift.String(),
-    resource: OneOf_Resource? = nil,
-    tier: OneOf_Tier? = nil,
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.queueingPolicy = queueingPolicy
-    self.state = state
-    self.reservationName = reservationName
-    self.resource = resource
-    self.tier = tier
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = QueuedResource().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -152,13 +149,22 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. The TPU node(s) being requested.
-    public var nodeSpec: [QueuedResource.Tpu.NodeSpec]
+    public var nodeSpec: [QueuedResource.Tpu.NodeSpec] = []
 
     /// Initialize a new instance of `Tpu`.
-    public init(
-      nodeSpec: [QueuedResource.Tpu.NodeSpec] = [],
-    ) {
-      self.nodeSpec = nodeSpec
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Tpu().with { $0.nodeSpec = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Details of the TPU node(s) being requested. Users can request either a
@@ -168,23 +174,28 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Required. The parent resource name.
-      public var parent: Swift.String
+      public var parent: Swift.String = Swift.String()
 
       /// Required. The node.
-      public var node: Node?
+      public var node: Node? = nil
 
       /// Either a node_id or multislice_params.
-      public var nameStrategy: OneOf_NameStrategy?
+      public var nameStrategy: OneOf_NameStrategy? = nil
 
       /// Initialize a new instance of `NodeSpec`.
-      public init(
-        parent: Swift.String = Swift.String(),
-        node: Node? = nil,
-        nameStrategy: OneOf_NameStrategy? = nil,
-      ) {
-        self.parent = parent
-        self.node = node
-        self.nameStrategy = nameStrategy
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = NodeSpec().with { $0.parent = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       private enum CodingKeys: String, CodingKey {
@@ -244,22 +255,29 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Required. Number of nodes with this spec. The system will attempt
         /// to provision "node_count" nodes as part of the request.
         /// This needs to be > 1.
-        public var nodeCount: Swift.Int32
+        public var nodeCount: Swift.Int32 = Swift.Int32()
 
         /// Optional. Prefix of node_ids in case of multislice request.
         /// Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format.
         /// If node_count = 3 and node_id_prefix = "np", node ids of nodes
         /// created will be "np-0", "np-1", "np-2". If this field is not
         /// provided we use queued_resource_id as the node_id_prefix.
-        public var nodeIdPrefix: Swift.String
+        public var nodeIdPrefix: Swift.String = Swift.String()
 
         /// Initialize a new instance of `MultisliceParams`.
-        public init(
-          nodeCount: Swift.Int32 = Swift.Int32(),
-          nodeIdPrefix: Swift.String = Swift.String(),
-        ) {
-          self.nodeCount = nodeCount
-          self.nodeIdPrefix = nodeIdPrefix
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = MultisliceParams().with { $0.nodeCount = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -312,7 +330,19 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Initialize a new instance of `Spot`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Spot().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -333,13 +363,22 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Optional. Defines the minimum duration of the guarantee. If specified,
     /// the requested resources will only be provisioned if they can be
     /// allocated for at least the given duration.
-    public var minDuration: GoogleCloudWkt.Duration?
+    public var minDuration: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `Guaranteed`.
-    public init(
-      minDuration: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.minDuration = minDuration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Guaranteed().with { $0.minDuration = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -358,13 +397,22 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Time flexibility specification.
-    public var startTimingConstraints: OneOf_StartTimingConstraints?
+    public var startTimingConstraints: OneOf_StartTimingConstraints? = nil
 
     /// Initialize a new instance of `QueueingPolicy`.
-    public init(
-      startTimingConstraints: OneOf_StartTimingConstraints? = nil,
-    ) {
-      self.startTimingConstraints = startTimingConstraints
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = QueueingPolicy().with { $0.validUntilDuration = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

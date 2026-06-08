@@ -28,24 +28,29 @@ public struct ListWorkflowsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The workflows that match the request.
-  public var workflows: [Workflow]
+  public var workflows: [Workflow] = []
 
   /// A token, which can be sent as `page_token` to retrieve the next page.
   /// If this field is omitted, there are no subsequent pages.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Unreachable resources.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListWorkflowsResponse`.
-  public init(
-    workflows: [Workflow] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.workflows = workflows
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListWorkflowsResponse().with { $0.workflows = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,57 +23,50 @@
     Sendable
   {
     /// This is always `sql#sslCert`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Serial number, as extracted from the certificate.
-    public var certSerialNumber: Swift.String
+    public var certSerialNumber: Swift.String = Swift.String()
 
     /// PEM representation.
-    public var cert: Swift.String
+    public var cert: Swift.String = Swift.String()
 
     /// The time when the certificate was created in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`
-    public var createTime: GoogleCloudWkt.Timestamp?
+    public var createTime: GoogleCloudWkt.Timestamp? = nil
 
     /// User supplied name.  Constrained to [a-zA-Z.-_ ]+.
-    public var commonName: Swift.String
+    public var commonName: Swift.String = Swift.String()
 
     /// The time when the certificate expires in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var expirationTime: GoogleCloudWkt.Timestamp?
+    public var expirationTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Sha1 Fingerprint.
-    public var sha1Fingerprint: Swift.String
+    public var sha1Fingerprint: Swift.String = Swift.String()
 
     /// Name of the database instance.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SslCert`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      certSerialNumber: Swift.String = Swift.String(),
-      cert: Swift.String = Swift.String(),
-      createTime: GoogleCloudWkt.Timestamp? = nil,
-      commonName: Swift.String = Swift.String(),
-      expirationTime: GoogleCloudWkt.Timestamp? = nil,
-      sha1Fingerprint: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      selfLink: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.certSerialNumber = certSerialNumber
-      self.cert = cert
-      self.createTime = createTime
-      self.commonName = commonName
-      self.expirationTime = expirationTime
-      self.sha1Fingerprint = sha1Fingerprint
-      self.instance = instance
-      self.selfLink = selfLink
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SslCert().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

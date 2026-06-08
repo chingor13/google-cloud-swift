@@ -25,115 +25,90 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
   /// to which the cluster is connected. Example:
   /// projects/my-project/global/networks/my-network
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// Output only. The relative name of the Google Compute Engine
   /// [subnetwork](https://cloud.google.com/compute/docs/vpc)
   /// to which the cluster is connected. Example:
   /// projects/my-project/regions/us-central1/subnetworks/my-subnet
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// Whether Intra-node visibility is enabled for this cluster.
   /// This makes same node pod to pod traffic visible for VPC network.
-  public var enableIntraNodeVisibility: Swift.Bool
+  public var enableIntraNodeVisibility: Swift.Bool = Swift.Bool()
 
   /// Whether the cluster disables default in-node sNAT rules. In-node sNAT rules
   /// will be disabled when default_snat_status is disabled. When disabled is set
   /// to false, default IP masquerade rules will be applied to the nodes to
   /// prevent sNAT on cluster internal traffic.
-  public var defaultSnatStatus: DefaultSnatStatus?
+  public var defaultSnatStatus: DefaultSnatStatus? = nil
 
   /// Whether L4ILB Subsetting is enabled for this cluster.
-  public var enableL4IlbSubsetting: Swift.Bool
+  public var enableL4IlbSubsetting: Swift.Bool = Swift.Bool()
 
   /// The desired datapath provider for this cluster. By default, uses the
   /// IPTables-based kube-proxy implementation.
-  public var datapathProvider: DatapathProvider
+  public var datapathProvider: DatapathProvider = DatapathProvider()
 
   /// The desired state of IPv6 connectivity to Google Services.
   /// By default, no private IPv6 access to or from Google Services (all access
   /// will be via IPv4)
-  public var privateIpv6GoogleAccess: PrivateIPv6GoogleAccess
+  public var privateIpv6GoogleAccess: PrivateIPv6GoogleAccess = PrivateIPv6GoogleAccess()
 
   /// DNSConfig contains clusterDNS config for this cluster.
-  public var dnsConfig: DNSConfig?
+  public var dnsConfig: DNSConfig? = nil
 
   /// ServiceExternalIPsConfig specifies if services with externalIPs field are
   /// blocked or not.
-  public var serviceExternalIpsConfig: ServiceExternalIPsConfig?
+  public var serviceExternalIpsConfig: ServiceExternalIPsConfig? = nil
 
   /// GatewayAPIConfig contains the desired config of Gateway API on this
   /// cluster.
-  public var gatewayApiConfig: GatewayAPIConfig?
+  public var gatewayApiConfig: GatewayAPIConfig? = nil
 
   /// Whether multi-networking is enabled for this cluster.
-  public var enableMultiNetworking: Swift.Bool
+  public var enableMultiNetworking: Swift.Bool = Swift.Bool()
 
   /// Network bandwidth tier configuration.
-  public var networkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig?
+  public var networkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig? = nil
 
   /// Whether FQDN Network Policy is enabled on this cluster.
-  public var enableFqdnNetworkPolicy: Swift.Bool?
+  public var enableFqdnNetworkPolicy: Swift.Bool? = nil
 
   /// Specify the details of in-transit encryption.
   /// Now named inter-node transparent encryption.
-  public var inTransitEncryptionConfig: InTransitEncryptionConfig?
+  public var inTransitEncryptionConfig: InTransitEncryptionConfig? = nil
 
   /// Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
-  public var enableCiliumClusterwideNetworkPolicy: Swift.Bool?
+  public var enableCiliumClusterwideNetworkPolicy: Swift.Bool? = nil
 
   /// Controls whether by default nodes have private IP addresses only.
   /// It is invalid to specify both [PrivateClusterConfig.enablePrivateNodes][]
   /// and this field at the same time.
   /// To update the default setting, use
   /// [ClusterUpdate.desired_default_enable_private_nodes][google.container.v1.ClusterUpdate.desired_default_enable_private_nodes]
-  public var defaultEnablePrivateNodes: Swift.Bool?
+  public var defaultEnablePrivateNodes: Swift.Bool? = nil
 
   /// Optional. DataplaneV2Config specifies the DPv2 configuration.
-  public var dataplaneV2Config: DataplaneV2Config?
+  public var dataplaneV2Config: DataplaneV2Config? = nil
 
   /// Disable L4 load balancer VPC firewalls to enable firewall policies.
-  public var disableL4LbFirewallReconciliation: Swift.Bool?
+  public var disableL4LbFirewallReconciliation: Swift.Bool? = nil
 
   /// Initialize a new instance of `NetworkConfig`.
-  public init(
-    network: Swift.String = Swift.String(),
-    subnetwork: Swift.String = Swift.String(),
-    enableIntraNodeVisibility: Swift.Bool = Swift.Bool(),
-    defaultSnatStatus: DefaultSnatStatus? = nil,
-    enableL4IlbSubsetting: Swift.Bool = Swift.Bool(),
-    datapathProvider: DatapathProvider = DatapathProvider(),
-    privateIpv6GoogleAccess: PrivateIPv6GoogleAccess = PrivateIPv6GoogleAccess(),
-    dnsConfig: DNSConfig? = nil,
-    serviceExternalIpsConfig: ServiceExternalIPsConfig? = nil,
-    gatewayApiConfig: GatewayAPIConfig? = nil,
-    enableMultiNetworking: Swift.Bool = Swift.Bool(),
-    networkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig? = nil,
-    enableFqdnNetworkPolicy: Swift.Bool? = nil,
-    inTransitEncryptionConfig: InTransitEncryptionConfig? = nil,
-    enableCiliumClusterwideNetworkPolicy: Swift.Bool? = nil,
-    defaultEnablePrivateNodes: Swift.Bool? = nil,
-    dataplaneV2Config: DataplaneV2Config? = nil,
-    disableL4LbFirewallReconciliation: Swift.Bool? = nil,
-  ) {
-    self.network = network
-    self.subnetwork = subnetwork
-    self.enableIntraNodeVisibility = enableIntraNodeVisibility
-    self.defaultSnatStatus = defaultSnatStatus
-    self.enableL4IlbSubsetting = enableL4IlbSubsetting
-    self.datapathProvider = datapathProvider
-    self.privateIpv6GoogleAccess = privateIpv6GoogleAccess
-    self.dnsConfig = dnsConfig
-    self.serviceExternalIpsConfig = serviceExternalIpsConfig
-    self.gatewayApiConfig = gatewayApiConfig
-    self.enableMultiNetworking = enableMultiNetworking
-    self.networkPerformanceConfig = networkPerformanceConfig
-    self.enableFqdnNetworkPolicy = enableFqdnNetworkPolicy
-    self.inTransitEncryptionConfig = inTransitEncryptionConfig
-    self.enableCiliumClusterwideNetworkPolicy = enableCiliumClusterwideNetworkPolicy
-    self.defaultEnablePrivateNodes = defaultEnablePrivateNodes
-    self.dataplaneV2Config = dataplaneV2Config
-    self.disableL4LbFirewallReconciliation = disableL4LbFirewallReconciliation
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkConfig().with { $0.network = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -222,13 +197,22 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Specifies the total network bandwidth tier for NodePools in the cluster.
-    public var totalEgressBandwidthTier: NetworkConfig.ClusterNetworkPerformanceConfig.Tier?
+    public var totalEgressBandwidthTier: NetworkConfig.ClusterNetworkPerformanceConfig.Tier? = nil
 
     /// Initialize a new instance of `ClusterNetworkPerformanceConfig`.
-    public init(
-      totalEgressBandwidthTier: NetworkConfig.ClusterNetworkPerformanceConfig.Tier? = nil,
-    ) {
-      self.totalEgressBandwidthTier = totalEgressBandwidthTier
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ClusterNetworkPerformanceConfig().with { $0.totalEgressBandwidthTier = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Node network tier

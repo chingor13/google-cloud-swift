@@ -24,19 +24,26 @@ public struct ListJobsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resulting list of Jobs.
-  public var jobs: [Job]
+  public var jobs: [Job] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListJobs request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListJobsResponse`.
-  public init(
-    jobs: [Job] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.jobs = jobs
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListJobsResponse().with { $0.jobs = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

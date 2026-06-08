@@ -22,13 +22,22 @@ public struct NodeSelector: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. GPU accelerator type to attach to an instance.
-  public var accelerator: Swift.String
+  public var accelerator: Swift.String = Swift.String()
 
   /// Initialize a new instance of `NodeSelector`.
-  public init(
-    accelerator: Swift.String = Swift.String(),
-  ) {
-    self.accelerator = accelerator
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeSelector().with { $0.accelerator = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -25,9 +25,8 @@ import GoogleRpc
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudRunV2.Clients.InstancesClient()
   let items = try client.listInstances(
-    byItem: ListInstancesRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)",
-    )
+    byItem: ListInstancesRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
   )
   for try await item in items {
     print("  \(item)")

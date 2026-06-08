@@ -31,18 +31,25 @@ public struct UpdateInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// * "performance_config"
   /// * "deletion_protection_enabled"
   /// * "deletion_protection_reason"
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Only fields specified in update_mask are updated.
-  public var instance: Instance?
+  public var instance: Instance? = nil
 
   /// Initialize a new instance of `UpdateInstanceRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    instance: Instance? = nil,
-  ) {
-    self.updateMask = updateMask
-    self.instance = instance
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateInstanceRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -42,26 +42,31 @@ public struct Date: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
   /// a year.
-  public var year: Swift.Int32
+  public var year: Swift.Int32 = Swift.Int32()
 
   /// Month of a year. Must be from 1 to 12, or 0 to specify a year without a
   /// month and day.
-  public var month: Swift.Int32
+  public var month: Swift.Int32 = Swift.Int32()
 
   /// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0
   /// to specify a year by itself or a year and month where the day isn't
   /// significant.
-  public var day: Swift.Int32
+  public var day: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `Date`.
-  public init(
-    year: Swift.Int32 = Swift.Int32(),
-    month: Swift.Int32 = Swift.Int32(),
-    day: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.year = year
-    self.month = month
-    self.day = day
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Date().with { $0.year = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Date" }

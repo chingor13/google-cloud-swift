@@ -42,7 +42,7 @@ public struct ResourceReference: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///         type: "*"
   ///       }];
   ///     }
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// The resource type of a child collection that the annotated field
   /// references. This is useful for annotating the `parent` field that
@@ -55,15 +55,22 @@ public struct ResourceReference: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///         child_type: "logging.googleapis.com/LogEntry"
   ///       };
   ///     }
-  public var childType: Swift.String
+  public var childType: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ResourceReference`.
-  public init(
-    type: Swift.String = Swift.String(),
-    childType: Swift.String = Swift.String(),
-  ) {
-    self.type = type
-    self.childType = childType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceReference().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

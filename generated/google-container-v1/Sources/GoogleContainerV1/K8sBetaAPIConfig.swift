@@ -22,13 +22,22 @@ public struct K8sBetaAPIConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Enabled k8s beta APIs.
-  public var enabledApis: [Swift.String]
+  public var enabledApis: [Swift.String] = []
 
   /// Initialize a new instance of `K8sBetaAPIConfig`.
-  public init(
-    enabledApis: [Swift.String] = [],
-  ) {
-    self.enabledApis = enabledApis
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = K8sBetaAPIConfig().with { $0.enabledApis = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

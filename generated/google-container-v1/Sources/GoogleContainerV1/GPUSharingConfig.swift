@@ -23,18 +23,25 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The max number of containers that can share a physical GPU.
-  public var maxSharedClientsPerGpu: Swift.Int64
+  public var maxSharedClientsPerGpu: Swift.Int64 = Swift.Int64()
 
   /// The type of GPU sharing strategy to enable on the GPU node.
-  public var gpuSharingStrategy: GPUSharingConfig.GPUSharingStrategy?
+  public var gpuSharingStrategy: GPUSharingConfig.GPUSharingStrategy? = nil
 
   /// Initialize a new instance of `GPUSharingConfig`.
-  public init(
-    maxSharedClientsPerGpu: Swift.Int64 = Swift.Int64(),
-    gpuSharingStrategy: GPUSharingConfig.GPUSharingStrategy? = nil,
-  ) {
-    self.maxSharedClientsPerGpu = maxSharedClientsPerGpu
-    self.gpuSharingStrategy = gpuSharingStrategy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GPUSharingConfig().with { $0.maxSharedClientsPerGpu = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The type of GPU sharing strategy currently provided.

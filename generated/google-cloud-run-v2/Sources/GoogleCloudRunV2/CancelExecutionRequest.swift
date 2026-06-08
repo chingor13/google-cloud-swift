@@ -25,25 +25,30 @@ public struct CancelExecutionRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Format:
   /// `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
   /// where `{project}` can be project id or number.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Indicates that the request should be validated without actually
   /// cancelling any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// A system-generated fingerprint for this version of the resource.
   /// This may be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CancelExecutionRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.validateOnly = validateOnly
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CancelExecutionRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

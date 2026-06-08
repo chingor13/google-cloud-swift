@@ -22,38 +22,37 @@ public struct Stage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Name of the Stage. This will be unique for each Stage.
-  public var name: Stage.Name
+  public var name: Stage.Name = Stage.Name()
 
   /// Message describing the Stage
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// Current state of the Stage
-  public var state: Stage.State
+  public var state: Stage.State = Stage.State()
 
   /// Resource of the Stage
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// Link to the current Stage resource
-  public var resourceUri: Swift.String
+  public var resourceUri: Swift.String = Swift.String()
 
   /// State messages from the current Stage.
-  public var stateMessages: [StateMessage]
+  public var stateMessages: [StateMessage] = []
 
   /// Initialize a new instance of `Stage`.
-  public init(
-    name: Stage.Name = Stage.Name(),
-    message: Swift.String = Swift.String(),
-    state: Stage.State = Stage.State(),
-    resource: Swift.String = Swift.String(),
-    resourceUri: Swift.String = Swift.String(),
-    stateMessages: [StateMessage] = [],
-  ) {
-    self.name = name
-    self.message = message
-    self.state = state
-    self.resource = resource
-    self.resourceUri = resourceUri
-    self.stateMessages = stateMessages
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Stage().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible names for a Stage

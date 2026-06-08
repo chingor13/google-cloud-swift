@@ -23,39 +23,38 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// The last time when this issue was observed.
-  public var lastObservation: GoogleCloudWkt.Timestamp?
+  public var lastObservation: GoogleCloudWkt.Timestamp? = nil
 
   /// The constraint type of the issue.
-  public var constraintType: Swift.String
+  public var constraintType: Swift.String = Swift.String()
 
   /// The incompatibility type of this issue.
-  public var incompatibilityType: AutopilotCompatibilityIssue.IssueType
+  public var incompatibilityType: AutopilotCompatibilityIssue.IssueType =
+    AutopilotCompatibilityIssue.IssueType()
 
   /// The name of the resources which are subject to this issue.
-  public var subjects: [Swift.String]
+  public var subjects: [Swift.String] = []
 
   /// A URL to a public documentation, which addresses resolving this issue.
-  public var documentationUrl: Swift.String
+  public var documentationUrl: Swift.String = Swift.String()
 
   /// The description of the issue.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AutopilotCompatibilityIssue`.
-  public init(
-    lastObservation: GoogleCloudWkt.Timestamp? = nil,
-    constraintType: Swift.String = Swift.String(),
-    incompatibilityType: AutopilotCompatibilityIssue.IssueType =
-      AutopilotCompatibilityIssue.IssueType(),
-    subjects: [Swift.String] = [],
-    documentationUrl: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-  ) {
-    self.lastObservation = lastObservation
-    self.constraintType = constraintType
-    self.incompatibilityType = incompatibilityType
-    self.subjects = subjects
-    self.documentationUrl = documentationUrl
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AutopilotCompatibilityIssue().with { $0.lastObservation = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The type of the reported issue.

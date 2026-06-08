@@ -24,13 +24,22 @@ public struct TCPSocketAction: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. Port number to access on the container. Must be in the range 1 to
   /// 65535. If not specified, defaults to the exposed port of the container,
   /// which is the value of container.ports[0].containerPort.
-  public var port: Swift.Int32
+  public var port: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `TCPSocketAction`.
-  public init(
-    port: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.port = port
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TCPSocketAction().with { $0.port = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

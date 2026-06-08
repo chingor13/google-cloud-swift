@@ -23,8 +23,8 @@
 
   func sample(client: some SqlBackupRunsService) async throws {
     let items = try client.list(
-      byItem: SqlBackupRunsListRequest(/* set fields */
-      )
+      byItem: SqlBackupRunsListRequest()
+        /* set fields using .with { $0... } */
     )
     for try await item in items {
       print("  \(item)")

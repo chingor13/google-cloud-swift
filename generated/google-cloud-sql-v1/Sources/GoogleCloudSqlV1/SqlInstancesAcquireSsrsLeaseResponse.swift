@@ -24,13 +24,22 @@
     Sendable
   {
     /// The unique identifier for this operation.
-    public var operationId: Swift.String
+    public var operationId: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlInstancesAcquireSsrsLeaseResponse`.
-    public init(
-      operationId: Swift.String = Swift.String(),
-    ) {
-      self.operationId = operationId
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesAcquireSsrsLeaseResponse().with { $0.operationId = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

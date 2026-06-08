@@ -24,19 +24,26 @@ public struct UpdateBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Required. A [backup resource][google.cloud.filestore.v1.Backup]
   ///
   /// [google.cloud.filestore.v1.Backup]: <doc:Backup>
-  public var backup: Backup?
+  public var backup: Backup? = nil
 
   /// Required. Mask of fields to update.  At least one path must be supplied in
   /// this field.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `UpdateBackupRequest`.
-  public init(
-    backup: Backup? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.backup = backup
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateBackupRequest().with { $0.backup = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

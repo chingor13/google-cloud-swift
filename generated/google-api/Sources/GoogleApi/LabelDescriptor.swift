@@ -22,23 +22,28 @@ public struct LabelDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The label key.
-  public var key: Swift.String
+  public var key: Swift.String = Swift.String()
 
   /// The type of data that can be assigned to the label.
-  public var valueType: LabelDescriptor.ValueType
+  public var valueType: LabelDescriptor.ValueType = LabelDescriptor.ValueType()
 
   /// A human-readable description for the label.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `LabelDescriptor`.
-  public init(
-    key: Swift.String = Swift.String(),
-    valueType: LabelDescriptor.ValueType = LabelDescriptor.ValueType(),
-    description: Swift.String = Swift.String(),
-  ) {
-    self.key = key
-    self.valueType = valueType
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LabelDescriptor().with { $0.key = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Value types that can be used as label values.

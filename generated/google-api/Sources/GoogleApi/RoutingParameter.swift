@@ -22,7 +22,7 @@ public struct RoutingParameter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A request field to extract the header key-value pair from.
-  public var field: Swift.String
+  public var field: Swift.String = Swift.String()
 
   /// A pattern matching the key-value field. Optional.
   /// If not specified, the whole field specified in the `field` field will be
@@ -78,15 +78,22 @@ public struct RoutingParameter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///     }
   ///
   /// See Example 1 for more details.
-  public var pathTemplate: Swift.String
+  public var pathTemplate: Swift.String = Swift.String()
 
   /// Initialize a new instance of `RoutingParameter`.
-  public init(
-    field: Swift.String = Swift.String(),
-    pathTemplate: Swift.String = Swift.String(),
-  ) {
-    self.field = field
-    self.pathTemplate = pathTemplate
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RoutingParameter().with { $0.field = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.RoutingParameter" }

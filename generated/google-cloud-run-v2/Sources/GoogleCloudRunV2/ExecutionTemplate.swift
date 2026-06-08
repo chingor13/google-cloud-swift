@@ -34,7 +34,7 @@ public struct ExecutionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 ExecutionTemplate.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Unstructured key value map that may be set by external tools to store and
   /// arbitrary metadata. They are not queryable and should be preserved
@@ -47,7 +47,7 @@ public struct ExecutionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// <p>This field follows Kubernetes annotations' namespacing, limits, and
   /// rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Optional. Specifies the maximum desired number of tasks the execution
   /// should run at given time. When the job is run, if this field is 0 or unset,
@@ -55,30 +55,31 @@ public struct ExecutionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// number of tasks running in steady state will be less than this number when
   /// there are fewer tasks waiting to be completed remaining, i.e. when the work
   /// left to do is less than max parallelism.
-  public var parallelism: Swift.Int32
+  public var parallelism: Swift.Int32 = Swift.Int32()
 
   /// Specifies the desired number of tasks the execution should run.
   /// Setting to 1 means that parallelism is limited to 1 and the success of
   /// that task signals the success of the execution. Defaults to 1.
-  public var taskCount: Swift.Int32
+  public var taskCount: Swift.Int32 = Swift.Int32()
 
   /// Required. Describes the task(s) that will be created when executing an
   /// execution.
-  public var template: TaskTemplate?
+  public var template: TaskTemplate? = nil
 
   /// Initialize a new instance of `ExecutionTemplate`.
-  public init(
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    parallelism: Swift.Int32 = Swift.Int32(),
-    taskCount: Swift.Int32 = Swift.Int32(),
-    template: TaskTemplate? = nil,
-  ) {
-    self.labels = labels
-    self.annotations = annotations
-    self.parallelism = parallelism
-    self.taskCount = taskCount
-    self.template = template
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ExecutionTemplate().with { $0.labels = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

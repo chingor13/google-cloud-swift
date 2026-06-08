@@ -31,7 +31,7 @@ public struct MasterAuth: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// control plane versions 1.19 and newer. For a list of recommended
   /// authentication methods, see:
   /// https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication
-  public var username: Swift.String
+  public var username: Swift.String = Swift.String()
 
   /// The password to use for HTTP basic authentication to the master endpoint.
   /// Because the master endpoint is open to the Internet, you should create a
@@ -42,41 +42,40 @@ public struct MasterAuth: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// control plane versions 1.19 and newer. For a list of recommended
   /// authentication methods, see:
   /// https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication
-  public var password: Swift.String
+  public var password: Swift.String = Swift.String()
 
   /// Configuration for client certificate authentication on the cluster. For
   /// clusters before v1.12, if no configuration is specified, a client
   /// certificate is issued.
-  public var clientCertificateConfig: ClientCertificateConfig?
+  public var clientCertificateConfig: ClientCertificateConfig? = nil
 
   /// Output only. Base64-encoded public certificate that is the root of
   /// trust for the cluster.
-  public var clusterCaCertificate: Swift.String
+  public var clusterCaCertificate: Swift.String = Swift.String()
 
   /// Output only. Base64-encoded public certificate used by clients to
   /// authenticate to the cluster endpoint. Issued only if
   /// client_certificate_config is set.
-  public var clientCertificate: Swift.String
+  public var clientCertificate: Swift.String = Swift.String()
 
   /// Output only. Base64-encoded private key used by clients to authenticate
   /// to the cluster endpoint.
-  public var clientKey: Swift.String
+  public var clientKey: Swift.String = Swift.String()
 
   /// Initialize a new instance of `MasterAuth`.
-  public init(
-    username: Swift.String = Swift.String(),
-    password: Swift.String = Swift.String(),
-    clientCertificateConfig: ClientCertificateConfig? = nil,
-    clusterCaCertificate: Swift.String = Swift.String(),
-    clientCertificate: Swift.String = Swift.String(),
-    clientKey: Swift.String = Swift.String(),
-  ) {
-    self.username = username
-    self.password = password
-    self.clientCertificateConfig = clientCertificateConfig
-    self.clusterCaCertificate = clusterCaCertificate
-    self.clientCertificate = clientCertificate
-    self.clientKey = clientKey
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MasterAuth().with { $0.username = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

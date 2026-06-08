@@ -34,13 +34,22 @@ public struct CreateProjectRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// permission is checked on the parent resource. If no parent is set and
   /// the authorization credentials belong to an Organization, the parent
   /// will be set to that Organization.
-  public var project: Project?
+  public var project: Project? = nil
 
   /// Initialize a new instance of `CreateProjectRequest`.
-  public init(
-    project: Project? = nil,
-  ) {
-    self.project = project
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateProjectRequest().with { $0.project = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

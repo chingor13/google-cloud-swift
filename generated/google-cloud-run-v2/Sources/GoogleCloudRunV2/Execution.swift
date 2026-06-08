@@ -25,19 +25,19 @@ public struct Execution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The unique name of this Execution.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the Execution. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Output only. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -45,39 +45,39 @@ public struct Execution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// team, component, environment, state, etc. For more information, visit
   /// https://cloud.google.com/resource-manager/docs/creating-managing-labels or
   /// https://cloud.google.com/run/docs/configuring/labels
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Unstructured key value map that may
   /// be set by external tools to store and arbitrary metadata.
   /// They are not queryable and should be preserved
   /// when modifying objects.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. Represents time when the execution was acknowledged by the
   /// execution controller. It is not guaranteed to be set in happens-before
   /// order across separate operations.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Represents time when the execution started to run.
   /// It is not guaranteed to be set in happens-before order across separate
   /// operations.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Represents time when the execution was completed. It is not
   /// guaranteed to be set in happens-before order across separate operations.
-  public var completionTime: GoogleCloudWkt.Timestamp?
+  public var completionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the deletion time. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted. It is only populated as a response to a Delete
   /// request.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The least stable launch stage needed to create this resource, as defined by
   /// [Google Cloud Platform Launch
@@ -88,126 +88,81 @@ public struct Execution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// as input. For example, if ALPHA was provided as input in the parent
   /// resource, but only BETA and GA-level features are were, this field will be
   /// BETA.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Output only. The name of the parent Job.
-  public var job: Swift.String
+  public var job: Swift.String = Swift.String()
 
   /// Output only. Specifies the maximum desired number of tasks the execution
   /// should run at any given time. Must be <= task_count. The actual number of
   /// tasks running in steady state will be less than this number when
   /// ((.spec.task_count - .status.successful) < .spec.parallelism), i.e. when
   /// the work left to do is less than max parallelism.
-  public var parallelism: Swift.Int32
+  public var parallelism: Swift.Int32 = Swift.Int32()
 
   /// Output only. Specifies the desired number of tasks the execution should
   /// run. Setting to 1 means that parallelism is limited to 1 and the success of
   /// that task signals the success of the execution.
-  public var taskCount: Swift.Int32
+  public var taskCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The template used to create tasks for this execution.
-  public var template: TaskTemplate?
+  public var template: TaskTemplate? = nil
 
   /// Output only. Indicates whether the resource's reconciliation is still in
   /// progress. See comments in `Job.reconciling` for additional information on
   /// reconciliation process in Cloud Run.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Output only. The Condition of this Execution, containing its readiness
   /// status, and detailed error information in case it did not reach the desired
   /// state.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. The generation of this Execution. See comments in
   /// `reconciling` for additional information on reconciliation process in Cloud
   /// Run.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The number of actively running tasks.
-  public var runningCount: Swift.Int32
+  public var runningCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The number of tasks which reached phase Succeeded.
-  public var succeededCount: Swift.Int32
+  public var succeededCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The number of tasks which reached phase Failed.
-  public var failedCount: Swift.Int32
+  public var failedCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The number of tasks which reached phase Cancelled.
-  public var cancelledCount: Swift.Int32
+  public var cancelledCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The number of tasks which have retried at least once.
-  public var retriedCount: Swift.Int32
+  public var retriedCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. URI where logs for this execution can be found in Cloud
   /// Console.
-  public var logUri: Swift.String
+  public var logUri: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Execution`.
-  public init(
-    name: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    creator: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    completionTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    job: Swift.String = Swift.String(),
-    parallelism: Swift.Int32 = Swift.Int32(),
-    taskCount: Swift.Int32 = Swift.Int32(),
-    template: TaskTemplate? = nil,
-    reconciling: Swift.Bool = Swift.Bool(),
-    conditions: [Condition] = [],
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    runningCount: Swift.Int32 = Swift.Int32(),
-    succeededCount: Swift.Int32 = Swift.Int32(),
-    failedCount: Swift.Int32 = Swift.Int32(),
-    cancelledCount: Swift.Int32 = Swift.Int32(),
-    retriedCount: Swift.Int32 = Swift.Int32(),
-    logUri: Swift.String = Swift.String(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.uid = uid
-    self.creator = creator
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.startTime = startTime
-    self.completionTime = completionTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.launchStage = launchStage
-    self.job = job
-    self.parallelism = parallelism
-    self.taskCount = taskCount
-    self.template = template
-    self.reconciling = reconciling
-    self.conditions = conditions
-    self.observedGeneration = observedGeneration
-    self.runningCount = runningCount
-    self.succeededCount = succeededCount
-    self.failedCount = failedCount
-    self.cancelledCount = cancelledCount
-    self.retriedCount = retriedCount
-    self.logUri = logUri
-    self.satisfiesPzs = satisfiesPzs
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Execution().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

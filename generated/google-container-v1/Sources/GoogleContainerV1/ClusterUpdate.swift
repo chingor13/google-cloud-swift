@@ -34,7 +34,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
   /// - "1.X.Y-gke.N": picks an explicit Kubernetes version
   /// - "-": picks the Kubernetes master version
-  public var desiredNodeVersion: Swift.String
+  public var desiredNodeVersion: Swift.String = Swift.String()
 
   /// The monitoring service the cluster should use to write metrics.
   /// Currently available options:
@@ -47,55 +47,55 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
   /// used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
-  public var desiredMonitoringService: Swift.String
+  public var desiredMonitoringService: Swift.String = Swift.String()
 
   /// Configurations for the various addons available to run in the cluster.
-  public var desiredAddonsConfig: AddonsConfig?
+  public var desiredAddonsConfig: AddonsConfig? = nil
 
   /// The node pool to be upgraded. This field is mandatory if
   /// "desired_node_version", "desired_image_family" or
   /// "desired_node_pool_autoscaling" is specified and there is more than one
   /// node pool on the cluster.
-  public var desiredNodePoolId: Swift.String
+  public var desiredNodePoolId: Swift.String = Swift.String()
 
   /// The desired image type for the node pool.
   /// NOTE: Set the "desired_node_pool" field as well.
-  public var desiredImageType: Swift.String
+  public var desiredImageType: Swift.String = Swift.String()
 
   /// The desired name of the image to use for this node.
   /// This is used to create clusters using a custom image.
   /// NOTE: Set the "desired_node_pool" field as well.
-  public var desiredImage: Swift.String
+  public var desiredImage: Swift.String = Swift.String()
 
   /// The project containing the desired image to use for this node.
   /// This is used to create clusters using a custom image.
   /// NOTE: Set the "desired_node_pool" field as well.
-  public var desiredImageProject: Swift.String
+  public var desiredImageProject: Swift.String = Swift.String()
 
   /// Configuration of etcd encryption.
-  public var desiredDatabaseEncryption: DatabaseEncryption?
+  public var desiredDatabaseEncryption: DatabaseEncryption? = nil
 
   /// Configuration for Workload Identity.
-  public var desiredWorkloadIdentityConfig: WorkloadIdentityConfig?
+  public var desiredWorkloadIdentityConfig: WorkloadIdentityConfig? = nil
 
   /// Configuration for issuance of mTLS keys and certificates to Kubernetes
   /// pods.
-  public var desiredMeshCertificates: MeshCertificates?
+  public var desiredMeshCertificates: MeshCertificates? = nil
 
   /// Configuration for Shielded Nodes.
-  public var desiredShieldedNodes: ShieldedNodes?
+  public var desiredShieldedNodes: ShieldedNodes? = nil
 
   /// The desired configuration for the fine-grained cost management feature.
-  public var desiredCostManagementConfig: CostManagementConfig?
+  public var desiredCostManagementConfig: CostManagementConfig? = nil
 
   /// DNSConfig contains clusterDNS config for this cluster.
-  public var desiredDnsConfig: DNSConfig?
+  public var desiredDnsConfig: DNSConfig? = nil
 
   /// Autoscaler configuration for the node pool specified in
   /// desired_node_pool_id. If there is only one pool in the
   /// cluster and desired_node_pool_id is not provided then
   /// the change applies to that single node pool.
-  public var desiredNodePoolAutoscaling: NodePoolAutoscaling?
+  public var desiredNodePoolAutoscaling: NodePoolAutoscaling? = nil
 
   /// The desired list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
@@ -105,20 +105,20 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Warning: changing cluster locations will update the locations of all node
   /// pools and will result in nodes being added and/or removed.
-  public var desiredLocations: [Swift.String]
+  public var desiredLocations: [Swift.String] = []
 
   /// The desired configuration options for master authorized networks feature.
   ///
   /// Deprecated: Use
   /// desired_control_plane_endpoints_config.ip_endpoints_config.authorized_networks_config
   /// instead.
-  public var desiredMasterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig?
+  public var desiredMasterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil
 
   /// Cluster-level autoscaling configuration.
-  public var desiredClusterAutoscaling: ClusterAutoscaling?
+  public var desiredClusterAutoscaling: ClusterAutoscaling? = nil
 
   /// The desired configuration options for the Binary Authorization feature.
-  public var desiredBinaryAuthorization: BinaryAuthorization?
+  public var desiredBinaryAuthorization: BinaryAuthorization? = nil
 
   /// The logging service the cluster should use to write logs.
   /// Currently available options:
@@ -131,13 +131,13 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If left as an empty string,`logging.googleapis.com/kubernetes` will be
   /// used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
-  public var desiredLoggingService: Swift.String
+  public var desiredLoggingService: Swift.String = Swift.String()
 
   /// The desired configuration for exporting resource usage.
-  public var desiredResourceUsageExportConfig: ResourceUsageExportConfig?
+  public var desiredResourceUsageExportConfig: ResourceUsageExportConfig? = nil
 
   /// Cluster-level Vertical Pod Autoscaling configuration.
-  public var desiredVerticalPodAutoscaling: VerticalPodAutoscaling?
+  public var desiredVerticalPodAutoscaling: VerticalPodAutoscaling? = nil
 
   /// The desired private cluster configuration. master_global_access_config is
   /// the only field that can be changed via this field.
@@ -152,44 +152,44 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.container.v1.ClusterUpdate.desired_enable_private_endpoint]: <doc:ClusterUpdate/desiredEnablePrivateEndpoint>
   /// [google.container.v1.PrivateClusterConfig]: <doc:PrivateClusterConfig>
-  public var desiredPrivateClusterConfig: PrivateClusterConfig?
+  public var desiredPrivateClusterConfig: PrivateClusterConfig? = nil
 
   /// The desired config of Intra-node visibility.
-  public var desiredIntraNodeVisibilityConfig: IntraNodeVisibilityConfig?
+  public var desiredIntraNodeVisibilityConfig: IntraNodeVisibilityConfig? = nil
 
   /// The desired status of whether to disable default sNAT for this cluster.
-  public var desiredDefaultSnatStatus: DefaultSnatStatus?
+  public var desiredDefaultSnatStatus: DefaultSnatStatus? = nil
 
   /// The desired release channel configuration.
-  public var desiredReleaseChannel: ReleaseChannel?
+  public var desiredReleaseChannel: ReleaseChannel? = nil
 
   /// The desired L4 Internal Load Balancer Subsetting configuration.
-  public var desiredL4IlbSubsettingConfig: ILBSubsettingConfig?
+  public var desiredL4IlbSubsettingConfig: ILBSubsettingConfig? = nil
 
   /// The desired datapath provider for the cluster.
-  public var desiredDatapathProvider: DatapathProvider
+  public var desiredDatapathProvider: DatapathProvider = DatapathProvider()
 
   /// The desired state of IPv6 connectivity to Google Services.
-  public var desiredPrivateIpv6GoogleAccess: PrivateIPv6GoogleAccess
+  public var desiredPrivateIpv6GoogleAccess: PrivateIPv6GoogleAccess = PrivateIPv6GoogleAccess()
 
   /// The desired notification configuration.
-  public var desiredNotificationConfig: NotificationConfig?
+  public var desiredNotificationConfig: NotificationConfig? = nil
 
   /// The desired authenticator groups config for the cluster.
-  public var desiredAuthenticatorGroupsConfig: AuthenticatorGroupsConfig?
+  public var desiredAuthenticatorGroupsConfig: AuthenticatorGroupsConfig? = nil
 
   /// The desired logging configuration.
-  public var desiredLoggingConfig: LoggingConfig?
+  public var desiredLoggingConfig: LoggingConfig? = nil
 
   /// The desired monitoring configuration.
-  public var desiredMonitoringConfig: MonitoringConfig?
+  public var desiredMonitoringConfig: MonitoringConfig? = nil
 
   /// The desired Identity Service component configuration.
-  public var desiredIdentityServiceConfig: IdentityServiceConfig?
+  public var desiredIdentityServiceConfig: IdentityServiceConfig? = nil
 
   /// ServiceExternalIPsConfig specifies the config for the use of Services with
   /// ExternalIPs field.
-  public var desiredServiceExternalIpsConfig: ServiceExternalIPsConfig?
+  public var desiredServiceExternalIpsConfig: ServiceExternalIPsConfig? = nil
 
   /// Enable/Disable private endpoint for the cluster's master.
   ///
@@ -197,21 +197,21 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// desired_control_plane_endpoints_config.ip_endpoints_config.enable_public_endpoint
   /// instead. Note that the value of enable_public_endpoint is reversed: if
   /// enable_private_endpoint is false, then enable_public_endpoint will be true.
-  public var desiredEnablePrivateEndpoint: Swift.Bool?
+  public var desiredEnablePrivateEndpoint: Swift.Bool? = nil
 
   /// Override the default setting of whether future created
   /// nodes have private IP addresses only, namely
   /// [NetworkConfig.default_enable_private_nodes][google.container.v1.NetworkConfig.default_enable_private_nodes]
   ///
   /// [google.container.v1.NetworkConfig.default_enable_private_nodes]: <doc:NetworkConfig/defaultEnablePrivateNodes>
-  public var desiredDefaultEnablePrivateNodes: Swift.Bool?
+  public var desiredDefaultEnablePrivateNodes: Swift.Bool? = nil
 
   /// [Control plane
   /// endpoints][google.container.v1.Cluster.control_plane_endpoints_config]
   /// configuration.
   ///
   /// [google.container.v1.Cluster.control_plane_endpoints_config]: <doc:Cluster/controlPlaneEndpointsConfig>
-  public var desiredControlPlaneEndpointsConfig: ControlPlaneEndpointsConfig?
+  public var desiredControlPlaneEndpointsConfig: ControlPlaneEndpointsConfig? = nil
 
   /// The Kubernetes version to change the master to.
   ///
@@ -223,96 +223,96 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
   /// - "1.X.Y-gke.N": picks an explicit Kubernetes version
   /// - "-": picks the default Kubernetes version
-  public var desiredMasterVersion: Swift.String
+  public var desiredMasterVersion: Swift.String = Swift.String()
 
   /// The desired GCFS config for the cluster
-  public var desiredGcfsConfig: GcfsConfig?
+  public var desiredGcfsConfig: GcfsConfig? = nil
 
   /// The desired network tags that apply to all auto-provisioned node pools
   /// in autopilot clusters and node auto-provisioning enabled clusters.
-  public var desiredNodePoolAutoConfigNetworkTags: NetworkTags?
+  public var desiredNodePoolAutoConfigNetworkTags: NetworkTags? = nil
 
   /// The desired config for pod autoscaling.
-  public var desiredPodAutoscaling: PodAutoscaling?
+  public var desiredPodAutoscaling: PodAutoscaling? = nil
 
   /// The desired config of Gateway API on this cluster.
-  public var desiredGatewayApiConfig: GatewayAPIConfig?
+  public var desiredGatewayApiConfig: GatewayAPIConfig? = nil
 
   /// The current etag of the cluster.
   /// If an etag is provided and does not match the current etag of the cluster,
   /// update will be blocked and an ABORTED error will be returned.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// The desired node pool logging configuration defaults for the cluster.
-  public var desiredNodePoolLoggingConfig: NodePoolLoggingConfig?
+  public var desiredNodePoolLoggingConfig: NodePoolLoggingConfig? = nil
 
   /// The desired fleet configuration for the cluster.
-  public var desiredFleet: Fleet?
+  public var desiredFleet: Fleet? = nil
 
   /// The desired stack type of the cluster.
   /// If a stack type is provided and does not match the current stack type of
   /// the cluster, update will attempt to change the stack type to the new type.
-  public var desiredStackType: StackType
+  public var desiredStackType: StackType = StackType()
 
   /// The additional pod ranges to be added to the cluster. These pod ranges
   /// can be used by node pools to allocate pod IPs.
-  public var additionalPodRangesConfig: AdditionalPodRangesConfig?
+  public var additionalPodRangesConfig: AdditionalPodRangesConfig? = nil
 
   /// The additional pod ranges that are to be removed from the cluster.
   /// The pod ranges specified here must have been specified earlier in the
   /// 'additional_pod_ranges_config' argument.
-  public var removedAdditionalPodRangesConfig: AdditionalPodRangesConfig?
+  public var removedAdditionalPodRangesConfig: AdditionalPodRangesConfig? = nil
 
   /// Kubernetes open source beta apis enabled on the cluster. Only beta apis
-  public var enableK8SBetaApis: K8sBetaAPIConfig?
+  public var enableK8SBetaApis: K8sBetaAPIConfig? = nil
 
   /// Enable/Disable Security Posture API features for the cluster.
-  public var desiredSecurityPostureConfig: SecurityPostureConfig?
+  public var desiredSecurityPostureConfig: SecurityPostureConfig? = nil
 
   /// The desired network performance config.
-  public var desiredNetworkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig?
+  public var desiredNetworkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig? = nil
 
   /// Enable/Disable FQDN Network Policy for the cluster.
-  public var desiredEnableFqdnNetworkPolicy: Swift.Bool?
+  public var desiredEnableFqdnNetworkPolicy: Swift.Bool? = nil
 
   /// WorkloadPolicyConfig is the configuration related to GCW workload policy
-  public var desiredAutopilotWorkloadPolicyConfig: WorkloadPolicyConfig?
+  public var desiredAutopilotWorkloadPolicyConfig: WorkloadPolicyConfig? = nil
 
   /// Desired Beta APIs to be enabled for cluster.
-  public var desiredK8SBetaApis: K8sBetaAPIConfig?
+  public var desiredK8SBetaApis: K8sBetaAPIConfig? = nil
 
   /// The desired containerd config for the cluster.
-  public var desiredContainerdConfig: ContainerdConfig?
+  public var desiredContainerdConfig: ContainerdConfig? = nil
 
   /// Enable/Disable Multi-Networking for the cluster
-  public var desiredEnableMultiNetworking: Swift.Bool?
+  public var desiredEnableMultiNetworking: Swift.Bool? = nil
 
   /// The desired resource manager tags that apply to all auto-provisioned node
   /// pools in autopilot clusters and node auto-provisioning enabled clusters.
-  public var desiredNodePoolAutoConfigResourceManagerTags: ResourceManagerTags?
+  public var desiredNodePoolAutoConfigResourceManagerTags: ResourceManagerTags? = nil
 
   /// Specify the details of in-transit encryption.
-  public var desiredInTransitEncryptionConfig: InTransitEncryptionConfig?
+  public var desiredInTransitEncryptionConfig: InTransitEncryptionConfig? = nil
 
   /// Enable/Disable Cilium Clusterwide Network Policy for the cluster.
-  public var desiredEnableCiliumClusterwideNetworkPolicy: Swift.Bool?
+  public var desiredEnableCiliumClusterwideNetworkPolicy: Swift.Bool? = nil
 
   /// Enable/Disable Secret Manager Config.
-  public var desiredSecretManagerConfig: SecretManagerConfig?
+  public var desiredSecretManagerConfig: SecretManagerConfig? = nil
 
   /// Deprecated: Compliance Posture is no longer supported.
   /// For more details, see
   /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
   ///
   /// Enable/Disable Compliance Posture features for the cluster.
-  public var desiredCompliancePostureConfig: CompliancePostureConfig?
+  public var desiredCompliancePostureConfig: CompliancePostureConfig? = nil
 
   /// The desired node kubelet config for the cluster.
-  public var desiredNodeKubeletConfig: NodeKubeletConfig?
+  public var desiredNodeKubeletConfig: NodeKubeletConfig? = nil
 
   /// The desired node kubelet config for all auto-provisioned node pools
   /// in autopilot clusters and node auto-provisioning enabled clusters.
-  public var desiredNodePoolAutoConfigKubeletConfig: NodeKubeletConfig?
+  public var desiredNodePoolAutoConfigKubeletConfig: NodeKubeletConfig? = nil
 
   /// The Custom keys configuration for the cluster.
   ///
@@ -322,234 +322,82 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// instead.
   ///
   /// [google.container.v1.ClusterUpdate.desired_user_managed_keys_config]: <doc:ClusterUpdate/desiredUserManagedKeysConfig>
-  public var userManagedKeysConfig: UserManagedKeysConfig?
+  public var userManagedKeysConfig: UserManagedKeysConfig? = nil
 
   /// RBACBindingConfig allows user to restrict ClusterRoleBindings an
   /// RoleBindings that can be created.
-  public var desiredRbacBindingConfig: RBACBindingConfig?
+  public var desiredRbacBindingConfig: RBACBindingConfig? = nil
 
   /// The desired config for additional subnetworks attached to the cluster.
-  public var desiredAdditionalIpRangesConfig: DesiredAdditionalIPRangesConfig?
+  public var desiredAdditionalIpRangesConfig: DesiredAdditionalIPRangesConfig? = nil
 
   /// The desired enterprise configuration for the cluster.
   ///
   /// Deprecated: GKE Enterprise features are now available without an Enterprise
   /// tier.
-  public var desiredEnterpriseConfig: DesiredEnterpriseConfig?
+  public var desiredEnterpriseConfig: DesiredEnterpriseConfig? = nil
 
   /// AutoIpamConfig contains all information related to Auto IPAM
-  public var desiredAutoIpamConfig: AutoIpamConfig?
+  public var desiredAutoIpamConfig: AutoIpamConfig? = nil
 
   /// Enable/Disable L4 LB VPC firewall reconciliation for the cluster.
-  public var desiredDisableL4LbFirewallReconciliation: Swift.Bool?
+  public var desiredDisableL4LbFirewallReconciliation: Swift.Bool? = nil
 
   /// The desired Linux node config for all auto-provisioned node pools
   /// in autopilot clusters and node auto-provisioning enabled clusters.
   ///
   /// Currently only `cgroup_mode` can be set here.
-  public var desiredNodePoolAutoConfigLinuxNodeConfig: LinuxNodeConfig?
+  public var desiredNodePoolAutoConfigLinuxNodeConfig: LinuxNodeConfig? = nil
 
   /// The desired user managed keys config for the cluster.
-  public var desiredUserManagedKeysConfig: UserManagedKeysConfig?
+  public var desiredUserManagedKeysConfig: UserManagedKeysConfig? = nil
 
   /// Configuration for limiting anonymous access to all endpoints except the
   /// health checks.
-  public var desiredAnonymousAuthenticationConfig: AnonymousAuthenticationConfig?
+  public var desiredAnonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil
 
   /// Configuration for GKE auto upgrade.
-  public var gkeAutoUpgradeConfig: GkeAutoUpgradeConfig?
+  public var gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil
 
   /// The desired network tier configuration for the cluster.
-  public var desiredNetworkTierConfig: NetworkTierConfig?
+  public var desiredNetworkTierConfig: NetworkTierConfig? = nil
 
   /// Configuration for sync Secret Manager secrets as k8s secrets.
-  public var desiredSecretSyncConfig: SecretSyncConfig?
+  public var desiredSecretSyncConfig: SecretSyncConfig? = nil
 
   /// The desired privileged admission config for the cluster.
-  public var desiredPrivilegedAdmissionConfig: PrivilegedAdmissionConfig?
+  public var desiredPrivilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil
 
   /// The desired control plane egress control config for the cluster.
-  public var desiredControlPlaneEgress: ControlPlaneEgress?
+  public var desiredControlPlaneEgress: ControlPlaneEgress? = nil
 
   /// The desired managed open telemetry configuration.
-  public var desiredManagedOpentelemetryConfig: ManagedOpenTelemetryConfig?
+  public var desiredManagedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil
 
   /// The desired autopilot cluster policies that to be enforced in the cluster.
-  public var desiredAutopilotClusterPolicyConfig: ClusterPolicyConfig?
+  public var desiredAutopilotClusterPolicyConfig: ClusterPolicyConfig? = nil
 
   /// The desired managed machine learning diagnostics configuration.
   public var desiredManagedMachineLearningDiagnosticsConfig:
-    ManagedMachineLearningDiagnosticsConfig?
+    ManagedMachineLearningDiagnosticsConfig? = nil
 
   /// Optional. The desired NodeCreationConfig for the cluster.
-  public var desiredNodeCreationConfig: NodeCreationConfig?
+  public var desiredNodeCreationConfig: NodeCreationConfig? = nil
 
   /// Initialize a new instance of `ClusterUpdate`.
-  public init(
-    desiredNodeVersion: Swift.String = Swift.String(),
-    desiredMonitoringService: Swift.String = Swift.String(),
-    desiredAddonsConfig: AddonsConfig? = nil,
-    desiredNodePoolId: Swift.String = Swift.String(),
-    desiredImageType: Swift.String = Swift.String(),
-    desiredImage: Swift.String = Swift.String(),
-    desiredImageProject: Swift.String = Swift.String(),
-    desiredDatabaseEncryption: DatabaseEncryption? = nil,
-    desiredWorkloadIdentityConfig: WorkloadIdentityConfig? = nil,
-    desiredMeshCertificates: MeshCertificates? = nil,
-    desiredShieldedNodes: ShieldedNodes? = nil,
-    desiredCostManagementConfig: CostManagementConfig? = nil,
-    desiredDnsConfig: DNSConfig? = nil,
-    desiredNodePoolAutoscaling: NodePoolAutoscaling? = nil,
-    desiredLocations: [Swift.String] = [],
-    desiredMasterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil,
-    desiredClusterAutoscaling: ClusterAutoscaling? = nil,
-    desiredBinaryAuthorization: BinaryAuthorization? = nil,
-    desiredLoggingService: Swift.String = Swift.String(),
-    desiredResourceUsageExportConfig: ResourceUsageExportConfig? = nil,
-    desiredVerticalPodAutoscaling: VerticalPodAutoscaling? = nil,
-    desiredPrivateClusterConfig: PrivateClusterConfig? = nil,
-    desiredIntraNodeVisibilityConfig: IntraNodeVisibilityConfig? = nil,
-    desiredDefaultSnatStatus: DefaultSnatStatus? = nil,
-    desiredReleaseChannel: ReleaseChannel? = nil,
-    desiredL4IlbSubsettingConfig: ILBSubsettingConfig? = nil,
-    desiredDatapathProvider: DatapathProvider = DatapathProvider(),
-    desiredPrivateIpv6GoogleAccess: PrivateIPv6GoogleAccess = PrivateIPv6GoogleAccess(),
-    desiredNotificationConfig: NotificationConfig? = nil,
-    desiredAuthenticatorGroupsConfig: AuthenticatorGroupsConfig? = nil,
-    desiredLoggingConfig: LoggingConfig? = nil,
-    desiredMonitoringConfig: MonitoringConfig? = nil,
-    desiredIdentityServiceConfig: IdentityServiceConfig? = nil,
-    desiredServiceExternalIpsConfig: ServiceExternalIPsConfig? = nil,
-    desiredEnablePrivateEndpoint: Swift.Bool? = nil,
-    desiredDefaultEnablePrivateNodes: Swift.Bool? = nil,
-    desiredControlPlaneEndpointsConfig: ControlPlaneEndpointsConfig? = nil,
-    desiredMasterVersion: Swift.String = Swift.String(),
-    desiredGcfsConfig: GcfsConfig? = nil,
-    desiredNodePoolAutoConfigNetworkTags: NetworkTags? = nil,
-    desiredPodAutoscaling: PodAutoscaling? = nil,
-    desiredGatewayApiConfig: GatewayAPIConfig? = nil,
-    etag: Swift.String = Swift.String(),
-    desiredNodePoolLoggingConfig: NodePoolLoggingConfig? = nil,
-    desiredFleet: Fleet? = nil,
-    desiredStackType: StackType = StackType(),
-    additionalPodRangesConfig: AdditionalPodRangesConfig? = nil,
-    removedAdditionalPodRangesConfig: AdditionalPodRangesConfig? = nil,
-    enableK8SBetaApis: K8sBetaAPIConfig? = nil,
-    desiredSecurityPostureConfig: SecurityPostureConfig? = nil,
-    desiredNetworkPerformanceConfig: NetworkConfig.ClusterNetworkPerformanceConfig? = nil,
-    desiredEnableFqdnNetworkPolicy: Swift.Bool? = nil,
-    desiredAutopilotWorkloadPolicyConfig: WorkloadPolicyConfig? = nil,
-    desiredK8SBetaApis: K8sBetaAPIConfig? = nil,
-    desiredContainerdConfig: ContainerdConfig? = nil,
-    desiredEnableMultiNetworking: Swift.Bool? = nil,
-    desiredNodePoolAutoConfigResourceManagerTags: ResourceManagerTags? = nil,
-    desiredInTransitEncryptionConfig: InTransitEncryptionConfig? = nil,
-    desiredEnableCiliumClusterwideNetworkPolicy: Swift.Bool? = nil,
-    desiredSecretManagerConfig: SecretManagerConfig? = nil,
-    desiredCompliancePostureConfig: CompliancePostureConfig? = nil,
-    desiredNodeKubeletConfig: NodeKubeletConfig? = nil,
-    desiredNodePoolAutoConfigKubeletConfig: NodeKubeletConfig? = nil,
-    userManagedKeysConfig: UserManagedKeysConfig? = nil,
-    desiredRbacBindingConfig: RBACBindingConfig? = nil,
-    desiredAdditionalIpRangesConfig: DesiredAdditionalIPRangesConfig? = nil,
-    desiredEnterpriseConfig: DesiredEnterpriseConfig? = nil,
-    desiredAutoIpamConfig: AutoIpamConfig? = nil,
-    desiredDisableL4LbFirewallReconciliation: Swift.Bool? = nil,
-    desiredNodePoolAutoConfigLinuxNodeConfig: LinuxNodeConfig? = nil,
-    desiredUserManagedKeysConfig: UserManagedKeysConfig? = nil,
-    desiredAnonymousAuthenticationConfig: AnonymousAuthenticationConfig? = nil,
-    gkeAutoUpgradeConfig: GkeAutoUpgradeConfig? = nil,
-    desiredNetworkTierConfig: NetworkTierConfig? = nil,
-    desiredSecretSyncConfig: SecretSyncConfig? = nil,
-    desiredPrivilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil,
-    desiredControlPlaneEgress: ControlPlaneEgress? = nil,
-    desiredManagedOpentelemetryConfig: ManagedOpenTelemetryConfig? = nil,
-    desiredAutopilotClusterPolicyConfig: ClusterPolicyConfig? = nil,
-    desiredManagedMachineLearningDiagnosticsConfig: ManagedMachineLearningDiagnosticsConfig? = nil,
-    desiredNodeCreationConfig: NodeCreationConfig? = nil,
-  ) {
-    self.desiredNodeVersion = desiredNodeVersion
-    self.desiredMonitoringService = desiredMonitoringService
-    self.desiredAddonsConfig = desiredAddonsConfig
-    self.desiredNodePoolId = desiredNodePoolId
-    self.desiredImageType = desiredImageType
-    self.desiredImage = desiredImage
-    self.desiredImageProject = desiredImageProject
-    self.desiredDatabaseEncryption = desiredDatabaseEncryption
-    self.desiredWorkloadIdentityConfig = desiredWorkloadIdentityConfig
-    self.desiredMeshCertificates = desiredMeshCertificates
-    self.desiredShieldedNodes = desiredShieldedNodes
-    self.desiredCostManagementConfig = desiredCostManagementConfig
-    self.desiredDnsConfig = desiredDnsConfig
-    self.desiredNodePoolAutoscaling = desiredNodePoolAutoscaling
-    self.desiredLocations = desiredLocations
-    self.desiredMasterAuthorizedNetworksConfig = desiredMasterAuthorizedNetworksConfig
-    self.desiredClusterAutoscaling = desiredClusterAutoscaling
-    self.desiredBinaryAuthorization = desiredBinaryAuthorization
-    self.desiredLoggingService = desiredLoggingService
-    self.desiredResourceUsageExportConfig = desiredResourceUsageExportConfig
-    self.desiredVerticalPodAutoscaling = desiredVerticalPodAutoscaling
-    self.desiredPrivateClusterConfig = desiredPrivateClusterConfig
-    self.desiredIntraNodeVisibilityConfig = desiredIntraNodeVisibilityConfig
-    self.desiredDefaultSnatStatus = desiredDefaultSnatStatus
-    self.desiredReleaseChannel = desiredReleaseChannel
-    self.desiredL4IlbSubsettingConfig = desiredL4IlbSubsettingConfig
-    self.desiredDatapathProvider = desiredDatapathProvider
-    self.desiredPrivateIpv6GoogleAccess = desiredPrivateIpv6GoogleAccess
-    self.desiredNotificationConfig = desiredNotificationConfig
-    self.desiredAuthenticatorGroupsConfig = desiredAuthenticatorGroupsConfig
-    self.desiredLoggingConfig = desiredLoggingConfig
-    self.desiredMonitoringConfig = desiredMonitoringConfig
-    self.desiredIdentityServiceConfig = desiredIdentityServiceConfig
-    self.desiredServiceExternalIpsConfig = desiredServiceExternalIpsConfig
-    self.desiredEnablePrivateEndpoint = desiredEnablePrivateEndpoint
-    self.desiredDefaultEnablePrivateNodes = desiredDefaultEnablePrivateNodes
-    self.desiredControlPlaneEndpointsConfig = desiredControlPlaneEndpointsConfig
-    self.desiredMasterVersion = desiredMasterVersion
-    self.desiredGcfsConfig = desiredGcfsConfig
-    self.desiredNodePoolAutoConfigNetworkTags = desiredNodePoolAutoConfigNetworkTags
-    self.desiredPodAutoscaling = desiredPodAutoscaling
-    self.desiredGatewayApiConfig = desiredGatewayApiConfig
-    self.etag = etag
-    self.desiredNodePoolLoggingConfig = desiredNodePoolLoggingConfig
-    self.desiredFleet = desiredFleet
-    self.desiredStackType = desiredStackType
-    self.additionalPodRangesConfig = additionalPodRangesConfig
-    self.removedAdditionalPodRangesConfig = removedAdditionalPodRangesConfig
-    self.enableK8SBetaApis = enableK8SBetaApis
-    self.desiredSecurityPostureConfig = desiredSecurityPostureConfig
-    self.desiredNetworkPerformanceConfig = desiredNetworkPerformanceConfig
-    self.desiredEnableFqdnNetworkPolicy = desiredEnableFqdnNetworkPolicy
-    self.desiredAutopilotWorkloadPolicyConfig = desiredAutopilotWorkloadPolicyConfig
-    self.desiredK8SBetaApis = desiredK8SBetaApis
-    self.desiredContainerdConfig = desiredContainerdConfig
-    self.desiredEnableMultiNetworking = desiredEnableMultiNetworking
-    self.desiredNodePoolAutoConfigResourceManagerTags = desiredNodePoolAutoConfigResourceManagerTags
-    self.desiredInTransitEncryptionConfig = desiredInTransitEncryptionConfig
-    self.desiredEnableCiliumClusterwideNetworkPolicy = desiredEnableCiliumClusterwideNetworkPolicy
-    self.desiredSecretManagerConfig = desiredSecretManagerConfig
-    self.desiredCompliancePostureConfig = desiredCompliancePostureConfig
-    self.desiredNodeKubeletConfig = desiredNodeKubeletConfig
-    self.desiredNodePoolAutoConfigKubeletConfig = desiredNodePoolAutoConfigKubeletConfig
-    self.userManagedKeysConfig = userManagedKeysConfig
-    self.desiredRbacBindingConfig = desiredRbacBindingConfig
-    self.desiredAdditionalIpRangesConfig = desiredAdditionalIpRangesConfig
-    self.desiredEnterpriseConfig = desiredEnterpriseConfig
-    self.desiredAutoIpamConfig = desiredAutoIpamConfig
-    self.desiredDisableL4LbFirewallReconciliation = desiredDisableL4LbFirewallReconciliation
-    self.desiredNodePoolAutoConfigLinuxNodeConfig = desiredNodePoolAutoConfigLinuxNodeConfig
-    self.desiredUserManagedKeysConfig = desiredUserManagedKeysConfig
-    self.desiredAnonymousAuthenticationConfig = desiredAnonymousAuthenticationConfig
-    self.gkeAutoUpgradeConfig = gkeAutoUpgradeConfig
-    self.desiredNetworkTierConfig = desiredNetworkTierConfig
-    self.desiredSecretSyncConfig = desiredSecretSyncConfig
-    self.desiredPrivilegedAdmissionConfig = desiredPrivilegedAdmissionConfig
-    self.desiredControlPlaneEgress = desiredControlPlaneEgress
-    self.desiredManagedOpentelemetryConfig = desiredManagedOpentelemetryConfig
-    self.desiredAutopilotClusterPolicyConfig = desiredAutopilotClusterPolicyConfig
-    self.desiredManagedMachineLearningDiagnosticsConfig =
-      desiredManagedMachineLearningDiagnosticsConfig
-    self.desiredNodeCreationConfig = desiredNodeCreationConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterUpdate().with { $0.desiredNodeVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

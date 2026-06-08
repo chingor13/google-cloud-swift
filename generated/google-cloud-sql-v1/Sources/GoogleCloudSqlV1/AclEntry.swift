@@ -23,30 +23,33 @@
     Sendable
   {
     /// The allowlisted value for the access control list.
-    public var value: Swift.String
+    public var value: Swift.String = Swift.String()
 
     /// The time when this access control entry expires in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var expirationTime: GoogleCloudWkt.Timestamp?
+    public var expirationTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Optional. A label to identify this entry.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// This is always `sql#aclEntry`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `AclEntry`.
-    public init(
-      value: Swift.String = Swift.String(),
-      expirationTime: GoogleCloudWkt.Timestamp? = nil,
-      name: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.value = value
-      self.expirationTime = expirationTime
-      self.name = name
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AclEntry().with { $0.value = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

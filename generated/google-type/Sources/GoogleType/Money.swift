@@ -22,11 +22,11 @@ public struct Money: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The three-letter currency code defined in ISO 4217.
-  public var currencyCode: Swift.String
+  public var currencyCode: Swift.String = Swift.String()
 
   /// The whole units of the amount.
   /// For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
-  public var units: Swift.Int64
+  public var units: Swift.Int64 = Swift.Int64()
 
   /// Number of nano (10^-9) units of the amount.
   /// The value must be between -999,999,999 and +999,999,999 inclusive.
@@ -34,17 +34,22 @@ public struct Money: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// If `units` is zero, `nanos` can be positive, zero, or negative.
   /// If `units` is negative, `nanos` must be negative or zero.
   /// For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
-  public var nanos: Swift.Int32
+  public var nanos: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `Money`.
-  public init(
-    currencyCode: Swift.String = Swift.String(),
-    units: Swift.Int64 = Swift.Int64(),
-    nanos: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.currencyCode = currencyCode
-    self.units = units
-    self.nanos = nanos
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Money().with { $0.currencyCode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Money" }

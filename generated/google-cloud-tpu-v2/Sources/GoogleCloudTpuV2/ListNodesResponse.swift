@@ -26,23 +26,28 @@ public struct ListNodesResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The listed nodes.
-  public var nodes: [Node]
+  public var nodes: [Node] = []
 
   /// The next page token or empty if none.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListNodesResponse`.
-  public init(
-    nodes: [Node] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.nodes = nodes
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListNodesResponse().with { $0.nodes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

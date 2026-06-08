@@ -23,23 +23,28 @@
     Sendable
   {
     /// Code to uniquely identify the warning type.
-    public var code: ApiWarning.SqlApiWarningCode
+    public var code: ApiWarning.SqlApiWarningCode = ApiWarning.SqlApiWarningCode()
 
     /// The warning message.
-    public var message: Swift.String
+    public var message: Swift.String = Swift.String()
 
     /// The region name for REGION_UNREACHABLE warning.
-    public var region: Swift.String
+    public var region: Swift.String = Swift.String()
 
     /// Initialize a new instance of `ApiWarning`.
-    public init(
-      code: ApiWarning.SqlApiWarningCode = ApiWarning.SqlApiWarningCode(),
-      message: Swift.String = Swift.String(),
-      region: Swift.String = Swift.String(),
-    ) {
-      self.code = code
-      self.message = message
-      self.region = region
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ApiWarning().with { $0.code = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public enum SqlApiWarningCode: Codable, Equatable, Sendable {

@@ -23,17 +23,24 @@ public struct EnvVar: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Required. Name of the environment variable. Must not exceed 32768
   /// characters.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
-  public var values: OneOf_Values?
+  public var values: OneOf_Values? = nil
 
   /// Initialize a new instance of `EnvVar`.
-  public init(
-    name: Swift.String = Swift.String(),
-    values: OneOf_Values? = nil,
-  ) {
-    self.name = name
-    self.values = values
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EnvVar().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

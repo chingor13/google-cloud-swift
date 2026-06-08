@@ -27,14 +27,14 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWkt._An
   /// Depending on the recurrence, this may be the date the first window appears.
   /// Days are measured in the UTC timezone. This setting must be used when
   /// INTERVAL>1 or FREQ=WEEKLY/MONTHLY and no BYDAY specified.
-  public var delayUntil: GoogleType.Date?
+  public var delayUntil: GoogleType.Date? = nil
 
   /// Required. Start time of the window on days that it is scheduled,
   /// assuming UTC timezone.
-  public var windowStartTime: GoogleType.TimeOfDay?
+  public var windowStartTime: GoogleType.TimeOfDay? = nil
 
   /// Required. Duration of the window.
-  public var windowDuration: GoogleCloudWkt.Duration?
+  public var windowDuration: GoogleCloudWkt.Duration? = nil
 
   /// Required. An RRULE (https://tools.ietf.org/html/rfc5545#section-3.8.5.3)
   /// for how this window recurs.
@@ -49,19 +49,22 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWkt._An
   /// `FREQ=MONTHLY;BYSETPOS=1;BYDAY=SA,SU`
   ///
   /// The FREQ values of HOURLY, MINUTELY, and SECONDLY are not supported.
-  public var recurrence: Swift.String
+  public var recurrence: Swift.String = Swift.String()
 
   /// Initialize a new instance of `RecurringMaintenanceWindow`.
-  public init(
-    delayUntil: GoogleType.Date? = nil,
-    windowStartTime: GoogleType.TimeOfDay? = nil,
-    windowDuration: GoogleCloudWkt.Duration? = nil,
-    recurrence: Swift.String = Swift.String(),
-  ) {
-    self.delayUntil = delayUntil
-    self.windowStartTime = windowStartTime
-    self.windowDuration = windowDuration
-    self.recurrence = recurrence
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RecurringMaintenanceWindow().with { $0.delayUntil = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -33,13 +33,22 @@ public struct PrivilegedAdmissionConfig: Codable, Equatable, GoogleCloudWkt._Any
   /// Wildcards (`*`) are supported to authorize all allowlists under specific
   /// paths or directories. Example: `gs://my-bucket/*` will authorize all
   /// allowlists under the `my-bucket` bucket.
-  public var allowlistPaths: [Swift.String]
+  public var allowlistPaths: [Swift.String] = []
 
   /// Initialize a new instance of `PrivilegedAdmissionConfig`.
-  public init(
-    allowlistPaths: [Swift.String] = [],
-  ) {
-    self.allowlistPaths = allowlistPaths
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PrivilegedAdmissionConfig().with { $0.allowlistPaths = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -22,23 +22,28 @@ public struct StateMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Severity of the state message.
-  public var severity: StateMessage.Severity
+  public var severity: StateMessage.Severity = StateMessage.Severity()
 
   /// One-word CamelCase type of the state message.
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// The message.
-  public var message: Swift.String
+  public var message: Swift.String = Swift.String()
 
   /// Initialize a new instance of `StateMessage`.
-  public init(
-    severity: StateMessage.Severity = StateMessage.Severity(),
-    type: Swift.String = Swift.String(),
-    message: Swift.String = Swift.String(),
-  ) {
-    self.severity = severity
-    self.type = type
-    self.message = message
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = StateMessage().with { $0.severity = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Severity of the state message.

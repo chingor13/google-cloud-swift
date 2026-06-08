@@ -24,21 +24,21 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the name field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Deprecated. The name of the cluster to upgrade.
   /// This field has been deprecated and replaced by the name field.
-  public var clusterId: Swift.String
+  public var clusterId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the node pool to upgrade.
   /// This field has been deprecated and replaced by the name field.
-  public var nodePoolId: Swift.String
+  public var nodePoolId: Swift.String = Swift.String()
 
   /// Required. The Kubernetes version to change the nodes to (typically an
   /// upgrade).
@@ -51,25 +51,25 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
   /// - "1.X.Y-gke.N": picks an explicit Kubernetes version
   /// - "-": picks the Kubernetes master version
-  public var nodeVersion: Swift.String
+  public var nodeVersion: Swift.String = Swift.String()
 
   /// Required. The desired image type for the node pool. Please see
   /// https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
   /// for available image types.
-  public var imageType: Swift.String
+  public var imageType: Swift.String = Swift.String()
 
   /// The name (project, location, cluster, node pool) of the node pool to
   /// update. Specified in the format
   /// `projects/*/locations/*/clusters/*/nodePools/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The desired name of the image name to use for this node.
   /// This is used to create clusters using a custom image.
-  public var image: Swift.String
+  public var image: Swift.String = Swift.String()
 
   /// The project containing the desired image to use for this node pool.
   /// This is used to create clusters using a custom image.
-  public var imageProject: Swift.String
+  public var imageProject: Swift.String = Swift.String()
 
   /// The desired list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
@@ -84,213 +84,144 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// other fields will only apply to newly created nodes and will not be
   /// applied to existing nodes in the node pool. To ensure all nodes are updated
   /// consistently, use a separate API call for location changes.
-  public var locations: [Swift.String]
+  public var locations: [Swift.String] = []
 
   /// The desired workload metadata config for the node pool.
-  public var workloadMetadataConfig: WorkloadMetadataConfig?
+  public var workloadMetadataConfig: WorkloadMetadataConfig? = nil
 
   /// Upgrade settings control disruption and speed of the upgrade.
-  public var upgradeSettings: NodePool.UpgradeSettings?
+  public var upgradeSettings: NodePool.UpgradeSettings? = nil
 
   /// The desired network tags to be applied to all nodes in the node pool.
   /// If this field is not present, the tags will not be changed. Otherwise,
   /// the existing network tags will be *replaced* with the provided tags.
-  public var tags: NetworkTags?
+  public var tags: NetworkTags? = nil
 
   /// The desired node taints to be applied to all nodes in the node pool.
   /// If this field is not present, the taints will not be changed. Otherwise,
   /// the existing node taints will be *replaced* with the provided taints.
-  public var taints: NodeTaints?
+  public var taints: NodeTaints? = nil
 
   /// The desired node labels to be applied to all nodes in the node pool.
   /// If this field is not present, the labels will not be changed. Otherwise,
   /// the existing node labels will be *replaced* with the provided labels.
-  public var labels: NodeLabels?
+  public var labels: NodeLabels? = nil
 
   /// Parameters that can be configured on Linux nodes.
-  public var linuxNodeConfig: LinuxNodeConfig?
+  public var linuxNodeConfig: LinuxNodeConfig? = nil
 
   /// Node kubelet configs.
-  public var kubeletConfig: NodeKubeletConfig?
+  public var kubeletConfig: NodeKubeletConfig? = nil
 
   /// Node network config.
-  public var nodeNetworkConfig: NodeNetworkConfig?
+  public var nodeNetworkConfig: NodeNetworkConfig? = nil
 
   /// GCFS config.
-  public var gcfsConfig: GcfsConfig?
+  public var gcfsConfig: GcfsConfig? = nil
 
   /// Confidential nodes config.
   /// All the nodes in the node pool will be Confidential VM once enabled.
-  public var confidentialNodes: ConfidentialNodes?
+  public var confidentialNodes: ConfidentialNodes? = nil
 
   /// Enable or disable gvnic on the node pool.
-  public var gvnic: VirtualNIC?
+  public var gvnic: VirtualNIC? = nil
 
   /// The current etag of the node pool.
   /// If an etag is provided and does not match the current etag of the node
   /// pool, update will be blocked and an ABORTED error will be returned.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Enable or disable NCCL fast socket for the node pool.
-  public var fastSocket: FastSocket?
+  public var fastSocket: FastSocket? = nil
 
   /// Logging configuration.
-  public var loggingConfig: NodePoolLoggingConfig?
+  public var loggingConfig: NodePoolLoggingConfig? = nil
 
   /// The resource labels for the node pool to use to annotate any related
   /// Google Compute Engine resources.
-  public var resourceLabels: ResourceLabels?
+  public var resourceLabels: ResourceLabels? = nil
 
   /// Parameters that can be configured on Windows nodes.
-  public var windowsNodeConfig: WindowsNodeConfig?
+  public var windowsNodeConfig: WindowsNodeConfig? = nil
 
   /// A list of hardware accelerators to be attached to each node.
   /// See
   /// https://cloud.google.com/compute/docs/gpus
   /// for more information about support for GPUs.
-  public var accelerators: [AcceleratorConfig]
+  public var accelerators: [AcceleratorConfig] = []
 
   /// Optional. The desired [Google Compute Engine machine
   /// type](https://cloud.google.com/compute/docs/machine-types)
   /// for nodes in the node pool. Initiates an upgrade operation that migrates
   /// the nodes in the node pool to the specified machine type.
-  public var machineType: Swift.String
+  public var machineType: Swift.String = Swift.String()
 
   /// Optional. The desired disk type (e.g. 'pd-standard', 'pd-ssd' or
   /// 'pd-balanced') for nodes in the node pool.
   /// Initiates an upgrade operation that migrates the nodes in the
   /// node pool to the specified disk type.
-  public var diskType: Swift.String
+  public var diskType: Swift.String = Swift.String()
 
   /// Optional. The desired disk size for nodes in the node pool specified in GB.
   /// The smallest allowed disk size is 10GB.
   /// Initiates an upgrade operation that migrates the nodes in the
   /// node pool to the specified disk size.
-  public var diskSizeGb: Swift.Int64
+  public var diskSizeGb: Swift.Int64 = Swift.Int64()
 
   /// Desired resource manager tag keys and values to be attached to the nodes
   /// for managing Compute Engine firewalls using Network Firewall Policies.
   /// Existing tags will be replaced with new values.
-  public var resourceManagerTags: ResourceManagerTags?
+  public var resourceManagerTags: ResourceManagerTags? = nil
 
   /// The desired containerd config for nodes in the node pool.
   /// Initiates an upgrade operation that recreates the nodes with the new
   /// config.
-  public var containerdConfig: ContainerdConfig?
+  public var containerdConfig: ContainerdConfig? = nil
 
   /// Specifies the configuration of queued provisioning.
-  public var queuedProvisioning: NodePool.QueuedProvisioning?
+  public var queuedProvisioning: NodePool.QueuedProvisioning? = nil
 
   /// List of Storage Pools where boot disks are provisioned.
   /// Existing Storage Pools will be replaced with storage-pools.
-  public var storagePools: [Swift.String]
+  public var storagePools: [Swift.String] = []
 
   /// The maximum duration for the nodes to exist.
   /// If unspecified, the nodes can exist indefinitely.
-  public var maxRunDuration: GoogleCloudWkt.Duration?
+  public var maxRunDuration: GoogleCloudWkt.Duration? = nil
 
   /// Flex Start flag for enabling Flex Start VM.
-  public var flexStart: Swift.Bool?
+  public var flexStart: Swift.Bool? = nil
 
   /// The desired boot disk config for nodes in the node pool.
   /// Initiates an upgrade operation that migrates the nodes in the
   /// node pool to the specified boot disk config.
-  public var bootDisk: BootDisk?
+  public var bootDisk: BootDisk? = nil
 
   /// The desired node drain configuration for nodes in the node pool.
-  public var nodeDrainConfig: NodePool.NodeDrainConfig?
+  public var nodeDrainConfig: NodePool.NodeDrainConfig? = nil
 
   /// Consolidation delay defines duration after which the Cluster Autoscaler can
   /// scale down underutilized nodes. If not set, nodes are scaled down by
   /// default behavior, i.e. according to the chosen autoscaling profile.
-  public var consolidationDelay: GoogleCloudWkt.Duration?
+  public var consolidationDelay: GoogleCloudWkt.Duration? = nil
 
   /// The taint configuration for the node pool.
-  public var taintConfig: TaintConfig?
+  public var taintConfig: TaintConfig? = nil
 
   /// Initialize a new instance of `UpdateNodePoolRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    clusterId: Swift.String = Swift.String(),
-    nodePoolId: Swift.String = Swift.String(),
-    nodeVersion: Swift.String = Swift.String(),
-    imageType: Swift.String = Swift.String(),
-    name: Swift.String = Swift.String(),
-    image: Swift.String = Swift.String(),
-    imageProject: Swift.String = Swift.String(),
-    locations: [Swift.String] = [],
-    workloadMetadataConfig: WorkloadMetadataConfig? = nil,
-    upgradeSettings: NodePool.UpgradeSettings? = nil,
-    tags: NetworkTags? = nil,
-    taints: NodeTaints? = nil,
-    labels: NodeLabels? = nil,
-    linuxNodeConfig: LinuxNodeConfig? = nil,
-    kubeletConfig: NodeKubeletConfig? = nil,
-    nodeNetworkConfig: NodeNetworkConfig? = nil,
-    gcfsConfig: GcfsConfig? = nil,
-    confidentialNodes: ConfidentialNodes? = nil,
-    gvnic: VirtualNIC? = nil,
-    etag: Swift.String = Swift.String(),
-    fastSocket: FastSocket? = nil,
-    loggingConfig: NodePoolLoggingConfig? = nil,
-    resourceLabels: ResourceLabels? = nil,
-    windowsNodeConfig: WindowsNodeConfig? = nil,
-    accelerators: [AcceleratorConfig] = [],
-    machineType: Swift.String = Swift.String(),
-    diskType: Swift.String = Swift.String(),
-    diskSizeGb: Swift.Int64 = Swift.Int64(),
-    resourceManagerTags: ResourceManagerTags? = nil,
-    containerdConfig: ContainerdConfig? = nil,
-    queuedProvisioning: NodePool.QueuedProvisioning? = nil,
-    storagePools: [Swift.String] = [],
-    maxRunDuration: GoogleCloudWkt.Duration? = nil,
-    flexStart: Swift.Bool? = nil,
-    bootDisk: BootDisk? = nil,
-    nodeDrainConfig: NodePool.NodeDrainConfig? = nil,
-    consolidationDelay: GoogleCloudWkt.Duration? = nil,
-    taintConfig: TaintConfig? = nil,
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.clusterId = clusterId
-    self.nodePoolId = nodePoolId
-    self.nodeVersion = nodeVersion
-    self.imageType = imageType
-    self.name = name
-    self.image = image
-    self.imageProject = imageProject
-    self.locations = locations
-    self.workloadMetadataConfig = workloadMetadataConfig
-    self.upgradeSettings = upgradeSettings
-    self.tags = tags
-    self.taints = taints
-    self.labels = labels
-    self.linuxNodeConfig = linuxNodeConfig
-    self.kubeletConfig = kubeletConfig
-    self.nodeNetworkConfig = nodeNetworkConfig
-    self.gcfsConfig = gcfsConfig
-    self.confidentialNodes = confidentialNodes
-    self.gvnic = gvnic
-    self.etag = etag
-    self.fastSocket = fastSocket
-    self.loggingConfig = loggingConfig
-    self.resourceLabels = resourceLabels
-    self.windowsNodeConfig = windowsNodeConfig
-    self.accelerators = accelerators
-    self.machineType = machineType
-    self.diskType = diskType
-    self.diskSizeGb = diskSizeGb
-    self.resourceManagerTags = resourceManagerTags
-    self.containerdConfig = containerdConfig
-    self.queuedProvisioning = queuedProvisioning
-    self.storagePools = storagePools
-    self.maxRunDuration = maxRunDuration
-    self.flexStart = flexStart
-    self.bootDisk = bootDisk
-    self.nodeDrainConfig = nodeDrainConfig
-    self.consolidationDelay = consolidationDelay
-    self.taintConfig = taintConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateNodePoolRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

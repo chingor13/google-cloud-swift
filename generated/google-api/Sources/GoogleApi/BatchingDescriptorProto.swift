@@ -24,28 +24,33 @@ public struct BatchingDescriptorProto: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// The repeated field in the request message to be aggregated by batching.
-  public var batchedField: Swift.String
+  public var batchedField: Swift.String = Swift.String()
 
   /// A list of the fields in the request message. Two requests will be batched
   /// together only if the values of every field specified in
   /// `request_discriminator_fields` is equal between the two requests.
-  public var discriminatorFields: [Swift.String]
+  public var discriminatorFields: [Swift.String] = []
 
   /// Optional. When present, indicates the field in the response message to be
   /// used to demultiplex the response into multiple response messages, in
   /// correspondence with the multiple request messages originally batched
   /// together.
-  public var subresponseField: Swift.String
+  public var subresponseField: Swift.String = Swift.String()
 
   /// Initialize a new instance of `BatchingDescriptorProto`.
-  public init(
-    batchedField: Swift.String = Swift.String(),
-    discriminatorFields: [Swift.String] = [],
-    subresponseField: Swift.String = Swift.String(),
-  ) {
-    self.batchedField = batchedField
-    self.discriminatorFields = discriminatorFields
-    self.subresponseField = subresponseField
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BatchingDescriptorProto().with { $0.batchedField = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -53,21 +53,28 @@ public struct Logging: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// There can be multiple producer destinations, each one must have a
   /// different monitored resource type. A log can be used in at most
   /// one producer destination.
-  public var producerDestinations: [Logging.LoggingDestination]
+  public var producerDestinations: [Logging.LoggingDestination] = []
 
   /// Logging configurations for sending logs to the consumer project.
   /// There can be multiple consumer destinations, each one must have a
   /// different monitored resource type. A log can be used in at most
   /// one consumer destination.
-  public var consumerDestinations: [Logging.LoggingDestination]
+  public var consumerDestinations: [Logging.LoggingDestination] = []
 
   /// Initialize a new instance of `Logging`.
-  public init(
-    producerDestinations: [Logging.LoggingDestination] = [],
-    consumerDestinations: [Logging.LoggingDestination] = [],
-  ) {
-    self.producerDestinations = producerDestinations
-    self.consumerDestinations = consumerDestinations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Logging().with { $0.producerDestinations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration of a specific logging destination (the producer project
@@ -80,7 +87,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// section.
     ///
     /// [google.api.Service.monitored_resources]: <doc:Service/monitoredResources>
-    public var monitoredResource: Swift.String
+    public var monitoredResource: Swift.String = Swift.String()
 
     /// Names of the logs to be sent to this destination. Each name must
     /// be defined in the [Service.logs][google.api.Service.logs] section. If the
@@ -88,15 +95,22 @@ public struct Logging: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// with the service name followed by "/".
     ///
     /// [google.api.Service.logs]: <doc:Service/logs>
-    public var logs: [Swift.String]
+    public var logs: [Swift.String] = []
 
     /// Initialize a new instance of `LoggingDestination`.
-    public init(
-      monitoredResource: Swift.String = Swift.String(),
-      logs: [Swift.String] = [],
-    ) {
-      self.monitoredResource = monitoredResource
-      self.logs = logs
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = LoggingDestination().with { $0.monitoredResource = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

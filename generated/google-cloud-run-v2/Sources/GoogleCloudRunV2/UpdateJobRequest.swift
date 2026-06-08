@@ -22,26 +22,31 @@ public struct UpdateJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The Job to be updated.
-  public var job: Job?
+  public var job: Job? = nil
 
   /// Indicates that the request should be validated and default values
   /// populated, without persisting the request or updating any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Optional. If set to true, and if the Job does not exist, it will create a
   /// new one. Caller must have both create and update permissions for this call
   /// if this is set to true.
-  public var allowMissing: Swift.Bool
+  public var allowMissing: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UpdateJobRequest`.
-  public init(
-    job: Job? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-    allowMissing: Swift.Bool = Swift.Bool(),
-  ) {
-    self.job = job
-    self.validateOnly = validateOnly
-    self.allowMissing = allowMissing
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateJobRequest().with { $0.job = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

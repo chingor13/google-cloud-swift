@@ -37,11 +37,11 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The number of values in the population. Must be non-negative. This value
   /// must equal the sum of the values in `bucket_counts` if a histogram is
   /// provided.
-  public var count: Swift.Int64
+  public var count: Swift.Int64 = Swift.Int64()
 
   /// The arithmetic mean of the values in the population. If `count` is zero
   /// then this field must be zero.
-  public var mean: Swift.Double
+  public var mean: Swift.Double = Swift.Double()
 
   /// The sum of squared deviations from the mean of the values in the
   /// population. For values x_i this is:
@@ -52,15 +52,15 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// describes Welford's method for accumulating this sum in one pass.
   ///
   /// If `count` is zero then this field must be zero.
-  public var sumOfSquaredDeviation: Swift.Double
+  public var sumOfSquaredDeviation: Swift.Double = Swift.Double()
 
   /// If specified, contains the range of the population values. The field
   /// must not be present if the `count` is zero.
-  public var range: Distribution.Range?
+  public var range: Distribution.Range? = nil
 
   /// Defines the histogram bucket boundaries. If the distribution does not
   /// contain a histogram, then omit this field.
-  public var bucketOptions: Distribution.BucketOptions?
+  public var bucketOptions: Distribution.BucketOptions? = nil
 
   /// The number of values in each bucket of the histogram, as described in
   /// `bucket_options`. If the distribution does not have a histogram, then omit
@@ -77,28 +77,25 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// count for the underflow bucket (number 0). The next N-2 values are the
   /// counts for the finite buckets (number 1 through N-2). The N'th value in
   /// `bucket_counts` is the count for the overflow bucket (number N-1).
-  public var bucketCounts: [Swift.Int64]
+  public var bucketCounts: [Swift.Int64] = []
 
   /// Must be in increasing order of `value` field.
-  public var exemplars: [Distribution.Exemplar]
+  public var exemplars: [Distribution.Exemplar] = []
 
   /// Initialize a new instance of `Distribution`.
-  public init(
-    count: Swift.Int64 = Swift.Int64(),
-    mean: Swift.Double = Swift.Double(),
-    sumOfSquaredDeviation: Swift.Double = Swift.Double(),
-    range: Distribution.Range? = nil,
-    bucketOptions: Distribution.BucketOptions? = nil,
-    bucketCounts: [Swift.Int64] = [],
-    exemplars: [Distribution.Exemplar] = [],
-  ) {
-    self.count = count
-    self.mean = mean
-    self.sumOfSquaredDeviation = sumOfSquaredDeviation
-    self.range = range
-    self.bucketOptions = bucketOptions
-    self.bucketCounts = bucketCounts
-    self.exemplars = exemplars
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Distribution().with { $0.count = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The range of the population values.
@@ -106,18 +103,25 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The minimum of the population values.
-    public var min: Swift.Double
+    public var min: Swift.Double = Swift.Double()
 
     /// The maximum of the population values.
-    public var max: Swift.Double
+    public var max: Swift.Double = Swift.Double()
 
     /// Initialize a new instance of `Range`.
-    public init(
-      min: Swift.Double = Swift.Double(),
-      max: Swift.Double = Swift.Double(),
-    ) {
-      self.min = min
-      self.max = max
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Range().with { $0.min = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -150,13 +154,22 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Exactly one of these three fields must be set.
-    public var options: OneOf_Options?
+    public var options: OneOf_Options? = nil
 
     /// Initialize a new instance of `BucketOptions`.
-    public init(
-      options: OneOf_Options? = nil,
-    ) {
-      self.options = options
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BucketOptions().with { $0.linearBuckets = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -225,23 +238,28 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Must be greater than 0.
-      public var numFiniteBuckets: Swift.Int32
+      public var numFiniteBuckets: Swift.Int32 = Swift.Int32()
 
       /// Must be greater than 0.
-      public var width: Swift.Double
+      public var width: Swift.Double = Swift.Double()
 
       /// Lower bound of the first bucket.
-      public var offset: Swift.Double
+      public var offset: Swift.Double = Swift.Double()
 
       /// Initialize a new instance of `Linear`.
-      public init(
-        numFiniteBuckets: Swift.Int32 = Swift.Int32(),
-        width: Swift.Double = Swift.Double(),
-        offset: Swift.Double = Swift.Double(),
-      ) {
-        self.numFiniteBuckets = numFiniteBuckets
-        self.width = width
-        self.offset = offset
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Linear().with { $0.numFiniteBuckets = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -269,23 +287,28 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Must be greater than 0.
-      public var numFiniteBuckets: Swift.Int32
+      public var numFiniteBuckets: Swift.Int32 = Swift.Int32()
 
       /// Must be greater than 1.
-      public var growthFactor: Swift.Double
+      public var growthFactor: Swift.Double = Swift.Double()
 
       /// Must be greater than 0.
-      public var scale: Swift.Double
+      public var scale: Swift.Double = Swift.Double()
 
       /// Initialize a new instance of `Exponential`.
-      public init(
-        numFiniteBuckets: Swift.Int32 = Swift.Int32(),
-        growthFactor: Swift.Double = Swift.Double(),
-        scale: Swift.Double = Swift.Double(),
-      ) {
-        self.numFiniteBuckets = numFiniteBuckets
-        self.growthFactor = growthFactor
-        self.scale = scale
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Exponential().with { $0.numFiniteBuckets = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -314,13 +337,22 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The values must be monotonically increasing.
-      public var bounds: [Swift.Double]
+      public var bounds: [Swift.Double] = []
 
       /// Initialize a new instance of `Explicit`.
-      public init(
-        bounds: [Swift.Double] = [],
-      ) {
-        self.bounds = bounds
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Explicit().with { $0.bounds = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -365,10 +397,10 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   {
     /// Value of the exemplar point. This value determines to which bucket the
     /// exemplar belongs.
-    public var value: Swift.Double
+    public var value: Swift.Double = Swift.Double()
 
     /// The observation (sampling) time of the above value.
-    public var timestamp: GoogleCloudWkt.Timestamp?
+    public var timestamp: GoogleCloudWkt.Timestamp? = nil
 
     /// Contextual information about the example value. Examples are:
     ///
@@ -381,17 +413,22 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// There may be only a single attachment of any given message type in a
     /// single exemplar, and this is enforced by the system.
-    public var attachments: [GoogleCloudWkt.`Any`]
+    public var attachments: [GoogleCloudWkt.`Any`] = []
 
     /// Initialize a new instance of `Exemplar`.
-    public init(
-      value: Swift.Double = Swift.Double(),
-      timestamp: GoogleCloudWkt.Timestamp? = nil,
-      attachments: [GoogleCloudWkt.`Any`] = [],
-    ) {
-      self.value = value
-      self.timestamp = timestamp
-      self.attachments = attachments
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Exemplar().with { $0.value = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

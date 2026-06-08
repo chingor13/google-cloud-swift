@@ -22,23 +22,28 @@ public struct MessageWithUInt64Value: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.Int64Value?
+  public var singular: GoogleCloudWkt.Int64Value? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWkt.Int64Value]
+  public var repeated: [GoogleCloudWkt.Int64Value] = []
 
   /// Test google.protobuf.Int64Value as values.
-  public var map: [Swift.String: GoogleCloudWkt.Int64Value]
+  public var map: [Swift.String: GoogleCloudWkt.Int64Value] = [:]
 
   /// Initialize a new instance of `MessageWithUInt64Value`.
-  public init(
-    singular: GoogleCloudWkt.Int64Value? = nil,
-    repeated: [GoogleCloudWkt.Int64Value] = [],
-    map: [Swift.String: GoogleCloudWkt.Int64Value] = [:],
-  ) {
-    self.singular = singular
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithUInt64Value().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

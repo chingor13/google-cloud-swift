@@ -36,13 +36,13 @@ func testDecodingGetSecretRequestMessage() throws {
   let any = wrapped.value
   #expect(any.typeUrl == "type.googleapis.com/google.cloud.secretmanager.v1.GetSecretRequest")
   let got = try GetSecretRequest(fromAny: any)
-  let want = GetSecretRequest(name: "projects/test-project/secrets/my-secret")
+  let want = GetSecretRequest().with { $0.name = "projects/test-project/secrets/my-secret" }
   #expect(got == want)
 }
 
 @Test("Any encoding GetSecretRequest")
 func testEncodingGetSecretRequestMessage() throws {
-  let input = GetSecretRequest(name: "projects/test-project/secrets/my-secret")
+  let input = GetSecretRequest().with { $0.name = "projects/test-project/secrets/my-secret" }
   let any = try `Any`(fromMessage: input)
   let wrapped = WrappedAny(value: any)
   let encoder = JSONEncoder()
@@ -66,23 +66,23 @@ func testDecodingListSecretVersionsRequestMessage() throws {
   #expect(
     any.typeUrl == "type.googleapis.com/google.cloud.secretmanager.v1.ListSecretVersionsRequest")
   let got = try ListSecretVersionsRequest(fromAny: any)
-  let want = ListSecretVersionsRequest(
-    parent: "projects/test-project/secrets/my-secret",
-    pageSize: 10,
-    pageToken: "token123",
-    filter: "state:ENABLED"
-  )
+  let want = ListSecretVersionsRequest().with {
+    $0.parent = "projects/test-project/secrets/my-secret"
+    $0.pageSize = 10
+    $0.pageToken = "token123"
+    $0.filter = "state:ENABLED"
+  }
   #expect(got == want)
 }
 
 @Test("Any encoding ListSecretVersionsRequest")
 func testEncodingListSecretVersionsRequestMessage() throws {
-  let input = ListSecretVersionsRequest(
-    parent: "projects/test-project/secrets/my-secret",
-    pageSize: 10,
-    pageToken: "token123",
-    filter: "state:ENABLED"
-  )
+  let input = ListSecretVersionsRequest().with {
+    $0.parent = "projects/test-project/secrets/my-secret"
+    $0.pageSize = 10
+    $0.pageToken = "token123"
+    $0.filter = "state:ENABLED"
+  }
   let any = try `Any`(fromMessage: input)
   let wrapped = WrappedAny(value: any)
   let encoder = JSONEncoder()

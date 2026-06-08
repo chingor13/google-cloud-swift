@@ -22,13 +22,22 @@ public struct MaxPodsConstraint: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Constraint enforced on the max num of pods per node.
-  public var maxPodsPerNode: Swift.Int64
+  public var maxPodsPerNode: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `MaxPodsConstraint`.
-  public init(
-    maxPodsPerNode: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.maxPodsPerNode = maxPodsPerNode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaxPodsConstraint().with { $0.maxPodsPerNode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

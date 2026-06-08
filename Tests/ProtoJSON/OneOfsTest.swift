@@ -20,21 +20,34 @@ import GoogleCloudWkt
   @Test(
     "OneOf serialization",
     arguments: [
-      (#"{"stringContents":"test"}"#, MessageWithOneOf(singleString: .stringContents("test"))),
-      (#"{"stringContentsOne":"test"}"#, MessageWithOneOf(twoStrings: .stringContentsOne("test"))),
-      (#"{"stringContentsTwo":"test"}"#, MessageWithOneOf(twoStrings: .stringContentsTwo("test"))),
+      (
+        #"{"stringContents":"test"}"#,
+        MessageWithOneOf().with { $0.singleString = .stringContents("test") }
+      ),
+      (
+        #"{"stringContentsOne":"test"}"#,
+        MessageWithOneOf().with { $0.twoStrings = .stringContentsOne("test") }
+      ),
+      (
+        #"{"stringContentsTwo":"test"}"#,
+        MessageWithOneOf().with { $0.twoStrings = .stringContentsTwo("test") }
+      ),
       (
         #"{"messageValue":{"parent":"test"}}"#,
-        MessageWithOneOf(oneMessage: .messageValue(MessageWithOneOf.Message(parent: "test")))
+        MessageWithOneOf().with {
+          $0.oneMessage = .messageValue(MessageWithOneOf.Message().with { $0.parent = "test" })
+        }
       ),
       (
         #"{"anotherMessage":{"parent":"test"}}"#,
-        MessageWithOneOf(mixed: .anotherMessage(MessageWithOneOf.Message(parent: "test")))
+        MessageWithOneOf().with {
+          $0.mixed = .anotherMessage(MessageWithOneOf.Message().with { $0.parent = "test" })
+        }
       ),
-      (#"{"string":"test"}"#, MessageWithOneOf(mixed: .string("test"))),
+      (#"{"string":"test"}"#, MessageWithOneOf().with { $0.mixed = .string("test") }),
       (
         #"{"duration":"10s"}"#,
-        MessageWithOneOf(mixed: .duration(try! Duration(seconds: 10, nanos: 0)))
+        MessageWithOneOf().with { $0.mixed = .duration(try! Duration(seconds: 10, nanos: 0)) }
       ),
     ]
   )
@@ -53,25 +66,40 @@ import GoogleCloudWkt
   @Test(
     "ComplexOneOf serialization",
     arguments: [
-      (#"{"boolValue":true}"#, MessageWithComplexOneOf(complex: .boolValue(true))),
-      (#"{"bytesValue":"AQID"}"#, MessageWithComplexOneOf(complex: .bytesValue(Data([1, 2, 3])))),
-      (#"{"stringValue":"test"}"#, MessageWithComplexOneOf(complex: .stringValue("test"))),
-      (#"{"floatValue":1.5}"#, MessageWithComplexOneOf(complex: .floatValue(1.5))),
-      (#"{"doubleValue":2.5}"#, MessageWithComplexOneOf(complex: .doubleValue(2.5))),
-      (#"{"int32":42}"#, MessageWithComplexOneOf(complex: .int32(42))),
-      (#"{"int64":42}"#, MessageWithComplexOneOf(complex: .int64(42))),
-      (#"{"enum":1}"#, MessageWithComplexOneOf(complex: .enum(.black))),
+      (#"{"boolValue":true}"#, MessageWithComplexOneOf().with { $0.complex = .boolValue(true) }),
+      (
+        #"{"bytesValue":"AQID"}"#,
+        MessageWithComplexOneOf().with { $0.complex = .bytesValue(Data([1, 2, 3])) }
+      ),
+      (
+        #"{"stringValue":"test"}"#,
+        MessageWithComplexOneOf().with { $0.complex = .stringValue("test") }
+      ),
+      (#"{"floatValue":1.5}"#, MessageWithComplexOneOf().with { $0.complex = .floatValue(1.5) }),
+      (#"{"doubleValue":2.5}"#, MessageWithComplexOneOf().with { $0.complex = .doubleValue(2.5) }),
+      (#"{"int32":42}"#, MessageWithComplexOneOf().with { $0.complex = .int32(42) }),
+      (#"{"int64":42}"#, MessageWithComplexOneOf().with { $0.complex = .int64(42) }),
+      (#"{"enum":1}"#, MessageWithComplexOneOf().with { $0.complex = .enum(.black) }),
       (
         #"{"inner":{"strings":["a","b"]}}"#,
-        MessageWithComplexOneOf(
-          complex: .inner(MessageWithComplexOneOf.Inner(strings: ["a", "b"])))
+        MessageWithComplexOneOf().with {
+          $0.complex = .inner(MessageWithComplexOneOf.Inner().with { $0.strings = ["a", "b"] })
+        }
       ),
       (
         #"{"duration":"10s"}"#,
-        MessageWithComplexOneOf(complex: .duration(try! Duration(seconds: 10, nanos: 0)))
+        MessageWithComplexOneOf().with {
+          $0.complex = .duration(try! Duration(seconds: 10, nanos: 0))
+        }
       ),
-      (#"{"value":"hello"}"#, MessageWithComplexOneOf(complex: .value(.string("hello")))),
-      (#"{"optionalDouble":1.5}"#, MessageWithComplexOneOf(complex: .optionalDouble(1.5))),
+      (
+        #"{"value":"hello"}"#,
+        MessageWithComplexOneOf().with { $0.complex = .value(.string("hello")) }
+      ),
+      (
+        #"{"optionalDouble":1.5}"#,
+        MessageWithComplexOneOf().with { $0.complex = .optionalDouble(1.5) }
+      ),
     ]
   )
   func complexOneOfSerialization(expectedJSON: String, input: MessageWithComplexOneOf) throws {
@@ -88,7 +116,7 @@ import GoogleCloudWkt
 
   // TODO(https://github.com/googleapis/librarian/issues/5260) - review if this is right.
   @Test func complexOneOfSerialization_null() throws {
-    let input = MessageWithComplexOneOf(complex: .null(NullValue()))
+    let input = MessageWithComplexOneOf().with { $0.complex = .null(NullValue()) }
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
     let data = try encoder.encode(input)
@@ -98,7 +126,7 @@ import GoogleCloudWkt
     let decoder = _ProtoJSONDecoder()
     let roundtrip = try decoder.decode(MessageWithComplexOneOf.self, from: data)
     // Currently decodes to nil because decodeIfPresent returns nil for null values.
-    #expect(roundtrip == MessageWithComplexOneOf(complex: nil))
+    #expect(roundtrip == MessageWithComplexOneOf().with { $0.complex = nil })
   }
 
   @Test("Use oneof with @unknown")

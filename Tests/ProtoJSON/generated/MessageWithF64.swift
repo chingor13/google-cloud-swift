@@ -22,29 +22,32 @@ public struct MessageWithF64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.Double
+  public var singular: Swift.Double = Swift.Double()
 
   /// An optional field.
-  public var option: Swift.Double?
+  public var option: Swift.Double? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.Double]
+  public var repeated: [Swift.Double] = []
 
   /// A map field, doubles cannot be keys, so we only need to test them as
   /// values.
-  public var map: [Swift.String: Swift.Double]
+  public var map: [Swift.String: Swift.Double] = [:]
 
   /// Initialize a new instance of `MessageWithF64`.
-  public init(
-    singular: Swift.Double = Swift.Double(),
-    option: Swift.Double? = nil,
-    repeated: [Swift.Double] = [],
-    map: [Swift.String: Swift.Double] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithF64().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

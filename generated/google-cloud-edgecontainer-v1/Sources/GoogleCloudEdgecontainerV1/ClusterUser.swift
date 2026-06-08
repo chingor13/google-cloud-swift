@@ -22,13 +22,22 @@ public struct ClusterUser: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. An active Google username.
-  public var username: Swift.String
+  public var username: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ClusterUser`.
-  public init(
-    username: Swift.String = Swift.String(),
-  ) {
-    self.username = username
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterUser().with { $0.username = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

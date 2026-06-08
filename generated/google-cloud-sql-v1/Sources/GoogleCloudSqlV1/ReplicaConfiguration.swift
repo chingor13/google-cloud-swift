@@ -23,7 +23,7 @@
     Sendable
   {
     /// This is always `sql#replicaConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// MySQL specific configuration when replicating from a MySQL on-premises
     /// primary instance. Replication configuration information such as the
@@ -31,31 +31,34 @@
     /// metadata. The configuration information is used only to set up the
     /// replication connection and is stored by MySQL in a file named
     /// `master.info` in the data directory.
-    public var mysqlReplicaConfiguration: MySqlReplicaConfiguration?
+    public var mysqlReplicaConfiguration: MySqlReplicaConfiguration? = nil
 
     /// Specifies if the replica is the failover target. If the field is set to
     /// `true`, the replica will be designated as a failover replica. In case the
     /// primary instance fails, the replica instance will be promoted as the new
     /// primary instance. Only one replica can be specified as failover target, and
     /// the replica has to be in different zone with the primary instance.
-    public var failoverTarget: GoogleCloudWkt.BoolValue?
+    public var failoverTarget: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. Specifies if a SQL Server replica is a cascadable replica. A
     /// cascadable replica is a SQL Server cross region replica that supports
     /// replica(s) under it.
-    public var cascadableReplica: GoogleCloudWkt.BoolValue?
+    public var cascadableReplica: GoogleCloudWkt.BoolValue? = nil
 
     /// Initialize a new instance of `ReplicaConfiguration`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      mysqlReplicaConfiguration: MySqlReplicaConfiguration? = nil,
-      failoverTarget: GoogleCloudWkt.BoolValue? = nil,
-      cascadableReplica: GoogleCloudWkt.BoolValue? = nil,
-    ) {
-      self.kind = kind
-      self.mysqlReplicaConfiguration = mysqlReplicaConfiguration
-      self.failoverTarget = failoverTarget
-      self.cascadableReplica = cascadableReplica
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ReplicaConfiguration().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

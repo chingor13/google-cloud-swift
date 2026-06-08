@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let response = try await client.setMasterAuth(
-    request: SetMasterAuthRequest(/* set fields */
-    )
+    request: SetMasterAuthRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

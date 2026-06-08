@@ -30,13 +30,13 @@ public struct Api: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The fully qualified name of this interface, including package name
   /// followed by the interface's simple name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The methods of this interface, in unspecified order.
-  public var methods: [Method]
+  public var methods: [Method] = []
 
   /// Any metadata attached to the interface.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// A version string for this interface. If specified, must have the form
   /// `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -58,37 +58,34 @@ public struct Api: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// be omitted. Zero major versions must only be used for
   /// experimental, non-GA interfaces.
   ///
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Source context for the protocol buffer service represented by this
   /// message.
-  public var sourceContext: SourceContext?
+  public var sourceContext: SourceContext? = nil
 
   /// Included interfaces. See [Mixin][].
   ///
   /// [Mixin]: <doc:Mixin>
-  public var mixins: [Mixin]
+  public var mixins: [Mixin] = []
 
   /// The source syntax of the service.
-  public var syntax: Syntax
+  public var syntax: Syntax = Syntax()
 
   /// Initialize a new instance of `Api`.
-  public init(
-    name: Swift.String = Swift.String(),
-    methods: [Method] = [],
-    options: [Option] = [],
-    version: Swift.String = Swift.String(),
-    sourceContext: SourceContext? = nil,
-    mixins: [Mixin] = [],
-    syntax: Syntax = Syntax(),
-  ) {
-    self.name = name
-    self.methods = methods
-    self.options = options
-    self.version = version
-    self.sourceContext = sourceContext
-    self.mixins = mixins
-    self.syntax = syntax
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Api().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Api" }

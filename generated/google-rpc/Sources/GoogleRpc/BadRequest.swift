@@ -23,13 +23,22 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Describes all violations in a client request.
-  public var fieldViolations: [BadRequest.FieldViolation]
+  public var fieldViolations: [BadRequest.FieldViolation] = []
 
   /// Initialize a new instance of `BadRequest`.
-  public init(
-    fieldViolations: [BadRequest.FieldViolation] = [],
-  ) {
-    self.fieldViolations = fieldViolations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BadRequest().with { $0.fieldViolations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// A message type used to describe a single bad request field.
@@ -73,10 +82,10 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///   first `emailAddresses` message
     /// * `emailAddresses[2].type[1]` for a violation in the second `type`
     ///   value in the third `emailAddresses` message.
-    public var field: Swift.String
+    public var field: Swift.String = Swift.String()
 
     /// A description of why the request element is bad.
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// The reason of the field-level error. This is a constant value that
     /// identifies the proximate cause of the field-level error. It should
@@ -84,23 +93,26 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// google.rpc.ErrorInfo.domain. This should be at most 63
     /// characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]`,
     /// which represents UPPER_SNAKE_CASE.
-    public var reason: Swift.String
+    public var reason: Swift.String = Swift.String()
 
     /// Provides a localized error message for field-level errors that is safe to
     /// return to the API consumer.
-    public var localizedMessage: LocalizedMessage?
+    public var localizedMessage: LocalizedMessage? = nil
 
     /// Initialize a new instance of `FieldViolation`.
-    public init(
-      field: Swift.String = Swift.String(),
-      description: Swift.String = Swift.String(),
-      reason: Swift.String = Swift.String(),
-      localizedMessage: LocalizedMessage? = nil,
-    ) {
-      self.field = field
-      self.description = description
-      self.reason = reason
-      self.localizedMessage = localizedMessage
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FieldViolation().with { $0.field = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

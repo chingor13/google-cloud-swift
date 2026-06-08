@@ -22,23 +22,28 @@ public struct NetworkEndpoint: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The internal IP address of this network endpoint.
-  public var ipAddress: Swift.String
+  public var ipAddress: Swift.String = Swift.String()
 
   /// The port of this network endpoint.
-  public var port: Swift.Int32
+  public var port: Swift.Int32 = Swift.Int32()
 
   /// The access config for the TPU worker.
-  public var accessConfig: AccessConfig?
+  public var accessConfig: AccessConfig? = nil
 
   /// Initialize a new instance of `NetworkEndpoint`.
-  public init(
-    ipAddress: Swift.String = Swift.String(),
-    port: Swift.Int32 = Swift.Int32(),
-    accessConfig: AccessConfig? = nil,
-  ) {
-    self.ipAddress = ipAddress
-    self.port = port
-    self.accessConfig = accessConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkEndpoint().with { $0.ipAddress = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

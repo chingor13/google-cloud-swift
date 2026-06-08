@@ -29,17 +29,24 @@ public struct JwtLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// For example, for "Authorization: Bearer {JWT}",
   /// value_prefix="Bearer " with a space at the end.
-  public var valuePrefix: Swift.String
+  public var valuePrefix: Swift.String = Swift.String()
 
-  public var `in`: OneOf_In?
+  public var `in`: OneOf_In? = nil
 
   /// Initialize a new instance of `JwtLocation`.
-  public init(
-    valuePrefix: Swift.String = Swift.String(),
-    `in`: OneOf_In? = nil,
-  ) {
-    self.valuePrefix = valuePrefix
-    self.`in` = `in`
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = JwtLocation().with { $0.header = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

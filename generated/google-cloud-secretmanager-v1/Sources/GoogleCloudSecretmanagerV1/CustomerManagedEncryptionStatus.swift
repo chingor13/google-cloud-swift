@@ -24,13 +24,22 @@ public struct CustomerManagedEncryptionStatus: Codable, Equatable, GoogleCloudWk
   /// Required. The resource name of the Cloud KMS CryptoKeyVersion used to
   /// encrypt the secret payload, in the following format:
   /// `projects/*/locations/*/keyRings/*/cryptoKeys/*/versions/*`.
-  public var kmsKeyVersionName: Swift.String
+  public var kmsKeyVersionName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CustomerManagedEncryptionStatus`.
-  public init(
-    kmsKeyVersionName: Swift.String = Swift.String(),
-  ) {
-    self.kmsKeyVersionName = kmsKeyVersionName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CustomerManagedEncryptionStatus().with { $0.kmsKeyVersionName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

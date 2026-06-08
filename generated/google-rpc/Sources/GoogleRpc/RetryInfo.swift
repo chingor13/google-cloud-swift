@@ -34,13 +34,22 @@ public struct RetryInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Clients should wait at least this long between retrying the same request.
-  public var retryDelay: GoogleCloudWkt.Duration?
+  public var retryDelay: GoogleCloudWkt.Duration? = nil
 
   /// Initialize a new instance of `RetryInfo`.
-  public init(
-    retryDelay: GoogleCloudWkt.Duration? = nil,
-  ) {
-    self.retryDelay = retryDelay
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RetryInfo().with { $0.retryDelay = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.RetryInfo" }

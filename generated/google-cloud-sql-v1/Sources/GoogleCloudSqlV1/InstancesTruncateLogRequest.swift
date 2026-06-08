@@ -23,13 +23,22 @@
     Sendable
   {
     /// Contains details about the truncate log operation.
-    public var truncateLogContext: TruncateLogContext?
+    public var truncateLogContext: TruncateLogContext? = nil
 
     /// Initialize a new instance of `InstancesTruncateLogRequest`.
-    public init(
-      truncateLogContext: TruncateLogContext? = nil,
-    ) {
-      self.truncateLogContext = truncateLogContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesTruncateLogRequest().with { $0.truncateLogContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -26,9 +26,11 @@ func sample(
   client: some Executions, projectId: String, locationId: String, jobId: String, executionId: String
 ) async throws {
   let response = try await client.getExecution(
-    request: GetExecutionRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)",
-    )
+    request: GetExecutionRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)"
+      }
   )
   print("Success: \(response)")
 }

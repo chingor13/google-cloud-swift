@@ -24,26 +24,31 @@ public struct ListTagValuesRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Required.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The maximum number of TagValues to return in the response. The
   /// server allows a maximum of 300 TagValues to return. If unspecified, the
   /// server will use 100 as the default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to
   /// `ListTagValues` that indicates where this listing should continue from.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagValuesRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagValuesRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

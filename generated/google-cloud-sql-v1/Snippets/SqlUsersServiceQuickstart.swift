@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlUsersServiceClient()
     let response = try await client.delete(
-      request: SqlUsersDeleteRequest(/* set fields */
-      )
+      request: SqlUsersDeleteRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

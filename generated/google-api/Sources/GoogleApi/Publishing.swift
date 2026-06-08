@@ -25,73 +25,62 @@ public struct Publishing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// A list of API method settings, e.g. the behavior for methods that use the
   /// long-running operation pattern.
-  public var methodSettings: [MethodSettings]
+  public var methodSettings: [MethodSettings] = []
 
   /// Link to a *public* URI where users can report issues.  Example:
   /// https://issuetracker.google.com/issues/new?component=190865&template=1161103
-  public var newIssueUri: Swift.String
+  public var newIssueUri: Swift.String = Swift.String()
 
   /// Link to product home page.  Example:
   /// https://cloud.google.com/asset-inventory/docs/overview
-  public var documentationUri: Swift.String
+  public var documentationUri: Swift.String = Swift.String()
 
   /// Used as a tracking tag when collecting data about the APIs developer
   /// relations artifacts like docs, packages delivered to package managers,
   /// etc.  Example: "speech".
-  public var apiShortName: Swift.String
+  public var apiShortName: Swift.String = Swift.String()
 
   /// GitHub label to apply to issues and pull requests opened for this API.
-  public var githubLabel: Swift.String
+  public var githubLabel: Swift.String = Swift.String()
 
   /// GitHub teams to be added to CODEOWNERS in the directory in GitHub
   /// containing source code for the client libraries for this API.
-  public var codeownerGithubTeams: [Swift.String]
+  public var codeownerGithubTeams: [Swift.String] = []
 
   /// A prefix used in sample code when demarking regions to be included in
   /// documentation.
-  public var docTagPrefix: Swift.String
+  public var docTagPrefix: Swift.String = Swift.String()
 
   /// For whom the client library is being published.
-  public var organization: ClientLibraryOrganization
+  public var organization: ClientLibraryOrganization = ClientLibraryOrganization()
 
   /// Client library settings.  If the same version string appears multiple
   /// times in this list, then the last one wins.  Settings from earlier
   /// settings with the same version string are discarded.
-  public var librarySettings: [ClientLibrarySettings]
+  public var librarySettings: [ClientLibrarySettings] = []
 
   /// Optional link to proto reference documentation.  Example:
   /// https://cloud.google.com/pubsub/lite/docs/reference/rpc
-  public var protoReferenceDocumentationUri: Swift.String
+  public var protoReferenceDocumentationUri: Swift.String = Swift.String()
 
   /// Optional link to REST reference documentation.  Example:
   /// https://cloud.google.com/pubsub/lite/docs/reference/rest
-  public var restReferenceDocumentationUri: Swift.String
+  public var restReferenceDocumentationUri: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Publishing`.
-  public init(
-    methodSettings: [MethodSettings] = [],
-    newIssueUri: Swift.String = Swift.String(),
-    documentationUri: Swift.String = Swift.String(),
-    apiShortName: Swift.String = Swift.String(),
-    githubLabel: Swift.String = Swift.String(),
-    codeownerGithubTeams: [Swift.String] = [],
-    docTagPrefix: Swift.String = Swift.String(),
-    organization: ClientLibraryOrganization = ClientLibraryOrganization(),
-    librarySettings: [ClientLibrarySettings] = [],
-    protoReferenceDocumentationUri: Swift.String = Swift.String(),
-    restReferenceDocumentationUri: Swift.String = Swift.String(),
-  ) {
-    self.methodSettings = methodSettings
-    self.newIssueUri = newIssueUri
-    self.documentationUri = documentationUri
-    self.apiShortName = apiShortName
-    self.githubLabel = githubLabel
-    self.codeownerGithubTeams = codeownerGithubTeams
-    self.docTagPrefix = docTagPrefix
-    self.organization = organization
-    self.librarySettings = librarySettings
-    self.protoReferenceDocumentationUri = protoReferenceDocumentationUri
-    self.restReferenceDocumentationUri = restReferenceDocumentationUri
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Publishing().with { $0.methodSettings = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Publishing" }

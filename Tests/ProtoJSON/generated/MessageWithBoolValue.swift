@@ -22,23 +22,28 @@ public struct MessageWithBoolValue: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.BoolValue?
+  public var singular: GoogleCloudWkt.BoolValue? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWkt.BoolValue]
+  public var repeated: [GoogleCloudWkt.BoolValue] = []
 
   /// Test google.protobuf.BoolValue as map values.
-  public var map: [Swift.String: GoogleCloudWkt.BoolValue]
+  public var map: [Swift.String: GoogleCloudWkt.BoolValue] = [:]
 
   /// Initialize a new instance of `MessageWithBoolValue`.
-  public init(
-    singular: GoogleCloudWkt.BoolValue? = nil,
-    repeated: [GoogleCloudWkt.BoolValue] = [],
-    map: [Swift.String: GoogleCloudWkt.BoolValue] = [:],
-  ) {
-    self.singular = singular
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithBoolValue().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

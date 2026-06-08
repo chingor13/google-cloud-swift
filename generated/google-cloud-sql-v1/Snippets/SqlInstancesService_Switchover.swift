@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.switchover(
-      request: SqlInstancesSwitchoverRequest(/* set fields */
-      )
+      request: SqlInstancesSwitchoverRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

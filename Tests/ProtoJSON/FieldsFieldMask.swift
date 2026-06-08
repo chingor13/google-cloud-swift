@@ -23,26 +23,32 @@ import GoogleCloudWkt
       (#"{}"#, MessageWithFieldMask()),
       (
         #"{"singular": "userDisplayName,photo"}"#,
-        MessageWithFieldMask(
-          singular: GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"]))
+        MessageWithFieldMask().with {
+          $0.singular = GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
+        }
       ),
       (
         #"{"optional": "userDisplayName,photo"}"#,
-        MessageWithFieldMask(
-          optional: GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"]))
+        MessageWithFieldMask().with {
+          $0.optional = GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
+        }
       ),
       (#"{"repeated": []}"#, MessageWithFieldMask()),
       (
         #"{"repeated": ["userDisplayName,photo"]}"#,
-        MessageWithFieldMask(repeated: [
-          GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-        ])
+        MessageWithFieldMask().with {
+          $0.repeated = [
+            GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
+          ]
+        }
       ),
       (
         #"{"map":      {"a": "userDisplayName,photo"}}"#,
-        MessageWithFieldMask(map: [
-          "a": GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-        ])
+        MessageWithFieldMask().with {
+          $0.map = [
+            "a": GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
+          ]
+        }
       ),
     ])
   func deserialize(input: String, want: MessageWithFieldMask) throws {

@@ -24,8 +24,8 @@ import GoogleLongrunning
 func sample() async throws {
   let client = try GoogleCloudRunV2.Clients.BuildsClient()
   let response = try await client.submitBuild(
-    request: SubmitBuildRequest(/* set fields */
-    )
+    request: SubmitBuildRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

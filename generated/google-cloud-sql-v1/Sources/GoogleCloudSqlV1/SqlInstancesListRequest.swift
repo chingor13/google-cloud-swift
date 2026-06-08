@@ -31,32 +31,35 @@
     /// 'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each
     /// expression is an AND expression. However, you can include AND and OR
     /// expressions explicitly.
-    public var filter: Swift.String
+    public var filter: Swift.String = Swift.String()
 
     /// The maximum number of instances to return. The service may return fewer
     /// than this value.
     /// If unspecified, at most 500 instances are returned.
     /// The maximum value is 1000; values above 1000 are coerced to 1000.
-    public var maxResults: Swift.UInt32
+    public var maxResults: Swift.UInt32 = Swift.UInt32()
 
     /// A previously-returned page token representing part of the larger set of
     /// results to view.
-    public var pageToken: Swift.String
+    public var pageToken: Swift.String = Swift.String()
 
     /// Project ID of the project for which to list Cloud SQL instances.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlInstancesListRequest`.
-    public init(
-      filter: Swift.String = Swift.String(),
-      maxResults: Swift.UInt32 = Swift.UInt32(),
-      pageToken: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.filter = filter
-      self.maxResults = maxResults
-      self.pageToken = pageToken
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesListRequest().with { $0.filter = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

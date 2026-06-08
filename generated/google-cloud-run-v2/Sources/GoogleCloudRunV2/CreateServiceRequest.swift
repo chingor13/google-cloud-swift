@@ -24,31 +24,34 @@ public struct CreateServiceRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Required. The location and project in which this service should be created.
   /// Format: projects/{project}/locations/{location}, where {project} can be
   /// project id or number. Only lowercase characters, digits, and hyphens.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The Service instance to create.
-  public var service: Service?
+  public var service: Service? = nil
 
   /// Required. The unique identifier for the Service. It must begin with letter,
   /// and cannot end with hyphen; must contain fewer than 50 characters.
   /// The name of the service becomes {parent}/services/{service_id}.
-  public var serviceId: Swift.String
+  public var serviceId: Swift.String = Swift.String()
 
   /// Indicates that the request should be validated and default values
   /// populated, without persisting the request or creating any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateServiceRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    service: Service? = nil,
-    serviceId: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.service = service
-    self.serviceId = serviceId
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateServiceRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

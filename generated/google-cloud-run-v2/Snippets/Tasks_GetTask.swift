@@ -26,10 +26,11 @@ func sample(
   taskId: String
 ) async throws {
   let response = try await client.getTask(
-    request: GetTaskRequest(
-      name:
-        "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)/tasks/\(taskId)",
-    )
+    request: GetTaskRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)/executions/\(executionId)/tasks/\(taskId)"
+      }
   )
   print("Success: \(response)")
 }

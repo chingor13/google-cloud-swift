@@ -23,13 +23,22 @@
     Sendable
   {
     /// Contains details about the export operation.
-    public var exportContext: ExportContext?
+    public var exportContext: ExportContext? = nil
 
     /// Initialize a new instance of `InstancesExportRequest`.
-    public init(
-      exportContext: ExportContext? = nil,
-    ) {
-      self.exportContext = exportContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesExportRequest().with { $0.exportContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

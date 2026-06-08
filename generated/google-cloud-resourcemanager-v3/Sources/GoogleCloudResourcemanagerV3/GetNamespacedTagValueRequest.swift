@@ -30,13 +30,22 @@ public struct GetNamespacedTagValueRequest: Codable, Equatable, GoogleCloudWkt._
   ///   name "foo" under the organization with ID 42
   /// - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
   ///    short name "bar" under the project with ID "r2-d2"
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetNamespacedTagValueRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetNamespacedTagValueRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlOperationsService) async throws {
     try await client.cancel(
-      request: SqlOperationsCancelRequest(/* set fields */
-      )
+      request: SqlOperationsCancelRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success (no response expected)")
   }

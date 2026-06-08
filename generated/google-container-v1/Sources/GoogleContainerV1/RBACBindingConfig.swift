@@ -24,19 +24,26 @@ public struct RBACBindingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
 {
   /// Setting this to true will allow any ClusterRoleBinding and RoleBinding
   /// with subjets system:anonymous or system:unauthenticated.
-  public var enableInsecureBindingSystemUnauthenticated: Swift.Bool?
+  public var enableInsecureBindingSystemUnauthenticated: Swift.Bool? = nil
 
   /// Setting this to true will allow any ClusterRoleBinding and RoleBinding
   /// with subjects system:authenticated.
-  public var enableInsecureBindingSystemAuthenticated: Swift.Bool?
+  public var enableInsecureBindingSystemAuthenticated: Swift.Bool? = nil
 
   /// Initialize a new instance of `RBACBindingConfig`.
-  public init(
-    enableInsecureBindingSystemUnauthenticated: Swift.Bool? = nil,
-    enableInsecureBindingSystemAuthenticated: Swift.Bool? = nil,
-  ) {
-    self.enableInsecureBindingSystemUnauthenticated = enableInsecureBindingSystemUnauthenticated
-    self.enableInsecureBindingSystemAuthenticated = enableInsecureBindingSystemAuthenticated
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RBACBindingConfig().with { $0.enableInsecureBindingSystemUnauthenticated = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -25,9 +25,8 @@ import GoogleLongrunning
 func sample(organizationId: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.OrganizationsClient()
   let response = try await client.getOrganization(
-    request: GetOrganizationRequest(
-      name: "organizations/\(organizationId)",
-    )
+    request: GetOrganizationRequest()
+      .with { $0.name = "organizations/\(organizationId)" }
   )
   print("Success: \(response)")
 }

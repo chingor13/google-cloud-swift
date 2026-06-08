@@ -28,21 +28,28 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable, GoogleCloudWk
   /// Required. The parent resource where this external_account_key will be
   /// created. Format: projects/[project_id]/locations/[location]. At present
   /// only the "global" location is supported.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The external account key to create. This field only exists to
   /// future-proof the API. At present, all fields in ExternalAccountKey are
   /// output only and all values are ignored. For the purpose of the
   /// CreateExternalAccountKeyRequest, set it to a default/empty value.
-  public var externalAccountKey: ExternalAccountKey?
+  public var externalAccountKey: ExternalAccountKey? = nil
 
   /// Initialize a new instance of `CreateExternalAccountKeyRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    externalAccountKey: ExternalAccountKey? = nil,
-  ) {
-    self.parent = parent
-    self.externalAccountKey = externalAccountKey
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateExternalAccountKeyRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

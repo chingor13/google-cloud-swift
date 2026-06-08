@@ -24,24 +24,29 @@ public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWkt._AnyPa
   /// The number of threads per physical core. To disable simultaneous
   /// multithreading (SMT) set this to 1. If unset, the maximum number of threads
   /// supported per core by the underlying processor is assumed.
-  public var threadsPerCore: Swift.Int64?
+  public var threadsPerCore: Swift.Int64? = nil
 
   /// Whether or not to enable nested virtualization (defaults to false).
-  public var enableNestedVirtualization: Swift.Bool?
+  public var enableNestedVirtualization: Swift.Bool? = nil
 
   /// Type of Performance Monitoring Unit (PMU) requested on node pool instances.
   /// If unset, PMU will not be available to the node.
-  public var performanceMonitoringUnit: AdvancedMachineFeatures.PerformanceMonitoringUnit?
+  public var performanceMonitoringUnit: AdvancedMachineFeatures.PerformanceMonitoringUnit? = nil
 
   /// Initialize a new instance of `AdvancedMachineFeatures`.
-  public init(
-    threadsPerCore: Swift.Int64? = nil,
-    enableNestedVirtualization: Swift.Bool? = nil,
-    performanceMonitoringUnit: AdvancedMachineFeatures.PerformanceMonitoringUnit? = nil,
-  ) {
-    self.threadsPerCore = threadsPerCore
-    self.enableNestedVirtualization = enableNestedVirtualization
-    self.performanceMonitoringUnit = performanceMonitoringUnit
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdvancedMachineFeatures().with { $0.threadsPerCore = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Level of PMU access.

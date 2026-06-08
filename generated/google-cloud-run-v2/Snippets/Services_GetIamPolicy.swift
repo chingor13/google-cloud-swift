@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Services) async throws {
   let response = try await client.getIamPolicy(
-    request: GetIamPolicyRequest(/* set fields */
-    )
+    request: GetIamPolicyRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.preCheckMajorVersionUpgrade(
-      request: SqlInstancesPreCheckMajorVersionUpgradeRequest(/* set fields */
-      )
+      request: SqlInstancesPreCheckMajorVersionUpgradeRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

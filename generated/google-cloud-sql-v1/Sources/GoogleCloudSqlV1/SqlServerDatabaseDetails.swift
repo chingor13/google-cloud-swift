@@ -23,18 +23,25 @@
     Sendable
   {
     /// The version of SQL Server with which the database is to be made compatible
-    public var compatibilityLevel: Swift.Int32
+    public var compatibilityLevel: Swift.Int32 = Swift.Int32()
 
     /// The recovery model of a SQL Server database
-    public var recoveryModel: Swift.String
+    public var recoveryModel: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlServerDatabaseDetails`.
-    public init(
-      compatibilityLevel: Swift.Int32 = Swift.Int32(),
-      recoveryModel: Swift.String = Swift.String(),
-    ) {
-      self.compatibilityLevel = compatibilityLevel
-      self.recoveryModel = recoveryModel
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlServerDatabaseDetails().with { $0.compatibilityLevel = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

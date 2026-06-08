@@ -27,9 +27,11 @@ func sample(client: some Tpu, projectId: String, locationId: String, accelerator
   async throws
 {
   let response = try await client.getAcceleratorType(
-    request: GetAcceleratorTypeRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/acceleratorTypes/\(acceleratorTypeId)",
-    )
+    request: GetAcceleratorTypeRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/acceleratorTypes/\(acceleratorTypeId)"
+      }
   )
   print("Success: \(response)")
 }

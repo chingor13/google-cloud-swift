@@ -23,13 +23,13 @@
     Sendable
   {
     /// Whether the instance is assigned a public IP address or not.
-    public var ipv4Enabled: GoogleCloudWkt.BoolValue?
+    public var ipv4Enabled: GoogleCloudWkt.BoolValue? = nil
 
     /// The resource link for the VPC network from which the Cloud SQL instance is
     /// accessible for private IP. For example,
     /// `/projects/myProject/global/networks/default`. This setting can
     /// be updated, but it cannot be removed after it is set.
-    public var privateNetwork: Swift.String
+    public var privateNetwork: Swift.String = Swift.String()
 
     /// Use `ssl_mode` instead.
     ///
@@ -40,12 +40,12 @@
     /// valid client certificates. If you want to enforce SSL/TLS without enforcing
     /// the requirement for valid client certificates, then use the `ssl_mode` flag
     /// instead of the `require_ssl` flag.
-    public var requireSsl: GoogleCloudWkt.BoolValue?
+    public var requireSsl: GoogleCloudWkt.BoolValue? = nil
 
     /// The list of external networks that are allowed to connect to the instance
     /// using the IP. In 'CIDR' notation, also known as 'slash' notation (for
     /// example: `157.197.200.0/24`).
-    public var authorizedNetworks: [AclEntry]
+    public var authorizedNetworks: [AclEntry] = []
 
     /// The name of the allocated ip range for the private ip Cloud SQL instance.
     /// For example: "google-managed-services-default". If set, the instance ip
@@ -53,11 +53,11 @@
     /// [RFC 1035](https://tools.ietf.org/html/rfc1035). Specifically, the name
     /// must be 1-63 characters long and match the regular expression
     /// `[a-z]([-a-z0-9]*[a-z0-9])?.`
-    public var allocatedIpRange: Swift.String
+    public var allocatedIpRange: Swift.String = Swift.String()
 
     /// Controls connectivity to private IP instances from Google services,
     /// such as BigQuery.
-    public var enablePrivatePathForGoogleCloudServices: GoogleCloudWkt.BoolValue?
+    public var enablePrivatePathForGoogleCloudServices: GoogleCloudWkt.BoolValue? = nil
 
     /// Specify how SSL/TLS is enforced in database connections. If you must use
     /// the `require_ssl` flag for backward compatibility, then only the following
@@ -81,21 +81,21 @@
     /// connections, while `require_ssl=false` means accept both non-SSL
     /// and SSL connections. In this case, MySQL and PostgreSQL databases respect
     /// `ssl_mode` and accepts only SSL connections.
-    public var sslMode: IpConfiguration.SslMode
+    public var sslMode: IpConfiguration.SslMode = IpConfiguration.SslMode()
 
     /// PSC settings for this instance.
-    public var pscConfig: PscConfig?
+    public var pscConfig: PscConfig? = nil
 
     /// Specify what type of CA is used for the server certificate.
-    public var serverCaMode: IpConfiguration.CaMode?
+    public var serverCaMode: IpConfiguration.CaMode? = nil
 
     /// Optional. Custom Subject Alternative Name(SAN)s for a Cloud SQL instance.
-    public var customSubjectAlternativeNames: [Swift.String]
+    public var customSubjectAlternativeNames: [Swift.String] = []
 
     /// Optional. The resource name of the server CA pool for an instance with
     /// `CUSTOMER_MANAGED_CAS_CA` as the `server_ca_mode`.
     /// Format: projects/{PROJECT}/locations/{REGION}/caPools/{CA_POOL_ID}
-    public var serverCaPool: Swift.String?
+    public var serverCaPool: Swift.String? = nil
 
     /// Optional. Controls the automatic server certificate rotation feature. This
     /// feature is disabled by default. When enabled, the server certificate will
@@ -103,35 +103,22 @@
     /// self-service maintenance updates up to six months before it expires. This
     /// setting can only be set if server_ca_mode is either GOOGLE_MANAGED_CAS_CA
     /// or CUSTOMER_MANAGED_CAS_CA.
-    public var serverCertificateRotationMode: IpConfiguration.ServerCertificateRotationMode?
+    public var serverCertificateRotationMode: IpConfiguration.ServerCertificateRotationMode? = nil
 
     /// Initialize a new instance of `IpConfiguration`.
-    public init(
-      ipv4Enabled: GoogleCloudWkt.BoolValue? = nil,
-      privateNetwork: Swift.String = Swift.String(),
-      requireSsl: GoogleCloudWkt.BoolValue? = nil,
-      authorizedNetworks: [AclEntry] = [],
-      allocatedIpRange: Swift.String = Swift.String(),
-      enablePrivatePathForGoogleCloudServices: GoogleCloudWkt.BoolValue? = nil,
-      sslMode: IpConfiguration.SslMode = IpConfiguration.SslMode(),
-      pscConfig: PscConfig? = nil,
-      serverCaMode: IpConfiguration.CaMode? = nil,
-      customSubjectAlternativeNames: [Swift.String] = [],
-      serverCaPool: Swift.String? = nil,
-      serverCertificateRotationMode: IpConfiguration.ServerCertificateRotationMode? = nil,
-    ) {
-      self.ipv4Enabled = ipv4Enabled
-      self.privateNetwork = privateNetwork
-      self.requireSsl = requireSsl
-      self.authorizedNetworks = authorizedNetworks
-      self.allocatedIpRange = allocatedIpRange
-      self.enablePrivatePathForGoogleCloudServices = enablePrivatePathForGoogleCloudServices
-      self.sslMode = sslMode
-      self.pscConfig = pscConfig
-      self.serverCaMode = serverCaMode
-      self.customSubjectAlternativeNames = customSubjectAlternativeNames
-      self.serverCaPool = serverCaPool
-      self.serverCertificateRotationMode = serverCertificateRotationMode
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = IpConfiguration().with { $0.ipv4Enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The SSL options for database connections.

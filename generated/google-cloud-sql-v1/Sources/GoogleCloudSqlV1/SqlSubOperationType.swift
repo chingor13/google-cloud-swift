@@ -23,13 +23,22 @@
     Sendable
   {
     /// Sub operation details corresponding to the operation type.
-    public var subOperationDetails: OneOf_SubOperationDetails?
+    public var subOperationDetails: OneOf_SubOperationDetails? = nil
 
     /// Initialize a new instance of `SqlSubOperationType`.
-    public init(
-      subOperationDetails: OneOf_SubOperationDetails? = nil,
-    ) {
-      self.subOperationDetails = subOperationDetails
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlSubOperationType().with { $0.maintenanceType = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

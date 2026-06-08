@@ -24,23 +24,28 @@ public struct ListNodePoolsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Node pools in the cluster.
-  public var nodePools: [NodePool]
+  public var nodePools: [NodePool] = []
 
   /// A token to retrieve next page of results.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListNodePoolsResponse`.
-  public init(
-    nodePools: [NodePool] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.nodePools = nodePools
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListNodePoolsResponse().with { $0.nodePools = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

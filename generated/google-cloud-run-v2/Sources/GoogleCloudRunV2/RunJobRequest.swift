@@ -24,31 +24,34 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Required. The full name of the Job.
   /// Format: projects/{project}/locations/{location}/jobs/{job}, where {project}
   /// can be project id or number.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Indicates that the request should be validated without actually
   /// deleting any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Overrides specification for a given execution of a job. If provided,
   /// overrides will be applied to update the execution or task spec.
-  public var overrides: RunJobRequest.Overrides?
+  public var overrides: RunJobRequest.Overrides? = nil
 
   /// Initialize a new instance of `RunJobRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-    overrides: RunJobRequest.Overrides? = nil,
-  ) {
-    self.name = name
-    self.validateOnly = validateOnly
-    self.etag = etag
-    self.overrides = overrides
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RunJobRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// RunJob Overrides that contains Execution fields to be overridden.
@@ -56,26 +59,31 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Per container override specification.
-    public var containerOverrides: [RunJobRequest.Overrides.ContainerOverride]
+    public var containerOverrides: [RunJobRequest.Overrides.ContainerOverride] = []
 
     /// Optional. The desired number of tasks the execution should run. Will
     /// replace existing task_count value.
-    public var taskCount: Swift.Int32
+    public var taskCount: Swift.Int32 = Swift.Int32()
 
     /// Duration in seconds the task may be active before the system will
     /// actively try to mark it failed and kill associated containers. Will
     /// replace existing timeout_seconds value.
-    public var timeout: GoogleCloudWkt.Duration?
+    public var timeout: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `Overrides`.
-    public init(
-      containerOverrides: [RunJobRequest.Overrides.ContainerOverride] = [],
-      taskCount: Swift.Int32 = Swift.Int32(),
-      timeout: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.containerOverrides = containerOverrides
-      self.taskCount = taskCount
-      self.timeout = timeout
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Overrides().with { $0.containerOverrides = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Per-container override specification.
@@ -83,30 +91,33 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The name of the container specified as a DNS_LABEL.
-      public var name: Swift.String
+      public var name: Swift.String = Swift.String()
 
       /// Optional. Arguments to the entrypoint. Will replace existing args for
       /// override.
-      public var args: [Swift.String]
+      public var args: [Swift.String] = []
 
       /// List of environment variables to set in the container. Will be merged
       /// with existing env for override.
-      public var env: [EnvVar]
+      public var env: [EnvVar] = []
 
       /// Optional. True if the intention is to clear out existing args list.
-      public var clearArgs: Swift.Bool
+      public var clearArgs: Swift.Bool = Swift.Bool()
 
       /// Initialize a new instance of `ContainerOverride`.
-      public init(
-        name: Swift.String = Swift.String(),
-        args: [Swift.String] = [],
-        env: [EnvVar] = [],
-        clearArgs: Swift.Bool = Swift.Bool(),
-      ) {
-        self.name = name
-        self.args = args
-        self.env = env
-        self.clearArgs = clearArgs
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = ContainerOverride().with { $0.name = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

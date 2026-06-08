@@ -23,90 +23,73 @@
     Sendable
   {
     /// This is always `sql#user`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The password for the user.
-    public var password: Swift.String
+    public var password: Swift.String = Swift.String()
 
     /// This field is deprecated and will be removed from a future version of the
     /// API.
-    public var etag: Swift.String
+    public var etag: Swift.String = Swift.String()
 
     /// The name of the user in the Cloud SQL instance. Can be omitted for
     /// `update` because it is already specified in the URL.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Optional. The host from which the user can connect. For `insert`
     /// operations, host defaults to an empty string. For `update`
     /// operations, host is specified as part of the request URL. The host name
     /// cannot be updated after insertion.  For a MySQL instance, it's required;
     /// for a PostgreSQL or SQL Server instance, it's optional.
-    public var host: Swift.String
+    public var host: Swift.String = Swift.String()
 
     /// The name of the Cloud SQL instance. This does not include the project ID.
     /// Can be omitted for `update` because it is already specified on the
     /// URL.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// The project ID of the project containing the Cloud SQL database. The Google
     /// apps domain is prefixed if applicable. Can be omitted for `update` because
     /// it is already specified on the URL.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// The user type. It determines the method to authenticate the user during
     /// login. The default is the database's built-in user type.
-    public var type: User.SqlUserType
+    public var type: User.SqlUserType = User.SqlUserType()
 
     /// Optional. The full email for an IAM user. For normal database users, this
     /// will not be filled. Only applicable to MySQL database users.
-    public var iamEmail: Swift.String
+    public var iamEmail: Swift.String = Swift.String()
 
     /// User level password validation policy.
-    public var passwordPolicy: UserPasswordValidationPolicy?
+    public var passwordPolicy: UserPasswordValidationPolicy? = nil
 
     /// Dual password status for the user.
-    public var dualPasswordType: User.DualPasswordType?
+    public var dualPasswordType: User.DualPasswordType? = nil
 
     /// Indicates if a group is active or inactive for IAM database authentication.
-    public var iamStatus: User.IamStatus?
+    public var iamStatus: User.IamStatus? = nil
 
     /// Optional. Role memberships of the user
-    public var databaseRoles: [Swift.String]
+    public var databaseRoles: [Swift.String] = []
 
     /// User details for specific database type
-    public var userDetails: OneOf_UserDetails?
+    public var userDetails: OneOf_UserDetails? = nil
 
     /// Initialize a new instance of `User`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      password: Swift.String = Swift.String(),
-      etag: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-      host: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      type: User.SqlUserType = User.SqlUserType(),
-      iamEmail: Swift.String = Swift.String(),
-      passwordPolicy: UserPasswordValidationPolicy? = nil,
-      dualPasswordType: User.DualPasswordType? = nil,
-      iamStatus: User.IamStatus? = nil,
-      databaseRoles: [Swift.String] = [],
-      userDetails: OneOf_UserDetails? = nil,
-    ) {
-      self.kind = kind
-      self.password = password
-      self.etag = etag
-      self.name = name
-      self.host = host
-      self.instance = instance
-      self.project = project
-      self.type = type
-      self.iamEmail = iamEmail
-      self.passwordPolicy = passwordPolicy
-      self.dualPasswordType = dualPasswordType
-      self.iamStatus = iamStatus
-      self.databaseRoles = databaseRoles
-      self.userDetails = userDetails
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = User().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

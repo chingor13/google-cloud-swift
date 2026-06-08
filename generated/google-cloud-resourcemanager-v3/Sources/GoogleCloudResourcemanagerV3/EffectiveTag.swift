@@ -26,50 +26,49 @@ public struct EffectiveTag: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Resource name for TagValue in the format `tagValues/456`.
-  public var tagValue: Swift.String
+  public var tagValue: Swift.String = Swift.String()
 
   /// The namespaced name of the TagValue. Can be in the form
   /// `{organization_id}/{tag_key_short_name}/{tag_value_short_name}` or
   /// `{project_id}/{tag_key_short_name}/{tag_value_short_name}` or
   /// `{project_number}/{tag_key_short_name}/{tag_value_short_name}`.
-  public var namespacedTagValue: Swift.String
+  public var namespacedTagValue: Swift.String = Swift.String()
 
   /// The name of the TagKey, in the format `tagKeys/{id}`, such as
   /// `tagKeys/123`.
-  public var tagKey: Swift.String
+  public var tagKey: Swift.String = Swift.String()
 
   /// The namespaced name of the TagKey. Can be in the form
   /// `{organization_id}/{tag_key_short_name}` or
   /// `{project_id}/{tag_key_short_name}` or
   /// `{project_number}/{tag_key_short_name}`.
-  public var namespacedTagKey: Swift.String
+  public var namespacedTagKey: Swift.String = Swift.String()
 
   /// The parent name of the tag key.
   /// Must be in the format `organizations/{organization_id}` or
   /// `projects/{project_number}`
-  public var tagKeyParentName: Swift.String
+  public var tagKeyParentName: Swift.String = Swift.String()
 
   /// Indicates the inheritance status of a tag value
   /// attached to the given resource. If the tag value is inherited from one of
   /// the resource's ancestors, inherited will be true. If false, then the tag
   /// value is directly attached to the resource, inherited will be false.
-  public var inherited: Swift.Bool
+  public var inherited: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `EffectiveTag`.
-  public init(
-    tagValue: Swift.String = Swift.String(),
-    namespacedTagValue: Swift.String = Swift.String(),
-    tagKey: Swift.String = Swift.String(),
-    namespacedTagKey: Swift.String = Swift.String(),
-    tagKeyParentName: Swift.String = Swift.String(),
-    inherited: Swift.Bool = Swift.Bool(),
-  ) {
-    self.tagValue = tagValue
-    self.namespacedTagValue = namespacedTagValue
-    self.tagKey = tagKey
-    self.namespacedTagKey = namespacedTagKey
-    self.tagKeyParentName = tagKeyParentName
-    self.inherited = inherited
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EffectiveTag().with { $0.tagValue = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

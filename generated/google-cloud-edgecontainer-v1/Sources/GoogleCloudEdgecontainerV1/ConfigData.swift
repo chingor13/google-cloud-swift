@@ -22,18 +22,25 @@ public struct ConfigData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// list of available v4 ip pools for external loadbalancer
-  public var availableExternalLbPoolsIpv4: [Swift.String]
+  public var availableExternalLbPoolsIpv4: [Swift.String] = []
 
   /// list of available v6 ip pools for external loadbalancer
-  public var availableExternalLbPoolsIpv6: [Swift.String]
+  public var availableExternalLbPoolsIpv6: [Swift.String] = []
 
   /// Initialize a new instance of `ConfigData`.
-  public init(
-    availableExternalLbPoolsIpv4: [Swift.String] = [],
-    availableExternalLbPoolsIpv6: [Swift.String] = [],
-  ) {
-    self.availableExternalLbPoolsIpv4 = availableExternalLbPoolsIpv4
-    self.availableExternalLbPoolsIpv6 = availableExternalLbPoolsIpv6
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ConfigData().with { $0.availableExternalLbPoolsIpv4 = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

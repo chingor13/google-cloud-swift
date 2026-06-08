@@ -24,21 +24,28 @@
     Sendable
   {
     /// The unit that 'retained_backups' represents.
-    public var retentionUnit: BackupRetentionSettings.RetentionUnit
+    public var retentionUnit: BackupRetentionSettings.RetentionUnit =
+      BackupRetentionSettings.RetentionUnit()
 
     /// Depending on the value of retention_unit, this is used to determine
     /// if a backup needs to be deleted.  If retention_unit is 'COUNT', we will
     /// retain this many backups.
-    public var retainedBackups: GoogleCloudWkt.Int32Value?
+    public var retainedBackups: GoogleCloudWkt.Int32Value? = nil
 
     /// Initialize a new instance of `BackupRetentionSettings`.
-    public init(
-      retentionUnit: BackupRetentionSettings.RetentionUnit =
-        BackupRetentionSettings.RetentionUnit(),
-      retainedBackups: GoogleCloudWkt.Int32Value? = nil,
-    ) {
-      self.retentionUnit = retentionUnit
-      self.retainedBackups = retainedBackups
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BackupRetentionSettings().with { $0.retentionUnit = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The units that retained_backups specifies, we only support COUNT.

@@ -24,27 +24,32 @@ public struct GetServerConfigRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// to return operations for. This field has been deprecated and replaced by
   /// the name field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// The name (project and location) of the server config to get,
   /// specified in the format `projects/*/locations/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetServerConfigRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    name: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetServerConfigRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

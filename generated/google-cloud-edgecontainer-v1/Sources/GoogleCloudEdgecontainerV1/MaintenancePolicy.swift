@@ -22,21 +22,28 @@ public struct MaintenancePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Specifies the maintenance window in which maintenance may be performed.
-  public var window: MaintenanceWindow?
+  public var window: MaintenanceWindow? = nil
 
   /// Optional. Exclusions to automatic maintenance. Non-emergency maintenance
   /// should not occur in these windows. Each exclusion has a unique name and may
   /// be active or expired. The max number of maintenance exclusions allowed at a
   /// given time is 3.
-  public var maintenanceExclusions: [MaintenanceExclusionWindow]
+  public var maintenanceExclusions: [MaintenanceExclusionWindow] = []
 
   /// Initialize a new instance of `MaintenancePolicy`.
-  public init(
-    window: MaintenanceWindow? = nil,
-    maintenanceExclusions: [MaintenanceExclusionWindow] = [],
-  ) {
-    self.window = window
-    self.maintenanceExclusions = maintenanceExclusions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaintenancePolicy().with { $0.window = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

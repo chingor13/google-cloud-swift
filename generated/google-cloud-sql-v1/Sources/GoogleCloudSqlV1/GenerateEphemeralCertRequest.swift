@@ -23,39 +23,38 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// PEM encoded public key to include in the signed certificate.
-    public var publicKey: Swift.String
+    public var publicKey: Swift.String = Swift.String()
 
     /// Optional. Access token to include in the signed certificate.
-    public var accessToken: Swift.String
+    public var accessToken: Swift.String = Swift.String()
 
     /// Optional. Optional snapshot read timestamp to trade freshness for
     /// performance.
-    public var readTime: GoogleCloudWkt.Timestamp?
+    public var readTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Optional. If set, it will contain the cert valid duration.
-    public var validDuration: GoogleCloudWkt.Duration?
+    public var validDuration: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `GenerateEphemeralCertRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      publicKey: Swift.String = Swift.String(),
-      accessToken: Swift.String = Swift.String(),
-      readTime: GoogleCloudWkt.Timestamp? = nil,
-      validDuration: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.publicKey = publicKey
-      self.accessToken = accessToken
-      self.readTime = readTime
-      self.validDuration = validDuration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = GenerateEphemeralCertRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

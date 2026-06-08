@@ -24,18 +24,25 @@
   {
     /// The current settings version of this instance. Request will be rejected if
     /// this version doesn't match the current settings version.
-    public var settingsVersion: Swift.Int64
+    public var settingsVersion: Swift.Int64 = Swift.Int64()
 
     /// This is always `sql#failoverContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `FailoverContext`.
-    public init(
-      settingsVersion: Swift.Int64 = Swift.Int64(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.settingsVersion = settingsVersion
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FailoverContext().with { $0.settingsVersion = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

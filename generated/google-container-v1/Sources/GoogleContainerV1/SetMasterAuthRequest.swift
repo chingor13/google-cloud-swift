@@ -24,43 +24,42 @@ public struct SetMasterAuthRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the name field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Deprecated. The name of the cluster to upgrade.
   /// This field has been deprecated and replaced by the name field.
-  public var clusterId: Swift.String
+  public var clusterId: Swift.String = Swift.String()
 
   /// Required. The exact form of action to be taken on the master auth.
-  public var action: SetMasterAuthRequest.Action
+  public var action: SetMasterAuthRequest.Action = SetMasterAuthRequest.Action()
 
   /// Required. A description of the update.
-  public var update: MasterAuth?
+  public var update: MasterAuth? = nil
 
   /// The name (project, location, cluster) of the cluster to set auth.
   /// Specified in the format `projects/*/locations/*/clusters/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SetMasterAuthRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    clusterId: Swift.String = Swift.String(),
-    action: SetMasterAuthRequest.Action = SetMasterAuthRequest.Action(),
-    update: MasterAuth? = nil,
-    name: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.clusterId = clusterId
-    self.action = action
-    self.update = update
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SetMasterAuthRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Operation type: what type update to perform.

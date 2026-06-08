@@ -23,11 +23,11 @@ public struct TagValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Immutable. Resource name for TagValue in the format `tagValues/456`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Immutable. The resource name of the new TagValue's parent TagKey.
   /// Must be of the form `tagKeys/{tag_key_id}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. Immutable. User-assigned short name for TagValue. The short name
   /// should be unique for TagValues within the same parent TagKey.
@@ -35,50 +35,45 @@ public struct TagValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The short name must be 63 characters or less, beginning and ending with
   /// an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_),
   /// dots (.), and alphanumerics between.
-  public var shortName: Swift.String
+  public var shortName: Swift.String = Swift.String()
 
   /// Output only. The namespaced name of the TagValue. Can be in the form
   /// `{organization_id}/{tag_key_short_name}/{tag_value_short_name}` or
   /// `{project_id}/{tag_key_short_name}/{tag_value_short_name}` or
   /// `{project_number}/{tag_key_short_name}/{tag_value_short_name}`.
-  public var namespacedName: Swift.String
+  public var namespacedName: Swift.String = Swift.String()
 
   /// Optional. User-assigned description of the TagValue.
   /// Must not exceed 256 characters.
   ///
   /// Read-write.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. Creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Update time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Optional. Entity tag which users can pass to prevent race conditions. This
   /// field is always set in server responses. See UpdateTagValueRequest for
   /// details.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TagValue`.
-  public init(
-    name: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-    shortName: Swift.String = Swift.String(),
-    namespacedName: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.parent = parent
-    self.shortName = shortName
-    self.namespacedName = namespacedName
-    self.description = description
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TagValue().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

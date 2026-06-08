@@ -22,19 +22,26 @@ public struct TimeWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The time that the window first starts.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The time that the window ends. The end time must take place after the
   /// start time.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `TimeWindow`.
-  public init(
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.startTime = startTime
-    self.endTime = endTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TimeWindow().with { $0.startTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

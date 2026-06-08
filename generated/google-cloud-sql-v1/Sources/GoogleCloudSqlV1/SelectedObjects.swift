@@ -24,13 +24,22 @@
     Sendable
   {
     /// Required. The name of the database to migrate.
-    public var database: Swift.String
+    public var database: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SelectedObjects`.
-    public init(
-      database: Swift.String = Swift.String(),
-    ) {
-      self.database = database
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SelectedObjects().with { $0.database = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

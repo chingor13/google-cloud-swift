@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   try await client.completeNodePoolUpgrade(
-    request: CompleteNodePoolUpgradeRequest(/* set fields */
-    )
+    request: CompleteNodePoolUpgradeRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success (no response expected)")
 }

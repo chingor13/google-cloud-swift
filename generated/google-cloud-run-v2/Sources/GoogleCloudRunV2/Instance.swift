@@ -29,51 +29,51 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Format:
   /// projects/{project}/locations/{location}/instances/{instance_id}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// User-provided description of the Instance. This field currently has a
   /// 512-character limit.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the trigger. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
   /// Please note that unlike v1, this is an int64 value. As with most Google
   /// APIs, its JSON representation will be a `string` instead of an `integer`.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The deletion time.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. Email address of the last authenticated modifier.
-  public var lastModifier: Swift.String
+  public var lastModifier: Swift.String = Swift.String()
 
   /// Arbitrary identifier for the API client.
-  public var client: Swift.String
+  public var client: Swift.String = Swift.String()
 
   /// Arbitrary version identifier for the API client.
-  public var clientVersion: Swift.String
+  public var clientVersion: Swift.String = Swift.String()
 
   /// The launch stage as defined by [Google Cloud Platform
   ///  Launch Stages](https://cloud.google.com/terms/launch-stages).
@@ -85,87 +85,88 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// <p>
   ///  For example, if ALPHA is provided as input, but only BETA and GA-level
   ///  features are used, this field will be BETA on output.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Settings for the Binary Authorization feature.
-  public var binaryAuthorization: BinaryAuthorization?
+  public var binaryAuthorization: BinaryAuthorization? = nil
 
   /// Optional. VPC Access configuration to use for this Revision. For more
   /// information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Required. Holds the single container that defines the unit of execution for
   /// this Instance.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// A reference to a customer managed encryption key (CMEK) to use to encrypt
   /// this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// The action to take if the encryption key is revoked.
-  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction
+  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction =
+    EncryptionKeyRevocationAction()
 
   /// If encryption_key_revocation_action is SHUTDOWN, the duration before
   /// shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration?
+  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil
 
   /// Optional. The node selector for the instance.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. True if GPU zonal redundancy is disabled on this instance.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
   /// Optional. Provides the ingress settings for this Instance. On output,
   /// returns the currently observed ingress settings, or
   /// INGRESS_TRAFFIC_UNSPECIFIED if no revision is active.
-  public var ingress: IngressTraffic
+  public var ingress: IngressTraffic = IngressTraffic()
 
   /// Optional. Disables IAM permission check for run.routes.invoke for callers
   /// of this Instance. For more information, visit
   /// https://cloud.google.com/run/docs/securing/managing-access#invoker_check.
-  public var invokerIamDisabled: Swift.Bool
+  public var invokerIamDisabled: Swift.Bool = Swift.Bool()
 
   /// Optional. IAP settings on the Instance.
-  public var iapEnabled: Swift.Bool
+  public var iapEnabled: Swift.Bool = Swift.Bool()
 
   /// Output only. The generation of this Instance currently serving traffic. See
   /// comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run. Please note that unlike v1, this is an int64 value.
   /// As with most Google APIs, its JSON representation will be a `string`
   /// instead of an `integer`.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The Google Console URI to obtain logs for the Instance.
-  public var logUri: Swift.String
+  public var logUri: Swift.String = Swift.String()
 
   /// Output only. The Condition of this Instance, containing its readiness
   /// status, and detailed error information in case it did not reach a serving
   /// state. See comments in `reconciling` for additional information on
   /// reconciliation process in Cloud Run.
-  public var terminalCondition: Condition?
+  public var terminalCondition: Condition? = nil
 
   /// Output only. The Conditions of all other associated sub-resources. They
   /// contain additional diagnostics information in case the Instance does not
   /// reach its Serving state. See comments in `reconciling` for additional
   /// information on reconciliation process in Cloud Run.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. Status information for each of the specified containers. The
   /// status includes the resolved digest for specified images.
-  public var containerStatuses: [ContainerStatus]
+  public var containerStatuses: [ContainerStatus] = []
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. All URLs serving traffic for this Instance.
-  public var urls: [Swift.String]
+  public var urls: [Swift.String] = []
 
   /// Output only. Returns true if the Instance is currently being acted upon by
   /// the system to bring it into the desired state.
@@ -179,89 +180,26 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// possible outcomes: reconciliation succeeded and the serving state matches
   /// the Instance, or there was an error, and reconciliation failed. This state
   /// can be found in `terminal_condition.state`.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Optional. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Instance`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    creator: Swift.String = Swift.String(),
-    lastModifier: Swift.String = Swift.String(),
-    client: Swift.String = Swift.String(),
-    clientVersion: Swift.String = Swift.String(),
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    binaryAuthorization: BinaryAuthorization? = nil,
-    vpcAccess: VpcAccess? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    encryptionKey: Swift.String = Swift.String(),
-    encryptionKeyRevocationAction: EncryptionKeyRevocationAction = EncryptionKeyRevocationAction(),
-    encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil,
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-    ingress: IngressTraffic = IngressTraffic(),
-    invokerIamDisabled: Swift.Bool = Swift.Bool(),
-    iapEnabled: Swift.Bool = Swift.Bool(),
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    logUri: Swift.String = Swift.String(),
-    terminalCondition: Condition? = nil,
-    conditions: [Condition] = [],
-    containerStatuses: [ContainerStatus] = [],
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    urls: [Swift.String] = [],
-    reconciling: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.description = description
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.creator = creator
-    self.lastModifier = lastModifier
-    self.client = client
-    self.clientVersion = clientVersion
-    self.launchStage = launchStage
-    self.binaryAuthorization = binaryAuthorization
-    self.vpcAccess = vpcAccess
-    self.serviceAccount = serviceAccount
-    self.containers = containers
-    self.volumes = volumes
-    self.encryptionKey = encryptionKey
-    self.encryptionKeyRevocationAction = encryptionKeyRevocationAction
-    self.encryptionKeyShutdownDuration = encryptionKeyShutdownDuration
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
-    self.ingress = ingress
-    self.invokerIamDisabled = invokerIamDisabled
-    self.iapEnabled = iapEnabled
-    self.observedGeneration = observedGeneration
-    self.logUri = logUri
-    self.terminalCondition = terminalCondition
-    self.conditions = conditions
-    self.containerStatuses = containerStatuses
-    self.satisfiesPzs = satisfiesPzs
-    self.urls = urls
-    self.reconciling = reconciling
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Instance().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

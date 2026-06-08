@@ -22,24 +22,29 @@ public struct MessageWithBytesValue: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.BytesValue?
+  public var singular: GoogleCloudWkt.BytesValue? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWkt.BytesValue]
+  public var repeated: [GoogleCloudWkt.BytesValue] = []
 
   /// A map field, google.protobuf.BytesValue cannot be keys, so we only need to
   /// test them as values.
-  public var map: [Swift.String: GoogleCloudWkt.BytesValue]
+  public var map: [Swift.String: GoogleCloudWkt.BytesValue] = [:]
 
   /// Initialize a new instance of `MessageWithBytesValue`.
-  public init(
-    singular: GoogleCloudWkt.BytesValue? = nil,
-    repeated: [GoogleCloudWkt.BytesValue] = [],
-    map: [Swift.String: GoogleCloudWkt.BytesValue] = [:],
-  ) {
-    self.singular = singular
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithBytesValue().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -24,17 +24,17 @@ public struct UpdateMasterRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the name field.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Deprecated. The name of the cluster to upgrade.
   /// This field has been deprecated and replaced by the name field.
-  public var clusterId: Swift.String
+  public var clusterId: Swift.String = Swift.String()
 
   /// Required. The Kubernetes version to change the master to.
   ///
@@ -46,25 +46,26 @@ public struct UpdateMasterRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
   /// - "1.X.Y-gke.N": picks an explicit Kubernetes version
   /// - "-": picks the default Kubernetes version
-  public var masterVersion: Swift.String
+  public var masterVersion: Swift.String = Swift.String()
 
   /// The name (project, location, cluster) of the cluster to update.
   /// Specified in the format `projects/*/locations/*/clusters/*`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UpdateMasterRequest`.
-  public init(
-    projectId: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    clusterId: Swift.String = Swift.String(),
-    masterVersion: Swift.String = Swift.String(),
-    name: Swift.String = Swift.String(),
-  ) {
-    self.projectId = projectId
-    self.zone = zone
-    self.clusterId = clusterId
-    self.masterVersion = masterVersion
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateMasterRequest().with { $0.projectId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

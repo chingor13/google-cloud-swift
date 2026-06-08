@@ -23,25 +23,30 @@
     Sendable
   {
     /// Cloud SQL read replica instance name.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// ID of the project that contains the replica.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Optional. (MySQL and PostgreSQL only) Cloud SQL instance operations
     /// timeout, which is a sum of all database operations. Default value is 10
     /// minutes and can be modified to a maximum value of 24 hours.
-    public var dbTimeout: GoogleCloudWkt.Duration?
+    public var dbTimeout: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `SqlInstancesSwitchoverRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      dbTimeout: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.dbTimeout = dbTimeout
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesSwitchoverRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

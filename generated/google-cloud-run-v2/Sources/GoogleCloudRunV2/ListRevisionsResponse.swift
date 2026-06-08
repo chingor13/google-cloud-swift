@@ -24,19 +24,26 @@ public struct ListRevisionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The resulting list of Revisions.
-  public var revisions: [Revision]
+  public var revisions: [Revision] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListRevisions request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListRevisionsResponse`.
-  public init(
-    revisions: [Revision] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.revisions = revisions
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListRevisionsResponse().with { $0.revisions = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

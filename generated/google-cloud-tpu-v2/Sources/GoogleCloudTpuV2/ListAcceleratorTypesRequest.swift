@@ -25,33 +25,34 @@ public struct ListAcceleratorTypesRequest: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Required. The parent resource name.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The maximum number of items to return.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The next_page_token value returned from a previous List request, if any.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// List filter.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Sort results.
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListAcceleratorTypesRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.filter = filter
-    self.orderBy = orderBy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListAcceleratorTypesRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

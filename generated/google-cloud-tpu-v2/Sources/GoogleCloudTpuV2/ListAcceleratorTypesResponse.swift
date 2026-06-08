@@ -27,23 +27,28 @@ public struct ListAcceleratorTypesResponse: Codable, Equatable, GoogleCloudWkt._
   Sendable
 {
   /// The listed nodes.
-  public var acceleratorTypes: [AcceleratorType]
+  public var acceleratorTypes: [AcceleratorType] = []
 
   /// The next page token or empty if none.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListAcceleratorTypesResponse`.
-  public init(
-    acceleratorTypes: [AcceleratorType] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.acceleratorTypes = acceleratorTypes
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListAcceleratorTypesResponse().with { $0.acceleratorTypes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

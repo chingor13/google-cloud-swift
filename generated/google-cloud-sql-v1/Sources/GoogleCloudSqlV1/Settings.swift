@@ -26,22 +26,22 @@
     /// method to make sure concurrent updates are handled properly. During update,
     /// use the most recent settingsVersion value for this instance and do not try
     /// to update this value.
-    public var settingsVersion: GoogleCloudWkt.Int64Value?
+    public var settingsVersion: GoogleCloudWkt.Int64Value? = nil
 
     /// The App Engine app IDs that can access this instance.
     /// (Deprecated) Applied to First Generation instances only.
-    public var authorizedGaeApplications: [Swift.String]
+    public var authorizedGaeApplications: [Swift.String] = []
 
     /// The tier (or machine type) for this instance, for example
     /// `db-custom-1-3840`. WARNING: Changing this restarts the instance.
-    public var tier: Swift.String
+    public var tier: Swift.String = Swift.String()
 
     /// This is always `sql#settings`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// User-provided labels, represented as a dictionary where each label is a
     /// single key value pair.
-    public var userLabels: [Swift.String: Swift.String]
+    public var userLabels: [Swift.String: Swift.String] = [:]
 
     /// Availability type. Potential values:
     /// *  `ZONAL`: The instance serves data from only one zone. Outages in that
@@ -51,20 +51,20 @@
     ///
     /// For more information, see [Overview of the High Availability
     /// Configuration](https://cloud.google.com/sql/docs/mysql/high-availability).
-    public var availabilityType: SqlAvailabilityType
+    public var availabilityType: SqlAvailabilityType = SqlAvailabilityType()
 
     /// The pricing plan for this instance. This can be either `PER_USE` or
     /// `PACKAGE`. Only `PER_USE` is supported for Second Generation instances.
-    public var pricingPlan: SqlPricingPlan
+    public var pricingPlan: SqlPricingPlan = SqlPricingPlan()
 
     /// The type of replication this instance uses. This can be either
     /// `ASYNCHRONOUS` or `SYNCHRONOUS`. (Deprecated) This property was only
     /// applicable to First Generation instances.
-    public var replicationType: SqlReplicationType
+    public var replicationType: SqlReplicationType = SqlReplicationType()
 
     /// The maximum size to which storage capacity can be automatically increased.
     /// The default value is 0, which specifies that there is no limit.
-    public var storageAutoResizeLimit: GoogleCloudWkt.Int64Value?
+    public var storageAutoResizeLimit: GoogleCloudWkt.Int64Value? = nil
 
     /// The activation policy specifies when the instance is activated; it is
     /// applicable only when the instance state is RUNNABLE. Valid values:
@@ -72,70 +72,70 @@
     /// connection requests.
     /// *  `NEVER`: The instance is off; it is not activated, even if a
     /// connection request arrives.
-    public var activationPolicy: Settings.SqlActivationPolicy
+    public var activationPolicy: Settings.SqlActivationPolicy = Settings.SqlActivationPolicy()
 
     /// The settings for IP Management. This allows to enable or disable the
     /// instance IP and manage which external networks can connect to the instance.
     /// The IPv4 address cannot be disabled for Second Generation instances.
-    public var ipConfiguration: IpConfiguration?
+    public var ipConfiguration: IpConfiguration? = nil
 
     /// Configuration to increase storage size automatically. The default value is
     /// true.
-    public var storageAutoResize: GoogleCloudWkt.BoolValue?
+    public var storageAutoResize: GoogleCloudWkt.BoolValue? = nil
 
     /// The location preference settings. This allows the instance to be located as
     /// near as possible to either an App Engine app or Compute Engine zone for
     /// better performance. App Engine co-location was only applicable to First
     /// Generation instances.
-    public var locationPreference: LocationPreference?
+    public var locationPreference: LocationPreference? = nil
 
     /// The database flags passed to the instance at startup.
-    public var databaseFlags: [DatabaseFlags]
+    public var databaseFlags: [DatabaseFlags] = []
 
     /// The type of data disk: `PD_SSD` (default) or `PD_HDD`. Not used for
     /// First Generation instances.
-    public var dataDiskType: SqlDataDiskType
+    public var dataDiskType: SqlDataDiskType = SqlDataDiskType()
 
     /// The maintenance window for this instance. This specifies when the instance
     /// can be restarted for maintenance purposes.
-    public var maintenanceWindow: MaintenanceWindow?
+    public var maintenanceWindow: MaintenanceWindow? = nil
 
     /// The daily backup configuration for the instance.
-    public var backupConfiguration: BackupConfiguration?
+    public var backupConfiguration: BackupConfiguration? = nil
 
     /// Configuration specific to read replica instances. Indicates whether
     /// replication is enabled or not. WARNING: Changing this restarts the
     /// instance.
-    public var databaseReplicationEnabled: GoogleCloudWkt.BoolValue?
+    public var databaseReplicationEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Configuration specific to read replica instances. Indicates whether
     /// database flags for crash-safe replication are enabled. This property was
     /// only applicable to First Generation instances.
-    public var crashSafeReplicationEnabled: GoogleCloudWkt.BoolValue?
+    public var crashSafeReplicationEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// The size of data disk, in GB. The data disk size minimum is 10GB.
-    public var dataDiskSizeGb: GoogleCloudWkt.Int64Value?
+    public var dataDiskSizeGb: GoogleCloudWkt.Int64Value? = nil
 
     /// Active Directory configuration, relevant only for Cloud SQL for SQL Server.
-    public var activeDirectoryConfig: SqlActiveDirectoryConfig?
+    public var activeDirectoryConfig: SqlActiveDirectoryConfig? = nil
 
     /// The name of server Instance collation.
-    public var collation: Swift.String
+    public var collation: Swift.String = Swift.String()
 
     /// Deny maintenance periods
-    public var denyMaintenancePeriods: [DenyMaintenancePeriod]
+    public var denyMaintenancePeriods: [DenyMaintenancePeriod] = []
 
     /// Insights configuration, for now relevant only for Postgres.
-    public var insightsConfig: InsightsConfig?
+    public var insightsConfig: InsightsConfig? = nil
 
     /// The local user password validation policy of the instance.
-    public var passwordValidationPolicy: PasswordValidationPolicy?
+    public var passwordValidationPolicy: PasswordValidationPolicy? = nil
 
     /// SQL Server specific audit configuration.
-    public var sqlServerAuditConfig: SqlServerAuditConfig?
+    public var sqlServerAuditConfig: SqlServerAuditConfig? = nil
 
     /// Optional. The edition of the instance.
-    public var edition: Settings.Edition
+    public var edition: Settings.Edition = Settings.Edition()
 
     /// Specifies if connections must use Cloud SQL connectors.
     /// Option values include the following: `NOT_REQUIRED` (Cloud SQL instances
@@ -147,174 +147,93 @@
     /// this field is not specified when creating a new instance, NOT_REQUIRED is
     /// used. If this field is not specified when patching or updating an existing
     /// instance, it is left unchanged in the instance.
-    public var connectorEnforcement: Settings.ConnectorEnforcement
+    public var connectorEnforcement: Settings.ConnectorEnforcement = Settings.ConnectorEnforcement()
 
     /// Configuration to protect against accidental instance deletion.
-    public var deletionProtectionEnabled: GoogleCloudWkt.BoolValue?
+    public var deletionProtectionEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Server timezone, relevant only for Cloud SQL for SQL Server.
-    public var timeZone: Swift.String
+    public var timeZone: Swift.String = Swift.String()
 
     /// Specifies advanced machine configuration for the instances relevant only
     /// for SQL Server.
-    public var advancedMachineFeatures: AdvancedMachineFeatures?
+    public var advancedMachineFeatures: AdvancedMachineFeatures? = nil
 
     /// Configuration for data cache.
-    public var dataCacheConfig: DataCacheConfig?
+    public var dataCacheConfig: DataCacheConfig? = nil
 
     /// Optional. Configuration value for recreation of replica after certain
     /// replication lag
-    public var replicationLagMaxSeconds: GoogleCloudWkt.Int32Value?
+    public var replicationLagMaxSeconds: GoogleCloudWkt.Int32Value? = nil
 
     /// Optional. When this parameter is set to true, Cloud SQL instances can
     /// connect to Vertex AI to pass requests for real-time predictions and
     /// insights to the AI. The default value is false. This applies only to Cloud
     /// SQL for MySQL and Cloud SQL for PostgreSQL instances.
-    public var enableGoogleMlIntegration: GoogleCloudWkt.BoolValue?
+    public var enableGoogleMlIntegration: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. By default, Cloud SQL instances have schema extraction disabled
     /// for Dataplex. When this parameter is set to true, schema extraction for
     /// Dataplex on Cloud SQL instances is activated.
-    public var enableDataplexIntegration: GoogleCloudWkt.BoolValue?
+    public var enableDataplexIntegration: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. When this parameter is set to true, Cloud SQL retains backups of
     /// the instance even after the instance is deleted. The ON_DEMAND backup will
     /// be retained until customer deletes the backup or the project. The AUTOMATED
     /// backup will be retained based on the backups retention setting.
-    public var retainBackupsOnDelete: GoogleCloudWkt.BoolValue?
+    public var retainBackupsOnDelete: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. Provisioned number of I/O operations per second for the data
     /// disk. This field is only used for hyperdisk-balanced disk types.
-    public var dataDiskProvisionedIops: Swift.Int64?
+    public var dataDiskProvisionedIops: Swift.Int64? = nil
 
     /// Optional. Provisioned throughput measured in MiB per second for the data
     /// disk. This field is only used for hyperdisk-balanced disk types.
-    public var dataDiskProvisionedThroughput: Swift.Int64?
+    public var dataDiskProvisionedThroughput: Swift.Int64? = nil
 
     /// Optional. The managed connection pooling configuration for the instance.
-    public var connectionPoolConfig: ConnectionPoolConfig?
+    public var connectionPoolConfig: ConnectionPoolConfig? = nil
 
     /// Optional. The final backup configuration for the instance.
-    public var finalBackupConfig: FinalBackupConfig?
+    public var finalBackupConfig: FinalBackupConfig? = nil
 
     /// Optional. The read pool auto-scale configuration for the instance.
-    public var readPoolAutoScaleConfig: ReadPoolAutoScaleConfig?
+    public var readPoolAutoScaleConfig: ReadPoolAutoScaleConfig? = nil
 
     /// Optional. Whether the replica is in accelerated mode. This feature is in
     /// private preview and requires allowlisting to take effect.
-    public var acceleratedReplicaMode: GoogleCloudWkt.BoolValue?
+    public var acceleratedReplicaMode: GoogleCloudWkt.BoolValue? = nil
 
     /// Optional. Cloud SQL for MySQL auto-upgrade configuration. When this
     /// parameter is set to true, auto-upgrade is enabled for MySQL 8.0 minor
     /// versions. The MySQL version must be 8.0.35 or higher.
-    public var autoUpgradeEnabled: Swift.Bool?
+    public var autoUpgradeEnabled: Swift.Bool? = nil
 
     /// Optional. The Microsoft Entra ID configuration for the SQL Server instance.
-    public var entraidConfig: SqlServerEntraIdConfig?
+    public var entraidConfig: SqlServerEntraIdConfig? = nil
 
     /// This parameter controls whether to allow using ExecuteSql API to connect to
     /// the instance. Not allowed by default.
-    public var dataApiAccess: Settings.DataApiAccess?
+    public var dataApiAccess: Settings.DataApiAccess? = nil
 
     /// Optional. Configuration for Performance Capture, provides diagnostic
     /// metrics during high load situations.
-    public var performanceCaptureConfig: PerformanceCaptureConfig?
+    public var performanceCaptureConfig: PerformanceCaptureConfig? = nil
 
     /// Initialize a new instance of `Settings`.
-    public init(
-      settingsVersion: GoogleCloudWkt.Int64Value? = nil,
-      authorizedGaeApplications: [Swift.String] = [],
-      tier: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-      userLabels: [Swift.String: Swift.String] = [:],
-      availabilityType: SqlAvailabilityType = SqlAvailabilityType(),
-      pricingPlan: SqlPricingPlan = SqlPricingPlan(),
-      replicationType: SqlReplicationType = SqlReplicationType(),
-      storageAutoResizeLimit: GoogleCloudWkt.Int64Value? = nil,
-      activationPolicy: Settings.SqlActivationPolicy = Settings.SqlActivationPolicy(),
-      ipConfiguration: IpConfiguration? = nil,
-      storageAutoResize: GoogleCloudWkt.BoolValue? = nil,
-      locationPreference: LocationPreference? = nil,
-      databaseFlags: [DatabaseFlags] = [],
-      dataDiskType: SqlDataDiskType = SqlDataDiskType(),
-      maintenanceWindow: MaintenanceWindow? = nil,
-      backupConfiguration: BackupConfiguration? = nil,
-      databaseReplicationEnabled: GoogleCloudWkt.BoolValue? = nil,
-      crashSafeReplicationEnabled: GoogleCloudWkt.BoolValue? = nil,
-      dataDiskSizeGb: GoogleCloudWkt.Int64Value? = nil,
-      activeDirectoryConfig: SqlActiveDirectoryConfig? = nil,
-      collation: Swift.String = Swift.String(),
-      denyMaintenancePeriods: [DenyMaintenancePeriod] = [],
-      insightsConfig: InsightsConfig? = nil,
-      passwordValidationPolicy: PasswordValidationPolicy? = nil,
-      sqlServerAuditConfig: SqlServerAuditConfig? = nil,
-      edition: Settings.Edition = Settings.Edition(),
-      connectorEnforcement: Settings.ConnectorEnforcement = Settings.ConnectorEnforcement(),
-      deletionProtectionEnabled: GoogleCloudWkt.BoolValue? = nil,
-      timeZone: Swift.String = Swift.String(),
-      advancedMachineFeatures: AdvancedMachineFeatures? = nil,
-      dataCacheConfig: DataCacheConfig? = nil,
-      replicationLagMaxSeconds: GoogleCloudWkt.Int32Value? = nil,
-      enableGoogleMlIntegration: GoogleCloudWkt.BoolValue? = nil,
-      enableDataplexIntegration: GoogleCloudWkt.BoolValue? = nil,
-      retainBackupsOnDelete: GoogleCloudWkt.BoolValue? = nil,
-      dataDiskProvisionedIops: Swift.Int64? = nil,
-      dataDiskProvisionedThroughput: Swift.Int64? = nil,
-      connectionPoolConfig: ConnectionPoolConfig? = nil,
-      finalBackupConfig: FinalBackupConfig? = nil,
-      readPoolAutoScaleConfig: ReadPoolAutoScaleConfig? = nil,
-      acceleratedReplicaMode: GoogleCloudWkt.BoolValue? = nil,
-      autoUpgradeEnabled: Swift.Bool? = nil,
-      entraidConfig: SqlServerEntraIdConfig? = nil,
-      dataApiAccess: Settings.DataApiAccess? = nil,
-      performanceCaptureConfig: PerformanceCaptureConfig? = nil,
-    ) {
-      self.settingsVersion = settingsVersion
-      self.authorizedGaeApplications = authorizedGaeApplications
-      self.tier = tier
-      self.kind = kind
-      self.userLabels = userLabels
-      self.availabilityType = availabilityType
-      self.pricingPlan = pricingPlan
-      self.replicationType = replicationType
-      self.storageAutoResizeLimit = storageAutoResizeLimit
-      self.activationPolicy = activationPolicy
-      self.ipConfiguration = ipConfiguration
-      self.storageAutoResize = storageAutoResize
-      self.locationPreference = locationPreference
-      self.databaseFlags = databaseFlags
-      self.dataDiskType = dataDiskType
-      self.maintenanceWindow = maintenanceWindow
-      self.backupConfiguration = backupConfiguration
-      self.databaseReplicationEnabled = databaseReplicationEnabled
-      self.crashSafeReplicationEnabled = crashSafeReplicationEnabled
-      self.dataDiskSizeGb = dataDiskSizeGb
-      self.activeDirectoryConfig = activeDirectoryConfig
-      self.collation = collation
-      self.denyMaintenancePeriods = denyMaintenancePeriods
-      self.insightsConfig = insightsConfig
-      self.passwordValidationPolicy = passwordValidationPolicy
-      self.sqlServerAuditConfig = sqlServerAuditConfig
-      self.edition = edition
-      self.connectorEnforcement = connectorEnforcement
-      self.deletionProtectionEnabled = deletionProtectionEnabled
-      self.timeZone = timeZone
-      self.advancedMachineFeatures = advancedMachineFeatures
-      self.dataCacheConfig = dataCacheConfig
-      self.replicationLagMaxSeconds = replicationLagMaxSeconds
-      self.enableGoogleMlIntegration = enableGoogleMlIntegration
-      self.enableDataplexIntegration = enableDataplexIntegration
-      self.retainBackupsOnDelete = retainBackupsOnDelete
-      self.dataDiskProvisionedIops = dataDiskProvisionedIops
-      self.dataDiskProvisionedThroughput = dataDiskProvisionedThroughput
-      self.connectionPoolConfig = connectionPoolConfig
-      self.finalBackupConfig = finalBackupConfig
-      self.readPoolAutoScaleConfig = readPoolAutoScaleConfig
-      self.acceleratedReplicaMode = acceleratedReplicaMode
-      self.autoUpgradeEnabled = autoUpgradeEnabled
-      self.entraidConfig = entraidConfig
-      self.dataApiAccess = dataApiAccess
-      self.performanceCaptureConfig = performanceCaptureConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Settings().with { $0.settingsVersion = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Specifies when the instance is activated.

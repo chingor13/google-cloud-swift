@@ -24,19 +24,26 @@ public struct ListTagKeysResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// List of TagKeys that live under the specified parent in the request.
-  public var tagKeys: [TagKey]
+  public var tagKeys: [TagKey] = []
 
   /// A pagination token returned from a previous call to `ListTagKeys`
   /// that indicates from where listing should continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagKeysResponse`.
-  public init(
-    tagKeys: [TagKey] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.tagKeys = tagKeys
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagKeysResponse().with { $0.tagKeys = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

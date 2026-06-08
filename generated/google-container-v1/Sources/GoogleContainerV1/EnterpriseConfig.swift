@@ -25,18 +25,25 @@ public struct EnterpriseConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. cluster_tier indicates the effective tier of the cluster.
-  public var clusterTier: EnterpriseConfig.ClusterTier
+  public var clusterTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier()
 
   /// desired_tier specifies the desired tier of the cluster.
-  public var desiredTier: EnterpriseConfig.ClusterTier
+  public var desiredTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier()
 
   /// Initialize a new instance of `EnterpriseConfig`.
-  public init(
-    clusterTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier(),
-    desiredTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier(),
-  ) {
-    self.clusterTier = clusterTier
-    self.desiredTier = desiredTier
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EnterpriseConfig().with { $0.clusterTier = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Premium tiers for GKE Cluster.

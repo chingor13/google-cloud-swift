@@ -24,35 +24,38 @@ public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The action that was performed on an audit configuration in a policy.
   /// Required
-  public var action: AuditConfigDelta.Action
+  public var action: AuditConfigDelta.Action = AuditConfigDelta.Action()
 
   /// Specifies a service that was configured for Cloud Audit Logging.
   /// For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
   /// `allServices` is a special value that covers all services.
   /// Required
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// A single identity that is exempted from "data access" audit
   /// logging for the `service` specified above.
   /// Follows the same format of Binding.members.
-  public var exemptedMember: Swift.String
+  public var exemptedMember: Swift.String = Swift.String()
 
   /// Specifies the log_type that was be enabled. ADMIN_ACTIVITY is always
   /// enabled, and cannot be configured.
   /// Required
-  public var logType: Swift.String
+  public var logType: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AuditConfigDelta`.
-  public init(
-    action: AuditConfigDelta.Action = AuditConfigDelta.Action(),
-    service: Swift.String = Swift.String(),
-    exemptedMember: Swift.String = Swift.String(),
-    logType: Swift.String = Swift.String(),
-  ) {
-    self.action = action
-    self.service = service
-    self.exemptedMember = exemptedMember
-    self.logType = logType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuditConfigDelta().with { $0.action = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The type of action performed on an audit configuration in a policy.

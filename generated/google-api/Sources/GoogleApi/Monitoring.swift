@@ -78,7 +78,7 @@ public struct Monitoring: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// needed for different sets of metrics associated with that monitored
   /// resource type. A monitored resource and metric pair may only be used once
   /// in the Monitoring configuration.
-  public var producerDestinations: [Monitoring.MonitoringDestination]
+  public var producerDestinations: [Monitoring.MonitoringDestination] = []
 
   /// Monitoring configurations for sending metrics to the consumer project.
   /// There can be multiple consumer destinations. A monitored resource type may
@@ -86,15 +86,22 @@ public struct Monitoring: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// needed for different sets of metrics associated with that monitored
   /// resource type. A monitored resource and metric pair may only be used once
   /// in the Monitoring configuration.
-  public var consumerDestinations: [Monitoring.MonitoringDestination]
+  public var consumerDestinations: [Monitoring.MonitoringDestination] = []
 
   /// Initialize a new instance of `Monitoring`.
-  public init(
-    producerDestinations: [Monitoring.MonitoringDestination] = [],
-    consumerDestinations: [Monitoring.MonitoringDestination] = [],
-  ) {
-    self.producerDestinations = producerDestinations
-    self.consumerDestinations = consumerDestinations
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Monitoring().with { $0.producerDestinations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration of a specific monitoring destination (the producer project
@@ -107,22 +114,29 @@ public struct Monitoring: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// section.
     ///
     /// [google.api.Service.monitored_resources]: <doc:Service/monitoredResources>
-    public var monitoredResource: Swift.String
+    public var monitoredResource: Swift.String = Swift.String()
 
     /// Types of the metrics to report to this monitoring destination.
     /// Each type must be defined in
     /// [Service.metrics][google.api.Service.metrics] section.
     ///
     /// [google.api.Service.metrics]: <doc:Service/metrics>
-    public var metrics: [Swift.String]
+    public var metrics: [Swift.String] = []
 
     /// Initialize a new instance of `MonitoringDestination`.
-    public init(
-      monitoredResource: Swift.String = Swift.String(),
-      metrics: [Swift.String] = [],
-    ) {
-      self.monitoredResource = monitoredResource
-      self.metrics = metrics
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MonitoringDestination().with { $0.monitoredResource = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

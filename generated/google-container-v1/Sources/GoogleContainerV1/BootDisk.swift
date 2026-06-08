@@ -23,28 +23,31 @@ public struct BootDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Disk type of the boot disk.
   /// (i.e. Hyperdisk-Balanced, PD-Balanced, etc.)
-  public var diskType: Swift.String
+  public var diskType: Swift.String = Swift.String()
 
   /// Disk size in GB. Replaces NodeConfig.disk_size_gb
-  public var sizeGb: Swift.Int64
+  public var sizeGb: Swift.Int64 = Swift.Int64()
 
   /// For Hyperdisk-Balanced only, the provisioned IOPS config value.
-  public var provisionedIops: Swift.Int64
+  public var provisionedIops: Swift.Int64 = Swift.Int64()
 
   /// For Hyperdisk-Balanced only, the provisioned throughput config value.
-  public var provisionedThroughput: Swift.Int64
+  public var provisionedThroughput: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `BootDisk`.
-  public init(
-    diskType: Swift.String = Swift.String(),
-    sizeGb: Swift.Int64 = Swift.Int64(),
-    provisionedIops: Swift.Int64 = Swift.Int64(),
-    provisionedThroughput: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.diskType = diskType
-    self.sizeGb = sizeGb
-    self.provisionedIops = provisionedIops
-    self.provisionedThroughput = provisionedThroughput
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BootDisk().with { $0.diskType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

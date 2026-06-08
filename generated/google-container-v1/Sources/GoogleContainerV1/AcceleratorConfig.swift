@@ -22,36 +22,37 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The number of the accelerator cards exposed to an instance.
-  public var acceleratorCount: Swift.Int64
+  public var acceleratorCount: Swift.Int64 = Swift.Int64()
 
   /// The accelerator type resource name. List of supported accelerators
   /// [here](https://cloud.google.com/compute/docs/gpus)
-  public var acceleratorType: Swift.String
+  public var acceleratorType: Swift.String = Swift.String()
 
   /// Size of partitions to create on the GPU. Valid values are described in the
   /// NVIDIA [mig user
   /// guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
-  public var gpuPartitionSize: Swift.String
+  public var gpuPartitionSize: Swift.String = Swift.String()
 
   /// The configuration for GPU sharing options.
-  public var gpuSharingConfig: GPUSharingConfig?
+  public var gpuSharingConfig: GPUSharingConfig? = nil
 
   /// The configuration for auto installation of GPU driver.
-  public var gpuDriverInstallationConfig: GPUDriverInstallationConfig?
+  public var gpuDriverInstallationConfig: GPUDriverInstallationConfig? = nil
 
   /// Initialize a new instance of `AcceleratorConfig`.
-  public init(
-    acceleratorCount: Swift.Int64 = Swift.Int64(),
-    acceleratorType: Swift.String = Swift.String(),
-    gpuPartitionSize: Swift.String = Swift.String(),
-    gpuSharingConfig: GPUSharingConfig? = nil,
-    gpuDriverInstallationConfig: GPUDriverInstallationConfig? = nil,
-  ) {
-    self.acceleratorCount = acceleratorCount
-    self.acceleratorType = acceleratorType
-    self.gpuPartitionSize = gpuPartitionSize
-    self.gpuSharingConfig = gpuSharingConfig
-    self.gpuDriverInstallationConfig = gpuDriverInstallationConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AcceleratorConfig().with { $0.acceleratorCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

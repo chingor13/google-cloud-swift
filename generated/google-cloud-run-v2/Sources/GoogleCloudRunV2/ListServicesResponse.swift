@@ -24,25 +24,30 @@ public struct ListServicesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The resulting list of Services.
-  public var services: [Service]
+  public var services: [Service] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListServices request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Output only. For global requests, returns the list of regions that could
   /// not be reached within the deadline.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListServicesResponse`.
-  public init(
-    services: [Service] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.services = services
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListServicesResponse().with { $0.services = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -22,19 +22,26 @@ public struct ListOperationsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// A list of operations in the project in the specified zone.
-  public var operations: [Operation]
+  public var operations: [Operation] = []
 
   /// If any zones are listed here, the list of operations returned
   /// may be missing the operations from those zones.
-  public var missingZones: [Swift.String]
+  public var missingZones: [Swift.String] = []
 
   /// Initialize a new instance of `ListOperationsResponse`.
-  public init(
-    operations: [Operation] = [],
-    missingZones: [Swift.String] = [],
-  ) {
-    self.operations = operations
-    self.missingZones = missingZones
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListOperationsResponse().with { $0.operations = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

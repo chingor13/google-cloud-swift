@@ -29,43 +29,44 @@ public struct NfsExportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// NfsExportOptions. An error will be returned.
   /// The limit is 64 IP ranges/addresses for each FileShareConfig among all
   /// NfsExportOptions.
-  public var ipRanges: [Swift.String]
+  public var ipRanges: [Swift.String] = []
 
   /// Either READ_ONLY, for allowing only read requests on the exported
   /// directory, or READ_WRITE, for allowing both read and write requests.
   /// The default is READ_WRITE.
-  public var accessMode: NfsExportOptions.AccessMode
+  public var accessMode: NfsExportOptions.AccessMode = NfsExportOptions.AccessMode()
 
   /// Either NO_ROOT_SQUASH, for allowing root access on the exported directory,
   /// or ROOT_SQUASH, for not allowing root access. The default is
   /// NO_ROOT_SQUASH.
-  public var squashMode: NfsExportOptions.SquashMode
+  public var squashMode: NfsExportOptions.SquashMode = NfsExportOptions.SquashMode()
 
   /// An integer representing the anonymous user id with a default value of
   /// 65534.
   /// Anon_uid may only be set with squash_mode of ROOT_SQUASH.  An error will be
   /// returned if this field is specified for other squash_mode settings.
-  public var anonUid: Swift.Int64
+  public var anonUid: Swift.Int64 = Swift.Int64()
 
   /// An integer representing the anonymous group id with a default value of
   /// 65534.
   /// Anon_gid may only be set with squash_mode of ROOT_SQUASH.  An error will be
   /// returned if this field is specified for other squash_mode settings.
-  public var anonGid: Swift.Int64
+  public var anonGid: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `NfsExportOptions`.
-  public init(
-    ipRanges: [Swift.String] = [],
-    accessMode: NfsExportOptions.AccessMode = NfsExportOptions.AccessMode(),
-    squashMode: NfsExportOptions.SquashMode = NfsExportOptions.SquashMode(),
-    anonUid: Swift.Int64 = Swift.Int64(),
-    anonGid: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.ipRanges = ipRanges
-    self.accessMode = accessMode
-    self.squashMode = squashMode
-    self.anonUid = anonUid
-    self.anonGid = anonGid
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NfsExportOptions().with { $0.ipRanges = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The access mode.

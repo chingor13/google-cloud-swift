@@ -23,65 +23,54 @@
     Sendable
   {
     /// The host and port of the on-premises instance in host:port format
-    public var hostPort: Swift.String
+    public var hostPort: Swift.String = Swift.String()
 
     /// This is always `sql#onPremisesConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The username for connecting to on-premises instance.
-    public var username: Swift.String
+    public var username: Swift.String = Swift.String()
 
     /// The password for connecting to on-premises instance.
-    public var password: Swift.String
+    public var password: Swift.String = Swift.String()
 
     /// PEM representation of the trusted CA's x509 certificate.
-    public var caCertificate: Swift.String
+    public var caCertificate: Swift.String = Swift.String()
 
     /// PEM representation of the replica's x509 certificate.
-    public var clientCertificate: Swift.String
+    public var clientCertificate: Swift.String = Swift.String()
 
     /// PEM representation of the replica's private key. The corresponding public
     /// key is encoded in the client's certificate.
-    public var clientKey: Swift.String
+    public var clientKey: Swift.String = Swift.String()
 
     /// The dump file to create the Cloud SQL replica.
-    public var dumpFilePath: Swift.String
+    public var dumpFilePath: Swift.String = Swift.String()
 
     /// The reference to Cloud SQL instance if the source is Cloud SQL.
-    public var sourceInstance: InstanceReference?
+    public var sourceInstance: InstanceReference? = nil
 
     /// Optional. A list of objects that the user selects for replication from an
     /// external source instance.
-    public var selectedObjects: [SelectedObjects]
+    public var selectedObjects: [SelectedObjects] = []
 
     /// Optional. SSL option for replica connection to the on-premises source.
-    public var sslOption: OnPremisesConfiguration.SslOption
+    public var sslOption: OnPremisesConfiguration.SslOption = OnPremisesConfiguration.SslOption()
 
     /// Initialize a new instance of `OnPremisesConfiguration`.
-    public init(
-      hostPort: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-      username: Swift.String = Swift.String(),
-      password: Swift.String = Swift.String(),
-      caCertificate: Swift.String = Swift.String(),
-      clientCertificate: Swift.String = Swift.String(),
-      clientKey: Swift.String = Swift.String(),
-      dumpFilePath: Swift.String = Swift.String(),
-      sourceInstance: InstanceReference? = nil,
-      selectedObjects: [SelectedObjects] = [],
-      sslOption: OnPremisesConfiguration.SslOption = OnPremisesConfiguration.SslOption(),
-    ) {
-      self.hostPort = hostPort
-      self.kind = kind
-      self.username = username
-      self.password = password
-      self.caCertificate = caCertificate
-      self.clientCertificate = clientCertificate
-      self.clientKey = clientKey
-      self.dumpFilePath = dumpFilePath
-      self.sourceInstance = sourceInstance
-      self.selectedObjects = selectedObjects
-      self.sslOption = sslOption
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = OnPremisesConfiguration().with { $0.hostPort = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// SslOption defines the SSL mode to be used for replica connection to the

@@ -27,11 +27,11 @@ public struct Project: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// generated number prefixed by "projects/".
   ///
   /// Example: `projects/415104041262`
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. A reference to a parent Resource. eg., `organizations/123` or
   /// `folders/876`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Immutable. The unique, user-assigned id of the project.
   /// It must be 6 to 30 lowercase ASCII letters, digits, or hyphens.
@@ -39,10 +39,10 @@ public struct Project: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Trailing hyphens are prohibited.
   ///
   /// Example: `tokyo-rain-123`
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Output only. The project lifecycle state.
-  public var state: Project.State
+  public var state: Project.State = Project.State()
 
   /// Optional. A user-assigned display name of the project.
   /// When present it must be between 4 to 30 characters.
@@ -50,21 +50,21 @@ public struct Project: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// hyphen, single-quote, double-quote, space, and exclamation point.
   ///
   /// Example: `My Project`
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Output only. Creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The most recent time this resource was modified.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time at which this resource was requested for deletion.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. A checksum computed by the server based on the current value
   /// of the Project resource. This may be sent on update and delete requests to
   /// ensure the client has an up-to-date value before proceeding.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Optional. The labels associated with this project.
   ///
@@ -80,31 +80,22 @@ public struct Project: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// depend on specific characters being disallowed.
   ///
   /// Example: `"myBusinessDimension" : "businessValue"`
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `Project`.
-  public init(
-    name: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-    projectId: Swift.String = Swift.String(),
-    state: Project.State = Project.State(),
-    displayName: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    etag: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-  ) {
-    self.name = name
-    self.parent = parent
-    self.projectId = projectId
-    self.state = state
-    self.displayName = displayName
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.etag = etag
-    self.labels = labels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Project().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Project lifecycle states.

@@ -23,39 +23,38 @@ public struct UpgradeEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resource type that is upgrading.
-  public var resourceType: UpgradeResourceType
+  public var resourceType: UpgradeResourceType = UpgradeResourceType()
 
   /// The operation associated with this upgrade.
-  public var operation: Swift.String
+  public var operation: Swift.String = Swift.String()
 
   /// The time when the operation was started.
-  public var operationStartTime: GoogleCloudWkt.Timestamp?
+  public var operationStartTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The current version before the upgrade.
-  public var currentVersion: Swift.String
+  public var currentVersion: Swift.String = Swift.String()
 
   /// The target version for the upgrade.
-  public var targetVersion: Swift.String
+  public var targetVersion: Swift.String = Swift.String()
 
   /// Optional relative path to the resource. For example in node pool upgrades,
   /// the relative path of the node pool.
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UpgradeEvent`.
-  public init(
-    resourceType: UpgradeResourceType = UpgradeResourceType(),
-    operation: Swift.String = Swift.String(),
-    operationStartTime: GoogleCloudWkt.Timestamp? = nil,
-    currentVersion: Swift.String = Swift.String(),
-    targetVersion: Swift.String = Swift.String(),
-    resource: Swift.String = Swift.String(),
-  ) {
-    self.resourceType = resourceType
-    self.operation = operation
-    self.operationStartTime = operationStartTime
-    self.currentVersion = currentVersion
-    self.targetVersion = targetVersion
-    self.resource = resource
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpgradeEvent().with { $0.resourceType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

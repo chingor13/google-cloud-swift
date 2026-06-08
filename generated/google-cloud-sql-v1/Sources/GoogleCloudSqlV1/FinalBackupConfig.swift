@@ -23,20 +23,27 @@
     Sendable
   {
     /// Whether the final backup is enabled for the instance.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// The number of days to retain the final backup after the instance deletion.
     /// The final backup will be purged at (time_of_instance_deletion +
     /// retention_days).
-    public var retentionDays: Swift.Int32?
+    public var retentionDays: Swift.Int32? = nil
 
     /// Initialize a new instance of `FinalBackupConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      retentionDays: Swift.Int32? = nil,
-    ) {
-      self.enabled = enabled
-      self.retentionDays = retentionDays
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FinalBackupConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

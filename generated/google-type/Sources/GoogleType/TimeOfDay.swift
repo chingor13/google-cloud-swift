@@ -29,32 +29,35 @@ public struct TimeOfDay: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Hours of a day in 24 hour format. Must be greater than or equal to 0 and
   /// typically must be less than or equal to 23. An API may choose to allow the
   /// value "24:00:00" for scenarios like business closing time.
-  public var hours: Swift.Int32
+  public var hours: Swift.Int32 = Swift.Int32()
 
   /// Minutes of an hour. Must be greater than or equal to 0 and less than or
   /// equal to 59.
-  public var minutes: Swift.Int32
+  public var minutes: Swift.Int32 = Swift.Int32()
 
   /// Seconds of a minute. Must be greater than or equal to 0 and typically must
   /// be less than or equal to 59. An API may allow the value 60 if it allows
   /// leap-seconds.
-  public var seconds: Swift.Int32
+  public var seconds: Swift.Int32 = Swift.Int32()
 
   /// Fractions of seconds, in nanoseconds. Must be greater than or equal to 0
   /// and less than or equal to 999,999,999.
-  public var nanos: Swift.Int32
+  public var nanos: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `TimeOfDay`.
-  public init(
-    hours: Swift.Int32 = Swift.Int32(),
-    minutes: Swift.Int32 = Swift.Int32(),
-    seconds: Swift.Int32 = Swift.Int32(),
-    nanos: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.hours = hours
-    self.minutes = minutes
-    self.seconds = seconds
-    self.nanos = nanos
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TimeOfDay().with { $0.hours = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.TimeOfDay" }

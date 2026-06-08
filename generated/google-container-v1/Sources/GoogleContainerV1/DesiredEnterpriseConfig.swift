@@ -25,13 +25,22 @@ public struct DesiredEnterpriseConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// desired_tier specifies the desired tier of the cluster.
-  public var desiredTier: EnterpriseConfig.ClusterTier
+  public var desiredTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier()
 
   /// Initialize a new instance of `DesiredEnterpriseConfig`.
-  public init(
-    desiredTier: EnterpriseConfig.ClusterTier = EnterpriseConfig.ClusterTier(),
-  ) {
-    self.desiredTier = desiredTier
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DesiredEnterpriseConfig().with { $0.desiredTier = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

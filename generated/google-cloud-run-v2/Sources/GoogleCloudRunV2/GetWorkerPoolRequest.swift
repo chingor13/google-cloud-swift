@@ -25,13 +25,22 @@ public struct GetWorkerPoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Format:
   /// `projects/{project}/locations/{location}/workerPools/{worker_pool}`, where
   /// `{project}` can be project id or number.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetWorkerPoolRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetWorkerPoolRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

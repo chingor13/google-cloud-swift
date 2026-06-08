@@ -23,18 +23,25 @@ public struct ManagedPrometheusConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Enable Managed Collection.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// GKE Workload Auto-Monitoring Configuration.
-  public var autoMonitoringConfig: AutoMonitoringConfig?
+  public var autoMonitoringConfig: AutoMonitoringConfig? = nil
 
   /// Initialize a new instance of `ManagedPrometheusConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    autoMonitoringConfig: AutoMonitoringConfig? = nil,
-  ) {
-    self.enabled = enabled
-    self.autoMonitoringConfig = autoMonitoringConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ManagedPrometheusConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.resetReplicaSize(
-      request: SqlInstancesResetReplicaSizeRequest(/* set fields */
-      )
+      request: SqlInstancesResetReplicaSizeRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

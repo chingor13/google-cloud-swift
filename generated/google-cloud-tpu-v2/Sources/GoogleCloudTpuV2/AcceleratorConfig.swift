@@ -22,18 +22,25 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Required. Type of TPU.
-  public var type: AcceleratorConfig.Type_
+  public var type: AcceleratorConfig.Type_ = AcceleratorConfig.Type_()
 
   /// Required. Topology of TPU in chips.
-  public var topology: Swift.String
+  public var topology: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AcceleratorConfig`.
-  public init(
-    type: AcceleratorConfig.Type_ = AcceleratorConfig.Type_(),
-    topology: Swift.String = Swift.String(),
-  ) {
-    self.type = type
-    self.topology = topology
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AcceleratorConfig().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// TPU type.

@@ -23,24 +23,29 @@ public struct AdditionalPodNetworkConfig: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Name of the subnetwork where the additional pod network belongs.
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// The name of the secondary range on the subnet which provides IP address for
   /// this pod range.
-  public var secondaryPodRange: Swift.String
+  public var secondaryPodRange: Swift.String = Swift.String()
 
   /// The maximum number of pods per node which use this pod network.
-  public var maxPodsPerNode: MaxPodsConstraint?
+  public var maxPodsPerNode: MaxPodsConstraint? = nil
 
   /// Initialize a new instance of `AdditionalPodNetworkConfig`.
-  public init(
-    subnetwork: Swift.String = Swift.String(),
-    secondaryPodRange: Swift.String = Swift.String(),
-    maxPodsPerNode: MaxPodsConstraint? = nil,
-  ) {
-    self.subnetwork = subnetwork
-    self.secondaryPodRange = secondaryPodRange
-    self.maxPodsPerNode = maxPodsPerNode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdditionalPodNetworkConfig().with { $0.subnetwork = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

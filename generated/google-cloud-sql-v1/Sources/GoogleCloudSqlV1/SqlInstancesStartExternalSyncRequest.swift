@@ -24,55 +24,50 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// External sync mode.
-    public var syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode
+    public var syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode =
+      SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode()
 
     /// Whether to skip the verification step (VESS).
-    public var skipVerification: Swift.Bool
+    public var skipVerification: Swift.Bool = Swift.Bool()
 
     /// Optional. Parallel level for initial data sync. Currently only applicable
     /// for MySQL.
-    public var syncParallelLevel: ExternalSyncParallelLevel
+    public var syncParallelLevel: ExternalSyncParallelLevel = ExternalSyncParallelLevel()
 
     /// Optional. MigrationType configures the migration to use physical files or
     /// logical dump files. If not set, then the logical dump file configuration is
     /// used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
-    public var migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType
+    public var migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType =
+      SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType()
 
     /// Optional. MySQL only. True if end-user has confirmed that this SES call
     /// will wipe replica databases overlapping with the proposed selected_objects.
     /// If this field is not set and there are both overlapping and additional
     /// databases proposed, an error will be returned.
-    public var replicaOverwriteEnabled: Swift.Bool
+    public var replicaOverwriteEnabled: Swift.Bool = Swift.Bool()
 
-    public var syncConfig: OneOf_SyncConfig?
+    public var syncConfig: OneOf_SyncConfig? = nil
 
     /// Initialize a new instance of `SqlInstancesStartExternalSyncRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      syncMode: SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode =
-        SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode(),
-      skipVerification: Swift.Bool = Swift.Bool(),
-      syncParallelLevel: ExternalSyncParallelLevel = ExternalSyncParallelLevel(),
-      migrationType: SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType =
-        SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType(),
-      replicaOverwriteEnabled: Swift.Bool = Swift.Bool(),
-      syncConfig: OneOf_SyncConfig? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.syncMode = syncMode
-      self.skipVerification = skipVerification
-      self.syncParallelLevel = syncParallelLevel
-      self.migrationType = migrationType
-      self.replicaOverwriteEnabled = replicaOverwriteEnabled
-      self.syncConfig = syncConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesStartExternalSyncRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

@@ -31,13 +31,13 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time at which the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was created.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time this
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was destroyed.
@@ -48,25 +48,25 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   /// [google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]: <doc:SecretVersion/State/destroyed>
   /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
-  public var destroyTime: GoogleCloudWkt.Timestamp?
+  public var destroyTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The current state of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var state: SecretVersion.State
+  public var state: SecretVersion.State = SecretVersion.State()
 
   /// The replication status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var replicationStatus: ReplicationStatus?
+  public var replicationStatus: ReplicationStatus? = nil
 
   /// Output only. Etag of the currently stored
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Output only. True if payload checksum specified in
   /// [SecretPayload][google.cloud.secretmanager.v1.SecretPayload] object has
@@ -78,14 +78,14 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretManagerService]: <doc:SecretManagerService>
   /// [google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion]: <doc:SecretManagerService/addSecretVersion(request:)>
   /// [google.cloud.secretmanager.v1.SecretPayload]: <doc:SecretPayload>
-  public var clientSpecifiedPayloadChecksum: Swift.Bool
+  public var clientSpecifiedPayloadChecksum: Swift.Bool = Swift.Bool()
 
   /// Optional. Output only. Scheduled destroy time for secret version.
   /// This is a part of the Delayed secret version destroy feature. For a
   /// Secret with a valid version destroy TTL, when a secert version is
   /// destroyed, version is moved to disabled state and it is scheduled for
   /// destruction Version is destroyed only after the scheduled_destroy_time.
-  public var scheduledDestroyTime: GoogleCloudWkt.Timestamp?
+  public var scheduledDestroyTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The customer-managed encryption status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
@@ -94,29 +94,22 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var customerManagedEncryption: CustomerManagedEncryptionStatus?
+  public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
   /// Initialize a new instance of `SecretVersion`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    destroyTime: GoogleCloudWkt.Timestamp? = nil,
-    state: SecretVersion.State = SecretVersion.State(),
-    replicationStatus: ReplicationStatus? = nil,
-    etag: Swift.String = Swift.String(),
-    clientSpecifiedPayloadChecksum: Swift.Bool = Swift.Bool(),
-    scheduledDestroyTime: GoogleCloudWkt.Timestamp? = nil,
-    customerManagedEncryption: CustomerManagedEncryptionStatus? = nil,
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.destroyTime = destroyTime
-    self.state = state
-    self.replicationStatus = replicationStatus
-    self.etag = etag
-    self.clientSpecifiedPayloadChecksum = clientSpecifiedPayloadChecksum
-    self.scheduledDestroyTime = scheduledDestroyTime
-    self.customerManagedEncryption = customerManagedEncryption
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecretVersion().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The state of a

@@ -26,7 +26,7 @@ public struct SelectiveGapicGeneration: Codable, Equatable, GoogleCloudWkt._AnyP
 {
   /// An allowlist of the fully qualified names of RPCs that should be included
   /// on public client surfaces.
-  public var methods: [Swift.String]
+  public var methods: [Swift.String] = []
 
   /// Setting this to true indicates to the client generators that methods
   /// that would be excluded from the generation should instead be generated
@@ -34,15 +34,22 @@ public struct SelectiveGapicGeneration: Codable, Equatable, GoogleCloudWkt._AnyP
   /// end users. How this is expressed is up to individual language
   /// implementations to decide. Some examples may be: added annotations,
   /// obfuscated identifiers, or other language idiomatic patterns.
-  public var generateOmittedAsInternal: Swift.Bool
+  public var generateOmittedAsInternal: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `SelectiveGapicGeneration`.
-  public init(
-    methods: [Swift.String] = [],
-    generateOmittedAsInternal: Swift.Bool = Swift.Bool(),
-  ) {
-    self.methods = methods
-    self.generateOmittedAsInternal = generateOmittedAsInternal
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SelectiveGapicGeneration().with { $0.methods = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

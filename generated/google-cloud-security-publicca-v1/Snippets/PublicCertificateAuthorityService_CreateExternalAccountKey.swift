@@ -24,9 +24,8 @@ func sample(client: some PublicCertificateAuthorityService, projectId: String, l
   async throws
 {
   let response = try await client.createExternalAccountKey(
-    request: CreateExternalAccountKeyRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)",
-    )
+    request: CreateExternalAccountKeyRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
   )
   print("Success: \(response)")
 }

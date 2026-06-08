@@ -30,7 +30,7 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///       method_settings:
   ///       - selector: google.storage.control.v2.StorageControl.CreateFolder
   ///         # method settings for CreateFolder...
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Describes settings to use for long-running operations when generating
   /// API methods for RPCs. Complements RPCs that use the annotations in
@@ -46,7 +46,7 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///           poll_delay_multiplier: 1.5
   ///           max_poll_delay: 360s # 6 minutes
   ///           total_poll_timeout: 54000s # 90 minutes
-  public var longRunning: MethodSettings.LongRunning?
+  public var longRunning: MethodSettings.LongRunning? = nil
 
   /// List of top-level fields of the request message, that should be
   /// automatically populated by the client libraries based on their
@@ -59,7 +59,7 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///       - selector: google.example.v1.ExampleService.CreateExample
   ///         auto_populated_fields:
   ///         - request_id
-  public var autoPopulatedFields: [Swift.String]
+  public var autoPopulatedFields: [Swift.String] = []
 
   /// Batching configuration for an API method in client libraries.
   ///
@@ -72,19 +72,22 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///           element_count_threshold: 1000
   ///           request_byte_threshold: 100000000
   ///           delay_threshold_millis: 10
-  public var batching: BatchingConfigProto?
+  public var batching: BatchingConfigProto? = nil
 
   /// Initialize a new instance of `MethodSettings`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    longRunning: MethodSettings.LongRunning? = nil,
-    autoPopulatedFields: [Swift.String] = [],
-    batching: BatchingConfigProto? = nil,
-  ) {
-    self.selector = selector
-    self.longRunning = longRunning
-    self.autoPopulatedFields = autoPopulatedFields
-    self.batching = batching
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MethodSettings().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes settings to use when generating API methods that use the
@@ -97,32 +100,35 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   {
     /// Initial delay after which the first poll request will be made.
     /// Default value: 5 seconds.
-    public var initialPollDelay: GoogleCloudWkt.Duration?
+    public var initialPollDelay: GoogleCloudWkt.Duration? = nil
 
     /// Multiplier to gradually increase delay between subsequent polls until it
     /// reaches max_poll_delay.
     /// Default value: 1.5.
-    public var pollDelayMultiplier: Swift.Float
+    public var pollDelayMultiplier: Swift.Float = Swift.Float()
 
     /// Maximum time between two subsequent poll requests.
     /// Default value: 45 seconds.
-    public var maxPollDelay: GoogleCloudWkt.Duration?
+    public var maxPollDelay: GoogleCloudWkt.Duration? = nil
 
     /// Total polling timeout.
     /// Default value: 5 minutes.
-    public var totalPollTimeout: GoogleCloudWkt.Duration?
+    public var totalPollTimeout: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `LongRunning`.
-    public init(
-      initialPollDelay: GoogleCloudWkt.Duration? = nil,
-      pollDelayMultiplier: Swift.Float = Swift.Float(),
-      maxPollDelay: GoogleCloudWkt.Duration? = nil,
-      totalPollTimeout: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.initialPollDelay = initialPollDelay
-      self.pollDelayMultiplier = pollDelayMultiplier
-      self.maxPollDelay = maxPollDelay
-      self.totalPollTimeout = totalPollTimeout
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = LongRunning().with { $0.initialPollDelay = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

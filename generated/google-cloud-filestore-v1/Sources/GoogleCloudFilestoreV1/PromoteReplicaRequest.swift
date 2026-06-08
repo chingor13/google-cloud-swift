@@ -23,21 +23,28 @@ public struct PromoteReplicaRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The resource name of the instance, in the format
   /// `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. The resource name of the peer instance to promote, in the format
   /// `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
   /// The peer instance is required if the operation is called on an active
   /// instance.
-  public var peerInstance: Swift.String
+  public var peerInstance: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PromoteReplicaRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    peerInstance: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.peerInstance = peerInstance
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PromoteReplicaRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

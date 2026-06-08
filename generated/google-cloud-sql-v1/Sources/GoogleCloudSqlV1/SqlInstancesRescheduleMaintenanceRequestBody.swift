@@ -24,35 +24,51 @@
     Sendable
   {
     /// Required. The type of the reschedule the user wants.
-    public var reschedule: SqlInstancesRescheduleMaintenanceRequestBody.Reschedule?
+    public var reschedule: SqlInstancesRescheduleMaintenanceRequestBody.Reschedule? = nil
 
     /// Initialize a new instance of `SqlInstancesRescheduleMaintenanceRequestBody`.
-    public init(
-      reschedule: SqlInstancesRescheduleMaintenanceRequestBody.Reschedule? = nil,
-    ) {
-      self.reschedule = reschedule
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesRescheduleMaintenanceRequestBody().with { $0.reschedule = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public struct Reschedule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Required. The type of the reschedule.
-      public var rescheduleType: SqlInstancesRescheduleMaintenanceRequestBody.RescheduleType
+      public var rescheduleType: SqlInstancesRescheduleMaintenanceRequestBody.RescheduleType =
+        SqlInstancesRescheduleMaintenanceRequestBody.RescheduleType()
 
       /// Optional. Timestamp when the maintenance shall be rescheduled to if
       /// reschedule_type=SPECIFIC_TIME, in
       /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
       /// `2012-11-15T16:19:00.094Z`.
-      public var scheduleTime: GoogleCloudWkt.Timestamp?
+      public var scheduleTime: GoogleCloudWkt.Timestamp? = nil
 
       /// Initialize a new instance of `Reschedule`.
-      public init(
-        rescheduleType: SqlInstancesRescheduleMaintenanceRequestBody.RescheduleType =
-          SqlInstancesRescheduleMaintenanceRequestBody.RescheduleType(),
-        scheduleTime: GoogleCloudWkt.Timestamp? = nil,
-      ) {
-        self.rescheduleType = rescheduleType
-        self.scheduleTime = scheduleTime
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Reschedule().with { $0.rescheduleType = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

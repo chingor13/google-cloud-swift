@@ -24,25 +24,30 @@ public struct DeleteTagKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Required. The resource name of a TagKey to be deleted in the format
   /// `tagKeys/123`. The TagKey cannot be a parent of any existing TagValues or
   /// it will not be deleted successfully.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. Set as true to perform validations necessary for deletion, but
   /// not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Optional. The etag known to the client for the expected state of the
   /// TagKey. This is to be used for optimistic concurrency.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DeleteTagKeyRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    validateOnly: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.validateOnly = validateOnly
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteTagKeyRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

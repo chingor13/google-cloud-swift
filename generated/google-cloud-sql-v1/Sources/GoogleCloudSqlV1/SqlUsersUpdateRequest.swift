@@ -22,45 +22,42 @@
     Sendable
   {
     /// Optional. Host of the user in the instance.
-    public var host: Swift.String
+    public var host: Swift.String = Swift.String()
 
     /// Database instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Name of the user in the instance.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Optional. List of database roles to grant to the user. body.database_roles
     /// will be ignored for update request.
-    public var databaseRoles: [Swift.String]
+    public var databaseRoles: [Swift.String] = []
 
     /// Optional. Specifies whether to revoke existing roles that are not present
     /// in the `database_roles` field. If `false` or unset, the database roles
     /// specified in `database_roles` are added to the user's existing roles.
-    public var revokeExistingRoles: Swift.Bool?
+    public var revokeExistingRoles: Swift.Bool? = nil
 
-    public var body: User?
+    public var body: User? = nil
 
     /// Initialize a new instance of `SqlUsersUpdateRequest`.
-    public init(
-      host: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      databaseRoles: [Swift.String] = [],
-      revokeExistingRoles: Swift.Bool? = nil,
-      body: User? = nil,
-    ) {
-      self.host = host
-      self.instance = instance
-      self.name = name
-      self.project = project
-      self.databaseRoles = databaseRoles
-      self.revokeExistingRoles = revokeExistingRoles
-      self.body = body
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlUsersUpdateRequest().with { $0.host = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

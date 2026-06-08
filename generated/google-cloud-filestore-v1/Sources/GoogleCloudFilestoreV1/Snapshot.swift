@@ -23,24 +23,24 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The resource name of the snapshot, in the format
   /// `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// A description of the snapshot with 2048 characters or less.
   /// Requests with longer descriptions will be rejected.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. The snapshot state.
-  public var state: Snapshot.State
+  public var state: Snapshot.State = Snapshot.State()
 
   /// Output only. The time when the snapshot was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Resource labels to represent user provided metadata.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. The amount of bytes needed to allocate a full copy of the
   /// snapshot content
-  public var filesystemUsedBytes: Swift.Int64
+  public var filesystemUsedBytes: Swift.Int64 = Swift.Int64()
 
   /// Optional. Input only. Immutable. Tag key-value pairs bound to this
   /// resource. Each key must be a namespaced name and each value a short name.
@@ -52,25 +52,22 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
   /// - Short name:
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `Snapshot`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    state: Snapshot.State = Snapshot.State(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    filesystemUsedBytes: Swift.Int64 = Swift.Int64(),
-    tags: [Swift.String: Swift.String] = [:],
-  ) {
-    self.name = name
-    self.description = description
-    self.state = state
-    self.createTime = createTime
-    self.labels = labels
-    self.filesystemUsedBytes = filesystemUsedBytes
-    self.tags = tags
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Snapshot().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The snapshot state.

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.`get`(
-      request: SqlInstancesGetRequest(/* set fields */
-      )
+      request: SqlInstancesGetRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

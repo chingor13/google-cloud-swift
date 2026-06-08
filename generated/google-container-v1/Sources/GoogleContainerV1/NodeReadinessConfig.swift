@@ -23,13 +23,22 @@ public struct NodeReadinessConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Optional. Whether the GKE Node Readiness Controller is enabled for this
   /// cluster.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `NodeReadinessConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeReadinessConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

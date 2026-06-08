@@ -23,54 +23,54 @@ public struct Backup: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The resource name of the backup, in the format
   /// `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// A description of the backup with 2048 characters or less.
   /// Requests with longer descriptions will be rejected.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. The backup state.
-  public var state: Backup.State
+  public var state: Backup.State = Backup.State()
 
   /// Output only. The time when the backup was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Resource labels to represent user provided metadata.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Capacity of the source file share when the backup was created.
-  public var capacityGb: Swift.Int64
+  public var capacityGb: Swift.Int64 = Swift.Int64()
 
   /// Output only. The size of the storage used by the backup. As backups share
   /// storage, this number is expected to change with backup creation/deletion.
-  public var storageBytes: Swift.Int64
+  public var storageBytes: Swift.Int64 = Swift.Int64()
 
   /// The resource name of the source Filestore instance, in the format
   /// `projects/{project_number}/locations/{location_id}/instances/{instance_id}`,
   /// used to create this backup.
-  public var sourceInstance: Swift.String
+  public var sourceInstance: Swift.String = Swift.String()
 
   /// Name of the file share in the source Filestore instance that the
   /// backup is created from.
-  public var sourceFileShare: Swift.String
+  public var sourceFileShare: Swift.String = Swift.String()
 
   /// Output only. The service tier of the source Filestore instance that this
   /// backup is created from.
-  public var sourceInstanceTier: Instance.Tier
+  public var sourceInstanceTier: Instance.Tier = Instance.Tier()
 
   /// Output only. Amount of bytes that will be downloaded if the backup is
   /// restored. This may be different than storage bytes, since sequential
   /// backups of the same disk will share storage.
-  public var downloadBytes: Swift.Int64
+  public var downloadBytes: Swift.Int64 = Swift.Int64()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: GoogleCloudWkt.BoolValue?
+  public var satisfiesPzs: GoogleCloudWkt.BoolValue? = nil
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzi: Swift.Bool
+  public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
   /// Immutable. KMS key name used for data encryption.
-  public var kmsKey: Swift.String
+  public var kmsKey: Swift.String = Swift.String()
 
   /// Optional. Input only. Immutable. Tag key-value pairs bound to this
   /// resource. Each key must be a namespaced name and each value a short name.
@@ -82,47 +82,26 @@ public struct Backup: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
   /// - Short name:
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Output only. The file system protocol of the source Filestore instance that
   /// this backup is created from.
-  public var fileSystemProtocol: Instance.FileProtocol
+  public var fileSystemProtocol: Instance.FileProtocol = Instance.FileProtocol()
 
   /// Initialize a new instance of `Backup`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    state: Backup.State = Backup.State(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    capacityGb: Swift.Int64 = Swift.Int64(),
-    storageBytes: Swift.Int64 = Swift.Int64(),
-    sourceInstance: Swift.String = Swift.String(),
-    sourceFileShare: Swift.String = Swift.String(),
-    sourceInstanceTier: Instance.Tier = Instance.Tier(),
-    downloadBytes: Swift.Int64 = Swift.Int64(),
-    satisfiesPzs: GoogleCloudWkt.BoolValue? = nil,
-    satisfiesPzi: Swift.Bool = Swift.Bool(),
-    kmsKey: Swift.String = Swift.String(),
-    tags: [Swift.String: Swift.String] = [:],
-    fileSystemProtocol: Instance.FileProtocol = Instance.FileProtocol(),
-  ) {
-    self.name = name
-    self.description = description
-    self.state = state
-    self.createTime = createTime
-    self.labels = labels
-    self.capacityGb = capacityGb
-    self.storageBytes = storageBytes
-    self.sourceInstance = sourceInstance
-    self.sourceFileShare = sourceFileShare
-    self.sourceInstanceTier = sourceInstanceTier
-    self.downloadBytes = downloadBytes
-    self.satisfiesPzs = satisfiesPzs
-    self.satisfiesPzi = satisfiesPzi
-    self.kmsKey = kmsKey
-    self.tags = tags
-    self.fileSystemProtocol = fileSystemProtocol
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Backup().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The backup state.

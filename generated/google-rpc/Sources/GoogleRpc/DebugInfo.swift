@@ -22,18 +22,25 @@ public struct DebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The stack trace entries indicating where the error occurred.
-  public var stackEntries: [Swift.String]
+  public var stackEntries: [Swift.String] = []
 
   /// Additional debugging information provided by the server.
-  public var detail: Swift.String
+  public var detail: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DebugInfo`.
-  public init(
-    stackEntries: [Swift.String] = [],
-    detail: Swift.String = Swift.String(),
-  ) {
-    self.stackEntries = stackEntries
-    self.detail = detail
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DebugInfo().with { $0.stackEntries = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.DebugInfo" }

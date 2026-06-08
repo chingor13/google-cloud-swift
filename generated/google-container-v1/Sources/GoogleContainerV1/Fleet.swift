@@ -24,31 +24,34 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The Fleet host project(project ID or project number) where this cluster
   /// will be registered to. This field cannot be changed after the cluster has
   /// been registered.
-  public var project: Swift.String
+  public var project: Swift.String = Swift.String()
 
   /// Output only. The full resource name of the registered fleet membership of
   /// the cluster, in the format
   /// `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
-  public var membership: Swift.String
+  public var membership: Swift.String = Swift.String()
 
   /// Output only. Whether the cluster has been registered through the fleet
   /// API.
-  public var preRegistered: Swift.Bool
+  public var preRegistered: Swift.Bool = Swift.Bool()
 
   /// The type of the cluster's fleet membership.
-  public var membershipType: Fleet.MembershipType
+  public var membershipType: Fleet.MembershipType = Fleet.MembershipType()
 
   /// Initialize a new instance of `Fleet`.
-  public init(
-    project: Swift.String = Swift.String(),
-    membership: Swift.String = Swift.String(),
-    preRegistered: Swift.Bool = Swift.Bool(),
-    membershipType: Fleet.MembershipType = Fleet.MembershipType(),
-  ) {
-    self.project = project
-    self.membership = membership
-    self.preRegistered = preRegistered
-    self.membershipType = membershipType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Fleet().with { $0.project = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// MembershipType describes if the membership supports all features or only

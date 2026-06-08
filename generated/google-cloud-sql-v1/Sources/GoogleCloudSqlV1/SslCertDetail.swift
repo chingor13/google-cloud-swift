@@ -23,19 +23,26 @@
     Sendable
   {
     /// The public information about the cert.
-    public var certInfo: SslCert?
+    public var certInfo: SslCert? = nil
 
     /// The private key for the client cert, in pem format.  Keep private in order
     /// to protect your security.
-    public var certPrivateKey: Swift.String
+    public var certPrivateKey: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SslCertDetail`.
-    public init(
-      certInfo: SslCert? = nil,
-      certPrivateKey: Swift.String = Swift.String(),
-    ) {
-      self.certInfo = certInfo
-      self.certPrivateKey = certPrivateKey
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SslCertDetail().with { $0.certInfo = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

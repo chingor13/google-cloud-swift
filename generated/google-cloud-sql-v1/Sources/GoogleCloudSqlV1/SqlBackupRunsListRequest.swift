@@ -24,29 +24,32 @@
   {
     /// Cloud SQL instance ID, or "-" for all instances. This does not include
     /// the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Maximum number of backup runs per response.
-    public var maxResults: Swift.Int32
+    public var maxResults: Swift.Int32 = Swift.Int32()
 
     /// A previously-returned page token representing part of the larger set of
     /// results to view.
-    public var pageToken: Swift.String
+    public var pageToken: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlBackupRunsListRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      maxResults: Swift.Int32 = Swift.Int32(),
-      pageToken: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.instance = instance
-      self.maxResults = maxResults
-      self.pageToken = pageToken
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlBackupRunsListRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

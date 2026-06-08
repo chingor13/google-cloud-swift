@@ -40,18 +40,25 @@ public struct EphemeralStorageLocalSsdConfig: Codable, Equatable, GoogleCloudWkt
   /// ssds), 0 will be provisioned. See
   /// https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
   /// for more info.
-  public var localSsdCount: Swift.Int32
+  public var localSsdCount: Swift.Int32 = Swift.Int32()
 
   /// Number of local SSDs to use for GKE Data Cache.
-  public var dataCacheCount: Swift.Int32
+  public var dataCacheCount: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `EphemeralStorageLocalSsdConfig`.
-  public init(
-    localSsdCount: Swift.Int32 = Swift.Int32(),
-    dataCacheCount: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.localSsdCount = localSsdCount
-    self.dataCacheCount = dataCacheCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EphemeralStorageLocalSsdConfig().with { $0.localSsdCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

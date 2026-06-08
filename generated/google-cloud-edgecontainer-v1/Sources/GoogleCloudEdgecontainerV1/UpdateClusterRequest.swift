@@ -26,25 +26,30 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// The fields specified in the update_mask are relative to the resource, not
   /// the full request. A field will be overwritten if it is in the mask. If the
   /// user does not provide a mask then all fields will be overwritten.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// The updated cluster.
-  public var cluster: Cluster?
+  public var cluster: Cluster? = nil
 
   /// A unique identifier for this request. Restricted to 36 ASCII characters.
   /// A random UUID is recommended.
   /// This request is only idempotent if `request_id` is provided.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UpdateClusterRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    cluster: Cluster? = nil,
-    requestId: Swift.String = Swift.String(),
-  ) {
-    self.updateMask = updateMask
-    self.cluster = cluster
-    self.requestId = requestId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateClusterRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

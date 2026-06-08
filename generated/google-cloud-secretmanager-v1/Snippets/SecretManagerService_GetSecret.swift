@@ -24,9 +24,8 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
   let response = try await client.getSecret(
-    request: GetSecretRequest(
-      name: "projects/\(projectId)/secrets/\(secretId)",
-    )
+    request: GetSecretRequest()
+      .with { $0.name = "projects/\(projectId)/secrets/\(secretId)" }
   )
   print("Success: \(response)")
 }

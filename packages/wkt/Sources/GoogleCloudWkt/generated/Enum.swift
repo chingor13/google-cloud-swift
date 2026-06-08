@@ -21,38 +21,37 @@ public struct Enum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Enum type name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Enum value definitions.
-  public var enumvalue: [EnumValue]
+  public var enumvalue: [EnumValue] = []
 
   /// Protocol buffer options.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// The source context.
-  public var sourceContext: SourceContext?
+  public var sourceContext: SourceContext? = nil
 
   /// The source syntax.
-  public var syntax: Syntax
+  public var syntax: Syntax = Syntax()
 
   /// The source edition string, only valid when syntax is SYNTAX_EDITIONS.
-  public var edition: Swift.String
+  public var edition: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Enum`.
-  public init(
-    name: Swift.String = Swift.String(),
-    enumvalue: [EnumValue] = [],
-    options: [Option] = [],
-    sourceContext: SourceContext? = nil,
-    syntax: Syntax = Syntax(),
-    edition: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.enumvalue = enumvalue
-    self.options = options
-    self.sourceContext = sourceContext
-    self.syntax = syntax
-    self.edition = edition
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Enum().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.Enum" }

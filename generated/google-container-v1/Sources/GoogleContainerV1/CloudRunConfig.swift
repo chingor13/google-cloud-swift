@@ -22,18 +22,25 @@ public struct CloudRunConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Whether Cloud Run addon is enabled for this cluster.
-  public var disabled: Swift.Bool
+  public var disabled: Swift.Bool = Swift.Bool()
 
   /// Which load balancer type is installed for Cloud Run.
-  public var loadBalancerType: CloudRunConfig.LoadBalancerType
+  public var loadBalancerType: CloudRunConfig.LoadBalancerType = CloudRunConfig.LoadBalancerType()
 
   /// Initialize a new instance of `CloudRunConfig`.
-  public init(
-    disabled: Swift.Bool = Swift.Bool(),
-    loadBalancerType: CloudRunConfig.LoadBalancerType = CloudRunConfig.LoadBalancerType(),
-  ) {
-    self.disabled = disabled
-    self.loadBalancerType = loadBalancerType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CloudRunConfig().with { $0.disabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Load balancer type of ingress service of Cloud Run.

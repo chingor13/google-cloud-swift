@@ -27,9 +27,8 @@ func sample(client: some Workflows, projectId: String, locationId: String, workf
   async throws
 {
   let response = try await client.getWorkflow(
-    request: GetWorkflowRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/workflows/\(workflowId)",
-    )
+    request: GetWorkflowRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/workflows/\(workflowId)" }
   )
   print("Success: \(response)")
 }

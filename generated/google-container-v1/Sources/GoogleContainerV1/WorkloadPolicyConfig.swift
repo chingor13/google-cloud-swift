@@ -22,19 +22,26 @@ public struct WorkloadPolicyConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// If true, workloads can use NET_ADMIN capability.
-  public var allowNetAdmin: Swift.Bool?
+  public var allowNetAdmin: Swift.Bool? = nil
 
   /// If true, enables the GCW Auditor that audits workloads on
   /// standard clusters.
-  public var autopilotCompatibilityAuditingEnabled: Swift.Bool?
+  public var autopilotCompatibilityAuditingEnabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `WorkloadPolicyConfig`.
-  public init(
-    allowNetAdmin: Swift.Bool? = nil,
-    autopilotCompatibilityAuditingEnabled: Swift.Bool? = nil,
-  ) {
-    self.allowNetAdmin = allowNetAdmin
-    self.autopilotCompatibilityAuditingEnabled = autopilotCompatibilityAuditingEnabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkloadPolicyConfig().with { $0.allowNetAdmin = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

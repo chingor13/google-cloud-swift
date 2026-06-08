@@ -22,15 +22,30 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithStruct()),
       (#"{"singular": null            }"#, MessageWithStruct()),
-      (#"{"singular": {}              }"#, MessageWithStruct(singular: [:])),
-      (#"{"singular": {"a": 42}       }"#, MessageWithStruct(singular: ["a": .number(42)])),
-      (#"{"singular": {"a": "hello"}  }"#, MessageWithStruct(singular: ["a": .string("hello")])),
-      (#"{"optional": {"a": 42}       }"#, MessageWithStruct(optional: ["a": .number(42)])),
+      (#"{"singular": {}              }"#, MessageWithStruct().with { $0.singular = [:] }),
+      (
+        #"{"singular": {"a": 42}       }"#,
+        MessageWithStruct().with { $0.singular = ["a": .number(42)] }
+      ),
+      (
+        #"{"singular": {"a": "hello"}  }"#,
+        MessageWithStruct().with { $0.singular = ["a": .string("hello")] }
+      ),
+      (
+        #"{"optional": {"a": 42}       }"#,
+        MessageWithStruct().with { $0.optional = ["a": .number(42)] }
+      ),
       (#"{"repeated": []              }"#, MessageWithStruct()),
-      (#"{"repeated": [{}]            }"#, MessageWithStruct(repeated: [[:]])),
-      (#"{"repeated": [{"a": 42}]     }"#, MessageWithStruct(repeated: [["a": .number(42)]])),
+      (#"{"repeated": [{}]            }"#, MessageWithStruct().with { $0.repeated = [[:]] }),
+      (
+        #"{"repeated": [{"a": 42}]     }"#,
+        MessageWithStruct().with { $0.repeated = [["a": .number(42)]] }
+      ),
       (#"{"map":      {}              }"#, MessageWithStruct()),
-      (#"{"map":      {"a": {"b": 42}}}"#, MessageWithStruct(map: ["a": ["b": .number(42)]])),
+      (
+        #"{"map":      {"a": {"b": 42}}}"#,
+        MessageWithStruct().with { $0.map = ["a": ["b": .number(42)]] }
+      ),
     ])
   func deserialize(input: String, want: MessageWithStruct) throws {
     let decoder = _ProtoJSONDecoder()

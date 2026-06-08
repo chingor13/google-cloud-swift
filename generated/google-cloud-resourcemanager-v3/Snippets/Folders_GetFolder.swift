@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some Folders, folderId: String) async throws {
   let response = try await client.getFolder(
-    request: GetFolderRequest(
-      name: "folders/\(folderId)",
-    )
+    request: GetFolderRequest()
+      .with { $0.name = "folders/\(folderId)" }
   )
   print("Success: \(response)")
 }

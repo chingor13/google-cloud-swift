@@ -23,13 +23,22 @@ public struct TestIamPermissionsResponse: Codable, Equatable, GoogleCloudWkt._An
 {
   /// A subset of `TestPermissionsRequest.permissions` that the caller is
   /// allowed.
-  public var permissions: [Swift.String]
+  public var permissions: [Swift.String] = []
 
   /// Initialize a new instance of `TestIamPermissionsResponse`.
-  public init(
-    permissions: [Swift.String] = [],
-  ) {
-    self.permissions = permissions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TestIamPermissionsResponse().with { $0.permissions = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

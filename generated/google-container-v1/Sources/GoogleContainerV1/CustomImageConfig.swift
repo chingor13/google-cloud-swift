@@ -22,18 +22,25 @@ public struct CustomImageConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The name of the image to use for this node.
-  public var image: Swift.String
+  public var image: Swift.String = Swift.String()
 
   /// The project containing the image to use for this node.
-  public var imageProject: Swift.String
+  public var imageProject: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CustomImageConfig`.
-  public init(
-    image: Swift.String = Swift.String(),
-    imageProject: Swift.String = Swift.String(),
-  ) {
-    self.image = image
-    self.imageProject = imageProject
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CustomImageConfig().with { $0.image = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -26,9 +26,8 @@ import GoogleRpc
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.TagKeysClient()
   let items = try client.listTagKeys(
-    byItem: ListTagKeysRequest(
-      parent: "\(parent)",
-    )
+    byItem: ListTagKeysRequest()
+      .with { $0.parent = "\(parent)" }
   )
   for try await item in items {
     print("  \(item)")

@@ -22,13 +22,22 @@ public struct WorkloadIdentityConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// The workload pool to attach all Kubernetes service accounts to.
-  public var workloadPool: Swift.String
+  public var workloadPool: Swift.String = Swift.String()
 
   /// Initialize a new instance of `WorkloadIdentityConfig`.
-  public init(
-    workloadPool: Swift.String = Swift.String(),
-  ) {
-    self.workloadPool = workloadPool
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkloadIdentityConfig().with { $0.workloadPool = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

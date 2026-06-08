@@ -23,25 +23,31 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Output only. State of the QueuedResource request.
-  public var state: QueuedResourceState.State
+  public var state: QueuedResourceState.State = QueuedResourceState.State()
 
   /// Output only. The initiator of the QueuedResources's current state. Used to
   /// indicate whether the SUSPENDING/SUSPENDED state was initiated by the user
   /// or the service.
-  public var stateInitiator: QueuedResourceState.StateInitiator
+  public var stateInitiator: QueuedResourceState.StateInitiator =
+    QueuedResourceState.StateInitiator()
 
   /// Further data for the state.
-  public var stateData: OneOf_StateData?
+  public var stateData: OneOf_StateData? = nil
 
   /// Initialize a new instance of `QueuedResourceState`.
-  public init(
-    state: QueuedResourceState.State = QueuedResourceState.State(),
-    stateInitiator: QueuedResourceState.StateInitiator = QueuedResourceState.StateInitiator(),
-    stateData: OneOf_StateData? = nil,
-  ) {
-    self.state = state
-    self.stateInitiator = stateInitiator
-    self.stateData = stateData
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = QueuedResourceState().with { $0.state = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -148,7 +154,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `CreatingData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CreatingData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -167,7 +185,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `AcceptedData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AcceptedData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -186,7 +216,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `ProvisioningData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ProvisioningData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -206,13 +248,22 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
   {
     /// Output only. The error that caused the queued resource to enter the
     /// FAILED state.
-    public var error: GoogleRpc.Status?
+    public var error: GoogleRpc.Status? = nil
 
     /// Initialize a new instance of `FailedData`.
-    public init(
-      error: GoogleRpc.Status? = nil,
-    ) {
-      self.error = error
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FailedData().with { $0.error = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -231,7 +282,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `DeletingData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DeletingData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -250,7 +313,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `ActiveData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ActiveData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -269,7 +344,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `SuspendingData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SuspendingData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -288,7 +375,19 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     Sendable
   {
     /// Initialize a new instance of `SuspendedData`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SuspendedData().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

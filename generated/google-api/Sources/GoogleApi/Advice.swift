@@ -24,13 +24,22 @@ public struct Advice: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Useful description for why this advice was applied and what actions should
   /// be taken to mitigate any implied risks.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Advice`.
-  public init(
-    description: Swift.String = Swift.String(),
-  ) {
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Advice().with { $0.description = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Advice" }

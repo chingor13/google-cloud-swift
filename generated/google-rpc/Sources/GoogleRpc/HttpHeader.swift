@@ -22,18 +22,25 @@ public struct HttpHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP header key. It is case insensitive.
-  public var key: Swift.String
+  public var key: Swift.String = Swift.String()
 
   /// The HTTP header value.
-  public var value: Swift.String
+  public var value: Swift.String = Swift.String()
 
   /// Initialize a new instance of `HttpHeader`.
-  public init(
-    key: Swift.String = Swift.String(),
-    value: Swift.String = Swift.String(),
-  ) {
-    self.key = key
-    self.value = value
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HttpHeader().with { $0.key = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.HttpHeader" }

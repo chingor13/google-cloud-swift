@@ -23,18 +23,25 @@ public struct UpdateSnapshotRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. Mask of fields to update. At least one path must be supplied in
   /// this field.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Required. A snapshot resource.
-  public var snapshot: Snapshot?
+  public var snapshot: Snapshot? = nil
 
   /// Initialize a new instance of `UpdateSnapshotRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    snapshot: Snapshot? = nil,
-  ) {
-    self.updateMask = updateMask
-    self.snapshot = snapshot
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateSnapshotRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

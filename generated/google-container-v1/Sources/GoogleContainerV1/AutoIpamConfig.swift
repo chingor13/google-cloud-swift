@@ -22,13 +22,22 @@ public struct AutoIpamConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The flag that enables Auto IPAM on this cluster
-  public var enabled: Swift.Bool?
+  public var enabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `AutoIpamConfig`.
-  public init(
-    enabled: Swift.Bool? = nil,
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AutoIpamConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

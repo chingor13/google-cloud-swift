@@ -26,7 +26,7 @@ public struct ShieldedInstanceConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Secure Boot helps ensure that the system only runs authentic software by
   /// verifying the digital signature of all boot components, and halting the
   /// boot process if signature verification fails.
-  public var enableSecureBoot: Swift.Bool
+  public var enableSecureBoot: Swift.Bool = Swift.Bool()
 
   /// Defines whether the instance has integrity monitoring enabled.
   ///
@@ -34,15 +34,22 @@ public struct ShieldedInstanceConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// The attestation is performed against the integrity policy baseline. This
   /// baseline is initially derived from the implicitly trusted boot image when
   /// the instance is created.
-  public var enableIntegrityMonitoring: Swift.Bool
+  public var enableIntegrityMonitoring: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ShieldedInstanceConfig`.
-  public init(
-    enableSecureBoot: Swift.Bool = Swift.Bool(),
-    enableIntegrityMonitoring: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enableSecureBoot = enableSecureBoot
-    self.enableIntegrityMonitoring = enableIntegrityMonitoring
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ShieldedInstanceConfig().with { $0.enableSecureBoot = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

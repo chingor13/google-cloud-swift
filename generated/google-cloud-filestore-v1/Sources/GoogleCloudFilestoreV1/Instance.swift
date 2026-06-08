@@ -23,53 +23,53 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The resource name of the instance, in the format
   /// `projects/{project}/locations/{location}/instances/{instance}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The description of the instance (2048 characters or less).
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. The instance state.
-  public var state: Instance.State
+  public var state: Instance.State = Instance.State()
 
   /// Output only. Additional information about the instance state, if available.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. The time when the instance was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The service tier of the instance.
-  public var tier: Instance.Tier
+  public var tier: Instance.Tier = Instance.Tier()
 
   /// Resource labels to represent user provided metadata.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// File system shares on the instance.
   /// For this version, only a single file share is supported.
-  public var fileShares: [FileShareConfig]
+  public var fileShares: [FileShareConfig] = []
 
   /// VPC networks to which the instance is connected.
   /// For this version, only a single network is supported.
-  public var networks: [NetworkConfig]
+  public var networks: [NetworkConfig] = []
 
   /// Server-specified ETag for the instance resource to prevent simultaneous
   /// updates from overwriting each other.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: GoogleCloudWkt.BoolValue?
+  public var satisfiesPzs: GoogleCloudWkt.BoolValue? = nil
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzi: Swift.Bool
+  public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
   /// KMS key name used for data encryption.
-  public var kmsKeyName: Swift.String
+  public var kmsKeyName: Swift.String = Swift.String()
 
   /// Output only. Field indicates all the reasons the instance is in "SUSPENDED"
   /// state.
-  public var suspensionReasons: [Instance.SuspensionReason]
+  public var suspensionReasons: [Instance.SuspensionReason] = []
 
   /// Optional. Replication configuration.
-  public var replication: Replication?
+  public var replication: Replication? = nil
 
   /// Optional. Input only. Immutable. Tag key-value pairs bound to this
   /// resource. Each key must be a namespaced name and each value a short name.
@@ -81,77 +81,44 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
   /// - Short name:
   /// https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Immutable. The protocol indicates the access protocol for all shares in the
   /// instance. This field is immutable and it cannot be changed after the
   /// instance has been created. Default value: `NFS_V3`.
-  public var `protocol`: Instance.FileProtocol
+  public var `protocol`: Instance.FileProtocol = Instance.FileProtocol()
 
   /// Output only. Indicates whether this instance supports configuring its
   /// performance. If true, the user can configure the instance's performance by
   /// using the 'performance_config' field.
-  public var customPerformanceSupported: Swift.Bool
+  public var customPerformanceSupported: Swift.Bool = Swift.Bool()
 
   /// Optional. Used to configure performance.
-  public var performanceConfig: Instance.PerformanceConfig?
+  public var performanceConfig: Instance.PerformanceConfig? = nil
 
   /// Output only. Used for getting performance limits.
-  public var performanceLimits: Instance.PerformanceLimits?
+  public var performanceLimits: Instance.PerformanceLimits? = nil
 
   /// Optional. Indicates whether the instance is protected against deletion.
-  public var deletionProtectionEnabled: Swift.Bool
+  public var deletionProtectionEnabled: Swift.Bool = Swift.Bool()
 
   /// Optional. The reason for enabling deletion protection.
-  public var deletionProtectionReason: Swift.String
+  public var deletionProtectionReason: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Instance`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    state: Instance.State = Instance.State(),
-    statusMessage: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    tier: Instance.Tier = Instance.Tier(),
-    labels: [Swift.String: Swift.String] = [:],
-    fileShares: [FileShareConfig] = [],
-    networks: [NetworkConfig] = [],
-    etag: Swift.String = Swift.String(),
-    satisfiesPzs: GoogleCloudWkt.BoolValue? = nil,
-    satisfiesPzi: Swift.Bool = Swift.Bool(),
-    kmsKeyName: Swift.String = Swift.String(),
-    suspensionReasons: [Instance.SuspensionReason] = [],
-    replication: Replication? = nil,
-    tags: [Swift.String: Swift.String] = [:],
-    `protocol`: Instance.FileProtocol = Instance.FileProtocol(),
-    customPerformanceSupported: Swift.Bool = Swift.Bool(),
-    performanceConfig: Instance.PerformanceConfig? = nil,
-    performanceLimits: Instance.PerformanceLimits? = nil,
-    deletionProtectionEnabled: Swift.Bool = Swift.Bool(),
-    deletionProtectionReason: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.description = description
-    self.state = state
-    self.statusMessage = statusMessage
-    self.createTime = createTime
-    self.tier = tier
-    self.labels = labels
-    self.fileShares = fileShares
-    self.networks = networks
-    self.etag = etag
-    self.satisfiesPzs = satisfiesPzs
-    self.satisfiesPzi = satisfiesPzi
-    self.kmsKeyName = kmsKeyName
-    self.suspensionReasons = suspensionReasons
-    self.replication = replication
-    self.tags = tags
-    self.`protocol` = `protocol`
-    self.customPerformanceSupported = customPerformanceSupported
-    self.performanceConfig = performanceConfig
-    self.performanceLimits = performanceLimits
-    self.deletionProtectionEnabled = deletionProtectionEnabled
-    self.deletionProtectionReason = deletionProtectionReason
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Instance().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -245,13 +212,22 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Required. Maximum IOPS per TiB.
-    public var maxIopsPerTb: Swift.Int64
+    public var maxIopsPerTb: Swift.Int64 = Swift.Int64()
 
     /// Initialize a new instance of `IOPSPerTB`.
-    public init(
-      maxIopsPerTb: Swift.Int64 = Swift.Int64(),
-    ) {
-      self.maxIopsPerTb = maxIopsPerTb
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = IOPSPerTB().with { $0.maxIopsPerTb = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -270,13 +246,22 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Required. Maximum IOPS.
-    public var maxIops: Swift.Int64
+    public var maxIops: Swift.Int64 = Swift.Int64()
 
     /// Initialize a new instance of `FixedIOPS`.
-    public init(
-      maxIops: Swift.Int64 = Swift.Int64(),
-    ) {
-      self.maxIops = maxIops
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FixedIOPS().with { $0.maxIops = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -300,13 +285,22 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public struct PerformanceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var mode: OneOf_Mode?
+    public var mode: OneOf_Mode? = nil
 
     /// Initialize a new instance of `PerformanceConfig`.
-    public init(
-      mode: OneOf_Mode? = nil,
-    ) {
-      self.mode = mode
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PerformanceConfig().with { $0.iopsPerTb = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -393,33 +387,34 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Output only. The max IOPS.
-    public var maxIops: Swift.Int64
+    public var maxIops: Swift.Int64 = Swift.Int64()
 
     /// Output only. The max read IOPS.
-    public var maxReadIops: Swift.Int64
+    public var maxReadIops: Swift.Int64 = Swift.Int64()
 
     /// Output only. The max write IOPS.
-    public var maxWriteIops: Swift.Int64
+    public var maxWriteIops: Swift.Int64 = Swift.Int64()
 
     /// Output only. The max read throughput in bytes per second.
-    public var maxReadThroughputBps: Swift.Int64
+    public var maxReadThroughputBps: Swift.Int64 = Swift.Int64()
 
     /// Output only. The max write throughput in bytes per second.
-    public var maxWriteThroughputBps: Swift.Int64
+    public var maxWriteThroughputBps: Swift.Int64 = Swift.Int64()
 
     /// Initialize a new instance of `PerformanceLimits`.
-    public init(
-      maxIops: Swift.Int64 = Swift.Int64(),
-      maxReadIops: Swift.Int64 = Swift.Int64(),
-      maxWriteIops: Swift.Int64 = Swift.Int64(),
-      maxReadThroughputBps: Swift.Int64 = Swift.Int64(),
-      maxWriteThroughputBps: Swift.Int64 = Swift.Int64(),
-    ) {
-      self.maxIops = maxIops
-      self.maxReadIops = maxReadIops
-      self.maxWriteIops = maxWriteIops
-      self.maxReadThroughputBps = maxReadThroughputBps
-      self.maxWriteThroughputBps = maxWriteThroughputBps
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PerformanceLimits().with { $0.maxIops = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

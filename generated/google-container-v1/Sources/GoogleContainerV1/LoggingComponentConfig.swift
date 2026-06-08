@@ -22,13 +22,22 @@ public struct LoggingComponentConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
   Sendable
 {
   /// Select components to collect logs. An empty set would disable all logging.
-  public var enableComponents: [LoggingComponentConfig.Component]
+  public var enableComponents: [LoggingComponentConfig.Component] = []
 
   /// Initialize a new instance of `LoggingComponentConfig`.
-  public init(
-    enableComponents: [LoggingComponentConfig.Component] = [],
-  ) {
-    self.enableComponents = enableComponents
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LoggingComponentConfig().with { $0.enableComponents = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// GKE components exposing logs

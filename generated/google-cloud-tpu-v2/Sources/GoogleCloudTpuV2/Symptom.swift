@@ -22,28 +22,31 @@ public struct Symptom: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Timestamp when the Symptom is created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Type of the Symptom.
-  public var symptomType: Symptom.SymptomType
+  public var symptomType: Symptom.SymptomType = Symptom.SymptomType()
 
   /// Detailed information of the current Symptom.
-  public var details: Swift.String
+  public var details: Swift.String = Swift.String()
 
   /// A string used to uniquely distinguish a worker within a TPU node.
-  public var workerId: Swift.String
+  public var workerId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Symptom`.
-  public init(
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    symptomType: Symptom.SymptomType = Symptom.SymptomType(),
-    details: Swift.String = Swift.String(),
-    workerId: Swift.String = Swift.String(),
-  ) {
-    self.createTime = createTime
-    self.symptomType = symptomType
-    self.details = details
-    self.workerId = workerId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Symptom().with { $0.createTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// SymptomType represents the different types of Symptoms that a TPU can be

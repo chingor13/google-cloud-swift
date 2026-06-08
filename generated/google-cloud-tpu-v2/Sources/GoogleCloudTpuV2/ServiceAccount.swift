@@ -23,19 +23,26 @@ public struct ServiceAccount: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Email address of the service account. If empty, default Compute service
   /// account will be used.
-  public var email: Swift.String
+  public var email: Swift.String = Swift.String()
 
   /// The list of scopes to be made available for this service account. If empty,
   /// access to all Cloud APIs will be allowed.
-  public var scope: [Swift.String]
+  public var scope: [Swift.String] = []
 
   /// Initialize a new instance of `ServiceAccount`.
-  public init(
-    email: Swift.String = Swift.String(),
-    scope: [Swift.String] = [],
-  ) {
-    self.email = email
-    self.scope = scope
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServiceAccount().with { $0.email = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

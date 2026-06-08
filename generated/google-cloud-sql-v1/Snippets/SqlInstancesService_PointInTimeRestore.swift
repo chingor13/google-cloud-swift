@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.pointInTimeRestore(
-      request: SqlInstancesPointInTimeRestoreRequest(/* set fields */
-      )
+      request: SqlInstancesPointInTimeRestoreRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

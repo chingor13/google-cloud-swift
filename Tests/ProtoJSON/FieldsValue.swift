@@ -22,22 +22,28 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithValue()),
       (#"{"singular": null         }"#, MessageWithValue()),
-      (#"{"singular": 42           }"#, MessageWithValue(singular: .number(42))),
-      (#"{"singular": "42"         }"#, MessageWithValue(singular: .string("42"))),
-      (#"{"singular": "hello"      }"#, MessageWithValue(singular: .string("hello"))),
-      (#"{"singular": true         }"#, MessageWithValue(singular: .bool(true))),
-      (#"{"singular": {}           }"#, MessageWithValue(singular: .object([:]))),
-      (#"{"singular": []           }"#, MessageWithValue(singular: .array([]))),
-      (#"{"optional": 42           }"#, MessageWithValue(optional: .number(42))),
+      (#"{"singular": 42           }"#, MessageWithValue().with { $0.singular = .number(42) }),
+      (#"{"singular": "42"         }"#, MessageWithValue().with { $0.singular = .string("42") }),
+      (#"{"singular": "hello"      }"#, MessageWithValue().with { $0.singular = .string("hello") }),
+      (#"{"singular": true         }"#, MessageWithValue().with { $0.singular = .bool(true) }),
+      (#"{"singular": {}           }"#, MessageWithValue().with { $0.singular = .object([:]) }),
+      (#"{"singular": []           }"#, MessageWithValue().with { $0.singular = .array([]) }),
+      (#"{"optional": 42           }"#, MessageWithValue().with { $0.optional = .number(42) }),
       (#"{"repeated": []           }"#, MessageWithValue()),
-      (#"{"repeated": [null]       }"#, MessageWithValue(repeated: [.null(NullValue())])),
+      (
+        #"{"repeated": [null]       }"#,
+        MessageWithValue().with { $0.repeated = [.null(NullValue())] }
+      ),
       (
         #"{"repeated": [42, "hello"]}"#,
-        MessageWithValue(repeated: [.number(42), .string("hello")])
+        MessageWithValue().with { $0.repeated = [.number(42), .string("hello")] }
       ),
       (#"{"map":      {}           }"#, MessageWithValue()),
-      (#"{"map":      {"a": 42}    }"#, MessageWithValue(map: ["a": .number(42)])),
-      (#"{"map":      {"a": null}  }"#, MessageWithValue(map: ["a": .null(NullValue())])),
+      (#"{"map":      {"a": 42}    }"#, MessageWithValue().with { $0.map = ["a": .number(42)] }),
+      (
+        #"{"map":      {"a": null}  }"#,
+        MessageWithValue().with { $0.map = ["a": .null(NullValue())] }
+      ),
     ])
   func deserialize(input: String, want: MessageWithValue) throws {
     let decoder = _ProtoJSONDecoder()

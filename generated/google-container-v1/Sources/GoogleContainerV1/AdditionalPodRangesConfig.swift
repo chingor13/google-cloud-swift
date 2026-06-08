@@ -23,18 +23,25 @@ public struct AdditionalPodRangesConfig: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// Name for pod secondary ipv4 range which has the actual range defined ahead.
-  public var podRangeNames: [Swift.String]
+  public var podRangeNames: [Swift.String] = []
 
   /// Output only. Information for additional pod range.
-  public var podRangeInfo: [RangeInfo]
+  public var podRangeInfo: [RangeInfo] = []
 
   /// Initialize a new instance of `AdditionalPodRangesConfig`.
-  public init(
-    podRangeNames: [Swift.String] = [],
-    podRangeInfo: [RangeInfo] = [],
-  ) {
-    self.podRangeNames = podRangeNames
-    self.podRangeInfo = podRangeInfo
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdditionalPodRangesConfig().with { $0.podRangeNames = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

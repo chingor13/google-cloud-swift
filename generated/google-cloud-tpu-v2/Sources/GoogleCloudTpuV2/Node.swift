@@ -22,34 +22,34 @@ public struct Node: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. Immutable. The name of the TPU.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The user-supplied description of the TPU. Maximum of 512 characters.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Optional. The type of hardware accelerators associated with this node.
-  public var acceleratorType: Swift.String
+  public var acceleratorType: Swift.String = Swift.String()
 
   /// Output only. The current state for the TPU Node.
-  public var state: Node.State
+  public var state: Node.State = Node.State()
 
   /// Output only. If this field is populated, it contains a description of why
   /// the TPU Node is unhealthy.
-  public var healthDescription: Swift.String
+  public var healthDescription: Swift.String = Swift.String()
 
   /// Required. The runtime version running in the Node.
-  public var runtimeVersion: Swift.String
+  public var runtimeVersion: Swift.String = Swift.String()
 
   /// Network configurations for the TPU node. network_config and network_configs
   /// are mutually exclusive, you can only specify one of them. If both are
   /// specified, an error will be returned.
-  public var networkConfig: NetworkConfig?
+  public var networkConfig: NetworkConfig? = nil
 
   /// Optional. Repeated network configurations for the TPU node. This field is
   /// used to specify multiple networks configs for the TPU node. network_config
   /// and network_configs are mutually exclusive, you can only specify one of
   /// them. If both are specified, an error will be returned.
-  public var networkConfigs: [NetworkConfig]
+  public var networkConfigs: [NetworkConfig] = []
 
   /// The CIDR block that the TPU node will use when selecting an IP address.
   /// This CIDR block must be a /29 block; the Compute Engine networks API
@@ -59,115 +59,76 @@ public struct Node: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// conflicts with any subnetworks in the user's provided network, or the
   /// provided network is peered with another network that is using that CIDR
   /// block.
-  public var cidrBlock: Swift.String
+  public var cidrBlock: Swift.String = Swift.String()
 
   /// The Google Cloud Platform Service Account to be used by the TPU node VMs.
   /// If None is specified, the default compute service account will be used.
-  public var serviceAccount: ServiceAccount?
+  public var serviceAccount: ServiceAccount? = nil
 
   /// Output only. The time when the node was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The scheduling options for this node.
-  public var schedulingConfig: SchedulingConfig?
+  public var schedulingConfig: SchedulingConfig? = nil
 
   /// Output only. The network endpoints where TPU workers can be accessed and
   /// sent work. It is recommended that runtime clients of the node reach out
   /// to the 0th entry in this map first.
-  public var networkEndpoints: [NetworkEndpoint]
+  public var networkEndpoints: [NetworkEndpoint] = []
 
   /// The health status of the TPU node.
-  public var health: Node.Health
+  public var health: Node.Health = Node.Health()
 
   /// Resource labels to represent user-provided metadata.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Custom metadata to apply to the TPU Node.
   /// Can set startup-script and shutdown-script
-  public var metadata: [Swift.String: Swift.String]
+  public var metadata: [Swift.String: Swift.String] = [:]
 
   /// Tags to apply to the TPU Node. Tags are used to identify valid sources or
   /// targets for network firewalls.
-  public var tags: [Swift.String]
+  public var tags: [Swift.String] = []
 
   /// Output only. The unique identifier for the TPU Node.
-  public var id: Swift.Int64
+  public var id: Swift.Int64 = Swift.Int64()
 
   /// The additional data disks for the Node.
-  public var dataDisks: [AttachedDisk]
+  public var dataDisks: [AttachedDisk] = []
 
   /// Output only. The API version that created this Node.
-  public var apiVersion: Node.ApiVersion
+  public var apiVersion: Node.ApiVersion = Node.ApiVersion()
 
   /// Output only. The Symptoms that have occurred to the TPU Node.
-  public var symptoms: [Symptom]
+  public var symptoms: [Symptom] = []
 
   /// Shielded Instance options.
-  public var shieldedInstanceConfig: ShieldedInstanceConfig?
+  public var shieldedInstanceConfig: ShieldedInstanceConfig? = nil
 
   /// The AccleratorConfig for the TPU Node.
-  public var acceleratorConfig: AcceleratorConfig?
+  public var acceleratorConfig: AcceleratorConfig? = nil
 
   /// Output only. The qualified name of the QueuedResource that requested this
   /// Node.
-  public var queuedResource: Swift.String
+  public var queuedResource: Swift.String = Swift.String()
 
   /// Output only. Whether the Node belongs to a Multislice group.
-  public var multisliceNode: Swift.Bool
+  public var multisliceNode: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `Node`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    acceleratorType: Swift.String = Swift.String(),
-    state: Node.State = Node.State(),
-    healthDescription: Swift.String = Swift.String(),
-    runtimeVersion: Swift.String = Swift.String(),
-    networkConfig: NetworkConfig? = nil,
-    networkConfigs: [NetworkConfig] = [],
-    cidrBlock: Swift.String = Swift.String(),
-    serviceAccount: ServiceAccount? = nil,
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    schedulingConfig: SchedulingConfig? = nil,
-    networkEndpoints: [NetworkEndpoint] = [],
-    health: Node.Health = Node.Health(),
-    labels: [Swift.String: Swift.String] = [:],
-    metadata: [Swift.String: Swift.String] = [:],
-    tags: [Swift.String] = [],
-    id: Swift.Int64 = Swift.Int64(),
-    dataDisks: [AttachedDisk] = [],
-    apiVersion: Node.ApiVersion = Node.ApiVersion(),
-    symptoms: [Symptom] = [],
-    shieldedInstanceConfig: ShieldedInstanceConfig? = nil,
-    acceleratorConfig: AcceleratorConfig? = nil,
-    queuedResource: Swift.String = Swift.String(),
-    multisliceNode: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.description = description
-    self.acceleratorType = acceleratorType
-    self.state = state
-    self.healthDescription = healthDescription
-    self.runtimeVersion = runtimeVersion
-    self.networkConfig = networkConfig
-    self.networkConfigs = networkConfigs
-    self.cidrBlock = cidrBlock
-    self.serviceAccount = serviceAccount
-    self.createTime = createTime
-    self.schedulingConfig = schedulingConfig
-    self.networkEndpoints = networkEndpoints
-    self.health = health
-    self.labels = labels
-    self.metadata = metadata
-    self.tags = tags
-    self.id = id
-    self.dataDisks = dataDisks
-    self.apiVersion = apiVersion
-    self.symptoms = symptoms
-    self.shieldedInstanceConfig = shieldedInstanceConfig
-    self.acceleratorConfig = acceleratorConfig
-    self.queuedResource = queuedResource
-    self.multisliceNode = multisliceNode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Node().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Represents the different states of a TPU node during its lifecycle.

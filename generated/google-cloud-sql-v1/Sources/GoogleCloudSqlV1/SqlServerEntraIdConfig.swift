@@ -23,23 +23,28 @@
     Sendable
   {
     /// Output only. This is always sql#sqlServerEntraIdConfig
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Optional. The tenant ID for the Entra ID configuration.
-    public var tenantId: Swift.String
+    public var tenantId: Swift.String = Swift.String()
 
     /// Optional. The application ID for the Entra ID configuration.
-    public var applicationId: Swift.String
+    public var applicationId: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlServerEntraIdConfig`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      tenantId: Swift.String = Swift.String(),
-      applicationId: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.tenantId = tenantId
-      self.applicationId = applicationId
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlServerEntraIdConfig().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

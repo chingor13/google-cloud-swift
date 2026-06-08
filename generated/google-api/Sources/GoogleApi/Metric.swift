@@ -29,19 +29,26 @@ public struct Metric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `custom.googleapis.com/invoice/paid/amount`.
   ///
   /// [google.api.MetricDescriptor]: <doc:MetricDescriptor>
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// The set of label values that uniquely identify this metric. All
   /// labels listed in the `MetricDescriptor` must be assigned values.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `Metric`.
-  public init(
-    type: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-  ) {
-    self.type = type
-    self.labels = labels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Metric().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Metric" }

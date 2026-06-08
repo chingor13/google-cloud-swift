@@ -38,7 +38,7 @@ public struct OperationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// message name must be used (e.g. `google.protobuf.Struct`).
   ///
   /// Note: Altering this value constitutes a breaking change.
-  public var responseType: Swift.String
+  public var responseType: Swift.String = Swift.String()
 
   /// Required. The message name of the metadata type for this long-running
   /// operation.
@@ -47,15 +47,22 @@ public struct OperationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// message name must be used (e.g. `google.protobuf.Struct`).
   ///
   /// Note: Altering this value constitutes a breaking change.
-  public var metadataType: Swift.String
+  public var metadataType: Swift.String = Swift.String()
 
   /// Initialize a new instance of `OperationInfo`.
-  public init(
-    responseType: Swift.String = Swift.String(),
-    metadataType: Swift.String = Swift.String(),
-  ) {
-    self.responseType = responseType
-    self.metadataType = metadataType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = OperationInfo().with { $0.responseType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -22,33 +22,34 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// The time the operation was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The time the operation finished running.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Server-defined resource path for the target of the operation.
-  public var target: Swift.String
+  public var target: Swift.String = Swift.String()
 
   /// Name of the verb executed by the operation.
-  public var verb: Swift.String
+  public var verb: Swift.String = Swift.String()
 
   /// API version used to start the operation.
-  public var apiVersion: Swift.String
+  public var apiVersion: Swift.String = Swift.String()
 
   /// Initialize a new instance of `OperationMetadata`.
-  public init(
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-    target: Swift.String = Swift.String(),
-    verb: Swift.String = Swift.String(),
-    apiVersion: Swift.String = Swift.String(),
-  ) {
-    self.createTime = createTime
-    self.endTime = endTime
-    self.target = target
-    self.verb = verb
-    self.apiVersion = apiVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = OperationMetadata().with { $0.createTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

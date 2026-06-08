@@ -23,13 +23,22 @@ public struct AutoMonitoringConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Scope for GKE Workload Auto-Monitoring.
-  public var scope: AutoMonitoringConfig.Scope
+  public var scope: AutoMonitoringConfig.Scope = AutoMonitoringConfig.Scope()
 
   /// Initialize a new instance of `AutoMonitoringConfig`.
-  public init(
-    scope: AutoMonitoringConfig.Scope = AutoMonitoringConfig.Scope(),
-  ) {
-    self.scope = scope
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AutoMonitoringConfig().with { $0.scope = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Scope for applications monitored by Auto-Monitoring

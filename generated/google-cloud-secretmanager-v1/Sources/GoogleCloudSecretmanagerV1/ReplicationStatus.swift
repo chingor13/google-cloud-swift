@@ -28,13 +28,22 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var replicationStatus: OneOf_ReplicationStatus?
+  public var replicationStatus: OneOf_ReplicationStatus? = nil
 
   /// Initialize a new instance of `ReplicationStatus`.
-  public init(
-    replicationStatus: OneOf_ReplicationStatus? = nil,
-  ) {
-    self.replicationStatus = replicationStatus
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ReplicationStatus().with { $0.automatic = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -98,13 +107,22 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// populated if customer-managed encryption is used.
     ///
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-    public var customerManagedEncryption: CustomerManagedEncryptionStatus?
+    public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
     /// Initialize a new instance of `AutomaticStatus`.
-    public init(
-      customerManagedEncryption: CustomerManagedEncryptionStatus? = nil,
-    ) {
-      self.customerManagedEncryption = customerManagedEncryption
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AutomaticStatus().with { $0.customerManagedEncryption = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -134,13 +152,22 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     ///
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-    public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus]
+    public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus] = []
 
     /// Initialize a new instance of `UserManagedStatus`.
-    public init(
-      replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus] = [],
-    ) {
-      self.replicas = replicas
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UserManagedStatus().with { $0.replicas = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Describes the status of a user-managed replica for the
@@ -152,22 +179,29 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     {
       /// Output only. The canonical ID of the replica location.
       /// For example: `"us-east1"`.
-      public var location: Swift.String
+      public var location: Swift.String = Swift.String()
 
       /// Output only. The customer-managed encryption status of the
       /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
       /// populated if customer-managed encryption is used.
       ///
       /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-      public var customerManagedEncryption: CustomerManagedEncryptionStatus?
+      public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
       /// Initialize a new instance of `ReplicaStatus`.
-      public init(
-        location: Swift.String = Swift.String(),
-        customerManagedEncryption: CustomerManagedEncryptionStatus? = nil,
-      ) {
-        self.location = location
-        self.customerManagedEncryption = customerManagedEncryption
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = ReplicaStatus().with { $0.location = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

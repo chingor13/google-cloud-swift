@@ -23,18 +23,25 @@
     Sendable
   {
     /// Instance operation ID.
-    public var operation: Swift.String
+    public var operation: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlOperationsCancelRequest`.
-    public init(
-      operation: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.operation = operation
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlOperationsCancelRequest().with { $0.operation = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

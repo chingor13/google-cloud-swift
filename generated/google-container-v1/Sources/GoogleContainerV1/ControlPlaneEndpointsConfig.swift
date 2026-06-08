@@ -22,18 +22,25 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// DNS endpoint configuration.
-  public var dnsEndpointConfig: ControlPlaneEndpointsConfig.DNSEndpointConfig?
+  public var dnsEndpointConfig: ControlPlaneEndpointsConfig.DNSEndpointConfig? = nil
 
   /// IP endpoints configuration.
-  public var ipEndpointsConfig: ControlPlaneEndpointsConfig.IPEndpointsConfig?
+  public var ipEndpointsConfig: ControlPlaneEndpointsConfig.IPEndpointsConfig? = nil
 
   /// Initialize a new instance of `ControlPlaneEndpointsConfig`.
-  public init(
-    dnsEndpointConfig: ControlPlaneEndpointsConfig.DNSEndpointConfig? = nil,
-    ipEndpointsConfig: ControlPlaneEndpointsConfig.IPEndpointsConfig? = nil,
-  ) {
-    self.dnsEndpointConfig = dnsEndpointConfig
-    self.ipEndpointsConfig = ipEndpointsConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ControlPlaneEndpointsConfig().with { $0.dnsEndpointConfig = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes the configuration of a DNS endpoint.
@@ -47,29 +54,32 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
     /// [DNSEndpointConfig.allow_external_traffic][google.container.v1.ControlPlaneEndpointsConfig.DNSEndpointConfig.allow_external_traffic].
     ///
     /// [google.container.v1.ControlPlaneEndpointsConfig.DNSEndpointConfig.allow_external_traffic]: <doc:ControlPlaneEndpointsConfig/DNSEndpointConfig/allowExternalTraffic>
-    public var endpoint: Swift.String
+    public var endpoint: Swift.String = Swift.String()
 
     /// Controls whether user traffic is allowed over this endpoint. Note that
     /// Google-managed services may still use the endpoint even if this is false.
-    public var allowExternalTraffic: Swift.Bool?
+    public var allowExternalTraffic: Swift.Bool? = nil
 
     /// Controls whether the k8s token auth is allowed via DNS.
-    public var enableK8STokensViaDns: Swift.Bool?
+    public var enableK8STokensViaDns: Swift.Bool? = nil
 
     /// Controls whether the k8s certs auth is allowed via DNS.
-    public var enableK8SCertsViaDns: Swift.Bool?
+    public var enableK8SCertsViaDns: Swift.Bool? = nil
 
     /// Initialize a new instance of `DNSEndpointConfig`.
-    public init(
-      endpoint: Swift.String = Swift.String(),
-      allowExternalTraffic: Swift.Bool? = nil,
-      enableK8STokensViaDns: Swift.Bool? = nil,
-      enableK8SCertsViaDns: Swift.Bool? = nil,
-    ) {
-      self.endpoint = endpoint
-      self.allowExternalTraffic = allowExternalTraffic
-      self.enableK8STokensViaDns = enableK8STokensViaDns
-      self.enableK8SCertsViaDns = enableK8SCertsViaDns
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DNSEndpointConfig().with { $0.endpoint = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -114,13 +124,13 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
     Sendable
   {
     /// Controls whether to allow direct IP access.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// Controls whether the control plane allows access through a public IP.
     /// It is invalid to specify both
     /// [PrivateClusterConfig.enablePrivateEndpoint][] and this field at the same
     /// time.
-    public var enablePublicEndpoint: Swift.Bool?
+    public var enablePublicEndpoint: Swift.Bool? = nil
 
     /// Controls whether the control plane's private endpoint is accessible from
     /// sources in other regions.
@@ -129,47 +139,44 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
     /// and this field at the same time.
     ///
     /// [google.container.v1.PrivateClusterMasterGlobalAccessConfig.enabled]: <doc:PrivateClusterMasterGlobalAccessConfig/enabled>
-    public var globalAccess: Swift.Bool?
+    public var globalAccess: Swift.Bool? = nil
 
     /// Configuration of authorized networks. If enabled, restricts access to the
     /// control plane based on source IP.
     /// It is invalid to specify both
     /// [Cluster.masterAuthorizedNetworksConfig][] and this field at the same
     /// time.
-    public var authorizedNetworksConfig: MasterAuthorizedNetworksConfig?
+    public var authorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil
 
     /// Output only. The external IP address of this cluster's control plane.
     /// Only populated if enabled.
-    public var publicEndpoint: Swift.String
+    public var publicEndpoint: Swift.String = Swift.String()
 
     /// Output only. The internal IP address of this cluster's control plane.
     /// Only populated if enabled.
-    public var privateEndpoint: Swift.String
+    public var privateEndpoint: Swift.String = Swift.String()
 
     /// Subnet to provision the master's private endpoint during cluster
     /// creation. Specified in projects/*/regions/*/subnetworks/* format. It is
     /// invalid to specify both
     /// [PrivateClusterConfig.privateEndpointSubnetwork][] and this field at the
     /// same time.
-    public var privateEndpointSubnetwork: Swift.String
+    public var privateEndpointSubnetwork: Swift.String = Swift.String()
 
     /// Initialize a new instance of `IPEndpointsConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      enablePublicEndpoint: Swift.Bool? = nil,
-      globalAccess: Swift.Bool? = nil,
-      authorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil,
-      publicEndpoint: Swift.String = Swift.String(),
-      privateEndpoint: Swift.String = Swift.String(),
-      privateEndpointSubnetwork: Swift.String = Swift.String(),
-    ) {
-      self.enabled = enabled
-      self.enablePublicEndpoint = enablePublicEndpoint
-      self.globalAccess = globalAccess
-      self.authorizedNetworksConfig = authorizedNetworksConfig
-      self.publicEndpoint = publicEndpoint
-      self.privateEndpoint = privateEndpoint
-      self.privateEndpointSubnetwork = privateEndpointSubnetwork
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = IPEndpointsConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

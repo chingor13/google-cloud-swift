@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   try await client.cancelOperation(
-    request: CancelOperationRequest(/* set fields */
-    )
+    request: CancelOperationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success (no response expected)")
 }

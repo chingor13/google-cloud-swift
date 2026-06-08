@@ -24,15 +24,15 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The resource name of the workflow.
   /// Format: projects/{project}/locations/{location}/workflows/{workflow}.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Description of the workflow provided by the user.
   /// Must be at most 1000 Unicode characters long.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. State of the workflow deployment.
-  public var state: Workflow.State
+  public var state: Workflow.State = Workflow.State()
 
   /// Output only. The revision of the workflow.
   /// A new revision of a workflow is created as a result of updating the
@@ -48,19 +48,19 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.workflows.v1.Workflow.service_account]: <doc:Workflow/serviceAccount>
   /// [google.cloud.workflows.v1.Workflow.source_contents]: <doc:Workflow/sourceContents>
-  public var revisionId: Swift.String
+  public var revisionId: Swift.String = Swift.String()
 
   /// Output only. The timestamp for when the workflow was created.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The timestamp for when the workflow was last updated.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The timestamp for the latest revision of the workflow's
   /// creation.
-  public var revisionCreateTime: GoogleCloudWkt.Timestamp?
+  public var revisionCreateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this workflow.
   /// Labels can contain at most 64 entries. Keys and values can be no longer
@@ -68,7 +68,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// characters, underscores, and dashes. Label keys must start with a letter.
   /// International characters are allowed.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// The service account associated with the latest workflow version.
   /// This service account represents the identity of the workflow and determines
@@ -82,7 +82,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// If not provided, workflow will use the project's default service account.
   /// Modifying this field for an existing workflow results in a new workflow
   /// revision.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Optional. The resource name of a KMS crypto key used to encrypt or decrypt
   /// the data associated with the workflow.
@@ -95,92 +95,65 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If not provided, data associated with the workflow will not be
   /// CMEK-encrypted.
-  public var cryptoKeyName: Swift.String
+  public var cryptoKeyName: Swift.String = Swift.String()
 
   /// Output only. Error regarding the state of the workflow. For example, this
   /// field will have error details if the execution data is unavailable due to
   /// revoked KMS key permissions.
-  public var stateError: Workflow.StateError?
+  public var stateError: Workflow.StateError? = nil
 
   /// Optional. Describes the level of platform logging to apply to calls and
   /// call responses during executions of this workflow. If both the workflow and
   /// the execution specify a logging level, the execution level takes
   /// precedence.
-  public var callLogLevel: Workflow.CallLogLevel
+  public var callLogLevel: Workflow.CallLogLevel = Workflow.CallLogLevel()
 
   /// Optional. User-defined environment variables associated with this workflow
   /// revision. This map has a maximum length of 20. Each string can take up to
   /// 4KiB. Keys cannot be empty strings and cannot start with "GOOGLE" or
   /// "WORKFLOWS".
-  public var userEnvVars: [Swift.String: Swift.String]
+  public var userEnvVars: [Swift.String: Swift.String] = [:]
 
   /// Optional. Describes the execution history level to apply to this workflow.
-  public var executionHistoryLevel: ExecutionHistoryLevel
+  public var executionHistoryLevel: ExecutionHistoryLevel = ExecutionHistoryLevel()
 
   /// Output only. A list of all KMS crypto keys used to encrypt or decrypt the
   /// data associated with the workflow.
-  public var allKmsKeys: [Swift.String]
+  public var allKmsKeys: [Swift.String] = []
 
   /// Output only. A list of all KMS crypto key versions used to encrypt or
   /// decrypt the data associated with the workflow.
-  public var allKmsKeysVersions: [Swift.String]
+  public var allKmsKeysVersions: [Swift.String] = []
 
   /// Output only. The resource name of a KMS crypto key version used to encrypt
   /// or decrypt the data associated with the workflow.
   ///
   /// Format:
   /// projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}
-  public var cryptoKeyVersion: Swift.String
+  public var cryptoKeyVersion: Swift.String = Swift.String()
 
   /// Optional. Input only. Immutable. Tags associated with this workflow.
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Required. Location of the workflow source code.
   /// Modifying this field for an existing workflow results in a new workflow
   /// revision.
-  public var sourceCode: OneOf_SourceCode?
+  public var sourceCode: OneOf_SourceCode? = nil
 
   /// Initialize a new instance of `Workflow`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    state: Workflow.State = Workflow.State(),
-    revisionId: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    revisionCreateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    serviceAccount: Swift.String = Swift.String(),
-    cryptoKeyName: Swift.String = Swift.String(),
-    stateError: Workflow.StateError? = nil,
-    callLogLevel: Workflow.CallLogLevel = Workflow.CallLogLevel(),
-    userEnvVars: [Swift.String: Swift.String] = [:],
-    executionHistoryLevel: ExecutionHistoryLevel = ExecutionHistoryLevel(),
-    allKmsKeys: [Swift.String] = [],
-    allKmsKeysVersions: [Swift.String] = [],
-    cryptoKeyVersion: Swift.String = Swift.String(),
-    tags: [Swift.String: Swift.String] = [:],
-    sourceCode: OneOf_SourceCode? = nil,
-  ) {
-    self.name = name
-    self.description = description
-    self.state = state
-    self.revisionId = revisionId
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.revisionCreateTime = revisionCreateTime
-    self.labels = labels
-    self.serviceAccount = serviceAccount
-    self.cryptoKeyName = cryptoKeyName
-    self.stateError = stateError
-    self.callLogLevel = callLogLevel
-    self.userEnvVars = userEnvVars
-    self.executionHistoryLevel = executionHistoryLevel
-    self.allKmsKeys = allKmsKeys
-    self.allKmsKeysVersions = allKmsKeysVersions
-    self.cryptoKeyVersion = cryptoKeyVersion
-    self.tags = tags
-    self.sourceCode = sourceCode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Workflow().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -282,18 +255,25 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Provides specifics about the error.
-    public var details: Swift.String
+    public var details: Swift.String = Swift.String()
 
     /// The type of this state error.
-    public var type: Workflow.StateError.Type_
+    public var type: Workflow.StateError.Type_ = Workflow.StateError.Type_()
 
     /// Initialize a new instance of `StateError`.
-    public init(
-      details: Swift.String = Swift.String(),
-      type: Workflow.StateError.Type_ = Workflow.StateError.Type_(),
-    ) {
-      self.details = details
-      self.type = type
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = StateError().with { $0.details = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Describes the possibled types of a state error.

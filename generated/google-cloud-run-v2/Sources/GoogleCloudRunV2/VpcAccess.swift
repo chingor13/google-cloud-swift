@@ -27,25 +27,30 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// where `{project}` can be project id or number.
   /// For more information on sending traffic to a VPC network via a connector,
   /// visit https://cloud.google.com/run/docs/configuring/vpc-connectors.
-  public var connector: Swift.String
+  public var connector: Swift.String = Swift.String()
 
   /// Optional. Traffic VPC egress settings. If not provided, it defaults to
   /// PRIVATE_RANGES_ONLY.
-  public var egress: VpcAccess.VpcEgress
+  public var egress: VpcAccess.VpcEgress = VpcAccess.VpcEgress()
 
   /// Optional. Direct VPC egress settings. Currently only single network
   /// interface is supported.
-  public var networkInterfaces: [VpcAccess.NetworkInterface]
+  public var networkInterfaces: [VpcAccess.NetworkInterface] = []
 
   /// Initialize a new instance of `VpcAccess`.
-  public init(
-    connector: Swift.String = Swift.String(),
-    egress: VpcAccess.VpcEgress = VpcAccess.VpcEgress(),
-    networkInterfaces: [VpcAccess.NetworkInterface] = [],
-  ) {
-    self.connector = connector
-    self.egress = egress
-    self.networkInterfaces = networkInterfaces
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = VpcAccess().with { $0.connector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Direct VPC egress settings.
@@ -57,27 +62,32 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// If both network and subnetwork are specified, the given VPC subnetwork
     /// must belong to the given VPC network. If network is not specified, it
     /// will be looked up from the subnetwork.
-    public var network: Swift.String
+    public var network: Swift.String = Swift.String()
 
     /// Optional. The VPC subnetwork that the Cloud Run resource will get IPs
     /// from. At least one of network or subnetwork must be specified. If both
     /// network and subnetwork are specified, the given VPC subnetwork must
     /// belong to the given VPC network. If subnetwork is not specified, the
     /// subnetwork with the same name with the network will be used.
-    public var subnetwork: Swift.String
+    public var subnetwork: Swift.String = Swift.String()
 
     /// Optional. Network tags applied to this Cloud Run resource.
-    public var tags: [Swift.String]
+    public var tags: [Swift.String] = []
 
     /// Initialize a new instance of `NetworkInterface`.
-    public init(
-      network: Swift.String = Swift.String(),
-      subnetwork: Swift.String = Swift.String(),
-      tags: [Swift.String] = [],
-    ) {
-      self.network = network
-      self.subnetwork = subnetwork
-      self.tags = tags
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NetworkInterface().with { $0.network = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

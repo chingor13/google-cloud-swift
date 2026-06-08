@@ -25,29 +25,32 @@
     Sendable
   {
     /// This is always `sql#instancesList`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// List of warnings that occurred while handling the request.
-    public var warnings: [ApiWarning]
+    public var warnings: [ApiWarning] = []
 
     /// List of database instance resources.
-    public var items: [DatabaseInstance]
+    public var items: [DatabaseInstance] = []
 
     /// The continuation token, used to page through large result sets. Provide
     /// this value in a subsequent request to return the next page of results.
-    public var nextPageToken: Swift.String
+    public var nextPageToken: Swift.String = Swift.String()
 
     /// Initialize a new instance of `InstancesListResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      warnings: [ApiWarning] = [],
-      items: [DatabaseInstance] = [],
-      nextPageToken: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.warnings = warnings
-      self.items = items
-      self.nextPageToken = nextPageToken
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesListResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

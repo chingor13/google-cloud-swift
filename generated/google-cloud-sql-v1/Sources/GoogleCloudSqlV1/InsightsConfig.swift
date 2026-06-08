@@ -24,43 +24,42 @@
     Sendable
   {
     /// Whether Query Insights feature is enabled.
-    public var queryInsightsEnabled: Swift.Bool
+    public var queryInsightsEnabled: Swift.Bool = Swift.Bool()
 
     /// Whether Query Insights will record client address when enabled.
-    public var recordClientAddress: Swift.Bool
+    public var recordClientAddress: Swift.Bool = Swift.Bool()
 
     /// Whether Query Insights will record application tags from query when
     /// enabled.
-    public var recordApplicationTags: Swift.Bool
+    public var recordApplicationTags: Swift.Bool = Swift.Bool()
 
     /// Maximum query length stored in bytes. Default value: 1024 bytes.
     /// Range: 256-4500 bytes. Query lengths greater than this field value will be
     /// truncated to this value. When unset, query length will be the default
     /// value. Changing query length will restart the database.
-    public var queryStringLength: GoogleCloudWkt.Int32Value?
+    public var queryStringLength: GoogleCloudWkt.Int32Value? = nil
 
     /// Number of query execution plans captured by Insights per minute
     /// for all queries combined. Default is 5.
-    public var queryPlansPerMinute: GoogleCloudWkt.Int32Value?
+    public var queryPlansPerMinute: GoogleCloudWkt.Int32Value? = nil
 
     /// Optional. Whether enhanced query insights feature is enabled.
-    public var enhancedQueryInsightsEnabled: GoogleCloudWkt.BoolValue?
+    public var enhancedQueryInsightsEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Initialize a new instance of `InsightsConfig`.
-    public init(
-      queryInsightsEnabled: Swift.Bool = Swift.Bool(),
-      recordClientAddress: Swift.Bool = Swift.Bool(),
-      recordApplicationTags: Swift.Bool = Swift.Bool(),
-      queryStringLength: GoogleCloudWkt.Int32Value? = nil,
-      queryPlansPerMinute: GoogleCloudWkt.Int32Value? = nil,
-      enhancedQueryInsightsEnabled: GoogleCloudWkt.BoolValue? = nil,
-    ) {
-      self.queryInsightsEnabled = queryInsightsEnabled
-      self.recordClientAddress = recordClientAddress
-      self.recordApplicationTags = recordApplicationTags
-      self.queryStringLength = queryStringLength
-      self.queryPlansPerMinute = queryPlansPerMinute
-      self.enhancedQueryInsightsEnabled = enhancedQueryInsightsEnabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InsightsConfig().with { $0.queryInsightsEnabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -24,23 +24,28 @@
     Sendable
   {
     /// List of Entra ID certificates for the instance.
-    public var certs: [SslCert]
+    public var certs: [SslCert] = []
 
     /// The `sha1_fingerprint` of the active certificate from `certs`.
-    public var activeVersion: Swift.String
+    public var activeVersion: Swift.String = Swift.String()
 
     /// This is always `sql#instancesListEntraIdCertificates`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `InstancesListEntraIdCertificatesResponse`.
-    public init(
-      certs: [SslCert] = [],
-      activeVersion: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.certs = certs
-      self.activeVersion = activeVersion
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesListEntraIdCertificatesResponse().with { $0.certs = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

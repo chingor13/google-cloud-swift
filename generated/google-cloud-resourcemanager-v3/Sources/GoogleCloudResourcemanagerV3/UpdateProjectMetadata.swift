@@ -23,7 +23,19 @@ public struct UpdateProjectMetadata: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Initialize a new instance of `UpdateProjectMetadata`.
-  public init() {
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateProjectMetadata().with { $0.<placeholder> = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

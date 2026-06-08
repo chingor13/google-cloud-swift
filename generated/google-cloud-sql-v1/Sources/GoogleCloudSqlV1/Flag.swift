@@ -24,12 +24,12 @@
   {
     /// This is the name of the flag. Flag names always use underscores, not
     /// hyphens, for example: `max_allowed_packet`
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The type of the flag. Flags are typed to being `BOOLEAN`, `STRING`,
     /// `INTEGER` or `NONE`. `NONE` is used for flags that do not take a
     /// value, such as `skip_grant_tables`.
-    public var type: SqlFlagType
+    public var type: SqlFlagType = SqlFlagType()
 
     /// The database version this flag applies to. Can be
     /// MySQL instances: `MYSQL_8_0`, `MYSQL_8_0_18`, `MYSQL_8_0_26`, `MYSQL_5_7`,
@@ -41,64 +41,51 @@
     /// `SQLSERVER_2019_WEB`.
     /// See [the complete
     /// list](/sql/docs/mysql/admin-api/rest/v1/SqlDatabaseVersion).
-    public var appliesTo: [SqlDatabaseVersion]
+    public var appliesTo: [SqlDatabaseVersion] = []
 
     /// For `STRING` flags, a list of strings that the value can be set to.
-    public var allowedStringValues: [Swift.String]
+    public var allowedStringValues: [Swift.String] = []
 
     /// For `INTEGER` flags, the minimum allowed value.
-    public var minValue: GoogleCloudWkt.Int64Value?
+    public var minValue: GoogleCloudWkt.Int64Value? = nil
 
     /// For `INTEGER` flags, the maximum allowed value.
-    public var maxValue: GoogleCloudWkt.Int64Value?
+    public var maxValue: GoogleCloudWkt.Int64Value? = nil
 
     /// Indicates whether changing this flag will trigger a database restart. Only
     /// applicable to Second Generation instances.
-    public var requiresRestart: GoogleCloudWkt.BoolValue?
+    public var requiresRestart: GoogleCloudWkt.BoolValue? = nil
 
     /// This is always `sql#flag`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Whether or not the flag is considered in beta.
-    public var inBeta: GoogleCloudWkt.BoolValue?
+    public var inBeta: GoogleCloudWkt.BoolValue? = nil
 
     /// Use this field if only certain integers are accepted. Can be combined
     /// with min_value and max_value to add additional values.
-    public var allowedIntValues: [Swift.Int64]
+    public var allowedIntValues: [Swift.Int64] = []
 
     /// Scope of flag.
-    public var flagScope: SqlFlagScope
+    public var flagScope: SqlFlagScope = SqlFlagScope()
 
     /// Recommended flag value for UI display.
-    public var recommendedValue: OneOf_RecommendedValue?
+    public var recommendedValue: OneOf_RecommendedValue? = nil
 
     /// Initialize a new instance of `Flag`.
-    public init(
-      name: Swift.String = Swift.String(),
-      type: SqlFlagType = SqlFlagType(),
-      appliesTo: [SqlDatabaseVersion] = [],
-      allowedStringValues: [Swift.String] = [],
-      minValue: GoogleCloudWkt.Int64Value? = nil,
-      maxValue: GoogleCloudWkt.Int64Value? = nil,
-      requiresRestart: GoogleCloudWkt.BoolValue? = nil,
-      kind: Swift.String = Swift.String(),
-      inBeta: GoogleCloudWkt.BoolValue? = nil,
-      allowedIntValues: [Swift.Int64] = [],
-      flagScope: SqlFlagScope = SqlFlagScope(),
-      recommendedValue: OneOf_RecommendedValue? = nil,
-    ) {
-      self.name = name
-      self.type = type
-      self.appliesTo = appliesTo
-      self.allowedStringValues = allowedStringValues
-      self.minValue = minValue
-      self.maxValue = maxValue
-      self.requiresRestart = requiresRestart
-      self.kind = kind
-      self.inBeta = inBeta
-      self.allowedIntValues = allowedIntValues
-      self.flagScope = flagScope
-      self.recommendedValue = recommendedValue
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Flag().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

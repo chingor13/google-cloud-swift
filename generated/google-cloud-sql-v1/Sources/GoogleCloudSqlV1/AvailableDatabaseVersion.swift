@@ -23,24 +23,29 @@
     Sendable
   {
     /// The version's major version name.
-    public var majorVersion: Swift.String?
+    public var majorVersion: Swift.String? = nil
 
     /// The database version name. For MySQL 8.0, this string provides the database
     /// major and minor version.
-    public var name: Swift.String?
+    public var name: Swift.String? = nil
 
     /// The database version's display name.
-    public var displayName: Swift.String?
+    public var displayName: Swift.String? = nil
 
     /// Initialize a new instance of `AvailableDatabaseVersion`.
-    public init(
-      majorVersion: Swift.String? = nil,
-      name: Swift.String? = nil,
-      displayName: Swift.String? = nil,
-    ) {
-      self.majorVersion = majorVersion
-      self.name = name
-      self.displayName = displayName
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AvailableDatabaseVersion().with { $0.majorVersion = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

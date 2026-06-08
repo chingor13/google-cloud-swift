@@ -23,75 +23,60 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resource type associated with the upgrade.
-  public var resourceType: UpgradeResourceType
+  public var resourceType: UpgradeResourceType = UpgradeResourceType()
 
   /// The operation associated with this upgrade.
-  public var operation: Swift.String
+  public var operation: Swift.String = Swift.String()
 
   /// The time when the operation was started.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The time when the operation ended.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The current version before the upgrade.
-  public var currentVersion: Swift.String
+  public var currentVersion: Swift.String = Swift.String()
 
   /// The target version for the upgrade.
-  public var targetVersion: Swift.String
+  public var targetVersion: Swift.String = Swift.String()
 
   /// Optional relative path to the resource. For example in node pool upgrades,
   /// the relative path of the node pool.
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// Output only. The state of the upgrade.
-  public var state: UpgradeInfoEvent.State
+  public var state: UpgradeInfoEvent.State = UpgradeInfoEvent.State()
 
   /// The end of standard support timestamp.
-  public var standardSupportEndTime: GoogleCloudWkt.Timestamp?
+  public var standardSupportEndTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The end of extended support timestamp.
-  public var extendedSupportEndTime: GoogleCloudWkt.Timestamp?
+  public var extendedSupportEndTime: GoogleCloudWkt.Timestamp? = nil
 
   /// A brief description of the event.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// The type of the event.
-  public var eventType: UpgradeInfoEvent.EventType
+  public var eventType: UpgradeInfoEvent.EventType = UpgradeInfoEvent.EventType()
 
   /// The information about the disruption event. This field is only populated
   /// when event_type is DISRUPTION_EVENT.
-  public var disruptionEvent: DisruptionEvent?
+  public var disruptionEvent: DisruptionEvent? = nil
 
   /// Initialize a new instance of `UpgradeInfoEvent`.
-  public init(
-    resourceType: UpgradeResourceType = UpgradeResourceType(),
-    operation: Swift.String = Swift.String(),
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-    currentVersion: Swift.String = Swift.String(),
-    targetVersion: Swift.String = Swift.String(),
-    resource: Swift.String = Swift.String(),
-    state: UpgradeInfoEvent.State = UpgradeInfoEvent.State(),
-    standardSupportEndTime: GoogleCloudWkt.Timestamp? = nil,
-    extendedSupportEndTime: GoogleCloudWkt.Timestamp? = nil,
-    description: Swift.String = Swift.String(),
-    eventType: UpgradeInfoEvent.EventType = UpgradeInfoEvent.EventType(),
-    disruptionEvent: DisruptionEvent? = nil,
-  ) {
-    self.resourceType = resourceType
-    self.operation = operation
-    self.startTime = startTime
-    self.endTime = endTime
-    self.currentVersion = currentVersion
-    self.targetVersion = targetVersion
-    self.resource = resource
-    self.state = state
-    self.standardSupportEndTime = standardSupportEndTime
-    self.extendedSupportEndTime = extendedSupportEndTime
-    self.description = description
-    self.eventType = eventType
-    self.disruptionEvent = disruptionEvent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpgradeInfoEvent().with { $0.resourceType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The state of the upgrade.

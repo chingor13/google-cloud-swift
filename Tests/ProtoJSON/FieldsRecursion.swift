@@ -40,50 +40,61 @@ import GoogleCloudWkt
           }
         }
         """,
-        MessageWithRecursion(
-          singular: MessageWithRecursion.Level0(
-            level1: MessageWithRecursion.Level1(
-              recurse: MessageWithRecursion(
-                singular: MessageWithRecursion.Level0(
-                  side: MessageWithRecursion.NonRecursive(value: "depth-3")
-                )
-              )
-            )
-          )
-        )
+        MessageWithRecursion().with {
+          $0.singular = Recursive(
+            value: MessageWithRecursion.Level0().with {
+              $0.level1 = Recursive(
+                value: MessageWithRecursion.Level1().with {
+                  $0.recurse = Recursive(
+                    value: MessageWithRecursion().with {
+                      $0.singular = Recursive(
+                        value: MessageWithRecursion.Level0().with {
+                          $0.side = MessageWithRecursion.NonRecursive().with {
+                            $0.value = "depth-3"
+                          }
+                        })
+                    })
+                })
+            })
+        }
       ),
       // Optional recursive field
       (
         #"{"optional": {"side": {"value": "optional-side"}}}"#,
-        MessageWithRecursion(
-          optional: MessageWithRecursion.Level0(
-            side: MessageWithRecursion.NonRecursive(value: "optional-side")
-          )
-        )
+        MessageWithRecursion().with {
+          $0.optional = Recursive(
+            value: MessageWithRecursion.Level0().with {
+              $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "optional-side" }
+            })
+        }
       ),
       // Repeated recursive field
       (
         #"{"repeated": [{"side": {"value": "side-1"}}, {"side": {"value": "side-2"}}]}"#,
-        MessageWithRecursion(
-          repeated: [
-            MessageWithRecursion.Level0(side: MessageWithRecursion.NonRecursive(value: "side-1")),
-            MessageWithRecursion.Level0(side: MessageWithRecursion.NonRecursive(value: "side-2")),
+        MessageWithRecursion().with {
+          $0.repeated = [
+            MessageWithRecursion.Level0().with {
+              $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "side-1" }
+            },
+            MessageWithRecursion.Level0().with {
+              $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "side-2" }
+            },
           ]
-        )
+        }
       ),
       // Map recursive field
       (
         #"{"map": {"key1": {"side": {"value": "side-1"}}, "key2": {"side": {"value": "side-2"}}}}"#,
-        MessageWithRecursion(
-          map: [
-            "key1": MessageWithRecursion.Level0(
-              side: MessageWithRecursion.NonRecursive(value: "side-1")
-            ),
-            "key2": MessageWithRecursion.Level0(
-              side: MessageWithRecursion.NonRecursive(value: "side-2")
-            ),
+        MessageWithRecursion().with {
+          $0.map = [
+            "key1": MessageWithRecursion.Level0().with {
+              $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "side-1" }
+            },
+            "key2": MessageWithRecursion.Level0().with {
+              $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "side-2" }
+            },
           ]
-        )
+        }
       ),
     ])
   func deserialize(input: String, want: MessageWithRecursion) throws {
@@ -93,30 +104,35 @@ import GoogleCloudWkt
   }
 
   @Test func testRoundtripSerialization() throws {
-    let input = MessageWithRecursion(
-      singular: MessageWithRecursion.Level0(
-        level1: MessageWithRecursion.Level1(
-          recurse: MessageWithRecursion(
-            singular: MessageWithRecursion.Level0(
-              side: MessageWithRecursion.NonRecursive(value: "roundtrip")
-            )
-          )
-        )
-      ),
-      optional: MessageWithRecursion.Level0(
-        side: MessageWithRecursion.NonRecursive(value: "optional-roundtrip")
-      ),
-      repeated: [
-        MessageWithRecursion.Level0(
-          side: MessageWithRecursion.NonRecursive(value: "repeated-roundtrip")
-        )
-      ],
-      map: [
-        "mapkey": MessageWithRecursion.Level0(
-          side: MessageWithRecursion.NonRecursive(value: "map-roundtrip")
-        )
+    let input = MessageWithRecursion().with {
+      $0.singular = Recursive(
+        value: MessageWithRecursion.Level0().with {
+          $0.level1 = Recursive(
+            value: MessageWithRecursion.Level1().with {
+              $0.recurse = Recursive(
+                value: MessageWithRecursion().with {
+                  $0.singular = Recursive(
+                    value: MessageWithRecursion.Level0().with {
+                      $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "roundtrip" }
+                    })
+                })
+            })
+        })
+      $0.optional = Recursive(
+        value: MessageWithRecursion.Level0().with {
+          $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "optional-roundtrip" }
+        })
+      $0.repeated = [
+        MessageWithRecursion.Level0().with {
+          $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "repeated-roundtrip" }
+        }
       ]
-    )
+      $0.map = [
+        "mapkey": MessageWithRecursion.Level0().with {
+          $0.side = MessageWithRecursion.NonRecursive().with { $0.value = "map-roundtrip" }
+        }
+      ]
+    }
 
     let data = try JSONEncoder().encode(input)
     let decoded = try _ProtoJSONDecoder().decode(MessageWithRecursion.self, from: data)

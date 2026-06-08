@@ -22,28 +22,31 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// cluster_dns indicates which in-cluster DNS provider should be used.
-  public var clusterDns: DNSConfig.Provider
+  public var clusterDns: DNSConfig.Provider = DNSConfig.Provider()
 
   /// cluster_dns_scope indicates the scope of access to cluster DNS records.
-  public var clusterDnsScope: DNSConfig.DNSScope
+  public var clusterDnsScope: DNSConfig.DNSScope = DNSConfig.DNSScope()
 
   /// cluster_dns_domain is the suffix used for all cluster service records.
-  public var clusterDnsDomain: Swift.String
+  public var clusterDnsDomain: Swift.String = Swift.String()
 
   /// Optional. The domain used in Additive VPC scope.
-  public var additiveVpcScopeDnsDomain: Swift.String
+  public var additiveVpcScopeDnsDomain: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DNSConfig`.
-  public init(
-    clusterDns: DNSConfig.Provider = DNSConfig.Provider(),
-    clusterDnsScope: DNSConfig.DNSScope = DNSConfig.DNSScope(),
-    clusterDnsDomain: Swift.String = Swift.String(),
-    additiveVpcScopeDnsDomain: Swift.String = Swift.String(),
-  ) {
-    self.clusterDns = clusterDns
-    self.clusterDnsScope = clusterDnsScope
-    self.clusterDnsDomain = clusterDnsDomain
-    self.additiveVpcScopeDnsDomain = additiveVpcScopeDnsDomain
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DNSConfig().with { $0.clusterDns = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Provider lists the various in-cluster DNS providers.

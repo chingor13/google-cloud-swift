@@ -39,13 +39,22 @@ public struct GetPolicyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// To learn which resources support conditions in their IAM policies, see the
   /// [IAM
   /// documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-  public var requestedPolicyVersion: Swift.Int32
+  public var requestedPolicyVersion: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `GetPolicyOptions`.
-  public init(
-    requestedPolicyVersion: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.requestedPolicyVersion = requestedPolicyVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetPolicyOptions().with { $0.requestedPolicyVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

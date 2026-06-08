@@ -41,14 +41,14 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// the latest revision.
   ///
   /// All new revisions **must** be backward compatible with old revisions.
-  public var revision: Swift.Int32
+  public var revision: Swift.Int32 = Swift.Int32()
 
   /// Required. CLDR region code of the country/region of the address. This
   /// is never inferred and it is up to the user to ensure the value is
   /// correct. See https://cldr.unicode.org/ and
   /// https://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
   /// for details. Example: "CH" for Switzerland.
-  public var regionCode: Swift.String
+  public var regionCode: Swift.String = Swift.String()
 
   /// Optional. BCP-47 language code of the contents of this address (if
   /// known). This is often the UI language of the input form or is expected
@@ -62,20 +62,20 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// possibly incorrect default).
   ///
   /// Examples: "zh-Hant", "ja", "ja-Latn", "en".
-  public var languageCode: Swift.String
+  public var languageCode: Swift.String = Swift.String()
 
   /// Optional. Postal code of the address. Not all countries use or require
   /// postal codes to be present, but where they are used, they may trigger
   /// additional validation with other parts of the address (for example,
   /// state or zip code validation in the United States).
-  public var postalCode: Swift.String
+  public var postalCode: Swift.String = Swift.String()
 
   /// Optional. Additional, country-specific, sorting code. This is not used
   /// in most regions. Where it is used, the value is either a string like
   /// "CEDEX", optionally followed by a number (for example, "CEDEX 7"), or just
   /// a number alone, representing the "sector code" (Jamaica), "delivery area
   /// indicator" (Malawi) or "post office indicator" (Côte d'Ivoire).
-  public var sortingCode: Swift.String
+  public var sortingCode: Swift.String = Swift.String()
 
   /// Optional. Highest administrative subdivision which is used for postal
   /// addresses of a country or region.
@@ -84,17 +84,17 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// community (for example, "Barcelona" and not "Catalonia").
   /// Many countries don't use an administrative area in postal addresses. For
   /// example, in Switzerland, this should be left unpopulated.
-  public var administrativeArea: Swift.String
+  public var administrativeArea: Swift.String = Swift.String()
 
   /// Optional. Generally refers to the city or town portion of the address.
   /// Examples: US city, IT comune, UK post town.
   /// In regions of the world where localities are not well defined or do not fit
   /// into this structure well, leave `locality` empty and use `address_lines`.
-  public var locality: Swift.String
+  public var locality: Swift.String = Swift.String()
 
   /// Optional. Sublocality of the address.
   /// For example, this can be a neighborhood, borough, or district.
-  public var sublocality: Swift.String
+  public var sublocality: Swift.String = Swift.String()
 
   /// Unstructured address lines describing the lower levels of an address.
   ///
@@ -119,41 +119,30 @@ public struct PostalAddress: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// then geocoding is the recommended way to handle completely unstructured
   /// addresses (as opposed to guessing which parts of the address should be
   /// localities or administrative areas).
-  public var addressLines: [Swift.String]
+  public var addressLines: [Swift.String] = []
 
   /// Optional. The recipient at the address.
   /// This field may, under certain circumstances, contain multiline information.
   /// For example, it might contain "care of" information.
-  public var recipients: [Swift.String]
+  public var recipients: [Swift.String] = []
 
   /// Optional. The name of the organization at the address.
-  public var organization: Swift.String
+  public var organization: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PostalAddress`.
-  public init(
-    revision: Swift.Int32 = Swift.Int32(),
-    regionCode: Swift.String = Swift.String(),
-    languageCode: Swift.String = Swift.String(),
-    postalCode: Swift.String = Swift.String(),
-    sortingCode: Swift.String = Swift.String(),
-    administrativeArea: Swift.String = Swift.String(),
-    locality: Swift.String = Swift.String(),
-    sublocality: Swift.String = Swift.String(),
-    addressLines: [Swift.String] = [],
-    recipients: [Swift.String] = [],
-    organization: Swift.String = Swift.String(),
-  ) {
-    self.revision = revision
-    self.regionCode = regionCode
-    self.languageCode = languageCode
-    self.postalCode = postalCode
-    self.sortingCode = sortingCode
-    self.administrativeArea = administrativeArea
-    self.locality = locality
-    self.sublocality = sublocality
-    self.addressLines = addressLines
-    self.recipients = recipients
-    self.organization = organization
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PostalAddress().with { $0.revision = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.PostalAddress" }

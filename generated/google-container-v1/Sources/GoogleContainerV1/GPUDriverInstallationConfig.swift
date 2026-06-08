@@ -23,13 +23,22 @@ public struct GPUDriverInstallationConfig: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Mode for how the GPU driver is installed.
-  public var gpuDriverVersion: GPUDriverInstallationConfig.GPUDriverVersion?
+  public var gpuDriverVersion: GPUDriverInstallationConfig.GPUDriverVersion? = nil
 
   /// Initialize a new instance of `GPUDriverInstallationConfig`.
-  public init(
-    gpuDriverVersion: GPUDriverInstallationConfig.GPUDriverVersion? = nil,
-  ) {
-    self.gpuDriverVersion = gpuDriverVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GPUDriverInstallationConfig().with { $0.gpuDriverVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The GPU driver version to install.

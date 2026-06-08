@@ -21,23 +21,28 @@ public struct EnumValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Enum value name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Enum value number.
-  public var number: Swift.Int32
+  public var number: Swift.Int32 = Swift.Int32()
 
   /// Protocol buffer options.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// Initialize a new instance of `EnumValue`.
-  public init(
-    name: Swift.String = Swift.String(),
-    number: Swift.Int32 = Swift.Int32(),
-    options: [Option] = [],
-  ) {
-    self.name = name
-    self.number = number
-    self.options = options
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EnumValue().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.EnumValue" }

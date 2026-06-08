@@ -23,13 +23,22 @@
     Sendable
   {
     /// The values for the row.
-    public var values: [Value]
+    public var values: [Value] = []
 
     /// Initialize a new instance of `Row`.
-    public init(
-      values: [Value] = [],
-    ) {
-      self.values = values
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Row().with { $0.values = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.sql.v1.Row" }

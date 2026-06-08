@@ -24,33 +24,36 @@ public struct SecretEnvVar: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Name of the environment variable.
-  public var key: Swift.String
+  public var key: Swift.String = Swift.String()
 
   /// Project identifier (preferably project number but can also be the
   /// project ID) of the project that contains the secret. If not set, it is
   /// assumed that the secret is in the same project as the function.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Name of the secret in secret manager (not the full resource name).
-  public var secret: Swift.String
+  public var secret: Swift.String = Swift.String()
 
   /// Version of the secret (version number or the string 'latest'). It is
   /// recommended to use a numeric version for secret environment variables as
   /// any updates to the secret value is not reflected until new instances
   /// start.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SecretEnvVar`.
-  public init(
-    key: Swift.String = Swift.String(),
-    projectId: Swift.String = Swift.String(),
-    secret: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-  ) {
-    self.key = key
-    self.projectId = projectId
-    self.secret = secret
-    self.version = version
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecretEnvVar().with { $0.key = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

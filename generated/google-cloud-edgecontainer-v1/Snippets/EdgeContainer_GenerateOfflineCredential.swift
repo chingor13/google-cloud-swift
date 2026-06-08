@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some EdgeContainer) async throws {
   let response = try await client.generateOfflineCredential(
-    request: GenerateOfflineCredentialRequest(/* set fields */
-    )
+    request: GenerateOfflineCredentialRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

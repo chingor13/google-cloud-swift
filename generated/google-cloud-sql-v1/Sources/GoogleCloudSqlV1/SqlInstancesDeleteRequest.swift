@@ -23,32 +23,33 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance to be deleted.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Flag to opt-in for final backup. By default, it is turned off.
-    public var enableFinalBackup: Swift.Bool?
+    public var enableFinalBackup: Swift.Bool? = nil
 
     /// Optional. The description of the final backup.
-    public var finalBackupDescription: Swift.String
+    public var finalBackupDescription: Swift.String = Swift.String()
 
-    public var expiration: OneOf_Expiration?
+    public var expiration: OneOf_Expiration? = nil
 
     /// Initialize a new instance of `SqlInstancesDeleteRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      enableFinalBackup: Swift.Bool? = nil,
-      finalBackupDescription: Swift.String = Swift.String(),
-      expiration: OneOf_Expiration? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.enableFinalBackup = enableFinalBackup
-      self.finalBackupDescription = finalBackupDescription
-      self.expiration = expiration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesDeleteRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

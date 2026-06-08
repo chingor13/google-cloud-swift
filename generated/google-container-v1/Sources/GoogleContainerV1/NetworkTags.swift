@@ -23,13 +23,22 @@ public struct NetworkTags: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// List of network tags.
-  public var tags: [Swift.String]
+  public var tags: [Swift.String] = []
 
   /// Initialize a new instance of `NetworkTags`.
-  public init(
-    tags: [Swift.String] = [],
-  ) {
-    self.tags = tags
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkTags().with { $0.tags = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

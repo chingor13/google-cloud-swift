@@ -23,13 +23,22 @@ public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
 {
   /// PatchMode specifies how auto upgrade patch builds should be
   /// selected.
-  public var patchMode: GkeAutoUpgradeConfig.PatchMode
+  public var patchMode: GkeAutoUpgradeConfig.PatchMode = GkeAutoUpgradeConfig.PatchMode()
 
   /// Initialize a new instance of `GkeAutoUpgradeConfig`.
-  public init(
-    patchMode: GkeAutoUpgradeConfig.PatchMode = GkeAutoUpgradeConfig.PatchMode(),
-  ) {
-    self.patchMode = patchMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GkeAutoUpgradeConfig().with { $0.patchMode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// PatchMode specifies how auto upgrade patch builds should be

@@ -27,20 +27,20 @@ public struct ListWorkflowsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
 {
   /// Required. Project and location from which the workflows should be listed.
   /// Format: projects/{project}/locations/{location}
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Maximum number of workflows to return per call. The service might return
   /// fewer than this value even if not at the end of the collection. If a value
   /// is not specified, a default value of 500 is used. The maximum permitted
   /// value is 1000 and values greater than 1000 are coerced down to 1000.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// A page token, received from a previous `ListWorkflows` call.
   /// Provide this to retrieve the subsequent page.
   ///
   /// When paginating, all other parameters provided to `ListWorkflows` must
   /// match the call that provided the page token.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Filter to restrict results to specific workflows.
   /// For details, see <a href="https://google.aip.dev/160"
@@ -53,27 +53,28 @@ public struct ListWorkflowsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// or
   ///
   /// `createTime>"2023-08-01" AND state="FAILED"`
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Comma-separated list of fields that specify the order of the results.
   /// Default sorting order for a field is ascending. To specify descending order
   /// for a field, append a "desc" suffix.
   /// If not specified, the results are returned in an unspecified order.
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListWorkflowsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.filter = filter
-    self.orderBy = orderBy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListWorkflowsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

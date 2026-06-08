@@ -24,86 +24,69 @@ public struct Function: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// A user-defined name of the function. Function names must be unique
   /// globally and match pattern `projects/*/locations/*/functions/*`
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// User-provided description of a function.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Describes the Build step of the function that builds a container from the
   /// given source.
-  public var buildConfig: BuildConfig?
+  public var buildConfig: BuildConfig? = nil
 
   /// Describes the Service being deployed. Currently deploys services to Cloud
   /// Run (fully managed).
-  public var serviceConfig: ServiceConfig?
+  public var serviceConfig: ServiceConfig? = nil
 
   /// An Eventarc trigger managed by Google Cloud Functions that fires events in
   /// response to a condition in another service.
-  public var eventTrigger: EventTrigger?
+  public var eventTrigger: EventTrigger? = nil
 
   /// Output only. State of the function.
-  public var state: Function.State
+  public var state: Function.State = Function.State()
 
   /// Output only. The last update timestamp of a Cloud Function.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this Cloud Function.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. State Messages for this Cloud Function.
-  public var stateMessages: [StateMessage]
+  public var stateMessages: [StateMessage] = []
 
   /// Describe whether the function is 1st Gen or 2nd Gen.
-  public var environment: Environment
+  public var environment: Environment = Environment()
 
   /// Output only. The deployed url for the function.
-  public var url: Swift.String
+  public var url: Swift.String = Swift.String()
 
   /// Resource name of a KMS crypto key (managed by the user) used to
   /// encrypt/decrypt function resources.
   ///
   /// It must match the pattern
   /// `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
-  public var kmsKeyName: Swift.String
+  public var kmsKeyName: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. The create timestamp of a Cloud Function. This is only
   /// applicable to 2nd Gen functions.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `Function`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    buildConfig: BuildConfig? = nil,
-    serviceConfig: ServiceConfig? = nil,
-    eventTrigger: EventTrigger? = nil,
-    state: Function.State = Function.State(),
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    stateMessages: [StateMessage] = [],
-    environment: Environment = Environment(),
-    url: Swift.String = Swift.String(),
-    kmsKeyName: Swift.String = Swift.String(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.name = name
-    self.description = description
-    self.buildConfig = buildConfig
-    self.serviceConfig = serviceConfig
-    self.eventTrigger = eventTrigger
-    self.state = state
-    self.updateTime = updateTime
-    self.labels = labels
-    self.stateMessages = stateMessages
-    self.environment = environment
-    self.url = url
-    self.kmsKeyName = kmsKeyName
-    self.satisfiesPzs = satisfiesPzs
-    self.createTime = createTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Function().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes the current state of the function.

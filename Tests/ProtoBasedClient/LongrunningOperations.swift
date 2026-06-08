@@ -33,22 +33,24 @@ public enum LongrunningOperations {
     let parent = "projects/\(projectId)/locations/\(location)"
 
     print("Testing createWorkflow()")
-    let create = CreateWorkflowRequest(
-      parent: parent,
-      workflow: Workflow(
-        description: "Test workflow created by integration test",
-        labels: ["integration-test": "true"],
-        sourceCode: .sourceContents(
+    let create = CreateWorkflowRequest().with {
+      $0.parent = parent
+      $0.workflowId = workflowId
+      $0.workflow = Workflow().with {
+        $0.description = "Test workflow created by integration test"
+        $0.labels = ["integration-test": "true"]
+        $0.sourceCode = .sourceContents(
           """
           - init:
               assign:
                 - message: "Hello World"
           - finish:
               return: ${message}
-          """)
-      ),
-      workflowId: workflowId
-    )
+          """
+        )
+      }
+    }
+
     print("create = \(create)")
 
     let createLro = try await client.createWorkflow(withPolling: create)
@@ -58,7 +60,7 @@ public enum LongrunningOperations {
 
     print("\nTesting deleteWorkflow() for \(workflow.name)")
     let deleteLro = try await client.deleteWorkflow(
-      withPolling: DeleteWorkflowRequest(name: workflow.name))
+      withPolling: DeleteWorkflowRequest().with { $0.name = workflow.name })
     _ = try await deleteLro.wait()
     print("deleteWorkflow() was successful")
   }

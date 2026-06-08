@@ -28,9 +28,8 @@ func sample(
   client: some CloudFilestoreManager, projectId: String, locationId: String, backupId: String
 ) async throws {
   let response = try await client.getBackup(
-    request: GetBackupRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)",
-    )
+    request: GetBackupRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)" }
   )
   print("Success: \(response)")
 }

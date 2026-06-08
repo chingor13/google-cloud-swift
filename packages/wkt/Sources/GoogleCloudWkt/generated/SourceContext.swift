@@ -23,13 +23,22 @@ public struct SourceContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The path-qualified name of the .proto file that contained the associated
   /// protobuf element.  For example: `"google/protobuf/source_context.proto"`.
-  public var fileName: Swift.String
+  public var fileName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SourceContext`.
-  public init(
-    fileName: Swift.String = Swift.String(),
-  ) {
-    self.fileName = fileName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SourceContext().with { $0.fileName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

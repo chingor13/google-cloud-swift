@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.reencrypt(
-      request: SqlInstancesReencryptRequest(/* set fields */
-      )
+      request: SqlInstancesReencryptRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

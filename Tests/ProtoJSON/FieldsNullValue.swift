@@ -24,9 +24,9 @@ import GoogleCloudWkt
       (#"{"singular": null        }"#, MessageWithNullValue()),
       (#"{"optional": null        }"#, MessageWithNullValue()),
       (#"{"repeated": []          }"#, MessageWithNullValue()),
-      (#"{"repeated": [null]      }"#, MessageWithNullValue(repeated: [NullValue()])),
+      (#"{"repeated": [null]      }"#, MessageWithNullValue().with { $0.repeated = [NullValue()] }),
       (#"{"map":      {}          }"#, MessageWithNullValue()),
-      (#"{"map":      {"a": null} }"#, MessageWithNullValue(map: ["a": NullValue()])),
+      (#"{"map":      {"a": null} }"#, MessageWithNullValue().with { $0.map = ["a": NullValue()] }),
     ])
   func deserialize(input: String, want: MessageWithNullValue) throws {
     let decoder = _ProtoJSONDecoder()

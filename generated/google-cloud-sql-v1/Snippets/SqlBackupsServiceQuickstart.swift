@@ -24,9 +24,8 @@
   func sample(projectId: String, ) async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlBackupsServiceClient()
     let items = try client.listBackups(
-      byItem: ListBackupsRequest(
-        parent: "projects/\(projectId)",
-      )
+      byItem: ListBackupsRequest()
+        .with { $0.parent = "projects/\(projectId)" }
     )
     for try await item in items {
       print("  \(item)")

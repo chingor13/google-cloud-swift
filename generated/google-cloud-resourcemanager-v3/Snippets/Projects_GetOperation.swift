@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Projects) async throws {
   let response = try await client.getOperation(
-    request: GetOperationRequest(/* set fields */
-    )
+    request: GetOperationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

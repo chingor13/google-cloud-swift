@@ -22,13 +22,22 @@ public struct GPUDirectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The type of GPU direct strategy to enable on the node pool.
-  public var gpuDirectStrategy: GPUDirectConfig.GPUDirectStrategy?
+  public var gpuDirectStrategy: GPUDirectConfig.GPUDirectStrategy? = nil
 
   /// Initialize a new instance of `GPUDirectConfig`.
-  public init(
-    gpuDirectStrategy: GPUDirectConfig.GPUDirectStrategy? = nil,
-  ) {
-    self.gpuDirectStrategy = gpuDirectStrategy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GPUDirectConfig().with { $0.gpuDirectStrategy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Option for GPU direct Strategies

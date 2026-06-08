@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let response = try await client.createCluster(
-    request: CreateClusterRequest(/* set fields */
-    )
+    request: CreateClusterRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

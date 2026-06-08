@@ -24,17 +24,24 @@
   {
     /// Project ID of the project to which the newly created Cloud SQL instances
     /// should belong.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
-    public var body: DatabaseInstance?
+    public var body: DatabaseInstance? = nil
 
     /// Initialize a new instance of `SqlInstancesInsertRequest`.
-    public init(
-      project: Swift.String = Swift.String(),
-      body: DatabaseInstance? = nil,
-    ) {
-      self.project = project
-      self.body = body
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesInsertRequest().with { $0.project = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

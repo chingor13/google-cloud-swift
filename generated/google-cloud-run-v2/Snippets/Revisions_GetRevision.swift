@@ -27,10 +27,11 @@ func sample(
   revisionId: String
 ) async throws {
   let response = try await client.getRevision(
-    request: GetRevisionRequest(
-      name:
-        "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)/revisions/\(revisionId)",
-    )
+    request: GetRevisionRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)/revisions/\(revisionId)"
+      }
   )
   print("Success: \(response)")
 }

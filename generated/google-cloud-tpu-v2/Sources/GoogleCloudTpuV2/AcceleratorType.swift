@@ -22,23 +22,28 @@ public struct AcceleratorType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The resource name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The accelerator type.
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// The accelerator config.
-  public var acceleratorConfigs: [AcceleratorConfig]
+  public var acceleratorConfigs: [AcceleratorConfig] = []
 
   /// Initialize a new instance of `AcceleratorType`.
-  public init(
-    name: Swift.String = Swift.String(),
-    type: Swift.String = Swift.String(),
-    acceleratorConfigs: [AcceleratorConfig] = [],
-  ) {
-    self.name = name
-    self.type = type
-    self.acceleratorConfigs = acceleratorConfigs
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AcceleratorType().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

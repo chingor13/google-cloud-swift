@@ -25,132 +25,99 @@
   {
     /// Output only. The resource name of the backup.
     /// Format: projects/{project}/backups/{backup}.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Output only. This is always `sql#backup`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Output only. The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// Output only. The type of this backup. The type can be "AUTOMATED",
     /// "ON_DEMAND" or “FINAL”.
-    public var type: Backup.SqlBackupType
+    public var type: Backup.SqlBackupType = Backup.SqlBackupType()
 
     /// The description of this backup.
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// The name of the source database instance.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// The storage location of the backups. The location can be multi-regional.
-    public var location: Swift.String
+    public var location: Swift.String = Swift.String()
 
     /// Output only. This output contains the following values:
     /// start_time: All database writes up to this time are available.
     /// end_time: Any database writes after this time aren't available.
-    public var backupInterval: GoogleType.Interval?
+    public var backupInterval: GoogleType.Interval? = nil
 
     /// Output only. The status of this backup.
-    public var state: Backup.SqlBackupState
+    public var state: Backup.SqlBackupState = Backup.SqlBackupState()
 
     /// Output only. Information about why the backup operation fails (for example,
     /// when the backup state fails).
-    public var error: OperationError?
+    public var error: OperationError? = nil
 
     /// Output only. This output contains the encryption configuration for a backup
     /// and the resource name of the KMS key for disk encryption.
-    public var kmsKey: Swift.String
+    public var kmsKey: Swift.String = Swift.String()
 
     /// Output only. This output contains the encryption status for a backup and
     /// the version of the KMS key that's used to encrypt the Cloud SQL instance.
-    public var kmsKeyVersion: Swift.String
+    public var kmsKeyVersion: Swift.String = Swift.String()
 
     /// Output only. Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
-    public var backupKind: SqlBackupKind
+    public var backupKind: SqlBackupKind = SqlBackupKind()
 
     /// Output only. This output contains a backup time zone. If a Cloud SQL for
     /// SQL Server instance has a different time zone from the backup's time zone,
     /// then the restore to the instance doesn't happen.
-    public var timeZone: Swift.String
+    public var timeZone: Swift.String = Swift.String()
 
     /// Output only. The database version of the instance of at the time this
     /// backup was made.
-    public var databaseVersion: SqlDatabaseVersion
+    public var databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion()
 
     /// Output only. The maximum chargeable bytes for the backup.
-    public var maxChargeableBytes: Swift.Int64?
+    public var maxChargeableBytes: Swift.Int64? = nil
 
     /// Optional. Output only. Timestamp in UTC of when the instance associated
     /// with this backup is deleted.
-    public var instanceDeletionTime: GoogleCloudWkt.Timestamp?
+    public var instanceDeletionTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Optional. Output only. The instance setting of the source instance that's
     /// associated with this backup.
-    public var instanceSettings: DatabaseInstance?
+    public var instanceSettings: DatabaseInstance? = nil
 
     /// Output only. The mapping to backup run resource used for IAM validations.
-    public var backupRun: Swift.String
+    public var backupRun: Swift.String = Swift.String()
 
     /// Output only. This status indicates whether the backup satisfies PZS.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzs: GoogleCloudWkt.BoolValue?
+    public var satisfiesPzs: GoogleCloudWkt.BoolValue? = nil
 
     /// Output only. This status indicates whether the backup satisfies PZI.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzi: GoogleCloudWkt.BoolValue?
+    public var satisfiesPzi: GoogleCloudWkt.BoolValue? = nil
 
-    public var expiration: OneOf_Expiration?
+    public var expiration: OneOf_Expiration? = nil
 
     /// Initialize a new instance of `Backup`.
-    public init(
-      name: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-      selfLink: Swift.String = Swift.String(),
-      type: Backup.SqlBackupType = Backup.SqlBackupType(),
-      description: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      location: Swift.String = Swift.String(),
-      backupInterval: GoogleType.Interval? = nil,
-      state: Backup.SqlBackupState = Backup.SqlBackupState(),
-      error: OperationError? = nil,
-      kmsKey: Swift.String = Swift.String(),
-      kmsKeyVersion: Swift.String = Swift.String(),
-      backupKind: SqlBackupKind = SqlBackupKind(),
-      timeZone: Swift.String = Swift.String(),
-      databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion(),
-      maxChargeableBytes: Swift.Int64? = nil,
-      instanceDeletionTime: GoogleCloudWkt.Timestamp? = nil,
-      instanceSettings: DatabaseInstance? = nil,
-      backupRun: Swift.String = Swift.String(),
-      satisfiesPzs: GoogleCloudWkt.BoolValue? = nil,
-      satisfiesPzi: GoogleCloudWkt.BoolValue? = nil,
-      expiration: OneOf_Expiration? = nil,
-    ) {
-      self.name = name
-      self.kind = kind
-      self.selfLink = selfLink
-      self.type = type
-      self.description = description
-      self.instance = instance
-      self.location = location
-      self.backupInterval = backupInterval
-      self.state = state
-      self.error = error
-      self.kmsKey = kmsKey
-      self.kmsKeyVersion = kmsKeyVersion
-      self.backupKind = backupKind
-      self.timeZone = timeZone
-      self.databaseVersion = databaseVersion
-      self.maxChargeableBytes = maxChargeableBytes
-      self.instanceDeletionTime = instanceDeletionTime
-      self.instanceSettings = instanceSettings
-      self.backupRun = backupRun
-      self.satisfiesPzs = satisfiesPzs
-      self.satisfiesPzi = satisfiesPzi
-      self.expiration = expiration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Backup().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

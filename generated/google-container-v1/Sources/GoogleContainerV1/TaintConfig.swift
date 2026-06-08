@@ -22,13 +22,22 @@ public struct TaintConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Optional. Controls architecture tainting behavior.
-  public var architectureTaintBehavior: TaintConfig.ArchitectureTaintBehavior?
+  public var architectureTaintBehavior: TaintConfig.ArchitectureTaintBehavior? = nil
 
   /// Initialize a new instance of `TaintConfig`.
-  public init(
-    architectureTaintBehavior: TaintConfig.ArchitectureTaintBehavior? = nil,
-  ) {
-    self.architectureTaintBehavior = architectureTaintBehavior
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TaintConfig().with { $0.architectureTaintBehavior = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Controls architecture tainting behavior for a node pool.

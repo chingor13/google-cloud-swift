@@ -22,13 +22,22 @@ public struct ServiceExternalIPsConfig: Codable, Equatable, GoogleCloudWkt._AnyP
   Sendable
 {
   /// Whether Services with ExternalIPs field are allowed or not.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ServiceExternalIPsConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServiceExternalIPsConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

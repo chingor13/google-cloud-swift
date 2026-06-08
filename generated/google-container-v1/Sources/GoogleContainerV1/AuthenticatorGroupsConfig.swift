@@ -23,19 +23,26 @@ public struct AuthenticatorGroupsConfig: Codable, Equatable, GoogleCloudWkt._Any
 {
   /// Whether this cluster should return group membership lookups
   /// during authentication using a group of security groups.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// The name of the security group-of-groups to be used. Only relevant
   /// if enabled = true.
-  public var securityGroup: Swift.String
+  public var securityGroup: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AuthenticatorGroupsConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    securityGroup: Swift.String = Swift.String(),
-  ) {
-    self.enabled = enabled
-    self.securityGroup = securityGroup
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuthenticatorGroupsConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

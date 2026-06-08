@@ -22,30 +22,33 @@ public struct Autopilot: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Enable Autopilot
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// WorkloadPolicyConfig is the configuration related to GCW workload policy
-  public var workloadPolicyConfig: WorkloadPolicyConfig?
+  public var workloadPolicyConfig: WorkloadPolicyConfig? = nil
 
   /// PrivilegedAdmissionConfig is the configuration related to privileged
   /// admission control.
-  public var privilegedAdmissionConfig: PrivilegedAdmissionConfig?
+  public var privilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil
 
   /// ClusterPolicyConfig denotes cluster level policies that are enforced for
   /// the cluster.
-  public var clusterPolicyConfig: ClusterPolicyConfig?
+  public var clusterPolicyConfig: ClusterPolicyConfig? = nil
 
   /// Initialize a new instance of `Autopilot`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    workloadPolicyConfig: WorkloadPolicyConfig? = nil,
-    privilegedAdmissionConfig: PrivilegedAdmissionConfig? = nil,
-    clusterPolicyConfig: ClusterPolicyConfig? = nil,
-  ) {
-    self.enabled = enabled
-    self.workloadPolicyConfig = workloadPolicyConfig
-    self.privilegedAdmissionConfig = privilegedAdmissionConfig
-    self.clusterPolicyConfig = clusterPolicyConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Autopilot().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

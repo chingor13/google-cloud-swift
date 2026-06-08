@@ -27,10 +27,10 @@ public struct CreateWorkflowRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. Project and location in which the workflow should be created.
   /// Format:  projects/{project}/locations/{location}
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. Workflow to be created.
-  public var workflow: Workflow?
+  public var workflow: Workflow? = nil
 
   /// Required. The ID of the workflow to be created. It has to fulfill the
   /// following requirements:
@@ -40,17 +40,22 @@ public struct CreateWorkflowRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// * Must be between 1-64 characters.
   /// * Must end with a number or a letter.
   /// * Must be unique within the customer project and location.
-  public var workflowId: Swift.String
+  public var workflowId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateWorkflowRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    workflow: Workflow? = nil,
-    workflowId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.workflow = workflow
-    self.workflowId = workflowId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateWorkflowRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -25,29 +25,32 @@ public struct CreateQueuedResourceRequest: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Required. The parent resource name.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The unqualified resource name. Should follow the
   /// `^[A-Za-z0-9_.~+%-]+$` regex format.
-  public var queuedResourceId: Swift.String
+  public var queuedResourceId: Swift.String = Swift.String()
 
   /// Required. The queued resource.
-  public var queuedResource: QueuedResource?
+  public var queuedResource: QueuedResource? = nil
 
   /// Optional. Idempotent request UUID.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateQueuedResourceRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    queuedResourceId: Swift.String = Swift.String(),
-    queuedResource: QueuedResource? = nil,
-    requestId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.queuedResourceId = queuedResourceId
-    self.queuedResource = queuedResource
-    self.requestId = requestId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateQueuedResourceRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

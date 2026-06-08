@@ -24,21 +24,21 @@ public struct EventTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. The resource name of the Eventarc trigger. The format of this
   /// field is `projects/{project}/locations/{region}/triggers/{trigger}`.
-  public var trigger: Swift.String
+  public var trigger: Swift.String = Swift.String()
 
   /// The region that the trigger will be in. The trigger will only receive
   /// events originating in this region. It can be the same
   /// region as the function, a different region or multi-region, or the global
   /// region. If not provided, defaults to the same region as the function.
-  public var triggerRegion: Swift.String
+  public var triggerRegion: Swift.String = Swift.String()
 
   /// Required. The type of event to observe. For example:
   /// `google.cloud.audit.log.v1.written` or
   /// `google.cloud.pubsub.topic.v1.messagePublished`.
-  public var eventType: Swift.String
+  public var eventType: Swift.String = Swift.String()
 
   /// Criteria used to filter events.
-  public var eventFilters: [EventFilter]
+  public var eventFilters: [EventFilter] = []
 
   /// Optional. The name of a Pub/Sub topic in the same project that will be used
   /// as the transport topic for the event delivery. Format:
@@ -47,23 +47,23 @@ public struct EventTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// This is only valid for events of type
   /// `google.cloud.pubsub.topic.v1.messagePublished`. The topic provided here
   /// will not be deleted at function deletion.
-  public var pubsubTopic: Swift.String
+  public var pubsubTopic: Swift.String = Swift.String()
 
   /// Optional. The email of the trigger's service account. The service account
   /// must have permission to invoke Cloud Run services, the permission is
   /// `run.routes.invoke`.
   /// If empty, defaults to the Compute Engine default service account:
   /// `{project_number}-compute@developer.gserviceaccount.com`.
-  public var serviceAccountEmail: Swift.String
+  public var serviceAccountEmail: Swift.String = Swift.String()
 
   /// Optional. If unset, then defaults to ignoring failures (i.e. not retrying
   /// them).
-  public var retryPolicy: EventTrigger.RetryPolicy
+  public var retryPolicy: EventTrigger.RetryPolicy = EventTrigger.RetryPolicy()
 
   /// Optional. The name of the channel associated with the trigger in
   /// `projects/{project}/locations/{location}/channels/{channel}` format.
   /// You must provide a channel to receive events from Eventarc SaaS partners.
-  public var channel: Swift.String
+  public var channel: Swift.String = Swift.String()
 
   /// Optional. The hostname of the service that 1st Gen function should be
   /// observed.
@@ -73,29 +73,22 @@ public struct EventTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// event types in the `google.storage` namespace.
   ///
   /// The field is only applicable to 1st Gen functions.
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// Initialize a new instance of `EventTrigger`.
-  public init(
-    trigger: Swift.String = Swift.String(),
-    triggerRegion: Swift.String = Swift.String(),
-    eventType: Swift.String = Swift.String(),
-    eventFilters: [EventFilter] = [],
-    pubsubTopic: Swift.String = Swift.String(),
-    serviceAccountEmail: Swift.String = Swift.String(),
-    retryPolicy: EventTrigger.RetryPolicy = EventTrigger.RetryPolicy(),
-    channel: Swift.String = Swift.String(),
-    service: Swift.String = Swift.String(),
-  ) {
-    self.trigger = trigger
-    self.triggerRegion = triggerRegion
-    self.eventType = eventType
-    self.eventFilters = eventFilters
-    self.pubsubTopic = pubsubTopic
-    self.serviceAccountEmail = serviceAccountEmail
-    self.retryPolicy = retryPolicy
-    self.channel = channel
-    self.service = service
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EventTrigger().with { $0.trigger = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Describes the retry policy in case of function's execution failure.

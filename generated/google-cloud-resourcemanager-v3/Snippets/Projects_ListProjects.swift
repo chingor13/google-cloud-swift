@@ -25,9 +25,8 @@ import GoogleRpc
 
 func sample(client: some Projects, parent: String) async throws {
   let items = try client.listProjects(
-    byItem: ListProjectsRequest(
-      parent: "\(parent)",
-    )
+    byItem: ListProjectsRequest()
+      .with { $0.parent = "\(parent)" }
   )
   for try await item in items {
     print("  \(item)")

@@ -24,7 +24,7 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A name for the type of resource being accessed, e.g. "sql table",
   /// "cloud storage bucket", "file", "Google calendar"; or the type URL
   /// of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
-  public var resourceType: Swift.String
+  public var resourceType: Swift.String = Swift.String()
 
   /// The name of the resource being accessed.  For example, a shared calendar
   /// name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
@@ -32,29 +32,32 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
   ///
   /// [google.rpc.Code.PERMISSION_DENIED]: <doc:Code/permissionDenied>
-  public var resourceName: Swift.String
+  public var resourceName: Swift.String = Swift.String()
 
   /// The owner of the resource (optional).
   /// For example, "user:<owner email>" or "project:<Google developer project
   /// id>".
-  public var owner: Swift.String
+  public var owner: Swift.String = Swift.String()
 
   /// Describes what error is encountered when accessing this resource.
   /// For example, updating a cloud project may require the `writer` permission
   /// on the developer console project.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ResourceInfo`.
-  public init(
-    resourceType: Swift.String = Swift.String(),
-    resourceName: Swift.String = Swift.String(),
-    owner: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-  ) {
-    self.resourceType = resourceType
-    self.resourceName = resourceName
-    self.owner = owner
-    self.description = description
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceInfo().with { $0.resourceType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.ResourceInfo" }

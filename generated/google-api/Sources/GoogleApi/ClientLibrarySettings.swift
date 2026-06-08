@@ -24,64 +24,53 @@ public struct ClientLibrarySettings: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// Version of the API to apply these settings to. This is the full protobuf
   /// package for the API, ending in the version element.
   /// Examples: "google.cloud.speech.v1" and "google.spanner.admin.database.v1".
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Launch stage of this version of the API.
-  public var launchStage: LaunchStage
+  public var launchStage: LaunchStage = LaunchStage()
 
   /// When using transport=rest, the client request will encode enums as
   /// numbers rather than strings.
-  public var restNumericEnums: Swift.Bool
+  public var restNumericEnums: Swift.Bool = Swift.Bool()
 
   /// Settings for legacy Java features, supported in the Service YAML.
-  public var javaSettings: JavaSettings?
+  public var javaSettings: JavaSettings? = nil
 
   /// Settings for C++ client libraries.
-  public var cppSettings: CppSettings?
+  public var cppSettings: CppSettings? = nil
 
   /// Settings for PHP client libraries.
-  public var phpSettings: PhpSettings?
+  public var phpSettings: PhpSettings? = nil
 
   /// Settings for Python client libraries.
-  public var pythonSettings: PythonSettings?
+  public var pythonSettings: PythonSettings? = nil
 
   /// Settings for Node client libraries.
-  public var nodeSettings: NodeSettings?
+  public var nodeSettings: NodeSettings? = nil
 
   /// Settings for .NET client libraries.
-  public var dotnetSettings: DotnetSettings?
+  public var dotnetSettings: DotnetSettings? = nil
 
   /// Settings for Ruby client libraries.
-  public var rubySettings: RubySettings?
+  public var rubySettings: RubySettings? = nil
 
   /// Settings for Go client libraries.
-  public var goSettings: GoSettings?
+  public var goSettings: GoSettings? = nil
 
   /// Initialize a new instance of `ClientLibrarySettings`.
-  public init(
-    version: Swift.String = Swift.String(),
-    launchStage: LaunchStage = LaunchStage(),
-    restNumericEnums: Swift.Bool = Swift.Bool(),
-    javaSettings: JavaSettings? = nil,
-    cppSettings: CppSettings? = nil,
-    phpSettings: PhpSettings? = nil,
-    pythonSettings: PythonSettings? = nil,
-    nodeSettings: NodeSettings? = nil,
-    dotnetSettings: DotnetSettings? = nil,
-    rubySettings: RubySettings? = nil,
-    goSettings: GoSettings? = nil,
-  ) {
-    self.version = version
-    self.launchStage = launchStage
-    self.restNumericEnums = restNumericEnums
-    self.javaSettings = javaSettings
-    self.cppSettings = cppSettings
-    self.phpSettings = phpSettings
-    self.pythonSettings = pythonSettings
-    self.nodeSettings = nodeSettings
-    self.dotnetSettings = dotnetSettings
-    self.rubySettings = rubySettings
-    self.goSettings = goSettings
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClientLibrarySettings().with { $0.version = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

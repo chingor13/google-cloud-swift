@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.verifyExternalSyncSettings(
-      request: SqlInstancesVerifyExternalSyncSettingsRequest(/* set fields */
-      )
+      request: SqlInstancesVerifyExternalSyncSettingsRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

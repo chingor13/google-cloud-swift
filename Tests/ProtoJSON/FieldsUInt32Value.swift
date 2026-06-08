@@ -22,12 +22,12 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithUInt32Value()),
       (#"{"singular": null         }"#, MessageWithUInt32Value()),
-      (#"{"singular": 42           }"#, MessageWithUInt32Value(singular: 42)),
-      (#"{"singular": "42"         }"#, MessageWithUInt32Value(singular: 42)),
+      (#"{"singular": 42           }"#, MessageWithUInt32Value().with { $0.singular = 42 }),
+      (#"{"singular": "42"         }"#, MessageWithUInt32Value().with { $0.singular = 42 }),
       (#"{"repeated": []           }"#, MessageWithUInt32Value()),
-      (#"{"repeated": [42]         }"#, MessageWithUInt32Value(repeated: [42])),
+      (#"{"repeated": [42]         }"#, MessageWithUInt32Value().with { $0.repeated = [42] }),
       (#"{"map":      {}           }"#, MessageWithUInt32Value()),
-      (#"{"map":      {"a": 42 }   }"#, MessageWithUInt32Value(map: ["a": 42])),
+      (#"{"map":      {"a": 42 }   }"#, MessageWithUInt32Value().with { $0.map = ["a": 42] }),
     ])
   func deserialize(input: String, want: MessageWithUInt32Value) throws {
     let decoder = _ProtoJSONDecoder()

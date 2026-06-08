@@ -22,13 +22,22 @@ public struct LoggingVariantConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Logging variant deployed on nodes.
-  public var variant: LoggingVariantConfig.Variant
+  public var variant: LoggingVariantConfig.Variant = LoggingVariantConfig.Variant()
 
   /// Initialize a new instance of `LoggingVariantConfig`.
-  public init(
-    variant: LoggingVariantConfig.Variant = LoggingVariantConfig.Variant(),
-  ) {
-    self.variant = variant
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LoggingVariantConfig().with { $0.variant = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Logging component variants.

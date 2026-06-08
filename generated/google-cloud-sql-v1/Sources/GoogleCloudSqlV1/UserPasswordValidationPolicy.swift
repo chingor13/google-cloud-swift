@@ -23,34 +23,35 @@
     Sendable
   {
     /// Number of failed login attempts allowed before user get locked.
-    public var allowedFailedAttempts: Swift.Int32
+    public var allowedFailedAttempts: Swift.Int32 = Swift.Int32()
 
     /// Expiration duration after password is updated.
-    public var passwordExpirationDuration: GoogleCloudWkt.Duration?
+    public var passwordExpirationDuration: GoogleCloudWkt.Duration? = nil
 
     /// If true, failed login attempts check will be enabled.
-    public var enableFailedAttemptsCheck: Swift.Bool
+    public var enableFailedAttemptsCheck: Swift.Bool = Swift.Bool()
 
     /// Output only. Read-only password status.
-    public var status: PasswordStatus?
+    public var status: PasswordStatus? = nil
 
     /// If true, the user must specify the current password before changing the
     /// password. This flag is supported only for MySQL.
-    public var enablePasswordVerification: Swift.Bool
+    public var enablePasswordVerification: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `UserPasswordValidationPolicy`.
-    public init(
-      allowedFailedAttempts: Swift.Int32 = Swift.Int32(),
-      passwordExpirationDuration: GoogleCloudWkt.Duration? = nil,
-      enableFailedAttemptsCheck: Swift.Bool = Swift.Bool(),
-      status: PasswordStatus? = nil,
-      enablePasswordVerification: Swift.Bool = Swift.Bool(),
-    ) {
-      self.allowedFailedAttempts = allowedFailedAttempts
-      self.passwordExpirationDuration = passwordExpirationDuration
-      self.enableFailedAttemptsCheck = enableFailedAttemptsCheck
-      self.status = status
-      self.enablePasswordVerification = enablePasswordVerification
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UserPasswordValidationPolicy().with { $0.allowedFailedAttempts = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

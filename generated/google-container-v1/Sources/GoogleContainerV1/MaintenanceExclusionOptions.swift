@@ -23,19 +23,26 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
 {
   /// Scope specifies the upgrade scope which upgrades are blocked by the
   /// exclusion.
-  public var scope: MaintenanceExclusionOptions.Scope
+  public var scope: MaintenanceExclusionOptions.Scope = MaintenanceExclusionOptions.Scope()
 
   /// EndTimeBehavior specifies the behavior of the exclusion end time.
-  public var endTimeBehavior: MaintenanceExclusionOptions.EndTimeBehavior
+  public var endTimeBehavior: MaintenanceExclusionOptions.EndTimeBehavior =
+    MaintenanceExclusionOptions.EndTimeBehavior()
 
   /// Initialize a new instance of `MaintenanceExclusionOptions`.
-  public init(
-    scope: MaintenanceExclusionOptions.Scope = MaintenanceExclusionOptions.Scope(),
-    endTimeBehavior: MaintenanceExclusionOptions.EndTimeBehavior =
-      MaintenanceExclusionOptions.EndTimeBehavior(),
-  ) {
-    self.scope = scope
-    self.endTimeBehavior = endTimeBehavior
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaintenanceExclusionOptions().with { $0.scope = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Scope of exclusion.

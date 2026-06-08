@@ -23,18 +23,25 @@ public struct AdditionalNodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Name of the VPC where the additional interface belongs
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// Name of the subnetwork where the additional interface belongs
-  public var subnetwork: Swift.String
+  public var subnetwork: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AdditionalNodeNetworkConfig`.
-  public init(
-    network: Swift.String = Swift.String(),
-    subnetwork: Swift.String = Swift.String(),
-  ) {
-    self.network = network
-    self.subnetwork = subnetwork
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdditionalNodeNetworkConfig().with { $0.network = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

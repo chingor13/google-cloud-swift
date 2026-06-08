@@ -77,7 +77,7 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// /[A-Za-z][a-zA-Z0-9]+/. It should start with an upper case character and
   /// should use PascalCase (UpperCamelCase). The maximum number of
   /// characters allowed for the `resource_type_kind` is 100.
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// Optional. The relative resource name pattern associated with this resource
   /// type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -98,11 +98,11 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// hierarchy. It is expected that, if multiple patterns are provided,
   /// the same component name (e.g. "project") refers to IDs of the same
   /// type of resource.
-  public var pattern: [Swift.String]
+  public var pattern: [Swift.String] = []
 
   /// Optional. The field on the resource that designates the resource name
   /// field. If omitted, this is assumed to be "name".
-  public var nameField: Swift.String
+  public var nameField: Swift.String = Swift.String()
 
   /// Optional. The historical or future-looking state of the resource pattern.
   ///
@@ -119,7 +119,7 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///         history: ORIGINALLY_SINGLE_PATTERN
   ///       };
   ///     }
-  public var history: ResourceDescriptor.History
+  public var history: ResourceDescriptor.History = ResourceDescriptor.History()
 
   /// The plural name used in the resource name and permission names, such as
   /// 'projects' for the resource name of 'projects/{project}' and the permission
@@ -134,35 +134,32 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// Note: The plural form is required even for singleton resources. See
   /// https://aip.dev/156
-  public var plural: Swift.String
+  public var plural: Swift.String = Swift.String()
 
   /// The same concept of the `singular` field in k8s CRD spec
   /// https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
   /// Such as "project" for the `resourcemanager.googleapis.com/Project` type.
-  public var singular: Swift.String
+  public var singular: Swift.String = Swift.String()
 
   /// Style flag(s) for this resource.
   /// These indicate that a resource is expected to conform to a given
   /// style. See the specific style flags for additional information.
-  public var style: [ResourceDescriptor.Style]
+  public var style: [ResourceDescriptor.Style] = []
 
   /// Initialize a new instance of `ResourceDescriptor`.
-  public init(
-    type: Swift.String = Swift.String(),
-    pattern: [Swift.String] = [],
-    nameField: Swift.String = Swift.String(),
-    history: ResourceDescriptor.History = ResourceDescriptor.History(),
-    plural: Swift.String = Swift.String(),
-    singular: Swift.String = Swift.String(),
-    style: [ResourceDescriptor.Style] = [],
-  ) {
-    self.type = type
-    self.pattern = pattern
-    self.nameField = nameField
-    self.history = history
-    self.plural = plural
-    self.singular = singular
-    self.style = style
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceDescriptor().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// A description of the historical or future-looking state of the

@@ -25,29 +25,32 @@ public struct ListExecutionsRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// To list all Executions across Jobs, use "-" instead of Job name.
   /// Format: `projects/{project}/locations/{location}/jobs/{job}`, where
   /// `{project}` can be project id or number.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Maximum number of Executions to return in this call.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// A page token received from a previous call to ListExecutions.
   /// All other parameters must match.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// If true, returns deleted (but unexpired) resources along with active ones.
-  public var showDeleted: Swift.Bool
+  public var showDeleted: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListExecutionsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    showDeleted: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.showDeleted = showDeleted
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListExecutionsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

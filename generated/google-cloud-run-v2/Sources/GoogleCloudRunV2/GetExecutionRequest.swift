@@ -25,13 +25,22 @@ public struct GetExecutionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Format:
   /// `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
   /// where `{project}` can be project id or number.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetExecutionRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetExecutionRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

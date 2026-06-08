@@ -30,7 +30,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.NetworkConfig.default_enable_private_nodes]: <doc:NetworkConfig/defaultEnablePrivateNodes>
-  public var enablePrivateNodes: Swift.Bool
+  public var enablePrivateNodes: Swift.Bool = Swift.Bool()
 
   /// Whether the master's internal IP address is used as the cluster endpoint.
   ///
@@ -40,13 +40,13 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// enable_private_endpoint is false, then enable_public_endpoint will be true.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_public_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/enablePublicEndpoint>
-  public var enablePrivateEndpoint: Swift.Bool
+  public var enablePrivateEndpoint: Swift.Bool = Swift.Bool()
 
   /// The IP range in CIDR notation to use for the hosted master network. This
   /// range will be used for assigning internal IP addresses to the master or
   /// set of masters, as well as the ILB VIP. This range must not overlap with
   /// any other ranges in use within the cluster's network.
-  public var masterIpv4CidrBlock: Swift.String
+  public var masterIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Output only. The internal IP address of this cluster's master endpoint.
   ///
@@ -55,7 +55,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/privateEndpoint>
-  public var privateEndpoint: Swift.String
+  public var privateEndpoint: Swift.String = Swift.String()
 
   /// Output only. The external IP address of this cluster's master endpoint.
   ///
@@ -64,17 +64,17 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.public_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/publicEndpoint>
-  public var publicEndpoint: Swift.String
+  public var publicEndpoint: Swift.String = Swift.String()
 
   /// Output only. The peering name in the customer VPC used by this cluster.
-  public var peeringName: Swift.String
+  public var peeringName: Swift.String = Swift.String()
 
   /// Controls master global access settings.
   ///
   /// Deprecated: Use
   /// [ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_global_access][]
   /// instead.
-  public var masterGlobalAccessConfig: PrivateClusterMasterGlobalAccessConfig?
+  public var masterGlobalAccessConfig: PrivateClusterMasterGlobalAccessConfig? = nil
 
   /// Subnet to provision the master's private endpoint during cluster creation.
   /// Specified in projects/*/regions/*/subnetworks/* format.
@@ -84,27 +84,22 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint_subnetwork]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/privateEndpointSubnetwork>
-  public var privateEndpointSubnetwork: Swift.String
+  public var privateEndpointSubnetwork: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PrivateClusterConfig`.
-  public init(
-    enablePrivateNodes: Swift.Bool = Swift.Bool(),
-    enablePrivateEndpoint: Swift.Bool = Swift.Bool(),
-    masterIpv4CidrBlock: Swift.String = Swift.String(),
-    privateEndpoint: Swift.String = Swift.String(),
-    publicEndpoint: Swift.String = Swift.String(),
-    peeringName: Swift.String = Swift.String(),
-    masterGlobalAccessConfig: PrivateClusterMasterGlobalAccessConfig? = nil,
-    privateEndpointSubnetwork: Swift.String = Swift.String(),
-  ) {
-    self.enablePrivateNodes = enablePrivateNodes
-    self.enablePrivateEndpoint = enablePrivateEndpoint
-    self.masterIpv4CidrBlock = masterIpv4CidrBlock
-    self.privateEndpoint = privateEndpoint
-    self.publicEndpoint = publicEndpoint
-    self.peeringName = peeringName
-    self.masterGlobalAccessConfig = masterGlobalAccessConfig
-    self.privateEndpointSubnetwork = privateEndpointSubnetwork
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PrivateClusterConfig().with { $0.enablePrivateNodes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

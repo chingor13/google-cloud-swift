@@ -24,67 +24,58 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Holds the single container that defines the unit of execution for this
   /// task.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// Optional. A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// Optional. Max allowed time duration the Task may be active before the
   /// system will actively try to mark it failed and kill associated containers.
   /// This applies per attempt of a task, meaning each retry can run for the full
   /// timeout. Defaults to 600 seconds.
-  public var timeout: GoogleCloudWkt.Duration?
+  public var timeout: GoogleCloudWkt.Duration? = nil
 
   /// Optional. Email address of the IAM service account associated with the Task
   /// of a Job. The service account represents the identity of the running task,
   /// and determines what permissions the task has. If not provided, the task
   /// will use the project's default service account.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Optional. The execution environment being used to host this Task.
-  public var executionEnvironment: ExecutionEnvironment
+  public var executionEnvironment: ExecutionEnvironment = ExecutionEnvironment()
 
   /// A reference to a customer managed encryption key (CMEK) to use to encrypt
   /// this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// Optional. VPC Access configuration to use for this Task. For more
   /// information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
   /// Optional. The node selector for the task template.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. True if GPU zonal redundancy is disabled on this task template.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
-  public var retries: OneOf_Retries?
+  public var retries: OneOf_Retries? = nil
 
   /// Initialize a new instance of `TaskTemplate`.
-  public init(
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    timeout: GoogleCloudWkt.Duration? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    executionEnvironment: ExecutionEnvironment = ExecutionEnvironment(),
-    encryptionKey: Swift.String = Swift.String(),
-    vpcAccess: VpcAccess? = nil,
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-    retries: OneOf_Retries? = nil,
-  ) {
-    self.containers = containers
-    self.volumes = volumes
-    self.timeout = timeout
-    self.serviceAccount = serviceAccount
-    self.executionEnvironment = executionEnvironment
-    self.encryptionKey = encryptionKey
-    self.vpcAccess = vpcAccess
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
-    self.retries = retries
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TaskTemplate().with { $0.containers = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

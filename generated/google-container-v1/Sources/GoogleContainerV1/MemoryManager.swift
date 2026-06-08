@@ -31,13 +31,22 @@ public struct MemoryManager: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// * "none"
   /// * "static"
   /// The default value is 'none' if unspecified.
-  public var policy: Swift.String
+  public var policy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `MemoryManager`.
-  public init(
-    policy: Swift.String = Swift.String(),
-  ) {
-    self.policy = policy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MemoryManager().with { $0.policy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

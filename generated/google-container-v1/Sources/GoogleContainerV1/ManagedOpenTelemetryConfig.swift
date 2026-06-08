@@ -23,13 +23,22 @@ public struct ManagedOpenTelemetryConfig: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Scope of the Managed OpenTelemetry pipeline.
-  public var scope: ManagedOpenTelemetryConfig.Scope?
+  public var scope: ManagedOpenTelemetryConfig.Scope? = nil
 
   /// Initialize a new instance of `ManagedOpenTelemetryConfig`.
-  public init(
-    scope: ManagedOpenTelemetryConfig.Scope? = nil,
-  ) {
-    self.scope = scope
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ManagedOpenTelemetryConfig().with { $0.scope = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Scope is the scope of the Managed OpenTelemetry pipeline.

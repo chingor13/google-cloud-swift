@@ -24,22 +24,27 @@
   {
     /// Required. The ID of the Cloud SQL instance to be cloned (source). This does
     /// not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Required. Project ID of the source Cloud SQL instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
-    public var body: InstancesCloneRequest?
+    public var body: InstancesCloneRequest? = nil
 
     /// Initialize a new instance of `SqlInstancesCloneRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      body: InstancesCloneRequest? = nil,
-    ) {
-      self.instance = instance
-      self.project = project
-      self.body = body
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesCloneRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

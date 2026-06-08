@@ -24,28 +24,31 @@ public struct ListLocationsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The resource that owns the locations collection, if applicable.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The standard list filter.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// The standard list page size.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The standard list page token.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListLocationsRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.filter = filter
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListLocationsRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

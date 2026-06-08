@@ -23,18 +23,25 @@ public struct SecondaryBootDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Disk mode (container image cache, etc.)
-  public var mode: SecondaryBootDisk.Mode
+  public var mode: SecondaryBootDisk.Mode = SecondaryBootDisk.Mode()
 
   /// Fully-qualified resource ID for an existing disk image.
-  public var diskImage: Swift.String
+  public var diskImage: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SecondaryBootDisk`.
-  public init(
-    mode: SecondaryBootDisk.Mode = SecondaryBootDisk.Mode(),
-    diskImage: Swift.String = Swift.String(),
-  ) {
-    self.mode = mode
-    self.diskImage = diskImage
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecondaryBootDisk().with { $0.mode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Mode specifies how the secondary boot disk will be used.

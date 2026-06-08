@@ -36,26 +36,31 @@ public struct Page: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// </code></pre>
   /// You can reference `Java` page using Markdown reference link syntax:
   /// `[Java][Tutorial.Java]`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The Markdown content of the page. You can use ```(== include {path}
   /// ==)``` to include content from a Markdown file. The content can be used
   /// to produce the documentation page such as HTML format page.
-  public var content: Swift.String
+  public var content: Swift.String = Swift.String()
 
   /// Subpages of this page. The order of subpages specified here will be
   /// honored in the generated docset.
-  public var subpages: [Page]
+  public var subpages: [Page] = []
 
   /// Initialize a new instance of `Page`.
-  public init(
-    name: Swift.String = Swift.String(),
-    content: Swift.String = Swift.String(),
-    subpages: [Page] = [],
-  ) {
-    self.name = name
-    self.content = content
-    self.subpages = subpages
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Page().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Page" }

@@ -30,27 +30,32 @@ public struct ResourceRequirements: Codable, Equatable, GoogleCloudWkt._AnyPacka
   ///   * For supported 'memory' values and syntax, go to
   ///  https://cloud.google.com/run/docs/configuring/memory-limits
   ///  * The only supported 'nvidia.com/gpu' value is '1'.
-  public var limits: [Swift.String: Swift.String]
+  public var limits: [Swift.String: Swift.String] = [:]
 
   /// Determines whether CPU is only allocated during requests (true by default).
   /// However, if ResourceRequirements is set, the caller must explicitly
   /// set this field to true to preserve the default behavior.
-  public var cpuIdle: Swift.Bool
+  public var cpuIdle: Swift.Bool = Swift.Bool()
 
   /// Determines whether CPU should be boosted on startup of a new container
   /// instance above the requested CPU threshold, this can help reduce cold-start
   /// latency.
-  public var startupCpuBoost: Swift.Bool
+  public var startupCpuBoost: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ResourceRequirements`.
-  public init(
-    limits: [Swift.String: Swift.String] = [:],
-    cpuIdle: Swift.Bool = Swift.Bool(),
-    startupCpuBoost: Swift.Bool = Swift.Bool(),
-  ) {
-    self.limits = limits
-    self.cpuIdle = cpuIdle
-    self.startupCpuBoost = startupCpuBoost
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceRequirements().with { $0.limits = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

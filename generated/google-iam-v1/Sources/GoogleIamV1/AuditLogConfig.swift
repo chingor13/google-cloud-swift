@@ -40,7 +40,7 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The log type that this config enables.
-  public var logType: AuditLogConfig.LogType
+  public var logType: AuditLogConfig.LogType = AuditLogConfig.LogType()
 
   /// Specifies the identities that do not cause logging for this type of
   /// permission.
@@ -48,15 +48,22 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [Binding.members][google.iam.v1.Binding.members].
   ///
   /// [google.iam.v1.Binding.members]: <doc:Binding/members>
-  public var exemptedMembers: [Swift.String]
+  public var exemptedMembers: [Swift.String] = []
 
   /// Initialize a new instance of `AuditLogConfig`.
-  public init(
-    logType: AuditLogConfig.LogType = AuditLogConfig.LogType(),
-    exemptedMembers: [Swift.String] = [],
-  ) {
-    self.logType = logType
-    self.exemptedMembers = exemptedMembers
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuditLogConfig().with { $0.logType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The list of valid permission types for which logging can be configured.

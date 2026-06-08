@@ -22,43 +22,40 @@ public struct NodePoolUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// minor_target_version indicates the target version for minor upgrade.
-  public var minorTargetVersion: Swift.String?
+  public var minorTargetVersion: Swift.String? = nil
 
   /// patch_target_version indicates the target version for patch upgrade.
-  public var patchTargetVersion: Swift.String?
+  public var patchTargetVersion: Swift.String? = nil
 
   /// The auto upgrade status.
-  public var autoUpgradeStatus: [NodePoolUpgradeInfo.AutoUpgradeStatus]
+  public var autoUpgradeStatus: [NodePoolUpgradeInfo.AutoUpgradeStatus] = []
 
   /// The auto upgrade paused reason.
-  public var pausedReason: [NodePoolUpgradeInfo.AutoUpgradePausedReason]
+  public var pausedReason: [NodePoolUpgradeInfo.AutoUpgradePausedReason] = []
 
   /// The list of past auto upgrades.
-  public var upgradeDetails: [UpgradeDetails]
+  public var upgradeDetails: [UpgradeDetails] = []
 
   /// The node pool's current minor version's end of standard support timestamp.
-  public var endOfStandardSupportTimestamp: Swift.String?
+  public var endOfStandardSupportTimestamp: Swift.String? = nil
 
   /// The node pool's current minor version's end of extended support timestamp.
-  public var endOfExtendedSupportTimestamp: Swift.String?
+  public var endOfExtendedSupportTimestamp: Swift.String? = nil
 
   /// Initialize a new instance of `NodePoolUpgradeInfo`.
-  public init(
-    minorTargetVersion: Swift.String? = nil,
-    patchTargetVersion: Swift.String? = nil,
-    autoUpgradeStatus: [NodePoolUpgradeInfo.AutoUpgradeStatus] = [],
-    pausedReason: [NodePoolUpgradeInfo.AutoUpgradePausedReason] = [],
-    upgradeDetails: [UpgradeDetails] = [],
-    endOfStandardSupportTimestamp: Swift.String? = nil,
-    endOfExtendedSupportTimestamp: Swift.String? = nil,
-  ) {
-    self.minorTargetVersion = minorTargetVersion
-    self.patchTargetVersion = patchTargetVersion
-    self.autoUpgradeStatus = autoUpgradeStatus
-    self.pausedReason = pausedReason
-    self.upgradeDetails = upgradeDetails
-    self.endOfStandardSupportTimestamp = endOfStandardSupportTimestamp
-    self.endOfExtendedSupportTimestamp = endOfExtendedSupportTimestamp
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePoolUpgradeInfo().with { $0.minorTargetVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// AutoUpgradeStatus indicates the status of auto upgrade.

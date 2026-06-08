@@ -26,19 +26,26 @@
   {
     /// Required. The parent resource where you created this instance.
     /// Format: projects/{project}
-    public var parent: Swift.String
+    public var parent: Swift.String = Swift.String()
 
     /// Required. The context for request to perform a PITR on a Google Cloud
     /// Backup and Disaster Recovery managed instance.
-    public var context: PointInTimeRestoreContext?
+    public var context: PointInTimeRestoreContext? = nil
 
     /// Initialize a new instance of `SqlInstancesPointInTimeRestoreRequest`.
-    public init(
-      parent: Swift.String = Swift.String(),
-      context: PointInTimeRestoreContext? = nil,
-    ) {
-      self.parent = parent
-      self.context = context
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesPointInTimeRestoreRequest().with { $0.parent = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

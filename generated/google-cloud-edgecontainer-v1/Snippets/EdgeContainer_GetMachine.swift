@@ -27,9 +27,8 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, m
   async throws
 {
   let response = try await client.getMachine(
-    request: GetMachineRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/machines/\(machineId)",
-    )
+    request: GetMachineRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/machines/\(machineId)" }
   )
   print("Success: \(response)")
 }

@@ -27,17 +27,17 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The name of the node pool.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The node configuration of the pool.
-  public var config: NodeConfig?
+  public var config: NodeConfig? = nil
 
   /// The initial node count for the pool. You must ensure that your
   /// Compute Engine [resource
   /// quota](https://cloud.google.com/compute/quotas)
   /// is sufficient for this number of instances. You must also have available
   /// firewall and routes quota.
-  public var initialNodeCount: Swift.Int32
+  public var initialNodeCount: Swift.Int32 = Swift.Int32()
 
   /// The list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
@@ -49,128 +49,93 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Warning: changing node pool locations will result in nodes being added
   /// and/or removed.
-  public var locations: [Swift.String]
+  public var locations: [Swift.String] = []
 
   /// Networking configuration for this NodePool. If specified, it overrides the
   /// cluster-level defaults.
-  public var networkConfig: NodeNetworkConfig?
+  public var networkConfig: NodeNetworkConfig? = nil
 
   /// Output only. Server-defined URL for the resource.
-  public var selfLink: Swift.String
+  public var selfLink: Swift.String = Swift.String()
 
   /// The version of Kubernetes running on this NodePool's nodes. If unspecified,
   /// it defaults as described
   /// [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Output only. The resource URLs of the [managed instance
   /// groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances)
   /// associated with this node pool.
   /// During the node pool blue-green upgrade operation, the URLs contain both
   /// blue and green resources.
-  public var instanceGroupUrls: [Swift.String]
+  public var instanceGroupUrls: [Swift.String] = []
 
   /// Output only. The status of the nodes in this pool instance.
-  public var status: NodePool.Status
+  public var status: NodePool.Status = NodePool.Status()
 
   /// Output only. Deprecated. Use conditions instead.
   /// Additional information about the current status of this
   /// node pool instance, if available.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Autoscaler configuration for this NodePool. Autoscaler is enabled
   /// only if a valid configuration is present.
-  public var autoscaling: NodePoolAutoscaling?
+  public var autoscaling: NodePoolAutoscaling? = nil
 
   /// NodeManagement configuration for this NodePool.
-  public var management: NodeManagement?
+  public var management: NodeManagement? = nil
 
   /// The constraint on the maximum number of pods that can be run
   /// simultaneously on a node in the node pool.
-  public var maxPodsConstraint: MaxPodsConstraint?
+  public var maxPodsConstraint: MaxPodsConstraint? = nil
 
   /// Which conditions caused the current node pool state.
-  public var conditions: [StatusCondition]
+  public var conditions: [StatusCondition] = []
 
   /// Output only. The pod CIDR block size per node in this node pool.
-  public var podIpv4CidrSize: Swift.Int32
+  public var podIpv4CidrSize: Swift.Int32 = Swift.Int32()
 
   /// Upgrade settings control disruption and speed of the upgrade.
-  public var upgradeSettings: NodePool.UpgradeSettings?
+  public var upgradeSettings: NodePool.UpgradeSettings? = nil
 
   /// Specifies the node placement policy.
-  public var placementPolicy: NodePool.PlacementPolicy?
+  public var placementPolicy: NodePool.PlacementPolicy? = nil
 
   /// Output only. Update info contains relevant information during a node
   /// pool update.
-  public var updateInfo: NodePool.UpdateInfo?
+  public var updateInfo: NodePool.UpdateInfo? = nil
 
   /// This checksum is computed by the server based on the value of node pool
   /// fields, and may be sent on update requests to ensure the client has an
   /// up-to-date value before proceeding.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Specifies the configuration of queued provisioning.
-  public var queuedProvisioning: NodePool.QueuedProvisioning?
+  public var queuedProvisioning: NodePool.QueuedProvisioning? = nil
 
   /// Enable best effort provisioning for nodes
-  public var bestEffortProvisioning: BestEffortProvisioning?
+  public var bestEffortProvisioning: BestEffortProvisioning? = nil
 
   /// Specifies the node drain configuration for this node pool.
-  public var nodeDrainConfig: NodePool.NodeDrainConfig?
+  public var nodeDrainConfig: NodePool.NodeDrainConfig? = nil
 
   /// Optional. Specifies the maintenance policy for the node pool.
-  public var maintenancePolicy: NodePool.NodePoolMaintenancePolicy?
+  public var maintenancePolicy: NodePool.NodePoolMaintenancePolicy? = nil
 
   /// Initialize a new instance of `NodePool`.
-  public init(
-    name: Swift.String = Swift.String(),
-    config: NodeConfig? = nil,
-    initialNodeCount: Swift.Int32 = Swift.Int32(),
-    locations: [Swift.String] = [],
-    networkConfig: NodeNetworkConfig? = nil,
-    selfLink: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-    instanceGroupUrls: [Swift.String] = [],
-    status: NodePool.Status = NodePool.Status(),
-    statusMessage: Swift.String = Swift.String(),
-    autoscaling: NodePoolAutoscaling? = nil,
-    management: NodeManagement? = nil,
-    maxPodsConstraint: MaxPodsConstraint? = nil,
-    conditions: [StatusCondition] = [],
-    podIpv4CidrSize: Swift.Int32 = Swift.Int32(),
-    upgradeSettings: NodePool.UpgradeSettings? = nil,
-    placementPolicy: NodePool.PlacementPolicy? = nil,
-    updateInfo: NodePool.UpdateInfo? = nil,
-    etag: Swift.String = Swift.String(),
-    queuedProvisioning: NodePool.QueuedProvisioning? = nil,
-    bestEffortProvisioning: BestEffortProvisioning? = nil,
-    nodeDrainConfig: NodePool.NodeDrainConfig? = nil,
-    maintenancePolicy: NodePool.NodePoolMaintenancePolicy? = nil,
-  ) {
-    self.name = name
-    self.config = config
-    self.initialNodeCount = initialNodeCount
-    self.locations = locations
-    self.networkConfig = networkConfig
-    self.selfLink = selfLink
-    self.version = version
-    self.instanceGroupUrls = instanceGroupUrls
-    self.status = status
-    self.statusMessage = statusMessage
-    self.autoscaling = autoscaling
-    self.management = management
-    self.maxPodsConstraint = maxPodsConstraint
-    self.conditions = conditions
-    self.podIpv4CidrSize = podIpv4CidrSize
-    self.upgradeSettings = upgradeSettings
-    self.placementPolicy = placementPolicy
-    self.updateInfo = updateInfo
-    self.etag = etag
-    self.queuedProvisioning = queuedProvisioning
-    self.bestEffortProvisioning = bestEffortProvisioning
-    self.nodeDrainConfig = nodeDrainConfig
-    self.maintenancePolicy = maintenancePolicy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePool().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// These upgrade settings control the level of parallelism and the level of
@@ -224,30 +189,33 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   {
     /// The maximum number of nodes that can be created beyond the current size
     /// of the node pool during the upgrade process.
-    public var maxSurge: Swift.Int32
+    public var maxSurge: Swift.Int32 = Swift.Int32()
 
     /// The maximum number of nodes that can be simultaneously unavailable during
     /// the upgrade process. A node is considered available if its status is
     /// Ready.
-    public var maxUnavailable: Swift.Int32
+    public var maxUnavailable: Swift.Int32 = Swift.Int32()
 
     /// Update strategy of the node pool.
-    public var strategy: NodePoolUpdateStrategy?
+    public var strategy: NodePoolUpdateStrategy? = nil
 
     /// Settings for blue-green upgrade strategy.
-    public var blueGreenSettings: BlueGreenSettings?
+    public var blueGreenSettings: BlueGreenSettings? = nil
 
     /// Initialize a new instance of `UpgradeSettings`.
-    public init(
-      maxSurge: Swift.Int32 = Swift.Int32(),
-      maxUnavailable: Swift.Int32 = Swift.Int32(),
-      strategy: NodePoolUpdateStrategy? = nil,
-      blueGreenSettings: BlueGreenSettings? = nil,
-    ) {
-      self.maxSurge = maxSurge
-      self.maxUnavailable = maxUnavailable
-      self.strategy = strategy
-      self.blueGreenSettings = blueGreenSettings
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UpgradeSettings().with { $0.maxSurge = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -267,13 +235,22 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Information of a blue-green upgrade.
-    public var blueGreenInfo: NodePool.UpdateInfo.BlueGreenInfo?
+    public var blueGreenInfo: NodePool.UpdateInfo.BlueGreenInfo? = nil
 
     /// Initialize a new instance of `UpdateInfo`.
-    public init(
-      blueGreenInfo: NodePool.UpdateInfo.BlueGreenInfo? = nil,
-    ) {
-      self.blueGreenInfo = blueGreenInfo
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UpdateInfo().with { $0.blueGreenInfo = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Information relevant to blue-green upgrade.
@@ -281,38 +258,40 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Current blue-green upgrade phase.
-      public var phase: NodePool.UpdateInfo.BlueGreenInfo.Phase
+      public var phase: NodePool.UpdateInfo.BlueGreenInfo.Phase = NodePool.UpdateInfo.BlueGreenInfo
+        .Phase()
 
       /// The resource URLs of the [managed instance groups]
       /// (/compute/docs/instance-groups/creating-groups-of-managed-instances)
       /// associated with blue pool.
-      public var blueInstanceGroupUrls: [Swift.String]
+      public var blueInstanceGroupUrls: [Swift.String] = []
 
       /// The resource URLs of the [managed instance groups]
       /// (/compute/docs/instance-groups/creating-groups-of-managed-instances)
       /// associated with green pool.
-      public var greenInstanceGroupUrls: [Swift.String]
+      public var greenInstanceGroupUrls: [Swift.String] = []
 
       /// Time to start deleting blue pool to complete blue-green upgrade,
       /// in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-      public var bluePoolDeletionStartTime: Swift.String
+      public var bluePoolDeletionStartTime: Swift.String = Swift.String()
 
       /// Version of green pool.
-      public var greenPoolVersion: Swift.String
+      public var greenPoolVersion: Swift.String = Swift.String()
 
       /// Initialize a new instance of `BlueGreenInfo`.
-      public init(
-        phase: NodePool.UpdateInfo.BlueGreenInfo.Phase = NodePool.UpdateInfo.BlueGreenInfo.Phase(),
-        blueInstanceGroupUrls: [Swift.String] = [],
-        greenInstanceGroupUrls: [Swift.String] = [],
-        bluePoolDeletionStartTime: Swift.String = Swift.String(),
-        greenPoolVersion: Swift.String = Swift.String(),
-      ) {
-        self.phase = phase
-        self.blueInstanceGroupUrls = blueInstanceGroupUrls
-        self.greenInstanceGroupUrls = greenInstanceGroupUrls
-        self.bluePoolDeletionStartTime = bluePoolDeletionStartTime
-        self.greenPoolVersion = greenPoolVersion
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = BlueGreenInfo().with { $0.phase = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       /// Phase represents the different stages blue-green upgrade is running in.
@@ -474,26 +453,31 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The type of placement.
-    public var type: NodePool.PlacementPolicy.Type_
+    public var type: NodePool.PlacementPolicy.Type_ = NodePool.PlacementPolicy.Type_()
 
     /// Optional. TPU placement topology for pod slice node pool.
     /// https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
-    public var tpuTopology: Swift.String
+    public var tpuTopology: Swift.String = Swift.String()
 
     /// If set, refers to the name of a custom resource policy supplied by the
     /// user. The resource policy must be in the same project and region as the
     /// node pool. If not found, InvalidArgument error is returned.
-    public var policyName: Swift.String
+    public var policyName: Swift.String = Swift.String()
 
     /// Initialize a new instance of `PlacementPolicy`.
-    public init(
-      type: NodePool.PlacementPolicy.Type_ = NodePool.PlacementPolicy.Type_(),
-      tpuTopology: Swift.String = Swift.String(),
-      policyName: Swift.String = Swift.String(),
-    ) {
-      self.type = type
-      self.tpuTopology = tpuTopology
-      self.policyName = policyName
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PlacementPolicy().with { $0.type = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Type defines the type of placement policy.
@@ -610,13 +594,22 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Denotes that this node pool is QRM specific, meaning nodes can be only
     /// obtained through queuing via the Cluster Autoscaler ProvisioningRequest
     /// API.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `QueuedProvisioning`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-    ) {
-      self.enabled = enabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = QueuedProvisioning().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -636,23 +629,28 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The duration of the PDB timeout period for node drain.
-    public var pdbTimeoutDuration: GoogleCloudWkt.Duration?
+    public var pdbTimeoutDuration: GoogleCloudWkt.Duration? = nil
 
     /// The duration of the grace termination period for node drain.
-    public var graceTerminationDuration: GoogleCloudWkt.Duration?
+    public var graceTerminationDuration: GoogleCloudWkt.Duration? = nil
 
     /// Whether to respect PDB during node pool deletion.
-    public var respectPdbDuringNodePoolDeletion: Swift.Bool?
+    public var respectPdbDuringNodePoolDeletion: Swift.Bool? = nil
 
     /// Initialize a new instance of `NodeDrainConfig`.
-    public init(
-      pdbTimeoutDuration: GoogleCloudWkt.Duration? = nil,
-      graceTerminationDuration: GoogleCloudWkt.Duration? = nil,
-      respectPdbDuringNodePoolDeletion: Swift.Bool? = nil,
-    ) {
-      self.pdbTimeoutDuration = pdbTimeoutDuration
-      self.graceTerminationDuration = graceTerminationDuration
-      self.respectPdbDuringNodePoolDeletion = respectPdbDuringNodePoolDeletion
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NodeDrainConfig().with { $0.pdbTimeoutDuration = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -671,27 +669,32 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. Indicates whether the exclusion is enabled.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// Output only. The start time of the maintenance exclusion. It is output
     /// only. It is the exclusion creation time.
-    public var startTime: GoogleCloudWkt.Timestamp?
+    public var startTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Output only. The end time of the maintenance exclusion. It is output
     /// only. It is the cluster control plane version's end of support time, or
     /// end of extended support time when the cluster is on extended support
     /// channel.
-    public var endTime: GoogleCloudWkt.Timestamp?
+    public var endTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `ExclusionUntilEndOfSupport`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-      startTime: GoogleCloudWkt.Timestamp? = nil,
-      endTime: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.enabled = enabled
-      self.startTime = startTime
-      self.endTime = endTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ExclusionUntilEndOfSupport().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -710,13 +713,22 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. The exclusion until end of support for the node pool.
-    public var exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport?
+    public var exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport? = nil
 
     /// Initialize a new instance of `NodePoolMaintenancePolicy`.
-    public init(
-      exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport? = nil,
-    ) {
-      self.exclusionUntilEndOfSupport = exclusionUntilEndOfSupport
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NodePoolMaintenancePolicy().with { $0.exclusionUntilEndOfSupport = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -32,19 +32,26 @@ public struct UpdateFolderRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Required. The new definition of the Folder. It must include the `name`
   /// field, which cannot be changed.
-  public var folder: Folder?
+  public var folder: Folder? = nil
 
   /// Required. Fields to be updated.
   /// Only the `display_name` can be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `UpdateFolderRequest`.
-  public init(
-    folder: Folder? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.folder = folder
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateFolderRequest().with { $0.folder = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

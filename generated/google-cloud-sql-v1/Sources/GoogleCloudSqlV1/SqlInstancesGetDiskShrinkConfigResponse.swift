@@ -24,23 +24,28 @@
     Sendable
   {
     /// This is always `sql#getDiskShrinkConfig`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The minimum size to which a disk can be shrunk in GigaBytes.
-    public var minimalTargetSizeGb: Swift.Int64
+    public var minimalTargetSizeGb: Swift.Int64 = Swift.Int64()
 
     /// Additional message to customers.
-    public var message: Swift.String
+    public var message: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlInstancesGetDiskShrinkConfigResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      minimalTargetSizeGb: Swift.Int64 = Swift.Int64(),
-      message: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.minimalTargetSizeGb = minimalTargetSizeGb
-      self.message = message
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesGetDiskShrinkConfigResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

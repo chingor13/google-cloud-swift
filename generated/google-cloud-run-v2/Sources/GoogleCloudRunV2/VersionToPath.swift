@@ -23,12 +23,12 @@ public struct VersionToPath: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The relative path of the secret in the container.
-  public var path: Swift.String
+  public var path: Swift.String = Swift.String()
 
   /// The Cloud Secret Manager secret version.
   /// Can be 'latest' for the latest value, or an integer or a secret alias for a
   /// specific version.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Integer octal mode bits to use on this file, must be a value between
   /// 01 and 0777 (octal). If 0 or not set, the Volume's default mode will be
@@ -44,17 +44,22 @@ public struct VersionToPath: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// 493 (base-10).
   /// * This might be in conflict with other options that affect the
   /// file mode, like fsGroup, and the result can be other mode bits set.
-  public var mode: Swift.Int32
+  public var mode: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `VersionToPath`.
-  public init(
-    path: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-    mode: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.path = path
-    self.version = version
-    self.mode = mode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = VersionToPath().with { $0.path = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

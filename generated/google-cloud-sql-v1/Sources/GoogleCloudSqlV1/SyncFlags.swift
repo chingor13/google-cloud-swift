@@ -24,19 +24,26 @@
     Sendable
   {
     /// The name of the flag.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The value of the flag. This field must be omitted if the flag
     /// doesn't take a value.
-    public var value: Swift.String
+    public var value: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SyncFlags`.
-    public init(
-      name: Swift.String = Swift.String(),
-      value: Swift.String = Swift.String(),
-    ) {
-      self.name = name
-      self.value = value
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SyncFlags().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

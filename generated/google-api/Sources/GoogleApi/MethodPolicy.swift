@@ -31,18 +31,25 @@ public struct MethodPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// automatically filled by the service config compiler .
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Policies that are applicable to the request message.
-  public var requestPolicies: [FieldPolicy]
+  public var requestPolicies: [FieldPolicy] = []
 
   /// Initialize a new instance of `MethodPolicy`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    requestPolicies: [FieldPolicy] = [],
-  ) {
-    self.selector = selector
-    self.requestPolicies = requestPolicies
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MethodPolicy().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.MethodPolicy" }

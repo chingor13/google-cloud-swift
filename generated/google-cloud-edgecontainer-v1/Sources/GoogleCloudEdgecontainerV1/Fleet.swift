@@ -30,22 +30,29 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Project names are formatted as
   /// `projects/<project-number>`.
-  public var project: Swift.String
+  public var project: Swift.String = Swift.String()
 
   /// Output only. The name of the managed Hub Membership resource associated to
   /// this cluster.
   ///
   /// Membership names are formatted as
   /// `projects/<project-number>/locations/global/membership/<cluster-id>`.
-  public var membership: Swift.String
+  public var membership: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Fleet`.
-  public init(
-    project: Swift.String = Swift.String(),
-    membership: Swift.String = Swift.String(),
-  ) {
-    self.project = project
-    self.membership = membership
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Fleet().with { $0.project = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

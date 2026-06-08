@@ -34,7 +34,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `projects/*/secrets/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. Immutable. The replication policy of the secret data attached to
   /// the [Secret][google.cloud.secretmanager.v1.Secret].
@@ -42,13 +42,13 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The replication policy cannot be changed after the Secret has been created.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var replication: Replication?
+  public var replication: Replication? = nil
 
   /// Output only. The time at which the
   /// [Secret][google.cloud.secretmanager.v1.Secret] was created.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The labels assigned to this Secret.
   ///
@@ -61,24 +61,24 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`
   ///
   /// No more than 64 labels can be assigned to a given resource.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Optional. A list of up to 10 Pub/Sub topics to which messages are published
   /// when control plane operations are called on the secret or its versions.
-  public var topics: [Topic]
+  public var topics: [Topic] = []
 
   /// Optional. Etag of the currently stored
   /// [Secret][google.cloud.secretmanager.v1.Secret].
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Optional. Rotation policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. May be excluded if there is
   /// no rotation policy.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var rotation: Rotation?
+  public var rotation: Rotation? = nil
 
   /// Optional. Mapping from version alias to version name.
   ///
@@ -91,7 +91,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Version-Alias pairs will be viewable via GetSecret and modifiable via
   /// UpdateSecret. Access by alias is only be supported on
   /// GetSecretVersion and AccessSecretVersion.
-  public var versionAliases: [Swift.String: Swift.Int64]
+  public var versionAliases: [Swift.String: Swift.Int64] = [:]
 
   /// Optional. Custom metadata about the secret.
   ///
@@ -105,7 +105,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// alphanumerics in between these symbols.
   ///
   /// The total size of annotation keys and values must be less than 16KiB.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Optional. Secret Version TTL after destruction request
   ///
@@ -113,7 +113,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For secret with TTL>0, version destruction doesn't happen immediately
   /// on calling destroy instead the version goes to a disabled state and
   /// destruction happens after the TTL expires.
-  public var versionDestroyTtl: GoogleCloudWkt.Duration?
+  public var versionDestroyTtl: GoogleCloudWkt.Duration? = nil
 
   /// Optional. The customer-managed encryption configuration of the regionalized
   /// secrets. If no configuration is provided, Google-managed default encryption
@@ -127,7 +127,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var customerManagedEncryption: CustomerManagedEncryption?
+  public var customerManagedEncryption: CustomerManagedEncryption? = nil
 
   /// Optional. Input only. Immutable. Mapping of Tag keys/values directly bound
   /// to this resource. For example:
@@ -137,7 +137,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Tags are used to organize and group resources.
   ///
   /// Tags can be used to control policy evaluation for the resource.
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Expiration policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. If specified the
@@ -153,37 +153,22 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var expiration: OneOf_Expiration?
+  public var expiration: OneOf_Expiration? = nil
 
   /// Initialize a new instance of `Secret`.
-  public init(
-    name: Swift.String = Swift.String(),
-    replication: Replication? = nil,
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    topics: [Topic] = [],
-    etag: Swift.String = Swift.String(),
-    rotation: Rotation? = nil,
-    versionAliases: [Swift.String: Swift.Int64] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    versionDestroyTtl: GoogleCloudWkt.Duration? = nil,
-    customerManagedEncryption: CustomerManagedEncryption? = nil,
-    tags: [Swift.String: Swift.String] = [:],
-    expiration: OneOf_Expiration? = nil,
-  ) {
-    self.name = name
-    self.replication = replication
-    self.createTime = createTime
-    self.labels = labels
-    self.topics = topics
-    self.etag = etag
-    self.rotation = rotation
-    self.versionAliases = versionAliases
-    self.annotations = annotations
-    self.versionDestroyTtl = versionDestroyTtl
-    self.customerManagedEncryption = customerManagedEncryption
-    self.tags = tags
-    self.expiration = expiration
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Secret().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

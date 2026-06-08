@@ -23,28 +23,31 @@
     Sendable
   {
     /// Output only. The DNS name.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Output only. The connection type of the DNS name.
-    public var connectionType: DnsNameMapping.ConnectionType
+    public var connectionType: DnsNameMapping.ConnectionType = DnsNameMapping.ConnectionType()
 
     /// Output only. The scope that the DNS name applies to.
-    public var dnsScope: DnsNameMapping.DnsScope
+    public var dnsScope: DnsNameMapping.DnsScope = DnsNameMapping.DnsScope()
 
     /// Output only. The manager for this DNS record.
-    public var recordManager: DnsNameMapping.RecordManager
+    public var recordManager: DnsNameMapping.RecordManager = DnsNameMapping.RecordManager()
 
     /// Initialize a new instance of `DnsNameMapping`.
-    public init(
-      name: Swift.String = Swift.String(),
-      connectionType: DnsNameMapping.ConnectionType = DnsNameMapping.ConnectionType(),
-      dnsScope: DnsNameMapping.DnsScope = DnsNameMapping.DnsScope(),
-      recordManager: DnsNameMapping.RecordManager = DnsNameMapping.RecordManager(),
-    ) {
-      self.name = name
-      self.connectionType = connectionType
-      self.dnsScope = dnsScope
-      self.recordManager = recordManager
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DnsNameMapping().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The connection type of the DNS name.

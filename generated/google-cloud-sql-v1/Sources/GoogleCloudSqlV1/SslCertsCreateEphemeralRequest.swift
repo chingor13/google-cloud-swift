@@ -23,18 +23,25 @@
     Sendable
   {
     /// PEM encoded public key to include in the signed certificate.
-    public var publicKey: Swift.String
+    public var publicKey: Swift.String = Swift.String()
 
     /// Access token to include in the signed certificate.
-    public var accessToken: Swift.String
+    public var accessToken: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SslCertsCreateEphemeralRequest`.
-    public init(
-      publicKey: Swift.String = Swift.String(),
-      accessToken: Swift.String = Swift.String(),
-    ) {
-      self.publicKey = publicKey
-      self.accessToken = accessToken
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SslCertsCreateEphemeralRequest().with { $0.publicKey = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

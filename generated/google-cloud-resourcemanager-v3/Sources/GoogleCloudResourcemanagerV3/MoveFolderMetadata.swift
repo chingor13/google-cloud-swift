@@ -22,23 +22,28 @@ public struct MoveFolderMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// The display name of the folder.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// The resource name of the folder's parent.
-  public var sourceParent: Swift.String
+  public var sourceParent: Swift.String = Swift.String()
 
   /// The resource name of the folder or organization to move the folder to.
-  public var destinationParent: Swift.String
+  public var destinationParent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `MoveFolderMetadata`.
-  public init(
-    displayName: Swift.String = Swift.String(),
-    sourceParent: Swift.String = Swift.String(),
-    destinationParent: Swift.String = Swift.String(),
-  ) {
-    self.displayName = displayName
-    self.sourceParent = sourceParent
-    self.destinationParent = destinationParent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MoveFolderMetadata().with { $0.displayName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

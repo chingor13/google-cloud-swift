@@ -24,18 +24,25 @@
   {
     /// Required. The parent resource where this backup is created.
     /// Format: projects/{project}
-    public var parent: Swift.String
+    public var parent: Swift.String = Swift.String()
 
     /// Required. The Backup to create.
-    public var backup: Backup?
+    public var backup: Backup? = nil
 
     /// Initialize a new instance of `CreateBackupRequest`.
-    public init(
-      parent: Swift.String = Swift.String(),
-      backup: Backup? = nil,
-    ) {
-      self.parent = parent
-      self.backup = backup
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CreateBackupRequest().with { $0.parent = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

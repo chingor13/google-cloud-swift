@@ -22,18 +22,25 @@ public struct HTTPHeader: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The header field name
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. The header field value
-  public var value: Swift.String
+  public var value: Swift.String = Swift.String()
 
   /// Initialize a new instance of `HTTPHeader`.
-  public init(
-    name: Swift.String = Swift.String(),
-    value: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.value = value
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HTTPHeader().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

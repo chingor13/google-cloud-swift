@@ -202,30 +202,32 @@ let errorResponseWithDetails = """
 
 let wantDetails: [StatusDetail] = [
   .errorInfo(
-    ErrorInfo(
-      reason: "SERVICE_DISABLED", domain: "googleapis.com",
-      metadata: [
+    ErrorInfo().with {
+      $0.reason = "SERVICE_DISABLED"
+      $0.domain = "googleapis.com"
+      $0.metadata = [
         "activationUrl":
           "https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project",
         "service": "telcoautomation.googleapis.com",
         "consumer": "projects/test-only-project",
         "containerInfo": "test-only-project",
         "serviceTitle": "Telco Automation API",
-      ])),
-  .localizedMessage(
-    LocalizedMessage(
-      locale: "en-US",
-      message:
-        "Telco Automation API has not been used in project test-only-project before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
-    )),
-  .help(
-    Help(
-      links: [
-        Help.Link(
-          description: "Google developers console API activation",
-          url:
-            "https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project"
-        )
       ]
-    )),
+    }),
+  .localizedMessage(
+    LocalizedMessage().with {
+      $0.locale = "en-US"
+      $0.message =
+        "Telco Automation API has not been used in project test-only-project before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+    }),
+  .help(
+    Help().with {
+      $0.links = [
+        Help.Link().with {
+          $0.description = "Google developers console API activation"
+          $0.url =
+            "https://console.developers.google.com/apis/api/telcoautomation.googleapis.com/overview?project=test-only-project"
+        }
+      ]
+    }),
 ]

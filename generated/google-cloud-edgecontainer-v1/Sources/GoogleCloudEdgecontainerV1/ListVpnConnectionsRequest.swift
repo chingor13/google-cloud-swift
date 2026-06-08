@@ -23,33 +23,34 @@ public struct ListVpnConnectionsRequest: Codable, Equatable, GoogleCloudWkt._Any
 {
   /// Required. The parent location, which owns this collection of VPN
   /// connections.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The maximum number of resources to list.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// A page token received from previous list request.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Only resources matching this filter will be listed.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Specifies the order in which resources will be listed.
-  public var orderBy: Swift.String
+  public var orderBy: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListVpnConnectionsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    orderBy: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.filter = filter
-    self.orderBy = orderBy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListVpnConnectionsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

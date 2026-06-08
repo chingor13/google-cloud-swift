@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let response = try await client.completeIprotation(
-    request: CompleteIPRotationRequest(/* set fields */
-    )
+    request: CompleteIPRotationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlBackupRunsService) async throws {
     let response = try await client.insert(
-      request: SqlBackupRunsInsertRequest(/* set fields */
-      )
+      request: SqlBackupRunsInsertRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

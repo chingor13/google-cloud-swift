@@ -32,22 +32,22 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Format:
   /// `projects/{project}/locations/{location}/workerPools/{worker_id}`
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// User-provided description of the WorkerPool. This field currently has a
   /// 512-character limit.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the trigger. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
   /// Please note that unlike v1, this is an int64 value. As with most Google
   /// APIs, its JSON representation will be a `string` instead of an `integer`.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Optional. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -60,7 +60,7 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 WorkerPool.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Optional. Unstructured key value map that may be set by external tools to
   /// store and arbitrary metadata. They are not queryable and should be
@@ -73,33 +73,33 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// <p>This field follows Kubernetes
   /// annotations' namespacing, limits, and rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The deletion time. It is only populated as a response to a
   /// Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. Email address of the last authenticated modifier.
-  public var lastModifier: Swift.String
+  public var lastModifier: Swift.String = Swift.String()
 
   /// Arbitrary identifier for the API client.
-  public var client: Swift.String
+  public var client: Swift.String = Swift.String()
 
   /// Arbitrary version identifier for the API client.
-  public var clientVersion: Swift.String
+  public var clientVersion: Swift.String = Swift.String()
 
   /// Optional. The launch stage as defined by [Google Cloud Platform
   ///  Launch Stages](https://cloud.google.com/terms/launch-stages).
@@ -111,66 +111,66 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   ///  For example, if ALPHA is provided as input, but only BETA and GA-level
   ///  features are used, this field will be BETA on output.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Optional. Settings for the Binary Authorization feature.
-  public var binaryAuthorization: BinaryAuthorization?
+  public var binaryAuthorization: BinaryAuthorization? = nil
 
   /// Required. The template used to create revisions for this WorkerPool.
-  public var template: WorkerPoolRevisionTemplate?
+  public var template: WorkerPoolRevisionTemplate? = nil
 
   /// Optional. Specifies how to distribute instances over a collection of
   /// Revisions belonging to the WorkerPool. If instance split is empty or not
   /// provided, defaults to 100% instances assigned to the latest `Ready`
   /// Revision.
-  public var instanceSplits: [InstanceSplit]
+  public var instanceSplits: [InstanceSplit] = []
 
   /// Optional. Specifies worker-pool-level scaling settings
-  public var scaling: WorkerPoolScaling?
+  public var scaling: WorkerPoolScaling? = nil
 
   /// Output only. The generation of this WorkerPool currently serving workloads.
   /// See comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run. Please note that unlike v1, this is an int64 value.
   /// As with most Google APIs, its JSON representation will be a `string`
   /// instead of an `integer`.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The Condition of this WorkerPool, containing its readiness
   /// status, and detailed error information in case it did not reach a serving
   /// state. See comments in `reconciling` for additional information on
   /// reconciliation process in Cloud Run.
-  public var terminalCondition: Condition?
+  public var terminalCondition: Condition? = nil
 
   /// Output only. The Conditions of all other associated sub-resources. They
   /// contain additional diagnostics information in case the WorkerPool does not
   /// reach its Serving state. See comments in `reconciling` for additional
   /// information on reconciliation process in Cloud Run.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. Name of the latest revision that is serving workloads. See
   /// comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run.
-  public var latestReadyRevision: Swift.String
+  public var latestReadyRevision: Swift.String = Swift.String()
 
   /// Output only. Name of the last created revision. See comments in
   /// `reconciling` for additional information on reconciliation process in Cloud
   /// Run.
-  public var latestCreatedRevision: Swift.String
+  public var latestCreatedRevision: Swift.String = Swift.String()
 
   /// Output only. Detailed status information for corresponding instance splits.
   /// See comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run.
-  public var instanceSplitStatuses: [InstanceSplitStatus]
+  public var instanceSplitStatuses: [InstanceSplitStatus] = []
 
   /// Output only. Indicates whether Cloud Run Threat Detection monitoring is
   /// enabled for the parent project of this worker pool.
-  public var threatDetectionEnabled: Swift.Bool
+  public var threatDetectionEnabled: Swift.Bool = Swift.Bool()
 
   /// Deprecated: Not supported, and ignored by Cloud Run.
-  public var customAudiences: [Swift.String]
+  public var customAudiences: [Swift.String] = []
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. Returns true if the WorkerPool is currently being acted upon
   /// by the system to bring it into the desired state.
@@ -194,75 +194,26 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// and `latest_ready_revision` will have the state of the last serving
   /// revision, or empty for newly created WorkerPools. Additional information on
   /// the failure can be found in `terminal_condition` and `conditions`.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Optional. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `WorkerPool`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    creator: Swift.String = Swift.String(),
-    lastModifier: Swift.String = Swift.String(),
-    client: Swift.String = Swift.String(),
-    clientVersion: Swift.String = Swift.String(),
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    binaryAuthorization: BinaryAuthorization? = nil,
-    template: WorkerPoolRevisionTemplate? = nil,
-    instanceSplits: [InstanceSplit] = [],
-    scaling: WorkerPoolScaling? = nil,
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    terminalCondition: Condition? = nil,
-    conditions: [Condition] = [],
-    latestReadyRevision: Swift.String = Swift.String(),
-    latestCreatedRevision: Swift.String = Swift.String(),
-    instanceSplitStatuses: [InstanceSplitStatus] = [],
-    threatDetectionEnabled: Swift.Bool = Swift.Bool(),
-    customAudiences: [Swift.String] = [],
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    reconciling: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.description = description
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.creator = creator
-    self.lastModifier = lastModifier
-    self.client = client
-    self.clientVersion = clientVersion
-    self.launchStage = launchStage
-    self.binaryAuthorization = binaryAuthorization
-    self.template = template
-    self.instanceSplits = instanceSplits
-    self.scaling = scaling
-    self.observedGeneration = observedGeneration
-    self.terminalCondition = terminalCondition
-    self.conditions = conditions
-    self.latestReadyRevision = latestReadyRevision
-    self.latestCreatedRevision = latestCreatedRevision
-    self.instanceSplitStatuses = instanceSplitStatuses
-    self.threatDetectionEnabled = threatDetectionEnabled
-    self.customAudiences = customAudiences
-    self.satisfiesPzs = satisfiesPzs
-    self.reconciling = reconciling
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = WorkerPool().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

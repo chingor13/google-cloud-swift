@@ -104,7 +104,7 @@ And then list the secrets:
 
 ```swift
     let secrets = try client.listSecrets(
-      byItem: ListSecretsRequest(parent: "projects/\(projectId)"))
+      byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
     for try await item in secrets {
       print("  \(item)")
     }

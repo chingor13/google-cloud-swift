@@ -26,9 +26,8 @@ func sample(client: some Instances, projectId: String, locationId: String, insta
   async throws
 {
   let response = try await client.getInstance(
-    request: GetInstanceRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)",
-    )
+    request: GetInstanceRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
   )
   print("Success: \(response)")
 }

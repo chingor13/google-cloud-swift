@@ -22,13 +22,22 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Notification config for Pub/Sub.
-  public var pubsub: NotificationConfig.PubSub?
+  public var pubsub: NotificationConfig.PubSub? = nil
 
   /// Initialize a new instance of `NotificationConfig`.
-  public init(
-    pubsub: NotificationConfig.PubSub? = nil,
-  ) {
-    self.pubsub = pubsub
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NotificationConfig().with { $0.pubsub = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Pub/Sub specific notification config.
@@ -36,26 +45,31 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// Enable notifications for Pub/Sub.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// The desired Pub/Sub topic to which notifications will be
     /// sent by GKE. Format is `projects/{project}/topics/{topic}`.
-    public var topic: Swift.String
+    public var topic: Swift.String = Swift.String()
 
     /// Allows filtering to one or more specific event types. If no filter is
     /// specified, or if a filter is specified with no event types, all event
     /// types will be sent
-    public var filter: NotificationConfig.Filter?
+    public var filter: NotificationConfig.Filter? = nil
 
     /// Initialize a new instance of `PubSub`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-      topic: Swift.String = Swift.String(),
-      filter: NotificationConfig.Filter? = nil,
-    ) {
-      self.enabled = enabled
-      self.topic = topic
-      self.filter = filter
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PubSub().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -77,13 +91,22 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// Event types to allowlist.
-    public var eventType: [NotificationConfig.EventType]
+    public var eventType: [NotificationConfig.EventType] = []
 
     /// Initialize a new instance of `Filter`.
-    public init(
-      eventType: [NotificationConfig.EventType] = [],
-    ) {
-      self.eventType = eventType
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Filter().with { $0.eventType = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

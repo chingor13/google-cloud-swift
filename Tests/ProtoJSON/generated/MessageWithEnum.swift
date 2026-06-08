@@ -22,28 +22,31 @@ public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: MessageWithEnum.TestEnum
+  public var singular: MessageWithEnum.TestEnum = MessageWithEnum.TestEnum()
 
   /// An optional field.
-  public var `optional`: MessageWithEnum.TestEnum?
+  public var `optional`: MessageWithEnum.TestEnum? = nil
 
   /// A repeated field.
-  public var repeated: [MessageWithEnum.TestEnum]
+  public var repeated: [MessageWithEnum.TestEnum] = []
 
   /// A map field, enums cannot be keys. We only need to test them as values.
-  public var map: [Swift.String: MessageWithEnum.TestEnum]
+  public var map: [Swift.String: MessageWithEnum.TestEnum] = [:]
 
   /// Initialize a new instance of `MessageWithEnum`.
-  public init(
-    singular: MessageWithEnum.TestEnum = MessageWithEnum.TestEnum(),
-    `optional`: MessageWithEnum.TestEnum? = nil,
-    repeated: [MessageWithEnum.TestEnum] = [],
-    map: [Swift.String: MessageWithEnum.TestEnum] = [:],
-  ) {
-    self.singular = singular
-    self.`optional` = `optional`
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithEnum().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

@@ -23,28 +23,31 @@
     Sendable
   {
     /// This is always sql#sqlServerAuditConfig
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The name of the destination bucket (e.g., gs://mybucket).
-    public var bucket: Swift.String
+    public var bucket: Swift.String = Swift.String()
 
     /// How long to keep generated audit files.
-    public var retentionInterval: GoogleCloudWkt.Duration?
+    public var retentionInterval: GoogleCloudWkt.Duration? = nil
 
     /// How often to upload generated audit files.
-    public var uploadInterval: GoogleCloudWkt.Duration?
+    public var uploadInterval: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `SqlServerAuditConfig`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      bucket: Swift.String = Swift.String(),
-      retentionInterval: GoogleCloudWkt.Duration? = nil,
-      uploadInterval: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.kind = kind
-      self.bucket = bucket
-      self.retentionInterval = retentionInterval
-      self.uploadInterval = uploadInterval
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlServerAuditConfig().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

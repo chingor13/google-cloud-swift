@@ -27,9 +27,8 @@ func sample(client: some Services, projectId: String, locationId: String, servic
   async throws
 {
   let response = try await client.getService(
-    request: GetServiceRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)",
-    )
+    request: GetServiceRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)" }
   )
   print("Success: \(response)")
 }

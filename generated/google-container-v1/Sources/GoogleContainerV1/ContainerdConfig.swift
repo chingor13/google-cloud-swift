@@ -23,26 +23,31 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// PrivateRegistryAccessConfig is used to configure access configuration
   /// for private container registries.
-  public var privateRegistryAccessConfig: ContainerdConfig.PrivateRegistryAccessConfig?
+  public var privateRegistryAccessConfig: ContainerdConfig.PrivateRegistryAccessConfig? = nil
 
   /// Optional. WritableCgroups defines writable cgroups configuration for the
   /// node pool.
-  public var writableCgroups: ContainerdConfig.WritableCgroups?
+  public var writableCgroups: ContainerdConfig.WritableCgroups? = nil
 
   /// RegistryHostConfig configures containerd registry host configuration.
   /// Each registry_hosts represents a hosts.toml file.
   /// At most 25 registry_hosts are allowed.
-  public var registryHosts: [ContainerdConfig.RegistryHostConfig]
+  public var registryHosts: [ContainerdConfig.RegistryHostConfig] = []
 
   /// Initialize a new instance of `ContainerdConfig`.
-  public init(
-    privateRegistryAccessConfig: ContainerdConfig.PrivateRegistryAccessConfig? = nil,
-    writableCgroups: ContainerdConfig.WritableCgroups? = nil,
-    registryHosts: [ContainerdConfig.RegistryHostConfig] = [],
-  ) {
-    self.privateRegistryAccessConfig = privateRegistryAccessConfig
-    self.writableCgroups = writableCgroups
-    self.registryHosts = registryHosts
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ContainerdConfig().with { $0.privateRegistryAccessConfig = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// PrivateRegistryAccessConfig contains access configuration for
@@ -51,20 +56,26 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Private registry access is enabled.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// Private registry access configuration.
     public var certificateAuthorityDomainConfig:
-      [ContainerdConfig.PrivateRegistryAccessConfig.CertificateAuthorityDomainConfig]
+      [ContainerdConfig.PrivateRegistryAccessConfig.CertificateAuthorityDomainConfig] = []
 
     /// Initialize a new instance of `PrivateRegistryAccessConfig`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-      certificateAuthorityDomainConfig: [ContainerdConfig.PrivateRegistryAccessConfig
-        .CertificateAuthorityDomainConfig] = [],
-    ) {
-      self.enabled = enabled
-      self.certificateAuthorityDomainConfig = certificateAuthorityDomainConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PrivateRegistryAccessConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// CertificateAuthorityDomainConfig configures one or more fully qualified
@@ -78,19 +89,26 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Examples:
       /// - `my.customdomain.com`
       /// - `10.0.1.2:5000`
-      public var fqdns: [Swift.String]
+      public var fqdns: [Swift.String] = []
 
       /// Certificate access config. The following are supported:
       /// - GCPSecretManagerCertificateConfig
-      public var certificateConfig: OneOf_CertificateConfig?
+      public var certificateConfig: OneOf_CertificateConfig? = nil
 
       /// Initialize a new instance of `CertificateAuthorityDomainConfig`.
-      public init(
-        fqdns: [Swift.String] = [],
-        certificateConfig: OneOf_CertificateConfig? = nil,
-      ) {
-        self.fqdns = fqdns
-        self.certificateConfig = certificateConfig
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = CertificateAuthorityDomainConfig().with { $0.fqdns = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       private enum CodingKeys: String, CodingKey {
@@ -143,13 +161,22 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Secret URI, in the form
         /// "projects/$PROJECT_ID/secrets/$SECRET_NAME/versions/$VERSION".
         /// Version can be fixed (e.g. "2") or "latest"
-        public var secretUri: Swift.String
+        public var secretUri: Swift.String = Swift.String()
 
         /// Initialize a new instance of `GCPSecretManagerCertificateConfig`.
-        public init(
-          secretUri: Swift.String = Swift.String(),
-        ) {
-          self.secretUri = secretUri
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = GCPSecretManagerCertificateConfig().with { $0.secretUri = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -201,13 +228,22 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. Whether writable cgroups is enabled.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `WritableCgroups`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-    ) {
-      self.enabled = enabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = WritableCgroups().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -236,20 +272,27 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Examples:
     /// - `my.customdomain.com`
     /// - `10.0.1.2:5000`
-    public var server: Swift.String
+    public var server: Swift.String = Swift.String()
 
     /// HostConfig configures a list of host-specific configurations for the
     /// server.
     /// Each server can have at most 10 host configurations.
-    public var hosts: [ContainerdConfig.RegistryHostConfig.HostConfig]
+    public var hosts: [ContainerdConfig.RegistryHostConfig.HostConfig] = []
 
     /// Initialize a new instance of `RegistryHostConfig`.
-    public init(
-      server: Swift.String = Swift.String(),
-      hosts: [ContainerdConfig.RegistryHostConfig.HostConfig] = [],
-    ) {
-      self.server = server
-      self.hosts = hosts
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RegistryHostConfig().with { $0.server = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// CertificateConfig configures certificate for the registry.
@@ -257,13 +300,22 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// One of the methods to configure the certificate.
-      public var certificate: OneOf_Certificate?
+      public var certificate: OneOf_Certificate? = nil
 
       /// Initialize a new instance of `CertificateConfig`.
-      public init(
-        certificate: OneOf_Certificate? = nil,
-      ) {
-        self.certificate = certificate
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = CertificateConfig().with { $0.gcpSecretManagerSecretUri = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       private enum CodingKeys: String, CodingKey {
@@ -332,18 +384,25 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Cert configures the client certificate.
-      public var cert: ContainerdConfig.RegistryHostConfig.CertificateConfig?
+      public var cert: ContainerdConfig.RegistryHostConfig.CertificateConfig? = nil
 
       /// Key configures the client private key. Optional.
-      public var key: ContainerdConfig.RegistryHostConfig.CertificateConfig?
+      public var key: ContainerdConfig.RegistryHostConfig.CertificateConfig? = nil
 
       /// Initialize a new instance of `CertificateConfigPair`.
-      public init(
-        cert: ContainerdConfig.RegistryHostConfig.CertificateConfig? = nil,
-        key: ContainerdConfig.RegistryHostConfig.CertificateConfig? = nil,
-      ) {
-        self.cert = cert
-        self.key = key
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = CertificateConfigPair().with { $0.cert = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -363,18 +422,25 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Key configures the header key.
-      public var key: Swift.String
+      public var key: Swift.String = Swift.String()
 
       /// Value configures the header value.
-      public var value: [Swift.String]
+      public var value: [Swift.String] = []
 
       /// Initialize a new instance of `RegistryHeader`.
-      public init(
-        key: Swift.String = Swift.String(),
-        value: [Swift.String] = [],
-      ) {
-        self.key = key
-        self.value = value
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RegistryHeader().with { $0.key = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -402,53 +468,50 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// - `my.customdomain.com`
       /// - `https://my.customdomain.com/path`
       /// - `10.0.1.2:5000`
-      public var host: Swift.String
+      public var host: Swift.String = Swift.String()
 
       /// Capabilities represent the capabilities of the registry host,
       /// specifying what operations a host is capable of performing.
       /// If not set, containerd enables all capabilities by default.
-      public var capabilities: [ContainerdConfig.RegistryHostConfig.HostCapability]
+      public var capabilities: [ContainerdConfig.RegistryHostConfig.HostCapability] = []
 
       /// OverridePath is used to indicate the host's API root endpoint is
       /// defined in the URL path rather than by the API specification. This may
       /// be used with non-compliant OCI registries which are missing the /v2
       /// prefix.
       /// If not set, containerd sets default false.
-      public var overridePath: Swift.Bool
+      public var overridePath: Swift.Bool = Swift.Bool()
 
       /// Header configures the registry host headers.
-      public var header: [ContainerdConfig.RegistryHostConfig.RegistryHeader]
+      public var header: [ContainerdConfig.RegistryHostConfig.RegistryHeader] = []
 
       /// CA configures the registry host certificate.
-      public var ca: [ContainerdConfig.RegistryHostConfig.CertificateConfig]
+      public var ca: [ContainerdConfig.RegistryHostConfig.CertificateConfig] = []
 
       /// Client configures the registry host client certificate and key.
-      public var client: [ContainerdConfig.RegistryHostConfig.CertificateConfigPair]
+      public var client: [ContainerdConfig.RegistryHostConfig.CertificateConfigPair] = []
 
       /// Specifies the maximum duration allowed for a connection attempt to
       /// complete. A shorter timeout helps reduce delays when falling back to
       /// the original registry if the mirror is unreachable.
       /// Maximum allowed value is 180s. If not set, containerd sets default 30s.
       /// The value should be a decimal number of seconds with an `s` suffix.
-      public var dialTimeout: GoogleCloudWkt.Duration?
+      public var dialTimeout: GoogleCloudWkt.Duration? = nil
 
       /// Initialize a new instance of `HostConfig`.
-      public init(
-        host: Swift.String = Swift.String(),
-        capabilities: [ContainerdConfig.RegistryHostConfig.HostCapability] = [],
-        overridePath: Swift.Bool = Swift.Bool(),
-        header: [ContainerdConfig.RegistryHostConfig.RegistryHeader] = [],
-        ca: [ContainerdConfig.RegistryHostConfig.CertificateConfig] = [],
-        client: [ContainerdConfig.RegistryHostConfig.CertificateConfigPair] = [],
-        dialTimeout: GoogleCloudWkt.Duration? = nil,
-      ) {
-        self.host = host
-        self.capabilities = capabilities
-        self.overridePath = overridePath
-        self.header = header
-        self.ca = ca
-        self.client = client
-        self.dialTimeout = dialTimeout
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = HostConfig().with { $0.host = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

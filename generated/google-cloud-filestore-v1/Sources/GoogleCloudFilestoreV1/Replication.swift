@@ -22,19 +22,26 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Optional. The replication role.
-  public var role: Replication.Role
+  public var role: Replication.Role = Replication.Role()
 
   /// Optional. Replication configuration for the replica instance associated
   /// with this instance. Only a single replica is supported.
-  public var replicas: [ReplicaConfig]
+  public var replicas: [ReplicaConfig] = []
 
   /// Initialize a new instance of `Replication`.
-  public init(
-    role: Replication.Role = Replication.Role(),
-    replicas: [ReplicaConfig] = [],
-  ) {
-    self.role = role
-    self.replicas = replicas
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Replication().with { $0.role = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Replication role.

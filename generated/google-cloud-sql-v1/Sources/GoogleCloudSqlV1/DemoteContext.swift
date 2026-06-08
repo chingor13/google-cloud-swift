@@ -24,19 +24,26 @@
     Sendable
   {
     /// This is always `sql#demoteContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Required. The name of the instance which acts as the on-premises primary
     /// instance in the replication setup.
-    public var sourceRepresentativeInstanceName: Swift.String
+    public var sourceRepresentativeInstanceName: Swift.String = Swift.String()
 
     /// Initialize a new instance of `DemoteContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      sourceRepresentativeInstanceName: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.sourceRepresentativeInstanceName = sourceRepresentativeInstanceName
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DemoteContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

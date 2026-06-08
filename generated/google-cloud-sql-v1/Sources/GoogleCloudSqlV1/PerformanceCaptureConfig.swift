@@ -23,43 +23,42 @@
     Sendable
   {
     /// Optional. Enables or disables the performance capture feature.
-    public var enabled: Swift.Bool?
+    public var enabled: Swift.Bool? = nil
 
     /// Optional. Specifies the interval in seconds between consecutive probes that
     /// check if any trigger condition thresholds have been reached.
-    public var probingIntervalSeconds: Swift.Int32?
+    public var probingIntervalSeconds: Swift.Int32? = nil
 
     /// Optional. Specifies the minimum number of consecutive probe threshold that
     /// triggers performance capture.
-    public var probeThreshold: Swift.Int32?
+    public var probeThreshold: Swift.Int32? = nil
 
     /// Optional. Specifies the minimum number of MySQL `Threads_running` to
     /// trigger the performance capture on the primary instance.
-    public var runningThreadsThreshold: Swift.Int32?
+    public var runningThreadsThreshold: Swift.Int32? = nil
 
     /// Optional. Specifies the minimum number of seconds replica must be lagging
     /// behind primary instance to trigger the performance capture on replica.
-    public var secondsBehindSourceThreshold: Swift.Int32?
+    public var secondsBehindSourceThreshold: Swift.Int32? = nil
 
     /// Optional. Specifies the amount of time in seconds that a transaction needs
     /// to have been open before the watcher starts recording it.
-    public var transactionDurationThreshold: Swift.Int32?
+    public var transactionDurationThreshold: Swift.Int32? = nil
 
     /// Initialize a new instance of `PerformanceCaptureConfig`.
-    public init(
-      enabled: Swift.Bool? = nil,
-      probingIntervalSeconds: Swift.Int32? = nil,
-      probeThreshold: Swift.Int32? = nil,
-      runningThreadsThreshold: Swift.Int32? = nil,
-      secondsBehindSourceThreshold: Swift.Int32? = nil,
-      transactionDurationThreshold: Swift.Int32? = nil,
-    ) {
-      self.enabled = enabled
-      self.probingIntervalSeconds = probingIntervalSeconds
-      self.probeThreshold = probeThreshold
-      self.runningThreadsThreshold = runningThreadsThreshold
-      self.secondsBehindSourceThreshold = secondsBehindSourceThreshold
-      self.transactionDurationThreshold = transactionDurationThreshold
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PerformanceCaptureConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

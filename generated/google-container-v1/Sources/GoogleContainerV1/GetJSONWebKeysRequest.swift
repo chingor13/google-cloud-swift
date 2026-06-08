@@ -26,13 +26,22 @@ public struct GetJSONWebKeysRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// The cluster (project, location, cluster name) to get keys for. Specified in
   /// the format `projects/*/locations/*/clusters/*`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetJSONWebKeysRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetJSONWebKeysRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

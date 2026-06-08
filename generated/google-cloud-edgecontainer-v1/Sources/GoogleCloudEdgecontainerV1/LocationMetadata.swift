@@ -26,13 +26,22 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The set of available Google Distributed Cloud Edge zones in the location.
   /// The map is keyed by the lowercase ID of each zone.
-  public var availableZones: [Swift.String: ZoneMetadata]
+  public var availableZones: [Swift.String: ZoneMetadata] = [:]
 
   /// Initialize a new instance of `LocationMetadata`.
-  public init(
-    availableZones: [Swift.String: ZoneMetadata] = [:],
-  ) {
-    self.availableZones = availableZones
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LocationMetadata().with { $0.availableZones = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -28,37 +28,38 @@ public struct ContextRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// A list of full type names of requested contexts, only the requested context
   /// will be made available to the backend.
-  public var requested: [Swift.String]
+  public var requested: [Swift.String] = []
 
   /// A list of full type names of provided contexts. It is used to support
   /// propagating HTTP headers and ETags from the response extension.
-  public var provided: [Swift.String]
+  public var provided: [Swift.String] = []
 
   /// A list of full type names or extension IDs of extensions allowed in grpc
   /// side channel from client to backend.
-  public var allowedRequestExtensions: [Swift.String]
+  public var allowedRequestExtensions: [Swift.String] = []
 
   /// A list of full type names or extension IDs of extensions allowed in grpc
   /// side channel from backend to client.
-  public var allowedResponseExtensions: [Swift.String]
+  public var allowedResponseExtensions: [Swift.String] = []
 
   /// Initialize a new instance of `ContextRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    requested: [Swift.String] = [],
-    provided: [Swift.String] = [],
-    allowedRequestExtensions: [Swift.String] = [],
-    allowedResponseExtensions: [Swift.String] = [],
-  ) {
-    self.selector = selector
-    self.requested = requested
-    self.provided = provided
-    self.allowedRequestExtensions = allowedRequestExtensions
-    self.allowedResponseExtensions = allowedResponseExtensions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ContextRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.ContextRule" }

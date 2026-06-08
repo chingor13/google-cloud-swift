@@ -77,14 +77,14 @@ struct WellKnown: Encodable {
 }
 
 @Test func createExternalAccountKeyRequestSerialization() throws {
-  let request = CreateExternalAccountKeyRequest(
-    parent: "projects/my-project/locations/global",
-    externalAccountKey: ExternalAccountKey(
-      name: "my-key",
-      keyId: "my-key-id",
-      b64MacKey: "abc".data(using: .utf8)!
-    )
-  )
+  let request = CreateExternalAccountKeyRequest().with {
+    $0.parent = "projects/my-project/locations/global"
+    $0.externalAccountKey = ExternalAccountKey().with {
+      $0.name = "my-key"
+      $0.keyId = "my-key-id"
+      $0.b64MacKey = "abc".data(using: .utf8)!
+    }
+  }
 
   let encoder = QueryParameterEncoder()
   let items = try encoder.encode(request, prefix: "fieldName")
@@ -100,10 +100,10 @@ struct WellKnown: Encodable {
 }
 
 @Test func createExternalAccountKeyRequestNilSerialization() throws {
-  let request = CreateExternalAccountKeyRequest(
-    parent: "projects/my-project/locations/global",
-    externalAccountKey: nil
-  )
+  let request = CreateExternalAccountKeyRequest().with {
+    $0.parent = "projects/my-project/locations/global"
+    $0.externalAccountKey = nil
+  }
 
   let encoder = QueryParameterEncoder()
   let items = try encoder.encode(request, prefix: "fieldName")

@@ -35,7 +35,7 @@ public struct ListProjectsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The list of Projects under the parent. This list can be paginated.
-  public var projects: [Project]
+  public var projects: [Project] = []
 
   /// Pagination token.
   ///
@@ -48,15 +48,22 @@ public struct ListProjectsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// the list returned is the last page in the result set.
   ///
   /// Pagination tokens have a limited lifetime.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListProjectsResponse`.
-  public init(
-    projects: [Project] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.projects = projects
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListProjectsResponse().with { $0.projects = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

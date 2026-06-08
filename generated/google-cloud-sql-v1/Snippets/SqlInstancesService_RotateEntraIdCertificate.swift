@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.rotateEntraIdCertificate(
-      request: SqlInstancesRotateEntraIdCertificateRequest(/* set fields */
-      )
+      request: SqlInstancesRotateEntraIdCertificateRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

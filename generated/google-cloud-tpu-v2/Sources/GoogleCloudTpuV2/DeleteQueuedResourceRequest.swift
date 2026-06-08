@@ -25,27 +25,32 @@ public struct DeleteQueuedResourceRequest: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// Required. The resource name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. Idempotent request UUID.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Optional. If set to true, all running nodes belonging to this queued
   /// resource will be deleted first and then the queued resource will be
   /// deleted. Otherwise (i.e. force=false), the queued resource will only be
   /// deleted if its nodes have already been deleted or the queued resource is in
   /// the ACCEPTED, FAILED, or SUSPENDED state.
-  public var force: Swift.Bool
+  public var force: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `DeleteQueuedResourceRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    requestId: Swift.String = Swift.String(),
-    force: Swift.Bool = Swift.Bool(),
-  ) {
-    self.name = name
-    self.requestId = requestId
-    self.force = force
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DeleteQueuedResourceRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -22,13 +22,22 @@ public struct CppSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// Initialize a new instance of `CppSettings`.
-  public init(
-    common: CommonLanguageSettings? = nil,
-  ) {
-    self.common = common
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CppSettings().with { $0.common = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.CppSettings" }

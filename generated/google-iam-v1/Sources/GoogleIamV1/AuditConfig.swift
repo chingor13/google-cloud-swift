@@ -74,18 +74,25 @@ public struct AuditConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Specifies a service that will be enabled for audit logging.
   /// For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
   /// `allServices` is a special value that covers all services.
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// The configuration for logging of each type of permission.
-  public var auditLogConfigs: [AuditLogConfig]
+  public var auditLogConfigs: [AuditLogConfig] = []
 
   /// Initialize a new instance of `AuditConfig`.
-  public init(
-    service: Swift.String = Swift.String(),
-    auditLogConfigs: [AuditLogConfig] = [],
-  ) {
-    self.service = service
-    self.auditLogConfigs = auditLogConfigs
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AuditConfig().with { $0.service = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.AuditConfig" }

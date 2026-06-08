@@ -24,14 +24,14 @@ public struct TagKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Immutable. The resource name for a TagKey. Must be in the format
   /// `tagKeys/{tag_key_id}`, where `tag_key_id` is the generated numeric id for
   /// the TagKey.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Immutable. The resource name of the TagKey's parent. A TagKey can be
   /// parented by an Organization or a Project. For a TagKey parented by an
   /// Organization, its parent must be in the form `organizations/{org_id}`. For
   /// a TagKey parented by a Project, its parent can be in the form
   /// `projects/{project_id}` or `projects/{project_number}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. Immutable. The user friendly name for a TagKey. The short name
   /// should be unique for TagKeys within the same tag namespace.
@@ -39,27 +39,27 @@ public struct TagKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The short name must be 1-63 characters, beginning and ending with
   /// an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_),
   /// dots (.), and alphanumerics between.
-  public var shortName: Swift.String
+  public var shortName: Swift.String = Swift.String()
 
   /// Output only. Immutable. Namespaced name of the TagKey.
-  public var namespacedName: Swift.String
+  public var namespacedName: Swift.String = Swift.String()
 
   /// Optional. User-assigned description of the TagKey. Must not exceed 256
   /// characters.
   ///
   /// Read-write.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. Creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Update time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Optional. Entity tag which users can pass to prevent race conditions. This
   /// field is always set in server responses. See UpdateTagKeyRequest for
   /// details.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Optional. A purpose denotes that this Tag is intended for use in policies
   /// of a specific policy engine, and will involve that policy engine in
@@ -68,37 +68,28 @@ public struct TagKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// other policy engines.
   ///
   /// A purpose cannot be changed once set.
-  public var purpose: Purpose
+  public var purpose: Purpose = Purpose()
 
   /// Optional. Purpose data corresponds to the policy system that the tag is
   /// intended for. See documentation for `Purpose` for formatting of this field.
   ///
   /// Purpose data cannot be changed once set.
-  public var purposeData: [Swift.String: Swift.String]
+  public var purposeData: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `TagKey`.
-  public init(
-    name: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-    shortName: Swift.String = Swift.String(),
-    namespacedName: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    etag: Swift.String = Swift.String(),
-    purpose: Purpose = Purpose(),
-    purposeData: [Swift.String: Swift.String] = [:],
-  ) {
-    self.name = name
-    self.parent = parent
-    self.shortName = shortName
-    self.namespacedName = namespacedName
-    self.description = description
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.etag = etag
-    self.purpose = purpose
-    self.purposeData = purposeData
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TagKey().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

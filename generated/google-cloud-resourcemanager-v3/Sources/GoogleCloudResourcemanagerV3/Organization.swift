@@ -25,30 +25,30 @@ public struct Organization: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Output only. The resource name of the organization. This is the
   /// organization's relative path in the API. Its format is
   /// "organizations/[organization_id]". For example, "organizations/1234".
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. A human-readable string that refers to the organization in the
   /// Google Cloud Console. This string is set by the server and cannot be
   /// changed. The string will be set to the primary domain (for example,
   /// "google.com") of the Google Workspace customer that owns the organization.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Output only. The organization's current lifecycle state.
-  public var state: Organization.State
+  public var state: Organization.State = Organization.State()
 
   /// Output only. Timestamp when the Organization was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Timestamp when the Organization was last modified.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Timestamp when the Organization was requested for deletion.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. A checksum computed by the server based on the current value
   /// of the Organization resource. This may be sent on update and delete
   /// requests to ensure the client has an up-to-date value before proceeding.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// The owner of this organization. The owner should be specified on
   /// creation. Once set, it cannot be changed.
@@ -56,27 +56,22 @@ public struct Organization: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The lifetime of the organization and all of its descendants are bound to
   /// the owner. If the owner is deleted, the organization and all its
   /// descendants will be deleted.
-  public var owner: OneOf_Owner?
+  public var owner: OneOf_Owner? = nil
 
   /// Initialize a new instance of `Organization`.
-  public init(
-    name: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-    state: Organization.State = Organization.State(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    etag: Swift.String = Swift.String(),
-    owner: OneOf_Owner? = nil,
-  ) {
-    self.name = name
-    self.displayName = displayName
-    self.state = state
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.etag = etag
-    self.owner = owner
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Organization().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

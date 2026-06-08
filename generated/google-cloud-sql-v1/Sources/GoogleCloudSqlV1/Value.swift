@@ -23,18 +23,25 @@
     Sendable
   {
     /// The cell value in string format.
-    public var value: Swift.String
+    public var value: Swift.String = Swift.String()
 
     /// If cell value is null, then this flag will be set to true.
-    public var nullValue: Swift.Bool
+    public var nullValue: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `Value`.
-    public init(
-      value: Swift.String = Swift.String(),
-      nullValue: Swift.Bool = Swift.Bool(),
-    ) {
-      self.value = value
-      self.nullValue = nullValue
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Value().with { $0.value = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.sql.v1.Value" }

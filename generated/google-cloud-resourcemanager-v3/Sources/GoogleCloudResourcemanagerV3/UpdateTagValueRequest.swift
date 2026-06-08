@@ -25,24 +25,29 @@ public struct UpdateTagValueRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// `etag` fields can be updated by this request. If the `etag` field is
   /// nonempty, it must match the `etag` field of the existing ControlGroup.
   /// Otherwise, `ABORTED` will be returned.
-  public var tagValue: TagValue?
+  public var tagValue: TagValue? = nil
 
   /// Optional. Fields to be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Optional. True to perform validations necessary for updating the resource,
   /// but not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UpdateTagValueRequest`.
-  public init(
-    tagValue: TagValue? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.tagValue = tagValue
-    self.updateMask = updateMask
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateTagValueRequest().with { $0.tagValue = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

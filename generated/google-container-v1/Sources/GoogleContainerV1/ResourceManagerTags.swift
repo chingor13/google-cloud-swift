@@ -30,13 +30,22 @@ public struct ResourceManagerTags: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// 1. `tagKeys/{tag_key_id}=tagValues/{tag_value_id}`
   /// 2. `{org_id}/{tag_key_name}={tag_value_name}`
   /// 3. `{project_id}/{tag_key_name}={tag_value_name}`
-  public var tags: [Swift.String: Swift.String]
+  public var tags: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `ResourceManagerTags`.
-  public init(
-    tags: [Swift.String: Swift.String] = [:],
-  ) {
-    self.tags = tags
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceManagerTags().with { $0.tags = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

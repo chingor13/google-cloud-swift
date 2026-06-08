@@ -23,38 +23,37 @@
     Sendable
   {
     /// Output only. Whether Gemini is enabled.
-    public var entitled: Swift.Bool?
+    public var entitled: Swift.Bool? = nil
 
     /// Output only. Whether the vacuum management is enabled.
-    public var googleVacuumMgmtEnabled: Swift.Bool?
+    public var googleVacuumMgmtEnabled: Swift.Bool? = nil
 
     /// Output only. Whether canceling the out-of-memory (OOM) session is enabled.
-    public var oomSessionCancelEnabled: Swift.Bool?
+    public var oomSessionCancelEnabled: Swift.Bool? = nil
 
     /// Output only. Whether the active query is enabled.
-    public var activeQueryEnabled: Swift.Bool?
+    public var activeQueryEnabled: Swift.Bool? = nil
 
     /// Output only. Whether the index advisor is enabled.
-    public var indexAdvisorEnabled: Swift.Bool?
+    public var indexAdvisorEnabled: Swift.Bool? = nil
 
     /// Output only. Whether the flag recommender is enabled.
-    public var flagRecommenderEnabled: Swift.Bool?
+    public var flagRecommenderEnabled: Swift.Bool? = nil
 
     /// Initialize a new instance of `GeminiInstanceConfig`.
-    public init(
-      entitled: Swift.Bool? = nil,
-      googleVacuumMgmtEnabled: Swift.Bool? = nil,
-      oomSessionCancelEnabled: Swift.Bool? = nil,
-      activeQueryEnabled: Swift.Bool? = nil,
-      indexAdvisorEnabled: Swift.Bool? = nil,
-      flagRecommenderEnabled: Swift.Bool? = nil,
-    ) {
-      self.entitled = entitled
-      self.googleVacuumMgmtEnabled = googleVacuumMgmtEnabled
-      self.oomSessionCancelEnabled = oomSessionCancelEnabled
-      self.activeQueryEnabled = activeQueryEnabled
-      self.indexAdvisorEnabled = indexAdvisorEnabled
-      self.flagRecommenderEnabled = flagRecommenderEnabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = GeminiInstanceConfig().with { $0.entitled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

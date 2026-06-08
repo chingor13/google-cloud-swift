@@ -23,18 +23,25 @@ public struct TimeZone: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// IANA Time Zone Database time zone. For example "America/New_York".
-  public var id: Swift.String
+  public var id: Swift.String = Swift.String()
 
   /// Optional. IANA Time Zone Database version number. For example "2019a".
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TimeZone`.
-  public init(
-    id: Swift.String = Swift.String(),
-    version: Swift.String = Swift.String(),
-  ) {
-    self.id = id
-    self.version = version
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TimeZone().with { $0.id = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.TimeZone" }

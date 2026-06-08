@@ -24,27 +24,32 @@ public struct StorageSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Required. Google Cloud Storage bucket containing the source (see
   /// [Bucket Name
   /// Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
-  public var bucket: Swift.String
+  public var bucket: Swift.String = Swift.String()
 
   /// Required. Google Cloud Storage object containing the source.
   ///
   /// This object must be a gzipped archive file (`.tar.gz`) containing source to
   /// build.
-  public var object: Swift.String
+  public var object: Swift.String = Swift.String()
 
   /// Optional. Google Cloud Storage generation for the object. If the generation
   /// is omitted, the latest generation will be used.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `StorageSource`.
-  public init(
-    bucket: Swift.String = Swift.String(),
-    object: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.bucket = bucket
-    self.object = object
-    self.generation = generation
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = StorageSource().with { $0.bucket = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

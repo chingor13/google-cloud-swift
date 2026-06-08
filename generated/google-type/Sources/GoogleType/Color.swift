@@ -145,13 +145,13 @@ public struct Color: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The amount of red in the color as a value in the interval [0, 1].
-  public var red: Swift.Float
+  public var red: Swift.Float = Swift.Float()
 
   /// The amount of green in the color as a value in the interval [0, 1].
-  public var green: Swift.Float
+  public var green: Swift.Float = Swift.Float()
 
   /// The amount of blue in the color as a value in the interval [0, 1].
-  public var blue: Swift.Float
+  public var blue: Swift.Float = Swift.Float()
 
   /// The fraction of this color that should be applied to the pixel. That is,
   /// the final pixel color is defined by the equation:
@@ -164,19 +164,22 @@ public struct Color: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// possible to distinguish between a default value and the value being unset.
   /// If omitted, this color object is rendered as a solid color
   /// (as if the alpha value had been explicitly given a value of 1.0).
-  public var alpha: GoogleCloudWkt.FloatValue?
+  public var alpha: GoogleCloudWkt.FloatValue? = nil
 
   /// Initialize a new instance of `Color`.
-  public init(
-    red: Swift.Float = Swift.Float(),
-    green: Swift.Float = Swift.Float(),
-    blue: Swift.Float = Swift.Float(),
-    alpha: GoogleCloudWkt.FloatValue? = nil,
-  ) {
-    self.red = red
-    self.green = green
-    self.blue = blue
-    self.alpha = alpha
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Color().with { $0.red = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Color" }

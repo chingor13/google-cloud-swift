@@ -22,29 +22,32 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The HTTP request method.
-  public var method: Swift.String
+  public var method: Swift.String = Swift.String()
 
   /// The HTTP request URI.
-  public var uri: Swift.String
+  public var uri: Swift.String = Swift.String()
 
   /// The HTTP request headers. The ordering of the headers is significant.
   /// Multiple headers with the same key may present for the request.
-  public var headers: [HttpHeader]
+  public var headers: [HttpHeader] = []
 
   /// The HTTP request body. If the body is not expected, it should be empty.
-  public var body: Foundation.Data
+  public var body: Foundation.Data = Foundation.Data()
 
   /// Initialize a new instance of `HttpRequest`.
-  public init(
-    method: Swift.String = Swift.String(),
-    uri: Swift.String = Swift.String(),
-    headers: [HttpHeader] = [],
-    body: Foundation.Data = Foundation.Data(),
-  ) {
-    self.method = method
-    self.uri = uri
-    self.headers = headers
-    self.body = body
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HttpRequest().with { $0.method = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.HttpRequest" }

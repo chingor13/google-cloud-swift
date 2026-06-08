@@ -23,13 +23,22 @@ public struct PodAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Selected Horizontal Pod Autoscaling profile.
-  public var hpaProfile: PodAutoscaling.HPAProfile?
+  public var hpaProfile: PodAutoscaling.HPAProfile? = nil
 
   /// Initialize a new instance of `PodAutoscaling`.
-  public init(
-    hpaProfile: PodAutoscaling.HPAProfile? = nil,
-  ) {
-    self.hpaProfile = hpaProfile
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PodAutoscaling().with { $0.hpaProfile = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Possible types of Horizontal Pod Autoscaling profile.

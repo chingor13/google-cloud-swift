@@ -22,30 +22,33 @@ public struct UpgradeClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Required. The resource name of the cluster.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. The version the cluster is going to be upgraded to.
-  public var targetVersion: Swift.String
+  public var targetVersion: Swift.String = Swift.String()
 
   /// The schedule for the upgrade.
-  public var schedule: UpgradeClusterRequest.Schedule
+  public var schedule: UpgradeClusterRequest.Schedule = UpgradeClusterRequest.Schedule()
 
   /// A unique identifier for this request. Restricted to 36 ASCII characters. A
   /// random UUID is recommended. This request is only idempotent if
   /// `request_id` is provided.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UpgradeClusterRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    targetVersion: Swift.String = Swift.String(),
-    schedule: UpgradeClusterRequest.Schedule = UpgradeClusterRequest.Schedule(),
-    requestId: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.targetVersion = targetVersion
-    self.schedule = schedule
-    self.requestId = requestId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpgradeClusterRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Represents the schedule about when the cluster is going to be upgraded.

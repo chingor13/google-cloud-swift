@@ -24,30 +24,30 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The server-assigned ID for the operation.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the operation is taking place. This field is deprecated, use
   /// location instead.
-  public var zone: Swift.String
+  public var zone: Swift.String = Swift.String()
 
   /// Output only. The operation type.
-  public var operationType: Operation.Type_
+  public var operationType: Operation.Type_ = Operation.Type_()
 
   /// Output only. The current status of the operation.
-  public var status: Operation.Status
+  public var status: Operation.Status = Operation.Status()
 
   /// Output only. Detailed operation progress, if available.
-  public var detail: Swift.String
+  public var detail: Swift.String = Swift.String()
 
   /// Output only. If an error has occurred, a textual description of the error.
   /// Deprecated. Use the field error instead.
-  public var statusMessage: Swift.String
+  public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. Server-defined URI for the operation. Example:
   /// `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`.
-  public var selfLink: Swift.String
+  public var selfLink: Swift.String = Swift.String()
 
   /// Output only. Server-defined URI for the target of the operation. The format
   /// of this is a URI to the resource being modified (such as a cluster, node
@@ -64,70 +64,51 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
   ///
   /// `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
-  public var targetLink: Swift.String
+  public var targetLink: Swift.String = Swift.String()
 
   /// Output only. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   /// or
   /// [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   /// in which the cluster resides.
-  public var location: Swift.String
+  public var location: Swift.String = Swift.String()
 
   /// Output only. The time the operation started, in
   /// [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  public var startTime: Swift.String
+  public var startTime: Swift.String = Swift.String()
 
   /// Output only. The time the operation completed, in
   /// [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  public var endTime: Swift.String
+  public var endTime: Swift.String = Swift.String()
 
   /// Output only. Progress information for an operation.
-  public var progress: OperationProgress?
+  public var progress: OperationProgress? = nil
 
   /// Which conditions caused the current cluster state.
   /// Deprecated. Use field error instead.
-  public var clusterConditions: [StatusCondition]
+  public var clusterConditions: [StatusCondition] = []
 
   /// Which conditions caused the current node pool state.
   /// Deprecated. Use field error instead.
-  public var nodepoolConditions: [StatusCondition]
+  public var nodepoolConditions: [StatusCondition] = []
 
   /// The error result of the operation in case of failure.
-  public var error: GoogleRpc.Status?
+  public var error: GoogleRpc.Status? = nil
 
   /// Initialize a new instance of `Operation`.
-  public init(
-    name: Swift.String = Swift.String(),
-    zone: Swift.String = Swift.String(),
-    operationType: Operation.Type_ = Operation.Type_(),
-    status: Operation.Status = Operation.Status(),
-    detail: Swift.String = Swift.String(),
-    statusMessage: Swift.String = Swift.String(),
-    selfLink: Swift.String = Swift.String(),
-    targetLink: Swift.String = Swift.String(),
-    location: Swift.String = Swift.String(),
-    startTime: Swift.String = Swift.String(),
-    endTime: Swift.String = Swift.String(),
-    progress: OperationProgress? = nil,
-    clusterConditions: [StatusCondition] = [],
-    nodepoolConditions: [StatusCondition] = [],
-    error: GoogleRpc.Status? = nil,
-  ) {
-    self.name = name
-    self.zone = zone
-    self.operationType = operationType
-    self.status = status
-    self.detail = detail
-    self.statusMessage = statusMessage
-    self.selfLink = selfLink
-    self.targetLink = targetLink
-    self.location = location
-    self.startTime = startTime
-    self.endTime = endTime
-    self.progress = progress
-    self.clusterConditions = clusterConditions
-    self.nodepoolConditions = nodepoolConditions
-    self.error = error
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Operation().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Current status of the operation.

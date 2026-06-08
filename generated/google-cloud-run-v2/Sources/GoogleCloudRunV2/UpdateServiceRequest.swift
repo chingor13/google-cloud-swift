@@ -22,31 +22,34 @@ public struct UpdateServiceRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// Optional. The list of fields to be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Required. The Service to be updated.
-  public var service: Service?
+  public var service: Service? = nil
 
   /// Indicates that the request should be validated and default values
   /// populated, without persisting the request or updating any resources.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Optional. If set to true, and if the Service does not exist, it will create
   /// a new one. The caller must have 'run.services.create' permissions if this
   /// is set to true and the Service does not exist.
-  public var allowMissing: Swift.Bool
+  public var allowMissing: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `UpdateServiceRequest`.
-  public init(
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-    service: Service? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-    allowMissing: Swift.Bool = Swift.Bool(),
-  ) {
-    self.updateMask = updateMask
-    self.service = service
-    self.validateOnly = validateOnly
-    self.allowMissing = allowMissing
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateServiceRequest().with { $0.updateMask = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

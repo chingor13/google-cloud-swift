@@ -22,17 +22,17 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithBool()),
       (#"{"singular": false         }"#, MessageWithBool()),
-      (#"{"singular": true          }"#, MessageWithBool(singular: true)),
+      (#"{"singular": true          }"#, MessageWithBool().with { $0.singular = true }),
       (#"{"option":   null          }"#, MessageWithBool()),
-      (#"{"option":   false         }"#, MessageWithBool(option: false)),
-      (#"{"option":   true          }"#, MessageWithBool(option: true)),
+      (#"{"option":   false         }"#, MessageWithBool().with { $0.option = false }),
+      (#"{"option":   true          }"#, MessageWithBool().with { $0.option = true }),
       (#"{"repeated": []            }"#, MessageWithBool()),
-      (#"{"repeated": [false]       }"#, MessageWithBool(repeated: [false])),
-      (#"{"repeated": [true, false] }"#, MessageWithBool(repeated: [true, false])),
+      (#"{"repeated": [false]       }"#, MessageWithBool().with { $0.repeated = [false] }),
+      (#"{"repeated": [true, false] }"#, MessageWithBool().with { $0.repeated = [true, false] }),
       // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapKey and mapKeyValue
       (#"{"mapValue": {}            }"#, MessageWithBool()),
-      (#"{"mapValue": {"a": true}   }"#, MessageWithBool(mapValue: ["a": true])),
-      (#"{"mapValue": {"a": "true"} }"#, MessageWithBool(mapValue: ["a": true])),
+      (#"{"mapValue": {"a": true}   }"#, MessageWithBool().with { $0.mapValue = ["a": true] }),
+      (#"{"mapValue": {"a": "true"} }"#, MessageWithBool().with { $0.mapValue = ["a": true] }),
     ])
   func deserialize(input: String, want: MessageWithBool) throws {
     let decoder = _ProtoJSONDecoder()

@@ -38,18 +38,25 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWkt._Any
   ///     { "name": "my-test-instance",
   ///       "security_group": ["a", "b", "c"],
   ///       "spot_instance": false }
-  public var systemLabels: GoogleCloudWkt.Struct?
+  public var systemLabels: GoogleCloudWkt.Struct? = nil
 
   /// Output only. A map of user-defined metadata labels.
-  public var userLabels: [Swift.String: Swift.String]
+  public var userLabels: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `MonitoredResourceMetadata`.
-  public init(
-    systemLabels: GoogleCloudWkt.Struct? = nil,
-    userLabels: [Swift.String: Swift.String] = [:],
-  ) {
-    self.systemLabels = systemLabels
-    self.userLabels = userLabels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MonitoredResourceMetadata().with { $0.systemLabels = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

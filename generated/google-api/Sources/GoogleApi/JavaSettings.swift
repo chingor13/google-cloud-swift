@@ -33,7 +33,7 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///       library_settings:
   ///         java_settings:
   ///           library_package: com.google.cloud.pubsub.v1
-  public var libraryPackage: Swift.String
+  public var libraryPackage: Swift.String = Swift.String()
 
   /// Configure the Java class name to use instead of the service's for its
   /// corresponding generated GAPIC client. Keys are fully-qualified
@@ -49,20 +49,25 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///         service_class_names:
   ///           - google.pubsub.v1.Publisher: TopicAdmin
   ///           - google.pubsub.v1.Subscriber: SubscriptionAdmin
-  public var serviceClassNames: [Swift.String: Swift.String]
+  public var serviceClassNames: [Swift.String: Swift.String] = [:]
 
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// Initialize a new instance of `JavaSettings`.
-  public init(
-    libraryPackage: Swift.String = Swift.String(),
-    serviceClassNames: [Swift.String: Swift.String] = [:],
-    common: CommonLanguageSettings? = nil,
-  ) {
-    self.libraryPackage = libraryPackage
-    self.serviceClassNames = serviceClassNames
-    self.common = common
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = JavaSettings().with { $0.libraryPackage = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.JavaSettings" }

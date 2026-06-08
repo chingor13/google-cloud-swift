@@ -23,38 +23,37 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The state of the upgrade.
-  public var state: UpgradeDetails.State
+  public var state: UpgradeDetails.State = UpgradeDetails.State()
 
   /// The start timestamp of the upgrade.
-  public var startTime: GoogleCloudWkt.Timestamp?
+  public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The end timestamp of the upgrade.
-  public var endTime: GoogleCloudWkt.Timestamp?
+  public var endTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The version before the upgrade.
-  public var initialVersion: Swift.String
+  public var initialVersion: Swift.String = Swift.String()
 
   /// The version after the upgrade.
-  public var targetVersion: Swift.String
+  public var targetVersion: Swift.String = Swift.String()
 
   /// The start type of the upgrade.
-  public var startType: UpgradeDetails.StartType
+  public var startType: UpgradeDetails.StartType = UpgradeDetails.StartType()
 
   /// Initialize a new instance of `UpgradeDetails`.
-  public init(
-    state: UpgradeDetails.State = UpgradeDetails.State(),
-    startTime: GoogleCloudWkt.Timestamp? = nil,
-    endTime: GoogleCloudWkt.Timestamp? = nil,
-    initialVersion: Swift.String = Swift.String(),
-    targetVersion: Swift.String = Swift.String(),
-    startType: UpgradeDetails.StartType = UpgradeDetails.StartType(),
-  ) {
-    self.state = state
-    self.startTime = startTime
-    self.endTime = endTime
-    self.initialVersion = initialVersion
-    self.targetVersion = targetVersion
-    self.startType = startType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpgradeDetails().with { $0.state = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// State indicates the state of the upgrade.

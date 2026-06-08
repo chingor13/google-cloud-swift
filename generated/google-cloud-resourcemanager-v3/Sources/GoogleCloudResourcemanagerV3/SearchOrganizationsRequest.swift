@@ -24,11 +24,11 @@ public struct SearchOrganizationsRequest: Codable, Equatable, GoogleCloudWkt._An
   /// Optional. The maximum number of organizations to return in the response.
   /// The server can return fewer organizations than requested. If unspecified,
   /// server picks an appropriate default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to
   /// `SearchOrganizations` that indicates from where listing should continue.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. An optional query string used to filter the Organizations to
   /// return in the response. Query rules are case-insensitive.
@@ -49,17 +49,22 @@ public struct SearchOrganizationsRequest: Codable, Equatable, GoogleCloudWkt._An
   /// resources with `owner.directory_customer_id` equal to `123456789`.
   /// * Query `domain:google.com` returns Organization resources corresponding
   /// to the domain `google.com`.
-  public var query: Swift.String
+  public var query: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SearchOrganizationsRequest`.
-  public init(
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    query: Swift.String = Swift.String(),
-  ) {
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.query = query
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SearchOrganizationsRequest().with { $0.pageSize = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

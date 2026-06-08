@@ -26,31 +26,34 @@ public struct NodePoolAutoConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// valid sources or targets for network firewalls and are specified by
   /// the client during cluster creation. Each tag within the list
   /// must comply with RFC1035.
-  public var networkTags: NetworkTags?
+  public var networkTags: NetworkTags? = nil
 
   /// Resource manager tag keys and values to be attached to the nodes
   /// for managing Compute Engine firewalls using Network Firewall Policies.
-  public var resourceManagerTags: ResourceManagerTags?
+  public var resourceManagerTags: ResourceManagerTags? = nil
 
   /// NodeKubeletConfig controls the defaults for autoprovisioned node-pools.
   ///
   /// Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
-  public var nodeKubeletConfig: NodeKubeletConfig?
+  public var nodeKubeletConfig: NodeKubeletConfig? = nil
 
   /// Output only. Configuration options for Linux nodes.
-  public var linuxNodeConfig: LinuxNodeConfig?
+  public var linuxNodeConfig: LinuxNodeConfig? = nil
 
   /// Initialize a new instance of `NodePoolAutoConfig`.
-  public init(
-    networkTags: NetworkTags? = nil,
-    resourceManagerTags: ResourceManagerTags? = nil,
-    nodeKubeletConfig: NodeKubeletConfig? = nil,
-    linuxNodeConfig: LinuxNodeConfig? = nil,
-  ) {
-    self.networkTags = networkTags
-    self.resourceManagerTags = resourceManagerTags
-    self.nodeKubeletConfig = nodeKubeletConfig
-    self.linuxNodeConfig = linuxNodeConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePoolAutoConfig().with { $0.networkTags = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

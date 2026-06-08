@@ -23,18 +23,25 @@
     Sendable
   {
     /// This is always `sql#flagsList`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// List of flags.
-    public var items: [Flag]
+    public var items: [Flag] = []
 
     /// Initialize a new instance of `FlagsListResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      items: [Flag] = [],
-    ) {
-      self.kind = kind
-      self.items = items
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FlagsListResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

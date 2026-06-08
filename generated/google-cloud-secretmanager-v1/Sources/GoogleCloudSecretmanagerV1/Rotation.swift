@@ -41,7 +41,7 @@ public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.secretmanager.v1.Rotation.next_rotation_time]: <doc:Rotation/nextRotationTime>
   /// [google.cloud.secretmanager.v1.Rotation.rotation_period]: <doc:Rotation/rotationPeriod>
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var nextRotationTime: GoogleCloudWkt.Timestamp?
+  public var nextRotationTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Input only. The Duration between rotation notifications. Must be in seconds
   /// and at least 3600s (1h) and at most 3153600000s (100 years).
@@ -57,15 +57,22 @@ public struct Rotation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.Rotation.next_rotation_time]: <doc:Rotation/nextRotationTime>
   /// [google.cloud.secretmanager.v1.Rotation.rotation_period]: <doc:Rotation/rotationPeriod>
-  public var rotationPeriod: GoogleCloudWkt.Duration?
+  public var rotationPeriod: GoogleCloudWkt.Duration? = nil
 
   /// Initialize a new instance of `Rotation`.
-  public init(
-    nextRotationTime: GoogleCloudWkt.Timestamp? = nil,
-    rotationPeriod: GoogleCloudWkt.Duration? = nil,
-  ) {
-    self.nextRotationTime = nextRotationTime
-    self.rotationPeriod = rotationPeriod
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Rotation().with { $0.nextRotationTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

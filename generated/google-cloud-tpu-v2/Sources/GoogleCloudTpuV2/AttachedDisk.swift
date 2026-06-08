@@ -24,20 +24,27 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Specifies the full path to an existing disk.
   /// For example: "projects/my-project/zones/us-central1-c/disks/my-disk".
-  public var sourceDisk: Swift.String
+  public var sourceDisk: Swift.String = Swift.String()
 
   /// The mode in which to attach this disk.
   /// If not specified, the default is READ_WRITE mode.
   /// Only applicable to data_disks.
-  public var mode: AttachedDisk.DiskMode
+  public var mode: AttachedDisk.DiskMode = AttachedDisk.DiskMode()
 
   /// Initialize a new instance of `AttachedDisk`.
-  public init(
-    sourceDisk: Swift.String = Swift.String(),
-    mode: AttachedDisk.DiskMode = AttachedDisk.DiskMode(),
-  ) {
-    self.sourceDisk = sourceDisk
-    self.mode = mode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AttachedDisk().with { $0.sourceDisk = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The different mode of the attached disk.

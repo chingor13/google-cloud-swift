@@ -27,23 +27,28 @@ public struct ListRuntimeVersionsResponse: Codable, Equatable, GoogleCloudWkt._A
   Sendable
 {
   /// The listed nodes.
-  public var runtimeVersions: [RuntimeVersion]
+  public var runtimeVersions: [RuntimeVersion] = []
 
   /// The next page token or empty if none.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListRuntimeVersionsResponse`.
-  public init(
-    runtimeVersions: [RuntimeVersion] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.runtimeVersions = runtimeVersions
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListRuntimeVersionsResponse().with { $0.runtimeVersions = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

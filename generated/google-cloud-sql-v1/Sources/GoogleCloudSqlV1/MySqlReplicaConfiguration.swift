@@ -28,65 +28,54 @@
     /// Dumps have the binlog co-ordinates from which replication
     /// begins. This can be accomplished by setting --master-data to 1 when using
     /// mysqldump.
-    public var dumpFilePath: Swift.String
+    public var dumpFilePath: Swift.String = Swift.String()
 
     /// The username for the replication connection.
-    public var username: Swift.String
+    public var username: Swift.String = Swift.String()
 
     /// The password for the replication connection.
-    public var password: Swift.String
+    public var password: Swift.String = Swift.String()
 
     /// Seconds to wait between connect retries. MySQL's default is 60 seconds.
-    public var connectRetryInterval: GoogleCloudWkt.Int32Value?
+    public var connectRetryInterval: GoogleCloudWkt.Int32Value? = nil
 
     /// Interval in milliseconds between replication heartbeats.
-    public var masterHeartbeatPeriod: GoogleCloudWkt.Int64Value?
+    public var masterHeartbeatPeriod: GoogleCloudWkt.Int64Value? = nil
 
     /// PEM representation of the trusted CA's x509 certificate.
-    public var caCertificate: Swift.String
+    public var caCertificate: Swift.String = Swift.String()
 
     /// PEM representation of the replica's x509 certificate.
-    public var clientCertificate: Swift.String
+    public var clientCertificate: Swift.String = Swift.String()
 
     /// PEM representation of the replica's private key. The corresponding public
     /// key is encoded in the client's certificate.
-    public var clientKey: Swift.String
+    public var clientKey: Swift.String = Swift.String()
 
     /// A list of permissible ciphers to use for SSL encryption.
-    public var sslCipher: Swift.String
+    public var sslCipher: Swift.String = Swift.String()
 
     /// Whether or not to check the primary instance's Common Name value in the
     /// certificate that it sends during the SSL handshake.
-    public var verifyServerCertificate: GoogleCloudWkt.BoolValue?
+    public var verifyServerCertificate: GoogleCloudWkt.BoolValue? = nil
 
     /// This is always `sql#mysqlReplicaConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `MySqlReplicaConfiguration`.
-    public init(
-      dumpFilePath: Swift.String = Swift.String(),
-      username: Swift.String = Swift.String(),
-      password: Swift.String = Swift.String(),
-      connectRetryInterval: GoogleCloudWkt.Int32Value? = nil,
-      masterHeartbeatPeriod: GoogleCloudWkt.Int64Value? = nil,
-      caCertificate: Swift.String = Swift.String(),
-      clientCertificate: Swift.String = Swift.String(),
-      clientKey: Swift.String = Swift.String(),
-      sslCipher: Swift.String = Swift.String(),
-      verifyServerCertificate: GoogleCloudWkt.BoolValue? = nil,
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.dumpFilePath = dumpFilePath
-      self.username = username
-      self.password = password
-      self.connectRetryInterval = connectRetryInterval
-      self.masterHeartbeatPeriod = masterHeartbeatPeriod
-      self.caCertificate = caCertificate
-      self.clientCertificate = clientCertificate
-      self.clientKey = clientKey
-      self.sslCipher = sslCipher
-      self.verifyServerCertificate = verifyServerCertificate
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MySqlReplicaConfiguration().with { $0.dumpFilePath = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -23,13 +23,22 @@ public struct GenerateDownloadUrlResponse: Codable, Equatable, GoogleCloudWkt._A
 {
   /// The generated Google Cloud Storage signed URL that should be used for
   /// function source code download.
-  public var downloadUrl: Swift.String
+  public var downloadUrl: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GenerateDownloadUrlResponse`.
-  public init(
-    downloadUrl: Swift.String = Swift.String(),
-  ) {
-    self.downloadUrl = downloadUrl
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateDownloadUrlResponse().with { $0.downloadUrl = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

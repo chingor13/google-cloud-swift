@@ -22,26 +22,31 @@ public struct EventFilter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The name of a CloudEvents attribute.
-  public var attribute: Swift.String
+  public var attribute: Swift.String = Swift.String()
 
   /// Required. The value for the attribute.
-  public var value: Swift.String
+  public var value: Swift.String = Swift.String()
 
   /// Optional. The operator used for matching the events with the value of the
   /// filter. If not specified, only events that have an exact key-value pair
   /// specified in the filter are matched. The only allowed value is
   /// `match-path-pattern`.
-  public var `operator`: Swift.String
+  public var `operator`: Swift.String = Swift.String()
 
   /// Initialize a new instance of `EventFilter`.
-  public init(
-    attribute: Swift.String = Swift.String(),
-    value: Swift.String = Swift.String(),
-    `operator`: Swift.String = Swift.String(),
-  ) {
-    self.attribute = attribute
-    self.value = value
-    self.`operator` = `operator`
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EventFilter().with { $0.attribute = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

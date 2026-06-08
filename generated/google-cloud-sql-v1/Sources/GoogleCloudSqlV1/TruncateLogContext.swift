@@ -23,19 +23,26 @@
     Sendable
   {
     /// This is always `sql#truncateLogContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The type of log to truncate. Valid values are `MYSQL_GENERAL_TABLE` and
     /// `MYSQL_SLOW_TABLE`.
-    public var logType: Swift.String
+    public var logType: Swift.String = Swift.String()
 
     /// Initialize a new instance of `TruncateLogContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      logType: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.logType = logType
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = TruncateLogContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

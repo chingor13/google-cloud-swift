@@ -26,14 +26,14 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// e.g., 'us-central1' or 'global' if the global builder is to be used.
   /// Format:
   /// `projects/{project}/locations/{location}`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. Artifact Registry URI to store the built image.
-  public var imageUri: Swift.String
+  public var imageUri: Swift.String = Swift.String()
 
   /// Optional. The service account to use for the build. If not set, the default
   /// Cloud Build service account for the project will be used.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Optional. Name of the Cloud Build Custom Worker Pool that should be used to
   /// build the function. The format of this field is
@@ -41,51 +41,42 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// `{project}` and `{region}` are the project id and region respectively where
   /// the worker pool is defined and `{workerPool}` is the short name of the
   /// worker pool.
-  public var workerPool: Swift.String
+  public var workerPool: Swift.String = Swift.String()
 
   /// Optional. Additional tags to annotate the build.
-  public var tags: [Swift.String]
+  public var tags: [Swift.String] = []
 
   /// Optional. The machine type from default pool to use for the build. If left
   /// blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
   /// is supported. If worker_pool is set, this field will be ignored.
-  public var machineType: Swift.String
+  public var machineType: Swift.String = Swift.String()
 
   /// Optional. The release track of the client that initiated the build request.
-  public var releaseTrack: GoogleApi.LaunchStage
+  public var releaseTrack: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Optional. The client that initiated the build request.
-  public var client: Swift.String
+  public var client: Swift.String = Swift.String()
 
   /// Location of source.
-  public var source: OneOf_Source?
+  public var source: OneOf_Source? = nil
 
   /// Build type must be one of the following.
-  public var buildType: OneOf_BuildType?
+  public var buildType: OneOf_BuildType? = nil
 
   /// Initialize a new instance of `SubmitBuildRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    imageUri: Swift.String = Swift.String(),
-    serviceAccount: Swift.String = Swift.String(),
-    workerPool: Swift.String = Swift.String(),
-    tags: [Swift.String] = [],
-    machineType: Swift.String = Swift.String(),
-    releaseTrack: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    client: Swift.String = Swift.String(),
-    source: OneOf_Source? = nil,
-    buildType: OneOf_BuildType? = nil,
-  ) {
-    self.parent = parent
-    self.imageUri = imageUri
-    self.serviceAccount = serviceAccount
-    self.workerPool = workerPool
-    self.tags = tags
-    self.machineType = machineType
-    self.releaseTrack = releaseTrack
-    self.client = client
-    self.source = source
-    self.buildType = buildType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SubmitBuildRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -186,7 +177,19 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// Initialize a new instance of `DockerBuild`.
-    public init() {
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DockerBuild().with { $0.<placeholder> = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -205,52 +208,49 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// The runtime name, e.g. 'go113'. Leave blank for generic builds.
-    public var runtime: Swift.String
+    public var runtime: Swift.String = Swift.String()
 
     /// Optional. Name of the function target if the source is a function source.
     /// Required for function builds.
-    public var functionTarget: Swift.String
+    public var functionTarget: Swift.String = Swift.String()
 
     /// Optional. cache_image_uri is the GCR/AR URL where the cache image will be
     /// stored. cache_image_uri is optional and omitting it will disable caching.
     /// This URL must be stable across builds. It is used to derive a
     /// build-specific temporary URL by substituting the tag with the build ID.
     /// The build will clean up the temporary image on a best-effort basis.
-    public var cacheImageUri: Swift.String
+    public var cacheImageUri: Swift.String = Swift.String()
 
     /// Optional. The base image to use for the build.
-    public var baseImage: Swift.String
+    public var baseImage: Swift.String = Swift.String()
 
     /// Optional. User-provided build-time environment variables.
-    public var environmentVariables: [Swift.String: Swift.String]
+    public var environmentVariables: [Swift.String: Swift.String] = [:]
 
     /// Optional. Whether or not the application container will be enrolled in
     /// automatic base image updates. When true, the application will be built on
     /// a scratch base image, so the base layers can be appended at run time.
-    public var enableAutomaticUpdates: Swift.Bool
+    public var enableAutomaticUpdates: Swift.Bool = Swift.Bool()
 
     /// Optional. project_descriptor stores the path to the project descriptor
     /// file. When empty, it means that there is no project descriptor file in
     /// the source.
-    public var projectDescriptor: Swift.String
+    public var projectDescriptor: Swift.String = Swift.String()
 
     /// Initialize a new instance of `BuildpacksBuild`.
-    public init(
-      runtime: Swift.String = Swift.String(),
-      functionTarget: Swift.String = Swift.String(),
-      cacheImageUri: Swift.String = Swift.String(),
-      baseImage: Swift.String = Swift.String(),
-      environmentVariables: [Swift.String: Swift.String] = [:],
-      enableAutomaticUpdates: Swift.Bool = Swift.Bool(),
-      projectDescriptor: Swift.String = Swift.String(),
-    ) {
-      self.runtime = runtime
-      self.functionTarget = functionTarget
-      self.cacheImageUri = cacheImageUri
-      self.baseImage = baseImage
-      self.environmentVariables = environmentVariables
-      self.enableAutomaticUpdates = enableAutomaticUpdates
-      self.projectDescriptor = projectDescriptor
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BuildpacksBuild().with { $0.runtime = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

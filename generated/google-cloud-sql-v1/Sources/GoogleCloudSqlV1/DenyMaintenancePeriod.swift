@@ -27,27 +27,32 @@
     /// empty, the year of the end date also must be empty. In this case, it means
     /// the deny maintenance period recurs every year. The date is in format
     /// yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01
-    public var startDate: Swift.String
+    public var startDate: Swift.String = Swift.String()
 
     /// "deny maintenance period" end date. If the year of the end date is empty,
     /// the year of the start date also must be empty. In this case, it means the
     /// no maintenance interval recurs every year. The date is in format yyyy-mm-dd
     /// i.e., 2020-11-01, or mm-dd, i.e., 11-01
-    public var endDate: Swift.String
+    public var endDate: Swift.String = Swift.String()
 
     /// Time in UTC when the "deny maintenance period" starts on start_date and
     /// ends on end_date. The time is in format: HH:mm:SS, i.e., 00:00:00
-    public var time: Swift.String
+    public var time: Swift.String = Swift.String()
 
     /// Initialize a new instance of `DenyMaintenancePeriod`.
-    public init(
-      startDate: Swift.String = Swift.String(),
-      endDate: Swift.String = Swift.String(),
-      time: Swift.String = Swift.String(),
-    ) {
-      self.startDate = startDate
-      self.endDate = endDate
-      self.time = time
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DenyMaintenancePeriod().with { $0.startDate = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

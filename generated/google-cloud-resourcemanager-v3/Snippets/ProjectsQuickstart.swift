@@ -26,9 +26,8 @@ import GoogleRpc
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.ProjectsClient()
   let items = try client.listProjects(
-    byItem: ListProjectsRequest(
-      parent: "\(parent)",
-    )
+    byItem: ListProjectsRequest()
+      .with { $0.parent = "\(parent)" }
   )
   for try await item in items {
     print("  \(item)")

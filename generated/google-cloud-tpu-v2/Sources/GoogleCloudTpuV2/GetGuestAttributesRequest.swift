@@ -24,24 +24,29 @@ public struct GetGuestAttributesRequest: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// Required. The resource name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The guest attributes path to be queried.
-  public var queryPath: Swift.String
+  public var queryPath: Swift.String = Swift.String()
 
   /// The 0-based worker ID. If it is empty, all workers' GuestAttributes will be
   /// returned.
-  public var workerIds: [Swift.String]
+  public var workerIds: [Swift.String] = []
 
   /// Initialize a new instance of `GetGuestAttributesRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    queryPath: Swift.String = Swift.String(),
-    workerIds: [Swift.String] = [],
-  ) {
-    self.name = name
-    self.queryPath = queryPath
-    self.workerIds = workerIds
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetGuestAttributesRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

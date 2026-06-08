@@ -24,23 +24,28 @@ public struct RestoreInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// Required. The resource name of the instance, in the format
   /// `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Required. Name of the file share in the Filestore instance that the backup
   /// is being restored to.
-  public var fileShare: Swift.String
+  public var fileShare: Swift.String = Swift.String()
 
-  public var source: OneOf_Source?
+  public var source: OneOf_Source? = nil
 
   /// Initialize a new instance of `RestoreInstanceRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    fileShare: Swift.String = Swift.String(),
-    source: OneOf_Source? = nil,
-  ) {
-    self.name = name
-    self.fileShare = fileShare
-    self.source = source
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RestoreInstanceRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

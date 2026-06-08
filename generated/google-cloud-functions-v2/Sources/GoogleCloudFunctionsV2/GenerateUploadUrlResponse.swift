@@ -24,7 +24,7 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWkt._Any
   /// The generated Google Cloud Storage signed URL that should be used for a
   /// function source code upload. The uploaded file should be a zip archive
   /// which contains a function.
-  public var uploadUrl: Swift.String
+  public var uploadUrl: Swift.String = Swift.String()
 
   /// The location of the source code in the upload bucket.
   ///
@@ -34,15 +34,22 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWkt._Any
   ///
   /// Generation defaults to 0, as Cloud Storage provides a new generation only
   /// upon uploading a new object or version of an object.
-  public var storageSource: StorageSource?
+  public var storageSource: StorageSource? = nil
 
   /// Initialize a new instance of `GenerateUploadUrlResponse`.
-  public init(
-    uploadUrl: Swift.String = Swift.String(),
-    storageSource: StorageSource? = nil,
-  ) {
-    self.uploadUrl = uploadUrl
-    self.storageSource = storageSource
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateUploadUrlResponse().with { $0.uploadUrl = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,17 +23,17 @@
     Sendable
   {
     /// This is always `sql#connectSettings`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// SSL configuration.
-    public var serverCaCert: SslCert?
+    public var serverCaCert: SslCert? = nil
 
     /// The assigned IP addresses for the instance.
-    public var ipAddresses: [IpMapping]
+    public var ipAddresses: [IpMapping] = []
 
     /// The cloud region for the instance. For example, `us-central1`,
     /// `europe-west1`. The region cannot be changed after instance creation.
-    public var region: Swift.String
+    public var region: Swift.String = Swift.String()
 
     /// The database engine type and version. The `databaseVersion`
     /// field cannot be changed after instance creation.
@@ -46,74 +46,57 @@
     /// `SQLSERVER_2017_WEB`, `SQLSERVER_2019_STANDARD`,
     /// `SQLSERVER_2019_ENTERPRISE`, `SQLSERVER_2019_EXPRESS`, or
     /// `SQLSERVER_2019_WEB`.
-    public var databaseVersion: SqlDatabaseVersion
+    public var databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion()
 
     /// `SECOND_GEN`: Cloud SQL database instance.
     /// `EXTERNAL`: A database server that is not managed by Google.
     /// This property is read-only; use the `tier` property in the `settings`
     /// object to determine the database type.
-    public var backendType: SqlBackendType
+    public var backendType: SqlBackendType = SqlBackendType()
 
     /// Whether PSC connectivity is enabled for this instance.
-    public var pscEnabled: Swift.Bool
+    public var pscEnabled: Swift.Bool = Swift.Bool()
 
     /// The dns name of the instance.
-    public var dnsName: Swift.String
+    public var dnsName: Swift.String = Swift.String()
 
     /// Specify what type of CA is used for the server certificate.
-    public var serverCaMode: ConnectSettings.CaMode
+    public var serverCaMode: ConnectSettings.CaMode = ConnectSettings.CaMode()
 
     /// Custom subject alternative names for the server certificate.
-    public var customSubjectAlternativeNames: [Swift.String]
+    public var customSubjectAlternativeNames: [Swift.String] = []
 
     /// Output only. The list of DNS names used by this instance.
-    public var dnsNames: [DnsNameMapping]
+    public var dnsNames: [DnsNameMapping] = []
 
     /// The number of read pool nodes in a read pool.
-    public var nodeCount: Swift.Int32?
+    public var nodeCount: Swift.Int32? = nil
 
     /// Output only. Entries containing information about each read pool node of
     /// the read pool.
-    public var nodes: [ConnectSettings.ConnectPoolNodeConfig]
+    public var nodes: [ConnectSettings.ConnectPoolNodeConfig] = []
 
     /// Optional. Output only. mdx_protocol_support controls how the client uses
     /// metadata exchange when connecting to the instance. The values in the list
     /// representing parts of the MDX protocol that are supported by this instance.
     /// When the list is empty, the instance does not support MDX, so the client
     /// must not send an MDX request. The default is empty.
-    public var mdxProtocolSupport: [ConnectSettings.MdxProtocolSupport]
+    public var mdxProtocolSupport: [ConnectSettings.MdxProtocolSupport] = []
 
     /// Initialize a new instance of `ConnectSettings`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      serverCaCert: SslCert? = nil,
-      ipAddresses: [IpMapping] = [],
-      region: Swift.String = Swift.String(),
-      databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion(),
-      backendType: SqlBackendType = SqlBackendType(),
-      pscEnabled: Swift.Bool = Swift.Bool(),
-      dnsName: Swift.String = Swift.String(),
-      serverCaMode: ConnectSettings.CaMode = ConnectSettings.CaMode(),
-      customSubjectAlternativeNames: [Swift.String] = [],
-      dnsNames: [DnsNameMapping] = [],
-      nodeCount: Swift.Int32? = nil,
-      nodes: [ConnectSettings.ConnectPoolNodeConfig] = [],
-      mdxProtocolSupport: [ConnectSettings.MdxProtocolSupport] = [],
-    ) {
-      self.kind = kind
-      self.serverCaCert = serverCaCert
-      self.ipAddresses = ipAddresses
-      self.region = region
-      self.databaseVersion = databaseVersion
-      self.backendType = backendType
-      self.pscEnabled = pscEnabled
-      self.dnsName = dnsName
-      self.serverCaMode = serverCaMode
-      self.customSubjectAlternativeNames = customSubjectAlternativeNames
-      self.dnsNames = dnsNames
-      self.nodeCount = nodeCount
-      self.nodes = nodes
-      self.mdxProtocolSupport = mdxProtocolSupport
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ConnectSettings().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Details of a single read pool node of a read pool.
@@ -122,29 +105,32 @@
     {
       /// Output only. The name of the read pool node. Doesn't include the project
       /// ID.
-      public var name: Swift.String?
+      public var name: Swift.String? = nil
 
       /// Output only. Mappings containing IP addresses that can be used to connect
       /// to the read pool node.
-      public var ipAddresses: [IpMapping]
+      public var ipAddresses: [IpMapping] = []
 
       /// Output only. The DNS name of the read pool node.
-      public var dnsName: Swift.String?
+      public var dnsName: Swift.String? = nil
 
       /// Output only. The list of DNS names used by this read pool node.
-      public var dnsNames: [DnsNameMapping]
+      public var dnsNames: [DnsNameMapping] = []
 
       /// Initialize a new instance of `ConnectPoolNodeConfig`.
-      public init(
-        name: Swift.String? = nil,
-        ipAddresses: [IpMapping] = [],
-        dnsName: Swift.String? = nil,
-        dnsNames: [DnsNameMapping] = [],
-      ) {
-        self.name = name
-        self.ipAddresses = ipAddresses
-        self.dnsName = dnsName
-        self.dnsNames = dnsNames
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = ConnectPoolNodeConfig().with { $0.name = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

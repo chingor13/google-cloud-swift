@@ -24,25 +24,30 @@ public struct SourceProvenance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// A copy of the build's `source.storage_source`, if exists, with any
   /// generations resolved.
-  public var resolvedStorageSource: StorageSource?
+  public var resolvedStorageSource: StorageSource? = nil
 
   /// A copy of the build's `source.repo_source`, if exists, with any
   /// revisions resolved.
-  public var resolvedRepoSource: RepoSource?
+  public var resolvedRepoSource: RepoSource? = nil
 
   /// A copy of the build's `source.git_uri`, if exists, with any commits
   /// resolved.
-  public var gitUri: Swift.String
+  public var gitUri: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SourceProvenance`.
-  public init(
-    resolvedStorageSource: StorageSource? = nil,
-    resolvedRepoSource: RepoSource? = nil,
-    gitUri: Swift.String = Swift.String(),
-  ) {
-    self.resolvedStorageSource = resolvedStorageSource
-    self.resolvedRepoSource = resolvedRepoSource
-    self.gitUri = gitUri
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SourceProvenance().with { $0.resolvedStorageSource = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

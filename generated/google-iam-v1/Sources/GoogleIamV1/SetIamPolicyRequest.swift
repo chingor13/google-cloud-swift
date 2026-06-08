@@ -23,30 +23,35 @@ public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// REQUIRED: The resource for which the policy is being specified.
   /// See the operation documentation for the appropriate value for this field.
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// REQUIRED: The complete policy to be applied to the `resource`. The size of
   /// the policy is limited to a few 10s of KB. An empty policy is a
   /// valid policy but certain Cloud Platform services (such as Projects)
   /// might reject them.
-  public var policy: Policy?
+  public var policy: Policy? = nil
 
   /// OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
   /// the fields in the mask will be modified. If no mask is provided, the
   /// following default mask is used:
   ///
   /// `paths: "bindings, etag"`
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `SetIamPolicyRequest`.
-  public init(
-    resource: Swift.String = Swift.String(),
-    policy: Policy? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.resource = resource
-    self.policy = policy
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SetIamPolicyRequest().with { $0.resource = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

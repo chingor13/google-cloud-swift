@@ -25,26 +25,26 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// This is used in conjunction with use_routes. It cannot
   /// be true if use_routes is true. If both use_ip_aliases and use_routes are
   /// false, then the server picks the default IP allocation mode
-  public var useIpAliases: Swift.Bool
+  public var useIpAliases: Swift.Bool = Swift.Bool()
 
   /// Whether a new subnetwork will be created automatically for the cluster.
   ///
   /// This field is only applicable when `use_ip_aliases` is true.
-  public var createSubnetwork: Swift.Bool
+  public var createSubnetwork: Swift.Bool = Swift.Bool()
 
   /// A custom subnetwork name to be used if `create_subnetwork` is true.  If
   /// this field is empty, then an automatic name will be chosen for the new
   /// subnetwork.
-  public var subnetworkName: Swift.String
+  public var subnetworkName: Swift.String = Swift.String()
 
   /// This field is deprecated, use cluster_ipv4_cidr_block.
-  public var clusterIpv4Cidr: Swift.String
+  public var clusterIpv4Cidr: Swift.String = Swift.String()
 
   /// This field is deprecated, use node_ipv4_cidr_block.
-  public var nodeIpv4Cidr: Swift.String
+  public var nodeIpv4Cidr: Swift.String = Swift.String()
 
   /// This field is deprecated, use services_ipv4_cidr_block.
-  public var servicesIpv4Cidr: Swift.String
+  public var servicesIpv4Cidr: Swift.String = Swift.String()
 
   /// The name of the secondary range to be used for the cluster CIDR
   /// block.  The secondary range will be used for pod IP
@@ -53,7 +53,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// This field is only applicable with use_ip_aliases is true and
   /// create_subnetwork is false.
-  public var clusterSecondaryRangeName: Swift.String
+  public var clusterSecondaryRangeName: Swift.String = Swift.String()
 
   /// The name of the secondary range to be used as for the services
   /// CIDR block.  The secondary range will be used for service
@@ -62,7 +62,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// This field is only applicable with use_ip_aliases is true and
   /// create_subnetwork is false.
-  public var servicesSecondaryRangeName: Swift.String
+  public var servicesSecondaryRangeName: Swift.String = Swift.String()
 
   /// The IP address range for the cluster pod IPs. If this field is set, then
   /// `cluster.cluster_ipv4_cidr` must be left blank.
@@ -79,7 +79,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
   /// `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
   /// to use.
-  public var clusterIpv4CidrBlock: Swift.String
+  public var clusterIpv4CidrBlock: Swift.String = Swift.String()
 
   /// The IP address range of the instance IPs in this cluster.
   ///
@@ -95,7 +95,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
   /// `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
   /// to use.
-  public var nodeIpv4CidrBlock: Swift.String
+  public var nodeIpv4CidrBlock: Swift.String = Swift.String()
 
   /// The IP address range of the services IPs in this cluster. If blank, a range
   /// will be automatically chosen with the default size.
@@ -112,7 +112,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
   /// `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
   /// to use.
-  public var servicesIpv4CidrBlock: Swift.String
+  public var servicesIpv4CidrBlock: Swift.String = Swift.String()
 
   /// The IP address range of the Cloud TPUs in this cluster. If unspecified, a
   /// range will be automatically chosen with the default size.
@@ -132,19 +132,19 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
-  public var tpuIpv4CidrBlock: Swift.String
+  public var tpuIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Whether routes will be used for pod IPs in the cluster.
   /// This is used in conjunction with use_ip_aliases. It cannot be true if
   /// use_ip_aliases is true. If both use_ip_aliases and use_routes are false,
   /// then the server picks the default IP allocation mode
-  public var useRoutes: Swift.Bool
+  public var useRoutes: Swift.Bool = Swift.Bool()
 
   /// The IP stack type of the cluster
-  public var stackType: StackType
+  public var stackType: StackType = StackType()
 
   /// The ipv6 access type (internal or external) when create_subnetwork is true
-  public var ipv6AccessType: IPv6AccessType
+  public var ipv6AccessType: IPv6AccessType = IPv6AccessType()
 
   /// [PRIVATE FIELD]
   /// Pod CIDR size overprovisioning config for the cluster.
@@ -158,89 +158,54 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// power of 2)
   /// Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
   /// overprovisioning is disabled.
-  public var podCidrOverprovisionConfig: PodCIDROverprovisionConfig?
+  public var podCidrOverprovisionConfig: PodCIDROverprovisionConfig? = nil
 
   /// Output only. The subnet's IPv6 CIDR block used by nodes and pods.
-  public var subnetIpv6CidrBlock: Swift.String
+  public var subnetIpv6CidrBlock: Swift.String = Swift.String()
 
   /// Output only. The services IPv6 CIDR block for the cluster.
-  public var servicesIpv6CidrBlock: Swift.String
+  public var servicesIpv6CidrBlock: Swift.String = Swift.String()
 
   /// Output only. The additional pod ranges that are added to the cluster.
   /// These pod ranges can be used by new node pools to allocate pod IPs
   /// automatically. Once the range is removed it will not show up in
   /// IPAllocationPolicy.
-  public var additionalPodRangesConfig: AdditionalPodRangesConfig?
+  public var additionalPodRangesConfig: AdditionalPodRangesConfig? = nil
 
   /// Output only. The utilization of the cluster default IPv4 range for the
   /// pod. The ratio is Usage/[Total number of IPs in the secondary range],
   /// Usage=numNodes*numZones*podIPsPerNode.
-  public var defaultPodIpv4RangeUtilization: Swift.Double
+  public var defaultPodIpv4RangeUtilization: Swift.Double = Swift.Double()
 
   /// Output only. The additional IP ranges that are added to the cluster.
   /// These IP ranges can be used by new node pools to allocate node and pod IPs
   /// automatically.
   /// Each AdditionalIPRangesConfig corresponds to a single subnetwork.
   /// Once a range is removed it will not show up in IPAllocationPolicy.
-  public var additionalIpRangesConfigs: [AdditionalIPRangesConfig]
+  public var additionalIpRangesConfigs: [AdditionalIPRangesConfig] = []
 
   /// Optional. AutoIpamConfig contains all information related to Auto IPAM
-  public var autoIpamConfig: AutoIpamConfig?
+  public var autoIpamConfig: AutoIpamConfig? = nil
 
   /// Cluster-level network tier configuration is used to determine the default
   /// network tier for external IP addresses on cluster resources, such as node
   /// pools and load balancers.
-  public var networkTierConfig: NetworkTierConfig?
+  public var networkTierConfig: NetworkTierConfig? = nil
 
   /// Initialize a new instance of `IPAllocationPolicy`.
-  public init(
-    useIpAliases: Swift.Bool = Swift.Bool(),
-    createSubnetwork: Swift.Bool = Swift.Bool(),
-    subnetworkName: Swift.String = Swift.String(),
-    clusterIpv4Cidr: Swift.String = Swift.String(),
-    nodeIpv4Cidr: Swift.String = Swift.String(),
-    servicesIpv4Cidr: Swift.String = Swift.String(),
-    clusterSecondaryRangeName: Swift.String = Swift.String(),
-    servicesSecondaryRangeName: Swift.String = Swift.String(),
-    clusterIpv4CidrBlock: Swift.String = Swift.String(),
-    nodeIpv4CidrBlock: Swift.String = Swift.String(),
-    servicesIpv4CidrBlock: Swift.String = Swift.String(),
-    tpuIpv4CidrBlock: Swift.String = Swift.String(),
-    useRoutes: Swift.Bool = Swift.Bool(),
-    stackType: StackType = StackType(),
-    ipv6AccessType: IPv6AccessType = IPv6AccessType(),
-    podCidrOverprovisionConfig: PodCIDROverprovisionConfig? = nil,
-    subnetIpv6CidrBlock: Swift.String = Swift.String(),
-    servicesIpv6CidrBlock: Swift.String = Swift.String(),
-    additionalPodRangesConfig: AdditionalPodRangesConfig? = nil,
-    defaultPodIpv4RangeUtilization: Swift.Double = Swift.Double(),
-    additionalIpRangesConfigs: [AdditionalIPRangesConfig] = [],
-    autoIpamConfig: AutoIpamConfig? = nil,
-    networkTierConfig: NetworkTierConfig? = nil,
-  ) {
-    self.useIpAliases = useIpAliases
-    self.createSubnetwork = createSubnetwork
-    self.subnetworkName = subnetworkName
-    self.clusterIpv4Cidr = clusterIpv4Cidr
-    self.nodeIpv4Cidr = nodeIpv4Cidr
-    self.servicesIpv4Cidr = servicesIpv4Cidr
-    self.clusterSecondaryRangeName = clusterSecondaryRangeName
-    self.servicesSecondaryRangeName = servicesSecondaryRangeName
-    self.clusterIpv4CidrBlock = clusterIpv4CidrBlock
-    self.nodeIpv4CidrBlock = nodeIpv4CidrBlock
-    self.servicesIpv4CidrBlock = servicesIpv4CidrBlock
-    self.tpuIpv4CidrBlock = tpuIpv4CidrBlock
-    self.useRoutes = useRoutes
-    self.stackType = stackType
-    self.ipv6AccessType = ipv6AccessType
-    self.podCidrOverprovisionConfig = podCidrOverprovisionConfig
-    self.subnetIpv6CidrBlock = subnetIpv6CidrBlock
-    self.servicesIpv6CidrBlock = servicesIpv6CidrBlock
-    self.additionalPodRangesConfig = additionalPodRangesConfig
-    self.defaultPodIpv4RangeUtilization = defaultPodIpv4RangeUtilization
-    self.additionalIpRangesConfigs = additionalIpRangesConfigs
-    self.autoIpamConfig = autoIpamConfig
-    self.networkTierConfig = networkTierConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = IPAllocationPolicy().with { $0.useIpAliases = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

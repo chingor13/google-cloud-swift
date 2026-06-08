@@ -89,7 +89,11 @@ import GoogleRpc
   @Test func quotaFailure() throws {
     var input = QuotaFailure()
     input.violations = [
-      QuotaFailure.Violation(subject: "subject", description: "desc", apiService: "service")
+      QuotaFailure.Violation().with {
+        $0.subject = "subject"
+        $0.description = "desc"
+        $0.apiService = "service"
+      }
     ]
     let asAny = try GoogleCloudWkt.`Any`(fromMessage: input)
     let detail = StatusDetail(from: asAny)

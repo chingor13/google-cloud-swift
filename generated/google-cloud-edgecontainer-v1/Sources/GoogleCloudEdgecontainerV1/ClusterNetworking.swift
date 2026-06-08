@@ -24,20 +24,27 @@ public struct ClusterNetworking: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Required. All pods in the cluster are assigned an RFC1918 IPv4 address from
   /// these blocks. Only a single block is supported. This field cannot be
   /// changed after creation.
-  public var clusterIpv4CidrBlocks: [Swift.String]
+  public var clusterIpv4CidrBlocks: [Swift.String] = []
 
   /// Required. All services in the cluster are assigned an RFC1918 IPv4 address
   /// from these blocks. Only a single block is supported. This field cannot be
   /// changed after creation.
-  public var servicesIpv4CidrBlocks: [Swift.String]
+  public var servicesIpv4CidrBlocks: [Swift.String] = []
 
   /// Initialize a new instance of `ClusterNetworking`.
-  public init(
-    clusterIpv4CidrBlocks: [Swift.String] = [],
-    servicesIpv4CidrBlocks: [Swift.String] = [],
-  ) {
-    self.clusterIpv4CidrBlocks = clusterIpv4CidrBlocks
-    self.servicesIpv4CidrBlocks = servicesIpv4CidrBlocks
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterNetworking().with { $0.clusterIpv4CidrBlocks = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

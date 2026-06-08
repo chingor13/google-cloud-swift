@@ -25,51 +25,50 @@ public struct EvictionMinimumReclaim: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Optional. Minimum reclaim for eviction due to memory available signal. Only
   /// take percentage value for now. Sample format: "10%". Must be <=10%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var memoryAvailable: Swift.String
+  public var memoryAvailable: Swift.String = Swift.String()
 
   /// Optional. Minimum reclaim for eviction due to nodefs available signal. Only
   /// take percentage value for now. Sample format: "10%". Must be <=10%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var nodefsAvailable: Swift.String
+  public var nodefsAvailable: Swift.String = Swift.String()
 
   /// Optional. Minimum reclaim for eviction due to nodefs inodes free signal.
   /// Only take percentage value for now. Sample format: "10%". Must be <=10%.
   /// See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var nodefsInodesFree: Swift.String
+  public var nodefsInodesFree: Swift.String = Swift.String()
 
   /// Optional. Minimum reclaim for eviction due to imagefs available signal.
   /// Only take percentage value for now. Sample format: "10%". Must be <=10%.
   /// See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var imagefsAvailable: Swift.String
+  public var imagefsAvailable: Swift.String = Swift.String()
 
   /// Optional. Minimum reclaim for eviction due to imagefs inodes free signal.
   /// Only take percentage value for now. Sample format: "10%". Must be <=10%.
   /// See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var imagefsInodesFree: Swift.String
+  public var imagefsInodesFree: Swift.String = Swift.String()
 
   /// Optional. Minimum reclaim for eviction due to pid available signal. Only
   /// take percentage value for now. Sample format: "10%". Must be <=10%. See
   /// https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
-  public var pidAvailable: Swift.String
+  public var pidAvailable: Swift.String = Swift.String()
 
   /// Initialize a new instance of `EvictionMinimumReclaim`.
-  public init(
-    memoryAvailable: Swift.String = Swift.String(),
-    nodefsAvailable: Swift.String = Swift.String(),
-    nodefsInodesFree: Swift.String = Swift.String(),
-    imagefsAvailable: Swift.String = Swift.String(),
-    imagefsInodesFree: Swift.String = Swift.String(),
-    pidAvailable: Swift.String = Swift.String(),
-  ) {
-    self.memoryAvailable = memoryAvailable
-    self.nodefsAvailable = nodefsAvailable
-    self.nodefsInodesFree = nodefsInodesFree
-    self.imagefsAvailable = imagefsAvailable
-    self.imagefsInodesFree = imagefsInodesFree
-    self.pidAvailable = pidAvailable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = EvictionMinimumReclaim().with { $0.memoryAvailable = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

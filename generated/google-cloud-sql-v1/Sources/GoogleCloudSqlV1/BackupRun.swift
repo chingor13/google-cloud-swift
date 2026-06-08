@@ -23,117 +23,90 @@
     Sendable
   {
     /// This is always `sql#backupRun`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The status of this run.
-    public var status: SqlBackupRunStatus
+    public var status: SqlBackupRunStatus = SqlBackupRunStatus()
 
     /// The time the run was enqueued in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var enqueuedTime: GoogleCloudWkt.Timestamp?
+    public var enqueuedTime: GoogleCloudWkt.Timestamp? = nil
 
     /// The identifier for this backup run. Unique only for a specific Cloud SQL
     /// instance.
-    public var id: Swift.Int64
+    public var id: Swift.Int64 = Swift.Int64()
 
     /// The time the backup operation actually started in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var startTime: GoogleCloudWkt.Timestamp?
+    public var startTime: GoogleCloudWkt.Timestamp? = nil
 
     /// The time the backup operation completed in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var endTime: GoogleCloudWkt.Timestamp?
+    public var endTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Information about why the backup operation failed. This is only present if
     /// the run has the FAILED status.
-    public var error: OperationError?
+    public var error: OperationError? = nil
 
     /// The type of this run; can be either "AUTOMATED" or "ON_DEMAND" or "FINAL".
     /// This field defaults to "ON_DEMAND" and is ignored, when specified for
     /// insert requests.
-    public var type: SqlBackupRunType
+    public var type: SqlBackupRunType = SqlBackupRunType()
 
     /// The description of this run, only applicable to on-demand backups.
-    public var description: Swift.String
+    public var description: Swift.String = Swift.String()
 
     /// The start time of the backup window during which this the backup was
     /// attempted in [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for
     /// example `2012-11-15T16:19:00.094Z`.
-    public var windowStartTime: GoogleCloudWkt.Timestamp?
+    public var windowStartTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Name of the database instance.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// Location of the backups.
-    public var location: Swift.String
+    public var location: Swift.String = Swift.String()
 
     /// Output only. The instance database version at the time this backup was
     /// made.
-    public var databaseVersion: SqlDatabaseVersion
+    public var databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion()
 
     /// Encryption configuration specific to a backup.
-    public var diskEncryptionConfiguration: DiskEncryptionConfiguration?
+    public var diskEncryptionConfiguration: DiskEncryptionConfiguration? = nil
 
     /// Encryption status specific to a backup.
-    public var diskEncryptionStatus: DiskEncryptionStatus?
+    public var diskEncryptionStatus: DiskEncryptionStatus? = nil
 
     /// Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
-    public var backupKind: SqlBackupKind
+    public var backupKind: SqlBackupKind = SqlBackupKind()
 
     /// Backup time zone to prevent restores to an instance with
     /// a different time zone. Now relevant only for SQL Server.
-    public var timeZone: Swift.String
+    public var timeZone: Swift.String = Swift.String()
 
     /// Output only. The maximum chargeable bytes for the backup.
-    public var maxChargeableBytes: Swift.Int64?
+    public var maxChargeableBytes: Swift.Int64? = nil
 
     /// Initialize a new instance of `BackupRun`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      status: SqlBackupRunStatus = SqlBackupRunStatus(),
-      enqueuedTime: GoogleCloudWkt.Timestamp? = nil,
-      id: Swift.Int64 = Swift.Int64(),
-      startTime: GoogleCloudWkt.Timestamp? = nil,
-      endTime: GoogleCloudWkt.Timestamp? = nil,
-      error: OperationError? = nil,
-      type: SqlBackupRunType = SqlBackupRunType(),
-      description: Swift.String = Swift.String(),
-      windowStartTime: GoogleCloudWkt.Timestamp? = nil,
-      instance: Swift.String = Swift.String(),
-      selfLink: Swift.String = Swift.String(),
-      location: Swift.String = Swift.String(),
-      databaseVersion: SqlDatabaseVersion = SqlDatabaseVersion(),
-      diskEncryptionConfiguration: DiskEncryptionConfiguration? = nil,
-      diskEncryptionStatus: DiskEncryptionStatus? = nil,
-      backupKind: SqlBackupKind = SqlBackupKind(),
-      timeZone: Swift.String = Swift.String(),
-      maxChargeableBytes: Swift.Int64? = nil,
-    ) {
-      self.kind = kind
-      self.status = status
-      self.enqueuedTime = enqueuedTime
-      self.id = id
-      self.startTime = startTime
-      self.endTime = endTime
-      self.error = error
-      self.type = type
-      self.description = description
-      self.windowStartTime = windowStartTime
-      self.instance = instance
-      self.selfLink = selfLink
-      self.location = location
-      self.databaseVersion = databaseVersion
-      self.diskEncryptionConfiguration = diskEncryptionConfiguration
-      self.diskEncryptionStatus = diskEncryptionStatus
-      self.backupKind = backupKind
-      self.timeZone = timeZone
-      self.maxChargeableBytes = maxChargeableBytes
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BackupRun().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

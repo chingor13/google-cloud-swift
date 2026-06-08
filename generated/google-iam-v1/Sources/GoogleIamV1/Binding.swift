@@ -24,7 +24,7 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Role that is assigned to the list of `members`, or principals.
   /// For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-  public var role: Swift.String
+  public var role: Swift.String = Swift.String()
 
   /// Specifies the principals requesting access for a Google Cloud resource.
   /// `members` can have the following values:
@@ -70,7 +70,7 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///    users of that domain. For example, `google.com` or `example.com`.
   ///
   ///
-  public var members: [Swift.String]
+  public var members: [Swift.String] = []
 
   /// The condition that is associated with this binding.
   ///
@@ -84,17 +84,22 @@ public struct Binding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// To learn which resources support conditions in their IAM policies, see the
   /// [IAM
   /// documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-  public var condition: GoogleType.Expr?
+  public var condition: GoogleType.Expr? = nil
 
   /// Initialize a new instance of `Binding`.
-  public init(
-    role: Swift.String = Swift.String(),
-    members: [Swift.String] = [],
-    condition: GoogleType.Expr? = nil,
-  ) {
-    self.role = role
-    self.members = members
-    self.condition = condition
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Binding().with { $0.role = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.Binding" }

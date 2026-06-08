@@ -24,23 +24,28 @@
     Sendable
   {
     /// This is always `sql#getLatestRecoveryTime`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Timestamp, identifies the latest recovery time of the source instance.
-    public var latestRecoveryTime: GoogleCloudWkt.Timestamp?
+    public var latestRecoveryTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Timestamp, identifies the earliest recovery time of the source instance.
-    public var earliestRecoveryTime: GoogleCloudWkt.Timestamp?
+    public var earliestRecoveryTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `SqlInstancesGetLatestRecoveryTimeResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      latestRecoveryTime: GoogleCloudWkt.Timestamp? = nil,
-      earliestRecoveryTime: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.kind = kind
-      self.latestRecoveryTime = latestRecoveryTime
-      self.earliestRecoveryTime = earliestRecoveryTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlInstancesGetLatestRecoveryTimeResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -26,15 +26,15 @@ public struct TagBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Output only. The name of the TagBinding. This is a String of the form:
   /// `tagBindings/{full-resource-name}/{tag-value-name}` (e.g.
   /// `tagBindings/%2F%2Fcloudresourcemanager.googleapis.com%2Fprojects%2F123/tagValues/456`).
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The full resource name of the resource the TagValue is bound to.
   /// E.g. `//cloudresourcemanager.googleapis.com/projects/123`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The TagValue of the TagBinding.
   /// Must be of the form `tagValues/456`.
-  public var tagValue: Swift.String
+  public var tagValue: Swift.String = Swift.String()
 
   /// The namespaced name for the TagValue of the TagBinding.
   /// Must be in the format
@@ -43,19 +43,22 @@ public struct TagBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For methods that support TagValue namespaced name, only one of
   /// tag_value_namespaced_name or tag_value may be filled. Requests with both
   /// fields will be rejected.
-  public var tagValueNamespacedName: Swift.String
+  public var tagValueNamespacedName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TagBinding`.
-  public init(
-    name: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-    tagValue: Swift.String = Swift.String(),
-    tagValueNamespacedName: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.parent = parent
-    self.tagValue = tagValue
-    self.tagValueNamespacedName = tagValueNamespacedName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TagBinding().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

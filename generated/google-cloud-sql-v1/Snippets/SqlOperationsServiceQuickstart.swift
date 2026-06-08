@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlOperationsServiceClient()
     let response = try await client.`get`(
-      request: SqlOperationsGetRequest(/* set fields */
-      )
+      request: SqlOperationsGetRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

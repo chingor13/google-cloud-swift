@@ -27,14 +27,14 @@ public struct SecretVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// Format: {secret} if the secret is in the same project.
   /// projects/{project}/secrets/{secret} if the secret is
   /// in a different project.
-  public var secret: Swift.String
+  public var secret: Swift.String = Swift.String()
 
   /// If unspecified, the volume will expose a file whose name is the
   /// secret, relative to VolumeMount.mount_path + VolumeMount.sub_path.
   /// If specified, the key will be used as the version to fetch from Cloud
   /// Secret Manager and the path will be the name of the file exposed in the
   /// volume. When items are defined, they must specify a path and a version.
-  public var items: [VersionToPath]
+  public var items: [VersionToPath] = []
 
   /// Integer representation of mode bits to use on created files by default.
   /// Must be a value between 0000 and 0777 (octal), defaulting to 0444.
@@ -53,17 +53,22 @@ public struct SecretVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// This might be in conflict with other options that affect the
   /// file mode, like fsGroup, and as a result, other mode bits could be set.
-  public var defaultMode: Swift.Int32
+  public var defaultMode: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `SecretVolumeSource`.
-  public init(
-    secret: Swift.String = Swift.String(),
-    items: [VersionToPath] = [],
-    defaultMode: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.secret = secret
-    self.items = items
-    self.defaultMode = defaultMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecretVolumeSource().with { $0.secret = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

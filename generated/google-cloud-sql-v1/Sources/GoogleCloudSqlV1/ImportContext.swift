@@ -26,7 +26,7 @@
     /// `gs://bucketName/fileName`. Compressed gzip files (.gz) are supported
     /// when `fileType` is `SQL`. The instance must have
     /// write permissions to the bucket and read access to the file.
-    public var uri: Swift.String
+    public var uri: Swift.String = Swift.String()
 
     /// The target database for the import. If `fileType` is `SQL`, this field
     /// is required only if the import file does not specify a database, and is
@@ -34,74 +34,72 @@
     /// instance parallel import operations, the database is overridden by the
     /// database name stored in subdirectory name. If
     /// `fileType` is `CSV`, one database must be specified.
-    public var database: Swift.String
+    public var database: Swift.String = Swift.String()
 
     /// This is always `sql#importContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The file type for the specified uri.\`SQL`: The file
     /// contains SQL statements. \`CSV`: The file contains CSV data.
-    public var fileType: SqlFileType
+    public var fileType: SqlFileType = SqlFileType()
 
     /// Options for importing data as CSV.
-    public var csvImportOptions: ImportContext.SqlCsvImportOptions?
+    public var csvImportOptions: ImportContext.SqlCsvImportOptions? = nil
 
     /// The PostgreSQL user for this import operation. PostgreSQL instances only.
-    public var importUser: Swift.String
+    public var importUser: Swift.String = Swift.String()
 
     /// Import parameters specific to SQL Server .BAK files
-    public var bakImportOptions: ImportContext.SqlBakImportOptions?
+    public var bakImportOptions: ImportContext.SqlBakImportOptions? = nil
 
     /// Optional. Options for importing data from SQL statements.
-    public var sqlImportOptions: ImportContext.SqlImportOptions?
+    public var sqlImportOptions: ImportContext.SqlImportOptions? = nil
 
     /// Optional. Import parameters specific to SQL Server TDE certificates
-    public var tdeImportOptions: ImportContext.SqlTdeImportOptions?
+    public var tdeImportOptions: ImportContext.SqlTdeImportOptions? = nil
 
     /// Initialize a new instance of `ImportContext`.
-    public init(
-      uri: Swift.String = Swift.String(),
-      database: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-      fileType: SqlFileType = SqlFileType(),
-      csvImportOptions: ImportContext.SqlCsvImportOptions? = nil,
-      importUser: Swift.String = Swift.String(),
-      bakImportOptions: ImportContext.SqlBakImportOptions? = nil,
-      sqlImportOptions: ImportContext.SqlImportOptions? = nil,
-      tdeImportOptions: ImportContext.SqlTdeImportOptions? = nil,
-    ) {
-      self.uri = uri
-      self.database = database
-      self.kind = kind
-      self.fileType = fileType
-      self.csvImportOptions = csvImportOptions
-      self.importUser = importUser
-      self.bakImportOptions = bakImportOptions
-      self.sqlImportOptions = sqlImportOptions
-      self.tdeImportOptions = tdeImportOptions
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ImportContext().with { $0.uri = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public struct SqlImportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Optional. The number of threads to use for parallel import.
-      public var threads: GoogleCloudWkt.Int32Value?
+      public var threads: GoogleCloudWkt.Int32Value? = nil
 
       /// Optional. Whether or not the import should be parallel.
-      public var parallel: GoogleCloudWkt.BoolValue?
+      public var parallel: GoogleCloudWkt.BoolValue? = nil
 
       /// Optional. Options for importing from a Cloud SQL for PostgreSQL instance.
-      public var postgresImportOptions: ImportContext.SqlImportOptions.PostgresImportOptions?
+      public var postgresImportOptions: ImportContext.SqlImportOptions.PostgresImportOptions? = nil
 
       /// Initialize a new instance of `SqlImportOptions`.
-      public init(
-        threads: GoogleCloudWkt.Int32Value? = nil,
-        parallel: GoogleCloudWkt.BoolValue? = nil,
-        postgresImportOptions: ImportContext.SqlImportOptions.PostgresImportOptions? = nil,
-      ) {
-        self.threads = threads
-        self.parallel = parallel
-        self.postgresImportOptions = postgresImportOptions
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlImportOptions().with { $0.threads = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public struct PostgresImportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -109,19 +107,26 @@
       {
         /// Optional. The --clean flag for the pg_restore utility. This flag
         /// applies only if you enabled Cloud SQL to import files in parallel.
-        public var clean: GoogleCloudWkt.BoolValue?
+        public var clean: GoogleCloudWkt.BoolValue? = nil
 
         /// Optional. The --if-exists flag for the pg_restore utility. This flag
         /// applies only if you enabled Cloud SQL to import files in parallel.
-        public var ifExists: GoogleCloudWkt.BoolValue?
+        public var ifExists: GoogleCloudWkt.BoolValue? = nil
 
         /// Initialize a new instance of `PostgresImportOptions`.
-        public init(
-          clean: GoogleCloudWkt.BoolValue? = nil,
-          ifExists: GoogleCloudWkt.BoolValue? = nil,
-        ) {
-          self.clean = clean
-          self.ifExists = ifExists
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = PostgresImportOptions().with { $0.clean = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -151,42 +156,41 @@
       Sendable
     {
       /// The table to which CSV data is imported.
-      public var table: Swift.String
+      public var table: Swift.String = Swift.String()
 
       /// The columns to which CSV data is imported. If not specified, all columns
       /// of the database table are loaded with CSV data.
-      public var columns: [Swift.String]
+      public var columns: [Swift.String] = []
 
       /// Specifies the character that should appear before a data character that
       /// needs to be escaped.
-      public var escapeCharacter: Swift.String
+      public var escapeCharacter: Swift.String = Swift.String()
 
       /// Specifies the quoting character to be used when a data value is quoted.
-      public var quoteCharacter: Swift.String
+      public var quoteCharacter: Swift.String = Swift.String()
 
       /// Specifies the character that separates columns within each row (line) of
       /// the file.
-      public var fieldsTerminatedBy: Swift.String
+      public var fieldsTerminatedBy: Swift.String = Swift.String()
 
       /// This is used to separate lines. If a line does not contain all fields,
       /// the rest of the columns are set to their default values.
-      public var linesTerminatedBy: Swift.String
+      public var linesTerminatedBy: Swift.String = Swift.String()
 
       /// Initialize a new instance of `SqlCsvImportOptions`.
-      public init(
-        table: Swift.String = Swift.String(),
-        columns: [Swift.String] = [],
-        escapeCharacter: Swift.String = Swift.String(),
-        quoteCharacter: Swift.String = Swift.String(),
-        fieldsTerminatedBy: Swift.String = Swift.String(),
-        linesTerminatedBy: Swift.String = Swift.String(),
-      ) {
-        self.table = table
-        self.columns = columns
-        self.escapeCharacter = escapeCharacter
-        self.quoteCharacter = quoteCharacter
-        self.fieldsTerminatedBy = fieldsTerminatedBy
-        self.linesTerminatedBy = linesTerminatedBy
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlCsvImportOptions().with { $0.table = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -203,54 +207,51 @@
     public struct SqlBakImportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
-      public var encryptionOptions: ImportContext.SqlBakImportOptions.EncryptionOptions?
+      public var encryptionOptions: ImportContext.SqlBakImportOptions.EncryptionOptions? = nil
 
       /// Whether or not the backup set being restored is striped.
       /// Applies only to Cloud SQL for SQL Server.
-      public var striped: GoogleCloudWkt.BoolValue?
+      public var striped: GoogleCloudWkt.BoolValue? = nil
 
       /// Whether or not the backup importing will restore database
       /// with NORECOVERY option.
       /// Applies only to Cloud SQL for SQL Server.
-      public var noRecovery: GoogleCloudWkt.BoolValue?
+      public var noRecovery: GoogleCloudWkt.BoolValue? = nil
 
       /// Whether or not the backup importing request will just bring database
       /// online without downloading Bak content only one of "no_recovery" and
       /// "recovery_only" can be true otherwise error will return. Applies only to
       /// Cloud SQL for SQL Server.
-      public var recoveryOnly: GoogleCloudWkt.BoolValue?
+      public var recoveryOnly: GoogleCloudWkt.BoolValue? = nil
 
       /// Type of the bak content, FULL or DIFF
-      public var bakType: BakType
+      public var bakType: BakType = BakType()
 
       /// Optional. The timestamp when the import should stop. This timestamp is in
       /// the [RFC 3339](https://tools.ietf.org/html/rfc3339) format (for example,
       /// `2023-10-01T16:19:00.094`). This field is equivalent to the STOPAT
       /// keyword and applies to Cloud SQL for SQL Server only.
-      public var stopAt: GoogleCloudWkt.Timestamp?
+      public var stopAt: GoogleCloudWkt.Timestamp? = nil
 
       /// Optional. The marked transaction where the import should stop. This field
       /// is equivalent to the STOPATMARK keyword and applies to Cloud SQL for SQL
       /// Server only.
-      public var stopAtMark: Swift.String
+      public var stopAtMark: Swift.String = Swift.String()
 
       /// Initialize a new instance of `SqlBakImportOptions`.
-      public init(
-        encryptionOptions: ImportContext.SqlBakImportOptions.EncryptionOptions? = nil,
-        striped: GoogleCloudWkt.BoolValue? = nil,
-        noRecovery: GoogleCloudWkt.BoolValue? = nil,
-        recoveryOnly: GoogleCloudWkt.BoolValue? = nil,
-        bakType: BakType = BakType(),
-        stopAt: GoogleCloudWkt.Timestamp? = nil,
-        stopAtMark: Swift.String = Swift.String(),
-      ) {
-        self.encryptionOptions = encryptionOptions
-        self.striped = striped
-        self.noRecovery = noRecovery
-        self.recoveryOnly = recoveryOnly
-        self.bakType = bakType
-        self.stopAt = stopAt
-        self.stopAtMark = stopAtMark
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlBakImportOptions().with { $0.encryptionOptions = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public struct EncryptionOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -259,30 +260,33 @@
         /// Path to the Certificate (.cer) in Cloud Storage, in the form
         /// `gs://bucketName/fileName`. The instance must have
         /// write permissions to the bucket and read access to the file.
-        public var certPath: Swift.String
+        public var certPath: Swift.String = Swift.String()
 
         /// Path to the Certificate Private Key (.pvk)  in Cloud Storage, in the
         /// form `gs://bucketName/fileName`. The instance must have
         /// write permissions to the bucket and read access to the file.
-        public var pvkPath: Swift.String
+        public var pvkPath: Swift.String = Swift.String()
 
         /// Password that encrypts the private key
-        public var pvkPassword: Swift.String
+        public var pvkPassword: Swift.String = Swift.String()
 
         /// Optional. Whether the imported file remains encrypted.
-        public var keepEncrypted: GoogleCloudWkt.BoolValue?
+        public var keepEncrypted: GoogleCloudWkt.BoolValue? = nil
 
         /// Initialize a new instance of `EncryptionOptions`.
-        public init(
-          certPath: Swift.String = Swift.String(),
-          pvkPath: Swift.String = Swift.String(),
-          pvkPassword: Swift.String = Swift.String(),
-          keepEncrypted: GoogleCloudWkt.BoolValue? = nil,
-        ) {
-          self.certPath = certPath
-          self.pvkPath = pvkPath
-          self.pvkPassword = pvkPassword
-          self.keepEncrypted = keepEncrypted
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = EncryptionOptions().with { $0.certPath = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
         }
 
         public static var _anyTypeUrl: String {
@@ -315,32 +319,35 @@
       /// in the form gs://bucketName/fileName.
       /// The instance must have read access to the file.
       /// Applicable only for SQL Server instances.
-      public var certificatePath: Swift.String
+      public var certificatePath: Swift.String = Swift.String()
 
       /// Required. Path to the TDE certificate private key
       /// in the form gs://bucketName/fileName.
       /// The instance must have read access to the file.
       /// Applicable only for SQL Server instances.
-      public var privateKeyPath: Swift.String
+      public var privateKeyPath: Swift.String = Swift.String()
 
       /// Required. Password that encrypts the private key.
-      public var privateKeyPassword: Swift.String
+      public var privateKeyPassword: Swift.String = Swift.String()
 
       /// Required. Certificate name.
       /// Applicable only for SQL Server instances.
-      public var name: Swift.String
+      public var name: Swift.String = Swift.String()
 
       /// Initialize a new instance of `SqlTdeImportOptions`.
-      public init(
-        certificatePath: Swift.String = Swift.String(),
-        privateKeyPath: Swift.String = Swift.String(),
-        privateKeyPassword: Swift.String = Swift.String(),
-        name: Swift.String = Swift.String(),
-      ) {
-        self.certificatePath = certificatePath
-        self.privateKeyPath = privateKeyPath
-        self.privateKeyPassword = privateKeyPassword
-        self.name = name
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SqlTdeImportOptions().with { $0.certificatePath = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

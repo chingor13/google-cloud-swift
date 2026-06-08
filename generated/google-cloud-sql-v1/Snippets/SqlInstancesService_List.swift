@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let items = try client.list(
-      byItem: SqlInstancesListRequest(/* set fields */
-      )
+      byItem: SqlInstancesListRequest()
+        /* set fields using .with { $0... } */
     )
     for try await item in items {
       print("  \(item)")

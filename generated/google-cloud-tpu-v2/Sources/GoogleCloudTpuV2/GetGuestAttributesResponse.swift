@@ -25,13 +25,22 @@ public struct GetGuestAttributesResponse: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// The guest attributes for the TPU workers.
-  public var guestAttributes: [GuestAttributes]
+  public var guestAttributes: [GuestAttributes] = []
 
   /// Initialize a new instance of `GetGuestAttributesResponse`.
-  public init(
-    guestAttributes: [GuestAttributes] = [],
-  ) {
-    self.guestAttributes = guestAttributes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetGuestAttributesResponse().with { $0.guestAttributes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

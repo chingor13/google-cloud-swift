@@ -29,12 +29,12 @@ public struct QuotaLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// name can only include alphanumeric characters as well as '-'.
   ///
   /// The maximum length of the limit name is 64 characters.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. User-visible, extended description for this quota limit.
   /// Should be used only when more context is needed to understand this limit
   /// than provided by the limit's display name (see: `display_name`).
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Default number of tokens that can be consumed during the specified
   /// duration. This is the number of tokens assigned when a client
@@ -46,7 +46,7 @@ public struct QuotaLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// negative values are allowed.
   ///
   /// Used by group-based quotas only.
-  public var defaultLimit: Swift.Int64
+  public var defaultLimit: Swift.Int64 = Swift.Int64()
 
   /// Maximum number of tokens that can be consumed during the specified
   /// duration. Client application developers can override the default limit up
@@ -57,7 +57,7 @@ public struct QuotaLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// indicating unlimited maximum quota.
   ///
   /// Used by group-based quotas only.
-  public var maxLimit: Swift.Int64
+  public var maxLimit: Swift.Int64 = Swift.Int64()
 
   /// Free tier value displayed in the Developers Console for this limit.
   /// The free tier is the number of tokens that will be subtracted from the
@@ -67,17 +67,17 @@ public struct QuotaLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// defaults to 0, indicating that there is no free tier for this service.
   ///
   /// Used by group-based quotas only.
-  public var freeTier: Swift.Int64
+  public var freeTier: Swift.Int64 = Swift.Int64()
 
   /// Duration of this limit in textual notation. Must be "100s" or "1d".
   ///
   /// Used by group-based quotas only.
-  public var duration: Swift.String
+  public var duration: Swift.String = Swift.String()
 
   /// The name of the metric this quota limit applies to. The quota limits with
   /// the same metric will be checked together during runtime. The metric must be
   /// defined within the service config.
-  public var metric: Swift.String
+  public var metric: Swift.String = Swift.String()
 
   /// Specify the unit of the quota limit. It uses the same syntax as
   /// [MetricDescriptor.unit][google.api.MetricDescriptor.unit]. The supported
@@ -90,42 +90,33 @@ public struct QuotaLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The "1" at the beginning is required to follow the metric unit syntax.
   ///
   /// [google.api.MetricDescriptor.unit]: <doc:MetricDescriptor/unit>
-  public var unit: Swift.String
+  public var unit: Swift.String = Swift.String()
 
   /// Tiered limit values. You must specify this as a key:value pair, with an
   /// integer value that is the maximum number of requests allowed for the
   /// specified unit. Currently only STANDARD is supported.
-  public var values: [Swift.String: Swift.Int64]
+  public var values: [Swift.String: Swift.Int64] = [:]
 
   /// User-visible display name for this limit.
   /// Optional. If not set, the UI will provide a default display name based on
   /// the quota configuration. This field can be used to override the default
   /// display name generated from the configuration.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Initialize a new instance of `QuotaLimit`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    defaultLimit: Swift.Int64 = Swift.Int64(),
-    maxLimit: Swift.Int64 = Swift.Int64(),
-    freeTier: Swift.Int64 = Swift.Int64(),
-    duration: Swift.String = Swift.String(),
-    metric: Swift.String = Swift.String(),
-    unit: Swift.String = Swift.String(),
-    values: [Swift.String: Swift.Int64] = [:],
-    displayName: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.description = description
-    self.defaultLimit = defaultLimit
-    self.maxLimit = maxLimit
-    self.freeTier = freeTier
-    self.duration = duration
-    self.metric = metric
-    self.unit = unit
-    self.values = values
-    self.displayName = displayName
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = QuotaLimit().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.QuotaLimit" }

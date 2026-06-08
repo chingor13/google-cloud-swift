@@ -22,23 +22,28 @@ public struct SchedulingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Defines whether the node is preemptible.
-  public var preemptible: Swift.Bool
+  public var preemptible: Swift.Bool = Swift.Bool()
 
   /// Whether the node is created under a reservation.
-  public var reserved: Swift.Bool
+  public var reserved: Swift.Bool = Swift.Bool()
 
   /// Optional. Defines whether the node is Spot VM.
-  public var spot: Swift.Bool
+  public var spot: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `SchedulingConfig`.
-  public init(
-    preemptible: Swift.Bool = Swift.Bool(),
-    reserved: Swift.Bool = Swift.Bool(),
-    spot: Swift.Bool = Swift.Bool(),
-  ) {
-    self.preemptible = preemptible
-    self.reserved = reserved
-    self.spot = spot
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SchedulingConfig().with { $0.preemptible = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

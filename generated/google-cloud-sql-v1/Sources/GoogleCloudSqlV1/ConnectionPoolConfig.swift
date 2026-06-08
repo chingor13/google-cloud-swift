@@ -23,23 +23,28 @@
     Sendable
   {
     /// Whether managed connection pooling is enabled.
-    public var connectionPoolingEnabled: Swift.Bool?
+    public var connectionPoolingEnabled: Swift.Bool? = nil
 
     /// Optional. List of connection pool configuration flags.
-    public var flags: [ConnectionPoolFlags]
+    public var flags: [ConnectionPoolFlags] = []
 
     /// Output only. Number of connection poolers.
-    public var poolerCount: Swift.Int32?
+    public var poolerCount: Swift.Int32? = nil
 
     /// Initialize a new instance of `ConnectionPoolConfig`.
-    public init(
-      connectionPoolingEnabled: Swift.Bool? = nil,
-      flags: [ConnectionPoolFlags] = [],
-      poolerCount: Swift.Int32? = nil,
-    ) {
-      self.connectionPoolingEnabled = connectionPoolingEnabled
-      self.flags = flags
-      self.poolerCount = poolerCount
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ConnectionPoolConfig().with { $0.connectionPoolingEnabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -23,8 +23,8 @@ import GoogleCloudWkt
 func sample() async throws {
   let client = try GoogleCloudLocation.Clients.LocationsClient()
   let items = try client.listLocations(
-    byItem: ListLocationsRequest(/* set fields */
-    )
+    byItem: ListLocationsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

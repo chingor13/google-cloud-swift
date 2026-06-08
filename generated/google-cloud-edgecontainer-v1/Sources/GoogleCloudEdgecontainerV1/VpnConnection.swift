@@ -22,73 +22,60 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The resource name of VPN connection
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time when the VPN connection was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time when the VPN connection was last updated.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this resource.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// NAT gateway IP, or WAN IP address. If a customer has multiple NAT IPs, the
   /// customer needs to configure NAT such that only one external IP maps to the
   /// GMEC Anthos cluster. This is empty if NAT is not used.
-  public var natGatewayIp: Swift.String
+  public var natGatewayIp: Swift.String = Swift.String()
 
   /// Dynamic routing mode of the VPC network, `regional` or `global`.
-  public var bgpRoutingMode: VpnConnection.BgpRoutingMode
+  public var bgpRoutingMode: VpnConnection.BgpRoutingMode = VpnConnection.BgpRoutingMode()
 
   /// The canonical Cluster name to connect to. It is in the form of
   /// projects/{project}/locations/{location}/clusters/{cluster}.
-  public var cluster: Swift.String
+  public var cluster: Swift.String = Swift.String()
 
   /// The network ID of VPC to connect to.
-  public var vpc: Swift.String
+  public var vpc: Swift.String = Swift.String()
 
   /// Optional. Project detail of the VPC network. Required if VPC is in a
   /// different project than the cluster project.
-  public var vpcProject: VpnConnection.VpcProject?
+  public var vpcProject: VpnConnection.VpcProject? = nil
 
   /// Whether this VPN connection has HA enabled on cluster side. If enabled,
   /// when creating VPN connection we will attempt to use 2 ANG floating IPs.
-  public var enableHighAvailability: Swift.Bool
+  public var enableHighAvailability: Swift.Bool = Swift.Bool()
 
   /// Optional. The VPN connection Cloud Router name.
-  public var router: Swift.String
+  public var router: Swift.String = Swift.String()
 
   /// Output only. The created connection details.
-  public var details: VpnConnection.Details?
+  public var details: VpnConnection.Details? = nil
 
   /// Initialize a new instance of `VpnConnection`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    natGatewayIp: Swift.String = Swift.String(),
-    bgpRoutingMode: VpnConnection.BgpRoutingMode = VpnConnection.BgpRoutingMode(),
-    cluster: Swift.String = Swift.String(),
-    vpc: Swift.String = Swift.String(),
-    vpcProject: VpnConnection.VpcProject? = nil,
-    enableHighAvailability: Swift.Bool = Swift.Bool(),
-    router: Swift.String = Swift.String(),
-    details: VpnConnection.Details? = nil,
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.labels = labels
-    self.natGatewayIp = natGatewayIp
-    self.bgpRoutingMode = bgpRoutingMode
-    self.cluster = cluster
-    self.vpc = vpc
-    self.vpcProject = vpcProject
-    self.enableHighAvailability = enableHighAvailability
-    self.router = router
-    self.details = details
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = VpnConnection().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Project detail of the VPC network.
@@ -97,18 +84,25 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   {
     /// The project of the VPC to connect to. If not specified, it is the same as
     /// the cluster project.
-    public var projectId: Swift.String
+    public var projectId: Swift.String = Swift.String()
 
     /// Optional. Deprecated: do not use.
-    public var serviceAccount: Swift.String
+    public var serviceAccount: Swift.String = Swift.String()
 
     /// Initialize a new instance of `VpcProject`.
-    public init(
-      projectId: Swift.String = Swift.String(),
-      serviceAccount: Swift.String = Swift.String(),
-    ) {
-      self.projectId = projectId
-      self.serviceAccount = serviceAccount
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = VpcProject().with { $0.projectId = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -127,28 +121,31 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The state of this connection.
-    public var state: VpnConnection.Details.State
+    public var state: VpnConnection.Details.State = VpnConnection.Details.State()
 
     /// The error message. This is only populated when state=ERROR.
-    public var error: Swift.String
+    public var error: Swift.String = Swift.String()
 
     /// The Cloud Router info.
-    public var cloudRouter: VpnConnection.Details.CloudRouter?
+    public var cloudRouter: VpnConnection.Details.CloudRouter? = nil
 
     /// Each connection has multiple Cloud VPN gateways.
-    public var cloudVpns: [VpnConnection.Details.CloudVpn]
+    public var cloudVpns: [VpnConnection.Details.CloudVpn] = []
 
     /// Initialize a new instance of `Details`.
-    public init(
-      state: VpnConnection.Details.State = VpnConnection.Details.State(),
-      error: Swift.String = Swift.String(),
-      cloudRouter: VpnConnection.Details.CloudRouter? = nil,
-      cloudVpns: [VpnConnection.Details.CloudVpn] = [],
-    ) {
-      self.state = state
-      self.error = error
-      self.cloudRouter = cloudRouter
-      self.cloudVpns = cloudVpns
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Details().with { $0.state = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The Cloud Router info.
@@ -156,13 +153,22 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The associated Cloud Router name.
-      public var name: Swift.String
+      public var name: Swift.String = Swift.String()
 
       /// Initialize a new instance of `CloudRouter`.
-      public init(
-        name: Swift.String = Swift.String(),
-      ) {
-        self.name = name
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = CloudRouter().with { $0.name = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -181,13 +187,22 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// The created Cloud VPN gateway name.
-      public var gateway: Swift.String
+      public var gateway: Swift.String = Swift.String()
 
       /// Initialize a new instance of `CloudVpn`.
-      public init(
-        gateway: Swift.String = Swift.String(),
-      ) {
-        self.gateway = gateway
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = CloudVpn().with { $0.gateway = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {

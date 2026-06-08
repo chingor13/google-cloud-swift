@@ -23,23 +23,28 @@ public struct ResourceLimit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Resource name "cpu", "memory" or gpu-specific string.
-  public var resourceType: Swift.String
+  public var resourceType: Swift.String = Swift.String()
 
   /// Minimum amount of the resource in the cluster.
-  public var minimum: Swift.Int64
+  public var minimum: Swift.Int64 = Swift.Int64()
 
   /// Maximum amount of the resource in the cluster.
-  public var maximum: Swift.Int64
+  public var maximum: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `ResourceLimit`.
-  public init(
-    resourceType: Swift.String = Swift.String(),
-    minimum: Swift.Int64 = Swift.Int64(),
-    maximum: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.resourceType = resourceType
-    self.minimum = minimum
-    self.maximum = maximum
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceLimit().with { $0.resourceType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

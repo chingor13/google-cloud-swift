@@ -22,38 +22,37 @@ public struct ServerConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Version of Kubernetes the service deploys by default.
-  public var defaultClusterVersion: Swift.String
+  public var defaultClusterVersion: Swift.String = Swift.String()
 
   /// List of valid node upgrade target versions, in descending order.
-  public var validNodeVersions: [Swift.String]
+  public var validNodeVersions: [Swift.String] = []
 
   /// Default image type.
-  public var defaultImageType: Swift.String
+  public var defaultImageType: Swift.String = Swift.String()
 
   /// List of valid image types.
-  public var validImageTypes: [Swift.String]
+  public var validImageTypes: [Swift.String] = []
 
   /// List of valid master versions, in descending order.
-  public var validMasterVersions: [Swift.String]
+  public var validMasterVersions: [Swift.String] = []
 
   /// List of release channel configurations.
-  public var channels: [ServerConfig.ReleaseChannelConfig]
+  public var channels: [ServerConfig.ReleaseChannelConfig] = []
 
   /// Initialize a new instance of `ServerConfig`.
-  public init(
-    defaultClusterVersion: Swift.String = Swift.String(),
-    validNodeVersions: [Swift.String] = [],
-    defaultImageType: Swift.String = Swift.String(),
-    validImageTypes: [Swift.String] = [],
-    validMasterVersions: [Swift.String] = [],
-    channels: [ServerConfig.ReleaseChannelConfig] = [],
-  ) {
-    self.defaultClusterVersion = defaultClusterVersion
-    self.validNodeVersions = validNodeVersions
-    self.defaultImageType = defaultImageType
-    self.validImageTypes = validImageTypes
-    self.validMasterVersions = validMasterVersions
-    self.channels = channels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServerConfig().with { $0.defaultClusterVersion = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// ReleaseChannelConfig exposes configuration for a release channel.
@@ -61,28 +60,31 @@ public struct ServerConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The release channel this configuration applies to.
-    public var channel: ReleaseChannel.Channel
+    public var channel: ReleaseChannel.Channel = ReleaseChannel.Channel()
 
     /// The default version for newly created clusters on the channel.
-    public var defaultVersion: Swift.String
+    public var defaultVersion: Swift.String = Swift.String()
 
     /// List of valid versions for the channel.
-    public var validVersions: [Swift.String]
+    public var validVersions: [Swift.String] = []
 
     /// The auto upgrade target version for clusters on the channel.
-    public var upgradeTargetVersion: Swift.String
+    public var upgradeTargetVersion: Swift.String = Swift.String()
 
     /// Initialize a new instance of `ReleaseChannelConfig`.
-    public init(
-      channel: ReleaseChannel.Channel = ReleaseChannel.Channel(),
-      defaultVersion: Swift.String = Swift.String(),
-      validVersions: [Swift.String] = [],
-      upgradeTargetVersion: Swift.String = Swift.String(),
-    ) {
-      self.channel = channel
-      self.defaultVersion = defaultVersion
-      self.validVersions = validVersions
-      self.upgradeTargetVersion = upgradeTargetVersion
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ReleaseChannelConfig().with { $0.channel = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -23,8 +23,8 @@ import GoogleCloudWkt
 func sample() async throws {
   let client = try GoogleContainerV1.Clients.ClusterManagerClient()
   let response = try await client.listClusters(
-    request: ListClustersRequest(/* set fields */
-    )
+    request: ListClustersRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

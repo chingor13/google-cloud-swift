@@ -23,16 +23,16 @@ public struct AutoprovisioningNodePoolDefaults: Codable, Equatable, GoogleCloudW
   Sendable
 {
   /// Scopes that are used by NAP when creating node pools.
-  public var oauthScopes: [Swift.String]
+  public var oauthScopes: [Swift.String] = []
 
   /// The Google Cloud Platform Service Account to be used by the node VMs.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Specifies the upgrade settings for NAP created node pools
-  public var upgradeSettings: NodePool.UpgradeSettings?
+  public var upgradeSettings: NodePool.UpgradeSettings? = nil
 
   /// Specifies the node management options for NAP created node-pools.
-  public var management: NodeManagement?
+  public var management: NodeManagement? = nil
 
   /// Deprecated. Minimum CPU platform to be used for NAP created node pools.
   /// The instance may be scheduled on the specified or newer CPU platform.
@@ -45,22 +45,22 @@ public struct AutoprovisioningNodePoolDefaults: Codable, Equatable, GoogleCloudW
   /// `cloud.google.com/requested-min-cpu-platform` label selector on the pod.
   /// To unset the min cpu platform field pass "automatic"
   /// as field value.
-  public var minCpuPlatform: Swift.String
+  public var minCpuPlatform: Swift.String = Swift.String()
 
   /// Size of the disk attached to each node, specified in GB.
   /// The smallest allowed disk size is 10GB.
   ///
   /// If unspecified, the default disk size is 100GB.
-  public var diskSizeGb: Swift.Int32
+  public var diskSizeGb: Swift.Int32 = Swift.Int32()
 
   /// Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or
   /// 'pd-balanced')
   ///
   /// If unspecified, the default disk type is 'pd-standard'
-  public var diskType: Swift.String
+  public var diskType: Swift.String = Swift.String()
 
   /// Shielded Instance options.
-  public var shieldedInstanceConfig: ShieldedInstanceConfig?
+  public var shieldedInstanceConfig: ShieldedInstanceConfig? = nil
 
   /// The Customer Managed Encryption Key used to encrypt the boot disk attached
   /// to each node in the node pool. This should be of the form
@@ -68,41 +68,30 @@ public struct AutoprovisioningNodePoolDefaults: Codable, Equatable, GoogleCloudW
   /// For more information about protecting resources with Cloud KMS Keys please
   /// see:
   /// https://cloud.google.com/compute/docs/disks/customer-managed-encryption
-  public var bootDiskKmsKey: Swift.String
+  public var bootDiskKmsKey: Swift.String = Swift.String()
 
   /// The image type to use for NAP created node. Please see
   /// https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
   /// for available image types.
-  public var imageType: Swift.String
+  public var imageType: Swift.String = Swift.String()
 
   /// DEPRECATED. Use NodePoolAutoConfig.NodeKubeletConfig instead.
-  public var insecureKubeletReadonlyPortEnabled: Swift.Bool?
+  public var insecureKubeletReadonlyPortEnabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `AutoprovisioningNodePoolDefaults`.
-  public init(
-    oauthScopes: [Swift.String] = [],
-    serviceAccount: Swift.String = Swift.String(),
-    upgradeSettings: NodePool.UpgradeSettings? = nil,
-    management: NodeManagement? = nil,
-    minCpuPlatform: Swift.String = Swift.String(),
-    diskSizeGb: Swift.Int32 = Swift.Int32(),
-    diskType: Swift.String = Swift.String(),
-    shieldedInstanceConfig: ShieldedInstanceConfig? = nil,
-    bootDiskKmsKey: Swift.String = Swift.String(),
-    imageType: Swift.String = Swift.String(),
-    insecureKubeletReadonlyPortEnabled: Swift.Bool? = nil,
-  ) {
-    self.oauthScopes = oauthScopes
-    self.serviceAccount = serviceAccount
-    self.upgradeSettings = upgradeSettings
-    self.management = management
-    self.minCpuPlatform = minCpuPlatform
-    self.diskSizeGb = diskSizeGb
-    self.diskType = diskType
-    self.shieldedInstanceConfig = shieldedInstanceConfig
-    self.bootDiskKmsKey = bootDiskKmsKey
-    self.imageType = imageType
-    self.insecureKubeletReadonlyPortEnabled = insecureKubeletReadonlyPortEnabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AutoprovisioningNodePoolDefaults().with { $0.oauthScopes = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

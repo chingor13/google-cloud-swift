@@ -22,38 +22,37 @@ public struct MessageWithString: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.String
+  public var singular: Swift.String = Swift.String()
 
   /// An optional field.
-  public var option: Swift.String?
+  public var option: Swift.String? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.String]
+  public var repeated: [Swift.String] = []
 
   /// Test string as map values.
-  public var mapValue: [Swift.Int32: Swift.String]
+  public var mapValue: [Swift.Int32: Swift.String] = [:]
 
   /// Test string as map keys.
-  public var mapKey: [Swift.String: Swift.Int32]
+  public var mapKey: [Swift.String: Swift.Int32] = [:]
 
   /// Test string as map key and value.
-  public var mapKeyValue: [Swift.String: Swift.String]
+  public var mapKeyValue: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `MessageWithString`.
-  public init(
-    singular: Swift.String = Swift.String(),
-    option: Swift.String? = nil,
-    repeated: [Swift.String] = [],
-    mapValue: [Swift.Int32: Swift.String] = [:],
-    mapKey: [Swift.String: Swift.Int32] = [:],
-    mapKeyValue: [Swift.String: Swift.String] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.mapValue = mapValue
-    self.mapKey = mapKey
-    self.mapKeyValue = mapKeyValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithString().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

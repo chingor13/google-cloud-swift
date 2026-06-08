@@ -30,35 +30,38 @@ public struct ListFoldersRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// Access to this method is controlled by checking the
   /// `resourcemanager.folders.list` permission on the `parent`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The maximum number of folders to return in the response. The
   /// server can return fewer folders than requested. If unspecified, server
   /// picks an appropriate default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to `ListFolders`
   /// that indicates where this listing should continue from.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. Controls whether folders in the
   /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
   /// state should be returned. Defaults to false.
   ///
   /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-  public var showDeleted: Swift.Bool
+  public var showDeleted: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListFoldersRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    showDeleted: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.showDeleted = showDeleted
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListFoldersRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

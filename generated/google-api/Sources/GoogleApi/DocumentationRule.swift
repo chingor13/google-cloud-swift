@@ -28,26 +28,31 @@ public struct DocumentationRule: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A wildcard will match
   /// one or more components. To specify a default for all applicable elements,
   /// the whole pattern "*" is used.
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Description of the selected proto element (e.g. a message, a method, a
   /// 'service' definition, or a field). Defaults to leading & trailing comments
   /// taken from the proto source definition of the proto element.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Deprecation description of the selected element(s). It can be provided if
   /// an element is marked as `deprecated`.
-  public var deprecationDescription: Swift.String
+  public var deprecationDescription: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DocumentationRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    deprecationDescription: Swift.String = Swift.String(),
-  ) {
-    self.selector = selector
-    self.description = description
-    self.deprecationDescription = deprecationDescription
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DocumentationRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

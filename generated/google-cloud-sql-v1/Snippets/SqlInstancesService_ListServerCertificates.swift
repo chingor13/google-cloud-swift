@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.listServerCertificates(
-      request: SqlInstancesListServerCertificatesRequest(/* set fields */
-      )
+      request: SqlInstancesListServerCertificatesRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

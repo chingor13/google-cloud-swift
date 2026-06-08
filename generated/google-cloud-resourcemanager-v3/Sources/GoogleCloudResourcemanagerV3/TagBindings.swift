@@ -249,7 +249,8 @@ extension Clients {
       let rawOp = try await self.createTagBinding(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagBinding>.State in
-        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        let op = try await self.getOperation(
+          request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
       return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
@@ -299,7 +300,8 @@ extension Clients {
       let rawOp = try await self.deleteTagBinding(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(request: .init(name: rawOp.name), options: options)
+        let op = try await self.getOperation(
+          request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
       return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)

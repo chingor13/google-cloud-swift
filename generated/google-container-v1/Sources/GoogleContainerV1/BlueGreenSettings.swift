@@ -23,18 +23,25 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
 {
   /// Time needed after draining entire blue pool. After this period, blue pool
   /// will be cleaned up.
-  public var nodePoolSoakDuration: GoogleCloudWkt.Duration?
+  public var nodePoolSoakDuration: GoogleCloudWkt.Duration? = nil
 
   /// The rollout policy controls the general rollout progress of blue-green.
-  public var rolloutPolicy: OneOf_RolloutPolicy?
+  public var rolloutPolicy: OneOf_RolloutPolicy? = nil
 
   /// Initialize a new instance of `BlueGreenSettings`.
-  public init(
-    nodePoolSoakDuration: GoogleCloudWkt.Duration? = nil,
-    rolloutPolicy: OneOf_RolloutPolicy? = nil,
-  ) {
-    self.nodePoolSoakDuration = nodePoolSoakDuration
-    self.rolloutPolicy = rolloutPolicy
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BlueGreenSettings().with { $0.standardRolloutPolicy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -90,18 +97,25 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
     Sendable
   {
     /// Soak time after each batch gets drained. Default to zero.
-    public var batchSoakDuration: GoogleCloudWkt.Duration?
+    public var batchSoakDuration: GoogleCloudWkt.Duration? = nil
 
     /// Blue pool size to drain in a batch.
-    public var updateBatchSize: OneOf_UpdateBatchSize?
+    public var updateBatchSize: OneOf_UpdateBatchSize? = nil
 
     /// Initialize a new instance of `StandardRolloutPolicy`.
-    public init(
-      batchSoakDuration: GoogleCloudWkt.Duration? = nil,
-      updateBatchSize: OneOf_UpdateBatchSize? = nil,
-    ) {
-      self.batchSoakDuration = batchSoakDuration
-      self.updateBatchSize = updateBatchSize
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = StandardRolloutPolicy().with { $0.batchPercentage = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -180,13 +194,22 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Optional. Time to wait after cordoning the blue pool before draining the
     /// nodes. Defaults to 3 days. The value can be set between 0 and 7 days,
     /// inclusive.
-    public var waitForDrainDuration: GoogleCloudWkt.Duration?
+    public var waitForDrainDuration: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `AutoscaledRolloutPolicy`.
-    public init(
-      waitForDrainDuration: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.waitForDrainDuration = waitForDrainDuration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = AutoscaledRolloutPolicy().with { $0.waitForDrainDuration = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

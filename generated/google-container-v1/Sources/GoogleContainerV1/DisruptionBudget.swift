@@ -24,30 +24,33 @@ public struct DisruptionBudget: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Optional. The minimum duration between two minor version upgrades of the
   /// control plane.
-  public var minorVersionDisruptionInterval: GoogleCloudWkt.Duration?
+  public var minorVersionDisruptionInterval: GoogleCloudWkt.Duration? = nil
 
   /// Optional. The minimum duration between two patch version upgrades of the
   /// control plane.
-  public var patchVersionDisruptionInterval: GoogleCloudWkt.Duration?
+  public var patchVersionDisruptionInterval: GoogleCloudWkt.Duration? = nil
 
   /// Output only. The last time a minor version upgrade was performed on the
   /// control plane.
-  public var lastMinorVersionDisruptionTime: GoogleCloudWkt.Timestamp?
+  public var lastMinorVersionDisruptionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last time a disruption was performed on the control plane.
-  public var lastDisruptionTime: GoogleCloudWkt.Timestamp?
+  public var lastDisruptionTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Initialize a new instance of `DisruptionBudget`.
-  public init(
-    minorVersionDisruptionInterval: GoogleCloudWkt.Duration? = nil,
-    patchVersionDisruptionInterval: GoogleCloudWkt.Duration? = nil,
-    lastMinorVersionDisruptionTime: GoogleCloudWkt.Timestamp? = nil,
-    lastDisruptionTime: GoogleCloudWkt.Timestamp? = nil,
-  ) {
-    self.minorVersionDisruptionInterval = minorVersionDisruptionInterval
-    self.patchVersionDisruptionInterval = patchVersionDisruptionInterval
-    self.lastMinorVersionDisruptionTime = lastMinorVersionDisruptionTime
-    self.lastDisruptionTime = lastDisruptionTime
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DisruptionBudget().with { $0.minorVersionDisruptionInterval = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

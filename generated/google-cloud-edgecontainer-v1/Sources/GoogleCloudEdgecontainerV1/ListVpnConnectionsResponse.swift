@@ -24,23 +24,28 @@ public struct ListVpnConnectionsResponse: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// VpnConnections in the location.
-  public var vpnConnections: [VpnConnection]
+  public var vpnConnections: [VpnConnection] = []
 
   /// A token to retrieve next page of results.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListVpnConnectionsResponse`.
-  public init(
-    vpnConnections: [VpnConnection] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.vpnConnections = vpnConnections
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListVpnConnectionsResponse().with { $0.vpnConnections = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

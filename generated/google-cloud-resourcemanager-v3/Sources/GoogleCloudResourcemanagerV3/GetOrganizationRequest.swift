@@ -25,13 +25,22 @@ public struct GetOrganizationRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Required. The resource name of the Organization to fetch. This is the
   /// organization's relative path in the API, formatted as
   /// "organizations/[organizationId]". For example, "organizations/1234".
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetOrganizationRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-  ) {
-    self.name = name
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetOrganizationRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

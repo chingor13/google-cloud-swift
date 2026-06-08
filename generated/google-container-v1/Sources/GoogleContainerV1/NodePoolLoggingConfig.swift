@@ -22,13 +22,22 @@ public struct NodePoolLoggingConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Logging variant configuration.
-  public var variantConfig: LoggingVariantConfig?
+  public var variantConfig: LoggingVariantConfig? = nil
 
   /// Initialize a new instance of `NodePoolLoggingConfig`.
-  public init(
-    variantConfig: LoggingVariantConfig? = nil,
-  ) {
-    self.variantConfig = variantConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePoolLoggingConfig().with { $0.variantConfig = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

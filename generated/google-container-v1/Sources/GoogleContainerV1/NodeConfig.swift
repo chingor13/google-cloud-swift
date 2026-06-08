@@ -32,13 +32,13 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// type](https://cloud.google.com/compute/docs/machine-types)
   ///
   /// If unspecified, the default machine type is `e2-medium`.
-  public var machineType: Swift.String
+  public var machineType: Swift.String = Swift.String()
 
   /// Size of the disk attached to each node, specified in GB.
   /// The smallest allowed disk size is 10GB.
   ///
   /// If unspecified, the default disk size is 100GB.
-  public var diskSizeGb: Swift.Int32
+  public var diskSizeGb: Swift.Int32 = Swift.Int32()
 
   /// The set of Google API scopes to be made available on all of the
   /// node VMs under the "default" service account.
@@ -54,12 +54,12 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If unspecified, no scopes are added, unless Cloud Logging or Cloud
   /// Monitoring are enabled, in which case their required scopes will be added.
-  public var oauthScopes: [Swift.String]
+  public var oauthScopes: [Swift.String] = []
 
   /// The Google Cloud Platform Service Account to be used by the node VMs.
   /// Specify the email address of the Service Account; otherwise, if no Service
   /// Account is specified, the "default" service account is used.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// The metadata key/value pairs assigned to instances in the cluster.
   ///
@@ -93,17 +93,17 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// that each value's size must be less than or equal to 32 KB.
   ///
   /// The total size of all keys and values must be less than 512 KB.
-  public var metadata: [Swift.String: Swift.String]
+  public var metadata: [Swift.String: Swift.String] = [:]
 
   /// The image type to use for this node. Note that for a given image type,
   /// the latest version of it will be used. Please see
   /// https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
   /// for available image types.
-  public var imageType: Swift.String
+  public var imageType: Swift.String = Swift.String()
 
   /// The node image configuration to use for this node pool.  Note that this is
   /// only applicable for node pools using image_type=CUSTOM.
-  public var nodeImageConfig: CustomImageConfig?
+  public var nodeImageConfig: CustomImageConfig? = nil
 
   /// The Kubernetes labels (key/value pairs) to apply to each node. The values
   /// in this field are added to the set of default labels Kubernetes applies to
@@ -122,7 +122,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// avoid label key conflicts. For more information about the default labels,
   /// see:
   /// https://kubernetes.io/docs/reference/labels-annotations-taints/
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// The number of local SSD disks to be attached to the node.
   ///
@@ -130,30 +130,30 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// disks available on a machine per zone. See:
   /// https://cloud.google.com/compute/docs/disks/local-ssd
   /// for more information.
-  public var localSsdCount: Swift.Int32
+  public var localSsdCount: Swift.Int32 = Swift.Int32()
 
   /// The list of instance tags applied to all nodes. Tags are used to identify
   /// valid sources or targets for network firewalls and are specified by
   /// the client during cluster or node pool creation. Each tag within the list
   /// must comply with RFC1035.
-  public var tags: [Swift.String]
+  public var tags: [Swift.String] = []
 
   /// Whether the nodes are created as preemptible VM instances. See:
   /// https://cloud.google.com/compute/docs/instances/preemptible
   /// for more information about preemptible VM instances.
-  public var preemptible: Swift.Bool
+  public var preemptible: Swift.Bool = Swift.Bool()
 
   /// A list of hardware accelerators to be attached to each node.
   /// See
   /// https://cloud.google.com/compute/docs/gpus
   /// for more information about support for GPUs.
-  public var accelerators: [AcceleratorConfig]
+  public var accelerators: [AcceleratorConfig] = []
 
   /// Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or
   /// 'pd-balanced')
   ///
   /// If unspecified, the default disk type is 'pd-standard'
-  public var diskType: Swift.String
+  public var diskType: Swift.String = Swift.String()
 
   /// Minimum CPU platform to be used by this instance. The instance may be
   /// scheduled on the specified or newer CPU platform. Applicable values are the
@@ -162,40 +162,40 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `minCpuPlatform: "Intel Sandy Bridge"`. For more
   /// information, read [how to specify min CPU
   /// platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
-  public var minCpuPlatform: Swift.String
+  public var minCpuPlatform: Swift.String = Swift.String()
 
   /// The workload metadata configuration for this node.
-  public var workloadMetadataConfig: WorkloadMetadataConfig?
+  public var workloadMetadataConfig: WorkloadMetadataConfig? = nil
 
   /// List of kubernetes taints to be applied to each node.
   ///
   /// For more information, including usage and the valid values, see:
   /// https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-  public var taints: [NodeTaint]
+  public var taints: [NodeTaint] = []
 
   /// Sandbox configuration for this node.
-  public var sandboxConfig: SandboxConfig?
+  public var sandboxConfig: SandboxConfig? = nil
 
   /// Setting this field will assign instances of this
   /// pool to run on the specified node group. This is useful for running
   /// workloads on [sole tenant
   /// nodes](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes).
-  public var nodeGroup: Swift.String
+  public var nodeGroup: Swift.String = Swift.String()
 
   /// The optional reservation affinity. Setting this field will apply
   /// the specified [Zonal Compute
   /// Reservation](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources)
   /// to this node pool.
-  public var reservationAffinity: ReservationAffinity?
+  public var reservationAffinity: ReservationAffinity? = nil
 
   /// Shielded Instance options.
-  public var shieldedInstanceConfig: ShieldedInstanceConfig?
+  public var shieldedInstanceConfig: ShieldedInstanceConfig? = nil
 
   /// Parameters that can be configured on Linux nodes.
-  public var linuxNodeConfig: LinuxNodeConfig?
+  public var linuxNodeConfig: LinuxNodeConfig? = nil
 
   /// Node kubelet configs.
-  public var kubeletConfig: NodeKubeletConfig?
+  public var kubeletConfig: NodeKubeletConfig? = nil
 
   ///
   /// The Customer Managed Encryption Key used to encrypt the boot disk attached
@@ -204,198 +204,111 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For more information about protecting resources with Cloud KMS Keys please
   /// see:
   /// https://cloud.google.com/compute/docs/disks/customer-managed-encryption
-  public var bootDiskKmsKey: Swift.String
+  public var bootDiskKmsKey: Swift.String = Swift.String()
 
   /// Google Container File System (image streaming) configs.
-  public var gcfsConfig: GcfsConfig?
+  public var gcfsConfig: GcfsConfig? = nil
 
   /// Advanced features for the Compute Engine VM.
-  public var advancedMachineFeatures: AdvancedMachineFeatures?
+  public var advancedMachineFeatures: AdvancedMachineFeatures? = nil
 
   /// Enable or disable gvnic in the node pool.
-  public var gvnic: VirtualNIC?
+  public var gvnic: VirtualNIC? = nil
 
   /// Spot flag for enabling Spot VM, which is a rebrand of
   /// the existing preemptible flag.
-  public var spot: Swift.Bool
+  public var spot: Swift.Bool = Swift.Bool()
 
   /// Confidential nodes config.
   /// All the nodes in the node pool will be Confidential VM once enabled.
-  public var confidentialNodes: ConfidentialNodes?
+  public var confidentialNodes: ConfidentialNodes? = nil
 
   /// Enable or disable NCCL fast socket for the node pool.
-  public var fastSocket: FastSocket?
+  public var fastSocket: FastSocket? = nil
 
   /// The resource labels for the node pool to use to annotate any related
   /// Google Compute Engine resources.
-  public var resourceLabels: [Swift.String: Swift.String]
+  public var resourceLabels: [Swift.String: Swift.String] = [:]
 
   /// Logging configuration.
-  public var loggingConfig: NodePoolLoggingConfig?
+  public var loggingConfig: NodePoolLoggingConfig? = nil
 
   /// Parameters that can be configured on Windows nodes.
-  public var windowsNodeConfig: WindowsNodeConfig?
+  public var windowsNodeConfig: WindowsNodeConfig? = nil
 
   /// Parameters for using raw-block Local NVMe SSDs.
-  public var localNvmeSsdBlockConfig: LocalNvmeSsdBlockConfig?
+  public var localNvmeSsdBlockConfig: LocalNvmeSsdBlockConfig? = nil
 
   /// Parameters for the node ephemeral storage using Local SSDs.
   /// If unspecified, ephemeral storage is backed by the boot disk.
-  public var ephemeralStorageLocalSsdConfig: EphemeralStorageLocalSsdConfig?
+  public var ephemeralStorageLocalSsdConfig: EphemeralStorageLocalSsdConfig? = nil
 
   /// Parameters for node pools to be backed by shared sole tenant node groups.
-  public var soleTenantConfig: SoleTenantConfig?
+  public var soleTenantConfig: SoleTenantConfig? = nil
 
   /// Parameters for containerd customization.
-  public var containerdConfig: ContainerdConfig?
+  public var containerdConfig: ContainerdConfig? = nil
 
   /// A map of resource manager tag keys and values to be attached to the nodes.
-  public var resourceManagerTags: ResourceManagerTags?
+  public var resourceManagerTags: ResourceManagerTags? = nil
 
   /// Optional. Reserved for future use.
-  public var enableConfidentialStorage: Swift.Bool
+  public var enableConfidentialStorage: Swift.Bool = Swift.Bool()
 
   /// List of secondary boot disks attached to the nodes.
-  public var secondaryBootDisks: [SecondaryBootDisk]
+  public var secondaryBootDisks: [SecondaryBootDisk] = []
 
   /// List of Storage Pools where boot disks are provisioned.
-  public var storagePools: [Swift.String]
+  public var storagePools: [Swift.String] = []
 
   /// Secondary boot disk update strategy.
-  public var secondaryBootDiskUpdateStrategy: SecondaryBootDiskUpdateStrategy?
+  public var secondaryBootDiskUpdateStrategy: SecondaryBootDiskUpdateStrategy? = nil
 
   /// The configuration for GPU Direct
-  public var gpuDirectConfig: GPUDirectConfig?
+  public var gpuDirectConfig: GPUDirectConfig? = nil
 
   /// The maximum duration for the nodes to exist.
   /// If unspecified, the nodes can exist indefinitely.
-  public var maxRunDuration: GoogleCloudWkt.Duration?
+  public var maxRunDuration: GoogleCloudWkt.Duration? = nil
 
   /// Specifies which method should be used for encrypting the
   /// Local SSDs attached to the node.
-  public var localSsdEncryptionMode: NodeConfig.LocalSsdEncryptionMode?
+  public var localSsdEncryptionMode: NodeConfig.LocalSsdEncryptionMode? = nil
 
   /// Output only. effective_cgroup_mode is the cgroup mode actually used by the
   /// node pool. It is determined by the cgroup mode specified in the
   /// LinuxNodeConfig or the default cgroup mode based on the cluster creation
   /// version.
-  public var effectiveCgroupMode: NodeConfig.EffectiveCgroupMode
+  public var effectiveCgroupMode: NodeConfig.EffectiveCgroupMode = NodeConfig.EffectiveCgroupMode()
 
   /// Flex Start flag for enabling Flex Start VM.
-  public var flexStart: Swift.Bool?
+  public var flexStart: Swift.Bool? = nil
 
   /// The boot disk configuration for the node pool.
-  public var bootDisk: BootDisk?
+  public var bootDisk: BootDisk? = nil
 
   /// Consolidation delay defines duration after which the Cluster Autoscaler can
   /// scale down underutilized nodes. If not set, nodes are scaled down by
   /// default behavior, i.e. according to the chosen autoscaling profile.
-  public var consolidationDelay: GoogleCloudWkt.Duration?
+  public var consolidationDelay: GoogleCloudWkt.Duration? = nil
 
   /// Optional. The taint configuration for the node pool.
-  public var taintConfig: TaintConfig?
+  public var taintConfig: TaintConfig? = nil
 
   /// Initialize a new instance of `NodeConfig`.
-  public init(
-    machineType: Swift.String = Swift.String(),
-    diskSizeGb: Swift.Int32 = Swift.Int32(),
-    oauthScopes: [Swift.String] = [],
-    serviceAccount: Swift.String = Swift.String(),
-    metadata: [Swift.String: Swift.String] = [:],
-    imageType: Swift.String = Swift.String(),
-    nodeImageConfig: CustomImageConfig? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    localSsdCount: Swift.Int32 = Swift.Int32(),
-    tags: [Swift.String] = [],
-    preemptible: Swift.Bool = Swift.Bool(),
-    accelerators: [AcceleratorConfig] = [],
-    diskType: Swift.String = Swift.String(),
-    minCpuPlatform: Swift.String = Swift.String(),
-    workloadMetadataConfig: WorkloadMetadataConfig? = nil,
-    taints: [NodeTaint] = [],
-    sandboxConfig: SandboxConfig? = nil,
-    nodeGroup: Swift.String = Swift.String(),
-    reservationAffinity: ReservationAffinity? = nil,
-    shieldedInstanceConfig: ShieldedInstanceConfig? = nil,
-    linuxNodeConfig: LinuxNodeConfig? = nil,
-    kubeletConfig: NodeKubeletConfig? = nil,
-    bootDiskKmsKey: Swift.String = Swift.String(),
-    gcfsConfig: GcfsConfig? = nil,
-    advancedMachineFeatures: AdvancedMachineFeatures? = nil,
-    gvnic: VirtualNIC? = nil,
-    spot: Swift.Bool = Swift.Bool(),
-    confidentialNodes: ConfidentialNodes? = nil,
-    fastSocket: FastSocket? = nil,
-    resourceLabels: [Swift.String: Swift.String] = [:],
-    loggingConfig: NodePoolLoggingConfig? = nil,
-    windowsNodeConfig: WindowsNodeConfig? = nil,
-    localNvmeSsdBlockConfig: LocalNvmeSsdBlockConfig? = nil,
-    ephemeralStorageLocalSsdConfig: EphemeralStorageLocalSsdConfig? = nil,
-    soleTenantConfig: SoleTenantConfig? = nil,
-    containerdConfig: ContainerdConfig? = nil,
-    resourceManagerTags: ResourceManagerTags? = nil,
-    enableConfidentialStorage: Swift.Bool = Swift.Bool(),
-    secondaryBootDisks: [SecondaryBootDisk] = [],
-    storagePools: [Swift.String] = [],
-    secondaryBootDiskUpdateStrategy: SecondaryBootDiskUpdateStrategy? = nil,
-    gpuDirectConfig: GPUDirectConfig? = nil,
-    maxRunDuration: GoogleCloudWkt.Duration? = nil,
-    localSsdEncryptionMode: NodeConfig.LocalSsdEncryptionMode? = nil,
-    effectiveCgroupMode: NodeConfig.EffectiveCgroupMode = NodeConfig.EffectiveCgroupMode(),
-    flexStart: Swift.Bool? = nil,
-    bootDisk: BootDisk? = nil,
-    consolidationDelay: GoogleCloudWkt.Duration? = nil,
-    taintConfig: TaintConfig? = nil,
-  ) {
-    self.machineType = machineType
-    self.diskSizeGb = diskSizeGb
-    self.oauthScopes = oauthScopes
-    self.serviceAccount = serviceAccount
-    self.metadata = metadata
-    self.imageType = imageType
-    self.nodeImageConfig = nodeImageConfig
-    self.labels = labels
-    self.localSsdCount = localSsdCount
-    self.tags = tags
-    self.preemptible = preemptible
-    self.accelerators = accelerators
-    self.diskType = diskType
-    self.minCpuPlatform = minCpuPlatform
-    self.workloadMetadataConfig = workloadMetadataConfig
-    self.taints = taints
-    self.sandboxConfig = sandboxConfig
-    self.nodeGroup = nodeGroup
-    self.reservationAffinity = reservationAffinity
-    self.shieldedInstanceConfig = shieldedInstanceConfig
-    self.linuxNodeConfig = linuxNodeConfig
-    self.kubeletConfig = kubeletConfig
-    self.bootDiskKmsKey = bootDiskKmsKey
-    self.gcfsConfig = gcfsConfig
-    self.advancedMachineFeatures = advancedMachineFeatures
-    self.gvnic = gvnic
-    self.spot = spot
-    self.confidentialNodes = confidentialNodes
-    self.fastSocket = fastSocket
-    self.resourceLabels = resourceLabels
-    self.loggingConfig = loggingConfig
-    self.windowsNodeConfig = windowsNodeConfig
-    self.localNvmeSsdBlockConfig = localNvmeSsdBlockConfig
-    self.ephemeralStorageLocalSsdConfig = ephemeralStorageLocalSsdConfig
-    self.soleTenantConfig = soleTenantConfig
-    self.containerdConfig = containerdConfig
-    self.resourceManagerTags = resourceManagerTags
-    self.enableConfidentialStorage = enableConfidentialStorage
-    self.secondaryBootDisks = secondaryBootDisks
-    self.storagePools = storagePools
-    self.secondaryBootDiskUpdateStrategy = secondaryBootDiskUpdateStrategy
-    self.gpuDirectConfig = gpuDirectConfig
-    self.maxRunDuration = maxRunDuration
-    self.localSsdEncryptionMode = localSsdEncryptionMode
-    self.effectiveCgroupMode = effectiveCgroupMode
-    self.flexStart = flexStart
-    self.bootDisk = bootDisk
-    self.consolidationDelay = consolidationDelay
-    self.taintConfig = taintConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeConfig().with { $0.machineType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// LocalSsdEncryptionMode specifies the method used for encrypting the Local

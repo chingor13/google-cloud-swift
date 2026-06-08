@@ -23,31 +23,34 @@ public struct TrafficTarget: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The allocation type for this traffic target.
-  public var type: TrafficTargetAllocationType
+  public var type: TrafficTargetAllocationType = TrafficTargetAllocationType()
 
   /// Revision to which to send this portion of traffic, if traffic allocation is
   /// by revision.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Specifies percent of the traffic to this Revision.
   /// This defaults to zero if unspecified.
-  public var percent: Swift.Int32
+  public var percent: Swift.Int32 = Swift.Int32()
 
   /// Indicates a string to be part of the URI to exclusively reference this
   /// target.
-  public var tag: Swift.String
+  public var tag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `TrafficTarget`.
-  public init(
-    type: TrafficTargetAllocationType = TrafficTargetAllocationType(),
-    revision: Swift.String = Swift.String(),
-    percent: Swift.Int32 = Swift.Int32(),
-    tag: Swift.String = Swift.String(),
-  ) {
-    self.type = type
-    self.revision = revision
-    self.percent = percent
-    self.tag = tag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TrafficTarget().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

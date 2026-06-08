@@ -22,19 +22,26 @@ public struct CreateFolderMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The display name of the folder.
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// The resource name of the folder or organization we are creating the folder
   /// under.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateFolderMetadata`.
-  public init(
-    displayName: Swift.String = Swift.String(),
-    parent: Swift.String = Swift.String(),
-  ) {
-    self.displayName = displayName
-    self.parent = parent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateFolderMetadata().with { $0.displayName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

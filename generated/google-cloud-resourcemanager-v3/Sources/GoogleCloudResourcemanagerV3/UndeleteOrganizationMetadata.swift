@@ -23,7 +23,19 @@ public struct UndeleteOrganizationMetadata: Codable, Equatable, GoogleCloudWkt._
   Sendable
 {
   /// Initialize a new instance of `UndeleteOrganizationMetadata`.
-  public init() {
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UndeleteOrganizationMetadata().with { $0.<placeholder> = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -24,7 +24,7 @@ public struct ListTagBindingsResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// A possibly paginated list of TagBindings for the specified resource.
-  public var tagBindings: [TagBinding]
+  public var tagBindings: [TagBinding] = []
 
   /// Pagination token.
   ///
@@ -37,15 +37,22 @@ public struct ListTagBindingsResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
   /// the list returned is the last page in the result set.
   ///
   /// Pagination tokens have a limited lifetime.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagBindingsResponse`.
-  public init(
-    tagBindings: [TagBinding] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.tagBindings = tagBindings
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagBindingsResponse().with { $0.tagBindings = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

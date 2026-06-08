@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Projects) async throws {
   let items = try client.searchProjects(
-    byItem: SearchProjectsRequest(/* set fields */
-    )
+    byItem: SearchProjectsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

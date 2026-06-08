@@ -22,17 +22,24 @@ public struct Volume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. Volume's name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
-  public var volumeType: OneOf_VolumeType?
+  public var volumeType: OneOf_VolumeType? = nil
 
   /// Initialize a new instance of `Volume`.
-  public init(
-    name: Swift.String = Swift.String(),
-    volumeType: OneOf_VolumeType? = nil,
-  ) {
-    self.name = name
-    self.volumeType = volumeType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Volume().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

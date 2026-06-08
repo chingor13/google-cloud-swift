@@ -24,35 +24,38 @@ public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleCloudWkt._
 {
   /// The parent project where subnetworks are usable.
   /// Specified in the format `projects/*`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Filtering currently only supports equality on the networkProjectId and must
   /// be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
   /// is the project which owns the listed subnetworks. This defaults to the
   /// parent project ID.
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// The max number of results per page that should be returned. If the number
   /// of available results is larger than `page_size`, a `next_page_token` is
   /// returned which can be used to get the next page of results in subsequent
   /// requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Specifies a page token to use. Set this to the nextPageToken returned by
   /// previous list requests to get the next page of results.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListUsableSubnetworksRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.filter = filter
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListUsableSubnetworksRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

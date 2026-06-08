@@ -22,20 +22,20 @@ import GoogleCloudWkt
     arguments: [
       (#"{}"#, MessageWithI32()),
       (#"{"singular": 0              }"#, MessageWithI32()),
-      (#"{"singular": 42             }"#, MessageWithI32(singular: 42)),
-      (#"{"singular": "42"           }"#, MessageWithI32(singular: 42)),
+      (#"{"singular": 42             }"#, MessageWithI32().with { $0.singular = 42 }),
+      (#"{"singular": "42"           }"#, MessageWithI32().with { $0.singular = 42 }),
       (#"{"option":   null           }"#, MessageWithI32()),
-      (#"{"option":   0              }"#, MessageWithI32(option: 0)),
-      (#"{"option":   42             }"#, MessageWithI32(option: 42)),
-      (#"{"option":   "42"           }"#, MessageWithI32(option: 42)),
+      (#"{"option":   0              }"#, MessageWithI32().with { $0.option = 0 }),
+      (#"{"option":   42             }"#, MessageWithI32().with { $0.option = 42 }),
+      (#"{"option":   "42"           }"#, MessageWithI32().with { $0.option = 42 }),
       (#"{"repeated": []             }"#, MessageWithI32()),
-      (#"{"repeated": [0]            }"#, MessageWithI32(repeated: [0])),
-      (#"{"repeated": [4, 2]         }"#, MessageWithI32(repeated: [4, 2])),
-      (#"{"repeated": ["4", "2"]     }"#, MessageWithI32(repeated: [4, 2])),
+      (#"{"repeated": [0]            }"#, MessageWithI32().with { $0.repeated = [0] }),
+      (#"{"repeated": [4, 2]         }"#, MessageWithI32().with { $0.repeated = [4, 2] }),
+      (#"{"repeated": ["4", "2"]     }"#, MessageWithI32().with { $0.repeated = [4, 2] }),
       // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapKey and mapKeyValue
       (#"{"mapValue": {}             }"#, MessageWithI32()),
-      (#"{"mapValue": {"a": 42}      }"#, MessageWithI32(mapValue: ["a": 42])),
-      (#"{"mapValue": {"a": "42"}    }"#, MessageWithI32(mapValue: ["a": 42])),
+      (#"{"mapValue": {"a": 42}      }"#, MessageWithI32().with { $0.mapValue = ["a": 42] }),
+      (#"{"mapValue": {"a": "42"}    }"#, MessageWithI32().with { $0.mapValue = ["a": 42] }),
     ])
   func deserialize(input: String, want: MessageWithI32) throws {
     let decoder = _ProtoJSONDecoder()

@@ -23,13 +23,22 @@
     Sendable
   {
     /// Flags to use for the initial dump.
-    public var initialSyncFlags: [SyncFlags]
+    public var initialSyncFlags: [SyncFlags] = []
 
     /// Initialize a new instance of `MySqlSyncConfig`.
-    public init(
-      initialSyncFlags: [SyncFlags] = [],
-    ) {
-      self.initialSyncFlags = initialSyncFlags
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MySqlSyncConfig().with { $0.initialSyncFlags = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

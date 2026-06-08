@@ -38,26 +38,31 @@ public struct FieldPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// When a `FieldPolicy` is used in service config, the selector must be a
   /// comma-separated string with valid request or response field paths,
   /// such as "foo.bar" or "foo.bar,foo.baz".
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Specifies the required permission(s) for the resource referred to by the
   /// field. It requires the field contains a valid resource reference, and
   /// the request must pass the permission checks to proceed. For example,
   /// "resourcemanager.projects.get".
-  public var resourcePermission: Swift.String
+  public var resourcePermission: Swift.String = Swift.String()
 
   /// Specifies the resource type for the resource referred to by the field.
-  public var resourceType: Swift.String
+  public var resourceType: Swift.String = Swift.String()
 
   /// Initialize a new instance of `FieldPolicy`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    resourcePermission: Swift.String = Swift.String(),
-    resourceType: Swift.String = Swift.String(),
-  ) {
-    self.selector = selector
-    self.resourcePermission = resourcePermission
-    self.resourceType = resourceType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = FieldPolicy().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.FieldPolicy" }

@@ -24,8 +24,8 @@ import GoogleLongrunning
 
 func sample(client: some Organizations) async throws {
   let items = try client.searchOrganizations(
-    byItem: SearchOrganizationsRequest(/* set fields */
-    )
+    byItem: SearchOrganizationsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

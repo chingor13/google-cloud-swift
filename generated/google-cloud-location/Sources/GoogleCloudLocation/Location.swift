@@ -23,37 +23,38 @@ public struct Location: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Resource name for the location, which may vary between implementations.
   /// For example: `"projects/example-project/locations/us-east1"`
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The canonical id for this location. For example: `"us-east1"`.
-  public var locationId: Swift.String
+  public var locationId: Swift.String = Swift.String()
 
   /// The friendly name for this location, typically a nearby city name.
   /// For example, "Tokyo".
-  public var displayName: Swift.String
+  public var displayName: Swift.String = Swift.String()
 
   /// Cross-service attributes for the location. For example
   ///
   ///     {"cloud.googleapis.com/region": "us-east1"}
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Service-specific metadata. For example the available capacity at the given
   /// location.
-  public var metadata: GoogleCloudWkt.`Any`?
+  public var metadata: GoogleCloudWkt.`Any`? = nil
 
   /// Initialize a new instance of `Location`.
-  public init(
-    name: Swift.String = Swift.String(),
-    locationId: Swift.String = Swift.String(),
-    displayName: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-    metadata: GoogleCloudWkt.`Any`? = nil,
-  ) {
-    self.name = name
-    self.locationId = locationId
-    self.displayName = displayName
-    self.labels = labels
-    self.metadata = metadata
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Location().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,22 +23,22 @@
     Sendable
   {
     /// This is always `sql#cloneContext`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Reserved for future use.
-    public var pitrTimestampMs: Swift.Int64
+    public var pitrTimestampMs: Swift.Int64 = Swift.Int64()
 
     /// Required. Name of the Cloud SQL instance to be created as a clone.
-    public var destinationInstanceName: Swift.String
+    public var destinationInstanceName: Swift.String = Swift.String()
 
     /// Binary log coordinates, if specified, identify the position up to which the
     /// source instance is cloned. If not specified, the source instance is
     /// cloned up to the most recent binary log coordinates.
-    public var binLogCoordinates: BinLogCoordinates?
+    public var binLogCoordinates: BinLogCoordinates? = nil
 
     /// Timestamp, if specified, identifies the time to which the source instance
     /// is cloned.
-    public var pointInTime: GoogleCloudWkt.Timestamp?
+    public var pointInTime: GoogleCloudWkt.Timestamp? = nil
 
     /// The name of the allocated ip range for the private ip Cloud SQL instance.
     /// For example: "google-managed-services-default". If set, the cloned instance
@@ -47,66 +47,53 @@
     /// must be 1-63 characters long and match the regular expression
     /// [a-z]([-a-z0-9]*[a-z0-9])?.
     /// Reserved for future use.
-    public var allocatedIpRange: Swift.String
+    public var allocatedIpRange: Swift.String = Swift.String()
 
     /// (SQL Server only) Clone only the specified databases from the source
     /// instance. Clone all databases if empty.
-    public var databaseNames: [Swift.String]
+    public var databaseNames: [Swift.String] = []
 
     /// Optional. Copy clone and point-in-time recovery clone of an instance to the
     /// specified zone. If no zone is specified, clone to the same primary zone as
     /// the source instance. This field applies to all DB types.
-    public var preferredZone: Swift.String?
+    public var preferredZone: Swift.String? = nil
 
     /// Optional. Copy clone and point-in-time recovery clone of a regional
     /// instance in the specified zones. If not specified, clone to the same
     /// secondary zone as the source instance. This value cannot be the same as the
     /// preferred_zone field. This field applies to all DB types.
-    public var preferredSecondaryZone: Swift.String?
+    public var preferredSecondaryZone: Swift.String? = nil
 
     /// The timestamp used to identify the time when the source instance is
     /// deleted. If this instance is deleted, then you must set the timestamp.
-    public var sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp?
+    public var sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Optional. The project ID of the destination project where the cloned
     /// instance will be created. To perform a cross-project clone, this field is
     /// required. If not specified, the clone is created in the same project
     /// as the source instance.
-    public var destinationProject: Swift.String?
+    public var destinationProject: Swift.String? = nil
 
     /// Optional. The fully qualified URI of the VPC network to which the cloned
     /// instance will be connected via Private Services Access for private IP. For
     /// example:`projects/my-network-project/global/networks/my-network`. This
     /// field is only required for cross-project cloning.
-    public var destinationNetwork: Swift.String?
+    public var destinationNetwork: Swift.String? = nil
 
     /// Initialize a new instance of `CloneContext`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      pitrTimestampMs: Swift.Int64 = Swift.Int64(),
-      destinationInstanceName: Swift.String = Swift.String(),
-      binLogCoordinates: BinLogCoordinates? = nil,
-      pointInTime: GoogleCloudWkt.Timestamp? = nil,
-      allocatedIpRange: Swift.String = Swift.String(),
-      databaseNames: [Swift.String] = [],
-      preferredZone: Swift.String? = nil,
-      preferredSecondaryZone: Swift.String? = nil,
-      sourceInstanceDeletionTime: GoogleCloudWkt.Timestamp? = nil,
-      destinationProject: Swift.String? = nil,
-      destinationNetwork: Swift.String? = nil,
-    ) {
-      self.kind = kind
-      self.pitrTimestampMs = pitrTimestampMs
-      self.destinationInstanceName = destinationInstanceName
-      self.binLogCoordinates = binLogCoordinates
-      self.pointInTime = pointInTime
-      self.allocatedIpRange = allocatedIpRange
-      self.databaseNames = databaseNames
-      self.preferredZone = preferredZone
-      self.preferredSecondaryZone = preferredSecondaryZone
-      self.sourceInstanceDeletionTime = sourceInstanceDeletionTime
-      self.destinationProject = destinationProject
-      self.destinationNetwork = destinationNetwork
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CloneContext().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

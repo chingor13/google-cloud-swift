@@ -23,24 +23,29 @@ public struct AdvancedDatapathObservabilityConfig: Codable, Equatable, GoogleClo
   Sendable
 {
   /// Expose flow metrics on nodes
-  public var enableMetrics: Swift.Bool
+  public var enableMetrics: Swift.Bool = Swift.Bool()
 
   /// Method used to make Relay available
-  public var relayMode: AdvancedDatapathObservabilityConfig.RelayMode
+  public var relayMode: AdvancedDatapathObservabilityConfig.RelayMode =
+    AdvancedDatapathObservabilityConfig.RelayMode()
 
   /// Enable Relay component
-  public var enableRelay: Swift.Bool?
+  public var enableRelay: Swift.Bool? = nil
 
   /// Initialize a new instance of `AdvancedDatapathObservabilityConfig`.
-  public init(
-    enableMetrics: Swift.Bool = Swift.Bool(),
-    relayMode: AdvancedDatapathObservabilityConfig.RelayMode =
-      AdvancedDatapathObservabilityConfig.RelayMode(),
-    enableRelay: Swift.Bool? = nil,
-  ) {
-    self.enableMetrics = enableMetrics
-    self.relayMode = relayMode
-    self.enableRelay = enableRelay
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AdvancedDatapathObservabilityConfig().with { $0.enableMetrics = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Supported Relay modes

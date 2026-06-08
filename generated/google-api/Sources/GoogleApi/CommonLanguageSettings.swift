@@ -23,25 +23,30 @@ public struct CommonLanguageSettings: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// Link to automatically generated reference documentation.  Example:
   /// https://cloud.google.com/nodejs/docs/reference/asset/latest
-  public var referenceDocsUri: Swift.String
+  public var referenceDocsUri: Swift.String = Swift.String()
 
   /// The destination where API teams want this client library to be published.
-  public var destinations: [ClientLibraryDestination]
+  public var destinations: [ClientLibraryDestination] = []
 
   /// Configuration for which RPCs should be generated in the GAPIC client.
   ///
   /// Note: This field should not be used in most cases.
-  public var selectiveGapicGeneration: SelectiveGapicGeneration?
+  public var selectiveGapicGeneration: SelectiveGapicGeneration? = nil
 
   /// Initialize a new instance of `CommonLanguageSettings`.
-  public init(
-    referenceDocsUri: Swift.String = Swift.String(),
-    destinations: [ClientLibraryDestination] = [],
-    selectiveGapicGeneration: SelectiveGapicGeneration? = nil,
-  ) {
-    self.referenceDocsUri = referenceDocsUri
-    self.destinations = destinations
-    self.selectiveGapicGeneration = selectiveGapicGeneration
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CommonLanguageSettings().with { $0.referenceDocsUri = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

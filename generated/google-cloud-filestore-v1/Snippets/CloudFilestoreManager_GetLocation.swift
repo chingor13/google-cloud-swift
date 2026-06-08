@@ -26,8 +26,8 @@ import GoogleRpc
 
 func sample(client: some CloudFilestoreManager) async throws {
   let response = try await client.getLocation(
-    request: GetLocationRequest(/* set fields */
-    )
+    request: GetLocationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

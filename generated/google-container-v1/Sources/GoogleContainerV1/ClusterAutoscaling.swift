@@ -25,50 +25,47 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Enables automatic node pool creation and deletion.
-  public var enableNodeAutoprovisioning: Swift.Bool
+  public var enableNodeAutoprovisioning: Swift.Bool = Swift.Bool()
 
   /// Contains global constraints regarding minimum and maximum
   /// amount of resources in the cluster.
-  public var resourceLimits: [ResourceLimit]
+  public var resourceLimits: [ResourceLimit] = []
 
   /// Defines autoscaling behaviour.
-  public var autoscalingProfile: ClusterAutoscaling.AutoscalingProfile
+  public var autoscalingProfile: ClusterAutoscaling.AutoscalingProfile =
+    ClusterAutoscaling.AutoscalingProfile()
 
   /// AutoprovisioningNodePoolDefaults contains defaults for a node pool
   /// created by NAP.
-  public var autoprovisioningNodePoolDefaults: AutoprovisioningNodePoolDefaults?
+  public var autoprovisioningNodePoolDefaults: AutoprovisioningNodePoolDefaults? = nil
 
   /// The list of Google Compute Engine
   /// [zones](https://cloud.google.com/compute/docs/zones#available)
   /// in which the NodePool's nodes can be created by NAP.
-  public var autoprovisioningLocations: [Swift.String]
+  public var autoprovisioningLocations: [Swift.String] = []
 
   /// Default compute class is a configuration for default compute class.
-  public var defaultComputeClassConfig: DefaultComputeClassConfig?
+  public var defaultComputeClassConfig: DefaultComputeClassConfig? = nil
 
   /// Autopilot general profile for the cluster, which defines the
   /// configuration for the cluster.
-  public var autopilotGeneralProfile: ClusterAutoscaling.AutopilotGeneralProfile
+  public var autopilotGeneralProfile: ClusterAutoscaling.AutopilotGeneralProfile =
+    ClusterAutoscaling.AutopilotGeneralProfile()
 
   /// Initialize a new instance of `ClusterAutoscaling`.
-  public init(
-    enableNodeAutoprovisioning: Swift.Bool = Swift.Bool(),
-    resourceLimits: [ResourceLimit] = [],
-    autoscalingProfile: ClusterAutoscaling.AutoscalingProfile =
-      ClusterAutoscaling.AutoscalingProfile(),
-    autoprovisioningNodePoolDefaults: AutoprovisioningNodePoolDefaults? = nil,
-    autoprovisioningLocations: [Swift.String] = [],
-    defaultComputeClassConfig: DefaultComputeClassConfig? = nil,
-    autopilotGeneralProfile: ClusterAutoscaling.AutopilotGeneralProfile =
-      ClusterAutoscaling.AutopilotGeneralProfile(),
-  ) {
-    self.enableNodeAutoprovisioning = enableNodeAutoprovisioning
-    self.resourceLimits = resourceLimits
-    self.autoscalingProfile = autoscalingProfile
-    self.autoprovisioningNodePoolDefaults = autoprovisioningNodePoolDefaults
-    self.autoprovisioningLocations = autoprovisioningLocations
-    self.defaultComputeClassConfig = defaultComputeClassConfig
-    self.autopilotGeneralProfile = autopilotGeneralProfile
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ClusterAutoscaling().with { $0.enableNodeAutoprovisioning = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Defines possible options for autoscaling_profile field.

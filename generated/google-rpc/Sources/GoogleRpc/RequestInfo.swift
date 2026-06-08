@@ -24,19 +24,26 @@ public struct RequestInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// An opaque string that should only be interpreted by the service generating
   /// it. For example, it can be used to identify requests in the service's logs.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Any data that was used to serve this request. For example, an encrypted
   /// stack trace that can be sent back to the service provider for debugging.
-  public var servingData: Swift.String
+  public var servingData: Swift.String = Swift.String()
 
   /// Initialize a new instance of `RequestInfo`.
-  public init(
-    requestId: Swift.String = Swift.String(),
-    servingData: Swift.String = Swift.String(),
-  ) {
-    self.requestId = requestId
-    self.servingData = servingData
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RequestInfo().with { $0.requestId = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.RequestInfo" }

@@ -30,17 +30,17 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// * "static": allows pods with certain resource characteristics to be granted
   /// increased CPU affinity and exclusivity on the node.
   /// The default value is 'none' if unspecified.
-  public var cpuManagerPolicy: Swift.String
+  public var cpuManagerPolicy: Swift.String = Swift.String()
 
   /// Optional. Controls Topology Manager configuration on the node.
   /// For more information, see:
   /// https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/
-  public var topologyManager: TopologyManager?
+  public var topologyManager: TopologyManager? = nil
 
   /// Optional. Controls NUMA-aware Memory Manager configuration on the
   /// node. For more information, see:
   /// https://kubernetes.io/docs/tasks/administer-cluster/memory-manager/
-  public var memoryManager: MemoryManager?
+  public var memoryManager: MemoryManager? = nil
 
   /// Enable CPU CFS quota enforcement for containers that specify CPU limits.
   ///
@@ -53,7 +53,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// your pods to be in Guaranteed QoS class by specifying the CPU limits.
   ///
   /// The default value is 'true' if unspecified.
-  public var cpuCfsQuota: GoogleCloudWkt.BoolValue?
+  public var cpuCfsQuota: GoogleCloudWkt.BoolValue? = nil
 
   /// Set the CPU CFS quota period value 'cpu.cfs_period_us'.
   ///
@@ -61,17 +61,17 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// fraction and a unit suffix, such as "300ms".
   /// Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
   /// The value must be a positive duration between 1ms and 1 second, inclusive.
-  public var cpuCfsQuotaPeriod: Swift.String
+  public var cpuCfsQuotaPeriod: Swift.String = Swift.String()
 
   /// Set the Pod PID limits. See
   /// https://kubernetes.io/docs/concepts/policy/pid-limiting/#pod-pid-limits
   ///
   /// Controls the maximum number of processes allowed to run in a pod. The value
   /// must be greater than or equal to 1024 and less than 4194304.
-  public var podPidsLimit: Swift.Int64
+  public var podPidsLimit: Swift.Int64 = Swift.Int64()
 
   /// Enable or disable Kubelet read only port.
-  public var insecureKubeletReadonlyPortEnabled: Swift.Bool?
+  public var insecureKubeletReadonlyPortEnabled: Swift.Bool? = nil
 
   /// Optional. Defines the percent of disk usage before which image garbage
   /// collection is never run. Lowest disk usage to garbage collect to. The
@@ -81,7 +81,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// image_gc_high_threshold_percent.
   ///
   /// The default value is 80 if unspecified.
-  public var imageGcLowThresholdPercent: Swift.Int32
+  public var imageGcLowThresholdPercent: Swift.Int32 = Swift.Int32()
 
   /// Optional. Defines the percent of disk usage after which image garbage
   /// collection is always run. The percent is calculated as this field value out
@@ -91,7 +91,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// image_gc_low_threshold_percent.
   ///
   /// The default value is 85 if unspecified.
-  public var imageGcHighThresholdPercent: Swift.Int32
+  public var imageGcHighThresholdPercent: Swift.Int32 = Swift.Int32()
 
   /// Optional. Defines the minimum age for an unused image before it is garbage
   /// collected.
@@ -103,7 +103,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// The value must be a positive duration less than or equal to 2 minutes.
   ///
   /// The default value is "2m0s" if unspecified.
-  public var imageMinimumGcAge: Swift.String
+  public var imageMinimumGcAge: Swift.String = Swift.String()
 
   /// Optional. Defines the maximum age an image can be unused before it is
   /// garbage collected. The string must be a sequence of decimal numbers, each
@@ -116,7 +116,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// The default value is "0s" if unspecified, which disables this field,
   /// meaning images won't be garbage collected based on being unused for too
   /// long.
-  public var imageMaximumGcAge: Swift.String
+  public var imageMaximumGcAge: Swift.String = Swift.String()
 
   /// Optional. Defines the maximum size of the container log file before it is
   /// rotated. See
@@ -131,7 +131,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// storage of the node, to avoid disk pressure caused by log files.
   ///
   /// The default value is 10Mi if unspecified.
-  public var containerLogMaxSize: Swift.String
+  public var containerLogMaxSize: Swift.String = Swift.String()
 
   /// Optional. Defines the maximum number of container log files that can be
   /// present for a container. See
@@ -139,7 +139,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// The value must be an integer between 2 and 10, inclusive.
   /// The default value is 5 if unspecified.
-  public var containerLogMaxFiles: Swift.Int32
+  public var containerLogMaxFiles: Swift.Int32 = Swift.Int32()
 
   /// Optional. Defines a comma-separated allowlist of unsafe sysctls or sysctl
   /// patterns (ending in `*`).
@@ -154,31 +154,31 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   ///
   /// See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
   /// for more details.
-  public var allowedUnsafeSysctls: [Swift.String]
+  public var allowedUnsafeSysctls: [Swift.String] = []
 
   /// Optional. eviction_soft is a map of signal names to quantities that defines
   /// soft eviction thresholds. Each signal is compared to its corresponding
   /// threshold to determine if a pod eviction should occur.
-  public var evictionSoft: EvictionSignals?
+  public var evictionSoft: EvictionSignals? = nil
 
   /// Optional. eviction_soft_grace_period is a map of signal names to quantities
   /// that defines grace periods for each soft eviction signal. The grace period
   /// is the amount of time that a pod must be under pressure before an eviction
   /// occurs.
-  public var evictionSoftGracePeriod: EvictionGracePeriod?
+  public var evictionSoftGracePeriod: EvictionGracePeriod? = nil
 
   /// Optional. eviction_minimum_reclaim is a map of signal names to quantities
   /// that defines minimum reclaims, which describe the minimum amount of a given
   /// resource the kubelet will reclaim when performing a pod eviction while that
   /// resource is under pressure.
-  public var evictionMinimumReclaim: EvictionMinimumReclaim?
+  public var evictionMinimumReclaim: EvictionMinimumReclaim? = nil
 
   /// Optional. eviction_max_pod_grace_period_seconds is the maximum allowed
   /// grace period (in seconds) to use when terminating pods in response to a
   /// soft eviction threshold being met. This value effectively caps the Pod's
   /// terminationGracePeriodSeconds value during soft evictions. Default: 0.
   /// Range: [0, 300].
-  public var evictionMaxPodGracePeriodSeconds: Swift.Int32
+  public var evictionMaxPodGracePeriodSeconds: Swift.Int32 = Swift.Int32()
 
   /// Optional. Defines the maximum number of image pulls in parallel.
   /// The range is 2 to 5, inclusive.
@@ -187,17 +187,17 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// See
   /// https://kubernetes.io/docs/concepts/containers/images/#maximum-parallel-image-pulls
   /// for more details.
-  public var maxParallelImagePulls: Swift.Int32
+  public var maxParallelImagePulls: Swift.Int32 = Swift.Int32()
 
   /// Optional. Defines whether to enable single process OOM killer.
   /// If true, will prevent the memory.oom.group flag from being set for
   /// container cgroups in cgroups v2. This causes processes in the container to
   /// be OOM killed individually instead of as a group.
-  public var singleProcessOomKill: Swift.Bool?
+  public var singleProcessOomKill: Swift.Bool? = nil
 
   /// Optional. Contains configuration options to modify node-level parameters
   /// for container restart behavior.
-  public var crashLoopBackOff: NodeKubeletConfig.CrashLoopBackOffConfig?
+  public var crashLoopBackOff: NodeKubeletConfig.CrashLoopBackOffConfig? = nil
 
   /// Optional. shutdown_grace_period_seconds is the maximum allowed grace period
   /// (in seconds) the total duration that the node should delay the shutdown
@@ -207,7 +207,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// If set to 0, node will not enable the graceful node shutdown functionality.
   /// This field is only valid for Spot VMs.
   /// Allowed values: 0, 30, 120.
-  public var shutdownGracePeriodSeconds: Swift.Int32?
+  public var shutdownGracePeriodSeconds: Swift.Int32? = nil
 
   /// Optional. shutdown_grace_period_critical_pods_seconds is the maximum
   /// allowed grace period (in seconds) used to terminate critical pods during a
@@ -215,57 +215,22 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// is only valid if shutdown_grace_period_seconds is set.
   /// https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/
   /// Range: [0, 120].
-  public var shutdownGracePeriodCriticalPodsSeconds: Swift.Int32?
+  public var shutdownGracePeriodCriticalPodsSeconds: Swift.Int32? = nil
 
   /// Initialize a new instance of `NodeKubeletConfig`.
-  public init(
-    cpuManagerPolicy: Swift.String = Swift.String(),
-    topologyManager: TopologyManager? = nil,
-    memoryManager: MemoryManager? = nil,
-    cpuCfsQuota: GoogleCloudWkt.BoolValue? = nil,
-    cpuCfsQuotaPeriod: Swift.String = Swift.String(),
-    podPidsLimit: Swift.Int64 = Swift.Int64(),
-    insecureKubeletReadonlyPortEnabled: Swift.Bool? = nil,
-    imageGcLowThresholdPercent: Swift.Int32 = Swift.Int32(),
-    imageGcHighThresholdPercent: Swift.Int32 = Swift.Int32(),
-    imageMinimumGcAge: Swift.String = Swift.String(),
-    imageMaximumGcAge: Swift.String = Swift.String(),
-    containerLogMaxSize: Swift.String = Swift.String(),
-    containerLogMaxFiles: Swift.Int32 = Swift.Int32(),
-    allowedUnsafeSysctls: [Swift.String] = [],
-    evictionSoft: EvictionSignals? = nil,
-    evictionSoftGracePeriod: EvictionGracePeriod? = nil,
-    evictionMinimumReclaim: EvictionMinimumReclaim? = nil,
-    evictionMaxPodGracePeriodSeconds: Swift.Int32 = Swift.Int32(),
-    maxParallelImagePulls: Swift.Int32 = Swift.Int32(),
-    singleProcessOomKill: Swift.Bool? = nil,
-    crashLoopBackOff: NodeKubeletConfig.CrashLoopBackOffConfig? = nil,
-    shutdownGracePeriodSeconds: Swift.Int32? = nil,
-    shutdownGracePeriodCriticalPodsSeconds: Swift.Int32? = nil,
-  ) {
-    self.cpuManagerPolicy = cpuManagerPolicy
-    self.topologyManager = topologyManager
-    self.memoryManager = memoryManager
-    self.cpuCfsQuota = cpuCfsQuota
-    self.cpuCfsQuotaPeriod = cpuCfsQuotaPeriod
-    self.podPidsLimit = podPidsLimit
-    self.insecureKubeletReadonlyPortEnabled = insecureKubeletReadonlyPortEnabled
-    self.imageGcLowThresholdPercent = imageGcLowThresholdPercent
-    self.imageGcHighThresholdPercent = imageGcHighThresholdPercent
-    self.imageMinimumGcAge = imageMinimumGcAge
-    self.imageMaximumGcAge = imageMaximumGcAge
-    self.containerLogMaxSize = containerLogMaxSize
-    self.containerLogMaxFiles = containerLogMaxFiles
-    self.allowedUnsafeSysctls = allowedUnsafeSysctls
-    self.evictionSoft = evictionSoft
-    self.evictionSoftGracePeriod = evictionSoftGracePeriod
-    self.evictionMinimumReclaim = evictionMinimumReclaim
-    self.evictionMaxPodGracePeriodSeconds = evictionMaxPodGracePeriodSeconds
-    self.maxParallelImagePulls = maxParallelImagePulls
-    self.singleProcessOomKill = singleProcessOomKill
-    self.crashLoopBackOff = crashLoopBackOff
-    self.shutdownGracePeriodSeconds = shutdownGracePeriodSeconds
-    self.shutdownGracePeriodCriticalPodsSeconds = shutdownGracePeriodCriticalPodsSeconds
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodeKubeletConfig().with { $0.cpuManagerPolicy = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Contains config to modify node-level parameters for container restart
@@ -284,13 +249,22 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// See
     /// https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#configurable-container-restart-delay
     /// for more details.
-    public var maxContainerRestartPeriod: Swift.String
+    public var maxContainerRestartPeriod: Swift.String = Swift.String()
 
     /// Initialize a new instance of `CrashLoopBackOffConfig`.
-    public init(
-      maxContainerRestartPeriod: Swift.String = Swift.String(),
-    ) {
-      self.maxContainerRestartPeriod = maxContainerRestartPeriod
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = CrashLoopBackOffConfig().with { $0.maxContainerRestartPeriod = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

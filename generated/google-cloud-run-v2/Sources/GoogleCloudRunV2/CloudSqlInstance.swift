@@ -29,13 +29,22 @@ public struct CloudSqlInstance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/sql/docs/mysql/connect-run for more information on
   /// how to connect Cloud SQL and Cloud Run. Format:
   /// {project}:{location}:{instance}
-  public var instances: [Swift.String]
+  public var instances: [Swift.String] = []
 
   /// Initialize a new instance of `CloudSqlInstance`.
-  public init(
-    instances: [Swift.String] = [],
-  ) {
-    self.instances = instances
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CloudSqlInstance().with { $0.instances = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

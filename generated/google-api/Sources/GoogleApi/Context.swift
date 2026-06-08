@@ -59,13 +59,22 @@ public struct Context: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A list of RPC context rules that apply to individual API methods.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [ContextRule]
+  public var rules: [ContextRule] = []
 
   /// Initialize a new instance of `Context`.
-  public init(
-    rules: [ContextRule] = [],
-  ) {
-    self.rules = rules
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Context().with { $0.rules = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Context" }

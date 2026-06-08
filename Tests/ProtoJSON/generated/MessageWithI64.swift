@@ -22,38 +22,37 @@ public struct MessageWithI64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.Int64
+  public var singular: Swift.Int64 = Swift.Int64()
 
   /// An optional field.
-  public var option: Swift.Int64?
+  public var option: Swift.Int64? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.Int64]
+  public var repeated: [Swift.Int64] = []
 
   /// Test i64 as values.
-  public var mapValue: [Swift.String: Swift.Int64]
+  public var mapValue: [Swift.String: Swift.Int64] = [:]
 
   /// Test i64 as keys.
-  public var mapKey: [Swift.Int64: Swift.String]
+  public var mapKey: [Swift.Int64: Swift.String] = [:]
 
   /// Test i64 as both keys and values.
-  public var mapKeyValue: [Swift.Int64: Swift.Int64]
+  public var mapKeyValue: [Swift.Int64: Swift.Int64] = [:]
 
   /// Initialize a new instance of `MessageWithI64`.
-  public init(
-    singular: Swift.Int64 = Swift.Int64(),
-    option: Swift.Int64? = nil,
-    repeated: [Swift.Int64] = [],
-    mapValue: [Swift.String: Swift.Int64] = [:],
-    mapKey: [Swift.Int64: Swift.String] = [:],
-    mapKeyValue: [Swift.Int64: Swift.Int64] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.mapValue = mapValue
-    self.mapKey = mapKey
-    self.mapKeyValue = mapKeyValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithI64().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

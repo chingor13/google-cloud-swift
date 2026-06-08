@@ -27,26 +27,31 @@ public struct ListWorkflowRevisionsRequest: Codable, Equatable, GoogleCloudWkt._
 {
   /// Required. Workflow for which the revisions should be listed.
   /// Format: projects/{project}/locations/{location}/workflows/{workflow}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The maximum number of revisions to return per page. If a value is not
   /// specified, a default value of 20 is used. The maximum permitted value is
   /// 100. Values greater than 100 are coerced down to 100.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// The page token, received from a previous ListWorkflowRevisions call.
   /// Provide this to retrieve the subsequent page.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListWorkflowRevisionsRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.pageSize = pageSize
-    self.pageToken = pageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListWorkflowRevisionsRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

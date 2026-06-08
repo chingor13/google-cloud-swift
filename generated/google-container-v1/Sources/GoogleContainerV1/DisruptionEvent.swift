@@ -23,33 +23,36 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The type of the disruption event.
-  public var disruptionType: DisruptionEvent.DisruptionType
+  public var disruptionType: DisruptionEvent.DisruptionType = DisruptionEvent.DisruptionType()
 
   /// The node whose drain is blocked by PDB. This field is set for both
   /// POD_PDB_VIOLATION and POD_NOT_ENOUGH_PDB event.
-  public var pdbBlockedNode: Swift.String
+  public var pdbBlockedNode: Swift.String = Swift.String()
 
   /// The pods whose evictions are blocked by PDB. This field is set for
   /// both POD_PDB_VIOLATION and POD_NOT_ENOUGH_PDB event.
-  public var pdbBlockedPod: [DisruptionEvent.PdbBlockedPod]
+  public var pdbBlockedPod: [DisruptionEvent.PdbBlockedPod] = []
 
   /// The timeout in seconds for which the node drain is blocked by PDB.
   /// After this timeout, pods are forcefully evicted.
   /// This field is only populated when event_type is
   /// POD_PDB_VIOLATION.
-  public var pdbViolationTimeout: GoogleCloudWkt.Duration?
+  public var pdbViolationTimeout: GoogleCloudWkt.Duration? = nil
 
   /// Initialize a new instance of `DisruptionEvent`.
-  public init(
-    disruptionType: DisruptionEvent.DisruptionType = DisruptionEvent.DisruptionType(),
-    pdbBlockedNode: Swift.String = Swift.String(),
-    pdbBlockedPod: [DisruptionEvent.PdbBlockedPod] = [],
-    pdbViolationTimeout: GoogleCloudWkt.Duration? = nil,
-  ) {
-    self.disruptionType = disruptionType
-    self.pdbBlockedNode = pdbBlockedNode
-    self.pdbBlockedPod = pdbBlockedPod
-    self.pdbViolationTimeout = pdbViolationTimeout
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DisruptionEvent().with { $0.disruptionType = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The namespace/name of the pod whose eviction is blocked by PDB.
@@ -57,18 +60,25 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// The namespace of the pod.
-    public var namespace: Swift.String
+    public var namespace: Swift.String = Swift.String()
 
     /// The name of the pod.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Initialize a new instance of `PdbBlockedPod`.
-    public init(
-      namespace: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-    ) {
-      self.namespace = namespace
-      self.name = name
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PdbBlockedPod().with { $0.namespace = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

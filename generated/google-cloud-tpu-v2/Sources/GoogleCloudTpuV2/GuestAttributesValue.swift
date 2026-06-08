@@ -22,13 +22,22 @@ public struct GuestAttributesValue: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// The list of guest attributes entries.
-  public var items: [GuestAttributesEntry]
+  public var items: [GuestAttributesEntry] = []
 
   /// Initialize a new instance of `GuestAttributesValue`.
-  public init(
-    items: [GuestAttributesEntry] = [],
-  ) {
-    self.items = items
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GuestAttributesValue().with { $0.items = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

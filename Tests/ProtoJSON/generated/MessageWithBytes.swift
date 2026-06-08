@@ -22,29 +22,32 @@ public struct MessageWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Foundation.Data
+  public var singular: Foundation.Data = Foundation.Data()
 
   /// An optional field.
-  public var option: Foundation.Data?
+  public var option: Foundation.Data? = nil
 
   /// A repeated field.
-  public var repeated: [Foundation.Data]
+  public var repeated: [Foundation.Data] = []
 
   /// A map field, bytes cannot be keys, so we only need to test them as
   /// values.
-  public var map: [Swift.String: Foundation.Data]
+  public var map: [Swift.String: Foundation.Data] = [:]
 
   /// Initialize a new instance of `MessageWithBytes`.
-  public init(
-    singular: Foundation.Data = Foundation.Data(),
-    option: Foundation.Data? = nil,
-    repeated: [Foundation.Data] = [],
-    map: [Swift.String: Foundation.Data] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithBytes().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

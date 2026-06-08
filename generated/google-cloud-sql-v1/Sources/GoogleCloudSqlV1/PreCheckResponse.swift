@@ -24,24 +24,29 @@
     Sendable
   {
     /// The message to be displayed to the user.
-    public var message: Swift.String?
+    public var message: Swift.String? = nil
 
     /// The type of message whether it is an info, warning, or error.
-    public var messageType: PreCheckResponse.MessageType?
+    public var messageType: PreCheckResponse.MessageType? = nil
 
     /// The actions that the user needs to take. Use repeated for multiple
     /// actions.
-    public var actionsRequired: [Swift.String]
+    public var actionsRequired: [Swift.String] = []
 
     /// Initialize a new instance of `PreCheckResponse`.
-    public init(
-      message: Swift.String? = nil,
-      messageType: PreCheckResponse.MessageType? = nil,
-      actionsRequired: [Swift.String] = [],
-    ) {
-      self.message = message
-      self.messageType = messageType
-      self.actionsRequired = actionsRequired
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = PreCheckResponse().with { $0.message = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The type of message which can be an info, a warning, or an error that

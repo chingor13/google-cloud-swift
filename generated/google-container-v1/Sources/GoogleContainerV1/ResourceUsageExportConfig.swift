@@ -22,24 +22,29 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// Configuration to use BigQuery as usage export destination.
-  public var bigqueryDestination: ResourceUsageExportConfig.BigQueryDestination?
+  public var bigqueryDestination: ResourceUsageExportConfig.BigQueryDestination? = nil
 
   /// Whether to enable network egress metering for this cluster. If enabled, a
   /// daemonset will be created in the cluster to meter network egress traffic.
-  public var enableNetworkEgressMetering: Swift.Bool
+  public var enableNetworkEgressMetering: Swift.Bool = Swift.Bool()
 
   /// Configuration to enable resource consumption metering.
-  public var consumptionMeteringConfig: ResourceUsageExportConfig.ConsumptionMeteringConfig?
+  public var consumptionMeteringConfig: ResourceUsageExportConfig.ConsumptionMeteringConfig? = nil
 
   /// Initialize a new instance of `ResourceUsageExportConfig`.
-  public init(
-    bigqueryDestination: ResourceUsageExportConfig.BigQueryDestination? = nil,
-    enableNetworkEgressMetering: Swift.Bool = Swift.Bool(),
-    consumptionMeteringConfig: ResourceUsageExportConfig.ConsumptionMeteringConfig? = nil,
-  ) {
-    self.bigqueryDestination = bigqueryDestination
-    self.enableNetworkEgressMetering = enableNetworkEgressMetering
-    self.consumptionMeteringConfig = consumptionMeteringConfig
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ResourceUsageExportConfig().with { $0.bigqueryDestination = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Parameters for using BigQuery as the destination of resource usage export.
@@ -47,13 +52,22 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
     Sendable
   {
     /// The ID of a BigQuery Dataset.
-    public var datasetId: Swift.String
+    public var datasetId: Swift.String = Swift.String()
 
     /// Initialize a new instance of `BigQueryDestination`.
-    public init(
-      datasetId: Swift.String = Swift.String(),
-    ) {
-      self.datasetId = datasetId
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BigQueryDestination().with { $0.datasetId = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -74,13 +88,22 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
     /// Whether to enable consumption metering for this cluster. If enabled, a
     /// second BigQuery table will be created to hold resource consumption
     /// records.
-    public var enabled: Swift.Bool
+    public var enabled: Swift.Bool = Swift.Bool()
 
     /// Initialize a new instance of `ConsumptionMeteringConfig`.
-    public init(
-      enabled: Swift.Bool = Swift.Bool(),
-    ) {
-      self.enabled = enabled
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ConsumptionMeteringConfig().with { $0.enabled = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

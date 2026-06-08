@@ -24,67 +24,60 @@ public struct UserManagedKeysConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// The Certificate Authority Service caPool to use for the cluster CA in this
   /// cluster.
-  public var clusterCa: Swift.String
+  public var clusterCa: Swift.String = Swift.String()
 
   /// Resource path of the Certificate Authority Service caPool to use for the
   /// etcd API CA in this cluster.
-  public var etcdApiCa: Swift.String
+  public var etcdApiCa: Swift.String = Swift.String()
 
   /// Resource path of the Certificate Authority Service caPool to use for the
   /// etcd peer CA in this cluster.
-  public var etcdPeerCa: Swift.String
+  public var etcdPeerCa: Swift.String = Swift.String()
 
   /// The Cloud KMS cryptoKeyVersions to use for signing service account JWTs
   /// issued by this cluster.
   ///
   /// Format:
   /// `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
-  public var serviceAccountSigningKeys: [Swift.String]
+  public var serviceAccountSigningKeys: [Swift.String] = []
 
   /// The Cloud KMS cryptoKeyVersions to use for verifying service account JWTs
   /// issued by this cluster.
   ///
   /// Format:
   /// `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
-  public var serviceAccountVerificationKeys: [Swift.String]
+  public var serviceAccountVerificationKeys: [Swift.String] = []
 
   /// The Certificate Authority Service caPool to use for the aggregation CA in
   /// this cluster.
-  public var aggregationCa: Swift.String
+  public var aggregationCa: Swift.String = Swift.String()
 
   /// The Cloud KMS cryptoKey to use for Confidential Hyperdisk on the control
   /// plane nodes.
-  public var controlPlaneDiskEncryptionKey: Swift.String
+  public var controlPlaneDiskEncryptionKey: Swift.String = Swift.String()
 
   /// Output only. All of the versions of the Cloud KMS cryptoKey that are used
   /// by Confidential Hyperdisks on the control plane nodes.
-  public var controlPlaneDiskEncryptionKeyVersions: [Swift.String]
+  public var controlPlaneDiskEncryptionKeyVersions: [Swift.String] = []
 
   /// Resource path of the Cloud KMS cryptoKey to use for encryption of internal
   /// etcd backups.
-  public var gkeopsEtcdBackupEncryptionKey: Swift.String
+  public var gkeopsEtcdBackupEncryptionKey: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UserManagedKeysConfig`.
-  public init(
-    clusterCa: Swift.String = Swift.String(),
-    etcdApiCa: Swift.String = Swift.String(),
-    etcdPeerCa: Swift.String = Swift.String(),
-    serviceAccountSigningKeys: [Swift.String] = [],
-    serviceAccountVerificationKeys: [Swift.String] = [],
-    aggregationCa: Swift.String = Swift.String(),
-    controlPlaneDiskEncryptionKey: Swift.String = Swift.String(),
-    controlPlaneDiskEncryptionKeyVersions: [Swift.String] = [],
-    gkeopsEtcdBackupEncryptionKey: Swift.String = Swift.String(),
-  ) {
-    self.clusterCa = clusterCa
-    self.etcdApiCa = etcdApiCa
-    self.etcdPeerCa = etcdPeerCa
-    self.serviceAccountSigningKeys = serviceAccountSigningKeys
-    self.serviceAccountVerificationKeys = serviceAccountVerificationKeys
-    self.aggregationCa = aggregationCa
-    self.controlPlaneDiskEncryptionKey = controlPlaneDiskEncryptionKey
-    self.controlPlaneDiskEncryptionKeyVersions = controlPlaneDiskEncryptionKeyVersions
-    self.gkeopsEtcdBackupEncryptionKey = gkeopsEtcdBackupEncryptionKey
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UserManagedKeysConfig().with { $0.clusterCa = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

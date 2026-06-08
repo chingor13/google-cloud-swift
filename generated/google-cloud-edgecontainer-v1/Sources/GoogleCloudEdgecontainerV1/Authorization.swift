@@ -24,13 +24,22 @@ public struct Authorization: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Required. User that will be granted the cluster-admin role on the cluster,
   /// providing full access to the cluster. Currently, this is a singular field,
   /// but will be expanded to allow multiple admins in the future.
-  public var adminUsers: ClusterUser?
+  public var adminUsers: ClusterUser? = nil
 
   /// Initialize a new instance of `Authorization`.
-  public init(
-    adminUsers: ClusterUser? = nil,
-  ) {
-    self.adminUsers = adminUsers
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Authorization().with { $0.adminUsers = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

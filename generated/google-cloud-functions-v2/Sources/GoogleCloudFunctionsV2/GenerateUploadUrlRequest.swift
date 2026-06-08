@@ -23,7 +23,7 @@ public struct GenerateUploadUrlRequest: Codable, Equatable, GoogleCloudWkt._AnyP
 {
   /// Required. The project and location in which the Google Cloud Storage signed
   /// URL should be generated, specified in the format `projects/*/locations/*`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Resource name of a KMS crypto key (managed by the user) used to
   /// encrypt/decrypt function source code objects in intermediate Cloud Storage
@@ -40,23 +40,28 @@ public struct GenerateUploadUrlRequest: Codable, Equatable, GoogleCloudWkt._AnyP
   /// granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
   /// (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
   /// Key/KeyRing/Project/Organization (least access preferred).
-  public var kmsKeyName: Swift.String
+  public var kmsKeyName: Swift.String = Swift.String()
 
   /// The function environment the generated upload url will be used for.
   /// The upload url for 2nd Gen functions can also be used for 1st gen
   /// functions, but not vice versa. If not specified, 2nd generation-style
   /// upload URLs are generated.
-  public var environment: Environment
+  public var environment: Environment = Environment()
 
   /// Initialize a new instance of `GenerateUploadUrlRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    kmsKeyName: Swift.String = Swift.String(),
-    environment: Environment = Environment(),
-  ) {
-    self.parent = parent
-    self.kmsKeyName = kmsKeyName
-    self.environment = environment
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GenerateUploadUrlRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

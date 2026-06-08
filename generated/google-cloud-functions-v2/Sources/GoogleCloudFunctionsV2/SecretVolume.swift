@@ -28,32 +28,35 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// under the `/etc/secrets` directory. This directory will also be completely
   /// shadowed and unavailable to mount any other secrets.
   /// Recommended mount path: /etc/secrets
-  public var mountPath: Swift.String
+  public var mountPath: Swift.String = Swift.String()
 
   /// Project identifier (preferably project number but can also be the project
   /// ID) of the project that contains the secret. If not set, it is
   /// assumed that the secret is in the same project as the function.
-  public var projectId: Swift.String
+  public var projectId: Swift.String = Swift.String()
 
   /// Name of the secret in secret manager (not the full resource name).
-  public var secret: Swift.String
+  public var secret: Swift.String = Swift.String()
 
   /// List of secret versions to mount for this secret. If empty, the `latest`
   /// version of the secret will be made available in a file named after the
   /// secret under the mount point.
-  public var versions: [SecretVolume.SecretVersion]
+  public var versions: [SecretVolume.SecretVersion] = []
 
   /// Initialize a new instance of `SecretVolume`.
-  public init(
-    mountPath: Swift.String = Swift.String(),
-    projectId: Swift.String = Swift.String(),
-    secret: Swift.String = Swift.String(),
-    versions: [SecretVolume.SecretVersion] = [],
-  ) {
-    self.mountPath = mountPath
-    self.projectId = projectId
-    self.secret = secret
-    self.versions = versions
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SecretVolume().with { $0.mountPath = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration for a single version.
@@ -63,21 +66,28 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Version of the secret (version number or the string 'latest'). It is
     /// preferable to use `latest` version with secret volumes as secret value
     /// changes are reflected immediately.
-    public var version: Swift.String
+    public var version: Swift.String = Swift.String()
 
     /// Relative path of the file under the mount path where the secret value for
     /// this version will be fetched and made available. For example, setting the
     /// mount_path as '/etc/secrets' and path as `secret_foo` would mount the
     /// secret value file at `/etc/secrets/secret_foo`.
-    public var path: Swift.String
+    public var path: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SecretVersion`.
-    public init(
-      version: Swift.String = Swift.String(),
-      path: Swift.String = Swift.String(),
-    ) {
-      self.version = version
-      self.path = path
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SecretVersion().with { $0.version = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

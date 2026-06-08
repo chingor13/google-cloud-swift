@@ -24,23 +24,28 @@ public struct CreateNodeRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Required. The parent resource name.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// The unqualified resource name.
-  public var nodeId: Swift.String
+  public var nodeId: Swift.String = Swift.String()
 
   /// Required. The node.
-  public var node: Node?
+  public var node: Node? = nil
 
   /// Initialize a new instance of `CreateNodeRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    nodeId: Swift.String = Swift.String(),
-    node: Node? = nil,
-  ) {
-    self.parent = parent
-    self.nodeId = nodeId
-    self.node = node
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateNodeRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

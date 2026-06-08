@@ -23,19 +23,26 @@ public struct ConfidentialNodes: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Whether Confidential Nodes feature is enabled.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Defines the type of technology used by the confidential node.
-  public var confidentialInstanceType: ConfidentialNodes.ConfidentialInstanceType
+  public var confidentialInstanceType: ConfidentialNodes.ConfidentialInstanceType =
+    ConfidentialNodes.ConfidentialInstanceType()
 
   /// Initialize a new instance of `ConfidentialNodes`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    confidentialInstanceType: ConfidentialNodes.ConfidentialInstanceType =
-      ConfidentialNodes.ConfidentialInstanceType(),
-  ) {
-    self.enabled = enabled
-    self.confidentialInstanceType = confidentialInstanceType
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ConfidentialNodes().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The type of technology used by the confidential node.

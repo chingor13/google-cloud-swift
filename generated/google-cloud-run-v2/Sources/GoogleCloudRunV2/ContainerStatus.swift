@@ -23,21 +23,28 @@ public struct ContainerStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The name of the container, if specified.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// ImageDigest holds the resolved digest for the image specified and resolved
   /// during the creation of Revision. This field holds the digest value
   /// regardless of whether a tag or digest was originally specified in the
   /// Container object.
-  public var imageDigest: Swift.String
+  public var imageDigest: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ContainerStatus`.
-  public init(
-    name: Swift.String = Swift.String(),
-    imageDigest: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.imageDigest = imageDigest
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ContainerStatus().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -27,9 +27,11 @@ func sample(client: some Tpu, projectId: String, locationId: String, queuedResou
   async throws
 {
   let response = try await client.getQueuedResource(
-    request: GetQueuedResourceRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/queuedResources/\(queuedResourceId)",
-    )
+    request: GetQueuedResourceRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/queuedResources/\(queuedResourceId)"
+      }
   )
   print("Success: \(response)")
 }

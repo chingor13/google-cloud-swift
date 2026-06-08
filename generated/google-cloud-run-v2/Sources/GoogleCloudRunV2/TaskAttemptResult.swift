@@ -24,7 +24,7 @@ public struct TaskAttemptResult: Codable, Equatable, GoogleCloudWkt._AnyPackable
 {
   /// Output only. The status of this attempt.
   /// If the status code is OK, then the attempt succeeded.
-  public var status: GoogleRpc.Status?
+  public var status: GoogleRpc.Status? = nil
 
   /// Output only. The exit code of this attempt.
   /// This may be unset if the container was unable to exit cleanly with a code
@@ -32,23 +32,28 @@ public struct TaskAttemptResult: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// See status field for possible failure details.
   ///
   /// At most one of exit_code or term_signal will be set.
-  public var exitCode: Swift.Int32
+  public var exitCode: Swift.Int32 = Swift.Int32()
 
   /// Output only. Termination signal of the container. This is set to non-zero
   /// if the container is terminated by the system.
   ///
   /// At most one of exit_code or term_signal will be set.
-  public var termSignal: Swift.Int32
+  public var termSignal: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `TaskAttemptResult`.
-  public init(
-    status: GoogleRpc.Status? = nil,
-    exitCode: Swift.Int32 = Swift.Int32(),
-    termSignal: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.status = status
-    self.exitCode = exitCode
-    self.termSignal = termSignal
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = TaskAttemptResult().with { $0.status = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

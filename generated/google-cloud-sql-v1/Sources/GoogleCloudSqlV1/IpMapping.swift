@@ -26,26 +26,31 @@
     /// can accept incoming connections. A `PRIVATE` address is a private address
     /// that can accept incoming connections. An `OUTGOING` address is the source
     /// address of connections originating from the instance, if supported.
-    public var type: SqlIpAddressType
+    public var type: SqlIpAddressType = SqlIpAddressType()
 
     /// The IP address assigned.
-    public var ipAddress: Swift.String
+    public var ipAddress: Swift.String = Swift.String()
 
     /// The due time for this IP to be retired in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`. This field is only available when
     /// the IP is scheduled to be retired.
-    public var timeToRetire: GoogleCloudWkt.Timestamp?
+    public var timeToRetire: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `IpMapping`.
-    public init(
-      type: SqlIpAddressType = SqlIpAddressType(),
-      ipAddress: Swift.String = Swift.String(),
-      timeToRetire: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.type = type
-      self.ipAddress = ipAddress
-      self.timeToRetire = timeToRetire
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = IpMapping().with { $0.type = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -53,32 +53,35 @@ public struct Expr: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Textual representation of an expression in Common Expression Language
   /// syntax.
-  public var expression: Swift.String
+  public var expression: Swift.String = Swift.String()
 
   /// Optional. Title for the expression, i.e. a short string describing
   /// its purpose. This can be used e.g. in UIs which allow to enter the
   /// expression.
-  public var title: Swift.String
+  public var title: Swift.String = Swift.String()
 
   /// Optional. Description of the expression. This is a longer text which
   /// describes the expression, e.g. when hovered over it in a UI.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Optional. String indicating the location of the expression for error
   /// reporting, e.g. a file name and a position in the file.
-  public var location: Swift.String
+  public var location: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Expr`.
-  public init(
-    expression: Swift.String = Swift.String(),
-    title: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    location: Swift.String = Swift.String(),
-  ) {
-    self.expression = expression
-    self.title = title
-    self.description = description
-    self.location = location
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Expr().with { $0.expression = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Expr" }

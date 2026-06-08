@@ -23,20 +23,27 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// NodeAffinities used to match to a shared sole tenant node group.
-  public var nodeAffinities: [SoleTenantConfig.NodeAffinity]
+  public var nodeAffinities: [SoleTenantConfig.NodeAffinity] = []
 
   /// Optional. The minimum number of virtual CPUs this instance will consume
   /// when running on a sole-tenant node. This field can only be set if the node
   /// pool is created in a shared sole-tenant node group.
-  public var minNodeCpus: Swift.Int32?
+  public var minNodeCpus: Swift.Int32? = nil
 
   /// Initialize a new instance of `SoleTenantConfig`.
-  public init(
-    nodeAffinities: [SoleTenantConfig.NodeAffinity] = [],
-    minNodeCpus: Swift.Int32? = nil,
-  ) {
-    self.nodeAffinities = nodeAffinities
-    self.minNodeCpus = minNodeCpus
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SoleTenantConfig().with { $0.nodeAffinities = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Specifies the NodeAffinity key, values, and affinity operator according to
@@ -46,23 +53,29 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Key for NodeAffinity.
-    public var key: Swift.String
+    public var key: Swift.String = Swift.String()
 
     /// Operator for NodeAffinity.
-    public var `operator`: SoleTenantConfig.NodeAffinity.Operator
+    public var `operator`: SoleTenantConfig.NodeAffinity.Operator = SoleTenantConfig.NodeAffinity
+      .Operator()
 
     /// Values for NodeAffinity.
-    public var values: [Swift.String]
+    public var values: [Swift.String] = []
 
     /// Initialize a new instance of `NodeAffinity`.
-    public init(
-      key: Swift.String = Swift.String(),
-      `operator`: SoleTenantConfig.NodeAffinity.Operator = SoleTenantConfig.NodeAffinity.Operator(),
-      values: [Swift.String] = [],
-    ) {
-      self.key = key
-      self.`operator` = `operator`
-      self.values = values
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NodeAffinity().with { $0.key = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

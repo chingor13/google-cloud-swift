@@ -28,7 +28,7 @@ public struct Http: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A list of HTTP configuration rules that apply to individual API methods.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [HttpRule]
+  public var rules: [HttpRule] = []
 
   /// When set to true, URL path parameters will be fully URI-decoded except in
   /// cases of single segment matches in reserved expansion, where "%2F" will be
@@ -36,15 +36,22 @@ public struct Http: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// The default behavior is to not decode RFC 6570 reserved characters in multi
   /// segment matches.
-  public var fullyDecodeReservedExpansion: Swift.Bool
+  public var fullyDecodeReservedExpansion: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `Http`.
-  public init(
-    rules: [HttpRule] = [],
-    fullyDecodeReservedExpansion: Swift.Bool = Swift.Bool(),
-  ) {
-    self.rules = rules
-    self.fullyDecodeReservedExpansion = fullyDecodeReservedExpansion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Http().with { $0.rules = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Http" }

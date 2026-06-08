@@ -23,13 +23,22 @@
     Sendable
   {
     /// Contains details about the rotate server CA operation.
-    public var rotateServerCaContext: RotateServerCaContext?
+    public var rotateServerCaContext: RotateServerCaContext? = nil
 
     /// Initialize a new instance of `InstancesRotateServerCaRequest`.
-    public init(
-      rotateServerCaContext: RotateServerCaContext? = nil,
-    ) {
-      self.rotateServerCaContext = rotateServerCaContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesRotateServerCaRequest().with { $0.rotateServerCaContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

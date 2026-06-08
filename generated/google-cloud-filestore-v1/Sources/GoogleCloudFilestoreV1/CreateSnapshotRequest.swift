@@ -23,27 +23,32 @@ public struct CreateSnapshotRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 {
   /// Required. The Filestore Instance to create the snapshots of, in the format
   /// `projects/{project_id}/locations/{location}/instances/{instance_id}`
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The ID to use for the snapshot.
   /// The ID must be unique within the specified instance.
   ///
   /// This value must start with a lowercase letter followed by up to 62
   /// lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-  public var snapshotId: Swift.String
+  public var snapshotId: Swift.String = Swift.String()
 
   /// Required. A snapshot resource.
-  public var snapshot: Snapshot?
+  public var snapshot: Snapshot? = nil
 
   /// Initialize a new instance of `CreateSnapshotRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    snapshotId: Swift.String = Swift.String(),
-    snapshot: Snapshot? = nil,
-  ) {
-    self.parent = parent
-    self.snapshotId = snapshotId
-    self.snapshot = snapshot
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateSnapshotRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

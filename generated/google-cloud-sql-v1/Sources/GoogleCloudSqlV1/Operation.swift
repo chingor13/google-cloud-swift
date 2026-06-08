@@ -25,37 +25,37 @@
     Sendable
   {
     /// This is always `sql#operation`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
-    public var targetLink: Swift.String
+    public var targetLink: Swift.String = Swift.String()
 
     /// The status of an operation.
-    public var status: Operation.SqlOperationStatus
+    public var status: Operation.SqlOperationStatus = Operation.SqlOperationStatus()
 
     /// The email address of the user who initiated this operation.
-    public var user: Swift.String
+    public var user: Swift.String = Swift.String()
 
     /// The time this operation was enqueued in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var insertTime: GoogleCloudWkt.Timestamp?
+    public var insertTime: GoogleCloudWkt.Timestamp? = nil
 
     /// The time this operation actually started in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var startTime: GoogleCloudWkt.Timestamp?
+    public var startTime: GoogleCloudWkt.Timestamp? = nil
 
     /// The time this operation finished in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var endTime: GoogleCloudWkt.Timestamp?
+    public var endTime: GoogleCloudWkt.Timestamp? = nil
 
     /// If errors occurred during processing of this operation, this field will be
     /// populated.
-    public var error: OperationErrors?
+    public var error: OperationErrors? = nil
 
     /// An Admin API warning message.
-    public var apiWarning: ApiWarning?
+    public var apiWarning: ApiWarning? = nil
 
     /// The type of the operation. Valid values are:
     /// *  `CREATE`
@@ -70,87 +70,58 @@
     /// *  `DELETE_USER`
     /// *  `CREATE_DATABASE`
     /// *  `DELETE_DATABASE`
-    public var operationType: Operation.SqlOperationType
+    public var operationType: Operation.SqlOperationType = Operation.SqlOperationType()
 
     /// The context for import operation, if applicable.
-    public var importContext: ImportContext?
+    public var importContext: ImportContext? = nil
 
     /// The context for export operation, if applicable.
-    public var exportContext: ExportContext?
+    public var exportContext: ExportContext? = nil
 
     /// The context for backup operation, if applicable.
-    public var backupContext: BackupContext?
+    public var backupContext: BackupContext? = nil
 
     /// This field is only populated when the operation_type is
     /// PRE_CHECK_MAJOR_VERSION_UPGRADE.
     /// The PreCheckMajorVersionUpgradeContext message itself contains the details
     /// for that pre-check, such as the target database version for the upgrade
     /// and the results of the check (including any warnings or errors found).
-    public var preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext?
+    public var preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext? = nil
 
     /// An identifier that uniquely identifies the operation. You can use this
     /// identifier to retrieve the Operations resource that has information about
     /// the operation.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// Name of the resource on which this operation runs.
-    public var targetId: Swift.String
+    public var targetId: Swift.String = Swift.String()
 
     /// The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// The project ID of the target instance related to this operation.
-    public var targetProject: Swift.String
+    public var targetProject: Swift.String = Swift.String()
 
     /// The context for acquire SSRS lease operation, if applicable.
-    public var acquireSsrsLeaseContext: AcquireSsrsLeaseContext?
+    public var acquireSsrsLeaseContext: AcquireSsrsLeaseContext? = nil
 
     /// Optional. The sub operation based on the operation type.
-    public var subOperationType: SqlSubOperationType?
+    public var subOperationType: SqlSubOperationType? = nil
 
     /// Initialize a new instance of `Operation`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      targetLink: Swift.String = Swift.String(),
-      status: Operation.SqlOperationStatus = Operation.SqlOperationStatus(),
-      user: Swift.String = Swift.String(),
-      insertTime: GoogleCloudWkt.Timestamp? = nil,
-      startTime: GoogleCloudWkt.Timestamp? = nil,
-      endTime: GoogleCloudWkt.Timestamp? = nil,
-      error: OperationErrors? = nil,
-      apiWarning: ApiWarning? = nil,
-      operationType: Operation.SqlOperationType = Operation.SqlOperationType(),
-      importContext: ImportContext? = nil,
-      exportContext: ExportContext? = nil,
-      backupContext: BackupContext? = nil,
-      preCheckMajorVersionUpgradeContext: PreCheckMajorVersionUpgradeContext? = nil,
-      name: Swift.String = Swift.String(),
-      targetId: Swift.String = Swift.String(),
-      selfLink: Swift.String = Swift.String(),
-      targetProject: Swift.String = Swift.String(),
-      acquireSsrsLeaseContext: AcquireSsrsLeaseContext? = nil,
-      subOperationType: SqlSubOperationType? = nil,
-    ) {
-      self.kind = kind
-      self.targetLink = targetLink
-      self.status = status
-      self.user = user
-      self.insertTime = insertTime
-      self.startTime = startTime
-      self.endTime = endTime
-      self.error = error
-      self.apiWarning = apiWarning
-      self.operationType = operationType
-      self.importContext = importContext
-      self.exportContext = exportContext
-      self.backupContext = backupContext
-      self.preCheckMajorVersionUpgradeContext = preCheckMajorVersionUpgradeContext
-      self.name = name
-      self.targetId = targetId
-      self.selfLink = selfLink
-      self.targetProject = targetProject
-      self.acquireSsrsLeaseContext = acquireSsrsLeaseContext
-      self.subOperationType = subOperationType
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Operation().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The type of Cloud SQL operation.

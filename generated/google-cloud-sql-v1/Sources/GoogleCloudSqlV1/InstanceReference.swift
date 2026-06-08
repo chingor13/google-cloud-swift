@@ -24,24 +24,29 @@
   {
     /// The name of the Cloud SQL instance being referenced.
     /// This does not include the project ID.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The region of the Cloud SQL instance being referenced.
-    public var region: Swift.String
+    public var region: Swift.String = Swift.String()
 
     /// The project ID of the Cloud SQL instance being referenced.
     /// The default is the same project ID as the instance references it.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `InstanceReference`.
-    public init(
-      name: Swift.String = Swift.String(),
-      region: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.name = name
-      self.region = region
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstanceReference().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

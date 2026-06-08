@@ -22,29 +22,32 @@ public struct MessageWithF32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.Float
+  public var singular: Swift.Float = Swift.Float()
 
   /// An optional field.
-  public var option: Swift.Float?
+  public var option: Swift.Float? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.Float]
+  public var repeated: [Swift.Float] = []
 
   /// A map field, floats cannot be keys, so we only need to test them as
   /// values.
-  public var map: [Swift.String: Swift.Float]
+  public var map: [Swift.String: Swift.Float] = [:]
 
   /// Initialize a new instance of `MessageWithF32`.
-  public init(
-    singular: Swift.Float = Swift.Float(),
-    option: Swift.Float? = nil,
-    repeated: [Swift.Float] = [],
-    map: [Swift.String: Swift.Float] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithF32().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

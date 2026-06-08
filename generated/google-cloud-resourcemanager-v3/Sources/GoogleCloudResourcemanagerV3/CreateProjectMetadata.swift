@@ -24,25 +24,30 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Creation time of the project creation workflow.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// True if the project can be retrieved using `GetProject`. No other
   /// operations on the project are guaranteed to work until the project creation
   /// is complete.
-  public var gettable: Swift.Bool
+  public var gettable: Swift.Bool = Swift.Bool()
 
   /// True if the project creation process is complete.
-  public var ready: Swift.Bool
+  public var ready: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateProjectMetadata`.
-  public init(
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    gettable: Swift.Bool = Swift.Bool(),
-    ready: Swift.Bool = Swift.Bool(),
-  ) {
-    self.createTime = createTime
-    self.gettable = gettable
-    self.ready = ready
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateProjectMetadata().with { $0.createTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

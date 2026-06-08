@@ -23,25 +23,30 @@ public struct InstanceSplit: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The allocation type for this instance split.
-  public var type: InstanceSplitAllocationType
+  public var type: InstanceSplitAllocationType = InstanceSplitAllocationType()
 
   /// Revision to which to assign this portion of instances, if split allocation
   /// is by revision.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Specifies percent of the instance split to this Revision.
   /// This defaults to zero if unspecified.
-  public var percent: Swift.Int32
+  public var percent: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `InstanceSplit`.
-  public init(
-    type: InstanceSplitAllocationType = InstanceSplitAllocationType(),
-    revision: Swift.String = Swift.String(),
-    percent: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.type = type
-    self.revision = revision
-    self.percent = percent
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = InstanceSplit().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

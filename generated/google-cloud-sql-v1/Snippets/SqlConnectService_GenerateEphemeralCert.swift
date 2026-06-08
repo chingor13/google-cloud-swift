@@ -23,8 +23,8 @@
 
   func sample(client: some SqlConnectService) async throws {
     let response = try await client.generateEphemeralCert(
-      request: GenerateEphemeralCertRequest(/* set fields */
-      )
+      request: GenerateEphemeralCertRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

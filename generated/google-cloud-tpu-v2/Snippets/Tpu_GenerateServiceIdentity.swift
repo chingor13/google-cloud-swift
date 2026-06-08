@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Tpu) async throws {
   let response = try await client.generateServiceIdentity(
-    request: GenerateServiceIdentityRequest(/* set fields */
-    )
+    request: GenerateServiceIdentityRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

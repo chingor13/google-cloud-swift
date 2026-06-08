@@ -25,32 +25,35 @@ public struct ServiceScaling: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. total min instances for the service. This number of instances is
   /// divided among all revisions with specified traffic based on the percent
   /// of traffic they are receiving.
-  public var minInstanceCount: Swift.Int32
+  public var minInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// Optional. The scaling mode for the service.
-  public var scalingMode: ServiceScaling.ScalingMode
+  public var scalingMode: ServiceScaling.ScalingMode = ServiceScaling.ScalingMode()
 
   /// Optional. total max instances for the service. This number of instances is
   /// divided among all revisions with specified traffic based on the percent
   /// of traffic they are receiving.
-  public var maxInstanceCount: Swift.Int32
+  public var maxInstanceCount: Swift.Int32 = Swift.Int32()
 
   /// Optional. total instance count for the service in manual scaling mode. This
   /// number of instances is divided among all revisions with specified traffic
   /// based on the percent of traffic they are receiving.
-  public var manualInstanceCount: Swift.Int32?
+  public var manualInstanceCount: Swift.Int32? = nil
 
   /// Initialize a new instance of `ServiceScaling`.
-  public init(
-    minInstanceCount: Swift.Int32 = Swift.Int32(),
-    scalingMode: ServiceScaling.ScalingMode = ServiceScaling.ScalingMode(),
-    maxInstanceCount: Swift.Int32 = Swift.Int32(),
-    manualInstanceCount: Swift.Int32? = nil,
-  ) {
-    self.minInstanceCount = minInstanceCount
-    self.scalingMode = scalingMode
-    self.maxInstanceCount = maxInstanceCount
-    self.manualInstanceCount = manualInstanceCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServiceScaling().with { $0.minInstanceCount = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The scaling mode for the service. If not provided, it defaults to

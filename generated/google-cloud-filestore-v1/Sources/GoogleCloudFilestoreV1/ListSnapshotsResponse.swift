@@ -24,24 +24,29 @@ public struct ListSnapshotsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// A list of snapshots in the project for the specified instance.
-  public var snapshots: [Snapshot]
+  public var snapshots: [Snapshot] = []
 
   /// The token you can use to retrieve the next page of results. Not returned
   /// if there are no more results in the list.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Unordered list. Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListSnapshotsResponse`.
-  public init(
-    snapshots: [Snapshot] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.snapshots = snapshots
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListSnapshotsResponse().with { $0.snapshots = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

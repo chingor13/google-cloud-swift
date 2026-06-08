@@ -24,21 +24,28 @@ public struct FieldInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The standard format of a field value. This does not explicitly configure
   /// any API consumer, just documents the API's format for the field it is
   /// applied to.
-  public var format: FieldInfo.Format
+  public var format: FieldInfo.Format = FieldInfo.Format()
 
   /// The type(s) that the annotated, generic field may represent.
   ///
   /// Currently, this must only be used on fields of type `google.protobuf.Any`.
   /// Supporting other generic types may be considered in the future.
-  public var referencedTypes: [TypeReference]
+  public var referencedTypes: [TypeReference] = []
 
   /// Initialize a new instance of `FieldInfo`.
-  public init(
-    format: FieldInfo.Format = FieldInfo.Format(),
-    referencedTypes: [TypeReference] = [],
-  ) {
-    self.format = format
-    self.referencedTypes = referencedTypes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = FieldInfo().with { $0.format = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The standard format of a field value. The supported formats are all backed

@@ -24,12 +24,12 @@ public struct CreateBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Required. The backup's project and location, in the format
   /// `projects/{project_number}/locations/{location}`. In Filestore,
   /// backup locations map to Google Cloud regions, for example **us-west1**.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. A [backup resource][google.cloud.filestore.v1.Backup]
   ///
   /// [google.cloud.filestore.v1.Backup]: <doc:Backup>
-  public var backup: Backup?
+  public var backup: Backup? = nil
 
   /// Required. The ID to use for the backup.
   /// The ID must be unique within the specified project and location.
@@ -38,17 +38,22 @@ public struct CreateBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
   /// Values that do not match this pattern will trigger an INVALID_ARGUMENT
   /// error.
-  public var backupId: Swift.String
+  public var backupId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateBackupRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    backup: Backup? = nil,
-    backupId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.backup = backup
-    self.backupId = backupId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateBackupRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

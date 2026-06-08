@@ -24,7 +24,7 @@
     Sendable
   {
     /// This is always `sql#demoteMasterConfiguration`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// MySQL specific configuration when replicating from a MySQL on-premises
     /// primary instance. Replication configuration information such as the
@@ -32,15 +32,22 @@
     /// metadata. The configuration information is used only to set up the
     /// replication connection and is stored by MySQL in a file named
     /// `master.info` in the data directory.
-    public var mysqlReplicaConfiguration: DemoteMasterMySqlReplicaConfiguration?
+    public var mysqlReplicaConfiguration: DemoteMasterMySqlReplicaConfiguration? = nil
 
     /// Initialize a new instance of `DemoteMasterConfiguration`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      mysqlReplicaConfiguration: DemoteMasterMySqlReplicaConfiguration? = nil,
-    ) {
-      self.kind = kind
-      self.mysqlReplicaConfiguration = mysqlReplicaConfiguration
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = DemoteMasterConfiguration().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

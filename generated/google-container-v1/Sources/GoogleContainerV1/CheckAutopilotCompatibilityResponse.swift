@@ -22,18 +22,25 @@ public struct CheckAutopilotCompatibilityResponse: Codable, Equatable, GoogleClo
   Sendable
 {
   /// The list of issues for the given operation.
-  public var issues: [AutopilotCompatibilityIssue]
+  public var issues: [AutopilotCompatibilityIssue] = []
 
   /// The summary of the autopilot compatibility response.
-  public var summary: Swift.String
+  public var summary: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CheckAutopilotCompatibilityResponse`.
-  public init(
-    issues: [AutopilotCompatibilityIssue] = [],
-    summary: Swift.String = Swift.String(),
-  ) {
-    self.issues = issues
-    self.summary = summary
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CheckAutopilotCompatibilityResponse().with { $0.issues = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

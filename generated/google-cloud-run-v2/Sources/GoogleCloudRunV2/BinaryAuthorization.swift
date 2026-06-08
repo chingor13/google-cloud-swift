@@ -25,17 +25,24 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// If use_default is False, then it must be empty.
   /// For more information on breakglass, see
   /// https://cloud.google.com/binary-authorization/docs/using-breakglass
-  public var breakglassJustification: Swift.String
+  public var breakglassJustification: Swift.String = Swift.String()
 
-  public var binauthzMethod: OneOf_BinauthzMethod?
+  public var binauthzMethod: OneOf_BinauthzMethod? = nil
 
   /// Initialize a new instance of `BinaryAuthorization`.
-  public init(
-    breakglassJustification: Swift.String = Swift.String(),
-    binauthzMethod: OneOf_BinauthzMethod? = nil,
-  ) {
-    self.breakglassJustification = breakglassJustification
-    self.binauthzMethod = binauthzMethod
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BinaryAuthorization().with { $0.useDefault = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

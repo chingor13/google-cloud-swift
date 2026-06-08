@@ -22,30 +22,33 @@ public struct CreateNodePoolRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Required. The parent cluster where this node pool will be created.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. A client-specified unique identifier for the node pool.
-  public var nodePoolId: Swift.String
+  public var nodePoolId: Swift.String = Swift.String()
 
   /// Required. The node pool to create.
-  public var nodePool: NodePool?
+  public var nodePool: NodePool? = nil
 
   /// A unique identifier for this request. Restricted to 36 ASCII characters. A
   /// random UUID is recommended. This request is only idempotent if
   /// `request_id` is provided.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateNodePoolRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    nodePoolId: Swift.String = Swift.String(),
-    nodePool: NodePool? = nil,
-    requestId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.nodePoolId = nodePoolId
-    self.nodePool = nodePool
-    self.requestId = requestId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateNodePoolRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -23,16 +23,16 @@ public struct ListTagHoldsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
 {
   /// Required. The resource name of the parent TagValue. Must be of the form:
   /// `tagValues/{tag-value-id}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. The maximum number of TagHolds to return in the response. The
   /// server allows a maximum of 300 TagHolds to return. If unspecified, the
   /// server will use 100 as the default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. A pagination token returned from a previous call to
   /// `ListTagHolds` that indicates where this listing should continue from.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. Criteria used to select a subset of TagHolds parented by the
   /// TagValue to return. This field follows the syntax defined by aip.dev/160;
@@ -45,19 +45,22 @@ public struct ListTagHoldsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   ///   * `holder =
   ///     //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
   ///     AND origin = 35678234`
-  public var filter: Swift.String
+  public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListTagHoldsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    pageToken: Swift.String = Swift.String(),
-    filter: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.pageSize = pageSize
-    self.pageToken = pageToken
-    self.filter = filter
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListTagHoldsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -24,8 +24,8 @@
   func sample() async throws {
     let client = try GoogleCloudSqlV1.Clients.SqlSslCertsServiceClient()
     let response = try await client.delete(
-      request: SqlSslCertsDeleteRequest(/* set fields */
-      )
+      request: SqlSslCertsDeleteRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

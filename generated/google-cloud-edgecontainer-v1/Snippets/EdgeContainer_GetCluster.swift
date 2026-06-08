@@ -27,9 +27,8 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, c
   async throws
 {
   let response = try await client.getCluster(
-    request: GetClusterRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)",
-    )
+    request: GetClusterRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)" }
   )
   print("Success: \(response)")
 }

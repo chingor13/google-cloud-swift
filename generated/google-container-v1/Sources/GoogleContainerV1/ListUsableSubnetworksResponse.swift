@@ -25,21 +25,28 @@ public struct ListUsableSubnetworksResponse: Codable, Equatable, GoogleCloudWkt.
   Sendable
 {
   /// A list of usable subnetworks in the specified network project.
-  public var subnetworks: [UsableSubnetwork]
+  public var subnetworks: [UsableSubnetwork] = []
 
   /// This token allows you to get the next page of results for list requests.
   /// If the number of results is larger than `page_size`, use the
   /// `next_page_token` as a value for the query parameter `page_token` in the
   /// next request. The value will become empty when there are no more pages.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListUsableSubnetworksResponse`.
-  public init(
-    subnetworks: [UsableSubnetwork] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.subnetworks = subnetworks
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListUsableSubnetworksResponse().with { $0.subnetworks = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

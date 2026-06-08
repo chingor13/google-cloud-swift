@@ -23,13 +23,22 @@ public struct AnonymousAuthenticationConfig: Codable, Equatable, GoogleCloudWkt.
   Sendable
 {
   /// Defines the mode of limiting anonymous access in the cluster.
-  public var mode: AnonymousAuthenticationConfig.Mode
+  public var mode: AnonymousAuthenticationConfig.Mode = AnonymousAuthenticationConfig.Mode()
 
   /// Initialize a new instance of `AnonymousAuthenticationConfig`.
-  public init(
-    mode: AnonymousAuthenticationConfig.Mode = AnonymousAuthenticationConfig.Mode(),
-  ) {
-    self.mode = mode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AnonymousAuthenticationConfig().with { $0.mode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Mode defines the mode of anonymous authentication

@@ -27,9 +27,10 @@ func sample(client: some WorkerPools, projectId: String, locationId: String, wor
   async throws
 {
   let response = try await client.getWorkerPool(
-    request: GetWorkerPoolRequest(
-      name: "projects/\(projectId)/locations/\(locationId)/workerPools/\(workerPoolId)",
-    )
+    request: GetWorkerPoolRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/workerPools/\(workerPoolId)"
+      }
   )
   print("Success: \(response)")
 }

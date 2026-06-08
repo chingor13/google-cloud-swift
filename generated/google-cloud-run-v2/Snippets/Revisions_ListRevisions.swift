@@ -26,9 +26,8 @@ func sample(client: some Revisions, projectId: String, locationId: String, servi
   async throws
 {
   let items = try client.listRevisions(
-    byItem: ListRevisionsRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)",
-    )
+    byItem: ListRevisionsRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)" }
   )
   for try await item in items {
     print("  \(item)")

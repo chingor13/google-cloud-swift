@@ -22,7 +22,7 @@ public struct GetFunctionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   Sendable
 {
   /// Required. The name of the function which details should be obtained.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Optional. The optional version of the 1st gen function whose details should
   /// be obtained. The version of a 1st gen function is an integer that starts
@@ -30,15 +30,22 @@ public struct GetFunctionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// configs for old versions of 1st gen function. This field can be specified
   /// to fetch the historical configs. This field is valid only for GCF 1st gen
   /// function.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetFunctionRequest`.
-  public init(
-    name: Swift.String = Swift.String(),
-    revision: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.revision = revision
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetFunctionRequest().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

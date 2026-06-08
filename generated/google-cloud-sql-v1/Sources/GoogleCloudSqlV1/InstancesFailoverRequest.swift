@@ -23,13 +23,22 @@
     Sendable
   {
     /// Failover Context.
-    public var failoverContext: FailoverContext?
+    public var failoverContext: FailoverContext? = nil
 
     /// Initialize a new instance of `InstancesFailoverRequest`.
-    public init(
-      failoverContext: FailoverContext? = nil,
-    ) {
-      self.failoverContext = failoverContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesFailoverRequest().with { $0.failoverContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

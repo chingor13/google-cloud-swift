@@ -22,13 +22,22 @@ public struct AccessConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. An external IP address associated with the TPU worker.
-  public var externalIp: Swift.String
+  public var externalIp: Swift.String = Swift.String()
 
   /// Initialize a new instance of `AccessConfig`.
-  public init(
-    externalIp: Swift.String = Swift.String(),
-  ) {
-    self.externalIp = externalIp
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = AccessConfig().with { $0.externalIp = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

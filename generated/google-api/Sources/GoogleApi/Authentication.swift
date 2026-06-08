@@ -41,18 +41,25 @@ public struct Authentication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// A list of authentication rules that apply to individual API methods.
   ///
   /// **NOTE:** All service configuration rules follow "last one wins" order.
-  public var rules: [AuthenticationRule]
+  public var rules: [AuthenticationRule] = []
 
   /// Defines a set of authentication providers that a service supports.
-  public var providers: [AuthProvider]
+  public var providers: [AuthProvider] = []
 
   /// Initialize a new instance of `Authentication`.
-  public init(
-    rules: [AuthenticationRule] = [],
-    providers: [AuthProvider] = [],
-  ) {
-    self.rules = rules
-    self.providers = providers
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Authentication().with { $0.rules = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Authentication" }

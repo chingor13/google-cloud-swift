@@ -23,29 +23,32 @@
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// Maximum number of operations per response.
-    public var maxResults: Swift.UInt32
+    public var maxResults: Swift.UInt32 = Swift.UInt32()
 
     /// A previously-returned page token representing part of the larger set of
     /// results to view.
-    public var pageToken: Swift.String
+    public var pageToken: Swift.String = Swift.String()
 
     /// Project ID of the project that contains the instance.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlOperationsListRequest`.
-    public init(
-      instance: Swift.String = Swift.String(),
-      maxResults: Swift.UInt32 = Swift.UInt32(),
-      pageToken: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-    ) {
-      self.instance = instance
-      self.maxResults = maxResults
-      self.pageToken = pageToken
-      self.project = project
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlOperationsListRequest().with { $0.instance = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -24,19 +24,26 @@ public struct ListWorkerPoolsResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// The resulting list of WorkerPools.
-  public var workerPools: [WorkerPool]
+  public var workerPools: [WorkerPool] = []
 
   /// A token indicating there are more items than page_size. Use it in the next
   /// ListWorkerPools request to continue.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListWorkerPoolsResponse`.
-  public init(
-    workerPools: [WorkerPool] = [],
-    nextPageToken: Swift.String = Swift.String(),
-  ) {
-    self.workerPools = workerPools
-    self.nextPageToken = nextPageToken
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListWorkerPoolsResponse().with { $0.workerPools = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

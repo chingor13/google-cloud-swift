@@ -22,19 +22,26 @@ public struct UpdateFunctionRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Required. New version of the function.
-  public var function: Function?
+  public var function: Function? = nil
 
   /// The list of fields to be updated.
   /// If no field mask is provided, all fields will be updated.
-  public var updateMask: GoogleCloudWkt.FieldMask?
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
 
   /// Initialize a new instance of `UpdateFunctionRequest`.
-  public init(
-    function: Function? = nil,
-    updateMask: GoogleCloudWkt.FieldMask? = nil,
-  ) {
-    self.function = function
-    self.updateMask = updateMask
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpdateFunctionRequest().with { $0.function = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

@@ -24,21 +24,28 @@ public struct DailyMaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Time within the maintenance window to start the maintenance operations.
   /// Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
   /// format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
-  public var startTime: Swift.String
+  public var startTime: Swift.String = Swift.String()
 
   /// Output only. Duration of the time window, automatically chosen to be
   /// smallest possible in the given scenario.
   /// Duration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
   /// format "PTnHnMnS".
-  public var duration: Swift.String
+  public var duration: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DailyMaintenanceWindow`.
-  public init(
-    startTime: Swift.String = Swift.String(),
-    duration: Swift.String = Swift.String(),
-  ) {
-    self.startTime = startTime
-    self.duration = duration
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DailyMaintenanceWindow().with { $0.startTime = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

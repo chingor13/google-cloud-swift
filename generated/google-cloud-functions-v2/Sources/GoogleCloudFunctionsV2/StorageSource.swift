@@ -24,34 +24,37 @@ public struct StorageSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Google Cloud Storage bucket containing the source (see
   /// [Bucket Name
   /// Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
-  public var bucket: Swift.String
+  public var bucket: Swift.String = Swift.String()
 
   /// Google Cloud Storage object containing the source.
   ///
   /// This object must be a gzipped archive file (`.tar.gz`) containing source to
   /// build.
-  public var object: Swift.String
+  public var object: Swift.String = Swift.String()
 
   /// Google Cloud Storage generation for the object. If the generation is
   /// omitted, the latest generation will be used.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// When the specified storage bucket is a 1st gen function uploard url bucket,
   /// this field should be set as the generated upload url for 1st gen
   /// deployment.
-  public var sourceUploadUrl: Swift.String
+  public var sourceUploadUrl: Swift.String = Swift.String()
 
   /// Initialize a new instance of `StorageSource`.
-  public init(
-    bucket: Swift.String = Swift.String(),
-    object: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    sourceUploadUrl: Swift.String = Swift.String(),
-  ) {
-    self.bucket = bucket
-    self.object = object
-    self.generation = generation
-    self.sourceUploadUrl = sourceUploadUrl
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = StorageSource().with { $0.bucket = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

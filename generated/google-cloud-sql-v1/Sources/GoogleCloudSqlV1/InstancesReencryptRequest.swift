@@ -23,13 +23,22 @@
     Sendable
   {
     /// Configuration specific to backup re-encryption
-    public var backupReencryptionConfig: BackupReencryptionConfig?
+    public var backupReencryptionConfig: BackupReencryptionConfig? = nil
 
     /// Initialize a new instance of `InstancesReencryptRequest`.
-    public init(
-      backupReencryptionConfig: BackupReencryptionConfig? = nil,
-    ) {
-      self.backupReencryptionConfig = backupReencryptionConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesReencryptRequest().with { $0.backupReencryptionConfig = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

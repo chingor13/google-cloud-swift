@@ -292,7 +292,7 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// The name of the request field whose value is mapped to the HTTP request
   /// body, or `*` for mapping all request fields not captured by the path
@@ -300,7 +300,7 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// NOTE: the referred field must be present at the top-level of the request
   /// message type.
-  public var body: Swift.String
+  public var body: Swift.String = Swift.String()
 
   /// Optional. The name of the response field whose value is mapped to the HTTP
   /// response body. When omitted, the entire response message will be used
@@ -308,31 +308,32 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// NOTE: The referred field must be present at the top-level of the response
   /// message type.
-  public var responseBody: Swift.String
+  public var responseBody: Swift.String = Swift.String()
 
   /// Additional HTTP bindings for the selector. Nested bindings must
   /// not contain an `additional_bindings` field themselves (that is,
   /// the nesting may only be one level deep).
-  public var additionalBindings: [HttpRule]
+  public var additionalBindings: [HttpRule] = []
 
   /// Determines the URL pattern is matched by this rules. This pattern can be
   /// used with any of the {get|put|post|delete|patch} methods. A custom method
   /// can be defined using the 'custom' field.
-  public var pattern: OneOf_Pattern?
+  public var pattern: OneOf_Pattern? = nil
 
   /// Initialize a new instance of `HttpRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    body: Swift.String = Swift.String(),
-    responseBody: Swift.String = Swift.String(),
-    additionalBindings: [HttpRule] = [],
-    pattern: OneOf_Pattern? = nil,
-  ) {
-    self.selector = selector
-    self.body = body
-    self.responseBody = responseBody
-    self.additionalBindings = additionalBindings
-    self.pattern = pattern
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = HttpRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

@@ -30,24 +30,29 @@ public struct ListBackupsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// response will only return backups in reachable locations and the
   /// "unreachable" field will be populated with a list of unreachable
   /// locations.
-  public var backups: [Backup]
+  public var backups: [Backup] = []
 
   /// The token you can use to retrieve the next page of results. Not returned
   /// if there are no more results in the list.
-  public var nextPageToken: Swift.String
+  public var nextPageToken: Swift.String = Swift.String()
 
   /// Unordered list. Locations that could not be reached.
-  public var unreachable: [Swift.String]
+  public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListBackupsResponse`.
-  public init(
-    backups: [Backup] = [],
-    nextPageToken: Swift.String = Swift.String(),
-    unreachable: [Swift.String] = [],
-  ) {
-    self.backups = backups
-    self.nextPageToken = nextPageToken
-    self.unreachable = unreachable
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListBackupsResponse().with { $0.backups = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

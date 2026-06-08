@@ -25,24 +25,29 @@
     Sendable
   {
     /// This is always `sql#operationsList`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// List of operation resources.
-    public var items: [Operation]
+    public var items: [Operation] = []
 
     /// The continuation token, used to page through large result sets. Provide
     /// this value in a subsequent request to return the next page of results.
-    public var nextPageToken: Swift.String
+    public var nextPageToken: Swift.String = Swift.String()
 
     /// Initialize a new instance of `OperationsListResponse`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      items: [Operation] = [],
-      nextPageToken: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.items = items
-      self.nextPageToken = nextPageToken
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = OperationsListResponse().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

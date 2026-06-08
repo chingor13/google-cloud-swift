@@ -23,13 +23,22 @@ public struct Source: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Location of the source.
   /// At least one source needs to be provided for the deployment to succeed.
-  public var source: OneOf_Source?
+  public var source: OneOf_Source? = nil
 
   /// Initialize a new instance of `Source`.
-  public init(
-    source: OneOf_Source? = nil,
-  ) {
-    self.source = source
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Source().with { $0.storageSource = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

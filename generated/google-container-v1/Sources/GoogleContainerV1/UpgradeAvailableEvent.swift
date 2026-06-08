@@ -23,30 +23,33 @@ public struct UpgradeAvailableEvent: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// The release version available for upgrade.
-  public var version: Swift.String
+  public var version: Swift.String = Swift.String()
 
   /// The resource type of the release version.
-  public var resourceType: UpgradeResourceType
+  public var resourceType: UpgradeResourceType = UpgradeResourceType()
 
   /// The release channel of the version. If empty, it means a non-channel
   /// release.
-  public var releaseChannel: ReleaseChannel?
+  public var releaseChannel: ReleaseChannel? = nil
 
   /// Optional relative path to the resource. For example, the relative path of
   /// the node pool.
-  public var resource: Swift.String
+  public var resource: Swift.String = Swift.String()
 
   /// Initialize a new instance of `UpgradeAvailableEvent`.
-  public init(
-    version: Swift.String = Swift.String(),
-    resourceType: UpgradeResourceType = UpgradeResourceType(),
-    releaseChannel: ReleaseChannel? = nil,
-    resource: Swift.String = Swift.String(),
-  ) {
-    self.version = version
-    self.resourceType = resourceType
-    self.releaseChannel = releaseChannel
-    self.resource = resource
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = UpgradeAvailableEvent().with { $0.version = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

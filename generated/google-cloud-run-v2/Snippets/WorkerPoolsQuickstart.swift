@@ -26,9 +26,8 @@ import GoogleRpc
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudRunV2.Clients.WorkerPoolsClient()
   let items = try client.listWorkerPools(
-    byItem: ListWorkerPoolsRequest(
-      parent: "projects/\(projectId)/locations/\(locationId)",
-    )
+    byItem: ListWorkerPoolsRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
   )
   for try await item in items {
     print("  \(item)")

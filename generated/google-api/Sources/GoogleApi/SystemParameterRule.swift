@@ -29,22 +29,29 @@ public struct SystemParameterRule: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// details.
   ///
   /// [google.api.DocumentationRule.selector]: <doc:DocumentationRule/selector>
-  public var selector: Swift.String
+  public var selector: Swift.String = Swift.String()
 
   /// Define parameters. Multiple names may be defined for a parameter.
   /// For a given method call, only one of them should be used. If multiple
   /// names are used the behavior is implementation-dependent.
   /// If none of the specified names are present the behavior is
   /// parameter-dependent.
-  public var parameters: [SystemParameter]
+  public var parameters: [SystemParameter] = []
 
   /// Initialize a new instance of `SystemParameterRule`.
-  public init(
-    selector: Swift.String = Swift.String(),
-    parameters: [SystemParameter] = [],
-  ) {
-    self.selector = selector
-    self.parameters = parameters
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SystemParameterRule().with { $0.selector = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

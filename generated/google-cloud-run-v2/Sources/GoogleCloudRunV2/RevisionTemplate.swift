@@ -24,7 +24,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Optional. The unique name for the revision. If this field is omitted, it
   /// will be automatically generated based on the Service name.
-  public var revision: Swift.String
+  public var revision: Swift.String = Swift.String()
 
   /// Optional. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -37,7 +37,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 RevisionTemplate.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Optional. Unstructured key value map that may be set by external tools to
   /// store and arbitrary metadata. They are not queryable and should be
@@ -50,108 +50,82 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// <p>This field follows Kubernetes annotations' namespacing, limits, and
   /// rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Optional. Scaling settings for this Revision.
-  public var scaling: RevisionScaling?
+  public var scaling: RevisionScaling? = nil
 
   /// Optional. VPC Access configuration to use for this Revision. For more
   /// information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
   /// Optional. Max allowed time for an instance to respond to a request.
-  public var timeout: GoogleCloudWkt.Duration?
+  public var timeout: GoogleCloudWkt.Duration? = nil
 
   /// Optional. Email address of the IAM service account associated with the
   /// revision of the service. The service account represents the identity of the
   /// running revision, and determines what permissions the revision has. If not
   /// provided, the revision will use the project's default service account.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Holds the single container that defines the unit of execution for this
   /// Revision.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// Optional. A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// Optional. The sandbox environment to host this Revision.
-  public var executionEnvironment: ExecutionEnvironment
+  public var executionEnvironment: ExecutionEnvironment = ExecutionEnvironment()
 
   /// A reference to a customer managed encryption key (CMEK) to use to encrypt
   /// this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// Optional. Sets the maximum number of requests that each serving instance
   /// can receive. If not specified or 0, concurrency defaults to 80 when
   /// requested `CPU >= 1` and defaults to 1 when requested `CPU < 1`.
-  public var maxInstanceRequestConcurrency: Swift.Int32
+  public var maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32()
 
   /// Optional. Enables service mesh connectivity.
-  public var serviceMesh: ServiceMesh?
+  public var serviceMesh: ServiceMesh? = nil
 
   /// Optional. The action to take if the encryption key is revoked.
-  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction
+  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction =
+    EncryptionKeyRevocationAction()
 
   /// Optional. If encryption_key_revocation_action is SHUTDOWN, the duration
   /// before shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration?
+  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil
 
   /// Optional. Enable session affinity.
-  public var sessionAffinity: Swift.Bool
+  public var sessionAffinity: Swift.Bool = Swift.Bool()
 
   /// Optional. Disables health checking containers during deployment.
-  public var healthCheckDisabled: Swift.Bool
+  public var healthCheckDisabled: Swift.Bool = Swift.Bool()
 
   /// Optional. The node selector for the revision template.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. True if GPU zonal redundancy is disabled on this revision.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
   /// Initialize a new instance of `RevisionTemplate`.
-  public init(
-    revision: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    scaling: RevisionScaling? = nil,
-    vpcAccess: VpcAccess? = nil,
-    timeout: GoogleCloudWkt.Duration? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    executionEnvironment: ExecutionEnvironment = ExecutionEnvironment(),
-    encryptionKey: Swift.String = Swift.String(),
-    maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32(),
-    serviceMesh: ServiceMesh? = nil,
-    encryptionKeyRevocationAction: EncryptionKeyRevocationAction = EncryptionKeyRevocationAction(),
-    encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil,
-    sessionAffinity: Swift.Bool = Swift.Bool(),
-    healthCheckDisabled: Swift.Bool = Swift.Bool(),
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-  ) {
-    self.revision = revision
-    self.labels = labels
-    self.annotations = annotations
-    self.scaling = scaling
-    self.vpcAccess = vpcAccess
-    self.timeout = timeout
-    self.serviceAccount = serviceAccount
-    self.containers = containers
-    self.volumes = volumes
-    self.executionEnvironment = executionEnvironment
-    self.encryptionKey = encryptionKey
-    self.maxInstanceRequestConcurrency = maxInstanceRequestConcurrency
-    self.serviceMesh = serviceMesh
-    self.encryptionKeyRevocationAction = encryptionKeyRevocationAction
-    self.encryptionKeyShutdownDuration = encryptionKeyShutdownDuration
-    self.sessionAffinity = sessionAffinity
-    self.healthCheckDisabled = healthCheckDisabled
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RevisionTemplate().with { $0.revision = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

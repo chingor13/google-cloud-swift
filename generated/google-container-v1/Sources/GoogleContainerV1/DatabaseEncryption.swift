@@ -23,37 +23,38 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 {
   /// Name of CloudKMS key to use for the encryption of secrets in etcd.
   /// Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
-  public var keyName: Swift.String
+  public var keyName: Swift.String = Swift.String()
 
   /// The desired state of etcd encryption.
-  public var state: DatabaseEncryption.State
+  public var state: DatabaseEncryption.State = DatabaseEncryption.State()
 
   /// Output only. The current state of etcd encryption.
-  public var currentState: DatabaseEncryption.CurrentState?
+  public var currentState: DatabaseEncryption.CurrentState? = nil
 
   /// Output only. Keys in use by the cluster for decrypting
   /// existing objects, in addition to the key in `key_name`.
   ///
   /// Each item is a CloudKMS key resource.
-  public var decryptionKeys: [Swift.String]
+  public var decryptionKeys: [Swift.String] = []
 
   /// Output only. Records errors seen during DatabaseEncryption update
   /// operations.
-  public var lastOperationErrors: [DatabaseEncryption.OperationError]
+  public var lastOperationErrors: [DatabaseEncryption.OperationError] = []
 
   /// Initialize a new instance of `DatabaseEncryption`.
-  public init(
-    keyName: Swift.String = Swift.String(),
-    state: DatabaseEncryption.State = DatabaseEncryption.State(),
-    currentState: DatabaseEncryption.CurrentState? = nil,
-    decryptionKeys: [Swift.String] = [],
-    lastOperationErrors: [DatabaseEncryption.OperationError] = [],
-  ) {
-    self.keyName = keyName
-    self.state = state
-    self.currentState = currentState
-    self.decryptionKeys = decryptionKeys
-    self.lastOperationErrors = lastOperationErrors
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = DatabaseEncryption().with { $0.keyName = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// OperationError records errors seen from CloudKMS keys
@@ -62,23 +63,28 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// CloudKMS key resource that had the error.
-    public var keyName: Swift.String
+    public var keyName: Swift.String = Swift.String()
 
     /// Description of the error seen during the operation.
-    public var errorMessage: Swift.String
+    public var errorMessage: Swift.String = Swift.String()
 
     /// Time when the CloudKMS error was seen.
-    public var timestamp: GoogleCloudWkt.Timestamp?
+    public var timestamp: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `OperationError`.
-    public init(
-      keyName: Swift.String = Swift.String(),
-      errorMessage: Swift.String = Swift.String(),
-      timestamp: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.keyName = keyName
-      self.errorMessage = errorMessage
-      self.timestamp = timestamp
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = OperationError().with { $0.keyName = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

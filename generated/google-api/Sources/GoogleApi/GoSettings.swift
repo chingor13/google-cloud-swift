@@ -22,7 +22,7 @@ public struct GoSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Some settings.
-  public var common: CommonLanguageSettings?
+  public var common: CommonLanguageSettings? = nil
 
   /// Map of service names to renamed services. Keys are the package relative
   /// service names and values are the name to be used for the service client
@@ -34,15 +34,22 @@ public struct GoSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///       go_settings:
   ///         renamed_services:
   ///           Publisher: TopicAdmin
-  public var renamedServices: [Swift.String: Swift.String]
+  public var renamedServices: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `GoSettings`.
-  public init(
-    common: CommonLanguageSettings? = nil,
-    renamedServices: [Swift.String: Swift.String] = [:],
-  ) {
-    self.common = common
-    self.renamedServices = renamedServices
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GoSettings().with { $0.common = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.GoSettings" }

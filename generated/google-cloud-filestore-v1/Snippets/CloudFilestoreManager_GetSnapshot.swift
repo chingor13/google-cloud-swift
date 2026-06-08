@@ -29,10 +29,11 @@ func sample(
   snapshotId: String
 ) async throws {
   let response = try await client.getSnapshot(
-    request: GetSnapshotRequest(
-      name:
-        "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)/snapshots/\(snapshotId)",
-    )
+    request: GetSnapshotRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)/snapshots/\(snapshotId)"
+      }
   )
   print("Success: \(response)")
 }

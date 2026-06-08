@@ -22,18 +22,25 @@ public struct MaintenanceExclusionWindow: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Optional. The time window.
-  public var window: TimeWindow?
+  public var window: TimeWindow? = nil
 
   /// Optional. A unique (per cluster) id for the window.
-  public var id: Swift.String
+  public var id: Swift.String = Swift.String()
 
   /// Initialize a new instance of `MaintenanceExclusionWindow`.
-  public init(
-    window: TimeWindow? = nil,
-    id: Swift.String = Swift.String(),
-  ) {
-    self.window = window
-    self.id = id
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaintenanceExclusionWindow().with { $0.window = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

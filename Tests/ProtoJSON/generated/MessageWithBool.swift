@@ -22,38 +22,37 @@ public struct MessageWithBool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.Bool
+  public var singular: Swift.Bool = Swift.Bool()
 
   /// An optional field.
-  public var option: Swift.Bool?
+  public var option: Swift.Bool? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.Bool]
+  public var repeated: [Swift.Bool] = []
 
   /// Test bool as map values.
-  public var mapValue: [Swift.String: Swift.Bool]
+  public var mapValue: [Swift.String: Swift.Bool] = [:]
 
   /// Test bool as map keys.
-  public var mapKey: [Swift.Bool: Swift.String]
+  public var mapKey: [Swift.Bool: Swift.String] = [:]
 
   /// Test bool as map key and value.
-  public var mapKeyValue: [Swift.Bool: Swift.Bool]
+  public var mapKeyValue: [Swift.Bool: Swift.Bool] = [:]
 
   /// Initialize a new instance of `MessageWithBool`.
-  public init(
-    singular: Swift.Bool = Swift.Bool(),
-    option: Swift.Bool? = nil,
-    repeated: [Swift.Bool] = [],
-    mapValue: [Swift.String: Swift.Bool] = [:],
-    mapKey: [Swift.Bool: Swift.String] = [:],
-    mapKeyValue: [Swift.Bool: Swift.Bool] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.mapValue = mapValue
-    self.mapKey = mapKey
-    self.mapKeyValue = mapKeyValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithBool().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

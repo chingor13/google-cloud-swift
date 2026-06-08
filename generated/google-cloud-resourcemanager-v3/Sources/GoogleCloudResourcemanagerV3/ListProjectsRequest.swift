@@ -31,33 +31,36 @@ public struct ListProjectsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   ///
   /// If the parent is a folder, use the value `folders/{folder_id}`. If the
   /// parent is an organization, use the value `organizations/{org_id}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Optional. A pagination token returned from a previous call to
   /// [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
   /// indicates from where listing should continue.
-  public var pageToken: Swift.String
+  public var pageToken: Swift.String = Swift.String()
 
   /// Optional. The maximum number of projects to return in the response.
   /// The server can return fewer projects than requested.
   /// If unspecified, server picks an appropriate default.
-  public var pageSize: Swift.Int32
+  public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. Indicate that projects in the `DELETE_REQUESTED` state should
   /// also be returned. Normally only `ACTIVE` projects are returned.
-  public var showDeleted: Swift.Bool
+  public var showDeleted: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `ListProjectsRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    pageToken: Swift.String = Swift.String(),
-    pageSize: Swift.Int32 = Swift.Int32(),
-    showDeleted: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.pageToken = pageToken
-    self.pageSize = pageSize
-    self.showDeleted = showDeleted
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ListProjectsRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

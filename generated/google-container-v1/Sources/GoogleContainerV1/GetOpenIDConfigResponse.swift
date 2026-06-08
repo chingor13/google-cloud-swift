@@ -23,43 +23,40 @@ public struct GetOpenIDConfigResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// OIDC Issuer.
-  public var issuer: Swift.String
+  public var issuer: Swift.String = Swift.String()
 
   /// JSON Web Key uri.
-  public var jwksUri: Swift.String
+  public var jwksUri: Swift.String = Swift.String()
 
   /// Supported response types.
-  public var responseTypesSupported: [Swift.String]
+  public var responseTypesSupported: [Swift.String] = []
 
   /// Supported subject types.
-  public var subjectTypesSupported: [Swift.String]
+  public var subjectTypesSupported: [Swift.String] = []
 
   /// supported ID Token signing Algorithms.
-  public var idTokenSigningAlgValuesSupported: [Swift.String]
+  public var idTokenSigningAlgValuesSupported: [Swift.String] = []
 
   /// Supported claims.
-  public var claimsSupported: [Swift.String]
+  public var claimsSupported: [Swift.String] = []
 
   /// Supported grant types.
-  public var grantTypes: [Swift.String]
+  public var grantTypes: [Swift.String] = []
 
   /// Initialize a new instance of `GetOpenIDConfigResponse`.
-  public init(
-    issuer: Swift.String = Swift.String(),
-    jwksUri: Swift.String = Swift.String(),
-    responseTypesSupported: [Swift.String] = [],
-    subjectTypesSupported: [Swift.String] = [],
-    idTokenSigningAlgValuesSupported: [Swift.String] = [],
-    claimsSupported: [Swift.String] = [],
-    grantTypes: [Swift.String] = [],
-  ) {
-    self.issuer = issuer
-    self.jwksUri = jwksUri
-    self.responseTypesSupported = responseTypesSupported
-    self.subjectTypesSupported = subjectTypesSupported
-    self.idTokenSigningAlgValuesSupported = idTokenSigningAlgValuesSupported
-    self.claimsSupported = claimsSupported
-    self.grantTypes = grantTypes
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GetOpenIDConfigResponse().with { $0.issuer = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {

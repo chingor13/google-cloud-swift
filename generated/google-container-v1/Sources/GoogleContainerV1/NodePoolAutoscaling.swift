@@ -23,51 +23,49 @@ public struct NodePoolAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackab
   Sendable
 {
   /// Is autoscaling enabled for this node pool.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// Minimum number of nodes for one location in the node pool. Must be greater
   /// than or equal to 0 and less than or equal to max_node_count.
-  public var minNodeCount: Swift.Int32
+  public var minNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Maximum number of nodes for one location in the node pool. Must be >=
   /// min_node_count. There has to be enough quota to scale up the cluster.
-  public var maxNodeCount: Swift.Int32
+  public var maxNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Can this node pool be deleted automatically.
-  public var autoprovisioned: Swift.Bool
+  public var autoprovisioned: Swift.Bool = Swift.Bool()
 
   /// Location policy used when scaling up a node pool.
-  public var locationPolicy: NodePoolAutoscaling.LocationPolicy
+  public var locationPolicy: NodePoolAutoscaling.LocationPolicy =
+    NodePoolAutoscaling.LocationPolicy()
 
   /// Minimum number of nodes in the node pool. Must be greater than or equal
   /// to 0 and less than or equal to total_max_node_count.
   /// The total_*_node_count fields are mutually exclusive with the *_node_count
   /// fields.
-  public var totalMinNodeCount: Swift.Int32
+  public var totalMinNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Maximum number of nodes in the node pool. Must be greater than or equal to
   /// total_min_node_count. There has to be enough quota to scale up the cluster.
   /// The total_*_node_count fields are mutually exclusive with the *_node_count
   /// fields.
-  public var totalMaxNodeCount: Swift.Int32
+  public var totalMaxNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Initialize a new instance of `NodePoolAutoscaling`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    minNodeCount: Swift.Int32 = Swift.Int32(),
-    maxNodeCount: Swift.Int32 = Swift.Int32(),
-    autoprovisioned: Swift.Bool = Swift.Bool(),
-    locationPolicy: NodePoolAutoscaling.LocationPolicy = NodePoolAutoscaling.LocationPolicy(),
-    totalMinNodeCount: Swift.Int32 = Swift.Int32(),
-    totalMaxNodeCount: Swift.Int32 = Swift.Int32(),
-  ) {
-    self.enabled = enabled
-    self.minNodeCount = minNodeCount
-    self.maxNodeCount = maxNodeCount
-    self.autoprovisioned = autoprovisioned
-    self.locationPolicy = locationPolicy
-    self.totalMinNodeCount = totalMinNodeCount
-    self.totalMaxNodeCount = totalMaxNodeCount
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NodePoolAutoscaling().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Location policy specifies how zones are picked when scaling up the

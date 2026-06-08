@@ -24,13 +24,22 @@
     Sendable
   {
     /// The time taken to execute the SQL statements.
-    public var sqlStatementExecutionTime: GoogleCloudWkt.Duration?
+    public var sqlStatementExecutionTime: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `Metadata`.
-    public init(
-      sqlStatementExecutionTime: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.sqlStatementExecutionTime = sqlStatementExecutionTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Metadata().with { $0.sqlStatementExecutionTime = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

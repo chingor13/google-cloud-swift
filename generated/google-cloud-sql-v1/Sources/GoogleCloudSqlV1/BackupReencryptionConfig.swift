@@ -23,18 +23,25 @@
     Sendable
   {
     /// Backup re-encryption limit
-    public var backupLimit: Swift.Int32?
+    public var backupLimit: Swift.Int32? = nil
 
     /// Type of backups users want to re-encrypt.
-    public var backupType: BackupReencryptionConfig.BackupType?
+    public var backupType: BackupReencryptionConfig.BackupType? = nil
 
     /// Initialize a new instance of `BackupReencryptionConfig`.
-    public init(
-      backupLimit: Swift.Int32? = nil,
-      backupType: BackupReencryptionConfig.BackupType? = nil,
-    ) {
-      self.backupLimit = backupLimit
-      self.backupType = backupType
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = BackupReencryptionConfig().with { $0.backupLimit = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Backup type for re-encryption

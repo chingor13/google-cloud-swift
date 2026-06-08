@@ -23,8 +23,8 @@
 
   func sample(client: some SqlSslCertsService) async throws {
     let response = try await client.`get`(
-      request: SqlSslCertsGetRequest(/* set fields */
-      )
+      request: SqlSslCertsGetRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

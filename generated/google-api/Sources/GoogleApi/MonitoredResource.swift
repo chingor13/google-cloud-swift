@@ -47,20 +47,27 @@ public struct MonitoredResource: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// `datastream.googleapis.com/Stream`.
   ///
   /// [google.api.MonitoredResourceDescriptor]: <doc:MonitoredResourceDescriptor>
-  public var type: Swift.String
+  public var type: Swift.String = Swift.String()
 
   /// Required. Values for all of the labels listed in the associated monitored
   /// resource descriptor. For example, Compute Engine VM instances use the
   /// labels `"project_id"`, `"instance_id"`, and `"zone"`.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Initialize a new instance of `MonitoredResource`.
-  public init(
-    type: Swift.String = Swift.String(),
-    labels: [Swift.String: Swift.String] = [:],
-  ) {
-    self.type = type
-    self.labels = labels
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MonitoredResource().with { $0.type = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

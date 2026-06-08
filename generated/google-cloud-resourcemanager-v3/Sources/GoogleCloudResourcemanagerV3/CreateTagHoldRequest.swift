@@ -23,24 +23,29 @@ public struct CreateTagHoldRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
 {
   /// Required. The resource name of the TagHold's parent TagValue. Must be of
   /// the form: `tagValues/{tag-value-id}`.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The TagHold to be created.
-  public var tagHold: TagHold?
+  public var tagHold: TagHold? = nil
 
   /// Optional. Set to true to perform the validations necessary for creating the
   /// resource, but not actually perform the action.
-  public var validateOnly: Swift.Bool
+  public var validateOnly: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `CreateTagHoldRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    tagHold: TagHold? = nil,
-    validateOnly: Swift.Bool = Swift.Bool(),
-  ) {
-    self.parent = parent
-    self.tagHold = tagHold
-    self.validateOnly = validateOnly
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateTagHoldRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

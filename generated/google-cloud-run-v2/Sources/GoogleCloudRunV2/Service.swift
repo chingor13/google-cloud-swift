@@ -32,22 +32,22 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Format:
   /// projects/{project}/locations/{location}/services/{service_id}
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// User-provided description of the Service. This field currently has a
   /// 512-character limit.
-  public var description: Swift.String
+  public var description: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the trigger. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
   /// Please note that unlike v1, this is an int64 value. As with most Google
   /// APIs, its JSON representation will be a `string` instead of an `integer`.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Optional. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -60,7 +60,7 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
   /// namespaces, and they will be rejected. All system labels in v1 now have a
   /// corresponding field in v2 Service.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Optional. Unstructured key value map that may be set by external tools to
   /// store and arbitrary metadata. They are not queryable and should be
@@ -73,38 +73,38 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// <p>This field follows Kubernetes
   /// annotations' namespacing, limits, and rules.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The deletion time. It is only populated as a response to a
   /// Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permanently deleted.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. Email address of the last authenticated modifier.
-  public var lastModifier: Swift.String
+  public var lastModifier: Swift.String = Swift.String()
 
   /// Arbitrary identifier for the API client.
-  public var client: Swift.String
+  public var client: Swift.String = Swift.String()
 
   /// Arbitrary version identifier for the API client.
-  public var clientVersion: Swift.String
+  public var clientVersion: Swift.String = Swift.String()
 
   /// Optional. Provides the ingress settings for this Service. On output,
   /// returns the currently observed ingress settings, or
   /// INGRESS_TRAFFIC_UNSPECIFIED if no revision is active.
-  public var ingress: IngressTraffic
+  public var ingress: IngressTraffic = IngressTraffic()
 
   /// Optional. The launch stage as defined by [Google Cloud Platform
   /// Launch Stages](https://cloud.google.com/terms/launch-stages).
@@ -116,92 +116,92 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// For example, if ALPHA is provided as input, but only BETA and GA-level
   /// features are used, this field will be BETA on output.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Optional. Settings for the Binary Authorization feature.
-  public var binaryAuthorization: BinaryAuthorization?
+  public var binaryAuthorization: BinaryAuthorization? = nil
 
   /// Required. The template used to create revisions for this Service.
-  public var template: RevisionTemplate?
+  public var template: RevisionTemplate? = nil
 
   /// Optional. Specifies how to distribute traffic over a collection of
   /// Revisions belonging to the Service. If traffic is empty or not provided,
   /// defaults to 100% traffic to the latest `Ready` Revision.
-  public var traffic: [TrafficTarget]
+  public var traffic: [TrafficTarget] = []
 
   /// Optional. Specifies service-level scaling settings
-  public var scaling: ServiceScaling?
+  public var scaling: ServiceScaling? = nil
 
   /// Optional. Disables IAM permission check for run.routes.invoke for callers
   /// of this service. For more information, visit
   /// https://cloud.google.com/run/docs/securing/managing-access#invoker_check.
-  public var invokerIamDisabled: Swift.Bool
+  public var invokerIamDisabled: Swift.Bool = Swift.Bool()
 
   /// Optional. Disables public resolution of the default URI of this service.
-  public var defaultUriDisabled: Swift.Bool
+  public var defaultUriDisabled: Swift.Bool = Swift.Bool()
 
   /// Output only. All URLs serving traffic for this Service.
-  public var urls: [Swift.String]
+  public var urls: [Swift.String] = []
 
   /// Optional. IAP settings on the Service.
-  public var iapEnabled: Swift.Bool
+  public var iapEnabled: Swift.Bool = Swift.Bool()
 
   /// Optional. Settings for multi-region deployment.
-  public var multiRegionSettings: Service.MultiRegionSettings?
+  public var multiRegionSettings: Service.MultiRegionSettings? = nil
 
   /// One or more custom audiences that you want this service to support. Specify
   /// each custom audience as the full URL in a string. The custom audiences are
   /// encoded in the token and used to authenticate requests. For more
   /// information, see
   /// https://cloud.google.com/run/docs/configuring/custom-audiences.
-  public var customAudiences: [Swift.String]
+  public var customAudiences: [Swift.String] = []
 
   /// Output only. The generation of this Service currently serving traffic. See
   /// comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run. Please note that unlike v1, this is an int64 value.
   /// As with most Google APIs, its JSON representation will be a `string`
   /// instead of an `integer`.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The Condition of this Service, containing its readiness
   /// status, and detailed error information in case it did not reach a serving
   /// state. See comments in `reconciling` for additional information on
   /// reconciliation process in Cloud Run.
-  public var terminalCondition: Condition?
+  public var terminalCondition: Condition? = nil
 
   /// Output only. The Conditions of all other associated sub-resources. They
   /// contain additional diagnostics information in case the Service does not
   /// reach its Serving state. See comments in `reconciling` for additional
   /// information on reconciliation process in Cloud Run.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. Name of the latest revision that is serving traffic. See
   /// comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run.
-  public var latestReadyRevision: Swift.String
+  public var latestReadyRevision: Swift.String = Swift.String()
 
   /// Output only. Name of the last created revision. See comments in
   /// `reconciling` for additional information on reconciliation process in Cloud
   /// Run.
-  public var latestCreatedRevision: Swift.String
+  public var latestCreatedRevision: Swift.String = Swift.String()
 
   /// Output only. Detailed status information for corresponding traffic targets.
   /// See comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run.
-  public var trafficStatuses: [TrafficTargetStatus]
+  public var trafficStatuses: [TrafficTargetStatus] = []
 
   /// Output only. The main URI in which this Service is serving traffic.
-  public var uri: Swift.String
+  public var uri: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Output only. True if Cloud Run Threat Detection monitoring is enabled for
   /// the parent project of this Service.
-  public var threatDetectionEnabled: Swift.Bool
+  public var threatDetectionEnabled: Swift.Bool = Swift.Bool()
 
   /// Optional. Configuration for building a Cloud Run function.
-  public var buildConfig: BuildConfig?
+  public var buildConfig: BuildConfig? = nil
 
   /// Output only. Returns true if the Service is currently being acted upon by
   /// the system to bring it into the desired state.
@@ -225,91 +225,26 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `latest_ready_revision` will have the state of the last serving revision,
   /// or empty for newly created Services. Additional information on the failure
   /// can be found in `terminal_condition` and `conditions`.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Optional. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Service`.
-  public init(
-    name: Swift.String = Swift.String(),
-    description: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    creator: Swift.String = Swift.String(),
-    lastModifier: Swift.String = Swift.String(),
-    client: Swift.String = Swift.String(),
-    clientVersion: Swift.String = Swift.String(),
-    ingress: IngressTraffic = IngressTraffic(),
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    binaryAuthorization: BinaryAuthorization? = nil,
-    template: RevisionTemplate? = nil,
-    traffic: [TrafficTarget] = [],
-    scaling: ServiceScaling? = nil,
-    invokerIamDisabled: Swift.Bool = Swift.Bool(),
-    defaultUriDisabled: Swift.Bool = Swift.Bool(),
-    urls: [Swift.String] = [],
-    iapEnabled: Swift.Bool = Swift.Bool(),
-    multiRegionSettings: Service.MultiRegionSettings? = nil,
-    customAudiences: [Swift.String] = [],
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    terminalCondition: Condition? = nil,
-    conditions: [Condition] = [],
-    latestReadyRevision: Swift.String = Swift.String(),
-    latestCreatedRevision: Swift.String = Swift.String(),
-    trafficStatuses: [TrafficTargetStatus] = [],
-    uri: Swift.String = Swift.String(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    threatDetectionEnabled: Swift.Bool = Swift.Bool(),
-    buildConfig: BuildConfig? = nil,
-    reconciling: Swift.Bool = Swift.Bool(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.description = description
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.creator = creator
-    self.lastModifier = lastModifier
-    self.client = client
-    self.clientVersion = clientVersion
-    self.ingress = ingress
-    self.launchStage = launchStage
-    self.binaryAuthorization = binaryAuthorization
-    self.template = template
-    self.traffic = traffic
-    self.scaling = scaling
-    self.invokerIamDisabled = invokerIamDisabled
-    self.defaultUriDisabled = defaultUriDisabled
-    self.urls = urls
-    self.iapEnabled = iapEnabled
-    self.multiRegionSettings = multiRegionSettings
-    self.customAudiences = customAudiences
-    self.observedGeneration = observedGeneration
-    self.terminalCondition = terminalCondition
-    self.conditions = conditions
-    self.latestReadyRevision = latestReadyRevision
-    self.latestCreatedRevision = latestCreatedRevision
-    self.trafficStatuses = trafficStatuses
-    self.uri = uri
-    self.satisfiesPzs = satisfiesPzs
-    self.threatDetectionEnabled = threatDetectionEnabled
-    self.buildConfig = buildConfig
-    self.reconciling = reconciling
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Service().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Settings for multi-region deployment.
@@ -317,18 +252,25 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Required. List of regions to deploy to, including primary region.
-    public var regions: [Swift.String]
+    public var regions: [Swift.String] = []
 
     /// Optional. System-generated unique id for the multi-region Service.
-    public var multiRegionId: Swift.String
+    public var multiRegionId: Swift.String = Swift.String()
 
     /// Initialize a new instance of `MultiRegionSettings`.
-    public init(
-      regions: [Swift.String] = [],
-      multiRegionId: Swift.String = Swift.String(),
-    ) {
-      self.regions = regions
-      self.multiRegionId = multiRegionId
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MultiRegionSettings().with { $0.regions = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

@@ -23,156 +23,126 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the cluster.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. The time when the cluster was created.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The time when the cluster was last updated.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Labels associated with this resource.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Required. Fleet configuration.
-  public var fleet: Fleet?
+  public var fleet: Fleet? = nil
 
   /// Required. Cluster-wide networking configuration.
-  public var networking: ClusterNetworking?
+  public var networking: ClusterNetworking? = nil
 
   /// Required. Immutable. RBAC policy that will be applied and managed by GEC.
-  public var authorization: Authorization?
+  public var authorization: Authorization? = nil
 
   /// Optional. The default maximum number of pods per node used if a maximum
   /// value is not specified explicitly for a node pool in this cluster. If
   /// unspecified, the Kubernetes default value will be used.
-  public var defaultMaxPodsPerNode: Swift.Int32
+  public var defaultMaxPodsPerNode: Swift.Int32 = Swift.Int32()
 
   /// Output only. The IP address of the Kubernetes API server.
-  public var endpoint: Swift.String
+  public var endpoint: Swift.String = Swift.String()
 
   /// Output only. The port number of the Kubernetes API server.
-  public var port: Swift.Int32
+  public var port: Swift.Int32 = Swift.Int32()
 
   /// Output only. The PEM-encoded public certificate of the cluster's CA.
-  public var clusterCaCertificate: Swift.String
+  public var clusterCaCertificate: Swift.String = Swift.String()
 
   /// Optional. Cluster-wide maintenance policy configuration.
-  public var maintenancePolicy: MaintenancePolicy?
+  public var maintenancePolicy: MaintenancePolicy? = nil
 
   /// Output only. The control plane release version
-  public var controlPlaneVersion: Swift.String
+  public var controlPlaneVersion: Swift.String = Swift.String()
 
   /// Output only. The lowest release version among all worker nodes. This field
   /// can be empty if the cluster does not have any worker nodes.
-  public var nodeVersion: Swift.String
+  public var nodeVersion: Swift.String = Swift.String()
 
   /// Optional. The configuration of the cluster control plane.
-  public var controlPlane: Cluster.ControlPlane?
+  public var controlPlane: Cluster.ControlPlane? = nil
 
   /// Optional. The configuration of the system add-ons.
-  public var systemAddonsConfig: Cluster.SystemAddonsConfig?
+  public var systemAddonsConfig: Cluster.SystemAddonsConfig? = nil
 
   /// Optional. IPv4 address pools for cluster data plane external load
   /// balancing.
-  public var externalLoadBalancerIpv4AddressPools: [Swift.String]
+  public var externalLoadBalancerIpv4AddressPools: [Swift.String] = []
 
   /// Optional. Remote control plane disk encryption options. This field is only
   /// used when enabling CMEK support.
-  public var controlPlaneEncryption: Cluster.ControlPlaneEncryption?
+  public var controlPlaneEncryption: Cluster.ControlPlaneEncryption? = nil
 
   /// Output only. The current status of the cluster.
-  public var status: Cluster.Status
+  public var status: Cluster.Status = Cluster.Status()
 
   /// Output only. All the maintenance events scheduled for the cluster,
   /// including the ones ongoing, planned for the future and done in the past (up
   /// to 90 days).
-  public var maintenanceEvents: [Cluster.MaintenanceEvent]
+  public var maintenanceEvents: [Cluster.MaintenanceEvent] = []
 
   /// Optional. The target cluster version. For example: "1.5.0".
-  public var targetVersion: Swift.String
+  public var targetVersion: Swift.String = Swift.String()
 
   /// Optional. The release channel a cluster is subscribed to.
-  public var releaseChannel: Cluster.ReleaseChannel
+  public var releaseChannel: Cluster.ReleaseChannel = Cluster.ReleaseChannel()
 
   /// Optional. Configuration of the cluster survivability, e.g., for the case
   /// when network connectivity is lost. Note: This only applies to local control
   /// plane clusters.
-  public var survivabilityConfig: Cluster.SurvivabilityConfig?
+  public var survivabilityConfig: Cluster.SurvivabilityConfig? = nil
 
   /// Optional. IPv6 address pools for cluster data plane external load
   /// balancing.
-  public var externalLoadBalancerIpv6AddressPools: [Swift.String]
+  public var externalLoadBalancerIpv6AddressPools: [Swift.String] = []
 
   /// Output only. The current connection state of the cluster.
-  public var connectionState: Cluster.ConnectionState?
+  public var connectionState: Cluster.ConnectionState? = nil
 
   /// Initialize a new instance of `Cluster`.
-  public init(
-    name: Swift.String = Swift.String(),
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    labels: [Swift.String: Swift.String] = [:],
-    fleet: Fleet? = nil,
-    networking: ClusterNetworking? = nil,
-    authorization: Authorization? = nil,
-    defaultMaxPodsPerNode: Swift.Int32 = Swift.Int32(),
-    endpoint: Swift.String = Swift.String(),
-    port: Swift.Int32 = Swift.Int32(),
-    clusterCaCertificate: Swift.String = Swift.String(),
-    maintenancePolicy: MaintenancePolicy? = nil,
-    controlPlaneVersion: Swift.String = Swift.String(),
-    nodeVersion: Swift.String = Swift.String(),
-    controlPlane: Cluster.ControlPlane? = nil,
-    systemAddonsConfig: Cluster.SystemAddonsConfig? = nil,
-    externalLoadBalancerIpv4AddressPools: [Swift.String] = [],
-    controlPlaneEncryption: Cluster.ControlPlaneEncryption? = nil,
-    status: Cluster.Status = Cluster.Status(),
-    maintenanceEvents: [Cluster.MaintenanceEvent] = [],
-    targetVersion: Swift.String = Swift.String(),
-    releaseChannel: Cluster.ReleaseChannel = Cluster.ReleaseChannel(),
-    survivabilityConfig: Cluster.SurvivabilityConfig? = nil,
-    externalLoadBalancerIpv6AddressPools: [Swift.String] = [],
-    connectionState: Cluster.ConnectionState? = nil,
-  ) {
-    self.name = name
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.labels = labels
-    self.fleet = fleet
-    self.networking = networking
-    self.authorization = authorization
-    self.defaultMaxPodsPerNode = defaultMaxPodsPerNode
-    self.endpoint = endpoint
-    self.port = port
-    self.clusterCaCertificate = clusterCaCertificate
-    self.maintenancePolicy = maintenancePolicy
-    self.controlPlaneVersion = controlPlaneVersion
-    self.nodeVersion = nodeVersion
-    self.controlPlane = controlPlane
-    self.systemAddonsConfig = systemAddonsConfig
-    self.externalLoadBalancerIpv4AddressPools = externalLoadBalancerIpv4AddressPools
-    self.controlPlaneEncryption = controlPlaneEncryption
-    self.status = status
-    self.maintenanceEvents = maintenanceEvents
-    self.targetVersion = targetVersion
-    self.releaseChannel = releaseChannel
-    self.survivabilityConfig = survivabilityConfig
-    self.externalLoadBalancerIpv6AddressPools = externalLoadBalancerIpv6AddressPools
-    self.connectionState = connectionState
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Cluster().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Configuration of the cluster control plane.
   public struct ControlPlane: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var config: OneOf_Config?
+    public var config: OneOf_Config? = nil
 
     /// Initialize a new instance of `ControlPlane`.
-    public init(
-      config: OneOf_Config? = nil,
-    ) {
-      self.config = config
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ControlPlane().with { $0.remote = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -223,7 +193,19 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Initialize a new instance of `Remote`.
-      public init() {
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Remote().with { $0.<placeholder> = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -249,40 +231,41 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       /// Name of the Google Distributed Cloud Edge zones where this node pool
       /// will be created. For example: `us-central1-edge-customer-a`.
-      public var nodeLocation: Swift.String
+      public var nodeLocation: Swift.String = Swift.String()
 
       /// The number of nodes to serve as replicas of the Control Plane.
-      public var nodeCount: Swift.Int32
+      public var nodeCount: Swift.Int32 = Swift.Int32()
 
       /// Only machines matching this filter will be allowed to host control
       /// plane nodes. The filtering language accepts strings like "name=<name>",
       /// and is documented here: [AIP-160](https://google.aip.dev/160).
-      public var machineFilter: Swift.String
+      public var machineFilter: Swift.String = Swift.String()
 
       /// Policy configuration about how user applications are deployed.
-      public var sharedDeploymentPolicy: Cluster.ControlPlane.SharedDeploymentPolicy
+      public var sharedDeploymentPolicy: Cluster.ControlPlane.SharedDeploymentPolicy = Cluster
+        .ControlPlane.SharedDeploymentPolicy()
 
       /// Optional. Name for the storage schema of control plane nodes.
       ///
       /// Warning: Configurable node local storage schema feature is an
       /// experimental feature, and is not recommended for general use
       /// in production clusters/nodepools.
-      public var controlPlaneNodeStorageSchema: Swift.String
+      public var controlPlaneNodeStorageSchema: Swift.String = Swift.String()
 
       /// Initialize a new instance of `Local`.
-      public init(
-        nodeLocation: Swift.String = Swift.String(),
-        nodeCount: Swift.Int32 = Swift.Int32(),
-        machineFilter: Swift.String = Swift.String(),
-        sharedDeploymentPolicy: Cluster.ControlPlane.SharedDeploymentPolicy = Cluster.ControlPlane
-          .SharedDeploymentPolicy(),
-        controlPlaneNodeStorageSchema: Swift.String = Swift.String(),
-      ) {
-        self.nodeLocation = nodeLocation
-        self.nodeCount = nodeCount
-        self.machineFilter = machineFilter
-        self.sharedDeploymentPolicy = sharedDeploymentPolicy
-        self.controlPlaneNodeStorageSchema = controlPlaneNodeStorageSchema
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Local().with { $0.nodeLocation = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -428,18 +411,25 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Optional. Config for Ingress.
-    public var ingress: Cluster.SystemAddonsConfig.Ingress?
+    public var ingress: Cluster.SystemAddonsConfig.Ingress? = nil
 
     /// Optional. Config for VM Service.
-    public var vmServiceConfig: Cluster.SystemAddonsConfig.VMServiceConfig?
+    public var vmServiceConfig: Cluster.SystemAddonsConfig.VMServiceConfig? = nil
 
     /// Initialize a new instance of `SystemAddonsConfig`.
-    public init(
-      ingress: Cluster.SystemAddonsConfig.Ingress? = nil,
-      vmServiceConfig: Cluster.SystemAddonsConfig.VMServiceConfig? = nil,
-    ) {
-      self.ingress = ingress
-      self.vmServiceConfig = vmServiceConfig
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SystemAddonsConfig().with { $0.ingress = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Config for the Ingress add-on which allows customers to create an Ingress
@@ -449,18 +439,25 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Optional. Whether Ingress is disabled.
-      public var disabled: Swift.Bool
+      public var disabled: Swift.Bool = Swift.Bool()
 
       /// Optional. Ingress VIP.
-      public var ipv4Vip: Swift.String
+      public var ipv4Vip: Swift.String = Swift.String()
 
       /// Initialize a new instance of `Ingress`.
-      public init(
-        disabled: Swift.Bool = Swift.Bool(),
-        ipv4Vip: Swift.String = Swift.String(),
-      ) {
-        self.disabled = disabled
-        self.ipv4Vip = ipv4Vip
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = Ingress().with { $0.disabled = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -480,13 +477,22 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
       /// Optional. Whether VMM is enabled.
-      public var vmmEnabled: Swift.Bool
+      public var vmmEnabled: Swift.Bool = Swift.Bool()
 
       /// Initialize a new instance of `VMServiceConfig`.
-      public init(
-        vmmEnabled: Swift.Bool = Swift.Bool(),
-      ) {
-        self.vmmEnabled = vmmEnabled
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = VMServiceConfig().with { $0.vmmEnabled = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
       }
 
       public static var _anyTypeUrl: String {
@@ -520,40 +526,41 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}
     /// to use for protecting control plane disks. If not specified, a
     /// Google-managed key will be used instead.
-    public var kmsKey: Swift.String
+    public var kmsKey: Swift.String = Swift.String()
 
     /// Output only. The Cloud KMS CryptoKeyVersion currently in use for
     /// protecting control plane disks. Only applicable if kms_key is set.
-    public var kmsKeyActiveVersion: Swift.String
+    public var kmsKeyActiveVersion: Swift.String = Swift.String()
 
     /// Output only. Availability of the Cloud KMS CryptoKey. If not
     /// `KEY_AVAILABLE`, then nodes may go offline as they cannot access their
     /// local data. This can be caused by a lack of permissions to use the key,
     /// or if the key is disabled or deleted.
-    public var kmsKeyState: KmsKeyState
+    public var kmsKeyState: KmsKeyState = KmsKeyState()
 
     /// Output only. Error status returned by Cloud KMS when using this key. This
     /// field may be populated only if `kms_key_state` is not
     /// `KMS_KEY_STATE_KEY_AVAILABLE`. If populated, this field contains the
     /// error status reported by Cloud KMS.
-    public var kmsStatus: GoogleRpc.Status?
+    public var kmsStatus: GoogleRpc.Status? = nil
 
     /// Output only. The current resource state associated with the cmek.
-    public var resourceState: ResourceState
+    public var resourceState: ResourceState = ResourceState()
 
     /// Initialize a new instance of `ControlPlaneEncryption`.
-    public init(
-      kmsKey: Swift.String = Swift.String(),
-      kmsKeyActiveVersion: Swift.String = Swift.String(),
-      kmsKeyState: KmsKeyState = KmsKeyState(),
-      kmsStatus: GoogleRpc.Status? = nil,
-      resourceState: ResourceState = ResourceState(),
-    ) {
-      self.kmsKey = kmsKey
-      self.kmsKeyActiveVersion = kmsKeyActiveVersion
-      self.kmsKeyState = kmsKeyState
-      self.kmsStatus = kmsStatus
-      self.resourceState = resourceState
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ControlPlaneEncryption().with { $0.kmsKey = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -575,63 +582,54 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Output only. UUID of the maintenance event.
-    public var uuid: Swift.String
+    public var uuid: Swift.String = Swift.String()
 
     /// Output only. The target version of the cluster.
-    public var targetVersion: Swift.String
+    public var targetVersion: Swift.String = Swift.String()
 
     /// Output only. The operation for running the maintenance event. Specified
     /// in the format projects/*/locations/*/operations/*. If the maintenance
     /// event is split into multiple operations (e.g. due to maintenance
     /// windows), the latest one is recorded.
-    public var operation: Swift.String
+    public var operation: Swift.String = Swift.String()
 
     /// Output only. The type of the maintenance event.
-    public var type: Cluster.MaintenanceEvent.Type_
+    public var type: Cluster.MaintenanceEvent.Type_ = Cluster.MaintenanceEvent.Type_()
 
     /// Output only. The schedule of the maintenance event.
-    public var schedule: Cluster.MaintenanceEvent.Schedule
+    public var schedule: Cluster.MaintenanceEvent.Schedule = Cluster.MaintenanceEvent.Schedule()
 
     /// Output only. The state of the maintenance event.
-    public var state: Cluster.MaintenanceEvent.State
+    public var state: Cluster.MaintenanceEvent.State = Cluster.MaintenanceEvent.State()
 
     /// Output only. The time when the maintenance event request was created.
-    public var createTime: GoogleCloudWkt.Timestamp?
+    public var createTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Output only. The time when the maintenance event started.
-    public var startTime: GoogleCloudWkt.Timestamp?
+    public var startTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Output only. The time when the maintenance event ended, either
     /// successfully or not. If the maintenance event is split into multiple
     /// maintenance windows, end_time is only updated when the whole flow ends.
-    public var endTime: GoogleCloudWkt.Timestamp?
+    public var endTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Output only. The time when the maintenance event message was updated.
-    public var updateTime: GoogleCloudWkt.Timestamp?
+    public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `MaintenanceEvent`.
-    public init(
-      uuid: Swift.String = Swift.String(),
-      targetVersion: Swift.String = Swift.String(),
-      operation: Swift.String = Swift.String(),
-      type: Cluster.MaintenanceEvent.Type_ = Cluster.MaintenanceEvent.Type_(),
-      schedule: Cluster.MaintenanceEvent.Schedule = Cluster.MaintenanceEvent.Schedule(),
-      state: Cluster.MaintenanceEvent.State = Cluster.MaintenanceEvent.State(),
-      createTime: GoogleCloudWkt.Timestamp? = nil,
-      startTime: GoogleCloudWkt.Timestamp? = nil,
-      endTime: GoogleCloudWkt.Timestamp? = nil,
-      updateTime: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.uuid = uuid
-      self.targetVersion = targetVersion
-      self.operation = operation
-      self.type = type
-      self.schedule = schedule
-      self.state = state
-      self.createTime = createTime
-      self.startTime = startTime
-      self.endTime = endTime
-      self.updateTime = updateTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = MaintenanceEvent().with { $0.uuid = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// Indicates the maintenance event type.
@@ -959,13 +957,22 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Optional. Time period that allows the cluster nodes to be rebooted and
     /// become functional without network connectivity to Google. The default 0
     /// means not allowed. The maximum is 7 days.
-    public var offlineRebootTtl: GoogleCloudWkt.Duration?
+    public var offlineRebootTtl: GoogleCloudWkt.Duration? = nil
 
     /// Initialize a new instance of `SurvivabilityConfig`.
-    public init(
-      offlineRebootTtl: GoogleCloudWkt.Duration? = nil,
-    ) {
-      self.offlineRebootTtl = offlineRebootTtl
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SurvivabilityConfig().with { $0.offlineRebootTtl = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -985,18 +992,25 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
     /// Output only. The current connection state.
-    public var state: Cluster.ConnectionState.State
+    public var state: Cluster.ConnectionState.State = Cluster.ConnectionState.State()
 
     /// Output only. The time when the connection state was last changed.
-    public var updateTime: GoogleCloudWkt.Timestamp?
+    public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
     /// Initialize a new instance of `ConnectionState`.
-    public init(
-      state: Cluster.ConnectionState.State = Cluster.ConnectionState.State(),
-      updateTime: GoogleCloudWkt.Timestamp? = nil,
-    ) {
-      self.state = state
-      self.updateTime = updateTime
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ConnectionState().with { $0.state = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The connection state.

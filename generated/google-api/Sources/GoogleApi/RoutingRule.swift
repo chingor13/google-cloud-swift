@@ -389,13 +389,22 @@ public struct RoutingRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// `path_template` is not provided), "last one wins" rule
   /// determines which Parameter gets used.
   /// See the examples for more details.
-  public var routingParameters: [RoutingParameter]
+  public var routingParameters: [RoutingParameter] = []
 
   /// Initialize a new instance of `RoutingRule`.
-  public init(
-    routingParameters: [RoutingParameter] = [],
-  ) {
-    self.routingParameters = routingParameters
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = RoutingRule().with { $0.routingParameters = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.RoutingRule" }

@@ -23,8 +23,8 @@
 
   func sample(client: some SqlInstancesService) async throws {
     let response = try await client.demoteMaster(
-      request: SqlInstancesDemoteMasterRequest(/* set fields */
-      )
+      request: SqlInstancesDemoteMasterRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

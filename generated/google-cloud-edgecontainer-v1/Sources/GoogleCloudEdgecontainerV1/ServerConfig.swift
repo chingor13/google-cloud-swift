@@ -22,23 +22,28 @@ public struct ServerConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. Mapping from release channel to channel config.
-  public var channels: [Swift.String: ChannelConfig]
+  public var channels: [Swift.String: ChannelConfig] = [:]
 
   /// Output only. Supported versions, e.g.: ["1.4.0", "1.5.0"].
-  public var versions: [Version]
+  public var versions: [Version] = []
 
   /// Output only. Default version, e.g.: "1.4.0".
-  public var defaultVersion: Swift.String
+  public var defaultVersion: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ServerConfig`.
-  public init(
-    channels: [Swift.String: ChannelConfig] = [:],
-    versions: [Version] = [],
-    defaultVersion: Swift.String = Swift.String(),
-  ) {
-    self.channels = channels
-    self.versions = versions
-    self.defaultVersion = defaultVersion
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = ServerConfig().with { $0.channels = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

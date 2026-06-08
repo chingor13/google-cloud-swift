@@ -25,8 +25,8 @@ import GoogleRpc
 
 func sample(client: some Workflows) async throws {
   let items = try client.listWorkflowRevisions(
-    byItem: ListWorkflowRevisionsRequest(/* set fields */
-    )
+    byItem: ListWorkflowRevisionsRequest()
+      /* set fields using .with { $0... } */
   )
   for try await item in items {
     print("  \(item)")

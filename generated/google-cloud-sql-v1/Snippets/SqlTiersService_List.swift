@@ -23,8 +23,8 @@
 
   func sample(client: some SqlTiersService) async throws {
     let response = try await client.list(
-      request: SqlTiersListRequest(/* set fields */
-      )
+      request: SqlTiersListRequest()
+        /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
   }

@@ -23,42 +23,41 @@
     Sendable
   {
     /// This is always sql#activeDirectoryConfig.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The name of the domain (e.g., mydomain.com).
-    public var domain: Swift.String
+    public var domain: Swift.String = Swift.String()
 
     /// Optional. The mode of the Active Directory configuration.
-    public var mode: SqlActiveDirectoryConfig.ActiveDirectoryMode
+    public var mode: SqlActiveDirectoryConfig.ActiveDirectoryMode =
+      SqlActiveDirectoryConfig.ActiveDirectoryMode()
 
     /// Optional. Domain controller IPv4 addresses used to bootstrap Active
     /// Directory.
-    public var dnsServers: [Swift.String]
+    public var dnsServers: [Swift.String] = []
 
     /// Optional. The secret manager key storing the administrator credential.
     /// (e.g., projects/{project}/secrets/{secret}).
-    public var adminCredentialSecretName: Swift.String
+    public var adminCredentialSecretName: Swift.String = Swift.String()
 
     /// Optional. The organizational unit distinguished name. This is the full
     /// hierarchical path to the organizational unit.
-    public var organizationalUnit: Swift.String
+    public var organizationalUnit: Swift.String = Swift.String()
 
     /// Initialize a new instance of `SqlActiveDirectoryConfig`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      domain: Swift.String = Swift.String(),
-      mode: SqlActiveDirectoryConfig.ActiveDirectoryMode =
-        SqlActiveDirectoryConfig.ActiveDirectoryMode(),
-      dnsServers: [Swift.String] = [],
-      adminCredentialSecretName: Swift.String = Swift.String(),
-      organizationalUnit: Swift.String = Swift.String(),
-    ) {
-      self.kind = kind
-      self.domain = domain
-      self.mode = mode
-      self.dnsServers = dnsServers
-      self.adminCredentialSecretName = adminCredentialSecretName
-      self.organizationalUnit = organizationalUnit
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlActiveDirectoryConfig().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     /// The modes of Active Directory configuration.

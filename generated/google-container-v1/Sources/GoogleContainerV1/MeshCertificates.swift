@@ -32,13 +32,22 @@ public struct MeshCertificates: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// must be non-empty).
   ///
   /// [google.container.v1.WorkloadIdentityConfig.workload_pool]: <doc:WorkloadIdentityConfig/workloadPool>
-  public var enableCertificates: GoogleCloudWkt.BoolValue?
+  public var enableCertificates: GoogleCloudWkt.BoolValue? = nil
 
   /// Initialize a new instance of `MeshCertificates`.
-  public init(
-    enableCertificates: GoogleCloudWkt.BoolValue? = nil,
-  ) {
-    self.enableCertificates = enableCertificates
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MeshCertificates().with { $0.enableCertificates = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

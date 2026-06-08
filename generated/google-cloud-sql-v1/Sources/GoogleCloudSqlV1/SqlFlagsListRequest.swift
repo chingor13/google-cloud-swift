@@ -24,19 +24,26 @@
   {
     /// Database type and version you want to retrieve flags for. By default, this
     /// method returns flags for all database types and versions.
-    public var databaseVersion: Swift.String
+    public var databaseVersion: Swift.String = Swift.String()
 
     /// Optional. Specify the scope of flags to be returned by SqlFlagsListService.
     /// Return list of database flags if unspecified.
-    public var flagScope: SqlFlagScope?
+    public var flagScope: SqlFlagScope? = nil
 
     /// Initialize a new instance of `SqlFlagsListRequest`.
-    public init(
-      databaseVersion: Swift.String = Swift.String(),
-      flagScope: SqlFlagScope? = nil,
-    ) {
-      self.databaseVersion = databaseVersion
-      self.flagScope = flagScope
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = SqlFlagsListRequest().with { $0.databaseVersion = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

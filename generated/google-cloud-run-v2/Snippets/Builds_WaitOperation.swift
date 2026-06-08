@@ -23,8 +23,8 @@ import GoogleLongrunning
 
 func sample(client: some Builds) async throws {
   let response = try await client.waitOperation(
-    request: WaitOperationRequest(/* set fields */
-    )
+    request: WaitOperationRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }

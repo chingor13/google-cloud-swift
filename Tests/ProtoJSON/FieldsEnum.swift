@@ -21,24 +21,42 @@ import GoogleCloudWkt
     "Enum fields deserialize",
     arguments: [
       (#"{}"#, MessageWithEnum()),
-      (#"{"singular": 0}"#, MessageWithEnum(singular: .unspecified)),
-      (#"{"singular": "TEST_ENUM_UNSPECIFIED"}"#, MessageWithEnum(singular: .unspecified)),
-      (#"{"singular": 1}"#, MessageWithEnum(singular: .red)),
-      (#"{"singular": "RED"}"#, MessageWithEnum(singular: .red)),
-      (#"{"singular": "CYAN"}"#, MessageWithEnum(singular: .unknownStringValue("CYAN"))),
-      (#"{"singular": "42"}"#, MessageWithEnum(singular: .unknownIntValue(42))),
-      (#"{"optional": 2}"#, MessageWithEnum(optional: .green)),
-      (#"{"optional": "GREEN"}"#, MessageWithEnum(optional: .green)),
+      (#"{"singular": 0}"#, MessageWithEnum().with { $0.singular = .unspecified }),
+      (
+        #"{"singular": "TEST_ENUM_UNSPECIFIED"}"#,
+        MessageWithEnum().with { $0.singular = .unspecified }
+      ),
+      (#"{"singular": 1}"#, MessageWithEnum().with { $0.singular = .red }),
+      (#"{"singular": "RED"}"#, MessageWithEnum().with { $0.singular = .red }),
+      (
+        #"{"singular": "CYAN"}"#,
+        MessageWithEnum().with { $0.singular = .unknownStringValue("CYAN") }
+      ),
+      (#"{"singular": "42"}"#, MessageWithEnum().with { $0.singular = .unknownIntValue(42) }),
+      (#"{"optional": 2}"#, MessageWithEnum().with { $0.optional = .green }),
+      (#"{"optional": "GREEN"}"#, MessageWithEnum().with { $0.optional = .green }),
       (#"{"optional": null}"#, MessageWithEnum()),
-      (#"{"optional": "CYAN"}"#, MessageWithEnum(optional: .unknownStringValue("CYAN"))),
-      (#"{"optional": "42"}"#, MessageWithEnum(optional: .unknownIntValue(42))),
-      (#"{"optional": 42}"#, MessageWithEnum(optional: .unknownIntValue(42))),
-      (#"{"repeated": [1, 3, "BLUE"]}"#, MessageWithEnum(repeated: [.red, .blue, .blue])),
-      (#"{"repeated": [42]}"#, MessageWithEnum(repeated: [.unknownIntValue(42)])),
-      (#"{"repeated": ["CYAN"]}"#, MessageWithEnum(repeated: [.unknownStringValue("CYAN")])),
-      (#"{"map": {"a": 2}}"#, MessageWithEnum(map: ["a": .green])),
-      (#"{"map": {"a": 42}}"#, MessageWithEnum(map: ["a": .unknownIntValue(42)])),
-      (#"{"map": {"a": "MAGENTA"}}"#, MessageWithEnum(map: ["a": .unknownStringValue("MAGENTA")])),
+      (
+        #"{"optional": "CYAN"}"#,
+        MessageWithEnum().with { $0.optional = .unknownStringValue("CYAN") }
+      ),
+      (#"{"optional": "42"}"#, MessageWithEnum().with { $0.optional = .unknownIntValue(42) }),
+      (#"{"optional": 42}"#, MessageWithEnum().with { $0.optional = .unknownIntValue(42) }),
+      (
+        #"{"repeated": [1, 3, "BLUE"]}"#,
+        MessageWithEnum().with { $0.repeated = [.red, .blue, .blue] }
+      ),
+      (#"{"repeated": [42]}"#, MessageWithEnum().with { $0.repeated = [.unknownIntValue(42)] }),
+      (
+        #"{"repeated": ["CYAN"]}"#,
+        MessageWithEnum().with { $0.repeated = [.unknownStringValue("CYAN")] }
+      ),
+      (#"{"map": {"a": 2}}"#, MessageWithEnum().with { $0.map = ["a": .green] }),
+      (#"{"map": {"a": 42}}"#, MessageWithEnum().with { $0.map = ["a": .unknownIntValue(42)] }),
+      (
+        #"{"map": {"a": "MAGENTA"}}"#,
+        MessageWithEnum().with { $0.map = ["a": .unknownStringValue("MAGENTA")] }
+      ),
     ])
   func deserialize(input: String, want: MessageWithEnum) throws {
     let decoder = _ProtoJSONDecoder()
@@ -52,49 +70,55 @@ import GoogleCloudWkt
       (#"{"map":{},"optional":null,"repeated":[],"singular":0}"#, MessageWithEnum()),
       (
         #"{"map":{},"optional":null,"repeated":[],"singular":0}"#,
-        MessageWithEnum(singular: .unspecified)
+        MessageWithEnum().with { $0.singular = .unspecified }
       ),
-      (#"{"map":{},"optional":null,"repeated":[],"singular":1}"#, MessageWithEnum(singular: .red)),
+      (
+        #"{"map":{},"optional":null,"repeated":[],"singular":1}"#,
+        MessageWithEnum().with { $0.singular = .red }
+      ),
       (
         #"{"map":{},"optional":null,"repeated":[],"singular":"CYAN"}"#,
-        MessageWithEnum(singular: .unknownStringValue("CYAN"))
+        MessageWithEnum().with { $0.singular = .unknownStringValue("CYAN") }
       ),
       (
         #"{"map":{},"optional":null,"repeated":[],"singular":42}"#,
-        MessageWithEnum(singular: .unknownIntValue(42))
+        MessageWithEnum().with { $0.singular = .unknownIntValue(42) }
       ),
-      (#"{"map":{},"optional":2,"repeated":[],"singular":0}"#, MessageWithEnum(optional: .green)),
+      (
+        #"{"map":{},"optional":2,"repeated":[],"singular":0}"#,
+        MessageWithEnum().with { $0.optional = .green }
+      ),
       (
         #"{"map":{},"optional":"CYAN","repeated":[],"singular":0}"#,
-        MessageWithEnum(optional: .unknownStringValue("CYAN"))
+        MessageWithEnum().with { $0.optional = .unknownStringValue("CYAN") }
       ),
       (
         #"{"map":{},"optional":42,"repeated":[],"singular":0}"#,
-        MessageWithEnum(optional: .unknownIntValue(42))
+        MessageWithEnum().with { $0.optional = .unknownIntValue(42) }
       ),
       (
         #"{"map":{},"optional":null,"repeated":[1,3,3],"singular":0}"#,
-        MessageWithEnum(repeated: [.red, .blue, .blue])
+        MessageWithEnum().with { $0.repeated = [.red, .blue, .blue] }
       ),
       (
         #"{"map":{},"optional":null,"repeated":[42],"singular":0}"#,
-        MessageWithEnum(repeated: [.unknownIntValue(42)])
+        MessageWithEnum().with { $0.repeated = [.unknownIntValue(42)] }
       ),
       (
         #"{"map":{},"optional":null,"repeated":["CYAN"],"singular":0}"#,
-        MessageWithEnum(repeated: [.unknownStringValue("CYAN")])
+        MessageWithEnum().with { $0.repeated = [.unknownStringValue("CYAN")] }
       ),
       (
         #"{"map":{"a":2},"optional":null,"repeated":[],"singular":0}"#,
-        MessageWithEnum(map: ["a": .green])
+        MessageWithEnum().with { $0.map = ["a": .green] }
       ),
       (
         #"{"map":{"a":42},"optional":null,"repeated":[],"singular":0}"#,
-        MessageWithEnum(map: ["a": .unknownIntValue(42)])
+        MessageWithEnum().with { $0.map = ["a": .unknownIntValue(42)] }
       ),
       (
         #"{"map":{"a":"MAGENTA"},"optional":null,"repeated":[],"singular":0}"#,
-        MessageWithEnum(map: ["a": .unknownStringValue("MAGENTA")])
+        MessageWithEnum().with { $0.map = ["a": .unknownStringValue("MAGENTA")] }
       ),
     ])
   func serialize(want: String, input: MessageWithEnum) throws {

@@ -22,13 +22,22 @@ public struct SourceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// All files used during config generation.
-  public var sourceFiles: [GoogleCloudWkt.`Any`]
+  public var sourceFiles: [GoogleCloudWkt.`Any`] = []
 
   /// Initialize a new instance of `SourceInfo`.
-  public init(
-    sourceFiles: [GoogleCloudWkt.`Any`] = [],
-  ) {
-    self.sourceFiles = sourceFiles
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = SourceInfo().with { $0.sourceFiles = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.SourceInfo" }

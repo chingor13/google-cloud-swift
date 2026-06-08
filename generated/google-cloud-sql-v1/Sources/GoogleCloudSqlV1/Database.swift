@@ -23,55 +23,48 @@
     Sendable
   {
     /// This is always `sql#database`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The Cloud SQL charset value.
-    public var charset: Swift.String
+    public var charset: Swift.String = Swift.String()
 
     /// The Cloud SQL collation value.
-    public var collation: Swift.String
+    public var collation: Swift.String = Swift.String()
 
     /// This field is deprecated and will be removed from a future version of the
     /// API.
-    public var etag: Swift.String
+    public var etag: Swift.String = Swift.String()
 
     /// The name of the database in the Cloud SQL instance. This does not include
     /// the project ID or instance name.
-    public var name: Swift.String
+    public var name: Swift.String = Swift.String()
 
     /// The name of the Cloud SQL instance. This does not include the project ID.
-    public var instance: Swift.String
+    public var instance: Swift.String = Swift.String()
 
     /// The URI of this resource.
-    public var selfLink: Swift.String
+    public var selfLink: Swift.String = Swift.String()
 
     /// The project ID of the project containing the Cloud SQL database. The Google
     /// apps domain is prefixed if applicable.
-    public var project: Swift.String
+    public var project: Swift.String = Swift.String()
 
-    public var databaseDetails: OneOf_DatabaseDetails?
+    public var databaseDetails: OneOf_DatabaseDetails? = nil
 
     /// Initialize a new instance of `Database`.
-    public init(
-      kind: Swift.String = Swift.String(),
-      charset: Swift.String = Swift.String(),
-      collation: Swift.String = Swift.String(),
-      etag: Swift.String = Swift.String(),
-      name: Swift.String = Swift.String(),
-      instance: Swift.String = Swift.String(),
-      selfLink: Swift.String = Swift.String(),
-      project: Swift.String = Swift.String(),
-      databaseDetails: OneOf_DatabaseDetails? = nil,
-    ) {
-      self.kind = kind
-      self.charset = charset
-      self.collation = collation
-      self.etag = etag
-      self.name = name
-      self.instance = instance
-      self.selfLink = selfLink
-      self.project = project
-      self.databaseDetails = databaseDetails
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Database().with { $0.kind = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

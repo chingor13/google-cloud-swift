@@ -22,30 +22,33 @@ public struct CreateVpnConnectionRequest: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Required. The parent location where this vpn connection will be created.
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. The VPN connection identifier.
-  public var vpnConnectionId: Swift.String
+  public var vpnConnectionId: Swift.String = Swift.String()
 
   /// Required. The VPN connection to create.
-  public var vpnConnection: VpnConnection?
+  public var vpnConnection: VpnConnection? = nil
 
   /// A unique identifier for this request. Restricted to 36 ASCII characters. A
   /// random UUID is recommended. This request is only idempotent if
   /// `request_id` is provided.
-  public var requestId: Swift.String
+  public var requestId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `CreateVpnConnectionRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    vpnConnectionId: Swift.String = Swift.String(),
-    vpnConnection: VpnConnection? = nil,
-    requestId: Swift.String = Swift.String(),
-  ) {
-    self.parent = parent
-    self.vpnConnectionId = vpnConnectionId
-    self.vpnConnection = vpnConnection
-    self.requestId = requestId
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateVpnConnectionRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

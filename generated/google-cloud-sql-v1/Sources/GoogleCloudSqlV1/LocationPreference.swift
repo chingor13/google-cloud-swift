@@ -27,31 +27,34 @@
   {
     /// The App Engine application to follow, it must be in the same region as the
     /// Cloud SQL instance. WARNING: Changing this might restart the instance.
-    public var followGaeApplication: Swift.String
+    public var followGaeApplication: Swift.String = Swift.String()
 
     /// The preferred Compute Engine zone (for example: us-central1-a,
     /// us-central1-b, etc.). WARNING: Changing this might restart the instance.
-    public var zone: Swift.String
+    public var zone: Swift.String = Swift.String()
 
     /// The preferred Compute Engine zone for the secondary/failover
     /// (for example: us-central1-a, us-central1-b, etc.).
     /// To disable this field, set it to 'no_secondary_zone'.
-    public var secondaryZone: Swift.String
+    public var secondaryZone: Swift.String = Swift.String()
 
     /// This is always `sql#locationPreference`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// Initialize a new instance of `LocationPreference`.
-    public init(
-      followGaeApplication: Swift.String = Swift.String(),
-      zone: Swift.String = Swift.String(),
-      secondaryZone: Swift.String = Swift.String(),
-      kind: Swift.String = Swift.String(),
-    ) {
-      self.followGaeApplication = followGaeApplication
-      self.zone = zone
-      self.secondaryZone = secondaryZone
-      self.kind = kind
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = LocationPreference().with { $0.followGaeApplication = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

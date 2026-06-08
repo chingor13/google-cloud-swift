@@ -22,19 +22,26 @@ public struct Fraction: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The numerator in the fraction, e.g. 2 in 2/3.
-  public var numerator: Swift.Int64
+  public var numerator: Swift.Int64 = Swift.Int64()
 
   /// The value by which the numerator is divided, e.g. 3 in 2/3. Must be
   /// positive.
-  public var denominator: Swift.Int64
+  public var denominator: Swift.Int64 = Swift.Int64()
 
   /// Initialize a new instance of `Fraction`.
-  public init(
-    numerator: Swift.Int64 = Swift.Int64(),
-    denominator: Swift.Int64 = Swift.Int64(),
-  ) {
-    self.numerator = numerator
-    self.denominator = denominator
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Fraction().with { $0.numerator = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.Fraction" }

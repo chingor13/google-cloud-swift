@@ -24,12 +24,13 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
   let response = try await client.updateSecret(
-    request: UpdateSecretRequest(
-      secret: Secret(
-        name: "projects/\(projectId)/secrets/\(secretId)",
-      ),
-      updateMask: GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]),
-    )
+    request: UpdateSecretRequest()
+      .with {
+        $0.secret = Secret().with {
+          $0.name = "projects/\(projectId)/secrets/\(secretId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

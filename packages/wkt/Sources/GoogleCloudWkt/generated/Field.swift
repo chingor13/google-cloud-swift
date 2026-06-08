@@ -21,60 +21,51 @@ public struct Field: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The field type.
-  public var kind: Field.Kind
+  public var kind: Field.Kind = Field.Kind()
 
   /// The field cardinality.
-  public var cardinality: Field.Cardinality
+  public var cardinality: Field.Cardinality = Field.Cardinality()
 
   /// The field number.
-  public var number: Swift.Int32
+  public var number: Swift.Int32 = Swift.Int32()
 
   /// The field name.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// The field type URL, without the scheme, for message or enumeration
   /// types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
-  public var typeUrl: Swift.String
+  public var typeUrl: Swift.String = Swift.String()
 
   /// The index of the field type in `Type.oneofs`, for message or enumeration
   /// types. The first type has index 1; zero means the type is not in the list.
-  public var oneofIndex: Swift.Int32
+  public var oneofIndex: Swift.Int32 = Swift.Int32()
 
   /// Whether to use alternative packed wire representation.
-  public var packed: Swift.Bool
+  public var packed: Swift.Bool = Swift.Bool()
 
   /// The protocol buffer options.
-  public var options: [Option]
+  public var options: [Option] = []
 
   /// The field JSON name.
-  public var jsonName: Swift.String
+  public var jsonName: Swift.String = Swift.String()
 
   /// The string value of the default value of this field. Proto2 syntax only.
-  public var defaultValue: Swift.String
+  public var defaultValue: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Field`.
-  public init(
-    kind: Field.Kind = Field.Kind(),
-    cardinality: Field.Cardinality = Field.Cardinality(),
-    number: Swift.Int32 = Swift.Int32(),
-    name: Swift.String = Swift.String(),
-    typeUrl: Swift.String = Swift.String(),
-    oneofIndex: Swift.Int32 = Swift.Int32(),
-    packed: Swift.Bool = Swift.Bool(),
-    options: [Option] = [],
-    jsonName: Swift.String = Swift.String(),
-    defaultValue: Swift.String = Swift.String(),
-  ) {
-    self.kind = kind
-    self.cardinality = cardinality
-    self.number = number
-    self.name = name
-    self.typeUrl = typeUrl
-    self.oneofIndex = oneofIndex
-    self.packed = packed
-    self.options = options
-    self.jsonName = jsonName
-    self.defaultValue = defaultValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Field().with { $0.kind = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Basic field types.

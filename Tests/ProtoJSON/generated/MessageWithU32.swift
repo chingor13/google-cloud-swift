@@ -22,38 +22,37 @@ public struct MessageWithU32: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: Swift.UInt32
+  public var singular: Swift.UInt32 = Swift.UInt32()
 
   /// An optional field.
-  public var option: Swift.UInt32?
+  public var option: Swift.UInt32? = nil
 
   /// A repeated field.
-  public var repeated: [Swift.UInt32]
+  public var repeated: [Swift.UInt32] = []
 
   /// Test u32 as values.
-  public var mapValue: [Swift.String: Swift.UInt32]
+  public var mapValue: [Swift.String: Swift.UInt32] = [:]
 
   /// Test u32 as keys.
-  public var mapKey: [Swift.UInt32: Swift.String]
+  public var mapKey: [Swift.UInt32: Swift.String] = [:]
 
   /// Test u32 as both keys and values.
-  public var mapKeyValue: [Swift.UInt32: Swift.UInt32]
+  public var mapKeyValue: [Swift.UInt32: Swift.UInt32] = [:]
 
   /// Initialize a new instance of `MessageWithU32`.
-  public init(
-    singular: Swift.UInt32 = Swift.UInt32(),
-    option: Swift.UInt32? = nil,
-    repeated: [Swift.UInt32] = [],
-    mapValue: [Swift.String: Swift.UInt32] = [:],
-    mapKey: [Swift.UInt32: Swift.String] = [:],
-    mapKeyValue: [Swift.UInt32: Swift.UInt32] = [:],
-  ) {
-    self.singular = singular
-    self.option = option
-    self.repeated = repeated
-    self.mapValue = mapValue
-    self.mapKey = mapKey
-    self.mapKeyValue = mapKeyValue
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithU32().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

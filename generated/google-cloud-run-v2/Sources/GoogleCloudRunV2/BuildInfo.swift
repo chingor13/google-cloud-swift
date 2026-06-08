@@ -23,18 +23,25 @@ public struct BuildInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Output only. Entry point of the function when the image is a Cloud Run
   /// function.
-  public var functionTarget: Swift.String
+  public var functionTarget: Swift.String = Swift.String()
 
   /// Output only. Source code location of the image.
-  public var sourceLocation: Swift.String
+  public var sourceLocation: Swift.String = Swift.String()
 
   /// Initialize a new instance of `BuildInfo`.
-  public init(
-    functionTarget: Swift.String = Swift.String(),
-    sourceLocation: Swift.String = Swift.String(),
-  ) {
-    self.functionTarget = functionTarget
-    self.sourceLocation = sourceLocation
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BuildInfo().with { $0.functionTarget = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

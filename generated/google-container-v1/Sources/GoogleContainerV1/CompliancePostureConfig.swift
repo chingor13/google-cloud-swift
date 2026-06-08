@@ -27,18 +27,25 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
   Sendable
 {
   /// Defines the enablement mode for Compliance Posture.
-  public var mode: CompliancePostureConfig.Mode?
+  public var mode: CompliancePostureConfig.Mode? = nil
 
   /// List of enabled compliance standards.
-  public var complianceStandards: [CompliancePostureConfig.ComplianceStandard]
+  public var complianceStandards: [CompliancePostureConfig.ComplianceStandard] = []
 
   /// Initialize a new instance of `CompliancePostureConfig`.
-  public init(
-    mode: CompliancePostureConfig.Mode? = nil,
-    complianceStandards: [CompliancePostureConfig.ComplianceStandard] = [],
-  ) {
-    self.mode = mode
-    self.complianceStandards = complianceStandards
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CompliancePostureConfig().with { $0.mode = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Defines the details of a compliance standard.
@@ -46,13 +53,22 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     Sendable
   {
     /// Name of the compliance standard.
-    public var standard: Swift.String?
+    public var standard: Swift.String? = nil
 
     /// Initialize a new instance of `ComplianceStandard`.
-    public init(
-      standard: Swift.String? = nil,
-    ) {
-      self.standard = standard
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ComplianceStandard().with { $0.standard = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

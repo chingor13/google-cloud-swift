@@ -25,32 +25,35 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// The action that was performed on a Binding.
   /// Required
-  public var action: BindingDelta.Action
+  public var action: BindingDelta.Action = BindingDelta.Action()
 
   /// Role that is assigned to `members`.
   /// For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
   /// Required
-  public var role: Swift.String
+  public var role: Swift.String = Swift.String()
 
   /// A single identity requesting access for a Google Cloud resource.
   /// Follows the same format of Binding.members.
   /// Required
-  public var member: Swift.String
+  public var member: Swift.String = Swift.String()
 
   /// The condition that is associated with this binding.
-  public var condition: GoogleType.Expr?
+  public var condition: GoogleType.Expr? = nil
 
   /// Initialize a new instance of `BindingDelta`.
-  public init(
-    action: BindingDelta.Action = BindingDelta.Action(),
-    role: Swift.String = Swift.String(),
-    member: Swift.String = Swift.String(),
-    condition: GoogleType.Expr? = nil,
-  ) {
-    self.action = action
-    self.role = role
-    self.member = member
-    self.condition = condition
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = BindingDelta().with { $0.action = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// The type of action performed on a Binding in a policy.

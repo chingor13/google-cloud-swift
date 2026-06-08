@@ -26,9 +26,8 @@ import GoogleRpc
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
   let items = try client.listWorkflows(
-    byItem: ListWorkflowsRequest(
-      parent: "\(parent)",
-    )
+    byItem: ListWorkflowsRequest()
+      .with { $0.parent = "\(parent)" }
   )
   for try await item in items {
     print("  \(item)")

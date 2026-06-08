@@ -22,53 +22,46 @@ public struct Jwk: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Key Type.
-  public var kty: Swift.String
+  public var kty: Swift.String = Swift.String()
 
   /// Algorithm.
-  public var alg: Swift.String
+  public var alg: Swift.String = Swift.String()
 
   /// Permitted uses for the public keys.
-  public var use: Swift.String
+  public var use: Swift.String = Swift.String()
 
   /// Key ID.
-  public var kid: Swift.String
+  public var kid: Swift.String = Swift.String()
 
   /// Used for RSA keys.
-  public var n: Swift.String
+  public var n: Swift.String = Swift.String()
 
   /// Used for RSA keys.
-  public var e: Swift.String
+  public var e: Swift.String = Swift.String()
 
   /// Used for ECDSA keys.
-  public var x: Swift.String
+  public var x: Swift.String = Swift.String()
 
   /// Used for ECDSA keys.
-  public var y: Swift.String
+  public var y: Swift.String = Swift.String()
 
   /// Used for ECDSA keys.
-  public var crv: Swift.String
+  public var crv: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Jwk`.
-  public init(
-    kty: Swift.String = Swift.String(),
-    alg: Swift.String = Swift.String(),
-    use: Swift.String = Swift.String(),
-    kid: Swift.String = Swift.String(),
-    n: Swift.String = Swift.String(),
-    e: Swift.String = Swift.String(),
-    x: Swift.String = Swift.String(),
-    y: Swift.String = Swift.String(),
-    crv: Swift.String = Swift.String(),
-  ) {
-    self.kty = kty
-    self.alg = alg
-    self.use = use
-    self.kid = kid
-    self.n = n
-    self.e = e
-    self.x = x
-    self.y = y
-    self.crv = crv
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Jwk().with { $0.kty = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/google.container.v1.Jwk" }

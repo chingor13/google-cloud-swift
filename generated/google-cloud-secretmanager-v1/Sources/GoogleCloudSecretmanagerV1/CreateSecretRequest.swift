@@ -29,30 +29,35 @@ public struct CreateSecretRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// or `projects/*/locations/*`.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var parent: Swift.String
+  public var parent: Swift.String = Swift.String()
 
   /// Required. This must be unique within the project.
   ///
   /// A secret ID is a string with a maximum length of 255 characters and can
   /// contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
   /// underscore (`_`) characters.
-  public var secretId: Swift.String
+  public var secretId: Swift.String = Swift.String()
 
   /// Required. A [Secret][google.cloud.secretmanager.v1.Secret] with initial
   /// field values.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var secret: Secret?
+  public var secret: Secret? = nil
 
   /// Initialize a new instance of `CreateSecretRequest`.
-  public init(
-    parent: Swift.String = Swift.String(),
-    secretId: Swift.String = Swift.String(),
-    secret: Secret? = nil,
-  ) {
-    self.parent = parent
-    self.secretId = secretId
-    self.secret = secret
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = CreateSecretRequest().with { $0.parent = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

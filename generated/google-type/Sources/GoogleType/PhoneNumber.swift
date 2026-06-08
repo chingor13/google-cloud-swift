@@ -55,20 +55,27 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// field is normally only set in conjunction with an E.164 number. It is held
   /// separately from the E.164 number to allow for short code extensions in the
   /// future.
-  public var `extension`: Swift.String
+  public var `extension`: Swift.String = Swift.String()
 
   /// Required.  Either a regular number, or a short code.  New fields may be
   /// added to the oneof below in the future, so clients should ignore phone
   /// numbers for which none of the fields they coded against are set.
-  public var kind: OneOf_Kind?
+  public var kind: OneOf_Kind? = nil
 
   /// Initialize a new instance of `PhoneNumber`.
-  public init(
-    `extension`: Swift.String = Swift.String(),
-    kind: OneOf_Kind? = nil,
-  ) {
-    self.`extension` = `extension`
-    self.kind = kind
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = PhoneNumber().with { $0.e164Number = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -134,19 +141,26 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     ///
     /// Reference(s):
     ///  - http://www.unicode.org/reports/tr35/#unicode_region_subtag
-    public var regionCode: Swift.String
+    public var regionCode: Swift.String = Swift.String()
 
     /// Required. The short code digits, without a leading plus ('+') or country
     /// calling code. For example "611".
-    public var number: Swift.String
+    public var number: Swift.String = Swift.String()
 
     /// Initialize a new instance of `ShortCode`.
-    public init(
-      regionCode: Swift.String = Swift.String(),
-      number: Swift.String = Swift.String(),
-    ) {
-      self.regionCode = regionCode
-      self.number = number
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = ShortCode().with { $0.regionCode = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

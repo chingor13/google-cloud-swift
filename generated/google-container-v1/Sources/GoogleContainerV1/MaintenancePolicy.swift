@@ -22,27 +22,32 @@ public struct MaintenancePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable
   Sendable
 {
   /// Specifies the maintenance window in which maintenance may be performed.
-  public var window: MaintenanceWindow?
+  public var window: MaintenanceWindow? = nil
 
   /// A hash identifying the version of this policy, so that updates to fields of
   /// the policy won't accidentally undo intermediate changes (and so that users
   /// of the API unaware of some fields won't accidentally remove other fields).
   /// Make a `get()` request to the cluster to get the current
   /// resource version and include it with requests to set the policy.
-  public var resourceVersion: Swift.String
+  public var resourceVersion: Swift.String = Swift.String()
 
   /// Optional. The upgrade disruption budget for the cluster control plane.
-  public var disruptionBudget: DisruptionBudget?
+  public var disruptionBudget: DisruptionBudget? = nil
 
   /// Initialize a new instance of `MaintenancePolicy`.
-  public init(
-    window: MaintenanceWindow? = nil,
-    resourceVersion: Swift.String = Swift.String(),
-    disruptionBudget: DisruptionBudget? = nil,
-  ) {
-    self.window = window
-    self.resourceVersion = resourceVersion
-    self.disruptionBudget = disruptionBudget
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MaintenancePolicy().with { $0.window = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

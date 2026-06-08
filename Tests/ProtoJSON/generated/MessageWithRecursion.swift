@@ -22,28 +22,31 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWkt.Recursive<MessageWithRecursion.Level0>?
+  public var singular: GoogleCloudWkt.Recursive<MessageWithRecursion.Level0>? = nil
 
   /// An optional field.
-  public var `optional`: GoogleCloudWkt.Recursive<MessageWithRecursion.Level0>?
+  public var `optional`: GoogleCloudWkt.Recursive<MessageWithRecursion.Level0>? = nil
 
   /// A repeated field.
-  public var repeated: [MessageWithRecursion.Level0]
+  public var repeated: [MessageWithRecursion.Level0] = []
 
   /// A map field, messages cannot be keys.
-  public var map: [Swift.String: MessageWithRecursion.Level0]
+  public var map: [Swift.String: MessageWithRecursion.Level0] = [:]
 
   /// Initialize a new instance of `MessageWithRecursion`.
-  public init(
-    singular: MessageWithRecursion.Level0? = nil,
-    `optional`: MessageWithRecursion.Level0? = nil,
-    repeated: [MessageWithRecursion.Level0] = [],
-    map: [Swift.String: MessageWithRecursion.Level0] = [:],
-  ) {
-    self.singular = singular.map { GoogleCloudWkt.Recursive(value: $0) }
-    self.`optional` = `optional`.map { GoogleCloudWkt.Recursive(value: $0) }
-    self.repeated = repeated
-    self.map = map
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = MessageWithRecursion().with { $0.singular = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -74,17 +77,24 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public struct Level0: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var level1: GoogleCloudWkt.Recursive<MessageWithRecursion.Level1>?
+    public var level1: GoogleCloudWkt.Recursive<MessageWithRecursion.Level1>? = nil
 
-    public var side: MessageWithRecursion.NonRecursive?
+    public var side: MessageWithRecursion.NonRecursive? = nil
 
     /// Initialize a new instance of `Level0`.
-    public init(
-      level1: MessageWithRecursion.Level1? = nil,
-      side: MessageWithRecursion.NonRecursive? = nil,
-    ) {
-      self.level1 = level1.map { GoogleCloudWkt.Recursive(value: $0) }
-      self.side = side
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Level0().with { $0.level1 = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -101,13 +111,22 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public struct Level1: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var recurse: GoogleCloudWkt.Recursive<MessageWithRecursion>?
+    public var recurse: GoogleCloudWkt.Recursive<MessageWithRecursion>? = nil
 
     /// Initialize a new instance of `Level1`.
-    public init(
-      recurse: MessageWithRecursion? = nil,
-    ) {
-      self.recurse = recurse.map { GoogleCloudWkt.Recursive(value: $0) }
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Level1().with { $0.recurse = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {
@@ -124,13 +143,22 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public struct NonRecursive: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    public var value: Swift.String
+    public var value: Swift.String = Swift.String()
 
     /// Initialize a new instance of `NonRecursive`.
-    public init(
-      value: Swift.String = Swift.String(),
-    ) {
-      self.value = value
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = NonRecursive().with { $0.value = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

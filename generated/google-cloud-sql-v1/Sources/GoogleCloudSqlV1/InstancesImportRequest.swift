@@ -23,13 +23,22 @@
     Sendable
   {
     /// Contains details about the import operation.
-    public var importContext: ImportContext?
+    public var importContext: ImportContext? = nil
 
     /// Initialize a new instance of `InstancesImportRequest`.
-    public init(
-      importContext: ImportContext? = nil,
-    ) {
-      self.importContext = importContext
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = InstancesImportRequest().with { $0.importContext = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     public static var _anyTypeUrl: String {

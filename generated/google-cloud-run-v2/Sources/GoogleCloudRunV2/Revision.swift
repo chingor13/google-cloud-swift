@@ -25,16 +25,16 @@ public struct Revision: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Output only. The unique name of this Revision.
-  public var name: Swift.String
+  public var name: Swift.String = Swift.String()
 
   /// Output only. Server assigned unique identifier for the Revision. The value
   /// is a UUID4 string and guaranteed to remain unchanged until the resource is
   /// deleted.
-  public var uid: Swift.String
+  public var uid: Swift.String = Swift.String()
 
   /// Output only. A number that monotonically increases every time the user
   /// modifies the desired state.
-  public var generation: Swift.Int64
+  public var generation: Swift.Int64 = Swift.Int64()
 
   /// Output only. Unstructured key value map that can be used to organize and
   /// categorize objects. User-provided labels are shared with Google's billing
@@ -42,28 +42,28 @@ public struct Revision: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// team, component, environment, state, etc. For more information, visit
   /// https://cloud.google.com/resource-manager/docs/creating-managing-labels or
   /// https://cloud.google.com/run/docs/configuring/labels.
-  public var labels: [Swift.String: Swift.String]
+  public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Unstructured key value map that may
   /// be set by external tools to store and arbitrary metadata.
   /// They are not queryable and should be preserved
   /// when modifying objects.
-  public var annotations: [Swift.String: Swift.String]
+  public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWkt.Timestamp?
+  public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWkt.Timestamp?
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the deletion time. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWkt.Timestamp?
+  public var deleteTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted. It is only populated as a response to a Delete
   /// request.
-  public var expireTime: GoogleCloudWkt.Timestamp?
+  public var expireTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The least stable launch stage needed to create this resource, as defined by
   /// [Google Cloud Platform Launch
@@ -74,166 +74,110 @@ public struct Revision: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// as input. For example, if ALPHA was provided as input in the parent
   /// resource, but only BETA and GA-level features are were, this field will be
   /// BETA.
-  public var launchStage: GoogleApi.LaunchStage
+  public var launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage()
 
   /// Output only. The name of the parent service.
-  public var service: Swift.String
+  public var service: Swift.String = Swift.String()
 
   /// Scaling settings for this revision.
-  public var scaling: RevisionScaling?
+  public var scaling: RevisionScaling? = nil
 
   /// VPC Access configuration for this Revision. For more information, visit
   /// https://cloud.google.com/run/docs/configuring/connecting-vpc.
-  public var vpcAccess: VpcAccess?
+  public var vpcAccess: VpcAccess? = nil
 
   /// Sets the maximum number of requests that each serving instance can receive.
-  public var maxInstanceRequestConcurrency: Swift.Int32
+  public var maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32()
 
   /// Max allowed time for an instance to respond to a request.
-  public var timeout: GoogleCloudWkt.Duration?
+  public var timeout: GoogleCloudWkt.Duration? = nil
 
   /// Email address of the IAM service account associated with the revision of
   /// the service. The service account represents the identity of the running
   /// revision, and determines what permissions the revision has.
-  public var serviceAccount: Swift.String
+  public var serviceAccount: Swift.String = Swift.String()
 
   /// Holds the single container that defines the unit of execution for this
   /// Revision.
-  public var containers: [Container]
+  public var containers: [Container] = []
 
   /// A list of Volumes to make available to containers.
-  public var volumes: [Volume]
+  public var volumes: [Volume] = []
 
   /// The execution environment being used to host this Revision.
-  public var executionEnvironment: ExecutionEnvironment
+  public var executionEnvironment: ExecutionEnvironment = ExecutionEnvironment()
 
   /// A reference to a customer managed encryption key (CMEK) to use to encrypt
   /// this container image. For more information, go to
   /// https://cloud.google.com/run/docs/securing/using-cmek
-  public var encryptionKey: Swift.String
+  public var encryptionKey: Swift.String = Swift.String()
 
   /// Enables service mesh connectivity.
-  public var serviceMesh: ServiceMesh?
+  public var serviceMesh: ServiceMesh? = nil
 
   /// The action to take if the encryption key is revoked.
-  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction
+  public var encryptionKeyRevocationAction: EncryptionKeyRevocationAction =
+    EncryptionKeyRevocationAction()
 
   /// If encryption_key_revocation_action is SHUTDOWN, the duration before
   /// shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration?
+  public var encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil
 
   /// Output only. Indicates whether the resource's reconciliation is still in
   /// progress. See comments in `Service.reconciling` for additional information
   /// on reconciliation process in Cloud Run.
-  public var reconciling: Swift.Bool
+  public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Output only. The Condition of this Revision, containing its readiness
   /// status, and detailed error information in case it did not reach a serving
   /// state.
-  public var conditions: [Condition]
+  public var conditions: [Condition] = []
 
   /// Output only. The generation of this Revision currently serving traffic. See
   /// comments in `reconciling` for additional information on reconciliation
   /// process in Cloud Run.
-  public var observedGeneration: Swift.Int64
+  public var observedGeneration: Swift.Int64 = Swift.Int64()
 
   /// Output only. The Google Console URI to obtain logs for the Revision.
-  public var logUri: Swift.String
+  public var logUri: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: Swift.Bool
+  public var satisfiesPzs: Swift.Bool = Swift.Bool()
 
   /// Enable session affinity.
-  public var sessionAffinity: Swift.Bool
+  public var sessionAffinity: Swift.Bool = Swift.Bool()
 
   /// Output only. The current effective scaling settings for the revision.
-  public var scalingStatus: RevisionScalingStatus?
+  public var scalingStatus: RevisionScalingStatus? = nil
 
   /// The node selector for the revision.
-  public var nodeSelector: NodeSelector?
+  public var nodeSelector: NodeSelector? = nil
 
   /// Optional. Output only. True if GPU zonal redundancy is disabled on this
   /// revision.
-  public var gpuZonalRedundancyDisabled: Swift.Bool?
+  public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
   /// Output only. Email address of the authenticated creator.
-  public var creator: Swift.String
+  public var creator: Swift.String = Swift.String()
 
   /// Output only. A system-generated fingerprint for this version of the
   /// resource. May be used to detect modification conflict during updates.
-  public var etag: Swift.String
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Revision`.
-  public init(
-    name: Swift.String = Swift.String(),
-    uid: Swift.String = Swift.String(),
-    generation: Swift.Int64 = Swift.Int64(),
-    labels: [Swift.String: Swift.String] = [:],
-    annotations: [Swift.String: Swift.String] = [:],
-    createTime: GoogleCloudWkt.Timestamp? = nil,
-    updateTime: GoogleCloudWkt.Timestamp? = nil,
-    deleteTime: GoogleCloudWkt.Timestamp? = nil,
-    expireTime: GoogleCloudWkt.Timestamp? = nil,
-    launchStage: GoogleApi.LaunchStage = GoogleApi.LaunchStage(),
-    service: Swift.String = Swift.String(),
-    scaling: RevisionScaling? = nil,
-    vpcAccess: VpcAccess? = nil,
-    maxInstanceRequestConcurrency: Swift.Int32 = Swift.Int32(),
-    timeout: GoogleCloudWkt.Duration? = nil,
-    serviceAccount: Swift.String = Swift.String(),
-    containers: [Container] = [],
-    volumes: [Volume] = [],
-    executionEnvironment: ExecutionEnvironment = ExecutionEnvironment(),
-    encryptionKey: Swift.String = Swift.String(),
-    serviceMesh: ServiceMesh? = nil,
-    encryptionKeyRevocationAction: EncryptionKeyRevocationAction = EncryptionKeyRevocationAction(),
-    encryptionKeyShutdownDuration: GoogleCloudWkt.Duration? = nil,
-    reconciling: Swift.Bool = Swift.Bool(),
-    conditions: [Condition] = [],
-    observedGeneration: Swift.Int64 = Swift.Int64(),
-    logUri: Swift.String = Swift.String(),
-    satisfiesPzs: Swift.Bool = Swift.Bool(),
-    sessionAffinity: Swift.Bool = Swift.Bool(),
-    scalingStatus: RevisionScalingStatus? = nil,
-    nodeSelector: NodeSelector? = nil,
-    gpuZonalRedundancyDisabled: Swift.Bool? = nil,
-    creator: Swift.String = Swift.String(),
-    etag: Swift.String = Swift.String(),
-  ) {
-    self.name = name
-    self.uid = uid
-    self.generation = generation
-    self.labels = labels
-    self.annotations = annotations
-    self.createTime = createTime
-    self.updateTime = updateTime
-    self.deleteTime = deleteTime
-    self.expireTime = expireTime
-    self.launchStage = launchStage
-    self.service = service
-    self.scaling = scaling
-    self.vpcAccess = vpcAccess
-    self.maxInstanceRequestConcurrency = maxInstanceRequestConcurrency
-    self.timeout = timeout
-    self.serviceAccount = serviceAccount
-    self.containers = containers
-    self.volumes = volumes
-    self.executionEnvironment = executionEnvironment
-    self.encryptionKey = encryptionKey
-    self.serviceMesh = serviceMesh
-    self.encryptionKeyRevocationAction = encryptionKeyRevocationAction
-    self.encryptionKeyShutdownDuration = encryptionKeyShutdownDuration
-    self.reconciling = reconciling
-    self.conditions = conditions
-    self.observedGeneration = observedGeneration
-    self.logUri = logUri
-    self.satisfiesPzs = satisfiesPzs
-    self.sessionAffinity = sessionAffinity
-    self.scalingStatus = scalingStatus
-    self.nodeSelector = nodeSelector
-    self.gpuZonalRedundancyDisabled = gpuZonalRedundancyDisabled
-    self.creator = creator
-    self.etag = etag
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = Revision().with { $0.name = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

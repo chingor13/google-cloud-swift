@@ -22,7 +22,7 @@ public struct LustreCsiDriverConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   Sendable
 {
   /// Whether the Lustre CSI driver is enabled for this cluster.
-  public var enabled: Swift.Bool
+  public var enabled: Swift.Bool = Swift.Bool()
 
   /// If set to true, the Lustre CSI driver will install Lustre kernel modules
   /// using port 6988.
@@ -35,24 +35,29 @@ public struct LustreCsiDriverConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// Deprecated: This flag is no longer required as of GKE node version
   /// 1.33.2-gke.4655000, unless you are connecting to a Lustre instance
   /// that has the `gke-support-enabled` flag.
-  public var enableLegacyLustrePort: Swift.Bool
+  public var enableLegacyLustrePort: Swift.Bool = Swift.Bool()
 
   /// When set to true, this disables multi-NIC support for the Lustre CSI
   /// driver.
   /// By default, GKE enables multi-NIC support, which allows the Lustre
   /// CSI driver to automatically detect and configure all suitable network
   /// interfaces on a node to maximize I/O performance for demanding workloads.
-  public var disableMultiNic: Swift.Bool
+  public var disableMultiNic: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `LustreCsiDriverConfig`.
-  public init(
-    enabled: Swift.Bool = Swift.Bool(),
-    enableLegacyLustrePort: Swift.Bool = Swift.Bool(),
-    disableMultiNic: Swift.Bool = Swift.Bool(),
-  ) {
-    self.enabled = enabled
-    self.enableLegacyLustrePort = enableLegacyLustrePort
-    self.disableMultiNic = disableMultiNic
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = LustreCsiDriverConfig().with { $0.enabled = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   public static var _anyTypeUrl: String {

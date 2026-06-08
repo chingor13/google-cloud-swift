@@ -24,11 +24,11 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The name of the Google Compute Engine
   /// [VPC network](https://cloud.google.com/vpc/docs/vpc) to which the
   /// instance is connected.
-  public var network: Swift.String
+  public var network: Swift.String = Swift.String()
 
   /// Internet protocol versions for which the instance has IP addresses
   /// assigned. For this version, only MODE_IPV4 is supported.
-  public var modes: [NetworkConfig.AddressMode]
+  public var modes: [NetworkConfig.AddressMode] = []
 
   /// Optional, reserved_ip_range can have one of the following two types of
   /// values.
@@ -49,30 +49,31 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// range you specify can't overlap with either existing subnets or assigned IP
   /// address ranges for other Filestore instances in the selected VPC
   /// network.
-  public var reservedIpRange: Swift.String
+  public var reservedIpRange: Swift.String = Swift.String()
 
   /// Output only. IPv4 addresses in the format
   /// `{octet1}.{octet2}.{octet3}.{octet4}` or IPv6 addresses in the format
   /// `{block1}:{block2}:{block3}:{block4}:{block5}:{block6}:{block7}:{block8}`.
-  public var ipAddresses: [Swift.String]
+  public var ipAddresses: [Swift.String] = []
 
   /// The network connect mode of the Filestore instance.
   /// If not provided, the connect mode defaults to DIRECT_PEERING.
-  public var connectMode: NetworkConfig.ConnectMode
+  public var connectMode: NetworkConfig.ConnectMode = NetworkConfig.ConnectMode()
 
   /// Initialize a new instance of `NetworkConfig`.
-  public init(
-    network: Swift.String = Swift.String(),
-    modes: [NetworkConfig.AddressMode] = [],
-    reservedIpRange: Swift.String = Swift.String(),
-    ipAddresses: [Swift.String] = [],
-    connectMode: NetworkConfig.ConnectMode = NetworkConfig.ConnectMode(),
-  ) {
-    self.network = network
-    self.modes = modes
-    self.reservedIpRange = reservedIpRange
-    self.ipAddresses = ipAddresses
-    self.connectMode = connectMode
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = NetworkConfig().with { $0.network = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Internet protocol versions supported by Filestore.

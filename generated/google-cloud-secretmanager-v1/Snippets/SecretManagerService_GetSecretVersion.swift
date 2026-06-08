@@ -26,9 +26,8 @@ func sample(
   client: some SecretManagerService, projectId: String, secretId: String, secretVersionId: String
 ) async throws {
   let response = try await client.getSecretVersion(
-    request: GetSecretVersionRequest(
-      name: "projects/\(projectId)/secrets/\(secretId)/versions/\(secretVersionId)",
-    )
+    request: GetSecretVersionRequest()
+      .with { $0.name = "projects/\(projectId)/secrets/\(secretId)/versions/\(secretVersionId)" }
   )
   print("Success: \(response)")
 }

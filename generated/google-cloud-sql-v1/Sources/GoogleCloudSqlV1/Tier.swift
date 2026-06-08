@@ -24,33 +24,34 @@
   {
     /// An identifier for the machine type, for example, `db-custom-1-3840`. For
     /// related information, see [Pricing](/sql/pricing).
-    public var tier: Swift.String
+    public var tier: Swift.String = Swift.String()
 
     /// The maximum RAM usage of this tier in bytes.
-    public var ram: Swift.Int64
+    public var ram: Swift.Int64 = Swift.Int64()
 
     /// This is always `sql#tier`.
-    public var kind: Swift.String
+    public var kind: Swift.String = Swift.String()
 
     /// The maximum disk size of this tier in bytes.
-    public var diskQuota: Swift.Int64
+    public var diskQuota: Swift.Int64 = Swift.Int64()
 
     /// The applicable regions for this tier.
-    public var region: [Swift.String]
+    public var region: [Swift.String] = []
 
     /// Initialize a new instance of `Tier`.
-    public init(
-      tier: Swift.String = Swift.String(),
-      ram: Swift.Int64 = Swift.Int64(),
-      kind: Swift.String = Swift.String(),
-      diskQuota: Swift.Int64 = Swift.Int64(),
-      region: [Swift.String] = [],
-    ) {
-      self.tier = tier
-      self.ram = ram
-      self.kind = kind
-      self.diskQuota = diskQuota
-      self.region = region
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Tier().with { $0.tier = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
     }
 
     private enum CodingKeys: String, CodingKey {

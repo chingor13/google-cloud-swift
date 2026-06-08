@@ -22,13 +22,22 @@ public struct GatewayAPIConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The Gateway API release channel to use for Gateway API.
-  public var channel: GatewayAPIConfig.Channel
+  public var channel: GatewayAPIConfig.Channel = GatewayAPIConfig.Channel()
 
   /// Initialize a new instance of `GatewayAPIConfig`.
-  public init(
-    channel: GatewayAPIConfig.Channel = GatewayAPIConfig.Channel(),
-  ) {
-    self.channel = channel
+  public init() {}
+
+  /// Use `config` to return a new instance of this object, with some fields updated.
+  ///
+  /// Commonly used to initialize the value, for example:
+  ///
+  /// ```
+  /// let value = GatewayAPIConfig().with { $0.channel = ... }
+  /// ```
+  public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+    var copy = self
+    try config(&copy)
+    return copy
   }
 
   /// Channel describes if/how Gateway API should be installed and implemented in

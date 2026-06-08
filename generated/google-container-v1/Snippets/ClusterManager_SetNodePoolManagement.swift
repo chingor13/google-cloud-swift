@@ -22,8 +22,8 @@ import GoogleCloudWkt
 
 func sample(client: some ClusterManager) async throws {
   let response = try await client.setNodePoolManagement(
-    request: SetNodePoolManagementRequest(/* set fields */
-    )
+    request: SetNodePoolManagementRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }
