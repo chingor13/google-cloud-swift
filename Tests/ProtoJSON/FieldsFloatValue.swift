@@ -17,21 +17,23 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsFloatValue {
+  typealias T = MessageWithFloatValue
+
   @Test(
     "FloatValue fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithFloatValue()),
-      (#"{"singular": null         }"#, MessageWithFloatValue()),
-      (#"{"singular": 4.2          }"#, MessageWithFloatValue().with { $0.singular = 4.2 }),
-      (#"{"singular": "4.2"        }"#, MessageWithFloatValue().with { $0.singular = 4.2 }),
-      (#"{"repeated": []           }"#, MessageWithFloatValue()),
-      (#"{"repeated": [4.2]        }"#, MessageWithFloatValue().with { $0.repeated = [4.2] }),
-      (#"{"map":      {}           }"#, MessageWithFloatValue()),
-      (#"{"map":      {"a": 4.2 }  }"#, MessageWithFloatValue().with { $0.map = ["a": 4.2] }),
+      (#"{}"#, T()),
+      (#"{"singular": null         }"#, T()),
+      (#"{"singular": 4.2          }"#, T().with { $0.singular = 4.2 }),
+      (#"{"singular": "4.2"        }"#, T().with { $0.singular = 4.2 }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": [4.2]        }"#, T().with { $0.repeated = [4.2] }),
+      (#"{"map":      {}           }"#, T()),
+      (#"{"map":      {"a": 4.2 }  }"#, T().with { $0.map = ["a": 4.2] }),
     ])
-  func deserialize(input: String, want: MessageWithFloatValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithFloatValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

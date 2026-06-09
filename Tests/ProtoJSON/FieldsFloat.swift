@@ -17,30 +17,32 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FloatFields {
+  typealias T = MessageWithF32
+
   @Test(
     "float fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithF32()),
-      (#"{"singular": 0.0            }"#, MessageWithF32()),
-      (#"{"singular": 1.5            }"#, MessageWithF32().with { $0.singular = 1.5 }),
-      (#"{"singular": "1.5"          }"#, MessageWithF32().with { $0.singular = 1.5 }),
-      (#"{"singular": "Infinity"     }"#, MessageWithF32().with { $0.singular = .infinity }),
-      (#"{"singular": "-Infinity"    }"#, MessageWithF32().with { $0.singular = -.infinity }),
-      (#"{"option":   null           }"#, MessageWithF32()),
-      (#"{"option":   0.0            }"#, MessageWithF32().with { $0.option = 0.0 }),
-      (#"{"option":   1.5            }"#, MessageWithF32().with { $0.option = 1.5 }),
-      (#"{"option":   "1.5"          }"#, MessageWithF32().with { $0.option = 1.5 }),
-      (#"{"repeated": []             }"#, MessageWithF32()),
-      (#"{"repeated": [0.0]          }"#, MessageWithF32().with { $0.repeated = [0.0] }),
-      (#"{"repeated": [1.5, -2.0]    }"#, MessageWithF32().with { $0.repeated = [1.5, -2.0] }),
-      (#"{"repeated": ["1.5", "-2.0"]}"#, MessageWithF32().with { $0.repeated = [1.5, -2.0] }),
-      (#"{"map":      {}             }"#, MessageWithF32()),
-      (#"{"map":      {"a": 1.5}     }"#, MessageWithF32().with { $0.map = ["a": 1.5] }),
-      (#"{"map":      {"a": "1.5"}   }"#, MessageWithF32().with { $0.map = ["a": 1.5] }),
+      (#"{}"#, T()),
+      (#"{"singular": 0.0            }"#, T()),
+      (#"{"singular": 1.5            }"#, T().with { $0.singular = 1.5 }),
+      (#"{"singular": "1.5"          }"#, T().with { $0.singular = 1.5 }),
+      (#"{"singular": "Infinity"     }"#, T().with { $0.singular = .infinity }),
+      (#"{"singular": "-Infinity"    }"#, T().with { $0.singular = -.infinity }),
+      (#"{"option":   null           }"#, T()),
+      (#"{"option":   0.0            }"#, T().with { $0.option = 0.0 }),
+      (#"{"option":   1.5            }"#, T().with { $0.option = 1.5 }),
+      (#"{"option":   "1.5"          }"#, T().with { $0.option = 1.5 }),
+      (#"{"repeated": []             }"#, T()),
+      (#"{"repeated": [0.0]          }"#, T().with { $0.repeated = [0.0] }),
+      (#"{"repeated": [1.5, -2.0]    }"#, T().with { $0.repeated = [1.5, -2.0] }),
+      (#"{"repeated": ["1.5", "-2.0"]}"#, T().with { $0.repeated = [1.5, -2.0] }),
+      (#"{"map":      {}             }"#, T()),
+      (#"{"map":      {"a": 1.5}     }"#, T().with { $0.map = ["a": 1.5] }),
+      (#"{"map":      {"a": "1.5"}   }"#, T().with { $0.map = ["a": 1.5] }),
     ])
-  func deserialize(input: String, want: MessageWithF32) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithF32.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 
@@ -50,24 +52,24 @@ import GoogleCloudWkt
     arguments: [
       (
         #"{"singular": "NaN"        }"#,
-        { @Sendable (got: MessageWithF32) -> Float32? in .some(got.singular) }
+        { @Sendable (got: T) -> Float32? in .some(got.singular) }
       ),
       (
         #"{"option":   "NaN"        }"#,
-        { @Sendable (got: MessageWithF32) -> Float32? in got.option }
+        { @Sendable (got: T) -> Float32? in got.option }
       ),
       (
         #"{"repeated": ["NaN"]      }"#,
-        { @Sendable (got: MessageWithF32) -> Float32? in got.repeated.first }
+        { @Sendable (got: T) -> Float32? in got.repeated.first }
       ),
       (
         #"{"map":      {"a": "NaN"} }"#,
-        { @Sendable (got: MessageWithF32) -> Float32? in got.map["a"] }
+        { @Sendable (got: T) -> Float32? in got.map["a"] }
       ),
     ]
-  ) func deserializeNaN(input: String, value: @Sendable (MessageWithF32) -> Float32?) throws {
+  ) func deserializeNaN(input: String, value: @Sendable (T) -> Float32?) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithF32.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(value(got).map({ $0.isNaN }) ?? false, "got=\(got)")
   }
 }

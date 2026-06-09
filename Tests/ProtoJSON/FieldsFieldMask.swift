@@ -17,43 +17,36 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsFieldMask {
+  typealias T = MessageWithFieldMask
+  static func mask(_ paths: [String]) -> GoogleCloudWkt.FieldMask {
+    GoogleCloudWkt.FieldMask(paths: paths)
+  }
+
   @Test(
     "FieldMask fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithFieldMask()),
+      (#"{}"#, T()),
       (
         #"{"singular": "userDisplayName,photo"}"#,
-        MessageWithFieldMask().with {
-          $0.singular = GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-        }
+        T().with { $0.singular = mask(["user_display_name", "photo"]) }
       ),
       (
         #"{"optional": "userDisplayName,photo"}"#,
-        MessageWithFieldMask().with {
-          $0.optional = GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-        }
+        T().with { $0.optional = mask(["user_display_name", "photo"]) }
       ),
-      (#"{"repeated": []}"#, MessageWithFieldMask()),
+      (#"{"repeated": []}"#, T()),
       (
         #"{"repeated": ["userDisplayName,photo"]}"#,
-        MessageWithFieldMask().with {
-          $0.repeated = [
-            GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-          ]
-        }
+        T().with { $0.repeated = [mask(["user_display_name", "photo"])] }
       ),
       (
         #"{"map":      {"a": "userDisplayName,photo"}}"#,
-        MessageWithFieldMask().with {
-          $0.map = [
-            "a": GoogleCloudWkt.FieldMask(paths: ["user_display_name", "photo"])
-          ]
-        }
+        T().with { $0.map = ["a": mask(["user_display_name", "photo"])] }
       ),
     ])
-  func deserialize(input: String, want: MessageWithFieldMask) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithFieldMask.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

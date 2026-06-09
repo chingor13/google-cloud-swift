@@ -17,18 +17,20 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsStringValue {
+  typealias T = MessageWithStringValue
+
   @Test(
     "StringValue fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithStringValue()),
-      (#"{"singular": "42"         }"#, MessageWithStringValue().with { $0.singular = "42" }),
-      (#"{"repeated": []           }"#, MessageWithStringValue()),
-      (#"{"repeated": ["42"]       }"#, MessageWithStringValue().with { $0.repeated = ["42"] }),
-      (#"{"map":      {"a": "42" } }"#, MessageWithStringValue().with { $0.map = ["a": "42"] }),
+      (#"{}"#, T()),
+      (#"{"singular": "42"         }"#, T().with { $0.singular = "42" }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": ["42"]       }"#, T().with { $0.repeated = ["42"] }),
+      (#"{"map":      {"a": "42" } }"#, T().with { $0.map = ["a": "42"] }),
     ])
-  func deserialize(input: String, want: MessageWithStringValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithStringValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

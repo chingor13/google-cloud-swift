@@ -17,20 +17,22 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsNullValue {
+  typealias T = MessageWithNullValue
+
   @Test(
     "NullValue fields deserialize",
     arguments: [
-      (#"{                        }"#, MessageWithNullValue()),
-      (#"{"singular": null        }"#, MessageWithNullValue()),
-      (#"{"optional": null        }"#, MessageWithNullValue()),
-      (#"{"repeated": []          }"#, MessageWithNullValue()),
-      (#"{"repeated": [null]      }"#, MessageWithNullValue().with { $0.repeated = [NullValue()] }),
-      (#"{"map":      {}          }"#, MessageWithNullValue()),
-      (#"{"map":      {"a": null} }"#, MessageWithNullValue().with { $0.map = ["a": NullValue()] }),
+      (#"{                        }"#, T()),
+      (#"{"singular": null        }"#, T()),
+      (#"{"optional": null        }"#, T()),
+      (#"{"repeated": []          }"#, T()),
+      (#"{"repeated": [null]      }"#, T().with { $0.repeated = [NullValue()] }),
+      (#"{"map":      {}          }"#, T()),
+      (#"{"map":      {"a": null} }"#, T().with { $0.map = ["a": NullValue()] }),
     ])
-  func deserialize(input: String, want: MessageWithNullValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithNullValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

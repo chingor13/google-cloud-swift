@@ -17,40 +17,28 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsListValue {
+  typealias T = MessageWithListValue
+
   @Test(
     "ListValue fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithListValue()),
-      (#"{"singular": null         }"#, MessageWithListValue()),
-      (#"{"singular": []           }"#, MessageWithListValue().with { $0.singular = [] }),
+      (#"{}"#, T()),
+      (#"{"singular": null         }"#, T()),
+      (#"{"singular": []           }"#, T().with { $0.singular = [] }),
+      (#"{"singular": [42]         }"#, T().with { $0.singular = [.number(42)] }),
+      (#"{"singular": ["hello"]    }"#, T().with { $0.singular = [.string("hello")] }),
       (
-        #"{"singular": [42]         }"#, MessageWithListValue().with { $0.singular = [.number(42)] }
+        #"{"singular": [42, "hello"]}"#, T().with { $0.singular = [.number(42), .string("hello")] }
       ),
-      (
-        #"{"singular": ["hello"]    }"#,
-        MessageWithListValue().with { $0.singular = [.string("hello")] }
-      ),
-      (
-        #"{"singular": [42, "hello"]}"#,
-        MessageWithListValue().with { $0.singular = [.number(42), .string("hello")] }
-      ),
-      (
-        #"{"optional": [42]         }"#, MessageWithListValue().with { $0.optional = [.number(42)] }
-      ),
-      (#"{"repeated": []           }"#, MessageWithListValue()),
-      (
-        #"{"repeated": [[42]]       }"#,
-        MessageWithListValue().with { $0.repeated = [[.number(42)]] }
-      ),
-      (#"{"map":      {}           }"#, MessageWithListValue()),
-      (
-        #"{"map":      {"a": [42] } }"#,
-        MessageWithListValue().with { $0.map = ["a": [.number(42)]] }
-      ),
+      (#"{"optional": [42]         }"#, T().with { $0.optional = [.number(42)] }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": [[42]]       }"#, T().with { $0.repeated = [[.number(42)]] }),
+      (#"{"map":      {}           }"#, T()),
+      (#"{"map":      {"a": [42] } }"#, T().with { $0.map = ["a": [.number(42)]] }),
     ])
-  func deserialize(input: String, want: MessageWithListValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithListValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

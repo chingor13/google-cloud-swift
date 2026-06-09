@@ -17,39 +17,26 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsStruct {
+  typealias T = MessageWithStruct
+
   @Test(
     "Struct fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithStruct()),
-      (#"{"singular": null            }"#, MessageWithStruct()),
-      (#"{"singular": {}              }"#, MessageWithStruct().with { $0.singular = [:] }),
-      (
-        #"{"singular": {"a": 42}       }"#,
-        MessageWithStruct().with { $0.singular = ["a": .number(42)] }
-      ),
-      (
-        #"{"singular": {"a": "hello"}  }"#,
-        MessageWithStruct().with { $0.singular = ["a": .string("hello")] }
-      ),
-      (
-        #"{"optional": {"a": 42}       }"#,
-        MessageWithStruct().with { $0.optional = ["a": .number(42)] }
-      ),
-      (#"{"repeated": []              }"#, MessageWithStruct()),
-      (#"{"repeated": [{}]            }"#, MessageWithStruct().with { $0.repeated = [[:]] }),
-      (
-        #"{"repeated": [{"a": 42}]     }"#,
-        MessageWithStruct().with { $0.repeated = [["a": .number(42)]] }
-      ),
-      (#"{"map":      {}              }"#, MessageWithStruct()),
-      (
-        #"{"map":      {"a": {"b": 42}}}"#,
-        MessageWithStruct().with { $0.map = ["a": ["b": .number(42)]] }
-      ),
+      (#"{}"#, T()),
+      (#"{"singular": null            }"#, T()),
+      (#"{"singular": {}              }"#, T().with { $0.singular = [:] }),
+      (#"{"singular": {"a": 42}       }"#, T().with { $0.singular = ["a": .number(42)] }),
+      (#"{"singular": {"a": "hello"}  }"#, T().with { $0.singular = ["a": .string("hello")] }),
+      (#"{"optional": {"a": 42}       }"#, T().with { $0.optional = ["a": .number(42)] }),
+      (#"{"repeated": []              }"#, T()),
+      (#"{"repeated": [{}]            }"#, T().with { $0.repeated = [[:]] }),
+      (#"{"repeated": [{"a": 42}]     }"#, T().with { $0.repeated = [["a": .number(42)]] }),
+      (#"{"map":      {}              }"#, T()),
+      (#"{"map":      {"a": {"b": 42}}}"#, T().with { $0.map = ["a": ["b": .number(42)]] }),
     ])
-  func deserialize(input: String, want: MessageWithStruct) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithStruct.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

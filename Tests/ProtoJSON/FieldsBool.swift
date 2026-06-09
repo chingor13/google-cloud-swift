@@ -17,26 +17,28 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct BoolFields {
+  typealias T = MessageWithBool
+
   @Test(
     "bool fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithBool()),
-      (#"{"singular": false         }"#, MessageWithBool()),
-      (#"{"singular": true          }"#, MessageWithBool().with { $0.singular = true }),
-      (#"{"option":   null          }"#, MessageWithBool()),
-      (#"{"option":   false         }"#, MessageWithBool().with { $0.option = false }),
-      (#"{"option":   true          }"#, MessageWithBool().with { $0.option = true }),
-      (#"{"repeated": []            }"#, MessageWithBool()),
-      (#"{"repeated": [false]       }"#, MessageWithBool().with { $0.repeated = [false] }),
-      (#"{"repeated": [true, false] }"#, MessageWithBool().with { $0.repeated = [true, false] }),
+      (#"{}"#, T()),
+      (#"{"singular": false         }"#, T()),
+      (#"{"singular": true          }"#, T().with { $0.singular = true }),
+      (#"{"option":   null          }"#, T()),
+      (#"{"option":   false         }"#, T().with { $0.option = false }),
+      (#"{"option":   true          }"#, T().with { $0.option = true }),
+      (#"{"repeated": []            }"#, T()),
+      (#"{"repeated": [false]       }"#, T().with { $0.repeated = [false] }),
+      (#"{"repeated": [true, false] }"#, T().with { $0.repeated = [true, false] }),
       // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapKey and mapKeyValue
-      (#"{"mapValue": {}            }"#, MessageWithBool()),
-      (#"{"mapValue": {"a": true}   }"#, MessageWithBool().with { $0.mapValue = ["a": true] }),
-      (#"{"mapValue": {"a": "true"} }"#, MessageWithBool().with { $0.mapValue = ["a": true] }),
+      (#"{"mapValue": {}            }"#, T()),
+      (#"{"mapValue": {"a": true}   }"#, T().with { $0.mapValue = ["a": true] }),
+      (#"{"mapValue": {"a": "true"} }"#, T().with { $0.mapValue = ["a": true] }),
     ])
-  func deserialize(input: String, want: MessageWithBool) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithBool.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

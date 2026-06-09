@@ -17,21 +17,23 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsDoubleValue {
+  typealias T = MessageWithDoubleValue
+
   @Test(
     "DoubleValue fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithDoubleValue()),
-      (#"{"singular": null         }"#, MessageWithDoubleValue()),
-      (#"{"singular": 4.2          }"#, MessageWithDoubleValue().with { $0.singular = 4.2 }),
-      (#"{"singular": "4.2"        }"#, MessageWithDoubleValue().with { $0.singular = 4.2 }),
-      (#"{"repeated": []           }"#, MessageWithDoubleValue()),
-      (#"{"repeated": [4.2]        }"#, MessageWithDoubleValue().with { $0.repeated = [4.2] }),
-      (#"{"map":      {}           }"#, MessageWithDoubleValue()),
-      (#"{"map":      {"a": 4.2 }  }"#, MessageWithDoubleValue().with { $0.map = ["a": 4.2] }),
+      (#"{}"#, T()),
+      (#"{"singular": null         }"#, T()),
+      (#"{"singular": 4.2          }"#, T().with { $0.singular = 4.2 }),
+      (#"{"singular": "4.2"        }"#, T().with { $0.singular = 4.2 }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": [4.2]        }"#, T().with { $0.repeated = [4.2] }),
+      (#"{"map":      {}           }"#, T()),
+      (#"{"map":      {"a": 4.2 }  }"#, T().with { $0.map = ["a": 4.2] }),
     ])
-  func deserialize(input: String, want: MessageWithDoubleValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithDoubleValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

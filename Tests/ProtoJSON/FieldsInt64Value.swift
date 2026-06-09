@@ -17,21 +17,23 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsInt64Value {
+  typealias T = MessageWithInt64Value
+
   @Test(
     "Int64Value fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithInt64Value()),
-      (#"{"singular": null         }"#, MessageWithInt64Value()),
-      (#"{"singular": 42           }"#, MessageWithInt64Value().with { $0.singular = 42 }),
-      (#"{"singular": "42"         }"#, MessageWithInt64Value().with { $0.singular = 42 }),
-      (#"{"repeated": []           }"#, MessageWithInt64Value()),
-      (#"{"repeated": [42]         }"#, MessageWithInt64Value().with { $0.repeated = [42] }),
-      (#"{"map":      {}           }"#, MessageWithInt64Value()),
-      (#"{"map":      {"a": 42 }   }"#, MessageWithInt64Value().with { $0.map = ["a": 42] }),
+      (#"{}"#, T()),
+      (#"{"singular": null         }"#, T()),
+      (#"{"singular": 42           }"#, T().with { $0.singular = 42 }),
+      (#"{"singular": "42"         }"#, T().with { $0.singular = 42 }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": [42]         }"#, T().with { $0.repeated = [42] }),
+      (#"{"map":      {}           }"#, T()),
+      (#"{"map":      {"a": 42 }   }"#, T().with { $0.map = ["a": 42] }),
     ])
-  func deserialize(input: String, want: MessageWithInt64Value) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithInt64Value.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

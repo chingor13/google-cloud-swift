@@ -17,28 +17,30 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct StringFields {
+  typealias T = MessageWithString
+
   @Test(
     "string fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithString()),
-      (#"{"singular": ""            }"#, MessageWithString()),
-      (#"{"singular": "42"          }"#, MessageWithString().with { $0.singular = "42" }),
-      (#"{"option":   null          }"#, MessageWithString()),
-      (#"{"option":   ""            }"#, MessageWithString().with { $0.option = "" }),
-      (#"{"option":   "42"          }"#, MessageWithString().with { $0.option = "42" }),
-      (#"{"repeated": []            }"#, MessageWithString()),
-      (#"{"repeated": [""]          }"#, MessageWithString().with { $0.repeated = [""] }),
-      (#"{"repeated": ["4", "2"]    }"#, MessageWithString().with { $0.repeated = ["4", "2"] }),
+      (#"{}"#, T()),
+      (#"{"singular": ""            }"#, T()),
+      (#"{"singular": "42"          }"#, T().with { $0.singular = "42" }),
+      (#"{"option":   null          }"#, T()),
+      (#"{"option":   ""            }"#, T().with { $0.option = "" }),
+      (#"{"option":   "42"          }"#, T().with { $0.option = "42" }),
+      (#"{"repeated": []            }"#, T()),
+      (#"{"repeated": [""]          }"#, T().with { $0.repeated = [""] }),
+      (#"{"repeated": ["4", "2"]    }"#, T().with { $0.repeated = ["4", "2"] }),
       // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapValue
-      (#"{"mapKey": {}              }"#, MessageWithString()),
-      (#"{"mapKey": {"4": 2}        }"#, MessageWithString().with { $0.mapKey = ["4": 2] }),
-      (#"{"mapKey": {"4": "2"}      }"#, MessageWithString().with { $0.mapKey = ["4": 2] }),
-      (#"{"mapKeyValue": {}         }"#, MessageWithString()),
-      (#"{"mapKeyValue": {"4": "2"} }"#, MessageWithString().with { $0.mapKeyValue = ["4": "2"] }),
+      (#"{"mapKey": {}              }"#, T()),
+      (#"{"mapKey": {"4": 2}        }"#, T().with { $0.mapKey = ["4": 2] }),
+      (#"{"mapKey": {"4": "2"}      }"#, T().with { $0.mapKey = ["4": 2] }),
+      (#"{"mapKeyValue": {}         }"#, T()),
+      (#"{"mapKeyValue": {"4": "2"} }"#, T().with { $0.mapKeyValue = ["4": "2"] }),
     ])
-  func deserialize(input: String, want: MessageWithString) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithString.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

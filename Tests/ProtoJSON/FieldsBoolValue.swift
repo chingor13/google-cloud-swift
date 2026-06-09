@@ -17,21 +17,23 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct FieldsBoolValue {
+  typealias T = MessageWithBoolValue
+
   @Test(
     "BoolValue fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithBoolValue()),
-      (#"{"singular": null         }"#, MessageWithBoolValue()),
-      (#"{"singular": true         }"#, MessageWithBoolValue().with { $0.singular = true }),
-      (#"{"singular": "false"      }"#, MessageWithBoolValue().with { $0.singular = false }),
-      (#"{"repeated": []           }"#, MessageWithBoolValue()),
-      (#"{"repeated": [true]       }"#, MessageWithBoolValue().with { $0.repeated = [true] }),
-      (#"{"map":      {}           }"#, MessageWithBoolValue()),
-      (#"{"map":      {"a": false} }"#, MessageWithBoolValue().with { $0.map = ["a": false] }),
+      (#"{}"#, T()),
+      (#"{"singular": null         }"#, T()),
+      (#"{"singular": true         }"#, T().with { $0.singular = true }),
+      (#"{"singular": "false"      }"#, T().with { $0.singular = false }),
+      (#"{"repeated": []           }"#, T()),
+      (#"{"repeated": [true]       }"#, T().with { $0.repeated = [true] }),
+      (#"{"map":      {}           }"#, T()),
+      (#"{"map":      {"a": false} }"#, T().with { $0.map = ["a": false] }),
     ])
-  func deserialize(input: String, want: MessageWithBoolValue) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithBoolValue.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }

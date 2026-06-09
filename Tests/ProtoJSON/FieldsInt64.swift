@@ -17,29 +17,31 @@ import Testing
 import GoogleCloudWkt
 
 @Suite struct Int64Fields {
+  typealias T = MessageWithI64
+
   @Test(
     "int64 fields deserialize",
     arguments: [
-      (#"{}"#, MessageWithI64()),
-      (#"{"singular": 0              }"#, MessageWithI64()),
-      (#"{"singular": 42             }"#, MessageWithI64().with { $0.singular = 42 }),
-      (#"{"singular": "42"           }"#, MessageWithI64().with { $0.singular = 42 }),
-      (#"{"option":   null           }"#, MessageWithI64()),
-      (#"{"option":   0              }"#, MessageWithI64().with { $0.option = 0 }),
-      (#"{"option":   42             }"#, MessageWithI64().with { $0.option = 42 }),
-      (#"{"option":   "42"           }"#, MessageWithI64().with { $0.option = 42 }),
-      (#"{"repeated": []             }"#, MessageWithI64()),
-      (#"{"repeated": [0]            }"#, MessageWithI64().with { $0.repeated = [0] }),
-      (#"{"repeated": [4, 2]         }"#, MessageWithI64().with { $0.repeated = [4, 2] }),
-      (#"{"repeated": ["4", "2"]     }"#, MessageWithI64().with { $0.repeated = [4, 2] }),
+      (#"{}"#, T()),
+      (#"{"singular": 0              }"#, T()),
+      (#"{"singular": 42             }"#, T().with { $0.singular = 42 }),
+      (#"{"singular": "42"           }"#, T().with { $0.singular = 42 }),
+      (#"{"option":   null           }"#, T()),
+      (#"{"option":   0              }"#, T().with { $0.option = 0 }),
+      (#"{"option":   42             }"#, T().with { $0.option = 42 }),
+      (#"{"option":   "42"           }"#, T().with { $0.option = 42 }),
+      (#"{"repeated": []             }"#, T()),
+      (#"{"repeated": [0]            }"#, T().with { $0.repeated = [0] }),
+      (#"{"repeated": [4, 2]         }"#, T().with { $0.repeated = [4, 2] }),
+      (#"{"repeated": ["4", "2"]     }"#, T().with { $0.repeated = [4, 2] }),
       // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapKey and mapKeyValue
-      (#"{"mapValue": {}             }"#, MessageWithI64()),
-      (#"{"mapValue": {"a": 42}      }"#, MessageWithI64().with { $0.mapValue = ["a": 42] }),
-      (#"{"mapValue": {"a": "42"}    }"#, MessageWithI64().with { $0.mapValue = ["a": 42] }),
+      (#"{"mapValue": {}             }"#, T()),
+      (#"{"mapValue": {"a": 42}      }"#, T().with { $0.mapValue = ["a": 42] }),
+      (#"{"mapValue": {"a": "42"}    }"#, T().with { $0.mapValue = ["a": 42] }),
     ])
-  func deserialize(input: String, want: MessageWithI64) throws {
+  func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
-    let got = try decoder.decode(MessageWithI64.self, from: input.data(using: .utf8)!)
+    let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
   }
 }
