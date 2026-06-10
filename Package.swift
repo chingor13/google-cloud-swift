@@ -51,6 +51,13 @@ let package = Package(
       ]
     ),
     .testTarget(
+      name: "Discovery",
+      dependencies: [
+        .product(name: "GoogleCloudWkt", package: "wkt"),
+      ],
+      exclude: ["disco/"],
+    ),
+    .testTarget(
       name: "ProtoJSON",
       dependencies: [
         .product(name: "GoogleCloudGax", package: "gax"),

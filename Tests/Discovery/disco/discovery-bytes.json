@@ -1,0 +1,34 @@
+{
+  "basePath": "",
+  "baseUrl": "https://publicca.googleapis.com/",
+  "schemas": {
+    "DiscoveryWithBytes": {
+      "description": "A message with byte data.",
+      "id": "DiscoveryWithBytes",
+      "type": "object",
+      "properties": {
+        "optional": {
+          "description": "An optional field.",
+          "format": "byte",
+          "type": "string"
+        },
+        "repeated": {
+          "description": "A repeated field.",
+          "items": {
+            "format": "byte",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "map": {
+          "description": "An map field.",
+          "additionalProperties": {
+            "type": "string",
+            "format": "byte"
+          },
+          "type": "object"
+        }
+      }
+    }
+  }
+}

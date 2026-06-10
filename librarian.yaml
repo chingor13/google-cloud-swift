@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.16.1-0.20260608160737-36d2aa121777
+version: v0.19.1-0.20260610005854-eee5ae462be0
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -166,6 +166,17 @@ libraries:
     apis:
       - path: google/type
     copyright_year: "2026"
+  - name: TestsDiscovery
+    copyright_year: "2026"
+    output: Tests/Discovery/generated
+    roots:
+      - Tests/Discovery/disco
+    skip_release: true
+    specification_format: discovery
+    swift:
+      modules:
+        - output: Tests/Discovery/generated
+          api_path: Tests/Discovery/disco/discovery-bytes.json
   - name: TestsProtoJSON
     copyright_year: "2026"
     output: Tests/ProtoJSON/generated
