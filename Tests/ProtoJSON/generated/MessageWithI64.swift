@@ -55,6 +55,71 @@ public struct MessageWithI64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case singular = "singular"
+    case option = "option"
+    case repeated = "repeated"
+    case mapValue = "mapValue"
+    case mapKey = "mapKey"
+    case mapKeyValue = "mapKeyValue"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.singular = try container.decode(Swift.Int64.self, forKey: .singular)
+    self.option = try container.decodeIfPresent(Swift.Int64.self, forKey: .option)
+    self.repeated = try container.decode([Swift.Int64].self, forKey: .repeated)
+    self.mapValue = try container.decode([Swift.String: Swift.Int64].self, forKey: .mapValue)
+    self.mapKey = try { () throws in
+      let stringKeyed = try container.decode([Swift.String: Swift.String].self, forKey: .mapKey)
+      let tuples = try stringKeyed.lazy.map { (key, value) throws -> (Swift.Int64, Swift.String) in
+        guard let newKey = Swift.Int64(key) else {
+          throw DecodingError.typeMismatch(
+            Swift.Int64.self,
+            DecodingError.Context(
+              codingPath: decoder.codingPath,
+              debugDescription: "Incorrect type for map key 'mapKey'"))
+        }
+        return (newKey, value)
+      }
+      return Dictionary(uniqueKeysWithValues: tuples)
+    }()
+    self.mapKeyValue = try { () throws in
+      let stringKeyed = try container.decode([Swift.String: Swift.Int64].self, forKey: .mapKeyValue)
+      let tuples = try stringKeyed.lazy.map { (key, value) throws -> (Swift.Int64, Swift.Int64) in
+        guard let newKey = Swift.Int64(key) else {
+          throw DecodingError.typeMismatch(
+            Swift.Int64.self,
+            DecodingError.Context(
+              codingPath: decoder.codingPath,
+              debugDescription: "Incorrect type for map key 'mapKeyValue'"))
+        }
+        return (newKey, value)
+      }
+      return Dictionary(uniqueKeysWithValues: tuples)
+    }()
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.singular, forKey: .singular)
+    try container.encode(self.option, forKey: .option)
+    try container.encode(self.repeated, forKey: .repeated)
+    try container.encode(self.mapValue, forKey: .mapValue)
+    do {
+      let stringKeyed = Dictionary(
+        uniqueKeysWithValues: self.mapKey.lazy.map { (Swift.String($0), $1) }
+      )
+      try container.encode(stringKeyed, forKey: .mapKey)
+    }
+    do {
+      let stringKeyed = Dictionary(
+        uniqueKeysWithValues: self.mapKeyValue.lazy.map { (Swift.String($0), $1) }
+      )
+      try container.encode(stringKeyed, forKey: .mapKeyValue)
+    }
+  }
+
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithI64"
   }

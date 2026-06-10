@@ -23,24 +23,52 @@ import GoogleCloudWkt
     "string fields deserialize",
     arguments: [
       (#"{}"#, T()),
-      (#"{"singular": ""            }"#, T()),
-      (#"{"singular": "42"          }"#, T().with { $0.singular = "42" }),
-      (#"{"option":   null          }"#, T()),
-      (#"{"option":   ""            }"#, T().with { $0.option = "" }),
-      (#"{"option":   "42"          }"#, T().with { $0.option = "42" }),
-      (#"{"repeated": []            }"#, T()),
-      (#"{"repeated": [""]          }"#, T().with { $0.repeated = [""] }),
-      (#"{"repeated": ["4", "2"]    }"#, T().with { $0.repeated = ["4", "2"] }),
-      // TODO(https://github.com/googleapis/librarian/issues/5808) - support mapValue
-      (#"{"mapKey": {}              }"#, T()),
-      (#"{"mapKey": {"4": 2}        }"#, T().with { $0.mapKey = ["4": 2] }),
-      (#"{"mapKey": {"4": "2"}      }"#, T().with { $0.mapKey = ["4": 2] }),
-      (#"{"mapKeyValue": {}         }"#, T()),
-      (#"{"mapKeyValue": {"4": "2"} }"#, T().with { $0.mapKeyValue = ["4": "2"] }),
+      (#"{"singular"   : ""                }"#, T()),
+      (#"{"singular"   : "42"              }"#, T().with { $0.singular = "42" }),
+      (#"{"option"     : null              }"#, T()),
+      (#"{"option"     : ""                }"#, T().with { $0.option = "" }),
+      (#"{"option"     : "42"              }"#, T().with { $0.option = "42" }),
+      (#"{"repeated"   : []                }"#, T()),
+      (#"{"repeated"   : [""]              }"#, T().with { $0.repeated = [""] }),
+      (#"{"repeated"   : ["4", "2"]        }"#, T().with { $0.repeated = ["4", "2"] }),
+      (#"{"mapValue"   : {}                }"#, T()),
+      (#"{"mapValue"   : {"42": "a"}       }"#, T().with { $0.mapValue = [42: "a"] }),
+      (#"{"mapKey"     : {}                }"#, T()),
+      (#"{"mapKey"     : {"4": 2}          }"#, T().with { $0.mapKey = ["4": 2] }),
+      (#"{"mapKey"     : {"4": "2"}        }"#, T().with { $0.mapKey = ["4": 2] }),
+      (#"{"mapKeyValue": {}                }"#, T()),
+      (#"{"mapKeyValue": {"4": "2"}        }"#, T().with { $0.mapKeyValue = ["4": "2"] }),
     ])
   func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
     let got = try decoder.decode(T.self, from: input.data(using: .utf8)!)
     #expect(got == want)
+  }
+
+  @Test(
+    arguments: [
+      (
+        #"{"mapKey":{},"mapKeyValue":{},"mapValue":{},"option":null,"repeated":[],"singular":""}"#,
+        T()
+      ),
+      (
+        #"{"mapKey":{"a":42},"mapKeyValue":{},"mapValue":{},"option":null,"repeated":[],"singular":""}"#,
+        T().with { $0.mapKey = ["a": 42] }
+      ),
+      (
+        #"{"mapKey":{},"mapKeyValue":{},"mapValue":{"42":"a"},"option":null,"repeated":[],"singular":""}"#,
+        T().with { $0.mapValue = [42: "a"] }
+      ),
+    ])
+  func roundtrip(want: String, input: T) throws {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(input)
+    let got = String(data: data, encoding: .utf8)!
+    #expect(got == want)
+
+    let decoder = _ProtoJSONDecoder()
+    let roundtrip = try decoder.decode(T.self, from: data)
+    #expect(input == roundtrip)
   }
 }

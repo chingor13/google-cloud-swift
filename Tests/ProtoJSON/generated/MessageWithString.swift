@@ -55,6 +55,53 @@ public struct MessageWithString: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
+  private enum CodingKeys: String, CodingKey {
+    case singular = "singular"
+    case option = "option"
+    case repeated = "repeated"
+    case mapValue = "mapValue"
+    case mapKey = "mapKey"
+    case mapKeyValue = "mapKeyValue"
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.singular = try container.decode(Swift.String.self, forKey: .singular)
+    self.option = try container.decodeIfPresent(Swift.String.self, forKey: .option)
+    self.repeated = try container.decode([Swift.String].self, forKey: .repeated)
+    self.mapValue = try { () throws in
+      let stringKeyed = try container.decode([Swift.String: Swift.String].self, forKey: .mapValue)
+      let tuples = try stringKeyed.lazy.map { (key, value) throws -> (Swift.Int32, Swift.String) in
+        guard let newKey = Swift.Int32(key) else {
+          throw DecodingError.typeMismatch(
+            Swift.Int32.self,
+            DecodingError.Context(
+              codingPath: decoder.codingPath,
+              debugDescription: "Incorrect type for map key 'mapValue'"))
+        }
+        return (newKey, value)
+      }
+      return Dictionary(uniqueKeysWithValues: tuples)
+    }()
+    self.mapKey = try container.decode([Swift.String: Swift.Int32].self, forKey: .mapKey)
+    self.mapKeyValue = try container.decode([Swift.String: Swift.String].self, forKey: .mapKeyValue)
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.singular, forKey: .singular)
+    try container.encode(self.option, forKey: .option)
+    try container.encode(self.repeated, forKey: .repeated)
+    do {
+      let stringKeyed = Dictionary(
+        uniqueKeysWithValues: self.mapValue.lazy.map { (Swift.String($0), $1) }
+      )
+      try container.encode(stringKeyed, forKey: .mapValue)
+    }
+    try container.encode(self.mapKey, forKey: .mapKey)
+    try container.encode(self.mapKeyValue, forKey: .mapKeyValue)
+  }
+
   public static var _anyTypeUrl: String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithString"
   }
