@@ -24,10 +24,16 @@ let package = Package(
   products: [
     .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"])
   ],
+  dependencies: [
+    .package(url: "https://github.com/swift-extras/swift-extras-base64", from: "1.0.0")
+  ],
 
   targets: [
     .target(
       name: "GoogleCloudWkt",
+      dependencies: [
+        .product(name: "ExtrasBase64", package: "swift-extras-base64")
+      ],
     ),
     .testTarget(
       name: "GoogleCloudWktTests",
