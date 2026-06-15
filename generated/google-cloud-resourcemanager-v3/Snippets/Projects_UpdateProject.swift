@@ -24,6 +24,17 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Projects, projectId: String) async throws {
+  let poller = try await client.updateProject(
+    withPolling: UpdateProjectRequest()
+      .with {
+        $0.project = Project().with {
+          $0.name = "projects/\(projectId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

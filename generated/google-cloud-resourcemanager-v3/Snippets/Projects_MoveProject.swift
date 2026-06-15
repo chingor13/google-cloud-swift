@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Projects) async throws {
+  let poller = try await client.moveProject(
+    withPolling: MoveProjectRequest()
+      /* set fields using .with { $0... } */
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

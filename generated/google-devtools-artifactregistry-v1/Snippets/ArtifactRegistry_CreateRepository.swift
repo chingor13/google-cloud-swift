@@ -25,6 +25,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some ArtifactRegistry, projectId: String, locationId: String) async throws {
+  let poller = try await client.createRepository(
+    withPolling: CreateRepositoryRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

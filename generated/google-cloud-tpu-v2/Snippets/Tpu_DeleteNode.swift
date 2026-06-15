@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Tpu, projectId: String, locationId: String, nodeId: String) async throws {
+  let poller = try await client.deleteNode(
+    withPolling: DeleteNodeRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/nodes/\(nodeId)" }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

@@ -28,6 +28,15 @@ func sample(
   client: some CloudFilestoreManager, projectId: String, locationId: String, instanceId: String,
   snapshotId: String
 ) async throws {
+  let poller = try await client.deleteSnapshot(
+    withPolling: DeleteSnapshotRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)/snapshots/\(snapshotId)"
+      }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

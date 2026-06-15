@@ -23,6 +23,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some TagBindings) async throws {
+  let poller = try await client.createTagBinding(
+    withPolling: CreateTagBindingRequest()
+      /* set fields using .with { $0... } */
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

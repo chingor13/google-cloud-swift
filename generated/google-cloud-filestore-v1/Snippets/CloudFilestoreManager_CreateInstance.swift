@@ -25,6 +25,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some CloudFilestoreManager, parent: String) async throws {
+  let poller = try await client.createInstance(
+    withPolling: CreateInstanceRequest()
+      .with { $0.parent = "\(parent)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

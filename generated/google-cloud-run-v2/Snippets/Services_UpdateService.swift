@@ -26,6 +26,17 @@ import GoogleRpc
 func sample(client: some Services, projectId: String, locationId: String, serviceId: String)
   async throws
 {
+  let poller = try await client.updateService(
+    withPolling: UpdateServiceRequest()
+      .with {
+        $0.service = Service().with {
+          $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

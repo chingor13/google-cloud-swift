@@ -24,6 +24,16 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Jobs, projectId: String, locationId: String, jobId: String) async throws {
+  let poller = try await client.updateJob(
+    withPolling: UpdateJobRequest()
+      .with {
+        $0.job = Job().with {
+          $0.name = "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)"
+        }
+      }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

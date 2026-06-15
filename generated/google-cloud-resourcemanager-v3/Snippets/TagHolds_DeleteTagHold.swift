@@ -23,6 +23,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some TagHolds, tagValueId: String, tagHoldId: String) async throws {
+  let poller = try await client.deleteTagHold(
+    withPolling: DeleteTagHoldRequest()
+      .with { $0.name = "tagValues/\(tagValueId)/tagHolds/\(tagHoldId)" }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

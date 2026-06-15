@@ -27,6 +27,14 @@ import GoogleRpc
 func sample(
   client: some ArtifactRegistry, projectId: String, locationId: String, repositoryId: String
 ) async throws {
+  let poller = try await client.deleteRepository(
+    withPolling: DeleteRepositoryRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)"
+      }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

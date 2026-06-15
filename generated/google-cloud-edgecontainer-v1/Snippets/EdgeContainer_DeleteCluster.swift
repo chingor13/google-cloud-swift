@@ -26,6 +26,12 @@ import GoogleRpc
 func sample(client: some EdgeContainer, projectId: String, locationId: String, clusterId: String)
   async throws
 {
+  let poller = try await client.deleteCluster(
+    withPolling: DeleteClusterRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)" }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

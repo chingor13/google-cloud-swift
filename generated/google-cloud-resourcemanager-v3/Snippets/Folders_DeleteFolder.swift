@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Folders, folderId: String) async throws {
+  let poller = try await client.deleteFolder(
+    withPolling: DeleteFolderRequest()
+      .with { $0.name = "folders/\(folderId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

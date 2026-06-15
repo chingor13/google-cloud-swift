@@ -27,6 +27,14 @@ import GoogleRpc
 func sample(
   client: some ArtifactRegistry, projectId: String, locationId: String, repositoryId: String
 ) async throws {
+  let poller = try await client.createAttachment(
+    withPolling: CreateAttachmentRequest()
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)"
+      }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

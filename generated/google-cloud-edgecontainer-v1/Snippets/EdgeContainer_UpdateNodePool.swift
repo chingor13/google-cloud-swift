@@ -27,6 +27,18 @@ func sample(
   client: some EdgeContainer, projectId: String, locationId: String, clusterId: String,
   nodePoolId: String
 ) async throws {
+  let poller = try await client.updateNodePool(
+    withPolling: UpdateNodePoolRequest()
+      .with {
+        $0.nodePool = NodePool().with {
+          $0.name =
+            "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)/nodePools/\(nodePoolId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

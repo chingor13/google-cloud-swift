@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Tpu, parent: String) async throws {
+  let poller = try await client.createQueuedResource(
+    withPolling: CreateQueuedResourceRequest()
+      .with { $0.parent = "\(parent)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

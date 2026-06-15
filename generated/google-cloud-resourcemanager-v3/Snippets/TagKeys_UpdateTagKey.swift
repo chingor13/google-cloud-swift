@@ -24,6 +24,17 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some TagKeys, tagKeyId: String) async throws {
+  let poller = try await client.updateTagKey(
+    withPolling: UpdateTagKeyRequest()
+      .with {
+        $0.tagKey = TagKey().with {
+          $0.name = "tagKeys/\(tagKeyId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

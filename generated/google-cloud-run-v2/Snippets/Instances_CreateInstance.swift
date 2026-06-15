@@ -23,6 +23,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Instances, projectId: String, locationId: String) async throws {
+  let poller = try await client.createInstance(
+    withPolling: CreateInstanceRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

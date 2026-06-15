@@ -27,6 +27,12 @@ import GoogleRpc
 func sample(client: some FunctionService, projectId: String, locationId: String, functionId: String)
   async throws
 {
+  let poller = try await client.deleteFunction(
+    withPolling: DeleteFunctionRequest()
+      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/functions/\(functionId)" }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

@@ -24,6 +24,17 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Folders, folderId: String) async throws {
+  let poller = try await client.updateFolder(
+    withPolling: UpdateFolderRequest()
+      .with {
+        $0.folder = Folder().with {
+          $0.name = "folders/\(folderId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

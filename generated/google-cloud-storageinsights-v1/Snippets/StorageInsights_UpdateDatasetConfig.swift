@@ -26,6 +26,18 @@ import GoogleRpc
 func sample(
   client: some StorageInsights, projectId: String, locationId: String, datasetConfigId: String
 ) async throws {
+  let poller = try await client.updateDatasetConfig(
+    withPolling: UpdateDatasetConfigRequest()
+      .with {
+        $0.datasetConfig = DatasetConfig().with {
+          $0.name =
+            "projects/\(projectId)/locations/\(locationId)/datasetConfigs/\(datasetConfigId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

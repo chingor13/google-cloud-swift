@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Folders) async throws {
+  let poller = try await client.moveFolder(
+    withPolling: MoveFolderRequest()
+      /* set fields using .with { $0... } */
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

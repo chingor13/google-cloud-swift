@@ -26,6 +26,17 @@ import GoogleRpc
 func sample(client: some EdgeContainer, projectId: String, locationId: String, clusterId: String)
   async throws
 {
+  let poller = try await client.updateCluster(
+    withPolling: UpdateClusterRequest()
+      .with {
+        $0.cluster = Cluster().with {
+          $0.name = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

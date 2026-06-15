@@ -26,6 +26,14 @@ import GoogleRpc
 func sample(
   client: some EdgeContainer, projectId: String, locationId: String, vpnConnectionId: String
 ) async throws {
+  let poller = try await client.deleteVpnConnection(
+    withPolling: DeleteVpnConnectionRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/vpnConnections/\(vpnConnectionId)"
+      }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

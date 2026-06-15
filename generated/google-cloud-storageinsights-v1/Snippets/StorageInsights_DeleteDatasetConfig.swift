@@ -26,6 +26,14 @@ import GoogleRpc
 func sample(
   client: some StorageInsights, projectId: String, locationId: String, datasetConfigId: String
 ) async throws {
+  let poller = try await client.deleteDatasetConfig(
+    withPolling: DeleteDatasetConfigRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/datasetConfigs/\(datasetConfigId)"
+      }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

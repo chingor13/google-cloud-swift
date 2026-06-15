@@ -26,6 +26,15 @@ import GoogleRpc
 func sample(client: some Tpu, projectId: String, locationId: String, queuedResourceId: String)
   async throws
 {
+  let poller = try await client.deleteQueuedResource(
+    withPolling: DeleteQueuedResourceRequest()
+      .with {
+        $0.name =
+          "projects/\(projectId)/locations/\(locationId)/queuedResources/\(queuedResourceId)"
+      }
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

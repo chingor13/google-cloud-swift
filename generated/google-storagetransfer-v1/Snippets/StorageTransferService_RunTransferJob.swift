@@ -23,6 +23,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some StorageTransferService) async throws {
+  let poller = try await client.runTransferJob(
+    withPolling: RunTransferJobRequest()
+      /* set fields using .with { $0... } */
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

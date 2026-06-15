@@ -28,6 +28,18 @@ func sample(
   client: some CloudFilestoreManager, projectId: String, locationId: String, instanceId: String,
   snapshotId: String
 ) async throws {
+  let poller = try await client.updateSnapshot(
+    withPolling: UpdateSnapshotRequest()
+      .with {
+        $0.snapshot = Snapshot().with {
+          $0.name =
+            "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)/snapshots/\(snapshotId)"
+        }
+      }
+      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

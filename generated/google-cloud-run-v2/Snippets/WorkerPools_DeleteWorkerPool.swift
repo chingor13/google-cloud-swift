@@ -26,6 +26,14 @@ import GoogleRpc
 func sample(client: some WorkerPools, projectId: String, locationId: String, workerPoolId: String)
   async throws
 {
+  let poller = try await client.deleteWorkerPool(
+    withPolling: DeleteWorkerPoolRequest()
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/workerPools/\(workerPoolId)"
+      }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

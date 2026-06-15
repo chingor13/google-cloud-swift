@@ -26,6 +26,12 @@ import GoogleRpc
 func sample(client: some EdgeContainer, projectId: String, locationId: String, clusterId: String)
   async throws
 {
+  let poller = try await client.createNodePool(
+    withPolling: CreateNodePoolRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

@@ -27,6 +27,12 @@ import GoogleRpc
 func sample(
   client: some CloudFilestoreManager, projectId: String, locationId: String, instanceId: String
 ) async throws {
+  let poller = try await client.createSnapshot(
+    withPolling: CreateSnapshotRequest()
+      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

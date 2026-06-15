@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some StorageInsights) async throws {
+  let poller = try await client.unlinkDataset(
+    withPolling: UnlinkDatasetRequest()
+      /* set fields using .with { $0... } */
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

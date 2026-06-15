@@ -25,6 +25,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some ArtifactRegistry) async throws {
+  let poller = try await client.importYumArtifacts(
+    withPolling: ImportYumArtifactsRequest()
+      /* set fields using .with { $0... } */
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

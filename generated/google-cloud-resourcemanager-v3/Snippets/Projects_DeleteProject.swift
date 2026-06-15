@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Projects, projectId: String) async throws {
+  let poller = try await client.deleteProject(
+    withPolling: DeleteProjectRequest()
+      .with { $0.name = "projects/\(projectId)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 

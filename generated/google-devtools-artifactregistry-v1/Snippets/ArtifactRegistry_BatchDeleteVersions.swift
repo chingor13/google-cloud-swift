@@ -25,6 +25,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some ArtifactRegistry) async throws {
+  let poller = try await client.batchDeleteVersions(
+    withPolling: BatchDeleteVersionsRequest()
+      /* set fields using .with { $0... } */
+  )
+  try await poller.wait()
+  print("Success")
 }
 // snippet.hide
 

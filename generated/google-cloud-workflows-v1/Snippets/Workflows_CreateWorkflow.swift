@@ -24,6 +24,12 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: some Workflows, parent: String) async throws {
+  let poller = try await client.createWorkflow(
+    withPolling: CreateWorkflowRequest()
+      .with { $0.parent = "\(parent)" }
+  )
+  let response = try await poller.wait()
+  print("Success: \(response)")
 }
 // snippet.hide
 
