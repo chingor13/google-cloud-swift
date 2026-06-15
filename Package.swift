@@ -27,7 +27,12 @@ let package = Package(
   dependencies: [
     // Reference local packages via paths
     .package(path: "./packages/auth"),
-    .package(path: "./packages/gax"),
+    .package(
+      path: "./packages/gax",
+      traits: [
+        .trait(name: "IntegrationTests", condition: .when(traits: ["IntegrationTests"]))
+      ]
+    ),
     .package(path: "./packages/wkt"),
     .package(path: "./guide"),
     .package(path: "./generated/google-cloud-location"),

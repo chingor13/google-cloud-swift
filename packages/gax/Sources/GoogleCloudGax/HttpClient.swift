@@ -21,6 +21,8 @@ import GoogleCloudAuth
 
 /// Implements a HTTP-only client for the Swift SDK client libraries.
 public struct HTTPClient {
+  private static let sharedSession = URLSession(configuration: .ephemeral)
+
   let endpoint: String
   let credentials: GoogleCloudAuth.Credentials
   let inner: URLSession
@@ -29,7 +31,7 @@ public struct HTTPClient {
   public init(from: ClientOptions, withDefaultEndpoint: String) throws {
     self.credentials = try from.credentials ?? GoogleCloudAuth.Credentials()
     self.endpoint = from.endpoint ?? withDefaultEndpoint
-    self.inner = URLSession(configuration: .ephemeral)
+    self.inner = Self.sharedSession
   }
 
   // Creates a new testing client.

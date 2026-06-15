@@ -24,6 +24,9 @@ let package = Package(
   products: [
     .library(name: "GoogleCloudGax", targets: ["GoogleCloudGax"])
   ],
+  traits: [
+    "IntegrationTests"
+  ],
   dependencies: [
     .package(path: "../auth"),
     .package(path: "../../generated/google-rpc"),
@@ -44,6 +47,15 @@ let package = Package(
         "GoogleCloudGax",
         .product(name: "GoogleRpc", package: "google-rpc"),
       ],
-      path: "Tests"),
+      path: "Tests",
+      exclude: ["IntegrationTests"]
+    ),
+    .testTarget(
+      name: "GoogleCloudGaxIntegrationTests",
+      dependencies: [
+        "GoogleCloudGax",
+      ],
+      path: "Tests/IntegrationTests"
+    ),
   ]
 )
