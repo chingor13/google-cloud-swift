@@ -26,7 +26,10 @@ import GoogleRpc
 func sample(client: some Tpu, parent: String) async throws {
   let poller = try await client.createQueuedResource(
     withPolling: CreateQueuedResourceRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.queuedResource = QueuedResource() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

@@ -26,7 +26,10 @@ import GoogleRpc
 func sample(client: some WorkerPools, projectId: String, locationId: String) async throws {
   let poller = try await client.createWorkerPool(
     withPolling: CreateWorkerPoolRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.workerPool = WorkerPool() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

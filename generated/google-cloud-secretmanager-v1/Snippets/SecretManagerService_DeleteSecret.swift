@@ -25,7 +25,9 @@ import GoogleIamV1
 func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
   try await client.deleteSecret(
     request: DeleteSecretRequest()
-      .with { $0.name = "projects/\(projectId)/secrets/\(secretId)" }
+      .with {
+        $0.name = "projects/\(projectId)/secrets/\(secretId)"
+      }
   )
   print("Success (no response expected)")
 }

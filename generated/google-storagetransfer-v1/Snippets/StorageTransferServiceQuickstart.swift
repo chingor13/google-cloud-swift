@@ -30,8 +30,8 @@ func sample(projectId: String, agentPoolId: String, ) async throws {
         $0.agentPool = AgentPool().with {
           $0.name = "projects/\(projectId)/agentPools/\(agentPoolId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

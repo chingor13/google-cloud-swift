@@ -25,7 +25,11 @@ import GoogleIamV1
 func sample(client: some SecretManagerService, projectId: String) async throws {
   let response = try await client.createSecret(
     request: CreateSecretRequest()
-      .with { $0.parent = "projects/\(projectId)" }
+      .with {
+        $0.parent = "projects/\(projectId)"
+        $0.secretId = "[replace with a valid ID]"
+        $0.secret = Secret() /* .with { ... } */
+      }
   )
   print("Success: \(response)")
 }

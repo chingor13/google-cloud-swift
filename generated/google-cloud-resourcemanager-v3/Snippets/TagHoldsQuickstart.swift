@@ -26,7 +26,9 @@ func sample(tagValueId: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.TagHoldsClient()
   let items = try client.listTagHolds(
     byItem: ListTagHoldsRequest()
-      .with { $0.parent = "tagValues/\(tagValueId)" }
+      .with {
+        $0.parent = "tagValues/\(tagValueId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

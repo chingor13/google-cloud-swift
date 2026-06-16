@@ -25,7 +25,10 @@ import GoogleRpc
 func sample(client: some TagHolds, tagValueId: String) async throws {
   let poller = try await client.createTagHold(
     withPolling: CreateTagHoldRequest()
-      .with { $0.parent = "tagValues/\(tagValueId)" }
+      .with {
+        $0.parent = "tagValues/\(tagValueId)"
+        $0.tagHold = TagHold() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

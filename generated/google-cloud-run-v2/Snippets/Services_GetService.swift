@@ -28,7 +28,9 @@ func sample(client: some Services, projectId: String, locationId: String, servic
 {
   let response = try await client.getService(
     request: GetServiceRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)"
+      }
   )
   print("Success: \(response)")
 }

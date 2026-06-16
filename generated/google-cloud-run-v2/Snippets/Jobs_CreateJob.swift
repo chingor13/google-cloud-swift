@@ -26,7 +26,11 @@ import GoogleRpc
 func sample(client: some Jobs, projectId: String, locationId: String) async throws {
   let poller = try await client.createJob(
     withPolling: CreateJobRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.jobId = "[replace with a valid ID]"
+        $0.job = Job() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

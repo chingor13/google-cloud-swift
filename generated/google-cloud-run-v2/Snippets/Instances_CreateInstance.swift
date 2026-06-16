@@ -25,7 +25,11 @@ import GoogleRpc
 func sample(client: some Instances, projectId: String, locationId: String) async throws {
   let poller = try await client.createInstance(
     withPolling: CreateInstanceRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.instanceId = "[replace with a valid ID]"
+        $0.instance = Instance() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

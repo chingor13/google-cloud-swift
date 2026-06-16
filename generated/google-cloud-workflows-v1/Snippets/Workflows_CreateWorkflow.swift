@@ -26,7 +26,11 @@ import GoogleRpc
 func sample(client: some Workflows, parent: String) async throws {
   let poller = try await client.createWorkflow(
     withPolling: CreateWorkflowRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.workflowId = "[replace with a valid ID]"
+        $0.workflow = Workflow() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

@@ -29,7 +29,11 @@ func sample(
 ) async throws {
   let poller = try await client.createSnapshot(
     withPolling: CreateSnapshotRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)"
+        $0.snapshotId = "[replace with a valid ID]"
+        $0.snapshot = Snapshot() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

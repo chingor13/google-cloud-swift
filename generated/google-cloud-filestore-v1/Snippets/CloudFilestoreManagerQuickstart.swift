@@ -28,7 +28,9 @@ func sample(parent: String, ) async throws {
   let client = try GoogleCloudFilestoreV1.Clients.CloudFilestoreManagerClient()
   let items = try client.listInstances(
     byItem: ListInstancesRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

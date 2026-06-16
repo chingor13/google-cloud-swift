@@ -25,7 +25,9 @@ import GoogleIamV1
 func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
   let items = try client.listSecretVersions(
     byItem: ListSecretVersionsRequest()
-      .with { $0.parent = "projects/\(projectId)/secrets/\(secretId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/secrets/\(secretId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

@@ -26,7 +26,10 @@ import GoogleRpc
 func sample(client: some StorageInsights, projectId: String, locationId: String) async throws {
   let response = try await client.createReportConfig(
     request: CreateReportConfigRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.reportConfig = ReportConfig() /* .with { ... } */
+      }
   )
   print("Success: \(response)")
 }

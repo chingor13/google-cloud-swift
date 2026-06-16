@@ -26,7 +26,9 @@ func sample(parent: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.TagBindingsClient()
   let items = try client.listTagBindings(
     byItem: ListTagBindingsRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

@@ -26,7 +26,9 @@ import GoogleRpc
 func sample(client: some Folders, folderId: String) async throws {
   let poller = try await client.undeleteFolder(
     withPolling: UndeleteFolderRequest()
-      .with { $0.name = "folders/\(folderId)" }
+      .with {
+        $0.name = "folders/\(folderId)"
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

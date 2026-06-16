@@ -35,8 +35,8 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)/files/\(fileId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

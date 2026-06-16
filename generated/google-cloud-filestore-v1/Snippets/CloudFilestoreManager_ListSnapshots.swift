@@ -29,7 +29,9 @@ func sample(
 ) async throws {
   let items = try client.listSnapshots(
     byItem: ListSnapshotsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

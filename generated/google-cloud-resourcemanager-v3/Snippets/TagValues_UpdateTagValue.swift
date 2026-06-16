@@ -30,8 +30,8 @@ func sample(client: some TagValues, tagValueId: String) async throws {
         $0.tagValue = TagValue().with {
           $0.name = "tagValues/\(tagValueId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

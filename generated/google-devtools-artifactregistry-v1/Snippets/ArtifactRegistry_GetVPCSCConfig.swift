@@ -27,7 +27,9 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, projectId: String, locationId: String) async throws {
   let response = try await client.getVpcscconfig(
     request: GetVPCSCConfigRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/vpcscConfig" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/vpcscConfig"
+      }
   )
   print("Success: \(response)")
 }

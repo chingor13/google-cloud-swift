@@ -25,7 +25,10 @@ func sample(client: some PublicCertificateAuthorityService, projectId: String, l
 {
   let response = try await client.createExternalAccountKey(
     request: CreateExternalAccountKeyRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.externalAccountKey = ExternalAccountKey() /* .with { ... } */
+      }
   )
   print("Success: \(response)")
 }

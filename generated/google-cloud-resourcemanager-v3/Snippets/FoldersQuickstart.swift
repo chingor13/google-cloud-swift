@@ -27,7 +27,9 @@ func sample(parent: String, ) async throws {
   let client = try GoogleCloudResourcemanagerV3.Clients.FoldersClient()
   let items = try client.listFolders(
     byItem: ListFoldersRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

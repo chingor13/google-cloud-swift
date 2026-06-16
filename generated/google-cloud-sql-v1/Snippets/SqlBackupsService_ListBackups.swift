@@ -24,7 +24,9 @@
   func sample(client: some SqlBackupsService, projectId: String) async throws {
     let items = try client.listBackups(
       byItem: ListBackupsRequest()
-        .with { $0.parent = "projects/\(projectId)" }
+        .with {
+          $0.parent = "projects/\(projectId)"
+        }
     )
     for try await item in items {
       print("  \(item)")

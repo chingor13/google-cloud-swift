@@ -26,7 +26,9 @@ import GoogleRpc
 func sample(client: some Projects, projectId: String) async throws {
   let poller = try await client.undeleteProject(
     withPolling: UndeleteProjectRequest()
-      .with { $0.name = "projects/\(projectId)" }
+      .with {
+        $0.name = "projects/\(projectId)"
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

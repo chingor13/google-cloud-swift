@@ -28,7 +28,9 @@ func sample(client: some Services, projectId: String, locationId: String, servic
 {
   let poller = try await client.deleteService(
     withPolling: DeleteServiceRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)"
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

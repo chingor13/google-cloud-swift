@@ -28,7 +28,9 @@ func sample(client: some Workflows, projectId: String, locationId: String, workf
 {
   let poller = try await client.deleteWorkflow(
     withPolling: DeleteWorkflowRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/workflows/\(workflowId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/workflows/\(workflowId)"
+      }
   )
   try await poller.wait()
   print("Success")

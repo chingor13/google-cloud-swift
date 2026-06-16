@@ -27,7 +27,11 @@ import GoogleRpc
 func sample(client: some FunctionService, parent: String) async throws {
   let poller = try await client.createFunction(
     withPolling: CreateFunctionRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.functionId = "[replace with a valid ID]"
+        $0.function = Function() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

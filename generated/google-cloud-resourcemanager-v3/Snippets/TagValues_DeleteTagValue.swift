@@ -26,7 +26,9 @@ import GoogleRpc
 func sample(client: some TagValues, tagValueId: String) async throws {
   let poller = try await client.deleteTagValue(
     withPolling: DeleteTagValueRequest()
-      .with { $0.name = "tagValues/\(tagValueId)" }
+      .with {
+        $0.name = "tagValues/\(tagValueId)"
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

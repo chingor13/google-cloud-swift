@@ -27,7 +27,9 @@ func sample(client: some Executions, projectId: String, locationId: String, jobI
 {
   let items = try client.listExecutions(
     byItem: ListExecutionsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/jobs/\(jobId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

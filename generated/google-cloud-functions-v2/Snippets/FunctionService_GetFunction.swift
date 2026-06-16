@@ -29,7 +29,9 @@ func sample(client: some FunctionService, projectId: String, locationId: String,
 {
   let response = try await client.getFunction(
     request: GetFunctionRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/functions/\(functionId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/functions/\(functionId)"
+      }
   )
   print("Success: \(response)")
 }

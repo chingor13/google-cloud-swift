@@ -26,7 +26,10 @@ import GoogleRpc
 func sample(client: some StorageInsights, projectId: String, locationId: String) async throws {
   let poller = try await client.createDatasetConfig(
     withPolling: CreateDatasetConfigRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.datasetConfig = DatasetConfig() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

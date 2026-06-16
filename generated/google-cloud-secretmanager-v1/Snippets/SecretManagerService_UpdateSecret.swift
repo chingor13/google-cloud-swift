@@ -29,8 +29,8 @@ func sample(client: some SecretManagerService, projectId: String, secretId: Stri
         $0.secret = Secret().with {
           $0.name = "projects/\(projectId)/secrets/\(secretId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

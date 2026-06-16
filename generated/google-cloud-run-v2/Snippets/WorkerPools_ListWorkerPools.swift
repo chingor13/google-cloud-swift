@@ -26,7 +26,9 @@ import GoogleRpc
 func sample(client: some WorkerPools, projectId: String, locationId: String) async throws {
   let items = try client.listWorkerPools(
     byItem: ListWorkerPoolsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

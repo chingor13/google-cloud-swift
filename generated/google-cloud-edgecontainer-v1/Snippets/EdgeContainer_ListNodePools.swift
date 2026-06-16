@@ -28,7 +28,9 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, c
 {
   let items = try client.listNodePools(
     byItem: ListNodePoolsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

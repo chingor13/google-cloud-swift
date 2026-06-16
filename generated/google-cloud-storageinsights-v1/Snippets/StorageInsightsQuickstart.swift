@@ -27,7 +27,9 @@ func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudStorageinsightsV1.Clients.StorageInsightsClient()
   let items = try client.listReportConfigs(
     byItem: ListReportConfigsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

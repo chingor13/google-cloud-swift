@@ -26,7 +26,11 @@ import GoogleRpc
 func sample(client: some Tpu, parent: String) async throws {
   let poller = try await client.createNode(
     withPolling: CreateNodeRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.nodeId = "[replace with a valid ID]"
+        $0.node = Node() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

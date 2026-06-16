@@ -27,7 +27,9 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, parent: String) async throws {
   let items = try client.listDockerImages(
     byItem: ListDockerImagesRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

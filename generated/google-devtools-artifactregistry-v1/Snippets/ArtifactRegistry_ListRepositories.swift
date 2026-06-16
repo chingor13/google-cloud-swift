@@ -27,7 +27,9 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, projectId: String, locationId: String) async throws {
   let items = try client.listRepositories(
     byItem: ListRepositoriesRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

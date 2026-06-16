@@ -31,6 +31,8 @@ func sample(
     request: CreateRuleRequest()
       .with {
         $0.parent = "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)"
+        $0.ruleId = "[replace with a valid ID]"
+        $0.rule = Rule() /* .with { ... } */
       }
   )
   print("Success: \(response)")

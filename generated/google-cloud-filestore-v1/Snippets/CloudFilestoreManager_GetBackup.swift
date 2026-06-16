@@ -29,7 +29,9 @@ func sample(
 ) async throws {
   let response = try await client.getBackup(
     request: GetBackupRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)"
+      }
   )
   print("Success: \(response)")
 }

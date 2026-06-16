@@ -24,7 +24,10 @@ func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
   let response = try await client.createExternalAccountKey(
     request: CreateExternalAccountKeyRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.externalAccountKey = ExternalAccountKey() /* .with { ... } */
+      }
   )
   print("Success: \(response)")
 }

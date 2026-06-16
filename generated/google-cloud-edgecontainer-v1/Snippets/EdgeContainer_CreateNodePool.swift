@@ -28,7 +28,10 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, c
 {
   let poller = try await client.createNodePool(
     withPolling: CreateNodePoolRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)"
+        $0.nodePool = NodePool() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

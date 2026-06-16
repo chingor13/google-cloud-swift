@@ -25,7 +25,9 @@ import GoogleRpc
 func sample(client: some TagBindings, tagBindingId: String) async throws {
   let poller = try await client.deleteTagBinding(
     withPolling: DeleteTagBindingRequest()
-      .with { $0.name = "tagBindings/\(tagBindingId)" }
+      .with {
+        $0.name = "tagBindings/\(tagBindingId)"
+      }
   )
   try await poller.wait()
   print("Success")

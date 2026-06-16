@@ -31,6 +31,8 @@ func sample(
     withPolling: CreateAttachmentRequest()
       .with {
         $0.parent = "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)"
+        $0.attachmentId = "[replace with a valid ID]"
+        $0.attachment = Attachment() /* .with { ... } */
       }
   )
   let response = try await poller.wait()

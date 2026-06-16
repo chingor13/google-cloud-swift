@@ -27,7 +27,11 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, projectId: String, locationId: String) async throws {
   let poller = try await client.createRepository(
     withPolling: CreateRepositoryRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.repositoryId = "[replace with a valid ID]"
+        $0.repository = Repository() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

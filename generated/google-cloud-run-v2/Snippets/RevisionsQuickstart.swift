@@ -26,7 +26,9 @@ func sample(projectId: String, locationId: String, serviceId: String, ) async th
   let client = try GoogleCloudRunV2.Clients.RevisionsClient()
   let items = try client.listRevisions(
     byItem: ListRevisionsRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)/services/\(serviceId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

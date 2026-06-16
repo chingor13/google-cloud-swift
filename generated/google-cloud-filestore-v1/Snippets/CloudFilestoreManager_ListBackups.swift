@@ -27,7 +27,9 @@ import GoogleRpc
 func sample(client: some CloudFilestoreManager, parent: String) async throws {
   let items = try client.listBackups(
     byItem: ListBackupsRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

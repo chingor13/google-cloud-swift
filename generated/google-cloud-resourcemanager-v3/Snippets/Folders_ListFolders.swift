@@ -26,7 +26,9 @@ import GoogleRpc
 func sample(client: some Folders, parent: String) async throws {
   let items = try client.listFolders(
     byItem: ListFoldersRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+      }
   )
   for try await item in items {
     print("  \(item)")

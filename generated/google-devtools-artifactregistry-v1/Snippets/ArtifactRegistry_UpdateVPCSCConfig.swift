@@ -31,8 +31,8 @@ func sample(client: some ArtifactRegistry, projectId: String, locationId: String
         $0.vpcscConfig = VPCSCConfig().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/vpcscConfig"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

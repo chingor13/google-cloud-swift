@@ -27,7 +27,9 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, projectId: String) async throws {
   let response = try await client.getProjectSettings(
     request: GetProjectSettingsRequest()
-      .with { $0.name = "projects/\(projectId)/projectSettings" }
+      .with {
+        $0.name = "projects/\(projectId)/projectSettings"
+      }
   )
   print("Success: \(response)")
 }

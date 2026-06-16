@@ -27,7 +27,9 @@ func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudEdgecontainerV1.Clients.EdgeContainerClient()
   let items = try client.listClusters(
     byItem: ListClustersRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+      }
   )
   for try await item in items {
     print("  \(item)")

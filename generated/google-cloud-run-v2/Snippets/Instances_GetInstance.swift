@@ -27,7 +27,9 @@ func sample(client: some Instances, projectId: String, locationId: String, insta
 {
   let response = try await client.getInstance(
     request: GetInstanceRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)"
+      }
   )
   print("Success: \(response)")
 }

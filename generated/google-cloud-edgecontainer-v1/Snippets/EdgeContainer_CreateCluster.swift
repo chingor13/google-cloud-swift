@@ -26,7 +26,11 @@ import GoogleRpc
 func sample(client: some EdgeContainer, projectId: String, locationId: String) async throws {
   let poller = try await client.createCluster(
     withPolling: CreateClusterRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.clusterId = "[replace with a valid ID]"
+        $0.cluster = Cluster() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

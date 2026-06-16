@@ -32,8 +32,8 @@ func sample(client: some Workflows, projectId: String, locationId: String, workf
         $0.workflow = Workflow().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/workflows/\(workflowId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

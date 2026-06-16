@@ -27,7 +27,11 @@ import GoogleRpc
 func sample(client: some ArtifactRegistry, parent: String) async throws {
   let response = try await client.createTag(
     request: CreateTagRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.tagId = "[replace with a valid ID]"
+        $0.tag = Tag() /* .with { ... } */
+      }
   )
   print("Success: \(response)")
 }

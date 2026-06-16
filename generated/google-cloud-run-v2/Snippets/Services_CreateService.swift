@@ -26,7 +26,11 @@ import GoogleRpc
 func sample(client: some Services, projectId: String, locationId: String) async throws {
   let poller = try await client.createService(
     withPolling: CreateServiceRequest()
-      .with { $0.parent = "projects/\(projectId)/locations/\(locationId)" }
+      .with {
+        $0.parent = "projects/\(projectId)/locations/\(locationId)"
+        $0.serviceId = "[replace with a valid ID]"
+        $0.service = Service() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

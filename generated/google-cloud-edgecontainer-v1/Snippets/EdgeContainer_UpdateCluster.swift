@@ -32,8 +32,8 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, c
         $0.cluster = Cluster().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

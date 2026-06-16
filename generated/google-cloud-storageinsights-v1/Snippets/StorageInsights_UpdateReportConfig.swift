@@ -32,8 +32,8 @@ func sample(
         $0.reportConfig = ReportConfig().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/reportConfigs/\(reportConfigId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   print("Success: \(response)")
 }

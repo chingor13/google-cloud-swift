@@ -30,8 +30,8 @@ func sample(client: some Folders, folderId: String) async throws {
         $0.folder = Folder().with {
           $0.name = "folders/\(folderId)"
         }
+        $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"])
       }
-      .with { $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["field.path1", "field.path2"]) }
   )
   let response = try await poller.wait()
   print("Success: \(response)")

@@ -29,7 +29,9 @@ func sample(
 ) async throws {
   let poller = try await client.deleteBackup(
     withPolling: DeleteBackupRequest()
-      .with { $0.name = "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)" }
+      .with {
+        $0.name = "projects/\(projectId)/locations/\(locationId)/backups/\(backupId)"
+      }
   )
   try await poller.wait()
   print("Success")

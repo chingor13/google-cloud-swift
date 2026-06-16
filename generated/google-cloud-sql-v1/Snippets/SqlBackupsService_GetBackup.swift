@@ -24,7 +24,9 @@
   func sample(client: some SqlBackupsService, projectId: String, backupId: String) async throws {
     let response = try await client.getBackup(
       request: GetBackupRequest()
-        .with { $0.name = "projects/\(projectId)/backups/\(backupId)" }
+        .with {
+          $0.name = "projects/\(projectId)/backups/\(backupId)"
+        }
     )
     print("Success: \(response)")
   }

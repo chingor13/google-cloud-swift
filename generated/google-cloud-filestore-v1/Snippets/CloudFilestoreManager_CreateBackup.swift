@@ -27,7 +27,11 @@ import GoogleRpc
 func sample(client: some CloudFilestoreManager, parent: String) async throws {
   let poller = try await client.createBackup(
     withPolling: CreateBackupRequest()
-      .with { $0.parent = "\(parent)" }
+      .with {
+        $0.parent = "\(parent)"
+        $0.backupId = "[replace with a valid ID]"
+        $0.backup = Backup() /* .with { ... } */
+      }
   )
   let response = try await poller.wait()
   print("Success: \(response)")
