@@ -16,20 +16,33 @@ import Foundation
 import Testing
 import GoogleCloudWkt
 
+// Verify the generated code can deserialize `bytes` as url-safe base64 encoded strings.
+//
+// The encoding for bytes is defined here:
+//   https://developers.google.com/discovery/v1/type-format
+//   https://datatracker.ietf.org/doc/html/rfc4648#section-5
+// This is not the same encoding as defined in ProtoJSON.
+//
+// We use the `???` test string because (a) it is short, (b) it encodes differently under
+// the two alphabets: `Pz8/` and `Pz8_`.
+//
+// We use `????` to verify padding (or lack thereof) also works.
 @Suite struct DiscoveryBytes {
   typealias T = DiscoveryWithBytes
 
   @Test(
     arguments: [
       (#"{}"#, T()),
-      (#"{"optional": null          }"#, T()),
-      (#"{"optional": ""            }"#, T().with { $0.optional = Data() }),
-      (#"{"optional": "NDI="        }"#, T().with { $0.optional = Data("42".utf8) }),
-      (#"{"repeated": []            }"#, T()),
-      (#"{"repeated": ["NDI="]      }"#, T().with { $0.repeated = [Data("42".utf8)] }),
-      (#"{"repeated": ["NDI=", ""]  }"#, T().with { $0.repeated = [Data("42".utf8), Data()] }),
-      (#"{"map":      {}            }"#, T()),
-      (#"{"map":      {"a": "NDI="} }"#, T().with { $0.map = ["a": Data("42".utf8)] }),
+      (#"{"optional": null            }"#, T()),
+      (#"{"optional": ""              }"#, T().with { $0.optional = Data() }),
+      (#"{"optional": "Pz8_"          }"#, T().with { $0.optional = Data("???".utf8) }),
+      (#"{"optional": "Pz8_Pw"        }"#, T().with { $0.optional = Data("????".utf8) }),
+      (#"{"repeated": []              }"#, T()),
+      (#"{"repeated": ["Pz8_"]        }"#, T().with { $0.repeated = [Data("???".utf8)] }),
+      (#"{"repeated": ["Pz8_Pw", ""]  }"#, T().with { $0.repeated = [Data("????".utf8), Data()] }),
+      (#"{"map":      {}              }"#, T()),
+      (#"{"map":      {"a": "Pz8_"}   }"#, T().with { $0.map = ["a": Data("???".utf8)] }),
+      (#"{"map":      {"a": "Pz8_Pw"} }"#, T().with { $0.map = ["a": Data("????".utf8)] }),
     ])
   func deserialize(input: String, want: T) throws {
     let decoder = _ProtoJSONDecoder()
@@ -39,21 +52,15 @@ import GoogleCloudWkt
 
   @Test(
     arguments: [
-      (#"{"map":{},"optional":null,"repeated":[]}"#, T()),
+      (#"{"map":{},"repeated":[]}"#, T()),
       (#"{"map":{},"optional":"","repeated":[]}"#, T().with { $0.optional = Data() }),
-      (#"{"map":{},"optional":"NDI=","repeated":[]}"#, T().with { $0.optional = Data("42".utf8) }),
+      (#"{"map":{},"optional":"Pz8_","repeated":[]}"#, T().with { $0.optional = Data("???".utf8) }),
+      (#"{"map":{},"repeated":["Pz8_"]}"#, T().with { $0.repeated = [Data("???".utf8)] }),
       (
-        #"{"map":{},"optional":null,"repeated":["NDI="]}"#,
-        T().with { $0.repeated = [Data("42".utf8)] }
+        #"{"map":{},"repeated":["Pz8_",""]}"#,
+        T().with { $0.repeated = [Data("???".utf8), Data()] }
       ),
-      (
-        #"{"map":{},"optional":null,"repeated":["NDI=",""]}"#,
-        T().with { $0.repeated = [Data("42".utf8), Data()] }
-      ),
-      (
-        #"{"map":{"a":"NDI="},"optional":null,"repeated":[]}"#,
-        T().with { $0.map = ["a": Data("42".utf8)] }
-      ),
+      (#"{"map":{"a":"Pz8_"},"repeated":[]}"#, T().with { $0.map = ["a": Data("???".utf8)] }),
     ])
   func roundtrip(want: String, input: T) throws {
     let encoder = JSONEncoder()

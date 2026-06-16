@@ -54,16 +54,57 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.map = try container.decode([Swift.String: Foundation.Data].self, forKey: .map)
-    self.`optional` = try container.decodeIfPresent(Foundation.Data.self, forKey: .`optional`)
-    self.repeated = try container.decode([Foundation.Data].self, forKey: .repeated)
+    do {
+      let strings = try container.decode([Swift.String: Swift.String].self, forKey: .map)
+      self.map = try strings.mapValues {
+        guard let v = GoogleCloudWkt._DiscoveryBase64.decode($0) else {
+          throw DecodingError.dataCorrupted(
+            DecodingError.Context(
+              codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
+          )
+        }
+        return v
+      }
+    }
+    if let s = try container.decodeIfPresent(Swift.String.self, forKey: .`optional`) {
+      guard let v = GoogleCloudWkt._DiscoveryBase64.decode(s) else {
+        throw DecodingError.dataCorrupted(
+          DecodingError.Context(
+            codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
+        )
+      }
+      self.`optional` = v
+    }
+    do {
+      let strings = try container.decode([Swift.String].self, forKey: .repeated)
+      self.repeated = try strings.map {
+        guard let v = GoogleCloudWkt._DiscoveryBase64.decode($0) else {
+          throw DecodingError.dataCorrupted(
+            DecodingError.Context(
+              codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
+          )
+        }
+        return v
+      }
+    }
   }
 
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.map, forKey: .map)
-    try container.encode(self.`optional`, forKey: .`optional`)
-    try container.encode(self.repeated, forKey: .repeated)
+    do {
+      let transformed = self.map.mapValues {
+        GoogleCloudWkt._DiscoveryBase64.encode($0)
+      }
+      try container.encode(transformed, forKey: .map)
+    }
+    if let v = `optional` {
+      try container.encode(
+        GoogleCloudWkt._DiscoveryBase64.encode(v), forKey: .`optional`
+      )
+    }
+    try container.encode(
+      repeated.map { GoogleCloudWkt._DiscoveryBase64.encode($0) }, forKey: .repeated
+    )
   }
 
   public static var _anyTypeUrl: String { return "type.googleapis.com/.DiscoveryWithBytes" }
