@@ -86,7 +86,7 @@ public final class _PollableOperationImpl<ResponseType>: PollableOperation {
   /// - Returns: The final deserialized response of type `ResponseType`.
   /// - Throws:
   ///   - The underlying operation error if the operation failed.
-  ///   - `RequestError.binding` if the operation completed successfully but returned no result.
+  ///   - `RequestError.malformedResponse` if the operation completed successfully but returned no result.
   public func wait() async throws -> ResponseType {
     let retryState = RetryState.init()
     while !state.done {
@@ -101,7 +101,7 @@ public final class _PollableOperationImpl<ResponseType>: PollableOperation {
     case .failure(let error):
       throw error
     case .none:
-      throw RequestError.binding("Operation completed but result was missing")
+      throw RequestError.malformedResponse("Operation completed but result was missing")
     }
   }
 }

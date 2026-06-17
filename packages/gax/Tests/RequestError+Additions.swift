@@ -29,6 +29,7 @@ extension RequestError: Equatable {
     case (.service(let l), .service(let r)): return l == r
     case (.unimplemented, .unimplemented): return true
     case (.exhausted(let l), .exhausted(let r)): return l == r
+    case (.malformedResponse(let l), .malformedResponse(let r)): return l == r
     default: return false
     }
   }

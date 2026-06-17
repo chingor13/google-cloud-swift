@@ -65,7 +65,9 @@ import Testing
     let op = _PollableOperationImpl<String>(initialState: state) {
       return state
     }
-    await #expect(throws: RequestError.binding("Operation completed but result was missing")) {
+    await #expect(
+      throws: RequestError.malformedResponse("Operation completed but result was missing")
+    ) {
       try await op.wait()
     }
   }

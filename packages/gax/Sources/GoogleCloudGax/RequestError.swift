@@ -96,6 +96,17 @@ public enum RequestError: Error {
   /// client. If this is not the case, then the client library has a serious bug, please open an issue at
   /// <https://github.com/googleapis/google-cloud-swift/issues>.
   case unimplemented
+
+  /// The service returned a response that is missing required fields or is otherwise malformed.
+  ///
+  /// ## Troubleshooting
+  ///
+  /// This indicates a bug in the service. The service returned a response that does not match the
+  /// API contract. For example, a long-running operation completed but did not contain either a
+  /// success response or an error details.
+  ///
+  /// Report this issue to the service team.
+  case malformedResponse(String)
 }
 
 /// The details for ``RequestError/http(_:)``.
