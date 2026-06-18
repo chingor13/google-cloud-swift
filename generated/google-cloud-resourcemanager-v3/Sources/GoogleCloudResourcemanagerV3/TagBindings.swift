@@ -50,6 +50,15 @@ public protocol TagBindings {
     byItem: ListTagBindingsRequest
   ) throws -> any AsyncSequence<TagBinding, Swift.Error>
 
+  /// Lists the TagBindings for the given Google Cloud resource, as specified
+  /// with `parent`.
+  ///
+  /// NOTE: The `parent` field is expected to be a full resource name:
+  /// https://cloud.google.com/apis/design/resource_names#full_resource_name
+  func listTagBindings(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagBinding, Swift.Error>
+
   /// Creates a TagBinding between a TagValue and a Google Cloud resource.
   ///
   /// @Snippet(path: "TagBindings_CreateTagBinding")
@@ -60,6 +69,11 @@ public protocol TagBindings {
   func createTagBinding(withPolling: CreateTagBindingRequest) async throws -> any GoogleCloudGax
     .PollableOperation<TagBinding>
 
+  /// Creates a TagBinding between a TagValue and a Google Cloud resource.
+  func createTagBinding(
+    tagBinding: TagBinding?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding>
+
   /// Deletes a TagBinding.
   ///
   /// @Snippet(path: "TagBindings_DeleteTagBinding")
@@ -69,6 +83,11 @@ public protocol TagBindings {
   /// Deletes a TagBinding.
   func deleteTagBinding(withPolling: DeleteTagBindingRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Void>
+
+  /// Deletes a TagBinding.
+  func deleteTagBinding(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Return a list of effective tags for the given Google Cloud resource, as
   /// specified in `parent`.
@@ -83,12 +102,25 @@ public protocol TagBindings {
     byItem: ListEffectiveTagsRequest
   ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
 
+  /// Return a list of effective tags for the given Google Cloud resource, as
+  /// specified in `parent`.
+  func listEffectiveTags(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
+
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagBindings_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Lists the TagBindings for the given Google Cloud resource, as specified
   /// with `parent`.
@@ -367,6 +399,15 @@ extension TagBindings {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listTagBindings(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagBinding, Swift.Error> {
+    let request = ListTagBindingsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listTagBindings(byItem: request)
+  }
+
   public func createTagBinding(request: CreateTagBindingRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -393,6 +434,15 @@ extension TagBindings {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func createTagBinding(
+    tagBinding: TagBinding?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding> {
+    let request = CreateTagBindingRequest().with {
+      $0.tagBinding = tagBinding
+    }
+    return try await self.createTagBinding(withPolling: request)
   }
 
   public func deleteTagBinding(request: DeleteTagBindingRequest) async throws
@@ -423,6 +473,15 @@ extension TagBindings {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteTagBinding(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteTagBindingRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteTagBinding(withPolling: request)
+  }
+
   public func listEffectiveTags(request: ListEffectiveTagsRequest) async throws
     -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
   {
@@ -451,6 +510,15 @@ extension TagBindings {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listEffectiveTags(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error> {
+    let request = ListEffectiveTagsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listEffectiveTags(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -460,5 +528,14 @@ extension TagBindings {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 }

@@ -41,10 +41,22 @@ public protocol WorkerPools {
   func createWorkerPool(withPolling: CreateWorkerPoolRequest) async throws -> any GoogleCloudGax
     .PollableOperation<WorkerPool>
 
+  /// Creates a new WorkerPool in a given project and location.
+  func createWorkerPool(
+    parent: Swift.String,
+    workerPool: WorkerPool?,
+    workerPoolId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool>
+
   /// Gets information about a WorkerPool.
   ///
   /// @Snippet(path: "WorkerPools_GetWorkerPool")
   func getWorkerPool(request: GetWorkerPoolRequest) async throws -> GoogleCloudRunV2.WorkerPool
+
+  /// Gets information about a WorkerPool.
+  func getWorkerPool(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.WorkerPool
 
   /// Lists WorkerPools. Results are sorted by creation time, descending.
   ///
@@ -57,6 +69,11 @@ public protocol WorkerPools {
     byItem: ListWorkerPoolsRequest
   ) throws -> any AsyncSequence<WorkerPool, Swift.Error>
 
+  /// Lists WorkerPools. Results are sorted by creation time, descending.
+  func listWorkerPools(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<WorkerPool, Swift.Error>
+
   /// Updates a WorkerPool.
   ///
   /// @Snippet(path: "WorkerPools_UpdateWorkerPool")
@@ -67,6 +84,17 @@ public protocol WorkerPools {
   func updateWorkerPool(withPolling: UpdateWorkerPoolRequest) async throws -> any GoogleCloudGax
     .PollableOperation<WorkerPool>
 
+  /// Updates a WorkerPool.
+  func updateWorkerPool(
+    workerPool: WorkerPool?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool>
+
+  /// Updates a WorkerPool.
+  func updateWorkerPool(
+    workerPool: WorkerPool?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool>
+
   /// Deletes a WorkerPool.
   ///
   /// @Snippet(path: "WorkerPools_DeleteWorkerPool")
@@ -76,6 +104,11 @@ public protocol WorkerPools {
   /// Deletes a WorkerPool.
   func deleteWorkerPool(withPolling: DeleteWorkerPoolRequest) async throws -> any GoogleCloudGax
     .PollableOperation<WorkerPool>
+
+  /// Deletes a WorkerPool.
+  func deleteWorkerPool(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool>
 
   /// Gets the IAM Access Control policy currently in effect for the given
   /// Cloud Run WorkerPool. This result does not include any inherited policies.
@@ -115,6 +148,14 @@ public protocol WorkerPools {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "WorkerPools_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
@@ -122,9 +163,23 @@ public protocol WorkerPools {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "WorkerPools_DeleteOperation")
   func deleteOperation(request: DeleteOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -570,6 +625,19 @@ extension WorkerPools {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createWorkerPool(
+    parent: Swift.String,
+    workerPool: WorkerPool?,
+    workerPoolId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool> {
+    let request = CreateWorkerPoolRequest().with {
+      $0.parent = parent
+      $0.workerPool = workerPool
+      $0.workerPoolId = workerPoolId
+    }
+    return try await self.createWorkerPool(withPolling: request)
+  }
+
   public func getWorkerPool(request: GetWorkerPoolRequest) async throws
     -> GoogleCloudRunV2.WorkerPool
   {
@@ -580,6 +648,15 @@ extension WorkerPools {
     request: GetWorkerPoolRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.WorkerPool {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getWorkerPool(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.WorkerPool {
+    let request = GetWorkerPoolRequest().with {
+      $0.name = name
+    }
+    return try await self.getWorkerPool(request: request)
   }
 
   public func listWorkerPools(request: ListWorkerPoolsRequest) async throws
@@ -607,6 +684,15 @@ extension WorkerPools {
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
+
+  public func listWorkerPools(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<WorkerPool, Swift.Error> {
+    let request = ListWorkerPoolsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listWorkerPools(byItem: request)
   }
 
   public func updateWorkerPool(request: UpdateWorkerPoolRequest) async throws
@@ -637,6 +723,26 @@ extension WorkerPools {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func updateWorkerPool(
+    workerPool: WorkerPool?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool> {
+    let request = UpdateWorkerPoolRequest().with {
+      $0.workerPool = workerPool
+    }
+    return try await self.updateWorkerPool(withPolling: request)
+  }
+
+  public func updateWorkerPool(
+    workerPool: WorkerPool?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool> {
+    let request = UpdateWorkerPoolRequest().with {
+      $0.workerPool = workerPool
+      $0.updateMask = updateMask
+    }
+    return try await self.updateWorkerPool(withPolling: request)
+  }
+
   public func deleteWorkerPool(request: DeleteWorkerPoolRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -663,6 +769,15 @@ extension WorkerPools {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func deleteWorkerPool(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<WorkerPool> {
+    let request = DeleteWorkerPoolRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteWorkerPool(withPolling: request)
   }
 
   public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
@@ -724,6 +839,17 @@ extension WorkerPools {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -735,6 +861,15 @@ extension WorkerPools {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func deleteOperation(request: DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
@@ -743,6 +878,15 @@ extension WorkerPools {
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
   }
 
   public func waitOperation(request: WaitOperationRequest) async throws

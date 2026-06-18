@@ -52,6 +52,14 @@ public protocol Builds {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Builds_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
@@ -59,9 +67,23 @@ public protocol Builds {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Builds_DeleteOperation")
   func deleteOperation(request: DeleteOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -228,6 +250,17 @@ extension Builds {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -239,6 +272,15 @@ extension Builds {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func deleteOperation(request: DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
@@ -247,6 +289,15 @@ extension Builds {
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
   }
 
   public func waitOperation(request: WaitOperationRequest) async throws

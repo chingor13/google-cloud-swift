@@ -46,10 +46,21 @@ public protocol Workflows {
     byItem: ListWorkflowsRequest
   ) throws -> any AsyncSequence<Workflow, Swift.Error>
 
+  /// Lists workflows in a given project and location.
+  /// The default order is not specified.
+  func listWorkflows(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Workflow, Swift.Error>
+
   /// Gets details of a single workflow.
   ///
   /// @Snippet(path: "Workflows_GetWorkflow")
   func getWorkflow(request: GetWorkflowRequest) async throws -> GoogleCloudWorkflowsV1.Workflow
+
+  /// Gets details of a single workflow.
+  func getWorkflow(
+    name: Swift.String,
+  ) async throws -> GoogleCloudWorkflowsV1.Workflow
 
   /// Creates a new workflow. If a workflow with the specified name already
   /// exists in the specified project and location, the long running operation
@@ -64,6 +75,15 @@ public protocol Workflows {
   func createWorkflow(withPolling: CreateWorkflowRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Workflow>
 
+  /// Creates a new workflow. If a workflow with the specified name already
+  /// exists in the specified project and location, the long running operation
+  /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
+  func createWorkflow(
+    parent: Swift.String,
+    workflow: Workflow?,
+    workflowId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
+
   /// Deletes a workflow with the specified name.
   /// This method also cancels and deletes all running executions of the
   /// workflow.
@@ -76,6 +96,13 @@ public protocol Workflows {
   /// workflow.
   func deleteWorkflow(withPolling: DeleteWorkflowRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Void>
+
+  /// Deletes a workflow with the specified name.
+  /// This method also cancels and deletes all running executions of the
+  /// workflow.
+  func deleteWorkflow(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Updates an existing workflow.
   /// Running this method has no impact on already running executions of the
@@ -93,6 +120,16 @@ public protocol Workflows {
   /// in new workflow executions.
   func updateWorkflow(withPolling: UpdateWorkflowRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Workflow>
+
+  /// Updates an existing workflow.
+  /// Running this method has no impact on already running executions of the
+  /// workflow. A new revision of the workflow might be created as a result of a
+  /// successful update operation. In that case, the new revision is used
+  /// in new workflow executions.
+  func updateWorkflow(
+    workflow: Workflow?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
 
   /// Lists revisions for a given workflow.
   ///
@@ -139,6 +176,14 @@ public protocol Workflows {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Workflows_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
@@ -146,9 +191,23 @@ public protocol Workflows {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Workflows_DeleteOperation")
   func deleteOperation(request: DeleteOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Lists workflows in a given project and location.
   /// The default order is not specified.
@@ -621,6 +680,15 @@ extension Workflows {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listWorkflows(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Workflow, Swift.Error> {
+    let request = ListWorkflowsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listWorkflows(byItem: request)
+  }
+
   public func getWorkflow(request: GetWorkflowRequest) async throws
     -> GoogleCloudWorkflowsV1.Workflow
   {
@@ -631,6 +699,15 @@ extension Workflows {
     request: GetWorkflowRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsV1.Workflow {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getWorkflow(
+    name: Swift.String,
+  ) async throws -> GoogleCloudWorkflowsV1.Workflow {
+    let request = GetWorkflowRequest().with {
+      $0.name = name
+    }
+    return try await self.getWorkflow(request: request)
   }
 
   public func createWorkflow(request: CreateWorkflowRequest) async throws
@@ -661,6 +738,19 @@ extension Workflows {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createWorkflow(
+    parent: Swift.String,
+    workflow: Workflow?,
+    workflowId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
+    let request = CreateWorkflowRequest().with {
+      $0.parent = parent
+      $0.workflow = workflow
+      $0.workflowId = workflowId
+    }
+    return try await self.createWorkflow(withPolling: request)
+  }
+
   public func deleteWorkflow(request: DeleteWorkflowRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -689,6 +779,15 @@ extension Workflows {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteWorkflow(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteWorkflowRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteWorkflow(withPolling: request)
+  }
+
   public func updateWorkflow(request: UpdateWorkflowRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -715,6 +814,17 @@ extension Workflows {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func updateWorkflow(
+    workflow: Workflow?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
+    let request = UpdateWorkflowRequest().with {
+      $0.workflow = workflow
+      $0.updateMask = updateMask
+    }
+    return try await self.updateWorkflow(withPolling: request)
   }
 
   public func listWorkflowRevisions(request: ListWorkflowRevisionsRequest) async throws
@@ -810,6 +920,17 @@ extension Workflows {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -821,6 +942,15 @@ extension Workflows {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func deleteOperation(request: DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
@@ -829,5 +959,14 @@ extension Workflows {
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
   }
 }

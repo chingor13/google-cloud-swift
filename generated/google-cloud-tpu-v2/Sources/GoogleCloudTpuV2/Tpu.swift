@@ -43,10 +43,20 @@ public protocol Tpu {
     byItem: ListNodesRequest
   ) throws -> any AsyncSequence<Node, Swift.Error>
 
+  /// Lists nodes.
+  func listNodes(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Node, Swift.Error>
+
   /// Gets the details of a node.
   ///
   /// @Snippet(path: "Tpu_GetNode")
   func getNode(request: GetNodeRequest) async throws -> GoogleCloudTpuV2.Node
+
+  /// Gets the details of a node.
+  func getNode(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.Node
 
   /// Creates a node.
   ///
@@ -57,6 +67,13 @@ public protocol Tpu {
   func createNode(withPolling: CreateNodeRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Node>
 
+  /// Creates a node.
+  func createNode(
+    parent: Swift.String,
+    node: Node?,
+    nodeId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+
   /// Deletes a node.
   ///
   /// @Snippet(path: "Tpu_DeleteNode")
@@ -65,6 +82,11 @@ public protocol Tpu {
   /// Deletes a node.
   func deleteNode(withPolling: DeleteNodeRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Void>
+
+  /// Deletes a node.
+  func deleteNode(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Stops a node. This operation is only available with single TPU nodes.
   ///
@@ -94,6 +116,12 @@ public protocol Tpu {
   func updateNode(withPolling: UpdateNodeRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Node>
 
+  /// Updates the configurations of a node.
+  func updateNode(
+    node: Node?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+
   /// Lists queued resources.
   ///
   /// @Snippet(path: "Tpu_ListQueuedResources")
@@ -105,11 +133,21 @@ public protocol Tpu {
     byItem: ListQueuedResourcesRequest
   ) throws -> any AsyncSequence<QueuedResource, Swift.Error>
 
+  /// Lists queued resources.
+  func listQueuedResources(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<QueuedResource, Swift.Error>
+
   /// Gets details of a queued resource.
   ///
   /// @Snippet(path: "Tpu_GetQueuedResource")
   func getQueuedResource(request: GetQueuedResourceRequest) async throws
     -> GoogleCloudTpuV2.QueuedResource
+
+  /// Gets details of a queued resource.
+  func getQueuedResource(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.QueuedResource
 
   /// Creates a QueuedResource TPU instance.
   ///
@@ -121,6 +159,13 @@ public protocol Tpu {
   func createQueuedResource(withPolling: CreateQueuedResourceRequest) async throws
     -> any GoogleCloudGax.PollableOperation<QueuedResource>
 
+  /// Creates a QueuedResource TPU instance.
+  func createQueuedResource(
+    parent: Swift.String,
+    queuedResource: QueuedResource?,
+    queuedResourceId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
+
   /// Deletes a QueuedResource TPU instance.
   ///
   /// @Snippet(path: "Tpu_DeleteQueuedResource")
@@ -131,6 +176,11 @@ public protocol Tpu {
   func deleteQueuedResource(withPolling: DeleteQueuedResourceRequest) async throws
     -> any GoogleCloudGax.PollableOperation<Void>
 
+  /// Deletes a QueuedResource TPU instance.
+  func deleteQueuedResource(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
   /// Resets a QueuedResource TPU instance
   ///
   /// @Snippet(path: "Tpu_ResetQueuedResource")
@@ -140,6 +190,11 @@ public protocol Tpu {
   /// Resets a QueuedResource TPU instance
   func resetQueuedResource(withPolling: ResetQueuedResourceRequest) async throws
     -> any GoogleCloudGax.PollableOperation<QueuedResource>
+
+  /// Resets a QueuedResource TPU instance
+  func resetQueuedResource(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
 
   /// Generates the Cloud TPU service identity for the project.
   ///
@@ -158,11 +213,21 @@ public protocol Tpu {
     byItem: ListAcceleratorTypesRequest
   ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
 
+  /// Lists accelerator types supported by this API.
+  func listAcceleratorTypes(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
+
   /// Gets AcceleratorType.
   ///
   /// @Snippet(path: "Tpu_GetAcceleratorType")
   func getAcceleratorType(request: GetAcceleratorTypeRequest) async throws
     -> GoogleCloudTpuV2.AcceleratorType
+
+  /// Gets AcceleratorType.
+  func getAcceleratorType(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.AcceleratorType
 
   /// Lists runtime versions supported by this API.
   ///
@@ -175,11 +240,21 @@ public protocol Tpu {
     byItem: ListRuntimeVersionsRequest
   ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error>
 
+  /// Lists runtime versions supported by this API.
+  func listRuntimeVersions(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error>
+
   /// Gets a runtime version.
   ///
   /// @Snippet(path: "Tpu_GetRuntimeVersion")
   func getRuntimeVersion(request: GetRuntimeVersionRequest) async throws
     -> GoogleCloudTpuV2.RuntimeVersion
+
+  /// Gets a runtime version.
+  func getRuntimeVersion(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.RuntimeVersion
 
   /// Retrieves the guest attributes for the node.
   ///
@@ -221,9 +296,24 @@ public protocol Tpu {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Tpu_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -235,9 +325,23 @@ public protocol Tpu {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Tpu_CancelOperation")
   func cancelOperation(request: CancelOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func cancelOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Lists nodes.
   ///
@@ -1179,6 +1283,15 @@ extension Tpu {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listNodes(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Node, Swift.Error> {
+    let request = ListNodesRequest().with {
+      $0.parent = parent
+    }
+    return try self.listNodes(byItem: request)
+  }
+
   public func getNode(request: GetNodeRequest) async throws -> GoogleCloudTpuV2.Node {
     try await self.getNode(request: request, options: .init())
   }
@@ -1187,6 +1300,15 @@ extension Tpu {
     request: GetNodeRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.Node {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getNode(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.Node {
+    let request = GetNodeRequest().with {
+      $0.name = name
+    }
+    return try await self.getNode(request: request)
   }
 
   public func createNode(request: CreateNodeRequest) async throws -> GoogleLongrunning.Operation {
@@ -1215,6 +1337,19 @@ extension Tpu {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createNode(
+    parent: Swift.String,
+    node: Node?,
+    nodeId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    let request = CreateNodeRequest().with {
+      $0.parent = parent
+      $0.node = node
+      $0.nodeId = nodeId
+    }
+    return try await self.createNode(withPolling: request)
+  }
+
   public func deleteNode(request: DeleteNodeRequest) async throws -> GoogleLongrunning.Operation {
     try await self.deleteNode(request: request, options: .init())
   }
@@ -1239,6 +1374,15 @@ extension Tpu {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func deleteNode(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteNodeRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteNode(withPolling: request)
   }
 
   public func stopNode(request: StopNodeRequest) async throws -> GoogleLongrunning.Operation {
@@ -1319,6 +1463,17 @@ extension Tpu {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func updateNode(
+    node: Node?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    let request = UpdateNodeRequest().with {
+      $0.node = node
+      $0.updateMask = updateMask
+    }
+    return try await self.updateNode(withPolling: request)
+  }
+
   public func listQueuedResources(request: ListQueuedResourcesRequest) async throws
     -> GoogleCloudTpuV2.ListQueuedResourcesResponse
   {
@@ -1346,6 +1501,15 @@ extension Tpu {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listQueuedResources(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<QueuedResource, Swift.Error> {
+    let request = ListQueuedResourcesRequest().with {
+      $0.parent = parent
+    }
+    return try self.listQueuedResources(byItem: request)
+  }
+
   public func getQueuedResource(request: GetQueuedResourceRequest) async throws
     -> GoogleCloudTpuV2.QueuedResource
   {
@@ -1356,6 +1520,15 @@ extension Tpu {
     request: GetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.QueuedResource {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getQueuedResource(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.QueuedResource {
+    let request = GetQueuedResourceRequest().with {
+      $0.name = name
+    }
+    return try await self.getQueuedResource(request: request)
   }
 
   public func createQueuedResource(request: CreateQueuedResourceRequest) async throws
@@ -1386,6 +1559,19 @@ extension Tpu {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createQueuedResource(
+    parent: Swift.String,
+    queuedResource: QueuedResource?,
+    queuedResourceId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+    let request = CreateQueuedResourceRequest().with {
+      $0.parent = parent
+      $0.queuedResource = queuedResource
+      $0.queuedResourceId = queuedResourceId
+    }
+    return try await self.createQueuedResource(withPolling: request)
+  }
+
   public func deleteQueuedResource(request: DeleteQueuedResourceRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -1414,6 +1600,15 @@ extension Tpu {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteQueuedResource(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteQueuedResourceRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteQueuedResource(withPolling: request)
+  }
+
   public func resetQueuedResource(request: ResetQueuedResourceRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -1440,6 +1635,15 @@ extension Tpu {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func resetQueuedResource(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+    let request = ResetQueuedResourceRequest().with {
+      $0.name = name
+    }
+    return try await self.resetQueuedResource(withPolling: request)
   }
 
   public func generateServiceIdentity(request: GenerateServiceIdentityRequest) async throws
@@ -1481,6 +1685,15 @@ extension Tpu {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listAcceleratorTypes(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
+    let request = ListAcceleratorTypesRequest().with {
+      $0.parent = parent
+    }
+    return try self.listAcceleratorTypes(byItem: request)
+  }
+
   public func getAcceleratorType(request: GetAcceleratorTypeRequest) async throws
     -> GoogleCloudTpuV2.AcceleratorType
   {
@@ -1491,6 +1704,15 @@ extension Tpu {
     request: GetAcceleratorTypeRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.AcceleratorType {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getAcceleratorType(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.AcceleratorType {
+    let request = GetAcceleratorTypeRequest().with {
+      $0.name = name
+    }
+    return try await self.getAcceleratorType(request: request)
   }
 
   public func listRuntimeVersions(request: ListRuntimeVersionsRequest) async throws
@@ -1520,6 +1742,15 @@ extension Tpu {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listRuntimeVersions(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error> {
+    let request = ListRuntimeVersionsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listRuntimeVersions(byItem: request)
+  }
+
   public func getRuntimeVersion(request: GetRuntimeVersionRequest) async throws
     -> GoogleCloudTpuV2.RuntimeVersion
   {
@@ -1530,6 +1761,15 @@ extension Tpu {
     request: GetRuntimeVersionRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.RuntimeVersion {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getRuntimeVersion(
+    name: Swift.String,
+  ) async throws -> GoogleCloudTpuV2.RuntimeVersion {
+    let request = GetRuntimeVersionRequest().with {
+      $0.name = name
+    }
+    return try await self.getRuntimeVersion(request: request)
   }
 
   public func getGuestAttributes(request: GetGuestAttributesRequest) async throws
@@ -1609,6 +1849,17 @@ extension Tpu {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -1618,6 +1869,15 @@ extension Tpu {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 
   public func deleteOperation(request: DeleteOperationRequest) async throws {
@@ -1630,6 +1890,15 @@ extension Tpu {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
+  }
+
   public func cancelOperation(request: CancelOperationRequest) async throws {
     try await self.cancelOperation(request: request, options: .init())
   }
@@ -1638,5 +1907,14 @@ extension Tpu {
     request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func cancelOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = CancelOperationRequest().with {
+      $0.name = name
+    }
+    try await self.cancelOperation(request: request)
   }
 }

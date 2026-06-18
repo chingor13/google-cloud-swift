@@ -42,12 +42,23 @@ public protocol TagValues {
     byItem: ListTagValuesRequest
   ) throws -> any AsyncSequence<TagValue, Swift.Error>
 
+  /// Lists all TagValues for a specific TagKey.
+  func listTagValues(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagValue, Swift.Error>
+
   /// Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
   /// value does not exist or the user does not have permission to view it.
   ///
   /// @Snippet(path: "TagValues_GetTagValue")
   func getTagValue(request: GetTagValueRequest) async throws
     -> GoogleCloudResourcemanagerV3.TagValue
+
+  /// Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
+  /// value does not exist or the user does not have permission to view it.
+  func getTagValue(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.TagValue
 
   /// Retrieves a TagValue by its namespaced name.
   /// This method will return `PERMISSION_DENIED` if the value does not exist
@@ -56,6 +67,13 @@ public protocol TagValues {
   /// @Snippet(path: "TagValues_GetNamespacedTagValue")
   func getNamespacedTagValue(request: GetNamespacedTagValueRequest) async throws
     -> GoogleCloudResourcemanagerV3.TagValue
+
+  /// Retrieves a TagValue by its namespaced name.
+  /// This method will return `PERMISSION_DENIED` if the value does not exist
+  /// or the user does not have permission to view it.
+  func getNamespacedTagValue(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.TagValue
 
   /// Creates a TagValue as a child of the specified TagKey. If a another
   /// request with the same parameters is sent while the original request is in
@@ -72,6 +90,14 @@ public protocol TagValues {
   func createTagValue(withPolling: CreateTagValueRequest) async throws -> any GoogleCloudGax
     .PollableOperation<TagValue>
 
+  /// Creates a TagValue as a child of the specified TagKey. If a another
+  /// request with the same parameters is sent while the original request is in
+  /// process the second request will receive an error. A maximum of 1000
+  /// TagValues can exist under a TagKey at any given time.
+  func createTagValue(
+    tagValue: TagValue?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue>
+
   /// Updates the attributes of the TagValue resource.
   ///
   /// @Snippet(path: "TagValues_UpdateTagValue")
@@ -80,6 +106,12 @@ public protocol TagValues {
   /// Updates the attributes of the TagValue resource.
   func updateTagValue(withPolling: UpdateTagValueRequest) async throws -> any GoogleCloudGax
     .PollableOperation<TagValue>
+
+  /// Updates the attributes of the TagValue resource.
+  func updateTagValue(
+    tagValue: TagValue?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue>
 
   /// Deletes a TagValue. The TagValue cannot have any bindings when it is
   /// deleted.
@@ -92,6 +124,12 @@ public protocol TagValues {
   func deleteTagValue(withPolling: DeleteTagValueRequest) async throws -> any GoogleCloudGax
     .PollableOperation<TagValue>
 
+  /// Deletes a TagValue. The TagValue cannot have any bindings when it is
+  /// deleted.
+  func deleteTagValue(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue>
+
   /// Gets the access control policy for a TagValue. The returned policy may be
   /// empty if no such policy or resource exists. The `resource` field should
   /// be the TagValue's resource name. For example: `tagValues/1234`.
@@ -102,6 +140,16 @@ public protocol TagValues {
   /// @Snippet(path: "TagValues_GetIamPolicy")
   func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
+  /// Gets the access control policy for a TagValue. The returned policy may be
+  /// empty if no such policy or resource exists. The `resource` field should
+  /// be the TagValue's resource name. For example: `tagValues/1234`.
+  /// The caller must have the
+  /// `cloudresourcemanager.googleapis.com/tagValues.getIamPolicy` permission on
+  /// the identified TagValue to get the access control policy.
+  func getIamPolicy(
+    resource: Swift.String,
+  ) async throws -> GoogleIamV1.Policy
+
   /// Sets the access control policy on a TagValue, replacing any existing
   /// policy. The `resource` field should be the TagValue's resource name.
   /// For example: `tagValues/1234`.
@@ -110,6 +158,16 @@ public protocol TagValues {
   ///
   /// @Snippet(path: "TagValues_SetIamPolicy")
   func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+  /// Sets the access control policy on a TagValue, replacing any existing
+  /// policy. The `resource` field should be the TagValue's resource name.
+  /// For example: `tagValues/1234`.
+  /// The caller must have `resourcemanager.tagValues.setIamPolicy` permission
+  /// on the identified tagValue.
+  func setIamPolicy(
+    resource: Swift.String,
+    policy: GoogleIamV1.Policy?,
+  ) async throws -> GoogleIamV1.Policy
 
   /// Returns permissions that a caller has on the specified TagValue.
   /// The `resource` field should be the TagValue's resource name. For example:
@@ -121,12 +179,29 @@ public protocol TagValues {
   func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
 
+  /// Returns permissions that a caller has on the specified TagValue.
+  /// The `resource` field should be the TagValue's resource name. For example:
+  /// `tagValues/1234`.
+  ///
+  /// There are no permissions required for making this API call.
+  func testIamPermissions(
+    resource: Swift.String,
+    permissions: [Swift.String],
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagValues_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Lists all TagValues for a specific TagKey.
   ///
@@ -535,6 +610,15 @@ extension TagValues {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listTagValues(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagValue, Swift.Error> {
+    let request = ListTagValuesRequest().with {
+      $0.parent = parent
+    }
+    return try self.listTagValues(byItem: request)
+  }
+
   public func getTagValue(request: GetTagValueRequest) async throws
     -> GoogleCloudResourcemanagerV3.TagValue
   {
@@ -547,6 +631,15 @@ extension TagValues {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getTagValue(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.TagValue {
+    let request = GetTagValueRequest().with {
+      $0.name = name
+    }
+    return try await self.getTagValue(request: request)
+  }
+
   public func getNamespacedTagValue(request: GetNamespacedTagValueRequest) async throws
     -> GoogleCloudResourcemanagerV3.TagValue
   {
@@ -557,6 +650,15 @@ extension TagValues {
     request: GetNamespacedTagValueRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudResourcemanagerV3.TagValue {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getNamespacedTagValue(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.TagValue {
+    let request = GetNamespacedTagValueRequest().with {
+      $0.name = name
+    }
+    return try await self.getNamespacedTagValue(request: request)
   }
 
   public func createTagValue(request: CreateTagValueRequest) async throws
@@ -587,6 +689,15 @@ extension TagValues {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createTagValue(
+    tagValue: TagValue?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue> {
+    let request = CreateTagValueRequest().with {
+      $0.tagValue = tagValue
+    }
+    return try await self.createTagValue(withPolling: request)
+  }
+
   public func updateTagValue(request: UpdateTagValueRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -613,6 +724,17 @@ extension TagValues {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func updateTagValue(
+    tagValue: TagValue?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue> {
+    let request = UpdateTagValueRequest().with {
+      $0.tagValue = tagValue
+      $0.updateMask = updateMask
+    }
+    return try await self.updateTagValue(withPolling: request)
   }
 
   public func deleteTagValue(request: DeleteTagValueRequest) async throws
@@ -643,6 +765,15 @@ extension TagValues {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteTagValue(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagValue> {
+    let request = DeleteTagValueRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteTagValue(withPolling: request)
+  }
+
   public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
     try await self.getIamPolicy(request: request, options: .init())
   }
@@ -653,6 +784,15 @@ extension TagValues {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getIamPolicy(
+    resource: Swift.String,
+  ) async throws -> GoogleIamV1.Policy {
+    let request = GetIamPolicyRequest().with {
+      $0.resource = resource
+    }
+    return try await self.getIamPolicy(request: request)
+  }
+
   public func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
     try await self.setIamPolicy(request: request, options: .init())
   }
@@ -661,6 +801,17 @@ extension TagValues {
     request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func setIamPolicy(
+    resource: Swift.String,
+    policy: GoogleIamV1.Policy?,
+  ) async throws -> GoogleIamV1.Policy {
+    let request = SetIamPolicyRequest().with {
+      $0.resource = resource
+      $0.policy = policy
+    }
+    return try await self.setIamPolicy(request: request)
   }
 
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
@@ -675,6 +826,17 @@ extension TagValues {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func testIamPermissions(
+    resource: Swift.String,
+    permissions: [Swift.String],
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    let request = TestIamPermissionsRequest().with {
+      $0.resource = resource
+      $0.permissions = permissions
+    }
+    return try await self.testIamPermissions(request: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -684,5 +846,14 @@ extension TagValues {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 }

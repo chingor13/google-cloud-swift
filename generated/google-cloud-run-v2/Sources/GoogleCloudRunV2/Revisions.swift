@@ -35,6 +35,11 @@ public protocol Revisions {
   /// @Snippet(path: "Revisions_GetRevision")
   func getRevision(request: GetRevisionRequest) async throws -> GoogleCloudRunV2.Revision
 
+  /// Gets information about a Revision.
+  func getRevision(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.Revision
+
   /// Lists Revisions from a given Service, or from a given location.  Results
   /// are sorted by creation time, descending.
   ///
@@ -48,6 +53,12 @@ public protocol Revisions {
     byItem: ListRevisionsRequest
   ) throws -> any AsyncSequence<Revision, Swift.Error>
 
+  /// Lists Revisions from a given Service, or from a given location.  Results
+  /// are sorted by creation time, descending.
+  func listRevisions(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Revision, Swift.Error>
+
   /// Deletes a Revision.
   ///
   /// @Snippet(path: "Revisions_DeleteRevision")
@@ -56,6 +67,11 @@ public protocol Revisions {
   /// Deletes a Revision.
   func deleteRevision(withPolling: DeleteRevisionRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Revision>
+
+  /// Deletes a Revision.
+  func deleteRevision(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Revision>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -75,6 +91,14 @@ public protocol Revisions {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Revisions_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
@@ -82,9 +106,23 @@ public protocol Revisions {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Revisions_DeleteOperation")
   func deleteOperation(request: DeleteOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -327,6 +365,15 @@ extension Revisions {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getRevision(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.Revision {
+    let request = GetRevisionRequest().with {
+      $0.name = name
+    }
+    return try await self.getRevision(request: request)
+  }
+
   public func listRevisions(request: ListRevisionsRequest) async throws
     -> GoogleCloudRunV2.ListRevisionsResponse
   {
@@ -352,6 +399,15 @@ extension Revisions {
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
+
+  public func listRevisions(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Revision, Swift.Error> {
+    let request = ListRevisionsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listRevisions(byItem: request)
   }
 
   public func deleteRevision(request: DeleteRevisionRequest) async throws
@@ -382,6 +438,15 @@ extension Revisions {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteRevision(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Revision> {
+    let request = DeleteRevisionRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteRevision(withPolling: request)
+  }
+
   public func listOperations(request: ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
   {
@@ -409,6 +474,17 @@ extension Revisions {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -420,6 +496,15 @@ extension Revisions {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func deleteOperation(request: DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
@@ -428,6 +513,15 @@ extension Revisions {
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
   }
 
   public func waitOperation(request: WaitOperationRequest) async throws

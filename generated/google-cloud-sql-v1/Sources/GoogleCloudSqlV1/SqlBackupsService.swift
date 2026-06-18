@@ -34,10 +34,22 @@
     /// @Snippet(path: "SqlBackupsService_CreateBackup")
     func createBackup(request: CreateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
 
+    /// Creates a backup for a Cloud SQL instance. This API can be used only to
+    /// create on-demand backups.
+    func createBackup(
+      parent: Swift.String,
+      backup: Backup?,
+    ) async throws -> GoogleCloudSqlV1.Operation
+
     /// Retrieves a resource containing information about a backup.
     ///
     /// @Snippet(path: "SqlBackupsService_GetBackup")
     func getBackup(request: GetBackupRequest) async throws -> GoogleCloudSqlV1.Backup
+
+    /// Retrieves a resource containing information about a backup.
+    func getBackup(
+      name: Swift.String,
+    ) async throws -> GoogleCloudSqlV1.Backup
 
     /// Lists all backups associated with the project.
     ///
@@ -50,16 +62,33 @@
       byItem: ListBackupsRequest
     ) throws -> any AsyncSequence<Backup, Swift.Error>
 
+    /// Lists all backups associated with the project.
+    func listBackups(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Backup, Swift.Error>
+
     /// Updates the retention period and description of the backup. You can use
     /// this API to update final backups only.
     ///
     /// @Snippet(path: "SqlBackupsService_UpdateBackup")
     func updateBackup(request: UpdateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
 
+    /// Updates the retention period and description of the backup. You can use
+    /// this API to update final backups only.
+    func updateBackup(
+      backup: Backup?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> GoogleCloudSqlV1.Operation
+
     /// Deletes the backup.
     ///
     /// @Snippet(path: "SqlBackupsService_DeleteBackup")
     func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleCloudSqlV1.Operation
+
+    /// Deletes the backup.
+    func deleteBackup(
+      name: Swift.String,
+    ) async throws -> GoogleCloudSqlV1.Operation
 
     /// Creates a backup for a Cloud SQL instance. This API can be used only to
     /// create on-demand backups.
@@ -182,6 +211,17 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
+    public func createBackup(
+      parent: Swift.String,
+      backup: Backup?,
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      let request = CreateBackupRequest().with {
+        $0.parent = parent
+        $0.backup = backup
+      }
+      return try await self.createBackup(request: request)
+    }
+
     public func getBackup(request: GetBackupRequest) async throws -> GoogleCloudSqlV1.Backup {
       try await self.getBackup(request: request, options: .init())
     }
@@ -190,6 +230,15 @@
       request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Backup {
       throw GoogleCloudGax.RequestError.unimplemented
+    }
+
+    public func getBackup(
+      name: Swift.String,
+    ) async throws -> GoogleCloudSqlV1.Backup {
+      let request = GetBackupRequest().with {
+        $0.name = name
+      }
+      return try await self.getBackup(request: request)
     }
 
     public func listBackups(request: ListBackupsRequest) async throws
@@ -219,6 +268,15 @@
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
+    public func listBackups(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Backup, Swift.Error> {
+      let request = ListBackupsRequest().with {
+        $0.parent = parent
+      }
+      return try self.listBackups(byItem: request)
+    }
+
     public func updateBackup(request: UpdateBackupRequest) async throws
       -> GoogleCloudSqlV1.Operation
     {
@@ -231,6 +289,17 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
+    public func updateBackup(
+      backup: Backup?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      let request = UpdateBackupRequest().with {
+        $0.backup = backup
+        $0.updateMask = updateMask
+      }
+      return try await self.updateBackup(request: request)
+    }
+
     public func deleteBackup(request: DeleteBackupRequest) async throws
       -> GoogleCloudSqlV1.Operation
     {
@@ -241,6 +310,15 @@
       request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
+    }
+
+    public func deleteBackup(
+      name: Swift.String,
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      let request = DeleteBackupRequest().with {
+        $0.name = name
+      }
+      return try await self.deleteBackup(request: request)
     }
   }
 #endif

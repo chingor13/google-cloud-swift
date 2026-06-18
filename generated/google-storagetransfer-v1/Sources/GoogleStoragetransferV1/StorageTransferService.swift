@@ -125,16 +125,34 @@ public protocol StorageTransferService {
   func createAgentPool(request: CreateAgentPoolRequest) async throws
     -> GoogleStoragetransferV1.AgentPool
 
+  /// Creates an agent pool resource.
+  func createAgentPool(
+    projectId: Swift.String,
+    agentPool: AgentPool?,
+    agentPoolId: Swift.String,
+  ) async throws -> GoogleStoragetransferV1.AgentPool
+
   /// Updates an existing agent pool resource.
   ///
   /// @Snippet(path: "StorageTransferService_UpdateAgentPool")
   func updateAgentPool(request: UpdateAgentPoolRequest) async throws
     -> GoogleStoragetransferV1.AgentPool
 
+  /// Updates an existing agent pool resource.
+  func updateAgentPool(
+    agentPool: AgentPool?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> GoogleStoragetransferV1.AgentPool
+
   /// Gets an agent pool.
   ///
   /// @Snippet(path: "StorageTransferService_GetAgentPool")
   func getAgentPool(request: GetAgentPoolRequest) async throws -> GoogleStoragetransferV1.AgentPool
+
+  /// Gets an agent pool.
+  func getAgentPool(
+    name: Swift.String,
+  ) async throws -> GoogleStoragetransferV1.AgentPool
 
   /// Lists agent pools.
   ///
@@ -147,10 +165,20 @@ public protocol StorageTransferService {
     byItem: ListAgentPoolsRequest
   ) throws -> any AsyncSequence<AgentPool, Swift.Error>
 
+  /// Lists agent pools.
+  func listAgentPools(
+    projectId: Swift.String,
+  ) throws -> any AsyncSequence<AgentPool, Swift.Error>
+
   /// Deletes an agent pool.
   ///
   /// @Snippet(path: "StorageTransferService_DeleteAgentPool")
   func deleteAgentPool(request: DeleteAgentPoolRequest) async throws
+
+  /// Deletes an agent pool.
+  func deleteAgentPool(
+    name: Swift.String,
+  ) async throws
 
   /// Lists transfer operations. Operations are ordered by their creation
   /// time in reverse chronological order.
@@ -165,12 +193,26 @@ public protocol StorageTransferService {
     byItem: ListOperationsRequest
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
+  /// Lists transfer operations. Operations are ordered by their creation
+  /// time in reverse chronological order.
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageTransferService_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Cancels a transfer. Use
   /// the [transferOperations.get][google.longrunning.Operations.GetOperation]
@@ -202,6 +244,37 @@ public protocol StorageTransferService {
   ///
   /// @Snippet(path: "StorageTransferService_CancelOperation")
   func cancelOperation(request: CancelOperationRequest) async throws
+
+  /// Cancels a transfer. Use
+  /// the [transferOperations.get][google.longrunning.Operations.GetOperation]
+  /// method to check if the cancellation succeeded or if the operation
+  /// completed despite the `cancel` request.
+  ///
+  /// When you cancel an operation, the currently running transfer is
+  /// interrupted.  For recurring transfer jobs, the next instance of the
+  /// transfer job will still run.  For example, if your job is configured
+  /// to run every day at 1pm and you cancel Monday's operation at 1:05pm,
+  /// Monday's transfer
+  /// will stop. However, a transfer job will still be attempted on Tuesday.
+  ///
+  /// This applies only to currently running operations. If an operation is
+  /// not currently running, `cancel` does nothing.
+  ///
+  /// <aside class="caution">
+  /// <b>Caution:</b> Canceling a transfer job can leave your data in an
+  /// unknown state. We recommend that you restore the state at both the
+  /// destination and the source after the `cancel` request completes so
+  /// that your data is in a consistent state. </aside>
+  ///
+  /// When you cancel a job, the next job computes a delta of files and may
+  /// repair any inconsistent state. For instance, if you run a job every
+  /// day, and today's job found 10 new files and transferred five files
+  /// before you canceled the job, tomorrow's transfer operation will
+  /// compute a new delta with the five files that were not copied today
+  /// plus any new files discovered tomorrow.
+  func cancelOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Returns the Google service account that is used by Storage Transfer
   /// Service to access buckets in the project where transfers
@@ -771,6 +844,19 @@ extension StorageTransferService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func createAgentPool(
+    projectId: Swift.String,
+    agentPool: AgentPool?,
+    agentPoolId: Swift.String,
+  ) async throws -> GoogleStoragetransferV1.AgentPool {
+    let request = CreateAgentPoolRequest().with {
+      $0.projectId = projectId
+      $0.agentPool = agentPool
+      $0.agentPoolId = agentPoolId
+    }
+    return try await self.createAgentPool(request: request)
+  }
+
   public func updateAgentPool(request: UpdateAgentPoolRequest) async throws
     -> GoogleStoragetransferV1.AgentPool
   {
@@ -783,6 +869,17 @@ extension StorageTransferService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func updateAgentPool(
+    agentPool: AgentPool?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> GoogleStoragetransferV1.AgentPool {
+    let request = UpdateAgentPoolRequest().with {
+      $0.agentPool = agentPool
+      $0.updateMask = updateMask
+    }
+    return try await self.updateAgentPool(request: request)
+  }
+
   public func getAgentPool(request: GetAgentPoolRequest) async throws
     -> GoogleStoragetransferV1.AgentPool
   {
@@ -793,6 +890,15 @@ extension StorageTransferService {
     request: GetAgentPoolRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleStoragetransferV1.AgentPool {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getAgentPool(
+    name: Swift.String,
+  ) async throws -> GoogleStoragetransferV1.AgentPool {
+    let request = GetAgentPoolRequest().with {
+      $0.name = name
+    }
+    return try await self.getAgentPool(request: request)
   }
 
   public func listAgentPools(request: ListAgentPoolsRequest) async throws
@@ -823,6 +929,15 @@ extension StorageTransferService {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listAgentPools(
+    projectId: Swift.String,
+  ) throws -> any AsyncSequence<AgentPool, Swift.Error> {
+    let request = ListAgentPoolsRequest().with {
+      $0.projectId = projectId
+    }
+    return try self.listAgentPools(byItem: request)
+  }
+
   public func deleteAgentPool(request: DeleteAgentPoolRequest) async throws {
     try await self.deleteAgentPool(request: request, options: .init())
   }
@@ -831,6 +946,15 @@ extension StorageTransferService {
     request: DeleteAgentPoolRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteAgentPool(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteAgentPoolRequest().with {
+      $0.name = name
+    }
+    try await self.deleteAgentPool(request: request)
   }
 
   public func listOperations(request: ListOperationsRequest) async throws
@@ -860,6 +984,17 @@ extension StorageTransferService {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -871,6 +1006,15 @@ extension StorageTransferService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func cancelOperation(request: CancelOperationRequest) async throws {
     try await self.cancelOperation(request: request, options: .init())
   }
@@ -879,5 +1023,14 @@ extension StorageTransferService {
     request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func cancelOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = CancelOperationRequest().with {
+      $0.name = name
+    }
+    try await self.cancelOperation(request: request)
   }
 }

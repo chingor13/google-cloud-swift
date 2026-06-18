@@ -45,6 +45,13 @@ public protocol TagHolds {
   func createTagHold(withPolling: CreateTagHoldRequest) async throws -> any GoogleCloudGax
     .PollableOperation<TagHold>
 
+  /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
+  /// resource and origin exists under the same TagValue.
+  func createTagHold(
+    parent: Swift.String,
+    tagHold: TagHold?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagHold>
+
   /// Deletes a TagHold.
   ///
   /// @Snippet(path: "TagHolds_DeleteTagHold")
@@ -53,6 +60,11 @@ public protocol TagHolds {
   /// Deletes a TagHold.
   func deleteTagHold(withPolling: DeleteTagHoldRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Void>
+
+  /// Deletes a TagHold.
+  func deleteTagHold(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Lists TagHolds under a TagValue.
   ///
@@ -65,12 +77,24 @@ public protocol TagHolds {
     byItem: ListTagHoldsRequest
   ) throws -> any AsyncSequence<TagHold, Swift.Error>
 
+  /// Lists TagHolds under a TagValue.
+  func listTagHolds(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagHold, Swift.Error>
+
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagHolds_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
   /// resource and origin exists under the same TagValue.
@@ -305,6 +329,17 @@ extension TagHolds {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createTagHold(
+    parent: Swift.String,
+    tagHold: TagHold?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagHold> {
+    let request = CreateTagHoldRequest().with {
+      $0.parent = parent
+      $0.tagHold = tagHold
+    }
+    return try await self.createTagHold(withPolling: request)
+  }
+
   public func deleteTagHold(request: DeleteTagHoldRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -331,6 +366,15 @@ extension TagHolds {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func deleteTagHold(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteTagHoldRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteTagHold(withPolling: request)
   }
 
   public func listTagHolds(request: ListTagHoldsRequest) async throws
@@ -361,6 +405,15 @@ extension TagHolds {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listTagHolds(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<TagHold, Swift.Error> {
+    let request = ListTagHoldsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listTagHolds(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -370,5 +423,14 @@ extension TagHolds {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 }

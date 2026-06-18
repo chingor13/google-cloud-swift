@@ -42,6 +42,11 @@ public protocol FunctionService {
   /// @Snippet(path: "FunctionService_GetFunction")
   func getFunction(request: GetFunctionRequest) async throws -> GoogleCloudFunctionsV2.Function
 
+  /// Returns a function with the given name from the requested project.
+  func getFunction(
+    name: Swift.String,
+  ) async throws -> GoogleCloudFunctionsV2.Function
+
   /// Returns a list of functions that belong to the requested project.
   ///
   /// @Snippet(path: "FunctionService_ListFunctions")
@@ -51,6 +56,11 @@ public protocol FunctionService {
   /// Returns a list of functions that belong to the requested project.
   func listFunctions(
     byItem: ListFunctionsRequest
+  ) throws -> any AsyncSequence<Function, Swift.Error>
+
+  /// Returns a list of functions that belong to the requested project.
+  func listFunctions(
+    parent: Swift.String,
   ) throws -> any AsyncSequence<Function, Swift.Error>
 
   /// Creates a new function. If a function with the given name already exists in
@@ -66,6 +76,15 @@ public protocol FunctionService {
   func createFunction(withPolling: CreateFunctionRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Function>
 
+  /// Creates a new function. If a function with the given name already exists in
+  /// the specified project, the long running operation will return
+  /// `ALREADY_EXISTS` error.
+  func createFunction(
+    parent: Swift.String,
+    function: Function?,
+    functionId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Function>
+
   /// Updates existing function.
   ///
   /// @Snippet(path: "FunctionService_UpdateFunction")
@@ -74,6 +93,12 @@ public protocol FunctionService {
   /// Updates existing function.
   func updateFunction(withPolling: UpdateFunctionRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Function>
+
+  /// Updates existing function.
+  func updateFunction(
+    function: Function?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Function>
 
   /// Deletes a function with the given name from the specified project. If the
   /// given function is used by some trigger, the trigger will be updated to
@@ -87,6 +112,13 @@ public protocol FunctionService {
   /// remove this function.
   func deleteFunction(withPolling: DeleteFunctionRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Void>
+
+  /// Deletes a function with the given name from the specified project. If the
+  /// given function is used by some trigger, the trigger will be updated to
+  /// remove this function.
+  func deleteFunction(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
   /// Returns a signed URL for uploading a function source code.
   /// For more information about the signed URL usage see:
@@ -131,6 +163,11 @@ public protocol FunctionService {
   /// @Snippet(path: "FunctionService_ListRuntimes")
   func listRuntimes(request: ListRuntimesRequest) async throws
     -> GoogleCloudFunctionsV2.ListRuntimesResponse
+
+  /// Returns a list of runtimes that are supported for the requested project.
+  func listRuntimes(
+    parent: Swift.String,
+  ) async throws -> GoogleCloudFunctionsV2.ListRuntimesResponse
 
   /// Lists information about the supported locations for this service.
   ///
@@ -188,9 +225,24 @@ public protocol FunctionService {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "FunctionService_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Returns a function with the given name from the requested project.
   ///
@@ -692,6 +744,15 @@ extension FunctionService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getFunction(
+    name: Swift.String,
+  ) async throws -> GoogleCloudFunctionsV2.Function {
+    let request = GetFunctionRequest().with {
+      $0.name = name
+    }
+    return try await self.getFunction(request: request)
+  }
+
   public func listFunctions(request: ListFunctionsRequest) async throws
     -> GoogleCloudFunctionsV2.ListFunctionsResponse
   {
@@ -717,6 +778,15 @@ extension FunctionService {
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
+
+  public func listFunctions(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Function, Swift.Error> {
+    let request = ListFunctionsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listFunctions(byItem: request)
   }
 
   public func createFunction(request: CreateFunctionRequest) async throws
@@ -747,6 +817,19 @@ extension FunctionService {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createFunction(
+    parent: Swift.String,
+    function: Function?,
+    functionId: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Function> {
+    let request = CreateFunctionRequest().with {
+      $0.parent = parent
+      $0.function = function
+      $0.functionId = functionId
+    }
+    return try await self.createFunction(withPolling: request)
+  }
+
   public func updateFunction(request: UpdateFunctionRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -775,6 +858,17 @@ extension FunctionService {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func updateFunction(
+    function: Function?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Function> {
+    let request = UpdateFunctionRequest().with {
+      $0.function = function
+      $0.updateMask = updateMask
+    }
+    return try await self.updateFunction(withPolling: request)
+  }
+
   public func deleteFunction(request: DeleteFunctionRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -801,6 +895,15 @@ extension FunctionService {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func deleteFunction(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let request = DeleteFunctionRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteFunction(withPolling: request)
   }
 
   public func generateUploadUrl(request: GenerateUploadUrlRequest) async throws
@@ -837,6 +940,15 @@ extension FunctionService {
     request: ListRuntimesRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudFunctionsV2.ListRuntimesResponse {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func listRuntimes(
+    parent: Swift.String,
+  ) async throws -> GoogleCloudFunctionsV2.ListRuntimesResponse {
+    let request = ListRuntimesRequest().with {
+      $0.parent = parent
+    }
+    return try await self.listRuntimes(request: request)
   }
 
   public func listLocations(request: ListLocationsRequest) async throws
@@ -925,6 +1037,17 @@ extension FunctionService {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -934,5 +1057,14 @@ extension FunctionService {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 }

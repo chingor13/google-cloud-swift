@@ -40,6 +40,15 @@ public protocol Projects {
   /// @Snippet(path: "Projects_GetProject")
   func getProject(request: GetProjectRequest) async throws -> GoogleCloudResourcemanagerV3.Project
 
+  /// Retrieves the project identified by the specified `name` (for example,
+  /// `projects/415104041262`).
+  ///
+  /// The caller must have `resourcemanager.projects.get` permission
+  /// for this project.
+  func getProject(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.Project
+
   /// Lists projects that are direct children of the specified folder or
   /// organization resource. `list()` provides a strongly consistent view of the
   /// projects underneath the specified parent resource. `list()` returns
@@ -59,6 +68,16 @@ public protocol Projects {
   /// permission on the identified parent.
   func listProjects(
     byItem: ListProjectsRequest
+  ) throws -> any AsyncSequence<Project, Swift.Error>
+
+  /// Lists projects that are direct children of the specified folder or
+  /// organization resource. `list()` provides a strongly consistent view of the
+  /// projects underneath the specified parent resource. `list()` returns
+  /// projects sorted based upon the (ascending) lexical ordering of their
+  /// `display_name`. The caller must have `resourcemanager.projects.list`
+  /// permission on the identified parent.
+  func listProjects(
+    parent: Swift.String,
   ) throws -> any AsyncSequence<Project, Swift.Error>
 
   /// Search for projects that the caller has both `resourcemanager.projects.get`
@@ -94,6 +113,22 @@ public protocol Projects {
     byItem: SearchProjectsRequest
   ) throws -> any AsyncSequence<Project, Swift.Error>
 
+  /// Search for projects that the caller has both `resourcemanager.projects.get`
+  /// permission on, and also satisfy the specified query.
+  ///
+  /// This method returns projects in an unspecified order.
+  ///
+  /// This method is eventually consistent with project mutations; this means
+  /// that a newly created project may not appear in the results or recent
+  /// updates to an existing project may not be reflected in the results. To
+  /// retrieve the latest state of a project, use the
+  /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
+  ///
+  /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
+  func searchProjects(
+    query: Swift.String,
+  ) throws -> any AsyncSequence<Project, Swift.Error>
+
   /// Request that a new project be created. The result is an `Operation` which
   /// can be used to track the creation process. This process usually takes a few
   /// seconds, but can sometimes take much longer. The tracking `Operation` is
@@ -110,6 +145,15 @@ public protocol Projects {
   /// `DeleteOperation`.
   func createProject(withPolling: CreateProjectRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Project>
+
+  /// Request that a new project be created. The result is an `Operation` which
+  /// can be used to track the creation process. This process usually takes a few
+  /// seconds, but can sometimes take much longer. The tracking `Operation` is
+  /// automatically deleted after a few hours, so there is no need to call
+  /// `DeleteOperation`.
+  func createProject(
+    project: Project?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
   /// Updates the `display_name` and labels of the project identified by the
   /// specified `name` (for example, `projects/415104041262`). Deleting all
@@ -129,6 +173,17 @@ public protocol Projects {
   /// project.
   func updateProject(withPolling: UpdateProjectRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Project>
+
+  /// Updates the `display_name` and labels of the project identified by the
+  /// specified `name` (for example, `projects/415104041262`). Deleting all
+  /// labels requires an update mask for labels field.
+  ///
+  /// The caller must have `resourcemanager.projects.update` permission for this
+  /// project.
+  func updateProject(
+    project: Project?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
   /// Move a project to another place in your resource hierarchy, under a new
   /// resource parent.
@@ -168,6 +223,27 @@ public protocol Projects {
   ///
   func moveProject(withPolling: MoveProjectRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Project>
+
+  /// Move a project to another place in your resource hierarchy, under a new
+  /// resource parent.
+  ///
+  /// Returns an operation which can be used to track the process of the project
+  /// move workflow.
+  /// Upon success, the `Operation.response` field will be populated with the
+  /// moved project.
+  ///
+  /// The caller must have `resourcemanager.projects.move` permission on the
+  /// project, on the project's current and proposed new parent.
+  ///
+  /// If project has no current parent, or it currently does not have an
+  /// associated organization resource, you will also need the
+  /// `resourcemanager.projects.setIamPolicy` permission in the project.
+  ///
+  ///
+  func moveProject(
+    name: Swift.String,
+    destinationParent: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
   /// Marks the project identified by the specified
   /// `name` (for example, `projects/415104041262`) for deletion.
@@ -250,6 +326,47 @@ public protocol Projects {
   func deleteProject(withPolling: DeleteProjectRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Project>
 
+  /// Marks the project identified by the specified
+  /// `name` (for example, `projects/415104041262`) for deletion.
+  ///
+  /// This method will only affect the project if it has a lifecycle state of
+  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE].
+  ///
+  /// This method changes the Project's lifecycle state from
+  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
+  /// to
+  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
+  /// The deletion starts at an unspecified time,
+  /// at which point the Project is no longer accessible.
+  ///
+  /// Until the deletion completes, you can check the lifecycle state
+  /// checked by retrieving the project with [GetProject]
+  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
+  /// and the project remains visible to [ListProjects]
+  /// [google.cloud.resourcemanager.v3.Projects.ListProjects].
+  /// However, you cannot update the project.
+  ///
+  /// After the deletion completes, the project is not retrievable by
+  /// the  [GetProject]
+  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
+  /// [ListProjects]
+  /// [google.cloud.resourcemanager.v3.Projects.ListProjects], and
+  /// [SearchProjects][google.cloud.resourcemanager.v3.Projects.SearchProjects]
+  /// methods.
+  ///
+  /// This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
+  /// project will not cause an error, but also won't do anything.
+  ///
+  /// The caller must have `resourcemanager.projects.delete` permissions for this
+  /// project.
+  ///
+  /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
+  /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
+  /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
+  func deleteProject(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
   /// Restores the project identified by the specified
   /// `name` (for example, `projects/415104041262`).
   /// You can only use this method for a project that has a lifecycle state of
@@ -275,12 +392,32 @@ public protocol Projects {
   func undeleteProject(withPolling: UndeleteProjectRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Project>
 
+  /// Restores the project identified by the specified
+  /// `name` (for example, `projects/415104041262`).
+  /// You can only use this method for a project that has a lifecycle state of
+  /// [DELETE_REQUESTED]
+  /// [Projects.State.DELETE_REQUESTED].
+  /// After deletion starts, the project cannot be restored.
+  ///
+  /// The caller must have `resourcemanager.projects.undelete` permission for
+  /// this project.
+  func undeleteProject(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
   /// Returns the IAM access control policy for the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
   /// Permission is denied if the policy or the resource do not exist.
   ///
   /// @Snippet(path: "Projects_GetIamPolicy")
   func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+  /// Returns the IAM access control policy for the specified project, in the
+  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
+  /// Permission is denied if the policy or the resource do not exist.
+  func getIamPolicy(
+    resource: Swift.String,
+  ) async throws -> GoogleIamV1.Policy
 
   /// Sets the IAM access control policy for the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
@@ -327,6 +464,52 @@ public protocol Projects {
   /// @Snippet(path: "Projects_SetIamPolicy")
   func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
+  /// Sets the IAM access control policy for the specified project, in the
+  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
+  ///
+  /// CAUTION: This method will replace the existing policy, and cannot be used
+  /// to append additional IAM settings.
+  ///
+  /// Note: Removing service accounts from policies or changing their roles can
+  /// render services completely inoperable. It is important to understand how
+  /// the service account is being used before removing or updating its roles.
+  ///
+  /// The following constraints apply when using `setIamPolicy()`:
+  ///
+  /// + Project does not support `allUsers` and `allAuthenticatedUsers` as
+  /// `members` in a `Binding` of a `Policy`.
+  ///
+  /// + The owner role can be granted to a `user`, `serviceAccount`, or a group
+  /// that is part of an organization. For example,
+  /// group@myownpersonaldomain.com could be added as an owner to a project in
+  /// the myownpersonaldomain.com organization, but not the examplepetstore.com
+  /// organization.
+  ///
+  /// + Service accounts can be made owners of a project directly
+  /// without any restrictions. However, to be added as an owner, a user must be
+  /// invited using the Cloud Platform console and must accept the invitation.
+  ///
+  /// + A user cannot be granted the owner role using `setIamPolicy()`. The user
+  /// must be granted the owner role using the Cloud Platform Console and must
+  /// explicitly accept the invitation.
+  ///
+  /// + Invitations to grant the owner role cannot be sent using
+  /// `setIamPolicy()`;
+  /// they must be sent only using the Cloud Platform Console.
+  ///
+  /// + If the project is not part of an organization, there must be at least
+  /// one owner who has accepted the Terms of Service (ToS) agreement in the
+  /// policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
+  /// from the policy will fail. This restriction also applies to legacy
+  /// projects that no longer have owners who have accepted the ToS. Edits to
+  /// IAM policies will be rejected until the lack of a ToS-accepting owner is
+  /// rectified. If the project is part of an organization, you can remove all
+  /// owners, potentially making the organization inaccessible.
+  func setIamPolicy(
+    resource: Swift.String,
+    policy: GoogleIamV1.Policy?,
+  ) async throws -> GoogleIamV1.Policy
+
   /// Returns permissions that a caller has on the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123..
   ///
@@ -334,12 +517,26 @@ public protocol Projects {
   func testIamPermissions(request: TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
 
+  /// Returns permissions that a caller has on the specified project, in the
+  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123..
+  func testIamPermissions(
+    resource: Swift.String,
+    permissions: [Swift.String],
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Projects_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
 
   /// Retrieves the project identified by the specified `name` (for example,
   /// `projects/415104041262`).
@@ -1163,6 +1360,15 @@ extension Projects {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getProject(
+    name: Swift.String,
+  ) async throws -> GoogleCloudResourcemanagerV3.Project {
+    let request = GetProjectRequest().with {
+      $0.name = name
+    }
+    return try await self.getProject(request: request)
+  }
+
   public func listProjects(request: ListProjectsRequest) async throws
     -> GoogleCloudResourcemanagerV3.ListProjectsResponse
   {
@@ -1189,6 +1395,15 @@ extension Projects {
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
+
+  public func listProjects(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Project, Swift.Error> {
+    let request = ListProjectsRequest().with {
+      $0.parent = parent
+    }
+    return try self.listProjects(byItem: request)
   }
 
   public func searchProjects(request: SearchProjectsRequest) async throws
@@ -1219,6 +1434,15 @@ extension Projects {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func searchProjects(
+    query: Swift.String,
+  ) throws -> any AsyncSequence<Project, Swift.Error> {
+    let request = SearchProjectsRequest().with {
+      $0.query = query
+    }
+    return try self.searchProjects(byItem: request)
+  }
+
   public func createProject(request: CreateProjectRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -1245,6 +1469,15 @@ extension Projects {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func createProject(
+    project: Project?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let request = CreateProjectRequest().with {
+      $0.project = project
+    }
+    return try await self.createProject(withPolling: request)
   }
 
   public func updateProject(request: UpdateProjectRequest) async throws
@@ -1275,6 +1508,17 @@ extension Projects {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func updateProject(
+    project: Project?,
+    updateMask: GoogleCloudWkt.FieldMask?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let request = UpdateProjectRequest().with {
+      $0.project = project
+      $0.updateMask = updateMask
+    }
+    return try await self.updateProject(withPolling: request)
+  }
+
   public func moveProject(request: MoveProjectRequest) async throws -> GoogleLongrunning.Operation {
     try await self.moveProject(request: request, options: .init())
   }
@@ -1299,6 +1543,17 @@ extension Projects {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func moveProject(
+    name: Swift.String,
+    destinationParent: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let request = MoveProjectRequest().with {
+      $0.name = name
+      $0.destinationParent = destinationParent
+    }
+    return try await self.moveProject(withPolling: request)
   }
 
   public func deleteProject(request: DeleteProjectRequest) async throws
@@ -1329,6 +1584,15 @@ extension Projects {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteProject(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let request = DeleteProjectRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteProject(withPolling: request)
+  }
+
   public func undeleteProject(request: UndeleteProjectRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -1357,6 +1621,15 @@ extension Projects {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func undeleteProject(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let request = UndeleteProjectRequest().with {
+      $0.name = name
+    }
+    return try await self.undeleteProject(withPolling: request)
+  }
+
   public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
     try await self.getIamPolicy(request: request, options: .init())
   }
@@ -1367,6 +1640,15 @@ extension Projects {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getIamPolicy(
+    resource: Swift.String,
+  ) async throws -> GoogleIamV1.Policy {
+    let request = GetIamPolicyRequest().with {
+      $0.resource = resource
+    }
+    return try await self.getIamPolicy(request: request)
+  }
+
   public func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
     try await self.setIamPolicy(request: request, options: .init())
   }
@@ -1375,6 +1657,17 @@ extension Projects {
     request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func setIamPolicy(
+    resource: Swift.String,
+    policy: GoogleIamV1.Policy?,
+  ) async throws -> GoogleIamV1.Policy {
+    let request = SetIamPolicyRequest().with {
+      $0.resource = resource
+      $0.policy = policy
+    }
+    return try await self.setIamPolicy(request: request)
   }
 
   public func testIamPermissions(request: TestIamPermissionsRequest) async throws
@@ -1389,6 +1682,17 @@ extension Projects {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func testIamPermissions(
+    resource: Swift.String,
+    permissions: [Swift.String],
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    let request = TestIamPermissionsRequest().with {
+      $0.resource = resource
+      $0.permissions = permissions
+    }
+    return try await self.testIamPermissions(request: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -1398,5 +1702,14 @@ extension Projects {
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
   }
 }

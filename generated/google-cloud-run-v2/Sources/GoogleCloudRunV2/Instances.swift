@@ -39,6 +39,12 @@ public protocol Instances {
   func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Instance>
 
+  /// Creates an Instance.
+  func createInstance(
+    parent: Swift.String,
+    instance: Instance?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
   /// Deletes a Instance
   ///
   /// @Snippet(path: "Instances_DeleteInstance")
@@ -48,10 +54,20 @@ public protocol Instances {
   func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Instance>
 
+  /// Deletes a Instance
+  func deleteInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
   /// Gets a Instance
   ///
   /// @Snippet(path: "Instances_GetInstance")
   func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudRunV2.Instance
+
+  /// Gets a Instance
+  func getInstance(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.Instance
 
   /// Lists Instances. Results are sorted by creation time, descending.
   ///
@@ -64,6 +80,11 @@ public protocol Instances {
     byItem: ListInstancesRequest
   ) throws -> any AsyncSequence<Instance, Swift.Error>
 
+  /// Lists Instances. Results are sorted by creation time, descending.
+  func listInstances(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Instance, Swift.Error>
+
   /// Stops an Instance.
   ///
   /// @Snippet(path: "Instances_StopInstance")
@@ -73,6 +94,11 @@ public protocol Instances {
   func stopInstance(withPolling: StopInstanceRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Instance>
 
+  /// Stops an Instance.
+  func stopInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
   /// Starts an Instance.
   ///
   /// @Snippet(path: "Instances_StartInstance")
@@ -81,6 +107,11 @@ public protocol Instances {
   /// Starts an Instance.
   func startInstance(withPolling: StartInstanceRequest) async throws -> any GoogleCloudGax
     .PollableOperation<Instance>
+
+  /// Starts an Instance.
+  func startInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -100,6 +131,14 @@ public protocol Instances {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_GetOperation")
   func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
@@ -107,9 +146,23 @@ public protocol Instances {
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_DeleteOperation")
   func deleteOperation(request: DeleteOperationRequest) async throws
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  func deleteOperation(
+    name: Swift.String,
+  ) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -580,6 +633,17 @@ extension Instances {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func createInstance(
+    parent: Swift.String,
+    instance: Instance?,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let request = CreateInstanceRequest().with {
+      $0.parent = parent
+      $0.instance = instance
+    }
+    return try await self.createInstance(withPolling: request)
+  }
+
   public func deleteInstance(request: DeleteInstanceRequest) async throws
     -> GoogleLongrunning.Operation
   {
@@ -608,6 +672,15 @@ extension Instances {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func deleteInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let request = DeleteInstanceRequest().with {
+      $0.name = name
+    }
+    return try await self.deleteInstance(withPolling: request)
+  }
+
   public func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudRunV2.Instance {
     try await self.getInstance(request: request, options: .init())
   }
@@ -616,6 +689,15 @@ extension Instances {
     request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.Instance {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getInstance(
+    name: Swift.String,
+  ) async throws -> GoogleCloudRunV2.Instance {
+    let request = GetInstanceRequest().with {
+      $0.name = name
+    }
+    return try await self.getInstance(request: request)
   }
 
   public func listInstances(request: ListInstancesRequest) async throws
@@ -645,6 +727,15 @@ extension Instances {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listInstances(
+    parent: Swift.String,
+  ) throws -> any AsyncSequence<Instance, Swift.Error> {
+    let request = ListInstancesRequest().with {
+      $0.parent = parent
+    }
+    return try self.listInstances(byItem: request)
+  }
+
   public func stopInstance(request: StopInstanceRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.stopInstance(request: request, options: .init())
@@ -670,6 +761,15 @@ extension Instances {
     }
     return GoogleCloudGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
+  }
+
+  public func stopInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let request = StopInstanceRequest().with {
+      $0.name = name
+    }
+    return try await self.stopInstance(withPolling: request)
   }
 
   public func startInstance(request: StartInstanceRequest) async throws
@@ -700,6 +800,15 @@ extension Instances {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
+  public func startInstance(
+    name: Swift.String,
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let request = StartInstanceRequest().with {
+      $0.name = name
+    }
+    return try await self.startInstance(withPolling: request)
+  }
+
   public func listOperations(request: ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
   {
@@ -727,6 +836,17 @@ extension Instances {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
+  public func listOperations(
+    name: Swift.String,
+    filter: Swift.String,
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let request = ListOperationsRequest().with {
+      $0.name = name
+      $0.filter = filter
+    }
+    return try self.listOperations(byItem: request)
+  }
+
   public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
@@ -738,6 +858,15 @@ extension Instances {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
+  public func getOperation(
+    name: Swift.String,
+  ) async throws -> GoogleLongrunning.Operation {
+    let request = GetOperationRequest().with {
+      $0.name = name
+    }
+    return try await self.getOperation(request: request)
+  }
+
   public func deleteOperation(request: DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
@@ -746,6 +875,15 @@ extension Instances {
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func deleteOperation(
+    name: Swift.String,
+  ) async throws {
+    let request = DeleteOperationRequest().with {
+      $0.name = name
+    }
+    try await self.deleteOperation(request: request)
   }
 
   public func waitOperation(request: WaitOperationRequest) async throws
