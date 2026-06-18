@@ -63,11 +63,6 @@ import Testing
     // Parse the success response
     let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
 
-    // Print the JSON response
-    if let json = json {
-      print("Response JSON: \(json)")
-    }
-
     // The response should be a JSON object, possibly with a 'secrets' array if there are any
     // or simply an empty object if no secrets exist, but the request itself should succeed.
     #expect(json != nil)
