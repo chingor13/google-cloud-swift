@@ -51,9 +51,7 @@ let package = Package(
     .testTarget(
       name: "IntegrationTests",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(
-          name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1"),
+        .product(name: "GoogleCloudAuth", package: "auth")
       ]
     ),
     .testTarget(

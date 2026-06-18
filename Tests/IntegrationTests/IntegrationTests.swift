@@ -18,7 +18,6 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudAuth
-import GoogleCloudSecurityPubliccaV1
 import Testing
 
 #if IntegrationTests
@@ -73,19 +72,4 @@ import Testing
     // or simply an empty object if no secrets exist, but the request itself should succeed.
     #expect(json != nil)
   }
-
-  @Test func createExternalAccountKey() async throws {
-    let projectId = try #require(
-      ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"],
-      "GOOGLE_CLOUD_PROJECT environment variable must be set")
-
-    let client = try GoogleCloudSecurityPubliccaV1.Clients.PublicCertificateAuthorityServiceClient()
-    let response = try await client.createExternalAccountKey(
-      request: CreateExternalAccountKeyRequest().with {
-        $0.parent = "projects/\(projectId)/locations/global"
-      }
-    )
-    print("Response \(response)")
-  }
-
 #endif
