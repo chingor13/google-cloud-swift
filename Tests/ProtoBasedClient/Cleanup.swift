@@ -15,6 +15,7 @@
 import Foundation
 import GoogleCloudSecretmanagerV1
 import GoogleCloudWorkflowsV1
+import GoogleCloudTestHelpers
 
 func cleanupStaleSecrets() async {
   do {

@@ -35,7 +35,7 @@ fileprivate let alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 /// Fetches the project id to use in the tests.
 ///
 /// - Throws: a `ResourceNameError` if the project id is not set.
-func projectId() throws -> String {
+public func projectId() throws -> String {
   guard let id = ProcessInfo.processInfo.environment[googleCloudProject] else {
     throw ResourceNameError.unsetEnvironmentVariable(googleCloudProject)
   }
@@ -43,7 +43,7 @@ func projectId() throws -> String {
 }
 
 /// Fetches the location to use in the tests. Defaults to `us-central1`.
-func locationId() -> String {
+public func locationId() -> String {
   guard let id = ProcessInfo.processInfo.environment[locationVar] else {
     return defaultLocation
   }
@@ -53,7 +53,7 @@ func locationId() -> String {
 /// Fetches the test service account to use in the tests.
 ///
 /// - Throws: a `ResourceNameError` if the project id is not set.
-func testServiceAccount() throws -> String {
+public func testServiceAccount() throws -> String {
   guard let account = ProcessInfo.processInfo.environment[serviceAccountVar] else {
     throw ResourceNameError.unsetEnvironmentVariable(serviceAccountVar)
   }
@@ -61,7 +61,7 @@ func testServiceAccount() throws -> String {
 }
 
 /// Generates a random secret ID.
-func randomSecretId() -> String {
+public func randomSecretId() -> String {
   assert(prefix.count < secretIdLength)
   let length = secretIdLength - prefix.count
   let suffix = String((0..<length).map { _ in alphanumeric.randomElement()! })

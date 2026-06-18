@@ -15,6 +15,7 @@
 import Foundation
 import Testing
 import GoogleCloudGax
+import GoogleCloudTestHelpers
 
 // All the code is compiled by default. The driver to run the code is only enabled when the
 // `IntegrationTests` package trait is enabled.
@@ -54,16 +55,6 @@ import GoogleCloudGax
         print("### error=\(error)")
         throw error
       }
-    }
-
-    func reportRequestError(_ name: String, error: GoogleCloudGax.RequestError) throws {
-      if case let .http(details) = error {
-        let p = String(data: details.payload, encoding: .utf8)!
-        print("### payload=\(p) error=\(error)")
-      } else {
-        print("### error=\(error)")
-      }
-      throw error
     }
   }
 #endif

@@ -44,6 +44,7 @@ for dir in "${packages[@]}"; do
         continue
     fi
 
+    [[ -d "${dir}/Tests" ]] || continue
     echo "--- Testing ${dir} ---"
     if swift test -Xswiftc -warnings-as-errors --quiet --package-path "${dir}"; then
         echo "✓ ${dir} passed"

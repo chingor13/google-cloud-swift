@@ -14,6 +14,7 @@
 
 import GoogleCloudLocation
 import GoogleCloudSecretmanagerV1
+import GoogleCloudTestHelpers
 import GoogleCloudWkt
 import GoogleIamV1
 import CryptoSwift
