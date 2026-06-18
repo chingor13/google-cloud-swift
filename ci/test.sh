@@ -45,7 +45,7 @@ for dir in "${packages[@]}"; do
     fi
 
     echo "--- Testing ${dir} ---"
-    if swift test -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+    if swift test -Xswiftc -warnings-as-errors --quiet --package-path "${dir}"; then
         echo "✓ ${dir} passed"
     else
         echo "✗ ${dir} failed" >&2
