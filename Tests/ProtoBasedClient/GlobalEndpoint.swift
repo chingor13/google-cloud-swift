@@ -18,15 +18,16 @@ import GoogleCloudTestHelpers
 import GoogleCloudWkt
 import GoogleIamV1
 import CryptoSwift
+import Logging
 
 /// Run tests for the global endpoint.
 public enum GlobalEndpoint {
-  static public func run() async throws {
+  static public func run(_ logger: Logger) async throws {
     let projectId = try projectId()
     let secretId = randomSecretId()
     let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
 
-    print("Testing createSecret()")
+    logger.info("Testing createSecret()")
     let create = try await client.createSecret(
       request: CreateSecretRequest().with {
         $0.parent = "projects/\(projectId)"
@@ -38,17 +39,17 @@ public enum GlobalEndpoint {
           $0.labels = ["integration-test": "true"]
         }
       })
-    print("create = \(create)")
+    logger.info("create = \(create)")
 
-    print("\nTesting getSecret()")
+    logger.info("\nTesting getSecret()")
     let get = try await client.getSecret(request: GetSecretRequest().with { $0.name = create.name })
-    print("get = \(get)")
+    logger.info("get = \(get)")
 
-    try await testSecretVersions(client: client, secretName: create.name)
-    try await testIAM(client: client, secretName: create.name)
-    try await testLocations(client: client, projectId: projectId)
+    try await testSecretVersions(client: client, secretName: create.name, logger: logger)
+    try await testIAM(client: client, secretName: create.name, logger: logger)
+    try await testLocations(client: client, projectId: projectId, logger: logger)
 
-    print("\nTesting updateSecret()")
+    logger.info("\nTesting updateSecret()")
     var updatedLabels = get.labels
     updatedLabels["updated"] = "test-1"
     var updatedAnnotations = get.annotations
@@ -66,27 +67,29 @@ public enum GlobalEndpoint {
         }
       }
     )
-    print("update = \(update)")
+    logger.info("update = \(update)")
 
-    print("\nTesting listSecrets()")
+    logger.info("\nTesting listSecrets()")
     let secrets = try client.listSecrets(
       byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
     var count: UInt64 = 0
     for try await secret in secrets {
-      print("  secret = \(secret)")
+      logger.info("  secret = \(secret)")
       count += 1
     }
-    print("item count = \(count)")
+    logger.info("item count = \(count)")
 
-    print("\nTesting deleteSecret()")
+    logger.info("\nTesting deleteSecret()")
     try await client.deleteSecret(request: DeleteSecretRequest().with { $0.name = get.name })
-    print("deleteSecret() was successful")
+    logger.info("deleteSecret() was successful")
   }
 
-  static private func testSecretVersions(client: SecretManagerService, secretName: String)
+  static private func testSecretVersions(
+    client: SecretManagerService, secretName: String, logger: Logger
+  )
     async throws
   {
-    print("\nTesting secret version CRUD")
+    logger.info("\nTesting secret version CRUD")
     let data = "the quick brown fox jumps over the lazy dog".data(using: .utf8)!
     let checksum = CryptoSwift.Checksum.crc32c(data.byteArray)
     let version = try await client.addSecretVersion(
@@ -97,58 +100,60 @@ public enum GlobalEndpoint {
           $0.dataCrc32C = Int64(checksum)
         }
       })
-    print("version = \(version)")
+    logger.info("version = \(version)")
 
-    print("\nTesting getSecretVersion()")
+    logger.info("\nTesting getSecretVersion()")
     let getVersion = try await client.getSecretVersion(
       request: GetSecretVersionRequest().with { $0.name = version.name })
-    print("getVersion = \(getVersion)")
+    logger.info("getVersion = \(getVersion)")
 
-    print("\nTesting accessSecretVersion()")
+    logger.info("\nTesting accessSecretVersion()")
     let accessVersion = try await client.accessSecretVersion(
       request: AccessSecretVersionRequest().with { $0.name = version.name })
-    print("accessVersion payload length = \(accessVersion.payload?.data.count ?? 0)")
+    logger.info("accessVersion payload length = \(accessVersion.payload?.data.count ?? 0)")
 
-    print("\nTesting disableSecretVersion()")
+    logger.info("\nTesting disableSecretVersion()")
     let disabledVersion = try await client.disableSecretVersion(
       request: DisableSecretVersionRequest().with { $0.name = version.name })
-    print("disabledVersion state = \(disabledVersion.state)")
+    logger.info("disabledVersion state = \(disabledVersion.state)")
 
-    print("\nTesting enableSecretVersion()")
+    logger.info("\nTesting enableSecretVersion()")
     let enabledVersion = try await client.enableSecretVersion(
       request: EnableSecretVersionRequest().with { $0.name = version.name })
-    print("enabledVersion state = \(enabledVersion.state)")
+    logger.info("enabledVersion state = \(enabledVersion.state)")
 
-    print("\nTesting listSecretVersions()")
+    logger.info("\nTesting listSecretVersions()")
     let versions = try client.listSecretVersions(
       byItem: ListSecretVersionsRequest().with { $0.parent = secretName })
     for try await version in versions {
-      print("  version = \(version)")
+      logger.info("  version = \(version)")
     }
 
-    print("\nTesting destroySecretVersion()")
+    logger.info("\nTesting destroySecretVersion()")
     let destroyedVersion = try await client.destroySecretVersion(
       request: DestroySecretVersionRequest().with { $0.name = version.name })
-    print("destroyedVersion state = \(destroyedVersion.state)")
+    logger.info("destroyedVersion state = \(destroyedVersion.state)")
   }
 
-  static private func testIAM(client: SecretManagerService, secretName: String) async throws {
-    print("\nTesting IAM operations")
+  static private func testIAM(client: SecretManagerService, secretName: String, logger: Logger)
+    async throws
+  {
+    logger.info("\nTesting IAM operations")
     let serviceAccount = try testServiceAccount();
-    print("Testing getIamPolicy()")
+    logger.info("Testing getIamPolicy()")
     var policy = try await client.getIamPolicy(
       request: GetIamPolicyRequest().with { $0.resource = secretName })
-    print("policy = \(policy)")
+    logger.info("policy = \(policy)")
 
-    print("Testing testIamPermissions()")
+    logger.info("Testing testIamPermissions()")
     let permissions = try await client.testIamPermissions(
       request: TestIamPermissionsRequest().with {
         $0.resource = secretName
         $0.permissions = ["secretmanager.versions.access"]
       })
-    print("permissions = \(permissions)")
+    logger.info("permissions = \(permissions)")
 
-    print("Testing setIamPolicy()")
+    logger.info("Testing setIamPolicy()")
     let role = "roles/secretmanager.secretVersionAdder"
     if var found = policy.bindings.first(where: { $0.role == role }) {
       found.members.append("serviceAccount:\(serviceAccount)")
@@ -164,30 +169,32 @@ public enum GlobalEndpoint {
         $0.resource = secretName
         $0.policy = policy
       })
-    print("updatedPolicy = \(updatedPolicy)")
+    logger.info("updatedPolicy = \(updatedPolicy)")
   }
 
-  static private func testLocations(client: SecretManagerService, projectId: String) async throws {
-    print("\nTesting location operations")
-    print("Testing listLocations()")
+  static private func testLocations(client: SecretManagerService, projectId: String, logger: Logger)
+    async throws
+  {
+    logger.info("\nTesting location operations")
+    logger.info("Testing listLocations()")
     var count: Int64 = 0
     var first: Location? = nil
     let locations = try client.listLocations(
       byItem: ListLocationsRequest().with { $0.name = "projects/\(projectId)" })
     for try await location in locations {
-      print("  location = \(location)")
+      logger.info("  location = \(location)")
       count += 1
       if first == nil {
         first = location
       }
     }
-    print("locations count = \(count)")
+    logger.info("locations count = \(count)")
 
     if let firstLocation = first {
-      print("Testing getLocation() for \(firstLocation.name)")
+      logger.info("Testing getLocation() for \(firstLocation.name)")
       let location = try await client.getLocation(
         request: GetLocationRequest().with { $0.name = firstLocation.name })
-      print("location = \(location)")
+      logger.info("location = \(location)")
     }
   }
 }

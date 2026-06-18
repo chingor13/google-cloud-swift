@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import Foundation
+import Logging
 import Testing
 import GoogleCloudGax
 import GoogleCloudTestHelpers
@@ -23,38 +24,17 @@ import GoogleCloudTestHelpers
   @Suite struct ProtoBasedClient {
     @Test func globalEndpoint() async throws {
       await cleanupStaleSecrets()
-      do {
-        try await GlobalEndpoint.run()
-      } catch let e as GoogleCloudGax.RequestError {
-        try reportRequestError(#function, error: e)
-      } catch {
-        print("### error=\(error)")
-        throw error
-      }
+      try await runLoggedTest(#function, { try await GlobalEndpoint.run($0) })
     }
 
     @Test func logging() async throws {
       await cleanupStaleSecrets()
-      do {
-        try await Logging.run()
-      } catch let e as GoogleCloudGax.RequestError {
-        try reportRequestError(#function, error: e)
-      } catch {
-        print("### error=\(error)")
-        throw error
-      }
+      try await runLoggedTest(#function, { try await Logging.run($0) })
     }
 
     @Test func longRunningOperations() async throws {
       await cleanUpStaleWorkflows()
-      do {
-        try await LongrunningOperations.run()
-      } catch let e as GoogleCloudGax.RequestError {
-        try reportRequestError(#function, error: e)
-      } catch {
-        print("### error=\(error)")
-        throw error
-      }
+      try await runLoggedTest(#function, { try await LongrunningOperations.run($0) })
     }
   }
 #endif

@@ -24,13 +24,15 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../gax"),
+    .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudTestHelpers",
       dependencies: [
         .product(name: "GoogleCloudGax", package: "gax"),
+        .product(name: "InMemoryLogging", package: "swift-log"),
       ],
-    ),
+    )
   ]
 )

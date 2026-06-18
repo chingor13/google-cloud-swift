@@ -23,15 +23,15 @@ import Testing
 
 /// Run tests for the global endpoint.
 public enum Logging {
-  static public func run() async throws {
+  static public func run(_ logger: Logger) async throws {
     let projectId = try projectId()
     let handler = InMemoryLogHandler()
-    var logger = Logger(label: "logging.test", factory: { (String) in handler })
-    logger.logLevel = .debug
+    var clientLogger = Logger(label: "logging.test", factory: { (String) in handler })
+    clientLogger.logLevel = .debug
     let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient(
-      ClientOptions().with { $0.logger = logger })
+      ClientOptions().with { $0.logger = clientLogger })
 
-    print("\nTesting listLocations()")
+    logger.info("\nTesting listLocations()")
     let _ = try await client.listLocations(
       request: ListLocationsRequest().with { $0.name = "projects/\(projectId)" })
 

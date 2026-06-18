@@ -14,13 +14,42 @@
 
 import Foundation
 import GoogleCloudGax
+import InMemoryLogging
+import Logging
 
-public func reportRequestError(_ name: String, error: GoogleCloudGax.RequestError) throws {
+public func runLoggedTest(_ name: String, _ test: (Logger) async throws -> Void) async throws {
+  let handler = InMemoryLogHandler()
+  let logger = Logger(label: "logging.test", factory: { (String) in handler })
+  do {
+    try await test(logger)
+  } catch let e as GoogleCloudGax.RequestError {
+    try reportRequestError(name, error: e, handler: handler)
+  } catch {
+    try reportError(name, error: error, handler: handler)
+  }
+}
+
+func reportRequestError(
+  _ name: String, error: GoogleCloudGax.RequestError, handler: InMemoryLogHandler
+) throws {
+  for entry in handler.entries {
+    print("\(entry.message)")
+  }
   if case let .http(details) = error {
     let p = String(data: details.payload, encoding: .utf8)!
     print("### \(name) error=\(error)\npayload=\(p)")
   } else {
     print("### \(name) error=\(error)")
   }
+  throw error
+}
+
+func reportError(
+  _ name: String, error: any Error, handler: InMemoryLogHandler
+) throws {
+  for entry in handler.entries {
+    print("\(entry.message)")
+  }
+  print("### \(name) error=\(error)")
   throw error
 }

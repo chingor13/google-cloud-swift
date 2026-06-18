@@ -14,26 +14,29 @@
 
 import Foundation
 import Testing
+import Logging
 import GoogleCloudTestHelpers
 import GoogleCloudWkt
 import GoogleCloudWorkflowsV1
 
 /// Run tests for LROs.
 public enum LongrunningOperations {
-  static public func run() async throws {
+  static public func run(_ logger: Logger) async throws {
     let project = try projectId()
     let location = locationId()
 
-    try await createAndDeleteWorkflow(projectId: project, location: location)
+    try await createAndDeleteWorkflow(projectId: project, location: location, logger: logger)
   }
 
-  static private func createAndDeleteWorkflow(projectId: String, location: String) async throws {
+  static private func createAndDeleteWorkflow(projectId: String, location: String, logger: Logger)
+    async throws
+  {
     let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
     let workflowId =
       "test_wf_\(UUID().uuidString.replacingOccurrences(of: "-", with: "_").prefix(20))"
     let parent = "projects/\(projectId)/locations/\(location)"
 
-    print("Testing createWorkflow()")
+    logger.info("Testing createWorkflow()")
     let create = CreateWorkflowRequest().with {
       $0.parent = parent
       $0.workflowId = workflowId
@@ -52,17 +55,17 @@ public enum LongrunningOperations {
       }
     }
 
-    print("create = \(create)")
+    logger.info("create = \(create)")
 
     let createLro = try await client.createWorkflow(withPolling: create)
     let workflow = try await createLro.wait()
-    print("createWorkflow() was successful")
+    logger.info("createWorkflow() was successful")
     #expect(workflow.name == "\(parent)/workflows/\(workflowId)")
 
-    print("\nTesting deleteWorkflow() for \(workflow.name)")
+    logger.info("\nTesting deleteWorkflow() for \(workflow.name)")
     let deleteLro = try await client.deleteWorkflow(
       withPolling: DeleteWorkflowRequest().with { $0.name = workflow.name })
     _ = try await deleteLro.wait()
-    print("deleteWorkflow() was successful")
+    logger.info("deleteWorkflow() was successful")
   }
 }
