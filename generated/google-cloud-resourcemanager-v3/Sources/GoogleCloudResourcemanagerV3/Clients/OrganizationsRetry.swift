@@ -84,14 +84,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIamV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIamV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -99,14 +99,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIamV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIamV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -114,14 +114,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIamV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIamV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -129,14 +129,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongrunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -24,7 +24,7 @@ import GoogleRpc
 
 func sample(client: some Executions) async throws {
   let items = try client.listOperations(
-    byItem: ListOperationsRequest()
+    byItem: GoogleLongrunning.ListOperationsRequest()
       /* set fields using .with { $0... } */
   )
   for try await item in items {

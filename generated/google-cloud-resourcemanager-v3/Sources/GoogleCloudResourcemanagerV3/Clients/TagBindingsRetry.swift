@@ -114,14 +114,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongrunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

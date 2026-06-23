@@ -25,7 +25,7 @@ import GoogleRpc
 
 func sample(client: some Tpu) async throws {
   try await client.deleteOperation(
-    request: DeleteOperationRequest()
+    request: GoogleLongrunning.DeleteOperationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success (no response expected)")

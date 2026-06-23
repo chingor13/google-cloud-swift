@@ -24,7 +24,7 @@ import GoogleRpc
 
 func sample(client: some StorageTransferService) async throws {
   let response = try await client.getOperation(
-    request: GetOperationRequest()
+    request: GoogleLongrunning.GetOperationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

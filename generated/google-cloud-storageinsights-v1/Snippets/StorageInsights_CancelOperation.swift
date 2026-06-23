@@ -25,7 +25,7 @@ import GoogleRpc
 
 func sample(client: some StorageInsights) async throws {
   try await client.cancelOperation(
-    request: CancelOperationRequest()
+    request: GoogleLongrunning.CancelOperationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success (no response expected)")

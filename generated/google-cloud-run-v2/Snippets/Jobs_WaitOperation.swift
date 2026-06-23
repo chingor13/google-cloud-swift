@@ -25,7 +25,7 @@ import GoogleRpc
 
 func sample(client: some Jobs) async throws {
   let response = try await client.waitOperation(
-    request: WaitOperationRequest()
+    request: GoogleLongrunning.WaitOperationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

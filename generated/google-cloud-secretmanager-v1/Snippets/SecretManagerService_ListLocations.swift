@@ -24,7 +24,7 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService) async throws {
   let items = try client.listLocations(
-    byItem: ListLocationsRequest()
+    byItem: GoogleCloudLocation.ListLocationsRequest()
       /* set fields using .with { $0... } */
   )
   for try await item in items {

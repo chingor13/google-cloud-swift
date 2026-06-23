@@ -50,31 +50,31 @@ extension Clients {
     ) async throws -> GoogleLongrunning.Operation
 
     func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy
 
     func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy
 
     func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse
 
     func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation
 
     func deleteOperation(
-      request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws
 
     func waitOperation(
-      request: WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation
   }
 
@@ -194,7 +194,7 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
@@ -213,7 +213,7 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
@@ -232,7 +232,7 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
@@ -251,7 +251,7 @@ extension Clients {
     }
 
     public func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
@@ -275,7 +275,7 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
@@ -292,7 +292,7 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
@@ -307,7 +307,7 @@ extension Clients {
     }
 
     public func waitOperation(
-      request: WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {

@@ -85,15 +85,15 @@ extension Clients {
     ) async throws
 
     func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse
 
     func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation
 
     func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws
   }
 
@@ -367,7 +367,7 @@ extension Clients {
     }
 
     public func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
@@ -391,7 +391,7 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
@@ -408,7 +408,7 @@ extension Clients {
     }
 
     public func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {

@@ -26,7 +26,7 @@ import GoogleRpc
 
 func sample(client: some ArtifactRegistry) async throws {
   let response = try await client.getLocation(
-    request: GetLocationRequest()
+    request: GoogleCloudLocation.GetLocationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

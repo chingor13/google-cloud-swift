@@ -314,13 +314,13 @@ public protocol SecretManagerService {
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   ///
   /// @Snippet(path: "SecretManagerService_SetIamPolicy")
-  func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Gets the access control policy for a secret.
   /// Returns empty policy if the secret exists and does not have a policy set.
   ///
   /// @Snippet(path: "SecretManagerService_GetIamPolicy")
-  func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Returns permissions that a caller has for the specified secret.
   /// If the secret does not exist, this call returns an empty set of
@@ -331,24 +331,25 @@ public protocol SecretManagerService {
   /// may "fail open" without warning.
   ///
   /// @Snippet(path: "SecretManagerService_TestIamPermissions")
-  func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "SecretManagerService_ListLocations")
-  func listLocations(request: ListLocationsRequest) async throws
+  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
     -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
   func listLocations(
-    byItem: ListLocationsRequest
+    byItem: GoogleCloudLocation.ListLocationsRequest
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecretManagerService_GetLocation")
-  func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
+  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+    -> GoogleCloudLocation.Location
 
   /// Lists [Secrets][google.cloud.secretmanager.v1.Secret].
   ///
@@ -520,7 +521,7 @@ public protocol SecretManagerService {
   ///
   /// @Snippet(path: "SecretManagerService_SetIamPolicy")
   func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Gets the access control policy for a secret.
@@ -528,7 +529,7 @@ public protocol SecretManagerService {
   ///
   /// @Snippet(path: "SecretManagerService_GetIamPolicy")
   func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Returns permissions that a caller has for the specified secret.
@@ -541,26 +542,26 @@ public protocol SecretManagerService {
   ///
   /// @Snippet(path: "SecretManagerService_TestIamPermissions")
   func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "SecretManagerService_ListLocations")
   func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
   func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecretManagerService_GetLocation")
   func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location
 }
 
@@ -696,35 +697,35 @@ extension Clients {
 
     /// See `SecretManagerService.setIamPolicy`
     public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
 
     /// See `SecretManagerService.getIamPolicy`
     public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
 
     /// See `SecretManagerService.testIamPermissions`
     public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
 
     /// See `SecretManagerService.listLocations`
     public func listLocations(
-      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
 
     /// Lists information about the supported locations for this service.
     public func listLocations(
-      byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
@@ -736,7 +737,7 @@ extension Clients {
 
     /// See `SecretManagerService.getLocation`
     public func getLocation(
-      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -1034,58 +1035,62 @@ extension SecretManagerService {
     return try await self.destroySecretVersion(request: request)
   }
 
-  public func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.setIamPolicy(request: request, options: .init())
   }
 
   public func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.getIamPolicy(request: request, options: .init())
   }
 
   public func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  public func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
   {
     try await self.testIamPermissions(request: request, options: .init())
   }
 
   public func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listLocations(request: ListLocationsRequest) async throws
+  public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
     -> GoogleCloudLocation.ListLocationsResponse
   {
     try await self.listLocations(request: request, options: .init())
   }
 
   public func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func listLocations(
-    byItem: ListLocationsRequest
+    byItem: GoogleCloudLocation.ListLocationsRequest
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     try self.listLocations(byItem: byItem, options: .init())
   }
 
   public func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1093,13 +1098,14 @@ extension SecretManagerService {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
-  public func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
+  public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+    -> GoogleCloudLocation.Location
   {
     try await self.getLocation(request: request, options: .init())
   }
 
   public func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     throw GoogleCloudGax.RequestError.unimplemented
   }

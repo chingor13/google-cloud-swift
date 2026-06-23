@@ -24,7 +24,7 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService) async throws {
   let response = try await client.getIamPolicy(
-    request: GetIamPolicyRequest()
+    request: GoogleIamV1.GetIamPolicyRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

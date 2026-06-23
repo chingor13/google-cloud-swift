@@ -117,20 +117,20 @@ public protocol Services {
   /// Cloud Run Service. This result does not include any inherited policies.
   ///
   /// @Snippet(path: "Services_GetIamPolicy")
-  func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Sets the IAM Access control policy for the specified Service. Overwrites
   /// any existing policy.
   ///
   /// @Snippet(path: "Services_SetIamPolicy")
-  func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Returns permissions that a caller has on the specified Project.
   ///
   /// There are no permissions required for making this API call.
   ///
   /// @Snippet(path: "Services_TestIamPermissions")
-  func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -138,14 +138,14 @@ public protocol Services {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Services_ListOperations")
-  func listOperations(request: ListOperationsRequest) async throws
+  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   func listOperations(
-    byItem: ListOperationsRequest
+    byItem: GoogleLongrunning.ListOperationsRequest
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -161,7 +161,8 @@ public protocol Services {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Services_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -175,7 +176,7 @@ public protocol Services {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Services_DeleteOperation")
-  func deleteOperation(request: DeleteOperationRequest) async throws
+  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -189,7 +190,8 @@ public protocol Services {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Services_WaitOperation")
-  func waitOperation(request: WaitOperationRequest) async throws -> GoogleLongrunning.Operation
+  func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
+    -> GoogleLongrunning.Operation
 
   /// Creates a new Service in a given project and location.
   ///
@@ -255,7 +257,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_GetIamPolicy")
   func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Sets the IAM Access control policy for the specified Service. Overwrites
@@ -263,7 +265,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_SetIamPolicy")
   func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Returns permissions that a caller has on the specified Project.
@@ -272,7 +274,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_TestIamPermissions")
   func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -281,14 +283,14 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_ListOperations")
   func listOperations(
-    request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.ListOperationsResponse
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   func listOperations(
-    byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -297,7 +299,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_GetOperation")
   func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -306,7 +308,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_DeleteOperation")
   func deleteOperation(
-    request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -315,7 +317,7 @@ public protocol Services {
   ///
   /// @Snippet(path: "Services_WaitOperation")
   func waitOperation(
-    request: WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 }
 
@@ -541,28 +543,28 @@ extension Clients {
 
     /// See `Services.getIamPolicy`
     public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
 
     /// See `Services.setIamPolicy`
     public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
 
     /// See `Services.testIamPermissions`
     public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
 
     /// See `Services.listOperations`
     public func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -571,7 +573,7 @@ extension Clients {
     ///
     /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
     public func listOperations(
-      byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
@@ -583,21 +585,21 @@ extension Clients {
 
     /// See `Services.getOperation`
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
 
     /// See `Services.deleteOperation`
     public func deleteOperation(
-      request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
 
     /// See `Services.waitOperation`
     public func waitOperation(
-      request: WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -787,58 +789,62 @@ extension Services {
     return try await self.deleteService(withPolling: request)
   }
 
-  public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.getIamPolicy(request: request, options: .init())
   }
 
   public func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.setIamPolicy(request: request, options: .init())
   }
 
   public func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  public func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
   {
     try await self.testIamPermissions(request: request, options: .init())
   }
 
   public func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func listOperations(request: ListOperationsRequest) async throws
+  public func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
   {
     try await self.listOperations(request: request, options: .init())
   }
 
   public func listOperations(
-    request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.ListOperationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func listOperations(
-    byItem: ListOperationsRequest
+    byItem: GoogleLongrunning.ListOperationsRequest
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     try self.listOperations(byItem: byItem, options: .init())
   }
 
   public func listOperations(
-    byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
@@ -850,20 +856,21 @@ extension Services {
     name: Swift.String,
     filter: Swift.String,
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let request = ListOperationsRequest().with {
+    let request = GoogleLongrunning.ListOperationsRequest().with {
       $0.name = name
       $0.filter = filter
     }
     return try self.listOperations(byItem: request)
   }
 
-  public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  public func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
   }
 
   public func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -871,18 +878,18 @@ extension Services {
   public func getOperation(
     name: Swift.String,
   ) async throws -> GoogleLongrunning.Operation {
-    let request = GetOperationRequest().with {
+    let request = GoogleLongrunning.GetOperationRequest().with {
       $0.name = name
     }
     return try await self.getOperation(request: request)
   }
 
-  public func deleteOperation(request: DeleteOperationRequest) async throws {
+  public func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws {
     try await self.deleteOperation(request: request, options: .init())
   }
 
   public func deleteOperation(
-    request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -890,20 +897,20 @@ extension Services {
   public func deleteOperation(
     name: Swift.String,
   ) async throws {
-    let request = DeleteOperationRequest().with {
+    let request = GoogleLongrunning.DeleteOperationRequest().with {
       $0.name = name
     }
     try await self.deleteOperation(request: request)
   }
 
-  public func waitOperation(request: WaitOperationRequest) async throws
+  public func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
     -> GoogleLongrunning.Operation
   {
     try await self.waitOperation(request: request, options: .init())
   }
 
   public func waitOperation(
-    request: WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }

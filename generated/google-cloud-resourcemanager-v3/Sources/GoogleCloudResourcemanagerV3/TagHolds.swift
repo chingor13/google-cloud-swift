@@ -87,7 +87,8 @@ public protocol TagHolds {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagHolds_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -140,7 +141,7 @@ public protocol TagHolds {
   ///
   /// @Snippet(path: "TagHolds_GetOperation")
   func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 }
 
@@ -292,7 +293,7 @@ extension Clients {
 
     /// See `TagHolds.getOperation`
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -414,13 +415,14 @@ extension TagHolds {
     return try self.listTagHolds(byItem: request)
   }
 
-  public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  public func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
   }
 
   public func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -428,7 +430,7 @@ extension TagHolds {
   public func getOperation(
     name: Swift.String,
   ) async throws -> GoogleLongrunning.Operation {
-    let request = GetOperationRequest().with {
+    let request = GoogleLongrunning.GetOperationRequest().with {
       $0.name = name
     }
     return try await self.getOperation(request: request)

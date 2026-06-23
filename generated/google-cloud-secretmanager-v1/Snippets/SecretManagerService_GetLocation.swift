@@ -24,7 +24,7 @@ import GoogleIamV1
 
 func sample(client: some SecretManagerService) async throws {
   let response = try await client.getLocation(
-    request: GetLocationRequest()
+    request: GoogleCloudLocation.GetLocationRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

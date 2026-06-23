@@ -561,17 +561,17 @@ public protocol ArtifactRegistry {
   /// Updates the IAM policy for a given resource.
   ///
   /// @Snippet(path: "ArtifactRegistry_SetIamPolicy")
-  func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Gets the IAM policy for a given resource.
   ///
   /// @Snippet(path: "ArtifactRegistry_GetIamPolicy")
-  func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
 
   /// Tests if the caller has a list of permissions on a resource.
   ///
   /// @Snippet(path: "ArtifactRegistry_TestIamPermissions")
-  func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Retrieves the Settings for the Project.
@@ -719,7 +719,7 @@ public protocol ArtifactRegistry {
   /// to the project.
   ///
   /// @Snippet(path: "ArtifactRegistry_ListLocations")
-  func listLocations(request: ListLocationsRequest) async throws
+  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
     -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
@@ -731,20 +731,22 @@ public protocol ArtifactRegistry {
   /// locations as well as private or other locations specifically visible
   /// to the project.
   func listLocations(
-    byItem: ListLocationsRequest
+    byItem: GoogleCloudLocation.ListLocationsRequest
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ArtifactRegistry_GetLocation")
-  func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
+  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+    -> GoogleCloudLocation.Location
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "ArtifactRegistry_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -1134,21 +1136,21 @@ public protocol ArtifactRegistry {
   ///
   /// @Snippet(path: "ArtifactRegistry_SetIamPolicy")
   func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Gets the IAM policy for a given resource.
   ///
   /// @Snippet(path: "ArtifactRegistry_GetIamPolicy")
   func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy
 
   /// Tests if the caller has a list of permissions on a resource.
   ///
   /// @Snippet(path: "ArtifactRegistry_TestIamPermissions")
   func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
   /// Retrieves the Settings for the Project.
@@ -1258,7 +1260,7 @@ public protocol ArtifactRegistry {
   ///
   /// @Snippet(path: "ArtifactRegistry_ListLocations")
   func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
   /// Lists information about the supported locations for this service.
@@ -1270,14 +1272,14 @@ public protocol ArtifactRegistry {
   /// locations as well as private or other locations specifically visible
   /// to the project.
   func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ArtifactRegistry_GetLocation")
   func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1286,7 +1288,7 @@ public protocol ArtifactRegistry {
   ///
   /// @Snippet(path: "ArtifactRegistry_GetOperation")
   func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 }
 
@@ -2092,21 +2094,21 @@ extension Clients {
 
     /// See `ArtifactRegistry.setIamPolicy`
     public func setIamPolicy(
-      request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
 
     /// See `ArtifactRegistry.getIamPolicy`
     public func getIamPolicy(
-      request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
 
     /// See `ArtifactRegistry.testIamPermissions`
     public func testIamPermissions(
-      request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -2348,7 +2350,7 @@ extension Clients {
 
     /// See `ArtifactRegistry.listLocations`
     public func listLocations(
-      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -2362,7 +2364,7 @@ extension Clients {
     /// locations as well as private or other locations specifically visible
     /// to the project.
     public func listLocations(
-      byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
@@ -2374,14 +2376,14 @@ extension Clients {
 
     /// See `ArtifactRegistry.getLocation`
     public func getLocation(
-      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
 
     /// See `ArtifactRegistry.getOperation`
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -3453,34 +3455,38 @@ extension ArtifactRegistry {
     try await self.deleteRule(request: request)
   }
 
-  public func setIamPolicy(request: SetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.setIamPolicy(request: request, options: .init())
   }
 
   public func setIamPolicy(
-    request: SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func getIamPolicy(request: GetIamPolicyRequest) async throws -> GoogleIamV1.Policy {
+  public func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
     try await self.getIamPolicy(request: request, options: .init())
   }
 
   public func getIamPolicy(
-    request: GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func testIamPermissions(request: TestIamPermissionsRequest) async throws
+  public func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
     -> GoogleIamV1.TestIamPermissionsResponse
   {
     try await self.testIamPermissions(request: request, options: .init())
   }
 
   public func testIamPermissions(
-    request: TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -3761,26 +3767,26 @@ extension ArtifactRegistry {
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
-  public func listLocations(request: ListLocationsRequest) async throws
+  public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
     -> GoogleCloudLocation.ListLocationsResponse
   {
     try await self.listLocations(request: request, options: .init())
   }
 
   public func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func listLocations(
-    byItem: ListLocationsRequest
+    byItem: GoogleCloudLocation.ListLocationsRequest
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     try self.listLocations(byItem: byItem, options: .init())
   }
 
   public func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
@@ -3788,24 +3794,26 @@ extension ArtifactRegistry {
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
-  public func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
+  public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+    -> GoogleCloudLocation.Location
   {
     try await self.getLocation(request: request, options: .init())
   }
 
   public func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
-  public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  public func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
   }
 
   public func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -3813,7 +3821,7 @@ extension ArtifactRegistry {
   public func getOperation(
     name: Swift.String,
   ) async throws -> GoogleLongrunning.Operation {
-    let request = GetOperationRequest().with {
+    let request = GoogleLongrunning.GetOperationRequest().with {
       $0.name = name
     }
     return try await self.getOperation(request: request)

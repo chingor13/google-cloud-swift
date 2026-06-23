@@ -24,7 +24,7 @@ import GoogleLongrunning
 
 func sample(client: some Organizations) async throws {
   let response = try await client.testIamPermissions(
-    request: TestIamPermissionsRequest()
+    request: GoogleIamV1.TestIamPermissionsRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

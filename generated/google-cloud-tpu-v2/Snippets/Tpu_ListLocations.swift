@@ -25,7 +25,7 @@ import GoogleRpc
 
 func sample(client: some Tpu) async throws {
   let items = try client.listLocations(
-    byItem: ListLocationsRequest()
+    byItem: GoogleCloudLocation.ListLocationsRequest()
       /* set fields using .with { $0... } */
   )
   for try await item in items {

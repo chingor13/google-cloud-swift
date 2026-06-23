@@ -24,7 +24,7 @@ import GoogleLongrunning
 
 func sample(client: some Organizations) async throws {
   let response = try await client.getIamPolicy(
-    request: GetIamPolicyRequest()
+    request: GoogleIamV1.GetIamPolicyRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")

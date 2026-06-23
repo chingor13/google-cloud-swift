@@ -184,13 +184,13 @@ public protocol StorageTransferService {
   /// time in reverse chronological order.
   ///
   /// @Snippet(path: "StorageTransferService_ListOperations")
-  func listOperations(request: ListOperationsRequest) async throws
+  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
 
   /// Lists transfer operations. Operations are ordered by their creation
   /// time in reverse chronological order.
   func listOperations(
-    byItem: ListOperationsRequest
+    byItem: GoogleLongrunning.ListOperationsRequest
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Lists transfer operations. Operations are ordered by their creation
@@ -205,7 +205,8 @@ public protocol StorageTransferService {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageTransferService_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
@@ -243,7 +244,7 @@ public protocol StorageTransferService {
   /// plus any new files discovered tomorrow.
   ///
   /// @Snippet(path: "StorageTransferService_CancelOperation")
-  func cancelOperation(request: CancelOperationRequest) async throws
+  func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
 
   /// Cancels a transfer. Use
   /// the [transferOperations.get][google.longrunning.Operations.GetOperation]
@@ -422,13 +423,13 @@ public protocol StorageTransferService {
   ///
   /// @Snippet(path: "StorageTransferService_ListOperations")
   func listOperations(
-    request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.ListOperationsResponse
 
   /// Lists transfer operations. Operations are ordered by their creation
   /// time in reverse chronological order.
   func listOperations(
-    byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -437,7 +438,7 @@ public protocol StorageTransferService {
   ///
   /// @Snippet(path: "StorageTransferService_GetOperation")
   func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation
 
   /// Cancels a transfer. Use
@@ -470,7 +471,7 @@ public protocol StorageTransferService {
   ///
   /// @Snippet(path: "StorageTransferService_CancelOperation")
   func cancelOperation(
-    request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws
 }
 
@@ -662,7 +663,7 @@ extension Clients {
 
     /// See `StorageTransferService.listOperations`
     public func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -670,7 +671,7 @@ extension Clients {
     /// Lists transfer operations. Operations are ordered by their creation
     /// time in reverse chronological order.
     public func listOperations(
-      byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
@@ -682,14 +683,14 @@ extension Clients {
 
     /// See `StorageTransferService.getOperation`
     public func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleLongrunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
 
     /// See `StorageTransferService.cancelOperation`
     public func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -957,26 +958,26 @@ extension StorageTransferService {
     try await self.deleteAgentPool(request: request)
   }
 
-  public func listOperations(request: ListOperationsRequest) async throws
+  public func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
   {
     try await self.listOperations(request: request, options: .init())
   }
 
   public func listOperations(
-    request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.ListOperationsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func listOperations(
-    byItem: ListOperationsRequest
+    byItem: GoogleLongrunning.ListOperationsRequest
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     try self.listOperations(byItem: byItem, options: .init())
   }
 
   public func listOperations(
-    byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
     let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
@@ -988,20 +989,21 @@ extension StorageTransferService {
     name: Swift.String,
     filter: Swift.String,
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let request = ListOperationsRequest().with {
+    let request = GoogleLongrunning.ListOperationsRequest().with {
       $0.name = name
       $0.filter = filter
     }
     return try self.listOperations(byItem: request)
   }
 
-  public func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+  public func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+    -> GoogleLongrunning.Operation
   {
     try await self.getOperation(request: request, options: .init())
   }
 
   public func getOperation(
-    request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -1009,18 +1011,18 @@ extension StorageTransferService {
   public func getOperation(
     name: Swift.String,
   ) async throws -> GoogleLongrunning.Operation {
-    let request = GetOperationRequest().with {
+    let request = GoogleLongrunning.GetOperationRequest().with {
       $0.name = name
     }
     return try await self.getOperation(request: request)
   }
 
-  public func cancelOperation(request: CancelOperationRequest) async throws {
+  public func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws {
     try await self.cancelOperation(request: request, options: .init())
   }
 
   public func cancelOperation(
-    request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws {
     throw GoogleCloudGax.RequestError.unimplemented
   }
@@ -1028,7 +1030,7 @@ extension StorageTransferService {
   public func cancelOperation(
     name: Swift.String,
   ) async throws {
-    let request = CancelOperationRequest().with {
+    let request = GoogleLongrunning.CancelOperationRequest().with {
       $0.name = name
     }
     try await self.cancelOperation(request: request)
