@@ -1,21 +1,27 @@
 # Integration tests for Protobuf-based client
 
 This directory contains integration tests for a Protobuf-based client. The tests
-use the `GoogleCloudSecretmanagerV1` library, because it is easy to enable this
-library, the quota is fairly generous for integration tests, and because it
-covers a number of features including:
+uses two libraries:
 
-- Multiple data types, including maps, bytes, timestamps, and field masks.
-- Nested messages, nested enums, and other complex types.
-- The location and IAM mixins.
-- Pagination.
-- Some regional endpoints.
+- `GoogleCloudSecretmanagerV1`, because it is easy to enable this API, the
+  quota limits rarely affect integration tests, and because it covers a number
+  of features including:
+  - Multiple data types, including maps, bytes, timestamps, and field masks.
+  - Nested messages, nested enums, and other complex types.
+  - The location and IAM mixins.
+  - Pagination.
+  - Some regional endpoints.
 
-The service does not use some features, such as:
+- `GoogleCloudWorkflowsV1`, because it is also easy to enable, the quota limits
+  rarely affect integration tests, and because it covers a different set of
+  features including:
+  - The LRO mixin.
+  - Use of `Any` in the service.
 
-- The LRO mixin.
+We may want to expand these tests with something that covers other features such as:
+
 - Recursive messages.
-- Use of `Any` in the service.
+- Use more well-known types, such as `Struct` or `Value`.
 
-We (will) have separate tests for these additional features. In fact, it is
-better to have a service with some limitations to start testing early.
+However, basic unit tests cover these features fairly well: as long as
+serialization works, we are fine.
