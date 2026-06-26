@@ -75,6 +75,19 @@ libraries:
     apis:
       - path: google/cloud/common
     copyright_year: "2026"
+  - name: GoogleCloudComputeV1
+    apis:
+      - path: discoveries/compute.v1.json
+    copyright_year: "2026"
+    output: generated/google-cloud-compute-v1
+    roots:
+      - discovery
+      - googleapis
+    specification_format: discovery
+    swift:
+      per_service_traits: true
+      default_traits:
+        - Instances
   - name: GoogleCloudEdgecontainerV1
     apis:
       - path: google/cloud/edgecontainer/v1
