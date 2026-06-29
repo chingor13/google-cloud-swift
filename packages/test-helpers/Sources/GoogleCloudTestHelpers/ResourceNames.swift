@@ -25,12 +25,16 @@ fileprivate let defaultLocation = "us-central1"
 /// The maximum length for a secret ID.
 fileprivate let secretIdLength = 64
 
+/// The maximum length for a VM ID.
+fileprivate let vmIdLength = 63
+
 /// A common prefix for resource ids.
 ///
 /// Where possible, we use this prefix for randomly generated resource ids.
 fileprivate let prefix = "swift-sdk-testing-"
 
 fileprivate let alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+fileprivate let lowerCaseAlphanumeric = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 /// Fetches the project id to use in the tests.
 ///
@@ -65,6 +69,14 @@ public func randomSecretId() -> String {
   assert(prefix.count < secretIdLength)
   let length = secretIdLength - prefix.count
   let suffix = String((0..<length).map { _ in alphanumeric.randomElement()! })
+  return prefix + suffix
+}
+
+/// Generates a random VM id.
+public func randomVMId() -> String {
+  assert(prefix.count < vmIdLength)
+  let length = vmIdLength - prefix.count
+  let suffix = String((0..<length).map { _ in lowerCaseAlphanumeric.randomElement()! })
   return prefix + suffix
 }
 

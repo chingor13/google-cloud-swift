@@ -37,7 +37,9 @@ func reportRequestError(
   }
   if case let .http(details) = error {
     let p = String(data: details.payload, encoding: .utf8)!
-    print("### \(name) error=\(error)\npayload=\(p)")
+    print("### \(name) HTTP error=\(error)\npayload=\(p)")
+  } else if case let .service(e) = error {
+    print("### \(name) Service error=\(e)")
   } else {
     print("### \(name) error=\(error)")
   }

@@ -36,6 +36,7 @@ let package = Package(
     .package(path: "./packages/test-helpers"),
     .package(path: "./packages/wkt"),
     .package(path: "./guide"),
+    .package(path: "./generated/google-cloud-compute-v1", traits: ["Instances", "Images", "ZoneOperations"]),
     .package(path: "./generated/google-cloud-location"),
     .package(path: "./generated/google-iam-v1"),
     .package(path: "./generated/google-cloud-secretmanager-v1"),
@@ -69,6 +70,15 @@ let package = Package(
         .product(name: "GoogleCloudWkt", package: "wkt"),
       ],
       exclude: ["protos/"],
+    ),
+    .testTarget(
+      name: "DiscoveryBasedClient",
+      dependencies: [
+        .product(name: "GoogleCloudComputeV1", package: "google-cloud-compute-v1"),
+        .product(name: "GoogleCloudWkt", package: "wkt"),
+        .product(name: "GoogleCloudTestHelpers", package: "test-helpers"),
+      ],
+      exclude: ["README.md"],
     ),
     .testTarget(
       name: "ProtoBasedClient",
