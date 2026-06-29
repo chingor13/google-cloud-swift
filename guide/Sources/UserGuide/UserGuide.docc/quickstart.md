@@ -65,50 +65,29 @@ let package = Package(
 
 ## Import the dependencies
 
-```swift
-import Foundation
-import GoogleCloudSecretmanagerV1
-```
+@Snippet(path: "GoogleCloudCLI", slice: "imports")
 
 ## Create the entry point for your program
 
-```swift
-@main
-struct GoogleCloudCLI {
-  static func main() async throws {
-```
+@Snippet(path: "GoogleCloudCLI", slice: "main")
 
 ## Get a project id
 
 Get your project id from the command-line:
 
-```swift
-    let args = CommandLine.arguments.dropFirst()
-    guard let projectId = args.first else {
-      print("Usage: GoogleCloudCLI <projectId>")
-      exit(1)
-    }
-```
+@Snippet(path: "GoogleCloudCLI", slice: "args")
 
 ## Initialize the client
 
 Initialize the client with the defaults:
 
-```swift
-    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
-```
+@Snippet(path: "GoogleCloudCLI", slice: "client")
 
 ## List the secrets
 
 And then list the secrets:
 
-```swift
-    let secrets = try client.listSecrets(
-      byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
-    for try await item in secrets {
-      print("  \(item)")
-    }
-```
+@Snippet(path: "GoogleCloudCLI", slice: "list")
 
 ## Running the program
 
@@ -123,27 +102,7 @@ swift run GoogleCloudCLI [PROJECT ID]
 
 The full code for your program should look like this:
 
-```swift
-import Foundation
-import GoogleCloudSecretmanagerV1
-
-@main
-struct GoogleCloudCLI {
-  static func main() async throws {
-    let args = CommandLine.arguments.dropFirst()
-    guard let projectId = args.first else {
-      print("Usage: GoogleCloudCLI <projectId>")
-      exit(1)
-    }
-    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
-    let secrets = try client.listSecrets(
-      byItem: ListSecretsRequest(parent: "projects/\(projectId)"))
-    for try await item in secrets {
-      print("  \(item)")
-    }
-  }
-}
-```
+@Snippet(path: "GoogleCloudCLI")
 
 [Installing Swift]: https://www.swift.org/getting-started/
 [Authenticate for using client libraries]: https://cloud.google.com/docs/authentication/client-libraries
