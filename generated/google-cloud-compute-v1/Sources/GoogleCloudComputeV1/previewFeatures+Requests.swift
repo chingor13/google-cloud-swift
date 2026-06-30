@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.PreviewFeaturesClient {
+  extension PreviewFeaturesClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.previewFeatures.get] method.
     ///
     /// [google.cloud.compute.v1.previewFeatures.get]: <doc:PreviewFeatures/`get`(request:)>

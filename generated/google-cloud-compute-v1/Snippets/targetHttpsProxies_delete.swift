@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some TargetHttpsProxies) async throws {
+  func sample(client: TargetHttpsProxiesClient) async throws {
     let response = try await client.delete(
-      request: Clients.TargetHttpsProxiesClient.DeleteRequest()
+      request: TargetHttpsProxiesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.TargetHttpsProxiesClient()
+        let client = try GoogleCloudComputeV1.TargetHttpsProxiesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

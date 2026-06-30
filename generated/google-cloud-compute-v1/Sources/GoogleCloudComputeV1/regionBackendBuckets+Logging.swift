@@ -60,15 +60,14 @@
       }
 
       public func delete(
-        request: Clients.RegionBackendBucketsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.RegionBackendBucketsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionBackendBucketsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -76,15 +75,14 @@
       }
 
       public func `get`(
-        request: Clients.RegionBackendBucketsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucket {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.RegionBackendBucketsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionBackendBucketsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.BackendBucket
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -92,7 +90,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.RegionBackendBucketsClient.GetIamPolicyRequest,
+        request: RegionBackendBucketsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -100,25 +98,22 @@
           options: options,
           name: "getIamPolicy",
           action: {
-            (
-              r: Clients.RegionBackendBucketsClient.GetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: RegionBackendBucketsClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.RegionBackendBucketsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.RegionBackendBucketsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionBackendBucketsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -126,15 +121,14 @@
       }
 
       public func list(
-        request: Clients.RegionBackendBucketsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionBackendBucketsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionBackendBucketsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.BackendBucketList
             in
             return try await self.inner.list(request: r, options: o)
@@ -142,7 +136,7 @@
       }
 
       public func listUsable(
-        request: Clients.RegionBackendBucketsClient.ListUsableRequest,
+        request: RegionBackendBucketsClient.ListUsableRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable {
         try await self._intercept(
@@ -150,25 +144,22 @@
           options: options,
           name: "listUsable",
           action: {
-            (
-              r: Clients.RegionBackendBucketsClient.ListUsableRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable
+            (r: RegionBackendBucketsClient.ListUsableRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.BackendBucketListUsable
             in
             return try await self.inner.listUsable(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionBackendBucketsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.RegionBackendBucketsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionBackendBucketsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -176,7 +167,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.RegionBackendBucketsClient.SetIamPolicyRequest,
+        request: RegionBackendBucketsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -184,17 +175,15 @@
           options: options,
           name: "setIamPolicy",
           action: {
-            (
-              r: Clients.RegionBackendBucketsClient.SetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: RegionBackendBucketsClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.RegionBackendBucketsClient.TestIamPermissionsRequest,
+        request: RegionBackendBucketsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -203,7 +192,7 @@
           name: "testIamPermissions",
           action: {
             (
-              r: Clients.RegionBackendBucketsClient.TestIamPermissionsRequest,
+              r: RegionBackendBucketsClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

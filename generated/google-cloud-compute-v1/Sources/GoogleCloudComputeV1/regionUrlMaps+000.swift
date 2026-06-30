@@ -28,67 +28,71 @@
   /// Service for the `regionUrlMaps` resource.
   ///
   /// @Snippet(path: "regionUrlMapsQuickstart")
-  public protocol RegionUrlMaps {
+  public class RegionUrlMapsClient: Clients.RegionUrlMapsProtocol {
+    let inner: any Clients.RegionUrlMapsStub
+
+    /// Creates a new `RegionUrlMapsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionUrlMapsStub = try Clients.RegionUrlMapsTransport(options)
+      inner = Clients.RegionUrlMapsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionUrlMapsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified UrlMap resource.
     ///
     /// @Snippet(path: "regionUrlMaps_delete")
-    func delete(request: Clients.RegionUrlMapsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified UrlMap resource.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      urlMap: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified UrlMap resource.
     ///
     /// @Snippet(path: "regionUrlMaps_get")
-    func `get`(request: Clients.RegionUrlMapsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.UrlMap
-
-    /// Returns the specified UrlMap resource.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      urlMap: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.UrlMap
+    public func `get`(
+      request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMap {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a UrlMap resource in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "regionUrlMaps_insert")
-    func insert(request: Clients.RegionUrlMapsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a UrlMap resource in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of UrlMap resources available to the specified
     /// project in the specified region.
     ///
     /// @Snippet(path: "regionUrlMaps_list")
-    func list(request: Clients.RegionUrlMapsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.UrlMapList
+    public func list(
+      request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMapList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of UrlMap resources available to the specified
     /// project in the specified region.
-    func list(
-      byItem: Clients.RegionUrlMapsClient.ListRequest
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project in the specified region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
+    ///
+    /// @Snippet(path: "regionUrlMaps_list")
+    public func list(
+      byItem: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified UrlMap resource with the data included in the
     /// request. This method supportsPATCH
@@ -96,207 +100,177 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "regionUrlMaps_patch")
-    func patch(request: Clients.RegionUrlMapsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified UrlMap resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      urlMap: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Updates the specified UrlMap resource with the data included in the
     /// request.
     ///
     /// @Snippet(path: "regionUrlMaps_update")
-    func update(request: Clients.RegionUrlMapsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified UrlMap resource with the data included in the
-    /// request.
-    func update(
-      project: Swift.String,
-      region: Swift.String,
-      urlMap: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
 
     /// Runs static validation for the UrlMap. In particular, the tests of the
     /// provided UrlMap will be run. Calling this method does NOT create the
     /// UrlMap.
     ///
     /// @Snippet(path: "regionUrlMaps_validate")
-    func validate(request: Clients.RegionUrlMapsClient.ValidateRequest) async throws
-      -> GoogleCloudComputeV1.UrlMapsValidateResponse
-
-    /// Runs static validation for the UrlMap. In particular, the tests of the
-    /// provided UrlMap will be run. Calling this method does NOT create the
-    /// UrlMap.
-    func validate(
-      project: Swift.String,
-      region: Swift.String,
-      urlMap: Swift.String,
-      body: RegionUrlMapsValidateRequest?,
-    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
-
-    /// Deletes the specified UrlMap resource.
-    ///
-    /// @Snippet(path: "regionUrlMaps_delete")
-    func delete(
-      request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified UrlMap resource.
-    ///
-    /// @Snippet(path: "regionUrlMaps_get")
-    func `get`(
-      request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMap
-
-    /// Creates a UrlMap resource in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "regionUrlMaps_insert")
-    func insert(
-      request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project in the specified region.
-    ///
-    /// @Snippet(path: "regionUrlMaps_list")
-    func list(
-      request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMapList
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project in the specified region.
-    func list(
-      byItem: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
-
-    /// Patches the specified UrlMap resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "regionUrlMaps_patch")
-    func patch(
-      request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified UrlMap resource with the data included in the
-    /// request.
-    ///
-    /// @Snippet(path: "regionUrlMaps_update")
-    func update(
-      request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Runs static validation for the UrlMap. In particular, the tests of the
-    /// provided UrlMap will be run. Calling this method does NOT create the
-    /// UrlMap.
-    ///
-    /// @Snippet(path: "regionUrlMaps_validate")
-    func validate(
-      request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+    public func validate(
+      request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
+      try await self.inner.validate(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionUrlMaps``.
-    public class RegionUrlMapsClient: RegionUrlMaps {
-      let inner: any RegionUrlMapsStub
+    /// A Swift protocol to mock `RegionUrlMapsClient`.
+    ///
+    /// To mock `RegionUrlMapsClient` change your functions to receive
+    /// `some RegionUrlMapsProtocol` or `any RegionUrlMapsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionUrlMapsProtocol {
+      /// See `RegionUrlMapsClient.delete`.
+      func delete(request: RegionUrlMapsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionUrlMapsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionUrlMapsStub = try RegionUrlMapsTransport(options)
-        inner = RegionUrlMapsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionUrlMapsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionUrlMapsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        urlMap: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionUrlMaps.delete`
-      public func delete(
-        request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.`get``.
+      func `get`(request: RegionUrlMapsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.UrlMap
 
-      /// See `RegionUrlMaps.`get``
-      public func `get`(
-        request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMap {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        urlMap: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.UrlMap
 
-      /// See `RegionUrlMaps.insert`
-      public func insert(
-        request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.insert`.
+      func insert(request: RegionUrlMapsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionUrlMaps.list`
-      public func list(
-        request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMapList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of UrlMap resources available to the specified
-      /// project in the specified region.
-      public func list(
-        byItem: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RegionUrlMapsClient.list`.
+      func list(request: RegionUrlMapsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.UrlMapList
 
-      /// See `RegionUrlMaps.patch`
-      public func patch(
-        request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.list`.
+      func list(
+        byItem: RegionUrlMapsClient.ListRequest
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
 
-      /// See `RegionUrlMaps.update`
-      public func update(
-        request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
 
-      /// See `RegionUrlMaps.validate`
-      public func validate(
-        request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
-        try await self.inner.validate(request: request, options: options)
-      }
+      /// See `RegionUrlMapsClient.patch`.
+      func patch(request: RegionUrlMapsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        urlMap: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.update`.
+      func update(request: RegionUrlMapsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.update`.
+      func update(
+        project: Swift.String,
+        region: Swift.String,
+        urlMap: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.validate`.
+      func validate(request: RegionUrlMapsClient.ValidateRequest) async throws
+        -> GoogleCloudComputeV1.UrlMapsValidateResponse
+
+      /// See `RegionUrlMapsClient.validate`.
+      func validate(
+        project: Swift.String,
+        region: Swift.String,
+        urlMap: Swift.String,
+        body: RegionUrlMapsValidateRequest?,
+      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+
+      /// See `RegionUrlMapsClient.delete`.
+      func delete(
+        request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.`get``.
+      func `get`(
+        request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMap
+
+      /// See `RegionUrlMapsClient.insert`.
+      func insert(
+        request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.list`.
+      func list(
+        request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMapList
+
+      /// See `RegionUrlMapsClient.list`.
+      func list(
+        byItem: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
+
+      /// See `RegionUrlMapsClient.patch`.
+      func patch(
+        request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.update`.
+      func update(
+        request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionUrlMapsClient.validate`.
+      func validate(
+        request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
     }
   }
 
   // Default implementations
-  extension RegionUrlMaps {
-    public func delete(request: Clients.RegionUrlMapsClient.DeleteRequest) async throws
+  extension Clients.RegionUrlMapsProtocol {
+    public func delete(request: RegionUrlMapsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -306,7 +280,7 @@
       region: Swift.String,
       urlMap: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionUrlMapsClient.DeleteRequest().with {
+      let request = RegionUrlMapsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.urlMap = urlMap
@@ -314,14 +288,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionUrlMapsClient.GetRequest) async throws
+    public func `get`(request: RegionUrlMapsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.UrlMap
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMap {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -331,7 +305,7 @@
       region: Swift.String,
       urlMap: Swift.String,
     ) async throws -> GoogleCloudComputeV1.UrlMap {
-      let request = Clients.RegionUrlMapsClient.GetRequest().with {
+      let request = RegionUrlMapsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.urlMap = urlMap
@@ -339,14 +313,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionUrlMapsClient.InsertRequest) async throws
+    public func insert(request: RegionUrlMapsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -356,7 +330,7 @@
       region: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionUrlMapsClient.InsertRequest().with {
+      let request = RegionUrlMapsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -364,26 +338,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionUrlMapsClient.ListRequest) async throws
+    public func list(request: RegionUrlMapsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.UrlMapList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionUrlMapsClient.ListRequest
+      byItem: RegionUrlMapsClient.ListRequest
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -395,21 +369,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
-      let request = Clients.RegionUrlMapsClient.ListRequest().with {
+      let request = RegionUrlMapsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.RegionUrlMapsClient.PatchRequest) async throws
+    public func patch(request: RegionUrlMapsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -420,7 +394,7 @@
       urlMap: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionUrlMapsClient.PatchRequest().with {
+      let request = RegionUrlMapsClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.urlMap = urlMap
@@ -429,14 +403,14 @@
       return try await self.patch(request: request)
     }
 
-    public func update(request: Clients.RegionUrlMapsClient.UpdateRequest) async throws
+    public func update(request: RegionUrlMapsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -447,7 +421,7 @@
       urlMap: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionUrlMapsClient.UpdateRequest().with {
+      let request = RegionUrlMapsClient.UpdateRequest().with {
         $0.project = project
         $0.region = region
         $0.urlMap = urlMap
@@ -456,14 +430,14 @@
       return try await self.update(request: request)
     }
 
-    public func validate(request: Clients.RegionUrlMapsClient.ValidateRequest) async throws
+    public func validate(request: RegionUrlMapsClient.ValidateRequest) async throws
       -> GoogleCloudComputeV1.UrlMapsValidateResponse
     {
       try await self.validate(request: request, options: .init())
     }
 
     public func validate(
-      request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -474,7 +448,7 @@
       urlMap: Swift.String,
       body: RegionUrlMapsValidateRequest?,
     ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
-      let request = Clients.RegionUrlMapsClient.ValidateRequest().with {
+      let request = RegionUrlMapsClient.ValidateRequest().with {
         $0.project = project
         $0.region = region
         $0.urlMap = urlMap

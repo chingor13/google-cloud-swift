@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstanceGroupsClient {
+  extension RegionInstanceGroupsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.regionInstanceGroups.get] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.get]: <doc:RegionInstanceGroups/`get`(request:)>

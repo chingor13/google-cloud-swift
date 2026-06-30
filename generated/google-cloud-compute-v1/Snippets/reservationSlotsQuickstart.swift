@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.ReservationSlotsClient()
+    let client = try GoogleCloudComputeV1.ReservationSlotsClient()
     let response = try await client.`get`(
-      request: Clients.ReservationSlotsClient.GetRequest()
+      request: ReservationSlotsClient.GetRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

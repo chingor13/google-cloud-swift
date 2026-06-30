@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.TargetPoolsClient()
+    let client = try GoogleCloudComputeV1.TargetPoolsClient()
     let response = try await client.addHealthCheck(
-      request: Clients.TargetPoolsClient.AddHealthCheckRequest()
+      request: TargetPoolsClient.AddHealthCheckRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some StorageTransferService) async throws {
+func sample(client: StorageTransferServiceClient) async throws {
   let response = try await client.createTransferJob(
     request: CreateTransferJobRequest()
       /* set fields using .with { $0... } */
@@ -35,7 +35,7 @@ func sample(client: some StorageTransferService) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleStoragetransferV1.Clients.StorageTransferServiceClient()
+      let client = try GoogleStoragetransferV1.StorageTransferServiceClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

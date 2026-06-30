@@ -28,52 +28,49 @@
   extension Clients {
     protocol ReservationsStub {
       func aggregatedList(
-        request: Clients.ReservationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList
 
       func delete(
-        request: Clients.ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Reservation
 
       func getIamPolicy(
-        request: Clients.ReservationsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationList
 
       func performMaintenance(
-        request: Clients.ReservationsClient.PerformMaintenanceRequest,
+        request: ReservationsClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resize(
-        request: Clients.ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.ReservationsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.ReservationsClient.TestIamPermissionsRequest,
+        request: ReservationsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -86,8 +83,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.ReservationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -117,7 +113,7 @@
       }
 
       public func delete(
-        request: Clients.ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -145,7 +141,7 @@
       }
 
       public func `get`(
-        request: Clients.ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Reservation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -171,8 +167,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.ReservationsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -200,7 +195,7 @@
       }
 
       public func insert(
-        request: Clients.ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -226,7 +221,7 @@
       }
 
       public func list(
-        request: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -254,7 +249,7 @@
       }
 
       public func performMaintenance(
-        request: Clients.ReservationsClient.PerformMaintenanceRequest,
+        request: ReservationsClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -287,7 +282,7 @@
       }
 
       public func resize(
-        request: Clients.ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -319,8 +314,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.ReservationsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -348,7 +342,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.ReservationsClient.TestIamPermissionsRequest,
+        request: ReservationsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
@@ -377,7 +371,7 @@
       }
 
       public func update(
-        request: Clients.ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

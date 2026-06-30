@@ -28,62 +28,55 @@
   extension Clients {
     protocol TargetPoolsStub {
       func addHealthCheck(
-        request: Clients.TargetPoolsClient.AddHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func addInstance(
-        request: Clients.TargetPoolsClient.AddInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: Clients.TargetPoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList
 
       func delete(
-        request: Clients.TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPool
 
       func getHealth(
-        request: Clients.TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
 
       func insert(
-        request: Clients.TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolList
 
       func removeHealthCheck(
-        request: Clients.TargetPoolsClient.RemoveHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeInstance(
-        request: Clients.TargetPoolsClient.RemoveInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setBackup(
-        request: Clients.TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setSecurityPolicy(
-        request: Clients.TargetPoolsClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.TargetPoolsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -96,8 +89,7 @@
       }
 
       public func addHealthCheck(
-        request: Clients.TargetPoolsClient.AddHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -128,8 +120,7 @@
       }
 
       public func addInstance(
-        request: Clients.TargetPoolsClient.AddInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -160,8 +151,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.TargetPoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -191,7 +181,7 @@
       }
 
       public func delete(
-        request: Clients.TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -218,7 +208,7 @@
       }
 
       public func `get`(
-        request: Clients.TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPool {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -243,7 +233,7 @@
       }
 
       public func getHealth(
-        request: Clients.TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -272,7 +262,7 @@
       }
 
       public func insert(
-        request: Clients.TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -298,7 +288,7 @@
       }
 
       public func list(
-        request: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -326,8 +316,7 @@
       }
 
       public func removeHealthCheck(
-        request: Clients.TargetPoolsClient.RemoveHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -358,8 +347,7 @@
       }
 
       public func removeInstance(
-        request: Clients.TargetPoolsClient.RemoveInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -390,7 +378,7 @@
       }
 
       public func setBackup(
-        request: Clients.TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -422,8 +410,7 @@
       }
 
       public func setSecurityPolicy(
-        request: Clients.TargetPoolsClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -454,8 +441,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.TargetPoolsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

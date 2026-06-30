@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SslCertificatesClient {
+  extension SslCertificatesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.sslCertificates.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.sslCertificates.aggregatedList]: <doc:SslCertificates/aggregatedList(request:)>

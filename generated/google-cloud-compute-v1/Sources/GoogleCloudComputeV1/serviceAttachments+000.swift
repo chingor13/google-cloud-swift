@@ -28,157 +28,19 @@
   /// Service for the `serviceAttachments` resource.
   ///
   /// @Snippet(path: "serviceAttachmentsQuickstart")
-  public protocol ServiceAttachments {
-    /// Retrieves the list of all ServiceAttachment resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "serviceAttachments_aggregatedList")
-    func aggregatedList(request: Clients.ServiceAttachmentsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
+  public class ServiceAttachmentsClient: Clients.ServiceAttachmentsProtocol {
+    let inner: any Clients.ServiceAttachmentsStub
 
-    /// Retrieves the list of all ServiceAttachment resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ServiceAttachmentsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
-
-    /// Retrieves the list of all ServiceAttachment resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
-
-    /// Deletes the specified ServiceAttachment in the given scope
-    ///
-    /// @Snippet(path: "serviceAttachments_delete")
-    func delete(request: Clients.ServiceAttachmentsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified ServiceAttachment in the given scope
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      serviceAttachment: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified ServiceAttachment resource in the given scope.
-    ///
-    /// @Snippet(path: "serviceAttachments_get")
-    func `get`(request: Clients.ServiceAttachmentsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ServiceAttachment
-
-    /// Returns the specified ServiceAttachment resource in the given scope.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      serviceAttachment: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ServiceAttachment
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "serviceAttachments_getIamPolicy")
-    func getIamPolicy(request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a ServiceAttachment in the specified project in the given scope
-    /// using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "serviceAttachments_insert")
-    func insert(request: Clients.ServiceAttachmentsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a ServiceAttachment in the specified project in the given scope
-    /// using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: ServiceAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the ServiceAttachments for a project in the given scope.
-    ///
-    /// @Snippet(path: "serviceAttachments_list")
-    func list(request: Clients.ServiceAttachmentsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ServiceAttachmentList
-
-    /// Lists the ServiceAttachments for a project in the given scope.
-    func list(
-      byItem: Clients.ServiceAttachmentsClient.ListRequest
-    ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
-
-    /// Lists the ServiceAttachments for a project in the given scope.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
-
-    /// Patches the specified ServiceAttachment resource with the data included in
-    /// the request. This method supports PATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "serviceAttachments_patch")
-    func patch(request: Clients.ServiceAttachmentsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified ServiceAttachment resource with the data included in
-    /// the request. This method supports PATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      serviceAttachment: Swift.String,
-      body: ServiceAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "serviceAttachments_setIamPolicy")
-    func setIamPolicy(request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "serviceAttachments_testIamPermissions")
-    func testIamPermissions(request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `ServiceAttachmentsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ServiceAttachmentsStub = try Clients.ServiceAttachmentsTransport(
+        options)
+      inner = Clients.ServiceAttachmentsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ServiceAttachmentsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all ServiceAttachment resources,
     /// regional and global, available to the specified project.
@@ -187,65 +49,92 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "serviceAttachments_aggregatedList")
-    func aggregatedList(
-      request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: ServiceAttachmentsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
+    ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all ServiceAttachment resources,
     /// regional and global, available to the specified project.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ServiceAttachmentsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "serviceAttachments_aggregatedList")
+    public func aggregatedList(
+      byItem: ServiceAttachmentsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified ServiceAttachment in the given scope
     ///
     /// @Snippet(path: "serviceAttachments_delete")
-    func delete(
-      request: Clients.ServiceAttachmentsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified ServiceAttachment resource in the given scope.
     ///
     /// @Snippet(path: "serviceAttachments_get")
-    func `get`(
-      request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ServiceAttachment
+    public func `get`(
+      request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "serviceAttachments_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: ServiceAttachmentsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a ServiceAttachment in the specified project in the given scope
     /// using the parameters that are included in the request.
     ///
     /// @Snippet(path: "serviceAttachments_insert")
-    func insert(
-      request: Clients.ServiceAttachmentsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the ServiceAttachments for a project in the given scope.
     ///
     /// @Snippet(path: "serviceAttachments_list")
-    func list(
-      request: Clients.ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList
+    public func list(
+      request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the ServiceAttachments for a project in the given scope.
-    func list(
-      byItem: Clients.ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
+    ///
+    /// @Snippet(path: "serviceAttachments_list")
+    public func list(
+      byItem: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified ServiceAttachment resource with the data included in
     /// the request. This method supports PATCH
@@ -253,171 +142,234 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "serviceAttachments_patch")
-    func patch(
-      request: Clients.ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "serviceAttachments_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: ServiceAttachmentsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "serviceAttachments_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: ServiceAttachmentsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ServiceAttachments``.
-    public class ServiceAttachmentsClient: ServiceAttachments {
-      let inner: any ServiceAttachmentsStub
+    /// A Swift protocol to mock `ServiceAttachmentsClient`.
+    ///
+    /// To mock `ServiceAttachmentsClient` change your functions to receive
+    /// `some ServiceAttachmentsProtocol` or `any ServiceAttachmentsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ServiceAttachmentsProtocol {
+      /// See `ServiceAttachmentsClient.aggregatedList`.
+      func aggregatedList(request: ServiceAttachmentsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
 
-      /// Creates a new `ServiceAttachmentsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ServiceAttachmentsStub = try ServiceAttachmentsTransport(options)
-        inner = ServiceAttachmentsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ServiceAttachmentsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ServiceAttachmentsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ServiceAttachmentsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
 
-      /// See `ServiceAttachments.aggregatedList`
-      public func aggregatedList(
-        request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+      /// See `ServiceAttachmentsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
+
+      /// See `ServiceAttachmentsClient.delete`.
+      func delete(request: ServiceAttachmentsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        serviceAttachment: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.`get``.
+      func `get`(request: ServiceAttachmentsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ServiceAttachment
+
+      /// See `ServiceAttachmentsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        serviceAttachment: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ServiceAttachment
+
+      /// See `ServiceAttachmentsClient.getIamPolicy`.
+      func getIamPolicy(request: ServiceAttachmentsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ServiceAttachmentsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ServiceAttachmentsClient.insert`.
+      func insert(request: ServiceAttachmentsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: ServiceAttachment?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.list`.
+      func list(request: ServiceAttachmentsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ServiceAttachmentList
+
+      /// See `ServiceAttachmentsClient.list`.
+      func list(
+        byItem: ServiceAttachmentsClient.ListRequest
+      ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
+
+      /// See `ServiceAttachmentsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
+
+      /// See `ServiceAttachmentsClient.patch`.
+      func patch(request: ServiceAttachmentsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        serviceAttachment: Swift.String,
+        body: ServiceAttachment?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.setIamPolicy`.
+      func setIamPolicy(request: ServiceAttachmentsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ServiceAttachmentsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ServiceAttachmentsClient.testIamPermissions`.
+      func testIamPermissions(request: ServiceAttachmentsClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ServiceAttachmentsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ServiceAttachmentsClient.aggregatedList`.
+      func aggregatedList(
+        request: ServiceAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
 
-      /// Retrieves the list of all ServiceAttachment resources,
-      /// regional and global, available to the specified project.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+      /// See `ServiceAttachmentsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ServiceAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error>
 
-      /// See `ServiceAttachments.delete`
-      public func delete(
-        request: Clients.ServiceAttachmentsClient.DeleteRequest,
+      /// See `ServiceAttachmentsClient.delete`.
+      func delete(
+        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.`get``.
+      func `get`(
+        request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ServiceAttachment
+
+      /// See `ServiceAttachmentsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: ServiceAttachmentsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// See `ServiceAttachments.`get``
-      public func `get`(
-        request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ServiceAttachmentsClient.insert`.
+      func insert(
+        request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ServiceAttachments.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
+      /// See `ServiceAttachmentsClient.list`.
+      func list(
+        request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList
+
+      /// See `ServiceAttachmentsClient.list`.
+      func list(
+        byItem: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error>
+
+      /// See `ServiceAttachmentsClient.patch`.
+      func patch(
+        request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ServiceAttachmentsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: ServiceAttachmentsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// See `ServiceAttachments.insert`
-      public func insert(
-        request: Clients.ServiceAttachmentsClient.InsertRequest,
+      /// See `ServiceAttachmentsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: ServiceAttachmentsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `ServiceAttachments.list`
-      public func list(
-        request: Clients.ServiceAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Lists the ServiceAttachments for a project in the given scope.
-      public func list(
-        byItem: Clients.ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `ServiceAttachments.patch`
-      public func patch(
-        request: Clients.ServiceAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `ServiceAttachments.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `ServiceAttachments.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension ServiceAttachments {
-    public func aggregatedList(request: Clients.ServiceAttachmentsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
+  extension Clients.ServiceAttachmentsProtocol {
+    public func aggregatedList(request: ServiceAttachmentsClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+      request: ServiceAttachmentsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.ServiceAttachmentsClient.AggregatedListRequest
+      byItem: ServiceAttachmentsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.ServiceAttachmentsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: ServiceAttachmentsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList in
@@ -429,21 +381,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, ServiceAttachmentsScopedList), Swift.Error> {
-      let request = Clients.ServiceAttachmentsClient.AggregatedListRequest().with {
+      let request = ServiceAttachmentsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.ServiceAttachmentsClient.DeleteRequest) async throws
+    public func delete(request: ServiceAttachmentsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.ServiceAttachmentsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -453,7 +404,7 @@
       region: Swift.String,
       serviceAttachment: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ServiceAttachmentsClient.DeleteRequest().with {
+      let request = ServiceAttachmentsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.serviceAttachment = serviceAttachment
@@ -461,14 +412,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.ServiceAttachmentsClient.GetRequest) async throws
+    public func `get`(request: ServiceAttachmentsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ServiceAttachment
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -478,7 +429,7 @@
       region: Swift.String,
       serviceAttachment: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
-      let request = Clients.ServiceAttachmentsClient.GetRequest().with {
+      let request = ServiceAttachmentsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.serviceAttachment = serviceAttachment
@@ -486,15 +437,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(request: ServiceAttachmentsClient.GetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -504,7 +454,7 @@
       region: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ServiceAttachmentsClient.GetIamPolicyRequest().with {
+      let request = ServiceAttachmentsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -512,15 +462,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.ServiceAttachmentsClient.InsertRequest) async throws
+    public func insert(request: ServiceAttachmentsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.ServiceAttachmentsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -530,7 +479,7 @@
       region: Swift.String,
       body: ServiceAttachment?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ServiceAttachmentsClient.InsertRequest().with {
+      let request = ServiceAttachmentsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -538,26 +487,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.ServiceAttachmentsClient.ListRequest) async throws
+    public func list(request: ServiceAttachmentsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ServiceAttachmentList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ServiceAttachmentsClient.ListRequest
+      byItem: ServiceAttachmentsClient.ListRequest
     ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ServiceAttachmentList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -569,21 +518,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<ServiceAttachment, Swift.Error> {
-      let request = Clients.ServiceAttachmentsClient.ListRequest().with {
+      let request = ServiceAttachmentsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.ServiceAttachmentsClient.PatchRequest) async throws
+    public func patch(request: ServiceAttachmentsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -594,7 +543,7 @@
       serviceAttachment: Swift.String,
       body: ServiceAttachment?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ServiceAttachmentsClient.PatchRequest().with {
+      let request = ServiceAttachmentsClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.serviceAttachment = serviceAttachment
@@ -603,15 +552,14 @@
       return try await self.patch(request: request)
     }
 
-    public func setIamPolicy(request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(request: ServiceAttachmentsClient.SetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ServiceAttachmentsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -622,7 +570,7 @@
       resource: Swift.String,
       body: RegionSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ServiceAttachmentsClient.SetIamPolicyRequest().with {
+      let request = ServiceAttachmentsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -631,14 +579,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: ServiceAttachmentsClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+      request: ServiceAttachmentsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -650,7 +598,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.ServiceAttachmentsClient.TestIamPermissionsRequest().with {
+      let request = ServiceAttachmentsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

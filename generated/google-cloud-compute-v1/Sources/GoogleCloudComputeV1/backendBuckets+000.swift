@@ -28,21 +28,28 @@
   /// Service for the `backendBuckets` resource.
   ///
   /// @Snippet(path: "backendBucketsQuickstart")
-  public protocol BackendBuckets {
+  public class BackendBucketsClient: Clients.BackendBucketsProtocol {
+    let inner: any Clients.BackendBucketsStub
+
+    /// Creates a new `BackendBucketsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.BackendBucketsStub = try Clients.BackendBucketsTransport(options)
+      inner = Clients.BackendBucketsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.BackendBucketsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Adds a key for validating requests with signed URLs for this backend
     /// bucket.
     ///
     /// @Snippet(path: "backendBuckets_addSignedUrlKey")
-    func addSignedUrlKey(request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Adds a key for validating requests with signed URLs for this backend
-    /// bucket.
-    func addSignedUrlKey(
-      project: Swift.String,
-      backendBucket: Swift.String,
-      body: SignedUrlKey?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func addSignedUrlKey(
+      request: BackendBucketsClient.AddSignedUrlKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.addSignedUrlKey(request: request, options: options)
+    }
 
     /// Retrieves the list of all BackendBucket resources, regional and global,
     /// available to the specified project.
@@ -51,212 +58,11 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "backendBuckets_aggregatedList")
-    func aggregatedList(request: Clients.BackendBucketsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.BackendBucketAggregatedList
-
-    /// Retrieves the list of all BackendBucket resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.BackendBucketsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
-
-    /// Retrieves the list of all BackendBucket resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
-
-    /// Deletes the specified BackendBucket resource.
-    ///
-    /// @Snippet(path: "backendBuckets_delete")
-    func delete(request: Clients.BackendBucketsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified BackendBucket resource.
-    func delete(
-      project: Swift.String,
-      backendBucket: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes a key for validating requests with signed URLs for this backend
-    /// bucket.
-    ///
-    /// @Snippet(path: "backendBuckets_deleteSignedUrlKey")
-    func deleteSignedUrlKey(request: Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes a key for validating requests with signed URLs for this backend
-    /// bucket.
-    func deleteSignedUrlKey(
-      project: Swift.String,
-      backendBucket: Swift.String,
-      keyName: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified BackendBucket resource.
-    ///
-    /// @Snippet(path: "backendBuckets_get")
-    func `get`(request: Clients.BackendBucketsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.BackendBucket
-
-    /// Returns the specified BackendBucket resource.
-    func `get`(
-      project: Swift.String,
-      backendBucket: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.BackendBucket
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "backendBuckets_getIamPolicy")
-    func getIamPolicy(request: Clients.BackendBucketsClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a BackendBucket resource in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "backendBuckets_insert")
-    func insert(request: Clients.BackendBucketsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a BackendBucket resource in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      body: BackendBucket?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of BackendBucket resources available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "backendBuckets_list")
-    func list(request: Clients.BackendBucketsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.BackendBucketList
-
-    /// Retrieves the list of BackendBucket resources available to the specified
-    /// project.
-    func list(
-      byItem: Clients.BackendBucketsClient.ListRequest
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
-
-    /// Retrieves the list of BackendBucket resources available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
-
-    /// Retrieves a list of all usable backend buckets in the specified project.
-    ///
-    /// @Snippet(path: "backendBuckets_listUsable")
-    func listUsable(request: Clients.BackendBucketsClient.ListUsableRequest) async throws
-      -> GoogleCloudComputeV1.BackendBucketListUsable
-
-    /// Retrieves a list of all usable backend buckets in the specified project.
-    func listUsable(
-      byItem: Clients.BackendBucketsClient.ListUsableRequest
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
-
-    /// Retrieves a list of all usable backend buckets in the specified project.
-    func listUsable(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
-
-    /// Updates the specified BackendBucket resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "backendBuckets_patch")
-    func patch(request: Clients.BackendBucketsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified BackendBucket resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      backendBucket: Swift.String,
-      body: BackendBucket?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the edge security policy for the specified backend bucket.
-    ///
-    /// @Snippet(path: "backendBuckets_setEdgeSecurityPolicy")
-    func setEdgeSecurityPolicy(request: Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the edge security policy for the specified backend bucket.
-    func setEdgeSecurityPolicy(
-      project: Swift.String,
-      backendBucket: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "backendBuckets_setIamPolicy")
-    func setIamPolicy(request: Clients.BackendBucketsClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "backendBuckets_testIamPermissions")
-    func testIamPermissions(request: Clients.BackendBucketsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates the specified BackendBucket resource with the data included in the
-    /// request.
-    ///
-    /// @Snippet(path: "backendBuckets_update")
-    func update(request: Clients.BackendBucketsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified BackendBucket resource with the data included in the
-    /// request.
-    func update(
-      project: Swift.String,
-      backendBucket: Swift.String,
-      body: BackendBucket?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Adds a key for validating requests with signed URLs for this backend
-    /// bucket.
-    ///
-    /// @Snippet(path: "backendBuckets_addSignedUrlKey")
-    func addSignedUrlKey(
-      request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func aggregatedList(
+      request: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all BackendBucket resources, regional and global,
     /// available to the specified project.
@@ -265,87 +71,115 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "backendBuckets_aggregatedList")
-    func aggregatedList(
-      request: Clients.BackendBucketsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList
-
-    /// Retrieves the list of all BackendBucket resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.BackendBucketsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
+    public func aggregatedList(
+      byItem: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified BackendBucket resource.
     ///
     /// @Snippet(path: "backendBuckets_delete")
-    func delete(
-      request: Clients.BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Deletes a key for validating requests with signed URLs for this backend
     /// bucket.
     ///
     /// @Snippet(path: "backendBuckets_deleteSignedUrlKey")
-    func deleteSignedUrlKey(
-      request: Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest,
+    public func deleteSignedUrlKey(
+      request: BackendBucketsClient.DeleteSignedUrlKeyRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.deleteSignedUrlKey(request: request, options: options)
+    }
 
     /// Returns the specified BackendBucket resource.
     ///
     /// @Snippet(path: "backendBuckets_get")
-    func `get`(
-      request: Clients.BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.BackendBucket
+    public func `get`(
+      request: BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.BackendBucket {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "backendBuckets_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.BackendBucketsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: BackendBucketsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a BackendBucket resource in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "backendBuckets_insert")
-    func insert(
-      request: Clients.BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of BackendBucket resources available to the specified
     /// project.
     ///
     /// @Snippet(path: "backendBuckets_list")
-    func list(
-      request: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.BackendBucketList
+    public func list(
+      request: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.BackendBucketList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of BackendBucket resources available to the specified
     /// project.
-    func list(
-      byItem: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+    ///
+    /// @Snippet(path: "backendBuckets_list")
+    public func list(
+      byItem: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.BackendBucketList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Retrieves a list of all usable backend buckets in the specified project.
     ///
     /// @Snippet(path: "backendBuckets_listUsable")
-    func listUsable(
-      request: Clients.BackendBucketsClient.ListUsableRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable
+    public func listUsable(
+      request: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable {
+      try await self.inner.listUsable(request: request, options: options)
+    }
 
     /// Retrieves a list of all usable backend buckets in the specified project.
-    func listUsable(
-      byItem: Clients.BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+    ///
+    /// @Snippet(path: "backendBuckets_listUsable")
+    public func listUsable(
+      byItem: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listUsable(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the specified BackendBucket resource with the data included in the
     /// request. This method supportsPATCH
@@ -353,223 +187,319 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "backendBuckets_patch")
-    func patch(
-      request: Clients.BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Sets the edge security policy for the specified backend bucket.
     ///
     /// @Snippet(path: "backendBuckets_setEdgeSecurityPolicy")
-    func setEdgeSecurityPolicy(
-      request: Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest,
+    public func setEdgeSecurityPolicy(
+      request: BackendBucketsClient.SetEdgeSecurityPolicyRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setEdgeSecurityPolicy(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "backendBuckets_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.BackendBucketsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: BackendBucketsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "backendBuckets_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.BackendBucketsClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: BackendBucketsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates the specified BackendBucket resource with the data included in the
     /// request.
     ///
     /// @Snippet(path: "backendBuckets_update")
-    func update(
-      request: Clients.BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``BackendBuckets``.
-    public class BackendBucketsClient: BackendBuckets {
-      let inner: any BackendBucketsStub
+    /// A Swift protocol to mock `BackendBucketsClient`.
+    ///
+    /// To mock `BackendBucketsClient` change your functions to receive
+    /// `some BackendBucketsProtocol` or `any BackendBucketsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol BackendBucketsProtocol {
+      /// See `BackendBucketsClient.addSignedUrlKey`.
+      func addSignedUrlKey(request: BackendBucketsClient.AddSignedUrlKeyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `BackendBucketsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any BackendBucketsStub = try BackendBucketsTransport(options)
-        inner = BackendBucketsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = BackendBucketsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `BackendBucketsClient.addSignedUrlKey`.
+      func addSignedUrlKey(
+        project: Swift.String,
+        backendBucket: Swift.String,
+        body: SignedUrlKey?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendBuckets.addSignedUrlKey`
-      public func addSignedUrlKey(
-        request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest,
+      /// See `BackendBucketsClient.aggregatedList`.
+      func aggregatedList(request: BackendBucketsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.BackendBucketAggregatedList
+
+      /// See `BackendBucketsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: BackendBucketsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
+
+      /// See `BackendBucketsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
+
+      /// See `BackendBucketsClient.delete`.
+      func delete(request: BackendBucketsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.delete`.
+      func delete(
+        project: Swift.String,
+        backendBucket: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.deleteSignedUrlKey`.
+      func deleteSignedUrlKey(request: BackendBucketsClient.DeleteSignedUrlKeyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.deleteSignedUrlKey`.
+      func deleteSignedUrlKey(
+        project: Swift.String,
+        backendBucket: Swift.String,
+        keyName: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.`get``.
+      func `get`(request: BackendBucketsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.BackendBucket
+
+      /// See `BackendBucketsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        backendBucket: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.BackendBucket
+
+      /// See `BackendBucketsClient.getIamPolicy`.
+      func getIamPolicy(request: BackendBucketsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.insert`.
+      func insert(request: BackendBucketsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: BackendBucket?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.list`.
+      func list(request: BackendBucketsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.BackendBucketList
+
+      /// See `BackendBucketsClient.list`.
+      func list(
+        byItem: BackendBucketsClient.ListRequest
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.listUsable`.
+      func listUsable(request: BackendBucketsClient.ListUsableRequest) async throws
+        -> GoogleCloudComputeV1.BackendBucketListUsable
+
+      /// See `BackendBucketsClient.listUsable`.
+      func listUsable(
+        byItem: BackendBucketsClient.ListUsableRequest
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.listUsable`.
+      func listUsable(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.patch`.
+      func patch(request: BackendBucketsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.patch`.
+      func patch(
+        project: Swift.String,
+        backendBucket: Swift.String,
+        body: BackendBucket?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.setEdgeSecurityPolicy`.
+      func setEdgeSecurityPolicy(request: BackendBucketsClient.SetEdgeSecurityPolicyRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.setEdgeSecurityPolicy`.
+      func setEdgeSecurityPolicy(
+        project: Swift.String,
+        backendBucket: Swift.String,
+        body: SecurityPolicyReference?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.setIamPolicy`.
+      func setIamPolicy(request: BackendBucketsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        resource: Swift.String,
+        body: GlobalSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.testIamPermissions`.
+      func testIamPermissions(request: BackendBucketsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `BackendBucketsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `BackendBucketsClient.update`.
+      func update(request: BackendBucketsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.update`.
+      func update(
+        project: Swift.String,
+        backendBucket: Swift.String,
+        body: BackendBucket?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.addSignedUrlKey`.
+      func addSignedUrlKey(
+        request: BackendBucketsClient.AddSignedUrlKeyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.aggregatedList`.
+      func aggregatedList(
+        request: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList
+
+      /// See `BackendBucketsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error>
+
+      /// See `BackendBucketsClient.delete`.
+      func delete(
+        request: BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.deleteSignedUrlKey`.
+      func deleteSignedUrlKey(
+        request: BackendBucketsClient.DeleteSignedUrlKeyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.addSignedUrlKey(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendBuckets.aggregatedList`
-      public func aggregatedList(
-        request: Clients.BackendBucketsClient.AggregatedListRequest,
+      /// See `BackendBucketsClient.`get``.
+      func `get`(
+        request: BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.BackendBucket
+
+      /// See `BackendBucketsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: BackendBucketsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.insert`.
+      func insert(
+        request: BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.list`.
+      func list(
+        request: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.BackendBucketList
+
+      /// See `BackendBucketsClient.list`.
+      func list(
+        byItem: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.listUsable`.
+      func listUsable(
+        request: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable
+
+      /// See `BackendBucketsClient.listUsable`.
+      func listUsable(
+        byItem: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<BackendBucket, Swift.Error>
+
+      /// See `BackendBucketsClient.patch`.
+      func patch(
+        request: BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `BackendBucketsClient.setEdgeSecurityPolicy`.
+      func setEdgeSecurityPolicy(
+        request: BackendBucketsClient.SetEdgeSecurityPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of all BackendBucket resources, regional and global,
-      /// available to the specified project.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.BackendBucketsClient.AggregatedListRequest,
+      /// See `BackendBucketsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: BackendBucketsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `BackendBucketsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: BackendBucketsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
-      /// See `BackendBuckets.delete`
-      public func delete(
-        request: Clients.BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.deleteSignedUrlKey`
-      public func deleteSignedUrlKey(
-        request: Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.deleteSignedUrlKey(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.`get``
-      public func `get`(
-        request: Clients.BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.BackendBucket {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.BackendBucketsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.insert`
-      public func insert(
-        request: Clients.BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.list`
-      public func list(
-        request: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.BackendBucketList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves the list of BackendBucket resources available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.BackendBucketList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `BackendBuckets.listUsable`
-      public func listUsable(
-        request: Clients.BackendBucketsClient.ListUsableRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable {
-        try await self.inner.listUsable(request: request, options: options)
-      }
-
-      /// Retrieves a list of all usable backend buckets in the specified project.
-      public func listUsable(
-        byItem: Clients.BackendBucketsClient.ListUsableRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listUsable(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `BackendBuckets.patch`
-      public func patch(
-        request: Clients.BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.setEdgeSecurityPolicy`
-      public func setEdgeSecurityPolicy(
-        request: Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setEdgeSecurityPolicy(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.BackendBucketsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.BackendBucketsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
-
-      /// See `BackendBuckets.update`
-      public func update(
-        request: Clients.BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `BackendBucketsClient.update`.
+      func update(
+        request: BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension BackendBuckets {
-    public func addSignedUrlKey(request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.BackendBucketsProtocol {
+    public func addSignedUrlKey(request: BackendBucketsClient.AddSignedUrlKeyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.addSignedUrlKey(request: request, options: .init())
     }
 
     public func addSignedUrlKey(
-      request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.AddSignedUrlKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -579,7 +509,7 @@
       backendBucket: Swift.String,
       body: SignedUrlKey?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.AddSignedUrlKeyRequest().with {
+      let request = BackendBucketsClient.AddSignedUrlKeyRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
         $0.body = body
@@ -587,28 +517,26 @@
       return try await self.addSignedUrlKey(request: request)
     }
 
-    public func aggregatedList(request: Clients.BackendBucketsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList
+    public func aggregatedList(request: BackendBucketsClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.BackendBucketAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.BackendBucketsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.BackendBucketsClient.AggregatedListRequest
+      byItem: BackendBucketsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.BackendBucketsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
@@ -620,20 +548,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
-      let request = Clients.BackendBucketsClient.AggregatedListRequest().with {
+      let request = BackendBucketsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.BackendBucketsClient.DeleteRequest) async throws
+    public func delete(request: BackendBucketsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -642,21 +570,21 @@
       project: Swift.String,
       backendBucket: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.DeleteRequest().with {
+      let request = BackendBucketsClient.DeleteRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
       }
       return try await self.delete(request: request)
     }
 
-    public func deleteSignedUrlKey(request: Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest)
+    public func deleteSignedUrlKey(request: BackendBucketsClient.DeleteSignedUrlKeyRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.deleteSignedUrlKey(request: request, options: .init())
     }
 
     public func deleteSignedUrlKey(
-      request: Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest,
+      request: BackendBucketsClient.DeleteSignedUrlKeyRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -667,7 +595,7 @@
       backendBucket: Swift.String,
       keyName: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.DeleteSignedUrlKeyRequest().with {
+      let request = BackendBucketsClient.DeleteSignedUrlKeyRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
         $0.keyName = keyName
@@ -675,14 +603,14 @@
       return try await self.deleteSignedUrlKey(request: request)
     }
 
-    public func `get`(request: Clients.BackendBucketsClient.GetRequest) async throws
+    public func `get`(request: BackendBucketsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.BackendBucket
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendBucket {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -691,22 +619,21 @@
       project: Swift.String,
       backendBucket: Swift.String,
     ) async throws -> GoogleCloudComputeV1.BackendBucket {
-      let request = Clients.BackendBucketsClient.GetRequest().with {
+      let request = BackendBucketsClient.GetRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
       }
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.BackendBucketsClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: BackendBucketsClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.BackendBucketsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -715,21 +642,21 @@
       project: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.BackendBucketsClient.GetIamPolicyRequest().with {
+      let request = BackendBucketsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.resource = resource
       }
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.BackendBucketsClient.InsertRequest) async throws
+    public func insert(request: BackendBucketsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -738,33 +665,33 @@
       project: Swift.String,
       body: BackendBucket?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.InsertRequest().with {
+      let request = BackendBucketsClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.BackendBucketsClient.ListRequest) async throws
+    public func list(request: BackendBucketsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.BackendBucketList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendBucketList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.BackendBucketsClient.ListRequest
+      byItem: BackendBucketsClient.ListRequest
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.BackendBucketList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -775,33 +702,32 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-      let request = Clients.BackendBucketsClient.ListRequest().with {
+      let request = BackendBucketsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func listUsable(request: Clients.BackendBucketsClient.ListUsableRequest) async throws
+    public func listUsable(request: BackendBucketsClient.ListUsableRequest) async throws
       -> GoogleCloudComputeV1.BackendBucketListUsable
     {
       try await self.listUsable(request: request, options: .init())
     }
 
     public func listUsable(
-      request: Clients.BackendBucketsClient.ListUsableRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listUsable(
-      byItem: Clients.BackendBucketsClient.ListUsableRequest
+      byItem: BackendBucketsClient.ListUsableRequest
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       try self.listUsable(byItem: byItem, options: .init())
     }
 
     public func listUsable(
-      byItem: Clients.BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      byItem: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
@@ -813,20 +739,20 @@
     public func listUsable(
       project: Swift.String,
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-      let request = Clients.BackendBucketsClient.ListUsableRequest().with {
+      let request = BackendBucketsClient.ListUsableRequest().with {
         $0.project = project
       }
       return try self.listUsable(byItem: request)
     }
 
-    public func patch(request: Clients.BackendBucketsClient.PatchRequest) async throws
+    public func patch(request: BackendBucketsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -836,7 +762,7 @@
       backendBucket: Swift.String,
       body: BackendBucket?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.PatchRequest().with {
+      let request = BackendBucketsClient.PatchRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
         $0.body = body
@@ -844,14 +770,14 @@
       return try await self.patch(request: request)
     }
 
-    public func setEdgeSecurityPolicy(
-      request: Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func setEdgeSecurityPolicy(request: BackendBucketsClient.SetEdgeSecurityPolicyRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.setEdgeSecurityPolicy(request: request, options: .init())
     }
 
     public func setEdgeSecurityPolicy(
-      request: Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest,
+      request: BackendBucketsClient.SetEdgeSecurityPolicyRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -862,7 +788,7 @@
       backendBucket: Swift.String,
       body: SecurityPolicyReference?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.SetEdgeSecurityPolicyRequest().with {
+      let request = BackendBucketsClient.SetEdgeSecurityPolicyRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
         $0.body = body
@@ -870,15 +796,14 @@
       return try await self.setEdgeSecurityPolicy(request: request)
     }
 
-    public func setIamPolicy(request: Clients.BackendBucketsClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: BackendBucketsClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.BackendBucketsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -888,7 +813,7 @@
       resource: Swift.String,
       body: GlobalSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.BackendBucketsClient.SetIamPolicyRequest().with {
+      let request = BackendBucketsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -896,14 +821,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(request: Clients.BackendBucketsClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: BackendBucketsClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.BackendBucketsClient.TestIamPermissionsRequest,
+      request: BackendBucketsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -914,7 +839,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.BackendBucketsClient.TestIamPermissionsRequest().with {
+      let request = BackendBucketsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -922,14 +847,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.BackendBucketsClient.UpdateRequest) async throws
+    public func update(request: BackendBucketsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: BackendBucketsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -939,7 +864,7 @@
       backendBucket: Swift.String,
       body: BackendBucket?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.BackendBucketsClient.UpdateRequest().with {
+      let request = BackendBucketsClient.UpdateRequest().with {
         $0.project = project
         $0.backendBucket = backendBucket
         $0.body = body

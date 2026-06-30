@@ -28,51 +28,61 @@
   /// Service for the `zoneOperations` resource.
   ///
   /// @Snippet(path: "zoneOperationsQuickstart")
-  public protocol ZoneOperations {
+  public class ZoneOperationsClient: Clients.ZoneOperationsProtocol {
+    let inner: any Clients.ZoneOperationsStub
+
+    /// Creates a new `ZoneOperationsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ZoneOperationsStub = try Clients.ZoneOperationsTransport(options)
+      inner = Clients.ZoneOperationsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ZoneOperationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified zone-specific Operations resource.
     ///
     /// @Snippet(path: "zoneOperations_delete")
-    func delete(request: Clients.ZoneOperationsClient.DeleteRequest) async throws
-
-    /// Deletes the specified zone-specific Operations resource.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      operation: Swift.String,
-    ) async throws
+    public func delete(
+      request: ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves the specified zone-specific Operations resource.
     ///
     /// @Snippet(path: "zoneOperations_get")
-    func `get`(request: Clients.ZoneOperationsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the specified zone-specific Operations resource.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      operation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func `get`(
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within
     /// the specified zone.
     ///
     /// @Snippet(path: "zoneOperations_list")
-    func list(request: Clients.ZoneOperationsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.OperationList
+    public func list(
+      request: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.OperationList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within
     /// the specified zone.
-    func list(
-      byItem: Clients.ZoneOperationsClient.ListRequest
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Retrieves a list of Operation resources contained within
-    /// the specified zone.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
+    ///
+    /// @Snippet(path: "zoneOperations_list")
+    public func list(
+      byItem: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Operation, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Waits for the specified Operation resource to return as `DONE`
     /// or for the request to approach the 2 minute deadline, and retrieves the
@@ -91,146 +101,102 @@
     ///     if the operation is not `DONE`.
     ///
     /// @Snippet(path: "zoneOperations_wait")
-    func wait(request: Clients.ZoneOperationsClient.WaitRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Waits for the specified Operation resource to return as `DONE`
-    /// or for the request to approach the 2 minute deadline, and retrieves the
-    /// specified Operation resource. This method waits for no more than the
-    /// 2 minutes and then returns the current state of the
-    /// operation, which might be `DONE` or still in progress.
-    ///
-    /// This method is called on a best-effort basis. Specifically:
-    ///
-    ///
-    ///     - In uncommon cases, when the server is overloaded, the request might
-    ///     return before the default deadline is reached, or might return after zero
-    ///     seconds.
-    ///    - If the default deadline is reached, there is no guarantee that the
-    ///     operation is actually done when the method returns. Be prepared to retry
-    ///     if the operation is not `DONE`.
-    func wait(
-      project: Swift.String,
-      zone: Swift.String,
-      operation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified zone-specific Operations resource.
-    ///
-    /// @Snippet(path: "zoneOperations_delete")
-    func delete(
-      request: Clients.ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws
-
-    /// Retrieves the specified zone-specific Operations resource.
-    ///
-    /// @Snippet(path: "zoneOperations_get")
-    func `get`(
-      request: Clients.ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of Operation resources contained within
-    /// the specified zone.
-    ///
-    /// @Snippet(path: "zoneOperations_list")
-    func list(
-      request: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.OperationList
-
-    /// Retrieves a list of Operation resources contained within
-    /// the specified zone.
-    func list(
-      byItem: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Waits for the specified Operation resource to return as `DONE`
-    /// or for the request to approach the 2 minute deadline, and retrieves the
-    /// specified Operation resource. This method waits for no more than the
-    /// 2 minutes and then returns the current state of the
-    /// operation, which might be `DONE` or still in progress.
-    ///
-    /// This method is called on a best-effort basis. Specifically:
-    ///
-    ///
-    ///     - In uncommon cases, when the server is overloaded, the request might
-    ///     return before the default deadline is reached, or might return after zero
-    ///     seconds.
-    ///    - If the default deadline is reached, there is no guarantee that the
-    ///     operation is actually done when the method returns. Be prepared to retry
-    ///     if the operation is not `DONE`.
-    ///
-    /// @Snippet(path: "zoneOperations_wait")
-    func wait(
-      request: Clients.ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func wait(
+      request: ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.wait(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ZoneOperations``.
-    public class ZoneOperationsClient: ZoneOperations {
-      let inner: any ZoneOperationsStub
+    /// A Swift protocol to mock `ZoneOperationsClient`.
+    ///
+    /// To mock `ZoneOperationsClient` change your functions to receive
+    /// `some ZoneOperationsProtocol` or `any ZoneOperationsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ZoneOperationsProtocol {
+      /// See `ZoneOperationsClient.delete`.
+      func delete(request: ZoneOperationsClient.DeleteRequest) async throws
 
-      /// Creates a new `ZoneOperationsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ZoneOperationsStub = try ZoneOperationsTransport(options)
-        inner = ZoneOperationsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ZoneOperationsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ZoneOperationsClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        operation: Swift.String,
+      ) async throws
 
-      /// See `ZoneOperations.delete`
-      public func delete(
-        request: Clients.ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `ZoneOperationsClient.`get``.
+      func `get`(request: ZoneOperationsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `ZoneOperations.`get``
-      public func `get`(
-        request: Clients.ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ZoneOperationsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        operation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ZoneOperations.list`
-      public func list(
-        request: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.OperationList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `ZoneOperationsClient.list`.
+      func list(request: ZoneOperationsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.OperationList
 
-      /// Retrieves a list of Operation resources contained within
-      /// the specified zone.
-      public func list(
-        byItem: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Operation, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `ZoneOperationsClient.list`.
+      func list(
+        byItem: ZoneOperationsClient.ListRequest
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-      /// See `ZoneOperations.wait`
-      public func wait(
-        request: Clients.ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.wait(request: request, options: options)
-      }
+      /// See `ZoneOperationsClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `ZoneOperationsClient.wait`.
+      func wait(request: ZoneOperationsClient.WaitRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ZoneOperationsClient.wait`.
+      func wait(
+        project: Swift.String,
+        zone: Swift.String,
+        operation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ZoneOperationsClient.delete`.
+      func delete(
+        request: ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws
+
+      /// See `ZoneOperationsClient.`get``.
+      func `get`(
+        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ZoneOperationsClient.list`.
+      func list(
+        request: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.OperationList
+
+      /// See `ZoneOperationsClient.list`.
+      func list(
+        byItem: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `ZoneOperationsClient.wait`.
+      func wait(
+        request: ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension ZoneOperations {
-    public func delete(request: Clients.ZoneOperationsClient.DeleteRequest) async throws {
+  extension Clients.ZoneOperationsProtocol {
+    public func delete(request: ZoneOperationsClient.DeleteRequest) async throws {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -240,7 +206,7 @@
       zone: Swift.String,
       operation: Swift.String,
     ) async throws {
-      let request = Clients.ZoneOperationsClient.DeleteRequest().with {
+      let request = ZoneOperationsClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.operation = operation
@@ -248,14 +214,14 @@
       try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.ZoneOperationsClient.GetRequest) async throws
+    public func `get`(request: ZoneOperationsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -265,7 +231,7 @@
       zone: Swift.String,
       operation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ZoneOperationsClient.GetRequest().with {
+      let request = ZoneOperationsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.operation = operation
@@ -273,26 +239,26 @@
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.ZoneOperationsClient.ListRequest) async throws
+    public func list(request: ZoneOperationsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.OperationList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ZoneOperationsClient.ListRequest
+      byItem: ZoneOperationsClient.ListRequest
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -304,21 +270,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let request = Clients.ZoneOperationsClient.ListRequest().with {
+      let request = ZoneOperationsClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func wait(request: Clients.ZoneOperationsClient.WaitRequest) async throws
+    public func wait(request: ZoneOperationsClient.WaitRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.wait(request: request, options: .init())
     }
 
     public func wait(
-      request: Clients.ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -328,7 +294,7 @@
       zone: Swift.String,
       operation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ZoneOperationsClient.WaitRequest().with {
+      let request = ZoneOperationsClient.WaitRequest().with {
         $0.project = project
         $0.zone = zone
         $0.operation = operation

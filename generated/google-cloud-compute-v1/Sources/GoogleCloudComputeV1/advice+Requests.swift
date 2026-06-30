@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.AdviceClient {
+  extension AdviceClient {
     /// Synthetic request message for the [calendarMode()][google.cloud.compute.v1.advice.calendarMode] method.
     ///
     /// [google.cloud.compute.v1.advice.calendarMode]: <doc:Advice/calendarMode(request:)>

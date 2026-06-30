@@ -28,38 +28,35 @@
   extension Clients {
     protocol ForwardingRulesStub {
       func aggregatedList(
-        request: Clients.ForwardingRulesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleAggregatedList
 
       func delete(
-        request: Clients.ForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRule
 
       func insert(
-        request: Clients.ForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleList
 
       func patch(
-        request: Clients.ForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: Clients.ForwardingRulesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setTarget(
-        request: Clients.ForwardingRulesClient.SetTargetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetTargetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -72,8 +69,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.ForwardingRulesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -103,7 +99,7 @@
       }
 
       public func delete(
-        request: Clients.ForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -131,7 +127,7 @@
       }
 
       public func `get`(
-        request: Clients.ForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRule {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -159,7 +155,7 @@
       }
 
       public func insert(
-        request: Clients.ForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -185,7 +181,7 @@
       }
 
       public func list(
-        request: Clients.ForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -213,7 +209,7 @@
       }
 
       public func patch(
-        request: Clients.ForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -245,8 +241,7 @@
       }
 
       public func setLabels(
-        request: Clients.ForwardingRulesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -276,8 +271,7 @@
       }
 
       public func setTarget(
-        request: Clients.ForwardingRulesClient.SetTargetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetTargetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

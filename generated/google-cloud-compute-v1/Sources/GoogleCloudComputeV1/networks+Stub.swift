@@ -28,60 +28,56 @@
   extension Clients {
     protocol NetworksStub {
       func addPeering(
-        request: Clients.NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func cancelRequestRemovePeering(
-        request: Clients.NetworksClient.CancelRequestRemovePeeringRequest,
+        request: NetworksClient.CancelRequestRemovePeeringRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Network
 
       func getEffectiveFirewalls(
-        request: Clients.NetworksClient.GetEffectiveFirewallsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetEffectiveFirewallsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse
 
       func insert(
-        request: Clients.NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkList
 
       func listPeeringRoutes(
-        request: Clients.NetworksClient.ListPeeringRoutesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExchangedPeeringRoutesList
 
       func patch(
-        request: Clients.NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removePeering(
-        request: Clients.NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func requestRemovePeering(
-        request: Clients.NetworksClient.RequestRemovePeeringRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RequestRemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func switchToCustomMode(
-        request: Clients.NetworksClient.SwitchToCustomModeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updatePeering(
-        request: Clients.NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -94,7 +90,7 @@
       }
 
       public func addPeering(
-        request: Clients.NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -120,7 +116,7 @@
       }
 
       public func cancelRequestRemovePeering(
-        request: Clients.NetworksClient.CancelRequestRemovePeeringRequest,
+        request: NetworksClient.CancelRequestRemovePeeringRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -148,7 +144,7 @@
       }
 
       public func delete(
-        request: Clients.NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -170,7 +166,7 @@
       }
 
       public func `get`(
-        request: Clients.NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Network {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -190,8 +186,7 @@
       }
 
       public func getEffectiveFirewalls(
-        request: Clients.NetworksClient.GetEffectiveFirewallsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetEffectiveFirewallsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -212,7 +207,7 @@
       }
 
       public func insert(
-        request: Clients.NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -235,7 +230,7 @@
       }
 
       public func list(
-        request: Clients.NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -260,8 +255,7 @@
       }
 
       public func listPeeringRoutes(
-        request: Clients.NetworksClient.ListPeeringRoutesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExchangedPeeringRoutesList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -293,7 +287,7 @@
       }
 
       public func patch(
-        request: Clients.NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -319,7 +313,7 @@
       }
 
       public func removePeering(
-        request: Clients.NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -346,8 +340,7 @@
       }
 
       public func requestRemovePeering(
-        request: Clients.NetworksClient.RequestRemovePeeringRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RequestRemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -374,8 +367,7 @@
       }
 
       public func switchToCustomMode(
-        request: Clients.NetworksClient.SwitchToCustomModeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -398,7 +390,7 @@
       }
 
       public func updatePeering(
-        request: Clients.NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

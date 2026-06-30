@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some StorageInsights, projectId: String, locationId: String) async throws {
+func sample(client: StorageInsightsClient, projectId: String, locationId: String) async throws {
   let items = try client.listDatasetConfigs(
     byItem: ListDatasetConfigsRequest()
       .with {
@@ -40,7 +40,7 @@ func sample(client: some StorageInsights, projectId: String, locationId: String)
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudStorageinsightsV1.Clients.StorageInsightsClient()
+      let client = try GoogleCloudStorageinsightsV1.StorageInsightsClient()
       try await sample(client: client, projectId: "[placeholder]", locationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

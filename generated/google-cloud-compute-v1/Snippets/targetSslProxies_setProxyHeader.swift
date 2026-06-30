@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some TargetSslProxies) async throws {
+  func sample(client: TargetSslProxiesClient) async throws {
     let response = try await client.setProxyHeader(
-      request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest()
+      request: TargetSslProxiesClient.SetProxyHeaderRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.TargetSslProxiesClient()
+        let client = try GoogleCloudComputeV1.TargetSslProxiesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

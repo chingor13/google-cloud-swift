@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.TargetPoolsClient {
+  extension TargetPoolsClient {
     /// Synthetic request message for the [addHealthCheck()][google.cloud.compute.v1.targetPools.addHealthCheck] method.
     ///
     /// [google.cloud.compute.v1.targetPools.addHealthCheck]: <doc:TargetPools/addHealthCheck(request:)>

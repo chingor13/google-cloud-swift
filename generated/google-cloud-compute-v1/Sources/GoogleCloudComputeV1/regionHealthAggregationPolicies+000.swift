@@ -28,128 +28,21 @@
   /// Service for the `regionHealthAggregationPolicies` resource.
   ///
   /// @Snippet(path: "regionHealthAggregationPoliciesQuickstart")
-  public protocol RegionHealthAggregationPolicies {
-    /// Retrieves the list of all HealthAggregationPolicy resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_aggregatedList")
-    func aggregatedList(
-      request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
+  public class RegionHealthAggregationPoliciesClient: Clients
+      .RegionHealthAggregationPoliciesProtocol
+  {
+    let inner: any Clients.RegionHealthAggregationPoliciesStub
 
-    /// Retrieves the list of all HealthAggregationPolicy resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
-
-    /// Retrieves the list of all HealthAggregationPolicy resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
-
-    /// Deletes the specified HealthAggregationPolicy in the given region.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_delete")
-    func delete(request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified HealthAggregationPolicy in the given region.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      healthAggregationPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified HealthAggregationPolicy resource in the given region.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_get")
-    func `get`(request: Clients.RegionHealthAggregationPoliciesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.HealthAggregationPolicy
-
-    /// Returns the specified HealthAggregationPolicy resource in the given region.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      healthAggregationPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
-
-    /// Create a HealthAggregationPolicy in the specified project in the given
-    /// region using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_insert")
-    func insert(request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Create a HealthAggregationPolicy in the specified project in the given
-    /// region using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: HealthAggregationPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the HealthAggregationPolicies for a project in the given region.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_list")
-    func list(request: Clients.RegionHealthAggregationPoliciesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.HealthAggregationPolicyList
-
-    /// Lists the HealthAggregationPolicies for a project in the given region.
-    func list(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.ListRequest
-    ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
-
-    /// Lists the HealthAggregationPolicies for a project in the given region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
-
-    /// Updates the specified regional HealthAggregationPolicy
-    /// resource with the data included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_patch")
-    func patch(request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified regional HealthAggregationPolicy
-    /// resource with the data included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      healthAggregationPolicy: Swift.String,
-      body: HealthAggregationPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "regionHealthAggregationPolicies_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `RegionHealthAggregationPoliciesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionHealthAggregationPoliciesStub =
+        try Clients.RegionHealthAggregationPoliciesTransport(options)
+      inner = Clients.RegionHealthAggregationPoliciesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionHealthAggregationPoliciesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all HealthAggregationPolicy resources,
     /// regional and global, available to the specified project.
@@ -158,59 +51,91 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_aggregatedList")
-    func aggregatedList(
-      request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
+    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all HealthAggregationPolicy resources,
     /// regional and global, available to the specified project.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+    ///
+    /// @Snippet(path: "regionHealthAggregationPolicies_aggregatedList")
+    public func aggregatedList(
+      byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
+    {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
+        in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified HealthAggregationPolicy in the given region.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_delete")
-    func delete(
-      request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+    public func delete(
+      request: RegionHealthAggregationPoliciesClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified HealthAggregationPolicy resource in the given region.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_get")
-    func `get`(
-      request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+    public func `get`(
+      request: RegionHealthAggregationPoliciesClient.GetRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
+    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Create a HealthAggregationPolicy in the specified project in the given
     /// region using the parameters that are included in the request.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_insert")
-    func insert(
-      request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+    public func insert(
+      request: RegionHealthAggregationPoliciesClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the HealthAggregationPolicies for a project in the given region.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_list")
-    func list(
-      request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+    public func list(
+      request: RegionHealthAggregationPoliciesClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
+    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the HealthAggregationPolicies for a project in the given region.
-    func list(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+    ///
+    /// @Snippet(path: "regionHealthAggregationPolicies_list")
+    public func list(
+      byItem: RegionHealthAggregationPoliciesClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
+    ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the specified regional HealthAggregationPolicy
     /// resource with the data included in the request. This method supportsPATCH
@@ -218,153 +143,204 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_patch")
-    func patch(
-      request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+    public func patch(
+      request: RegionHealthAggregationPoliciesClient.PatchRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "regionHealthAggregationPolicies_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionHealthAggregationPolicies``.
-    public class RegionHealthAggregationPoliciesClient: RegionHealthAggregationPolicies {
-      let inner: any RegionHealthAggregationPoliciesStub
+    /// A Swift protocol to mock `RegionHealthAggregationPoliciesClient`.
+    ///
+    /// To mock `RegionHealthAggregationPoliciesClient` change your functions to receive
+    /// `some RegionHealthAggregationPoliciesProtocol` or `any RegionHealthAggregationPoliciesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionHealthAggregationPoliciesProtocol {
+      /// See `RegionHealthAggregationPoliciesClient.aggregatedList`.
+      func aggregatedList(request: RegionHealthAggregationPoliciesClient.AggregatedListRequest)
+        async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
 
-      /// Creates a new `RegionHealthAggregationPoliciesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionHealthAggregationPoliciesStub =
-          try RegionHealthAggregationPoliciesTransport(options)
-        inner = RegionHealthAggregationPoliciesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionHealthAggregationPoliciesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionHealthAggregationPoliciesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<
+        (Swift.String, HealthAggregationPoliciesScopedList), Swift.Error
+      >
 
-      /// See `RegionHealthAggregationPolicies.aggregatedList`
-      public func aggregatedList(
-        request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+      /// See `RegionHealthAggregationPoliciesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<
+        (Swift.String, HealthAggregationPoliciesScopedList), Swift.Error
+      >
+
+      /// See `RegionHealthAggregationPoliciesClient.delete`.
+      func delete(request: RegionHealthAggregationPoliciesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        healthAggregationPolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.`get``.
+      func `get`(request: RegionHealthAggregationPoliciesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.HealthAggregationPolicy
+
+      /// See `RegionHealthAggregationPoliciesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        healthAggregationPolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
+
+      /// See `RegionHealthAggregationPoliciesClient.insert`.
+      func insert(request: RegionHealthAggregationPoliciesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: HealthAggregationPolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.list`.
+      func list(request: RegionHealthAggregationPoliciesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.HealthAggregationPolicyList
+
+      /// See `RegionHealthAggregationPoliciesClient.list`.
+      func list(
+        byItem: RegionHealthAggregationPoliciesClient.ListRequest
+      ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
+
+      /// See `RegionHealthAggregationPoliciesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
+
+      /// See `RegionHealthAggregationPoliciesClient.patch`.
+      func patch(request: RegionHealthAggregationPoliciesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        healthAggregationPolicy: Swift.String,
+        body: HealthAggregationPolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthAggregationPoliciesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionHealthAggregationPoliciesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionHealthAggregationPoliciesClient.aggregatedList`.
+      func aggregatedList(
+        request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
 
-      /// Retrieves the list of all HealthAggregationPolicy resources,
-      /// regional and global, available to the specified project.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+      /// See `RegionHealthAggregationPoliciesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) throws -> any AsyncSequence<
         (Swift.String, HealthAggregationPoliciesScopedList), Swift.Error
-      > {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
-          in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      >
 
-      /// See `RegionHealthAggregationPolicies.delete`
-      public func delete(
-        request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+      /// See `RegionHealthAggregationPoliciesClient.delete`.
+      func delete(
+        request: RegionHealthAggregationPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthAggregationPolicies.`get``
-      public func `get`(
-        request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+      /// See `RegionHealthAggregationPoliciesClient.`get``.
+      func `get`(
+        request: RegionHealthAggregationPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
 
-      /// See `RegionHealthAggregationPolicies.insert`
-      public func insert(
-        request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+      /// See `RegionHealthAggregationPoliciesClient.insert`.
+      func insert(
+        request: RegionHealthAggregationPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthAggregationPolicies.list`
-      public func list(
-        request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+      /// See `RegionHealthAggregationPoliciesClient.list`.
+      func list(
+        request: RegionHealthAggregationPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
 
-      /// Lists the HealthAggregationPolicies for a project in the given region.
-      public func list(
-        byItem: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+      /// See `RegionHealthAggregationPoliciesClient.list`.
+      func list(
+        byItem: RegionHealthAggregationPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error>
 
-      /// See `RegionHealthAggregationPolicies.patch`
-      public func patch(
-        request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+      /// See `RegionHealthAggregationPoliciesClient.patch`.
+      func patch(
+        request: RegionHealthAggregationPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthAggregationPolicies.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+      /// See `RegionHealthAggregationPoliciesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension RegionHealthAggregationPolicies {
-    public func aggregatedList(
-      request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest
-    ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
+  extension Clients.RegionHealthAggregationPoliciesProtocol {
+    public func aggregatedList(request: RegionHealthAggregationPoliciesClient.AggregatedListRequest)
+      async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
+    {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+      request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest
+      byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
     {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+      byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
     {
@@ -380,20 +356,20 @@
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, HealthAggregationPoliciesScopedList), Swift.Error>
     {
-      let request = Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: RegionHealthAggregationPoliciesClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+      request: RegionHealthAggregationPoliciesClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -404,7 +380,7 @@
       region: Swift.String,
       healthAggregationPolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthAggregationPoliciesClient.DeleteRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.healthAggregationPolicy = healthAggregationPolicy
@@ -412,14 +388,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionHealthAggregationPoliciesClient.GetRequest)
-      async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
+    public func `get`(request: RegionHealthAggregationPoliciesClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.HealthAggregationPolicy
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+      request: RegionHealthAggregationPoliciesClient.GetRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -430,7 +406,7 @@
       region: Swift.String,
       healthAggregationPolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
-      let request = Clients.RegionHealthAggregationPoliciesClient.GetRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.healthAggregationPolicy = healthAggregationPolicy
@@ -438,14 +414,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: RegionHealthAggregationPoliciesClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+      request: RegionHealthAggregationPoliciesClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -456,7 +432,7 @@
       region: Swift.String,
       body: HealthAggregationPolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthAggregationPoliciesClient.InsertRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -464,27 +440,27 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionHealthAggregationPoliciesClient.ListRequest)
-      async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
+    public func list(request: RegionHealthAggregationPoliciesClient.ListRequest) async throws
+      -> GoogleCloudComputeV1.HealthAggregationPolicyList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+      request: RegionHealthAggregationPoliciesClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.ListRequest
+      byItem: RegionHealthAggregationPoliciesClient.ListRequest
     ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+      byItem: RegionHealthAggregationPoliciesClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error> {
       let listRpc = {
@@ -498,21 +474,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<HealthAggregationPolicy, Swift.Error> {
-      let request = Clients.RegionHealthAggregationPoliciesClient.ListRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func patch(request: RegionHealthAggregationPoliciesClient.PatchRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+      request: RegionHealthAggregationPoliciesClient.PatchRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -524,7 +500,7 @@
       healthAggregationPolicy: Swift.String,
       body: HealthAggregationPolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthAggregationPoliciesClient.PatchRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.healthAggregationPolicy = healthAggregationPolicy
@@ -534,13 +510,13 @@
     }
 
     public func testIamPermissions(
-      request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest
+      request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+      request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -552,7 +528,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest().with {
+      let request = RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

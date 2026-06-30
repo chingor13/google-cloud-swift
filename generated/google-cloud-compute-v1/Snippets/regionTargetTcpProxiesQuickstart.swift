@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionTargetTcpProxiesClient()
+    let client = try GoogleCloudComputeV1.RegionTargetTcpProxiesClient()
     let response = try await client.delete(
-      request: Clients.RegionTargetTcpProxiesClient.DeleteRequest()
+      request: RegionTargetTcpProxiesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -28,27 +28,32 @@
   /// Cloud SQL instance names service.
   ///
   /// @Snippet(path: "SqlInstanceNamesServiceQuickstart")
-  public protocol SqlInstanceNamesService {
+  public class SqlInstanceNamesServiceClient: Clients.SqlInstanceNamesServiceProtocol {
+    let inner: any Clients.SqlInstanceNamesServiceStub
+
+    /// Creates a new `SqlInstanceNamesServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlInstanceNamesServiceStub =
+        try Clients.SqlInstanceNamesServiceTransport(options)
+      inner = Clients.SqlInstanceNamesServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlInstanceNamesServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlInstanceNamesService``.
-    public class SqlInstanceNamesServiceClient: SqlInstanceNamesService {
-      let inner: any SqlInstanceNamesServiceStub
-
-      /// Creates a new `SqlInstanceNamesServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlInstanceNamesServiceStub = try SqlInstanceNamesServiceTransport(options)
-        inner = SqlInstanceNamesServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlInstanceNamesServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlInstanceNamesServiceClient`.
+    ///
+    /// To mock `SqlInstanceNamesServiceClient` change your functions to receive
+    /// `some SqlInstanceNamesServiceProtocol` or `any SqlInstanceNamesServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlInstanceNamesServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlInstanceNamesService {
+  extension Clients.SqlInstanceNamesServiceProtocol {
   }
 #endif

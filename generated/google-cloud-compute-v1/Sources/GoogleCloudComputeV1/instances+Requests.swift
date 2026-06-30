@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InstancesClient {
+  extension InstancesClient {
     /// Synthetic request message for the [addAccessConfig()][google.cloud.compute.v1.instances.addAccessConfig] method.
     ///
     /// [google.cloud.compute.v1.instances.addAccessConfig]: <doc:Instances/addAccessConfig(request:)>
@@ -2961,7 +2961,7 @@
       /// updated properties do not require it. If not specified, then
       /// Compute Engine acts based on the minimum action that the updated
       /// properties require.
-      public var minimalAction: Clients.InstancesClient.UpdateRequest.MinimalAction? = nil
+      public var minimalAction: InstancesClient.UpdateRequest.MinimalAction? = nil
 
       /// Specifies the most disruptive action that can be taken on the instance
       /// as part of the update. Compute Engine returns an error if the
@@ -2969,7 +2969,7 @@
       /// instance update. Valid options from lowest to highest are
       /// NO_EFFECT, REFRESH, and RESTART.
       public var mostDisruptiveAllowedAction:
-        Clients.InstancesClient.UpdateRequest.MostDisruptiveAllowedAction? = nil
+        InstancesClient.UpdateRequest.MostDisruptiveAllowedAction? = nil
 
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
@@ -3015,7 +3015,7 @@
 
       /// The enumerated type for the [minimalAction][google.cloud.compute.v1.instances.updateRequest.minimalAction] field.
       ///
-      /// [google.cloud.compute.v1.instances.updateRequest.minimalAction]: <doc:Clients/InstancesClient/UpdateRequest/MinimalAction>
+      /// [google.cloud.compute.v1.instances.updateRequest.minimalAction]: <doc:InstancesClient/UpdateRequest/MinimalAction>
       public enum MinimalAction: Codable, Equatable, Sendable {
         case invalid
         case noEffect
@@ -3125,7 +3125,7 @@
 
       /// The enumerated type for the [mostDisruptiveAllowedAction][google.cloud.compute.v1.instances.updateRequest.mostDisruptiveAllowedAction] field.
       ///
-      /// [google.cloud.compute.v1.instances.updateRequest.mostDisruptiveAllowedAction]: <doc:Clients/InstancesClient/UpdateRequest/MostDisruptiveAllowedAction>
+      /// [google.cloud.compute.v1.instances.updateRequest.mostDisruptiveAllowedAction]: <doc:InstancesClient/UpdateRequest/MostDisruptiveAllowedAction>
       public enum MostDisruptiveAllowedAction: Codable, Equatable, Sendable {
         case invalid
         case noEffect

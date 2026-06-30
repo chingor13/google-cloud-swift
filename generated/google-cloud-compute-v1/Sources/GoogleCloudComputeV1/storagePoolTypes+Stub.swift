@@ -28,16 +28,16 @@
   extension Clients {
     protocol StoragePoolTypesStub {
       func aggregatedList(
-        request: Clients.StoragePoolTypesClient.AggregatedListRequest,
+        request: StoragePoolTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
 
       func `get`(
-        request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolType
 
       func list(
-        request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList
     }
 
@@ -50,7 +50,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.StoragePoolTypesClient.AggregatedListRequest,
+        request: StoragePoolTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -81,7 +81,7 @@
       }
 
       public func `get`(
-        request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -107,7 +107,7 @@
       }
 
       public func list(
-        request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

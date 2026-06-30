@@ -28,161 +28,159 @@
   /// Service for the `rolloutPlans` resource.
   ///
   /// @Snippet(path: "rolloutPlansQuickstart")
-  public protocol RolloutPlans {
-    /// Deletes a RolloutPlan.
-    ///
-    /// @Snippet(path: "rolloutPlans_delete")
-    func delete(request: Clients.RolloutPlansClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
+  public class RolloutPlansClient: Clients.RolloutPlansProtocol {
+    let inner: any Clients.RolloutPlansStub
 
-    /// Deletes a RolloutPlan.
-    func delete(
-      project: Swift.String,
-      rolloutPlan: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Gets details of a single project-scoped RolloutPlan.
-    ///
-    /// @Snippet(path: "rolloutPlans_get")
-    func `get`(request: Clients.RolloutPlansClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.RolloutPlan
-
-    /// Gets details of a single project-scoped RolloutPlan.
-    func `get`(
-      project: Swift.String,
-      rolloutPlan: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.RolloutPlan
-
-    /// Creates a new RolloutPlan in a given project and location.
-    ///
-    /// @Snippet(path: "rolloutPlans_insert")
-    func insert(request: Clients.RolloutPlansClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new RolloutPlan in a given project and location.
-    func insert(
-      project: Swift.String,
-      body: RolloutPlan?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists RolloutPlans in a given project and location.
-    ///
-    /// @Snippet(path: "rolloutPlans_list")
-    func list(request: Clients.RolloutPlansClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.RolloutPlansListResponse
-
-    /// Lists RolloutPlans in a given project and location.
-    func list(
-      byItem: Clients.RolloutPlansClient.ListRequest
-    ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
-
-    /// Lists RolloutPlans in a given project and location.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
+    /// Creates a new `RolloutPlansClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RolloutPlansStub = try Clients.RolloutPlansTransport(options)
+      inner = Clients.RolloutPlansRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RolloutPlansLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes a RolloutPlan.
     ///
     /// @Snippet(path: "rolloutPlans_delete")
-    func delete(
-      request: Clients.RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Gets details of a single project-scoped RolloutPlan.
     ///
     /// @Snippet(path: "rolloutPlans_get")
-    func `get`(
-      request: Clients.RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RolloutPlan
+    public func `get`(
+      request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RolloutPlan {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a new RolloutPlan in a given project and location.
     ///
     /// @Snippet(path: "rolloutPlans_insert")
-    func insert(
-      request: Clients.RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists RolloutPlans in a given project and location.
     ///
     /// @Snippet(path: "rolloutPlans_list")
-    func list(
-      request: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse
+    public func list(
+      request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists RolloutPlans in a given project and location.
-    func list(
-      byItem: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
+    ///
+    /// @Snippet(path: "rolloutPlans_list")
+    public func list(
+      byItem: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<RolloutPlan, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RolloutPlans``.
-    public class RolloutPlansClient: RolloutPlans {
-      let inner: any RolloutPlansStub
+    /// A Swift protocol to mock `RolloutPlansClient`.
+    ///
+    /// To mock `RolloutPlansClient` change your functions to receive
+    /// `some RolloutPlansProtocol` or `any RolloutPlansProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RolloutPlansProtocol {
+      /// See `RolloutPlansClient.delete`.
+      func delete(request: RolloutPlansClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RolloutPlansClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RolloutPlansStub = try RolloutPlansTransport(options)
-        inner = RolloutPlansRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RolloutPlansLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RolloutPlansClient.delete`.
+      func delete(
+        project: Swift.String,
+        rolloutPlan: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutPlans.delete`
-      public func delete(
-        request: Clients.RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `RolloutPlansClient.`get``.
+      func `get`(request: RolloutPlansClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.RolloutPlan
 
-      /// See `RolloutPlans.`get``
-      public func `get`(
-        request: Clients.RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RolloutPlan {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RolloutPlansClient.`get``.
+      func `get`(
+        project: Swift.String,
+        rolloutPlan: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.RolloutPlan
 
-      /// See `RolloutPlans.insert`
-      public func insert(
-        request: Clients.RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RolloutPlansClient.insert`.
+      func insert(request: RolloutPlansClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutPlans.list`
-      public func list(
-        request: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RolloutPlansClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: RolloutPlan?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Lists RolloutPlans in a given project and location.
-      public func list(
-        byItem: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<RolloutPlan, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RolloutPlansClient.list`.
+      func list(request: RolloutPlansClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.RolloutPlansListResponse
+
+      /// See `RolloutPlansClient.list`.
+      func list(
+        byItem: RolloutPlansClient.ListRequest
+      ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
+
+      /// See `RolloutPlansClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
+
+      /// See `RolloutPlansClient.delete`.
+      func delete(
+        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RolloutPlansClient.`get``.
+      func `get`(
+        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RolloutPlan
+
+      /// See `RolloutPlansClient.insert`.
+      func insert(
+        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RolloutPlansClient.list`.
+      func list(
+        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse
+
+      /// See `RolloutPlansClient.list`.
+      func list(
+        byItem: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<RolloutPlan, Swift.Error>
     }
   }
 
   // Default implementations
-  extension RolloutPlans {
-    public func delete(request: Clients.RolloutPlansClient.DeleteRequest) async throws
+  extension Clients.RolloutPlansProtocol {
+    public func delete(request: RolloutPlansClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -191,21 +189,21 @@
       project: Swift.String,
       rolloutPlan: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RolloutPlansClient.DeleteRequest().with {
+      let request = RolloutPlansClient.DeleteRequest().with {
         $0.project = project
         $0.rolloutPlan = rolloutPlan
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RolloutPlansClient.GetRequest) async throws
+    public func `get`(request: RolloutPlansClient.GetRequest) async throws
       -> GoogleCloudComputeV1.RolloutPlan
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RolloutPlan {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -214,21 +212,21 @@
       project: Swift.String,
       rolloutPlan: Swift.String,
     ) async throws -> GoogleCloudComputeV1.RolloutPlan {
-      let request = Clients.RolloutPlansClient.GetRequest().with {
+      let request = RolloutPlansClient.GetRequest().with {
         $0.project = project
         $0.rolloutPlan = rolloutPlan
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RolloutPlansClient.InsertRequest) async throws
+    public func insert(request: RolloutPlansClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -237,33 +235,33 @@
       project: Swift.String,
       body: RolloutPlan?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RolloutPlansClient.InsertRequest().with {
+      let request = RolloutPlansClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RolloutPlansClient.ListRequest) async throws
+    public func list(request: RolloutPlansClient.ListRequest) async throws
       -> GoogleCloudComputeV1.RolloutPlansListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RolloutPlansClient.ListRequest
+      byItem: RolloutPlansClient.ListRequest
     ) throws -> any AsyncSequence<RolloutPlan, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<RolloutPlan, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse in
@@ -275,7 +273,7 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<RolloutPlan, Swift.Error> {
-      let request = Clients.RolloutPlansClient.ListRequest().with {
+      let request = RolloutPlansClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)

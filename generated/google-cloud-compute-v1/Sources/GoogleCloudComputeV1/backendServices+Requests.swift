@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.BackendServicesClient {
+  extension BackendServicesClient {
     /// Synthetic request message for the [addSignedUrlKey()][google.cloud.compute.v1.backendServices.addSignedUrlKey] method.
     ///
     /// [google.cloud.compute.v1.backendServices.addSignedUrlKey]: <doc:BackendServices/addSignedUrlKey(request:)>

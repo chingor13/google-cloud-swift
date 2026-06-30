@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some ForwardingRules) async throws {
+  func sample(client: ForwardingRulesClient) async throws {
     let response = try await client.delete(
-      request: Clients.ForwardingRulesClient.DeleteRequest()
+      request: ForwardingRulesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.ForwardingRulesClient()
+        let client = try GoogleCloudComputeV1.ForwardingRulesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

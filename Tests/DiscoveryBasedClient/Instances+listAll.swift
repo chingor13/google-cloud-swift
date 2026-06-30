@@ -18,7 +18,7 @@ import Logging
 
 extension InstanceSamples {
   static public func listAll(
-    client: some GoogleCloudComputeV1.Instances,
+    client: InstancesClient,
     projectId: String,
     zoneId: String,
     logger: Logger

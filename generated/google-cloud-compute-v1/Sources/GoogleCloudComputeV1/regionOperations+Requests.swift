@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionOperationsClient {
+  extension RegionOperationsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionOperations.delete] method.
     ///
     /// [google.cloud.compute.v1.regionOperations.delete]: <doc:RegionOperations/delete(request:)>

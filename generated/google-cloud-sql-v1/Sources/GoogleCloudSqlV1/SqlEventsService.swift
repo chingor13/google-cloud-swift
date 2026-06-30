@@ -29,27 +29,31 @@
   /// service is only used internally.
   ///
   /// @Snippet(path: "SqlEventsServiceQuickstart")
-  public protocol SqlEventsService {
+  public class SqlEventsServiceClient: Clients.SqlEventsServiceProtocol {
+    let inner: any Clients.SqlEventsServiceStub
+
+    /// Creates a new `SqlEventsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlEventsServiceStub = try Clients.SqlEventsServiceTransport(options)
+      inner = Clients.SqlEventsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlEventsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlEventsService``.
-    public class SqlEventsServiceClient: SqlEventsService {
-      let inner: any SqlEventsServiceStub
-
-      /// Creates a new `SqlEventsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlEventsServiceStub = try SqlEventsServiceTransport(options)
-        inner = SqlEventsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlEventsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlEventsServiceClient`.
+    ///
+    /// To mock `SqlEventsServiceClient` change your functions to receive
+    /// `some SqlEventsServiceProtocol` or `any SqlEventsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlEventsServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlEventsService {
+  extension Clients.SqlEventsServiceProtocol {
   }
 #endif

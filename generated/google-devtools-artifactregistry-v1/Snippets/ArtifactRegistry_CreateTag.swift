@@ -24,7 +24,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some ArtifactRegistry, parent: String) async throws {
+func sample(client: ArtifactRegistryClient, parent: String) async throws {
   let response = try await client.createTag(
     request: CreateTagRequest()
       .with {
@@ -41,7 +41,7 @@ func sample(client: some ArtifactRegistry, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleDevtoolsArtifactregistryV1.Clients.ArtifactRegistryClient()
+      let client = try GoogleDevtoolsArtifactregistryV1.ArtifactRegistryClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

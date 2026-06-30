@@ -28,142 +28,19 @@
   /// Service for the `regionInstantSnapshots` resource.
   ///
   /// @Snippet(path: "regionInstantSnapshotsQuickstart")
-  public protocol RegionInstantSnapshots {
-    /// Deletes the specified InstantSnapshot resource. Keep in mind that deleting
-    /// a single instantSnapshot might not necessarily delete all the data on that
-    /// instantSnapshot. If any data on the instantSnapshot that is marked for
-    /// deletion is needed for subsequent instantSnapshots, the data will be moved
-    /// to the next corresponding instantSnapshot.
-    ///
-    /// For more information, seeDeleting
-    /// instantSnapshots.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_delete")
-    func delete(request: Clients.RegionInstantSnapshotsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
+  public class RegionInstantSnapshotsClient: Clients.RegionInstantSnapshotsProtocol {
+    let inner: any Clients.RegionInstantSnapshotsStub
 
-    /// Deletes the specified InstantSnapshot resource. Keep in mind that deleting
-    /// a single instantSnapshot might not necessarily delete all the data on that
-    /// instantSnapshot. If any data on the instantSnapshot that is marked for
-    /// deletion is needed for subsequent instantSnapshots, the data will be moved
-    /// to the next corresponding instantSnapshot.
-    ///
-    /// For more information, seeDeleting
-    /// instantSnapshots.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      instantSnapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified InstantSnapshot resource in the specified region.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_get")
-    func `get`(request: Clients.RegionInstantSnapshotsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InstantSnapshot
-
-    /// Returns the specified InstantSnapshot resource in the specified region.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      instantSnapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InstantSnapshot
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_getIamPolicy")
-    func getIamPolicy(request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates an instant snapshot in the specified region.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_insert")
-    func insert(request: Clients.RegionInstantSnapshotsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates an instant snapshot in the specified region.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: InstantSnapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of InstantSnapshot resources contained within
-    /// the specified region.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_list")
-    func list(request: Clients.RegionInstantSnapshotsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.InstantSnapshotList
-
-    /// Retrieves the list of InstantSnapshot resources contained within
-    /// the specified region.
-    func list(
-      byItem: Clients.RegionInstantSnapshotsClient.ListRequest
-    ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
-
-    /// Retrieves the list of InstantSnapshot resources contained within
-    /// the specified region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_setIamPolicy")
-    func setIamPolicy(request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Sets the labels on a instantSnapshot in the given region. To learn more
-    /// about labels, read the Labeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_setLabels")
-    func setLabels(request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on a instantSnapshot in the given region. To learn more
-    /// about labels, read the Labeling
-    /// Resources documentation.
-    func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "regionInstantSnapshots_testIamPermissions")
-    func testIamPermissions(request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `RegionInstantSnapshotsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionInstantSnapshotsStub =
+        try Clients.RegionInstantSnapshotsTransport(options)
+      inner = Clients.RegionInstantSnapshotsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionInstantSnapshotsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes the specified InstantSnapshot resource. Keep in mind that deleting
     /// a single instantSnapshot might not necessarily delete all the data on that
@@ -175,186 +52,262 @@
     /// instantSnapshots.
     ///
     /// @Snippet(path: "regionInstantSnapshots_delete")
-    func delete(
-      request: Clients.RegionInstantSnapshotsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified InstantSnapshot resource in the specified region.
     ///
     /// @Snippet(path: "regionInstantSnapshots_get")
-    func `get`(
-      request: Clients.RegionInstantSnapshotsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstantSnapshot
+    public func `get`(
+      request: RegionInstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "regionInstantSnapshots_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest,
+    public func getIamPolicy(
+      request: RegionInstantSnapshotsClient.GetIamPolicyRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates an instant snapshot in the specified region.
     ///
     /// @Snippet(path: "regionInstantSnapshots_insert")
-    func insert(
-      request: Clients.RegionInstantSnapshotsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of InstantSnapshot resources contained within
     /// the specified region.
     ///
     /// @Snippet(path: "regionInstantSnapshots_list")
-    func list(
-      request: Clients.RegionInstantSnapshotsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstantSnapshotList
+    public func list(
+      request: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstantSnapshotList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of InstantSnapshot resources contained within
     /// the specified region.
-    func list(
-      byItem: Clients.RegionInstantSnapshotsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstantSnapshots_list")
+    public func list(
+      byItem: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstantSnapshotList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "regionInstantSnapshots_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest,
+    public func setIamPolicy(
+      request: RegionInstantSnapshotsClient.SetIamPolicyRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Sets the labels on a instantSnapshot in the given region. To learn more
     /// about labels, read the Labeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "regionInstantSnapshots_setLabels")
-    func setLabels(
-      request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(
+      request: RegionInstantSnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setLabels(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "regionInstantSnapshots_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: RegionInstantSnapshotsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionInstantSnapshots``.
-    public class RegionInstantSnapshotsClient: RegionInstantSnapshots {
-      let inner: any RegionInstantSnapshotsStub
+    /// A Swift protocol to mock `RegionInstantSnapshotsClient`.
+    ///
+    /// To mock `RegionInstantSnapshotsClient` change your functions to receive
+    /// `some RegionInstantSnapshotsProtocol` or `any RegionInstantSnapshotsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionInstantSnapshotsProtocol {
+      /// See `RegionInstantSnapshotsClient.delete`.
+      func delete(request: RegionInstantSnapshotsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionInstantSnapshotsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionInstantSnapshotsStub = try RegionInstantSnapshotsTransport(options)
-        inner = RegionInstantSnapshotsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionInstantSnapshotsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionInstantSnapshotsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        instantSnapshot: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstantSnapshots.delete`
-      public func delete(
-        request: Clients.RegionInstantSnapshotsClient.DeleteRequest,
+      /// See `RegionInstantSnapshotsClient.`get``.
+      func `get`(request: RegionInstantSnapshotsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InstantSnapshot
+
+      /// See `RegionInstantSnapshotsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        instantSnapshot: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InstantSnapshot
+
+      /// See `RegionInstantSnapshotsClient.getIamPolicy`.
+      func getIamPolicy(request: RegionInstantSnapshotsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `RegionInstantSnapshotsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `RegionInstantSnapshotsClient.insert`.
+      func insert(request: RegionInstantSnapshotsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstantSnapshotsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: InstantSnapshot?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstantSnapshotsClient.list`.
+      func list(request: RegionInstantSnapshotsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.InstantSnapshotList
+
+      /// See `RegionInstantSnapshotsClient.list`.
+      func list(
+        byItem: RegionInstantSnapshotsClient.ListRequest
+      ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
+
+      /// See `RegionInstantSnapshotsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
+
+      /// See `RegionInstantSnapshotsClient.setIamPolicy`.
+      func setIamPolicy(request: RegionInstantSnapshotsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `RegionInstantSnapshotsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `RegionInstantSnapshotsClient.setLabels`.
+      func setLabels(request: RegionInstantSnapshotsClient.SetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstantSnapshotsClient.setLabels`.
+      func setLabels(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstantSnapshotsClient.testIamPermissions`.
+      func testIamPermissions(request: RegionInstantSnapshotsClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionInstantSnapshotsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionInstantSnapshotsClient.delete`.
+      func delete(
+        request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstantSnapshotsClient.`get``.
+      func `get`(
+        request: RegionInstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InstantSnapshot
+
+      /// See `RegionInstantSnapshotsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: RegionInstantSnapshotsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// See `RegionInstantSnapshots.`get``
-      public func `get`(
-        request: Clients.RegionInstantSnapshotsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionInstantSnapshotsClient.insert`.
+      func insert(
+        request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstantSnapshots.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
+      /// See `RegionInstantSnapshotsClient.list`.
+      func list(
+        request: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InstantSnapshotList
 
-      /// See `RegionInstantSnapshots.insert`
-      public func insert(
-        request: Clients.RegionInstantSnapshotsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RegionInstantSnapshotsClient.list`.
+      func list(
+        byItem: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error>
 
-      /// See `RegionInstantSnapshots.list`
-      public func list(
-        request: Clients.RegionInstantSnapshotsClient.ListRequest,
+      /// See `RegionInstantSnapshotsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: RegionInstantSnapshotsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstantSnapshotList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// Retrieves the list of InstantSnapshot resources contained within
-      /// the specified region.
-      public func list(
-        byItem: Clients.RegionInstantSnapshotsClient.ListRequest,
+      /// See `RegionInstantSnapshotsClient.setLabels`.
+      func setLabels(
+        request: RegionInstantSnapshotsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstantSnapshotList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstantSnapshots.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest,
+      /// See `RegionInstantSnapshotsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RegionInstantSnapshotsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `RegionInstantSnapshots.setLabels`
-      public func setLabels(
-        request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setLabels(request: request, options: options)
-      }
-
-      /// See `RegionInstantSnapshots.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension RegionInstantSnapshots {
-    public func delete(request: Clients.RegionInstantSnapshotsClient.DeleteRequest) async throws
+  extension Clients.RegionInstantSnapshotsProtocol {
+    public func delete(request: RegionInstantSnapshotsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionInstantSnapshotsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -364,7 +317,7 @@
       region: Swift.String,
       instantSnapshot: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstantSnapshotsClient.DeleteRequest().with {
+      let request = RegionInstantSnapshotsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.instantSnapshot = instantSnapshot
@@ -372,15 +325,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionInstantSnapshotsClient.GetRequest) async throws
+    public func `get`(request: RegionInstantSnapshotsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InstantSnapshot
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionInstantSnapshotsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -390,7 +342,7 @@
       region: Swift.String,
       instantSnapshot: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
-      let request = Clients.RegionInstantSnapshotsClient.GetRequest().with {
+      let request = RegionInstantSnapshotsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.instantSnapshot = instantSnapshot
@@ -398,14 +350,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(request: RegionInstantSnapshotsClient.GetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest,
+      request: RegionInstantSnapshotsClient.GetIamPolicyRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -416,7 +368,7 @@
       region: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest().with {
+      let request = RegionInstantSnapshotsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -424,15 +376,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.RegionInstantSnapshotsClient.InsertRequest) async throws
+    public func insert(request: RegionInstantSnapshotsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionInstantSnapshotsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -442,7 +393,7 @@
       region: Swift.String,
       body: InstantSnapshot?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstantSnapshotsClient.InsertRequest().with {
+      let request = RegionInstantSnapshotsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -450,28 +401,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionInstantSnapshotsClient.ListRequest) async throws
+    public func list(request: RegionInstantSnapshotsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.InstantSnapshotList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionInstantSnapshotsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstantSnapshotList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionInstantSnapshotsClient.ListRequest
+      byItem: RegionInstantSnapshotsClient.ListRequest
     ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionInstantSnapshotsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstantSnapshotList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -483,21 +432,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<InstantSnapshot, Swift.Error> {
-      let request = Clients.RegionInstantSnapshotsClient.ListRequest().with {
+      let request = RegionInstantSnapshotsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func setIamPolicy(request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(request: RegionInstantSnapshotsClient.SetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest,
+      request: RegionInstantSnapshotsClient.SetIamPolicyRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -509,7 +458,7 @@
       resource: Swift.String,
       body: RegionSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest().with {
+      let request = RegionInstantSnapshotsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -518,15 +467,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func setLabels(request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(request: RegionInstantSnapshotsClient.SetLabelsRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setLabels(request: request, options: .init())
     }
 
     public func setLabels(
-      request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -537,7 +485,7 @@
       resource: Swift.String,
       body: RegionSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstantSnapshotsClient.SetLabelsRequest().with {
+      let request = RegionInstantSnapshotsClient.SetLabelsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -546,14 +494,14 @@
       return try await self.setLabels(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: RegionInstantSnapshotsClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest,
+      request: RegionInstantSnapshotsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -565,7 +513,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest().with {
+      let request = RegionInstantSnapshotsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

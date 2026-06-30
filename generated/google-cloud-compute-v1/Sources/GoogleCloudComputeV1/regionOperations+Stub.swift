@@ -28,20 +28,19 @@
   extension Clients {
     protocol RegionOperationsStub {
       func delete(
-        request: Clients.RegionOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws
 
       func `get`(
-        request: Clients.RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       func wait(
-        request: Clients.RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -54,8 +53,7 @@
       }
 
       public func delete(
-        request: Clients.RegionOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -78,7 +76,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -103,7 +101,7 @@
       }
 
       public func list(
-        request: Clients.RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -131,7 +129,7 @@
       }
 
       public func wait(
-        request: Clients.RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

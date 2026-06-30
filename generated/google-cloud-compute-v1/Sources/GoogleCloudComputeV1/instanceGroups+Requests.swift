@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InstanceGroupsClient {
+  extension InstanceGroupsClient {
     /// Synthetic request message for the [addInstances()][google.cloud.compute.v1.instanceGroups.addInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroups.addInstances]: <doc:InstanceGroups/addInstances(request:)>

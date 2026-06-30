@@ -28,23 +28,19 @@
   extension Clients {
     protocol RegionInstanceTemplatesStub {
       func delete(
-        request: Clients.RegionInstanceTemplatesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionInstanceTemplatesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplate
 
       func insert(
-        request: Clients.RegionInstanceTemplatesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionInstanceTemplatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplateList
     }
 
@@ -57,8 +53,7 @@
       }
 
       public func delete(
-        request: Clients.RegionInstanceTemplatesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -87,8 +82,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionInstanceTemplatesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplate {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -115,8 +109,7 @@
       }
 
       public func insert(
-        request: Clients.RegionInstanceTemplatesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -142,8 +135,7 @@
       }
 
       public func list(
-        request: Clients.RegionInstanceTemplatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplateList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

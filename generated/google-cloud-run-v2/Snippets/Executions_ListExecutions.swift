@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Executions, projectId: String, locationId: String, jobId: String)
+func sample(client: ExecutionsClient, projectId: String, locationId: String, jobId: String)
   async throws
 {
   let items = try client.listExecutions(
@@ -41,7 +41,7 @@ func sample(client: some Executions, projectId: String, locationId: String, jobI
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.ExecutionsClient()
+      let client = try GoogleCloudRunV2.ExecutionsClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         jobId: "[placeholder]")

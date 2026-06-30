@@ -28,13 +28,11 @@
   extension Clients {
     protocol InterconnectLocationsStub {
       func `get`(
-        request: Clients.InterconnectLocationsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocation
 
       func list(
-        request: Clients.InterconnectLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocationList
     }
 
@@ -47,8 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectLocationsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -72,8 +69,7 @@
       }
 
       public func list(
-        request: Clients.InterconnectLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocationList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

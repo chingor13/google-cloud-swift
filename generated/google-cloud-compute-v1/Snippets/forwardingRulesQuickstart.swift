@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.ForwardingRulesClient()
+    let client = try GoogleCloudComputeV1.ForwardingRulesClient()
     let items = try client.aggregatedList(
-      byItem: Clients.ForwardingRulesClient.AggregatedListRequest()
+      byItem: ForwardingRulesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

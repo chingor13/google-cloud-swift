@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some StoragePoolTypes) async throws {
+  func sample(client: StoragePoolTypesClient) async throws {
     let items = try client.aggregatedList(
-      byItem: Clients.StoragePoolTypesClient.AggregatedListRequest()
+      byItem: StoragePoolTypesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.StoragePoolTypesClient()
+        let client = try GoogleCloudComputeV1.StoragePoolTypesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

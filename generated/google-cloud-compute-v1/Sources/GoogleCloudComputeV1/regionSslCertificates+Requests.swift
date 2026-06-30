@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionSslCertificatesClient {
+  extension RegionSslCertificatesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionSslCertificates.delete] method.
     ///
     /// [google.cloud.compute.v1.regionSslCertificates.delete]: <doc:RegionSslCertificates/delete(request:)>

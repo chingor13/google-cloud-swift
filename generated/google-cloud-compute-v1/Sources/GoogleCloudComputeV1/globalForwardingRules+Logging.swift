@@ -60,15 +60,14 @@
       }
 
       public func delete(
-        request: Clients.GlobalForwardingRulesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.GlobalForwardingRulesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalForwardingRulesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -76,15 +75,14 @@
       }
 
       public func `get`(
-        request: Clients.GlobalForwardingRulesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRule {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.GlobalForwardingRulesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalForwardingRulesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.ForwardingRule
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -92,15 +90,14 @@
       }
 
       public func insert(
-        request: Clients.GlobalForwardingRulesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.GlobalForwardingRulesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalForwardingRulesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -108,15 +105,14 @@
       }
 
       public func list(
-        request: Clients.GlobalForwardingRulesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.GlobalForwardingRulesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalForwardingRulesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.ForwardingRuleList
             in
             return try await self.inner.list(request: r, options: o)
@@ -124,15 +120,14 @@
       }
 
       public func patch(
-        request: Clients.GlobalForwardingRulesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.GlobalForwardingRulesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalForwardingRulesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -140,7 +135,7 @@
       }
 
       public func setLabels(
-        request: Clients.GlobalForwardingRulesClient.SetLabelsRequest,
+        request: GlobalForwardingRulesClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -148,17 +143,15 @@
           options: options,
           name: "setLabels",
           action: {
-            (
-              r: Clients.GlobalForwardingRulesClient.SetLabelsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalForwardingRulesClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
           })
       }
 
       public func setTarget(
-        request: Clients.GlobalForwardingRulesClient.SetTargetRequest,
+        request: GlobalForwardingRulesClient.SetTargetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -166,10 +159,8 @@
           options: options,
           name: "setTarget",
           action: {
-            (
-              r: Clients.GlobalForwardingRulesClient.SetTargetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalForwardingRulesClient.SetTargetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setTarget(request: r, options: o)
           })

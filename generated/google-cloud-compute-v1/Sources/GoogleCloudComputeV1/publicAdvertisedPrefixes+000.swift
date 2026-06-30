@@ -28,72 +28,81 @@
   /// Service for the `publicAdvertisedPrefixes` resource.
   ///
   /// @Snippet(path: "publicAdvertisedPrefixesQuickstart")
-  public protocol PublicAdvertisedPrefixes {
+  public class PublicAdvertisedPrefixesClient: Clients.PublicAdvertisedPrefixesProtocol {
+    let inner: any Clients.PublicAdvertisedPrefixesStub
+
+    /// Creates a new `PublicAdvertisedPrefixesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.PublicAdvertisedPrefixesStub =
+        try Clients.PublicAdvertisedPrefixesTransport(options)
+      inner = Clients.PublicAdvertisedPrefixesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.PublicAdvertisedPrefixesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Announces the specified PublicAdvertisedPrefix
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_announce")
-    func announce(request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Announces the specified PublicAdvertisedPrefix
-    func announce(
-      project: Swift.String,
-      publicAdvertisedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func announce(
+      request: PublicAdvertisedPrefixesClient.AnnounceRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.announce(request: request, options: options)
+    }
 
     /// Deletes the specified PublicAdvertisedPrefix
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_delete")
-    func delete(request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified PublicAdvertisedPrefix
-    func delete(
-      project: Swift.String,
-      publicAdvertisedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: PublicAdvertisedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified PublicAdvertisedPrefix resource.
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_get")
-    func `get`(request: Clients.PublicAdvertisedPrefixesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.PublicAdvertisedPrefix
-
-    /// Returns the specified PublicAdvertisedPrefix resource.
-    func `get`(
-      project: Swift.String,
-      publicAdvertisedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
+    public func `get`(
+      request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a PublicAdvertisedPrefix in the specified project
     /// using the parameters that are included in the request.
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_insert")
-    func insert(request: Clients.PublicAdvertisedPrefixesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a PublicAdvertisedPrefix in the specified project
-    /// using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      body: PublicAdvertisedPrefix?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: PublicAdvertisedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the PublicAdvertisedPrefixes for a project.
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_list")
-    func list(request: Clients.PublicAdvertisedPrefixesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
+    public func list(
+      request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the PublicAdvertisedPrefixes for a project.
-    func list(
-      byItem: Clients.PublicAdvertisedPrefixesClient.ListRequest
-    ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
-
-    /// Lists the PublicAdvertisedPrefixes for a project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
+    ///
+    /// @Snippet(path: "publicAdvertisedPrefixes_list")
+    public func list(
+      byItem: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified Router resource with the data included in the
     /// request. This method supportsPATCH
@@ -101,195 +110,161 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_patch")
-    func patch(request: Clients.PublicAdvertisedPrefixesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified Router resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      publicAdvertisedPrefix: Swift.String,
-      body: PublicAdvertisedPrefix?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Withdraws the specified PublicAdvertisedPrefix
     ///
     /// @Snippet(path: "publicAdvertisedPrefixes_withdraw")
-    func withdraw(request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Withdraws the specified PublicAdvertisedPrefix
-    func withdraw(
-      project: Swift.String,
-      publicAdvertisedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Announces the specified PublicAdvertisedPrefix
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_announce")
-    func announce(
-      request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest,
+    public func withdraw(
+      request: PublicAdvertisedPrefixesClient.WithdrawRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified PublicAdvertisedPrefix
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_delete")
-    func delete(
-      request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified PublicAdvertisedPrefix resource.
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_get")
-    func `get`(
-      request: Clients.PublicAdvertisedPrefixesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
-
-    /// Creates a PublicAdvertisedPrefix in the specified project
-    /// using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_insert")
-    func insert(
-      request: Clients.PublicAdvertisedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the PublicAdvertisedPrefixes for a project.
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_list")
-    func list(
-      request: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
-
-    /// Lists the PublicAdvertisedPrefixes for a project.
-    func list(
-      byItem: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
-
-    /// Patches the specified Router resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_patch")
-    func patch(
-      request: Clients.PublicAdvertisedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Withdraws the specified PublicAdvertisedPrefix
-    ///
-    /// @Snippet(path: "publicAdvertisedPrefixes_withdraw")
-    func withdraw(
-      request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.withdraw(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``PublicAdvertisedPrefixes``.
-    public class PublicAdvertisedPrefixesClient: PublicAdvertisedPrefixes {
-      let inner: any PublicAdvertisedPrefixesStub
+    /// A Swift protocol to mock `PublicAdvertisedPrefixesClient`.
+    ///
+    /// To mock `PublicAdvertisedPrefixesClient` change your functions to receive
+    /// `some PublicAdvertisedPrefixesProtocol` or `any PublicAdvertisedPrefixesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol PublicAdvertisedPrefixesProtocol {
+      /// See `PublicAdvertisedPrefixesClient.announce`.
+      func announce(request: PublicAdvertisedPrefixesClient.AnnounceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `PublicAdvertisedPrefixesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any PublicAdvertisedPrefixesStub = try PublicAdvertisedPrefixesTransport(options)
-        inner = PublicAdvertisedPrefixesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = PublicAdvertisedPrefixesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `PublicAdvertisedPrefixesClient.announce`.
+      func announce(
+        project: Swift.String,
+        publicAdvertisedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicAdvertisedPrefixes.announce`
-      public func announce(
-        request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest,
+      /// See `PublicAdvertisedPrefixesClient.delete`.
+      func delete(request: PublicAdvertisedPrefixesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.delete`.
+      func delete(
+        project: Swift.String,
+        publicAdvertisedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.`get``.
+      func `get`(request: PublicAdvertisedPrefixesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.PublicAdvertisedPrefix
+
+      /// See `PublicAdvertisedPrefixesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        publicAdvertisedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
+
+      /// See `PublicAdvertisedPrefixesClient.insert`.
+      func insert(request: PublicAdvertisedPrefixesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: PublicAdvertisedPrefix?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.list`.
+      func list(request: PublicAdvertisedPrefixesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
+
+      /// See `PublicAdvertisedPrefixesClient.list`.
+      func list(
+        byItem: PublicAdvertisedPrefixesClient.ListRequest
+      ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
+
+      /// See `PublicAdvertisedPrefixesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
+
+      /// See `PublicAdvertisedPrefixesClient.patch`.
+      func patch(request: PublicAdvertisedPrefixesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.patch`.
+      func patch(
+        project: Swift.String,
+        publicAdvertisedPrefix: Swift.String,
+        body: PublicAdvertisedPrefix?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.withdraw`.
+      func withdraw(request: PublicAdvertisedPrefixesClient.WithdrawRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.withdraw`.
+      func withdraw(
+        project: Swift.String,
+        publicAdvertisedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicAdvertisedPrefixesClient.announce`.
+      func announce(
+        request: PublicAdvertisedPrefixesClient.AnnounceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.announce(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicAdvertisedPrefixes.delete`
-      public func delete(
-        request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest,
+      /// See `PublicAdvertisedPrefixesClient.delete`.
+      func delete(
+        request: PublicAdvertisedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicAdvertisedPrefixes.`get``
-      public func `get`(
-        request: Clients.PublicAdvertisedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `PublicAdvertisedPrefixesClient.`get``.
+      func `get`(
+        request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
 
-      /// See `PublicAdvertisedPrefixes.insert`
-      public func insert(
-        request: Clients.PublicAdvertisedPrefixesClient.InsertRequest,
+      /// See `PublicAdvertisedPrefixesClient.insert`.
+      func insert(
+        request: PublicAdvertisedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicAdvertisedPrefixes.list`
-      public func list(
-        request: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `PublicAdvertisedPrefixesClient.list`.
+      func list(
+        request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
 
-      /// Lists the PublicAdvertisedPrefixes for a project.
-      public func list(
-        byItem: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `PublicAdvertisedPrefixesClient.list`.
+      func list(
+        byItem: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error>
 
-      /// See `PublicAdvertisedPrefixes.patch`
-      public func patch(
-        request: Clients.PublicAdvertisedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `PublicAdvertisedPrefixesClient.patch`.
+      func patch(
+        request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicAdvertisedPrefixes.withdraw`
-      public func withdraw(
-        request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest,
+      /// See `PublicAdvertisedPrefixesClient.withdraw`.
+      func withdraw(
+        request: PublicAdvertisedPrefixesClient.WithdrawRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.withdraw(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension PublicAdvertisedPrefixes {
-    public func announce(request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.PublicAdvertisedPrefixesProtocol {
+    public func announce(request: PublicAdvertisedPrefixesClient.AnnounceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.announce(request: request, options: .init())
     }
 
     public func announce(
-      request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest,
+      request: PublicAdvertisedPrefixesClient.AnnounceRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -299,22 +274,21 @@
       project: Swift.String,
       publicAdvertisedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicAdvertisedPrefixesClient.AnnounceRequest().with {
+      let request = PublicAdvertisedPrefixesClient.AnnounceRequest().with {
         $0.project = project
         $0.publicAdvertisedPrefix = publicAdvertisedPrefix
       }
       return try await self.announce(request: request)
     }
 
-    public func delete(request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest) async throws
+    public func delete(request: PublicAdvertisedPrefixesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicAdvertisedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -323,22 +297,21 @@
       project: Swift.String,
       publicAdvertisedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicAdvertisedPrefixesClient.DeleteRequest().with {
+      let request = PublicAdvertisedPrefixesClient.DeleteRequest().with {
         $0.project = project
         $0.publicAdvertisedPrefix = publicAdvertisedPrefix
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.PublicAdvertisedPrefixesClient.GetRequest) async throws
+    public func `get`(request: PublicAdvertisedPrefixesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.PublicAdvertisedPrefix
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.PublicAdvertisedPrefixesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -347,22 +320,21 @@
       project: Swift.String,
       publicAdvertisedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix {
-      let request = Clients.PublicAdvertisedPrefixesClient.GetRequest().with {
+      let request = PublicAdvertisedPrefixesClient.GetRequest().with {
         $0.project = project
         $0.publicAdvertisedPrefix = publicAdvertisedPrefix
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.PublicAdvertisedPrefixesClient.InsertRequest) async throws
+    public func insert(request: PublicAdvertisedPrefixesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.PublicAdvertisedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicAdvertisedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -371,35 +343,33 @@
       project: Swift.String,
       body: PublicAdvertisedPrefix?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicAdvertisedPrefixesClient.InsertRequest().with {
+      let request = PublicAdvertisedPrefixesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.PublicAdvertisedPrefixesClient.ListRequest) async throws
+    public func list(request: PublicAdvertisedPrefixesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.PublicAdvertisedPrefixesClient.ListRequest
+      byItem: PublicAdvertisedPrefixesClient.ListRequest
     ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
@@ -411,21 +381,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
-      let request = Clients.PublicAdvertisedPrefixesClient.ListRequest().with {
+      let request = PublicAdvertisedPrefixesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.PublicAdvertisedPrefixesClient.PatchRequest) async throws
+    public func patch(request: PublicAdvertisedPrefixesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.PublicAdvertisedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -435,7 +404,7 @@
       publicAdvertisedPrefix: Swift.String,
       body: PublicAdvertisedPrefix?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicAdvertisedPrefixesClient.PatchRequest().with {
+      let request = PublicAdvertisedPrefixesClient.PatchRequest().with {
         $0.project = project
         $0.publicAdvertisedPrefix = publicAdvertisedPrefix
         $0.body = body
@@ -443,14 +412,14 @@
       return try await self.patch(request: request)
     }
 
-    public func withdraw(request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func withdraw(request: PublicAdvertisedPrefixesClient.WithdrawRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.withdraw(request: request, options: .init())
     }
 
     public func withdraw(
-      request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest,
+      request: PublicAdvertisedPrefixesClient.WithdrawRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -460,7 +429,7 @@
       project: Swift.String,
       publicAdvertisedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicAdvertisedPrefixesClient.WithdrawRequest().with {
+      let request = PublicAdvertisedPrefixesClient.WithdrawRequest().with {
         $0.project = project
         $0.publicAdvertisedPrefix = publicAdvertisedPrefix
       }

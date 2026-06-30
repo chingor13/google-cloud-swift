@@ -28,28 +28,27 @@
   extension Clients {
     protocol VpnTunnelsStub {
       func aggregatedList(
-        request: Clients.VpnTunnelsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelAggregatedList
 
       func delete(
-        request: Clients.VpnTunnelsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.VpnTunnelsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnel
 
       func insert(
-        request: Clients.VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.VpnTunnelsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelList
 
       func setLabels(
-        request: Clients.VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -62,8 +61,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.VpnTunnelsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -93,7 +91,7 @@
       }
 
       public func delete(
-        request: Clients.VpnTunnelsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -120,7 +118,7 @@
       }
 
       public func `get`(
-        request: Clients.VpnTunnelsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnel {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -145,7 +143,7 @@
       }
 
       public func insert(
-        request: Clients.VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -171,7 +169,7 @@
       }
 
       public func list(
-        request: Clients.VpnTunnelsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -199,7 +197,7 @@
       }
 
       public func setLabels(
-        request: Clients.VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

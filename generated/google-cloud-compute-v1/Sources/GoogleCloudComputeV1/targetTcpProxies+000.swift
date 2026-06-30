@@ -28,130 +28,18 @@
   /// Service for the `targetTcpProxies` resource.
   ///
   /// @Snippet(path: "targetTcpProxiesQuickstart")
-  public protocol TargetTcpProxies {
-    /// Retrieves the list of all TargetTcpProxy resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "targetTcpProxies_aggregatedList")
-    func aggregatedList(request: Clients.TargetTcpProxiesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
+  public class TargetTcpProxiesClient: Clients.TargetTcpProxiesProtocol {
+    let inner: any Clients.TargetTcpProxiesStub
 
-    /// Retrieves the list of all TargetTcpProxy resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetTcpProxiesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
-
-    /// Retrieves the list of all TargetTcpProxy resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
-
-    /// Deletes the specified TargetTcpProxy resource.
-    ///
-    /// @Snippet(path: "targetTcpProxies_delete")
-    func delete(request: Clients.TargetTcpProxiesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified TargetTcpProxy resource.
-    func delete(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified TargetTcpProxy resource.
-    ///
-    /// @Snippet(path: "targetTcpProxies_get")
-    func `get`(request: Clients.TargetTcpProxiesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.TargetTcpProxy
-
-    /// Returns the specified TargetTcpProxy resource.
-    func `get`(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
-
-    /// Creates a TargetTcpProxy resource in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "targetTcpProxies_insert")
-    func insert(request: Clients.TargetTcpProxiesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a TargetTcpProxy resource in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      body: TargetTcpProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of TargetTcpProxy resources
-    /// available to the specified project.
-    ///
-    /// @Snippet(path: "targetTcpProxies_list")
-    func list(request: Clients.TargetTcpProxiesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.TargetTcpProxyList
-
-    /// Retrieves the list of TargetTcpProxy resources
-    /// available to the specified project.
-    func list(
-      byItem: Clients.TargetTcpProxiesClient.ListRequest
-    ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
-
-    /// Retrieves the list of TargetTcpProxy resources
-    /// available to the specified project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
-
-    /// Changes the BackendService for TargetTcpProxy.
-    ///
-    /// @Snippet(path: "targetTcpProxies_setBackendService")
-    func setBackendService(request: Clients.TargetTcpProxiesClient.SetBackendServiceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the BackendService for TargetTcpProxy.
-    func setBackendService(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-      body: TargetTcpProxiesSetBackendServiceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the ProxyHeaderType for TargetTcpProxy.
-    ///
-    /// @Snippet(path: "targetTcpProxies_setProxyHeader")
-    func setProxyHeader(request: Clients.TargetTcpProxiesClient.SetProxyHeaderRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Changes the ProxyHeaderType for TargetTcpProxy.
-    func setProxyHeader(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-      body: TargetTcpProxiesSetProxyHeaderRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "targetTcpProxies_testIamPermissions")
-    func testIamPermissions(request: Clients.TargetTcpProxiesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `TargetTcpProxiesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.TargetTcpProxiesStub = try Clients.TargetTcpProxiesTransport(options)
+      inner = Clients.TargetTcpProxiesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.TargetTcpProxiesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all TargetTcpProxy resources, regional and global,
     /// available to the specified project.
@@ -160,216 +48,290 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "targetTcpProxies_aggregatedList")
-    func aggregatedList(
-      request: Clients.TargetTcpProxiesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
+    public func aggregatedList(
+      request: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all TargetTcpProxy resources, regional and global,
     /// available to the specified project.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetTcpProxiesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "targetTcpProxies_aggregatedList")
+    public func aggregatedList(
+      byItem: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified TargetTcpProxy resource.
     ///
     /// @Snippet(path: "targetTcpProxies_delete")
-    func delete(
-      request: Clients.TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified TargetTcpProxy resource.
     ///
     /// @Snippet(path: "targetTcpProxies_get")
-    func `get`(
-      request: Clients.TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
+    public func `get`(
+      request: TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetTcpProxy {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a TargetTcpProxy resource in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "targetTcpProxies_insert")
-    func insert(
-      request: Clients.TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of TargetTcpProxy resources
     /// available to the specified project.
     ///
     /// @Snippet(path: "targetTcpProxies_list")
-    func list(
-      request: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList
+    public func list(
+      request: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of TargetTcpProxy resources
     /// available to the specified project.
-    func list(
-      byItem: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
+    ///
+    /// @Snippet(path: "targetTcpProxies_list")
+    public func list(
+      byItem: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Changes the BackendService for TargetTcpProxy.
     ///
     /// @Snippet(path: "targetTcpProxies_setBackendService")
-    func setBackendService(
-      request: Clients.TargetTcpProxiesClient.SetBackendServiceRequest,
+    public func setBackendService(
+      request: TargetTcpProxiesClient.SetBackendServiceRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setBackendService(request: request, options: options)
+    }
 
     /// Changes the ProxyHeaderType for TargetTcpProxy.
     ///
     /// @Snippet(path: "targetTcpProxies_setProxyHeader")
-    func setProxyHeader(
-      request: Clients.TargetTcpProxiesClient.SetProxyHeaderRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setProxyHeader(
+      request: TargetTcpProxiesClient.SetProxyHeaderRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setProxyHeader(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "targetTcpProxies_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.TargetTcpProxiesClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: TargetTcpProxiesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``TargetTcpProxies``.
-    public class TargetTcpProxiesClient: TargetTcpProxies {
-      let inner: any TargetTcpProxiesStub
+    /// A Swift protocol to mock `TargetTcpProxiesClient`.
+    ///
+    /// To mock `TargetTcpProxiesClient` change your functions to receive
+    /// `some TargetTcpProxiesProtocol` or `any TargetTcpProxiesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol TargetTcpProxiesProtocol {
+      /// See `TargetTcpProxiesClient.aggregatedList`.
+      func aggregatedList(request: TargetTcpProxiesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
 
-      /// Creates a new `TargetTcpProxiesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any TargetTcpProxiesStub = try TargetTcpProxiesTransport(options)
-        inner = TargetTcpProxiesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = TargetTcpProxiesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `TargetTcpProxiesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetTcpProxiesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
 
-      /// See `TargetTcpProxies.aggregatedList`
-      public func aggregatedList(
-        request: Clients.TargetTcpProxiesClient.AggregatedListRequest,
+      /// See `TargetTcpProxiesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
+
+      /// See `TargetTcpProxiesClient.delete`.
+      func delete(request: TargetTcpProxiesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.delete`.
+      func delete(
+        project: Swift.String,
+        targetTcpProxy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.`get``.
+      func `get`(request: TargetTcpProxiesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.TargetTcpProxy
+
+      /// See `TargetTcpProxiesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        targetTcpProxy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
+
+      /// See `TargetTcpProxiesClient.insert`.
+      func insert(request: TargetTcpProxiesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: TargetTcpProxy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.list`.
+      func list(request: TargetTcpProxiesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.TargetTcpProxyList
+
+      /// See `TargetTcpProxiesClient.list`.
+      func list(
+        byItem: TargetTcpProxiesClient.ListRequest
+      ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
+
+      /// See `TargetTcpProxiesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
+
+      /// See `TargetTcpProxiesClient.setBackendService`.
+      func setBackendService(request: TargetTcpProxiesClient.SetBackendServiceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.setBackendService`.
+      func setBackendService(
+        project: Swift.String,
+        targetTcpProxy: Swift.String,
+        body: TargetTcpProxiesSetBackendServiceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.setProxyHeader`.
+      func setProxyHeader(request: TargetTcpProxiesClient.SetProxyHeaderRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.setProxyHeader`.
+      func setProxyHeader(
+        project: Swift.String,
+        targetTcpProxy: Swift.String,
+        body: TargetTcpProxiesSetProxyHeaderRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.testIamPermissions`.
+      func testIamPermissions(request: TargetTcpProxiesClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetTcpProxiesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetTcpProxiesClient.aggregatedList`.
+      func aggregatedList(
+        request: TargetTcpProxiesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
 
-      /// Retrieves the list of all TargetTcpProxy resources, regional and global,
-      /// available to the specified project.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.TargetTcpProxiesClient.AggregatedListRequest,
+      /// See `TargetTcpProxiesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error>
+
+      /// See `TargetTcpProxiesClient.delete`.
+      func delete(
+        request: TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.`get``.
+      func `get`(
+        request: TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
+
+      /// See `TargetTcpProxiesClient.insert`.
+      func insert(
+        request: TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetTcpProxiesClient.list`.
+      func list(
+        request: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList
+
+      /// See `TargetTcpProxiesClient.list`.
+      func list(
+        byItem: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error>
+
+      /// See `TargetTcpProxiesClient.setBackendService`.
+      func setBackendService(
+        request: TargetTcpProxiesClient.SetBackendServiceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetTcpProxies.delete`
-      public func delete(
-        request: Clients.TargetTcpProxiesClient.DeleteRequest,
+      /// See `TargetTcpProxiesClient.setProxyHeader`.
+      func setProxyHeader(
+        request: TargetTcpProxiesClient.SetProxyHeaderRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetTcpProxies.`get``
-      public func `get`(
-        request: Clients.TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetTcpProxy {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `TargetTcpProxies.insert`
-      public func insert(
-        request: Clients.TargetTcpProxiesClient.InsertRequest,
+      /// See `TargetTcpProxiesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: TargetTcpProxiesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `TargetTcpProxies.list`
-      public func list(
-        request: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves the list of TargetTcpProxy resources
-      /// available to the specified project.
-      public func list(
-        byItem: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `TargetTcpProxies.setBackendService`
-      public func setBackendService(
-        request: Clients.TargetTcpProxiesClient.SetBackendServiceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setBackendService(request: request, options: options)
-      }
-
-      /// See `TargetTcpProxies.setProxyHeader`
-      public func setProxyHeader(
-        request: Clients.TargetTcpProxiesClient.SetProxyHeaderRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setProxyHeader(request: request, options: options)
-      }
-
-      /// See `TargetTcpProxies.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.TargetTcpProxiesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension TargetTcpProxies {
-    public func aggregatedList(request: Clients.TargetTcpProxiesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
+  extension Clients.TargetTcpProxiesProtocol {
+    public func aggregatedList(request: TargetTcpProxiesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.TargetTcpProxiesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetTcpProxiesClient.AggregatedListRequest
+      byItem: TargetTcpProxiesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetTcpProxiesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList in
@@ -381,20 +343,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, TargetTcpProxiesScopedList), Swift.Error> {
-      let request = Clients.TargetTcpProxiesClient.AggregatedListRequest().with {
+      let request = TargetTcpProxiesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.TargetTcpProxiesClient.DeleteRequest) async throws
+    public func delete(request: TargetTcpProxiesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -403,21 +365,21 @@
       project: Swift.String,
       targetTcpProxy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetTcpProxiesClient.DeleteRequest().with {
+      let request = TargetTcpProxiesClient.DeleteRequest().with {
         $0.project = project
         $0.targetTcpProxy = targetTcpProxy
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.TargetTcpProxiesClient.GetRequest) async throws
+    public func `get`(request: TargetTcpProxiesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetTcpProxy
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetTcpProxy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -426,21 +388,21 @@
       project: Swift.String,
       targetTcpProxy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.TargetTcpProxy {
-      let request = Clients.TargetTcpProxiesClient.GetRequest().with {
+      let request = TargetTcpProxiesClient.GetRequest().with {
         $0.project = project
         $0.targetTcpProxy = targetTcpProxy
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.TargetTcpProxiesClient.InsertRequest) async throws
+    public func insert(request: TargetTcpProxiesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -449,33 +411,33 @@
       project: Swift.String,
       body: TargetTcpProxy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetTcpProxiesClient.InsertRequest().with {
+      let request = TargetTcpProxiesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.TargetTcpProxiesClient.ListRequest) async throws
+    public func list(request: TargetTcpProxiesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.TargetTcpProxyList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.TargetTcpProxiesClient.ListRequest
+      byItem: TargetTcpProxiesClient.ListRequest
     ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -486,20 +448,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
-      let request = Clients.TargetTcpProxiesClient.ListRequest().with {
+      let request = TargetTcpProxiesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func setBackendService(request: Clients.TargetTcpProxiesClient.SetBackendServiceRequest)
+    public func setBackendService(request: TargetTcpProxiesClient.SetBackendServiceRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setBackendService(request: request, options: .init())
     }
 
     public func setBackendService(
-      request: Clients.TargetTcpProxiesClient.SetBackendServiceRequest,
+      request: TargetTcpProxiesClient.SetBackendServiceRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -510,7 +472,7 @@
       targetTcpProxy: Swift.String,
       body: TargetTcpProxiesSetBackendServiceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetTcpProxiesClient.SetBackendServiceRequest().with {
+      let request = TargetTcpProxiesClient.SetBackendServiceRequest().with {
         $0.project = project
         $0.targetTcpProxy = targetTcpProxy
         $0.body = body
@@ -518,15 +480,14 @@
       return try await self.setBackendService(request: request)
     }
 
-    public func setProxyHeader(request: Clients.TargetTcpProxiesClient.SetProxyHeaderRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setProxyHeader(request: TargetTcpProxiesClient.SetProxyHeaderRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setProxyHeader(request: request, options: .init())
     }
 
     public func setProxyHeader(
-      request: Clients.TargetTcpProxiesClient.SetProxyHeaderRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetTcpProxiesClient.SetProxyHeaderRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -536,7 +497,7 @@
       targetTcpProxy: Swift.String,
       body: TargetTcpProxiesSetProxyHeaderRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetTcpProxiesClient.SetProxyHeaderRequest().with {
+      let request = TargetTcpProxiesClient.SetProxyHeaderRequest().with {
         $0.project = project
         $0.targetTcpProxy = targetTcpProxy
         $0.body = body
@@ -544,14 +505,14 @@
       return try await self.setProxyHeader(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.TargetTcpProxiesClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: TargetTcpProxiesClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.TargetTcpProxiesClient.TestIamPermissionsRequest,
+      request: TargetTcpProxiesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -562,7 +523,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.TargetTcpProxiesClient.TestIamPermissionsRequest().with {
+      let request = TargetTcpProxiesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body

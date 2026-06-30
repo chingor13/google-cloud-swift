@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RolloutPlansClient {
+  extension RolloutPlansClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.rolloutPlans.delete] method.
     ///
     /// [google.cloud.compute.v1.rolloutPlans.delete]: <doc:RolloutPlans/delete(request:)>

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InterconnectGroupsClient {
+  extension InterconnectGroupsClient {
     /// Synthetic request message for the [createMembers()][google.cloud.compute.v1.interconnectGroups.createMembers] method.
     ///
     /// [google.cloud.compute.v1.interconnectGroups.createMembers]: <doc:InterconnectGroups/createMembers(request:)>

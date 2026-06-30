@@ -28,108 +28,18 @@
   /// Service for the `targetVpnGateways` resource.
   ///
   /// @Snippet(path: "targetVpnGatewaysQuickstart")
-  public protocol TargetVpnGateways {
-    /// Retrieves an aggregated list of target VPN gateways.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "targetVpnGateways_aggregatedList")
-    func aggregatedList(request: Clients.TargetVpnGatewaysClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
+  public class TargetVpnGatewaysClient: Clients.TargetVpnGatewaysProtocol {
+    let inner: any Clients.TargetVpnGatewaysStub
 
-    /// Retrieves an aggregated list of target VPN gateways.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of target VPN gateways.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
-
-    /// Deletes the specified target VPN gateway.
-    ///
-    /// @Snippet(path: "targetVpnGateways_delete")
-    func delete(request: Clients.TargetVpnGatewaysClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified target VPN gateway.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      targetVpnGateway: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified target VPN gateway.
-    ///
-    /// @Snippet(path: "targetVpnGateways_get")
-    func `get`(request: Clients.TargetVpnGatewaysClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.TargetVpnGateway
-
-    /// Returns the specified target VPN gateway.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      targetVpnGateway: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.TargetVpnGateway
-
-    /// Creates a target VPN gateway in the specified project and region using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "targetVpnGateways_insert")
-    func insert(request: Clients.TargetVpnGatewaysClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a target VPN gateway in the specified project and region using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: TargetVpnGateway?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of target VPN gateways available to the specified
-    /// project and region.
-    ///
-    /// @Snippet(path: "targetVpnGateways_list")
-    func list(request: Clients.TargetVpnGatewaysClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.TargetVpnGatewayList
-
-    /// Retrieves a list of target VPN gateways available to the specified
-    /// project and region.
-    func list(
-      byItem: Clients.TargetVpnGatewaysClient.ListRequest
-    ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
-
-    /// Retrieves a list of target VPN gateways available to the specified
-    /// project and region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
-
-    /// Sets the labels on a TargetVpnGateway. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "targetVpnGateways_setLabels")
-    func setLabels(request: Clients.TargetVpnGatewaysClient.SetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on a TargetVpnGateway. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `TargetVpnGatewaysClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.TargetVpnGatewaysStub = try Clients.TargetVpnGatewaysTransport(options)
+      inner = Clients.TargetVpnGatewaysRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.TargetVpnGatewaysLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of target VPN gateways.
     ///
@@ -137,183 +47,241 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "targetVpnGateways_aggregatedList")
-    func aggregatedList(
-      request: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
+    public func aggregatedList(
+      request: TargetVpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of target VPN gateways.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "targetVpnGateways_aggregatedList")
+    public func aggregatedList(
+      byItem: TargetVpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified target VPN gateway.
     ///
     /// @Snippet(path: "targetVpnGateways_delete")
-    func delete(
-      request: Clients.TargetVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: TargetVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified target VPN gateway.
     ///
     /// @Snippet(path: "targetVpnGateways_get")
-    func `get`(
-      request: Clients.TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetVpnGateway
+    public func `get`(
+      request: TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetVpnGateway {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a target VPN gateway in the specified project and region using
     /// the data included in the request.
     ///
     /// @Snippet(path: "targetVpnGateways_insert")
-    func insert(
-      request: Clients.TargetVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: TargetVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of target VPN gateways available to the specified
     /// project and region.
     ///
     /// @Snippet(path: "targetVpnGateways_list")
-    func list(
-      request: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList
+    public func list(
+      request: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of target VPN gateways available to the specified
     /// project and region.
-    func list(
-      byItem: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
+    ///
+    /// @Snippet(path: "targetVpnGateways_list")
+    public func list(
+      byItem: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Sets the labels on a TargetVpnGateway. To learn more about labels, read theLabeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "targetVpnGateways_setLabels")
-    func setLabels(
-      request: Clients.TargetVpnGatewaysClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(
+      request: TargetVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setLabels(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``TargetVpnGateways``.
-    public class TargetVpnGatewaysClient: TargetVpnGateways {
-      let inner: any TargetVpnGatewaysStub
+    /// A Swift protocol to mock `TargetVpnGatewaysClient`.
+    ///
+    /// To mock `TargetVpnGatewaysClient` change your functions to receive
+    /// `some TargetVpnGatewaysProtocol` or `any TargetVpnGatewaysProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol TargetVpnGatewaysProtocol {
+      /// See `TargetVpnGatewaysClient.aggregatedList`.
+      func aggregatedList(request: TargetVpnGatewaysClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
 
-      /// Creates a new `TargetVpnGatewaysClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any TargetVpnGatewaysStub = try TargetVpnGatewaysTransport(options)
-        inner = TargetVpnGatewaysRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = TargetVpnGatewaysLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `TargetVpnGatewaysClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetVpnGatewaysClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
 
-      /// See `TargetVpnGateways.aggregatedList`
-      public func aggregatedList(
-        request: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
+      /// See `TargetVpnGatewaysClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
+
+      /// See `TargetVpnGatewaysClient.delete`.
+      func delete(request: TargetVpnGatewaysClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        targetVpnGateway: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.`get``.
+      func `get`(request: TargetVpnGatewaysClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.TargetVpnGateway
+
+      /// See `TargetVpnGatewaysClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        targetVpnGateway: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.TargetVpnGateway
+
+      /// See `TargetVpnGatewaysClient.insert`.
+      func insert(request: TargetVpnGatewaysClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: TargetVpnGateway?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.list`.
+      func list(request: TargetVpnGatewaysClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.TargetVpnGatewayList
+
+      /// See `TargetVpnGatewaysClient.list`.
+      func list(
+        byItem: TargetVpnGatewaysClient.ListRequest
+      ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
+
+      /// See `TargetVpnGatewaysClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
+
+      /// See `TargetVpnGatewaysClient.setLabels`.
+      func setLabels(request: TargetVpnGatewaysClient.SetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.setLabels`.
+      func setLabels(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetVpnGatewaysClient.aggregatedList`.
+      func aggregatedList(
+        request: TargetVpnGatewaysClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
 
-      /// Retrieves an aggregated list of target VPN gateways.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
+      /// See `TargetVpnGatewaysClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetVpnGatewaysClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error>
 
-      /// See `TargetVpnGateways.delete`
-      public func delete(
-        request: Clients.TargetVpnGatewaysClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `TargetVpnGatewaysClient.delete`.
+      func delete(
+        request: TargetVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetVpnGateways.`get``
-      public func `get`(
-        request: Clients.TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetVpnGateway {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `TargetVpnGatewaysClient.`get``.
+      func `get`(
+        request: TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetVpnGateway
 
-      /// See `TargetVpnGateways.insert`
-      public func insert(
-        request: Clients.TargetVpnGatewaysClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `TargetVpnGatewaysClient.insert`.
+      func insert(
+        request: TargetVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetVpnGateways.list`
-      public func list(
-        request: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `TargetVpnGatewaysClient.list`.
+      func list(
+        request: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList
 
-      /// Retrieves a list of target VPN gateways available to the specified
-      /// project and region.
-      public func list(
-        byItem: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `TargetVpnGatewaysClient.list`.
+      func list(
+        byItem: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error>
 
-      /// See `TargetVpnGateways.setLabels`
-      public func setLabels(
-        request: Clients.TargetVpnGatewaysClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setLabels(request: request, options: options)
-      }
+      /// See `TargetVpnGatewaysClient.setLabels`.
+      func setLabels(
+        request: TargetVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension TargetVpnGateways {
-    public func aggregatedList(request: Clients.TargetVpnGatewaysClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
+  extension Clients.TargetVpnGatewaysProtocol {
+    public func aggregatedList(request: TargetVpnGatewaysClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest
+      byItem: TargetVpnGatewaysClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: TargetVpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayAggregatedList in
@@ -325,20 +293,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, TargetVpnGatewaysScopedList), Swift.Error> {
-      let request = Clients.TargetVpnGatewaysClient.AggregatedListRequest().with {
+      let request = TargetVpnGatewaysClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.TargetVpnGatewaysClient.DeleteRequest) async throws
+    public func delete(request: TargetVpnGatewaysClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.TargetVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -348,7 +316,7 @@
       region: Swift.String,
       targetVpnGateway: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetVpnGatewaysClient.DeleteRequest().with {
+      let request = TargetVpnGatewaysClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.targetVpnGateway = targetVpnGateway
@@ -356,14 +324,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.TargetVpnGatewaysClient.GetRequest) async throws
+    public func `get`(request: TargetVpnGatewaysClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetVpnGateway
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetVpnGateway {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -373,7 +341,7 @@
       region: Swift.String,
       targetVpnGateway: Swift.String,
     ) async throws -> GoogleCloudComputeV1.TargetVpnGateway {
-      let request = Clients.TargetVpnGatewaysClient.GetRequest().with {
+      let request = TargetVpnGatewaysClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.targetVpnGateway = targetVpnGateway
@@ -381,14 +349,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.TargetVpnGatewaysClient.InsertRequest) async throws
+    public func insert(request: TargetVpnGatewaysClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.TargetVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -398,7 +366,7 @@
       region: Swift.String,
       body: TargetVpnGateway?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetVpnGatewaysClient.InsertRequest().with {
+      let request = TargetVpnGatewaysClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -406,26 +374,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.TargetVpnGatewaysClient.ListRequest) async throws
+    public func list(request: TargetVpnGatewaysClient.ListRequest) async throws
       -> GoogleCloudComputeV1.TargetVpnGatewayList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.TargetVpnGatewaysClient.ListRequest
+      byItem: TargetVpnGatewaysClient.ListRequest
     ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: TargetVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetVpnGatewayList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -437,22 +405,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<TargetVpnGateway, Swift.Error> {
-      let request = Clients.TargetVpnGatewaysClient.ListRequest().with {
+      let request = TargetVpnGatewaysClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func setLabels(request: Clients.TargetVpnGatewaysClient.SetLabelsRequest) async throws
+    public func setLabels(request: TargetVpnGatewaysClient.SetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.setLabels(request: request, options: .init())
     }
 
     public func setLabels(
-      request: Clients.TargetVpnGatewaysClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -463,7 +430,7 @@
       resource: Swift.String,
       body: RegionSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetVpnGatewaysClient.SetLabelsRequest().with {
+      let request = TargetVpnGatewaysClient.SetLabelsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

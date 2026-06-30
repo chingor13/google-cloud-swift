@@ -28,12 +28,12 @@
   extension Clients {
     protocol InterconnectRemoteLocationsStub {
       func `get`(
-        request: Clients.InterconnectRemoteLocationsClient.GetRequest,
+        request: InterconnectRemoteLocationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation
 
       func list(
-        request: Clients.InterconnectRemoteLocationsClient.ListRequest,
+        request: InterconnectRemoteLocationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList
     }
@@ -47,7 +47,7 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectRemoteLocationsClient.GetRequest,
+        request: InterconnectRemoteLocationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation {
         let path = try { () throws -> Swift.String in
@@ -72,7 +72,7 @@
       }
 
       public func list(
-        request: Clients.InterconnectRemoteLocationsClient.ListRequest,
+        request: InterconnectRemoteLocationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList {
         let path = try { () throws -> Swift.String in

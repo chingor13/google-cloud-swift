@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some WireGroups) async throws {
+  func sample(client: WireGroupsClient) async throws {
     let response = try await client.`get`(
-      request: Clients.WireGroupsClient.GetRequest()
+      request: WireGroupsClient.GetRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.WireGroupsClient()
+        let client = try GoogleCloudComputeV1.WireGroupsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

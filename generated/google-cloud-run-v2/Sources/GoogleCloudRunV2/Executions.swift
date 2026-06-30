@@ -29,419 +29,395 @@ import Logging
 /// Cloud Run Execution Control Plane API.
 ///
 /// @Snippet(path: "ExecutionsQuickstart")
-public protocol Executions {
-  /// Gets information about an Execution.
-  ///
-  /// @Snippet(path: "Executions_GetExecution")
-  func getExecution(request: GetExecutionRequest) async throws -> GoogleCloudRunV2.Execution
+public class ExecutionsClient: Clients.ExecutionsProtocol {
+  let inner: any Clients.ExecutionsStub
 
-  /// Gets information about an Execution.
-  func getExecution(
-    name: Swift.String,
-  ) async throws -> GoogleCloudRunV2.Execution
-
-  /// Lists Executions from a Job. Results are sorted by creation time,
-  /// descending.
-  ///
-  /// @Snippet(path: "Executions_ListExecutions")
-  func listExecutions(request: ListExecutionsRequest) async throws
-    -> GoogleCloudRunV2.ListExecutionsResponse
-
-  /// Lists Executions from a Job. Results are sorted by creation time,
-  /// descending.
-  func listExecutions(
-    byItem: ListExecutionsRequest
-  ) throws -> any AsyncSequence<Execution, Swift.Error>
-
-  /// Lists Executions from a Job. Results are sorted by creation time,
-  /// descending.
-  func listExecutions(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Execution, Swift.Error>
-
-  /// Deletes an Execution.
-  ///
-  /// @Snippet(path: "Executions_DeleteExecution")
-  func deleteExecution(request: DeleteExecutionRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes an Execution.
-  func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Execution>
-
-  /// Deletes an Execution.
-  func deleteExecution(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
-
-  /// Cancels an Execution.
-  ///
-  /// @Snippet(path: "Executions_CancelExecution")
-  func cancelExecution(request: CancelExecutionRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Cancels an Execution.
-  func cancelExecution(withPolling: CancelExecutionRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Execution>
-
-  /// Cancels an Execution.
-  func cancelExecution(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Executions_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Executions_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Executions_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Executions_WaitOperation")
-  func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
-    -> GoogleLongrunning.Operation
+  /// Creates a new `ExecutionsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.ExecutionsStub = try Clients.ExecutionsTransport(options)
+    inner = Clients.ExecutionsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.ExecutionsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Gets information about an Execution.
   ///
   /// @Snippet(path: "Executions_GetExecution")
-  func getExecution(
+  public func getExecution(
     request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.Execution
+  ) async throws -> GoogleCloudRunV2.Execution {
+    try await self.inner.getExecution(request: request, options: options)
+  }
 
   /// Lists Executions from a Job. Results are sorted by creation time,
   /// descending.
   ///
   /// @Snippet(path: "Executions_ListExecutions")
-  func listExecutions(
+  public func listExecutions(
     request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.ListExecutionsResponse
+  ) async throws -> GoogleCloudRunV2.ListExecutionsResponse {
+    try await self.inner.listExecutions(request: request, options: options)
+  }
 
   /// Lists Executions from a Job. Results are sorted by creation time,
   /// descending.
-  func listExecutions(
+  ///
+  /// @Snippet(path: "Executions_ListExecutions")
+  public func listExecutions(
     byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Execution, Swift.Error>
+  ) throws -> any AsyncSequence<Execution, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListExecutionsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listExecutions(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Deletes an Execution.
   ///
   /// @Snippet(path: "Executions_DeleteExecution")
-  func deleteExecution(
+  public func deleteExecution(
     request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteExecution(request: request, options: options)
+  }
 
   /// Deletes an Execution.
-  func deleteExecution(
+  ///
+  /// @Snippet(path: "Executions_DeleteExecution")
+  public func deleteExecution(
     withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Execution(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteExecution(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Cancels an Execution.
   ///
   /// @Snippet(path: "Executions_CancelExecution")
-  func cancelExecution(
+  public func cancelExecution(
     request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.cancelExecution(request: request, options: options)
+  }
 
   /// Cancels an Execution.
-  func cancelExecution(
+  ///
+  /// @Snippet(path: "Executions_CancelExecution")
+  public func cancelExecution(
     withPolling: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Execution(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.cancelExecution(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Executions_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "Executions_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Executions_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Executions_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Executions_WaitOperation")
-  func waitOperation(
+  public func waitOperation(
     request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.waitOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Executions``.
-  public class ExecutionsClient: Executions {
-    let inner: any ExecutionsStub
+  /// A Swift protocol to mock `ExecutionsClient`.
+  ///
+  /// To mock `ExecutionsClient` change your functions to receive
+  /// `some ExecutionsProtocol` or `any ExecutionsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol ExecutionsProtocol {
+    /// See `ExecutionsClient.getExecution`.
+    func getExecution(request: GetExecutionRequest) async throws -> GoogleCloudRunV2.Execution
 
-    /// Creates a new `ExecutionsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any ExecutionsStub = try ExecutionsTransport(options)
-      inner = ExecutionsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = ExecutionsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `ExecutionsClient.getExecution`.
+    func getExecution(
+      name: Swift.String,
+    ) async throws -> GoogleCloudRunV2.Execution
 
-    /// See `Executions.getExecution`
-    public func getExecution(
+    /// See `ExecutionsClient.listExecutions`.
+    func listExecutions(request: ListExecutionsRequest) async throws
+      -> GoogleCloudRunV2.ListExecutionsResponse
+
+    /// See `ExecutionsClient.listExecutions`.
+    func listExecutions(
+      byItem: ListExecutionsRequest
+    ) throws -> any AsyncSequence<Execution, Swift.Error>
+
+    /// See `ExecutionsClient.listExecutions`.
+    func listExecutions(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Execution, Swift.Error>
+
+    /// See `ExecutionsClient.deleteExecution`.
+    func deleteExecution(request: DeleteExecutionRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ExecutionsClient.deleteExecution`.
+    func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Execution>
+
+    /// See `ExecutionsClient.deleteExecution`.
+    func deleteExecution(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+
+    /// See `ExecutionsClient.cancelExecution`.
+    func cancelExecution(request: CancelExecutionRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ExecutionsClient.cancelExecution`.
+    func cancelExecution(withPolling: CancelExecutionRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Execution>
+
+    /// See `ExecutionsClient.cancelExecution`.
+    func cancelExecution(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+
+    /// See `ExecutionsClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `ExecutionsClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `ExecutionsClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `ExecutionsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ExecutionsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `ExecutionsClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `ExecutionsClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `ExecutionsClient.waitOperation`.
+    func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ExecutionsClient.getExecution`.
+    func getExecution(
       request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.Execution {
-      try await self.inner.getExecution(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudRunV2.Execution
 
-    /// See `Executions.listExecutions`
-    public func listExecutions(
+    /// See `ExecutionsClient.listExecutions`.
+    func listExecutions(
       request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.ListExecutionsResponse {
-      try await self.inner.listExecutions(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudRunV2.ListExecutionsResponse
 
-    /// Lists Executions from a Job. Results are sorted by creation time,
-    /// descending.
-    public func listExecutions(
+    /// See `ExecutionsClient.listExecutions`.
+    func listExecutions(
       byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Execution, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListExecutionsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listExecutions(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Execution, Swift.Error>
 
-    /// See `Executions.deleteExecution`
-    public func deleteExecution(
+    /// See `ExecutionsClient.deleteExecution`.
+    func deleteExecution(
       request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteExecution(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes an Execution.
-    public func deleteExecution(
+    /// See `ExecutionsClient.deleteExecution`.
+    func deleteExecution(
       withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Execution(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteExecution(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Executions.cancelExecution`
-    public func cancelExecution(
+    /// See `ExecutionsClient.cancelExecution`.
+    func cancelExecution(
       request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.cancelExecution(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Cancels an Execution.
-    public func cancelExecution(
+    /// See `ExecutionsClient.cancelExecution`.
+    func cancelExecution(
       withPolling: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Execution(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.cancelExecution(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Executions.listOperations`
-    public func listOperations(
+    /// See `ExecutionsClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `ExecutionsClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `Executions.getOperation`
-    public func getOperation(
+    /// See `ExecutionsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `Executions.deleteOperation`
-    public func deleteOperation(
+    /// See `ExecutionsClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `Executions.waitOperation`
-    public func waitOperation(
+    /// See `ExecutionsClient.waitOperation`.
+    func waitOperation(
       request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.waitOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Executions {
+extension Clients.ExecutionsProtocol {
   public func getExecution(request: GetExecutionRequest) async throws -> GoogleCloudRunV2.Execution
   {
     try await self.getExecution(request: request, options: .init())

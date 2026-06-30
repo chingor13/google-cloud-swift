@@ -28,147 +28,137 @@
   /// Service for the `globalOrganizationOperations` resource.
   ///
   /// @Snippet(path: "globalOrganizationOperationsQuickstart")
-  public protocol GlobalOrganizationOperations {
+  public class GlobalOrganizationOperationsClient: Clients.GlobalOrganizationOperationsProtocol {
+    let inner: any Clients.GlobalOrganizationOperationsStub
+
+    /// Creates a new `GlobalOrganizationOperationsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.GlobalOrganizationOperationsStub =
+        try Clients.GlobalOrganizationOperationsTransport(options)
+      inner = Clients.GlobalOrganizationOperationsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.GlobalOrganizationOperationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified Operations resource.
     ///
     /// @Snippet(path: "globalOrganizationOperations_delete")
-    func delete(request: Clients.GlobalOrganizationOperationsClient.DeleteRequest) async throws
-
-    /// Deletes the specified Operations resource.
-    func delete(
-      operation: Swift.String,
-    ) async throws
+    public func delete(
+      request: GlobalOrganizationOperationsClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves the specified Operations resource. Gets a list of operations
     /// by making a `list()` request.
     ///
     /// @Snippet(path: "globalOrganizationOperations_get")
-    func `get`(request: Clients.GlobalOrganizationOperationsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the specified Operations resource. Gets a list of operations
-    /// by making a `list()` request.
-    func `get`(
-      operation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func `get`(
+      request: GlobalOrganizationOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within the specified
     /// organization.
     ///
     /// @Snippet(path: "globalOrganizationOperations_list")
-    func list(request: Clients.GlobalOrganizationOperationsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.OperationList
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// organization.
-    func list(
-      byItem: Clients.GlobalOrganizationOperationsClient.ListRequest
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// organization.
-    func list() throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Deletes the specified Operations resource.
-    ///
-    /// @Snippet(path: "globalOrganizationOperations_delete")
-    func delete(
-      request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+    public func list(
+      request: GlobalOrganizationOperationsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws
-
-    /// Retrieves the specified Operations resource. Gets a list of operations
-    /// by making a `list()` request.
-    ///
-    /// @Snippet(path: "globalOrganizationOperations_get")
-    func `get`(
-      request: Clients.GlobalOrganizationOperationsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.OperationList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within the specified
     /// organization.
     ///
     /// @Snippet(path: "globalOrganizationOperations_list")
-    func list(
-      request: Clients.GlobalOrganizationOperationsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.OperationList
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// organization.
-    func list(
-      byItem: Clients.GlobalOrganizationOperationsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
+    public func list(
+      byItem: GlobalOrganizationOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Operation, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``GlobalOrganizationOperations``.
-    public class GlobalOrganizationOperationsClient: GlobalOrganizationOperations {
-      let inner: any GlobalOrganizationOperationsStub
+    /// A Swift protocol to mock `GlobalOrganizationOperationsClient`.
+    ///
+    /// To mock `GlobalOrganizationOperationsClient` change your functions to receive
+    /// `some GlobalOrganizationOperationsProtocol` or `any GlobalOrganizationOperationsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol GlobalOrganizationOperationsProtocol {
+      /// See `GlobalOrganizationOperationsClient.delete`.
+      func delete(request: GlobalOrganizationOperationsClient.DeleteRequest) async throws
 
-      /// Creates a new `GlobalOrganizationOperationsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any GlobalOrganizationOperationsStub = try GlobalOrganizationOperationsTransport(
-          options)
-        inner = GlobalOrganizationOperationsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = GlobalOrganizationOperationsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `GlobalOrganizationOperationsClient.delete`.
+      func delete(
+        operation: Swift.String,
+      ) async throws
 
-      /// See `GlobalOrganizationOperations.delete`
-      public func delete(
-        request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+      /// See `GlobalOrganizationOperationsClient.`get``.
+      func `get`(request: GlobalOrganizationOperationsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOrganizationOperationsClient.`get``.
+      func `get`(
+        operation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOrganizationOperationsClient.list`.
+      func list(request: GlobalOrganizationOperationsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.OperationList
+
+      /// See `GlobalOrganizationOperationsClient.list`.
+      func list(
+        byItem: GlobalOrganizationOperationsClient.ListRequest
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `GlobalOrganizationOperationsClient.list`.
+      func list() throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `GlobalOrganizationOperationsClient.delete`.
+      func delete(
+        request: GlobalOrganizationOperationsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws
 
-      /// See `GlobalOrganizationOperations.`get``
-      public func `get`(
-        request: Clients.GlobalOrganizationOperationsClient.GetRequest,
+      /// See `GlobalOrganizationOperationsClient.`get``.
+      func `get`(
+        request: GlobalOrganizationOperationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalOrganizationOperations.list`
-      public func list(
-        request: Clients.GlobalOrganizationOperationsClient.ListRequest,
+      /// See `GlobalOrganizationOperationsClient.list`.
+      func list(
+        request: GlobalOrganizationOperationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.OperationList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.OperationList
 
-      /// Retrieves a list of Operation resources contained within the specified
-      /// organization.
-      public func list(
-        byItem: Clients.GlobalOrganizationOperationsClient.ListRequest,
+      /// See `GlobalOrganizationOperationsClient.list`.
+      func list(
+        byItem: GlobalOrganizationOperationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Operation, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
     }
   }
 
   // Default implementations
-  extension GlobalOrganizationOperations {
-    public func delete(request: Clients.GlobalOrganizationOperationsClient.DeleteRequest)
-      async throws
-    {
+  extension Clients.GlobalOrganizationOperationsProtocol {
+    public func delete(request: GlobalOrganizationOperationsClient.DeleteRequest) async throws {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+      request: GlobalOrganizationOperationsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -177,21 +167,20 @@
     public func delete(
       operation: Swift.String,
     ) async throws {
-      let request = Clients.GlobalOrganizationOperationsClient.DeleteRequest().with {
+      let request = GlobalOrganizationOperationsClient.DeleteRequest().with {
         $0.operation = operation
       }
       try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.GlobalOrganizationOperationsClient.GetRequest) async throws
+    public func `get`(request: GlobalOrganizationOperationsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.GlobalOrganizationOperationsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: GlobalOrganizationOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -199,34 +188,33 @@
     public func `get`(
       operation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.GlobalOrganizationOperationsClient.GetRequest().with {
+      let request = GlobalOrganizationOperationsClient.GetRequest().with {
         $0.operation = operation
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.GlobalOrganizationOperationsClient.ListRequest) async throws
+    public func list(request: GlobalOrganizationOperationsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.OperationList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.GlobalOrganizationOperationsClient.ListRequest,
+      request: GlobalOrganizationOperationsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.GlobalOrganizationOperationsClient.ListRequest
+      byItem: GlobalOrganizationOperationsClient.ListRequest
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.GlobalOrganizationOperationsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOrganizationOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -235,7 +223,7 @@
     }
 
     public func list() throws -> any AsyncSequence<Operation, Swift.Error> {
-      let request = Clients.GlobalOrganizationOperationsClient.ListRequest().with {
+      let request = GlobalOrganizationOperationsClient.ListRequest().with {
       }
       return try self.list(byItem: request)
     }

@@ -23,7 +23,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(
-  client: some Revisions, projectId: String, locationId: String, serviceId: String,
+  client: RevisionsClient, projectId: String, locationId: String, serviceId: String,
   revisionId: String
 ) async throws {
   let response = try await client.getRevision(
@@ -41,7 +41,7 @@ func sample(
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.RevisionsClient()
+      let client = try GoogleCloudRunV2.RevisionsClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         serviceId: "[placeholder]", revisionId: "[placeholder]")

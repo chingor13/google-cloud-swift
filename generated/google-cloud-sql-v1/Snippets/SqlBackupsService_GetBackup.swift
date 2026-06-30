@@ -21,7 +21,7 @@
   import GoogleCloudSqlV1
   import GoogleCloudWkt
 
-  func sample(client: some SqlBackupsService, projectId: String, backupId: String) async throws {
+  func sample(client: SqlBackupsServiceClient, projectId: String, backupId: String) async throws {
     let response = try await client.getBackup(
       request: GetBackupRequest()
         .with {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudSqlV1.Clients.SqlBackupsServiceClient()
+        let client = try GoogleCloudSqlV1.SqlBackupsServiceClient()
         try await sample(client: client, projectId: "[placeholder]", backupId: "[placeholder]")
       } catch {
         print("Error: \(error)")

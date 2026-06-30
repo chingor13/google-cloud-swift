@@ -60,14 +60,14 @@
       }
 
       public func delete(
-        request: Clients.LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.LicensesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicensesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -75,14 +75,14 @@
       }
 
       public func `get`(
-        request: Clients.LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.License {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.LicensesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicensesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.License
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -90,29 +90,29 @@
       }
 
       public func getIamPolicy(
-        request: Clients.LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: Clients.LicensesClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: LicensesClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.LicensesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicensesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -120,14 +120,14 @@
       }
 
       public func list(
-        request: Clients.LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicensesListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.LicensesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicensesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.LicensesListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -135,30 +135,29 @@
       }
 
       public func setIamPolicy(
-        request: Clients.LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: Clients.LicensesClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: LicensesClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.LicensesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: Clients.LicensesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: LicensesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -166,14 +165,14 @@
       }
 
       public func update(
-        request: Clients.LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.LicensesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicensesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)

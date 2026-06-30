@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some InstanceGroupManagers) async throws {
+  func sample(client: InstanceGroupManagersClient) async throws {
     let response = try await client.setTargetPools(
-      request: Clients.InstanceGroupManagersClient.SetTargetPoolsRequest()
+      request: InstanceGroupManagersClient.SetTargetPoolsRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.InstanceGroupManagersClient()
+        let client = try GoogleCloudComputeV1.InstanceGroupManagersClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

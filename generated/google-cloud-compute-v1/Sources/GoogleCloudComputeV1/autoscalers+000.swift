@@ -28,140 +28,18 @@
   /// Service for the `autoscalers` resource.
   ///
   /// @Snippet(path: "autoscalersQuickstart")
-  public protocol Autoscalers {
-    /// Retrieves an aggregated list of autoscalers.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "autoscalers_aggregatedList")
-    func aggregatedList(request: Clients.AutoscalersClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.AutoscalerAggregatedList
+  public class AutoscalersClient: Clients.AutoscalersProtocol {
+    let inner: any Clients.AutoscalersStub
 
-    /// Retrieves an aggregated list of autoscalers.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AutoscalersClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of autoscalers.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
-
-    /// Deletes the specified autoscaler.
-    ///
-    /// @Snippet(path: "autoscalers_delete")
-    func delete(request: Clients.AutoscalersClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified autoscaler.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      autoscaler: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified autoscaler resource.
-    ///
-    /// @Snippet(path: "autoscalers_get")
-    func `get`(request: Clients.AutoscalersClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Autoscaler
-
-    /// Returns the specified autoscaler resource.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      autoscaler: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Autoscaler
-
-    /// Creates an autoscaler in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "autoscalers_insert")
-    func insert(request: Clients.AutoscalersClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates an autoscaler in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of autoscalers contained within
-    /// the specified zone.
-    ///
-    /// @Snippet(path: "autoscalers_list")
-    func list(request: Clients.AutoscalersClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.AutoscalerList
-
-    /// Retrieves a list of autoscalers contained within
-    /// the specified zone.
-    func list(
-      byItem: Clients.AutoscalersClient.ListRequest
-    ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
-
-    /// Retrieves a list of autoscalers contained within
-    /// the specified zone.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
-
-    /// Updates an autoscaler in the specified project using the data
-    /// included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "autoscalers_patch")
-    func patch(request: Clients.AutoscalersClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates an autoscaler in the specified project using the data
-    /// included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "autoscalers_testIamPermissions")
-    func testIamPermissions(request: Clients.AutoscalersClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates an autoscaler in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "autoscalers_update")
-    func update(request: Clients.AutoscalersClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates an autoscaler in the specified project using the data
-    /// included in the request.
-    func update(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `AutoscalersClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.AutoscalersStub = try Clients.AutoscalersTransport(options)
+      inner = Clients.AutoscalersRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.AutoscalersLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of autoscalers.
     ///
@@ -169,55 +47,82 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "autoscalers_aggregatedList")
-    func aggregatedList(
-      request: Clients.AutoscalersClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList
+    public func aggregatedList(
+      request: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of autoscalers.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AutoscalersClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "autoscalers_aggregatedList")
+    public func aggregatedList(
+      byItem: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified autoscaler.
     ///
     /// @Snippet(path: "autoscalers_delete")
-    func delete(
-      request: Clients.AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified autoscaler resource.
     ///
     /// @Snippet(path: "autoscalers_get")
-    func `get`(
-      request: Clients.AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Autoscaler
+    public func `get`(
+      request: AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Autoscaler {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates an autoscaler in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "autoscalers_insert")
-    func insert(
-      request: Clients.AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of autoscalers contained within
     /// the specified zone.
     ///
     /// @Snippet(path: "autoscalers_list")
-    func list(
-      request: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AutoscalerList
+    public func list(
+      request: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AutoscalerList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of autoscalers contained within
     /// the specified zone.
-    func list(
-      byItem: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
+    ///
+    /// @Snippet(path: "autoscalers_list")
+    public func list(
+      byItem: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Autoscaler, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AutoscalerList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates an autoscaler in the specified project using the data
     /// included in the request. This method supportsPATCH
@@ -225,156 +130,209 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "autoscalers_patch")
-    func patch(
-      request: Clients.AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "autoscalers_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.AutoscalersClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates an autoscaler in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "autoscalers_update")
-    func update(
-      request: Clients.AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Autoscalers``.
-    public class AutoscalersClient: Autoscalers {
-      let inner: any AutoscalersStub
+    /// A Swift protocol to mock `AutoscalersClient`.
+    ///
+    /// To mock `AutoscalersClient` change your functions to receive
+    /// `some AutoscalersProtocol` or `any AutoscalersProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol AutoscalersProtocol {
+      /// See `AutoscalersClient.aggregatedList`.
+      func aggregatedList(request: AutoscalersClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.AutoscalerAggregatedList
 
-      /// Creates a new `AutoscalersClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any AutoscalersStub = try AutoscalersTransport(options)
-        inner = AutoscalersRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = AutoscalersLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `AutoscalersClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AutoscalersClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
 
-      /// See `Autoscalers.aggregatedList`
-      public func aggregatedList(
-        request: Clients.AutoscalersClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `AutoscalersClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
 
-      /// Retrieves an aggregated list of autoscalers.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.AutoscalersClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AutoscalersClient.delete`.
+      func delete(request: AutoscalersClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Autoscalers.delete`
-      public func delete(
-        request: Clients.AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `AutoscalersClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        autoscaler: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Autoscalers.`get``
-      public func `get`(
-        request: Clients.AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Autoscaler {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `AutoscalersClient.`get``.
+      func `get`(request: AutoscalersClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Autoscaler
 
-      /// See `Autoscalers.insert`
-      public func insert(
-        request: Clients.AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `AutoscalersClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        autoscaler: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Autoscaler
 
-      /// See `Autoscalers.list`
-      public func list(
-        request: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AutoscalerList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `AutoscalersClient.insert`.
+      func insert(request: AutoscalersClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves a list of autoscalers contained within
-      /// the specified zone.
-      public func list(
-        byItem: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Autoscaler, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AutoscalerList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AutoscalersClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        body: Autoscaler?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Autoscalers.patch`
-      public func patch(
-        request: Clients.AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `AutoscalersClient.list`.
+      func list(request: AutoscalersClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.AutoscalerList
 
-      /// See `Autoscalers.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.AutoscalersClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `AutoscalersClient.list`.
+      func list(
+        byItem: AutoscalersClient.ListRequest
+      ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
 
-      /// See `Autoscalers.update`
-      public func update(
-        request: Clients.AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `AutoscalersClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
+
+      /// See `AutoscalersClient.patch`.
+      func patch(request: AutoscalersClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.patch`.
+      func patch(
+        project: Swift.String,
+        zone: Swift.String,
+        body: Autoscaler?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.testIamPermissions`.
+      func testIamPermissions(request: AutoscalersClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `AutoscalersClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `AutoscalersClient.update`.
+      func update(request: AutoscalersClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.update`.
+      func update(
+        project: Swift.String,
+        zone: Swift.String,
+        body: Autoscaler?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.aggregatedList`.
+      func aggregatedList(
+        request: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList
+
+      /// See `AutoscalersClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error>
+
+      /// See `AutoscalersClient.delete`.
+      func delete(
+        request: AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.`get``.
+      func `get`(
+        request: AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Autoscaler
+
+      /// See `AutoscalersClient.insert`.
+      func insert(
+        request: AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.list`.
+      func list(
+        request: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AutoscalerList
+
+      /// See `AutoscalersClient.list`.
+      func list(
+        byItem: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Autoscaler, Swift.Error>
+
+      /// See `AutoscalersClient.patch`.
+      func patch(
+        request: AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AutoscalersClient.testIamPermissions`.
+      func testIamPermissions(
+        request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `AutoscalersClient.update`.
+      func update(
+        request: AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Autoscalers {
-    public func aggregatedList(request: Clients.AutoscalersClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList
+  extension Clients.AutoscalersProtocol {
+    public func aggregatedList(request: AutoscalersClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.AutoscalerAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.AutoscalersClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.AutoscalersClient.AggregatedListRequest
+      byItem: AutoscalersClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.AutoscalersClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList in
@@ -386,20 +344,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, AutoscalersScopedList), Swift.Error> {
-      let request = Clients.AutoscalersClient.AggregatedListRequest().with {
+      let request = AutoscalersClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.AutoscalersClient.DeleteRequest) async throws
+    public func delete(request: AutoscalersClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -409,7 +367,7 @@
       zone: Swift.String,
       autoscaler: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AutoscalersClient.DeleteRequest().with {
+      let request = AutoscalersClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.autoscaler = autoscaler
@@ -417,14 +375,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.AutoscalersClient.GetRequest) async throws
+    public func `get`(request: AutoscalersClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Autoscaler
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Autoscaler {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -434,7 +392,7 @@
       zone: Swift.String,
       autoscaler: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Autoscaler {
-      let request = Clients.AutoscalersClient.GetRequest().with {
+      let request = AutoscalersClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.autoscaler = autoscaler
@@ -442,14 +400,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.AutoscalersClient.InsertRequest) async throws
+    public func insert(request: AutoscalersClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -459,7 +417,7 @@
       zone: Swift.String,
       body: Autoscaler?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AutoscalersClient.InsertRequest().with {
+      let request = AutoscalersClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -467,26 +425,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.AutoscalersClient.ListRequest) async throws
+    public func list(request: AutoscalersClient.ListRequest) async throws
       -> GoogleCloudComputeV1.AutoscalerList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AutoscalerList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.AutoscalersClient.ListRequest
+      byItem: AutoscalersClient.ListRequest
     ) throws -> any AsyncSequence<Autoscaler, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Autoscaler, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AutoscalerList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -498,21 +456,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<Autoscaler, Swift.Error> {
-      let request = Clients.AutoscalersClient.ListRequest().with {
+      let request = AutoscalersClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.AutoscalersClient.PatchRequest) async throws
+    public func patch(request: AutoscalersClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -522,7 +480,7 @@
       zone: Swift.String,
       body: Autoscaler?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AutoscalersClient.PatchRequest().with {
+      let request = AutoscalersClient.PatchRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -530,15 +488,14 @@
       return try await self.patch(request: request)
     }
 
-    public func testIamPermissions(request: Clients.AutoscalersClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: AutoscalersClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.AutoscalersClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -549,7 +506,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.AutoscalersClient.TestIamPermissionsRequest().with {
+      let request = AutoscalersClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -558,14 +515,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.AutoscalersClient.UpdateRequest) async throws
+    public func update(request: AutoscalersClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -575,7 +532,7 @@
       zone: Swift.String,
       body: Autoscaler?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AutoscalersClient.UpdateRequest().with {
+      let request = AutoscalersClient.UpdateRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body

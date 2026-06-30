@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.TargetHttpProxiesClient {
+  extension TargetHttpProxiesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.targetHttpProxies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.aggregatedList]: <doc:TargetHttpProxies/aggregatedList(request:)>

@@ -28,36 +28,32 @@
   extension Clients {
     protocol RegionAutoscalersStub {
       func delete(
-        request: Clients.RegionAutoscalersClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler
 
       func insert(
-        request: Clients.RegionAutoscalersClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionAutoscalerList
 
       func patch(
-        request: Clients.RegionAutoscalersClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionAutoscalersClient.TestIamPermissionsRequest,
+        request: RegionAutoscalersClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.RegionAutoscalersClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -70,8 +66,7 @@
       }
 
       public func delete(
-        request: Clients.RegionAutoscalersClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -98,7 +93,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -123,8 +118,7 @@
       }
 
       public func insert(
-        request: Clients.RegionAutoscalersClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -150,7 +144,7 @@
       }
 
       public func list(
-        request: Clients.RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionAutoscalerList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -178,8 +172,7 @@
       }
 
       public func patch(
-        request: Clients.RegionAutoscalersClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -206,7 +199,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionAutoscalersClient.TestIamPermissionsRequest,
+        request: RegionAutoscalersClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
@@ -235,8 +228,7 @@
       }
 
       public func update(
-        request: Clients.RegionAutoscalersClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

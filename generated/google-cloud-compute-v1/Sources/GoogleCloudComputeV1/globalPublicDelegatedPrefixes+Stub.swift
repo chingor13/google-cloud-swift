@@ -28,27 +28,27 @@
   extension Clients {
     protocol GlobalPublicDelegatedPrefixesStub {
       func delete(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.DeleteRequest,
+        request: GlobalPublicDelegatedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.GetRequest,
+        request: GlobalPublicDelegatedPrefixesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
 
       func insert(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.InsertRequest,
+        request: GlobalPublicDelegatedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.ListRequest,
+        request: GlobalPublicDelegatedPrefixesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
 
       func patch(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.PatchRequest,
+        request: GlobalPublicDelegatedPrefixesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -62,7 +62,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.DeleteRequest,
+        request: GlobalPublicDelegatedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -89,7 +89,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.GetRequest,
+        request: GlobalPublicDelegatedPrefixesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
         let path = try { () throws -> Swift.String in
@@ -114,7 +114,7 @@
       }
 
       public func insert(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.InsertRequest,
+        request: GlobalPublicDelegatedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -138,7 +138,7 @@
       }
 
       public func list(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.ListRequest,
+        request: GlobalPublicDelegatedPrefixesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
         let path = try { () throws -> Swift.String in
@@ -164,7 +164,7 @@
       }
 
       public func patch(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.PatchRequest,
+        request: GlobalPublicDelegatedPrefixesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

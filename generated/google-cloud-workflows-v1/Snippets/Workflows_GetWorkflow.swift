@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Workflows, projectId: String, locationId: String, workflowId: String)
+func sample(client: WorkflowsClient, projectId: String, locationId: String, workflowId: String)
   async throws
 {
   let response = try await client.getWorkflow(
@@ -40,7 +40,7 @@ func sample(client: some Workflows, projectId: String, locationId: String, workf
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+      let client = try GoogleCloudWorkflowsV1.WorkflowsClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         workflowId: "[placeholder]")

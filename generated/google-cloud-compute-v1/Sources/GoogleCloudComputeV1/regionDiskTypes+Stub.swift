@@ -28,11 +28,11 @@
   extension Clients {
     protocol RegionDiskTypesStub {
       func `get`(
-        request: Clients.RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType
 
       func list(
-        request: Clients.RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionDiskTypeList
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -69,7 +69,7 @@
       }
 
       public func list(
-        request: Clients.RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionDiskTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some PacketMirrorings) async throws {
+  func sample(client: PacketMirroringsClient) async throws {
     let response = try await client.delete(
-      request: Clients.PacketMirroringsClient.DeleteRequest()
+      request: PacketMirroringsClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.PacketMirroringsClient()
+        let client = try GoogleCloudComputeV1.PacketMirroringsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

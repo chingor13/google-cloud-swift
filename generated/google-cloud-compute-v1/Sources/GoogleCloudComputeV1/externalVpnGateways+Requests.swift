@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ExternalVpnGatewaysClient {
+  extension ExternalVpnGatewaysClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.externalVpnGateways.delete] method.
     ///
     /// [google.cloud.compute.v1.externalVpnGateways.delete]: <doc:ExternalVpnGateways/delete(request:)>

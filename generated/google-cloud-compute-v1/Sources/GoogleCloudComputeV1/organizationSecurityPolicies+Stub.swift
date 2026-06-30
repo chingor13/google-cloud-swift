@@ -28,82 +28,82 @@
   extension Clients {
     protocol OrganizationSecurityPoliciesStub {
       func addAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.AddAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.AddAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func addRule(
-        request: Clients.OrganizationSecurityPoliciesClient.AddRuleRequest,
+        request: OrganizationSecurityPoliciesClient.AddRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func copyRules(
-        request: Clients.OrganizationSecurityPoliciesClient.CopyRulesRequest,
+        request: OrganizationSecurityPoliciesClient.CopyRulesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.OrganizationSecurityPoliciesClient.DeleteRequest,
+        request: OrganizationSecurityPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRequest,
+        request: OrganizationSecurityPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy
 
       func getAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.GetAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.GetAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyAssociation
 
       func getRule(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRuleRequest,
+        request: OrganizationSecurityPoliciesClient.GetRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule
 
       func insert(
-        request: Clients.OrganizationSecurityPoliciesClient.InsertRequest,
+        request: OrganizationSecurityPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.OrganizationSecurityPoliciesClient.ListRequest,
+        request: OrganizationSecurityPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList
 
       func listAssociations(
-        request: Clients.OrganizationSecurityPoliciesClient.ListAssociationsRequest,
+        request: OrganizationSecurityPoliciesClient.ListAssociationsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse
 
       func listPreconfiguredExpressionSets(
-        request: Clients.OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+        request: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
 
       func move(
-        request: Clients.OrganizationSecurityPoliciesClient.MoveRequest,
+        request: OrganizationSecurityPoliciesClient.MoveRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patch(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRule(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRuleRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeRule(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -117,7 +117,7 @@
       }
 
       public func addAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.AddAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.AddAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -146,7 +146,7 @@
       }
 
       public func addRule(
-        request: Clients.OrganizationSecurityPoliciesClient.AddRuleRequest,
+        request: OrganizationSecurityPoliciesClient.AddRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -172,7 +172,7 @@
       }
 
       public func copyRules(
-        request: Clients.OrganizationSecurityPoliciesClient.CopyRulesRequest,
+        request: OrganizationSecurityPoliciesClient.CopyRulesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -197,7 +197,7 @@
       }
 
       public func delete(
-        request: Clients.OrganizationSecurityPoliciesClient.DeleteRequest,
+        request: OrganizationSecurityPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -219,7 +219,7 @@
       }
 
       public func `get`(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRequest,
+        request: OrganizationSecurityPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy {
         let path = try { () throws -> Swift.String in
@@ -239,7 +239,7 @@
       }
 
       public func getAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.GetAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.GetAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyAssociation {
         let path = try { () throws -> Swift.String in
@@ -261,7 +261,7 @@
       }
 
       public func getRule(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRuleRequest,
+        request: OrganizationSecurityPoliciesClient.GetRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule {
         let path = try { () throws -> Swift.String in
@@ -283,7 +283,7 @@
       }
 
       public func insert(
-        request: Clients.OrganizationSecurityPoliciesClient.InsertRequest,
+        request: OrganizationSecurityPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -305,7 +305,7 @@
       }
 
       public func list(
-        request: Clients.OrganizationSecurityPoliciesClient.ListRequest,
+        request: OrganizationSecurityPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList {
         let path = try { () throws -> Swift.String in
@@ -329,7 +329,7 @@
       }
 
       public func listAssociations(
-        request: Clients.OrganizationSecurityPoliciesClient.ListAssociationsRequest,
+        request: OrganizationSecurityPoliciesClient.ListAssociationsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse {
         let path = try { () throws -> Swift.String in
@@ -348,7 +348,7 @@
       }
 
       public func listPreconfiguredExpressionSets(
-        request: Clients.OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+        request: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
       {
@@ -374,7 +374,7 @@
       }
 
       public func move(
-        request: Clients.OrganizationSecurityPoliciesClient.MoveRequest,
+        request: OrganizationSecurityPoliciesClient.MoveRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -397,7 +397,7 @@
       }
 
       public func patch(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -423,7 +423,7 @@
       }
 
       public func patchRule(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRuleRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -450,7 +450,7 @@
       }
 
       public func removeAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -473,7 +473,7 @@
       }
 
       public func removeRule(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

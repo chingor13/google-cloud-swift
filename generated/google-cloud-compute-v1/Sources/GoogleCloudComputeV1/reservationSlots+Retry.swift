@@ -53,30 +53,29 @@
       }
 
       public func `get`(
-        request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ReservationSlotsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
+            (r: ReservationSlotsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ReservationSlotsGetResponse
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getVersion(
-        request: Clients.ReservationSlotsClient.GetVersionRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.ReservationSlotsClient.GetVersionRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ReservationSlotsClient.GetVersionRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getVersion(request: r, options: o)
@@ -84,31 +83,30 @@
       }
 
       public func list(
-        request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ReservationSlotsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
+            (r: ReservationSlotsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ReservationSlotsListResponse
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.ReservationSlotsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.ReservationSlotsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ReservationSlotsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

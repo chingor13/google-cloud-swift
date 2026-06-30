@@ -28,37 +28,37 @@
   extension Clients {
     protocol RegionHealthAggregationPoliciesStub {
       func aggregatedList(
-        request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+        request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
 
       func delete(
-        request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+        request: RegionHealthAggregationPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+        request: RegionHealthAggregationPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
 
       func insert(
-        request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+        request: RegionHealthAggregationPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+        request: RegionHealthAggregationPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
 
       func patch(
-        request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+        request: RegionHealthAggregationPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+        request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -72,7 +72,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+        request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -103,7 +103,7 @@
       }
 
       public func delete(
-        request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+        request: RegionHealthAggregationPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -133,7 +133,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+        request: RegionHealthAggregationPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
         let path = try { () throws -> Swift.String in
@@ -161,7 +161,7 @@
       }
 
       public func insert(
-        request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+        request: RegionHealthAggregationPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -189,7 +189,7 @@
       }
 
       public func list(
-        request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+        request: RegionHealthAggregationPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList {
         let path = try { () throws -> Swift.String in
@@ -219,7 +219,7 @@
       }
 
       public func patch(
-        request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+        request: RegionHealthAggregationPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -253,7 +253,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+        request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

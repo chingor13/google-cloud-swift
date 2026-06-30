@@ -24,7 +24,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some FunctionService) async throws {
+func sample(client: FunctionServiceClient) async throws {
   let items = try client.listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest()
       /* set fields using .with { $0... } */
@@ -39,7 +39,7 @@ func sample(client: some FunctionService) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudFunctionsV2.Clients.FunctionServiceClient()
+      let client = try GoogleCloudFunctionsV2.FunctionServiceClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

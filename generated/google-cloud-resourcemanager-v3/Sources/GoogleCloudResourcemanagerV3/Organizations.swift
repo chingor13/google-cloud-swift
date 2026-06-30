@@ -29,133 +29,27 @@ import Logging
 /// Allows users to manage their organization resources.
 ///
 /// @Snippet(path: "OrganizationsQuickstart")
-public protocol Organizations {
-  /// Fetches an organization resource identified by the specified resource name.
-  ///
-  /// @Snippet(path: "Organizations_GetOrganization")
-  func getOrganization(request: GetOrganizationRequest) async throws
-    -> GoogleCloudResourcemanagerV3.Organization
+public class OrganizationsClient: Clients.OrganizationsProtocol {
+  let inner: any Clients.OrganizationsStub
 
-  /// Fetches an organization resource identified by the specified resource name.
-  func getOrganization(
-    name: Swift.String,
-  ) async throws -> GoogleCloudResourcemanagerV3.Organization
-
-  /// Searches organization resources that are visible to the user and satisfy
-  /// the specified filter. This method returns organizations in an unspecified
-  /// order. New organizations do not necessarily appear at the end of the
-  /// results, and may take a small amount of time to appear.
-  ///
-  /// Search will only return organizations on which the user has the permission
-  /// `resourcemanager.organizations.get`
-  ///
-  /// @Snippet(path: "Organizations_SearchOrganizations")
-  func searchOrganizations(request: SearchOrganizationsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
-
-  /// Searches organization resources that are visible to the user and satisfy
-  /// the specified filter. This method returns organizations in an unspecified
-  /// order. New organizations do not necessarily appear at the end of the
-  /// results, and may take a small amount of time to appear.
-  ///
-  /// Search will only return organizations on which the user has the permission
-  /// `resourcemanager.organizations.get`
-  func searchOrganizations(
-    byItem: SearchOrganizationsRequest
-  ) throws -> any AsyncSequence<Organization, Swift.Error>
-
-  /// Searches organization resources that are visible to the user and satisfy
-  /// the specified filter. This method returns organizations in an unspecified
-  /// order. New organizations do not necessarily appear at the end of the
-  /// results, and may take a small amount of time to appear.
-  ///
-  /// Search will only return organizations on which the user has the permission
-  /// `resourcemanager.organizations.get`
-  func searchOrganizations(
-    query: Swift.String,
-  ) throws -> any AsyncSequence<Organization, Swift.Error>
-
-  /// Gets the access control policy for an organization resource. The policy may
-  /// be empty if no such policy or resource exists. The `resource` field should
-  /// be the organization's resource name, for example: "organizations/123".
-  ///
-  /// Authorization requires the IAM permission
-  /// `resourcemanager.organizations.getIamPolicy` on the specified organization.
-  ///
-  /// @Snippet(path: "Organizations_GetIamPolicy")
-  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Gets the access control policy for an organization resource. The policy may
-  /// be empty if no such policy or resource exists. The `resource` field should
-  /// be the organization's resource name, for example: "organizations/123".
-  ///
-  /// Authorization requires the IAM permission
-  /// `resourcemanager.organizations.getIamPolicy` on the specified organization.
-  func getIamPolicy(
-    resource: Swift.String,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on an organization resource. Replaces any
-  /// existing policy. The `resource` field should be the organization's resource
-  /// name, for example: "organizations/123".
-  ///
-  /// Authorization requires the IAM permission
-  /// `resourcemanager.organizations.setIamPolicy` on the specified organization.
-  ///
-  /// @Snippet(path: "Organizations_SetIamPolicy")
-  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on an organization resource. Replaces any
-  /// existing policy. The `resource` field should be the organization's resource
-  /// name, for example: "organizations/123".
-  ///
-  /// Authorization requires the IAM permission
-  /// `resourcemanager.organizations.setIamPolicy` on the specified organization.
-  func setIamPolicy(
-    resource: Swift.String,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Returns the permissions that a caller has on the specified organization.
-  /// The `resource` field should be the organization's resource name,
-  /// for example: "organizations/123".
-  ///
-  /// There are no permissions required for making this API call.
-  ///
-  /// @Snippet(path: "Organizations_TestIamPermissions")
-  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
-    -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Returns the permissions that a caller has on the specified organization.
-  /// The `resource` field should be the organization's resource name,
-  /// for example: "organizations/123".
-  ///
-  /// There are no permissions required for making this API call.
-  func testIamPermissions(
-    resource: Swift.String,
-    permissions: [Swift.String],
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Organizations_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `OrganizationsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.OrganizationsStub = try Clients.OrganizationsTransport(options)
+    inner = Clients.OrganizationsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.OrganizationsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Fetches an organization resource identified by the specified resource name.
   ///
   /// @Snippet(path: "Organizations_GetOrganization")
-  func getOrganization(
+  public func getOrganization(
     request: GetOrganizationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.Organization
+  ) async throws -> GoogleCloudResourcemanagerV3.Organization {
+    try await self.inner.getOrganization(request: request, options: options)
+  }
 
   /// Searches organization resources that are visible to the user and satisfy
   /// the specified filter. This method returns organizations in an unspecified
@@ -166,9 +60,11 @@ public protocol Organizations {
   /// `resourcemanager.organizations.get`
   ///
   /// @Snippet(path: "Organizations_SearchOrganizations")
-  func searchOrganizations(
+  public func searchOrganizations(
     request: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse {
+    try await self.inner.searchOrganizations(request: request, options: options)
+  }
 
   /// Searches organization resources that are visible to the user and satisfy
   /// the specified filter. This method returns organizations in an unspecified
@@ -177,9 +73,19 @@ public protocol Organizations {
   ///
   /// Search will only return organizations on which the user has the permission
   /// `resourcemanager.organizations.get`
-  func searchOrganizations(
+  ///
+  /// @Snippet(path: "Organizations_SearchOrganizations")
+  public func searchOrganizations(
     byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Organization, Swift.Error>
+  ) throws -> any AsyncSequence<Organization, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.searchOrganizations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the access control policy for an organization resource. The policy may
   /// be empty if no such policy or resource exists. The `resource` field should
@@ -189,9 +95,11 @@ public protocol Organizations {
   /// `resourcemanager.organizations.getIamPolicy` on the specified organization.
   ///
   /// @Snippet(path: "Organizations_GetIamPolicy")
-  func getIamPolicy(
+  public func getIamPolicy(
     request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
 
   /// Sets the access control policy on an organization resource. Replaces any
   /// existing policy. The `resource` field should be the organization's resource
@@ -201,9 +109,11 @@ public protocol Organizations {
   /// `resourcemanager.organizations.setIamPolicy` on the specified organization.
   ///
   /// @Snippet(path: "Organizations_SetIamPolicy")
-  func setIamPolicy(
+  public func setIamPolicy(
     request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
 
   /// Returns the permissions that a caller has on the specified organization.
   /// The `resource` field should be the organization's resource name,
@@ -212,100 +122,128 @@ public protocol Organizations {
   /// There are no permissions required for making this API call.
   ///
   /// @Snippet(path: "Organizations_TestIamPermissions")
-  func testIamPermissions(
+  public func testIamPermissions(
     request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Organizations_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Organizations``.
-  public class OrganizationsClient: Organizations {
-    let inner: any OrganizationsStub
+  /// A Swift protocol to mock `OrganizationsClient`.
+  ///
+  /// To mock `OrganizationsClient` change your functions to receive
+  /// `some OrganizationsProtocol` or `any OrganizationsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol OrganizationsProtocol {
+    /// See `OrganizationsClient.getOrganization`.
+    func getOrganization(request: GetOrganizationRequest) async throws
+      -> GoogleCloudResourcemanagerV3.Organization
 
-    /// Creates a new `OrganizationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any OrganizationsStub = try OrganizationsTransport(options)
-      inner = OrganizationsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = OrganizationsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `OrganizationsClient.getOrganization`.
+    func getOrganization(
+      name: Swift.String,
+    ) async throws -> GoogleCloudResourcemanagerV3.Organization
 
-    /// See `Organizations.getOrganization`
-    public func getOrganization(
+    /// See `OrganizationsClient.searchOrganizations`.
+    func searchOrganizations(request: SearchOrganizationsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
+
+    /// See `OrganizationsClient.searchOrganizations`.
+    func searchOrganizations(
+      byItem: SearchOrganizationsRequest
+    ) throws -> any AsyncSequence<Organization, Swift.Error>
+
+    /// See `OrganizationsClient.searchOrganizations`.
+    func searchOrganizations(
+      query: Swift.String,
+    ) throws -> any AsyncSequence<Organization, Swift.Error>
+
+    /// See `OrganizationsClient.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `OrganizationsClient.getIamPolicy`.
+    func getIamPolicy(
+      resource: Swift.String,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `OrganizationsClient.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `OrganizationsClient.setIamPolicy`.
+    func setIamPolicy(
+      resource: Swift.String,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `OrganizationsClient.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `OrganizationsClient.testIamPermissions`.
+    func testIamPermissions(
+      resource: Swift.String,
+      permissions: [Swift.String],
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `OrganizationsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `OrganizationsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `OrganizationsClient.getOrganization`.
+    func getOrganization(
       request: GetOrganizationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.Organization {
-      try await self.inner.getOrganization(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.Organization
 
-    /// See `Organizations.searchOrganizations`
-    public func searchOrganizations(
+    /// See `OrganizationsClient.searchOrganizations`.
+    func searchOrganizations(
       request: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse {
-      try await self.inner.searchOrganizations(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
 
-    /// Searches organization resources that are visible to the user and satisfy
-    /// the specified filter. This method returns organizations in an unspecified
-    /// order. New organizations do not necessarily appear at the end of the
-    /// results, and may take a small amount of time to appear.
-    ///
-    /// Search will only return organizations on which the user has the permission
-    /// `resourcemanager.organizations.get`
-    public func searchOrganizations(
+    /// See `OrganizationsClient.searchOrganizations`.
+    func searchOrganizations(
       byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Organization, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.searchOrganizations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Organization, Swift.Error>
 
-    /// See `Organizations.getIamPolicy`
-    public func getIamPolicy(
+    /// See `OrganizationsClient.getIamPolicy`.
+    func getIamPolicy(
       request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.getIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Organizations.setIamPolicy`
-    public func setIamPolicy(
+    /// See `OrganizationsClient.setIamPolicy`.
+    func setIamPolicy(
       request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.setIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Organizations.testIamPermissions`
-    public func testIamPermissions(
+    /// See `OrganizationsClient.testIamPermissions`.
+    func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      try await self.inner.testIamPermissions(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `Organizations.getOperation`
-    public func getOperation(
+    /// See `OrganizationsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Organizations {
+extension Clients.OrganizationsProtocol {
   public func getOrganization(request: GetOrganizationRequest) async throws
     -> GoogleCloudResourcemanagerV3.Organization
   {

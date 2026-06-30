@@ -60,33 +60,29 @@
       }
 
       public func delete(
-        request: Clients.RegionTargetHttpProxiesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (
-              r: Clients.RegionTargetHttpProxiesClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionTargetHttpProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.RegionTargetHttpProxiesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxy {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.RegionTargetHttpProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionTargetHttpProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TargetHttpProxy
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -94,33 +90,29 @@
       }
 
       public func insert(
-        request: Clients.RegionTargetHttpProxiesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (
-              r: Clients.RegionTargetHttpProxiesClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionTargetHttpProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.RegionTargetHttpProxiesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionTargetHttpProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionTargetHttpProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TargetHttpProxyList
             in
             return try await self.inner.list(request: r, options: o)
@@ -128,7 +120,7 @@
       }
 
       public func setUrlMap(
-        request: Clients.RegionTargetHttpProxiesClient.SetUrlMapRequest,
+        request: RegionTargetHttpProxiesClient.SetUrlMapRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -136,10 +128,8 @@
           options: options,
           name: "setUrlMap",
           action: {
-            (
-              r: Clients.RegionTargetHttpProxiesClient.SetUrlMapRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionTargetHttpProxiesClient.SetUrlMapRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setUrlMap(request: r, options: o)
           })

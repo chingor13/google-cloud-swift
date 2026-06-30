@@ -55,7 +55,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+        request: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList {
         try await self._intercept(
@@ -64,7 +64,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest,
+              r: RegionHealthAggregationPoliciesClient.AggregatedListRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyAggregatedList
             in
@@ -73,7 +73,7 @@
       }
 
       public func delete(
-        request: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+        request: RegionHealthAggregationPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -82,7 +82,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionHealthAggregationPoliciesClient.DeleteRequest,
+              r: RegionHealthAggregationPoliciesClient.DeleteRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -91,7 +91,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
+        request: RegionHealthAggregationPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy {
         try await self._intercept(
@@ -99,17 +99,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionHealthAggregationPoliciesClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
+            (r: RegionHealthAggregationPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.HealthAggregationPolicy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+        request: RegionHealthAggregationPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -118,7 +116,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionHealthAggregationPoliciesClient.InsertRequest,
+              r: RegionHealthAggregationPoliciesClient.InsertRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -127,7 +125,7 @@
       }
 
       public func list(
-        request: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
+        request: RegionHealthAggregationPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList {
         try await self._intercept(
@@ -135,17 +133,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionHealthAggregationPoliciesClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
+            (r: RegionHealthAggregationPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.HealthAggregationPolicyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+        request: RegionHealthAggregationPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -154,7 +150,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionHealthAggregationPoliciesClient.PatchRequest,
+              r: RegionHealthAggregationPoliciesClient.PatchRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -163,7 +159,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+        request: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -172,7 +168,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
+              r: RegionHealthAggregationPoliciesClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

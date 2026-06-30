@@ -23,7 +23,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudResourcemanagerV3.Clients.TagBindingsClient()
+  let client = try GoogleCloudResourcemanagerV3.TagBindingsClient()
   let items = try client.listTagBindings(
     byItem: ListTagBindingsRequest()
       .with {

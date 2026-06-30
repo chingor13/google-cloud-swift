@@ -28,64 +28,59 @@
   /// Service for the `regionNetworkEndpointGroups` resource.
   ///
   /// @Snippet(path: "regionNetworkEndpointGroupsQuickstart")
-  public protocol RegionNetworkEndpointGroups {
+  public class RegionNetworkEndpointGroupsClient: Clients.RegionNetworkEndpointGroupsProtocol {
+    let inner: any Clients.RegionNetworkEndpointGroupsStub
+
+    /// Creates a new `RegionNetworkEndpointGroupsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionNetworkEndpointGroupsStub =
+        try Clients.RegionNetworkEndpointGroupsTransport(options)
+      inner = Clients.RegionNetworkEndpointGroupsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionNetworkEndpointGroupsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Attach a list of network endpoints to the specified network endpoint group.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_attachNetworkEndpoints")
-    func attachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Attach a list of network endpoints to the specified network endpoint group.
-    func attachNetworkEndpoints(
-      project: Swift.String,
-      region: Swift.String,
-      networkEndpointGroup: Swift.String,
-      body: RegionNetworkEndpointGroupsAttachEndpointsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func attachNetworkEndpoints(
+      request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.attachNetworkEndpoints(request: request, options: options)
+    }
 
     /// Deletes the specified network endpoint group. Note that the NEG cannot be
     /// deleted if it is configured as a backend of a backend service.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_delete")
-    func delete(request: Clients.RegionNetworkEndpointGroupsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified network endpoint group. Note that the NEG cannot be
-    /// deleted if it is configured as a backend of a backend service.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      networkEndpointGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionNetworkEndpointGroupsClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Detach the network endpoint from the specified network endpoint group.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_detachNetworkEndpoints")
-    func detachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Detach the network endpoint from the specified network endpoint group.
-    func detachNetworkEndpoints(
-      project: Swift.String,
-      region: Swift.String,
-      networkEndpointGroup: Swift.String,
-      body: RegionNetworkEndpointGroupsDetachEndpointsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func detachNetworkEndpoints(
+      request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.detachNetworkEndpoints(request: request, options: options)
+    }
 
     /// Returns the specified network endpoint group.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_get")
-    func `get`(request: Clients.RegionNetworkEndpointGroupsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NetworkEndpointGroup
-
-    /// Returns the specified network endpoint group.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      networkEndpointGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
+    public func `get`(
+      request: RegionNetworkEndpointGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a network endpoint group in the specified project using the
     /// parameters that are included in the request.
@@ -105,271 +100,231 @@
     ///    API
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_insert")
-    func insert(request: Clients.RegionNetworkEndpointGroupsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a network endpoint group in the specified project using the
-    /// parameters that are included in the request.
-    ///
-    /// Note: Use the following APIs to manage network endpoint groups:
-    ///
-    ///    -
-    ///    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity
-    ///    NEGs): zonal
-    ///    API
-    ///    -
-    ///    To manage NEGs with regional scope (such as regional internet NEGs,
-    ///    serverless NEGs, Private Service Connect NEGs): regional
-    ///    API
-    ///    -
-    ///    To manage NEGs with global scope (such as global internet NEGs):global
-    ///    API
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NetworkEndpointGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionNetworkEndpointGroupsClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of regional network endpoint groups available to the
     /// specified project in the given region.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_list")
-    func list(request: Clients.RegionNetworkEndpointGroupsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.NetworkEndpointGroupList
-
-    /// Retrieves the list of regional network endpoint groups available to the
-    /// specified project in the given region.
-    func list(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListRequest
-    ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
-
-    /// Retrieves the list of regional network endpoint groups available to the
-    /// specified project in the given region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
-
-    /// Lists the network endpoints in the specified network endpoint group.
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_listNetworkEndpoints")
-    func listNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
-    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
-
-    /// Lists the network endpoints in the specified network endpoint group.
-    func listNetworkEndpoints(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
-    ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
-
-    /// Lists the network endpoints in the specified network endpoint group.
-    func listNetworkEndpoints(
-      project: Swift.String,
-      region: Swift.String,
-      networkEndpointGroup: Swift.String,
-    ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
-
-    /// Attach a list of network endpoints to the specified network endpoint group.
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_attachNetworkEndpoints")
-    func attachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified network endpoint group. Note that the NEG cannot be
-    /// deleted if it is configured as a backend of a backend service.
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_delete")
-    func delete(
-      request: Clients.RegionNetworkEndpointGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Detach the network endpoint from the specified network endpoint group.
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_detachNetworkEndpoints")
-    func detachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified network endpoint group.
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_get")
-    func `get`(
-      request: Clients.RegionNetworkEndpointGroupsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
-
-    /// Creates a network endpoint group in the specified project using the
-    /// parameters that are included in the request.
-    ///
-    /// Note: Use the following APIs to manage network endpoint groups:
-    ///
-    ///    -
-    ///    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity
-    ///    NEGs): zonal
-    ///    API
-    ///    -
-    ///    To manage NEGs with regional scope (such as regional internet NEGs,
-    ///    serverless NEGs, Private Service Connect NEGs): regional
-    ///    API
-    ///    -
-    ///    To manage NEGs with global scope (such as global internet NEGs):global
-    ///    API
-    ///
-    /// @Snippet(path: "regionNetworkEndpointGroups_insert")
-    func insert(
-      request: Clients.RegionNetworkEndpointGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func list(
+      request: RegionNetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of regional network endpoint groups available to the
     /// specified project in the given region.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_list")
-    func list(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList
-
-    /// Retrieves the list of regional network endpoint groups available to the
-    /// specified project in the given region.
-    func list(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
+    public func list(
+      byItem: RegionNetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists the network endpoints in the specified network endpoint group.
     ///
     /// @Snippet(path: "regionNetworkEndpointGroups_listNetworkEndpoints")
-    func listNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+    public func listNetworkEndpoints(
+      request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
+    ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
+      try await self.inner.listNetworkEndpoints(request: request, options: options)
+    }
 
     /// Lists the network endpoints in the specified network endpoint group.
-    func listNetworkEndpoints(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+    ///
+    /// @Snippet(path: "regionNetworkEndpointGroups_listNetworkEndpoints")
+    public func listNetworkEndpoints(
+      byItem: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
+    ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listNetworkEndpoints(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionNetworkEndpointGroups``.
-    public class RegionNetworkEndpointGroupsClient: RegionNetworkEndpointGroups {
-      let inner: any RegionNetworkEndpointGroupsStub
+    /// A Swift protocol to mock `RegionNetworkEndpointGroupsClient`.
+    ///
+    /// To mock `RegionNetworkEndpointGroupsClient` change your functions to receive
+    /// `some RegionNetworkEndpointGroupsProtocol` or `any RegionNetworkEndpointGroupsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionNetworkEndpointGroupsProtocol {
+      /// See `RegionNetworkEndpointGroupsClient.attachNetworkEndpoints`.
+      func attachNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionNetworkEndpointGroupsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionNetworkEndpointGroupsStub = try RegionNetworkEndpointGroupsTransport(
-          options)
-        inner = RegionNetworkEndpointGroupsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionNetworkEndpointGroupsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionNetworkEndpointGroupsClient.attachNetworkEndpoints`.
+      func attachNetworkEndpoints(
+        project: Swift.String,
+        region: Swift.String,
+        networkEndpointGroup: Swift.String,
+        body: RegionNetworkEndpointGroupsAttachEndpointsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkEndpointGroups.attachNetworkEndpoints`
-      public func attachNetworkEndpoints(
-        request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+      /// See `RegionNetworkEndpointGroupsClient.delete`.
+      func delete(request: RegionNetworkEndpointGroupsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        networkEndpointGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.detachNetworkEndpoints`.
+      func detachNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.detachNetworkEndpoints`.
+      func detachNetworkEndpoints(
+        project: Swift.String,
+        region: Swift.String,
+        networkEndpointGroup: Swift.String,
+        body: RegionNetworkEndpointGroupsDetachEndpointsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.`get``.
+      func `get`(request: RegionNetworkEndpointGroupsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NetworkEndpointGroup
+
+      /// See `RegionNetworkEndpointGroupsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        networkEndpointGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
+
+      /// See `RegionNetworkEndpointGroupsClient.insert`.
+      func insert(request: RegionNetworkEndpointGroupsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: NetworkEndpointGroup?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNetworkEndpointGroupsClient.list`.
+      func list(request: RegionNetworkEndpointGroupsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.NetworkEndpointGroupList
+
+      /// See `RegionNetworkEndpointGroupsClient.list`.
+      func list(
+        byItem: RegionNetworkEndpointGroupsClient.ListRequest
+      ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
+
+      /// See `RegionNetworkEndpointGroupsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
+
+      /// See `RegionNetworkEndpointGroupsClient.listNetworkEndpoints`.
+      func listNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
+      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
+
+      /// See `RegionNetworkEndpointGroupsClient.listNetworkEndpoints`.
+      func listNetworkEndpoints(
+        byItem: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
+      ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
+
+      /// See `RegionNetworkEndpointGroupsClient.listNetworkEndpoints`.
+      func listNetworkEndpoints(
+        project: Swift.String,
+        region: Swift.String,
+        networkEndpointGroup: Swift.String,
+      ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
+
+      /// See `RegionNetworkEndpointGroupsClient.attachNetworkEndpoints`.
+      func attachNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.attachNetworkEndpoints(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkEndpointGroups.delete`
-      public func delete(
-        request: Clients.RegionNetworkEndpointGroupsClient.DeleteRequest,
+      /// See `RegionNetworkEndpointGroupsClient.delete`.
+      func delete(
+        request: RegionNetworkEndpointGroupsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkEndpointGroups.detachNetworkEndpoints`
-      public func detachNetworkEndpoints(
-        request: Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+      /// See `RegionNetworkEndpointGroupsClient.detachNetworkEndpoints`.
+      func detachNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.detachNetworkEndpoints(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkEndpointGroups.`get``
-      public func `get`(
-        request: Clients.RegionNetworkEndpointGroupsClient.GetRequest,
+      /// See `RegionNetworkEndpointGroupsClient.`get``.
+      func `get`(
+        request: RegionNetworkEndpointGroupsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
 
-      /// See `RegionNetworkEndpointGroups.insert`
-      public func insert(
-        request: Clients.RegionNetworkEndpointGroupsClient.InsertRequest,
+      /// See `RegionNetworkEndpointGroupsClient.insert`.
+      func insert(
+        request: RegionNetworkEndpointGroupsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkEndpointGroups.list`
-      public func list(
-        request: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
+      /// See `RegionNetworkEndpointGroupsClient.list`.
+      func list(
+        request: RegionNetworkEndpointGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList
 
-      /// Retrieves the list of regional network endpoint groups available to the
-      /// specified project in the given region.
-      public func list(
-        byItem: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
+      /// See `RegionNetworkEndpointGroupsClient.list`.
+      func list(
+        byItem: RegionNetworkEndpointGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error>
 
-      /// See `RegionNetworkEndpointGroups.listNetworkEndpoints`
-      public func listNetworkEndpoints(
-        request: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+      /// See `RegionNetworkEndpointGroupsClient.listNetworkEndpoints`.
+      func listNetworkEndpoints(
+        request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
-        try await self.inner.listNetworkEndpoints(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
 
-      /// Lists the network endpoints in the specified network endpoint group.
-      public func listNetworkEndpoints(
-        byItem: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+      /// See `RegionNetworkEndpointGroupsClient.listNetworkEndpoints`.
+      func listNetworkEndpoints(
+        byItem: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listNetworkEndpoints(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error>
     }
   }
 
   // Default implementations
-  extension RegionNetworkEndpointGroups {
+  extension Clients.RegionNetworkEndpointGroupsProtocol {
     public func attachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
+      request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.attachNetworkEndpoints(request: request, options: .init())
     }
 
     public func attachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+      request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -381,7 +336,7 @@
       networkEndpointGroup: Swift.String,
       body: RegionNetworkEndpointGroupsAttachEndpointsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEndpointGroup = networkEndpointGroup
@@ -390,14 +345,14 @@
       return try await self.attachNetworkEndpoints(request: request)
     }
 
-    public func delete(request: Clients.RegionNetworkEndpointGroupsClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: RegionNetworkEndpointGroupsClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionNetworkEndpointGroupsClient.DeleteRequest,
+      request: RegionNetworkEndpointGroupsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -408,7 +363,7 @@
       region: Swift.String,
       networkEndpointGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNetworkEndpointGroupsClient.DeleteRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEndpointGroup = networkEndpointGroup
@@ -417,13 +372,13 @@
     }
 
     public func detachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
+      request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.detachNetworkEndpoints(request: request, options: .init())
     }
 
     public func detachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+      request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -435,7 +390,7 @@
       networkEndpointGroup: Swift.String,
       body: RegionNetworkEndpointGroupsDetachEndpointsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEndpointGroup = networkEndpointGroup
@@ -444,15 +399,14 @@
       return try await self.detachNetworkEndpoints(request: request)
     }
 
-    public func `get`(request: Clients.RegionNetworkEndpointGroupsClient.GetRequest) async throws
+    public func `get`(request: RegionNetworkEndpointGroupsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NetworkEndpointGroup
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionNetworkEndpointGroupsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionNetworkEndpointGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -462,7 +416,7 @@
       region: Swift.String,
       networkEndpointGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
-      let request = Clients.RegionNetworkEndpointGroupsClient.GetRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEndpointGroup = networkEndpointGroup
@@ -470,14 +424,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionNetworkEndpointGroupsClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: RegionNetworkEndpointGroupsClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionNetworkEndpointGroupsClient.InsertRequest,
+      request: RegionNetworkEndpointGroupsClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -488,7 +442,7 @@
       region: Swift.String,
       body: NetworkEndpointGroup?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNetworkEndpointGroupsClient.InsertRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -496,28 +450,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionNetworkEndpointGroupsClient.ListRequest) async throws
+    public func list(request: RegionNetworkEndpointGroupsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.NetworkEndpointGroupList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionNetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListRequest
+      byItem: RegionNetworkEndpointGroupsClient.ListRequest
     ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionNetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
@@ -530,7 +482,7 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
-      let request = Clients.RegionNetworkEndpointGroupsClient.ListRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
@@ -538,26 +490,26 @@
     }
 
     public func listNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
+      request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
     ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
       try await self.listNetworkEndpoints(request: request, options: .init())
     }
 
     public func listNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+      request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listNetworkEndpoints(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
+      byItem: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest
     ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
       try self.listNetworkEndpoints(byItem: byItem, options: .init())
     }
 
     public func listNetworkEndpoints(
-      byItem: Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+      byItem: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
       let listRpc = {
@@ -573,7 +525,7 @@
       region: Swift.String,
       networkEndpointGroup: Swift.String,
     ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
-      let request = Clients.RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest().with {
+      let request = RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEndpointGroup = networkEndpointGroup

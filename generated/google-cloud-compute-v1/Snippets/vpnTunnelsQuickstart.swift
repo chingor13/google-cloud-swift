@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.VpnTunnelsClient()
+    let client = try GoogleCloudComputeV1.VpnTunnelsClient()
     let items = try client.aggregatedList(
-      byItem: Clients.VpnTunnelsClient.AggregatedListRequest()
+      byItem: VpnTunnelsClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

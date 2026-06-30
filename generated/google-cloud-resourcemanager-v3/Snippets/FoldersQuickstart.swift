@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudResourcemanagerV3.Clients.FoldersClient()
+  let client = try GoogleCloudResourcemanagerV3.FoldersClient()
   let items = try client.listFolders(
     byItem: ListFoldersRequest()
       .with {

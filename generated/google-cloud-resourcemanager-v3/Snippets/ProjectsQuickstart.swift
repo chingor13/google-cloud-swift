@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudResourcemanagerV3.Clients.ProjectsClient()
+  let client = try GoogleCloudResourcemanagerV3.ProjectsClient()
   let items = try client.listProjects(
     byItem: ListProjectsRequest()
       .with {

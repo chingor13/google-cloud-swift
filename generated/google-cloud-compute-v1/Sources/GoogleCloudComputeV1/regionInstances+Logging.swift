@@ -60,15 +60,14 @@
       }
 
       public func bulkInsert(
-        request: Clients.RegionInstancesClient.BulkInsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "bulkInsert",
           action: {
-            (r: Clients.RegionInstancesClient.BulkInsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionInstancesClient.BulkInsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.bulkInsert(request: r, options: o)

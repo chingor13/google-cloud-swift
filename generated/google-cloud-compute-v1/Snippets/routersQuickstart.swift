@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RoutersClient()
+    let client = try GoogleCloudComputeV1.RoutersClient()
     let response = try await client.getRouterStatus(
-      request: Clients.RoutersClient.GetRouterStatusRequest()
+      request: RoutersClient.GetRouterStatusRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

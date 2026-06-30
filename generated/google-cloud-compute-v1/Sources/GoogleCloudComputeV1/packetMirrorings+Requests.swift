@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.PacketMirroringsClient {
+  extension PacketMirroringsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.packetMirrorings.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.packetMirrorings.aggregatedList]: <doc:PacketMirrorings/aggregatedList(request:)>

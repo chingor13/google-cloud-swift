@@ -28,242 +28,228 @@
   /// Service for the `reservationBlocks` resource.
   ///
   /// @Snippet(path: "reservationBlocksQuickstart")
-  public protocol ReservationBlocks {
+  public class ReservationBlocksClient: Clients.ReservationBlocksProtocol {
+    let inner: any Clients.ReservationBlocksStub
+
+    /// Creates a new `ReservationBlocksClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ReservationBlocksStub = try Clients.ReservationBlocksTransport(options)
+      inner = Clients.ReservationBlocksRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ReservationBlocksLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Retrieves information about the specified reservation block.
     ///
     /// @Snippet(path: "reservationBlocks_get")
-    func `get`(request: Clients.ReservationBlocksClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ReservationBlocksGetResponse
-
-    /// Retrieves information about the specified reservation block.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      reservationBlock: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse
+    public func `get`(
+      request: ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "reservationBlocks_getIamPolicy")
-    func getIamPolicy(request: Clients.ReservationBlocksClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      parentResource: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: ReservationBlocksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Retrieves a list of reservation blocks under a single reservation.
     ///
     /// @Snippet(path: "reservationBlocks_list")
-    func list(request: Clients.ReservationBlocksClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ReservationBlocksListResponse
+    public func list(
+      request: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of reservation blocks under a single reservation.
-    func list(
-      byItem: Clients.ReservationBlocksClient.ListRequest
-    ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
-
-    /// Retrieves a list of reservation blocks under a single reservation.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-    ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
+    ///
+    /// @Snippet(path: "reservationBlocks_list")
+    public func list(
+      byItem: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ReservationBlock, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Allows customers to perform maintenance on a reservation block
     ///
     /// @Snippet(path: "reservationBlocks_performMaintenance")
-    func performMaintenance(request: Clients.ReservationBlocksClient.PerformMaintenanceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Allows customers to perform maintenance on a reservation block
-    func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      reservationBlock: Swift.String,
-      body: ReservationsBlocksPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func performMaintenance(
+      request: ReservationBlocksClient.PerformMaintenanceRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.performMaintenance(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "reservationBlocks_setIamPolicy")
-    func setIamPolicy(request: Clients.ReservationBlocksClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      parentResource: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetNestedPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: ReservationBlocksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "reservationBlocks_testIamPermissions")
-    func testIamPermissions(request: Clients.ReservationBlocksClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      parentResource: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Retrieves information about the specified reservation block.
-    ///
-    /// @Snippet(path: "reservationBlocks_get")
-    func `get`(
-      request: Clients.ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "reservationBlocks_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.ReservationBlocksClient.GetIamPolicyRequest,
+    public func testIamPermissions(
+      request: ReservationBlocksClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Retrieves a list of reservation blocks under a single reservation.
-    ///
-    /// @Snippet(path: "reservationBlocks_list")
-    func list(
-      request: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse
-
-    /// Retrieves a list of reservation blocks under a single reservation.
-    func list(
-      byItem: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
-
-    /// Allows customers to perform maintenance on a reservation block
-    ///
-    /// @Snippet(path: "reservationBlocks_performMaintenance")
-    func performMaintenance(
-      request: Clients.ReservationBlocksClient.PerformMaintenanceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "reservationBlocks_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.ReservationBlocksClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "reservationBlocks_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.ReservationBlocksClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ReservationBlocks``.
-    public class ReservationBlocksClient: ReservationBlocks {
-      let inner: any ReservationBlocksStub
+    /// A Swift protocol to mock `ReservationBlocksClient`.
+    ///
+    /// To mock `ReservationBlocksClient` change your functions to receive
+    /// `some ReservationBlocksProtocol` or `any ReservationBlocksProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ReservationBlocksProtocol {
+      /// See `ReservationBlocksClient.`get``.
+      func `get`(request: ReservationBlocksClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ReservationBlocksGetResponse
 
-      /// Creates a new `ReservationBlocksClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ReservationBlocksStub = try ReservationBlocksTransport(options)
-        inner = ReservationBlocksRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ReservationBlocksLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ReservationBlocksClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+        reservationBlock: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse
 
-      /// See `ReservationBlocks.`get``
-      public func `get`(
-        request: Clients.ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ReservationBlocksClient.getIamPolicy`.
+      func getIamPolicy(request: ReservationBlocksClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
 
-      /// See `ReservationBlocks.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.ReservationBlocksClient.GetIamPolicyRequest,
+      /// See `ReservationBlocksClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        parentResource: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationBlocksClient.list`.
+      func list(request: ReservationBlocksClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ReservationBlocksListResponse
+
+      /// See `ReservationBlocksClient.list`.
+      func list(
+        byItem: ReservationBlocksClient.ListRequest
+      ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
+
+      /// See `ReservationBlocksClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+      ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
+
+      /// See `ReservationBlocksClient.performMaintenance`.
+      func performMaintenance(request: ReservationBlocksClient.PerformMaintenanceRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationBlocksClient.performMaintenance`.
+      func performMaintenance(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+        reservationBlock: Swift.String,
+        body: ReservationsBlocksPerformMaintenanceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationBlocksClient.setIamPolicy`.
+      func setIamPolicy(request: ReservationBlocksClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationBlocksClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        parentResource: Swift.String,
+        resource: Swift.String,
+        body: ZoneSetNestedPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationBlocksClient.testIamPermissions`.
+      func testIamPermissions(request: ReservationBlocksClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ReservationBlocksClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        parentResource: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ReservationBlocksClient.`get``.
+      func `get`(
+        request: ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse
+
+      /// See `ReservationBlocksClient.getIamPolicy`.
+      func getIamPolicy(
+        request: ReservationBlocksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationBlocksClient.list`.
+      func list(
+        request: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse
+
+      /// See `ReservationBlocksClient.list`.
+      func list(
+        byItem: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<ReservationBlock, Swift.Error>
+
+      /// See `ReservationBlocksClient.performMaintenance`.
+      func performMaintenance(
+        request: ReservationBlocksClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationBlocks.list`
-      public func list(
-        request: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `ReservationBlocksClient.setIamPolicy`.
+      func setIamPolicy(
+        request: ReservationBlocksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// Retrieves a list of reservation blocks under a single reservation.
-      public func list(
-        byItem: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ReservationBlock, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `ReservationBlocks.performMaintenance`
-      public func performMaintenance(
-        request: Clients.ReservationBlocksClient.PerformMaintenanceRequest,
+      /// See `ReservationBlocksClient.testIamPermissions`.
+      func testIamPermissions(
+        request: ReservationBlocksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.performMaintenance(request: request, options: options)
-      }
-
-      /// See `ReservationBlocks.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.ReservationBlocksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `ReservationBlocks.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.ReservationBlocksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension ReservationBlocks {
-    public func `get`(request: Clients.ReservationBlocksClient.GetRequest) async throws
+  extension Clients.ReservationBlocksProtocol {
+    public func `get`(request: ReservationBlocksClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ReservationBlocksGetResponse
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -274,7 +260,7 @@
       reservation: Swift.String,
       reservationBlock: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse {
-      let request = Clients.ReservationBlocksClient.GetRequest().with {
+      let request = ReservationBlocksClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -283,15 +269,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.ReservationBlocksClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(request: ReservationBlocksClient.GetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.ReservationBlocksClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationBlocksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -302,7 +287,7 @@
       parentResource: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ReservationBlocksClient.GetIamPolicyRequest().with {
+      let request = ReservationBlocksClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentResource = parentResource
@@ -311,26 +296,26 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func list(request: Clients.ReservationBlocksClient.ListRequest) async throws
+    public func list(request: ReservationBlocksClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ReservationBlocksListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ReservationBlocksClient.ListRequest
+      byItem: ReservationBlocksClient.ListRequest
     ) throws -> any AsyncSequence<ReservationBlock, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationBlock, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse in
@@ -344,7 +329,7 @@
       zone: Swift.String,
       reservation: Swift.String,
     ) throws -> any AsyncSequence<ReservationBlock, Swift.Error> {
-      let request = Clients.ReservationBlocksClient.ListRequest().with {
+      let request = ReservationBlocksClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -352,14 +337,14 @@
       return try self.list(byItem: request)
     }
 
-    public func performMaintenance(
-      request: Clients.ReservationBlocksClient.PerformMaintenanceRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func performMaintenance(request: ReservationBlocksClient.PerformMaintenanceRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.performMaintenance(request: request, options: .init())
     }
 
     public func performMaintenance(
-      request: Clients.ReservationBlocksClient.PerformMaintenanceRequest,
+      request: ReservationBlocksClient.PerformMaintenanceRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -372,7 +357,7 @@
       reservationBlock: Swift.String,
       body: ReservationsBlocksPerformMaintenanceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationBlocksClient.PerformMaintenanceRequest().with {
+      let request = ReservationBlocksClient.PerformMaintenanceRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -382,15 +367,14 @@
       return try await self.performMaintenance(request: request)
     }
 
-    public func setIamPolicy(request: Clients.ReservationBlocksClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(request: ReservationBlocksClient.SetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.ReservationBlocksClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationBlocksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -402,7 +386,7 @@
       resource: Swift.String,
       body: ZoneSetNestedPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ReservationBlocksClient.SetIamPolicyRequest().with {
+      let request = ReservationBlocksClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentResource = parentResource
@@ -412,14 +396,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.ReservationBlocksClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: ReservationBlocksClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.ReservationBlocksClient.TestIamPermissionsRequest,
+      request: ReservationBlocksClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -432,7 +416,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.ReservationBlocksClient.TestIamPermissionsRequest().with {
+      let request = ReservationBlocksClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentResource = parentResource

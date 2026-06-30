@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalOrganizationOperationsClient {
+  extension GlobalOrganizationOperationsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.globalOrganizationOperations.delete] method.
     ///
     /// [google.cloud.compute.v1.globalOrganizationOperations.delete]: <doc:GlobalOrganizationOperations/delete(request:)>

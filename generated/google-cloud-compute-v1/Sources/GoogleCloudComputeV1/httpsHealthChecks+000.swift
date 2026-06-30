@@ -28,63 +28,71 @@
   /// Service for the `httpsHealthChecks` resource.
   ///
   /// @Snippet(path: "httpsHealthChecksQuickstart")
-  public protocol HttpsHealthChecks {
+  public class HttpsHealthChecksClient: Clients.HttpsHealthChecksProtocol {
+    let inner: any Clients.HttpsHealthChecksStub
+
+    /// Creates a new `HttpsHealthChecksClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.HttpsHealthChecksStub = try Clients.HttpsHealthChecksTransport(options)
+      inner = Clients.HttpsHealthChecksRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.HttpsHealthChecksLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified HttpsHealthCheck resource.
     ///
     /// @Snippet(path: "httpsHealthChecks_delete")
-    func delete(request: Clients.HttpsHealthChecksClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified HttpsHealthCheck resource.
-    func delete(
-      project: Swift.String,
-      httpsHealthCheck: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified HttpsHealthCheck resource.
     ///
     /// @Snippet(path: "httpsHealthChecks_get")
-    func `get`(request: Clients.HttpsHealthChecksClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.HttpsHealthCheck
-
-    /// Returns the specified HttpsHealthCheck resource.
-    func `get`(
-      project: Swift.String,
-      httpsHealthCheck: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck
+    public func `get`(
+      request: HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a HttpsHealthCheck resource in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "httpsHealthChecks_insert")
-    func insert(request: Clients.HttpsHealthChecksClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      body: HttpsHealthCheck?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of HttpsHealthCheck resources available to the specified
     /// project.
     ///
     /// @Snippet(path: "httpsHealthChecks_list")
-    func list(request: Clients.HttpsHealthChecksClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.HttpsHealthCheckList
+    public func list(
+      request: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of HttpsHealthCheck resources available to the specified
     /// project.
-    func list(
-      byItem: Clients.HttpsHealthChecksClient.ListRequest
-    ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
-
-    /// Retrieves the list of HttpsHealthCheck resources available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
+    ///
+    /// @Snippet(path: "httpsHealthChecks_list")
+    public func list(
+      byItem: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates a HttpsHealthCheck resource in the specified project using the data
     /// included in the request. This method supportsPATCH
@@ -92,204 +100,170 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "httpsHealthChecks_patch")
-    func patch(request: Clients.HttpsHealthChecksClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      httpsHealthCheck: Swift.String,
-      body: HttpsHealthCheck?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "httpsHealthChecks_testIamPermissions")
-    func testIamPermissions(request: Clients.HttpsHealthChecksClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_update")
-    func update(request: Clients.HttpsHealthChecksClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request.
-    func update(
-      project: Swift.String,
-      httpsHealthCheck: Swift.String,
-      body: HttpsHealthCheck?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified HttpsHealthCheck resource.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_delete")
-    func delete(
-      request: Clients.HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified HttpsHealthCheck resource.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_get")
-    func `get`(
-      request: Clients.HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck
-
-    /// Creates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_insert")
-    func insert(
-      request: Clients.HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of HttpsHealthCheck resources available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_list")
-    func list(
-      request: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList
-
-    /// Retrieves the list of HttpsHealthCheck resources available to the specified
-    /// project.
-    func list(
-      byItem: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
-
-    /// Updates a HttpsHealthCheck resource in the specified project using the data
-    /// included in the request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_patch")
-    func patch(
-      request: Clients.HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "httpsHealthChecks_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.HttpsHealthChecksClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: HttpsHealthChecksClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates a HttpsHealthCheck resource in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "httpsHealthChecks_update")
-    func update(
-      request: Clients.HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``HttpsHealthChecks``.
-    public class HttpsHealthChecksClient: HttpsHealthChecks {
-      let inner: any HttpsHealthChecksStub
+    /// A Swift protocol to mock `HttpsHealthChecksClient`.
+    ///
+    /// To mock `HttpsHealthChecksClient` change your functions to receive
+    /// `some HttpsHealthChecksProtocol` or `any HttpsHealthChecksProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol HttpsHealthChecksProtocol {
+      /// See `HttpsHealthChecksClient.delete`.
+      func delete(request: HttpsHealthChecksClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `HttpsHealthChecksClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any HttpsHealthChecksStub = try HttpsHealthChecksTransport(options)
-        inner = HttpsHealthChecksRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = HttpsHealthChecksLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `HttpsHealthChecksClient.delete`.
+      func delete(
+        project: Swift.String,
+        httpsHealthCheck: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `HttpsHealthChecks.delete`
-      public func delete(
-        request: Clients.HttpsHealthChecksClient.DeleteRequest,
+      /// See `HttpsHealthChecksClient.`get``.
+      func `get`(request: HttpsHealthChecksClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.HttpsHealthCheck
+
+      /// See `HttpsHealthChecksClient.`get``.
+      func `get`(
+        project: Swift.String,
+        httpsHealthCheck: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck
+
+      /// See `HttpsHealthChecksClient.insert`.
+      func insert(request: HttpsHealthChecksClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: HttpsHealthCheck?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.list`.
+      func list(request: HttpsHealthChecksClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.HttpsHealthCheckList
+
+      /// See `HttpsHealthChecksClient.list`.
+      func list(
+        byItem: HttpsHealthChecksClient.ListRequest
+      ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
+
+      /// See `HttpsHealthChecksClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
+
+      /// See `HttpsHealthChecksClient.patch`.
+      func patch(request: HttpsHealthChecksClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.patch`.
+      func patch(
+        project: Swift.String,
+        httpsHealthCheck: Swift.String,
+        body: HttpsHealthCheck?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.testIamPermissions`.
+      func testIamPermissions(request: HttpsHealthChecksClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `HttpsHealthChecksClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `HttpsHealthChecksClient.update`.
+      func update(request: HttpsHealthChecksClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.update`.
+      func update(
+        project: Swift.String,
+        httpsHealthCheck: Swift.String,
+        body: HttpsHealthCheck?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.delete`.
+      func delete(
+        request: HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.`get``.
+      func `get`(
+        request: HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck
+
+      /// See `HttpsHealthChecksClient.insert`.
+      func insert(
+        request: HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.list`.
+      func list(
+        request: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList
+
+      /// See `HttpsHealthChecksClient.list`.
+      func list(
+        byItem: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error>
+
+      /// See `HttpsHealthChecksClient.patch`.
+      func patch(
+        request: HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `HttpsHealthChecksClient.testIamPermissions`.
+      func testIamPermissions(
+        request: HttpsHealthChecksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
-      /// See `HttpsHealthChecks.`get``
-      public func `get`(
-        request: Clients.HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `HttpsHealthChecks.insert`
-      public func insert(
-        request: Clients.HttpsHealthChecksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `HttpsHealthChecks.list`
-      public func list(
-        request: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves the list of HttpsHealthCheck resources available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `HttpsHealthChecks.patch`
-      public func patch(
-        request: Clients.HttpsHealthChecksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `HttpsHealthChecks.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.HttpsHealthChecksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
-
-      /// See `HttpsHealthChecks.update`
-      public func update(
-        request: Clients.HttpsHealthChecksClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `HttpsHealthChecksClient.update`.
+      func update(
+        request: HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension HttpsHealthChecks {
-    public func delete(request: Clients.HttpsHealthChecksClient.DeleteRequest) async throws
+  extension Clients.HttpsHealthChecksProtocol {
+    public func delete(request: HttpsHealthChecksClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -298,21 +272,21 @@
       project: Swift.String,
       httpsHealthCheck: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.HttpsHealthChecksClient.DeleteRequest().with {
+      let request = HttpsHealthChecksClient.DeleteRequest().with {
         $0.project = project
         $0.httpsHealthCheck = httpsHealthCheck
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.HttpsHealthChecksClient.GetRequest) async throws
+    public func `get`(request: HttpsHealthChecksClient.GetRequest) async throws
       -> GoogleCloudComputeV1.HttpsHealthCheck
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -321,21 +295,21 @@
       project: Swift.String,
       httpsHealthCheck: Swift.String,
     ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck {
-      let request = Clients.HttpsHealthChecksClient.GetRequest().with {
+      let request = HttpsHealthChecksClient.GetRequest().with {
         $0.project = project
         $0.httpsHealthCheck = httpsHealthCheck
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.HttpsHealthChecksClient.InsertRequest) async throws
+    public func insert(request: HttpsHealthChecksClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -344,33 +318,33 @@
       project: Swift.String,
       body: HttpsHealthCheck?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.HttpsHealthChecksClient.InsertRequest().with {
+      let request = HttpsHealthChecksClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.HttpsHealthChecksClient.ListRequest) async throws
+    public func list(request: HttpsHealthChecksClient.ListRequest) async throws
       -> GoogleCloudComputeV1.HttpsHealthCheckList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.HttpsHealthChecksClient.ListRequest
+      byItem: HttpsHealthChecksClient.ListRequest
     ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -381,20 +355,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
-      let request = Clients.HttpsHealthChecksClient.ListRequest().with {
+      let request = HttpsHealthChecksClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.HttpsHealthChecksClient.PatchRequest) async throws
+    public func patch(request: HttpsHealthChecksClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -404,7 +378,7 @@
       httpsHealthCheck: Swift.String,
       body: HttpsHealthCheck?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.HttpsHealthChecksClient.PatchRequest().with {
+      let request = HttpsHealthChecksClient.PatchRequest().with {
         $0.project = project
         $0.httpsHealthCheck = httpsHealthCheck
         $0.body = body
@@ -412,14 +386,14 @@
       return try await self.patch(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.HttpsHealthChecksClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: HttpsHealthChecksClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.HttpsHealthChecksClient.TestIamPermissionsRequest,
+      request: HttpsHealthChecksClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -430,7 +404,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.HttpsHealthChecksClient.TestIamPermissionsRequest().with {
+      let request = HttpsHealthChecksClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -438,14 +412,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.HttpsHealthChecksClient.UpdateRequest) async throws
+    public func update(request: HttpsHealthChecksClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -455,7 +429,7 @@
       httpsHealthCheck: Swift.String,
       body: HttpsHealthCheck?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.HttpsHealthChecksClient.UpdateRequest().with {
+      let request = HttpsHealthChecksClient.UpdateRequest().with {
         $0.project = project
         $0.httpsHealthCheck = httpsHealthCheck
         $0.body = body

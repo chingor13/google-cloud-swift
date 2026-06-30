@@ -53,7 +53,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.TargetHttpProxiesClient.AggregatedListRequest,
+        request: TargetHttpProxiesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyAggregatedList {
         try await self._intercept(
@@ -61,25 +61,22 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.TargetHttpProxiesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TargetHttpProxyAggregatedList
+            (r: TargetHttpProxiesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TargetHttpProxyAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.TargetHttpProxiesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetHttpProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetHttpProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -87,30 +84,29 @@
       }
 
       public func `get`(
-        request: Clients.TargetHttpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.TargetHttpProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetHttpProxy
+            (r: TargetHttpProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetHttpProxy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.TargetHttpProxiesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetHttpProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetHttpProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -118,46 +114,44 @@
       }
 
       public func list(
-        request: Clients.TargetHttpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.TargetHttpProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetHttpProxyList
+            (r: TargetHttpProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetHttpProxyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.TargetHttpProxiesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetHttpProxiesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: TargetHttpProxiesClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func setUrlMap(
-        request: Clients.TargetHttpProxiesClient.SetUrlMapRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.SetUrlMapRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetHttpProxiesClient.SetUrlMapRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetHttpProxiesClient.SetUrlMapRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setUrlMap(request: r, options: o)

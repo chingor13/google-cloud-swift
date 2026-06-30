@@ -31,1357 +31,1320 @@ import Logging
 /// Cloud deployments.
 ///
 /// @Snippet(path: "EdgeContainerQuickstart")
-public protocol EdgeContainer {
-  /// Lists Clusters in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_ListClusters")
-  func listClusters(request: ListClustersRequest) async throws
-    -> GoogleCloudEdgecontainerV1.ListClustersResponse
-
-  /// Lists Clusters in a given project and location.
-  func listClusters(
-    byItem: ListClustersRequest
-  ) throws -> any AsyncSequence<Cluster, Swift.Error>
-
-  /// Lists Clusters in a given project and location.
-  func listClusters(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Cluster, Swift.Error>
-
-  /// Gets details of a single Cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetCluster")
-  func getCluster(request: GetClusterRequest) async throws -> GoogleCloudEdgecontainerV1.Cluster
-
-  /// Gets details of a single Cluster.
-  func getCluster(
-    name: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.Cluster
-
-  /// Creates a new Cluster in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_CreateCluster")
-  func createCluster(request: CreateClusterRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a new Cluster in a given project and location.
-  func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Cluster>
-
-  /// Creates a new Cluster in a given project and location.
-  func createCluster(
-    parent: Swift.String,
-    cluster: Cluster?,
-    clusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
-
-  /// Updates the parameters of a single Cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_UpdateCluster")
-  func updateCluster(request: UpdateClusterRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the parameters of a single Cluster.
-  func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Cluster>
-
-  /// Updates the parameters of a single Cluster.
-  func updateCluster(
-    cluster: Cluster?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
-
-  /// Upgrades a single cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_UpgradeCluster")
-  func upgradeCluster(request: UpgradeClusterRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Upgrades a single cluster.
-  func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Cluster>
-
-  /// Upgrades a single cluster.
-  func upgradeCluster(
-    name: Swift.String,
-    targetVersion: Swift.String,
-    schedule: UpgradeClusterRequest.Schedule,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
-
-  /// Deletes a single Cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_DeleteCluster")
-  func deleteCluster(request: DeleteClusterRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a single Cluster.
-  func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a single Cluster.
-  func deleteCluster(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Generates an access token for a Cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_GenerateAccessToken")
-  func generateAccessToken(request: GenerateAccessTokenRequest) async throws
-    -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
-
-  /// Generates an access token for a Cluster.
-  func generateAccessToken(
-    cluster: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
-
-  /// Generates an offline credential for a Cluster.
-  ///
-  /// @Snippet(path: "EdgeContainer_GenerateOfflineCredential")
-  func generateOfflineCredential(request: GenerateOfflineCredentialRequest) async throws
-    -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
-
-  /// Generates an offline credential for a Cluster.
-  func generateOfflineCredential(
-    cluster: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
-
-  /// Lists NodePools in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_ListNodePools")
-  func listNodePools(request: ListNodePoolsRequest) async throws
-    -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse
-
-  /// Lists NodePools in a given project and location.
-  func listNodePools(
-    byItem: ListNodePoolsRequest
-  ) throws -> any AsyncSequence<NodePool, Swift.Error>
-
-  /// Lists NodePools in a given project and location.
-  func listNodePools(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<NodePool, Swift.Error>
-
-  /// Gets details of a single NodePool.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetNodePool")
-  func getNodePool(request: GetNodePoolRequest) async throws -> GoogleCloudEdgecontainerV1.NodePool
-
-  /// Gets details of a single NodePool.
-  func getNodePool(
-    name: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.NodePool
-
-  /// Creates a new NodePool in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_CreateNodePool")
-  func createNodePool(request: CreateNodePoolRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a new NodePool in a given project and location.
-  func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<NodePool>
-
-  /// Creates a new NodePool in a given project and location.
-  func createNodePool(
-    parent: Swift.String,
-    nodePool: NodePool?,
-    nodePoolId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
-
-  /// Updates the parameters of a single NodePool.
-  ///
-  /// @Snippet(path: "EdgeContainer_UpdateNodePool")
-  func updateNodePool(request: UpdateNodePoolRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the parameters of a single NodePool.
-  func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<NodePool>
-
-  /// Updates the parameters of a single NodePool.
-  func updateNodePool(
-    nodePool: NodePool?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
-
-  /// Deletes a single NodePool.
-  ///
-  /// @Snippet(path: "EdgeContainer_DeleteNodePool")
-  func deleteNodePool(request: DeleteNodePoolRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a single NodePool.
-  func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a single NodePool.
-  func deleteNodePool(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Lists Machines in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_ListMachines")
-  func listMachines(request: ListMachinesRequest) async throws
-    -> GoogleCloudEdgecontainerV1.ListMachinesResponse
-
-  /// Lists Machines in a given project and location.
-  func listMachines(
-    byItem: ListMachinesRequest
-  ) throws -> any AsyncSequence<Machine, Swift.Error>
-
-  /// Lists Machines in a given project and location.
-  func listMachines(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Machine, Swift.Error>
-
-  /// Gets details of a single Machine.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetMachine")
-  func getMachine(request: GetMachineRequest) async throws -> GoogleCloudEdgecontainerV1.Machine
-
-  /// Gets details of a single Machine.
-  func getMachine(
-    name: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.Machine
-
-  /// Lists VPN connections in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_ListVpnConnections")
-  func listVpnConnections(request: ListVpnConnectionsRequest) async throws
-    -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse
-
-  /// Lists VPN connections in a given project and location.
-  func listVpnConnections(
-    byItem: ListVpnConnectionsRequest
-  ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
-
-  /// Lists VPN connections in a given project and location.
-  func listVpnConnections(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
-
-  /// Gets details of a single VPN connection.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetVpnConnection")
-  func getVpnConnection(request: GetVpnConnectionRequest) async throws
-    -> GoogleCloudEdgecontainerV1.VpnConnection
-
-  /// Gets details of a single VPN connection.
-  func getVpnConnection(
-    name: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection
-
-  /// Creates a new VPN connection in a given project and location.
-  ///
-  /// @Snippet(path: "EdgeContainer_CreateVpnConnection")
-  func createVpnConnection(request: CreateVpnConnectionRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Creates a new VPN connection in a given project and location.
-  func createVpnConnection(withPolling: CreateVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<VpnConnection>
-
-  /// Creates a new VPN connection in a given project and location.
-  func createVpnConnection(
-    parent: Swift.String,
-    vpnConnection: VpnConnection?,
-    vpnConnectionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
-
-  /// Deletes a single VPN connection.
-  ///
-  /// @Snippet(path: "EdgeContainer_DeleteVpnConnection")
-  func deleteVpnConnection(request: DeleteVpnConnectionRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Deletes a single VPN connection.
-  func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Deletes a single VPN connection.
-  func deleteVpnConnection(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Gets the server config.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetServerConfig")
-  func getServerConfig(request: GetServerConfigRequest) async throws
-    -> GoogleCloudEdgecontainerV1.ServerConfig
-
-  /// Gets the server config.
-  func getServerConfig(
-    name: Swift.String,
-  ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig
-
-  /// Lists information about the supported locations for this service.
-  ///
-  /// @Snippet(path: "EdgeContainer_ListLocations")
-  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
-    -> GoogleCloudLocation.ListLocationsResponse
-
-  /// Lists information about the supported locations for this service.
-  func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
-
-  /// Gets information about a location.
-  ///
-  /// @Snippet(path: "EdgeContainer_GetLocation")
-  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
-    -> GoogleCloudLocation.Location
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "EdgeContainer_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "EdgeContainer_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "EdgeContainer_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "EdgeContainer_CancelOperation")
-  func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func cancelOperation(
-    name: Swift.String,
-  ) async throws
+public class EdgeContainerClient: Clients.EdgeContainerProtocol {
+  let inner: any Clients.EdgeContainerStub
+
+  /// Creates a new `EdgeContainerClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.EdgeContainerStub = try Clients.EdgeContainerTransport(options)
+    inner = Clients.EdgeContainerRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.EdgeContainerLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists Clusters in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_ListClusters")
-  func listClusters(
+  public func listClusters(
     request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse {
+    try await self.inner.listClusters(request: request, options: options)
+  }
 
   /// Lists Clusters in a given project and location.
-  func listClusters(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListClusters")
+  public func listClusters(
     byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Cluster, Swift.Error>
+  ) throws -> any AsyncSequence<Cluster, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listClusters(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_GetCluster")
-  func getCluster(
+  public func getCluster(
     request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.Cluster
+  ) async throws -> GoogleCloudEdgecontainerV1.Cluster {
+    try await self.inner.getCluster(request: request, options: options)
+  }
 
   /// Creates a new Cluster in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_CreateCluster")
-  func createCluster(
+  public func createCluster(
     request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createCluster(request: request, options: options)
+  }
 
   /// Creates a new Cluster in a given project and location.
-  func createCluster(
+  ///
+  /// @Snippet(path: "EdgeContainer_CreateCluster")
+  public func createCluster(
     withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Cluster(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createCluster(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the parameters of a single Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_UpdateCluster")
-  func updateCluster(
+  public func updateCluster(
     request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateCluster(request: request, options: options)
+  }
 
   /// Updates the parameters of a single Cluster.
-  func updateCluster(
+  ///
+  /// @Snippet(path: "EdgeContainer_UpdateCluster")
+  public func updateCluster(
     withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Cluster(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateCluster(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Upgrades a single cluster.
   ///
   /// @Snippet(path: "EdgeContainer_UpgradeCluster")
-  func upgradeCluster(
+  public func upgradeCluster(
     request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.upgradeCluster(request: request, options: options)
+  }
 
   /// Upgrades a single cluster.
-  func upgradeCluster(
+  ///
+  /// @Snippet(path: "EdgeContainer_UpgradeCluster")
+  public func upgradeCluster(
     withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Cluster(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.upgradeCluster(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a single Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_DeleteCluster")
-  func deleteCluster(
+  public func deleteCluster(
     request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteCluster(request: request, options: options)
+  }
 
   /// Deletes a single Cluster.
-  func deleteCluster(
+  ///
+  /// @Snippet(path: "EdgeContainer_DeleteCluster")
+  public func deleteCluster(
     withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteCluster(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Generates an access token for a Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_GenerateAccessToken")
-  func generateAccessToken(
+  public func generateAccessToken(
     request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse {
+    try await self.inner.generateAccessToken(request: request, options: options)
+  }
 
   /// Generates an offline credential for a Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_GenerateOfflineCredential")
-  func generateOfflineCredential(
+  public func generateOfflineCredential(
     request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse {
+    try await self.inner.generateOfflineCredential(request: request, options: options)
+  }
 
   /// Lists NodePools in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_ListNodePools")
-  func listNodePools(
+  public func listNodePools(
     request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse {
+    try await self.inner.listNodePools(request: request, options: options)
+  }
 
   /// Lists NodePools in a given project and location.
-  func listNodePools(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListNodePools")
+  public func listNodePools(
     byItem: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<NodePool, Swift.Error>
+  ) throws -> any AsyncSequence<NodePool, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listNodePools(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single NodePool.
   ///
   /// @Snippet(path: "EdgeContainer_GetNodePool")
-  func getNodePool(
+  public func getNodePool(
     request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.NodePool
+  ) async throws -> GoogleCloudEdgecontainerV1.NodePool {
+    try await self.inner.getNodePool(request: request, options: options)
+  }
 
   /// Creates a new NodePool in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_CreateNodePool")
-  func createNodePool(
+  public func createNodePool(
     request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createNodePool(request: request, options: options)
+  }
 
   /// Creates a new NodePool in a given project and location.
-  func createNodePool(
+  ///
+  /// @Snippet(path: "EdgeContainer_CreateNodePool")
+  public func createNodePool(
     withPolling: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try NodePool(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createNodePool(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the parameters of a single NodePool.
   ///
   /// @Snippet(path: "EdgeContainer_UpdateNodePool")
-  func updateNodePool(
+  public func updateNodePool(
     request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateNodePool(request: request, options: options)
+  }
 
   /// Updates the parameters of a single NodePool.
-  func updateNodePool(
+  ///
+  /// @Snippet(path: "EdgeContainer_UpdateNodePool")
+  public func updateNodePool(
     withPolling: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try NodePool(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateNodePool(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a single NodePool.
   ///
   /// @Snippet(path: "EdgeContainer_DeleteNodePool")
-  func deleteNodePool(
+  public func deleteNodePool(
     request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteNodePool(request: request, options: options)
+  }
 
   /// Deletes a single NodePool.
-  func deleteNodePool(
+  ///
+  /// @Snippet(path: "EdgeContainer_DeleteNodePool")
+  public func deleteNodePool(
     withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteNodePool(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists Machines in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_ListMachines")
-  func listMachines(
+  public func listMachines(
     request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse {
+    try await self.inner.listMachines(request: request, options: options)
+  }
 
   /// Lists Machines in a given project and location.
-  func listMachines(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListMachines")
+  public func listMachines(
     byItem: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Machine, Swift.Error>
+  ) throws -> any AsyncSequence<Machine, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listMachines(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single Machine.
   ///
   /// @Snippet(path: "EdgeContainer_GetMachine")
-  func getMachine(
+  public func getMachine(
     request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.Machine
+  ) async throws -> GoogleCloudEdgecontainerV1.Machine {
+    try await self.inner.getMachine(request: request, options: options)
+  }
 
   /// Lists VPN connections in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_ListVpnConnections")
-  func listVpnConnections(
+  public func listVpnConnections(
     request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse
+  ) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse {
+    try await self.inner.listVpnConnections(request: request, options: options)
+  }
 
   /// Lists VPN connections in a given project and location.
-  func listVpnConnections(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListVpnConnections")
+  public func listVpnConnections(
     byItem: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
+  ) throws -> any AsyncSequence<VpnConnection, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listVpnConnections(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single VPN connection.
   ///
   /// @Snippet(path: "EdgeContainer_GetVpnConnection")
-  func getVpnConnection(
+  public func getVpnConnection(
     request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection
+  ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection {
+    try await self.inner.getVpnConnection(request: request, options: options)
+  }
 
   /// Creates a new VPN connection in a given project and location.
   ///
   /// @Snippet(path: "EdgeContainer_CreateVpnConnection")
-  func createVpnConnection(
+  public func createVpnConnection(
     request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createVpnConnection(request: request, options: options)
+  }
 
   /// Creates a new VPN connection in a given project and location.
-  func createVpnConnection(
+  ///
+  /// @Snippet(path: "EdgeContainer_CreateVpnConnection")
+  public func createVpnConnection(
     withPolling: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
+  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try VpnConnection(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createVpnConnection(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a single VPN connection.
   ///
   /// @Snippet(path: "EdgeContainer_DeleteVpnConnection")
-  func deleteVpnConnection(
+  public func deleteVpnConnection(
     request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteVpnConnection(request: request, options: options)
+  }
 
   /// Deletes a single VPN connection.
-  func deleteVpnConnection(
+  ///
+  /// @Snippet(path: "EdgeContainer_DeleteVpnConnection")
+  public func deleteVpnConnection(
     withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteVpnConnection(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Gets the server config.
   ///
   /// @Snippet(path: "EdgeContainer_GetServerConfig")
-  func getServerConfig(
+  public func getServerConfig(
     request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig
+  ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig {
+    try await self.inner.getServerConfig(request: request, options: options)
+  }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "EdgeContainer_ListLocations")
-  func listLocations(
+  public func listLocations(
     request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.ListLocationsResponse
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse {
+    try await self.inner.listLocations(request: request, options: options)
+  }
 
   /// Lists information about the supported locations for this service.
-  func listLocations(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListLocations")
+  public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listLocations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "EdgeContainer_GetLocation")
-  func getLocation(
+  public func getLocation(
     request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.Location
+  ) async throws -> GoogleCloudLocation.Location {
+    try await self.inner.getLocation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "EdgeContainer_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "EdgeContainer_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "EdgeContainer_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "EdgeContainer_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "EdgeContainer_CancelOperation")
-  func cancelOperation(
+  public func cancelOperation(
     request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.cancelOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``EdgeContainer``.
-  public class EdgeContainerClient: EdgeContainer {
-    let inner: any EdgeContainerStub
+  /// A Swift protocol to mock `EdgeContainerClient`.
+  ///
+  /// To mock `EdgeContainerClient` change your functions to receive
+  /// `some EdgeContainerProtocol` or `any EdgeContainerProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol EdgeContainerProtocol {
+    /// See `EdgeContainerClient.listClusters`.
+    func listClusters(request: ListClustersRequest) async throws
+      -> GoogleCloudEdgecontainerV1.ListClustersResponse
 
-    /// Creates a new `EdgeContainerClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any EdgeContainerStub = try EdgeContainerTransport(options)
-      inner = EdgeContainerRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = EdgeContainerLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `EdgeContainerClient.listClusters`.
+    func listClusters(
+      byItem: ListClustersRequest
+    ) throws -> any AsyncSequence<Cluster, Swift.Error>
 
-    /// See `EdgeContainer.listClusters`
-    public func listClusters(
+    /// See `EdgeContainerClient.listClusters`.
+    func listClusters(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Cluster, Swift.Error>
+
+    /// See `EdgeContainerClient.getCluster`.
+    func getCluster(request: GetClusterRequest) async throws -> GoogleCloudEdgecontainerV1.Cluster
+
+    /// See `EdgeContainerClient.getCluster`.
+    func getCluster(
+      name: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.Cluster
+
+    /// See `EdgeContainerClient.createCluster`.
+    func createCluster(request: CreateClusterRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.createCluster`.
+    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.createCluster`.
+    func createCluster(
+      parent: Swift.String,
+      cluster: Cluster?,
+      clusterId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.updateCluster`.
+    func updateCluster(request: UpdateClusterRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.updateCluster`.
+    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.updateCluster`.
+    func updateCluster(
+      cluster: Cluster?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.upgradeCluster`.
+    func upgradeCluster(request: UpgradeClusterRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.upgradeCluster`.
+    func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.upgradeCluster`.
+    func upgradeCluster(
+      name: Swift.String,
+      targetVersion: Swift.String,
+      schedule: UpgradeClusterRequest.Schedule,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+
+    /// See `EdgeContainerClient.deleteCluster`.
+    func deleteCluster(request: DeleteClusterRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.deleteCluster`.
+    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `EdgeContainerClient.deleteCluster`.
+    func deleteCluster(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `EdgeContainerClient.generateAccessToken`.
+    func generateAccessToken(request: GenerateAccessTokenRequest) async throws
+      -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
+
+    /// See `EdgeContainerClient.generateAccessToken`.
+    func generateAccessToken(
+      cluster: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
+
+    /// See `EdgeContainerClient.generateOfflineCredential`.
+    func generateOfflineCredential(request: GenerateOfflineCredentialRequest) async throws
+      -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
+
+    /// See `EdgeContainerClient.generateOfflineCredential`.
+    func generateOfflineCredential(
+      cluster: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
+
+    /// See `EdgeContainerClient.listNodePools`.
+    func listNodePools(request: ListNodePoolsRequest) async throws
+      -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse
+
+    /// See `EdgeContainerClient.listNodePools`.
+    func listNodePools(
+      byItem: ListNodePoolsRequest
+    ) throws -> any AsyncSequence<NodePool, Swift.Error>
+
+    /// See `EdgeContainerClient.listNodePools`.
+    func listNodePools(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<NodePool, Swift.Error>
+
+    /// See `EdgeContainerClient.getNodePool`.
+    func getNodePool(request: GetNodePoolRequest) async throws
+      -> GoogleCloudEdgecontainerV1.NodePool
+
+    /// See `EdgeContainerClient.getNodePool`.
+    func getNodePool(
+      name: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.NodePool
+
+    /// See `EdgeContainerClient.createNodePool`.
+    func createNodePool(request: CreateNodePoolRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.createNodePool`.
+    func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<NodePool>
+
+    /// See `EdgeContainerClient.createNodePool`.
+    func createNodePool(
+      parent: Swift.String,
+      nodePool: NodePool?,
+      nodePoolId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+
+    /// See `EdgeContainerClient.updateNodePool`.
+    func updateNodePool(request: UpdateNodePoolRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.updateNodePool`.
+    func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<NodePool>
+
+    /// See `EdgeContainerClient.updateNodePool`.
+    func updateNodePool(
+      nodePool: NodePool?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+
+    /// See `EdgeContainerClient.deleteNodePool`.
+    func deleteNodePool(request: DeleteNodePoolRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.deleteNodePool`.
+    func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `EdgeContainerClient.deleteNodePool`.
+    func deleteNodePool(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `EdgeContainerClient.listMachines`.
+    func listMachines(request: ListMachinesRequest) async throws
+      -> GoogleCloudEdgecontainerV1.ListMachinesResponse
+
+    /// See `EdgeContainerClient.listMachines`.
+    func listMachines(
+      byItem: ListMachinesRequest
+    ) throws -> any AsyncSequence<Machine, Swift.Error>
+
+    /// See `EdgeContainerClient.listMachines`.
+    func listMachines(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Machine, Swift.Error>
+
+    /// See `EdgeContainerClient.getMachine`.
+    func getMachine(request: GetMachineRequest) async throws -> GoogleCloudEdgecontainerV1.Machine
+
+    /// See `EdgeContainerClient.getMachine`.
+    func getMachine(
+      name: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.Machine
+
+    /// See `EdgeContainerClient.listVpnConnections`.
+    func listVpnConnections(request: ListVpnConnectionsRequest) async throws
+      -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse
+
+    /// See `EdgeContainerClient.listVpnConnections`.
+    func listVpnConnections(
+      byItem: ListVpnConnectionsRequest
+    ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
+
+    /// See `EdgeContainerClient.listVpnConnections`.
+    func listVpnConnections(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
+
+    /// See `EdgeContainerClient.getVpnConnection`.
+    func getVpnConnection(request: GetVpnConnectionRequest) async throws
+      -> GoogleCloudEdgecontainerV1.VpnConnection
+
+    /// See `EdgeContainerClient.getVpnConnection`.
+    func getVpnConnection(
+      name: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection
+
+    /// See `EdgeContainerClient.createVpnConnection`.
+    func createVpnConnection(request: CreateVpnConnectionRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.createVpnConnection`.
+    func createVpnConnection(withPolling: CreateVpnConnectionRequest) async throws
+      -> any GoogleCloudGax.PollableOperation<VpnConnection>
+
+    /// See `EdgeContainerClient.createVpnConnection`.
+    func createVpnConnection(
+      parent: Swift.String,
+      vpnConnection: VpnConnection?,
+      vpnConnectionId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
+
+    /// See `EdgeContainerClient.deleteVpnConnection`.
+    func deleteVpnConnection(request: DeleteVpnConnectionRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.deleteVpnConnection`.
+    func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
+      -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `EdgeContainerClient.deleteVpnConnection`.
+    func deleteVpnConnection(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `EdgeContainerClient.getServerConfig`.
+    func getServerConfig(request: GetServerConfigRequest) async throws
+      -> GoogleCloudEdgecontainerV1.ServerConfig
+
+    /// See `EdgeContainerClient.getServerConfig`.
+    func getServerConfig(
+      name: Swift.String,
+    ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig
+
+    /// See `EdgeContainerClient.listLocations`.
+    func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
+      -> GoogleCloudLocation.ListLocationsResponse
+
+    /// See `EdgeContainerClient.listLocations`.
+    func listLocations(
+      byItem: GoogleCloudLocation.ListLocationsRequest
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+
+    /// See `EdgeContainerClient.getLocation`.
+    func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+      -> GoogleCloudLocation.Location
+
+    /// See `EdgeContainerClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `EdgeContainerClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `EdgeContainerClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `EdgeContainerClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `EdgeContainerClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `EdgeContainerClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `EdgeContainerClient.cancelOperation`.
+    func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
+
+    /// See `EdgeContainerClient.cancelOperation`.
+    func cancelOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `EdgeContainerClient.listClusters`.
+    func listClusters(
       request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse {
-      try await self.inner.listClusters(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse
 
-    /// Lists Clusters in a given project and location.
-    public func listClusters(
+    /// See `EdgeContainerClient.listClusters`.
+    func listClusters(
       byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Cluster, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudEdgecontainerV1.ListClustersResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listClusters(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Cluster, Swift.Error>
 
-    /// See `EdgeContainer.getCluster`
-    public func getCluster(
+    /// See `EdgeContainerClient.getCluster`.
+    func getCluster(
       request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.Cluster {
-      try await self.inner.getCluster(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.Cluster
 
-    /// See `EdgeContainer.createCluster`
-    public func createCluster(
+    /// See `EdgeContainerClient.createCluster`.
+    func createCluster(
       request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createCluster(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new Cluster in a given project and location.
-    public func createCluster(
+    /// See `EdgeContainerClient.createCluster`.
+    func createCluster(
       withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Cluster(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createCluster(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.updateCluster`
-    public func updateCluster(
+    /// See `EdgeContainerClient.updateCluster`.
+    func updateCluster(
       request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateCluster(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the parameters of a single Cluster.
-    public func updateCluster(
+    /// See `EdgeContainerClient.updateCluster`.
+    func updateCluster(
       withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Cluster(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateCluster(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.upgradeCluster`
-    public func upgradeCluster(
+    /// See `EdgeContainerClient.upgradeCluster`.
+    func upgradeCluster(
       request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.upgradeCluster(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Upgrades a single cluster.
-    public func upgradeCluster(
+    /// See `EdgeContainerClient.upgradeCluster`.
+    func upgradeCluster(
       withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Cluster(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.upgradeCluster(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.deleteCluster`
-    public func deleteCluster(
+    /// See `EdgeContainerClient.deleteCluster`.
+    func deleteCluster(
       request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteCluster(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a single Cluster.
-    public func deleteCluster(
+    /// See `EdgeContainerClient.deleteCluster`.
+    func deleteCluster(
       withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteCluster(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.generateAccessToken`
-    public func generateAccessToken(
+    /// See `EdgeContainerClient.generateAccessToken`.
+    func generateAccessToken(
       request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse {
-      try await self.inner.generateAccessToken(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.GenerateAccessTokenResponse
 
-    /// See `EdgeContainer.generateOfflineCredential`
-    public func generateOfflineCredential(
+    /// See `EdgeContainerClient.generateOfflineCredential`.
+    func generateOfflineCredential(
       request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse {
-      try await self.inner.generateOfflineCredential(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.GenerateOfflineCredentialResponse
 
-    /// See `EdgeContainer.listNodePools`
-    public func listNodePools(
+    /// See `EdgeContainerClient.listNodePools`.
+    func listNodePools(
       request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse {
-      try await self.inner.listNodePools(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse
 
-    /// Lists NodePools in a given project and location.
-    public func listNodePools(
+    /// See `EdgeContainerClient.listNodePools`.
+    func listNodePools(
       byItem: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NodePool, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudEdgecontainerV1.ListNodePoolsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listNodePools(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<NodePool, Swift.Error>
 
-    /// See `EdgeContainer.getNodePool`
-    public func getNodePool(
+    /// See `EdgeContainerClient.getNodePool`.
+    func getNodePool(
       request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.NodePool {
-      try await self.inner.getNodePool(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.NodePool
 
-    /// See `EdgeContainer.createNodePool`
-    public func createNodePool(
+    /// See `EdgeContainerClient.createNodePool`.
+    func createNodePool(
       request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createNodePool(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new NodePool in a given project and location.
-    public func createNodePool(
+    /// See `EdgeContainerClient.createNodePool`.
+    func createNodePool(
       withPolling: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try NodePool(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createNodePool(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.updateNodePool`
-    public func updateNodePool(
+    /// See `EdgeContainerClient.updateNodePool`.
+    func updateNodePool(
       request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateNodePool(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the parameters of a single NodePool.
-    public func updateNodePool(
+    /// See `EdgeContainerClient.updateNodePool`.
+    func updateNodePool(
       withPolling: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try NodePool(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateNodePool(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.deleteNodePool`
-    public func deleteNodePool(
+    /// See `EdgeContainerClient.deleteNodePool`.
+    func deleteNodePool(
       request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteNodePool(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a single NodePool.
-    public func deleteNodePool(
+    /// See `EdgeContainerClient.deleteNodePool`.
+    func deleteNodePool(
       withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteNodePool(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.listMachines`
-    public func listMachines(
+    /// See `EdgeContainerClient.listMachines`.
+    func listMachines(
       request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse {
-      try await self.inner.listMachines(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse
 
-    /// Lists Machines in a given project and location.
-    public func listMachines(
+    /// See `EdgeContainerClient.listMachines`.
+    func listMachines(
       byItem: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Machine, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudEdgecontainerV1.ListMachinesResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listMachines(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Machine, Swift.Error>
 
-    /// See `EdgeContainer.getMachine`
-    public func getMachine(
+    /// See `EdgeContainerClient.getMachine`.
+    func getMachine(
       request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.Machine {
-      try await self.inner.getMachine(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.Machine
 
-    /// See `EdgeContainer.listVpnConnections`
-    public func listVpnConnections(
+    /// See `EdgeContainerClient.listVpnConnections`.
+    func listVpnConnections(
       request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse {
-      try await self.inner.listVpnConnections(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse
 
-    /// Lists VPN connections in a given project and location.
-    public func listVpnConnections(
+    /// See `EdgeContainerClient.listVpnConnections`.
+    func listVpnConnections(
       byItem: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<VpnConnection, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudEdgecontainerV1.ListVpnConnectionsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listVpnConnections(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
 
-    /// See `EdgeContainer.getVpnConnection`
-    public func getVpnConnection(
+    /// See `EdgeContainerClient.getVpnConnection`.
+    func getVpnConnection(
       request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection {
-      try await self.inner.getVpnConnection(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.VpnConnection
 
-    /// See `EdgeContainer.createVpnConnection`
-    public func createVpnConnection(
+    /// See `EdgeContainerClient.createVpnConnection`.
+    func createVpnConnection(
       request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createVpnConnection(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new VPN connection in a given project and location.
-    public func createVpnConnection(
+    /// See `EdgeContainerClient.createVpnConnection`.
+    func createVpnConnection(
       withPolling: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try VpnConnection(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createVpnConnection(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.deleteVpnConnection`
-    public func deleteVpnConnection(
+    /// See `EdgeContainerClient.deleteVpnConnection`.
+    func deleteVpnConnection(
       request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteVpnConnection(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a single VPN connection.
-    public func deleteVpnConnection(
+    /// See `EdgeContainerClient.deleteVpnConnection`.
+    func deleteVpnConnection(
       withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteVpnConnection(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `EdgeContainer.getServerConfig`
-    public func getServerConfig(
+    /// See `EdgeContainerClient.getServerConfig`.
+    func getServerConfig(
       request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig {
-      try await self.inner.getServerConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudEdgecontainerV1.ServerConfig
 
-    /// See `EdgeContainer.listLocations`
-    public func listLocations(
+    /// See `EdgeContainerClient.listLocations`.
+    func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      try await self.inner.listLocations(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
-    /// Lists information about the supported locations for this service.
-    public func listLocations(
+    /// See `EdgeContainerClient.listLocations`.
+    func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listLocations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
-    /// See `EdgeContainer.getLocation`
-    public func getLocation(
+    /// See `EdgeContainerClient.getLocation`.
+    func getLocation(
       request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.Location {
-      try await self.inner.getLocation(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.Location
 
-    /// See `EdgeContainer.listOperations`
-    public func listOperations(
+    /// See `EdgeContainerClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `EdgeContainerClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `EdgeContainer.getOperation`
-    public func getOperation(
+    /// See `EdgeContainerClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `EdgeContainer.deleteOperation`
-    public func deleteOperation(
+    /// See `EdgeContainerClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `EdgeContainer.cancelOperation`
-    public func cancelOperation(
+    /// See `EdgeContainerClient.cancelOperation`.
+    func cancelOperation(
       request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.cancelOperation(request: request, options: options)
-    }
+    ) async throws
   }
 }
 
 // Default implementations
-extension EdgeContainer {
+extension Clients.EdgeContainerProtocol {
   public func listClusters(request: ListClustersRequest) async throws
     -> GoogleCloudEdgecontainerV1.ListClustersResponse
   {

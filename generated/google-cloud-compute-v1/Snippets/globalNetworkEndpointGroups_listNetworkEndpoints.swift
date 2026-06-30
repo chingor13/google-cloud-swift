@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some GlobalNetworkEndpointGroups) async throws {
+  func sample(client: GlobalNetworkEndpointGroupsClient) async throws {
     let items = try client.listNetworkEndpoints(
-      byItem: Clients.GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest()
+      byItem: GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.GlobalNetworkEndpointGroupsClient()
+        let client = try GoogleCloudComputeV1.GlobalNetworkEndpointGroupsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

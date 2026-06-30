@@ -60,45 +60,45 @@
       }
 
       public func `get`(
-        request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeature {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.PreviewFeaturesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.PreviewFeature
+            (r: PreviewFeaturesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.PreviewFeature
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.PreviewFeaturesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.PreviewFeatureList
+            (r: PreviewFeaturesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.PreviewFeatureList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.PreviewFeaturesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: PreviewFeaturesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

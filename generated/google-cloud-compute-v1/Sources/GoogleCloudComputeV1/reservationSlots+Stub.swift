@@ -28,21 +28,19 @@
   extension Clients {
     protocol ReservationSlotsStub {
       func `get`(
-        request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
 
       func getVersion(
-        request: Clients.ReservationSlotsClient.GetVersionRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
 
       func update(
-        request: Clients.ReservationSlotsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -55,7 +53,7 @@
       }
 
       public func `get`(
-        request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -85,8 +83,7 @@
       }
 
       public func getVersion(
-        request: Clients.ReservationSlotsClient.GetVersionRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -122,7 +119,7 @@
       }
 
       public func list(
-        request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -155,8 +152,7 @@
       }
 
       public func update(
-        request: Clients.ReservationSlotsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

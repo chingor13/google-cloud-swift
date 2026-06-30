@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ImagesClient {
+  extension ImagesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.images.delete] method.
     ///
     /// [google.cloud.compute.v1.images.delete]: <doc:Images/delete(request:)>

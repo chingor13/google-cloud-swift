@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.GlobalOrganizationOperationsClient()
+    let client = try GoogleCloudComputeV1.GlobalOrganizationOperationsClient()
     try await client.delete(
-      request: Clients.GlobalOrganizationOperationsClient.DeleteRequest()
+      request: GlobalOrganizationOperationsClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success (no response expected)")

@@ -28,60 +28,53 @@
   extension Clients {
     protocol SecurityPoliciesStub {
       func addRule(
-        request: Clients.SecurityPoliciesClient.AddRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.AddRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: Clients.SecurityPoliciesClient.AggregatedListRequest,
+        request: SecurityPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList
 
       func delete(
-        request: Clients.SecurityPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.SecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy
 
       func getRule(
-        request: Clients.SecurityPoliciesClient.GetRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule
 
       func insert(
-        request: Clients.SecurityPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList
 
       func listPreconfiguredExpressionSets(
-        request: Clients.SecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+        request: SecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
 
       func patch(
-        request: Clients.SecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRule(
-        request: Clients.SecurityPoliciesClient.PatchRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeRule(
-        request: Clients.SecurityPoliciesClient.RemoveRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.RemoveRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: Clients.SecurityPoliciesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -94,8 +87,7 @@
       }
 
       public func addRule(
-        request: Clients.SecurityPoliciesClient.AddRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.AddRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -124,7 +116,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.SecurityPoliciesClient.AggregatedListRequest,
+        request: SecurityPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -155,8 +147,7 @@
       }
 
       public func delete(
-        request: Clients.SecurityPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -180,7 +171,7 @@
       }
 
       public func `get`(
-        request: Clients.SecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -202,8 +193,7 @@
       }
 
       public func getRule(
-        request: Clients.SecurityPoliciesClient.GetRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -228,8 +218,7 @@
       }
 
       public func insert(
-        request: Clients.SecurityPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -253,7 +242,7 @@
       }
 
       public func list(
-        request: Clients.SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -278,7 +267,7 @@
       }
 
       public func listPreconfiguredExpressionSets(
-        request: Clients.SecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+        request: SecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
       {
@@ -307,7 +296,7 @@
       }
 
       public func patch(
-        request: Clients.SecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -336,8 +325,7 @@
       }
 
       public func patchRule(
-        request: Clients.SecurityPoliciesClient.PatchRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -368,8 +356,7 @@
       }
 
       public func removeRule(
-        request: Clients.SecurityPoliciesClient.RemoveRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.RemoveRuleRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -394,8 +381,7 @@
       }
 
       public func setLabels(
-        request: Clients.SecurityPoliciesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

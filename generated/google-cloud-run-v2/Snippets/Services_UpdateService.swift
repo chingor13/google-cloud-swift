@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Services, projectId: String, locationId: String, serviceId: String)
+func sample(client: ServicesClient, projectId: String, locationId: String, serviceId: String)
   async throws
 {
   let poller = try await client.updateService(
@@ -44,7 +44,7 @@ func sample(client: some Services, projectId: String, locationId: String, servic
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.ServicesClient()
+      let client = try GoogleCloudRunV2.ServicesClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         serviceId: "[placeholder]")

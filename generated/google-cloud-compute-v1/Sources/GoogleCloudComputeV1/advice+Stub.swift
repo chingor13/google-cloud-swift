@@ -28,7 +28,7 @@
   extension Clients {
     protocol AdviceStub {
       func calendarMode(
-        request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
     }
 
@@ -41,7 +41,7 @@
       }
 
       public func calendarMode(
-        request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

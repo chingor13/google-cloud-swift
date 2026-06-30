@@ -28,149 +28,18 @@
   /// Service for the `resourcePolicies` resource.
   ///
   /// @Snippet(path: "resourcePoliciesQuickstart")
-  public protocol ResourcePolicies {
-    /// Retrieves an aggregated list of resource policies.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "resourcePolicies_aggregatedList")
-    func aggregatedList(request: Clients.ResourcePoliciesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
+  public class ResourcePoliciesClient: Clients.ResourcePoliciesProtocol {
+    let inner: any Clients.ResourcePoliciesStub
 
-    /// Retrieves an aggregated list of resource policies.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ResourcePoliciesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of resource policies.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
-
-    /// Deletes the specified resource policy.
-    ///
-    /// @Snippet(path: "resourcePolicies_delete")
-    func delete(request: Clients.ResourcePoliciesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified resource policy.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      resourcePolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves all information of the specified resource policy.
-    ///
-    /// @Snippet(path: "resourcePolicies_get")
-    func `get`(request: Clients.ResourcePoliciesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ResourcePolicy
-
-    /// Retrieves all information of the specified resource policy.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      resourcePolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ResourcePolicy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "resourcePolicies_getIamPolicy")
-    func getIamPolicy(request: Clients.ResourcePoliciesClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a new resource policy.
-    ///
-    /// @Snippet(path: "resourcePolicies_insert")
-    func insert(request: Clients.ResourcePoliciesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new resource policy.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: ResourcePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// A list all the resource policies that have been configured for the
-    /// specified project in specified region.
-    ///
-    /// @Snippet(path: "resourcePolicies_list")
-    func list(request: Clients.ResourcePoliciesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ResourcePolicyList
-
-    /// A list all the resource policies that have been configured for the
-    /// specified project in specified region.
-    func list(
-      byItem: Clients.ResourcePoliciesClient.ListRequest
-    ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
-
-    /// A list all the resource policies that have been configured for the
-    /// specified project in specified region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
-
-    /// Modify the specified resource policy.
-    ///
-    /// @Snippet(path: "resourcePolicies_patch")
-    func patch(request: Clients.ResourcePoliciesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Modify the specified resource policy.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      resourcePolicy: Swift.String,
-      body: ResourcePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "resourcePolicies_setIamPolicy")
-    func setIamPolicy(request: Clients.ResourcePoliciesClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "resourcePolicies_testIamPermissions")
-    func testIamPermissions(request: Clients.ResourcePoliciesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `ResourcePoliciesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ResourcePoliciesStub = try Clients.ResourcePoliciesTransport(options)
+      inner = Clients.ResourcePoliciesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ResourcePoliciesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of resource policies.
     ///
@@ -178,229 +47,319 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "resourcePolicies_aggregatedList")
-    func aggregatedList(
-      request: Clients.ResourcePoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
+    public func aggregatedList(
+      request: ResourcePoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of resource policies.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ResourcePoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "resourcePolicies_aggregatedList")
+    public func aggregatedList(
+      byItem: ResourcePoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified resource policy.
     ///
     /// @Snippet(path: "resourcePolicies_delete")
-    func delete(
-      request: Clients.ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves all information of the specified resource policy.
     ///
     /// @Snippet(path: "resourcePolicies_get")
-    func `get`(
-      request: Clients.ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ResourcePolicy
+    public func `get`(
+      request: ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ResourcePolicy {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "resourcePolicies_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.ResourcePoliciesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a new resource policy.
     ///
     /// @Snippet(path: "resourcePolicies_insert")
-    func insert(
-      request: Clients.ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// A list all the resource policies that have been configured for the
     /// specified project in specified region.
     ///
     /// @Snippet(path: "resourcePolicies_list")
-    func list(
-      request: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ResourcePolicyList
+    public func list(
+      request: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ResourcePolicyList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// A list all the resource policies that have been configured for the
     /// specified project in specified region.
-    func list(
-      byItem: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
+    ///
+    /// @Snippet(path: "resourcePolicies_list")
+    public func list(
+      byItem: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Modify the specified resource policy.
     ///
     /// @Snippet(path: "resourcePolicies_patch")
-    func patch(
-      request: Clients.ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "resourcePolicies_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.ResourcePoliciesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "resourcePolicies_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.ResourcePoliciesClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: ResourcePoliciesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ResourcePolicies``.
-    public class ResourcePoliciesClient: ResourcePolicies {
-      let inner: any ResourcePoliciesStub
+    /// A Swift protocol to mock `ResourcePoliciesClient`.
+    ///
+    /// To mock `ResourcePoliciesClient` change your functions to receive
+    /// `some ResourcePoliciesProtocol` or `any ResourcePoliciesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ResourcePoliciesProtocol {
+      /// See `ResourcePoliciesClient.aggregatedList`.
+      func aggregatedList(request: ResourcePoliciesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
 
-      /// Creates a new `ResourcePoliciesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ResourcePoliciesStub = try ResourcePoliciesTransport(options)
-        inner = ResourcePoliciesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ResourcePoliciesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ResourcePoliciesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ResourcePoliciesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
 
-      /// See `ResourcePolicies.aggregatedList`
-      public func aggregatedList(
-        request: Clients.ResourcePoliciesClient.AggregatedListRequest,
+      /// See `ResourcePoliciesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
+
+      /// See `ResourcePoliciesClient.delete`.
+      func delete(request: ResourcePoliciesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        resourcePolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.`get``.
+      func `get`(request: ResourcePoliciesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ResourcePolicy
+
+      /// See `ResourcePoliciesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        resourcePolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ResourcePolicy
+
+      /// See `ResourcePoliciesClient.getIamPolicy`.
+      func getIamPolicy(request: ResourcePoliciesClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.insert`.
+      func insert(request: ResourcePoliciesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: ResourcePolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.list`.
+      func list(request: ResourcePoliciesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ResourcePolicyList
+
+      /// See `ResourcePoliciesClient.list`.
+      func list(
+        byItem: ResourcePoliciesClient.ListRequest
+      ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
+
+      /// See `ResourcePoliciesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
+
+      /// See `ResourcePoliciesClient.patch`.
+      func patch(request: ResourcePoliciesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        resourcePolicy: Swift.String,
+        body: ResourcePolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.setIamPolicy`.
+      func setIamPolicy(request: ResourcePoliciesClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.testIamPermissions`.
+      func testIamPermissions(request: ResourcePoliciesClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ResourcePoliciesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ResourcePoliciesClient.aggregatedList`.
+      func aggregatedList(
+        request: ResourcePoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
 
-      /// Retrieves an aggregated list of resource policies.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.ResourcePoliciesClient.AggregatedListRequest,
+      /// See `ResourcePoliciesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ResourcePoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error>
+
+      /// See `ResourcePoliciesClient.delete`.
+      func delete(
+        request: ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.`get``.
+      func `get`(
+        request: ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ResourcePolicy
+
+      /// See `ResourcePoliciesClient.getIamPolicy`.
+      func getIamPolicy(
+        request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.insert`.
+      func insert(
+        request: ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.list`.
+      func list(
+        request: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ResourcePolicyList
+
+      /// See `ResourcePoliciesClient.list`.
+      func list(
+        byItem: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error>
+
+      /// See `ResourcePoliciesClient.patch`.
+      func patch(
+        request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ResourcePoliciesClient.setIamPolicy`.
+      func setIamPolicy(
+        request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ResourcePoliciesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: ResourcePoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `ResourcePolicies.delete`
-      public func delete(
-        request: Clients.ResourcePoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.`get``
-      public func `get`(
-        request: Clients.ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ResourcePolicy {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.ResourcePoliciesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.insert`
-      public func insert(
-        request: Clients.ResourcePoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.list`
-      public func list(
-        request: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ResourcePolicyList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// A list all the resource policies that have been configured for the
-      /// specified project in specified region.
-      public func list(
-        byItem: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `ResourcePolicies.patch`
-      public func patch(
-        request: Clients.ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.ResourcePoliciesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `ResourcePolicies.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.ResourcePoliciesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension ResourcePolicies {
-    public func aggregatedList(request: Clients.ResourcePoliciesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
+  extension Clients.ResourcePoliciesProtocol {
+    public func aggregatedList(request: ResourcePoliciesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.ResourcePoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.ResourcePoliciesClient.AggregatedListRequest
+      byItem: ResourcePoliciesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.ResourcePoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: ResourcePoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList in
@@ -412,20 +371,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, ResourcePoliciesScopedList), Swift.Error> {
-      let request = Clients.ResourcePoliciesClient.AggregatedListRequest().with {
+      let request = ResourcePoliciesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.ResourcePoliciesClient.DeleteRequest) async throws
+    public func delete(request: ResourcePoliciesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -435,7 +394,7 @@
       region: Swift.String,
       resourcePolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ResourcePoliciesClient.DeleteRequest().with {
+      let request = ResourcePoliciesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.resourcePolicy = resourcePolicy
@@ -443,14 +402,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.ResourcePoliciesClient.GetRequest) async throws
+    public func `get`(request: ResourcePoliciesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ResourcePolicy
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ResourcePolicy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -460,7 +419,7 @@
       region: Swift.String,
       resourcePolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ResourcePolicy {
-      let request = Clients.ResourcePoliciesClient.GetRequest().with {
+      let request = ResourcePoliciesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.resourcePolicy = resourcePolicy
@@ -468,15 +427,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.ResourcePoliciesClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(request: ResourcePoliciesClient.GetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.ResourcePoliciesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -486,7 +444,7 @@
       region: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ResourcePoliciesClient.GetIamPolicyRequest().with {
+      let request = ResourcePoliciesClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -494,14 +452,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.ResourcePoliciesClient.InsertRequest) async throws
+    public func insert(request: ResourcePoliciesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -511,7 +469,7 @@
       region: Swift.String,
       body: ResourcePolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ResourcePoliciesClient.InsertRequest().with {
+      let request = ResourcePoliciesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -519,26 +477,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.ResourcePoliciesClient.ListRequest) async throws
+    public func list(request: ResourcePoliciesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ResourcePolicyList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ResourcePolicyList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ResourcePoliciesClient.ListRequest
+      byItem: ResourcePoliciesClient.ListRequest
     ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ResourcePolicyList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -550,21 +508,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<ResourcePolicy, Swift.Error> {
-      let request = Clients.ResourcePoliciesClient.ListRequest().with {
+      let request = ResourcePoliciesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.ResourcePoliciesClient.PatchRequest) async throws
+    public func patch(request: ResourcePoliciesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -575,7 +533,7 @@
       resourcePolicy: Swift.String,
       body: ResourcePolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ResourcePoliciesClient.PatchRequest().with {
+      let request = ResourcePoliciesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.resourcePolicy = resourcePolicy
@@ -584,15 +542,14 @@
       return try await self.patch(request: request)
     }
 
-    public func setIamPolicy(request: Clients.ResourcePoliciesClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(request: ResourcePoliciesClient.SetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.ResourcePoliciesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -603,7 +560,7 @@
       resource: Swift.String,
       body: RegionSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ResourcePoliciesClient.SetIamPolicyRequest().with {
+      let request = ResourcePoliciesClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -612,14 +569,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.ResourcePoliciesClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: ResourcePoliciesClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.ResourcePoliciesClient.TestIamPermissionsRequest,
+      request: ResourcePoliciesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -631,7 +588,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.ResourcePoliciesClient.TestIamPermissionsRequest().with {
+      let request = ResourcePoliciesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

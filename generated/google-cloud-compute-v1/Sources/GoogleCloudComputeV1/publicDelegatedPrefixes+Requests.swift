@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.PublicDelegatedPrefixesClient {
+  extension PublicDelegatedPrefixesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.publicDelegatedPrefixes.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.publicDelegatedPrefixes.aggregatedList]: <doc:PublicDelegatedPrefixes/aggregatedList(request:)>

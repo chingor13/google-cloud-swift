@@ -53,105 +53,105 @@
       }
 
       public func delete(
-        request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionUrlMapsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionUrlMapsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionUrlMapsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.UrlMap
+            (r: RegionUrlMapsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.UrlMap
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionUrlMapsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionUrlMapsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionUrlMapsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.UrlMapList
+            (r: RegionUrlMapsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.UrlMapList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionUrlMapsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionUrlMapsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionUrlMapsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionUrlMapsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })
       }
 
       public func validate(
-        request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionUrlMapsClient.ValidateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+            (r: RegionUrlMapsClient.ValidateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.UrlMapsValidateResponse
             in
             return try await self.inner.validate(request: r, options: o)
           })

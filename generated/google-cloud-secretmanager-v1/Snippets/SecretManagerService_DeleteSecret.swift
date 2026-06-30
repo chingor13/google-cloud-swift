@@ -22,7 +22,7 @@ import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleIamV1
 
-func sample(client: some SecretManagerService, projectId: String, secretId: String) async throws {
+func sample(client: SecretManagerServiceClient, projectId: String, secretId: String) async throws {
   try await client.deleteSecret(
     request: DeleteSecretRequest()
       .with {
@@ -37,7 +37,7 @@ func sample(client: some SecretManagerService, projectId: String, secretId: Stri
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
+      let client = try GoogleCloudSecretmanagerV1.SecretManagerServiceClient()
       try await sample(client: client, projectId: "[placeholder]", secretId: "[placeholder]")
     } catch {
       print("Error: \(error)")

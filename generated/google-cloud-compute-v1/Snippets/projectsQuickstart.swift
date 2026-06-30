@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.ProjectsClient()
+    let client = try GoogleCloudComputeV1.ProjectsClient()
     let response = try await client.disableXpnHost(
-      request: Clients.ProjectsClient.DisableXpnHostRequest()
+      request: ProjectsClient.DisableXpnHostRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -28,32 +28,31 @@
   extension Clients {
     protocol FirewallsStub {
       func delete(
-        request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Firewall
 
       func insert(
-        request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallList
 
       func patch(
-        request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.FirewallsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -66,7 +65,7 @@
       }
 
       public func delete(
-        request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -88,7 +87,7 @@
       }
 
       public func `get`(
-        request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Firewall {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -108,7 +107,7 @@
       }
 
       public func insert(
-        request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -131,7 +130,7 @@
       }
 
       public func list(
-        request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -156,7 +155,7 @@
       }
 
       public func patch(
-        request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -182,8 +181,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.FirewallsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -208,7 +206,7 @@
       }
 
       public func update(
-        request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

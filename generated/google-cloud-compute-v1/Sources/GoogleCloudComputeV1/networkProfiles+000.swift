@@ -28,115 +28,113 @@
   /// Service for the `networkProfiles` resource.
   ///
   /// @Snippet(path: "networkProfilesQuickstart")
-  public protocol NetworkProfiles {
+  public class NetworkProfilesClient: Clients.NetworkProfilesProtocol {
+    let inner: any Clients.NetworkProfilesStub
+
+    /// Creates a new `NetworkProfilesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.NetworkProfilesStub = try Clients.NetworkProfilesTransport(options)
+      inner = Clients.NetworkProfilesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.NetworkProfilesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Returns the specified network profile.
     ///
     /// @Snippet(path: "networkProfiles_get")
-    func `get`(request: Clients.NetworkProfilesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NetworkProfile
-
-    /// Returns the specified network profile.
-    func `get`(
-      project: Swift.String,
-      networkProfile: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NetworkProfile
+    public func `get`(
+      request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NetworkProfile {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of network profiles available to the specified
     /// project.
     ///
     /// @Snippet(path: "networkProfiles_list")
-    func list(request: Clients.NetworkProfilesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.NetworkProfilesListResponse
-
-    /// Retrieves a list of network profiles available to the specified
-    /// project.
-    func list(
-      byItem: Clients.NetworkProfilesClient.ListRequest
-    ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
-
-    /// Retrieves a list of network profiles available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
-
-    /// Returns the specified network profile.
-    ///
-    /// @Snippet(path: "networkProfiles_get")
-    func `get`(
-      request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkProfile
+    public func list(
+      request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of network profiles available to the specified
     /// project.
     ///
     /// @Snippet(path: "networkProfiles_list")
-    func list(
-      request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
-
-    /// Retrieves a list of network profiles available to the specified
-    /// project.
-    func list(
-      byItem: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
+    public func list(
+      byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``NetworkProfiles``.
-    public class NetworkProfilesClient: NetworkProfiles {
-      let inner: any NetworkProfilesStub
+    /// A Swift protocol to mock `NetworkProfilesClient`.
+    ///
+    /// To mock `NetworkProfilesClient` change your functions to receive
+    /// `some NetworkProfilesProtocol` or `any NetworkProfilesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol NetworkProfilesProtocol {
+      /// See `NetworkProfilesClient.`get``.
+      func `get`(request: NetworkProfilesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NetworkProfile
 
-      /// Creates a new `NetworkProfilesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any NetworkProfilesStub = try NetworkProfilesTransport(options)
-        inner = NetworkProfilesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = NetworkProfilesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `NetworkProfilesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        networkProfile: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NetworkProfile
 
-      /// See `NetworkProfiles.`get``
-      public func `get`(
-        request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkProfile {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `NetworkProfilesClient.list`.
+      func list(request: NetworkProfilesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.NetworkProfilesListResponse
 
-      /// See `NetworkProfiles.list`
-      public func list(
-        request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `NetworkProfilesClient.list`.
+      func list(
+        byItem: NetworkProfilesClient.ListRequest
+      ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
 
-      /// Retrieves a list of network profiles available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `NetworkProfilesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
+
+      /// See `NetworkProfilesClient.`get``.
+      func `get`(
+        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NetworkProfile
+
+      /// See `NetworkProfilesClient.list`.
+      func list(
+        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
+
+      /// See `NetworkProfilesClient.list`.
+      func list(
+        byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
     }
   }
 
   // Default implementations
-  extension NetworkProfiles {
-    public func `get`(request: Clients.NetworkProfilesClient.GetRequest) async throws
+  extension Clients.NetworkProfilesProtocol {
+    public func `get`(request: NetworkProfilesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NetworkProfile
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfile {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -145,33 +143,33 @@
       project: Swift.String,
       networkProfile: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NetworkProfile {
-      let request = Clients.NetworkProfilesClient.GetRequest().with {
+      let request = NetworkProfilesClient.GetRequest().with {
         $0.project = project
         $0.networkProfile = networkProfile
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.NetworkProfilesClient.ListRequest) async throws
+    public func list(request: NetworkProfilesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.NetworkProfilesListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.NetworkProfilesClient.ListRequest
+      byItem: NetworkProfilesClient.ListRequest
     ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse in
@@ -183,7 +181,7 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
-      let request = Clients.NetworkProfilesClient.ListRequest().with {
+      let request = NetworkProfilesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)

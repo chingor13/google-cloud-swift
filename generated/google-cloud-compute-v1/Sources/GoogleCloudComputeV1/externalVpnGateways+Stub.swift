@@ -28,32 +28,27 @@
   extension Clients {
     protocol ExternalVpnGatewaysStub {
       func delete(
-        request: Clients.ExternalVpnGatewaysClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ExternalVpnGatewaysClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
 
       func insert(
-        request: Clients.ExternalVpnGatewaysClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ExternalVpnGatewaysClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList
 
       func setLabels(
-        request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest,
+        request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -67,8 +62,7 @@
       }
 
       public func delete(
-        request: Clients.ExternalVpnGatewaysClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -93,8 +87,7 @@
       }
 
       public func `get`(
-        request: Clients.ExternalVpnGatewaysClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -117,8 +110,7 @@
       }
 
       public func insert(
-        request: Clients.ExternalVpnGatewaysClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -141,8 +133,7 @@
       }
 
       public func list(
-        request: Clients.ExternalVpnGatewaysClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -167,8 +158,7 @@
       }
 
       public func setLabels(
-        request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -193,7 +183,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest,
+        request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

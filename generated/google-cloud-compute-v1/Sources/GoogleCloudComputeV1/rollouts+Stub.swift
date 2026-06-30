@@ -28,31 +28,31 @@
   extension Clients {
     protocol RolloutsStub {
       func advance(
-        request: Clients.RolloutsClient.AdvanceRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.AdvanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func cancel(
-        request: Clients.RolloutsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RolloutsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Rollout
 
       func list(
-        request: Clients.RolloutsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutsListResponse
 
       func pause(
-        request: Clients.RolloutsClient.PauseRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.PauseRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resume(
-        request: Clients.RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -65,7 +65,7 @@
       }
 
       public func advance(
-        request: Clients.RolloutsClient.AdvanceRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.AdvanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -89,7 +89,7 @@
       }
 
       public func cancel(
-        request: Clients.RolloutsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -112,7 +112,7 @@
       }
 
       public func delete(
-        request: Clients.RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -134,7 +134,7 @@
       }
 
       public func `get`(
-        request: Clients.RolloutsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Rollout {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -154,7 +154,7 @@
       }
 
       public func list(
-        request: Clients.RolloutsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutsListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -179,7 +179,7 @@
       }
 
       public func pause(
-        request: Clients.RolloutsClient.PauseRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.PauseRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -202,7 +202,7 @@
       }
 
       public func resume(
-        request: Clients.RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

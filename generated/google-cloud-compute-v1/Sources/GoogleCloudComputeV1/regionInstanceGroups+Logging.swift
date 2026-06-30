@@ -60,15 +60,14 @@
       }
 
       public func `get`(
-        request: Clients.RegionInstanceGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.RegionInstanceGroupsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionInstanceGroupsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InstanceGroup
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -76,15 +75,14 @@
       }
 
       public func list(
-        request: Clients.RegionInstanceGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionInstanceGroupsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionInstanceGroupsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.RegionInstanceGroupList
             in
             return try await self.inner.list(request: r, options: o)
@@ -92,7 +90,7 @@
       }
 
       public func listInstances(
-        request: Clients.RegionInstanceGroupsClient.ListInstancesRequest,
+        request: RegionInstanceGroupsClient.ListInstancesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances {
         try await self._intercept(
@@ -100,17 +98,15 @@
           options: options,
           name: "listInstances",
           action: {
-            (
-              r: Clients.RegionInstanceGroupsClient.ListInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances
+            (r: RegionInstanceGroupsClient.ListInstancesRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances
             in
             return try await self.inner.listInstances(request: r, options: o)
           })
       }
 
       public func setNamedPorts(
-        request: Clients.RegionInstanceGroupsClient.SetNamedPortsRequest,
+        request: RegionInstanceGroupsClient.SetNamedPortsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -118,17 +114,15 @@
           options: options,
           name: "setNamedPorts",
           action: {
-            (
-              r: Clients.RegionInstanceGroupsClient.SetNamedPortsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionInstanceGroupsClient.SetNamedPortsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setNamedPorts(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.RegionInstanceGroupsClient.TestIamPermissionsRequest,
+        request: RegionInstanceGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -137,7 +131,7 @@
           name: "testIamPermissions",
           action: {
             (
-              r: Clients.RegionInstanceGroupsClient.TestIamPermissionsRequest,
+              r: RegionInstanceGroupsClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

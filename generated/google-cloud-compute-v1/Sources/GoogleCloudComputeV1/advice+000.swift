@@ -28,25 +28,18 @@
   /// Service for the `advice` resource.
   ///
   /// @Snippet(path: "adviceQuickstart")
-  public protocol Advice {
-    /// Advise how, where and when to create the requested amount of instances
-    /// with specified accelerators, within the specified time and location limits.
-    /// The method recommends creating future reservations for the requested
-    /// resources.
-    ///
-    /// @Snippet(path: "advice_calendarMode")
-    func calendarMode(request: Clients.AdviceClient.CalendarModeRequest) async throws
-      -> GoogleCloudComputeV1.CalendarModeAdviceResponse
+  public class AdviceClient: Clients.AdviceProtocol {
+    let inner: any Clients.AdviceStub
 
-    /// Advise how, where and when to create the requested amount of instances
-    /// with specified accelerators, within the specified time and location limits.
-    /// The method recommends creating future reservations for the requested
-    /// resources.
-    func calendarMode(
-      project: Swift.String,
-      region: Swift.String,
-      body: CalendarModeAdviceRequest?,
-    ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
+    /// Creates a new `AdviceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.AdviceStub = try Clients.AdviceTransport(options)
+      inner = Clients.AdviceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.AdviceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Advise how, where and when to create the requested amount of instances
     /// with specified accelerators, within the specified time and location limits.
@@ -54,45 +47,48 @@
     /// resources.
     ///
     /// @Snippet(path: "advice_calendarMode")
-    func calendarMode(
-      request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
+    public func calendarMode(
+      request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
+      try await self.inner.calendarMode(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Advice``.
-    public class AdviceClient: Advice {
-      let inner: any AdviceStub
+    /// A Swift protocol to mock `AdviceClient`.
+    ///
+    /// To mock `AdviceClient` change your functions to receive
+    /// `some AdviceProtocol` or `any AdviceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol AdviceProtocol {
+      /// See `AdviceClient.calendarMode`.
+      func calendarMode(request: AdviceClient.CalendarModeRequest) async throws
+        -> GoogleCloudComputeV1.CalendarModeAdviceResponse
 
-      /// Creates a new `AdviceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any AdviceStub = try AdviceTransport(options)
-        inner = AdviceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = AdviceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `AdviceClient.calendarMode`.
+      func calendarMode(
+        project: Swift.String,
+        region: Swift.String,
+        body: CalendarModeAdviceRequest?,
+      ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
 
-      /// See `Advice.calendarMode`
-      public func calendarMode(
-        request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
-        try await self.inner.calendarMode(request: request, options: options)
-      }
+      /// See `AdviceClient.calendarMode`.
+      func calendarMode(
+        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
     }
   }
 
   // Default implementations
-  extension Advice {
-    public func calendarMode(request: Clients.AdviceClient.CalendarModeRequest) async throws
+  extension Clients.AdviceProtocol {
+    public func calendarMode(request: AdviceClient.CalendarModeRequest) async throws
       -> GoogleCloudComputeV1.CalendarModeAdviceResponse
     {
       try await self.calendarMode(request: request, options: .init())
     }
 
     public func calendarMode(
-      request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+      request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -102,7 +98,7 @@
       region: Swift.String,
       body: CalendarModeAdviceRequest?,
     ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
-      let request = Clients.AdviceClient.CalendarModeRequest().with {
+      let request = AdviceClient.CalendarModeRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body

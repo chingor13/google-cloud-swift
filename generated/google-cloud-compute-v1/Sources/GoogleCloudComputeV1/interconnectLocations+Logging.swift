@@ -60,15 +60,14 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectLocationsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocation {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.InterconnectLocationsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InterconnectLocationsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InterconnectLocation
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -76,15 +75,14 @@
       }
 
       public func list(
-        request: Clients.InterconnectLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocationList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.InterconnectLocationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InterconnectLocationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InterconnectLocationList
             in
             return try await self.inner.list(request: r, options: o)

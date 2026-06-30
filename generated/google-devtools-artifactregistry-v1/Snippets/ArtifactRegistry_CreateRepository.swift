@@ -24,7 +24,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some ArtifactRegistry, projectId: String, locationId: String) async throws {
+func sample(client: ArtifactRegistryClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createRepository(
     withPolling: CreateRepositoryRequest()
       .with {
@@ -42,7 +42,7 @@ func sample(client: some ArtifactRegistry, projectId: String, locationId: String
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleDevtoolsArtifactregistryV1.Clients.ArtifactRegistryClient()
+      let client = try GoogleDevtoolsArtifactregistryV1.ArtifactRegistryClient()
       try await sample(client: client, projectId: "[placeholder]", locationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

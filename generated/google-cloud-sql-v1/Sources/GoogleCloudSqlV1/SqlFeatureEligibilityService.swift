@@ -28,28 +28,32 @@
   /// Service to verify the eligibility of an instance for a given operation.
   ///
   /// @Snippet(path: "SqlFeatureEligibilityServiceQuickstart")
-  public protocol SqlFeatureEligibilityService {
+  public class SqlFeatureEligibilityServiceClient: Clients.SqlFeatureEligibilityServiceProtocol {
+    let inner: any Clients.SqlFeatureEligibilityServiceStub
+
+    /// Creates a new `SqlFeatureEligibilityServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlFeatureEligibilityServiceStub =
+        try Clients.SqlFeatureEligibilityServiceTransport(options)
+      inner = Clients.SqlFeatureEligibilityServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlFeatureEligibilityServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlFeatureEligibilityService``.
-    public class SqlFeatureEligibilityServiceClient: SqlFeatureEligibilityService {
-      let inner: any SqlFeatureEligibilityServiceStub
-
-      /// Creates a new `SqlFeatureEligibilityServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlFeatureEligibilityServiceStub = try SqlFeatureEligibilityServiceTransport(
-          options)
-        inner = SqlFeatureEligibilityServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlFeatureEligibilityServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlFeatureEligibilityServiceClient`.
+    ///
+    /// To mock `SqlFeatureEligibilityServiceClient` change your functions to receive
+    /// `some SqlFeatureEligibilityServiceProtocol` or `any SqlFeatureEligibilityServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlFeatureEligibilityServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlFeatureEligibilityService {
+  extension Clients.SqlFeatureEligibilityServiceProtocol {
   }
 #endif

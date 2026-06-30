@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.AutoscalersClient {
+  extension AutoscalersClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.autoscalers.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.autoscalers.aggregatedList]: <doc:Autoscalers/aggregatedList(request:)>

@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, ) async throws {
-  let client = try GoogleCloudStorageinsightsV1.Clients.StorageInsightsClient()
+  let client = try GoogleCloudStorageinsightsV1.StorageInsightsClient()
   let items = try client.listReportConfigs(
     byItem: ListReportConfigsRequest()
       .with {

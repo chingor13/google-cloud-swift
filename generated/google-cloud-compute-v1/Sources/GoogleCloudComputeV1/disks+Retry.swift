@@ -53,15 +53,14 @@
       }
 
       public func addResourcePolicies(
-        request: Clients.DisksClient.AddResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.AddResourcePoliciesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DisksClient.AddResourcePoliciesRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.addResourcePolicies(request: r, options: o)
@@ -69,74 +68,74 @@
       }
 
       public func aggregatedList(
-        request: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DisksClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.DiskAggregatedList
+            (r: DisksClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.DiskAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func bulkInsert(
-        request: Clients.DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.BulkInsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: DisksClient.BulkInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.bulkInsert(request: r, options: o)
           })
       }
 
       public func bulkSetLabels(
-        request: Clients.DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.BulkSetLabelsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: DisksClient.BulkSetLabelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.bulkSetLabels(request: r, options: o)
           })
       }
 
       public func createSnapshot(
-        request: Clients.DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.CreateSnapshotRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: DisksClient.CreateSnapshotRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.createSnapshot(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -144,14 +143,14 @@
       }
 
       public func `get`(
-        request: Clients.DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Disk {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DisksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Disk
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -159,29 +158,29 @@
       }
 
       public func getIamPolicy(
-        request: Clients.DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DisksClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: DisksClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -189,14 +188,14 @@
       }
 
       public func list(
-        request: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DisksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.DiskList
             in
             return try await self.inner.list(request: r, options: o)
@@ -204,15 +203,14 @@
       }
 
       public func removeResourcePolicies(
-        request: Clients.DisksClient.RemoveResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.RemoveResourcePoliciesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DisksClient.RemoveResourcePoliciesRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.removeResourcePolicies(request: r, options: o)
@@ -220,14 +218,14 @@
       }
 
       public func resize(
-        request: Clients.DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.ResizeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.ResizeRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.resize(request: r, options: o)
@@ -235,29 +233,29 @@
       }
 
       public func setIamPolicy(
-        request: Clients.DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: DisksClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: Clients.DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
@@ -265,15 +263,14 @@
       }
 
       public func startAsyncReplication(
-        request: Clients.DisksClient.StartAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.StartAsyncReplicationRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DisksClient.StartAsyncReplicationRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.startAsyncReplication(request: r, options: o)
@@ -281,15 +278,14 @@
       }
 
       public func stopAsyncReplication(
-        request: Clients.DisksClient.StopAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.StopAsyncReplicationRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DisksClient.StopAsyncReplicationRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.stopAsyncReplication(request: r, options: o)
@@ -297,7 +293,7 @@
       }
 
       public func stopGroupAsyncReplication(
-        request: Clients.DisksClient.StopGroupAsyncReplicationRequest,
+        request: DisksClient.StopGroupAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -305,25 +301,22 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.DisksClient.StopGroupAsyncReplicationRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: DisksClient.StopGroupAsyncReplicationRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.stopGroupAsyncReplication(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.DisksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DisksClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -331,14 +324,14 @@
       }
 
       public func update(
-        request: Clients.DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisksClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -346,15 +339,15 @@
       }
 
       public func updateKmsKey(
-        request: Clients.DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.DisksClient.UpdateKmsKeyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: DisksClient.UpdateKmsKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.updateKmsKey(request: r, options: o)
           })

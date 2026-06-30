@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.TargetSslProxiesClient {
+  extension TargetSslProxiesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.targetSslProxies.delete] method.
     ///
     /// [google.cloud.compute.v1.targetSslProxies.delete]: <doc:TargetSslProxies/delete(request:)>

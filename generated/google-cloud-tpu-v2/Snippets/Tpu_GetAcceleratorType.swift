@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Tpu, projectId: String, locationId: String, acceleratorTypeId: String)
+func sample(client: TpuClient, projectId: String, locationId: String, acceleratorTypeId: String)
   async throws
 {
   let response = try await client.getAcceleratorType(
@@ -41,7 +41,7 @@ func sample(client: some Tpu, projectId: String, locationId: String, accelerator
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudTpuV2.Clients.TpuClient()
+      let client = try GoogleCloudTpuV2.TpuClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         acceleratorTypeId: "[placeholder]")

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionSnapshotSettingsClient {
+  extension RegionSnapshotSettingsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.regionSnapshotSettings.get] method.
     ///
     /// [google.cloud.compute.v1.regionSnapshotSettings.get]: <doc:RegionSnapshotSettings/`get`(request:)>

@@ -28,38 +28,35 @@
   extension Clients {
     protocol InterconnectsStub {
       func delete(
-        request: Clients.InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Interconnect
 
       func getDiagnostics(
-        request: Clients.InterconnectsClient.GetDiagnosticsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetDiagnosticsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetDiagnosticsResponse
 
       func getMacsecConfig(
-        request: Clients.InterconnectsClient.GetMacsecConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetMacsecConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetMacsecConfigResponse
 
       func insert(
-        request: Clients.InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectList
 
       func patch(
-        request: Clients.InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: Clients.InterconnectsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -72,7 +69,7 @@
       }
 
       public func delete(
-        request: Clients.InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -96,7 +93,7 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Interconnect {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -118,8 +115,7 @@
       }
 
       public func getDiagnostics(
-        request: Clients.InterconnectsClient.GetDiagnosticsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetDiagnosticsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetDiagnosticsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -142,8 +138,7 @@
       }
 
       public func getMacsecConfig(
-        request: Clients.InterconnectsClient.GetMacsecConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetMacsecConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetMacsecConfigResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -166,7 +161,7 @@
       }
 
       public func insert(
-        request: Clients.InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -189,7 +184,7 @@
       }
 
       public func list(
-        request: Clients.InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -214,7 +209,7 @@
       }
 
       public func patch(
-        request: Clients.InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -242,8 +237,7 @@
       }
 
       public func setLabels(
-        request: Clients.InterconnectsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

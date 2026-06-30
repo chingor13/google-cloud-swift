@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NetworkEdgeSecurityServicesClient {
+  extension NetworkEdgeSecurityServicesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.networkEdgeSecurityServices.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.networkEdgeSecurityServices.aggregatedList]: <doc:NetworkEdgeSecurityServices/aggregatedList(request:)>

@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Folders, parent: String) async throws {
+func sample(client: FoldersClient, parent: String) async throws {
   let items = try client.listFolders(
     byItem: ListFoldersRequest()
       .with {
@@ -40,7 +40,7 @@ func sample(client: some Folders, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.FoldersClient()
+      let client = try GoogleCloudResourcemanagerV3.FoldersClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

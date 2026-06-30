@@ -60,15 +60,14 @@
       }
 
       public func aggregatedList(
-        request: Clients.HealthChecksClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthChecksAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: Clients.HealthChecksClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: HealthChecksClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.HealthChecksAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -76,82 +75,82 @@
       }
 
       public func delete(
-        request: Clients.HealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.HealthChecksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: HealthChecksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.HealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheck {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.HealthChecksClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.HealthCheck
+            (r: HealthChecksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.HealthCheck
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.HealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.HealthChecksClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: HealthChecksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.HealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheckList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.HealthChecksClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.HealthCheckList
+            (r: HealthChecksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.HealthCheckList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.HealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.HealthChecksClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: HealthChecksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.HealthChecksClient.TestIamPermissionsRequest,
+        request: HealthChecksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -159,25 +158,23 @@
           options: options,
           name: "testIamPermissions",
           action: {
-            (
-              r: Clients.HealthChecksClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: HealthChecksClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.HealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: HealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.HealthChecksClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: HealthChecksClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

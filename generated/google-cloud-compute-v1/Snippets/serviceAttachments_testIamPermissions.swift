@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some ServiceAttachments) async throws {
+  func sample(client: ServiceAttachmentsClient) async throws {
     let response = try await client.testIamPermissions(
-      request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest()
+      request: ServiceAttachmentsClient.TestIamPermissionsRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.ServiceAttachmentsClient()
+        let client = try GoogleCloudComputeV1.ServiceAttachmentsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

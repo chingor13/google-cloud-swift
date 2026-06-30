@@ -28,15 +28,15 @@
   extension Clients {
     protocol PreviewFeaturesStub {
       func `get`(
-        request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeature
 
       func list(
-        request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeatureList
 
       func update(
-        request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -49,7 +49,7 @@
       }
 
       public func `get`(
-        request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeature {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -71,7 +71,7 @@
       }
 
       public func list(
-        request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -96,7 +96,7 @@
       }
 
       public func update(
-        request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

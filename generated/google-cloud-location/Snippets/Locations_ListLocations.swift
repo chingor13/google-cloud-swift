@@ -20,7 +20,7 @@ import Foundation
 import GoogleCloudLocation
 import GoogleCloudWkt
 
-func sample(client: some Locations) async throws {
+func sample(client: LocationsClient) async throws {
   let items = try client.listLocations(
     byItem: ListLocationsRequest()
       /* set fields using .with { $0... } */
@@ -35,7 +35,7 @@ func sample(client: some Locations) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudLocation.Clients.LocationsClient()
+      let client = try GoogleCloudLocation.LocationsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

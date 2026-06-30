@@ -28,23 +28,23 @@
   extension Clients {
     protocol WireGroupsStub {
       func delete(
-        request: Clients.WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.WireGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroup
 
       func insert(
-        request: Clients.WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.WireGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroupList
 
       func patch(
-        request: Clients.WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -57,7 +57,7 @@
       }
 
       public func delete(
-        request: Clients.WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -87,7 +87,7 @@
       }
 
       public func `get`(
-        request: Clients.WireGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroup {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -115,7 +115,7 @@
       }
 
       public func insert(
-        request: Clients.WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -146,7 +146,7 @@
       }
 
       public func list(
-        request: Clients.WireGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroupList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -178,7 +178,7 @@
       }
 
       public func patch(
-        request: Clients.WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

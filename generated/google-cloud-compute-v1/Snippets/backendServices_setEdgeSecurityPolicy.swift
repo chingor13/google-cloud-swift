@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some BackendServices) async throws {
+  func sample(client: BackendServicesClient) async throws {
     let response = try await client.setEdgeSecurityPolicy(
-      request: Clients.BackendServicesClient.SetEdgeSecurityPolicyRequest()
+      request: BackendServicesClient.SetEdgeSecurityPolicyRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.BackendServicesClient()
+        let client = try GoogleCloudComputeV1.BackendServicesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

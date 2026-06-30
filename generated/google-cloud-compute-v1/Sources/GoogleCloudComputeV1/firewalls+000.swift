@@ -28,63 +28,71 @@
   /// Service for the `firewalls` resource.
   ///
   /// @Snippet(path: "firewallsQuickstart")
-  public protocol Firewalls {
+  public class FirewallsClient: Clients.FirewallsProtocol {
+    let inner: any Clients.FirewallsStub
+
+    /// Creates a new `FirewallsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.FirewallsStub = try Clients.FirewallsTransport(options)
+      inner = Clients.FirewallsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.FirewallsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified firewall.
     ///
     /// @Snippet(path: "firewalls_delete")
-    func delete(request: Clients.FirewallsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified firewall.
-    func delete(
-      project: Swift.String,
-      firewall: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified firewall.
     ///
     /// @Snippet(path: "firewalls_get")
-    func `get`(request: Clients.FirewallsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Firewall
-
-    /// Returns the specified firewall.
-    func `get`(
-      project: Swift.String,
-      firewall: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Firewall
+    public func `get`(
+      request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Firewall {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a firewall rule in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "firewalls_insert")
-    func insert(request: Clients.FirewallsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a firewall rule in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      body: Firewall?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of firewall rules available to the specified
     /// project.
     ///
     /// @Snippet(path: "firewalls_list")
-    func list(request: Clients.FirewallsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.FirewallList
+    public func list(
+      request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.FirewallList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of firewall rules available to the specified
     /// project.
-    func list(
-      byItem: Clients.FirewallsClient.ListRequest
-    ) throws -> any AsyncSequence<Firewall, Swift.Error>
-
-    /// Retrieves the list of firewall rules available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<Firewall, Swift.Error>
+    ///
+    /// @Snippet(path: "firewalls_list")
+    public func list(
+      byItem: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Firewall, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.FirewallList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the specified firewall rule with the data included in the
     /// request. This method supportsPATCH
@@ -92,31 +100,20 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "firewalls_patch")
-    func patch(request: Clients.FirewallsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified firewall rule with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      firewall: Swift.String,
-      body: Firewall?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "firewalls_testIamPermissions")
-    func testIamPermissions(request: Clients.FirewallsClient.TestIamPermissionsRequest) async throws
-      -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates the specified firewall rule with the data included in the
     /// request.
@@ -124,174 +121,148 @@
     /// specified. To update individual fields, please use PATCH instead.
     ///
     /// @Snippet(path: "firewalls_update")
-    func update(request: Clients.FirewallsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified firewall rule with the data included in the
-    /// request.
-    /// Note that all fields will be updated if using PUT, even fields that are not
-    /// specified. To update individual fields, please use PATCH instead.
-    func update(
-      project: Swift.String,
-      firewall: Swift.String,
-      body: Firewall?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified firewall.
-    ///
-    /// @Snippet(path: "firewalls_delete")
-    func delete(
-      request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified firewall.
-    ///
-    /// @Snippet(path: "firewalls_get")
-    func `get`(
-      request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Firewall
-
-    /// Creates a firewall rule in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "firewalls_insert")
-    func insert(
-      request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of firewall rules available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "firewalls_list")
-    func list(
-      request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.FirewallList
-
-    /// Retrieves the list of firewall rules available to the specified
-    /// project.
-    func list(
-      byItem: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Firewall, Swift.Error>
-
-    /// Updates the specified firewall rule with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "firewalls_patch")
-    func patch(
-      request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "firewalls_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.FirewallsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates the specified firewall rule with the data included in the
-    /// request.
-    /// Note that all fields will be updated if using PUT, even fields that are not
-    /// specified. To update individual fields, please use PATCH instead.
-    ///
-    /// @Snippet(path: "firewalls_update")
-    func update(
-      request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Firewalls``.
-    public class FirewallsClient: Firewalls {
-      let inner: any FirewallsStub
+    /// A Swift protocol to mock `FirewallsClient`.
+    ///
+    /// To mock `FirewallsClient` change your functions to receive
+    /// `some FirewallsProtocol` or `any FirewallsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol FirewallsProtocol {
+      /// See `FirewallsClient.delete`.
+      func delete(request: FirewallsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `FirewallsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any FirewallsStub = try FirewallsTransport(options)
-        inner = FirewallsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = FirewallsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `FirewallsClient.delete`.
+      func delete(
+        project: Swift.String,
+        firewall: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Firewalls.delete`
-      public func delete(
-        request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `FirewallsClient.`get``.
+      func `get`(request: FirewallsClient.GetRequest) async throws -> GoogleCloudComputeV1.Firewall
 
-      /// See `Firewalls.`get``
-      public func `get`(
-        request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Firewall {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `FirewallsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        firewall: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Firewall
 
-      /// See `Firewalls.insert`
-      public func insert(
-        request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `FirewallsClient.insert`.
+      func insert(request: FirewallsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Firewalls.list`
-      public func list(
-        request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.FirewallList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `FirewallsClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: Firewall?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of firewall rules available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Firewall, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.FirewallList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `FirewallsClient.list`.
+      func list(request: FirewallsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.FirewallList
 
-      /// See `Firewalls.patch`
-      public func patch(
-        request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `FirewallsClient.list`.
+      func list(
+        byItem: FirewallsClient.ListRequest
+      ) throws -> any AsyncSequence<Firewall, Swift.Error>
 
-      /// See `Firewalls.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.FirewallsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `FirewallsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<Firewall, Swift.Error>
 
-      /// See `Firewalls.update`
-      public func update(
-        request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `FirewallsClient.patch`.
+      func patch(request: FirewallsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.patch`.
+      func patch(
+        project: Swift.String,
+        firewall: Swift.String,
+        body: Firewall?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.testIamPermissions`.
+      func testIamPermissions(request: FirewallsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `FirewallsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `FirewallsClient.update`.
+      func update(request: FirewallsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.update`.
+      func update(
+        project: Swift.String,
+        firewall: Swift.String,
+        body: Firewall?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.delete`.
+      func delete(
+        request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.`get``.
+      func `get`(
+        request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Firewall
+
+      /// See `FirewallsClient.insert`.
+      func insert(
+        request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.list`.
+      func list(
+        request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.FirewallList
+
+      /// See `FirewallsClient.list`.
+      func list(
+        byItem: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Firewall, Swift.Error>
+
+      /// See `FirewallsClient.patch`.
+      func patch(
+        request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `FirewallsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `FirewallsClient.update`.
+      func update(
+        request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Firewalls {
-    public func delete(request: Clients.FirewallsClient.DeleteRequest) async throws
+  extension Clients.FirewallsProtocol {
+    public func delete(request: FirewallsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -300,21 +271,21 @@
       project: Swift.String,
       firewall: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.FirewallsClient.DeleteRequest().with {
+      let request = FirewallsClient.DeleteRequest().with {
         $0.project = project
         $0.firewall = firewall
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.FirewallsClient.GetRequest) async throws
+    public func `get`(request: FirewallsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Firewall
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Firewall {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -323,21 +294,21 @@
       project: Swift.String,
       firewall: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Firewall {
-      let request = Clients.FirewallsClient.GetRequest().with {
+      let request = FirewallsClient.GetRequest().with {
         $0.project = project
         $0.firewall = firewall
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.FirewallsClient.InsertRequest) async throws
+    public func insert(request: FirewallsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -346,33 +317,33 @@
       project: Swift.String,
       body: Firewall?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.FirewallsClient.InsertRequest().with {
+      let request = FirewallsClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.FirewallsClient.ListRequest) async throws
+    public func list(request: FirewallsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.FirewallList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.FirewallList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.FirewallsClient.ListRequest
+      byItem: FirewallsClient.ListRequest
     ) throws -> any AsyncSequence<Firewall, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Firewall, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.FirewallList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -383,20 +354,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<Firewall, Swift.Error> {
-      let request = Clients.FirewallsClient.ListRequest().with {
+      let request = FirewallsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.FirewallsClient.PatchRequest) async throws
+    public func patch(request: FirewallsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -406,7 +377,7 @@
       firewall: Swift.String,
       body: Firewall?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.FirewallsClient.PatchRequest().with {
+      let request = FirewallsClient.PatchRequest().with {
         $0.project = project
         $0.firewall = firewall
         $0.body = body
@@ -414,15 +385,14 @@
       return try await self.patch(request: request)
     }
 
-    public func testIamPermissions(request: Clients.FirewallsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: FirewallsClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.FirewallsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -432,7 +402,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.FirewallsClient.TestIamPermissionsRequest().with {
+      let request = FirewallsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -440,14 +410,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.FirewallsClient.UpdateRequest) async throws
+    public func update(request: FirewallsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -457,7 +427,7 @@
       firewall: Swift.String,
       body: Firewall?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.FirewallsClient.UpdateRequest().with {
+      let request = FirewallsClient.UpdateRequest().with {
         $0.project = project
         $0.firewall = firewall
         $0.body = body

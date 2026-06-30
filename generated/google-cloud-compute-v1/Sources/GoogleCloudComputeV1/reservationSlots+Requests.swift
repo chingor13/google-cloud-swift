@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ReservationSlotsClient {
+  extension ReservationSlotsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.reservationSlots.get] method.
     ///
     /// [google.cloud.compute.v1.reservationSlots.get]: <doc:ReservationSlots/`get`(request:)>

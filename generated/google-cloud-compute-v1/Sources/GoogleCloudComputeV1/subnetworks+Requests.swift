@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SubnetworksClient {
+  extension SubnetworksClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.subnetworks.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.subnetworks.aggregatedList]: <doc:Subnetworks/aggregatedList(request:)>
@@ -139,7 +139,7 @@
       ///
       ///    - WITH_UTILIZATION: Utilization data is included in the
       ///    response.
-      public var views: Clients.SubnetworksClient.AggregatedListRequest.Views? = nil
+      public var views: SubnetworksClient.AggregatedListRequest.Views? = nil
 
       /// Initialize a new instance of `AggregatedListRequest`.
       public init() {}
@@ -159,7 +159,7 @@
 
       /// The enumerated type for the [views][google.cloud.compute.v1.subnetworks.aggregatedListRequest.views] field.
       ///
-      /// [google.cloud.compute.v1.subnetworks.aggregatedListRequest.views]: <doc:Clients/SubnetworksClient/AggregatedListRequest/Views>
+      /// [google.cloud.compute.v1.subnetworks.aggregatedListRequest.views]: <doc:SubnetworksClient/AggregatedListRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
         case withUtilization
@@ -405,7 +405,7 @@
       ///
       ///    - WITH_UTILIZATION: Utilization data is included in the
       ///    response.
-      public var views: Clients.SubnetworksClient.GetRequest.Views? = nil
+      public var views: SubnetworksClient.GetRequest.Views? = nil
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -425,7 +425,7 @@
 
       /// The enumerated type for the [views][google.cloud.compute.v1.subnetworks.getRequest.views] field.
       ///
-      /// [google.cloud.compute.v1.subnetworks.getRequest.views]: <doc:Clients/SubnetworksClient/GetRequest/Views>
+      /// [google.cloud.compute.v1.subnetworks.getRequest.views]: <doc:SubnetworksClient/GetRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
         case withUtilization
@@ -746,7 +746,7 @@
       ///
       ///    - WITH_UTILIZATION: Utilization data is included in the
       ///    response.
-      public var views: Clients.SubnetworksClient.ListRequest.Views? = nil
+      public var views: SubnetworksClient.ListRequest.Views? = nil
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -766,7 +766,7 @@
 
       /// The enumerated type for the [views][google.cloud.compute.v1.subnetworks.listRequest.views] field.
       ///
-      /// [google.cloud.compute.v1.subnetworks.listRequest.views]: <doc:Clients/SubnetworksClient/ListRequest/Views>
+      /// [google.cloud.compute.v1.subnetworks.listRequest.views]: <doc:SubnetworksClient/ListRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
         case withUtilization

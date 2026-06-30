@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, ) async throws {
-  let client = try GoogleCloudTpuV2.Clients.TpuClient()
+  let client = try GoogleCloudTpuV2.TpuClient()
   let items = try client.listNodes(
     byItem: ListNodesRequest()
       .with {

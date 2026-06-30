@@ -60,7 +60,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.GlobalOperationsClient.AggregatedListRequest,
+        request: GlobalOperationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
         try await self._intercept(
@@ -68,70 +68,67 @@
           options: options,
           name: "aggregatedList",
           action: {
-            (
-              r: Clients.GlobalOperationsClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
+            (r: GlobalOperationsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.OperationAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.GlobalOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.GlobalOperationsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GlobalOperationsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.GlobalOperationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.OperationList
+            (r: GlobalOperationsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.OperationList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func wait(
-        request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "wait",
           action: {
-            (r: Clients.GlobalOperationsClient.WaitRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalOperationsClient.WaitRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.wait(request: r, options: o)
           })

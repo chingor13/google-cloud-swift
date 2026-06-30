@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some InstantSnapshots) async throws {
+  func sample(client: InstantSnapshotsClient) async throws {
     let items = try client.list(
-      byItem: Clients.InstantSnapshotsClient.ListRequest()
+      byItem: InstantSnapshotsClient.ListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.InstantSnapshotsClient()
+        let client = try GoogleCloudComputeV1.InstantSnapshotsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

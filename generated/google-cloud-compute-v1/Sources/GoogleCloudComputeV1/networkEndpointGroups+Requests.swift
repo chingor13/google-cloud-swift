@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NetworkEndpointGroupsClient {
+  extension NetworkEndpointGroupsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.networkEndpointGroups.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.networkEndpointGroups.aggregatedList]: <doc:NetworkEndpointGroups/aggregatedList(request:)>

@@ -60,30 +60,30 @@
       }
 
       public func `get`(
-        request: Clients.RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.RegionDiskTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.DiskType
+            (r: RegionDiskTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.DiskType
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionDiskTypeList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionDiskTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.RegionDiskTypeList
+            (r: RegionDiskTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.RegionDiskTypeList
             in
             return try await self.inner.list(request: r, options: o)
           })

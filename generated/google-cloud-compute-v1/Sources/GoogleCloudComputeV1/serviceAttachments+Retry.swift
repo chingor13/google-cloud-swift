@@ -53,7 +53,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+        request: ServiceAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList {
         try await self._intercept(
@@ -61,25 +61,22 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.ServiceAttachmentsClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
+            (r: ServiceAttachmentsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.ServiceAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.ServiceAttachmentsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ServiceAttachmentsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -87,22 +84,22 @@
       }
 
       public func `get`(
-        request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ServiceAttachmentsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ServiceAttachment
+            (r: ServiceAttachmentsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ServiceAttachment
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getIamPolicy(
-        request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
+        request: ServiceAttachmentsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -110,25 +107,22 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: ServiceAttachmentsClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.ServiceAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.ServiceAttachmentsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ServiceAttachmentsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -136,31 +130,29 @@
       }
 
       public func list(
-        request: Clients.ServiceAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ServiceAttachmentsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ServiceAttachmentList
+            (r: ServiceAttachmentsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ServiceAttachmentList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.ServiceAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.ServiceAttachmentsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ServiceAttachmentsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -168,7 +160,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
+        request: ServiceAttachmentsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -176,17 +168,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: ServiceAttachmentsClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+        request: ServiceAttachmentsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -195,7 +185,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+              r: ServiceAttachmentsClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

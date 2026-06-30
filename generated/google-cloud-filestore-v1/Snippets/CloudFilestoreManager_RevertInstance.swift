@@ -24,7 +24,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some CloudFilestoreManager) async throws {
+func sample(client: CloudFilestoreManagerClient) async throws {
   let poller = try await client.revertInstance(
     withPolling: RevertInstanceRequest()
       /* set fields using .with { $0... } */
@@ -38,7 +38,7 @@ func sample(client: some CloudFilestoreManager) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudFilestoreV1.Clients.CloudFilestoreManagerClient()
+      let client = try GoogleCloudFilestoreV1.CloudFilestoreManagerClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

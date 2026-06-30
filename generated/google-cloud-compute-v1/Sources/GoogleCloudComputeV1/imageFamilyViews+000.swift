@@ -28,65 +28,65 @@
   /// Service for the `imageFamilyViews` resource.
   ///
   /// @Snippet(path: "imageFamilyViewsQuickstart")
-  public protocol ImageFamilyViews {
-    /// Returns the latest image that is part of an image family, is not
-    /// deprecated and is rolled out in the specified zone.
-    ///
-    /// @Snippet(path: "imageFamilyViews_get")
-    func `get`(request: Clients.ImageFamilyViewsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ImageFamilyView
+  public class ImageFamilyViewsClient: Clients.ImageFamilyViewsProtocol {
+    let inner: any Clients.ImageFamilyViewsStub
 
-    /// Returns the latest image that is part of an image family, is not
-    /// deprecated and is rolled out in the specified zone.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      family: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ImageFamilyView
+    /// Creates a new `ImageFamilyViewsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ImageFamilyViewsStub = try Clients.ImageFamilyViewsTransport(options)
+      inner = Clients.ImageFamilyViewsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ImageFamilyViewsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Returns the latest image that is part of an image family, is not
     /// deprecated and is rolled out in the specified zone.
     ///
     /// @Snippet(path: "imageFamilyViews_get")
-    func `get`(
-      request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ImageFamilyView
+    public func `get`(
+      request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
+      try await self.inner.`get`(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ImageFamilyViews``.
-    public class ImageFamilyViewsClient: ImageFamilyViews {
-      let inner: any ImageFamilyViewsStub
+    /// A Swift protocol to mock `ImageFamilyViewsClient`.
+    ///
+    /// To mock `ImageFamilyViewsClient` change your functions to receive
+    /// `some ImageFamilyViewsProtocol` or `any ImageFamilyViewsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ImageFamilyViewsProtocol {
+      /// See `ImageFamilyViewsClient.`get``.
+      func `get`(request: ImageFamilyViewsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ImageFamilyView
 
-      /// Creates a new `ImageFamilyViewsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ImageFamilyViewsStub = try ImageFamilyViewsTransport(options)
-        inner = ImageFamilyViewsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ImageFamilyViewsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ImageFamilyViewsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        family: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ImageFamilyView
 
-      /// See `ImageFamilyViews.`get``
-      public func `get`(
-        request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ImageFamilyViewsClient.`get``.
+      func `get`(
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ImageFamilyView
     }
   }
 
   // Default implementations
-  extension ImageFamilyViews {
-    public func `get`(request: Clients.ImageFamilyViewsClient.GetRequest) async throws
+  extension Clients.ImageFamilyViewsProtocol {
+    public func `get`(request: ImageFamilyViewsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ImageFamilyView
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -96,7 +96,7 @@
       zone: Swift.String,
       family: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
-      let request = Clients.ImageFamilyViewsClient.GetRequest().with {
+      let request = ImageFamilyViewsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.family = family

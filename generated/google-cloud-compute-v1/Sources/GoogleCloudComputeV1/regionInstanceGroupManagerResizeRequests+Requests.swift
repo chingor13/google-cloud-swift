@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstanceGroupManagerResizeRequestsClient {
+  extension RegionInstanceGroupManagerResizeRequestsClient {
     /// Synthetic request message for the [cancel()][google.cloud.compute.v1.regionInstanceGroupManagerResizeRequests.cancel] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroupManagerResizeRequests.cancel]: <doc:RegionInstanceGroupManagerResizeRequests/cancel(request:)>

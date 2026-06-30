@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.InstancesClient()
+    let client = try GoogleCloudComputeV1.InstancesClient()
     let response = try await client.addAccessConfig(
-      request: Clients.InstancesClient.AddAccessConfigRequest()
+      request: InstancesClient.AddAccessConfigRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

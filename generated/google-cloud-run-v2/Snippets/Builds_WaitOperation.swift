@@ -21,7 +21,7 @@ import GoogleCloudRunV2
 import GoogleCloudWkt
 import GoogleLongrunning
 
-func sample(client: some Builds) async throws {
+func sample(client: BuildsClient) async throws {
   let response = try await client.waitOperation(
     request: GoogleLongrunning.WaitOperationRequest()
       /* set fields using .with { $0... } */
@@ -34,7 +34,7 @@ func sample(client: some Builds) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.BuildsClient()
+      let client = try GoogleCloudRunV2.BuildsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

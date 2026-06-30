@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.CrossSiteNetworksClient()
+    let client = try GoogleCloudComputeV1.CrossSiteNetworksClient()
     let response = try await client.delete(
-      request: Clients.CrossSiteNetworksClient.DeleteRequest()
+      request: CrossSiteNetworksClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NodeTypesClient {
+  extension NodeTypesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.nodeTypes.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.nodeTypes.aggregatedList]: <doc:NodeTypes/aggregatedList(request:)>

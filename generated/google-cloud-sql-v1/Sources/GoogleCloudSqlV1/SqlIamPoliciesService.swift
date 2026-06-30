@@ -28,27 +28,32 @@
   /// Service for providing IAM Meta APIs for Cloud SQL.
   ///
   /// @Snippet(path: "SqlIamPoliciesServiceQuickstart")
-  public protocol SqlIamPoliciesService {
+  public class SqlIamPoliciesServiceClient: Clients.SqlIamPoliciesServiceProtocol {
+    let inner: any Clients.SqlIamPoliciesServiceStub
+
+    /// Creates a new `SqlIamPoliciesServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlIamPoliciesServiceStub = try Clients.SqlIamPoliciesServiceTransport(
+        options)
+      inner = Clients.SqlIamPoliciesServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlIamPoliciesServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlIamPoliciesService``.
-    public class SqlIamPoliciesServiceClient: SqlIamPoliciesService {
-      let inner: any SqlIamPoliciesServiceStub
-
-      /// Creates a new `SqlIamPoliciesServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlIamPoliciesServiceStub = try SqlIamPoliciesServiceTransport(options)
-        inner = SqlIamPoliciesServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlIamPoliciesServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlIamPoliciesServiceClient`.
+    ///
+    /// To mock `SqlIamPoliciesServiceClient` change your functions to receive
+    /// `some SqlIamPoliciesServiceProtocol` or `any SqlIamPoliciesServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlIamPoliciesServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlIamPoliciesService {
+  extension Clients.SqlIamPoliciesServiceProtocol {
   }
 #endif

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionAutoscalersClient {
+  extension RegionAutoscalersClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionAutoscalers.delete] method.
     ///
     /// [google.cloud.compute.v1.regionAutoscalers.delete]: <doc:RegionAutoscalers/delete(request:)>

@@ -32,7 +32,7 @@ struct GoogleCloudCLI {
     }
     // snippet.end
     // snippet.client
-    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
+    let client = try SecretManagerServiceClient()
     // snippet.end
     // snippet.list
     let secrets = try client.listSecrets(

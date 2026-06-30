@@ -29,27 +29,31 @@
   /// internally and does not follow the same patterns as the other v1 RPCs.
   ///
   /// @Snippet(path: "SqlRegionsServiceQuickstart")
-  public protocol SqlRegionsService {
+  public class SqlRegionsServiceClient: Clients.SqlRegionsServiceProtocol {
+    let inner: any Clients.SqlRegionsServiceStub
+
+    /// Creates a new `SqlRegionsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlRegionsServiceStub = try Clients.SqlRegionsServiceTransport(options)
+      inner = Clients.SqlRegionsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlRegionsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlRegionsService``.
-    public class SqlRegionsServiceClient: SqlRegionsService {
-      let inner: any SqlRegionsServiceStub
-
-      /// Creates a new `SqlRegionsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlRegionsServiceStub = try SqlRegionsServiceTransport(options)
-        inner = SqlRegionsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlRegionsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlRegionsServiceClient`.
+    ///
+    /// To mock `SqlRegionsServiceClient` change your functions to receive
+    /// `some SqlRegionsServiceProtocol` or `any SqlRegionsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlRegionsServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlRegionsService {
+  extension Clients.SqlRegionsServiceProtocol {
   }
 #endif

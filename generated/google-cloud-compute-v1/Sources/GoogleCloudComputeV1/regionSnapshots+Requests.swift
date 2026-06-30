@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionSnapshotsClient {
+  extension RegionSnapshotsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionSnapshots.delete] method.
     ///
     /// [google.cloud.compute.v1.regionSnapshots.delete]: <doc:RegionSnapshots/delete(request:)>

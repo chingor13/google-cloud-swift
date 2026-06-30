@@ -24,7 +24,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some CloudFilestoreManager, parent: String) async throws {
+func sample(client: CloudFilestoreManagerClient, parent: String) async throws {
   let items = try client.listBackups(
     byItem: ListBackupsRequest()
       .with {
@@ -41,7 +41,7 @@ func sample(client: some CloudFilestoreManager, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudFilestoreV1.Clients.CloudFilestoreManagerClient()
+      let client = try GoogleCloudFilestoreV1.CloudFilestoreManagerClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

@@ -28,242 +28,220 @@
   /// Service for the `regionSslPolicies` resource.
   ///
   /// @Snippet(path: "regionSslPoliciesQuickstart")
-  public protocol RegionSslPolicies {
-    /// Deletes the specified SSL policy. The SSL policy resource can be deleted
-    /// only if it is not in use by any TargetHttpsProxy or TargetSslProxy
-    /// resources.
-    ///
-    /// @Snippet(path: "regionSslPolicies_delete")
-    func delete(request: Clients.RegionSslPoliciesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
+  public class RegionSslPoliciesClient: Clients.RegionSslPoliciesProtocol {
+    let inner: any Clients.RegionSslPoliciesStub
 
-    /// Deletes the specified SSL policy. The SSL policy resource can be deleted
-    /// only if it is not in use by any TargetHttpsProxy or TargetSslProxy
-    /// resources.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      sslPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists all of the ordered rules present in a single specified policy.
-    ///
-    /// @Snippet(path: "regionSslPolicies_get")
-    func `get`(request: Clients.RegionSslPoliciesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.SslPolicy
-
-    /// Lists all of the ordered rules present in a single specified policy.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      sslPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.SslPolicy
-
-    /// Creates a new policy in the specified project and region using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "regionSslPolicies_insert")
-    func insert(request: Clients.RegionSslPoliciesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new policy in the specified project and region using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: SslPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists all the SSL policies that have been configured for the specified
-    /// project and region.
-    ///
-    /// @Snippet(path: "regionSslPolicies_list")
-    func list(request: Clients.RegionSslPoliciesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.SslPoliciesList
-
-    /// Lists all the SSL policies that have been configured for the specified
-    /// project and region.
-    func list(
-      byItem: Clients.RegionSslPoliciesClient.ListRequest
-    ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
-
-    /// Lists all the SSL policies that have been configured for the specified
-    /// project and region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
-
-    /// Lists all features that can be specified in the SSL policy when using
-    /// custom profile.
-    ///
-    /// @Snippet(path: "regionSslPolicies_listAvailableFeatures")
-    func listAvailableFeatures(
-      request: Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest
-    ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
-
-    /// Lists all features that can be specified in the SSL policy when using
-    /// custom profile.
-    func listAvailableFeatures(
-      project: Swift.String,
-      region: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
-
-    /// Patches the specified SSL policy with the data included in the request.
-    ///
-    /// @Snippet(path: "regionSslPolicies_patch")
-    func patch(request: Clients.RegionSslPoliciesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified SSL policy with the data included in the request.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      sslPolicy: Swift.String,
-      body: SslPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `RegionSslPoliciesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionSslPoliciesStub = try Clients.RegionSslPoliciesTransport(options)
+      inner = Clients.RegionSslPoliciesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionSslPoliciesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes the specified SSL policy. The SSL policy resource can be deleted
     /// only if it is not in use by any TargetHttpsProxy or TargetSslProxy
     /// resources.
     ///
     /// @Snippet(path: "regionSslPolicies_delete")
-    func delete(
-      request: Clients.RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Lists all of the ordered rules present in a single specified policy.
     ///
     /// @Snippet(path: "regionSslPolicies_get")
-    func `get`(
-      request: Clients.RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslPolicy
+    public func `get`(
+      request: RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SslPolicy {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a new policy in the specified project and region using the data
     /// included in the request.
     ///
     /// @Snippet(path: "regionSslPolicies_insert")
-    func insert(
-      request: Clients.RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists all the SSL policies that have been configured for the specified
     /// project and region.
     ///
     /// @Snippet(path: "regionSslPolicies_list")
-    func list(
-      request: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslPoliciesList
+    public func list(
+      request: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SslPoliciesList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists all the SSL policies that have been configured for the specified
     /// project and region.
-    func list(
-      byItem: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
+    ///
+    /// @Snippet(path: "regionSslPolicies_list")
+    public func list(
+      byItem: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<SslPolicy, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslPoliciesList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists all features that can be specified in the SSL policy when using
     /// custom profile.
     ///
     /// @Snippet(path: "regionSslPolicies_listAvailableFeatures")
-    func listAvailableFeatures(
-      request: Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest,
+    public func listAvailableFeatures(
+      request: RegionSslPoliciesClient.ListAvailableFeaturesRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
+    ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
+      try await self.inner.listAvailableFeatures(request: request, options: options)
+    }
 
     /// Patches the specified SSL policy with the data included in the request.
     ///
     /// @Snippet(path: "regionSslPolicies_patch")
-    func patch(
-      request: Clients.RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionSslPolicies``.
-    public class RegionSslPoliciesClient: RegionSslPolicies {
-      let inner: any RegionSslPoliciesStub
+    /// A Swift protocol to mock `RegionSslPoliciesClient`.
+    ///
+    /// To mock `RegionSslPoliciesClient` change your functions to receive
+    /// `some RegionSslPoliciesProtocol` or `any RegionSslPoliciesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionSslPoliciesProtocol {
+      /// See `RegionSslPoliciesClient.delete`.
+      func delete(request: RegionSslPoliciesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionSslPoliciesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionSslPoliciesStub = try RegionSslPoliciesTransport(options)
-        inner = RegionSslPoliciesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionSslPoliciesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionSslPoliciesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        sslPolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSslPolicies.delete`
-      public func delete(
-        request: Clients.RegionSslPoliciesClient.DeleteRequest,
+      /// See `RegionSslPoliciesClient.`get``.
+      func `get`(request: RegionSslPoliciesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.SslPolicy
+
+      /// See `RegionSslPoliciesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        sslPolicy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.SslPolicy
+
+      /// See `RegionSslPoliciesClient.insert`.
+      func insert(request: RegionSslPoliciesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: SslPolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.list`.
+      func list(request: RegionSslPoliciesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.SslPoliciesList
+
+      /// See `RegionSslPoliciesClient.list`.
+      func list(
+        byItem: RegionSslPoliciesClient.ListRequest
+      ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
+
+      /// See `RegionSslPoliciesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
+
+      /// See `RegionSslPoliciesClient.listAvailableFeatures`.
+      func listAvailableFeatures(request: RegionSslPoliciesClient.ListAvailableFeaturesRequest)
+        async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
+
+      /// See `RegionSslPoliciesClient.listAvailableFeatures`.
+      func listAvailableFeatures(
+        project: Swift.String,
+        region: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
+
+      /// See `RegionSslPoliciesClient.patch`.
+      func patch(request: RegionSslPoliciesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        sslPolicy: Swift.String,
+        body: SslPolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.delete`.
+      func delete(
+        request: RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.`get``.
+      func `get`(
+        request: RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SslPolicy
+
+      /// See `RegionSslPoliciesClient.insert`.
+      func insert(
+        request: RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSslPoliciesClient.list`.
+      func list(
+        request: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SslPoliciesList
+
+      /// See `RegionSslPoliciesClient.list`.
+      func list(
+        byItem: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<SslPolicy, Swift.Error>
+
+      /// See `RegionSslPoliciesClient.listAvailableFeatures`.
+      func listAvailableFeatures(
+        request: RegionSslPoliciesClient.ListAvailableFeaturesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
 
-      /// See `RegionSslPolicies.`get``
-      public func `get`(
-        request: Clients.RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslPolicy {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `RegionSslPolicies.insert`
-      public func insert(
-        request: Clients.RegionSslPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `RegionSslPolicies.list`
-      public func list(
-        request: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslPoliciesList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Lists all the SSL policies that have been configured for the specified
-      /// project and region.
-      public func list(
-        byItem: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<SslPolicy, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslPoliciesList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `RegionSslPolicies.listAvailableFeatures`
-      public func listAvailableFeatures(
-        request: Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
-        try await self.inner.listAvailableFeatures(request: request, options: options)
-      }
-
-      /// See `RegionSslPolicies.patch`
-      public func patch(
-        request: Clients.RegionSslPoliciesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `RegionSslPoliciesClient.patch`.
+      func patch(
+        request: RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension RegionSslPolicies {
-    public func delete(request: Clients.RegionSslPoliciesClient.DeleteRequest) async throws
+  extension Clients.RegionSslPoliciesProtocol {
+    public func delete(request: RegionSslPoliciesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -273,7 +251,7 @@
       region: Swift.String,
       sslPolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionSslPoliciesClient.DeleteRequest().with {
+      let request = RegionSslPoliciesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.sslPolicy = sslPolicy
@@ -281,14 +259,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionSslPoliciesClient.GetRequest) async throws
+    public func `get`(request: RegionSslPoliciesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.SslPolicy
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslPolicy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -298,7 +276,7 @@
       region: Swift.String,
       sslPolicy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.SslPolicy {
-      let request = Clients.RegionSslPoliciesClient.GetRequest().with {
+      let request = RegionSslPoliciesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.sslPolicy = sslPolicy
@@ -306,14 +284,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionSslPoliciesClient.InsertRequest) async throws
+    public func insert(request: RegionSslPoliciesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -323,7 +301,7 @@
       region: Swift.String,
       body: SslPolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionSslPoliciesClient.InsertRequest().with {
+      let request = RegionSslPoliciesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -331,26 +309,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionSslPoliciesClient.ListRequest) async throws
+    public func list(request: RegionSslPoliciesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.SslPoliciesList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslPoliciesList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionSslPoliciesClient.ListRequest
+      byItem: RegionSslPoliciesClient.ListRequest
     ) throws -> any AsyncSequence<SslPolicy, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SslPolicy, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslPoliciesList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -362,21 +340,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<SslPolicy, Swift.Error> {
-      let request = Clients.RegionSslPoliciesClient.ListRequest().with {
+      let request = RegionSslPoliciesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func listAvailableFeatures(
-      request: Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest
-    ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
+    public func listAvailableFeatures(request: RegionSslPoliciesClient.ListAvailableFeaturesRequest)
+      async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
+    {
       try await self.listAvailableFeatures(request: request, options: .init())
     }
 
     public func listAvailableFeatures(
-      request: Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest,
+      request: RegionSslPoliciesClient.ListAvailableFeaturesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -386,21 +364,21 @@
       project: Swift.String,
       region: Swift.String,
     ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
-      let request = Clients.RegionSslPoliciesClient.ListAvailableFeaturesRequest().with {
+      let request = RegionSslPoliciesClient.ListAvailableFeaturesRequest().with {
         $0.project = project
         $0.region = region
       }
       return try await self.listAvailableFeatures(request: request)
     }
 
-    public func patch(request: Clients.RegionSslPoliciesClient.PatchRequest) async throws
+    public func patch(request: RegionSslPoliciesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -411,7 +389,7 @@
       sslPolicy: Swift.String,
       body: SslPolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionSslPoliciesClient.PatchRequest().with {
+      let request = RegionSslPoliciesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.sslPolicy = sslPolicy

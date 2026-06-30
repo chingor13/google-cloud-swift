@@ -28,47 +28,44 @@
   extension Clients {
     protocol StoragePoolsStub {
       func aggregatedList(
-        request: Clients.StoragePoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList
 
       func delete(
-        request: Clients.StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePool
 
       func getIamPolicy(
-        request: Clients.StoragePoolsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolList
 
       func listDisks(
-        request: Clients.StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolListDisks
 
       func setIamPolicy(
-        request: Clients.StoragePoolsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.StoragePoolsClient.TestIamPermissionsRequest,
+        request: StoragePoolsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -81,8 +78,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.StoragePoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -112,7 +108,7 @@
       }
 
       public func delete(
-        request: Clients.StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -140,7 +136,7 @@
       }
 
       public func `get`(
-        request: Clients.StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePool {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -166,8 +162,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.StoragePoolsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -195,7 +190,7 @@
       }
 
       public func insert(
-        request: Clients.StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -221,7 +216,7 @@
       }
 
       public func list(
-        request: Clients.StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -249,7 +244,7 @@
       }
 
       public func listDisks(
-        request: Clients.StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolListDisks {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -283,8 +278,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.StoragePoolsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -312,7 +306,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.StoragePoolsClient.TestIamPermissionsRequest,
+        request: StoragePoolsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
@@ -341,7 +335,7 @@
       }
 
       public func update(
-        request: Clients.StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

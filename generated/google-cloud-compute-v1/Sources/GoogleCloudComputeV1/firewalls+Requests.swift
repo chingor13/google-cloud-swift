@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.FirewallsClient {
+  extension FirewallsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.firewalls.delete] method.
     ///
     /// [google.cloud.compute.v1.firewalls.delete]: <doc:Firewalls/delete(request:)>

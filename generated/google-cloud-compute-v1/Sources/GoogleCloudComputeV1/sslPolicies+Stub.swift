@@ -28,33 +28,32 @@
   extension Clients {
     protocol SslPoliciesStub {
       func aggregatedList(
-        request: Clients.SslPoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesAggregatedList
 
       func delete(
-        request: Clients.SslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.SslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPolicy
 
       func insert(
-        request: Clients.SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.SslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesList
 
       func listAvailableFeatures(
-        request: Clients.SslPoliciesClient.ListAvailableFeaturesRequest,
+        request: SslPoliciesClient.ListAvailableFeaturesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
 
       func patch(
-        request: Clients.SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -67,8 +66,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.SslPoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -98,7 +96,7 @@
       }
 
       public func delete(
-        request: Clients.SslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -121,7 +119,7 @@
       }
 
       public func `get`(
-        request: Clients.SslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPolicy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -142,7 +140,7 @@
       }
 
       public func insert(
-        request: Clients.SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -165,7 +163,7 @@
       }
 
       public func list(
-        request: Clients.SslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -190,7 +188,7 @@
       }
 
       public func listAvailableFeatures(
-        request: Clients.SslPoliciesClient.ListAvailableFeaturesRequest,
+        request: SslPoliciesClient.ListAvailableFeaturesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse {
         let path = try { () throws -> Swift.String in
@@ -216,7 +214,7 @@
       }
 
       public func patch(
-        request: Clients.SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

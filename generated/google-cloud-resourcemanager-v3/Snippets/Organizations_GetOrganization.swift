@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
 
-func sample(client: some Organizations, organizationId: String) async throws {
+func sample(client: OrganizationsClient, organizationId: String) async throws {
   let response = try await client.getOrganization(
     request: GetOrganizationRequest()
       .with {
@@ -37,7 +37,7 @@ func sample(client: some Organizations, organizationId: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.OrganizationsClient()
+      let client = try GoogleCloudResourcemanagerV3.OrganizationsClient()
       try await sample(client: client, organizationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

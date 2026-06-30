@@ -60,15 +60,14 @@
       }
 
       public func delete(
-        request: Clients.TargetGrpcProxiesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.TargetGrpcProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetGrpcProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -76,30 +75,29 @@
       }
 
       public func `get`(
-        request: Clients.TargetGrpcProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetGrpcProxy {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.TargetGrpcProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetGrpcProxy
+            (r: TargetGrpcProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetGrpcProxy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.TargetGrpcProxiesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.TargetGrpcProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetGrpcProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -107,31 +105,30 @@
       }
 
       public func list(
-        request: Clients.TargetGrpcProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetGrpcProxyList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.TargetGrpcProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetGrpcProxyList
+            (r: TargetGrpcProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetGrpcProxyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.TargetGrpcProxiesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.TargetGrpcProxiesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: TargetGrpcProxiesClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })

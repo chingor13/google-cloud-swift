@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some RegionInstanceGroupManagerResizeRequests) async throws {
+  func sample(client: RegionInstanceGroupManagerResizeRequestsClient) async throws {
     let response = try await client.insert(
-      request: Clients.RegionInstanceGroupManagerResizeRequestsClient.InsertRequest()
+      request: RegionInstanceGroupManagerResizeRequestsClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,8 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients
-          .RegionInstanceGroupManagerResizeRequestsClient()
+        let client = try GoogleCloudComputeV1.RegionInstanceGroupManagerResizeRequestsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

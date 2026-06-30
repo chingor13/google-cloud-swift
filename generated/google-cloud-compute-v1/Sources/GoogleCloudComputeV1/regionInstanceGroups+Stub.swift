@@ -28,27 +28,25 @@
   extension Clients {
     protocol RegionInstanceGroupsStub {
       func `get`(
-        request: Clients.RegionInstanceGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup
 
       func list(
-        request: Clients.RegionInstanceGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupList
 
       func listInstances(
-        request: Clients.RegionInstanceGroupsClient.ListInstancesRequest,
+        request: RegionInstanceGroupsClient.ListInstancesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances
 
       func setNamedPorts(
-        request: Clients.RegionInstanceGroupsClient.SetNamedPortsRequest,
+        request: RegionInstanceGroupsClient.SetNamedPortsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionInstanceGroupsClient.TestIamPermissionsRequest,
+        request: RegionInstanceGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -62,8 +60,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionInstanceGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -89,8 +86,7 @@
       }
 
       public func list(
-        request: Clients.RegionInstanceGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -118,7 +114,7 @@
       }
 
       public func listInstances(
-        request: Clients.RegionInstanceGroupsClient.ListInstancesRequest,
+        request: RegionInstanceGroupsClient.ListInstancesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances {
         let path = try { () throws -> Swift.String in
@@ -157,7 +153,7 @@
       }
 
       public func setNamedPorts(
-        request: Clients.RegionInstanceGroupsClient.SetNamedPortsRequest,
+        request: RegionInstanceGroupsClient.SetNamedPortsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -190,7 +186,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionInstanceGroupsClient.TestIamPermissionsRequest,
+        request: RegionInstanceGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

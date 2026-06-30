@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionSslPoliciesClient()
+    let client = try GoogleCloudComputeV1.RegionSslPoliciesClient()
     let response = try await client.delete(
-      request: Clients.RegionSslPoliciesClient.DeleteRequest()
+      request: RegionSslPoliciesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

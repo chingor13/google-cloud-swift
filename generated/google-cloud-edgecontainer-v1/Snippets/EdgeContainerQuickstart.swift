@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, ) async throws {
-  let client = try GoogleCloudEdgecontainerV1.Clients.EdgeContainerClient()
+  let client = try GoogleCloudEdgecontainerV1.EdgeContainerClient()
   let items = try client.listClusters(
     byItem: ListClustersRequest()
       .with {

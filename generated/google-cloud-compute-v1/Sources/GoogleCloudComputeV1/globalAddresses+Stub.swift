@@ -28,32 +28,31 @@
   extension Clients {
     protocol GlobalAddressesStub {
       func delete(
-        request: Clients.GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Address
 
       func insert(
-        request: Clients.GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AddressList
 
       func move(
-        request: Clients.GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: Clients.GlobalAddressesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.GlobalAddressesClient.TestIamPermissionsRequest,
+        request: GlobalAddressesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -67,7 +66,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -89,7 +88,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Address {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -109,7 +108,7 @@
       }
 
       public func insert(
-        request: Clients.GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -132,7 +131,7 @@
       }
 
       public func list(
-        request: Clients.GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AddressList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -157,7 +156,7 @@
       }
 
       public func move(
-        request: Clients.GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -183,8 +182,7 @@
       }
 
       public func setLabels(
-        request: Clients.GlobalAddressesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -208,7 +206,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.GlobalAddressesClient.TestIamPermissionsRequest,
+        request: GlobalAddressesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

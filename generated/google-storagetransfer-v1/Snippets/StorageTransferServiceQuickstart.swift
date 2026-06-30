@@ -23,7 +23,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, agentPoolId: String, ) async throws {
-  let client = try GoogleStoragetransferV1.Clients.StorageTransferServiceClient()
+  let client = try GoogleStoragetransferV1.StorageTransferServiceClient()
   let response = try await client.updateAgentPool(
     request: UpdateAgentPoolRequest()
       .with {

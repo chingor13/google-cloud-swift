@@ -21,7 +21,7 @@
   import GoogleCloudSqlV1
   import GoogleCloudWkt
 
-  func sample(client: some SqlSslCertsService) async throws {
+  func sample(client: SqlSslCertsServiceClient) async throws {
     let response = try await client.`get`(
       request: SqlSslCertsGetRequest()
         /* set fields using .with { $0... } */
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudSqlV1.Clients.SqlSslCertsServiceClient()
+        let client = try GoogleCloudSqlV1.SqlSslCertsServiceClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

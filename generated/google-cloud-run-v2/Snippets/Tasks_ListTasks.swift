@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 
 func sample(
-  client: some Tasks, projectId: String, locationId: String, jobId: String, executionId: String
+  client: TasksClient, projectId: String, locationId: String, jobId: String, executionId: String
 ) async throws {
   let items = try client.listTasks(
     byItem: ListTasksRequest()
@@ -41,7 +41,7 @@ func sample(
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.TasksClient()
+      let client = try GoogleCloudRunV2.TasksClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         jobId: "[placeholder]", executionId: "[placeholder]")

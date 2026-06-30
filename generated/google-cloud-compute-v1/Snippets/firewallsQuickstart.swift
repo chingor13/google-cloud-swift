@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.FirewallsClient()
+    let client = try GoogleCloudComputeV1.FirewallsClient()
     let response = try await client.delete(
-      request: Clients.FirewallsClient.DeleteRequest()
+      request: FirewallsClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

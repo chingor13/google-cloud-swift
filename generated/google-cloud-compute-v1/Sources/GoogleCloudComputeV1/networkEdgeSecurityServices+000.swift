@@ -28,93 +28,19 @@
   /// Service for the `networkEdgeSecurityServices` resource.
   ///
   /// @Snippet(path: "networkEdgeSecurityServicesQuickstart")
-  public protocol NetworkEdgeSecurityServices {
-    /// Retrieves the list of all NetworkEdgeSecurityService resources available to
-    /// the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "networkEdgeSecurityServices_aggregatedList")
-    func aggregatedList(request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
+  public class NetworkEdgeSecurityServicesClient: Clients.NetworkEdgeSecurityServicesProtocol {
+    let inner: any Clients.NetworkEdgeSecurityServicesStub
 
-    /// Retrieves the list of all NetworkEdgeSecurityService resources available to
-    /// the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<
-      (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
-    >
-
-    /// Retrieves the list of all NetworkEdgeSecurityService resources available to
-    /// the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<
-      (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
-    >
-
-    /// Deletes the specified service.
-    ///
-    /// @Snippet(path: "networkEdgeSecurityServices_delete")
-    func delete(request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified service.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      networkEdgeSecurityService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Gets a specified NetworkEdgeSecurityService.
-    ///
-    /// @Snippet(path: "networkEdgeSecurityServices_get")
-    func `get`(request: Clients.NetworkEdgeSecurityServicesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NetworkEdgeSecurityService
-
-    /// Gets a specified NetworkEdgeSecurityService.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      networkEdgeSecurityService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
-
-    /// Creates a new service in the specified project using the data included in
-    /// the request.
-    ///
-    /// @Snippet(path: "networkEdgeSecurityServices_insert")
-    func insert(request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new service in the specified project using the data included in
-    /// the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NetworkEdgeSecurityService?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified policy with the data included in the request.
-    ///
-    /// @Snippet(path: "networkEdgeSecurityServices_patch")
-    func patch(request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified policy with the data included in the request.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      networkEdgeSecurityService: Swift.String,
-      body: NetworkEdgeSecurityService?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `NetworkEdgeSecurityServicesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.NetworkEdgeSecurityServicesStub =
+        try Clients.NetworkEdgeSecurityServicesTransport(options)
+      inner = Clients.NetworkEdgeSecurityServicesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.NetworkEdgeSecurityServicesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all NetworkEdgeSecurityService resources available to
     /// the specified project.
@@ -123,153 +49,204 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "networkEdgeSecurityServices_aggregatedList")
-    func aggregatedList(
-      request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
+    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all NetworkEdgeSecurityService resources available to
     /// the specified project.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+    ///
+    /// @Snippet(path: "networkEdgeSecurityServices_aggregatedList")
+    public func aggregatedList(
+      byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
-    >
+    > {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified service.
     ///
     /// @Snippet(path: "networkEdgeSecurityServices_delete")
-    func delete(
-      request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest,
+    public func delete(
+      request: NetworkEdgeSecurityServicesClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Gets a specified NetworkEdgeSecurityService.
     ///
     /// @Snippet(path: "networkEdgeSecurityServices_get")
-    func `get`(
-      request: Clients.NetworkEdgeSecurityServicesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
+    public func `get`(
+      request: NetworkEdgeSecurityServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a new service in the specified project using the data included in
     /// the request.
     ///
     /// @Snippet(path: "networkEdgeSecurityServices_insert")
-    func insert(
-      request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest,
+    public func insert(
+      request: NetworkEdgeSecurityServicesClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Patches the specified policy with the data included in the request.
     ///
     /// @Snippet(path: "networkEdgeSecurityServices_patch")
-    func patch(
-      request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest,
+    public func patch(
+      request: NetworkEdgeSecurityServicesClient.PatchRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``NetworkEdgeSecurityServices``.
-    public class NetworkEdgeSecurityServicesClient: NetworkEdgeSecurityServices {
-      let inner: any NetworkEdgeSecurityServicesStub
+    /// A Swift protocol to mock `NetworkEdgeSecurityServicesClient`.
+    ///
+    /// To mock `NetworkEdgeSecurityServicesClient` change your functions to receive
+    /// `some NetworkEdgeSecurityServicesProtocol` or `any NetworkEdgeSecurityServicesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol NetworkEdgeSecurityServicesProtocol {
+      /// See `NetworkEdgeSecurityServicesClient.aggregatedList`.
+      func aggregatedList(request: NetworkEdgeSecurityServicesClient.AggregatedListRequest)
+        async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
 
-      /// Creates a new `NetworkEdgeSecurityServicesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any NetworkEdgeSecurityServicesStub = try NetworkEdgeSecurityServicesTransport(
-          options)
-        inner = NetworkEdgeSecurityServicesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = NetworkEdgeSecurityServicesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `NetworkEdgeSecurityServicesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<
+        (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
+      >
 
-      /// See `NetworkEdgeSecurityServices.aggregatedList`
-      public func aggregatedList(
-        request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+      /// See `NetworkEdgeSecurityServicesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<
+        (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
+      >
+
+      /// See `NetworkEdgeSecurityServicesClient.delete`.
+      func delete(request: NetworkEdgeSecurityServicesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        networkEdgeSecurityService: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.`get``.
+      func `get`(request: NetworkEdgeSecurityServicesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NetworkEdgeSecurityService
+
+      /// See `NetworkEdgeSecurityServicesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        networkEdgeSecurityService: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
+
+      /// See `NetworkEdgeSecurityServicesClient.insert`.
+      func insert(request: NetworkEdgeSecurityServicesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: NetworkEdgeSecurityService?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.patch`.
+      func patch(request: NetworkEdgeSecurityServicesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        networkEdgeSecurityService: Swift.String,
+        body: NetworkEdgeSecurityService?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NetworkEdgeSecurityServicesClient.aggregatedList`.
+      func aggregatedList(
+        request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
 
-      /// Retrieves the list of all NetworkEdgeSecurityService resources available to
-      /// the specified project.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+      /// See `NetworkEdgeSecurityServicesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) throws -> any AsyncSequence<
         (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
-      > {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      >
 
-      /// See `NetworkEdgeSecurityServices.delete`
-      public func delete(
-        request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest,
+      /// See `NetworkEdgeSecurityServicesClient.delete`.
+      func delete(
+        request: NetworkEdgeSecurityServicesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkEdgeSecurityServices.`get``
-      public func `get`(
-        request: Clients.NetworkEdgeSecurityServicesClient.GetRequest,
+      /// See `NetworkEdgeSecurityServicesClient.`get``.
+      func `get`(
+        request: NetworkEdgeSecurityServicesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
 
-      /// See `NetworkEdgeSecurityServices.insert`
-      public func insert(
-        request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest,
+      /// See `NetworkEdgeSecurityServicesClient.insert`.
+      func insert(
+        request: NetworkEdgeSecurityServicesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkEdgeSecurityServices.patch`
-      public func patch(
-        request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest,
+      /// See `NetworkEdgeSecurityServicesClient.patch`.
+      func patch(
+        request: NetworkEdgeSecurityServicesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension NetworkEdgeSecurityServices {
-    public func aggregatedList(
-      request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest
-    ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
+  extension Clients.NetworkEdgeSecurityServicesProtocol {
+    public func aggregatedList(request: NetworkEdgeSecurityServicesClient.AggregatedListRequest)
+      async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
+    {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+      request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest
+      byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
     > {
@@ -277,7 +254,7 @@
     }
 
     public func aggregatedList(
-      byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+      byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
@@ -295,20 +272,20 @@
     ) throws -> any AsyncSequence<
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
     > {
-      let request = Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest().with {
+      let request = NetworkEdgeSecurityServicesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: NetworkEdgeSecurityServicesClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest,
+      request: NetworkEdgeSecurityServicesClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -319,7 +296,7 @@
       region: Swift.String,
       networkEdgeSecurityService: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NetworkEdgeSecurityServicesClient.DeleteRequest().with {
+      let request = NetworkEdgeSecurityServicesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEdgeSecurityService = networkEdgeSecurityService
@@ -327,15 +304,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.NetworkEdgeSecurityServicesClient.GetRequest) async throws
+    public func `get`(request: NetworkEdgeSecurityServicesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NetworkEdgeSecurityService
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.NetworkEdgeSecurityServicesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NetworkEdgeSecurityServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -345,7 +321,7 @@
       region: Swift.String,
       networkEdgeSecurityService: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
-      let request = Clients.NetworkEdgeSecurityServicesClient.GetRequest().with {
+      let request = NetworkEdgeSecurityServicesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEdgeSecurityService = networkEdgeSecurityService
@@ -353,14 +329,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: NetworkEdgeSecurityServicesClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest,
+      request: NetworkEdgeSecurityServicesClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -371,7 +347,7 @@
       region: Swift.String,
       body: NetworkEdgeSecurityService?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NetworkEdgeSecurityServicesClient.InsertRequest().with {
+      let request = NetworkEdgeSecurityServicesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -379,14 +355,14 @@
       return try await self.insert(request: request)
     }
 
-    public func patch(request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest) async throws
+    public func patch(request: NetworkEdgeSecurityServicesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest,
+      request: NetworkEdgeSecurityServicesClient.PatchRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -398,7 +374,7 @@
       networkEdgeSecurityService: Swift.String,
       body: NetworkEdgeSecurityService?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NetworkEdgeSecurityServicesClient.PatchRequest().with {
+      let request = NetworkEdgeSecurityServicesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.networkEdgeSecurityService = networkEdgeSecurityService

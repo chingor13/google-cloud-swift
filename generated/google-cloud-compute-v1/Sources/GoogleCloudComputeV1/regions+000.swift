@@ -28,7 +28,19 @@
   /// Service for the `regions` resource.
   ///
   /// @Snippet(path: "regionsQuickstart")
-  public protocol Regions {
+  public class RegionsClient: Clients.RegionsProtocol {
+    let inner: any Clients.RegionsStub
+
+    /// Creates a new `RegionsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionsStub = try Clients.RegionsTransport(options)
+      inner = Clients.RegionsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Returns the specified Region resource.
     ///
     /// To decrease latency for this method, you can optionally omit any unneeded
@@ -49,31 +61,11 @@
     /// behaviour for this method.
     ///
     /// @Snippet(path: "regions_get")
-    func `get`(request: Clients.RegionsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Region
-
-    /// Returns the specified Region resource.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information (the `quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// This method fails if the quota information is unavailable for the region
-    /// and if the organization policy constraint
-    /// compute.requireBasicQuotaInResponse is enforced. This
-    /// constraint, when enforced, disables the fail-open behaviour when quota
-    /// information (the `items.quotas` field) is unavailable for the region.
-    /// It is recommended to use the default setting
-    /// for the constraint unless your application requires the fail-closed
-    /// behaviour for this method.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Region
+    public func `get`(
+      request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Region {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves the list of region resources available to the specified project.
     ///
@@ -96,78 +88,11 @@
     /// behaviour for this method.
     ///
     /// @Snippet(path: "regions_list")
-    func list(request: Clients.RegionsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.RegionList
-
-    /// Retrieves the list of region resources available to the specified project.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information
-    /// (the `items.quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// This method fails if the quota information is unavailable for the region
-    /// and if the organization policy constraint
-    /// compute.requireBasicQuotaInResponse is enforced. This
-    /// constraint, when enforced, disables the fail-open behaviour when quota
-    /// information (the `items.quotas` field) is unavailable for the region.
-    /// It is recommended to use the default setting
-    /// for the constraint unless your application requires the fail-closed
-    /// behaviour for this method.
-    func list(
-      byItem: Clients.RegionsClient.ListRequest
-    ) throws -> any AsyncSequence<Region, Swift.Error>
-
-    /// Retrieves the list of region resources available to the specified project.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information
-    /// (the `items.quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// This method fails if the quota information is unavailable for the region
-    /// and if the organization policy constraint
-    /// compute.requireBasicQuotaInResponse is enforced. This
-    /// constraint, when enforced, disables the fail-open behaviour when quota
-    /// information (the `items.quotas` field) is unavailable for the region.
-    /// It is recommended to use the default setting
-    /// for the constraint unless your application requires the fail-closed
-    /// behaviour for this method.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<Region, Swift.Error>
-
-    /// Returns the specified Region resource.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information (the `quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// This method fails if the quota information is unavailable for the region
-    /// and if the organization policy constraint
-    /// compute.requireBasicQuotaInResponse is enforced. This
-    /// constraint, when enforced, disables the fail-open behaviour when quota
-    /// information (the `items.quotas` field) is unavailable for the region.
-    /// It is recommended to use the default setting
-    /// for the constraint unless your application requires the fail-closed
-    /// behaviour for this method.
-    ///
-    /// @Snippet(path: "regions_get")
-    func `get`(
-      request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Region
+    public func list(
+      request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RegionList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of region resources available to the specified project.
     ///
@@ -190,105 +115,73 @@
     /// behaviour for this method.
     ///
     /// @Snippet(path: "regions_list")
-    func list(
-      request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RegionList
-
-    /// Retrieves the list of region resources available to the specified project.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information
-    /// (the `items.quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// This method fails if the quota information is unavailable for the region
-    /// and if the organization policy constraint
-    /// compute.requireBasicQuotaInResponse is enforced. This
-    /// constraint, when enforced, disables the fail-open behaviour when quota
-    /// information (the `items.quotas` field) is unavailable for the region.
-    /// It is recommended to use the default setting
-    /// for the constraint unless your application requires the fail-closed
-    /// behaviour for this method.
-    func list(
-      byItem: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Region, Swift.Error>
+    public func list(
+      byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Region, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RegionList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Regions``.
-    public class RegionsClient: Regions {
-      let inner: any RegionsStub
+    /// A Swift protocol to mock `RegionsClient`.
+    ///
+    /// To mock `RegionsClient` change your functions to receive
+    /// `some RegionsProtocol` or `any RegionsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionsProtocol {
+      /// See `RegionsClient.`get``.
+      func `get`(request: RegionsClient.GetRequest) async throws -> GoogleCloudComputeV1.Region
 
-      /// Creates a new `RegionsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionsStub = try RegionsTransport(options)
-        inner = RegionsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Region
 
-      /// See `Regions.`get``
-      public func `get`(
-        request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Region {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionsClient.list`.
+      func list(request: RegionsClient.ListRequest) async throws -> GoogleCloudComputeV1.RegionList
 
-      /// See `Regions.list`
-      public func list(
-        request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RegionList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RegionsClient.list`.
+      func list(
+        byItem: RegionsClient.ListRequest
+      ) throws -> any AsyncSequence<Region, Swift.Error>
 
-      /// Retrieves the list of region resources available to the specified project.
-      ///
-      /// To decrease latency for this method, you can optionally omit any unneeded
-      /// information from the response by using a field mask. This practice is
-      /// especially recommended for unused quota information
-      /// (the `items.quotas` field).
-      /// To exclude one or more fields, set your request's `fields` query parameter
-      /// to only include the fields you need. For example, to only include the `id`
-      /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-      /// your request.
-      ///
-      /// This method fails if the quota information is unavailable for the region
-      /// and if the organization policy constraint
-      /// compute.requireBasicQuotaInResponse is enforced. This
-      /// constraint, when enforced, disables the fail-open behaviour when quota
-      /// information (the `items.quotas` field) is unavailable for the region.
-      /// It is recommended to use the default setting
-      /// for the constraint unless your application requires the fail-closed
-      /// behaviour for this method.
-      public func list(
-        byItem: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Region, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RegionList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RegionsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<Region, Swift.Error>
+
+      /// See `RegionsClient.`get``.
+      func `get`(
+        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Region
+
+      /// See `RegionsClient.list`.
+      func list(
+        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RegionList
+
+      /// See `RegionsClient.list`.
+      func list(
+        byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Region, Swift.Error>
     }
   }
 
   // Default implementations
-  extension Regions {
-    public func `get`(request: Clients.RegionsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Region
+  extension Clients.RegionsProtocol {
+    public func `get`(request: RegionsClient.GetRequest) async throws -> GoogleCloudComputeV1.Region
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Region {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -297,33 +190,33 @@
       project: Swift.String,
       region: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Region {
-      let request = Clients.RegionsClient.GetRequest().with {
+      let request = RegionsClient.GetRequest().with {
         $0.project = project
         $0.region = region
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.RegionsClient.ListRequest) async throws
+    public func list(request: RegionsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.RegionList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionsClient.ListRequest
+      byItem: RegionsClient.ListRequest
     ) throws -> any AsyncSequence<Region, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Region, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RegionList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -334,7 +227,7 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<Region, Swift.Error> {
-      let request = Clients.RegionsClient.ListRequest().with {
+      let request = RegionsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)

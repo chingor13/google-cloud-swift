@@ -28,136 +28,18 @@
   /// Service for the `addresses` resource.
   ///
   /// @Snippet(path: "addressesQuickstart")
-  public protocol Addresses {
-    /// Retrieves an aggregated list of addresses.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "addresses_aggregatedList")
-    func aggregatedList(request: Clients.AddressesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.AddressAggregatedList
+  public class AddressesClient: Clients.AddressesProtocol {
+    let inner: any Clients.AddressesStub
 
-    /// Retrieves an aggregated list of addresses.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AddressesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of addresses.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
-
-    /// Deletes the specified address resource.
-    ///
-    /// @Snippet(path: "addresses_delete")
-    func delete(request: Clients.AddressesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified address resource.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      address: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified address resource.
-    ///
-    /// @Snippet(path: "addresses_get")
-    func `get`(request: Clients.AddressesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Address
-
-    /// Returns the specified address resource.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      address: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Address
-
-    /// Creates an address resource in the specified project by using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "addresses_insert")
-    func insert(request: Clients.AddressesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates an address resource in the specified project by using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Address?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of addresses contained within
-    /// the specified region.
-    ///
-    /// @Snippet(path: "addresses_list")
-    func list(request: Clients.AddressesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.AddressList
-
-    /// Retrieves a list of addresses contained within
-    /// the specified region.
-    func list(
-      byItem: Clients.AddressesClient.ListRequest
-    ) throws -> any AsyncSequence<Address, Swift.Error>
-
-    /// Retrieves a list of addresses contained within
-    /// the specified region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<Address, Swift.Error>
-
-    /// Moves the specified address resource.
-    ///
-    /// @Snippet(path: "addresses_move")
-    func move(request: Clients.AddressesClient.MoveRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Moves the specified address resource.
-    func move(
-      project: Swift.String,
-      region: Swift.String,
-      address: Swift.String,
-      body: RegionAddressesMoveRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on an Address. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "addresses_setLabels")
-    func setLabels(request: Clients.AddressesClient.SetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on an Address. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "addresses_testIamPermissions")
-    func testIamPermissions(request: Clients.AddressesClient.TestIamPermissionsRequest) async throws
-      -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `AddressesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.AddressesStub = try Clients.AddressesTransport(options)
+      inner = Clients.AddressesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.AddressesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of addresses.
     ///
@@ -165,205 +47,288 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "addresses_aggregatedList")
-    func aggregatedList(
-      request: Clients.AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AddressAggregatedList
+    public func aggregatedList(
+      request: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AddressAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of addresses.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "addresses_aggregatedList")
+    public func aggregatedList(
+      byItem: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified address resource.
     ///
     /// @Snippet(path: "addresses_delete")
-    func delete(
-      request: Clients.AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified address resource.
     ///
     /// @Snippet(path: "addresses_get")
-    func `get`(
-      request: Clients.AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Address
+    public func `get`(
+      request: AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Address {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates an address resource in the specified project by using the data
     /// included in the request.
     ///
     /// @Snippet(path: "addresses_insert")
-    func insert(
-      request: Clients.AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of addresses contained within
     /// the specified region.
     ///
     /// @Snippet(path: "addresses_list")
-    func list(
-      request: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AddressList
+    public func list(
+      request: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AddressList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of addresses contained within
     /// the specified region.
-    func list(
-      byItem: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Address, Swift.Error>
+    ///
+    /// @Snippet(path: "addresses_list")
+    public func list(
+      byItem: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Address, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Moves the specified address resource.
     ///
     /// @Snippet(path: "addresses_move")
-    func move(
-      request: Clients.AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func move(
+      request: AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.move(request: request, options: options)
+    }
 
     /// Sets the labels on an Address. To learn more about labels, read theLabeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "addresses_setLabels")
-    func setLabels(
-      request: Clients.AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(
+      request: AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setLabels(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "addresses_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.AddressesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: AddressesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Addresses``.
-    public class AddressesClient: Addresses {
-      let inner: any AddressesStub
+    /// A Swift protocol to mock `AddressesClient`.
+    ///
+    /// To mock `AddressesClient` change your functions to receive
+    /// `some AddressesProtocol` or `any AddressesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol AddressesProtocol {
+      /// See `AddressesClient.aggregatedList`.
+      func aggregatedList(request: AddressesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.AddressAggregatedList
 
-      /// Creates a new `AddressesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any AddressesStub = try AddressesTransport(options)
-        inner = AddressesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = AddressesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `AddressesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AddressesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
 
-      /// See `Addresses.aggregatedList`
-      public func aggregatedList(
-        request: Clients.AddressesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AddressAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `AddressesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
 
-      /// Retrieves an aggregated list of addresses.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.AddressesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.AddressAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AddressesClient.delete`.
+      func delete(request: AddressesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Addresses.delete`
-      public func delete(
-        request: Clients.AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `AddressesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        address: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Addresses.`get``
-      public func `get`(
-        request: Clients.AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Address {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `AddressesClient.`get``.
+      func `get`(request: AddressesClient.GetRequest) async throws -> GoogleCloudComputeV1.Address
 
-      /// See `Addresses.insert`
-      public func insert(
-        request: Clients.AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `AddressesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        address: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Address
 
-      /// See `Addresses.list`
-      public func list(
-        request: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AddressList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `AddressesClient.insert`.
+      func insert(request: AddressesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves a list of addresses contained within
-      /// the specified region.
-      public func list(
-        byItem: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Address, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AddressesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: Address?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Addresses.move`
-      public func move(
-        request: Clients.AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.move(request: request, options: options)
-      }
+      /// See `AddressesClient.list`.
+      func list(request: AddressesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.AddressList
 
-      /// See `Addresses.setLabels`
-      public func setLabels(
-        request: Clients.AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setLabels(request: request, options: options)
-      }
+      /// See `AddressesClient.list`.
+      func list(
+        byItem: AddressesClient.ListRequest
+      ) throws -> any AsyncSequence<Address, Swift.Error>
 
-      /// See `Addresses.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.AddressesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `AddressesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<Address, Swift.Error>
+
+      /// See `AddressesClient.move`.
+      func move(request: AddressesClient.MoveRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.move`.
+      func move(
+        project: Swift.String,
+        region: Swift.String,
+        address: Swift.String,
+        body: RegionAddressesMoveRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.setLabels`.
+      func setLabels(request: AddressesClient.SetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.setLabels`.
+      func setLabels(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.testIamPermissions`.
+      func testIamPermissions(request: AddressesClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `AddressesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `AddressesClient.aggregatedList`.
+      func aggregatedList(
+        request: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AddressAggregatedList
+
+      /// See `AddressesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error>
+
+      /// See `AddressesClient.delete`.
+      func delete(
+        request: AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.`get``.
+      func `get`(
+        request: AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Address
+
+      /// See `AddressesClient.insert`.
+      func insert(
+        request: AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.list`.
+      func list(
+        request: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AddressList
+
+      /// See `AddressesClient.list`.
+      func list(
+        byItem: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Address, Swift.Error>
+
+      /// See `AddressesClient.move`.
+      func move(
+        request: AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.setLabels`.
+      func setLabels(
+        request: AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `AddressesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: AddressesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension Addresses {
-    public func aggregatedList(request: Clients.AddressesClient.AggregatedListRequest) async throws
+  extension Clients.AddressesProtocol {
+    public func aggregatedList(request: AddressesClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.AddressAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AddressAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.AddressesClient.AggregatedListRequest
+      byItem: AddressesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -374,20 +339,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, AddressesScopedList), Swift.Error> {
-      let request = Clients.AddressesClient.AggregatedListRequest().with {
+      let request = AddressesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.AddressesClient.DeleteRequest) async throws
+    public func delete(request: AddressesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -397,7 +362,7 @@
       region: Swift.String,
       address: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AddressesClient.DeleteRequest().with {
+      let request = AddressesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.address = address
@@ -405,14 +370,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.AddressesClient.GetRequest) async throws
+    public func `get`(request: AddressesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Address
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Address {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -422,7 +387,7 @@
       region: Swift.String,
       address: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Address {
-      let request = Clients.AddressesClient.GetRequest().with {
+      let request = AddressesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.address = address
@@ -430,14 +395,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.AddressesClient.InsertRequest) async throws
+    public func insert(request: AddressesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -447,7 +412,7 @@
       region: Swift.String,
       body: Address?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AddressesClient.InsertRequest().with {
+      let request = AddressesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -455,26 +420,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.AddressesClient.ListRequest) async throws
+    public func list(request: AddressesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.AddressList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AddressList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.AddressesClient.ListRequest
+      byItem: AddressesClient.ListRequest
     ) throws -> any AsyncSequence<Address, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Address, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -486,21 +451,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<Address, Swift.Error> {
-      let request = Clients.AddressesClient.ListRequest().with {
+      let request = AddressesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func move(request: Clients.AddressesClient.MoveRequest) async throws
+    public func move(request: AddressesClient.MoveRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.move(request: request, options: .init())
     }
 
     public func move(
-      request: Clients.AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -511,7 +476,7 @@
       address: Swift.String,
       body: RegionAddressesMoveRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AddressesClient.MoveRequest().with {
+      let request = AddressesClient.MoveRequest().with {
         $0.project = project
         $0.region = region
         $0.address = address
@@ -520,14 +485,14 @@
       return try await self.move(request: request)
     }
 
-    public func setLabels(request: Clients.AddressesClient.SetLabelsRequest) async throws
+    public func setLabels(request: AddressesClient.SetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.setLabels(request: request, options: .init())
     }
 
     public func setLabels(
-      request: Clients.AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -538,7 +503,7 @@
       resource: Swift.String,
       body: RegionSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.AddressesClient.SetLabelsRequest().with {
+      let request = AddressesClient.SetLabelsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -547,15 +512,14 @@
       return try await self.setLabels(request: request)
     }
 
-    public func testIamPermissions(request: Clients.AddressesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: AddressesClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.AddressesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: AddressesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -566,7 +530,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.AddressesClient.TestIamPermissionsRequest().with {
+      let request = AddressesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

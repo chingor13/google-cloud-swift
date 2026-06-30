@@ -25,7 +25,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(
-  client: some CloudFilestoreManager, projectId: String, locationId: String, backupId: String
+  client: CloudFilestoreManagerClient, projectId: String, locationId: String, backupId: String
 ) async throws {
   let poller = try await client.updateBackup(
     withPolling: UpdateBackupRequest()
@@ -45,7 +45,7 @@ func sample(
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudFilestoreV1.Clients.CloudFilestoreManagerClient()
+      let client = try GoogleCloudFilestoreV1.CloudFilestoreManagerClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         backupId: "[placeholder]")

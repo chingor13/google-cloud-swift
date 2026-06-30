@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InterconnectsClient {
+  extension InterconnectsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.interconnects.delete] method.
     ///
     /// [google.cloud.compute.v1.interconnects.delete]: <doc:Interconnects/delete(request:)>

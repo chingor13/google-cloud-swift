@@ -28,16 +28,15 @@
   extension Clients {
     protocol MachineTypesStub {
       func aggregatedList(
-        request: Clients.MachineTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList
 
       func `get`(
-        request: Clients.MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType
 
       func list(
-        request: Clients.MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList
     }
 
@@ -50,8 +49,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.MachineTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -81,7 +79,7 @@
       }
 
       public func `get`(
-        request: Clients.MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -107,7 +105,7 @@
       }
 
       public func list(
-        request: Clients.MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

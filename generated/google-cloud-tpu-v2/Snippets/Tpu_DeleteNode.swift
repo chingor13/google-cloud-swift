@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Tpu, projectId: String, locationId: String, nodeId: String) async throws {
+func sample(client: TpuClient, projectId: String, locationId: String, nodeId: String) async throws {
   let poller = try await client.deleteNode(
     withPolling: DeleteNodeRequest()
       .with {
@@ -39,7 +39,7 @@ func sample(client: some Tpu, projectId: String, locationId: String, nodeId: Str
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudTpuV2.Clients.TpuClient()
+      let client = try GoogleCloudTpuV2.TpuClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         nodeId: "[placeholder]")

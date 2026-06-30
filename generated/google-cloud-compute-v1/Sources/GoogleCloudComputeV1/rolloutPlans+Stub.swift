@@ -28,19 +28,19 @@
   extension Clients {
     protocol RolloutPlansStub {
       func delete(
-        request: Clients.RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlan
 
       func insert(
-        request: Clients.RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse
     }
 
@@ -53,7 +53,7 @@
       }
 
       public func delete(
-        request: Clients.RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -77,7 +77,7 @@
       }
 
       public func `get`(
-        request: Clients.RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlan {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -99,7 +99,7 @@
       }
 
       public func insert(
-        request: Clients.RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -122,7 +122,7 @@
       }
 
       public func list(
-        request: Clients.RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

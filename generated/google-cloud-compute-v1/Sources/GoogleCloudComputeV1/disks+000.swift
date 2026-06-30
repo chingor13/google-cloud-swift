@@ -28,24 +28,29 @@
   /// Service for the `disks` resource.
   ///
   /// @Snippet(path: "disksQuickstart")
-  public protocol Disks {
+  public class DisksClient: Clients.DisksProtocol {
+    let inner: any Clients.DisksStub
+
+    /// Creates a new `DisksClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.DisksStub = try Clients.DisksTransport(options)
+      inner = Clients.DisksRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.DisksLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Adds existing resource policies to a disk. You can only add one
     /// policy which will be applied to this disk for scheduling snapshot
     /// creation.
     ///
     /// @Snippet(path: "disks_addResourcePolicies")
-    func addResourcePolicies(request: Clients.DisksClient.AddResourcePoliciesRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Adds existing resource policies to a disk. You can only add one
-    /// policy which will be applied to this disk for scheduling snapshot
-    /// creation.
-    func addResourcePolicies(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: DisksAddResourcePoliciesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func addResourcePolicies(
+      request: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.addResourcePolicies(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of persistent disks.
     ///
@@ -53,52 +58,47 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "disks_aggregatedList")
-    func aggregatedList(request: Clients.DisksClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.DiskAggregatedList
+    public func aggregatedList(
+      request: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.DiskAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of persistent disks.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.DisksClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of persistent disks.
     ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
+    /// @Snippet(path: "disks_aggregatedList")
+    public func aggregatedList(
+      byItem: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Bulk create a set of disks.
     ///
     /// @Snippet(path: "disks_bulkInsert")
-    func bulkInsert(request: Clients.DisksClient.BulkInsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Bulk create a set of disks.
-    func bulkInsert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: BulkInsertDiskResource?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func bulkInsert(
+      request: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.bulkInsert(request: request, options: options)
+    }
 
     /// Sets the labels on many disks at once. To learn more about labels, read theLabeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "disks_bulkSetLabels")
-    func bulkSetLabels(request: Clients.DisksClient.BulkSetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on many disks at once. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    func bulkSetLabels(
-      project: Swift.String,
-      zone: Swift.String,
-      body: BulkZoneSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func bulkSetLabels(
+      request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.bulkSetLabels(request: request, options: options)
+    }
 
     /// Creates a snapshot of a specified persistent disk. For regular snapshot
     /// creation, consider using snapshots.insert
@@ -106,19 +106,11 @@
     /// in a project different from the source disk project.
     ///
     /// @Snippet(path: "disks_createSnapshot")
-    func createSnapshot(request: Clients.DisksClient.CreateSnapshotRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a snapshot of a specified persistent disk. For regular snapshot
-    /// creation, consider using snapshots.insert
-    /// instead, as that method supports more features, such as creating snapshots
-    /// in a project different from the source disk project.
-    func createSnapshot(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: Snapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func createSnapshot(
+      request: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.createSnapshot(request: request, options: options)
+    }
 
     /// Deletes the specified persistent disk. Deleting a disk removes its data
     /// permanently and is irreversible. However, deleting a disk does not
@@ -127,46 +119,30 @@
     /// snapshots.
     ///
     /// @Snippet(path: "disks_delete")
-    func delete(request: Clients.DisksClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified persistent disk. Deleting a disk removes its data
-    /// permanently and is irreversible. However, deleting a disk does not
-    /// delete any snapshots
-    /// previously made from the disk. You must separatelydelete
-    /// snapshots.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified persistent disk.
     ///
     /// @Snippet(path: "disks_get")
-    func `get`(request: Clients.DisksClient.GetRequest) async throws -> GoogleCloudComputeV1.Disk
-
-    /// Returns the specified persistent disk.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Disk
+    public func `get`(
+      request: DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Disk {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "disks_getIamPolicy")
-    func getIamPolicy(request: Clients.DisksClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a persistent disk in the specified project using the data
     /// in the request. You can create a disk from a source
@@ -175,586 +151,498 @@
     /// the default size by specifying the sizeGb property.
     ///
     /// @Snippet(path: "disks_insert")
-    func insert(request: Clients.DisksClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a persistent disk in the specified project using the data
-    /// in the request. You can create a disk from a source
-    /// (sourceImage, sourceSnapshot, orsourceDisk) or create an empty 500 GB data disk by
-    /// omitting all properties. You can also create a disk that is larger than
-    /// the default size by specifying the sizeGb property.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Disk?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of persistent disks contained within
     /// the specified zone.
     ///
     /// @Snippet(path: "disks_list")
-    func list(request: Clients.DisksClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.DiskList
+    public func list(
+      request: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.DiskList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of persistent disks contained within
     /// the specified zone.
-    func list(
-      byItem: Clients.DisksClient.ListRequest
-    ) throws -> any AsyncSequence<Disk, Swift.Error>
-
-    /// Retrieves a list of persistent disks contained within
-    /// the specified zone.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<Disk, Swift.Error>
+    ///
+    /// @Snippet(path: "disks_list")
+    public func list(
+      byItem: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Disk, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Removes resource policies from a disk.
     ///
     /// @Snippet(path: "disks_removeResourcePolicies")
-    func removeResourcePolicies(request: Clients.DisksClient.RemoveResourcePoliciesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Removes resource policies from a disk.
-    func removeResourcePolicies(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: DisksRemoveResourcePoliciesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func removeResourcePolicies(
+      request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.removeResourcePolicies(request: request, options: options)
+    }
 
     /// Resizes the specified persistent disk.
     /// You can only increase the size of the disk.
     ///
     /// @Snippet(path: "disks_resize")
-    func resize(request: Clients.DisksClient.ResizeRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Resizes the specified persistent disk.
-    /// You can only increase the size of the disk.
-    func resize(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: DisksResizeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func resize(
+      request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.resize(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "disks_setIamPolicy")
-    func setIamPolicy(request: Clients.DisksClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Sets the labels on a disk. To learn more about labels, read theLabeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "disks_setLabels")
-    func setLabels(request: Clients.DisksClient.SetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on a disk. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    func setLabels(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(
+      request: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setLabels(request: request, options: options)
+    }
 
     /// Starts asynchronous replication.
     /// Must be invoked on the primary disk.
     ///
     /// @Snippet(path: "disks_startAsyncReplication")
-    func startAsyncReplication(request: Clients.DisksClient.StartAsyncReplicationRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Starts asynchronous replication.
-    /// Must be invoked on the primary disk.
-    func startAsyncReplication(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: DisksStartAsyncReplicationRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func startAsyncReplication(
+      request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.startAsyncReplication(request: request, options: options)
+    }
 
     /// Stops asynchronous replication.
     /// Can be invoked either on the primary or on the secondary disk.
     ///
     /// @Snippet(path: "disks_stopAsyncReplication")
-    func stopAsyncReplication(request: Clients.DisksClient.StopAsyncReplicationRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Stops asynchronous replication.
-    /// Can be invoked either on the primary or on the secondary disk.
-    func stopAsyncReplication(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func stopAsyncReplication(
+      request: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.stopAsyncReplication(request: request, options: options)
+    }
 
     /// Stops asynchronous replication for a consistency group of disks.
     /// Can be invoked either in the primary or secondary scope.
     ///
     /// @Snippet(path: "disks_stopGroupAsyncReplication")
-    func stopGroupAsyncReplication(request: Clients.DisksClient.StopGroupAsyncReplicationRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Stops asynchronous replication for a consistency group of disks.
-    /// Can be invoked either in the primary or secondary scope.
-    func stopGroupAsyncReplication(
-      project: Swift.String,
-      zone: Swift.String,
-      body: DisksStopGroupAsyncReplicationResource?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func stopGroupAsyncReplication(
+      request: DisksClient.StopGroupAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.stopGroupAsyncReplication(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "disks_testIamPermissions")
-    func testIamPermissions(request: Clients.DisksClient.TestIamPermissionsRequest) async throws
-      -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates the specified disk with the data included in the request.
     /// The update is performed only on selected fields included as part
     /// of update-mask.
     ///
     /// @Snippet(path: "disks_update")
-    func update(request: Clients.DisksClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified disk with the data included in the request.
-    /// The update is performed only on selected fields included as part
-    /// of update-mask.
-    func update(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: Disk?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
 
     /// Rotates the customer-managed
     /// encryption key to the latest version for the specified persistent disk.
     ///
     /// @Snippet(path: "disks_updateKmsKey")
-    func updateKmsKey(request: Clients.DisksClient.UpdateKmsKeyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Rotates the customer-managed
-    /// encryption key to the latest version for the specified persistent disk.
-    func updateKmsKey(
-      project: Swift.String,
-      zone: Swift.String,
-      disk: Swift.String,
-      body: DiskUpdateKmsKeyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Adds existing resource policies to a disk. You can only add one
-    /// policy which will be applied to this disk for scheduling snapshot
-    /// creation.
-    ///
-    /// @Snippet(path: "disks_addResourcePolicies")
-    func addResourcePolicies(
-      request: Clients.DisksClient.AddResourcePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves an aggregated list of persistent disks.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "disks_aggregatedList")
-    func aggregatedList(
-      request: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.DiskAggregatedList
-
-    /// Retrieves an aggregated list of persistent disks.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
-
-    /// Bulk create a set of disks.
-    ///
-    /// @Snippet(path: "disks_bulkInsert")
-    func bulkInsert(
-      request: Clients.DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on many disks at once. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "disks_bulkSetLabels")
-    func bulkSetLabels(
-      request: Clients.DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Creates a snapshot of a specified persistent disk. For regular snapshot
-    /// creation, consider using snapshots.insert
-    /// instead, as that method supports more features, such as creating snapshots
-    /// in a project different from the source disk project.
-    ///
-    /// @Snippet(path: "disks_createSnapshot")
-    func createSnapshot(
-      request: Clients.DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified persistent disk. Deleting a disk removes its data
-    /// permanently and is irreversible. However, deleting a disk does not
-    /// delete any snapshots
-    /// previously made from the disk. You must separatelydelete
-    /// snapshots.
-    ///
-    /// @Snippet(path: "disks_delete")
-    func delete(
-      request: Clients.DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified persistent disk.
-    ///
-    /// @Snippet(path: "disks_get")
-    func `get`(
-      request: Clients.DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Disk
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "disks_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a persistent disk in the specified project using the data
-    /// in the request. You can create a disk from a source
-    /// (sourceImage, sourceSnapshot, orsourceDisk) or create an empty 500 GB data disk by
-    /// omitting all properties. You can also create a disk that is larger than
-    /// the default size by specifying the sizeGb property.
-    ///
-    /// @Snippet(path: "disks_insert")
-    func insert(
-      request: Clients.DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of persistent disks contained within
-    /// the specified zone.
-    ///
-    /// @Snippet(path: "disks_list")
-    func list(
-      request: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.DiskList
-
-    /// Retrieves a list of persistent disks contained within
-    /// the specified zone.
-    func list(
-      byItem: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Disk, Swift.Error>
-
-    /// Removes resource policies from a disk.
-    ///
-    /// @Snippet(path: "disks_removeResourcePolicies")
-    func removeResourcePolicies(
-      request: Clients.DisksClient.RemoveResourcePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Resizes the specified persistent disk.
-    /// You can only increase the size of the disk.
-    ///
-    /// @Snippet(path: "disks_resize")
-    func resize(
-      request: Clients.DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "disks_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Sets the labels on a disk. To learn more about labels, read theLabeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "disks_setLabels")
-    func setLabels(
-      request: Clients.DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Starts asynchronous replication.
-    /// Must be invoked on the primary disk.
-    ///
-    /// @Snippet(path: "disks_startAsyncReplication")
-    func startAsyncReplication(
-      request: Clients.DisksClient.StartAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Stops asynchronous replication.
-    /// Can be invoked either on the primary or on the secondary disk.
-    ///
-    /// @Snippet(path: "disks_stopAsyncReplication")
-    func stopAsyncReplication(
-      request: Clients.DisksClient.StopAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Stops asynchronous replication for a consistency group of disks.
-    /// Can be invoked either in the primary or secondary scope.
-    ///
-    /// @Snippet(path: "disks_stopGroupAsyncReplication")
-    func stopGroupAsyncReplication(
-      request: Clients.DisksClient.StopGroupAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "disks_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates the specified disk with the data included in the request.
-    /// The update is performed only on selected fields included as part
-    /// of update-mask.
-    ///
-    /// @Snippet(path: "disks_update")
-    func update(
-      request: Clients.DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Rotates the customer-managed
-    /// encryption key to the latest version for the specified persistent disk.
-    ///
-    /// @Snippet(path: "disks_updateKmsKey")
-    func updateKmsKey(
-      request: Clients.DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func updateKmsKey(
+      request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.updateKmsKey(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Disks``.
-    public class DisksClient: Disks {
-      let inner: any DisksStub
+    /// A Swift protocol to mock `DisksClient`.
+    ///
+    /// To mock `DisksClient` change your functions to receive
+    /// `some DisksProtocol` or `any DisksProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol DisksProtocol {
+      /// See `DisksClient.addResourcePolicies`.
+      func addResourcePolicies(request: DisksClient.AddResourcePoliciesRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `DisksClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any DisksStub = try DisksTransport(options)
-        inner = DisksRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = DisksLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `DisksClient.addResourcePolicies`.
+      func addResourcePolicies(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: DisksAddResourcePoliciesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Disks.addResourcePolicies`
-      public func addResourcePolicies(
-        request: Clients.DisksClient.AddResourcePoliciesRequest,
+      /// See `DisksClient.aggregatedList`.
+      func aggregatedList(request: DisksClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.DiskAggregatedList
+
+      /// See `DisksClient.aggregatedList`.
+      func aggregatedList(
+        byItem: DisksClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
+
+      /// See `DisksClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
+
+      /// See `DisksClient.bulkInsert`.
+      func bulkInsert(request: DisksClient.BulkInsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.bulkInsert`.
+      func bulkInsert(
+        project: Swift.String,
+        zone: Swift.String,
+        body: BulkInsertDiskResource?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.bulkSetLabels`.
+      func bulkSetLabels(request: DisksClient.BulkSetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.bulkSetLabels`.
+      func bulkSetLabels(
+        project: Swift.String,
+        zone: Swift.String,
+        body: BulkZoneSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.createSnapshot`.
+      func createSnapshot(request: DisksClient.CreateSnapshotRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.createSnapshot`.
+      func createSnapshot(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: Snapshot?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.delete`.
+      func delete(request: DisksClient.DeleteRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.`get``.
+      func `get`(request: DisksClient.GetRequest) async throws -> GoogleCloudComputeV1.Disk
+
+      /// See `DisksClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Disk
+
+      /// See `DisksClient.getIamPolicy`.
+      func getIamPolicy(request: DisksClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.insert`.
+      func insert(request: DisksClient.InsertRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        body: Disk?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.list`.
+      func list(request: DisksClient.ListRequest) async throws -> GoogleCloudComputeV1.DiskList
+
+      /// See `DisksClient.list`.
+      func list(
+        byItem: DisksClient.ListRequest
+      ) throws -> any AsyncSequence<Disk, Swift.Error>
+
+      /// See `DisksClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<Disk, Swift.Error>
+
+      /// See `DisksClient.removeResourcePolicies`.
+      func removeResourcePolicies(request: DisksClient.RemoveResourcePoliciesRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.removeResourcePolicies`.
+      func removeResourcePolicies(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: DisksRemoveResourcePoliciesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.resize`.
+      func resize(request: DisksClient.ResizeRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.resize`.
+      func resize(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: DisksResizeRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.setIamPolicy`.
+      func setIamPolicy(request: DisksClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: ZoneSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.setLabels`.
+      func setLabels(request: DisksClient.SetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.setLabels`.
+      func setLabels(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: ZoneSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.startAsyncReplication`.
+      func startAsyncReplication(request: DisksClient.StartAsyncReplicationRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.startAsyncReplication`.
+      func startAsyncReplication(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: DisksStartAsyncReplicationRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopAsyncReplication`.
+      func stopAsyncReplication(request: DisksClient.StopAsyncReplicationRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopAsyncReplication`.
+      func stopAsyncReplication(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopGroupAsyncReplication`.
+      func stopGroupAsyncReplication(request: DisksClient.StopGroupAsyncReplicationRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopGroupAsyncReplication`.
+      func stopGroupAsyncReplication(
+        project: Swift.String,
+        zone: Swift.String,
+        body: DisksStopGroupAsyncReplicationResource?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.testIamPermissions`.
+      func testIamPermissions(request: DisksClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `DisksClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `DisksClient.update`.
+      func update(request: DisksClient.UpdateRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.update`.
+      func update(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: Disk?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.updateKmsKey`.
+      func updateKmsKey(request: DisksClient.UpdateKmsKeyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.updateKmsKey`.
+      func updateKmsKey(
+        project: Swift.String,
+        zone: Swift.String,
+        disk: Swift.String,
+        body: DiskUpdateKmsKeyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.addResourcePolicies`.
+      func addResourcePolicies(
+        request: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.aggregatedList`.
+      func aggregatedList(
+        request: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.DiskAggregatedList
+
+      /// See `DisksClient.aggregatedList`.
+      func aggregatedList(
+        byItem: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error>
+
+      /// See `DisksClient.bulkInsert`.
+      func bulkInsert(
+        request: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.bulkSetLabels`.
+      func bulkSetLabels(
+        request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.createSnapshot`.
+      func createSnapshot(
+        request: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.delete`.
+      func delete(
+        request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.`get``.
+      func `get`(
+        request: DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Disk
+
+      /// See `DisksClient.getIamPolicy`.
+      func getIamPolicy(
+        request: DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.insert`.
+      func insert(
+        request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.list`.
+      func list(
+        request: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.DiskList
+
+      /// See `DisksClient.list`.
+      func list(
+        byItem: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Disk, Swift.Error>
+
+      /// See `DisksClient.removeResourcePolicies`.
+      func removeResourcePolicies(
+        request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.resize`.
+      func resize(
+        request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.setIamPolicy`.
+      func setIamPolicy(
+        request: DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `DisksClient.setLabels`.
+      func setLabels(
+        request: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.startAsyncReplication`.
+      func startAsyncReplication(
+        request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopAsyncReplication`.
+      func stopAsyncReplication(
+        request: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `DisksClient.stopGroupAsyncReplication`.
+      func stopGroupAsyncReplication(
+        request: DisksClient.StopGroupAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.addResourcePolicies(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Disks.aggregatedList`
-      public func aggregatedList(
-        request: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.DiskAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `DisksClient.testIamPermissions`.
+      func testIamPermissions(
+        request: DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
-      /// Retrieves an aggregated list of persistent disks.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `DisksClient.update`.
+      func update(
+        request: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Disks.bulkInsert`
-      public func bulkInsert(
-        request: Clients.DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.bulkInsert(request: request, options: options)
-      }
-
-      /// See `Disks.bulkSetLabels`
-      public func bulkSetLabels(
-        request: Clients.DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.bulkSetLabels(request: request, options: options)
-      }
-
-      /// See `Disks.createSnapshot`
-      public func createSnapshot(
-        request: Clients.DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.createSnapshot(request: request, options: options)
-      }
-
-      /// See `Disks.delete`
-      public func delete(
-        request: Clients.DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `Disks.`get``
-      public func `get`(
-        request: Clients.DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Disk {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `Disks.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `Disks.insert`
-      public func insert(
-        request: Clients.DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `Disks.list`
-      public func list(
-        request: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.DiskList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves a list of persistent disks contained within
-      /// the specified zone.
-      public func list(
-        byItem: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Disk, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Disks.removeResourcePolicies`
-      public func removeResourcePolicies(
-        request: Clients.DisksClient.RemoveResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.removeResourcePolicies(request: request, options: options)
-      }
-
-      /// See `Disks.resize`
-      public func resize(
-        request: Clients.DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.resize(request: request, options: options)
-      }
-
-      /// See `Disks.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `Disks.setLabels`
-      public func setLabels(
-        request: Clients.DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setLabels(request: request, options: options)
-      }
-
-      /// See `Disks.startAsyncReplication`
-      public func startAsyncReplication(
-        request: Clients.DisksClient.StartAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.startAsyncReplication(request: request, options: options)
-      }
-
-      /// See `Disks.stopAsyncReplication`
-      public func stopAsyncReplication(
-        request: Clients.DisksClient.StopAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.stopAsyncReplication(request: request, options: options)
-      }
-
-      /// See `Disks.stopGroupAsyncReplication`
-      public func stopGroupAsyncReplication(
-        request: Clients.DisksClient.StopGroupAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.stopGroupAsyncReplication(request: request, options: options)
-      }
-
-      /// See `Disks.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.DisksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
-
-      /// See `Disks.update`
-      public func update(
-        request: Clients.DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
-
-      /// See `Disks.updateKmsKey`
-      public func updateKmsKey(
-        request: Clients.DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.updateKmsKey(request: request, options: options)
-      }
+      /// See `DisksClient.updateKmsKey`.
+      func updateKmsKey(
+        request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Disks {
-    public func addResourcePolicies(request: Clients.DisksClient.AddResourcePoliciesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.DisksProtocol {
+    public func addResourcePolicies(request: DisksClient.AddResourcePoliciesRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.addResourcePolicies(request: request, options: .init())
     }
 
     public func addResourcePolicies(
-      request: Clients.DisksClient.AddResourcePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -765,7 +653,7 @@
       disk: Swift.String,
       body: DisksAddResourcePoliciesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.AddResourcePoliciesRequest().with {
+      let request = DisksClient.AddResourcePoliciesRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -774,26 +662,26 @@
       return try await self.addResourcePolicies(request: request)
     }
 
-    public func aggregatedList(request: Clients.DisksClient.AggregatedListRequest) async throws
+    public func aggregatedList(request: DisksClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.DiskAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.DisksClient.AggregatedListRequest
+      byItem: DisksClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -804,20 +692,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, DisksScopedList), Swift.Error> {
-      let request = Clients.DisksClient.AggregatedListRequest().with {
+      let request = DisksClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func bulkInsert(request: Clients.DisksClient.BulkInsertRequest) async throws
+    public func bulkInsert(request: DisksClient.BulkInsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.bulkInsert(request: request, options: .init())
     }
 
     public func bulkInsert(
-      request: Clients.DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -827,7 +715,7 @@
       zone: Swift.String,
       body: BulkInsertDiskResource?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.BulkInsertRequest().with {
+      let request = DisksClient.BulkInsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -835,14 +723,14 @@
       return try await self.bulkInsert(request: request)
     }
 
-    public func bulkSetLabels(request: Clients.DisksClient.BulkSetLabelsRequest) async throws
+    public func bulkSetLabels(request: DisksClient.BulkSetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.bulkSetLabels(request: request, options: .init())
     }
 
     public func bulkSetLabels(
-      request: Clients.DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -852,7 +740,7 @@
       zone: Swift.String,
       body: BulkZoneSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.BulkSetLabelsRequest().with {
+      let request = DisksClient.BulkSetLabelsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -860,14 +748,14 @@
       return try await self.bulkSetLabels(request: request)
     }
 
-    public func createSnapshot(request: Clients.DisksClient.CreateSnapshotRequest) async throws
+    public func createSnapshot(request: DisksClient.CreateSnapshotRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.createSnapshot(request: request, options: .init())
     }
 
     public func createSnapshot(
-      request: Clients.DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -878,7 +766,7 @@
       disk: Swift.String,
       body: Snapshot?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.CreateSnapshotRequest().with {
+      let request = DisksClient.CreateSnapshotRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -887,14 +775,14 @@
       return try await self.createSnapshot(request: request)
     }
 
-    public func delete(request: Clients.DisksClient.DeleteRequest) async throws
+    public func delete(request: DisksClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -904,7 +792,7 @@
       zone: Swift.String,
       disk: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.DeleteRequest().with {
+      let request = DisksClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -912,14 +800,12 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.DisksClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Disk
-    {
+    public func `get`(request: DisksClient.GetRequest) async throws -> GoogleCloudComputeV1.Disk {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Disk {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -929,7 +815,7 @@
       zone: Swift.String,
       disk: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Disk {
-      let request = Clients.DisksClient.GetRequest().with {
+      let request = DisksClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -937,14 +823,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.DisksClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: DisksClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -954,7 +840,7 @@
       zone: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.DisksClient.GetIamPolicyRequest().with {
+      let request = DisksClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -962,14 +848,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.DisksClient.InsertRequest) async throws
+    public func insert(request: DisksClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -979,7 +865,7 @@
       zone: Swift.String,
       body: Disk?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.InsertRequest().with {
+      let request = DisksClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -987,26 +873,25 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.DisksClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.DiskList
+    public func list(request: DisksClient.ListRequest) async throws -> GoogleCloudComputeV1.DiskList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.DisksClient.ListRequest
+      byItem: DisksClient.ListRequest
     ) throws -> any AsyncSequence<Disk, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Disk, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.DiskList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -1018,22 +903,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<Disk, Swift.Error> {
-      let request = Clients.DisksClient.ListRequest().with {
+      let request = DisksClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func removeResourcePolicies(request: Clients.DisksClient.RemoveResourcePoliciesRequest)
+    public func removeResourcePolicies(request: DisksClient.RemoveResourcePoliciesRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.removeResourcePolicies(request: request, options: .init())
     }
 
     public func removeResourcePolicies(
-      request: Clients.DisksClient.RemoveResourcePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1044,7 +928,7 @@
       disk: Swift.String,
       body: DisksRemoveResourcePoliciesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.RemoveResourcePoliciesRequest().with {
+      let request = DisksClient.RemoveResourcePoliciesRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -1053,14 +937,14 @@
       return try await self.removeResourcePolicies(request: request)
     }
 
-    public func resize(request: Clients.DisksClient.ResizeRequest) async throws
+    public func resize(request: DisksClient.ResizeRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.resize(request: request, options: .init())
     }
 
     public func resize(
-      request: Clients.DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1071,7 +955,7 @@
       disk: Swift.String,
       body: DisksResizeRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.ResizeRequest().with {
+      let request = DisksClient.ResizeRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -1080,14 +964,14 @@
       return try await self.resize(request: request)
     }
 
-    public func setIamPolicy(request: Clients.DisksClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: DisksClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1098,7 +982,7 @@
       resource: Swift.String,
       body: ZoneSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.DisksClient.SetIamPolicyRequest().with {
+      let request = DisksClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -1107,14 +991,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func setLabels(request: Clients.DisksClient.SetLabelsRequest) async throws
+    public func setLabels(request: DisksClient.SetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.setLabels(request: request, options: .init())
     }
 
     public func setLabels(
-      request: Clients.DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1125,7 +1009,7 @@
       resource: Swift.String,
       body: ZoneSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.SetLabelsRequest().with {
+      let request = DisksClient.SetLabelsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -1134,15 +1018,14 @@
       return try await self.setLabels(request: request)
     }
 
-    public func startAsyncReplication(request: Clients.DisksClient.StartAsyncReplicationRequest)
+    public func startAsyncReplication(request: DisksClient.StartAsyncReplicationRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.startAsyncReplication(request: request, options: .init())
     }
 
     public func startAsyncReplication(
-      request: Clients.DisksClient.StartAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1153,7 +1036,7 @@
       disk: Swift.String,
       body: DisksStartAsyncReplicationRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.StartAsyncReplicationRequest().with {
+      let request = DisksClient.StartAsyncReplicationRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -1162,15 +1045,14 @@
       return try await self.startAsyncReplication(request: request)
     }
 
-    public func stopAsyncReplication(request: Clients.DisksClient.StopAsyncReplicationRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func stopAsyncReplication(request: DisksClient.StopAsyncReplicationRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.stopAsyncReplication(request: request, options: .init())
     }
 
     public func stopAsyncReplication(
-      request: Clients.DisksClient.StopAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1180,7 +1062,7 @@
       zone: Swift.String,
       disk: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.StopAsyncReplicationRequest().with {
+      let request = DisksClient.StopAsyncReplicationRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -1188,15 +1070,14 @@
       return try await self.stopAsyncReplication(request: request)
     }
 
-    public func stopGroupAsyncReplication(
-      request: Clients.DisksClient.StopGroupAsyncReplicationRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func stopGroupAsyncReplication(request: DisksClient.StopGroupAsyncReplicationRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.stopGroupAsyncReplication(request: request, options: .init())
     }
 
     public func stopGroupAsyncReplication(
-      request: Clients.DisksClient.StopGroupAsyncReplicationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DisksClient.StopGroupAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1206,7 +1087,7 @@
       zone: Swift.String,
       body: DisksStopGroupAsyncReplicationResource?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.StopGroupAsyncReplicationRequest().with {
+      let request = DisksClient.StopGroupAsyncReplicationRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -1214,14 +1095,14 @@
       return try await self.stopGroupAsyncReplication(request: request)
     }
 
-    public func testIamPermissions(request: Clients.DisksClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: DisksClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1232,7 +1113,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.DisksClient.TestIamPermissionsRequest().with {
+      let request = DisksClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -1241,14 +1122,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.DisksClient.UpdateRequest) async throws
+    public func update(request: DisksClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1259,7 +1140,7 @@
       disk: Swift.String,
       body: Disk?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.UpdateRequest().with {
+      let request = DisksClient.UpdateRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk
@@ -1268,14 +1149,14 @@
       return try await self.update(request: request)
     }
 
-    public func updateKmsKey(request: Clients.DisksClient.UpdateKmsKeyRequest) async throws
+    public func updateKmsKey(request: DisksClient.UpdateKmsKeyRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.updateKmsKey(request: request, options: .init())
     }
 
     public func updateKmsKey(
-      request: Clients.DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1286,7 +1167,7 @@
       disk: Swift.String,
       body: DiskUpdateKmsKeyRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.DisksClient.UpdateKmsKeyRequest().with {
+      let request = DisksClient.UpdateKmsKeyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.disk = disk

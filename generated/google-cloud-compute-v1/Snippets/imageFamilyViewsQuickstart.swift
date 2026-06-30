@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.ImageFamilyViewsClient()
+    let client = try GoogleCloudComputeV1.ImageFamilyViewsClient()
     let response = try await client.`get`(
-      request: Clients.ImageFamilyViewsClient.GetRequest()
+      request: ImageFamilyViewsClient.GetRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

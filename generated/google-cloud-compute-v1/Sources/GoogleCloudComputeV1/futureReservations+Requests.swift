@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.FutureReservationsClient {
+  extension FutureReservationsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.futureReservations.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.futureReservations.aggregatedList]: <doc:FutureReservations/aggregatedList(request:)>

@@ -28,73 +28,91 @@
   /// Service for the `globalOperations` resource.
   ///
   /// @Snippet(path: "globalOperationsQuickstart")
-  public protocol GlobalOperations {
+  public class GlobalOperationsClient: Clients.GlobalOperationsProtocol {
+    let inner: any Clients.GlobalOperationsStub
+
+    /// Creates a new `GlobalOperationsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.GlobalOperationsStub = try Clients.GlobalOperationsTransport(options)
+      inner = Clients.GlobalOperationsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.GlobalOperationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Retrieves an aggregated list of all operations.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "globalOperations_aggregatedList")
-    func aggregatedList(request: Clients.GlobalOperationsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.OperationAggregatedList
+    public func aggregatedList(
+      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of all operations.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.GlobalOperationsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of all operations.
     ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
+    /// @Snippet(path: "globalOperations_aggregatedList")
+    public func aggregatedList(
+      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.OperationAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified Operations resource.
     ///
     /// @Snippet(path: "globalOperations_delete")
-    func delete(request: Clients.GlobalOperationsClient.DeleteRequest) async throws
-
-    /// Deletes the specified Operations resource.
-    func delete(
-      project: Swift.String,
-      operation: Swift.String,
-    ) async throws
+    public func delete(
+      request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves the specified Operations resource.
     ///
     /// @Snippet(path: "globalOperations_get")
-    func `get`(request: Clients.GlobalOperationsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the specified Operations resource.
-    func `get`(
-      project: Swift.String,
-      operation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func `get`(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within the specified
     /// project.
     ///
     /// @Snippet(path: "globalOperations_list")
-    func list(request: Clients.GlobalOperationsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.OperationList
+    public func list(
+      request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.OperationList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of Operation resources contained within the specified
     /// project.
-    func list(
-      byItem: Clients.GlobalOperationsClient.ListRequest
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
+    ///
+    /// @Snippet(path: "globalOperations_list")
+    public func list(
+      byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Operation, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Waits for the specified Operation resource to return as `DONE`
     /// or for the request to approach the 2 minute deadline, and retrieves the
@@ -114,209 +132,137 @@
     ///     if the operation is not `DONE`.
     ///
     /// @Snippet(path: "globalOperations_wait")
-    func wait(request: Clients.GlobalOperationsClient.WaitRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Waits for the specified Operation resource to return as `DONE`
-    /// or for the request to approach the 2 minute deadline, and retrieves the
-    /// specified Operation resource. This method differs from the
-    /// `GET` method in that it waits for no more than the default
-    /// deadline (2 minutes) and then returns the current state of the operation,
-    /// which might be `DONE` or still in progress.
-    ///
-    /// This method is called on a best-effort basis. Specifically:
-    ///
-    ///
-    ///     - In uncommon cases, when the server is overloaded, the request might
-    ///     return before the default deadline is reached, or might return after zero
-    ///     seconds.
-    ///    - If the default deadline is reached, there is no guarantee that the
-    ///     operation is actually done when the method returns. Be prepared to retry
-    ///     if the operation is not `DONE`.
-    func wait(
-      project: Swift.String,
-      operation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves an aggregated list of all operations.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "globalOperations_aggregatedList")
-    func aggregatedList(
-      request: Clients.GlobalOperationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
-
-    /// Retrieves an aggregated list of all operations.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.GlobalOperationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
-
-    /// Deletes the specified Operations resource.
-    ///
-    /// @Snippet(path: "globalOperations_delete")
-    func delete(
-      request: Clients.GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws
-
-    /// Retrieves the specified Operations resource.
-    ///
-    /// @Snippet(path: "globalOperations_get")
-    func `get`(
-      request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// project.
-    ///
-    /// @Snippet(path: "globalOperations_list")
-    func list(
-      request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.OperationList
-
-    /// Retrieves a list of Operation resources contained within the specified
-    /// project.
-    func list(
-      byItem: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Waits for the specified Operation resource to return as `DONE`
-    /// or for the request to approach the 2 minute deadline, and retrieves the
-    /// specified Operation resource. This method differs from the
-    /// `GET` method in that it waits for no more than the default
-    /// deadline (2 minutes) and then returns the current state of the operation,
-    /// which might be `DONE` or still in progress.
-    ///
-    /// This method is called on a best-effort basis. Specifically:
-    ///
-    ///
-    ///     - In uncommon cases, when the server is overloaded, the request might
-    ///     return before the default deadline is reached, or might return after zero
-    ///     seconds.
-    ///    - If the default deadline is reached, there is no guarantee that the
-    ///     operation is actually done when the method returns. Be prepared to retry
-    ///     if the operation is not `DONE`.
-    ///
-    /// @Snippet(path: "globalOperations_wait")
-    func wait(
-      request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func wait(
+      request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.wait(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``GlobalOperations``.
-    public class GlobalOperationsClient: GlobalOperations {
-      let inner: any GlobalOperationsStub
+    /// A Swift protocol to mock `GlobalOperationsClient`.
+    ///
+    /// To mock `GlobalOperationsClient` change your functions to receive
+    /// `some GlobalOperationsProtocol` or `any GlobalOperationsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol GlobalOperationsProtocol {
+      /// See `GlobalOperationsClient.aggregatedList`.
+      func aggregatedList(request: GlobalOperationsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.OperationAggregatedList
 
-      /// Creates a new `GlobalOperationsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any GlobalOperationsStub = try GlobalOperationsTransport(options)
-        inner = GlobalOperationsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = GlobalOperationsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `GlobalOperationsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: GlobalOperationsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
 
-      /// See `GlobalOperations.aggregatedList`
-      public func aggregatedList(
-        request: Clients.GlobalOperationsClient.AggregatedListRequest,
+      /// See `GlobalOperationsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
+
+      /// See `GlobalOperationsClient.delete`.
+      func delete(request: GlobalOperationsClient.DeleteRequest) async throws
+
+      /// See `GlobalOperationsClient.delete`.
+      func delete(
+        project: Swift.String,
+        operation: Swift.String,
+      ) async throws
+
+      /// See `GlobalOperationsClient.`get``.
+      func `get`(request: GlobalOperationsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOperationsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        operation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOperationsClient.list`.
+      func list(request: GlobalOperationsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.OperationList
+
+      /// See `GlobalOperationsClient.list`.
+      func list(
+        byItem: GlobalOperationsClient.ListRequest
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `GlobalOperationsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `GlobalOperationsClient.wait`.
+      func wait(request: GlobalOperationsClient.WaitRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOperationsClient.wait`.
+      func wait(
+        project: Swift.String,
+        operation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `GlobalOperationsClient.aggregatedList`.
+      func aggregatedList(
+        request: GlobalOperationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
 
-      /// Retrieves an aggregated list of all operations.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.GlobalOperationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.OperationAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `GlobalOperationsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
 
-      /// See `GlobalOperations.delete`
-      public func delete(
-        request: Clients.GlobalOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `GlobalOperationsClient.delete`.
+      func delete(
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws
 
-      /// See `GlobalOperations.`get``
-      public func `get`(
-        request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `GlobalOperationsClient.`get``.
+      func `get`(
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalOperations.list`
-      public func list(
-        request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.OperationList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `GlobalOperationsClient.list`.
+      func list(
+        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.OperationList
 
-      /// Retrieves a list of Operation resources contained within the specified
-      /// project.
-      public func list(
-        byItem: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Operation, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `GlobalOperationsClient.list`.
+      func list(
+        byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-      /// See `GlobalOperations.wait`
-      public func wait(
-        request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.wait(request: request, options: options)
-      }
+      /// See `GlobalOperationsClient.wait`.
+      func wait(
+        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension GlobalOperations {
-    public func aggregatedList(request: Clients.GlobalOperationsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.OperationAggregatedList
+  extension Clients.GlobalOperationsProtocol {
+    public func aggregatedList(request: GlobalOperationsClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.OperationAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.GlobalOperationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.GlobalOperationsClient.AggregatedListRequest
+      byItem: GlobalOperationsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.GlobalOperationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.OperationAggregatedList in
@@ -328,18 +274,18 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
-      let request = Clients.GlobalOperationsClient.AggregatedListRequest().with {
+      let request = GlobalOperationsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.GlobalOperationsClient.DeleteRequest) async throws {
+    public func delete(request: GlobalOperationsClient.DeleteRequest) async throws {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -348,21 +294,21 @@
       project: Swift.String,
       operation: Swift.String,
     ) async throws {
-      let request = Clients.GlobalOperationsClient.DeleteRequest().with {
+      let request = GlobalOperationsClient.DeleteRequest().with {
         $0.project = project
         $0.operation = operation
       }
       try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.GlobalOperationsClient.GetRequest) async throws
+    public func `get`(request: GlobalOperationsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -371,33 +317,33 @@
       project: Swift.String,
       operation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.GlobalOperationsClient.GetRequest().with {
+      let request = GlobalOperationsClient.GetRequest().with {
         $0.project = project
         $0.operation = operation
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.GlobalOperationsClient.ListRequest) async throws
+    public func list(request: GlobalOperationsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.OperationList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.GlobalOperationsClient.ListRequest
+      byItem: GlobalOperationsClient.ListRequest
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -408,20 +354,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let request = Clients.GlobalOperationsClient.ListRequest().with {
+      let request = GlobalOperationsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func wait(request: Clients.GlobalOperationsClient.WaitRequest) async throws
+    public func wait(request: GlobalOperationsClient.WaitRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.wait(request: request, options: .init())
     }
 
     public func wait(
-      request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -430,7 +376,7 @@
       project: Swift.String,
       operation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.GlobalOperationsClient.WaitRequest().with {
+      let request = GlobalOperationsClient.WaitRequest().with {
         $0.project = project
         $0.operation = operation
       }

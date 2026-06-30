@@ -28,38 +28,35 @@
   extension Clients {
     protocol NodeTemplatesStub {
       func aggregatedList(
-        request: Clients.NodeTemplatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList
 
       func delete(
-        request: Clients.NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplate
 
       func getIamPolicy(
-        request: Clients.NodeTemplatesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateList
 
       func setIamPolicy(
-        request: Clients.NodeTemplatesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.NodeTemplatesClient.TestIamPermissionsRequest,
+        request: NodeTemplatesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -73,8 +70,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.NodeTemplatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -104,7 +100,7 @@
       }
 
       public func delete(
-        request: Clients.NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -132,7 +128,7 @@
       }
 
       public func `get`(
-        request: Clients.NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplate {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -158,8 +154,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.NodeTemplatesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -187,7 +182,7 @@
       }
 
       public func insert(
-        request: Clients.NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -213,7 +208,7 @@
       }
 
       public func list(
-        request: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -241,8 +236,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.NodeTemplatesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -270,7 +264,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.NodeTemplatesClient.TestIamPermissionsRequest,
+        request: NodeTemplatesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

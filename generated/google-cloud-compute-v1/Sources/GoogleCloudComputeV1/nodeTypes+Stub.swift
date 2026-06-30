@@ -28,16 +28,15 @@
   extension Clients {
     protocol NodeTypesStub {
       func aggregatedList(
-        request: Clients.NodeTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList
 
       func `get`(
-        request: Clients.NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeType
 
       func list(
-        request: Clients.NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeList
     }
 
@@ -50,8 +49,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.NodeTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -81,7 +79,7 @@
       }
 
       public func `get`(
-        request: Clients.NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -105,7 +103,7 @@
       }
 
       public func list(
-        request: Clients.NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

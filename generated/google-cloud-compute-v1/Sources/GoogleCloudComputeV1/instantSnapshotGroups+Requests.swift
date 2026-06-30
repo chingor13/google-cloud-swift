@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InstantSnapshotGroupsClient {
+  extension InstantSnapshotGroupsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.instantSnapshotGroups.delete] method.
     ///
     /// [google.cloud.compute.v1.instantSnapshotGroups.delete]: <doc:InstantSnapshotGroups/delete(request:)>

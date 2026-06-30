@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionSecurityPoliciesClient {
+  extension RegionSecurityPoliciesClient {
     /// Synthetic request message for the [addRule()][google.cloud.compute.v1.regionSecurityPolicies.addRule] method.
     ///
     /// [google.cloud.compute.v1.regionSecurityPolicies.addRule]: <doc:RegionSecurityPolicies/addRule(request:)>

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ProjectsClient {
+  extension ProjectsClient {
     /// Synthetic request message for the [disableXpnHost()][google.cloud.compute.v1.projects.disableXpnHost] method.
     ///
     /// [google.cloud.compute.v1.projects.disableXpnHost]: <doc:Projects/disableXpnHost(request:)>

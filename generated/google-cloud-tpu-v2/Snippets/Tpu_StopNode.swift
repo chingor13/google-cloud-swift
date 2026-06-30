@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Tpu) async throws {
+func sample(client: TpuClient) async throws {
   let poller = try await client.stopNode(
     withPolling: StopNodeRequest()
       /* set fields using .with { $0... } */
@@ -37,7 +37,7 @@ func sample(client: some Tpu) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudTpuV2.Clients.TpuClient()
+      let client = try GoogleCloudTpuV2.TpuClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

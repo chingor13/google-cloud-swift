@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, ) async throws {
-  let client = try GoogleCloudRunV2.Clients.ServicesClient()
+  let client = try GoogleCloudRunV2.ServicesClient()
   let items = try client.listServices(
     byItem: ListServicesRequest()
       .with {

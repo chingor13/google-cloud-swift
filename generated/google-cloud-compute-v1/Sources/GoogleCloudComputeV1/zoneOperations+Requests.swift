@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ZoneOperationsClient {
+  extension ZoneOperationsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.zoneOperations.delete] method.
     ///
     /// [google.cloud.compute.v1.zoneOperations.delete]: <doc:ZoneOperations/delete(request:)>

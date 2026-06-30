@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ServiceAttachmentsClient {
+  extension ServiceAttachmentsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.serviceAttachments.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.serviceAttachments.aggregatedList]: <doc:ServiceAttachments/aggregatedList(request:)>

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ReservationSubBlocksClient {
+  extension ReservationSubBlocksClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.reservationSubBlocks.get] method.
     ///
     /// [google.cloud.compute.v1.reservationSubBlocks.get]: <doc:ReservationSubBlocks/`get`(request:)>
@@ -37,7 +37,7 @@
       public var reservationSubBlock: Swift.String = Swift.String()
 
       /// View of the subBlock.
-      public var view: Clients.ReservationSubBlocksClient.GetRequest.View? = nil
+      public var view: ReservationSubBlocksClient.GetRequest.View? = nil
 
       /// Name of the zone for this request. Zone name should conform to RFC1035.
       public var zone: Swift.String = Swift.String()
@@ -60,7 +60,7 @@
 
       /// The enumerated type for the [view][google.cloud.compute.v1.reservationSubBlocks.getRequest.view] field.
       ///
-      /// [google.cloud.compute.v1.reservationSubBlocks.getRequest.view]: <doc:Clients/ReservationSubBlocksClient/GetRequest/View>
+      /// [google.cloud.compute.v1.reservationSubBlocks.getRequest.view]: <doc:ReservationSubBlocksClient/GetRequest/View>
       public enum View: Codable, Equatable, Sendable {
         case subBlockViewBasic
         case subBlockViewFull

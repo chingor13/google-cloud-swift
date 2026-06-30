@@ -28,16 +28,16 @@
   extension Clients {
     protocol AcceleratorTypesStub {
       func aggregatedList(
-        request: Clients.AcceleratorTypesClient.AggregatedListRequest,
+        request: AcceleratorTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
 
       func `get`(
-        request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorType
 
       func list(
-        request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList
     }
 
@@ -50,7 +50,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.AcceleratorTypesClient.AggregatedListRequest,
+        request: AcceleratorTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -81,7 +81,7 @@
       }
 
       public func `get`(
-        request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -107,7 +107,7 @@
       }
 
       public func list(
-        request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

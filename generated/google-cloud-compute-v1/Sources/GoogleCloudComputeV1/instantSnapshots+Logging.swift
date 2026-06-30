@@ -60,7 +60,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.InstantSnapshotsClient.AggregatedListRequest,
+        request: InstantSnapshotsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotAggregatedList {
         try await self._intercept(
@@ -68,123 +68,112 @@
           options: options,
           name: "aggregatedList",
           action: {
-            (
-              r: Clients.InstantSnapshotsClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.InstantSnapshotAggregatedList
+            (r: InstantSnapshotsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.InstantSnapshotAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.InstantSnapshotsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.InstantSnapshotsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstantSnapshotsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.InstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.InstantSnapshotsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InstantSnapshot
+            (r: InstantSnapshotsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InstantSnapshot
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getIamPolicy(
-        request: Clients.InstantSnapshotsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (
-              r: Clients.InstantSnapshotsClient.GetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: InstantSnapshotsClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.InstantSnapshotsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.InstantSnapshotsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstantSnapshotsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.InstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.InstantSnapshotsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InstantSnapshotList
+            (r: InstantSnapshotsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InstantSnapshotList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: Clients.InstantSnapshotsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (
-              r: Clients.InstantSnapshotsClient.SetIamPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Policy
+            (r: InstantSnapshotsClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: Clients.InstantSnapshotsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setLabels",
           action: {
-            (r: Clients.InstantSnapshotsClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstantSnapshotsClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
@@ -192,7 +181,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.InstantSnapshotsClient.TestIamPermissionsRequest,
+        request: InstantSnapshotsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -200,10 +189,8 @@
           options: options,
           name: "testIamPermissions",
           action: {
-            (
-              r: Clients.InstantSnapshotsClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: InstantSnapshotsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })

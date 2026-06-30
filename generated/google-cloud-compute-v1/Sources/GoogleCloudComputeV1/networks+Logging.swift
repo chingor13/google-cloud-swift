@@ -60,22 +60,22 @@
       }
 
       public func addPeering(
-        request: Clients.NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "addPeering",
           action: {
-            (r: Clients.NetworksClient.AddPeeringRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: NetworksClient.AddPeeringRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.addPeering(request: r, options: o)
           })
       }
 
       public func cancelRequestRemovePeering(
-        request: Clients.NetworksClient.CancelRequestRemovePeeringRequest,
+        request: NetworksClient.CancelRequestRemovePeeringRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -83,24 +83,22 @@
           options: options,
           name: "cancelRequestRemovePeering",
           action: {
-            (
-              r: Clients.NetworksClient.CancelRequestRemovePeeringRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: NetworksClient.CancelRequestRemovePeeringRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.cancelRequestRemovePeering(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.NetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -108,14 +106,14 @@
       }
 
       public func `get`(
-        request: Clients.NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Network {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.NetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Network
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -123,32 +121,29 @@
       }
 
       public func getEffectiveFirewalls(
-        request: Clients.NetworksClient.GetEffectiveFirewallsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetEffectiveFirewallsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "getEffectiveFirewalls",
           action: {
-            (
-              r: Clients.NetworksClient.GetEffectiveFirewallsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse
+            (r: NetworksClient.GetEffectiveFirewallsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse
             in
             return try await self.inner.getEffectiveFirewalls(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.NetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -156,14 +151,14 @@
       }
 
       public func list(
-        request: Clients.NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.NetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NetworkList
             in
             return try await self.inner.list(request: r, options: o)
@@ -171,15 +166,14 @@
       }
 
       public func listPeeringRoutes(
-        request: Clients.NetworksClient.ListPeeringRoutesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExchangedPeeringRoutesList {
         try await self._intercept(
           request: request,
           options: options,
           name: "listPeeringRoutes",
           action: {
-            (r: Clients.NetworksClient.ListPeeringRoutesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworksClient.ListPeeringRoutesRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.ExchangedPeeringRoutesList
             in
             return try await self.inner.listPeeringRoutes(request: r, options: o)
@@ -187,14 +181,14 @@
       }
 
       public func patch(
-        request: Clients.NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.NetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -202,48 +196,44 @@
       }
 
       public func removePeering(
-        request: Clients.NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "removePeering",
           action: {
-            (r: Clients.NetworksClient.RemovePeeringRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: NetworksClient.RemovePeeringRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.removePeering(request: r, options: o)
           })
       }
 
       public func requestRemovePeering(
-        request: Clients.NetworksClient.RequestRemovePeeringRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RequestRemovePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "requestRemovePeering",
           action: {
-            (
-              r: Clients.NetworksClient.RequestRemovePeeringRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: NetworksClient.RequestRemovePeeringRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.requestRemovePeering(request: r, options: o)
           })
       }
 
       public func switchToCustomMode(
-        request: Clients.NetworksClient.SwitchToCustomModeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "switchToCustomMode",
           action: {
-            (r: Clients.NetworksClient.SwitchToCustomModeRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworksClient.SwitchToCustomModeRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.switchToCustomMode(request: r, options: o)
@@ -251,15 +241,15 @@
       }
 
       public func updatePeering(
-        request: Clients.NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "updatePeering",
           action: {
-            (r: Clients.NetworksClient.UpdatePeeringRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: NetworksClient.UpdatePeeringRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.updatePeering(request: r, options: o)
           })

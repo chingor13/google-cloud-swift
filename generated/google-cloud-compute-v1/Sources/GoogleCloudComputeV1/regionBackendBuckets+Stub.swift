@@ -28,47 +28,42 @@
   extension Clients {
     protocol RegionBackendBucketsStub {
       func delete(
-        request: Clients.RegionBackendBucketsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionBackendBucketsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucket
 
       func getIamPolicy(
-        request: Clients.RegionBackendBucketsClient.GetIamPolicyRequest,
+        request: RegionBackendBucketsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.RegionBackendBucketsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionBackendBucketsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketList
 
       func listUsable(
-        request: Clients.RegionBackendBucketsClient.ListUsableRequest,
+        request: RegionBackendBucketsClient.ListUsableRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable
 
       func patch(
-        request: Clients.RegionBackendBucketsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.RegionBackendBucketsClient.SetIamPolicyRequest,
+        request: RegionBackendBucketsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.RegionBackendBucketsClient.TestIamPermissionsRequest,
+        request: RegionBackendBucketsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -82,8 +77,7 @@
       }
 
       public func delete(
-        request: Clients.RegionBackendBucketsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -111,8 +105,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionBackendBucketsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucket {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -138,7 +131,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.RegionBackendBucketsClient.GetIamPolicyRequest,
+        request: RegionBackendBucketsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -167,8 +160,7 @@
       }
 
       public func insert(
-        request: Clients.RegionBackendBucketsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -194,8 +186,7 @@
       }
 
       public func list(
-        request: Clients.RegionBackendBucketsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -223,7 +214,7 @@
       }
 
       public func listUsable(
-        request: Clients.RegionBackendBucketsClient.ListUsableRequest,
+        request: RegionBackendBucketsClient.ListUsableRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable {
         let path = try { () throws -> Swift.String in
@@ -253,8 +244,7 @@
       }
 
       public func patch(
-        request: Clients.RegionBackendBucketsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -286,7 +276,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.RegionBackendBucketsClient.SetIamPolicyRequest,
+        request: RegionBackendBucketsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -315,7 +305,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionBackendBucketsClient.TestIamPermissionsRequest,
+        request: RegionBackendBucketsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

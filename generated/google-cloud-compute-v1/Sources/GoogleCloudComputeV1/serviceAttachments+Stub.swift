@@ -28,46 +28,42 @@
   extension Clients {
     protocol ServiceAttachmentsStub {
       func aggregatedList(
-        request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+        request: ServiceAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
 
       func delete(
-        request: Clients.ServiceAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachment
 
       func getIamPolicy(
-        request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
+        request: ServiceAttachmentsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.ServiceAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ServiceAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList
 
       func patch(
-        request: Clients.ServiceAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
+        request: ServiceAttachmentsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+        request: ServiceAttachmentsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -81,7 +77,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.ServiceAttachmentsClient.AggregatedListRequest,
+        request: ServiceAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -112,8 +108,7 @@
       }
 
       public func delete(
-        request: Clients.ServiceAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -142,7 +137,7 @@
       }
 
       public func `get`(
-        request: Clients.ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachment {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -171,7 +166,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.ServiceAttachmentsClient.GetIamPolicyRequest,
+        request: ServiceAttachmentsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -200,8 +195,7 @@
       }
 
       public func insert(
-        request: Clients.ServiceAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -227,8 +221,7 @@
       }
 
       public func list(
-        request: Clients.ServiceAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -256,8 +249,7 @@
       }
 
       public func patch(
-        request: Clients.ServiceAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -290,7 +282,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.ServiceAttachmentsClient.SetIamPolicyRequest,
+        request: ServiceAttachmentsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -319,7 +311,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.ServiceAttachmentsClient.TestIamPermissionsRequest,
+        request: ServiceAttachmentsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

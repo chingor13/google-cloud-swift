@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstantSnapshotGroupsClient {
+  extension RegionInstantSnapshotGroupsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionInstantSnapshotGroups.delete] method.
     ///
     /// [google.cloud.compute.v1.regionInstantSnapshotGroups.delete]: <doc:RegionInstantSnapshotGroups/delete(request:)>

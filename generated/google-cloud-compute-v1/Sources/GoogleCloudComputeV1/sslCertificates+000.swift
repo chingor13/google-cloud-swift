@@ -28,91 +28,18 @@
   /// Service for the `sslCertificates` resource.
   ///
   /// @Snippet(path: "sslCertificatesQuickstart")
-  public protocol SslCertificates {
-    /// Retrieves the list of all SslCertificate resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "sslCertificates_aggregatedList")
-    func aggregatedList(request: Clients.SslCertificatesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.SslCertificateAggregatedList
+  public class SslCertificatesClient: Clients.SslCertificatesProtocol {
+    let inner: any Clients.SslCertificatesStub
 
-    /// Retrieves the list of all SslCertificate resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.SslCertificatesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
-
-    /// Retrieves the list of all SslCertificate resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
-
-    /// Deletes the specified SslCertificate resource.
-    ///
-    /// @Snippet(path: "sslCertificates_delete")
-    func delete(request: Clients.SslCertificatesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified SslCertificate resource.
-    func delete(
-      project: Swift.String,
-      sslCertificate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified SslCertificate resource.
-    ///
-    /// @Snippet(path: "sslCertificates_get")
-    func `get`(request: Clients.SslCertificatesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.SslCertificate
-
-    /// Returns the specified SslCertificate resource.
-    func `get`(
-      project: Swift.String,
-      sslCertificate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.SslCertificate
-
-    /// Creates a SslCertificate resource in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "sslCertificates_insert")
-    func insert(request: Clients.SslCertificatesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a SslCertificate resource in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      body: SslCertificate?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of SslCertificate resources available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "sslCertificates_list")
-    func list(request: Clients.SslCertificatesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.SslCertificateList
-
-    /// Retrieves the list of SslCertificate resources available to the specified
-    /// project.
-    func list(
-      byItem: Clients.SslCertificatesClient.ListRequest
-    ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
-
-    /// Retrieves the list of SslCertificate resources available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
+    /// Creates a new `SslCertificatesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SslCertificatesStub = try Clients.SslCertificatesTransport(options)
+      inner = Clients.SslCertificatesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SslCertificatesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all SslCertificate resources, regional and global,
     /// available to the specified project.
@@ -121,166 +48,209 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "sslCertificates_aggregatedList")
-    func aggregatedList(
-      request: Clients.SslCertificatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
+    public func aggregatedList(
+      request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all SslCertificate resources, regional and global,
     /// available to the specified project.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.SslCertificatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "sslCertificates_aggregatedList")
+    public func aggregatedList(
+      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified SslCertificate resource.
     ///
     /// @Snippet(path: "sslCertificates_delete")
-    func delete(
-      request: Clients.SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified SslCertificate resource.
     ///
     /// @Snippet(path: "sslCertificates_get")
-    func `get`(
-      request: Clients.SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslCertificate
+    public func `get`(
+      request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SslCertificate {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a SslCertificate resource in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "sslCertificates_insert")
-    func insert(
-      request: Clients.SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of SslCertificate resources available to the specified
     /// project.
     ///
     /// @Snippet(path: "sslCertificates_list")
-    func list(
-      request: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SslCertificateList
+    public func list(
+      request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SslCertificateList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of SslCertificate resources available to the specified
     /// project.
-    func list(
-      byItem: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
+    ///
+    /// @Snippet(path: "sslCertificates_list")
+    public func list(
+      byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslCertificateList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SslCertificates``.
-    public class SslCertificatesClient: SslCertificates {
-      let inner: any SslCertificatesStub
+    /// A Swift protocol to mock `SslCertificatesClient`.
+    ///
+    /// To mock `SslCertificatesClient` change your functions to receive
+    /// `some SslCertificatesProtocol` or `any SslCertificatesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SslCertificatesProtocol {
+      /// See `SslCertificatesClient.aggregatedList`.
+      func aggregatedList(request: SslCertificatesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.SslCertificateAggregatedList
 
-      /// Creates a new `SslCertificatesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SslCertificatesStub = try SslCertificatesTransport(options)
-        inner = SslCertificatesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SslCertificatesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SslCertificatesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: SslCertificatesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
 
-      /// See `SslCertificates.aggregatedList`
-      public func aggregatedList(
-        request: Clients.SslCertificatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `SslCertificatesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
 
-      /// Retrieves the list of all SslCertificate resources, regional and global,
-      /// available to the specified project.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.SslCertificatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `SslCertificatesClient.delete`.
+      func delete(request: SslCertificatesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `SslCertificates.delete`
-      public func delete(
-        request: Clients.SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `SslCertificatesClient.delete`.
+      func delete(
+        project: Swift.String,
+        sslCertificate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `SslCertificates.`get``
-      public func `get`(
-        request: Clients.SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslCertificate {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `SslCertificatesClient.`get``.
+      func `get`(request: SslCertificatesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.SslCertificate
 
-      /// See `SslCertificates.insert`
-      public func insert(
-        request: Clients.SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `SslCertificatesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        sslCertificate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.SslCertificate
 
-      /// See `SslCertificates.list`
-      public func list(
-        request: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SslCertificateList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `SslCertificatesClient.insert`.
+      func insert(request: SslCertificatesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of SslCertificate resources available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslCertificateList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `SslCertificatesClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: SslCertificate?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SslCertificatesClient.list`.
+      func list(request: SslCertificatesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.SslCertificateList
+
+      /// See `SslCertificatesClient.list`.
+      func list(
+        byItem: SslCertificatesClient.ListRequest
+      ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
+
+      /// See `SslCertificatesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
+
+      /// See `SslCertificatesClient.aggregatedList`.
+      func aggregatedList(
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
+
+      /// See `SslCertificatesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
+
+      /// See `SslCertificatesClient.delete`.
+      func delete(
+        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SslCertificatesClient.`get``.
+      func `get`(
+        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SslCertificate
+
+      /// See `SslCertificatesClient.insert`.
+      func insert(
+        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SslCertificatesClient.list`.
+      func list(
+        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SslCertificateList
+
+      /// See `SslCertificatesClient.list`.
+      func list(
+        byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
     }
   }
 
   // Default implementations
-  extension SslCertificates {
-    public func aggregatedList(request: Clients.SslCertificatesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
+  extension Clients.SslCertificatesProtocol {
+    public func aggregatedList(request: SslCertificatesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.SslCertificateAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.SslCertificatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.SslCertificatesClient.AggregatedListRequest
+      byItem: SslCertificatesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.SslCertificatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList in
@@ -292,20 +262,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
-      let request = Clients.SslCertificatesClient.AggregatedListRequest().with {
+      let request = SslCertificatesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.SslCertificatesClient.DeleteRequest) async throws
+    public func delete(request: SslCertificatesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -314,21 +284,21 @@
       project: Swift.String,
       sslCertificate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SslCertificatesClient.DeleteRequest().with {
+      let request = SslCertificatesClient.DeleteRequest().with {
         $0.project = project
         $0.sslCertificate = sslCertificate
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.SslCertificatesClient.GetRequest) async throws
+    public func `get`(request: SslCertificatesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.SslCertificate
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificate {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -337,21 +307,21 @@
       project: Swift.String,
       sslCertificate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.SslCertificate {
-      let request = Clients.SslCertificatesClient.GetRequest().with {
+      let request = SslCertificatesClient.GetRequest().with {
         $0.project = project
         $0.sslCertificate = sslCertificate
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.SslCertificatesClient.InsertRequest) async throws
+    public func insert(request: SslCertificatesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -360,33 +330,33 @@
       project: Swift.String,
       body: SslCertificate?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SslCertificatesClient.InsertRequest().with {
+      let request = SslCertificatesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.SslCertificatesClient.ListRequest) async throws
+    public func list(request: SslCertificatesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.SslCertificateList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.SslCertificatesClient.ListRequest
+      byItem: SslCertificatesClient.ListRequest
     ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SslCertificateList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -397,7 +367,7 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
-      let request = Clients.SslCertificatesClient.ListRequest().with {
+      let request = SslCertificatesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)

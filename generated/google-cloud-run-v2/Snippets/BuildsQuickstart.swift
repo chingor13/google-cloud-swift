@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 
 func sample() async throws {
-  let client = try GoogleCloudRunV2.Clients.BuildsClient()
+  let client = try GoogleCloudRunV2.BuildsClient()
   let response = try await client.submitBuild(
     request: SubmitBuildRequest()
       /* set fields using .with { $0... } */

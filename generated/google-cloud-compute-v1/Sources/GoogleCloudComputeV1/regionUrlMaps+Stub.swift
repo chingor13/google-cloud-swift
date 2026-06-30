@@ -28,31 +28,31 @@
   extension Clients {
     protocol RegionUrlMapsStub {
       func delete(
-        request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap
 
       func insert(
-        request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList
 
       func patch(
-        request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func update(
-        request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func validate(
-        request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
     }
 
@@ -65,7 +65,7 @@
       }
 
       public func delete(
-        request: Clients.RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -91,7 +91,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -115,7 +115,7 @@
       }
 
       public func insert(
-        request: Clients.RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -141,7 +141,7 @@
       }
 
       public func list(
-        request: Clients.RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -169,7 +169,7 @@
       }
 
       public func patch(
-        request: Clients.RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -199,7 +199,7 @@
       }
 
       public func update(
-        request: Clients.RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -229,7 +229,7 @@
       }
 
       public func validate(
-        request: Clients.RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

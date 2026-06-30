@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 
 func sample(projectId: String, ) async throws {
-  let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
+  let client = try GoogleCloudSecretmanagerV1.SecretManagerServiceClient()
   let items = try client.listSecrets(
     byItem: ListSecretsRequest()
       .with {

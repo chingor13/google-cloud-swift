@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+  let client = try GoogleCloudWorkflowsV1.WorkflowsClient()
   let items = try client.listWorkflows(
     byItem: ListWorkflowsRequest()
       .with {

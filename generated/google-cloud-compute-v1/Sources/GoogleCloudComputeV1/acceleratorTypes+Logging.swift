@@ -60,7 +60,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.AcceleratorTypesClient.AggregatedListRequest,
+        request: AcceleratorTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList {
         try await self._intercept(
@@ -68,40 +68,38 @@
           options: options,
           name: "aggregatedList",
           action: {
-            (
-              r: Clients.AcceleratorTypesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
+            (r: AcceleratorTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorType {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.AcceleratorTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.AcceleratorType
+            (r: AcceleratorTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.AcceleratorType
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.AcceleratorTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.AcceleratorTypeList
+            (r: AcceleratorTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.AcceleratorTypeList
             in
             return try await self.inner.list(request: r, options: o)
           })

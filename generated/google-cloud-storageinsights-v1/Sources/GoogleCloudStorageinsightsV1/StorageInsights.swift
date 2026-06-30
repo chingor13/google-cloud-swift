@@ -30,957 +30,917 @@ import Logging
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "StorageInsightsQuickstart")
-public protocol StorageInsights {
-  /// Lists ReportConfigs in a given project and location.
-  ///
-  /// @Snippet(path: "StorageInsights_ListReportConfigs")
-  func listReportConfigs(request: ListReportConfigsRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
+public class StorageInsightsClient: Clients.StorageInsightsProtocol {
+  let inner: any Clients.StorageInsightsStub
 
-  /// Lists ReportConfigs in a given project and location.
-  func listReportConfigs(
-    byItem: ListReportConfigsRequest
-  ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
-
-  /// Lists ReportConfigs in a given project and location.
-  func listReportConfigs(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
-
-  /// Gets details of a single ReportConfig.
-  ///
-  /// @Snippet(path: "StorageInsights_GetReportConfig")
-  func getReportConfig(request: GetReportConfigRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Gets details of a single ReportConfig.
-  func getReportConfig(
-    name: Swift.String,
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Creates a new ReportConfig in a given project and location.
-  ///
-  /// @Snippet(path: "StorageInsights_CreateReportConfig")
-  func createReportConfig(request: CreateReportConfigRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Creates a new ReportConfig in a given project and location.
-  func createReportConfig(
-    parent: Swift.String,
-    reportConfig: ReportConfig?,
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Updates the parameters of a single ReportConfig.
-  ///
-  /// @Snippet(path: "StorageInsights_UpdateReportConfig")
-  func updateReportConfig(request: UpdateReportConfigRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Updates the parameters of a single ReportConfig.
-  func updateReportConfig(
-    reportConfig: ReportConfig?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
-
-  /// Deletes a single ReportConfig.
-  ///
-  /// @Snippet(path: "StorageInsights_DeleteReportConfig")
-  func deleteReportConfig(request: DeleteReportConfigRequest) async throws
-
-  /// Deletes a single ReportConfig.
-  func deleteReportConfig(
-    name: Swift.String,
-  ) async throws
-
-  /// Lists ReportDetails in a given project and location.
-  ///
-  /// @Snippet(path: "StorageInsights_ListReportDetails")
-  func listReportDetails(request: ListReportDetailsRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
-
-  /// Lists ReportDetails in a given project and location.
-  func listReportDetails(
-    byItem: ListReportDetailsRequest
-  ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
-
-  /// Lists ReportDetails in a given project and location.
-  func listReportDetails(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
-
-  /// Gets details of a single ReportDetail.
-  ///
-  /// @Snippet(path: "StorageInsights_GetReportDetail")
-  func getReportDetail(request: GetReportDetailRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ReportDetail
-
-  /// Gets details of a single ReportDetail.
-  func getReportDetail(
-    name: Swift.String,
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail
-
-  /// Lists the dataset configurations in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_ListDatasetConfigs")
-  func listDatasetConfigs(request: ListDatasetConfigsRequest) async throws
-    -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
-
-  /// Lists the dataset configurations in a given project for a given location.
-  func listDatasetConfigs(
-    byItem: ListDatasetConfigsRequest
-  ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
-
-  /// Lists the dataset configurations in a given project for a given location.
-  func listDatasetConfigs(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
-
-  /// Gets the dataset configuration in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_GetDatasetConfig")
-  func getDatasetConfig(request: GetDatasetConfigRequest) async throws
-    -> GoogleCloudStorageinsightsV1.DatasetConfig
-
-  /// Gets the dataset configuration in a given project for a given location.
-  func getDatasetConfig(
-    name: Swift.String,
-  ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig
-
-  /// Creates a dataset configuration in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_CreateDatasetConfig")
-  func createDatasetConfig(request: CreateDatasetConfigRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Creates a dataset configuration in a given project for a given location.
-  func createDatasetConfig(withPolling: CreateDatasetConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DatasetConfig>
-
-  /// Creates a dataset configuration in a given project for a given location.
-  func createDatasetConfig(
-    parent: Swift.String,
-    datasetConfig: DatasetConfig?,
-    datasetConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
-
-  /// Updates a dataset configuration in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_UpdateDatasetConfig")
-  func updateDatasetConfig(request: UpdateDatasetConfigRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Updates a dataset configuration in a given project for a given location.
-  func updateDatasetConfig(withPolling: UpdateDatasetConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DatasetConfig>
-
-  /// Updates a dataset configuration in a given project for a given location.
-  func updateDatasetConfig(
-    datasetConfig: DatasetConfig?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
-
-  /// Deletes a dataset configuration in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_DeleteDatasetConfig")
-  func deleteDatasetConfig(request: DeleteDatasetConfigRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Deletes a dataset configuration in a given project for a given location.
-  func deleteDatasetConfig(withPolling: DeleteDatasetConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Deletes a dataset configuration in a given project for a given location.
-  func deleteDatasetConfig(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Links a dataset to BigQuery in a given project for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_LinkDataset")
-  func linkDataset(request: LinkDatasetRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Links a dataset to BigQuery in a given project for a given location.
-  func linkDataset(withPolling: LinkDatasetRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<LinkDatasetResponse>
-
-  /// Links a dataset to BigQuery in a given project for a given location.
-  func linkDataset(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse>
-
-  /// Unlinks a dataset from BigQuery in a given project
-  /// for a given location.
-  ///
-  /// @Snippet(path: "StorageInsights_UnlinkDataset")
-  func unlinkDataset(request: UnlinkDatasetRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Unlinks a dataset from BigQuery in a given project
-  /// for a given location.
-  func unlinkDataset(withPolling: UnlinkDatasetRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Unlinks a dataset from BigQuery in a given project
-  /// for a given location.
-  func unlinkDataset(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Lists information about the supported locations for this service.
-  ///
-  /// @Snippet(path: "StorageInsights_ListLocations")
-  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
-    -> GoogleCloudLocation.ListLocationsResponse
-
-  /// Lists information about the supported locations for this service.
-  func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
-
-  /// Gets information about a location.
-  ///
-  /// @Snippet(path: "StorageInsights_GetLocation")
-  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
-    -> GoogleCloudLocation.Location
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "StorageInsights_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "StorageInsights_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "StorageInsights_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "StorageInsights_CancelOperation")
-  func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func cancelOperation(
-    name: Swift.String,
-  ) async throws
+  /// Creates a new `StorageInsightsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.StorageInsightsStub = try Clients.StorageInsightsTransport(options)
+    inner = Clients.StorageInsightsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.StorageInsightsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists ReportConfigs in a given project and location.
   ///
   /// @Snippet(path: "StorageInsights_ListReportConfigs")
-  func listReportConfigs(
+  public func listReportConfigs(
     request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
+  ) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse {
+    try await self.inner.listReportConfigs(request: request, options: options)
+  }
 
   /// Lists ReportConfigs in a given project and location.
-  func listReportConfigs(
+  ///
+  /// @Snippet(path: "StorageInsights_ListReportConfigs")
+  public func listReportConfigs(
     byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
+  ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listReportConfigs(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single ReportConfig.
   ///
   /// @Snippet(path: "StorageInsights_GetReportConfig")
-  func getReportConfig(
+  public func getReportConfig(
     request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
+    try await self.inner.getReportConfig(request: request, options: options)
+  }
 
   /// Creates a new ReportConfig in a given project and location.
   ///
   /// @Snippet(path: "StorageInsights_CreateReportConfig")
-  func createReportConfig(
+  public func createReportConfig(
     request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
+    try await self.inner.createReportConfig(request: request, options: options)
+  }
 
   /// Updates the parameters of a single ReportConfig.
   ///
   /// @Snippet(path: "StorageInsights_UpdateReportConfig")
-  func updateReportConfig(
+  public func updateReportConfig(
     request: UpdateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+  ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
+    try await self.inner.updateReportConfig(request: request, options: options)
+  }
 
   /// Deletes a single ReportConfig.
   ///
   /// @Snippet(path: "StorageInsights_DeleteReportConfig")
-  func deleteReportConfig(
+  public func deleteReportConfig(
     request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteReportConfig(request: request, options: options)
+  }
 
   /// Lists ReportDetails in a given project and location.
   ///
   /// @Snippet(path: "StorageInsights_ListReportDetails")
-  func listReportDetails(
+  public func listReportDetails(
     request: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
+  ) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse {
+    try await self.inner.listReportDetails(request: request, options: options)
+  }
 
   /// Lists ReportDetails in a given project and location.
-  func listReportDetails(
+  ///
+  /// @Snippet(path: "StorageInsights_ListReportDetails")
+  public func listReportDetails(
     byItem: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
+  ) throws -> any AsyncSequence<ReportDetail, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listReportDetails(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single ReportDetail.
   ///
   /// @Snippet(path: "StorageInsights_GetReportDetail")
-  func getReportDetail(
+  public func getReportDetail(
     request: GetReportDetailRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail
+  ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail {
+    try await self.inner.getReportDetail(request: request, options: options)
+  }
 
   /// Lists the dataset configurations in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_ListDatasetConfigs")
-  func listDatasetConfigs(
+  public func listDatasetConfigs(
     request: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
+  ) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse {
+    try await self.inner.listDatasetConfigs(request: request, options: options)
+  }
 
   /// Lists the dataset configurations in a given project for a given location.
-  func listDatasetConfigs(
+  ///
+  /// @Snippet(path: "StorageInsights_ListDatasetConfigs")
+  public func listDatasetConfigs(
     byItem: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
+  ) throws -> any AsyncSequence<DatasetConfig, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listDatasetConfigs(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the dataset configuration in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_GetDatasetConfig")
-  func getDatasetConfig(
+  public func getDatasetConfig(
     request: GetDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig
+  ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig {
+    try await self.inner.getDatasetConfig(request: request, options: options)
+  }
 
   /// Creates a dataset configuration in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_CreateDatasetConfig")
-  func createDatasetConfig(
+  public func createDatasetConfig(
     request: CreateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createDatasetConfig(request: request, options: options)
+  }
 
   /// Creates a dataset configuration in a given project for a given location.
-  func createDatasetConfig(
+  ///
+  /// @Snippet(path: "StorageInsights_CreateDatasetConfig")
+  public func createDatasetConfig(
     withPolling: CreateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try DatasetConfig(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createDatasetConfig(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates a dataset configuration in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_UpdateDatasetConfig")
-  func updateDatasetConfig(
+  public func updateDatasetConfig(
     request: UpdateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateDatasetConfig(request: request, options: options)
+  }
 
   /// Updates a dataset configuration in a given project for a given location.
-  func updateDatasetConfig(
+  ///
+  /// @Snippet(path: "StorageInsights_UpdateDatasetConfig")
+  public func updateDatasetConfig(
     withPolling: UpdateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+  ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try DatasetConfig(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateDatasetConfig(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a dataset configuration in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_DeleteDatasetConfig")
-  func deleteDatasetConfig(
+  public func deleteDatasetConfig(
     request: DeleteDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteDatasetConfig(request: request, options: options)
+  }
 
   /// Deletes a dataset configuration in a given project for a given location.
-  func deleteDatasetConfig(
+  ///
+  /// @Snippet(path: "StorageInsights_DeleteDatasetConfig")
+  public func deleteDatasetConfig(
     withPolling: DeleteDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteDatasetConfig(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Links a dataset to BigQuery in a given project for a given location.
   ///
   /// @Snippet(path: "StorageInsights_LinkDataset")
-  func linkDataset(
+  public func linkDataset(
     request: LinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.linkDataset(request: request, options: options)
+  }
 
   /// Links a dataset to BigQuery in a given project for a given location.
-  func linkDataset(
+  ///
+  /// @Snippet(path: "StorageInsights_LinkDataset")
+  public func linkDataset(
     withPolling: LinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse>
+  ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<LinkDatasetResponse>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try LinkDatasetResponse(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.linkDataset(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = {
+      () async throws -> GoogleCloudGax._PollableOperationImpl<LinkDatasetResponse>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Unlinks a dataset from BigQuery in a given project
   /// for a given location.
   ///
   /// @Snippet(path: "StorageInsights_UnlinkDataset")
-  func unlinkDataset(
+  public func unlinkDataset(
     request: UnlinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.unlinkDataset(request: request, options: options)
+  }
 
   /// Unlinks a dataset from BigQuery in a given project
   /// for a given location.
-  func unlinkDataset(
+  ///
+  /// @Snippet(path: "StorageInsights_UnlinkDataset")
+  public func unlinkDataset(
     withPolling: UnlinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.unlinkDataset(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "StorageInsights_ListLocations")
-  func listLocations(
+  public func listLocations(
     request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.ListLocationsResponse
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse {
+    try await self.inner.listLocations(request: request, options: options)
+  }
 
   /// Lists information about the supported locations for this service.
-  func listLocations(
+  ///
+  /// @Snippet(path: "StorageInsights_ListLocations")
+  public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listLocations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "StorageInsights_GetLocation")
-  func getLocation(
+  public func getLocation(
     request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.Location
+  ) async throws -> GoogleCloudLocation.Location {
+    try await self.inner.getLocation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageInsights_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "StorageInsights_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageInsights_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageInsights_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "StorageInsights_CancelOperation")
-  func cancelOperation(
+  public func cancelOperation(
     request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.cancelOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``StorageInsights``.
-  public class StorageInsightsClient: StorageInsights {
-    let inner: any StorageInsightsStub
+  /// A Swift protocol to mock `StorageInsightsClient`.
+  ///
+  /// To mock `StorageInsightsClient` change your functions to receive
+  /// `some StorageInsightsProtocol` or `any StorageInsightsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol StorageInsightsProtocol {
+    /// See `StorageInsightsClient.listReportConfigs`.
+    func listReportConfigs(request: ListReportConfigsRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
 
-    /// Creates a new `StorageInsightsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any StorageInsightsStub = try StorageInsightsTransport(options)
-      inner = StorageInsightsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = StorageInsightsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `StorageInsightsClient.listReportConfigs`.
+    func listReportConfigs(
+      byItem: ListReportConfigsRequest
+    ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
 
-    /// See `StorageInsights.listReportConfigs`
-    public func listReportConfigs(
+    /// See `StorageInsightsClient.listReportConfigs`.
+    func listReportConfigs(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
+
+    /// See `StorageInsightsClient.getReportConfig`.
+    func getReportConfig(request: GetReportConfigRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.getReportConfig`.
+    func getReportConfig(
+      name: Swift.String,
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.createReportConfig`.
+    func createReportConfig(request: CreateReportConfigRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.createReportConfig`.
+    func createReportConfig(
+      parent: Swift.String,
+      reportConfig: ReportConfig?,
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.updateReportConfig`.
+    func updateReportConfig(request: UpdateReportConfigRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.updateReportConfig`.
+    func updateReportConfig(
+      reportConfig: ReportConfig?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
+
+    /// See `StorageInsightsClient.deleteReportConfig`.
+    func deleteReportConfig(request: DeleteReportConfigRequest) async throws
+
+    /// See `StorageInsightsClient.deleteReportConfig`.
+    func deleteReportConfig(
+      name: Swift.String,
+    ) async throws
+
+    /// See `StorageInsightsClient.listReportDetails`.
+    func listReportDetails(request: ListReportDetailsRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
+
+    /// See `StorageInsightsClient.listReportDetails`.
+    func listReportDetails(
+      byItem: ListReportDetailsRequest
+    ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
+
+    /// See `StorageInsightsClient.listReportDetails`.
+    func listReportDetails(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
+
+    /// See `StorageInsightsClient.getReportDetail`.
+    func getReportDetail(request: GetReportDetailRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ReportDetail
+
+    /// See `StorageInsightsClient.getReportDetail`.
+    func getReportDetail(
+      name: Swift.String,
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail
+
+    /// See `StorageInsightsClient.listDatasetConfigs`.
+    func listDatasetConfigs(request: ListDatasetConfigsRequest) async throws
+      -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
+
+    /// See `StorageInsightsClient.listDatasetConfigs`.
+    func listDatasetConfigs(
+      byItem: ListDatasetConfigsRequest
+    ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
+
+    /// See `StorageInsightsClient.listDatasetConfigs`.
+    func listDatasetConfigs(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
+
+    /// See `StorageInsightsClient.getDatasetConfig`.
+    func getDatasetConfig(request: GetDatasetConfigRequest) async throws
+      -> GoogleCloudStorageinsightsV1.DatasetConfig
+
+    /// See `StorageInsightsClient.getDatasetConfig`.
+    func getDatasetConfig(
+      name: Swift.String,
+    ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig
+
+    /// See `StorageInsightsClient.createDatasetConfig`.
+    func createDatasetConfig(request: CreateDatasetConfigRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.createDatasetConfig`.
+    func createDatasetConfig(withPolling: CreateDatasetConfigRequest) async throws
+      -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+
+    /// See `StorageInsightsClient.createDatasetConfig`.
+    func createDatasetConfig(
+      parent: Swift.String,
+      datasetConfig: DatasetConfig?,
+      datasetConfigId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+
+    /// See `StorageInsightsClient.updateDatasetConfig`.
+    func updateDatasetConfig(request: UpdateDatasetConfigRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.updateDatasetConfig`.
+    func updateDatasetConfig(withPolling: UpdateDatasetConfigRequest) async throws
+      -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+
+    /// See `StorageInsightsClient.updateDatasetConfig`.
+    func updateDatasetConfig(
+      datasetConfig: DatasetConfig?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
+
+    /// See `StorageInsightsClient.deleteDatasetConfig`.
+    func deleteDatasetConfig(request: DeleteDatasetConfigRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.deleteDatasetConfig`.
+    func deleteDatasetConfig(withPolling: DeleteDatasetConfigRequest) async throws
+      -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `StorageInsightsClient.deleteDatasetConfig`.
+    func deleteDatasetConfig(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `StorageInsightsClient.linkDataset`.
+    func linkDataset(request: LinkDatasetRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.linkDataset`.
+    func linkDataset(withPolling: LinkDatasetRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<LinkDatasetResponse>
+
+    /// See `StorageInsightsClient.linkDataset`.
+    func linkDataset(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse>
+
+    /// See `StorageInsightsClient.unlinkDataset`.
+    func unlinkDataset(request: UnlinkDatasetRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.unlinkDataset`.
+    func unlinkDataset(withPolling: UnlinkDatasetRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `StorageInsightsClient.unlinkDataset`.
+    func unlinkDataset(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `StorageInsightsClient.listLocations`.
+    func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
+      -> GoogleCloudLocation.ListLocationsResponse
+
+    /// See `StorageInsightsClient.listLocations`.
+    func listLocations(
+      byItem: GoogleCloudLocation.ListLocationsRequest
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+
+    /// See `StorageInsightsClient.getLocation`.
+    func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+      -> GoogleCloudLocation.Location
+
+    /// See `StorageInsightsClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `StorageInsightsClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `StorageInsightsClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `StorageInsightsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `StorageInsightsClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `StorageInsightsClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `StorageInsightsClient.cancelOperation`.
+    func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
+
+    /// See `StorageInsightsClient.cancelOperation`.
+    func cancelOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `StorageInsightsClient.listReportConfigs`.
+    func listReportConfigs(
       request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse {
-      try await self.inner.listReportConfigs(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
 
-    /// Lists ReportConfigs in a given project and location.
-    public func listReportConfigs(
+    /// See `StorageInsightsClient.listReportConfigs`.
+    func listReportConfigs(
       byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listReportConfigs(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
 
-    /// See `StorageInsights.getReportConfig`
-    public func getReportConfig(
+    /// See `StorageInsightsClient.getReportConfig`.
+    func getReportConfig(
       request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
-      try await self.inner.getReportConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
 
-    /// See `StorageInsights.createReportConfig`
-    public func createReportConfig(
+    /// See `StorageInsightsClient.createReportConfig`.
+    func createReportConfig(
       request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
-      try await self.inner.createReportConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
 
-    /// See `StorageInsights.updateReportConfig`
-    public func updateReportConfig(
+    /// See `StorageInsightsClient.updateReportConfig`.
+    func updateReportConfig(
       request: UpdateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig {
-      try await self.inner.updateReportConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportConfig
 
-    /// See `StorageInsights.deleteReportConfig`
-    public func deleteReportConfig(
+    /// See `StorageInsightsClient.deleteReportConfig`.
+    func deleteReportConfig(
       request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteReportConfig(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `StorageInsights.listReportDetails`
-    public func listReportDetails(
+    /// See `StorageInsightsClient.listReportDetails`.
+    func listReportDetails(
       request: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse {
-      try await self.inner.listReportDetails(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
 
-    /// Lists ReportDetails in a given project and location.
-    public func listReportDetails(
+    /// See `StorageInsightsClient.listReportDetails`.
+    func listReportDetails(
       byItem: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ReportDetail, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listReportDetails(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<ReportDetail, Swift.Error>
 
-    /// See `StorageInsights.getReportDetail`
-    public func getReportDetail(
+    /// See `StorageInsightsClient.getReportDetail`.
+    func getReportDetail(
       request: GetReportDetailRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail {
-      try await self.inner.getReportDetail(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ReportDetail
 
-    /// See `StorageInsights.listDatasetConfigs`
-    public func listDatasetConfigs(
+    /// See `StorageInsightsClient.listDatasetConfigs`.
+    func listDatasetConfigs(
       request: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse {
-      try await self.inner.listDatasetConfigs(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
 
-    /// Lists the dataset configurations in a given project for a given location.
-    public func listDatasetConfigs(
+    /// See `StorageInsightsClient.listDatasetConfigs`.
+    func listDatasetConfigs(
       byItem: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<DatasetConfig, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listDatasetConfigs(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<DatasetConfig, Swift.Error>
 
-    /// See `StorageInsights.getDatasetConfig`
-    public func getDatasetConfig(
+    /// See `StorageInsightsClient.getDatasetConfig`.
+    func getDatasetConfig(
       request: GetDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig {
-      try await self.inner.getDatasetConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudStorageinsightsV1.DatasetConfig
 
-    /// See `StorageInsights.createDatasetConfig`
-    public func createDatasetConfig(
+    /// See `StorageInsightsClient.createDatasetConfig`.
+    func createDatasetConfig(
       request: CreateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createDatasetConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a dataset configuration in a given project for a given location.
-    public func createDatasetConfig(
+    /// See `StorageInsightsClient.createDatasetConfig`.
+    func createDatasetConfig(
       withPolling: CreateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try DatasetConfig(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createDatasetConfig(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `StorageInsights.updateDatasetConfig`
-    public func updateDatasetConfig(
+    /// See `StorageInsightsClient.updateDatasetConfig`.
+    func updateDatasetConfig(
       request: UpdateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateDatasetConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates a dataset configuration in a given project for a given location.
-    public func updateDatasetConfig(
+    /// See `StorageInsightsClient.updateDatasetConfig`.
+    func updateDatasetConfig(
       withPolling: UpdateDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetConfig>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try DatasetConfig(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateDatasetConfig(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetConfig>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `StorageInsights.deleteDatasetConfig`
-    public func deleteDatasetConfig(
+    /// See `StorageInsightsClient.deleteDatasetConfig`.
+    func deleteDatasetConfig(
       request: DeleteDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteDatasetConfig(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a dataset configuration in a given project for a given location.
-    public func deleteDatasetConfig(
+    /// See `StorageInsightsClient.deleteDatasetConfig`.
+    func deleteDatasetConfig(
       withPolling: DeleteDatasetConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteDatasetConfig(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `StorageInsights.linkDataset`
-    public func linkDataset(
+    /// See `StorageInsightsClient.linkDataset`.
+    func linkDataset(
       request: LinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.linkDataset(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Links a dataset to BigQuery in a given project for a given location.
-    public func linkDataset(
+    /// See `StorageInsightsClient.linkDataset`.
+    func linkDataset(
       withPolling: LinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<LinkDatasetResponse>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<LinkDatasetResponse>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try LinkDatasetResponse(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.linkDataset(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<LinkDatasetResponse>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `StorageInsights.unlinkDataset`
-    public func unlinkDataset(
+    /// See `StorageInsightsClient.unlinkDataset`.
+    func unlinkDataset(
       request: UnlinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.unlinkDataset(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Unlinks a dataset from BigQuery in a given project
-    /// for a given location.
-    public func unlinkDataset(
+    /// See `StorageInsightsClient.unlinkDataset`.
+    func unlinkDataset(
       withPolling: UnlinkDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.unlinkDataset(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `StorageInsights.listLocations`
-    public func listLocations(
+    /// See `StorageInsightsClient.listLocations`.
+    func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      try await self.inner.listLocations(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
-    /// Lists information about the supported locations for this service.
-    public func listLocations(
+    /// See `StorageInsightsClient.listLocations`.
+    func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listLocations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
-    /// See `StorageInsights.getLocation`
-    public func getLocation(
+    /// See `StorageInsightsClient.getLocation`.
+    func getLocation(
       request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.Location {
-      try await self.inner.getLocation(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.Location
 
-    /// See `StorageInsights.listOperations`
-    public func listOperations(
+    /// See `StorageInsightsClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `StorageInsightsClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `StorageInsights.getOperation`
-    public func getOperation(
+    /// See `StorageInsightsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `StorageInsights.deleteOperation`
-    public func deleteOperation(
+    /// See `StorageInsightsClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `StorageInsights.cancelOperation`
-    public func cancelOperation(
+    /// See `StorageInsightsClient.cancelOperation`.
+    func cancelOperation(
       request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.cancelOperation(request: request, options: options)
-    }
+    ) async throws
   }
 }
 
 // Default implementations
-extension StorageInsights {
+extension Clients.StorageInsightsProtocol {
   public func listReportConfigs(request: ListReportConfigsRequest) async throws
     -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
   {

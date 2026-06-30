@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ZoneVmExtensionPoliciesClient {
+  extension ZoneVmExtensionPoliciesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.zoneVmExtensionPolicies.delete] method.
     ///
     /// [google.cloud.compute.v1.zoneVmExtensionPolicies.delete]: <doc:ZoneVmExtensionPolicies/delete(request:)>

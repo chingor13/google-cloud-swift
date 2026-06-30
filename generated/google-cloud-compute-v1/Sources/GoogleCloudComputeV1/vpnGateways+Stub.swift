@@ -28,37 +28,35 @@
   extension Clients {
     protocol VpnGatewaysStub {
       func aggregatedList(
-        request: Clients.VpnGatewaysClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayAggregatedList
 
       func delete(
-        request: Clients.VpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.VpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGateway
 
       func getStatus(
-        request: Clients.VpnGatewaysClient.GetStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetStatusRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewaysGetStatusResponse
 
       func insert(
-        request: Clients.VpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.VpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayList
 
       func setLabels(
-        request: Clients.VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.VpnGatewaysClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -71,8 +69,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.VpnGatewaysClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -102,7 +99,7 @@
       }
 
       public func delete(
-        request: Clients.VpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -129,7 +126,7 @@
       }
 
       public func `get`(
-        request: Clients.VpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGateway {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -154,7 +151,7 @@
       }
 
       public func getStatus(
-        request: Clients.VpnGatewaysClient.GetStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetStatusRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewaysGetStatusResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -179,7 +176,7 @@
       }
 
       public func insert(
-        request: Clients.VpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -205,7 +202,7 @@
       }
 
       public func list(
-        request: Clients.VpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -233,7 +230,7 @@
       }
 
       public func setLabels(
-        request: Clients.VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -263,8 +260,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.VpnGatewaysClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

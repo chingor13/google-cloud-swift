@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RoutersClient {
+  extension RoutersClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.routers.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.routers.aggregatedList]: <doc:Routers/aggregatedList(request:)>
@@ -795,7 +795,7 @@
       Sendable
     {
       /// (Required) limit results to this address family (either IPv4 or IPv6)
-      public var addressFamily: Clients.RoutersClient.ListBgpRoutesRequest.AddressFamily? = nil
+      public var addressFamily: RoutersClient.ListBgpRoutesRequest.AddressFamily? = nil
 
       /// Limit results to destinations that are subnets of this CIDR range
       public var destinationPrefix: Swift.String? = nil
@@ -909,7 +909,7 @@
 
       /// (Required) limit results to this type of route (either LEARNED or
       /// ADVERTISED)
-      public var routeType: Clients.RoutersClient.ListBgpRoutesRequest.RouteType? = nil
+      public var routeType: RoutersClient.ListBgpRoutesRequest.RouteType? = nil
 
       /// Name or id of the resource for this request.
       /// Name should conform to RFC1035.
@@ -933,7 +933,7 @@
 
       /// The enumerated type for the [addressFamily][google.cloud.compute.v1.routers.listBgpRoutesRequest.addressFamily] field.
       ///
-      /// [google.cloud.compute.v1.routers.listBgpRoutesRequest.addressFamily]: <doc:Clients/RoutersClient/ListBgpRoutesRequest/AddressFamily>
+      /// [google.cloud.compute.v1.routers.listBgpRoutesRequest.addressFamily]: <doc:RoutersClient/ListBgpRoutesRequest/AddressFamily>
       public enum AddressFamily: Codable, Equatable, Sendable {
         case ipv4
         case ipv6
@@ -1037,7 +1037,7 @@
 
       /// The enumerated type for the [routeType][google.cloud.compute.v1.routers.listBgpRoutesRequest.routeType] field.
       ///
-      /// [google.cloud.compute.v1.routers.listBgpRoutesRequest.routeType]: <doc:Clients/RoutersClient/ListBgpRoutesRequest/RouteType>
+      /// [google.cloud.compute.v1.routers.listBgpRoutesRequest.routeType]: <doc:RoutersClient/ListBgpRoutesRequest/RouteType>
       public enum RouteType: Codable, Equatable, Sendable {
         case advertised
         case learned

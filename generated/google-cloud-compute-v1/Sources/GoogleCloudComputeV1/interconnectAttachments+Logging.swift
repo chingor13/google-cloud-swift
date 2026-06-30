@@ -60,7 +60,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.InterconnectAttachmentsClient.AggregatedListRequest,
+        request: InterconnectAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentAggregatedList {
         try await self._intercept(
@@ -69,7 +69,7 @@
           name: "aggregatedList",
           action: {
             (
-              r: Clients.InterconnectAttachmentsClient.AggregatedListRequest,
+              r: InterconnectAttachmentsClient.AggregatedListRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentAggregatedList
             in
@@ -78,33 +78,29 @@
       }
 
       public func delete(
-        request: Clients.InterconnectAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (
-              r: Clients.InterconnectAttachmentsClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectAttachmentsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.InterconnectAttachmentsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachment {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.InterconnectAttachmentsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InterconnectAttachmentsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InterconnectAttachment
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -112,33 +108,29 @@
       }
 
       public func insert(
-        request: Clients.InterconnectAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (
-              r: Clients.InterconnectAttachmentsClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectAttachmentsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.InterconnectAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.InterconnectAttachmentsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InterconnectAttachmentsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InterconnectAttachmentList
             in
             return try await self.inner.list(request: r, options: o)
@@ -146,25 +138,22 @@
       }
 
       public func patch(
-        request: Clients.InterconnectAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (
-              r: Clients.InterconnectAttachmentsClient.PatchRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectAttachmentsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: Clients.InterconnectAttachmentsClient.SetLabelsRequest,
+        request: InterconnectAttachmentsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -172,10 +161,8 @@
           options: options,
           name: "setLabels",
           action: {
-            (
-              r: Clients.InterconnectAttachmentsClient.SetLabelsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectAttachmentsClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
           })

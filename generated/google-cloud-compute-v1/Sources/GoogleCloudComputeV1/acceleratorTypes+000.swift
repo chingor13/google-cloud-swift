@@ -28,64 +28,18 @@
   /// Service for the `acceleratorTypes` resource.
   ///
   /// @Snippet(path: "acceleratorTypesQuickstart")
-  public protocol AcceleratorTypes {
-    /// Retrieves an aggregated list of accelerator types.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "acceleratorTypes_aggregatedList")
-    func aggregatedList(request: Clients.AcceleratorTypesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
+  public class AcceleratorTypesClient: Clients.AcceleratorTypesProtocol {
+    let inner: any Clients.AcceleratorTypesStub
 
-    /// Retrieves an aggregated list of accelerator types.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AcceleratorTypesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of accelerator types.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
-
-    /// Returns the specified accelerator type.
-    ///
-    /// @Snippet(path: "acceleratorTypes_get")
-    func `get`(request: Clients.AcceleratorTypesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.AcceleratorType
-
-    /// Returns the specified accelerator type.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      acceleratorType: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.AcceleratorType
-
-    /// Retrieves a list of accelerator types that are available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "acceleratorTypes_list")
-    func list(request: Clients.AcceleratorTypesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.AcceleratorTypeList
-
-    /// Retrieves a list of accelerator types that are available to the specified
-    /// project.
-    func list(
-      byItem: Clients.AcceleratorTypesClient.ListRequest
-    ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
-
-    /// Retrieves a list of accelerator types that are available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
+    /// Creates a new `AcceleratorTypesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.AcceleratorTypesStub = try Clients.AcceleratorTypesTransport(options)
+      inner = Clients.AcceleratorTypesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.AcceleratorTypesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of accelerator types.
     ///
@@ -93,135 +47,162 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "acceleratorTypes_aggregatedList")
-    func aggregatedList(
-      request: Clients.AcceleratorTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
+    public func aggregatedList(
+      request: AcceleratorTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of accelerator types.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.AcceleratorTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "acceleratorTypes_aggregatedList")
+    public func aggregatedList(
+      byItem: AcceleratorTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Returns the specified accelerator type.
     ///
     /// @Snippet(path: "acceleratorTypes_get")
-    func `get`(
-      request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AcceleratorType
+    public func `get`(
+      request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AcceleratorType {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of accelerator types that are available to the specified
     /// project.
     ///
     /// @Snippet(path: "acceleratorTypes_list")
-    func list(
-      request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList
+    public func list(
+      request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of accelerator types that are available to the specified
     /// project.
-    func list(
-      byItem: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
+    ///
+    /// @Snippet(path: "acceleratorTypes_list")
+    public func list(
+      byItem: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``AcceleratorTypes``.
-    public class AcceleratorTypesClient: AcceleratorTypes {
-      let inner: any AcceleratorTypesStub
+    /// A Swift protocol to mock `AcceleratorTypesClient`.
+    ///
+    /// To mock `AcceleratorTypesClient` change your functions to receive
+    /// `some AcceleratorTypesProtocol` or `any AcceleratorTypesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol AcceleratorTypesProtocol {
+      /// See `AcceleratorTypesClient.aggregatedList`.
+      func aggregatedList(request: AcceleratorTypesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
 
-      /// Creates a new `AcceleratorTypesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any AcceleratorTypesStub = try AcceleratorTypesTransport(options)
-        inner = AcceleratorTypesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = AcceleratorTypesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `AcceleratorTypesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AcceleratorTypesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
 
-      /// See `AcceleratorTypes.aggregatedList`
-      public func aggregatedList(
-        request: Clients.AcceleratorTypesClient.AggregatedListRequest,
+      /// See `AcceleratorTypesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
+
+      /// See `AcceleratorTypesClient.`get``.
+      func `get`(request: AcceleratorTypesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.AcceleratorType
+
+      /// See `AcceleratorTypesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        acceleratorType: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.AcceleratorType
+
+      /// See `AcceleratorTypesClient.list`.
+      func list(request: AcceleratorTypesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.AcceleratorTypeList
+
+      /// See `AcceleratorTypesClient.list`.
+      func list(
+        byItem: AcceleratorTypesClient.ListRequest
+      ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
+
+      /// See `AcceleratorTypesClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
+
+      /// See `AcceleratorTypesClient.aggregatedList`.
+      func aggregatedList(
+        request: AcceleratorTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
 
-      /// Retrieves an aggregated list of accelerator types.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.AcceleratorTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AcceleratorTypesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: AcceleratorTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error>
 
-      /// See `AcceleratorTypes.`get``
-      public func `get`(
-        request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AcceleratorType {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `AcceleratorTypesClient.`get``.
+      func `get`(
+        request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AcceleratorType
 
-      /// See `AcceleratorTypes.list`
-      public func list(
-        request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `AcceleratorTypesClient.list`.
+      func list(
+        request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList
 
-      /// Retrieves a list of accelerator types that are available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `AcceleratorTypesClient.list`.
+      func list(
+        byItem: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
     }
   }
 
   // Default implementations
-  extension AcceleratorTypes {
-    public func aggregatedList(request: Clients.AcceleratorTypesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
+  extension Clients.AcceleratorTypesProtocol {
+    public func aggregatedList(request: AcceleratorTypesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.AcceleratorTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: AcceleratorTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.AcceleratorTypesClient.AggregatedListRequest
+      byItem: AcceleratorTypesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.AcceleratorTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: AcceleratorTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList in
@@ -233,20 +214,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, AcceleratorTypesScopedList), Swift.Error> {
-      let request = Clients.AcceleratorTypesClient.AggregatedListRequest().with {
+      let request = AcceleratorTypesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func `get`(request: Clients.AcceleratorTypesClient.GetRequest) async throws
+    public func `get`(request: AcceleratorTypesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.AcceleratorType
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AcceleratorType {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -256,7 +237,7 @@
       zone: Swift.String,
       acceleratorType: Swift.String,
     ) async throws -> GoogleCloudComputeV1.AcceleratorType {
-      let request = Clients.AcceleratorTypesClient.GetRequest().with {
+      let request = AcceleratorTypesClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.acceleratorType = acceleratorType
@@ -264,26 +245,26 @@
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.AcceleratorTypesClient.ListRequest) async throws
+    public func list(request: AcceleratorTypesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.AcceleratorTypeList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.AcceleratorTypesClient.ListRequest
+      byItem: AcceleratorTypesClient.ListRequest
     ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AcceleratorTypeList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -295,7 +276,7 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
-      let request = Clients.AcceleratorTypesClient.ListRequest().with {
+      let request = AcceleratorTypesClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }

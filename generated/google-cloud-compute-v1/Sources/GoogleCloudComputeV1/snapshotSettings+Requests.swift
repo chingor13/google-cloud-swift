@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SnapshotSettingsClient {
+  extension SnapshotSettingsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.snapshotSettings.get] method.
     ///
     /// [google.cloud.compute.v1.snapshotSettings.get]: <doc:SnapshotSettings/`get`(request:)>

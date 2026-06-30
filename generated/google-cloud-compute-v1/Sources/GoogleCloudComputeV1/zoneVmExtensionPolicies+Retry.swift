@@ -53,33 +53,29 @@
       }
 
       public func delete(
-        request: Clients.ZoneVmExtensionPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.ZoneVmExtensionPoliciesClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: ZoneVmExtensionPoliciesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.ZoneVmExtensionPoliciesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ZoneVmExtensionPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ZoneVmExtensionPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.VmExtensionPolicy
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -87,33 +83,29 @@
       }
 
       public func insert(
-        request: Clients.ZoneVmExtensionPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.ZoneVmExtensionPoliciesClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: ZoneVmExtensionPoliciesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.ZoneVmExtensionPoliciesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ZoneVmExtensionPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ZoneVmExtensionPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.VmExtensionPolicyList
             in
             return try await self.inner.list(request: r, options: o)
@@ -121,18 +113,15 @@
       }
 
       public func update(
-        request: Clients.ZoneVmExtensionPoliciesClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.ZoneVmExtensionPoliciesClient.UpdateRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: ZoneVmExtensionPoliciesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

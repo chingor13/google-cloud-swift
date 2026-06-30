@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some RegionInstantSnapshots) async throws {
+  func sample(client: RegionInstantSnapshotsClient) async throws {
     let response = try await client.setIamPolicy(
-      request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest()
+      request: RegionInstantSnapshotsClient.SetIamPolicyRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.RegionInstantSnapshotsClient()
+        let client = try GoogleCloudComputeV1.RegionInstantSnapshotsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

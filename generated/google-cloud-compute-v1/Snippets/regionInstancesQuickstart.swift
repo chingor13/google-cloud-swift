@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionInstancesClient()
+    let client = try GoogleCloudComputeV1.RegionInstancesClient()
     let response = try await client.bulkInsert(
-      request: Clients.RegionInstancesClient.BulkInsertRequest()
+      request: RegionInstancesClient.BulkInsertRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

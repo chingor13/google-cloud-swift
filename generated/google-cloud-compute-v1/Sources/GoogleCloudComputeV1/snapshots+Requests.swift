@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SnapshotsClient {
+  extension SnapshotsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.snapshots.delete] method.
     ///
     /// [google.cloud.compute.v1.snapshots.delete]: <doc:Snapshots/delete(request:)>

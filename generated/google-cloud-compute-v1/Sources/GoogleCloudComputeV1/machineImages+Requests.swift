@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.MachineImagesClient {
+  extension MachineImagesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.machineImages.delete] method.
     ///
     /// [google.cloud.compute.v1.machineImages.delete]: <doc:MachineImages/delete(request:)>

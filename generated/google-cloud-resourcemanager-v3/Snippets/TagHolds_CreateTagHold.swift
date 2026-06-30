@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some TagHolds, tagValueId: String) async throws {
+func sample(client: TagHoldsClient, tagValueId: String) async throws {
   let poller = try await client.createTagHold(
     withPolling: CreateTagHoldRequest()
       .with {
@@ -39,7 +39,7 @@ func sample(client: some TagHolds, tagValueId: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.TagHoldsClient()
+      let client = try GoogleCloudResourcemanagerV3.TagHoldsClient()
       try await sample(client: client, tagValueId: "[placeholder]")
     } catch {
       print("Error: \(error)")

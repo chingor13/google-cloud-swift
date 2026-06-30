@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.LicenseCodesClient {
+  extension LicenseCodesClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.licenseCodes.get] method.
     ///
     /// [google.cloud.compute.v1.licenseCodes.get]: <doc:LicenseCodes/`get`(request:)>

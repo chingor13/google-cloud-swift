@@ -60,15 +60,14 @@
       }
 
       public func delete(
-        request: Clients.RegionAutoscalersClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.RegionAutoscalersClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionAutoscalersClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -76,30 +75,29 @@
       }
 
       public func `get`(
-        request: Clients.RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.RegionAutoscalersClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Autoscaler
+            (r: RegionAutoscalersClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Autoscaler
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.RegionAutoscalersClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.RegionAutoscalersClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionAutoscalersClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -107,38 +105,37 @@
       }
 
       public func list(
-        request: Clients.RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionAutoscalerList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionAutoscalersClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.RegionAutoscalerList
+            (r: RegionAutoscalersClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.RegionAutoscalerList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionAutoscalersClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.RegionAutoscalersClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionAutoscalersClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.RegionAutoscalersClient.TestIamPermissionsRequest,
+        request: RegionAutoscalersClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -146,25 +143,22 @@
           options: options,
           name: "testIamPermissions",
           action: {
-            (
-              r: Clients.RegionAutoscalersClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: RegionAutoscalersClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.RegionAutoscalersClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.RegionAutoscalersClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionAutoscalersClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)

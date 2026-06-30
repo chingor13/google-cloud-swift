@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ForwardingRulesClient {
+  extension ForwardingRulesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.forwardingRules.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.forwardingRules.aggregatedList]: <doc:ForwardingRules/aggregatedList(request:)>
@@ -233,7 +233,7 @@
       /// Name of the region scoping this request.
       public var region: Swift.String = Swift.String()
 
-      public var view: Clients.ForwardingRulesClient.GetRequest.View? = nil
+      public var view: ForwardingRulesClient.GetRequest.View? = nil
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -253,7 +253,7 @@
 
       /// The enumerated type for the [view][google.cloud.compute.v1.forwardingRules.getRequest.view] field.
       ///
-      /// [google.cloud.compute.v1.forwardingRules.getRequest.view]: <doc:Clients/ForwardingRulesClient/GetRequest/View>
+      /// [google.cloud.compute.v1.forwardingRules.getRequest.view]: <doc:ForwardingRulesClient/GetRequest/View>
       public enum View: Codable, Equatable, Sendable {
         case basic
         case full

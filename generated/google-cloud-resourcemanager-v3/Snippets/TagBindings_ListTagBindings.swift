@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some TagBindings, parent: String) async throws {
+func sample(client: TagBindingsClient, parent: String) async throws {
   let items = try client.listTagBindings(
     byItem: ListTagBindingsRequest()
       .with {
@@ -39,7 +39,7 @@ func sample(client: some TagBindings, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.TagBindingsClient()
+      let client = try GoogleCloudResourcemanagerV3.TagBindingsClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

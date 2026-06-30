@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some NodeGroups) async throws {
+  func sample(client: NodeGroupsClient) async throws {
     let items = try client.listNodes(
-      byItem: Clients.NodeGroupsClient.ListNodesRequest()
+      byItem: NodeGroupsClient.ListNodesRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.NodeGroupsClient()
+        let client = try GoogleCloudComputeV1.NodeGroupsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

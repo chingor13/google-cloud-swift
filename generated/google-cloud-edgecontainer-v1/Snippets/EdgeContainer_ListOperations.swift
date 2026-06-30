@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some EdgeContainer) async throws {
+func sample(client: EdgeContainerClient) async throws {
   let items = try client.listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest()
       /* set fields using .with { $0... } */
@@ -38,7 +38,7 @@ func sample(client: some EdgeContainer) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudEdgecontainerV1.Clients.EdgeContainerClient()
+      let client = try GoogleCloudEdgecontainerV1.EdgeContainerClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

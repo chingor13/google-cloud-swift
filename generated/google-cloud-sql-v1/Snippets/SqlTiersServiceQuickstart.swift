@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlTiersServiceClient()
+    let client = try GoogleCloudSqlV1.SqlTiersServiceClient()
     let response = try await client.list(
       request: SqlTiersListRequest()
         /* set fields using .with { $0... } */

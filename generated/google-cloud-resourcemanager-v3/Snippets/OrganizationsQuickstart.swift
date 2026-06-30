@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 
 func sample(organizationId: String, ) async throws {
-  let client = try GoogleCloudResourcemanagerV3.Clients.OrganizationsClient()
+  let client = try GoogleCloudResourcemanagerV3.OrganizationsClient()
   let response = try await client.getOrganization(
     request: GetOrganizationRequest()
       .with {

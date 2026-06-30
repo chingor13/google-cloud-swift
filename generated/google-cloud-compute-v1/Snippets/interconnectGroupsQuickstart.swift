@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.InterconnectGroupsClient()
+    let client = try GoogleCloudComputeV1.InterconnectGroupsClient()
     let response = try await client.createMembers(
-      request: Clients.InterconnectGroupsClient.CreateMembersRequest()
+      request: InterconnectGroupsClient.CreateMembersRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

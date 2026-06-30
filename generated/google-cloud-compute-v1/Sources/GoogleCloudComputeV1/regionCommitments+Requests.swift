@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionCommitmentsClient {
+  extension RegionCommitmentsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.regionCommitments.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.regionCommitments.aggregatedList]: <doc:RegionCommitments/aggregatedList(request:)>

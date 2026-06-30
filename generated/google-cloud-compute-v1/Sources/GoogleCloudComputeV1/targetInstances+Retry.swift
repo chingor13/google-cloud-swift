@@ -53,85 +53,82 @@
       }
 
       public func aggregatedList(
-        request: Clients.TargetInstancesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.TargetInstancesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList
+            (r: TargetInstancesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetInstancesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: TargetInstancesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetInstance {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.TargetInstancesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetInstance
+            (r: TargetInstancesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetInstance
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.TargetInstancesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: TargetInstancesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetInstanceList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.TargetInstancesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.TargetInstanceList
+            (r: TargetInstancesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.TargetInstanceList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func setSecurityPolicy(
-        request: Clients.TargetInstancesClient.SetSecurityPolicyRequest,
+        request: TargetInstancesClient.SetSecurityPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -139,17 +136,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.TargetInstancesClient.SetSecurityPolicyRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: TargetInstancesClient.SetSecurityPolicyRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setSecurityPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.TargetInstancesClient.TestIamPermissionsRequest,
+        request: TargetInstancesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -157,10 +152,8 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.TargetInstancesClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: TargetInstancesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })

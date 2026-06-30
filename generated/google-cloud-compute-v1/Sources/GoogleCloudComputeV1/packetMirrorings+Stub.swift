@@ -28,34 +28,32 @@
   extension Clients {
     protocol PacketMirroringsStub {
       func aggregatedList(
-        request: Clients.PacketMirroringsClient.AggregatedListRequest,
+        request: PacketMirroringsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList
 
       func delete(
-        request: Clients.PacketMirroringsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroring
 
       func insert(
-        request: Clients.PacketMirroringsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringList
 
       func patch(
-        request: Clients.PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.PacketMirroringsClient.TestIamPermissionsRequest,
+        request: PacketMirroringsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -69,7 +67,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.PacketMirroringsClient.AggregatedListRequest,
+        request: PacketMirroringsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -100,8 +98,7 @@
       }
 
       public func delete(
-        request: Clients.PacketMirroringsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -129,7 +126,7 @@
       }
 
       public func `get`(
-        request: Clients.PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroring {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -155,8 +152,7 @@
       }
 
       public func insert(
-        request: Clients.PacketMirroringsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -182,7 +178,7 @@
       }
 
       public func list(
-        request: Clients.PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -210,7 +206,7 @@
       }
 
       public func patch(
-        request: Clients.PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -242,7 +238,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.PacketMirroringsClient.TestIamPermissionsRequest,
+        request: PacketMirroringsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

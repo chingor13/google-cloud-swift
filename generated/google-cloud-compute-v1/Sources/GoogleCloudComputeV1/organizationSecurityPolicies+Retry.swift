@@ -55,7 +55,7 @@
       }
 
       public func addAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.AddAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.AddAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -64,7 +64,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.AddAssociationRequest,
+              r: OrganizationSecurityPoliciesClient.AddAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -73,7 +73,7 @@
       }
 
       public func addRule(
-        request: Clients.OrganizationSecurityPoliciesClient.AddRuleRequest,
+        request: OrganizationSecurityPoliciesClient.AddRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -81,17 +81,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.AddRuleRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: OrganizationSecurityPoliciesClient.AddRuleRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.addRule(request: r, options: o)
           })
       }
 
       public func copyRules(
-        request: Clients.OrganizationSecurityPoliciesClient.CopyRulesRequest,
+        request: OrganizationSecurityPoliciesClient.CopyRulesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -100,7 +98,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.CopyRulesRequest,
+              r: OrganizationSecurityPoliciesClient.CopyRulesRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -109,7 +107,7 @@
       }
 
       public func delete(
-        request: Clients.OrganizationSecurityPoliciesClient.DeleteRequest,
+        request: OrganizationSecurityPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -117,17 +115,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: OrganizationSecurityPoliciesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRequest,
+        request: OrganizationSecurityPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy {
         try await self._intercept(
@@ -135,17 +131,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.SecurityPolicy
+            (r: OrganizationSecurityPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.SecurityPolicy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.GetAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.GetAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyAssociation {
         try await self._intercept(
@@ -154,7 +148,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.GetAssociationRequest,
+              r: OrganizationSecurityPoliciesClient.GetAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.SecurityPolicyAssociation
             in
@@ -163,7 +157,7 @@
       }
 
       public func getRule(
-        request: Clients.OrganizationSecurityPoliciesClient.GetRuleRequest,
+        request: OrganizationSecurityPoliciesClient.GetRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule {
         try await self._intercept(
@@ -171,17 +165,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.GetRuleRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule
+            (r: OrganizationSecurityPoliciesClient.GetRuleRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.SecurityPolicyRule
             in
             return try await self.inner.getRule(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.OrganizationSecurityPoliciesClient.InsertRequest,
+        request: OrganizationSecurityPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -189,17 +181,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: OrganizationSecurityPoliciesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.OrganizationSecurityPoliciesClient.ListRequest,
+        request: OrganizationSecurityPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList {
         try await self._intercept(
@@ -207,17 +197,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.SecurityPolicyList
+            (r: OrganizationSecurityPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.SecurityPolicyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func listAssociations(
-        request: Clients.OrganizationSecurityPoliciesClient.ListAssociationsRequest,
+        request: OrganizationSecurityPoliciesClient.ListAssociationsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse {
         try await self._intercept(
@@ -226,7 +214,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.ListAssociationsRequest,
+              r: OrganizationSecurityPoliciesClient.ListAssociationsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws
               -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse
@@ -236,7 +224,7 @@
       }
 
       public func listPreconfiguredExpressionSets(
-        request: Clients.OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+        request: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
       {
@@ -246,7 +234,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
+              r: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws
               -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
@@ -256,7 +244,7 @@
       }
 
       public func move(
-        request: Clients.OrganizationSecurityPoliciesClient.MoveRequest,
+        request: OrganizationSecurityPoliciesClient.MoveRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -264,17 +252,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.MoveRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: OrganizationSecurityPoliciesClient.MoveRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.move(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -282,17 +268,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.OrganizationSecurityPoliciesClient.PatchRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: OrganizationSecurityPoliciesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func patchRule(
-        request: Clients.OrganizationSecurityPoliciesClient.PatchRuleRequest,
+        request: OrganizationSecurityPoliciesClient.PatchRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -301,7 +285,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.PatchRuleRequest,
+              r: OrganizationSecurityPoliciesClient.PatchRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -310,7 +294,7 @@
       }
 
       public func removeAssociation(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -319,7 +303,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+              r: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -328,7 +312,7 @@
       }
 
       public func removeRule(
-        request: Clients.OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+        request: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -337,7 +321,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+              r: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in

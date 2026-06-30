@@ -29,28 +29,34 @@
   /// service is only used internally.
   ///
   /// @Snippet(path: "SqlAvailableDatabaseVersionsServiceQuickstart")
-  public protocol SqlAvailableDatabaseVersionsService {
+  public class SqlAvailableDatabaseVersionsServiceClient: Clients
+      .SqlAvailableDatabaseVersionsServiceProtocol
+  {
+    let inner: any Clients.SqlAvailableDatabaseVersionsServiceStub
+
+    /// Creates a new `SqlAvailableDatabaseVersionsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlAvailableDatabaseVersionsServiceStub =
+        try Clients.SqlAvailableDatabaseVersionsServiceTransport(options)
+      inner = Clients.SqlAvailableDatabaseVersionsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlAvailableDatabaseVersionsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlAvailableDatabaseVersionsService``.
-    public class SqlAvailableDatabaseVersionsServiceClient: SqlAvailableDatabaseVersionsService {
-      let inner: any SqlAvailableDatabaseVersionsServiceStub
-
-      /// Creates a new `SqlAvailableDatabaseVersionsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlAvailableDatabaseVersionsServiceStub =
-          try SqlAvailableDatabaseVersionsServiceTransport(options)
-        inner = SqlAvailableDatabaseVersionsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlAvailableDatabaseVersionsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+    /// A Swift protocol to mock `SqlAvailableDatabaseVersionsServiceClient`.
+    ///
+    /// To mock `SqlAvailableDatabaseVersionsServiceClient` change your functions to receive
+    /// `some SqlAvailableDatabaseVersionsServiceProtocol` or `any SqlAvailableDatabaseVersionsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlAvailableDatabaseVersionsServiceProtocol {
     }
   }
 
   // Default implementations
-  extension SqlAvailableDatabaseVersionsService {
+  extension Clients.SqlAvailableDatabaseVersionsServiceProtocol {
   }
 #endif

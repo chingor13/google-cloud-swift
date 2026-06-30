@@ -60,45 +60,44 @@
       }
 
       public func delete(
-        request: Clients.InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.InterconnectsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Interconnect {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.InterconnectsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Interconnect
+            (r: InterconnectsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Interconnect
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getDiagnostics(
-        request: Clients.InterconnectsClient.GetDiagnosticsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetDiagnosticsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetDiagnosticsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "getDiagnostics",
           action: {
-            (r: Clients.InterconnectsClient.GetDiagnosticsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InterconnectsClient.GetDiagnosticsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InterconnectsGetDiagnosticsResponse
             in
             return try await self.inner.getDiagnostics(request: r, options: o)
@@ -106,79 +105,75 @@
       }
 
       public func getMacsecConfig(
-        request: Clients.InterconnectsClient.GetMacsecConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.GetMacsecConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectsGetMacsecConfigResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "getMacsecConfig",
           action: {
-            (
-              r: Clients.InterconnectsClient.GetMacsecConfigRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.InterconnectsGetMacsecConfigResponse
+            (r: InterconnectsClient.GetMacsecConfigRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.InterconnectsGetMacsecConfigResponse
             in
             return try await self.inner.getMacsecConfig(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.InterconnectsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.InterconnectsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InterconnectList
+            (r: InterconnectsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InterconnectList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.InterconnectsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: Clients.InterconnectsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setLabels",
           action: {
-            (r: Clients.InterconnectsClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InterconnectsClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
           })

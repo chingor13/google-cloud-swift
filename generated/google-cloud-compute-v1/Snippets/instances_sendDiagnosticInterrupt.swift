@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some Instances) async throws {
+  func sample(client: InstancesClient) async throws {
     try await client.sendDiagnosticInterrupt(
-      request: Clients.InstancesClient.SendDiagnosticInterruptRequest()
+      request: InstancesClient.SendDiagnosticInterruptRequest()
         /* set fields using .with { $0... } */
     )
     print("Success (no response expected)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.InstancesClient()
+        let client = try GoogleCloudComputeV1.InstancesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

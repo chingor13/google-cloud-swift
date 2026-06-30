@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NetworkFirewallPoliciesClient {
+  extension NetworkFirewallPoliciesClient {
     /// Synthetic request message for the [addAssociation()][google.cloud.compute.v1.networkFirewallPolicies.addAssociation] method.
     ///
     /// [google.cloud.compute.v1.networkFirewallPolicies.addAssociation]: <doc:NetworkFirewallPolicies/addAssociation(request:)>

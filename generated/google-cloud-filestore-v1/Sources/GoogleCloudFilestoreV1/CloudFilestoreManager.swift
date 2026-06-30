@@ -49,376 +49,53 @@ import Logging
 /// * `projects/12345/locations/us-central1/backups/my-backup`
 ///
 /// @Snippet(path: "CloudFilestoreManagerQuickstart")
-public protocol CloudFilestoreManager {
-  /// Lists all instances in a project for either a specified location
-  /// or for all locations.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_ListInstances")
-  func listInstances(request: ListInstancesRequest) async throws
-    -> GoogleCloudFilestoreV1.ListInstancesResponse
+public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol {
+  let inner: any Clients.CloudFilestoreManagerStub
 
-  /// Lists all instances in a project for either a specified location
-  /// or for all locations.
-  func listInstances(
-    byItem: ListInstancesRequest
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
-
-  /// Lists all instances in a project for either a specified location
-  /// or for all locations.
-  func listInstances(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
-
-  /// Gets the details of a specific instance.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_GetInstance")
-  func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudFilestoreV1.Instance
-
-  /// Gets the details of a specific instance.
-  func getInstance(
-    name: Swift.String,
-  ) async throws -> GoogleCloudFilestoreV1.Instance
-
-  /// Creates an instance.
-  /// When creating from a backup, the capacity of the new instance needs to be
-  /// equal to or larger than the capacity of the backup (and also equal to or
-  /// larger than the minimum capacity of the tier).
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_CreateInstance")
-  func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates an instance.
-  /// When creating from a backup, the capacity of the new instance needs to be
-  /// equal to or larger than the capacity of the backup (and also equal to or
-  /// larger than the minimum capacity of the tier).
-  func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Creates an instance.
-  /// When creating from a backup, the capacity of the new instance needs to be
-  /// equal to or larger than the capacity of the backup (and also equal to or
-  /// larger than the minimum capacity of the tier).
-  func createInstance(
-    parent: Swift.String,
-    instance: Instance?,
-    instanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Updates the settings of a specific instance.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_UpdateInstance")
-  func updateInstance(request: UpdateInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the settings of a specific instance.
-  func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Updates the settings of a specific instance.
-  func updateInstance(
-    instance: Instance?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Restores an existing instance's file share from a backup.
-  ///
-  /// The capacity of the instance needs to be equal to or larger than the
-  /// capacity of the backup (and also equal to or larger than the minimum
-  /// capacity of the tier).
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_RestoreInstance")
-  func restoreInstance(request: RestoreInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Restores an existing instance's file share from a backup.
-  ///
-  /// The capacity of the instance needs to be equal to or larger than the
-  /// capacity of the backup (and also equal to or larger than the minimum
-  /// capacity of the tier).
-  func restoreInstance(withPolling: RestoreInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Revert an existing instance's file system to a specified snapshot.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_RevertInstance")
-  func revertInstance(request: RevertInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Revert an existing instance's file system to a specified snapshot.
-  func revertInstance(withPolling: RevertInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Deletes an instance.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_DeleteInstance")
-  func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes an instance.
-  func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes an instance.
-  func deleteInstance(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Lists all snapshots in a project for either a specified location
-  /// or for all locations.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_ListSnapshots")
-  func listSnapshots(request: ListSnapshotsRequest) async throws
-    -> GoogleCloudFilestoreV1.ListSnapshotsResponse
-
-  /// Lists all snapshots in a project for either a specified location
-  /// or for all locations.
-  func listSnapshots(
-    byItem: ListSnapshotsRequest
-  ) throws -> any AsyncSequence<Snapshot, Swift.Error>
-
-  /// Lists all snapshots in a project for either a specified location
-  /// or for all locations.
-  func listSnapshots(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Snapshot, Swift.Error>
-
-  /// Gets the details of a specific snapshot.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_GetSnapshot")
-  func getSnapshot(request: GetSnapshotRequest) async throws -> GoogleCloudFilestoreV1.Snapshot
-
-  /// Gets the details of a specific snapshot.
-  func getSnapshot(
-    name: Swift.String,
-  ) async throws -> GoogleCloudFilestoreV1.Snapshot
-
-  /// Creates a snapshot.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_CreateSnapshot")
-  func createSnapshot(request: CreateSnapshotRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a snapshot.
-  func createSnapshot(withPolling: CreateSnapshotRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Snapshot>
-
-  /// Creates a snapshot.
-  func createSnapshot(
-    parent: Swift.String,
-    snapshot: Snapshot?,
-    snapshotId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
-
-  /// Deletes a snapshot.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_DeleteSnapshot")
-  func deleteSnapshot(request: DeleteSnapshotRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a snapshot.
-  func deleteSnapshot(withPolling: DeleteSnapshotRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a snapshot.
-  func deleteSnapshot(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Updates the settings of a specific snapshot.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_UpdateSnapshot")
-  func updateSnapshot(request: UpdateSnapshotRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the settings of a specific snapshot.
-  func updateSnapshot(withPolling: UpdateSnapshotRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Snapshot>
-
-  /// Updates the settings of a specific snapshot.
-  func updateSnapshot(
-    snapshot: Snapshot?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
-
-  /// Lists all backups in a project for either a specified location or for all
-  /// locations.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_ListBackups")
-  func listBackups(request: ListBackupsRequest) async throws
-    -> GoogleCloudFilestoreV1.ListBackupsResponse
-
-  /// Lists all backups in a project for either a specified location or for all
-  /// locations.
-  func listBackups(
-    byItem: ListBackupsRequest
-  ) throws -> any AsyncSequence<Backup, Swift.Error>
-
-  /// Lists all backups in a project for either a specified location or for all
-  /// locations.
-  func listBackups(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Backup, Swift.Error>
-
-  /// Gets the details of a specific backup.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_GetBackup")
-  func getBackup(request: GetBackupRequest) async throws -> GoogleCloudFilestoreV1.Backup
-
-  /// Gets the details of a specific backup.
-  func getBackup(
-    name: Swift.String,
-  ) async throws -> GoogleCloudFilestoreV1.Backup
-
-  /// Creates a backup.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_CreateBackup")
-  func createBackup(request: CreateBackupRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a backup.
-  func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Backup>
-
-  /// Creates a backup.
-  func createBackup(
-    parent: Swift.String,
-    backup: Backup?,
-    backupId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
-
-  /// Deletes a backup.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_DeleteBackup")
-  func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a backup.
-  func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a backup.
-  func deleteBackup(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Updates the settings of a specific backup.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_UpdateBackup")
-  func updateBackup(request: UpdateBackupRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the settings of a specific backup.
-  func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Backup>
-
-  /// Updates the settings of a specific backup.
-  func updateBackup(
-    backup: Backup?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
-
-  /// Promote the standby instance (replica).
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_PromoteReplica")
-  func promoteReplica(request: PromoteReplicaRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Promote the standby instance (replica).
-  func promoteReplica(withPolling: PromoteReplicaRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Lists information about the supported locations for this service.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_ListLocations")
-  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
-    -> GoogleCloudLocation.ListLocationsResponse
-
-  /// Lists information about the supported locations for this service.
-  func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
-
-  /// Gets information about a location.
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_GetLocation")
-  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
-    -> GoogleCloudLocation.Location
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "CloudFilestoreManager_CancelOperation")
-  func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func cancelOperation(
-    name: Swift.String,
-  ) async throws
+  /// Creates a new `CloudFilestoreManagerClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.CloudFilestoreManagerStub = try Clients.CloudFilestoreManagerTransport(
+      options)
+    inner = Clients.CloudFilestoreManagerRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.CloudFilestoreManagerLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists all instances in a project for either a specified location
   /// or for all locations.
   ///
   /// @Snippet(path: "CloudFilestoreManager_ListInstances")
-  func listInstances(
+  public func listInstances(
     request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse
+  ) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse {
+    try await self.inner.listInstances(request: request, options: options)
+  }
 
   /// Lists all instances in a project for either a specified location
   /// or for all locations.
-  func listInstances(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_ListInstances")
+  public func listInstances(
     byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
+  ) throws -> any AsyncSequence<Instance, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listInstances(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the details of a specific instance.
   ///
   /// @Snippet(path: "CloudFilestoreManager_GetInstance")
-  func getInstance(
+  public func getInstance(
     request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.Instance
+  ) async throws -> GoogleCloudFilestoreV1.Instance {
+    try await self.inner.getInstance(request: request, options: options)
+  }
 
   /// Creates an instance.
   /// When creating from a backup, the capacity of the new instance needs to be
@@ -426,29 +103,131 @@ public protocol CloudFilestoreManager {
   /// larger than the minimum capacity of the tier).
   ///
   /// @Snippet(path: "CloudFilestoreManager_CreateInstance")
-  func createInstance(
+  public func createInstance(
     request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createInstance(request: request, options: options)
+  }
 
   /// Creates an instance.
   /// When creating from a backup, the capacity of the new instance needs to be
   /// equal to or larger than the capacity of the backup (and also equal to or
   /// larger than the minimum capacity of the tier).
-  func createInstance(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_CreateInstance")
+  public func createInstance(
     withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the settings of a specific instance.
   ///
   /// @Snippet(path: "CloudFilestoreManager_UpdateInstance")
-  func updateInstance(
+  public func updateInstance(
     request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateInstance(request: request, options: options)
+  }
 
   /// Updates the settings of a specific instance.
-  func updateInstance(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_UpdateInstance")
+  public func updateInstance(
     withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Restores an existing instance's file share from a backup.
   ///
@@ -457,1093 +236,1248 @@ public protocol CloudFilestoreManager {
   /// capacity of the tier).
   ///
   /// @Snippet(path: "CloudFilestoreManager_RestoreInstance")
-  func restoreInstance(
+  public func restoreInstance(
     request: RestoreInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.restoreInstance(request: request, options: options)
+  }
 
   /// Restores an existing instance's file share from a backup.
   ///
   /// The capacity of the instance needs to be equal to or larger than the
   /// capacity of the backup (and also equal to or larger than the minimum
   /// capacity of the tier).
-  func restoreInstance(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_RestoreInstance")
+  public func restoreInstance(
     withPolling: RestoreInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.restoreInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Revert an existing instance's file system to a specified snapshot.
   ///
   /// @Snippet(path: "CloudFilestoreManager_RevertInstance")
-  func revertInstance(
+  public func revertInstance(
     request: RevertInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.revertInstance(request: request, options: options)
+  }
 
   /// Revert an existing instance's file system to a specified snapshot.
-  func revertInstance(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_RevertInstance")
+  public func revertInstance(
     withPolling: RevertInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.revertInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes an instance.
   ///
   /// @Snippet(path: "CloudFilestoreManager_DeleteInstance")
-  func deleteInstance(
+  public func deleteInstance(
     request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteInstance(request: request, options: options)
+  }
 
   /// Deletes an instance.
-  func deleteInstance(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_DeleteInstance")
+  public func deleteInstance(
     withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists all snapshots in a project for either a specified location
   /// or for all locations.
   ///
   /// @Snippet(path: "CloudFilestoreManager_ListSnapshots")
-  func listSnapshots(
+  public func listSnapshots(
     request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse
+  ) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse {
+    try await self.inner.listSnapshots(request: request, options: options)
+  }
 
   /// Lists all snapshots in a project for either a specified location
   /// or for all locations.
-  func listSnapshots(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_ListSnapshots")
+  public func listSnapshots(
     byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Snapshot, Swift.Error>
+  ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listSnapshots(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the details of a specific snapshot.
   ///
   /// @Snippet(path: "CloudFilestoreManager_GetSnapshot")
-  func getSnapshot(
+  public func getSnapshot(
     request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.Snapshot
+  ) async throws -> GoogleCloudFilestoreV1.Snapshot {
+    try await self.inner.getSnapshot(request: request, options: options)
+  }
 
   /// Creates a snapshot.
   ///
   /// @Snippet(path: "CloudFilestoreManager_CreateSnapshot")
-  func createSnapshot(
+  public func createSnapshot(
     request: CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createSnapshot(request: request, options: options)
+  }
 
   /// Creates a snapshot.
-  func createSnapshot(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_CreateSnapshot")
+  public func createSnapshot(
     withPolling: CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Snapshot(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createSnapshot(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a snapshot.
   ///
   /// @Snippet(path: "CloudFilestoreManager_DeleteSnapshot")
-  func deleteSnapshot(
+  public func deleteSnapshot(
     request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteSnapshot(request: request, options: options)
+  }
 
   /// Deletes a snapshot.
-  func deleteSnapshot(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_DeleteSnapshot")
+  public func deleteSnapshot(
     withPolling: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteSnapshot(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the settings of a specific snapshot.
   ///
   /// @Snippet(path: "CloudFilestoreManager_UpdateSnapshot")
-  func updateSnapshot(
+  public func updateSnapshot(
     request: UpdateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateSnapshot(request: request, options: options)
+  }
 
   /// Updates the settings of a specific snapshot.
-  func updateSnapshot(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_UpdateSnapshot")
+  public func updateSnapshot(
     withPolling: UpdateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Snapshot(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateSnapshot(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists all backups in a project for either a specified location or for all
   /// locations.
   ///
   /// @Snippet(path: "CloudFilestoreManager_ListBackups")
-  func listBackups(
+  public func listBackups(
     request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse
+  ) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse {
+    try await self.inner.listBackups(request: request, options: options)
+  }
 
   /// Lists all backups in a project for either a specified location or for all
   /// locations.
-  func listBackups(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_ListBackups")
+  public func listBackups(
     byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Backup, Swift.Error>
+  ) throws -> any AsyncSequence<Backup, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listBackups(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the details of a specific backup.
   ///
   /// @Snippet(path: "CloudFilestoreManager_GetBackup")
-  func getBackup(
+  public func getBackup(
     request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudFilestoreV1.Backup
+  ) async throws -> GoogleCloudFilestoreV1.Backup {
+    try await self.inner.getBackup(request: request, options: options)
+  }
 
   /// Creates a backup.
   ///
   /// @Snippet(path: "CloudFilestoreManager_CreateBackup")
-  func createBackup(
+  public func createBackup(
     request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createBackup(request: request, options: options)
+  }
 
   /// Creates a backup.
-  func createBackup(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_CreateBackup")
+  public func createBackup(
     withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Backup(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createBackup(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a backup.
   ///
   /// @Snippet(path: "CloudFilestoreManager_DeleteBackup")
-  func deleteBackup(
+  public func deleteBackup(
     request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteBackup(request: request, options: options)
+  }
 
   /// Deletes a backup.
-  func deleteBackup(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_DeleteBackup")
+  public func deleteBackup(
     withPolling: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteBackup(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the settings of a specific backup.
   ///
   /// @Snippet(path: "CloudFilestoreManager_UpdateBackup")
-  func updateBackup(
+  public func updateBackup(
     request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateBackup(request: request, options: options)
+  }
 
   /// Updates the settings of a specific backup.
-  func updateBackup(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_UpdateBackup")
+  public func updateBackup(
     withPolling: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Backup(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateBackup(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Promote the standby instance (replica).
   ///
   /// @Snippet(path: "CloudFilestoreManager_PromoteReplica")
-  func promoteReplica(
+  public func promoteReplica(
     request: PromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.promoteReplica(request: request, options: options)
+  }
 
   /// Promote the standby instance (replica).
-  func promoteReplica(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_PromoteReplica")
+  public func promoteReplica(
     withPolling: PromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.promoteReplica(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "CloudFilestoreManager_ListLocations")
-  func listLocations(
+  public func listLocations(
     request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.ListLocationsResponse
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse {
+    try await self.inner.listLocations(request: request, options: options)
+  }
 
   /// Lists information about the supported locations for this service.
-  func listLocations(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_ListLocations")
+  public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listLocations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CloudFilestoreManager_GetLocation")
-  func getLocation(
+  public func getLocation(
     request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.Location
+  ) async throws -> GoogleCloudLocation.Location {
+    try await self.inner.getLocation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "CloudFilestoreManager_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "CloudFilestoreManager_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "CloudFilestoreManager_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "CloudFilestoreManager_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "CloudFilestoreManager_CancelOperation")
-  func cancelOperation(
+  public func cancelOperation(
     request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.cancelOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``CloudFilestoreManager``.
-  public class CloudFilestoreManagerClient: CloudFilestoreManager {
-    let inner: any CloudFilestoreManagerStub
+  /// A Swift protocol to mock `CloudFilestoreManagerClient`.
+  ///
+  /// To mock `CloudFilestoreManagerClient` change your functions to receive
+  /// `some CloudFilestoreManagerProtocol` or `any CloudFilestoreManagerProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol CloudFilestoreManagerProtocol {
+    /// See `CloudFilestoreManagerClient.listInstances`.
+    func listInstances(request: ListInstancesRequest) async throws
+      -> GoogleCloudFilestoreV1.ListInstancesResponse
 
-    /// Creates a new `CloudFilestoreManagerClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any CloudFilestoreManagerStub = try CloudFilestoreManagerTransport(options)
-      inner = CloudFilestoreManagerRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = CloudFilestoreManagerLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `CloudFilestoreManagerClient.listInstances`.
+    func listInstances(
+      byItem: ListInstancesRequest
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
 
-    /// See `CloudFilestoreManager.listInstances`
-    public func listInstances(
+    /// See `CloudFilestoreManagerClient.listInstances`.
+    func listInstances(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.getInstance`.
+    func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudFilestoreV1.Instance
+
+    /// See `CloudFilestoreManagerClient.getInstance`.
+    func getInstance(
+      name: Swift.String,
+    ) async throws -> GoogleCloudFilestoreV1.Instance
+
+    /// See `CloudFilestoreManagerClient.createInstance`.
+    func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.createInstance`.
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.createInstance`.
+    func createInstance(
+      parent: Swift.String,
+      instance: Instance?,
+      instanceId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.updateInstance`.
+    func updateInstance(request: UpdateInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.updateInstance`.
+    func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.updateInstance`.
+    func updateInstance(
+      instance: Instance?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.restoreInstance`.
+    func restoreInstance(request: RestoreInstanceRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.restoreInstance`.
+    func restoreInstance(withPolling: RestoreInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.revertInstance`.
+    func revertInstance(request: RevertInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.revertInstance`.
+    func revertInstance(withPolling: RevertInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.deleteInstance`.
+    func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.deleteInstance`.
+    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.deleteInstance`.
+    func deleteInstance(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.listSnapshots`.
+    func listSnapshots(request: ListSnapshotsRequest) async throws
+      -> GoogleCloudFilestoreV1.ListSnapshotsResponse
+
+    /// See `CloudFilestoreManagerClient.listSnapshots`.
+    func listSnapshots(
+      byItem: ListSnapshotsRequest
+    ) throws -> any AsyncSequence<Snapshot, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.listSnapshots`.
+    func listSnapshots(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Snapshot, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.getSnapshot`.
+    func getSnapshot(request: GetSnapshotRequest) async throws -> GoogleCloudFilestoreV1.Snapshot
+
+    /// See `CloudFilestoreManagerClient.getSnapshot`.
+    func getSnapshot(
+      name: Swift.String,
+    ) async throws -> GoogleCloudFilestoreV1.Snapshot
+
+    /// See `CloudFilestoreManagerClient.createSnapshot`.
+    func createSnapshot(request: CreateSnapshotRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.createSnapshot`.
+    func createSnapshot(withPolling: CreateSnapshotRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Snapshot>
+
+    /// See `CloudFilestoreManagerClient.createSnapshot`.
+    func createSnapshot(
+      parent: Swift.String,
+      snapshot: Snapshot?,
+      snapshotId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+
+    /// See `CloudFilestoreManagerClient.deleteSnapshot`.
+    func deleteSnapshot(request: DeleteSnapshotRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.deleteSnapshot`.
+    func deleteSnapshot(withPolling: DeleteSnapshotRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.deleteSnapshot`.
+    func deleteSnapshot(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.updateSnapshot`.
+    func updateSnapshot(request: UpdateSnapshotRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.updateSnapshot`.
+    func updateSnapshot(withPolling: UpdateSnapshotRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Snapshot>
+
+    /// See `CloudFilestoreManagerClient.updateSnapshot`.
+    func updateSnapshot(
+      snapshot: Snapshot?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+
+    /// See `CloudFilestoreManagerClient.listBackups`.
+    func listBackups(request: ListBackupsRequest) async throws
+      -> GoogleCloudFilestoreV1.ListBackupsResponse
+
+    /// See `CloudFilestoreManagerClient.listBackups`.
+    func listBackups(
+      byItem: ListBackupsRequest
+    ) throws -> any AsyncSequence<Backup, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.listBackups`.
+    func listBackups(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Backup, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.getBackup`.
+    func getBackup(request: GetBackupRequest) async throws -> GoogleCloudFilestoreV1.Backup
+
+    /// See `CloudFilestoreManagerClient.getBackup`.
+    func getBackup(
+      name: Swift.String,
+    ) async throws -> GoogleCloudFilestoreV1.Backup
+
+    /// See `CloudFilestoreManagerClient.createBackup`.
+    func createBackup(request: CreateBackupRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.createBackup`.
+    func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Backup>
+
+    /// See `CloudFilestoreManagerClient.createBackup`.
+    func createBackup(
+      parent: Swift.String,
+      backup: Backup?,
+      backupId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+
+    /// See `CloudFilestoreManagerClient.deleteBackup`.
+    func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.deleteBackup`.
+    func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.deleteBackup`.
+    func deleteBackup(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `CloudFilestoreManagerClient.updateBackup`.
+    func updateBackup(request: UpdateBackupRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.updateBackup`.
+    func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Backup>
+
+    /// See `CloudFilestoreManagerClient.updateBackup`.
+    func updateBackup(
+      backup: Backup?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+
+    /// See `CloudFilestoreManagerClient.promoteReplica`.
+    func promoteReplica(request: PromoteReplicaRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.promoteReplica`.
+    func promoteReplica(withPolling: PromoteReplicaRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `CloudFilestoreManagerClient.listLocations`.
+    func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
+      -> GoogleCloudLocation.ListLocationsResponse
+
+    /// See `CloudFilestoreManagerClient.listLocations`.
+    func listLocations(
+      byItem: GoogleCloudLocation.ListLocationsRequest
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.getLocation`.
+    func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+      -> GoogleCloudLocation.Location
+
+    /// See `CloudFilestoreManagerClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `CloudFilestoreManagerClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `CloudFilestoreManagerClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `CloudFilestoreManagerClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `CloudFilestoreManagerClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `CloudFilestoreManagerClient.cancelOperation`.
+    func cancelOperation(request: GoogleLongrunning.CancelOperationRequest) async throws
+
+    /// See `CloudFilestoreManagerClient.cancelOperation`.
+    func cancelOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `CloudFilestoreManagerClient.listInstances`.
+    func listInstances(
       request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse {
-      try await self.inner.listInstances(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse
 
-    /// Lists all instances in a project for either a specified location
-    /// or for all locations.
-    public func listInstances(
+    /// See `CloudFilestoreManagerClient.listInstances`.
+    func listInstances(
       byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Instance, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listInstances(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
 
-    /// See `CloudFilestoreManager.getInstance`
-    public func getInstance(
+    /// See `CloudFilestoreManagerClient.getInstance`.
+    func getInstance(
       request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.Instance {
-      try await self.inner.getInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.Instance
 
-    /// See `CloudFilestoreManager.createInstance`
-    public func createInstance(
+    /// See `CloudFilestoreManagerClient.createInstance`.
+    func createInstance(
       request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates an instance.
-    /// When creating from a backup, the capacity of the new instance needs to be
-    /// equal to or larger than the capacity of the backup (and also equal to or
-    /// larger than the minimum capacity of the tier).
-    public func createInstance(
+    /// See `CloudFilestoreManagerClient.createInstance`.
+    func createInstance(
       withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.updateInstance`
-    public func updateInstance(
+    /// See `CloudFilestoreManagerClient.updateInstance`.
+    func updateInstance(
       request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the settings of a specific instance.
-    public func updateInstance(
+    /// See `CloudFilestoreManagerClient.updateInstance`.
+    func updateInstance(
       withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.restoreInstance`
-    public func restoreInstance(
+    /// See `CloudFilestoreManagerClient.restoreInstance`.
+    func restoreInstance(
       request: RestoreInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.restoreInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Restores an existing instance's file share from a backup.
-    ///
-    /// The capacity of the instance needs to be equal to or larger than the
-    /// capacity of the backup (and also equal to or larger than the minimum
-    /// capacity of the tier).
-    public func restoreInstance(
+    /// See `CloudFilestoreManagerClient.restoreInstance`.
+    func restoreInstance(
       withPolling: RestoreInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.restoreInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.revertInstance`
-    public func revertInstance(
+    /// See `CloudFilestoreManagerClient.revertInstance`.
+    func revertInstance(
       request: RevertInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.revertInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Revert an existing instance's file system to a specified snapshot.
-    public func revertInstance(
+    /// See `CloudFilestoreManagerClient.revertInstance`.
+    func revertInstance(
       withPolling: RevertInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.revertInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.deleteInstance`
-    public func deleteInstance(
+    /// See `CloudFilestoreManagerClient.deleteInstance`.
+    func deleteInstance(
       request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes an instance.
-    public func deleteInstance(
+    /// See `CloudFilestoreManagerClient.deleteInstance`.
+    func deleteInstance(
       withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.listSnapshots`
-    public func listSnapshots(
+    /// See `CloudFilestoreManagerClient.listSnapshots`.
+    func listSnapshots(
       request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse {
-      try await self.inner.listSnapshots(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse
 
-    /// Lists all snapshots in a project for either a specified location
-    /// or for all locations.
-    public func listSnapshots(
+    /// See `CloudFilestoreManagerClient.listSnapshots`.
+    func listSnapshots(
       byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listSnapshots(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Snapshot, Swift.Error>
 
-    /// See `CloudFilestoreManager.getSnapshot`
-    public func getSnapshot(
+    /// See `CloudFilestoreManagerClient.getSnapshot`.
+    func getSnapshot(
       request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.Snapshot {
-      try await self.inner.getSnapshot(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.Snapshot
 
-    /// See `CloudFilestoreManager.createSnapshot`
-    public func createSnapshot(
+    /// See `CloudFilestoreManagerClient.createSnapshot`.
+    func createSnapshot(
       request: CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createSnapshot(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a snapshot.
-    public func createSnapshot(
+    /// See `CloudFilestoreManagerClient.createSnapshot`.
+    func createSnapshot(
       withPolling: CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Snapshot(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createSnapshot(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.deleteSnapshot`
-    public func deleteSnapshot(
+    /// See `CloudFilestoreManagerClient.deleteSnapshot`.
+    func deleteSnapshot(
       request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteSnapshot(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a snapshot.
-    public func deleteSnapshot(
+    /// See `CloudFilestoreManagerClient.deleteSnapshot`.
+    func deleteSnapshot(
       withPolling: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteSnapshot(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.updateSnapshot`
-    public func updateSnapshot(
+    /// See `CloudFilestoreManagerClient.updateSnapshot`.
+    func updateSnapshot(
       request: UpdateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateSnapshot(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the settings of a specific snapshot.
-    public func updateSnapshot(
+    /// See `CloudFilestoreManagerClient.updateSnapshot`.
+    func updateSnapshot(
       withPolling: UpdateSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Snapshot(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateSnapshot(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.listBackups`
-    public func listBackups(
+    /// See `CloudFilestoreManagerClient.listBackups`.
+    func listBackups(
       request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse {
-      try await self.inner.listBackups(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse
 
-    /// Lists all backups in a project for either a specified location or for all
-    /// locations.
-    public func listBackups(
+    /// See `CloudFilestoreManagerClient.listBackups`.
+    func listBackups(
       byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Backup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listBackups(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Backup, Swift.Error>
 
-    /// See `CloudFilestoreManager.getBackup`
-    public func getBackup(
+    /// See `CloudFilestoreManagerClient.getBackup`.
+    func getBackup(
       request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudFilestoreV1.Backup {
-      try await self.inner.getBackup(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudFilestoreV1.Backup
 
-    /// See `CloudFilestoreManager.createBackup`
-    public func createBackup(
+    /// See `CloudFilestoreManagerClient.createBackup`.
+    func createBackup(
       request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createBackup(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a backup.
-    public func createBackup(
+    /// See `CloudFilestoreManagerClient.createBackup`.
+    func createBackup(
       withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Backup(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createBackup(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.deleteBackup`
-    public func deleteBackup(
+    /// See `CloudFilestoreManagerClient.deleteBackup`.
+    func deleteBackup(
       request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteBackup(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a backup.
-    public func deleteBackup(
+    /// See `CloudFilestoreManagerClient.deleteBackup`.
+    func deleteBackup(
       withPolling: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteBackup(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.updateBackup`
-    public func updateBackup(
+    /// See `CloudFilestoreManagerClient.updateBackup`.
+    func updateBackup(
       request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateBackup(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the settings of a specific backup.
-    public func updateBackup(
+    /// See `CloudFilestoreManagerClient.updateBackup`.
+    func updateBackup(
       withPolling: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Backup(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateBackup(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.promoteReplica`
-    public func promoteReplica(
+    /// See `CloudFilestoreManagerClient.promoteReplica`.
+    func promoteReplica(
       request: PromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.promoteReplica(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Promote the standby instance (replica).
-    public func promoteReplica(
+    /// See `CloudFilestoreManagerClient.promoteReplica`.
+    func promoteReplica(
       withPolling: PromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.promoteReplica(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `CloudFilestoreManager.listLocations`
-    public func listLocations(
+    /// See `CloudFilestoreManagerClient.listLocations`.
+    func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      try await self.inner.listLocations(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
-    /// Lists information about the supported locations for this service.
-    public func listLocations(
+    /// See `CloudFilestoreManagerClient.listLocations`.
+    func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listLocations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
-    /// See `CloudFilestoreManager.getLocation`
-    public func getLocation(
+    /// See `CloudFilestoreManagerClient.getLocation`.
+    func getLocation(
       request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.Location {
-      try await self.inner.getLocation(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.Location
 
-    /// See `CloudFilestoreManager.listOperations`
-    public func listOperations(
+    /// See `CloudFilestoreManagerClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `CloudFilestoreManagerClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `CloudFilestoreManager.getOperation`
-    public func getOperation(
+    /// See `CloudFilestoreManagerClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `CloudFilestoreManager.deleteOperation`
-    public func deleteOperation(
+    /// See `CloudFilestoreManagerClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `CloudFilestoreManager.cancelOperation`
-    public func cancelOperation(
+    /// See `CloudFilestoreManagerClient.cancelOperation`.
+    func cancelOperation(
       request: GoogleLongrunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.cancelOperation(request: request, options: options)
-    }
+    ) async throws
   }
 }
 
 // Default implementations
-extension CloudFilestoreManager {
+extension Clients.CloudFilestoreManagerProtocol {
   public func listInstances(request: ListInstancesRequest) async throws
     -> GoogleCloudFilestoreV1.ListInstancesResponse
   {

@@ -28,37 +28,34 @@
   extension Clients {
     protocol RegionTargetHttpsProxiesStub {
       func delete(
-        request: Clients.RegionTargetHttpsProxiesClient.DeleteRequest,
+        request: RegionTargetHttpsProxiesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionTargetHttpsProxiesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpsProxy
 
       func insert(
-        request: Clients.RegionTargetHttpsProxiesClient.InsertRequest,
+        request: RegionTargetHttpsProxiesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionTargetHttpsProxiesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpsProxyList
 
       func patch(
-        request: Clients.RegionTargetHttpsProxiesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setSslCertificates(
-        request: Clients.RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
+        request: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setUrlMap(
-        request: Clients.RegionTargetHttpsProxiesClient.SetUrlMapRequest,
+        request: RegionTargetHttpsProxiesClient.SetUrlMapRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -72,7 +69,7 @@
       }
 
       public func delete(
-        request: Clients.RegionTargetHttpsProxiesClient.DeleteRequest,
+        request: RegionTargetHttpsProxiesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -102,8 +99,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionTargetHttpsProxiesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpsProxy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -130,7 +126,7 @@
       }
 
       public func insert(
-        request: Clients.RegionTargetHttpsProxiesClient.InsertRequest,
+        request: RegionTargetHttpsProxiesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -157,8 +153,7 @@
       }
 
       public func list(
-        request: Clients.RegionTargetHttpsProxiesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpsProxyList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -186,8 +181,7 @@
       }
 
       public func patch(
-        request: Clients.RegionTargetHttpsProxiesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpsProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -220,7 +214,7 @@
       }
 
       public func setSslCertificates(
-        request: Clients.RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
+        request: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -254,7 +248,7 @@
       }
 
       public func setUrlMap(
-        request: Clients.RegionTargetHttpsProxiesClient.SetUrlMapRequest,
+        request: RegionTargetHttpsProxiesClient.SetUrlMapRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

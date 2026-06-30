@@ -28,16 +28,15 @@
   extension Clients {
     protocol DiskTypesStub {
       func aggregatedList(
-        request: Clients.DiskTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList
 
       func `get`(
-        request: Clients.DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType
 
       func list(
-        request: Clients.DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeList
     }
 
@@ -50,8 +49,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.DiskTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -81,7 +79,7 @@
       }
 
       public func `get`(
-        request: Clients.DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -105,7 +103,7 @@
       }
 
       public func list(
-        request: Clients.DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

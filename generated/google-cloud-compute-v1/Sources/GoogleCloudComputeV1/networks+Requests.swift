@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NetworksClient {
+  extension NetworksClient {
     /// Synthetic request message for the [addPeering()][google.cloud.compute.v1.networks.addPeering] method.
     ///
     /// [google.cloud.compute.v1.networks.addPeering]: <doc:Networks/addPeering(request:)>
@@ -463,7 +463,7 @@
       Sendable
     {
       /// The direction of the exchanged routes.
-      public var direction: Clients.NetworksClient.ListPeeringRoutesRequest.Direction? = nil
+      public var direction: NetworksClient.ListPeeringRoutesRequest.Direction? = nil
 
       /// A filter expression that filters resources listed in the response. Most
       /// Compute resources support two types of filter expressions:
@@ -589,7 +589,7 @@
 
       /// The enumerated type for the [direction][google.cloud.compute.v1.networks.listPeeringRoutesRequest.direction] field.
       ///
-      /// [google.cloud.compute.v1.networks.listPeeringRoutesRequest.direction]: <doc:Clients/NetworksClient/ListPeeringRoutesRequest/Direction>
+      /// [google.cloud.compute.v1.networks.listPeeringRoutesRequest.direction]: <doc:NetworksClient/ListPeeringRoutesRequest/Direction>
       public enum Direction: Codable, Equatable, Sendable {
         case incoming
         case outgoing

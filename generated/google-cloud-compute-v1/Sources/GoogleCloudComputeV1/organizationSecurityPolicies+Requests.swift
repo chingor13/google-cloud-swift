@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.OrganizationSecurityPoliciesClient {
+  extension OrganizationSecurityPoliciesClient {
     /// Synthetic request message for the [addAssociation()][google.cloud.compute.v1.organizationSecurityPolicies.addAssociation] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.addAssociation]: <doc:OrganizationSecurityPolicies/addAssociation(request:)>

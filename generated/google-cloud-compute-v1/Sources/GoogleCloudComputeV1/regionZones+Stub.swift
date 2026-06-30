@@ -28,7 +28,7 @@
   extension Clients {
     protocol RegionZonesStub {
       func list(
-        request: Clients.RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
     }
 
@@ -41,7 +41,7 @@
       }
 
       public func list(
-        request: Clients.RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

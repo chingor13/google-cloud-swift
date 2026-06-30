@@ -28,28 +28,27 @@
   /// Cloud SQL connect service.
   ///
   /// @Snippet(path: "SqlConnectServiceQuickstart")
-  public protocol SqlConnectService {
-    /// Retrieves connect settings about a Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlConnectService_GetConnectSettings")
-    func getConnectSettings(request: GetConnectSettingsRequest) async throws
-      -> GoogleCloudSqlV1.ConnectSettings
+  public class SqlConnectServiceClient: Clients.SqlConnectServiceProtocol {
+    let inner: any Clients.SqlConnectServiceStub
 
-    /// Generates a short-lived X509 certificate containing the provided public key
-    /// and signed by a private key specific to the target instance. Users may use
-    /// the certificate to authenticate as themselves when connecting to the
-    /// database.
-    ///
-    /// @Snippet(path: "SqlConnectService_GenerateEphemeralCert")
-    func generateEphemeralCert(request: GenerateEphemeralCertRequest) async throws
-      -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
+    /// Creates a new `SqlConnectServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlConnectServiceStub = try Clients.SqlConnectServiceTransport(options)
+      inner = Clients.SqlConnectServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlConnectServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves connect settings about a Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlConnectService_GetConnectSettings")
-    func getConnectSettings(
+    public func getConnectSettings(
       request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.ConnectSettings
+    ) async throws -> GoogleCloudSqlV1.ConnectSettings {
+      try await self.inner.getConnectSettings(request: request, options: options)
+    }
 
     /// Generates a short-lived X509 certificate containing the provided public key
     /// and signed by a private key specific to the target instance. Users may use
@@ -57,44 +56,42 @@
     /// database.
     ///
     /// @Snippet(path: "SqlConnectService_GenerateEphemeralCert")
-    func generateEphemeralCert(
+    public func generateEphemeralCert(
       request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
+    ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
+      try await self.inner.generateEphemeralCert(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlConnectService``.
-    public class SqlConnectServiceClient: SqlConnectService {
-      let inner: any SqlConnectServiceStub
+    /// A Swift protocol to mock `SqlConnectServiceClient`.
+    ///
+    /// To mock `SqlConnectServiceClient` change your functions to receive
+    /// `some SqlConnectServiceProtocol` or `any SqlConnectServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlConnectServiceProtocol {
+      /// See `SqlConnectServiceClient.getConnectSettings`.
+      func getConnectSettings(request: GetConnectSettingsRequest) async throws
+        -> GoogleCloudSqlV1.ConnectSettings
 
-      /// Creates a new `SqlConnectServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlConnectServiceStub = try SqlConnectServiceTransport(options)
-        inner = SqlConnectServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlConnectServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlConnectServiceClient.generateEphemeralCert`.
+      func generateEphemeralCert(request: GenerateEphemeralCertRequest) async throws
+        -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
 
-      /// See `SqlConnectService.getConnectSettings`
-      public func getConnectSettings(
+      /// See `SqlConnectServiceClient.getConnectSettings`.
+      func getConnectSettings(
         request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.ConnectSettings {
-        try await self.inner.getConnectSettings(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
-      /// See `SqlConnectService.generateEphemeralCert`
-      public func generateEphemeralCert(
+      /// See `SqlConnectServiceClient.generateEphemeralCert`.
+      func generateEphemeralCert(
         request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
-        try await self.inner.generateEphemeralCert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
     }
   }
 
   // Default implementations
-  extension SqlConnectService {
+  extension Clients.SqlConnectServiceProtocol {
     public func getConnectSettings(request: GetConnectSettingsRequest) async throws
       -> GoogleCloudSqlV1.ConnectSettings
     {

@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some StorageTransferService, projectId: String, agentPoolId: String)
+func sample(client: StorageTransferServiceClient, projectId: String, agentPoolId: String)
   async throws
 {
   let response = try await client.updateAgentPool(
@@ -42,7 +42,7 @@ func sample(client: some StorageTransferService, projectId: String, agentPoolId:
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleStoragetransferV1.Clients.StorageTransferServiceClient()
+      let client = try GoogleStoragetransferV1.StorageTransferServiceClient()
       try await sample(client: client, projectId: "[placeholder]", agentPoolId: "[placeholder]")
     } catch {
       print("Error: \(error)")

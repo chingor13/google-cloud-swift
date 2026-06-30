@@ -28,27 +28,27 @@
   extension Clients {
     protocol NetworkEdgeSecurityServicesStub {
       func aggregatedList(
-        request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+        request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
 
       func delete(
-        request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest,
+        request: NetworkEdgeSecurityServicesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.NetworkEdgeSecurityServicesClient.GetRequest,
+        request: NetworkEdgeSecurityServicesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
 
       func insert(
-        request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest,
+        request: NetworkEdgeSecurityServicesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patch(
-        request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest,
+        request: NetworkEdgeSecurityServicesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -62,7 +62,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest,
+        request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -93,7 +93,7 @@
       }
 
       public func delete(
-        request: Clients.NetworkEdgeSecurityServicesClient.DeleteRequest,
+        request: NetworkEdgeSecurityServicesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -123,7 +123,7 @@
       }
 
       public func `get`(
-        request: Clients.NetworkEdgeSecurityServicesClient.GetRequest,
+        request: NetworkEdgeSecurityServicesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
         let path = try { () throws -> Swift.String in
@@ -151,7 +151,7 @@
       }
 
       public func insert(
-        request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest,
+        request: NetworkEdgeSecurityServicesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -180,7 +180,7 @@
       }
 
       public func patch(
-        request: Clients.NetworkEdgeSecurityServicesClient.PatchRequest,
+        request: NetworkEdgeSecurityServicesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

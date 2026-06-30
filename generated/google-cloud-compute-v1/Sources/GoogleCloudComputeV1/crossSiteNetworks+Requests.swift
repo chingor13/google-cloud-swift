@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.CrossSiteNetworksClient {
+  extension CrossSiteNetworksClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.crossSiteNetworks.delete] method.
     ///
     /// [google.cloud.compute.v1.crossSiteNetworks.delete]: <doc:CrossSiteNetworks/delete(request:)>

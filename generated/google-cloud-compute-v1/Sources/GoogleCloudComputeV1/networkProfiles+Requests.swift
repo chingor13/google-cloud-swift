@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NetworkProfilesClient {
+  extension NetworkProfilesClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.networkProfiles.get] method.
     ///
     /// [google.cloud.compute.v1.networkProfiles.get]: <doc:NetworkProfiles/`get`(request:)>

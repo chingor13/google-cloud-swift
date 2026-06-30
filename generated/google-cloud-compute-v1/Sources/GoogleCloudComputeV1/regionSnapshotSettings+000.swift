@@ -28,93 +28,89 @@
   /// Service for the `regionSnapshotSettings` resource.
   ///
   /// @Snippet(path: "regionSnapshotSettingsQuickstart")
-  public protocol RegionSnapshotSettings {
-    /// Get region snapshot settings.
-    ///
-    /// @Snippet(path: "regionSnapshotSettings_get")
-    func `get`(request: Clients.RegionSnapshotSettingsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.SnapshotSettings
+  public class RegionSnapshotSettingsClient: Clients.RegionSnapshotSettingsProtocol {
+    let inner: any Clients.RegionSnapshotSettingsStub
 
-    /// Get region snapshot settings.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.SnapshotSettings
-
-    /// Patch region snapshot settings.
-    ///
-    /// @Snippet(path: "regionSnapshotSettings_patch")
-    func patch(request: Clients.RegionSnapshotSettingsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patch region snapshot settings.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      body: SnapshotSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `RegionSnapshotSettingsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionSnapshotSettingsStub =
+        try Clients.RegionSnapshotSettingsTransport(options)
+      inner = Clients.RegionSnapshotSettingsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionSnapshotSettingsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Get region snapshot settings.
     ///
     /// @Snippet(path: "regionSnapshotSettings_get")
-    func `get`(
-      request: Clients.RegionSnapshotSettingsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SnapshotSettings
+    public func `get`(
+      request: RegionSnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Patch region snapshot settings.
     ///
     /// @Snippet(path: "regionSnapshotSettings_patch")
-    func patch(
-      request: Clients.RegionSnapshotSettingsClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionSnapshotSettings``.
-    public class RegionSnapshotSettingsClient: RegionSnapshotSettings {
-      let inner: any RegionSnapshotSettingsStub
+    /// A Swift protocol to mock `RegionSnapshotSettingsClient`.
+    ///
+    /// To mock `RegionSnapshotSettingsClient` change your functions to receive
+    /// `some RegionSnapshotSettingsProtocol` or `any RegionSnapshotSettingsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionSnapshotSettingsProtocol {
+      /// See `RegionSnapshotSettingsClient.`get``.
+      func `get`(request: RegionSnapshotSettingsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.SnapshotSettings
 
-      /// Creates a new `RegionSnapshotSettingsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionSnapshotSettingsStub = try RegionSnapshotSettingsTransport(options)
-        inner = RegionSnapshotSettingsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionSnapshotSettingsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionSnapshotSettingsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.SnapshotSettings
 
-      /// See `RegionSnapshotSettings.`get``
-      public func `get`(
-        request: Clients.RegionSnapshotSettingsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionSnapshotSettingsClient.patch`.
+      func patch(request: RegionSnapshotSettingsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSnapshotSettings.patch`
-      public func patch(
-        request: Clients.RegionSnapshotSettingsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `RegionSnapshotSettingsClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        body: SnapshotSettings?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionSnapshotSettingsClient.`get``.
+      func `get`(
+        request: RegionSnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SnapshotSettings
+
+      /// See `RegionSnapshotSettingsClient.patch`.
+      func patch(
+        request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension RegionSnapshotSettings {
-    public func `get`(request: Clients.RegionSnapshotSettingsClient.GetRequest) async throws
+  extension Clients.RegionSnapshotSettingsProtocol {
+    public func `get`(request: RegionSnapshotSettingsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.SnapshotSettings
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionSnapshotSettingsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionSnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -123,22 +119,21 @@
       project: Swift.String,
       region: Swift.String,
     ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
-      let request = Clients.RegionSnapshotSettingsClient.GetRequest().with {
+      let request = RegionSnapshotSettingsClient.GetRequest().with {
         $0.project = project
         $0.region = region
       }
       return try await self.`get`(request: request)
     }
 
-    public func patch(request: Clients.RegionSnapshotSettingsClient.PatchRequest) async throws
+    public func patch(request: RegionSnapshotSettingsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionSnapshotSettingsClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -148,7 +143,7 @@
       region: Swift.String,
       body: SnapshotSettings?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionSnapshotSettingsClient.PatchRequest().with {
+      let request = RegionSnapshotSettingsClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body

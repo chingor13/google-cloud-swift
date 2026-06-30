@@ -53,14 +53,14 @@
       }
 
       public func delete(
-        request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RoutesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RoutesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -68,14 +68,14 @@
       }
 
       public func `get`(
-        request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Route {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RoutesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RoutesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Route
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -83,14 +83,14 @@
       }
 
       public func insert(
-        request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RoutesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RoutesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -98,14 +98,14 @@
       }
 
       public func list(
-        request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouteList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RoutesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RoutesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RouteList
             in
             return try await self.inner.list(request: r, options: o)
@@ -113,15 +113,14 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RoutesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RoutesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RoutesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)

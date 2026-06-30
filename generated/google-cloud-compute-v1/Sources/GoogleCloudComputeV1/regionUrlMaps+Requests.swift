@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionUrlMapsClient {
+  extension RegionUrlMapsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionUrlMaps.delete] method.
     ///
     /// [google.cloud.compute.v1.regionUrlMaps.delete]: <doc:RegionUrlMaps/delete(request:)>

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.NodeGroupsClient {
+  extension NodeGroupsClient {
     /// Synthetic request message for the [addNodes()][google.cloud.compute.v1.nodeGroups.addNodes] method.
     ///
     /// [google.cloud.compute.v1.nodeGroups.addNodes]: <doc:NodeGroups/addNodes(request:)>

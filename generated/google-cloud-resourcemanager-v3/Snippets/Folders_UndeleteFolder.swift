@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Folders, folderId: String) async throws {
+func sample(client: FoldersClient, folderId: String) async throws {
   let poller = try await client.undeleteFolder(
     withPolling: UndeleteFolderRequest()
       .with {
@@ -39,7 +39,7 @@ func sample(client: some Folders, folderId: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.FoldersClient()
+      let client = try GoogleCloudResourcemanagerV3.FoldersClient()
       try await sample(client: client, folderId: "[placeholder]")
     } catch {
       print("Error: \(error)")

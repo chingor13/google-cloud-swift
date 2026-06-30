@@ -30,514 +30,18 @@ import Logging
 /// Manages Google Cloud Projects.
 ///
 /// @Snippet(path: "ProjectsQuickstart")
-public protocol Projects {
-  /// Retrieves the project identified by the specified `name` (for example,
-  /// `projects/415104041262`).
-  ///
-  /// The caller must have `resourcemanager.projects.get` permission
-  /// for this project.
-  ///
-  /// @Snippet(path: "Projects_GetProject")
-  func getProject(request: GetProjectRequest) async throws -> GoogleCloudResourcemanagerV3.Project
+public class ProjectsClient: Clients.ProjectsProtocol {
+  let inner: any Clients.ProjectsStub
 
-  /// Retrieves the project identified by the specified `name` (for example,
-  /// `projects/415104041262`).
-  ///
-  /// The caller must have `resourcemanager.projects.get` permission
-  /// for this project.
-  func getProject(
-    name: Swift.String,
-  ) async throws -> GoogleCloudResourcemanagerV3.Project
-
-  /// Lists projects that are direct children of the specified folder or
-  /// organization resource. `list()` provides a strongly consistent view of the
-  /// projects underneath the specified parent resource. `list()` returns
-  /// projects sorted based upon the (ascending) lexical ordering of their
-  /// `display_name`. The caller must have `resourcemanager.projects.list`
-  /// permission on the identified parent.
-  ///
-  /// @Snippet(path: "Projects_ListProjects")
-  func listProjects(request: ListProjectsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListProjectsResponse
-
-  /// Lists projects that are direct children of the specified folder or
-  /// organization resource. `list()` provides a strongly consistent view of the
-  /// projects underneath the specified parent resource. `list()` returns
-  /// projects sorted based upon the (ascending) lexical ordering of their
-  /// `display_name`. The caller must have `resourcemanager.projects.list`
-  /// permission on the identified parent.
-  func listProjects(
-    byItem: ListProjectsRequest
-  ) throws -> any AsyncSequence<Project, Swift.Error>
-
-  /// Lists projects that are direct children of the specified folder or
-  /// organization resource. `list()` provides a strongly consistent view of the
-  /// projects underneath the specified parent resource. `list()` returns
-  /// projects sorted based upon the (ascending) lexical ordering of their
-  /// `display_name`. The caller must have `resourcemanager.projects.list`
-  /// permission on the identified parent.
-  func listProjects(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Project, Swift.Error>
-
-  /// Search for projects that the caller has both `resourcemanager.projects.get`
-  /// permission on, and also satisfy the specified query.
-  ///
-  /// This method returns projects in an unspecified order.
-  ///
-  /// This method is eventually consistent with project mutations; this means
-  /// that a newly created project may not appear in the results or recent
-  /// updates to an existing project may not be reflected in the results. To
-  /// retrieve the latest state of a project, use the
-  /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
-  ///
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
-  ///
-  /// @Snippet(path: "Projects_SearchProjects")
-  func searchProjects(request: SearchProjectsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.SearchProjectsResponse
-
-  /// Search for projects that the caller has both `resourcemanager.projects.get`
-  /// permission on, and also satisfy the specified query.
-  ///
-  /// This method returns projects in an unspecified order.
-  ///
-  /// This method is eventually consistent with project mutations; this means
-  /// that a newly created project may not appear in the results or recent
-  /// updates to an existing project may not be reflected in the results. To
-  /// retrieve the latest state of a project, use the
-  /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
-  ///
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
-  func searchProjects(
-    byItem: SearchProjectsRequest
-  ) throws -> any AsyncSequence<Project, Swift.Error>
-
-  /// Search for projects that the caller has both `resourcemanager.projects.get`
-  /// permission on, and also satisfy the specified query.
-  ///
-  /// This method returns projects in an unspecified order.
-  ///
-  /// This method is eventually consistent with project mutations; this means
-  /// that a newly created project may not appear in the results or recent
-  /// updates to an existing project may not be reflected in the results. To
-  /// retrieve the latest state of a project, use the
-  /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
-  ///
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
-  func searchProjects(
-    query: Swift.String,
-  ) throws -> any AsyncSequence<Project, Swift.Error>
-
-  /// Request that a new project be created. The result is an `Operation` which
-  /// can be used to track the creation process. This process usually takes a few
-  /// seconds, but can sometimes take much longer. The tracking `Operation` is
-  /// automatically deleted after a few hours, so there is no need to call
-  /// `DeleteOperation`.
-  ///
-  /// @Snippet(path: "Projects_CreateProject")
-  func createProject(request: CreateProjectRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Request that a new project be created. The result is an `Operation` which
-  /// can be used to track the creation process. This process usually takes a few
-  /// seconds, but can sometimes take much longer. The tracking `Operation` is
-  /// automatically deleted after a few hours, so there is no need to call
-  /// `DeleteOperation`.
-  func createProject(withPolling: CreateProjectRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Project>
-
-  /// Request that a new project be created. The result is an `Operation` which
-  /// can be used to track the creation process. This process usually takes a few
-  /// seconds, but can sometimes take much longer. The tracking `Operation` is
-  /// automatically deleted after a few hours, so there is no need to call
-  /// `DeleteOperation`.
-  func createProject(
-    project: Project?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
-
-  /// Updates the `display_name` and labels of the project identified by the
-  /// specified `name` (for example, `projects/415104041262`). Deleting all
-  /// labels requires an update mask for labels field.
-  ///
-  /// The caller must have `resourcemanager.projects.update` permission for this
-  /// project.
-  ///
-  /// @Snippet(path: "Projects_UpdateProject")
-  func updateProject(request: UpdateProjectRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the `display_name` and labels of the project identified by the
-  /// specified `name` (for example, `projects/415104041262`). Deleting all
-  /// labels requires an update mask for labels field.
-  ///
-  /// The caller must have `resourcemanager.projects.update` permission for this
-  /// project.
-  func updateProject(withPolling: UpdateProjectRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Project>
-
-  /// Updates the `display_name` and labels of the project identified by the
-  /// specified `name` (for example, `projects/415104041262`). Deleting all
-  /// labels requires an update mask for labels field.
-  ///
-  /// The caller must have `resourcemanager.projects.update` permission for this
-  /// project.
-  func updateProject(
-    project: Project?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
-
-  /// Move a project to another place in your resource hierarchy, under a new
-  /// resource parent.
-  ///
-  /// Returns an operation which can be used to track the process of the project
-  /// move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved project.
-  ///
-  /// The caller must have `resourcemanager.projects.move` permission on the
-  /// project, on the project's current and proposed new parent.
-  ///
-  /// If project has no current parent, or it currently does not have an
-  /// associated organization resource, you will also need the
-  /// `resourcemanager.projects.setIamPolicy` permission in the project.
-  ///
-  ///
-  ///
-  /// @Snippet(path: "Projects_MoveProject")
-  func moveProject(request: MoveProjectRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Move a project to another place in your resource hierarchy, under a new
-  /// resource parent.
-  ///
-  /// Returns an operation which can be used to track the process of the project
-  /// move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved project.
-  ///
-  /// The caller must have `resourcemanager.projects.move` permission on the
-  /// project, on the project's current and proposed new parent.
-  ///
-  /// If project has no current parent, or it currently does not have an
-  /// associated organization resource, you will also need the
-  /// `resourcemanager.projects.setIamPolicy` permission in the project.
-  ///
-  ///
-  func moveProject(withPolling: MoveProjectRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Project>
-
-  /// Move a project to another place in your resource hierarchy, under a new
-  /// resource parent.
-  ///
-  /// Returns an operation which can be used to track the process of the project
-  /// move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved project.
-  ///
-  /// The caller must have `resourcemanager.projects.move` permission on the
-  /// project, on the project's current and proposed new parent.
-  ///
-  /// If project has no current parent, or it currently does not have an
-  /// associated organization resource, you will also need the
-  /// `resourcemanager.projects.setIamPolicy` permission in the project.
-  ///
-  ///
-  func moveProject(
-    name: Swift.String,
-    destinationParent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
-
-  /// Marks the project identified by the specified
-  /// `name` (for example, `projects/415104041262`) for deletion.
-  ///
-  /// This method will only affect the project if it has a lifecycle state of
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE].
-  ///
-  /// This method changes the Project's lifecycle state from
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
-  /// to
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
-  /// The deletion starts at an unspecified time,
-  /// at which point the Project is no longer accessible.
-  ///
-  /// Until the deletion completes, you can check the lifecycle state
-  /// checked by retrieving the project with [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// and the project remains visible to [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects].
-  /// However, you cannot update the project.
-  ///
-  /// After the deletion completes, the project is not retrievable by
-  /// the  [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects], and
-  /// [SearchProjects][google.cloud.resourcemanager.v3.Projects.SearchProjects]
-  /// methods.
-  ///
-  /// This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
-  /// project will not cause an error, but also won't do anything.
-  ///
-  /// The caller must have `resourcemanager.projects.delete` permissions for this
-  /// project.
-  ///
-  /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
-  /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
-  /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
-  ///
-  /// @Snippet(path: "Projects_DeleteProject")
-  func deleteProject(request: DeleteProjectRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Marks the project identified by the specified
-  /// `name` (for example, `projects/415104041262`) for deletion.
-  ///
-  /// This method will only affect the project if it has a lifecycle state of
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE].
-  ///
-  /// This method changes the Project's lifecycle state from
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
-  /// to
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
-  /// The deletion starts at an unspecified time,
-  /// at which point the Project is no longer accessible.
-  ///
-  /// Until the deletion completes, you can check the lifecycle state
-  /// checked by retrieving the project with [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// and the project remains visible to [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects].
-  /// However, you cannot update the project.
-  ///
-  /// After the deletion completes, the project is not retrievable by
-  /// the  [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects], and
-  /// [SearchProjects][google.cloud.resourcemanager.v3.Projects.SearchProjects]
-  /// methods.
-  ///
-  /// This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
-  /// project will not cause an error, but also won't do anything.
-  ///
-  /// The caller must have `resourcemanager.projects.delete` permissions for this
-  /// project.
-  ///
-  /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
-  /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
-  /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
-  func deleteProject(withPolling: DeleteProjectRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Project>
-
-  /// Marks the project identified by the specified
-  /// `name` (for example, `projects/415104041262`) for deletion.
-  ///
-  /// This method will only affect the project if it has a lifecycle state of
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE].
-  ///
-  /// This method changes the Project's lifecycle state from
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
-  /// to
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
-  /// The deletion starts at an unspecified time,
-  /// at which point the Project is no longer accessible.
-  ///
-  /// Until the deletion completes, you can check the lifecycle state
-  /// checked by retrieving the project with [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// and the project remains visible to [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects].
-  /// However, you cannot update the project.
-  ///
-  /// After the deletion completes, the project is not retrievable by
-  /// the  [GetProject]
-  /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-  /// [ListProjects]
-  /// [google.cloud.resourcemanager.v3.Projects.ListProjects], and
-  /// [SearchProjects][google.cloud.resourcemanager.v3.Projects.SearchProjects]
-  /// methods.
-  ///
-  /// This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
-  /// project will not cause an error, but also won't do anything.
-  ///
-  /// The caller must have `resourcemanager.projects.delete` permissions for this
-  /// project.
-  ///
-  /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
-  /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
-  /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
-  func deleteProject(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
-
-  /// Restores the project identified by the specified
-  /// `name` (for example, `projects/415104041262`).
-  /// You can only use this method for a project that has a lifecycle state of
-  /// [DELETE_REQUESTED]
-  /// [Projects.State.DELETE_REQUESTED].
-  /// After deletion starts, the project cannot be restored.
-  ///
-  /// The caller must have `resourcemanager.projects.undelete` permission for
-  /// this project.
-  ///
-  /// @Snippet(path: "Projects_UndeleteProject")
-  func undeleteProject(request: UndeleteProjectRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Restores the project identified by the specified
-  /// `name` (for example, `projects/415104041262`).
-  /// You can only use this method for a project that has a lifecycle state of
-  /// [DELETE_REQUESTED]
-  /// [Projects.State.DELETE_REQUESTED].
-  /// After deletion starts, the project cannot be restored.
-  ///
-  /// The caller must have `resourcemanager.projects.undelete` permission for
-  /// this project.
-  func undeleteProject(withPolling: UndeleteProjectRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Project>
-
-  /// Restores the project identified by the specified
-  /// `name` (for example, `projects/415104041262`).
-  /// You can only use this method for a project that has a lifecycle state of
-  /// [DELETE_REQUESTED]
-  /// [Projects.State.DELETE_REQUESTED].
-  /// After deletion starts, the project cannot be restored.
-  ///
-  /// The caller must have `resourcemanager.projects.undelete` permission for
-  /// this project.
-  func undeleteProject(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
-
-  /// Returns the IAM access control policy for the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
-  /// Permission is denied if the policy or the resource do not exist.
-  ///
-  /// @Snippet(path: "Projects_GetIamPolicy")
-  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Returns the IAM access control policy for the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
-  /// Permission is denied if the policy or the resource do not exist.
-  func getIamPolicy(
-    resource: Swift.String,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Sets the IAM access control policy for the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
-  ///
-  /// CAUTION: This method will replace the existing policy, and cannot be used
-  /// to append additional IAM settings.
-  ///
-  /// Note: Removing service accounts from policies or changing their roles can
-  /// render services completely inoperable. It is important to understand how
-  /// the service account is being used before removing or updating its roles.
-  ///
-  /// The following constraints apply when using `setIamPolicy()`:
-  ///
-  /// + Project does not support `allUsers` and `allAuthenticatedUsers` as
-  /// `members` in a `Binding` of a `Policy`.
-  ///
-  /// + The owner role can be granted to a `user`, `serviceAccount`, or a group
-  /// that is part of an organization. For example,
-  /// group@myownpersonaldomain.com could be added as an owner to a project in
-  /// the myownpersonaldomain.com organization, but not the examplepetstore.com
-  /// organization.
-  ///
-  /// + Service accounts can be made owners of a project directly
-  /// without any restrictions. However, to be added as an owner, a user must be
-  /// invited using the Cloud Platform console and must accept the invitation.
-  ///
-  /// + A user cannot be granted the owner role using `setIamPolicy()`. The user
-  /// must be granted the owner role using the Cloud Platform Console and must
-  /// explicitly accept the invitation.
-  ///
-  /// + Invitations to grant the owner role cannot be sent using
-  /// `setIamPolicy()`;
-  /// they must be sent only using the Cloud Platform Console.
-  ///
-  /// + If the project is not part of an organization, there must be at least
-  /// one owner who has accepted the Terms of Service (ToS) agreement in the
-  /// policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
-  /// from the policy will fail. This restriction also applies to legacy
-  /// projects that no longer have owners who have accepted the ToS. Edits to
-  /// IAM policies will be rejected until the lack of a ToS-accepting owner is
-  /// rectified. If the project is part of an organization, you can remove all
-  /// owners, potentially making the organization inaccessible.
-  ///
-  /// @Snippet(path: "Projects_SetIamPolicy")
-  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Sets the IAM access control policy for the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
-  ///
-  /// CAUTION: This method will replace the existing policy, and cannot be used
-  /// to append additional IAM settings.
-  ///
-  /// Note: Removing service accounts from policies or changing their roles can
-  /// render services completely inoperable. It is important to understand how
-  /// the service account is being used before removing or updating its roles.
-  ///
-  /// The following constraints apply when using `setIamPolicy()`:
-  ///
-  /// + Project does not support `allUsers` and `allAuthenticatedUsers` as
-  /// `members` in a `Binding` of a `Policy`.
-  ///
-  /// + The owner role can be granted to a `user`, `serviceAccount`, or a group
-  /// that is part of an organization. For example,
-  /// group@myownpersonaldomain.com could be added as an owner to a project in
-  /// the myownpersonaldomain.com organization, but not the examplepetstore.com
-  /// organization.
-  ///
-  /// + Service accounts can be made owners of a project directly
-  /// without any restrictions. However, to be added as an owner, a user must be
-  /// invited using the Cloud Platform console and must accept the invitation.
-  ///
-  /// + A user cannot be granted the owner role using `setIamPolicy()`. The user
-  /// must be granted the owner role using the Cloud Platform Console and must
-  /// explicitly accept the invitation.
-  ///
-  /// + Invitations to grant the owner role cannot be sent using
-  /// `setIamPolicy()`;
-  /// they must be sent only using the Cloud Platform Console.
-  ///
-  /// + If the project is not part of an organization, there must be at least
-  /// one owner who has accepted the Terms of Service (ToS) agreement in the
-  /// policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
-  /// from the policy will fail. This restriction also applies to legacy
-  /// projects that no longer have owners who have accepted the ToS. Edits to
-  /// IAM policies will be rejected until the lack of a ToS-accepting owner is
-  /// rectified. If the project is part of an organization, you can remove all
-  /// owners, potentially making the organization inaccessible.
-  func setIamPolicy(
-    resource: Swift.String,
-    policy: GoogleIamV1.Policy?,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Returns permissions that a caller has on the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123..
-  ///
-  /// @Snippet(path: "Projects_TestIamPermissions")
-  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
-    -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Returns permissions that a caller has on the specified project, in the
-  /// format `projects/{ProjectIdOrNumber}` e.g. projects/123..
-  func testIamPermissions(
-    resource: Swift.String,
-    permissions: [Swift.String],
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Projects_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `ProjectsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.ProjectsStub = try Clients.ProjectsTransport(options)
+    inner = Clients.ProjectsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.ProjectsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Retrieves the project identified by the specified `name` (for example,
   /// `projects/415104041262`).
@@ -546,9 +50,11 @@ public protocol Projects {
   /// for this project.
   ///
   /// @Snippet(path: "Projects_GetProject")
-  func getProject(
+  public func getProject(
     request: GetProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.Project
+  ) async throws -> GoogleCloudResourcemanagerV3.Project {
+    try await self.inner.getProject(request: request, options: options)
+  }
 
   /// Lists projects that are direct children of the specified folder or
   /// organization resource. `list()` provides a strongly consistent view of the
@@ -558,9 +64,11 @@ public protocol Projects {
   /// permission on the identified parent.
   ///
   /// @Snippet(path: "Projects_ListProjects")
-  func listProjects(
+  public func listProjects(
     request: ListProjectsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse {
+    try await self.inner.listProjects(request: request, options: options)
+  }
 
   /// Lists projects that are direct children of the specified folder or
   /// organization resource. `list()` provides a strongly consistent view of the
@@ -568,9 +76,19 @@ public protocol Projects {
   /// projects sorted based upon the (ascending) lexical ordering of their
   /// `display_name`. The caller must have `resourcemanager.projects.list`
   /// permission on the identified parent.
-  func listProjects(
+  ///
+  /// @Snippet(path: "Projects_ListProjects")
+  public func listProjects(
     byItem: ListProjectsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Project, Swift.Error>
+  ) throws -> any AsyncSequence<Project, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listProjects(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Search for projects that the caller has both `resourcemanager.projects.get`
   /// permission on, and also satisfy the specified query.
@@ -586,9 +104,11 @@ public protocol Projects {
   /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
   ///
   /// @Snippet(path: "Projects_SearchProjects")
-  func searchProjects(
+  public func searchProjects(
     request: SearchProjectsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse {
+    try await self.inner.searchProjects(request: request, options: options)
+  }
 
   /// Search for projects that the caller has both `resourcemanager.projects.get`
   /// permission on, and also satisfy the specified query.
@@ -602,9 +122,19 @@ public protocol Projects {
   /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
   ///
   /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
-  func searchProjects(
+  ///
+  /// @Snippet(path: "Projects_SearchProjects")
+  public func searchProjects(
     byItem: SearchProjectsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Project, Swift.Error>
+  ) throws -> any AsyncSequence<Project, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.searchProjects(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Request that a new project be created. The result is an `Operation` which
   /// can be used to track the creation process. This process usually takes a few
@@ -613,18 +143,69 @@ public protocol Projects {
   /// `DeleteOperation`.
   ///
   /// @Snippet(path: "Projects_CreateProject")
-  func createProject(
+  public func createProject(
     request: CreateProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createProject(request: request, options: options)
+  }
 
   /// Request that a new project be created. The result is an `Operation` which
   /// can be used to track the creation process. This process usually takes a few
   /// seconds, but can sometimes take much longer. The tracking `Operation` is
   /// automatically deleted after a few hours, so there is no need to call
   /// `DeleteOperation`.
-  func createProject(
+  ///
+  /// @Snippet(path: "Projects_CreateProject")
+  public func createProject(
     withPolling: CreateProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Project(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createProject(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the `display_name` and labels of the project identified by the
   /// specified `name` (for example, `projects/415104041262`). Deleting all
@@ -634,9 +215,11 @@ public protocol Projects {
   /// project.
   ///
   /// @Snippet(path: "Projects_UpdateProject")
-  func updateProject(
+  public func updateProject(
     request: UpdateProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateProject(request: request, options: options)
+  }
 
   /// Updates the `display_name` and labels of the project identified by the
   /// specified `name` (for example, `projects/415104041262`). Deleting all
@@ -644,9 +227,58 @@ public protocol Projects {
   ///
   /// The caller must have `resourcemanager.projects.update` permission for this
   /// project.
-  func updateProject(
+  ///
+  /// @Snippet(path: "Projects_UpdateProject")
+  public func updateProject(
     withPolling: UpdateProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Project(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateProject(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Move a project to another place in your resource hierarchy, under a new
   /// resource parent.
@@ -666,9 +298,11 @@ public protocol Projects {
   ///
   ///
   /// @Snippet(path: "Projects_MoveProject")
-  func moveProject(
+  public func moveProject(
     request: MoveProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.moveProject(request: request, options: options)
+  }
 
   /// Move a project to another place in your resource hierarchy, under a new
   /// resource parent.
@@ -686,9 +320,58 @@ public protocol Projects {
   /// `resourcemanager.projects.setIamPolicy` permission in the project.
   ///
   ///
-  func moveProject(
+  ///
+  /// @Snippet(path: "Projects_MoveProject")
+  public func moveProject(
     withPolling: MoveProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Project(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.moveProject(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Marks the project identified by the specified
   /// `name` (for example, `projects/415104041262`) for deletion.
@@ -729,9 +412,11 @@ public protocol Projects {
   /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
   ///
   /// @Snippet(path: "Projects_DeleteProject")
-  func deleteProject(
+  public func deleteProject(
     request: DeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteProject(request: request, options: options)
+  }
 
   /// Marks the project identified by the specified
   /// `name` (for example, `projects/415104041262`) for deletion.
@@ -770,9 +455,58 @@ public protocol Projects {
   /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
   /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
   /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
-  func deleteProject(
+  ///
+  /// @Snippet(path: "Projects_DeleteProject")
+  public func deleteProject(
     withPolling: DeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Project(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteProject(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Restores the project identified by the specified
   /// `name` (for example, `projects/415104041262`).
@@ -785,9 +519,11 @@ public protocol Projects {
   /// this project.
   ///
   /// @Snippet(path: "Projects_UndeleteProject")
-  func undeleteProject(
+  public func undeleteProject(
     request: UndeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.undeleteProject(request: request, options: options)
+  }
 
   /// Restores the project identified by the specified
   /// `name` (for example, `projects/415104041262`).
@@ -798,18 +534,69 @@ public protocol Projects {
   ///
   /// The caller must have `resourcemanager.projects.undelete` permission for
   /// this project.
-  func undeleteProject(
+  ///
+  /// @Snippet(path: "Projects_UndeleteProject")
+  public func undeleteProject(
     withPolling: UndeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Project(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.undeleteProject(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Returns the IAM access control policy for the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
   /// Permission is denied if the policy or the resource do not exist.
   ///
   /// @Snippet(path: "Projects_GetIamPolicy")
-  func getIamPolicy(
+  public func getIamPolicy(
     request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
 
   /// Sets the IAM access control policy for the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123.
@@ -854,501 +641,275 @@ public protocol Projects {
   /// owners, potentially making the organization inaccessible.
   ///
   /// @Snippet(path: "Projects_SetIamPolicy")
-  func setIamPolicy(
+  public func setIamPolicy(
     request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
 
   /// Returns permissions that a caller has on the specified project, in the
   /// format `projects/{ProjectIdOrNumber}` e.g. projects/123..
   ///
   /// @Snippet(path: "Projects_TestIamPermissions")
-  func testIamPermissions(
+  public func testIamPermissions(
     request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Projects_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Projects``.
-  public class ProjectsClient: Projects {
-    let inner: any ProjectsStub
+  /// A Swift protocol to mock `ProjectsClient`.
+  ///
+  /// To mock `ProjectsClient` change your functions to receive
+  /// `some ProjectsProtocol` or `any ProjectsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol ProjectsProtocol {
+    /// See `ProjectsClient.getProject`.
+    func getProject(request: GetProjectRequest) async throws -> GoogleCloudResourcemanagerV3.Project
 
-    /// Creates a new `ProjectsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any ProjectsStub = try ProjectsTransport(options)
-      inner = ProjectsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = ProjectsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `ProjectsClient.getProject`.
+    func getProject(
+      name: Swift.String,
+    ) async throws -> GoogleCloudResourcemanagerV3.Project
 
-    /// See `Projects.getProject`
-    public func getProject(
+    /// See `ProjectsClient.listProjects`.
+    func listProjects(request: ListProjectsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListProjectsResponse
+
+    /// See `ProjectsClient.listProjects`.
+    func listProjects(
+      byItem: ListProjectsRequest
+    ) throws -> any AsyncSequence<Project, Swift.Error>
+
+    /// See `ProjectsClient.listProjects`.
+    func listProjects(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Project, Swift.Error>
+
+    /// See `ProjectsClient.searchProjects`.
+    func searchProjects(request: SearchProjectsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.SearchProjectsResponse
+
+    /// See `ProjectsClient.searchProjects`.
+    func searchProjects(
+      byItem: SearchProjectsRequest
+    ) throws -> any AsyncSequence<Project, Swift.Error>
+
+    /// See `ProjectsClient.searchProjects`.
+    func searchProjects(
+      query: Swift.String,
+    ) throws -> any AsyncSequence<Project, Swift.Error>
+
+    /// See `ProjectsClient.createProject`.
+    func createProject(request: CreateProjectRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.createProject`.
+    func createProject(withPolling: CreateProjectRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Project>
+
+    /// See `ProjectsClient.createProject`.
+    func createProject(
+      project: Project?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
+    /// See `ProjectsClient.updateProject`.
+    func updateProject(request: UpdateProjectRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.updateProject`.
+    func updateProject(withPolling: UpdateProjectRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Project>
+
+    /// See `ProjectsClient.updateProject`.
+    func updateProject(
+      project: Project?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
+    /// See `ProjectsClient.moveProject`.
+    func moveProject(request: MoveProjectRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.moveProject`.
+    func moveProject(withPolling: MoveProjectRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Project>
+
+    /// See `ProjectsClient.moveProject`.
+    func moveProject(
+      name: Swift.String,
+      destinationParent: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
+    /// See `ProjectsClient.deleteProject`.
+    func deleteProject(request: DeleteProjectRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.deleteProject`.
+    func deleteProject(withPolling: DeleteProjectRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Project>
+
+    /// See `ProjectsClient.deleteProject`.
+    func deleteProject(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
+    /// See `ProjectsClient.undeleteProject`.
+    func undeleteProject(request: UndeleteProjectRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.undeleteProject`.
+    func undeleteProject(withPolling: UndeleteProjectRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Project>
+
+    /// See `ProjectsClient.undeleteProject`.
+    func undeleteProject(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+
+    /// See `ProjectsClient.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `ProjectsClient.getIamPolicy`.
+    func getIamPolicy(
+      resource: Swift.String,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `ProjectsClient.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `ProjectsClient.setIamPolicy`.
+    func setIamPolicy(
+      resource: Swift.String,
+      policy: GoogleIamV1.Policy?,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `ProjectsClient.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `ProjectsClient.testIamPermissions`.
+    func testIamPermissions(
+      resource: Swift.String,
+      permissions: [Swift.String],
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `ProjectsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `ProjectsClient.getProject`.
+    func getProject(
       request: GetProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.Project {
-      try await self.inner.getProject(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.Project
 
-    /// See `Projects.listProjects`
-    public func listProjects(
+    /// See `ProjectsClient.listProjects`.
+    func listProjects(
       request: ListProjectsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse {
-      try await self.inner.listProjects(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse
 
-    /// Lists projects that are direct children of the specified folder or
-    /// organization resource. `list()` provides a strongly consistent view of the
-    /// projects underneath the specified parent resource. `list()` returns
-    /// projects sorted based upon the (ascending) lexical ordering of their
-    /// `display_name`. The caller must have `resourcemanager.projects.list`
-    /// permission on the identified parent.
-    public func listProjects(
+    /// See `ProjectsClient.listProjects`.
+    func listProjects(
       byItem: ListProjectsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Project, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListProjectsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listProjects(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Project, Swift.Error>
 
-    /// See `Projects.searchProjects`
-    public func searchProjects(
+    /// See `ProjectsClient.searchProjects`.
+    func searchProjects(
       request: SearchProjectsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse {
-      try await self.inner.searchProjects(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse
 
-    /// Search for projects that the caller has both `resourcemanager.projects.get`
-    /// permission on, and also satisfy the specified query.
-    ///
-    /// This method returns projects in an unspecified order.
-    ///
-    /// This method is eventually consistent with project mutations; this means
-    /// that a newly created project may not appear in the results or recent
-    /// updates to an existing project may not be reflected in the results. To
-    /// retrieve the latest state of a project, use the
-    /// [GetProject][google.cloud.resourcemanager.v3.Projects.GetProject] method.
-    ///
-    /// [google.cloud.resourcemanager.v3.Projects.GetProject]: <doc:Projects/getProject(request:)>
-    public func searchProjects(
+    /// See `ProjectsClient.searchProjects`.
+    func searchProjects(
       byItem: SearchProjectsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Project, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchProjectsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.searchProjects(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Project, Swift.Error>
 
-    /// See `Projects.createProject`
-    public func createProject(
+    /// See `ProjectsClient.createProject`.
+    func createProject(
       request: CreateProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createProject(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Request that a new project be created. The result is an `Operation` which
-    /// can be used to track the creation process. This process usually takes a few
-    /// seconds, but can sometimes take much longer. The tracking `Operation` is
-    /// automatically deleted after a few hours, so there is no need to call
-    /// `DeleteOperation`.
-    public func createProject(
+    /// See `ProjectsClient.createProject`.
+    func createProject(
       withPolling: CreateProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Project(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createProject(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Projects.updateProject`
-    public func updateProject(
+    /// See `ProjectsClient.updateProject`.
+    func updateProject(
       request: UpdateProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateProject(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the `display_name` and labels of the project identified by the
-    /// specified `name` (for example, `projects/415104041262`). Deleting all
-    /// labels requires an update mask for labels field.
-    ///
-    /// The caller must have `resourcemanager.projects.update` permission for this
-    /// project.
-    public func updateProject(
+    /// See `ProjectsClient.updateProject`.
+    func updateProject(
       withPolling: UpdateProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Project(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateProject(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Projects.moveProject`
-    public func moveProject(
+    /// See `ProjectsClient.moveProject`.
+    func moveProject(
       request: MoveProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.moveProject(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Move a project to another place in your resource hierarchy, under a new
-    /// resource parent.
-    ///
-    /// Returns an operation which can be used to track the process of the project
-    /// move workflow.
-    /// Upon success, the `Operation.response` field will be populated with the
-    /// moved project.
-    ///
-    /// The caller must have `resourcemanager.projects.move` permission on the
-    /// project, on the project's current and proposed new parent.
-    ///
-    /// If project has no current parent, or it currently does not have an
-    /// associated organization resource, you will also need the
-    /// `resourcemanager.projects.setIamPolicy` permission in the project.
-    ///
-    ///
-    public func moveProject(
+    /// See `ProjectsClient.moveProject`.
+    func moveProject(
       withPolling: MoveProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Project(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.moveProject(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Projects.deleteProject`
-    public func deleteProject(
+    /// See `ProjectsClient.deleteProject`.
+    func deleteProject(
       request: DeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteProject(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Marks the project identified by the specified
-    /// `name` (for example, `projects/415104041262`) for deletion.
-    ///
-    /// This method will only affect the project if it has a lifecycle state of
-    /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE].
-    ///
-    /// This method changes the Project's lifecycle state from
-    /// [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
-    /// to
-    /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
-    /// The deletion starts at an unspecified time,
-    /// at which point the Project is no longer accessible.
-    ///
-    /// Until the deletion completes, you can check the lifecycle state
-    /// checked by retrieving the project with [GetProject]
-    /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-    /// and the project remains visible to [ListProjects]
-    /// [google.cloud.resourcemanager.v3.Projects.ListProjects].
-    /// However, you cannot update the project.
-    ///
-    /// After the deletion completes, the project is not retrievable by
-    /// the  [GetProject]
-    /// [google.cloud.resourcemanager.v3.Projects.GetProject],
-    /// [ListProjects]
-    /// [google.cloud.resourcemanager.v3.Projects.ListProjects], and
-    /// [SearchProjects][google.cloud.resourcemanager.v3.Projects.SearchProjects]
-    /// methods.
-    ///
-    /// This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
-    /// project will not cause an error, but also won't do anything.
-    ///
-    /// The caller must have `resourcemanager.projects.delete` permissions for this
-    /// project.
-    ///
-    /// [google.cloud.resourcemanager.v3.Project.State.ACTIVE]: <doc:Project/State/active>
-    /// [google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED]: <doc:Project/State/deleteRequested>
-    /// [google.cloud.resourcemanager.v3.Projects.SearchProjects]: <doc:Projects/searchProjects(request:)>
-    public func deleteProject(
+    /// See `ProjectsClient.deleteProject`.
+    func deleteProject(
       withPolling: DeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Project(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteProject(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Projects.undeleteProject`
-    public func undeleteProject(
+    /// See `ProjectsClient.undeleteProject`.
+    func undeleteProject(
       request: UndeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.undeleteProject(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Restores the project identified by the specified
-    /// `name` (for example, `projects/415104041262`).
-    /// You can only use this method for a project that has a lifecycle state of
-    /// [DELETE_REQUESTED]
-    /// [Projects.State.DELETE_REQUESTED].
-    /// After deletion starts, the project cannot be restored.
-    ///
-    /// The caller must have `resourcemanager.projects.undelete` permission for
-    /// this project.
-    public func undeleteProject(
+    /// See `ProjectsClient.undeleteProject`.
+    func undeleteProject(
       withPolling: UndeleteProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Project>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Project(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.undeleteProject(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Projects.getIamPolicy`
-    public func getIamPolicy(
+    /// See `ProjectsClient.getIamPolicy`.
+    func getIamPolicy(
       request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.getIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Projects.setIamPolicy`
-    public func setIamPolicy(
+    /// See `ProjectsClient.setIamPolicy`.
+    func setIamPolicy(
       request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.setIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Projects.testIamPermissions`
-    public func testIamPermissions(
+    /// See `ProjectsClient.testIamPermissions`.
+    func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      try await self.inner.testIamPermissions(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `Projects.getOperation`
-    public func getOperation(
+    /// See `ProjectsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Projects {
+extension Clients.ProjectsProtocol {
   public func getProject(request: GetProjectRequest) async throws
     -> GoogleCloudResourcemanagerV3.Project
   {

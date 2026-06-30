@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionDiskTypesClient {
+  extension RegionDiskTypesClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.regionDiskTypes.get] method.
     ///
     /// [google.cloud.compute.v1.regionDiskTypes.get]: <doc:RegionDiskTypes/`get`(request:)>

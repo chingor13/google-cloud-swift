@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionZonesClient {
+  extension RegionZonesClient {
     /// Synthetic request message for the [list()][google.cloud.compute.v1.regionZones.list] method.
     ///
     /// [google.cloud.compute.v1.regionZones.list]: <doc:RegionZones/list(request:)>

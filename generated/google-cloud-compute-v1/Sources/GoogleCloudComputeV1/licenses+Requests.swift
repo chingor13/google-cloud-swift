@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.LicensesClient {
+  extension LicensesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.licenses.delete] method.
     ///
     /// [google.cloud.compute.v1.licenses.delete]: <doc:Licenses/delete(request:)>

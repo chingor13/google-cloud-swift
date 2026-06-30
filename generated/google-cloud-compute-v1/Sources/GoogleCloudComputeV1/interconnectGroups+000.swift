@@ -28,103 +28,102 @@
   /// Service for the `interconnectGroups` resource.
   ///
   /// @Snippet(path: "interconnectGroupsQuickstart")
-  public protocol InterconnectGroups {
+  public class InterconnectGroupsClient: Clients.InterconnectGroupsProtocol {
+    let inner: any Clients.InterconnectGroupsStub
+
+    /// Creates a new `InterconnectGroupsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.InterconnectGroupsStub = try Clients.InterconnectGroupsTransport(
+        options)
+      inner = Clients.InterconnectGroupsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.InterconnectGroupsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Create Interconnects with redundancy by creating them in a specified
     /// interconnect group.
     ///
     /// @Snippet(path: "interconnectGroups_createMembers")
-    func createMembers(request: Clients.InterconnectGroupsClient.CreateMembersRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Create Interconnects with redundancy by creating them in a specified
-    /// interconnect group.
-    func createMembers(
-      project: Swift.String,
-      interconnectGroup: Swift.String,
-      body: InterconnectGroupsCreateMembersRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func createMembers(
+      request: InterconnectGroupsClient.CreateMembersRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.createMembers(request: request, options: options)
+    }
 
     /// Deletes the specified InterconnectGroup in the given scope
     ///
     /// @Snippet(path: "interconnectGroups_delete")
-    func delete(request: Clients.InterconnectGroupsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified InterconnectGroup in the given scope
-    func delete(
-      project: Swift.String,
-      interconnectGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: InterconnectGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified InterconnectGroup resource in the given scope.
     ///
     /// @Snippet(path: "interconnectGroups_get")
-    func `get`(request: Clients.InterconnectGroupsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InterconnectGroup
-
-    /// Returns the specified InterconnectGroup resource in the given scope.
-    func `get`(
-      project: Swift.String,
-      interconnectGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroup
+    public func `get`(
+      request: InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InterconnectGroup {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "interconnectGroups_getIamPolicy")
-    func getIamPolicy(request: Clients.InterconnectGroupsClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: InterconnectGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Returns the interconnectStatuses for the specified
     /// InterconnectGroup.
     ///
     /// @Snippet(path: "interconnectGroups_getOperationalStatus")
-    func getOperationalStatus(request: Clients.InterconnectGroupsClient.GetOperationalStatusRequest)
-      async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
-
-    /// Returns the interconnectStatuses for the specified
-    /// InterconnectGroup.
-    func getOperationalStatus(
-      project: Swift.String,
-      interconnectGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
+    public func getOperationalStatus(
+      request: InterconnectGroupsClient.GetOperationalStatusRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse {
+      try await self.inner.getOperationalStatus(request: request, options: options)
+    }
 
     /// Creates a InterconnectGroup in the specified project in the given scope
     /// using the parameters that are included in the request.
     ///
     /// @Snippet(path: "interconnectGroups_insert")
-    func insert(request: Clients.InterconnectGroupsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a InterconnectGroup in the specified project in the given scope
-    /// using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      body: InterconnectGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: InterconnectGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the InterconnectGroups for a project in the given scope.
     ///
     /// @Snippet(path: "interconnectGroups_list")
-    func list(request: Clients.InterconnectGroupsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.InterconnectGroupsListResponse
+    public func list(
+      request: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the InterconnectGroups for a project in the given scope.
-    func list(
-      byItem: Clients.InterconnectGroupsClient.ListRequest
-    ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
-
-    /// Lists the InterconnectGroups for a project in the given scope.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
+    ///
+    /// @Snippet(path: "interconnectGroups_list")
+    public func list(
+      byItem: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified InterconnectGroup resource with the data included in
     /// the request. This method supports PATCH
@@ -132,258 +131,220 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "interconnectGroups_patch")
-    func patch(request: Clients.InterconnectGroupsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified InterconnectGroup resource with the data included in
-    /// the request. This method supports PATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      interconnectGroup: Swift.String,
-      body: InterconnectGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: InterconnectGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "interconnectGroups_setIamPolicy")
-    func setIamPolicy(request: Clients.InterconnectGroupsClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: InterconnectGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "interconnectGroups_testIamPermissions")
-    func testIamPermissions(request: Clients.InterconnectGroupsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Create Interconnects with redundancy by creating them in a specified
-    /// interconnect group.
-    ///
-    /// @Snippet(path: "interconnectGroups_createMembers")
-    func createMembers(
-      request: Clients.InterconnectGroupsClient.CreateMembersRequest,
+    public func testIamPermissions(
+      request: InterconnectGroupsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified InterconnectGroup in the given scope
-    ///
-    /// @Snippet(path: "interconnectGroups_delete")
-    func delete(
-      request: Clients.InterconnectGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified InterconnectGroup resource in the given scope.
-    ///
-    /// @Snippet(path: "interconnectGroups_get")
-    func `get`(
-      request: Clients.InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroup
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "interconnectGroups_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.InterconnectGroupsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns the interconnectStatuses for the specified
-    /// InterconnectGroup.
-    ///
-    /// @Snippet(path: "interconnectGroups_getOperationalStatus")
-    func getOperationalStatus(
-      request: Clients.InterconnectGroupsClient.GetOperationalStatusRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
-
-    /// Creates a InterconnectGroup in the specified project in the given scope
-    /// using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "interconnectGroups_insert")
-    func insert(
-      request: Clients.InterconnectGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the InterconnectGroups for a project in the given scope.
-    ///
-    /// @Snippet(path: "interconnectGroups_list")
-    func list(
-      request: Clients.InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse
-
-    /// Lists the InterconnectGroups for a project in the given scope.
-    func list(
-      byItem: Clients.InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
-
-    /// Patches the specified InterconnectGroup resource with the data included in
-    /// the request. This method supports PATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "interconnectGroups_patch")
-    func patch(
-      request: Clients.InterconnectGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "interconnectGroups_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.InterconnectGroupsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "interconnectGroups_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.InterconnectGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``InterconnectGroups``.
-    public class InterconnectGroupsClient: InterconnectGroups {
-      let inner: any InterconnectGroupsStub
+    /// A Swift protocol to mock `InterconnectGroupsClient`.
+    ///
+    /// To mock `InterconnectGroupsClient` change your functions to receive
+    /// `some InterconnectGroupsProtocol` or `any InterconnectGroupsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol InterconnectGroupsProtocol {
+      /// See `InterconnectGroupsClient.createMembers`.
+      func createMembers(request: InterconnectGroupsClient.CreateMembersRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `InterconnectGroupsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any InterconnectGroupsStub = try InterconnectGroupsTransport(options)
-        inner = InterconnectGroupsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = InterconnectGroupsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `InterconnectGroupsClient.createMembers`.
+      func createMembers(
+        project: Swift.String,
+        interconnectGroup: Swift.String,
+        body: InterconnectGroupsCreateMembersRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InterconnectGroups.createMembers`
-      public func createMembers(
-        request: Clients.InterconnectGroupsClient.CreateMembersRequest,
+      /// See `InterconnectGroupsClient.delete`.
+      func delete(request: InterconnectGroupsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.delete`.
+      func delete(
+        project: Swift.String,
+        interconnectGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.`get``.
+      func `get`(request: InterconnectGroupsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InterconnectGroup
+
+      /// See `InterconnectGroupsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        interconnectGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InterconnectGroup
+
+      /// See `InterconnectGroupsClient.getIamPolicy`.
+      func getIamPolicy(request: InterconnectGroupsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `InterconnectGroupsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `InterconnectGroupsClient.getOperationalStatus`.
+      func getOperationalStatus(request: InterconnectGroupsClient.GetOperationalStatusRequest)
+        async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
+
+      /// See `InterconnectGroupsClient.getOperationalStatus`.
+      func getOperationalStatus(
+        project: Swift.String,
+        interconnectGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
+
+      /// See `InterconnectGroupsClient.insert`.
+      func insert(request: InterconnectGroupsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: InterconnectGroup?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.list`.
+      func list(request: InterconnectGroupsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.InterconnectGroupsListResponse
+
+      /// See `InterconnectGroupsClient.list`.
+      func list(
+        byItem: InterconnectGroupsClient.ListRequest
+      ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
+
+      /// See `InterconnectGroupsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
+
+      /// See `InterconnectGroupsClient.patch`.
+      func patch(request: InterconnectGroupsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.patch`.
+      func patch(
+        project: Swift.String,
+        interconnectGroup: Swift.String,
+        body: InterconnectGroup?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.setIamPolicy`.
+      func setIamPolicy(request: InterconnectGroupsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `InterconnectGroupsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        resource: Swift.String,
+        body: GlobalSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `InterconnectGroupsClient.testIamPermissions`.
+      func testIamPermissions(request: InterconnectGroupsClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `InterconnectGroupsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `InterconnectGroupsClient.createMembers`.
+      func createMembers(
+        request: InterconnectGroupsClient.CreateMembersRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.createMembers(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InterconnectGroups.delete`
-      public func delete(
-        request: Clients.InterconnectGroupsClient.DeleteRequest,
+      /// See `InterconnectGroupsClient.delete`.
+      func delete(
+        request: InterconnectGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.`get``.
+      func `get`(
+        request: InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InterconnectGroup
+
+      /// See `InterconnectGroupsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: InterconnectGroupsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// See `InterconnectGroups.`get``
-      public func `get`(
-        request: Clients.InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InterconnectGroup {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `InterconnectGroups.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.InterconnectGroupsClient.GetIamPolicyRequest,
+      /// See `InterconnectGroupsClient.getOperationalStatus`.
+      func getOperationalStatus(
+        request: InterconnectGroupsClient.GetOperationalStatusRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
 
-      /// See `InterconnectGroups.getOperationalStatus`
-      public func getOperationalStatus(
-        request: Clients.InterconnectGroupsClient.GetOperationalStatusRequest,
+      /// See `InterconnectGroupsClient.insert`.
+      func insert(
+        request: InterconnectGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.list`.
+      func list(
+        request: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse
+
+      /// See `InterconnectGroupsClient.list`.
+      func list(
+        byItem: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error>
+
+      /// See `InterconnectGroupsClient.patch`.
+      func patch(
+        request: InterconnectGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InterconnectGroupsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: InterconnectGroupsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse {
-        try await self.inner.getOperationalStatus(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Policy
 
-      /// See `InterconnectGroups.insert`
-      public func insert(
-        request: Clients.InterconnectGroupsClient.InsertRequest,
+      /// See `InterconnectGroupsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: InterconnectGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `InterconnectGroups.list`
-      public func list(
-        request: Clients.InterconnectGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Lists the InterconnectGroups for a project in the given scope.
-      public func list(
-        byItem: Clients.InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `InterconnectGroups.patch`
-      public func patch(
-        request: Clients.InterconnectGroupsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `InterconnectGroups.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.InterconnectGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `InterconnectGroups.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.InterconnectGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension InterconnectGroups {
-    public func createMembers(request: Clients.InterconnectGroupsClient.CreateMembersRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.InterconnectGroupsProtocol {
+    public func createMembers(request: InterconnectGroupsClient.CreateMembersRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.createMembers(request: request, options: .init())
     }
 
     public func createMembers(
-      request: Clients.InterconnectGroupsClient.CreateMembersRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.CreateMembersRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -393,7 +354,7 @@
       interconnectGroup: Swift.String,
       body: InterconnectGroupsCreateMembersRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InterconnectGroupsClient.CreateMembersRequest().with {
+      let request = InterconnectGroupsClient.CreateMembersRequest().with {
         $0.project = project
         $0.interconnectGroup = interconnectGroup
         $0.body = body
@@ -401,15 +362,14 @@
       return try await self.createMembers(request: request)
     }
 
-    public func delete(request: Clients.InterconnectGroupsClient.DeleteRequest) async throws
+    public func delete(request: InterconnectGroupsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.InterconnectGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -418,21 +378,21 @@
       project: Swift.String,
       interconnectGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InterconnectGroupsClient.DeleteRequest().with {
+      let request = InterconnectGroupsClient.DeleteRequest().with {
         $0.project = project
         $0.interconnectGroup = interconnectGroup
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.InterconnectGroupsClient.GetRequest) async throws
+    public func `get`(request: InterconnectGroupsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InterconnectGroup
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectGroup {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -441,22 +401,21 @@
       project: Swift.String,
       interconnectGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InterconnectGroup {
-      let request = Clients.InterconnectGroupsClient.GetRequest().with {
+      let request = InterconnectGroupsClient.GetRequest().with {
         $0.project = project
         $0.interconnectGroup = interconnectGroup
       }
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.InterconnectGroupsClient.GetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(request: InterconnectGroupsClient.GetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.InterconnectGroupsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -465,21 +424,21 @@
       project: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.InterconnectGroupsClient.GetIamPolicyRequest().with {
+      let request = InterconnectGroupsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.resource = resource
       }
       return try await self.getIamPolicy(request: request)
     }
 
-    public func getOperationalStatus(
-      request: Clients.InterconnectGroupsClient.GetOperationalStatusRequest
-    ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse {
+    public func getOperationalStatus(request: InterconnectGroupsClient.GetOperationalStatusRequest)
+      async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse
+    {
       try await self.getOperationalStatus(request: request, options: .init())
     }
 
     public func getOperationalStatus(
-      request: Clients.InterconnectGroupsClient.GetOperationalStatusRequest,
+      request: InterconnectGroupsClient.GetOperationalStatusRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -489,22 +448,21 @@
       project: Swift.String,
       interconnectGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InterconnectGroupsGetOperationalStatusResponse {
-      let request = Clients.InterconnectGroupsClient.GetOperationalStatusRequest().with {
+      let request = InterconnectGroupsClient.GetOperationalStatusRequest().with {
         $0.project = project
         $0.interconnectGroup = interconnectGroup
       }
       return try await self.getOperationalStatus(request: request)
     }
 
-    public func insert(request: Clients.InterconnectGroupsClient.InsertRequest) async throws
+    public func insert(request: InterconnectGroupsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.InterconnectGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -513,33 +471,33 @@
       project: Swift.String,
       body: InterconnectGroup?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InterconnectGroupsClient.InsertRequest().with {
+      let request = InterconnectGroupsClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.InterconnectGroupsClient.ListRequest) async throws
+    public func list(request: InterconnectGroupsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.InterconnectGroupsListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.InterconnectGroupsClient.ListRequest
+      byItem: InterconnectGroupsClient.ListRequest
     ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InterconnectGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.InterconnectGroupsListResponse in
@@ -551,20 +509,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<InterconnectGroup, Swift.Error> {
-      let request = Clients.InterconnectGroupsClient.ListRequest().with {
+      let request = InterconnectGroupsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.InterconnectGroupsClient.PatchRequest) async throws
+    public func patch(request: InterconnectGroupsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.InterconnectGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -574,7 +532,7 @@
       interconnectGroup: Swift.String,
       body: InterconnectGroup?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InterconnectGroupsClient.PatchRequest().with {
+      let request = InterconnectGroupsClient.PatchRequest().with {
         $0.project = project
         $0.interconnectGroup = interconnectGroup
         $0.body = body
@@ -582,15 +540,14 @@
       return try await self.patch(request: request)
     }
 
-    public func setIamPolicy(request: Clients.InterconnectGroupsClient.SetIamPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(request: InterconnectGroupsClient.SetIamPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.InterconnectGroupsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InterconnectGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -600,7 +557,7 @@
       resource: Swift.String,
       body: GlobalSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.InterconnectGroupsClient.SetIamPolicyRequest().with {
+      let request = InterconnectGroupsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -608,14 +565,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.InterconnectGroupsClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: InterconnectGroupsClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.InterconnectGroupsClient.TestIamPermissionsRequest,
+      request: InterconnectGroupsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -626,7 +583,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.InterconnectGroupsClient.TestIamPermissionsRequest().with {
+      let request = InterconnectGroupsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body

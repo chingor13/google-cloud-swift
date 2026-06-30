@@ -28,187 +28,167 @@
   /// Service for the `regionInstanceTemplates` resource.
   ///
   /// @Snippet(path: "regionInstanceTemplatesQuickstart")
-  public protocol RegionInstanceTemplates {
-    /// Deletes the specified instance template. Deleting an instance template is
-    /// permanent and cannot be undone.
-    ///
-    /// @Snippet(path: "regionInstanceTemplates_delete")
-    func delete(request: Clients.RegionInstanceTemplatesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
+  public class RegionInstanceTemplatesClient: Clients.RegionInstanceTemplatesProtocol {
+    let inner: any Clients.RegionInstanceTemplatesStub
 
-    /// Deletes the specified instance template. Deleting an instance template is
-    /// permanent and cannot be undone.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      instanceTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified instance template.
-    ///
-    /// @Snippet(path: "regionInstanceTemplates_get")
-    func `get`(request: Clients.RegionInstanceTemplatesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InstanceTemplate
-
-    /// Returns the specified instance template.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      instanceTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InstanceTemplate
-
-    /// Creates an instance template in the specified project and region using the
-    /// global instance template whose URL is included in the request.
-    ///
-    /// @Snippet(path: "regionInstanceTemplates_insert")
-    func insert(request: Clients.RegionInstanceTemplatesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates an instance template in the specified project and region using the
-    /// global instance template whose URL is included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: InstanceTemplate?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of instance templates that are contained within the
-    /// specified project and region.
-    ///
-    /// @Snippet(path: "regionInstanceTemplates_list")
-    func list(request: Clients.RegionInstanceTemplatesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.InstanceTemplateList
-
-    /// Retrieves a list of instance templates that are contained within the
-    /// specified project and region.
-    func list(
-      byItem: Clients.RegionInstanceTemplatesClient.ListRequest
-    ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
-
-    /// Retrieves a list of instance templates that are contained within the
-    /// specified project and region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
+    /// Creates a new `RegionInstanceTemplatesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionInstanceTemplatesStub =
+        try Clients.RegionInstanceTemplatesTransport(options)
+      inner = Clients.RegionInstanceTemplatesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionInstanceTemplatesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes the specified instance template. Deleting an instance template is
     /// permanent and cannot be undone.
     ///
     /// @Snippet(path: "regionInstanceTemplates_delete")
-    func delete(
-      request: Clients.RegionInstanceTemplatesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified instance template.
     ///
     /// @Snippet(path: "regionInstanceTemplates_get")
-    func `get`(
-      request: Clients.RegionInstanceTemplatesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceTemplate
+    public func `get`(
+      request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstanceTemplate {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates an instance template in the specified project and region using the
     /// global instance template whose URL is included in the request.
     ///
     /// @Snippet(path: "regionInstanceTemplates_insert")
-    func insert(
-      request: Clients.RegionInstanceTemplatesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of instance templates that are contained within the
     /// specified project and region.
     ///
     /// @Snippet(path: "regionInstanceTemplates_list")
-    func list(
-      request: Clients.RegionInstanceTemplatesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceTemplateList
+    public func list(
+      request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstanceTemplateList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of instance templates that are contained within the
     /// specified project and region.
-    func list(
-      byItem: Clients.RegionInstanceTemplatesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstanceTemplates_list")
+    public func list(
+      byItem: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceTemplateList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionInstanceTemplates``.
-    public class RegionInstanceTemplatesClient: RegionInstanceTemplates {
-      let inner: any RegionInstanceTemplatesStub
+    /// A Swift protocol to mock `RegionInstanceTemplatesClient`.
+    ///
+    /// To mock `RegionInstanceTemplatesClient` change your functions to receive
+    /// `some RegionInstanceTemplatesProtocol` or `any RegionInstanceTemplatesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionInstanceTemplatesProtocol {
+      /// See `RegionInstanceTemplatesClient.delete`.
+      func delete(request: RegionInstanceTemplatesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionInstanceTemplatesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionInstanceTemplatesStub = try RegionInstanceTemplatesTransport(options)
-        inner = RegionInstanceTemplatesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionInstanceTemplatesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionInstanceTemplatesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        instanceTemplate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceTemplates.delete`
-      public func delete(
-        request: Clients.RegionInstanceTemplatesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `RegionInstanceTemplatesClient.`get``.
+      func `get`(request: RegionInstanceTemplatesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InstanceTemplate
 
-      /// See `RegionInstanceTemplates.`get``
-      public func `get`(
-        request: Clients.RegionInstanceTemplatesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceTemplate {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionInstanceTemplatesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        instanceTemplate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InstanceTemplate
 
-      /// See `RegionInstanceTemplates.insert`
-      public func insert(
-        request: Clients.RegionInstanceTemplatesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RegionInstanceTemplatesClient.insert`.
+      func insert(request: RegionInstanceTemplatesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceTemplates.list`
-      public func list(
-        request: Clients.RegionInstanceTemplatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceTemplateList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RegionInstanceTemplatesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: InstanceTemplate?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves a list of instance templates that are contained within the
-      /// specified project and region.
-      public func list(
-        byItem: Clients.RegionInstanceTemplatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceTemplateList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RegionInstanceTemplatesClient.list`.
+      func list(request: RegionInstanceTemplatesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.InstanceTemplateList
+
+      /// See `RegionInstanceTemplatesClient.list`.
+      func list(
+        byItem: RegionInstanceTemplatesClient.ListRequest
+      ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
+
+      /// See `RegionInstanceTemplatesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
+
+      /// See `RegionInstanceTemplatesClient.delete`.
+      func delete(
+        request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceTemplatesClient.`get``.
+      func `get`(
+        request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InstanceTemplate
+
+      /// See `RegionInstanceTemplatesClient.insert`.
+      func insert(
+        request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceTemplatesClient.list`.
+      func list(
+        request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InstanceTemplateList
+
+      /// See `RegionInstanceTemplatesClient.list`.
+      func list(
+        byItem: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error>
     }
   }
 
   // Default implementations
-  extension RegionInstanceTemplates {
-    public func delete(request: Clients.RegionInstanceTemplatesClient.DeleteRequest) async throws
+  extension Clients.RegionInstanceTemplatesProtocol {
+    public func delete(request: RegionInstanceTemplatesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionInstanceTemplatesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -218,7 +198,7 @@
       region: Swift.String,
       instanceTemplate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceTemplatesClient.DeleteRequest().with {
+      let request = RegionInstanceTemplatesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceTemplate = instanceTemplate
@@ -226,15 +206,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionInstanceTemplatesClient.GetRequest) async throws
+    public func `get`(request: RegionInstanceTemplatesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InstanceTemplate
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionInstanceTemplatesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceTemplate {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -244,7 +223,7 @@
       region: Swift.String,
       instanceTemplate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InstanceTemplate {
-      let request = Clients.RegionInstanceTemplatesClient.GetRequest().with {
+      let request = RegionInstanceTemplatesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceTemplate = instanceTemplate
@@ -252,15 +231,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionInstanceTemplatesClient.InsertRequest) async throws
+    public func insert(request: RegionInstanceTemplatesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionInstanceTemplatesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -270,7 +248,7 @@
       region: Swift.String,
       body: InstanceTemplate?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceTemplatesClient.InsertRequest().with {
+      let request = RegionInstanceTemplatesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -278,28 +256,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionInstanceTemplatesClient.ListRequest) async throws
+    public func list(request: RegionInstanceTemplatesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.InstanceTemplateList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionInstanceTemplatesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceTemplateList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionInstanceTemplatesClient.ListRequest
+      byItem: RegionInstanceTemplatesClient.ListRequest
     ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionInstanceTemplatesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceTemplateList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -311,7 +287,7 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<InstanceTemplate, Swift.Error> {
-      let request = Clients.RegionInstanceTemplatesClient.ListRequest().with {
+      let request = RegionInstanceTemplatesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }

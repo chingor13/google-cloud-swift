@@ -20,7 +20,7 @@ import Foundation
 import GoogleIamV1
 import GoogleCloudWkt
 
-func sample(client: some IAMPolicy) async throws {
+func sample(client: IAMPolicyClient) async throws {
   let response = try await client.setIamPolicy(
     request: SetIamPolicyRequest()
       /* set fields using .with { $0... } */
@@ -33,7 +33,7 @@ func sample(client: some IAMPolicy) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleIamV1.Clients.IAMPolicyClient()
+      let client = try GoogleIamV1.IAMPolicyClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

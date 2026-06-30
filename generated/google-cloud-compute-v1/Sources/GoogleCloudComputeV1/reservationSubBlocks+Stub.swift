@@ -28,42 +28,40 @@
   extension Clients {
     protocol ReservationSubBlocksStub {
       func `get`(
-        request: Clients.ReservationSubBlocksClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksGetResponse
 
       func getIamPolicy(
-        request: Clients.ReservationSubBlocksClient.GetIamPolicyRequest,
+        request: ReservationSubBlocksClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func getVersion(
-        request: Clients.ReservationSubBlocksClient.GetVersionRequest,
+        request: ReservationSubBlocksClient.GetVersionRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ReservationSubBlocksClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
 
       func performMaintenance(
-        request: Clients.ReservationSubBlocksClient.PerformMaintenanceRequest,
+        request: ReservationSubBlocksClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func reportFaulty(
-        request: Clients.ReservationSubBlocksClient.ReportFaultyRequest,
+        request: ReservationSubBlocksClient.ReportFaultyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.ReservationSubBlocksClient.SetIamPolicyRequest,
+        request: ReservationSubBlocksClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.ReservationSubBlocksClient.TestIamPermissionsRequest,
+        request: ReservationSubBlocksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -77,8 +75,7 @@
       }
 
       public func `get`(
-        request: Clients.ReservationSubBlocksClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksGetResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -111,7 +108,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.ReservationSubBlocksClient.GetIamPolicyRequest,
+        request: ReservationSubBlocksClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -145,7 +142,7 @@
       }
 
       public func getVersion(
-        request: Clients.ReservationSubBlocksClient.GetVersionRequest,
+        request: ReservationSubBlocksClient.GetVersionRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -183,8 +180,7 @@
       }
 
       public func list(
-        request: Clients.ReservationSubBlocksClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -217,7 +213,7 @@
       }
 
       public func performMaintenance(
-        request: Clients.ReservationSubBlocksClient.PerformMaintenanceRequest,
+        request: ReservationSubBlocksClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -251,7 +247,7 @@
       }
 
       public func reportFaulty(
-        request: Clients.ReservationSubBlocksClient.ReportFaultyRequest,
+        request: ReservationSubBlocksClient.ReportFaultyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -289,7 +285,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.ReservationSubBlocksClient.SetIamPolicyRequest,
+        request: ReservationSubBlocksClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -323,7 +319,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.ReservationSubBlocksClient.TestIamPermissionsRequest,
+        request: ReservationSubBlocksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

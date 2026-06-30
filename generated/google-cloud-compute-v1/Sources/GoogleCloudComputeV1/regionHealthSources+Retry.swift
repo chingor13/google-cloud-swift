@@ -53,7 +53,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionHealthSourcesClient.AggregatedListRequest,
+        request: RegionHealthSourcesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceAggregatedList {
         try await self._intercept(
@@ -61,25 +61,22 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionHealthSourcesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.HealthSourceAggregatedList
+            (r: RegionHealthSourcesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.HealthSourceAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.RegionHealthSourcesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionHealthSourcesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionHealthSourcesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -87,49 +84,44 @@
       }
 
       public func `get`(
-        request: Clients.RegionHealthSourcesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSource {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionHealthSourcesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.HealthSource
+            (r: RegionHealthSourcesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.HealthSource
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getHealth(
-        request: Clients.RegionHealthSourcesClient.GetHealthRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceHealth {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionHealthSourcesClient.GetHealthRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.HealthSourceHealth
+            (r: RegionHealthSourcesClient.GetHealthRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.HealthSourceHealth
             in
             return try await self.inner.getHealth(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.RegionHealthSourcesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionHealthSourcesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionHealthSourcesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -137,15 +129,14 @@
       }
 
       public func list(
-        request: Clients.RegionHealthSourcesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionHealthSourcesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionHealthSourcesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.HealthSourceList
             in
             return try await self.inner.list(request: r, options: o)
@@ -153,15 +144,14 @@
       }
 
       public func patch(
-        request: Clients.RegionHealthSourcesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.RegionHealthSourcesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionHealthSourcesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -169,7 +159,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionHealthSourcesClient.TestIamPermissionsRequest,
+        request: RegionHealthSourcesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -178,7 +168,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionHealthSourcesClient.TestIamPermissionsRequest,
+              r: RegionHealthSourcesClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some TagKeys) async throws {
+func sample(client: TagKeysClient) async throws {
   let response = try await client.getIamPolicy(
     request: GoogleIamV1.GetIamPolicyRequest()
       /* set fields using .with { $0... } */
@@ -36,7 +36,7 @@ func sample(client: some TagKeys) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.TagKeysClient()
+      let client = try GoogleCloudResourcemanagerV3.TagKeysClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

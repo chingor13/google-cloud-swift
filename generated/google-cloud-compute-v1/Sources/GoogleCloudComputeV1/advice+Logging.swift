@@ -60,15 +60,15 @@
       }
 
       public func calendarMode(
-        request: Clients.AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "calendarMode",
           action: {
-            (r: Clients.AdviceClient.CalendarModeRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
+            (r: AdviceClient.CalendarModeRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.CalendarModeAdviceResponse
             in
             return try await self.inner.calendarMode(request: r, options: o)
           })

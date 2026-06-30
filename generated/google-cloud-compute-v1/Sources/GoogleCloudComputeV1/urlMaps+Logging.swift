@@ -60,29 +60,29 @@
       }
 
       public func aggregatedList(
-        request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: Clients.UrlMapsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList
+            (r: UrlMapsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.UrlMapsAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.UrlMapsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -90,14 +90,14 @@
       }
 
       public func `get`(
-        request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.UrlMapsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.UrlMap
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -105,14 +105,14 @@
       }
 
       public func insert(
-        request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.UrlMapsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -120,30 +120,29 @@
       }
 
       public func invalidateCache(
-        request: Clients.UrlMapsClient.InvalidateCacheRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "invalidateCache",
           action: {
-            (r: Clients.UrlMapsClient.InvalidateCacheRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: UrlMapsClient.InvalidateCacheRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.invalidateCache(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.UrlMapsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.UrlMapList
             in
             return try await self.inner.list(request: r, options: o)
@@ -151,14 +150,14 @@
       }
 
       public func patch(
-        request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.UrlMapsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -166,15 +165,14 @@
       }
 
       public func testIamPermissions(
-        request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: Clients.UrlMapsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: UrlMapsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -182,14 +180,14 @@
       }
 
       public func update(
-        request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.UrlMapsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UrlMapsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -197,15 +195,15 @@
       }
 
       public func validate(
-        request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "validate",
           action: {
-            (r: Clients.UrlMapsClient.ValidateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+            (r: UrlMapsClient.ValidateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.UrlMapsValidateResponse
             in
             return try await self.inner.validate(request: r, options: o)
           })

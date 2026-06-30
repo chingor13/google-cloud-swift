@@ -33,275 +33,269 @@ import Logging
 /// so that TagHolds can be managed in the same location as their usage.
 ///
 /// @Snippet(path: "TagHoldsQuickstart")
-public protocol TagHolds {
-  /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
-  /// resource and origin exists under the same TagValue.
-  ///
-  /// @Snippet(path: "TagHolds_CreateTagHold")
-  func createTagHold(request: CreateTagHoldRequest) async throws -> GoogleLongrunning.Operation
+public class TagHoldsClient: Clients.TagHoldsProtocol {
+  let inner: any Clients.TagHoldsStub
 
-  /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
-  /// resource and origin exists under the same TagValue.
-  func createTagHold(withPolling: CreateTagHoldRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<TagHold>
-
-  /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
-  /// resource and origin exists under the same TagValue.
-  func createTagHold(
-    parent: Swift.String,
-    tagHold: TagHold?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagHold>
-
-  /// Deletes a TagHold.
-  ///
-  /// @Snippet(path: "TagHolds_DeleteTagHold")
-  func deleteTagHold(request: DeleteTagHoldRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a TagHold.
-  func deleteTagHold(withPolling: DeleteTagHoldRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a TagHold.
-  func deleteTagHold(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Lists TagHolds under a TagValue.
-  ///
-  /// @Snippet(path: "TagHolds_ListTagHolds")
-  func listTagHolds(request: ListTagHoldsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse
-
-  /// Lists TagHolds under a TagValue.
-  func listTagHolds(
-    byItem: ListTagHoldsRequest
-  ) throws -> any AsyncSequence<TagHold, Swift.Error>
-
-  /// Lists TagHolds under a TagValue.
-  func listTagHolds(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<TagHold, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "TagHolds_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `TagHoldsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.TagHoldsStub = try Clients.TagHoldsTransport(options)
+    inner = Clients.TagHoldsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.TagHoldsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
   /// resource and origin exists under the same TagValue.
   ///
   /// @Snippet(path: "TagHolds_CreateTagHold")
-  func createTagHold(
+  public func createTagHold(
     request: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createTagHold(request: request, options: options)
+  }
 
   /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
   /// resource and origin exists under the same TagValue.
-  func createTagHold(
+  ///
+  /// @Snippet(path: "TagHolds_CreateTagHold")
+  public func createTagHold(
     withPolling: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagHold>
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagHold> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<TagHold>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try TagHold(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createTagHold(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagHold>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a TagHold.
   ///
   /// @Snippet(path: "TagHolds_DeleteTagHold")
-  func deleteTagHold(
+  public func deleteTagHold(
     request: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteTagHold(request: request, options: options)
+  }
 
   /// Deletes a TagHold.
-  func deleteTagHold(
+  ///
+  /// @Snippet(path: "TagHolds_DeleteTagHold")
+  public func deleteTagHold(
     withPolling: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteTagHold(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists TagHolds under a TagValue.
   ///
   /// @Snippet(path: "TagHolds_ListTagHolds")
-  func listTagHolds(
+  public func listTagHolds(
     request: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse {
+    try await self.inner.listTagHolds(request: request, options: options)
+  }
 
   /// Lists TagHolds under a TagValue.
-  func listTagHolds(
+  ///
+  /// @Snippet(path: "TagHolds_ListTagHolds")
+  public func listTagHolds(
     byItem: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<TagHold, Swift.Error>
+  ) throws -> any AsyncSequence<TagHold, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listTagHolds(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagHolds_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``TagHolds``.
-  public class TagHoldsClient: TagHolds {
-    let inner: any TagHoldsStub
+  /// A Swift protocol to mock `TagHoldsClient`.
+  ///
+  /// To mock `TagHoldsClient` change your functions to receive
+  /// `some TagHoldsProtocol` or `any TagHoldsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol TagHoldsProtocol {
+    /// See `TagHoldsClient.createTagHold`.
+    func createTagHold(request: CreateTagHoldRequest) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new `TagHoldsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any TagHoldsStub = try TagHoldsTransport(options)
-      inner = TagHoldsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = TagHoldsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `TagHoldsClient.createTagHold`.
+    func createTagHold(withPolling: CreateTagHoldRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<TagHold>
 
-    /// See `TagHolds.createTagHold`
-    public func createTagHold(
+    /// See `TagHoldsClient.createTagHold`.
+    func createTagHold(
+      parent: Swift.String,
+      tagHold: TagHold?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagHold>
+
+    /// See `TagHoldsClient.deleteTagHold`.
+    func deleteTagHold(request: DeleteTagHoldRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagHoldsClient.deleteTagHold`.
+    func deleteTagHold(withPolling: DeleteTagHoldRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `TagHoldsClient.deleteTagHold`.
+    func deleteTagHold(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `TagHoldsClient.listTagHolds`.
+    func listTagHolds(request: ListTagHoldsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse
+
+    /// See `TagHoldsClient.listTagHolds`.
+    func listTagHolds(
+      byItem: ListTagHoldsRequest
+    ) throws -> any AsyncSequence<TagHold, Swift.Error>
+
+    /// See `TagHoldsClient.listTagHolds`.
+    func listTagHolds(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<TagHold, Swift.Error>
+
+    /// See `TagHoldsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `TagHoldsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagHoldsClient.createTagHold`.
+    func createTagHold(
       request: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createTagHold(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
-    /// resource and origin exists under the same TagValue.
-    public func createTagHold(
+    /// See `TagHoldsClient.createTagHold`.
+    func createTagHold(
       withPolling: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagHold> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TagHold>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagHold>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try TagHold(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createTagHold(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagHold>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagHolds.deleteTagHold`
-    public func deleteTagHold(
+    /// See `TagHoldsClient.deleteTagHold`.
+    func deleteTagHold(
       request: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteTagHold(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a TagHold.
-    public func deleteTagHold(
+    /// See `TagHoldsClient.deleteTagHold`.
+    func deleteTagHold(
       withPolling: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteTagHold(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagHolds.listTagHolds`
-    public func listTagHolds(
+    /// See `TagHoldsClient.listTagHolds`.
+    func listTagHolds(
       request: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse {
-      try await self.inner.listTagHolds(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse
 
-    /// Lists TagHolds under a TagValue.
-    public func listTagHolds(
+    /// See `TagHoldsClient.listTagHolds`.
+    func listTagHolds(
       byItem: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TagHold, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listTagHolds(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<TagHold, Swift.Error>
 
-    /// See `TagHolds.getOperation`
-    public func getOperation(
+    /// See `TagHoldsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension TagHolds {
+extension Clients.TagHoldsProtocol {
   public func createTagHold(request: CreateTagHoldRequest) async throws
     -> GoogleLongrunning.Operation
   {

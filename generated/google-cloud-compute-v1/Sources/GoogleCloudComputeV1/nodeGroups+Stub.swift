@@ -28,70 +28,64 @@
   extension Clients {
     protocol NodeGroupsStub {
       func addNodes(
-        request: Clients.NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: Clients.NodeGroupsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList
 
       func delete(
-        request: Clients.NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteNodes(
-        request: Clients.NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroup
 
       func getIamPolicy(
-        request: Clients.NodeGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupList
 
       func listNodes(
-        request: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes
 
       func patch(
-        request: Clients.NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func performMaintenance(
-        request: Clients.NodeGroupsClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.NodeGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setNodeTemplate(
-        request: Clients.NodeGroupsClient.SetNodeTemplateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func simulateMaintenanceEvent(
-        request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest,
+        request: NodeGroupsClient.SimulateMaintenanceEventRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.NodeGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -104,7 +98,7 @@
       }
 
       public func addNodes(
-        request: Clients.NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -135,8 +129,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.NodeGroupsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -166,7 +159,7 @@
       }
 
       public func delete(
-        request: Clients.NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -193,7 +186,7 @@
       }
 
       public func deleteNodes(
-        request: Clients.NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -224,7 +217,7 @@
       }
 
       public func `get`(
-        request: Clients.NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroup {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -249,8 +242,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.NodeGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -278,7 +270,7 @@
       }
 
       public func insert(
-        request: Clients.NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -306,7 +298,7 @@
       }
 
       public func list(
-        request: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -334,7 +326,7 @@
       }
 
       public func listNodes(
-        request: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -367,7 +359,7 @@
       }
 
       public func patch(
-        request: Clients.NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -398,8 +390,7 @@
       }
 
       public func performMaintenance(
-        request: Clients.NodeGroupsClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -430,8 +421,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.NodeGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -459,8 +449,7 @@
       }
 
       public func setNodeTemplate(
-        request: Clients.NodeGroupsClient.SetNodeTemplateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -491,7 +480,7 @@
       }
 
       public func simulateMaintenanceEvent(
-        request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest,
+        request: NodeGroupsClient.SimulateMaintenanceEventRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -523,8 +512,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.NodeGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

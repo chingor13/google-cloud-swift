@@ -28,26 +28,23 @@
   extension Clients {
     protocol CrossSiteNetworksStub {
       func delete(
-        request: Clients.CrossSiteNetworksClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetwork
 
       func insert(
-        request: Clients.CrossSiteNetworksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetworkList
 
       func patch(
-        request: Clients.CrossSiteNetworksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -60,8 +57,7 @@
       }
 
       public func delete(
-        request: Clients.CrossSiteNetworksClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -86,7 +82,7 @@
       }
 
       public func `get`(
-        request: Clients.CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetwork {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -109,8 +105,7 @@
       }
 
       public func insert(
-        request: Clients.CrossSiteNetworksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -134,7 +129,7 @@
       }
 
       public func list(
-        request: Clients.CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetworkList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -159,8 +154,7 @@
       }
 
       public func patch(
-        request: Clients.CrossSiteNetworksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

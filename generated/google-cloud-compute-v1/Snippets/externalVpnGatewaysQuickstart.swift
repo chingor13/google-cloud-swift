@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.ExternalVpnGatewaysClient()
+    let client = try GoogleCloudComputeV1.ExternalVpnGatewaysClient()
     let response = try await client.delete(
-      request: Clients.ExternalVpnGatewaysClient.DeleteRequest()
+      request: ExternalVpnGatewaysClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

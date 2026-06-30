@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Projects) async throws {
+func sample(client: ProjectsClient) async throws {
   let items = try client.searchProjects(
     byItem: SearchProjectsRequest()
       /* set fields using .with { $0... } */
@@ -38,7 +38,7 @@ func sample(client: some Projects) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.ProjectsClient()
+      let client = try GoogleCloudResourcemanagerV3.ProjectsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

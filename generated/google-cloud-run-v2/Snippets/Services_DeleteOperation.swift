@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Services) async throws {
+func sample(client: ServicesClient) async throws {
   try await client.deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest()
       /* set fields using .with { $0... } */
@@ -36,7 +36,7 @@ func sample(client: some Services) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.ServicesClient()
+      let client = try GoogleCloudRunV2.ServicesClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

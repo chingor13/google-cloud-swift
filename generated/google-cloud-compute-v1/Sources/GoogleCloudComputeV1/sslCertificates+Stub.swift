@@ -28,24 +28,23 @@
   extension Clients {
     protocol SslCertificatesStub {
       func aggregatedList(
-        request: Clients.SslCertificatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
 
       func delete(
-        request: Clients.SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate
 
       func insert(
-        request: Clients.SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList
     }
 
@@ -58,8 +57,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.SslCertificatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -89,7 +87,7 @@
       }
 
       public func delete(
-        request: Clients.SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -113,7 +111,7 @@
       }
 
       public func `get`(
-        request: Clients.SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -135,7 +133,7 @@
       }
 
       public func insert(
-        request: Clients.SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -158,7 +156,7 @@
       }
 
       public func list(
-        request: Clients.SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

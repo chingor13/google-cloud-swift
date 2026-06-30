@@ -28,7 +28,7 @@ public enum Logging {
     let handler = InMemoryLogHandler()
     var clientLogger = Logger(label: "logging.test", factory: { (String) in handler })
     clientLogger.logLevel = .debug
-    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient(
+    let client = try SecretManagerServiceClient(
       ClientOptions().with { $0.logger = clientLogger })
 
     logger.info("\nTesting listLocations()")

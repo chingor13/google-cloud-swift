@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalAddressesClient {
+  extension GlobalAddressesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.globalAddresses.delete] method.
     ///
     /// [google.cloud.compute.v1.globalAddresses.delete]: <doc:GlobalAddresses/delete(request:)>

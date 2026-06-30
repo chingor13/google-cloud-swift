@@ -60,15 +60,14 @@
       }
 
       public func aggregatedList(
-        request: Clients.NodeTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: Clients.NodeTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NodeTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -76,14 +75,14 @@
       }
 
       public func `get`(
-        request: Clients.NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeType {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.NodeTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NodeType
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -91,14 +90,14 @@
       }
 
       public func list(
-        request: Clients.NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.NodeTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NodeTypeList
             in
             return try await self.inner.list(request: r, options: o)

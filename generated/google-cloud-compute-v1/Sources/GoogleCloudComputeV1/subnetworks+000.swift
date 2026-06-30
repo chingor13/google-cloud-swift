@@ -28,137 +28,144 @@
   /// Service for the `subnetworks` resource.
   ///
   /// @Snippet(path: "subnetworksQuickstart")
-  public protocol Subnetworks {
+  public class SubnetworksClient: Clients.SubnetworksProtocol {
+    let inner: any Clients.SubnetworksStub
+
+    /// Creates a new `SubnetworksClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SubnetworksStub = try Clients.SubnetworksTransport(options)
+      inner = Clients.SubnetworksRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SubnetworksLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Retrieves an aggregated list of subnetworks.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "subnetworks_aggregatedList")
-    func aggregatedList(request: Clients.SubnetworksClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.SubnetworkAggregatedList
+    public func aggregatedList(
+      request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of subnetworks.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.SubnetworksClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of subnetworks.
     ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
+    /// @Snippet(path: "subnetworks_aggregatedList")
+    public func aggregatedList(
+      byItem: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified subnetwork.
     ///
     /// @Snippet(path: "subnetworks_delete")
-    func delete(request: Clients.SubnetworksClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified subnetwork.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      subnetwork: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Expands the IP CIDR range of the subnetwork to a specified value.
     ///
     /// @Snippet(path: "subnetworks_expandIpCidrRange")
-    func expandIpCidrRange(request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Expands the IP CIDR range of the subnetwork to a specified value.
-    func expandIpCidrRange(
-      project: Swift.String,
-      region: Swift.String,
-      subnetwork: Swift.String,
-      body: SubnetworksExpandIpCidrRangeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func expandIpCidrRange(
+      request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.expandIpCidrRange(request: request, options: options)
+    }
 
     /// Returns the specified subnetwork.
     ///
     /// @Snippet(path: "subnetworks_get")
-    func `get`(request: Clients.SubnetworksClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Subnetwork
-
-    /// Returns the specified subnetwork.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      subnetwork: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Subnetwork
+    public func `get`(
+      request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Subnetwork {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "subnetworks_getIamPolicy")
-    func getIamPolicy(request: Clients.SubnetworksClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a subnetwork in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "subnetworks_insert")
-    func insert(request: Clients.SubnetworksClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a subnetwork in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Subnetwork?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of subnetworks available to the specified
     /// project.
     ///
     /// @Snippet(path: "subnetworks_list")
-    func list(request: Clients.SubnetworksClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.SubnetworkList
+    public func list(
+      request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SubnetworkList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of subnetworks available to the specified
     /// project.
-    func list(
-      byItem: Clients.SubnetworksClient.ListRequest
-    ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
-
-    /// Retrieves a list of subnetworks available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
+    ///
+    /// @Snippet(path: "subnetworks_list")
+    public func list(
+      byItem: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Subnetwork, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SubnetworkList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Retrieves an aggregated list of all usable subnetworks in the project.
     ///
     /// @Snippet(path: "subnetworks_listUsable")
-    func listUsable(request: Clients.SubnetworksClient.ListUsableRequest) async throws
-      -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
+    public func listUsable(
+      request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList {
+      try await self.inner.listUsable(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of all usable subnetworks in the project.
-    func listUsable(
-      byItem: Clients.SubnetworksClient.ListUsableRequest
-    ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
-
-    /// Retrieves an aggregated list of all usable subnetworks in the project.
-    func listUsable(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
+    ///
+    /// @Snippet(path: "subnetworks_listUsable")
+    public func listUsable(
+      byItem: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listUsable(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified subnetwork with the data included in the request.
     /// Only certain fields can be updated with a patch request
@@ -167,363 +174,297 @@
     /// subnetwork resource being patched.
     ///
     /// @Snippet(path: "subnetworks_patch")
-    func patch(request: Clients.SubnetworksClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified subnetwork with the data included in the request.
-    /// Only certain fields can be updated with a patch request
-    /// as indicated in the field descriptions.
-    /// You must specify the current fingerprint of the
-    /// subnetwork resource being patched.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      subnetwork: Swift.String,
-      body: Subnetwork?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "subnetworks_setIamPolicy")
-    func setIamPolicy(request: Clients.SubnetworksClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Set whether VMs in this subnet can access Google services without assigning
     /// external IP addresses through Private Google Access.
     ///
     /// @Snippet(path: "subnetworks_setPrivateIpGoogleAccess")
-    func setPrivateIpGoogleAccess(
-      request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Set whether VMs in this subnet can access Google services without assigning
-    /// external IP addresses through Private Google Access.
-    func setPrivateIpGoogleAccess(
-      project: Swift.String,
-      region: Swift.String,
-      subnetwork: Swift.String,
-      body: SubnetworksSetPrivateIpGoogleAccessRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setPrivateIpGoogleAccess(
+      request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setPrivateIpGoogleAccess(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "subnetworks_testIamPermissions")
-    func testIamPermissions(request: Clients.SubnetworksClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Retrieves an aggregated list of subnetworks.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "subnetworks_aggregatedList")
-    func aggregatedList(
-      request: Clients.SubnetworksClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
-
-    /// Retrieves an aggregated list of subnetworks.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.SubnetworksClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
-
-    /// Deletes the specified subnetwork.
-    ///
-    /// @Snippet(path: "subnetworks_delete")
-    func delete(
-      request: Clients.SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Expands the IP CIDR range of the subnetwork to a specified value.
-    ///
-    /// @Snippet(path: "subnetworks_expandIpCidrRange")
-    func expandIpCidrRange(
-      request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified subnetwork.
-    ///
-    /// @Snippet(path: "subnetworks_get")
-    func `get`(
-      request: Clients.SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Subnetwork
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "subnetworks_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a subnetwork in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "subnetworks_insert")
-    func insert(
-      request: Clients.SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of subnetworks available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "subnetworks_list")
-    func list(
-      request: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SubnetworkList
-
-    /// Retrieves a list of subnetworks available to the specified
-    /// project.
-    func list(
-      byItem: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
-
-    /// Retrieves an aggregated list of all usable subnetworks in the project.
-    ///
-    /// @Snippet(path: "subnetworks_listUsable")
-    func listUsable(
-      request: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
-
-    /// Retrieves an aggregated list of all usable subnetworks in the project.
-    func listUsable(
-      byItem: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
-
-    /// Patches the specified subnetwork with the data included in the request.
-    /// Only certain fields can be updated with a patch request
-    /// as indicated in the field descriptions.
-    /// You must specify the current fingerprint of the
-    /// subnetwork resource being patched.
-    ///
-    /// @Snippet(path: "subnetworks_patch")
-    func patch(
-      request: Clients.SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "subnetworks_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Set whether VMs in this subnet can access Google services without assigning
-    /// external IP addresses through Private Google Access.
-    ///
-    /// @Snippet(path: "subnetworks_setPrivateIpGoogleAccess")
-    func setPrivateIpGoogleAccess(
-      request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "subnetworks_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.SubnetworksClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Subnetworks``.
-    public class SubnetworksClient: Subnetworks {
-      let inner: any SubnetworksStub
+    /// A Swift protocol to mock `SubnetworksClient`.
+    ///
+    /// To mock `SubnetworksClient` change your functions to receive
+    /// `some SubnetworksProtocol` or `any SubnetworksProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SubnetworksProtocol {
+      /// See `SubnetworksClient.aggregatedList`.
+      func aggregatedList(request: SubnetworksClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.SubnetworkAggregatedList
 
-      /// Creates a new `SubnetworksClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SubnetworksStub = try SubnetworksTransport(options)
-        inner = SubnetworksRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SubnetworksLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SubnetworksClient.aggregatedList`.
+      func aggregatedList(
+        byItem: SubnetworksClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
 
-      /// See `Subnetworks.aggregatedList`
-      public func aggregatedList(
-        request: Clients.SubnetworksClient.AggregatedListRequest,
+      /// See `SubnetworksClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
+
+      /// See `SubnetworksClient.delete`.
+      func delete(request: SubnetworksClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        subnetwork: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.expandIpCidrRange`.
+      func expandIpCidrRange(request: SubnetworksClient.ExpandIpCidrRangeRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.expandIpCidrRange`.
+      func expandIpCidrRange(
+        project: Swift.String,
+        region: Swift.String,
+        subnetwork: Swift.String,
+        body: SubnetworksExpandIpCidrRangeRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.`get``.
+      func `get`(request: SubnetworksClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Subnetwork
+
+      /// See `SubnetworksClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        subnetwork: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Subnetwork
+
+      /// See `SubnetworksClient.getIamPolicy`.
+      func getIamPolicy(request: SubnetworksClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.insert`.
+      func insert(request: SubnetworksClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: Subnetwork?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.list`.
+      func list(request: SubnetworksClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.SubnetworkList
+
+      /// See `SubnetworksClient.list`.
+      func list(
+        byItem: SubnetworksClient.ListRequest
+      ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.listUsable`.
+      func listUsable(request: SubnetworksClient.ListUsableRequest) async throws
+        -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
+
+      /// See `SubnetworksClient.listUsable`.
+      func listUsable(
+        byItem: SubnetworksClient.ListUsableRequest
+      ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.listUsable`.
+      func listUsable(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.patch`.
+      func patch(request: SubnetworksClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        subnetwork: Swift.String,
+        body: Subnetwork?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.setIamPolicy`.
+      func setIamPolicy(request: SubnetworksClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.setPrivateIpGoogleAccess`.
+      func setPrivateIpGoogleAccess(request: SubnetworksClient.SetPrivateIpGoogleAccessRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.setPrivateIpGoogleAccess`.
+      func setPrivateIpGoogleAccess(
+        project: Swift.String,
+        region: Swift.String,
+        subnetwork: Swift.String,
+        body: SubnetworksSetPrivateIpGoogleAccessRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.testIamPermissions`.
+      func testIamPermissions(request: SubnetworksClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `SubnetworksClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `SubnetworksClient.aggregatedList`.
+      func aggregatedList(
+        request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
+
+      /// See `SubnetworksClient.aggregatedList`.
+      func aggregatedList(
+        byItem: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error>
+
+      /// See `SubnetworksClient.delete`.
+      func delete(
+        request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.expandIpCidrRange`.
+      func expandIpCidrRange(
+        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.`get``.
+      func `get`(
+        request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Subnetwork
+
+      /// See `SubnetworksClient.getIamPolicy`.
+      func getIamPolicy(
+        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.insert`.
+      func insert(
+        request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.list`.
+      func list(
+        request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SubnetworkList
+
+      /// See `SubnetworksClient.list`.
+      func list(
+        byItem: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Subnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.listUsable`.
+      func listUsable(
+        request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
+
+      /// See `SubnetworksClient.listUsable`.
+      func listUsable(
+        byItem: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error>
+
+      /// See `SubnetworksClient.patch`.
+      func patch(
+        request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SubnetworksClient.setIamPolicy`.
+      func setIamPolicy(
+        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `SubnetworksClient.setPrivateIpGoogleAccess`.
+      func setPrivateIpGoogleAccess(
+        request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves an aggregated list of subnetworks.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.SubnetworksClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Subnetworks.delete`
-      public func delete(
-        request: Clients.SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `Subnetworks.expandIpCidrRange`
-      public func expandIpCidrRange(
-        request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.expandIpCidrRange(request: request, options: options)
-      }
-
-      /// See `Subnetworks.`get``
-      public func `get`(
-        request: Clients.SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Subnetwork {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `Subnetworks.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.SubnetworksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `Subnetworks.insert`
-      public func insert(
-        request: Clients.SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `Subnetworks.list`
-      public func list(
-        request: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SubnetworkList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves a list of subnetworks available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Subnetwork, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SubnetworkList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Subnetworks.listUsable`
-      public func listUsable(
-        request: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList {
-        try await self.inner.listUsable(request: request, options: options)
-      }
-
-      /// Retrieves an aggregated list of all usable subnetworks in the project.
-      public func listUsable(
-        byItem: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listUsable(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Subnetworks.patch`
-      public func patch(
-        request: Clients.SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `Subnetworks.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.SubnetworksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `Subnetworks.setPrivateIpGoogleAccess`
-      public func setPrivateIpGoogleAccess(
-        request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setPrivateIpGoogleAccess(request: request, options: options)
-      }
-
-      /// See `Subnetworks.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.SubnetworksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `SubnetworksClient.testIamPermissions`.
+      func testIamPermissions(
+        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension Subnetworks {
-    public func aggregatedList(request: Clients.SubnetworksClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
+  extension Clients.SubnetworksProtocol {
+    public func aggregatedList(request: SubnetworksClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.SubnetworkAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.SubnetworksClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.SubnetworksClient.AggregatedListRequest
+      byItem: SubnetworksClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.SubnetworksClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList in
@@ -535,20 +476,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, SubnetworksScopedList), Swift.Error> {
-      let request = Clients.SubnetworksClient.AggregatedListRequest().with {
+      let request = SubnetworksClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.SubnetworksClient.DeleteRequest) async throws
+    public func delete(request: SubnetworksClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -558,7 +499,7 @@
       region: Swift.String,
       subnetwork: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SubnetworksClient.DeleteRequest().with {
+      let request = SubnetworksClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.subnetwork = subnetwork
@@ -566,15 +507,14 @@
       return try await self.delete(request: request)
     }
 
-    public func expandIpCidrRange(request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func expandIpCidrRange(request: SubnetworksClient.ExpandIpCidrRangeRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.expandIpCidrRange(request: request, options: .init())
     }
 
     public func expandIpCidrRange(
-      request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -585,7 +525,7 @@
       subnetwork: Swift.String,
       body: SubnetworksExpandIpCidrRangeRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SubnetworksClient.ExpandIpCidrRangeRequest().with {
+      let request = SubnetworksClient.ExpandIpCidrRangeRequest().with {
         $0.project = project
         $0.region = region
         $0.subnetwork = subnetwork
@@ -594,14 +534,14 @@
       return try await self.expandIpCidrRange(request: request)
     }
 
-    public func `get`(request: Clients.SubnetworksClient.GetRequest) async throws
+    public func `get`(request: SubnetworksClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Subnetwork
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Subnetwork {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -611,7 +551,7 @@
       region: Swift.String,
       subnetwork: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Subnetwork {
-      let request = Clients.SubnetworksClient.GetRequest().with {
+      let request = SubnetworksClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.subnetwork = subnetwork
@@ -619,14 +559,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.SubnetworksClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: SubnetworksClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -636,7 +576,7 @@
       region: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.SubnetworksClient.GetIamPolicyRequest().with {
+      let request = SubnetworksClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -644,14 +584,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.SubnetworksClient.InsertRequest) async throws
+    public func insert(request: SubnetworksClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -661,7 +601,7 @@
       region: Swift.String,
       body: Subnetwork?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SubnetworksClient.InsertRequest().with {
+      let request = SubnetworksClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -669,26 +609,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.SubnetworksClient.ListRequest) async throws
+    public func list(request: SubnetworksClient.ListRequest) async throws
       -> GoogleCloudComputeV1.SubnetworkList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SubnetworkList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.SubnetworksClient.ListRequest
+      byItem: SubnetworksClient.ListRequest
     ) throws -> any AsyncSequence<Subnetwork, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Subnetwork, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SubnetworkList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -700,33 +640,33 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<Subnetwork, Swift.Error> {
-      let request = Clients.SubnetworksClient.ListRequest().with {
+      let request = SubnetworksClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func listUsable(request: Clients.SubnetworksClient.ListUsableRequest) async throws
+    public func listUsable(request: SubnetworksClient.ListUsableRequest) async throws
       -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
     {
       try await self.listUsable(request: request, options: .init())
     }
 
     public func listUsable(
-      request: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listUsable(
-      byItem: Clients.SubnetworksClient.ListUsableRequest
+      byItem: SubnetworksClient.ListUsableRequest
     ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
       try self.listUsable(byItem: byItem, options: .init())
     }
 
     public func listUsable(
-      byItem: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList in
@@ -738,20 +678,20 @@
     public func listUsable(
       project: Swift.String,
     ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
-      let request = Clients.SubnetworksClient.ListUsableRequest().with {
+      let request = SubnetworksClient.ListUsableRequest().with {
         $0.project = project
       }
       return try self.listUsable(byItem: request)
     }
 
-    public func patch(request: Clients.SubnetworksClient.PatchRequest) async throws
+    public func patch(request: SubnetworksClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -762,7 +702,7 @@
       subnetwork: Swift.String,
       body: Subnetwork?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SubnetworksClient.PatchRequest().with {
+      let request = SubnetworksClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.subnetwork = subnetwork
@@ -771,14 +711,14 @@
       return try await self.patch(request: request)
     }
 
-    public func setIamPolicy(request: Clients.SubnetworksClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: SubnetworksClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -789,7 +729,7 @@
       resource: Swift.String,
       body: RegionSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.SubnetworksClient.SetIamPolicyRequest().with {
+      let request = SubnetworksClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -798,14 +738,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func setPrivateIpGoogleAccess(
-      request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func setPrivateIpGoogleAccess(request: SubnetworksClient.SetPrivateIpGoogleAccessRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.setPrivateIpGoogleAccess(request: request, options: .init())
     }
 
     public func setPrivateIpGoogleAccess(
-      request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+      request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -817,7 +757,7 @@
       subnetwork: Swift.String,
       body: SubnetworksSetPrivateIpGoogleAccessRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest().with {
+      let request = SubnetworksClient.SetPrivateIpGoogleAccessRequest().with {
         $0.project = project
         $0.region = region
         $0.subnetwork = subnetwork
@@ -826,15 +766,14 @@
       return try await self.setPrivateIpGoogleAccess(request: request)
     }
 
-    public func testIamPermissions(request: Clients.SubnetworksClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: SubnetworksClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.SubnetworksClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -845,7 +784,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.SubnetworksClient.TestIamPermissionsRequest().with {
+      let request = SubnetworksClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

@@ -28,34 +28,36 @@
   /// Service for the `targetPools` resource.
   ///
   /// @Snippet(path: "targetPoolsQuickstart")
-  public protocol TargetPools {
+  public class TargetPoolsClient: Clients.TargetPoolsProtocol {
+    let inner: any Clients.TargetPoolsStub
+
+    /// Creates a new `TargetPoolsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.TargetPoolsStub = try Clients.TargetPoolsTransport(options)
+      inner = Clients.TargetPoolsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.TargetPoolsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Adds health check URLs to a target pool.
     ///
     /// @Snippet(path: "targetPools_addHealthCheck")
-    func addHealthCheck(request: Clients.TargetPoolsClient.AddHealthCheckRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Adds health check URLs to a target pool.
-    func addHealthCheck(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsAddHealthCheckRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func addHealthCheck(
+      request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.addHealthCheck(request: request, options: options)
+    }
 
     /// Adds an instance to a target pool.
     ///
     /// @Snippet(path: "targetPools_addInstance")
-    func addInstance(request: Clients.TargetPoolsClient.AddInstanceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Adds an instance to a target pool.
-    func addInstance(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsAddInstanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func addInstance(
+      request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.addInstance(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of target pools.
     ///
@@ -63,190 +65,11 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "targetPools_aggregatedList")
-    func aggregatedList(request: Clients.TargetPoolsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.TargetPoolAggregatedList
-
-    /// Retrieves an aggregated list of target pools.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetPoolsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of target pools.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
-
-    /// Deletes the specified target pool.
-    ///
-    /// @Snippet(path: "targetPools_delete")
-    func delete(request: Clients.TargetPoolsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified target pool.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified target pool.
-    ///
-    /// @Snippet(path: "targetPools_get")
-    func `get`(request: Clients.TargetPoolsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.TargetPool
-
-    /// Returns the specified target pool.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.TargetPool
-
-    /// Gets the most recent health check results for each IP for the
-    /// instance that is referenced by the given target pool.
-    ///
-    /// @Snippet(path: "targetPools_getHealth")
-    func getHealth(request: Clients.TargetPoolsClient.GetHealthRequest) async throws
-      -> GoogleCloudComputeV1.TargetPoolInstanceHealth
-
-    /// Gets the most recent health check results for each IP for the
-    /// instance that is referenced by the given target pool.
-    func getHealth(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: InstanceReference?,
-    ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
-
-    /// Creates a target pool in the specified project and region using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "targetPools_insert")
-    func insert(request: Clients.TargetPoolsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a target pool in the specified project and region using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: TargetPool?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of target pools available to the specified
-    /// project and region.
-    ///
-    /// @Snippet(path: "targetPools_list")
-    func list(request: Clients.TargetPoolsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.TargetPoolList
-
-    /// Retrieves a list of target pools available to the specified
-    /// project and region.
-    func list(
-      byItem: Clients.TargetPoolsClient.ListRequest
-    ) throws -> any AsyncSequence<TargetPool, Swift.Error>
-
-    /// Retrieves a list of target pools available to the specified
-    /// project and region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<TargetPool, Swift.Error>
-
-    /// Removes health check URL from a target pool.
-    ///
-    /// @Snippet(path: "targetPools_removeHealthCheck")
-    func removeHealthCheck(request: Clients.TargetPoolsClient.RemoveHealthCheckRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Removes health check URL from a target pool.
-    func removeHealthCheck(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsRemoveHealthCheckRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Removes instance URL from a target pool.
-    ///
-    /// @Snippet(path: "targetPools_removeInstance")
-    func removeInstance(request: Clients.TargetPoolsClient.RemoveInstanceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Removes instance URL from a target pool.
-    func removeInstance(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsRemoveInstanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes a backup target pool's configurations.
-    ///
-    /// @Snippet(path: "targetPools_setBackup")
-    func setBackup(request: Clients.TargetPoolsClient.SetBackupRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Changes a backup target pool's configurations.
-    func setBackup(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the Google Cloud Armor security policy for the specified target pool.
-    /// For more information, seeGoogle
-    /// Cloud Armor Overview
-    ///
-    /// @Snippet(path: "targetPools_setSecurityPolicy")
-    func setSecurityPolicy(request: Clients.TargetPoolsClient.SetSecurityPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the Google Cloud Armor security policy for the specified target pool.
-    /// For more information, seeGoogle
-    /// Cloud Armor Overview
-    func setSecurityPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "targetPools_testIamPermissions")
-    func testIamPermissions(request: Clients.TargetPoolsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Adds health check URLs to a target pool.
-    ///
-    /// @Snippet(path: "targetPools_addHealthCheck")
-    func addHealthCheck(
-      request: Clients.TargetPoolsClient.AddHealthCheckRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Adds an instance to a target pool.
-    ///
-    /// @Snippet(path: "targetPools_addInstance")
-    func addInstance(
-      request: Clients.TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func aggregatedList(
+      request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of target pools.
     ///
@@ -254,262 +77,381 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "targetPools_aggregatedList")
-    func aggregatedList(
-      request: Clients.TargetPoolsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList
-
-    /// Retrieves an aggregated list of target pools.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetPoolsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
+    public func aggregatedList(
+      byItem: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified target pool.
     ///
     /// @Snippet(path: "targetPools_delete")
-    func delete(
-      request: Clients.TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified target pool.
     ///
     /// @Snippet(path: "targetPools_get")
-    func `get`(
-      request: Clients.TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetPool
+    public func `get`(
+      request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetPool {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the most recent health check results for each IP for the
     /// instance that is referenced by the given target pool.
     ///
     /// @Snippet(path: "targetPools_getHealth")
-    func getHealth(
-      request: Clients.TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
+    public func getHealth(
+      request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth {
+      try await self.inner.getHealth(request: request, options: options)
+    }
 
     /// Creates a target pool in the specified project and region using
     /// the data included in the request.
     ///
     /// @Snippet(path: "targetPools_insert")
-    func insert(
-      request: Clients.TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of target pools available to the specified
     /// project and region.
     ///
     /// @Snippet(path: "targetPools_list")
-    func list(
-      request: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetPoolList
+    public func list(
+      request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetPoolList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of target pools available to the specified
     /// project and region.
-    func list(
-      byItem: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TargetPool, Swift.Error>
+    ///
+    /// @Snippet(path: "targetPools_list")
+    public func list(
+      byItem: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<TargetPool, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetPoolList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Removes health check URL from a target pool.
     ///
     /// @Snippet(path: "targetPools_removeHealthCheck")
-    func removeHealthCheck(
-      request: Clients.TargetPoolsClient.RemoveHealthCheckRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func removeHealthCheck(
+      request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.removeHealthCheck(request: request, options: options)
+    }
 
     /// Removes instance URL from a target pool.
     ///
     /// @Snippet(path: "targetPools_removeInstance")
-    func removeInstance(
-      request: Clients.TargetPoolsClient.RemoveInstanceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func removeInstance(
+      request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.removeInstance(request: request, options: options)
+    }
 
     /// Changes a backup target pool's configurations.
     ///
     /// @Snippet(path: "targetPools_setBackup")
-    func setBackup(
-      request: Clients.TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setBackup(
+      request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setBackup(request: request, options: options)
+    }
 
     /// Sets the Google Cloud Armor security policy for the specified target pool.
     /// For more information, seeGoogle
     /// Cloud Armor Overview
     ///
     /// @Snippet(path: "targetPools_setSecurityPolicy")
-    func setSecurityPolicy(
-      request: Clients.TargetPoolsClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setSecurityPolicy(
+      request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setSecurityPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "targetPools_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.TargetPoolsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``TargetPools``.
-    public class TargetPoolsClient: TargetPools {
-      let inner: any TargetPoolsStub
+    /// A Swift protocol to mock `TargetPoolsClient`.
+    ///
+    /// To mock `TargetPoolsClient` change your functions to receive
+    /// `some TargetPoolsProtocol` or `any TargetPoolsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol TargetPoolsProtocol {
+      /// See `TargetPoolsClient.addHealthCheck`.
+      func addHealthCheck(request: TargetPoolsClient.AddHealthCheckRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `TargetPoolsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any TargetPoolsStub = try TargetPoolsTransport(options)
-        inner = TargetPoolsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = TargetPoolsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `TargetPoolsClient.addHealthCheck`.
+      func addHealthCheck(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: TargetPoolsAddHealthCheckRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.addHealthCheck`
-      public func addHealthCheck(
-        request: Clients.TargetPoolsClient.AddHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.addHealthCheck(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.addInstance`.
+      func addInstance(request: TargetPoolsClient.AddInstanceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.addInstance`
-      public func addInstance(
-        request: Clients.TargetPoolsClient.AddInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.addInstance(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.addInstance`.
+      func addInstance(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: TargetPoolsAddInstanceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.aggregatedList`
-      public func aggregatedList(
-        request: Clients.TargetPoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.aggregatedList`.
+      func aggregatedList(request: TargetPoolsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.TargetPoolAggregatedList
 
-      /// Retrieves an aggregated list of target pools.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.TargetPoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `TargetPoolsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetPoolsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
 
-      /// See `TargetPools.delete`
-      public func delete(
-        request: Clients.TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
 
-      /// See `TargetPools.`get``
-      public func `get`(
-        request: Clients.TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetPool {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.delete`.
+      func delete(request: TargetPoolsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.getHealth`
-      public func getHealth(
-        request: Clients.TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth {
-        try await self.inner.getHealth(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.insert`
-      public func insert(
-        request: Clients.TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.`get``.
+      func `get`(request: TargetPoolsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.TargetPool
 
-      /// See `TargetPools.list`
-      public func list(
-        request: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetPoolList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.TargetPool
 
-      /// Retrieves a list of target pools available to the specified
-      /// project and region.
-      public func list(
-        byItem: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<TargetPool, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetPoolList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `TargetPoolsClient.getHealth`.
+      func getHealth(request: TargetPoolsClient.GetHealthRequest) async throws
+        -> GoogleCloudComputeV1.TargetPoolInstanceHealth
 
-      /// See `TargetPools.removeHealthCheck`
-      public func removeHealthCheck(
-        request: Clients.TargetPoolsClient.RemoveHealthCheckRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.removeHealthCheck(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.getHealth`.
+      func getHealth(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: InstanceReference?,
+      ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
 
-      /// See `TargetPools.removeInstance`
-      public func removeInstance(
-        request: Clients.TargetPoolsClient.RemoveInstanceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.removeInstance(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.insert`.
+      func insert(request: TargetPoolsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.setBackup`
-      public func setBackup(
-        request: Clients.TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setBackup(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: TargetPool?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPools.setSecurityPolicy`
-      public func setSecurityPolicy(
-        request: Clients.TargetPoolsClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setSecurityPolicy(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.list`.
+      func list(request: TargetPoolsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.TargetPoolList
 
-      /// See `TargetPools.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.TargetPoolsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `TargetPoolsClient.list`.
+      func list(
+        byItem: TargetPoolsClient.ListRequest
+      ) throws -> any AsyncSequence<TargetPool, Swift.Error>
+
+      /// See `TargetPoolsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<TargetPool, Swift.Error>
+
+      /// See `TargetPoolsClient.removeHealthCheck`.
+      func removeHealthCheck(request: TargetPoolsClient.RemoveHealthCheckRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.removeHealthCheck`.
+      func removeHealthCheck(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: TargetPoolsRemoveHealthCheckRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.removeInstance`.
+      func removeInstance(request: TargetPoolsClient.RemoveInstanceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.removeInstance`.
+      func removeInstance(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: TargetPoolsRemoveInstanceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setBackup`.
+      func setBackup(request: TargetPoolsClient.SetBackupRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setBackup`.
+      func setBackup(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: TargetReference?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setSecurityPolicy`.
+      func setSecurityPolicy(request: TargetPoolsClient.SetSecurityPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setSecurityPolicy`.
+      func setSecurityPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        targetPool: Swift.String,
+        body: SecurityPolicyReference?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.testIamPermissions`.
+      func testIamPermissions(request: TargetPoolsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetPoolsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetPoolsClient.addHealthCheck`.
+      func addHealthCheck(
+        request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.addInstance`.
+      func addInstance(
+        request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.aggregatedList`.
+      func aggregatedList(
+        request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList
+
+      /// See `TargetPoolsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error>
+
+      /// See `TargetPoolsClient.delete`.
+      func delete(
+        request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.`get``.
+      func `get`(
+        request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetPool
+
+      /// See `TargetPoolsClient.getHealth`.
+      func getHealth(
+        request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
+
+      /// See `TargetPoolsClient.insert`.
+      func insert(
+        request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.list`.
+      func list(
+        request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetPoolList
+
+      /// See `TargetPoolsClient.list`.
+      func list(
+        byItem: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<TargetPool, Swift.Error>
+
+      /// See `TargetPoolsClient.removeHealthCheck`.
+      func removeHealthCheck(
+        request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.removeInstance`.
+      func removeInstance(
+        request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setBackup`.
+      func setBackup(
+        request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.setSecurityPolicy`.
+      func setSecurityPolicy(
+        request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetPoolsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension TargetPools {
-    public func addHealthCheck(request: Clients.TargetPoolsClient.AddHealthCheckRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.TargetPoolsProtocol {
+    public func addHealthCheck(request: TargetPoolsClient.AddHealthCheckRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.addHealthCheck(request: request, options: .init())
     }
 
     public func addHealthCheck(
-      request: Clients.TargetPoolsClient.AddHealthCheckRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -520,7 +462,7 @@
       targetPool: Swift.String,
       body: TargetPoolsAddHealthCheckRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.AddHealthCheckRequest().with {
+      let request = TargetPoolsClient.AddHealthCheckRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -529,14 +471,14 @@
       return try await self.addHealthCheck(request: request)
     }
 
-    public func addInstance(request: Clients.TargetPoolsClient.AddInstanceRequest) async throws
+    public func addInstance(request: TargetPoolsClient.AddInstanceRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.addInstance(request: request, options: .init())
     }
 
     public func addInstance(
-      request: Clients.TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -547,7 +489,7 @@
       targetPool: Swift.String,
       body: TargetPoolsAddInstanceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.AddInstanceRequest().with {
+      let request = TargetPoolsClient.AddInstanceRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -556,28 +498,26 @@
       return try await self.addInstance(request: request)
     }
 
-    public func aggregatedList(request: Clients.TargetPoolsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList
+    public func aggregatedList(request: TargetPoolsClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.TargetPoolAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.TargetPoolsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetPoolsClient.AggregatedListRequest
+      byItem: TargetPoolsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetPoolsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList in
@@ -589,20 +529,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, TargetPoolsScopedList), Swift.Error> {
-      let request = Clients.TargetPoolsClient.AggregatedListRequest().with {
+      let request = TargetPoolsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.TargetPoolsClient.DeleteRequest) async throws
+    public func delete(request: TargetPoolsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -612,7 +552,7 @@
       region: Swift.String,
       targetPool: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.DeleteRequest().with {
+      let request = TargetPoolsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -620,14 +560,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.TargetPoolsClient.GetRequest) async throws
+    public func `get`(request: TargetPoolsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetPool
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetPool {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -637,7 +577,7 @@
       region: Swift.String,
       targetPool: Swift.String,
     ) async throws -> GoogleCloudComputeV1.TargetPool {
-      let request = Clients.TargetPoolsClient.GetRequest().with {
+      let request = TargetPoolsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -645,14 +585,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getHealth(request: Clients.TargetPoolsClient.GetHealthRequest) async throws
+    public func getHealth(request: TargetPoolsClient.GetHealthRequest) async throws
       -> GoogleCloudComputeV1.TargetPoolInstanceHealth
     {
       try await self.getHealth(request: request, options: .init())
     }
 
     public func getHealth(
-      request: Clients.TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -663,7 +603,7 @@
       targetPool: Swift.String,
       body: InstanceReference?,
     ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth {
-      let request = Clients.TargetPoolsClient.GetHealthRequest().with {
+      let request = TargetPoolsClient.GetHealthRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -672,14 +612,14 @@
       return try await self.getHealth(request: request)
     }
 
-    public func insert(request: Clients.TargetPoolsClient.InsertRequest) async throws
+    public func insert(request: TargetPoolsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -689,7 +629,7 @@
       region: Swift.String,
       body: TargetPool?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.InsertRequest().with {
+      let request = TargetPoolsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -697,26 +637,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.TargetPoolsClient.ListRequest) async throws
+    public func list(request: TargetPoolsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.TargetPoolList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetPoolList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.TargetPoolsClient.ListRequest
+      byItem: TargetPoolsClient.ListRequest
     ) throws -> any AsyncSequence<TargetPool, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetPool, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetPoolList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -728,22 +668,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<TargetPool, Swift.Error> {
-      let request = Clients.TargetPoolsClient.ListRequest().with {
+      let request = TargetPoolsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func removeHealthCheck(request: Clients.TargetPoolsClient.RemoveHealthCheckRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func removeHealthCheck(request: TargetPoolsClient.RemoveHealthCheckRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.removeHealthCheck(request: request, options: .init())
     }
 
     public func removeHealthCheck(
-      request: Clients.TargetPoolsClient.RemoveHealthCheckRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -754,7 +693,7 @@
       targetPool: Swift.String,
       body: TargetPoolsRemoveHealthCheckRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.RemoveHealthCheckRequest().with {
+      let request = TargetPoolsClient.RemoveHealthCheckRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -763,15 +702,14 @@
       return try await self.removeHealthCheck(request: request)
     }
 
-    public func removeInstance(request: Clients.TargetPoolsClient.RemoveInstanceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func removeInstance(request: TargetPoolsClient.RemoveInstanceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.removeInstance(request: request, options: .init())
     }
 
     public func removeInstance(
-      request: Clients.TargetPoolsClient.RemoveInstanceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -782,7 +720,7 @@
       targetPool: Swift.String,
       body: TargetPoolsRemoveInstanceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.RemoveInstanceRequest().with {
+      let request = TargetPoolsClient.RemoveInstanceRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -791,14 +729,14 @@
       return try await self.removeInstance(request: request)
     }
 
-    public func setBackup(request: Clients.TargetPoolsClient.SetBackupRequest) async throws
+    public func setBackup(request: TargetPoolsClient.SetBackupRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.setBackup(request: request, options: .init())
     }
 
     public func setBackup(
-      request: Clients.TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -809,7 +747,7 @@
       targetPool: Swift.String,
       body: TargetReference?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.SetBackupRequest().with {
+      let request = TargetPoolsClient.SetBackupRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -818,15 +756,14 @@
       return try await self.setBackup(request: request)
     }
 
-    public func setSecurityPolicy(request: Clients.TargetPoolsClient.SetSecurityPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setSecurityPolicy(request: TargetPoolsClient.SetSecurityPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setSecurityPolicy(request: request, options: .init())
     }
 
     public func setSecurityPolicy(
-      request: Clients.TargetPoolsClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -837,7 +774,7 @@
       targetPool: Swift.String,
       body: SecurityPolicyReference?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetPoolsClient.SetSecurityPolicyRequest().with {
+      let request = TargetPoolsClient.SetSecurityPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.targetPool = targetPool
@@ -846,15 +783,14 @@
       return try await self.setSecurityPolicy(request: request)
     }
 
-    public func testIamPermissions(request: Clients.TargetPoolsClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: TargetPoolsClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.TargetPoolsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -865,7 +801,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.TargetPoolsClient.TestIamPermissionsRequest().with {
+      let request = TargetPoolsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

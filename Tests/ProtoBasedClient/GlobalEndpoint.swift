@@ -25,7 +25,7 @@ public enum GlobalEndpoint {
   static public func run(_ logger: Logger) async throws {
     let projectId = try projectId()
     let secretId = randomSecretId()
-    let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
+    let client = try SecretManagerServiceClient()
 
     logger.info("Testing createSecret()")
     let create = try await client.createSecret(
@@ -85,7 +85,7 @@ public enum GlobalEndpoint {
   }
 
   static private func testSecretVersions(
-    client: SecretManagerService, secretName: String, logger: Logger
+    client: SecretManagerServiceClient, secretName: String, logger: Logger
   )
     async throws
   {
@@ -135,7 +135,9 @@ public enum GlobalEndpoint {
     logger.info("destroyedVersion state = \(destroyedVersion.state)")
   }
 
-  static private func testIAM(client: SecretManagerService, secretName: String, logger: Logger)
+  static private func testIAM(
+    client: SecretManagerServiceClient, secretName: String, logger: Logger
+  )
     async throws
   {
     logger.info("\nTesting IAM operations")
@@ -172,7 +174,9 @@ public enum GlobalEndpoint {
     logger.info("updatedPolicy = \(updatedPolicy)")
   }
 
-  static private func testLocations(client: SecretManagerService, projectId: String, logger: Logger)
+  static private func testLocations(
+    client: SecretManagerServiceClient, projectId: String, logger: Logger
+  )
     async throws
   {
     logger.info("\nTesting location operations")

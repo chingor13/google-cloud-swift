@@ -28,20 +28,27 @@
   /// Service for the `nodeGroups` resource.
   ///
   /// @Snippet(path: "nodeGroupsQuickstart")
-  public protocol NodeGroups {
+  public class NodeGroupsClient: Clients.NodeGroupsProtocol {
+    let inner: any Clients.NodeGroupsStub
+
+    /// Creates a new `NodeGroupsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.NodeGroupsStub = try Clients.NodeGroupsTransport(options)
+      inner = Clients.NodeGroupsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.NodeGroupsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Adds specified number of nodes to the node group.
     ///
     /// @Snippet(path: "nodeGroups_addNodes")
-    func addNodes(request: Clients.NodeGroupsClient.AddNodesRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Adds specified number of nodes to the node group.
-    func addNodes(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsAddNodesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func addNodes(
+      request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.addNodes(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of node groups.
     /// Note: use nodeGroups.listNodes for more details about each group.
@@ -50,234 +57,11 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "nodeGroups_aggregatedList")
-    func aggregatedList(request: Clients.NodeGroupsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.NodeGroupAggregatedList
-
-    /// Retrieves an aggregated list of node groups.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NodeGroupsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of node groups.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
-
-    /// Deletes the specified NodeGroup resource.
-    ///
-    /// @Snippet(path: "nodeGroups_delete")
-    func delete(request: Clients.NodeGroupsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified NodeGroup resource.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes specified nodes from the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_deleteNodes")
-    func deleteNodes(request: Clients.NodeGroupsClient.DeleteNodesRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes specified nodes from the node group.
-    func deleteNodes(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsDeleteNodesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified NodeGroup. Get a list of available NodeGroups
-    /// by making a list() request.
-    /// Note: the "nodes" field should not be used. Use nodeGroups.listNodes
-    /// instead.
-    ///
-    /// @Snippet(path: "nodeGroups_get")
-    func `get`(request: Clients.NodeGroupsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NodeGroup
-
-    /// Returns the specified NodeGroup. Get a list of available NodeGroups
-    /// by making a list() request.
-    /// Note: the "nodes" field should not be used. Use nodeGroups.listNodes
-    /// instead.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NodeGroup
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "nodeGroups_getIamPolicy")
-    func getIamPolicy(request: Clients.NodeGroupsClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a NodeGroup resource in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "nodeGroups_insert")
-    func insert(request: Clients.NodeGroupsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a NodeGroup resource in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      initialNodeCount: Swift.Int32,
-      body: NodeGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of node groups available to the specified project.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    ///
-    /// @Snippet(path: "nodeGroups_list")
-    func list(request: Clients.NodeGroupsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.NodeGroupList
-
-    /// Retrieves a list of node groups available to the specified project.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    func list(
-      byItem: Clients.NodeGroupsClient.ListRequest
-    ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
-
-    /// Retrieves a list of node groups available to the specified project.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
-
-    /// Lists nodes in the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_listNodes")
-    func listNodes(request: Clients.NodeGroupsClient.ListNodesRequest) async throws
-      -> GoogleCloudComputeV1.NodeGroupsListNodes
-
-    /// Lists nodes in the node group.
-    func listNodes(
-      byItem: Clients.NodeGroupsClient.ListNodesRequest
-    ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
-
-    /// Lists nodes in the node group.
-    func listNodes(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-    ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
-
-    /// Updates the specified node group.
-    ///
-    /// @Snippet(path: "nodeGroups_patch")
-    func patch(request: Clients.NodeGroupsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified node group.
-    func patch(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Perform maintenance on a subset of nodes in the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_performMaintenance")
-    func performMaintenance(request: Clients.NodeGroupsClient.PerformMaintenanceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Perform maintenance on a subset of nodes in the node group.
-    func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "nodeGroups_setIamPolicy")
-    func setIamPolicy(request: Clients.NodeGroupsClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Updates the node template of the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_setNodeTemplate")
-    func setNodeTemplate(request: Clients.NodeGroupsClient.SetNodeTemplateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the node template of the node group.
-    func setNodeTemplate(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsSetNodeTemplateRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Simulates maintenance event on specified nodes from the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_simulateMaintenanceEvent")
-    func simulateMaintenanceEvent(request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Simulates maintenance event on specified nodes from the node group.
-    func simulateMaintenanceEvent(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsSimulateMaintenanceEventRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "nodeGroups_testIamPermissions")
-    func testIamPermissions(request: Clients.NodeGroupsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Adds specified number of nodes to the node group.
-    ///
-    /// @Snippet(path: "nodeGroups_addNodes")
-    func addNodes(
-      request: Clients.NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func aggregatedList(
+      request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of node groups.
     /// Note: use nodeGroups.listNodes for more details about each group.
@@ -286,33 +70,35 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "nodeGroups_aggregatedList")
-    func aggregatedList(
-      request: Clients.NodeGroupsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList
-
-    /// Retrieves an aggregated list of node groups.
-    /// Note: use nodeGroups.listNodes for more details about each group.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
+    public func aggregatedList(
+      byItem: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified NodeGroup resource.
     ///
     /// @Snippet(path: "nodeGroups_delete")
-    func delete(
-      request: Clients.NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Deletes specified nodes from the node group.
     ///
     /// @Snippet(path: "nodeGroups_deleteNodes")
-    func deleteNodes(
-      request: Clients.NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func deleteNodes(
+      request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.deleteNodes(request: request, options: options)
+    }
 
     /// Returns the specified NodeGroup. Get a list of available NodeGroups
     /// by making a list() request.
@@ -320,282 +106,433 @@
     /// instead.
     ///
     /// @Snippet(path: "nodeGroups_get")
-    func `get`(
-      request: Clients.NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeGroup
+    public func `get`(
+      request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeGroup {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "nodeGroups_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a NodeGroup resource in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "nodeGroups_insert")
-    func insert(
-      request: Clients.NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of node groups available to the specified project.
     /// Note: use nodeGroups.listNodes for more details about each group.
     ///
     /// @Snippet(path: "nodeGroups_list")
-    func list(
-      request: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeGroupList
+    public func list(
+      request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeGroupList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of node groups available to the specified project.
     /// Note: use nodeGroups.listNodes for more details about each group.
-    func list(
-      byItem: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
+    ///
+    /// @Snippet(path: "nodeGroups_list")
+    public func list(
+      byItem: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists nodes in the node group.
     ///
     /// @Snippet(path: "nodeGroups_listNodes")
-    func listNodes(
-      request: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes
+    public func listNodes(
+      request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes {
+      try await self.inner.listNodes(request: request, options: options)
+    }
 
     /// Lists nodes in the node group.
-    func listNodes(
-      byItem: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
+    ///
+    /// @Snippet(path: "nodeGroups_listNodes")
+    public func listNodes(
+      byItem: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listNodes(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the specified node group.
     ///
     /// @Snippet(path: "nodeGroups_patch")
-    func patch(
-      request: Clients.NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Perform maintenance on a subset of nodes in the node group.
     ///
     /// @Snippet(path: "nodeGroups_performMaintenance")
-    func performMaintenance(
-      request: Clients.NodeGroupsClient.PerformMaintenanceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func performMaintenance(
+      request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.performMaintenance(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "nodeGroups_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Updates the node template of the node group.
     ///
     /// @Snippet(path: "nodeGroups_setNodeTemplate")
-    func setNodeTemplate(
-      request: Clients.NodeGroupsClient.SetNodeTemplateRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setNodeTemplate(
+      request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setNodeTemplate(request: request, options: options)
+    }
 
     /// Simulates maintenance event on specified nodes from the node group.
     ///
     /// @Snippet(path: "nodeGroups_simulateMaintenanceEvent")
-    func simulateMaintenanceEvent(
-      request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest,
+    public func simulateMaintenanceEvent(
+      request: NodeGroupsClient.SimulateMaintenanceEventRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.simulateMaintenanceEvent(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "nodeGroups_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.NodeGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``NodeGroups``.
-    public class NodeGroupsClient: NodeGroups {
-      let inner: any NodeGroupsStub
+    /// A Swift protocol to mock `NodeGroupsClient`.
+    ///
+    /// To mock `NodeGroupsClient` change your functions to receive
+    /// `some NodeGroupsProtocol` or `any NodeGroupsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol NodeGroupsProtocol {
+      /// See `NodeGroupsClient.addNodes`.
+      func addNodes(request: NodeGroupsClient.AddNodesRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `NodeGroupsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any NodeGroupsStub = try NodeGroupsTransport(options)
-        inner = NodeGroupsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = NodeGroupsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `NodeGroupsClient.addNodes`.
+      func addNodes(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroupsAddNodesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeGroups.addNodes`
-      public func addNodes(
-        request: Clients.NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.addNodes(request: request, options: options)
-      }
+      /// See `NodeGroupsClient.aggregatedList`.
+      func aggregatedList(request: NodeGroupsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.NodeGroupAggregatedList
 
-      /// See `NodeGroups.aggregatedList`
-      public func aggregatedList(
-        request: Clients.NodeGroupsClient.AggregatedListRequest,
+      /// See `NodeGroupsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NodeGroupsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
+
+      /// See `NodeGroupsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
+
+      /// See `NodeGroupsClient.delete`.
+      func delete(request: NodeGroupsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.deleteNodes`.
+      func deleteNodes(request: NodeGroupsClient.DeleteNodesRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.deleteNodes`.
+      func deleteNodes(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroupsDeleteNodesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.`get``.
+      func `get`(request: NodeGroupsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NodeGroup
+
+      /// See `NodeGroupsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NodeGroup
+
+      /// See `NodeGroupsClient.getIamPolicy`.
+      func getIamPolicy(request: NodeGroupsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.insert`.
+      func insert(request: NodeGroupsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        initialNodeCount: Swift.Int32,
+        body: NodeGroup?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.list`.
+      func list(request: NodeGroupsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.NodeGroupList
+
+      /// See `NodeGroupsClient.list`.
+      func list(
+        byItem: NodeGroupsClient.ListRequest
+      ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
+
+      /// See `NodeGroupsClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
+
+      /// See `NodeGroupsClient.listNodes`.
+      func listNodes(request: NodeGroupsClient.ListNodesRequest) async throws
+        -> GoogleCloudComputeV1.NodeGroupsListNodes
+
+      /// See `NodeGroupsClient.listNodes`.
+      func listNodes(
+        byItem: NodeGroupsClient.ListNodesRequest
+      ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
+
+      /// See `NodeGroupsClient.listNodes`.
+      func listNodes(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+      ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
+
+      /// See `NodeGroupsClient.patch`.
+      func patch(request: NodeGroupsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.patch`.
+      func patch(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroup?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.performMaintenance`.
+      func performMaintenance(request: NodeGroupsClient.PerformMaintenanceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.performMaintenance`.
+      func performMaintenance(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroupsPerformMaintenanceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.setIamPolicy`.
+      func setIamPolicy(request: NodeGroupsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: ZoneSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.setNodeTemplate`.
+      func setNodeTemplate(request: NodeGroupsClient.SetNodeTemplateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.setNodeTemplate`.
+      func setNodeTemplate(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroupsSetNodeTemplateRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.simulateMaintenanceEvent`.
+      func simulateMaintenanceEvent(request: NodeGroupsClient.SimulateMaintenanceEventRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.simulateMaintenanceEvent`.
+      func simulateMaintenanceEvent(
+        project: Swift.String,
+        zone: Swift.String,
+        nodeGroup: Swift.String,
+        body: NodeGroupsSimulateMaintenanceEventRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.testIamPermissions`.
+      func testIamPermissions(request: NodeGroupsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `NodeGroupsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `NodeGroupsClient.addNodes`.
+      func addNodes(
+        request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.aggregatedList`.
+      func aggregatedList(
+        request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList
+
+      /// See `NodeGroupsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error>
+
+      /// See `NodeGroupsClient.delete`.
+      func delete(
+        request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.deleteNodes`.
+      func deleteNodes(
+        request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.`get``.
+      func `get`(
+        request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeGroup
+
+      /// See `NodeGroupsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.insert`.
+      func insert(
+        request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.list`.
+      func list(
+        request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeGroupList
+
+      /// See `NodeGroupsClient.list`.
+      func list(
+        byItem: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<NodeGroup, Swift.Error>
+
+      /// See `NodeGroupsClient.listNodes`.
+      func listNodes(
+        request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes
+
+      /// See `NodeGroupsClient.listNodes`.
+      func listNodes(
+        byItem: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error>
+
+      /// See `NodeGroupsClient.patch`.
+      func patch(
+        request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.performMaintenance`.
+      func performMaintenance(
+        request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeGroupsClient.setNodeTemplate`.
+      func setNodeTemplate(
+        request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeGroupsClient.simulateMaintenanceEvent`.
+      func simulateMaintenanceEvent(
+        request: NodeGroupsClient.SimulateMaintenanceEventRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves an aggregated list of node groups.
-      /// Note: use nodeGroups.listNodes for more details about each group.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.NodeGroupsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `NodeGroups.delete`
-      public func delete(
-        request: Clients.NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `NodeGroups.deleteNodes`
-      public func deleteNodes(
-        request: Clients.NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.deleteNodes(request: request, options: options)
-      }
-
-      /// See `NodeGroups.`get``
-      public func `get`(
-        request: Clients.NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeGroup {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `NodeGroups.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.NodeGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `NodeGroups.insert`
-      public func insert(
-        request: Clients.NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `NodeGroups.list`
-      public func list(
-        request: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeGroupList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves a list of node groups available to the specified project.
-      /// Note: use nodeGroups.listNodes for more details about each group.
-      public func list(
-        byItem: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `NodeGroups.listNodes`
-      public func listNodes(
-        request: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes {
-        try await self.inner.listNodes(request: request, options: options)
-      }
-
-      /// Lists nodes in the node group.
-      public func listNodes(
-        byItem: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listNodes(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `NodeGroups.patch`
-      public func patch(
-        request: Clients.NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
-
-      /// See `NodeGroups.performMaintenance`
-      public func performMaintenance(
-        request: Clients.NodeGroupsClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.performMaintenance(request: request, options: options)
-      }
-
-      /// See `NodeGroups.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.NodeGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `NodeGroups.setNodeTemplate`
-      public func setNodeTemplate(
-        request: Clients.NodeGroupsClient.SetNodeTemplateRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setNodeTemplate(request: request, options: options)
-      }
-
-      /// See `NodeGroups.simulateMaintenanceEvent`
-      public func simulateMaintenanceEvent(
-        request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.simulateMaintenanceEvent(request: request, options: options)
-      }
-
-      /// See `NodeGroups.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.NodeGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `NodeGroupsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension NodeGroups {
-    public func addNodes(request: Clients.NodeGroupsClient.AddNodesRequest) async throws
+  extension Clients.NodeGroupsProtocol {
+    public func addNodes(request: NodeGroupsClient.AddNodesRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.addNodes(request: request, options: .init())
     }
 
     public func addNodes(
-      request: Clients.NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -606,7 +543,7 @@
       nodeGroup: Swift.String,
       body: NodeGroupsAddNodesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.AddNodesRequest().with {
+      let request = NodeGroupsClient.AddNodesRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -615,27 +552,26 @@
       return try await self.addNodes(request: request)
     }
 
-    public func aggregatedList(request: Clients.NodeGroupsClient.AggregatedListRequest) async throws
+    public func aggregatedList(request: NodeGroupsClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.NodeGroupAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.NodeGroupsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.NodeGroupsClient.AggregatedListRequest
+      byItem: NodeGroupsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
@@ -647,20 +583,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
-      let request = Clients.NodeGroupsClient.AggregatedListRequest().with {
+      let request = NodeGroupsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.NodeGroupsClient.DeleteRequest) async throws
+    public func delete(request: NodeGroupsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -670,7 +606,7 @@
       zone: Swift.String,
       nodeGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.DeleteRequest().with {
+      let request = NodeGroupsClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -678,14 +614,14 @@
       return try await self.delete(request: request)
     }
 
-    public func deleteNodes(request: Clients.NodeGroupsClient.DeleteNodesRequest) async throws
+    public func deleteNodes(request: NodeGroupsClient.DeleteNodesRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.deleteNodes(request: request, options: .init())
     }
 
     public func deleteNodes(
-      request: Clients.NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -696,7 +632,7 @@
       nodeGroup: Swift.String,
       body: NodeGroupsDeleteNodesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.DeleteNodesRequest().with {
+      let request = NodeGroupsClient.DeleteNodesRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -705,14 +641,14 @@
       return try await self.deleteNodes(request: request)
     }
 
-    public func `get`(request: Clients.NodeGroupsClient.GetRequest) async throws
+    public func `get`(request: NodeGroupsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NodeGroup
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeGroup {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -722,7 +658,7 @@
       zone: Swift.String,
       nodeGroup: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NodeGroup {
-      let request = Clients.NodeGroupsClient.GetRequest().with {
+      let request = NodeGroupsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -730,14 +666,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.NodeGroupsClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: NodeGroupsClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -747,7 +683,7 @@
       zone: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.NodeGroupsClient.GetIamPolicyRequest().with {
+      let request = NodeGroupsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -755,14 +691,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.NodeGroupsClient.InsertRequest) async throws
+    public func insert(request: NodeGroupsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -773,7 +709,7 @@
       initialNodeCount: Swift.Int32,
       body: NodeGroup?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.InsertRequest().with {
+      let request = NodeGroupsClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.initialNodeCount = initialNodeCount
@@ -782,26 +718,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.NodeGroupsClient.ListRequest) async throws
+    public func list(request: NodeGroupsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.NodeGroupList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeGroupList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.NodeGroupsClient.ListRequest
+      byItem: NodeGroupsClient.ListRequest
     ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -813,33 +749,33 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
-      let request = Clients.NodeGroupsClient.ListRequest().with {
+      let request = NodeGroupsClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func listNodes(request: Clients.NodeGroupsClient.ListNodesRequest) async throws
+    public func listNodes(request: NodeGroupsClient.ListNodesRequest) async throws
       -> GoogleCloudComputeV1.NodeGroupsListNodes
     {
       try await self.listNodes(request: request, options: .init())
     }
 
     public func listNodes(
-      request: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listNodes(
-      byItem: Clients.NodeGroupsClient.ListNodesRequest
+      byItem: NodeGroupsClient.ListNodesRequest
     ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
       try self.listNodes(byItem: byItem, options: .init())
     }
 
     public func listNodes(
-      byItem: Clients.NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -852,7 +788,7 @@
       zone: Swift.String,
       nodeGroup: Swift.String,
     ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
-      let request = Clients.NodeGroupsClient.ListNodesRequest().with {
+      let request = NodeGroupsClient.ListNodesRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -860,14 +796,14 @@
       return try self.listNodes(byItem: request)
     }
 
-    public func patch(request: Clients.NodeGroupsClient.PatchRequest) async throws
+    public func patch(request: NodeGroupsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -878,7 +814,7 @@
       nodeGroup: Swift.String,
       body: NodeGroup?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.PatchRequest().with {
+      let request = NodeGroupsClient.PatchRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -887,15 +823,14 @@
       return try await self.patch(request: request)
     }
 
-    public func performMaintenance(request: Clients.NodeGroupsClient.PerformMaintenanceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func performMaintenance(request: NodeGroupsClient.PerformMaintenanceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.performMaintenance(request: request, options: .init())
     }
 
     public func performMaintenance(
-      request: Clients.NodeGroupsClient.PerformMaintenanceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -906,7 +841,7 @@
       nodeGroup: Swift.String,
       body: NodeGroupsPerformMaintenanceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.PerformMaintenanceRequest().with {
+      let request = NodeGroupsClient.PerformMaintenanceRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -915,14 +850,14 @@
       return try await self.performMaintenance(request: request)
     }
 
-    public func setIamPolicy(request: Clients.NodeGroupsClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: NodeGroupsClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -933,7 +868,7 @@
       resource: Swift.String,
       body: ZoneSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.NodeGroupsClient.SetIamPolicyRequest().with {
+      let request = NodeGroupsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -942,15 +877,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func setNodeTemplate(request: Clients.NodeGroupsClient.SetNodeTemplateRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setNodeTemplate(request: NodeGroupsClient.SetNodeTemplateRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setNodeTemplate(request: request, options: .init())
     }
 
     public func setNodeTemplate(
-      request: Clients.NodeGroupsClient.SetNodeTemplateRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -961,7 +895,7 @@
       nodeGroup: Swift.String,
       body: NodeGroupsSetNodeTemplateRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.SetNodeTemplateRequest().with {
+      let request = NodeGroupsClient.SetNodeTemplateRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -970,14 +904,14 @@
       return try await self.setNodeTemplate(request: request)
     }
 
-    public func simulateMaintenanceEvent(
-      request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func simulateMaintenanceEvent(request: NodeGroupsClient.SimulateMaintenanceEventRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.simulateMaintenanceEvent(request: request, options: .init())
     }
 
     public func simulateMaintenanceEvent(
-      request: Clients.NodeGroupsClient.SimulateMaintenanceEventRequest,
+      request: NodeGroupsClient.SimulateMaintenanceEventRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -989,7 +923,7 @@
       nodeGroup: Swift.String,
       body: NodeGroupsSimulateMaintenanceEventRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeGroupsClient.SimulateMaintenanceEventRequest().with {
+      let request = NodeGroupsClient.SimulateMaintenanceEventRequest().with {
         $0.project = project
         $0.zone = zone
         $0.nodeGroup = nodeGroup
@@ -998,15 +932,14 @@
       return try await self.simulateMaintenanceEvent(request: request)
     }
 
-    public func testIamPermissions(request: Clients.NodeGroupsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: NodeGroupsClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.NodeGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1017,7 +950,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.NodeGroupsClient.TestIamPermissionsRequest().with {
+      let request = NodeGroupsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource

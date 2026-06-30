@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ResourcePoliciesClient {
+  extension ResourcePoliciesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.resourcePolicies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.resourcePolicies.aggregatedList]: <doc:ResourcePolicies/aggregatedList(request:)>

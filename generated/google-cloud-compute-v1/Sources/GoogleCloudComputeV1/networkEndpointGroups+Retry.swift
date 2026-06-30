@@ -53,7 +53,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.NetworkEndpointGroupsClient.AggregatedListRequest,
+        request: NetworkEndpointGroupsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList {
         try await self._intercept(
@@ -61,17 +61,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.NetworkEndpointGroupsClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList
+            (r: NetworkEndpointGroupsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func attachNetworkEndpoints(
-        request: Clients.NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+        request: NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -80,7 +78,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+              r: NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -89,15 +87,14 @@
       }
 
       public func delete(
-        request: Clients.NetworkEndpointGroupsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEndpointGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.NetworkEndpointGroupsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEndpointGroupsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -105,7 +102,7 @@
       }
 
       public func detachNetworkEndpoints(
-        request: Clients.NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+        request: NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -114,7 +111,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+              r: NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -123,15 +120,14 @@
       }
 
       public func `get`(
-        request: Clients.NetworkEndpointGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEndpointGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.NetworkEndpointGroupsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEndpointGroupsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -139,15 +135,14 @@
       }
 
       public func insert(
-        request: Clients.NetworkEndpointGroupsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEndpointGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.NetworkEndpointGroupsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEndpointGroupsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -155,15 +150,14 @@
       }
 
       public func list(
-        request: Clients.NetworkEndpointGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.NetworkEndpointGroupsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEndpointGroupsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList
             in
             return try await self.inner.list(request: r, options: o)
@@ -171,7 +165,7 @@
       }
 
       public func listNetworkEndpoints(
-        request: Clients.NetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+        request: NetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
         try await self._intercept(
@@ -180,7 +174,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.NetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+              r: NetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
             in
@@ -189,7 +183,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.NetworkEndpointGroupsClient.TestIamPermissionsRequest,
+        request: NetworkEndpointGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -198,7 +192,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.NetworkEndpointGroupsClient.TestIamPermissionsRequest,
+              r: NetworkEndpointGroupsClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

@@ -30,207 +30,63 @@ import Logging
 /// Allow users to create and manage tag keys.
 ///
 /// @Snippet(path: "TagKeysQuickstart")
-public protocol TagKeys {
-  /// Lists all TagKeys for a parent resource.
-  ///
-  /// @Snippet(path: "TagKeys_ListTagKeys")
-  func listTagKeys(request: ListTagKeysRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListTagKeysResponse
+public class TagKeysClient: Clients.TagKeysProtocol {
+  let inner: any Clients.TagKeysStub
 
-  /// Lists all TagKeys for a parent resource.
-  func listTagKeys(
-    byItem: ListTagKeysRequest
-  ) throws -> any AsyncSequence<TagKey, Swift.Error>
-
-  /// Lists all TagKeys for a parent resource.
-  func listTagKeys(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<TagKey, Swift.Error>
-
-  /// Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
-  /// key does not exist or the user does not have permission to view it.
-  ///
-  /// @Snippet(path: "TagKeys_GetTagKey")
-  func getTagKey(request: GetTagKeyRequest) async throws -> GoogleCloudResourcemanagerV3.TagKey
-
-  /// Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
-  /// key does not exist or the user does not have permission to view it.
-  func getTagKey(
-    name: Swift.String,
-  ) async throws -> GoogleCloudResourcemanagerV3.TagKey
-
-  /// Retrieves a TagKey by its namespaced name.
-  /// This method will return `PERMISSION_DENIED` if the key does not exist
-  /// or the user does not have permission to view it.
-  ///
-  /// @Snippet(path: "TagKeys_GetNamespacedTagKey")
-  func getNamespacedTagKey(request: GetNamespacedTagKeyRequest) async throws
-    -> GoogleCloudResourcemanagerV3.TagKey
-
-  /// Retrieves a TagKey by its namespaced name.
-  /// This method will return `PERMISSION_DENIED` if the key does not exist
-  /// or the user does not have permission to view it.
-  func getNamespacedTagKey(
-    name: Swift.String,
-  ) async throws -> GoogleCloudResourcemanagerV3.TagKey
-
-  /// Creates a new TagKey. If another request with the same parameters is
-  /// sent while the original request is in process, the second request
-  /// will receive an error. A maximum of 1000 TagKeys can exist under a parent
-  /// at any given time.
-  ///
-  /// @Snippet(path: "TagKeys_CreateTagKey")
-  func createTagKey(request: CreateTagKeyRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a new TagKey. If another request with the same parameters is
-  /// sent while the original request is in process, the second request
-  /// will receive an error. A maximum of 1000 TagKeys can exist under a parent
-  /// at any given time.
-  func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<TagKey>
-
-  /// Creates a new TagKey. If another request with the same parameters is
-  /// sent while the original request is in process, the second request
-  /// will receive an error. A maximum of 1000 TagKeys can exist under a parent
-  /// at any given time.
-  func createTagKey(
-    tagKey: TagKey?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
-
-  /// Updates the attributes of the TagKey resource.
-  ///
-  /// @Snippet(path: "TagKeys_UpdateTagKey")
-  func updateTagKey(request: UpdateTagKeyRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates the attributes of the TagKey resource.
-  func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<TagKey>
-
-  /// Updates the attributes of the TagKey resource.
-  func updateTagKey(
-    tagKey: TagKey?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
-
-  /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
-  /// TagValues.
-  ///
-  /// @Snippet(path: "TagKeys_DeleteTagKey")
-  func deleteTagKey(request: DeleteTagKeyRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
-  /// TagValues.
-  func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<TagKey>
-
-  /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
-  /// TagValues.
-  func deleteTagKey(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
-
-  /// Gets the access control policy for a TagKey. The returned policy may be
-  /// empty if no such policy or resource exists. The `resource` field should
-  /// be the TagKey's resource name. For example, "tagKeys/1234".
-  /// The caller must have
-  /// `cloudresourcemanager.googleapis.com/tagKeys.getIamPolicy` permission on
-  /// the specified TagKey.
-  ///
-  /// @Snippet(path: "TagKeys_GetIamPolicy")
-  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Gets the access control policy for a TagKey. The returned policy may be
-  /// empty if no such policy or resource exists. The `resource` field should
-  /// be the TagKey's resource name. For example, "tagKeys/1234".
-  /// The caller must have
-  /// `cloudresourcemanager.googleapis.com/tagKeys.getIamPolicy` permission on
-  /// the specified TagKey.
-  func getIamPolicy(
-    resource: Swift.String,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on a TagKey, replacing any existing
-  /// policy. The `resource` field should be the TagKey's resource name.
-  /// For example, "tagKeys/1234".
-  /// The caller must have `resourcemanager.tagKeys.setIamPolicy` permission
-  /// on the identified tagValue.
-  ///
-  /// @Snippet(path: "TagKeys_SetIamPolicy")
-  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on a TagKey, replacing any existing
-  /// policy. The `resource` field should be the TagKey's resource name.
-  /// For example, "tagKeys/1234".
-  /// The caller must have `resourcemanager.tagKeys.setIamPolicy` permission
-  /// on the identified tagValue.
-  func setIamPolicy(
-    resource: Swift.String,
-    policy: GoogleIamV1.Policy?,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Returns permissions that a caller has on the specified TagKey.
-  /// The `resource` field should be the TagKey's resource name.
-  /// For example, "tagKeys/1234".
-  ///
-  /// There are no permissions required for making this API call.
-  ///
-  /// @Snippet(path: "TagKeys_TestIamPermissions")
-  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
-    -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Returns permissions that a caller has on the specified TagKey.
-  /// The `resource` field should be the TagKey's resource name.
-  /// For example, "tagKeys/1234".
-  ///
-  /// There are no permissions required for making this API call.
-  func testIamPermissions(
-    resource: Swift.String,
-    permissions: [Swift.String],
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "TagKeys_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `TagKeysClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.TagKeysStub = try Clients.TagKeysTransport(options)
+    inner = Clients.TagKeysRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.TagKeysLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists all TagKeys for a parent resource.
   ///
   /// @Snippet(path: "TagKeys_ListTagKeys")
-  func listTagKeys(
+  public func listTagKeys(
     request: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse {
+    try await self.inner.listTagKeys(request: request, options: options)
+  }
 
   /// Lists all TagKeys for a parent resource.
-  func listTagKeys(
+  ///
+  /// @Snippet(path: "TagKeys_ListTagKeys")
+  public func listTagKeys(
     byItem: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<TagKey, Swift.Error>
+  ) throws -> any AsyncSequence<TagKey, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listTagKeys(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
   /// key does not exist or the user does not have permission to view it.
   ///
   /// @Snippet(path: "TagKeys_GetTagKey")
-  func getTagKey(
+  public func getTagKey(
     request: GetTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.TagKey
+  ) async throws -> GoogleCloudResourcemanagerV3.TagKey {
+    try await self.inner.getTagKey(request: request, options: options)
+  }
 
   /// Retrieves a TagKey by its namespaced name.
   /// This method will return `PERMISSION_DENIED` if the key does not exist
   /// or the user does not have permission to view it.
   ///
   /// @Snippet(path: "TagKeys_GetNamespacedTagKey")
-  func getNamespacedTagKey(
+  public func getNamespacedTagKey(
     request: GetNamespacedTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.TagKey
+  ) async throws -> GoogleCloudResourcemanagerV3.TagKey {
+    try await self.inner.getNamespacedTagKey(request: request, options: options)
+  }
 
   /// Creates a new TagKey. If another request with the same parameters is
   /// sent while the original request is in process, the second request
@@ -238,43 +94,196 @@ public protocol TagKeys {
   /// at any given time.
   ///
   /// @Snippet(path: "TagKeys_CreateTagKey")
-  func createTagKey(
+  public func createTagKey(
     request: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createTagKey(request: request, options: options)
+  }
 
   /// Creates a new TagKey. If another request with the same parameters is
   /// sent while the original request is in process, the second request
   /// will receive an error. A maximum of 1000 TagKeys can exist under a parent
   /// at any given time.
-  func createTagKey(
+  ///
+  /// @Snippet(path: "TagKeys_CreateTagKey")
+  public func createTagKey(
     withPolling: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try TagKey(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createTagKey(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates the attributes of the TagKey resource.
   ///
   /// @Snippet(path: "TagKeys_UpdateTagKey")
-  func updateTagKey(
+  public func updateTagKey(
     request: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateTagKey(request: request, options: options)
+  }
 
   /// Updates the attributes of the TagKey resource.
-  func updateTagKey(
+  ///
+  /// @Snippet(path: "TagKeys_UpdateTagKey")
+  public func updateTagKey(
     withPolling: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try TagKey(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateTagKey(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
   /// TagValues.
   ///
   /// @Snippet(path: "TagKeys_DeleteTagKey")
-  func deleteTagKey(
+  public func deleteTagKey(
     request: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteTagKey(request: request, options: options)
+  }
 
   /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
   /// TagValues.
-  func deleteTagKey(
+  ///
+  /// @Snippet(path: "TagKeys_DeleteTagKey")
+  public func deleteTagKey(
     withPolling: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try TagKey(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteTagKey(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Gets the access control policy for a TagKey. The returned policy may be
   /// empty if no such policy or resource exists. The `resource` field should
@@ -284,9 +293,11 @@ public protocol TagKeys {
   /// the specified TagKey.
   ///
   /// @Snippet(path: "TagKeys_GetIamPolicy")
-  func getIamPolicy(
+  public func getIamPolicy(
     request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
 
   /// Sets the access control policy on a TagKey, replacing any existing
   /// policy. The `resource` field should be the TagKey's resource name.
@@ -295,9 +306,11 @@ public protocol TagKeys {
   /// on the identified tagValue.
   ///
   /// @Snippet(path: "TagKeys_SetIamPolicy")
-  func setIamPolicy(
+  public func setIamPolicy(
     request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
 
   /// Returns permissions that a caller has on the specified TagKey.
   /// The `resource` field should be the TagKey's resource name.
@@ -306,282 +319,209 @@ public protocol TagKeys {
   /// There are no permissions required for making this API call.
   ///
   /// @Snippet(path: "TagKeys_TestIamPermissions")
-  func testIamPermissions(
+  public func testIamPermissions(
     request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagKeys_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``TagKeys``.
-  public class TagKeysClient: TagKeys {
-    let inner: any TagKeysStub
+  /// A Swift protocol to mock `TagKeysClient`.
+  ///
+  /// To mock `TagKeysClient` change your functions to receive
+  /// `some TagKeysProtocol` or `any TagKeysProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol TagKeysProtocol {
+    /// See `TagKeysClient.listTagKeys`.
+    func listTagKeys(request: ListTagKeysRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListTagKeysResponse
 
-    /// Creates a new `TagKeysClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any TagKeysStub = try TagKeysTransport(options)
-      inner = TagKeysRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = TagKeysLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `TagKeysClient.listTagKeys`.
+    func listTagKeys(
+      byItem: ListTagKeysRequest
+    ) throws -> any AsyncSequence<TagKey, Swift.Error>
 
-    /// See `TagKeys.listTagKeys`
-    public func listTagKeys(
+    /// See `TagKeysClient.listTagKeys`.
+    func listTagKeys(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<TagKey, Swift.Error>
+
+    /// See `TagKeysClient.getTagKey`.
+    func getTagKey(request: GetTagKeyRequest) async throws -> GoogleCloudResourcemanagerV3.TagKey
+
+    /// See `TagKeysClient.getTagKey`.
+    func getTagKey(
+      name: Swift.String,
+    ) async throws -> GoogleCloudResourcemanagerV3.TagKey
+
+    /// See `TagKeysClient.getNamespacedTagKey`.
+    func getNamespacedTagKey(request: GetNamespacedTagKeyRequest) async throws
+      -> GoogleCloudResourcemanagerV3.TagKey
+
+    /// See `TagKeysClient.getNamespacedTagKey`.
+    func getNamespacedTagKey(
+      name: Swift.String,
+    ) async throws -> GoogleCloudResourcemanagerV3.TagKey
+
+    /// See `TagKeysClient.createTagKey`.
+    func createTagKey(request: CreateTagKeyRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagKeysClient.createTagKey`.
+    func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<TagKey>
+
+    /// See `TagKeysClient.createTagKey`.
+    func createTagKey(
+      tagKey: TagKey?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+
+    /// See `TagKeysClient.updateTagKey`.
+    func updateTagKey(request: UpdateTagKeyRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagKeysClient.updateTagKey`.
+    func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<TagKey>
+
+    /// See `TagKeysClient.updateTagKey`.
+    func updateTagKey(
+      tagKey: TagKey?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+
+    /// See `TagKeysClient.deleteTagKey`.
+    func deleteTagKey(request: DeleteTagKeyRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagKeysClient.deleteTagKey`.
+    func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<TagKey>
+
+    /// See `TagKeysClient.deleteTagKey`.
+    func deleteTagKey(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+
+    /// See `TagKeysClient.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `TagKeysClient.getIamPolicy`.
+    func getIamPolicy(
+      resource: Swift.String,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `TagKeysClient.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `TagKeysClient.setIamPolicy`.
+    func setIamPolicy(
+      resource: Swift.String,
+      policy: GoogleIamV1.Policy?,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `TagKeysClient.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `TagKeysClient.testIamPermissions`.
+    func testIamPermissions(
+      resource: Swift.String,
+      permissions: [Swift.String],
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `TagKeysClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `TagKeysClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagKeysClient.listTagKeys`.
+    func listTagKeys(
       request: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse {
-      try await self.inner.listTagKeys(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse
 
-    /// Lists all TagKeys for a parent resource.
-    public func listTagKeys(
+    /// See `TagKeysClient.listTagKeys`.
+    func listTagKeys(
       byItem: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TagKey, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagKeysResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listTagKeys(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<TagKey, Swift.Error>
 
-    /// See `TagKeys.getTagKey`
-    public func getTagKey(
+    /// See `TagKeysClient.getTagKey`.
+    func getTagKey(
       request: GetTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.TagKey {
-      try await self.inner.getTagKey(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.TagKey
 
-    /// See `TagKeys.getNamespacedTagKey`
-    public func getNamespacedTagKey(
+    /// See `TagKeysClient.getNamespacedTagKey`.
+    func getNamespacedTagKey(
       request: GetNamespacedTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.TagKey {
-      try await self.inner.getNamespacedTagKey(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.TagKey
 
-    /// See `TagKeys.createTagKey`
-    public func createTagKey(
+    /// See `TagKeysClient.createTagKey`.
+    func createTagKey(
       request: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createTagKey(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new TagKey. If another request with the same parameters is
-    /// sent while the original request is in process, the second request
-    /// will receive an error. A maximum of 1000 TagKeys can exist under a parent
-    /// at any given time.
-    public func createTagKey(
+    /// See `TagKeysClient.createTagKey`.
+    func createTagKey(
       withPolling: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try TagKey(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createTagKey(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagKeys.updateTagKey`
-    public func updateTagKey(
+    /// See `TagKeysClient.updateTagKey`.
+    func updateTagKey(
       request: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateTagKey(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates the attributes of the TagKey resource.
-    public func updateTagKey(
+    /// See `TagKeysClient.updateTagKey`.
+    func updateTagKey(
       withPolling: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try TagKey(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateTagKey(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagKeys.deleteTagKey`
-    public func deleteTagKey(
+    /// See `TagKeysClient.deleteTagKey`.
+    func deleteTagKey(
       request: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteTagKey(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a TagKey. The TagKey cannot be deleted if it has any child
-    /// TagValues.
-    public func deleteTagKey(
+    /// See `TagKeysClient.deleteTagKey`.
+    func deleteTagKey(
       withPolling: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try TagKey(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteTagKey(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagKeys.getIamPolicy`
-    public func getIamPolicy(
+    /// See `TagKeysClient.getIamPolicy`.
+    func getIamPolicy(
       request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.getIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `TagKeys.setIamPolicy`
-    public func setIamPolicy(
+    /// See `TagKeysClient.setIamPolicy`.
+    func setIamPolicy(
       request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.setIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `TagKeys.testIamPermissions`
-    public func testIamPermissions(
+    /// See `TagKeysClient.testIamPermissions`.
+    func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      try await self.inner.testIamPermissions(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `TagKeys.getOperation`
-    public func getOperation(
+    /// See `TagKeysClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension TagKeys {
+extension Clients.TagKeysProtocol {
   public func listTagKeys(request: ListTagKeysRequest) async throws
     -> GoogleCloudResourcemanagerV3.ListTagKeysResponse
   {

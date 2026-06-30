@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionHealthChecksClient {
+  extension RegionHealthChecksClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionHealthChecks.delete] method.
     ///
     /// [google.cloud.compute.v1.regionHealthChecks.delete]: <doc:RegionHealthChecks/delete(request:)>

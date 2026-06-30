@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RoutesClient {
+  extension RoutesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.routes.delete] method.
     ///
     /// [google.cloud.compute.v1.routes.delete]: <doc:Routes/delete(request:)>

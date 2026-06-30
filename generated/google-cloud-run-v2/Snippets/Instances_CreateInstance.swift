@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Instances, projectId: String, locationId: String) async throws {
+func sample(client: InstancesClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createInstance(
     withPolling: CreateInstanceRequest()
       .with {
@@ -40,7 +40,7 @@ func sample(client: some Instances, projectId: String, locationId: String) async
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.InstancesClient()
+      let client = try GoogleCloudRunV2.InstancesClient()
       try await sample(client: client, projectId: "[placeholder]", locationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

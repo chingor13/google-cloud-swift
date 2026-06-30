@@ -28,88 +28,88 @@
   /// Service for the `instanceSettings` resource.
   ///
   /// @Snippet(path: "instanceSettingsQuickstart")
-  public protocol InstanceSettings {
-    /// Get Instance settings.
-    ///
-    /// @Snippet(path: "instanceSettings_get")
-    func `get`(request: Clients.InstanceSettingsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InstanceSettings
+  public class InstanceSettingsClient: Clients.InstanceSettingsProtocol {
+    let inner: any Clients.InstanceSettingsStub
 
-    /// Get Instance settings.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InstanceSettings
-
-    /// Patch Instance settings
-    ///
-    /// @Snippet(path: "instanceSettings_patch")
-    func patch(request: Clients.InstanceSettingsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patch Instance settings
-    func patch(
-      project: Swift.String,
-      zone: Swift.String,
-      body: InstanceSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `InstanceSettingsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.InstanceSettingsStub = try Clients.InstanceSettingsTransport(options)
+      inner = Clients.InstanceSettingsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.InstanceSettingsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Get Instance settings.
     ///
     /// @Snippet(path: "instanceSettings_get")
-    func `get`(
-      request: Clients.InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceSettings
+    public func `get`(
+      request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstanceSettings {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Patch Instance settings
     ///
     /// @Snippet(path: "instanceSettings_patch")
-    func patch(
-      request: Clients.InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``InstanceSettings``.
-    public class InstanceSettingsClient: InstanceSettings {
-      let inner: any InstanceSettingsStub
+    /// A Swift protocol to mock `InstanceSettingsClient`.
+    ///
+    /// To mock `InstanceSettingsClient` change your functions to receive
+    /// `some InstanceSettingsProtocol` or `any InstanceSettingsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol InstanceSettingsProtocol {
+      /// See `InstanceSettingsClient.`get``.
+      func `get`(request: InstanceSettingsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InstanceSettings
 
-      /// Creates a new `InstanceSettingsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any InstanceSettingsStub = try InstanceSettingsTransport(options)
-        inner = InstanceSettingsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = InstanceSettingsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `InstanceSettingsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InstanceSettings
 
-      /// See `InstanceSettings.`get``
-      public func `get`(
-        request: Clients.InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceSettings {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `InstanceSettingsClient.patch`.
+      func patch(request: InstanceSettingsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceSettings.patch`
-      public func patch(
-        request: Clients.InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `InstanceSettingsClient.patch`.
+      func patch(
+        project: Swift.String,
+        zone: Swift.String,
+        body: InstanceSettings?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InstanceSettingsClient.`get``.
+      func `get`(
+        request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.InstanceSettings
+
+      /// See `InstanceSettingsClient.patch`.
+      func patch(
+        request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension InstanceSettings {
-    public func `get`(request: Clients.InstanceSettingsClient.GetRequest) async throws
+  extension Clients.InstanceSettingsProtocol {
+    public func `get`(request: InstanceSettingsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InstanceSettings
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceSettings {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -118,21 +118,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InstanceSettings {
-      let request = Clients.InstanceSettingsClient.GetRequest().with {
+      let request = InstanceSettingsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try await self.`get`(request: request)
     }
 
-    public func patch(request: Clients.InstanceSettingsClient.PatchRequest) async throws
+    public func patch(request: InstanceSettingsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -142,7 +142,7 @@
       zone: Swift.String,
       body: InstanceSettings?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InstanceSettingsClient.PatchRequest().with {
+      let request = InstanceSettingsClient.PatchRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body

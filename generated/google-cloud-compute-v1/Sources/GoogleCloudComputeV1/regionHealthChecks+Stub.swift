@@ -28,37 +28,32 @@
   extension Clients {
     protocol RegionHealthChecksStub {
       func delete(
-        request: Clients.RegionHealthChecksClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheck
 
       func insert(
-        request: Clients.RegionHealthChecksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionHealthChecksClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheckList
 
       func patch(
-        request: Clients.RegionHealthChecksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionHealthChecksClient.TestIamPermissionsRequest,
+        request: RegionHealthChecksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.RegionHealthChecksClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -71,8 +66,7 @@
       }
 
       public func delete(
-        request: Clients.RegionHealthChecksClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -100,7 +94,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheck {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -126,8 +120,7 @@
       }
 
       public func insert(
-        request: Clients.RegionHealthChecksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -153,8 +146,7 @@
       }
 
       public func list(
-        request: Clients.RegionHealthChecksClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthCheckList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -182,8 +174,7 @@
       }
 
       public func patch(
-        request: Clients.RegionHealthChecksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -215,7 +206,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionHealthChecksClient.TestIamPermissionsRequest,
+        request: RegionHealthChecksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
@@ -244,8 +235,7 @@
       }
 
       public func update(
-        request: Clients.RegionHealthChecksClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

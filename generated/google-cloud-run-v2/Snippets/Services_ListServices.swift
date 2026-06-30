@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Services, projectId: String, locationId: String) async throws {
+func sample(client: ServicesClient, projectId: String, locationId: String) async throws {
   let items = try client.listServices(
     byItem: ListServicesRequest()
       .with {
@@ -40,7 +40,7 @@ func sample(client: some Services, projectId: String, locationId: String) async 
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.ServicesClient()
+      let client = try GoogleCloudRunV2.ServicesClient()
       try await sample(client: client, projectId: "[placeholder]", locationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

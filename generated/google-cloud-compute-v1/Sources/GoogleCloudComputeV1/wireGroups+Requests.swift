@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.WireGroupsClient {
+  extension WireGroupsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.wireGroups.delete] method.
     ///
     /// [google.cloud.compute.v1.wireGroups.delete]: <doc:WireGroups/delete(request:)>

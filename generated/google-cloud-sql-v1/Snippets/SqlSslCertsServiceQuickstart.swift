@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlSslCertsServiceClient()
+    let client = try GoogleCloudSqlV1.SqlSslCertsServiceClient()
     let response = try await client.delete(
       request: SqlSslCertsDeleteRequest()
         /* set fields using .with { $0... } */

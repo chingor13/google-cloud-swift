@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlEventsServiceClient()
+    let client = try GoogleCloudSqlV1.SqlEventsServiceClient()
     print("use `client` to make requests: \(client)")
   }
   // snippet.hide

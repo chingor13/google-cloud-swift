@@ -28,138 +28,136 @@
   /// Service for the `previewFeatures` resource.
   ///
   /// @Snippet(path: "previewFeaturesQuickstart")
-  public protocol PreviewFeatures {
+  public class PreviewFeaturesClient: Clients.PreviewFeaturesProtocol {
+    let inner: any Clients.PreviewFeaturesStub
+
+    /// Creates a new `PreviewFeaturesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.PreviewFeaturesStub = try Clients.PreviewFeaturesTransport(options)
+      inner = Clients.PreviewFeaturesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.PreviewFeaturesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Returns the details of the given PreviewFeature.
     ///
     /// @Snippet(path: "previewFeatures_get")
-    func `get`(request: Clients.PreviewFeaturesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.PreviewFeature
-
-    /// Returns the details of the given PreviewFeature.
-    func `get`(
-      project: Swift.String,
-      previewFeature: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.PreviewFeature
+    public func `get`(
+      request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PreviewFeature {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Returns the details of the given PreviewFeature.
     ///
     /// @Snippet(path: "previewFeatures_list")
-    func list(request: Clients.PreviewFeaturesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.PreviewFeatureList
+    public func list(
+      request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Returns the details of the given PreviewFeature.
-    func list(
-      byItem: Clients.PreviewFeaturesClient.ListRequest
-    ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
-
-    /// Returns the details of the given PreviewFeature.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
+    ///
+    /// @Snippet(path: "previewFeatures_list")
+    public func list(
+      byItem: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<PreviewFeature, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.PreviewFeatureList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the given PreviewFeature. This method is used to enable or disable
     /// a PreviewFeature.
     ///
     /// @Snippet(path: "previewFeatures_update")
-    func update(request: Clients.PreviewFeaturesClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the given PreviewFeature. This method is used to enable or disable
-    /// a PreviewFeature.
-    func update(
-      project: Swift.String,
-      previewFeature: Swift.String,
-      body: PreviewFeature?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the details of the given PreviewFeature.
-    ///
-    /// @Snippet(path: "previewFeatures_get")
-    func `get`(
-      request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PreviewFeature
-
-    /// Returns the details of the given PreviewFeature.
-    ///
-    /// @Snippet(path: "previewFeatures_list")
-    func list(
-      request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PreviewFeatureList
-
-    /// Returns the details of the given PreviewFeature.
-    func list(
-      byItem: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
-
-    /// Patches the given PreviewFeature. This method is used to enable or disable
-    /// a PreviewFeature.
-    ///
-    /// @Snippet(path: "previewFeatures_update")
-    func update(
-      request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``PreviewFeatures``.
-    public class PreviewFeaturesClient: PreviewFeatures {
-      let inner: any PreviewFeaturesStub
+    /// A Swift protocol to mock `PreviewFeaturesClient`.
+    ///
+    /// To mock `PreviewFeaturesClient` change your functions to receive
+    /// `some PreviewFeaturesProtocol` or `any PreviewFeaturesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol PreviewFeaturesProtocol {
+      /// See `PreviewFeaturesClient.`get``.
+      func `get`(request: PreviewFeaturesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.PreviewFeature
 
-      /// Creates a new `PreviewFeaturesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any PreviewFeaturesStub = try PreviewFeaturesTransport(options)
-        inner = PreviewFeaturesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = PreviewFeaturesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `PreviewFeaturesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        previewFeature: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.PreviewFeature
 
-      /// See `PreviewFeatures.`get``
-      public func `get`(
-        request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PreviewFeature {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `PreviewFeaturesClient.list`.
+      func list(request: PreviewFeaturesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.PreviewFeatureList
 
-      /// See `PreviewFeatures.list`
-      public func list(
-        request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `PreviewFeaturesClient.list`.
+      func list(
+        byItem: PreviewFeaturesClient.ListRequest
+      ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
 
-      /// Returns the details of the given PreviewFeature.
-      public func list(
-        byItem: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<PreviewFeature, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.PreviewFeatureList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `PreviewFeaturesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
 
-      /// See `PreviewFeatures.update`
-      public func update(
-        request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `PreviewFeaturesClient.update`.
+      func update(request: PreviewFeaturesClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PreviewFeaturesClient.update`.
+      func update(
+        project: Swift.String,
+        previewFeature: Swift.String,
+        body: PreviewFeature?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PreviewFeaturesClient.`get``.
+      func `get`(
+        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PreviewFeature
+
+      /// See `PreviewFeaturesClient.list`.
+      func list(
+        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PreviewFeatureList
+
+      /// See `PreviewFeaturesClient.list`.
+      func list(
+        byItem: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<PreviewFeature, Swift.Error>
+
+      /// See `PreviewFeaturesClient.update`.
+      func update(
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension PreviewFeatures {
-    public func `get`(request: Clients.PreviewFeaturesClient.GetRequest) async throws
+  extension Clients.PreviewFeaturesProtocol {
+    public func `get`(request: PreviewFeaturesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.PreviewFeature
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PreviewFeature {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -168,33 +166,33 @@
       project: Swift.String,
       previewFeature: Swift.String,
     ) async throws -> GoogleCloudComputeV1.PreviewFeature {
-      let request = Clients.PreviewFeaturesClient.GetRequest().with {
+      let request = PreviewFeaturesClient.GetRequest().with {
         $0.project = project
         $0.previewFeature = previewFeature
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.PreviewFeaturesClient.ListRequest) async throws
+    public func list(request: PreviewFeaturesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.PreviewFeatureList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.PreviewFeaturesClient.ListRequest
+      byItem: PreviewFeaturesClient.ListRequest
     ) throws -> any AsyncSequence<PreviewFeature, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PreviewFeature, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.PreviewFeatureList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -205,20 +203,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<PreviewFeature, Swift.Error> {
-      let request = Clients.PreviewFeaturesClient.ListRequest().with {
+      let request = PreviewFeaturesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func update(request: Clients.PreviewFeaturesClient.UpdateRequest) async throws
+    public func update(request: PreviewFeaturesClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -228,7 +226,7 @@
       previewFeature: Swift.String,
       body: PreviewFeature?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PreviewFeaturesClient.UpdateRequest().with {
+      let request = PreviewFeaturesClient.UpdateRequest().with {
         $0.project = project
         $0.previewFeature = previewFeature
         $0.body = body

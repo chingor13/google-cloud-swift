@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.VpnGatewaysClient {
+  extension VpnGatewaysClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.vpnGateways.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.vpnGateways.aggregatedList]: <doc:VpnGateways/aggregatedList(request:)>

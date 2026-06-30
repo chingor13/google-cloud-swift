@@ -20,7 +20,7 @@ import Foundation
 import GoogleContainerV1
 import GoogleCloudWkt
 
-func sample(client: some ClusterManager) async throws {
+func sample(client: ClusterManagerClient) async throws {
   let response = try await client.fetchClusterUpgradeInfo(
     request: FetchClusterUpgradeInfoRequest()
       /* set fields using .with { $0... } */
@@ -33,7 +33,7 @@ func sample(client: some ClusterManager) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleContainerV1.Clients.ClusterManagerClient()
+      let client = try GoogleContainerV1.ClusterManagerClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

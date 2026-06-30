@@ -28,112 +28,110 @@
   /// Service to fetch operations for database instances.
   ///
   /// @Snippet(path: "SqlOperationsServiceQuickstart")
-  public protocol SqlOperationsService {
-    /// Retrieves an instance operation that has been performed on an instance.
-    ///
-    /// @Snippet(path: "SqlOperationsService_Get")
-    func `get`(request: SqlOperationsGetRequest) async throws -> GoogleCloudSqlV1.Operation
+  public class SqlOperationsServiceClient: Clients.SqlOperationsServiceProtocol {
+    let inner: any Clients.SqlOperationsServiceStub
 
-    /// Lists all instance operations that have been performed on the given Cloud
-    /// SQL instance in the reverse chronological order of the start time.
-    ///
-    /// @Snippet(path: "SqlOperationsService_List")
-    func list(request: SqlOperationsListRequest) async throws
-      -> GoogleCloudSqlV1.OperationsListResponse
-
-    /// Lists all instance operations that have been performed on the given Cloud
-    /// SQL instance in the reverse chronological order of the start time.
-    func list(
-      byItem: SqlOperationsListRequest
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-    /// Cancels an instance operation that has been performed on an instance.
-    ///
-    /// @Snippet(path: "SqlOperationsService_Cancel")
-    func cancel(request: SqlOperationsCancelRequest) async throws
+    /// Creates a new `SqlOperationsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlOperationsServiceStub = try Clients.SqlOperationsServiceTransport(
+        options)
+      inner = Clients.SqlOperationsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlOperationsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an instance operation that has been performed on an instance.
     ///
     /// @Snippet(path: "SqlOperationsService_Get")
-    func `get`(
+    public func `get`(
       request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Lists all instance operations that have been performed on the given Cloud
     /// SQL instance in the reverse chronological order of the start time.
     ///
     /// @Snippet(path: "SqlOperationsService_List")
-    func list(
+    public func list(
       request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.OperationsListResponse
+    ) async throws -> GoogleCloudSqlV1.OperationsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists all instance operations that have been performed on the given Cloud
     /// SQL instance in the reverse chronological order of the start time.
-    func list(
+    ///
+    /// @Snippet(path: "SqlOperationsService_List")
+    public func list(
       byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Swift.Error>
+    ) throws -> any AsyncSequence<Operation, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Cancels an instance operation that has been performed on an instance.
     ///
     /// @Snippet(path: "SqlOperationsService_Cancel")
-    func cancel(
+    public func cancel(
       request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws
+    ) async throws {
+      try await self.inner.cancel(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlOperationsService``.
-    public class SqlOperationsServiceClient: SqlOperationsService {
-      let inner: any SqlOperationsServiceStub
+    /// A Swift protocol to mock `SqlOperationsServiceClient`.
+    ///
+    /// To mock `SqlOperationsServiceClient` change your functions to receive
+    /// `some SqlOperationsServiceProtocol` or `any SqlOperationsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlOperationsServiceProtocol {
+      /// See `SqlOperationsServiceClient.`get``.
+      func `get`(request: SqlOperationsGetRequest) async throws -> GoogleCloudSqlV1.Operation
 
-      /// Creates a new `SqlOperationsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlOperationsServiceStub = try SqlOperationsServiceTransport(options)
-        inner = SqlOperationsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlOperationsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlOperationsServiceClient.list`.
+      func list(request: SqlOperationsListRequest) async throws
+        -> GoogleCloudSqlV1.OperationsListResponse
 
-      /// See `SqlOperationsService.`get``
-      public func `get`(
+      /// See `SqlOperationsServiceClient.list`.
+      func list(
+        byItem: SqlOperationsListRequest
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+      /// See `SqlOperationsServiceClient.cancel`.
+      func cancel(request: SqlOperationsCancelRequest) async throws
+
+      /// See `SqlOperationsServiceClient.`get``.
+      func `get`(
         request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlOperationsService.list`
-      public func list(
+      /// See `SqlOperationsServiceClient.list`.
+      func list(
         request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.OperationsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.OperationsListResponse
 
-      /// Lists all instance operations that have been performed on the given Cloud
-      /// SQL instance in the reverse chronological order of the start time.
-      public func list(
+      /// See `SqlOperationsServiceClient.list`.
+      func list(
         byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Operation, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-      /// See `SqlOperationsService.cancel`
-      public func cancel(
+      /// See `SqlOperationsServiceClient.cancel`.
+      func cancel(
         request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws {
-        try await self.inner.cancel(request: request, options: options)
-      }
+      ) async throws
     }
   }
 
   // Default implementations
-  extension SqlOperationsService {
+  extension Clients.SqlOperationsServiceProtocol {
     public func `get`(request: SqlOperationsGetRequest) async throws -> GoogleCloudSqlV1.Operation {
       try await self.`get`(request: request, options: .init())
     }

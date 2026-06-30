@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudResourcemanagerV3.Clients.TagKeysClient()
+  let client = try GoogleCloudResourcemanagerV3.TagKeysClient()
   let items = try client.listTagKeys(
     byItem: ListTagKeysRequest()
       .with {

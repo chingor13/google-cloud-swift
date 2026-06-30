@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.DiskTypesClient {
+  extension DiskTypesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.diskTypes.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.diskTypes.aggregatedList]: <doc:DiskTypes/aggregatedList(request:)>

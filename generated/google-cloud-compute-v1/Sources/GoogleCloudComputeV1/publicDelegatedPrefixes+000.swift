@@ -28,138 +28,19 @@
   /// Service for the `publicDelegatedPrefixes` resource.
   ///
   /// @Snippet(path: "publicDelegatedPrefixesQuickstart")
-  public protocol PublicDelegatedPrefixes {
-    /// Lists all PublicDelegatedPrefix resources owned by the specific project
-    /// across all scopes.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_aggregatedList")
-    func aggregatedList(request: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
+  public class PublicDelegatedPrefixesClient: Clients.PublicDelegatedPrefixesProtocol {
+    let inner: any Clients.PublicDelegatedPrefixesStub
 
-    /// Lists all PublicDelegatedPrefix resources owned by the specific project
-    /// across all scopes.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
-
-    /// Lists all PublicDelegatedPrefix resources owned by the specific project
-    /// across all scopes.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
-
-    /// Announces the specified PublicDelegatedPrefix in the given region.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_announce")
-    func announce(request: Clients.PublicDelegatedPrefixesClient.AnnounceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Announces the specified PublicDelegatedPrefix in the given region.
-    func announce(
-      project: Swift.String,
-      region: Swift.String,
-      publicDelegatedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified PublicDelegatedPrefix in the given region.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_delete")
-    func delete(request: Clients.PublicDelegatedPrefixesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified PublicDelegatedPrefix in the given region.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      publicDelegatedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified PublicDelegatedPrefix resource in the given region.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_get")
-    func `get`(request: Clients.PublicDelegatedPrefixesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.PublicDelegatedPrefix
-
-    /// Returns the specified PublicDelegatedPrefix resource in the given region.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      publicDelegatedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
-
-    /// Creates a PublicDelegatedPrefix in the specified project in the given
-    /// region using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_insert")
-    func insert(request: Clients.PublicDelegatedPrefixesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a PublicDelegatedPrefix in the specified project in the given
-    /// region using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: PublicDelegatedPrefix?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the PublicDelegatedPrefixes for a project in the given region.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_list")
-    func list(request: Clients.PublicDelegatedPrefixesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.PublicDelegatedPrefixList
-
-    /// Lists the PublicDelegatedPrefixes for a project in the given region.
-    func list(
-      byItem: Clients.PublicDelegatedPrefixesClient.ListRequest
-    ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
-
-    /// Lists the PublicDelegatedPrefixes for a project in the given region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
-
-    /// Patches the specified PublicDelegatedPrefix resource with the data included
-    /// in the request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_patch")
-    func patch(request: Clients.PublicDelegatedPrefixesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified PublicDelegatedPrefix resource with the data included
-    /// in the request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      publicDelegatedPrefix: Swift.String,
-      body: PublicDelegatedPrefix?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Withdraws the specified PublicDelegatedPrefix in the given region.
-    ///
-    /// @Snippet(path: "publicDelegatedPrefixes_withdraw")
-    func withdraw(request: Clients.PublicDelegatedPrefixesClient.WithdrawRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Withdraws the specified PublicDelegatedPrefix in the given region.
-    func withdraw(
-      project: Swift.String,
-      region: Swift.String,
-      publicDelegatedPrefix: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `PublicDelegatedPrefixesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.PublicDelegatedPrefixesStub =
+        try Clients.PublicDelegatedPrefixesTransport(options)
+      inner = Clients.PublicDelegatedPrefixesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.PublicDelegatedPrefixesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Lists all PublicDelegatedPrefix resources owned by the specific project
     /// across all scopes.
@@ -168,67 +49,93 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_aggregatedList")
-    func aggregatedList(
-      request: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: PublicDelegatedPrefixesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
+    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Lists all PublicDelegatedPrefix resources owned by the specific project
     /// across all scopes.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+    ///
+    /// @Snippet(path: "publicDelegatedPrefixes_aggregatedList")
+    public func aggregatedList(
+      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
+    ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Announces the specified PublicDelegatedPrefix in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_announce")
-    func announce(
-      request: Clients.PublicDelegatedPrefixesClient.AnnounceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func announce(
+      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.announce(request: request, options: options)
+    }
 
     /// Deletes the specified PublicDelegatedPrefix in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_delete")
-    func delete(
-      request: Clients.PublicDelegatedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified PublicDelegatedPrefix resource in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_get")
-    func `get`(
-      request: Clients.PublicDelegatedPrefixesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
+    public func `get`(
+      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a PublicDelegatedPrefix in the specified project in the given
     /// region using the parameters that are included in the request.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_insert")
-    func insert(
-      request: Clients.PublicDelegatedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the PublicDelegatedPrefixes for a project in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_list")
-    func list(
-      request: Clients.PublicDelegatedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
+    public func list(
+      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the PublicDelegatedPrefixes for a project in the given region.
-    func list(
-      byItem: Clients.PublicDelegatedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
+    ///
+    /// @Snippet(path: "publicDelegatedPrefixes_list")
+    public func list(
+      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified PublicDelegatedPrefix resource with the data included
     /// in the request. This method supportsPATCH
@@ -236,158 +143,204 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_patch")
-    func patch(
-      request: Clients.PublicDelegatedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Withdraws the specified PublicDelegatedPrefix in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_withdraw")
-    func withdraw(
-      request: Clients.PublicDelegatedPrefixesClient.WithdrawRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func withdraw(
+      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.withdraw(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``PublicDelegatedPrefixes``.
-    public class PublicDelegatedPrefixesClient: PublicDelegatedPrefixes {
-      let inner: any PublicDelegatedPrefixesStub
+    /// A Swift protocol to mock `PublicDelegatedPrefixesClient`.
+    ///
+    /// To mock `PublicDelegatedPrefixesClient` change your functions to receive
+    /// `some PublicDelegatedPrefixesProtocol` or `any PublicDelegatedPrefixesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol PublicDelegatedPrefixesProtocol {
+      /// See `PublicDelegatedPrefixesClient.aggregatedList`.
+      func aggregatedList(request: PublicDelegatedPrefixesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
 
-      /// Creates a new `PublicDelegatedPrefixesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any PublicDelegatedPrefixesStub = try PublicDelegatedPrefixesTransport(options)
-        inner = PublicDelegatedPrefixesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = PublicDelegatedPrefixesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `PublicDelegatedPrefixesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: PublicDelegatedPrefixesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
 
-      /// See `PublicDelegatedPrefixes.aggregatedList`
-      public func aggregatedList(
-        request: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+      /// See `PublicDelegatedPrefixesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
+
+      /// See `PublicDelegatedPrefixesClient.announce`.
+      func announce(request: PublicDelegatedPrefixesClient.AnnounceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.announce`.
+      func announce(
+        project: Swift.String,
+        region: Swift.String,
+        publicDelegatedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.delete`.
+      func delete(request: PublicDelegatedPrefixesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        publicDelegatedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.`get``.
+      func `get`(request: PublicDelegatedPrefixesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.PublicDelegatedPrefix
+
+      /// See `PublicDelegatedPrefixesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        publicDelegatedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
+
+      /// See `PublicDelegatedPrefixesClient.insert`.
+      func insert(request: PublicDelegatedPrefixesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: PublicDelegatedPrefix?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.list`.
+      func list(request: PublicDelegatedPrefixesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.PublicDelegatedPrefixList
+
+      /// See `PublicDelegatedPrefixesClient.list`.
+      func list(
+        byItem: PublicDelegatedPrefixesClient.ListRequest
+      ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
+
+      /// See `PublicDelegatedPrefixesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
+
+      /// See `PublicDelegatedPrefixesClient.patch`.
+      func patch(request: PublicDelegatedPrefixesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        publicDelegatedPrefix: Swift.String,
+        body: PublicDelegatedPrefix?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.withdraw`.
+      func withdraw(request: PublicDelegatedPrefixesClient.WithdrawRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.withdraw`.
+      func withdraw(
+        project: Swift.String,
+        region: Swift.String,
+        publicDelegatedPrefix: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `PublicDelegatedPrefixesClient.aggregatedList`.
+      func aggregatedList(
+        request: PublicDelegatedPrefixesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
 
-      /// Lists all PublicDelegatedPrefix resources owned by the specific project
-      /// across all scopes.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+      /// See `PublicDelegatedPrefixesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
-      {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
-          in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
 
-      /// See `PublicDelegatedPrefixes.announce`
-      public func announce(
-        request: Clients.PublicDelegatedPrefixesClient.AnnounceRequest,
+      /// See `PublicDelegatedPrefixesClient.announce`.
+      func announce(
+        request: PublicDelegatedPrefixesClient.AnnounceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.announce(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicDelegatedPrefixes.delete`
-      public func delete(
-        request: Clients.PublicDelegatedPrefixesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `PublicDelegatedPrefixesClient.delete`.
+      func delete(
+        request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicDelegatedPrefixes.`get``
-      public func `get`(
-        request: Clients.PublicDelegatedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `PublicDelegatedPrefixesClient.`get``.
+      func `get`(
+        request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
 
-      /// See `PublicDelegatedPrefixes.insert`
-      public func insert(
-        request: Clients.PublicDelegatedPrefixesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `PublicDelegatedPrefixesClient.insert`.
+      func insert(
+        request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicDelegatedPrefixes.list`
-      public func list(
-        request: Clients.PublicDelegatedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `PublicDelegatedPrefixesClient.list`.
+      func list(
+        request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
 
-      /// Lists the PublicDelegatedPrefixes for a project in the given region.
-      public func list(
-        byItem: Clients.PublicDelegatedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `PublicDelegatedPrefixesClient.list`.
+      func list(
+        byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
 
-      /// See `PublicDelegatedPrefixes.patch`
-      public func patch(
-        request: Clients.PublicDelegatedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `PublicDelegatedPrefixesClient.patch`.
+      func patch(
+        request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `PublicDelegatedPrefixes.withdraw`
-      public func withdraw(
-        request: Clients.PublicDelegatedPrefixesClient.WithdrawRequest,
+      /// See `PublicDelegatedPrefixesClient.withdraw`.
+      func withdraw(
+        request: PublicDelegatedPrefixesClient.WithdrawRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.withdraw(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension PublicDelegatedPrefixes {
-    public func aggregatedList(request: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest)
+  extension Clients.PublicDelegatedPrefixesProtocol {
+    public func aggregatedList(request: PublicDelegatedPrefixesClient.AggregatedListRequest)
       async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+      request: PublicDelegatedPrefixesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest
+      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.PublicDelegatedPrefixesClient.AggregatedListRequest,
+      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       let listRpc = {
@@ -400,21 +353,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
-      let request = Clients.PublicDelegatedPrefixesClient.AggregatedListRequest().with {
+      let request = PublicDelegatedPrefixesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func announce(request: Clients.PublicDelegatedPrefixesClient.AnnounceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func announce(request: PublicDelegatedPrefixesClient.AnnounceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.announce(request: request, options: .init())
     }
 
     public func announce(
-      request: Clients.PublicDelegatedPrefixesClient.AnnounceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -424,7 +376,7 @@
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicDelegatedPrefixesClient.AnnounceRequest().with {
+      let request = PublicDelegatedPrefixesClient.AnnounceRequest().with {
         $0.project = project
         $0.region = region
         $0.publicDelegatedPrefix = publicDelegatedPrefix
@@ -432,15 +384,14 @@
       return try await self.announce(request: request)
     }
 
-    public func delete(request: Clients.PublicDelegatedPrefixesClient.DeleteRequest) async throws
+    public func delete(request: PublicDelegatedPrefixesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.PublicDelegatedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -450,7 +401,7 @@
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicDelegatedPrefixesClient.DeleteRequest().with {
+      let request = PublicDelegatedPrefixesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.publicDelegatedPrefix = publicDelegatedPrefix
@@ -458,15 +409,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.PublicDelegatedPrefixesClient.GetRequest) async throws
+    public func `get`(request: PublicDelegatedPrefixesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.PublicDelegatedPrefix
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.PublicDelegatedPrefixesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -476,7 +426,7 @@
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
-      let request = Clients.PublicDelegatedPrefixesClient.GetRequest().with {
+      let request = PublicDelegatedPrefixesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.publicDelegatedPrefix = publicDelegatedPrefix
@@ -484,15 +434,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.PublicDelegatedPrefixesClient.InsertRequest) async throws
+    public func insert(request: PublicDelegatedPrefixesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.PublicDelegatedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -502,7 +451,7 @@
       region: Swift.String,
       body: PublicDelegatedPrefix?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicDelegatedPrefixesClient.InsertRequest().with {
+      let request = PublicDelegatedPrefixesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -510,28 +459,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.PublicDelegatedPrefixesClient.ListRequest) async throws
+    public func list(request: PublicDelegatedPrefixesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.PublicDelegatedPrefixList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.PublicDelegatedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.PublicDelegatedPrefixesClient.ListRequest
+      byItem: PublicDelegatedPrefixesClient.ListRequest
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.PublicDelegatedPrefixesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
@@ -544,22 +491,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
-      let request = Clients.PublicDelegatedPrefixesClient.ListRequest().with {
+      let request = PublicDelegatedPrefixesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.PublicDelegatedPrefixesClient.PatchRequest) async throws
+    public func patch(request: PublicDelegatedPrefixesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.PublicDelegatedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -570,7 +516,7 @@
       publicDelegatedPrefix: Swift.String,
       body: PublicDelegatedPrefix?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicDelegatedPrefixesClient.PatchRequest().with {
+      let request = PublicDelegatedPrefixesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.publicDelegatedPrefix = publicDelegatedPrefix
@@ -579,15 +525,14 @@
       return try await self.patch(request: request)
     }
 
-    public func withdraw(request: Clients.PublicDelegatedPrefixesClient.WithdrawRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func withdraw(request: PublicDelegatedPrefixesClient.WithdrawRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.withdraw(request: request, options: .init())
     }
 
     public func withdraw(
-      request: Clients.PublicDelegatedPrefixesClient.WithdrawRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -597,7 +542,7 @@
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.PublicDelegatedPrefixesClient.WithdrawRequest().with {
+      let request = PublicDelegatedPrefixesClient.WithdrawRequest().with {
         $0.project = project
         $0.region = region
         $0.publicDelegatedPrefix = publicDelegatedPrefix

@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some NodeTemplates) async throws {
+  func sample(client: NodeTemplatesClient) async throws {
     let response = try await client.setIamPolicy(
-      request: Clients.NodeTemplatesClient.SetIamPolicyRequest()
+      request: NodeTemplatesClient.SetIamPolicyRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.NodeTemplatesClient()
+        let client = try GoogleCloudComputeV1.NodeTemplatesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

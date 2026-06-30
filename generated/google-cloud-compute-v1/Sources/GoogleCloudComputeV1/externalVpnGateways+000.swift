@@ -28,245 +28,217 @@
   /// Service for the `externalVpnGateways` resource.
   ///
   /// @Snippet(path: "externalVpnGatewaysQuickstart")
-  public protocol ExternalVpnGateways {
+  public class ExternalVpnGatewaysClient: Clients.ExternalVpnGatewaysProtocol {
+    let inner: any Clients.ExternalVpnGatewaysStub
+
+    /// Creates a new `ExternalVpnGatewaysClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ExternalVpnGatewaysStub = try Clients.ExternalVpnGatewaysTransport(
+        options)
+      inner = Clients.ExternalVpnGatewaysRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ExternalVpnGatewaysLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified externalVpnGateway.
     ///
     /// @Snippet(path: "externalVpnGateways_delete")
-    func delete(request: Clients.ExternalVpnGatewaysClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified externalVpnGateway.
-    func delete(
-      project: Swift.String,
-      externalVpnGateway: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified externalVpnGateway. Get a list of available
     /// externalVpnGateways by making a list() request.
     ///
     /// @Snippet(path: "externalVpnGateways_get")
-    func `get`(request: Clients.ExternalVpnGatewaysClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ExternalVpnGateway
-
-    /// Returns the specified externalVpnGateway. Get a list of available
-    /// externalVpnGateways by making a list() request.
-    func `get`(
-      project: Swift.String,
-      externalVpnGateway: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
+    public func `get`(
+      request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a ExternalVpnGateway in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "externalVpnGateways_insert")
-    func insert(request: Clients.ExternalVpnGatewaysClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a ExternalVpnGateway in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      body: ExternalVpnGateway?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of ExternalVpnGateway available to the specified
     /// project.
     ///
     /// @Snippet(path: "externalVpnGateways_list")
-    func list(request: Clients.ExternalVpnGatewaysClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ExternalVpnGatewayList
+    public func list(
+      request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of ExternalVpnGateway available to the specified
     /// project.
-    func list(
-      byItem: Clients.ExternalVpnGatewaysClient.ListRequest
-    ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
-
-    /// Retrieves the list of ExternalVpnGateway available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
+    ///
+    /// @Snippet(path: "externalVpnGateways_list")
+    public func list(
+      byItem: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Sets the labels on an ExternalVpnGateway. To learn more about labels,
     /// read the Labeling
     /// Resources documentation.
     ///
     /// @Snippet(path: "externalVpnGateways_setLabels")
-    func setLabels(request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the labels on an ExternalVpnGateway. To learn more about labels,
-    /// read the Labeling
-    /// Resources documentation.
-    func setLabels(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setLabels(
+      request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setLabels(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "externalVpnGateways_testIamPermissions")
-    func testIamPermissions(request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Deletes the specified externalVpnGateway.
-    ///
-    /// @Snippet(path: "externalVpnGateways_delete")
-    func delete(
-      request: Clients.ExternalVpnGatewaysClient.DeleteRequest,
+    public func testIamPermissions(
+      request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified externalVpnGateway. Get a list of available
-    /// externalVpnGateways by making a list() request.
-    ///
-    /// @Snippet(path: "externalVpnGateways_get")
-    func `get`(
-      request: Clients.ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
-
-    /// Creates a ExternalVpnGateway in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "externalVpnGateways_insert")
-    func insert(
-      request: Clients.ExternalVpnGatewaysClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of ExternalVpnGateway available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "externalVpnGateways_list")
-    func list(
-      request: Clients.ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList
-
-    /// Retrieves the list of ExternalVpnGateway available to the specified
-    /// project.
-    func list(
-      byItem: Clients.ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
-
-    /// Sets the labels on an ExternalVpnGateway. To learn more about labels,
-    /// read the Labeling
-    /// Resources documentation.
-    ///
-    /// @Snippet(path: "externalVpnGateways_setLabels")
-    func setLabels(
-      request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "externalVpnGateways_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ExternalVpnGateways``.
-    public class ExternalVpnGatewaysClient: ExternalVpnGateways {
-      let inner: any ExternalVpnGatewaysStub
+    /// A Swift protocol to mock `ExternalVpnGatewaysClient`.
+    ///
+    /// To mock `ExternalVpnGatewaysClient` change your functions to receive
+    /// `some ExternalVpnGatewaysProtocol` or `any ExternalVpnGatewaysProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ExternalVpnGatewaysProtocol {
+      /// See `ExternalVpnGatewaysClient.delete`.
+      func delete(request: ExternalVpnGatewaysClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `ExternalVpnGatewaysClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ExternalVpnGatewaysStub = try ExternalVpnGatewaysTransport(options)
-        inner = ExternalVpnGatewaysRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ExternalVpnGatewaysLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ExternalVpnGatewaysClient.delete`.
+      func delete(
+        project: Swift.String,
+        externalVpnGateway: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ExternalVpnGateways.delete`
-      public func delete(
-        request: Clients.ExternalVpnGatewaysClient.DeleteRequest,
+      /// See `ExternalVpnGatewaysClient.`get``.
+      func `get`(request: ExternalVpnGatewaysClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ExternalVpnGateway
+
+      /// See `ExternalVpnGatewaysClient.`get``.
+      func `get`(
+        project: Swift.String,
+        externalVpnGateway: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
+
+      /// See `ExternalVpnGatewaysClient.insert`.
+      func insert(request: ExternalVpnGatewaysClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: ExternalVpnGateway?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.list`.
+      func list(request: ExternalVpnGatewaysClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ExternalVpnGatewayList
+
+      /// See `ExternalVpnGatewaysClient.list`.
+      func list(
+        byItem: ExternalVpnGatewaysClient.ListRequest
+      ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
+
+      /// See `ExternalVpnGatewaysClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
+
+      /// See `ExternalVpnGatewaysClient.setLabels`.
+      func setLabels(request: ExternalVpnGatewaysClient.SetLabelsRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.setLabels`.
+      func setLabels(
+        project: Swift.String,
+        resource: Swift.String,
+        body: GlobalSetLabelsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.testIamPermissions`.
+      func testIamPermissions(request: ExternalVpnGatewaysClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ExternalVpnGatewaysClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ExternalVpnGatewaysClient.delete`.
+      func delete(
+        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.`get``.
+      func `get`(
+        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
+
+      /// See `ExternalVpnGatewaysClient.insert`.
+      func insert(
+        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.list`.
+      func list(
+        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList
+
+      /// See `ExternalVpnGatewaysClient.list`.
+      func list(
+        byItem: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error>
+
+      /// See `ExternalVpnGatewaysClient.setLabels`.
+      func setLabels(
+        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ExternalVpnGatewaysClient.testIamPermissions`.
+      func testIamPermissions(
+        request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `ExternalVpnGateways.`get``
-      public func `get`(
-        request: Clients.ExternalVpnGatewaysClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `ExternalVpnGateways.insert`
-      public func insert(
-        request: Clients.ExternalVpnGatewaysClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `ExternalVpnGateways.list`
-      public func list(
-        request: Clients.ExternalVpnGatewaysClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves the list of ExternalVpnGateway available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.ExternalVpnGatewaysClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `ExternalVpnGateways.setLabels`
-      public func setLabels(
-        request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setLabels(request: request, options: options)
-      }
-
-      /// See `ExternalVpnGateways.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension ExternalVpnGateways {
-    public func delete(request: Clients.ExternalVpnGatewaysClient.DeleteRequest) async throws
+  extension Clients.ExternalVpnGatewaysProtocol {
+    public func delete(request: ExternalVpnGatewaysClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.ExternalVpnGatewaysClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -275,21 +247,21 @@
       project: Swift.String,
       externalVpnGateway: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ExternalVpnGatewaysClient.DeleteRequest().with {
+      let request = ExternalVpnGatewaysClient.DeleteRequest().with {
         $0.project = project
         $0.externalVpnGateway = externalVpnGateway
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.ExternalVpnGatewaysClient.GetRequest) async throws
+    public func `get`(request: ExternalVpnGatewaysClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ExternalVpnGateway
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -298,22 +270,21 @@
       project: Swift.String,
       externalVpnGateway: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
-      let request = Clients.ExternalVpnGatewaysClient.GetRequest().with {
+      let request = ExternalVpnGatewaysClient.GetRequest().with {
         $0.project = project
         $0.externalVpnGateway = externalVpnGateway
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.ExternalVpnGatewaysClient.InsertRequest) async throws
+    public func insert(request: ExternalVpnGatewaysClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.ExternalVpnGatewaysClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -322,33 +293,33 @@
       project: Swift.String,
       body: ExternalVpnGateway?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ExternalVpnGatewaysClient.InsertRequest().with {
+      let request = ExternalVpnGatewaysClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.ExternalVpnGatewaysClient.ListRequest) async throws
+    public func list(request: ExternalVpnGatewaysClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ExternalVpnGatewayList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ExternalVpnGatewaysClient.ListRequest
+      byItem: ExternalVpnGatewaysClient.ListRequest
     ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -359,21 +330,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<ExternalVpnGateway, Swift.Error> {
-      let request = Clients.ExternalVpnGatewaysClient.ListRequest().with {
+      let request = ExternalVpnGatewaysClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func setLabels(request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest) async throws
+    public func setLabels(request: ExternalVpnGatewaysClient.SetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.setLabels(request: request, options: .init())
     }
 
     public func setLabels(
-      request: Clients.ExternalVpnGatewaysClient.SetLabelsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -383,7 +353,7 @@
       resource: Swift.String,
       body: GlobalSetLabelsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ExternalVpnGatewaysClient.SetLabelsRequest().with {
+      let request = ExternalVpnGatewaysClient.SetLabelsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -391,14 +361,14 @@
       return try await self.setLabels(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: ExternalVpnGatewaysClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest,
+      request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -409,7 +379,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.ExternalVpnGatewaysClient.TestIamPermissionsRequest().with {
+      let request = ExternalVpnGatewaysClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body

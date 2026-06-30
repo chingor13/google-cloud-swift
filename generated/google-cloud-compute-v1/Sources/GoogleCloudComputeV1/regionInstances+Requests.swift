@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstancesClient {
+  extension RegionInstancesClient {
     /// Synthetic request message for the [bulkInsert()][google.cloud.compute.v1.regionInstances.bulkInsert] method.
     ///
     /// [google.cloud.compute.v1.regionInstances.bulkInsert]: <doc:RegionInstances/bulkInsert(request:)>

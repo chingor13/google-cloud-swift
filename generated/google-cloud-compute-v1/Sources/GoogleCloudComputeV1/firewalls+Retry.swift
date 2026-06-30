@@ -53,29 +53,29 @@
       }
 
       public func delete(
-        request: Clients.FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.FirewallsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FirewallsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Firewall {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.FirewallsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FirewallsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Firewall
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -83,29 +83,29 @@
       }
 
       public func insert(
-        request: Clients.FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.FirewallsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FirewallsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.FirewallsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FirewallsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.FirewallList
             in
             return try await self.inner.list(request: r, options: o)
@@ -113,14 +113,14 @@
       }
 
       public func patch(
-        request: Clients.FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.FirewallsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FirewallsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -128,15 +128,14 @@
       }
 
       public func testIamPermissions(
-        request: Clients.FirewallsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.FirewallsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: FirewallsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -144,15 +143,15 @@
       }
 
       public func update(
-        request: Clients.FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: FirewallsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.FirewallsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FirewallsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

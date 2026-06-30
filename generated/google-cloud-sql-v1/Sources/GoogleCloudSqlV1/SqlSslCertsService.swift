@@ -28,114 +28,107 @@
   /// Service to manage SSL certs for Cloud SQL instances.
   ///
   /// @Snippet(path: "SqlSslCertsServiceQuickstart")
-  public protocol SqlSslCertsService {
-    /// Deletes the SSL certificate. For First Generation instances, the
-    /// certificate remains valid until the instance is restarted.
-    ///
-    /// @Snippet(path: "SqlSslCertsService_Delete")
-    func delete(request: SqlSslCertsDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
+  public class SqlSslCertsServiceClient: Clients.SqlSslCertsServiceProtocol {
+    let inner: any Clients.SqlSslCertsServiceStub
 
-    /// Retrieves a particular SSL certificate.  Does not include the private key
-    /// (required for usage).  The private key must be saved from the response to
-    /// initial creation.
-    ///
-    /// @Snippet(path: "SqlSslCertsService_Get")
-    func `get`(request: SqlSslCertsGetRequest) async throws -> GoogleCloudSqlV1.SslCert
-
-    /// Creates an SSL certificate and returns it along with the private key and
-    /// server certificate authority.  The new certificate will not be usable until
-    /// the instance is restarted.
-    ///
-    /// @Snippet(path: "SqlSslCertsService_Insert")
-    func insert(request: SqlSslCertsInsertRequest) async throws
-      -> GoogleCloudSqlV1.SslCertsInsertResponse
-
-    /// Lists all of the current SSL certificates for the instance.
-    ///
-    /// @Snippet(path: "SqlSslCertsService_List")
-    func list(request: SqlSslCertsListRequest) async throws -> GoogleCloudSqlV1.SslCertsListResponse
+    /// Creates a new `SqlSslCertsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlSslCertsServiceStub = try Clients.SqlSslCertsServiceTransport(
+        options)
+      inner = Clients.SqlSslCertsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlSslCertsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes the SSL certificate. For First Generation instances, the
     /// certificate remains valid until the instance is restarted.
     ///
     /// @Snippet(path: "SqlSslCertsService_Delete")
-    func delete(
+    public func delete(
       request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves a particular SSL certificate.  Does not include the private key
     /// (required for usage).  The private key must be saved from the response to
     /// initial creation.
     ///
     /// @Snippet(path: "SqlSslCertsService_Get")
-    func `get`(
+    public func `get`(
       request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.SslCert
+    ) async throws -> GoogleCloudSqlV1.SslCert {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates an SSL certificate and returns it along with the private key and
     /// server certificate authority.  The new certificate will not be usable until
     /// the instance is restarted.
     ///
     /// @Snippet(path: "SqlSslCertsService_Insert")
-    func insert(
+    public func insert(
       request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse
+    ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists all of the current SSL certificates for the instance.
     ///
     /// @Snippet(path: "SqlSslCertsService_List")
-    func list(
+    public func list(
       request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.SslCertsListResponse
+    ) async throws -> GoogleCloudSqlV1.SslCertsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlSslCertsService``.
-    public class SqlSslCertsServiceClient: SqlSslCertsService {
-      let inner: any SqlSslCertsServiceStub
+    /// A Swift protocol to mock `SqlSslCertsServiceClient`.
+    ///
+    /// To mock `SqlSslCertsServiceClient` change your functions to receive
+    /// `some SqlSslCertsServiceProtocol` or `any SqlSslCertsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlSslCertsServiceProtocol {
+      /// See `SqlSslCertsServiceClient.delete`.
+      func delete(request: SqlSslCertsDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
 
-      /// Creates a new `SqlSslCertsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlSslCertsServiceStub = try SqlSslCertsServiceTransport(options)
-        inner = SqlSslCertsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlSslCertsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlSslCertsServiceClient.`get``.
+      func `get`(request: SqlSslCertsGetRequest) async throws -> GoogleCloudSqlV1.SslCert
 
-      /// See `SqlSslCertsService.delete`
-      public func delete(
+      /// See `SqlSslCertsServiceClient.insert`.
+      func insert(request: SqlSslCertsInsertRequest) async throws
+        -> GoogleCloudSqlV1.SslCertsInsertResponse
+
+      /// See `SqlSslCertsServiceClient.list`.
+      func list(request: SqlSslCertsListRequest) async throws
+        -> GoogleCloudSqlV1.SslCertsListResponse
+
+      /// See `SqlSslCertsServiceClient.delete`.
+      func delete(
         request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlSslCertsService.`get``
-      public func `get`(
+      /// See `SqlSslCertsServiceClient.`get``.
+      func `get`(
         request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.SslCert {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.SslCert
 
-      /// See `SqlSslCertsService.insert`
-      public func insert(
+      /// See `SqlSslCertsServiceClient.insert`.
+      func insert(
         request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse
 
-      /// See `SqlSslCertsService.list`
-      public func list(
+      /// See `SqlSslCertsServiceClient.list`.
+      func list(
         request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.SslCertsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.SslCertsListResponse
     }
   }
 
   // Default implementations
-  extension SqlSslCertsService {
+  extension Clients.SqlSslCertsServiceProtocol {
     public func delete(request: SqlSslCertsDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
     {
       try await self.delete(request: request, options: .init())

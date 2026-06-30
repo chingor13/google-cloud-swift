@@ -19,7 +19,7 @@ import Logging
 
 extension InstanceSamples {
   static public func delete(
-    client: some GoogleCloudComputeV1.Instances,
+    client: InstancesClient,
     projectId: String,
     zoneId: String,
     name: String,
@@ -31,7 +31,7 @@ extension InstanceSamples {
     guard let operationName = operation.name else {
       throw GoogleCloudGax.RequestError.malformedResponse("missing operation name")
     }
-    let poller = try GoogleCloudComputeV1.Clients.ZoneOperationsClient()
+    let poller = try ZoneOperationsClient()
     for _ in 0...10 {
       operation = try await poller.get(project: projectId, zone: zoneId, operation: operationName)
       if let status = operation.status, status == .done {

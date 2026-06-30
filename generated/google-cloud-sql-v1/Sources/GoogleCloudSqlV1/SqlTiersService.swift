@@ -28,50 +28,50 @@
   /// Service for providing machine types (tiers) for Cloud SQL instances.
   ///
   /// @Snippet(path: "SqlTiersServiceQuickstart")
-  public protocol SqlTiersService {
-    /// Lists all available machine types (tiers) for Cloud SQL, for example,
-    /// `db-custom-1-3840`. For more information, see
-    /// https://cloud.google.com/sql/pricing.
-    ///
-    /// @Snippet(path: "SqlTiersService_List")
-    func list(request: SqlTiersListRequest) async throws -> GoogleCloudSqlV1.TiersListResponse
+  public class SqlTiersServiceClient: Clients.SqlTiersServiceProtocol {
+    let inner: any Clients.SqlTiersServiceStub
+
+    /// Creates a new `SqlTiersServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlTiersServiceStub = try Clients.SqlTiersServiceTransport(options)
+      inner = Clients.SqlTiersServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlTiersServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Lists all available machine types (tiers) for Cloud SQL, for example,
     /// `db-custom-1-3840`. For more information, see
     /// https://cloud.google.com/sql/pricing.
     ///
     /// @Snippet(path: "SqlTiersService_List")
-    func list(
+    public func list(
       request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.TiersListResponse
+    ) async throws -> GoogleCloudSqlV1.TiersListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlTiersService``.
-    public class SqlTiersServiceClient: SqlTiersService {
-      let inner: any SqlTiersServiceStub
+    /// A Swift protocol to mock `SqlTiersServiceClient`.
+    ///
+    /// To mock `SqlTiersServiceClient` change your functions to receive
+    /// `some SqlTiersServiceProtocol` or `any SqlTiersServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlTiersServiceProtocol {
+      /// See `SqlTiersServiceClient.list`.
+      func list(request: SqlTiersListRequest) async throws -> GoogleCloudSqlV1.TiersListResponse
 
-      /// Creates a new `SqlTiersServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlTiersServiceStub = try SqlTiersServiceTransport(options)
-        inner = SqlTiersServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlTiersServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
-
-      /// See `SqlTiersService.list`
-      public func list(
+      /// See `SqlTiersServiceClient.list`.
+      func list(
         request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.TiersListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.TiersListResponse
     }
   }
 
   // Default implementations
-  extension SqlTiersService {
+  extension Clients.SqlTiersServiceProtocol {
     public func list(request: SqlTiersListRequest) async throws
       -> GoogleCloudSqlV1.TiersListResponse
     {

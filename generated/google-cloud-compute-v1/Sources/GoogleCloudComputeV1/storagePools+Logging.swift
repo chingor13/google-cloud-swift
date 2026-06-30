@@ -60,15 +60,14 @@
       }
 
       public func aggregatedList(
-        request: Clients.StoragePoolsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: Clients.StoragePoolsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: StoragePoolsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -76,45 +75,44 @@
       }
 
       public func delete(
-        request: Clients.StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: Clients.StoragePoolsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: StoragePoolsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePool {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.StoragePoolsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.StoragePool
+            (r: StoragePoolsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.StoragePool
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getIamPolicy(
-        request: Clients.StoragePoolsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: Clients.StoragePoolsClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: StoragePoolsClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -122,60 +120,59 @@
       }
 
       public func insert(
-        request: Clients.StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: Clients.StoragePoolsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: StoragePoolsClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.StoragePoolsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.StoragePoolList
+            (r: StoragePoolsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.StoragePoolList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func listDisks(
-        request: Clients.StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolListDisks {
         try await self._intercept(
           request: request,
           options: options,
           name: "listDisks",
           action: {
-            (r: Clients.StoragePoolsClient.ListDisksRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.StoragePoolListDisks
+            (r: StoragePoolsClient.ListDisksRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.StoragePoolListDisks
             in
             return try await self.inner.listDisks(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: Clients.StoragePoolsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: Clients.StoragePoolsClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: StoragePoolsClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -183,7 +180,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.StoragePoolsClient.TestIamPermissionsRequest,
+        request: StoragePoolsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -191,25 +188,23 @@
           options: options,
           name: "testIamPermissions",
           action: {
-            (
-              r: Clients.StoragePoolsClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: StoragePoolsClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func update(
-        request: Clients.StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: Clients.StoragePoolsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: StoragePoolsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })

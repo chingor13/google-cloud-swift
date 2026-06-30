@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some NodeGroups) async throws {
+  func sample(client: NodeGroupsClient) async throws {
     let response = try await client.delete(
-      request: Clients.NodeGroupsClient.DeleteRequest()
+      request: NodeGroupsClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.NodeGroupsClient()
+        let client = try GoogleCloudComputeV1.NodeGroupsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

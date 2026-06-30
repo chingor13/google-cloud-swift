@@ -28,86 +28,86 @@
   /// Service for the `snapshotSettings` resource.
   ///
   /// @Snippet(path: "snapshotSettingsQuickstart")
-  public protocol SnapshotSettings {
-    /// Get snapshot settings.
-    ///
-    /// @Snippet(path: "snapshotSettings_get")
-    func `get`(request: Clients.SnapshotSettingsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.SnapshotSettings
+  public class SnapshotSettingsClient: Clients.SnapshotSettingsProtocol {
+    let inner: any Clients.SnapshotSettingsStub
 
-    /// Get snapshot settings.
-    func `get`(
-      project: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.SnapshotSettings
-
-    /// Patch snapshot settings.
-    ///
-    /// @Snippet(path: "snapshotSettings_patch")
-    func patch(request: Clients.SnapshotSettingsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patch snapshot settings.
-    func patch(
-      project: Swift.String,
-      body: SnapshotSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `SnapshotSettingsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SnapshotSettingsStub = try Clients.SnapshotSettingsTransport(options)
+      inner = Clients.SnapshotSettingsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SnapshotSettingsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Get snapshot settings.
     ///
     /// @Snippet(path: "snapshotSettings_get")
-    func `get`(
-      request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.SnapshotSettings
+    public func `get`(
+      request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Patch snapshot settings.
     ///
     /// @Snippet(path: "snapshotSettings_patch")
-    func patch(
-      request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SnapshotSettings``.
-    public class SnapshotSettingsClient: SnapshotSettings {
-      let inner: any SnapshotSettingsStub
+    /// A Swift protocol to mock `SnapshotSettingsClient`.
+    ///
+    /// To mock `SnapshotSettingsClient` change your functions to receive
+    /// `some SnapshotSettingsProtocol` or `any SnapshotSettingsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SnapshotSettingsProtocol {
+      /// See `SnapshotSettingsClient.`get``.
+      func `get`(request: SnapshotSettingsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.SnapshotSettings
 
-      /// Creates a new `SnapshotSettingsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SnapshotSettingsStub = try SnapshotSettingsTransport(options)
-        inner = SnapshotSettingsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SnapshotSettingsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SnapshotSettingsClient.`get``.
+      func `get`(
+        project: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.SnapshotSettings
 
-      /// See `SnapshotSettings.`get``
-      public func `get`(
-        request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `SnapshotSettingsClient.patch`.
+      func patch(request: SnapshotSettingsClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `SnapshotSettings.patch`
-      public func patch(
-        request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `SnapshotSettingsClient.patch`.
+      func patch(
+        project: Swift.String,
+        body: SnapshotSettings?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `SnapshotSettingsClient.`get``.
+      func `get`(
+        request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.SnapshotSettings
+
+      /// See `SnapshotSettingsClient.patch`.
+      func patch(
+        request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension SnapshotSettings {
-    public func `get`(request: Clients.SnapshotSettingsClient.GetRequest) async throws
+  extension Clients.SnapshotSettingsProtocol {
+    public func `get`(request: SnapshotSettingsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.SnapshotSettings
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -115,20 +115,20 @@
     public func `get`(
       project: Swift.String,
     ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
-      let request = Clients.SnapshotSettingsClient.GetRequest().with {
+      let request = SnapshotSettingsClient.GetRequest().with {
         $0.project = project
       }
       return try await self.`get`(request: request)
     }
 
-    public func patch(request: Clients.SnapshotSettingsClient.PatchRequest) async throws
+    public func patch(request: SnapshotSettingsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -137,7 +137,7 @@
       project: Swift.String,
       body: SnapshotSettings?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.SnapshotSettingsClient.PatchRequest().with {
+      let request = SnapshotSettingsClient.PatchRequest().with {
         $0.project = project
         $0.body = body
       }

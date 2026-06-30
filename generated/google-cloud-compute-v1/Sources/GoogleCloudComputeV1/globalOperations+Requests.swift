@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalOperationsClient {
+  extension GlobalOperationsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.globalOperations.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.globalOperations.aggregatedList]: <doc:GlobalOperations/aggregatedList(request:)>

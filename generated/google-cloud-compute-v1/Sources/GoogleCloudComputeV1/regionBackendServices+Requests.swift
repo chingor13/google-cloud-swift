@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionBackendServicesClient {
+  extension RegionBackendServicesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionBackendServices.delete] method.
     ///
     /// [google.cloud.compute.v1.regionBackendServices.delete]: <doc:RegionBackendServices/delete(request:)>

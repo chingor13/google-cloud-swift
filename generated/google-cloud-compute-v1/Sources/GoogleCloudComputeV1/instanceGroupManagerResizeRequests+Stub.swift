@@ -28,27 +28,27 @@
   extension Clients {
     protocol InstanceGroupManagerResizeRequestsStub {
       func cancel(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest,
+        request: InstanceGroupManagerResizeRequestsClient.CancelRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest,
+        request: InstanceGroupManagerResizeRequestsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest,
+        request: InstanceGroupManagerResizeRequestsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
 
       func insert(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest,
+        request: InstanceGroupManagerResizeRequestsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+        request: InstanceGroupManagerResizeRequestsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
     }
@@ -62,7 +62,7 @@
       }
 
       public func cancel(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest,
+        request: InstanceGroupManagerResizeRequestsClient.CancelRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -97,7 +97,7 @@
       }
 
       public func delete(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest,
+        request: InstanceGroupManagerResizeRequestsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -132,7 +132,7 @@
       }
 
       public func `get`(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest,
+        request: InstanceGroupManagerResizeRequestsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
         let path = try { () throws -> Swift.String in
@@ -165,7 +165,7 @@
       }
 
       public func insert(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest,
+        request: InstanceGroupManagerResizeRequestsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -199,7 +199,7 @@
       }
 
       public func list(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+        request: InstanceGroupManagerResizeRequestsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse {
         let path = try { () throws -> Swift.String in

@@ -28,11 +28,11 @@
   extension Clients {
     protocol SnapshotSettingsStub {
       func `get`(
-        request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotSettings
 
       func patch(
-        request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -62,7 +62,7 @@
       }
 
       public func patch(
-        request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

@@ -27,178 +27,170 @@
 
   ///
   /// @Snippet(path: "SqlBackupsServiceQuickstart")
-  public protocol SqlBackupsService {
-    /// Creates a backup for a Cloud SQL instance. This API can be used only to
-    /// create on-demand backups.
-    ///
-    /// @Snippet(path: "SqlBackupsService_CreateBackup")
-    func createBackup(request: CreateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
+  public class SqlBackupsServiceClient: Clients.SqlBackupsServiceProtocol {
+    let inner: any Clients.SqlBackupsServiceStub
 
-    /// Creates a backup for a Cloud SQL instance. This API can be used only to
-    /// create on-demand backups.
-    func createBackup(
-      parent: Swift.String,
-      backup: Backup?,
-    ) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Retrieves a resource containing information about a backup.
-    ///
-    /// @Snippet(path: "SqlBackupsService_GetBackup")
-    func getBackup(request: GetBackupRequest) async throws -> GoogleCloudSqlV1.Backup
-
-    /// Retrieves a resource containing information about a backup.
-    func getBackup(
-      name: Swift.String,
-    ) async throws -> GoogleCloudSqlV1.Backup
-
-    /// Lists all backups associated with the project.
-    ///
-    /// @Snippet(path: "SqlBackupsService_ListBackups")
-    func listBackups(request: ListBackupsRequest) async throws
-      -> GoogleCloudSqlV1.ListBackupsResponse
-
-    /// Lists all backups associated with the project.
-    func listBackups(
-      byItem: ListBackupsRequest
-    ) throws -> any AsyncSequence<Backup, Swift.Error>
-
-    /// Lists all backups associated with the project.
-    func listBackups(
-      parent: Swift.String,
-    ) throws -> any AsyncSequence<Backup, Swift.Error>
-
-    /// Updates the retention period and description of the backup. You can use
-    /// this API to update final backups only.
-    ///
-    /// @Snippet(path: "SqlBackupsService_UpdateBackup")
-    func updateBackup(request: UpdateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Updates the retention period and description of the backup. You can use
-    /// this API to update final backups only.
-    func updateBackup(
-      backup: Backup?,
-      updateMask: GoogleCloudWkt.FieldMask?,
-    ) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Deletes the backup.
-    ///
-    /// @Snippet(path: "SqlBackupsService_DeleteBackup")
-    func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Deletes the backup.
-    func deleteBackup(
-      name: Swift.String,
-    ) async throws -> GoogleCloudSqlV1.Operation
+    /// Creates a new `SqlBackupsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlBackupsServiceStub = try Clients.SqlBackupsServiceTransport(options)
+      inner = Clients.SqlBackupsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlBackupsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Creates a backup for a Cloud SQL instance. This API can be used only to
     /// create on-demand backups.
     ///
     /// @Snippet(path: "SqlBackupsService_CreateBackup")
-    func createBackup(
+    public func createBackup(
       request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.createBackup(request: request, options: options)
+    }
 
     /// Retrieves a resource containing information about a backup.
     ///
     /// @Snippet(path: "SqlBackupsService_GetBackup")
-    func getBackup(
+    public func getBackup(
       request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Backup
+    ) async throws -> GoogleCloudSqlV1.Backup {
+      try await self.inner.getBackup(request: request, options: options)
+    }
 
     /// Lists all backups associated with the project.
     ///
     /// @Snippet(path: "SqlBackupsService_ListBackups")
-    func listBackups(
+    public func listBackups(
       request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.ListBackupsResponse
+    ) async throws -> GoogleCloudSqlV1.ListBackupsResponse {
+      try await self.inner.listBackups(request: request, options: options)
+    }
 
     /// Lists all backups associated with the project.
-    func listBackups(
+    ///
+    /// @Snippet(path: "SqlBackupsService_ListBackups")
+    public func listBackups(
       byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Backup, Swift.Error>
+    ) throws -> any AsyncSequence<Backup, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listBackups(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the retention period and description of the backup. You can use
     /// this API to update final backups only.
     ///
     /// @Snippet(path: "SqlBackupsService_UpdateBackup")
-    func updateBackup(
+    public func updateBackup(
       request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.updateBackup(request: request, options: options)
+    }
 
     /// Deletes the backup.
     ///
     /// @Snippet(path: "SqlBackupsService_DeleteBackup")
-    func deleteBackup(
+    public func deleteBackup(
       request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.deleteBackup(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlBackupsService``.
-    public class SqlBackupsServiceClient: SqlBackupsService {
-      let inner: any SqlBackupsServiceStub
+    /// A Swift protocol to mock `SqlBackupsServiceClient`.
+    ///
+    /// To mock `SqlBackupsServiceClient` change your functions to receive
+    /// `some SqlBackupsServiceProtocol` or `any SqlBackupsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlBackupsServiceProtocol {
+      /// See `SqlBackupsServiceClient.createBackup`.
+      func createBackup(request: CreateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
 
-      /// Creates a new `SqlBackupsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlBackupsServiceStub = try SqlBackupsServiceTransport(options)
-        inner = SqlBackupsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlBackupsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlBackupsServiceClient.createBackup`.
+      func createBackup(
+        parent: Swift.String,
+        backup: Backup?,
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlBackupsService.createBackup`
-      public func createBackup(
+      /// See `SqlBackupsServiceClient.getBackup`.
+      func getBackup(request: GetBackupRequest) async throws -> GoogleCloudSqlV1.Backup
+
+      /// See `SqlBackupsServiceClient.getBackup`.
+      func getBackup(
+        name: Swift.String,
+      ) async throws -> GoogleCloudSqlV1.Backup
+
+      /// See `SqlBackupsServiceClient.listBackups`.
+      func listBackups(request: ListBackupsRequest) async throws
+        -> GoogleCloudSqlV1.ListBackupsResponse
+
+      /// See `SqlBackupsServiceClient.listBackups`.
+      func listBackups(
+        byItem: ListBackupsRequest
+      ) throws -> any AsyncSequence<Backup, Swift.Error>
+
+      /// See `SqlBackupsServiceClient.listBackups`.
+      func listBackups(
+        parent: Swift.String,
+      ) throws -> any AsyncSequence<Backup, Swift.Error>
+
+      /// See `SqlBackupsServiceClient.updateBackup`.
+      func updateBackup(request: UpdateBackupRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlBackupsServiceClient.updateBackup`.
+      func updateBackup(
+        backup: Backup?,
+        updateMask: GoogleCloudWkt.FieldMask?,
+      ) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlBackupsServiceClient.deleteBackup`.
+      func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlBackupsServiceClient.deleteBackup`.
+      func deleteBackup(
+        name: Swift.String,
+      ) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlBackupsServiceClient.createBackup`.
+      func createBackup(
         request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.createBackup(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlBackupsService.getBackup`
-      public func getBackup(
+      /// See `SqlBackupsServiceClient.getBackup`.
+      func getBackup(
         request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Backup {
-        try await self.inner.getBackup(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Backup
 
-      /// See `SqlBackupsService.listBackups`
-      public func listBackups(
+      /// See `SqlBackupsServiceClient.listBackups`.
+      func listBackups(
         request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.ListBackupsResponse {
-        try await self.inner.listBackups(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.ListBackupsResponse
 
-      /// Lists all backups associated with the project.
-      public func listBackups(
+      /// See `SqlBackupsServiceClient.listBackups`.
+      func listBackups(
         byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Backup, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listBackups(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<Backup, Swift.Error>
 
-      /// See `SqlBackupsService.updateBackup`
-      public func updateBackup(
+      /// See `SqlBackupsServiceClient.updateBackup`.
+      func updateBackup(
         request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.updateBackup(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlBackupsService.deleteBackup`
-      public func deleteBackup(
+      /// See `SqlBackupsServiceClient.deleteBackup`.
+      func deleteBackup(
         request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.deleteBackup(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
 
   // Default implementations
-  extension SqlBackupsService {
+  extension Clients.SqlBackupsServiceProtocol {
     public func createBackup(request: CreateBackupRequest) async throws
       -> GoogleCloudSqlV1.Operation
     {

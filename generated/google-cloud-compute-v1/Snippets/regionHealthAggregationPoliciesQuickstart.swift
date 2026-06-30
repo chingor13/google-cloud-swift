@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionHealthAggregationPoliciesClient()
+    let client = try GoogleCloudComputeV1.RegionHealthAggregationPoliciesClient()
     let items = try client.aggregatedList(
-      byItem: Clients.RegionHealthAggregationPoliciesClient.AggregatedListRequest()
+      byItem: RegionHealthAggregationPoliciesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

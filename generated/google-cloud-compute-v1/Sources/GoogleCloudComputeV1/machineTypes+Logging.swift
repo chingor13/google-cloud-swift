@@ -60,15 +60,14 @@
       }
 
       public func aggregatedList(
-        request: Clients.MachineTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: Clients.MachineTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: MachineTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -76,30 +75,30 @@
       }
 
       public func `get`(
-        request: Clients.MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.MachineTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.MachineType
+            (r: MachineTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.MachineType
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.MachineTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.MachineTypeList
+            (r: MachineTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.MachineTypeList
             in
             return try await self.inner.list(request: r, options: o)
           })

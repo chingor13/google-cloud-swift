@@ -28,95 +28,21 @@
   /// Service for the `instanceGroupManagerResizeRequests` resource.
   ///
   /// @Snippet(path: "instanceGroupManagerResizeRequestsQuickstart")
-  public protocol InstanceGroupManagerResizeRequests {
-    /// Cancels the specified resize request and removes it from the queue.
-    /// Cancelled resize request does no longer wait for the resources to be
-    /// provisioned. Cancel is only possible for requests that are accepted in the
-    /// queue.
-    ///
-    /// @Snippet(path: "instanceGroupManagerResizeRequests_cancel")
-    func cancel(request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  public class InstanceGroupManagerResizeRequestsClient: Clients
+      .InstanceGroupManagerResizeRequestsProtocol
+  {
+    let inner: any Clients.InstanceGroupManagerResizeRequestsStub
 
-    /// Cancels the specified resize request and removes it from the queue.
-    /// Cancelled resize request does no longer wait for the resources to be
-    /// provisioned. Cancel is only possible for requests that are accepted in the
-    /// queue.
-    func cancel(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      resizeRequest: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified, inactive resize request. Requests that are still
-    /// active cannot be deleted. Deleting request does not delete instances that
-    /// were provisioned previously.
-    ///
-    /// @Snippet(path: "instanceGroupManagerResizeRequests_delete")
-    func delete(request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified, inactive resize request. Requests that are still
-    /// active cannot be deleted. Deleting request does not delete instances that
-    /// were provisioned previously.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      resizeRequest: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns all of the details about the specified resize request.
-    ///
-    /// @Snippet(path: "instanceGroupManagerResizeRequests_get")
-    func `get`(request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
-
-    /// Returns all of the details about the specified resize request.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      resizeRequest: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
-
-    /// Creates a new resize request that starts provisioning VMs immediately
-    /// or queues VM creation.
-    ///
-    /// @Snippet(path: "instanceGroupManagerResizeRequests_insert")
-    func insert(request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new resize request that starts provisioning VMs immediately
-    /// or queues VM creation.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: InstanceGroupManagerResizeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of resize requests that are contained in the
-    /// managed instance group.
-    ///
-    /// @Snippet(path: "instanceGroupManagerResizeRequests_list")
-    func list(request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
-
-    /// Retrieves a list of resize requests that are contained in the
-    /// managed instance group.
-    func list(
-      byItem: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest
-    ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
-
-    /// Retrieves a list of resize requests that are contained in the
-    /// managed instance group.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
+    /// Creates a new `InstanceGroupManagerResizeRequestsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.InstanceGroupManagerResizeRequestsStub =
+        try Clients.InstanceGroupManagerResizeRequestsTransport(options)
+      inner = Clients.InstanceGroupManagerResizeRequestsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.InstanceGroupManagerResizeRequestsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Cancels the specified resize request and removes it from the queue.
     /// Cancelled resize request does no longer wait for the resources to be
@@ -124,139 +50,195 @@
     /// queue.
     ///
     /// @Snippet(path: "instanceGroupManagerResizeRequests_cancel")
-    func cancel(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest,
+    public func cancel(
+      request: InstanceGroupManagerResizeRequestsClient.CancelRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.cancel(request: request, options: options)
+    }
 
     /// Deletes the specified, inactive resize request. Requests that are still
     /// active cannot be deleted. Deleting request does not delete instances that
     /// were provisioned previously.
     ///
     /// @Snippet(path: "instanceGroupManagerResizeRequests_delete")
-    func delete(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest,
+    public func delete(
+      request: InstanceGroupManagerResizeRequestsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns all of the details about the specified resize request.
     ///
     /// @Snippet(path: "instanceGroupManagerResizeRequests_get")
-    func `get`(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest,
+    public func `get`(
+      request: InstanceGroupManagerResizeRequestsClient.GetRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
+    ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a new resize request that starts provisioning VMs immediately
     /// or queues VM creation.
     ///
     /// @Snippet(path: "instanceGroupManagerResizeRequests_insert")
-    func insert(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest,
+    public func insert(
+      request: InstanceGroupManagerResizeRequestsClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of resize requests that are contained in the
     /// managed instance group.
     ///
     /// @Snippet(path: "instanceGroupManagerResizeRequests_list")
-    func list(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+    public func list(
+      request: InstanceGroupManagerResizeRequestsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
+    ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of resize requests that are contained in the
     /// managed instance group.
-    func list(
-      byItem: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+    ///
+    /// @Snippet(path: "instanceGroupManagerResizeRequests_list")
+    public func list(
+      byItem: InstanceGroupManagerResizeRequestsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
+    ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``InstanceGroupManagerResizeRequests``.
-    public class InstanceGroupManagerResizeRequestsClient: InstanceGroupManagerResizeRequests {
-      let inner: any InstanceGroupManagerResizeRequestsStub
+    /// A Swift protocol to mock `InstanceGroupManagerResizeRequestsClient`.
+    ///
+    /// To mock `InstanceGroupManagerResizeRequestsClient` change your functions to receive
+    /// `some InstanceGroupManagerResizeRequestsProtocol` or `any InstanceGroupManagerResizeRequestsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol InstanceGroupManagerResizeRequestsProtocol {
+      /// See `InstanceGroupManagerResizeRequestsClient.cancel`.
+      func cancel(request: InstanceGroupManagerResizeRequestsClient.CancelRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `InstanceGroupManagerResizeRequestsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any InstanceGroupManagerResizeRequestsStub =
-          try InstanceGroupManagerResizeRequestsTransport(options)
-        inner = InstanceGroupManagerResizeRequestsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = InstanceGroupManagerResizeRequestsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `InstanceGroupManagerResizeRequestsClient.cancel`.
+      func cancel(
+        project: Swift.String,
+        zone: Swift.String,
+        instanceGroupManager: Swift.String,
+        resizeRequest: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupManagerResizeRequests.cancel`
-      public func cancel(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.delete`.
+      func delete(request: InstanceGroupManagerResizeRequestsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `InstanceGroupManagerResizeRequestsClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        instanceGroupManager: Swift.String,
+        resizeRequest: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InstanceGroupManagerResizeRequestsClient.`get``.
+      func `get`(request: InstanceGroupManagerResizeRequestsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
+
+      /// See `InstanceGroupManagerResizeRequestsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        instanceGroupManager: Swift.String,
+        resizeRequest: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
+
+      /// See `InstanceGroupManagerResizeRequestsClient.insert`.
+      func insert(request: InstanceGroupManagerResizeRequestsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `InstanceGroupManagerResizeRequestsClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: InstanceGroupManagerResizeRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `InstanceGroupManagerResizeRequestsClient.list`.
+      func list(request: InstanceGroupManagerResizeRequestsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
+
+      /// See `InstanceGroupManagerResizeRequestsClient.list`.
+      func list(
+        byItem: InstanceGroupManagerResizeRequestsClient.ListRequest
+      ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
+
+      /// See `InstanceGroupManagerResizeRequestsClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
+
+      /// See `InstanceGroupManagerResizeRequestsClient.cancel`.
+      func cancel(
+        request: InstanceGroupManagerResizeRequestsClient.CancelRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.cancel(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupManagerResizeRequests.delete`
-      public func delete(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.delete`.
+      func delete(
+        request: InstanceGroupManagerResizeRequestsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupManagerResizeRequests.`get``
-      public func `get`(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.`get``.
+      func `get`(
+        request: InstanceGroupManagerResizeRequestsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
 
-      /// See `InstanceGroupManagerResizeRequests.insert`
-      public func insert(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.insert`.
+      func insert(
+        request: InstanceGroupManagerResizeRequestsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupManagerResizeRequests.list`
-      public func list(
-        request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.list`.
+      func list(
+        request: InstanceGroupManagerResizeRequestsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
 
-      /// Retrieves a list of resize requests that are contained in the
-      /// managed instance group.
-      public func list(
-        byItem: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+      /// See `InstanceGroupManagerResizeRequestsClient.list`.
+      func list(
+        byItem: InstanceGroupManagerResizeRequestsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error>
     }
   }
 
   // Default implementations
-  extension InstanceGroupManagerResizeRequests {
-    public func cancel(request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+  extension Clients.InstanceGroupManagerResizeRequestsProtocol {
+    public func cancel(request: InstanceGroupManagerResizeRequestsClient.CancelRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.cancel(request: request, options: .init())
     }
 
     public func cancel(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest,
+      request: InstanceGroupManagerResizeRequestsClient.CancelRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -268,7 +250,7 @@
       instanceGroupManager: Swift.String,
       resizeRequest: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InstanceGroupManagerResizeRequestsClient.CancelRequest().with {
+      let request = InstanceGroupManagerResizeRequestsClient.CancelRequest().with {
         $0.project = project
         $0.zone = zone
         $0.instanceGroupManager = instanceGroupManager
@@ -277,14 +259,14 @@
       return try await self.cancel(request: request)
     }
 
-    public func delete(request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: InstanceGroupManagerResizeRequestsClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest,
+      request: InstanceGroupManagerResizeRequestsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -296,7 +278,7 @@
       instanceGroupManager: Swift.String,
       resizeRequest: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InstanceGroupManagerResizeRequestsClient.DeleteRequest().with {
+      let request = InstanceGroupManagerResizeRequestsClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.instanceGroupManager = instanceGroupManager
@@ -305,14 +287,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest)
-      async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
+    public func `get`(request: InstanceGroupManagerResizeRequestsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.GetRequest,
+      request: InstanceGroupManagerResizeRequestsClient.GetRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -324,7 +306,7 @@
       instanceGroupManager: Swift.String,
       resizeRequest: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
-      let request = Clients.InstanceGroupManagerResizeRequestsClient.GetRequest().with {
+      let request = InstanceGroupManagerResizeRequestsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.instanceGroupManager = instanceGroupManager
@@ -333,14 +315,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: InstanceGroupManagerResizeRequestsClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest,
+      request: InstanceGroupManagerResizeRequestsClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -352,7 +334,7 @@
       instanceGroupManager: Swift.String,
       body: InstanceGroupManagerResizeRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.InstanceGroupManagerResizeRequestsClient.InsertRequest().with {
+      let request = InstanceGroupManagerResizeRequestsClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.instanceGroupManager = instanceGroupManager
@@ -361,27 +343,27 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest)
-      async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
+    public func list(request: InstanceGroupManagerResizeRequestsClient.ListRequest) async throws
+      -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+      request: InstanceGroupManagerResizeRequestsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest
+      byItem: InstanceGroupManagerResizeRequestsClient.ListRequest
     ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.InstanceGroupManagerResizeRequestsClient.ListRequest,
+      byItem: InstanceGroupManagerResizeRequestsClient.ListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
       let listRpc = {
@@ -397,7 +379,7 @@
       zone: Swift.String,
       instanceGroupManager: Swift.String,
     ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
-      let request = Clients.InstanceGroupManagerResizeRequestsClient.ListRequest().with {
+      let request = InstanceGroupManagerResizeRequestsClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
         $0.instanceGroupManager = instanceGroupManager

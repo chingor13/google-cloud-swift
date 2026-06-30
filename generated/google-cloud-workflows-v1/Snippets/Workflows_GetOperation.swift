@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Workflows) async throws {
+func sample(client: WorkflowsClient) async throws {
   let response = try await client.getOperation(
     request: GoogleLongrunning.GetOperationRequest()
       /* set fields using .with { $0... } */
@@ -36,7 +36,7 @@ func sample(client: some Workflows) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+      let client = try GoogleCloudWorkflowsV1.WorkflowsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

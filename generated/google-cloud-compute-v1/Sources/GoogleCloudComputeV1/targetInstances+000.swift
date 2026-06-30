@@ -28,124 +28,18 @@
   /// Service for the `targetInstances` resource.
   ///
   /// @Snippet(path: "targetInstancesQuickstart")
-  public protocol TargetInstances {
-    /// Retrieves an aggregated list of target instances.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "targetInstances_aggregatedList")
-    func aggregatedList(request: Clients.TargetInstancesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.TargetInstanceAggregatedList
+  public class TargetInstancesClient: Clients.TargetInstancesProtocol {
+    let inner: any Clients.TargetInstancesStub
 
-    /// Retrieves an aggregated list of target instances.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetInstancesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of target instances.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
-
-    /// Deletes the specified TargetInstance resource.
-    ///
-    /// @Snippet(path: "targetInstances_delete")
-    func delete(request: Clients.TargetInstancesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified TargetInstance resource.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      targetInstance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified TargetInstance resource.
-    ///
-    /// @Snippet(path: "targetInstances_get")
-    func `get`(request: Clients.TargetInstancesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.TargetInstance
-
-    /// Returns the specified TargetInstance resource.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      targetInstance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.TargetInstance
-
-    /// Creates a TargetInstance resource in the specified project and zone using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "targetInstances_insert")
-    func insert(request: Clients.TargetInstancesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a TargetInstance resource in the specified project and zone using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: TargetInstance?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of TargetInstance resources available to the specified
-    /// project and zone.
-    ///
-    /// @Snippet(path: "targetInstances_list")
-    func list(request: Clients.TargetInstancesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.TargetInstanceList
-
-    /// Retrieves a list of TargetInstance resources available to the specified
-    /// project and zone.
-    func list(
-      byItem: Clients.TargetInstancesClient.ListRequest
-    ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
-
-    /// Retrieves a list of TargetInstance resources available to the specified
-    /// project and zone.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
-
-    /// Sets the Google Cloud Armor security policy for the specified target
-    /// instance. For more information, seeGoogle
-    /// Cloud Armor Overview
-    ///
-    /// @Snippet(path: "targetInstances_setSecurityPolicy")
-    func setSecurityPolicy(request: Clients.TargetInstancesClient.SetSecurityPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the Google Cloud Armor security policy for the specified target
-    /// instance. For more information, seeGoogle
-    /// Cloud Armor Overview
-    func setSecurityPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      targetInstance: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "targetInstances_testIamPermissions")
-    func testIamPermissions(request: Clients.TargetInstancesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `TargetInstancesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.TargetInstancesStub = try Clients.TargetInstancesTransport(options)
+      inner = Clients.TargetInstancesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.TargetInstancesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of target instances.
     ///
@@ -153,198 +47,270 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "targetInstances_aggregatedList")
-    func aggregatedList(
-      request: Clients.TargetInstancesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList
+    public func aggregatedList(
+      request: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of target instances.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.TargetInstancesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "targetInstances_aggregatedList")
+    public func aggregatedList(
+      byItem: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified TargetInstance resource.
     ///
     /// @Snippet(path: "targetInstances_delete")
-    func delete(
-      request: Clients.TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified TargetInstance resource.
     ///
     /// @Snippet(path: "targetInstances_get")
-    func `get`(
-      request: Clients.TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetInstance
+    public func `get`(
+      request: TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetInstance {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a TargetInstance resource in the specified project and zone using
     /// the data included in the request.
     ///
     /// @Snippet(path: "targetInstances_insert")
-    func insert(
-      request: Clients.TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of TargetInstance resources available to the specified
     /// project and zone.
     ///
     /// @Snippet(path: "targetInstances_list")
-    func list(
-      request: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetInstanceList
+    public func list(
+      request: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetInstanceList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of TargetInstance resources available to the specified
     /// project and zone.
-    func list(
-      byItem: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
+    ///
+    /// @Snippet(path: "targetInstances_list")
+    public func list(
+      byItem: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Sets the Google Cloud Armor security policy for the specified target
     /// instance. For more information, seeGoogle
     /// Cloud Armor Overview
     ///
     /// @Snippet(path: "targetInstances_setSecurityPolicy")
-    func setSecurityPolicy(
-      request: Clients.TargetInstancesClient.SetSecurityPolicyRequest,
+    public func setSecurityPolicy(
+      request: TargetInstancesClient.SetSecurityPolicyRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setSecurityPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "targetInstances_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.TargetInstancesClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: TargetInstancesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``TargetInstances``.
-    public class TargetInstancesClient: TargetInstances {
-      let inner: any TargetInstancesStub
+    /// A Swift protocol to mock `TargetInstancesClient`.
+    ///
+    /// To mock `TargetInstancesClient` change your functions to receive
+    /// `some TargetInstancesProtocol` or `any TargetInstancesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol TargetInstancesProtocol {
+      /// See `TargetInstancesClient.aggregatedList`.
+      func aggregatedList(request: TargetInstancesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.TargetInstanceAggregatedList
 
-      /// Creates a new `TargetInstancesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any TargetInstancesStub = try TargetInstancesTransport(options)
-        inner = TargetInstancesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = TargetInstancesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `TargetInstancesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetInstancesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
 
-      /// See `TargetInstances.aggregatedList`
-      public func aggregatedList(
-        request: Clients.TargetInstancesClient.AggregatedListRequest,
+      /// See `TargetInstancesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
+
+      /// See `TargetInstancesClient.delete`.
+      func delete(request: TargetInstancesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        targetInstance: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.`get``.
+      func `get`(request: TargetInstancesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.TargetInstance
+
+      /// See `TargetInstancesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        targetInstance: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.TargetInstance
+
+      /// See `TargetInstancesClient.insert`.
+      func insert(request: TargetInstancesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        body: TargetInstance?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.list`.
+      func list(request: TargetInstancesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.TargetInstanceList
+
+      /// See `TargetInstancesClient.list`.
+      func list(
+        byItem: TargetInstancesClient.ListRequest
+      ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
+
+      /// See `TargetInstancesClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
+
+      /// See `TargetInstancesClient.setSecurityPolicy`.
+      func setSecurityPolicy(request: TargetInstancesClient.SetSecurityPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.setSecurityPolicy`.
+      func setSecurityPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        targetInstance: Swift.String,
+        body: SecurityPolicyReference?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.testIamPermissions`.
+      func testIamPermissions(request: TargetInstancesClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetInstancesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetInstancesClient.aggregatedList`.
+      func aggregatedList(
+        request: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList
+
+      /// See `TargetInstancesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error>
+
+      /// See `TargetInstancesClient.delete`.
+      func delete(
+        request: TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.`get``.
+      func `get`(
+        request: TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetInstance
+
+      /// See `TargetInstancesClient.insert`.
+      func insert(
+        request: TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetInstancesClient.list`.
+      func list(
+        request: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetInstanceList
+
+      /// See `TargetInstancesClient.list`.
+      func list(
+        byItem: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<TargetInstance, Swift.Error>
+
+      /// See `TargetInstancesClient.setSecurityPolicy`.
+      func setSecurityPolicy(
+        request: TargetInstancesClient.SetSecurityPolicyRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves an aggregated list of target instances.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.TargetInstancesClient.AggregatedListRequest,
+      /// See `TargetInstancesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: TargetInstancesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `TargetInstances.delete`
-      public func delete(
-        request: Clients.TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `TargetInstances.`get``
-      public func `get`(
-        request: Clients.TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetInstance {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `TargetInstances.insert`
-      public func insert(
-        request: Clients.TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `TargetInstances.list`
-      public func list(
-        request: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetInstanceList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves a list of TargetInstance resources available to the specified
-      /// project and zone.
-      public func list(
-        byItem: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `TargetInstances.setSecurityPolicy`
-      public func setSecurityPolicy(
-        request: Clients.TargetInstancesClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setSecurityPolicy(request: request, options: options)
-      }
-
-      /// See `TargetInstances.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.TargetInstancesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension TargetInstances {
-    public func aggregatedList(request: Clients.TargetInstancesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList
+  extension Clients.TargetInstancesProtocol {
+    public func aggregatedList(request: TargetInstancesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.TargetInstanceAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.TargetInstancesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetInstancesClient.AggregatedListRequest
+      byItem: TargetInstancesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.TargetInstancesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
@@ -356,20 +322,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
-      let request = Clients.TargetInstancesClient.AggregatedListRequest().with {
+      let request = TargetInstancesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.TargetInstancesClient.DeleteRequest) async throws
+    public func delete(request: TargetInstancesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetInstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -379,7 +345,7 @@
       zone: Swift.String,
       targetInstance: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetInstancesClient.DeleteRequest().with {
+      let request = TargetInstancesClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.targetInstance = targetInstance
@@ -387,14 +353,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.TargetInstancesClient.GetRequest) async throws
+    public func `get`(request: TargetInstancesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetInstance
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetInstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetInstance {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -404,7 +370,7 @@
       zone: Swift.String,
       targetInstance: Swift.String,
     ) async throws -> GoogleCloudComputeV1.TargetInstance {
-      let request = Clients.TargetInstancesClient.GetRequest().with {
+      let request = TargetInstancesClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.targetInstance = targetInstance
@@ -412,14 +378,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.TargetInstancesClient.InsertRequest) async throws
+    public func insert(request: TargetInstancesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -429,7 +395,7 @@
       zone: Swift.String,
       body: TargetInstance?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetInstancesClient.InsertRequest().with {
+      let request = TargetInstancesClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -437,26 +403,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.TargetInstancesClient.ListRequest) async throws
+    public func list(request: TargetInstancesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.TargetInstanceList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetInstanceList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.TargetInstancesClient.ListRequest
+      byItem: TargetInstancesClient.ListRequest
     ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -468,21 +434,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
-      let request = Clients.TargetInstancesClient.ListRequest().with {
+      let request = TargetInstancesClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func setSecurityPolicy(request: Clients.TargetInstancesClient.SetSecurityPolicyRequest)
+    public func setSecurityPolicy(request: TargetInstancesClient.SetSecurityPolicyRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setSecurityPolicy(request: request, options: .init())
     }
 
     public func setSecurityPolicy(
-      request: Clients.TargetInstancesClient.SetSecurityPolicyRequest,
+      request: TargetInstancesClient.SetSecurityPolicyRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -494,7 +460,7 @@
       targetInstance: Swift.String,
       body: SecurityPolicyReference?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetInstancesClient.SetSecurityPolicyRequest().with {
+      let request = TargetInstancesClient.SetSecurityPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.targetInstance = targetInstance
@@ -503,14 +469,14 @@
       return try await self.setSecurityPolicy(request: request)
     }
 
-    public func testIamPermissions(request: Clients.TargetInstancesClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: TargetInstancesClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.TargetInstancesClient.TestIamPermissionsRequest,
+      request: TargetInstancesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -522,7 +488,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.TargetInstancesClient.TestIamPermissionsRequest().with {
+      let request = TargetInstancesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource

@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlRegionsServiceClient()
+    let client = try GoogleCloudSqlV1.SqlRegionsServiceClient()
     print("use `client` to make requests: \(client)")
   }
   // snippet.hide

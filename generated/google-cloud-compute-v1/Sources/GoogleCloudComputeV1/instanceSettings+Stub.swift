@@ -28,11 +28,11 @@
   extension Clients {
     protocol InstanceSettingsStub {
       func `get`(
-        request: Clients.InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceSettings
 
       func patch(
-        request: Clients.InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceSettings {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -65,7 +65,7 @@
       }
 
       public func patch(
-        request: Clients.InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

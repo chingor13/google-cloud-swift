@@ -28,26 +28,24 @@
   extension Clients {
     protocol RegionCommitmentsStub {
       func aggregatedList(
-        request: Clients.RegionCommitmentsClient.AggregatedListRequest,
+        request: RegionCommitmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentAggregatedList
 
       func `get`(
-        request: Clients.RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Commitment
 
       func insert(
-        request: Clients.RegionCommitmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentList
 
       func update(
-        request: Clients.RegionCommitmentsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -60,7 +58,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionCommitmentsClient.AggregatedListRequest,
+        request: RegionCommitmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -91,7 +89,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Commitment {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -116,8 +114,7 @@
       }
 
       public func insert(
-        request: Clients.RegionCommitmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -143,7 +140,7 @@
       }
 
       public func list(
-        request: Clients.RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -171,8 +168,7 @@
       }
 
       public func update(
-        request: Clients.RegionCommitmentsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

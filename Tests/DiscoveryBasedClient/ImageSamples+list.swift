@@ -18,11 +18,11 @@ import Logging
 
 extension ImageSamples {
   static public func list(
-    client: some GoogleCloudComputeV1.Images, projectId: String, logger: Logger
+    client: ImagesClient, projectId: String, logger: Logger
   ) async throws {
     logger.info("Calling listImages()")
     let images = try client.list(
-      byItem: GoogleCloudComputeV1.Clients.ImagesClient.ListRequest().with {
+      byItem: ImagesClient.ListRequest().with {
         $0.project = projectId
       })
     for try await image in images {

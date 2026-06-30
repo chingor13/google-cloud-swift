@@ -29,26 +29,21 @@ import Logging
 /// the public certificate authority service.
 ///
 /// @Snippet(path: "PublicCertificateAuthorityServiceQuickstart")
-public protocol PublicCertificateAuthorityService {
-  /// Creates a new
-  /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
-  /// bound to the project.
-  ///
-  /// [google.cloud.security.publicca.v1.ExternalAccountKey]: <doc:ExternalAccountKey>
-  ///
-  /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
-  func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
-    -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
+public class PublicCertificateAuthorityServiceClient: Clients
+    .PublicCertificateAuthorityServiceProtocol
+{
+  let inner: any Clients.PublicCertificateAuthorityServiceStub
 
-  /// Creates a new
-  /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
-  /// bound to the project.
-  ///
-  /// [google.cloud.security.publicca.v1.ExternalAccountKey]: <doc:ExternalAccountKey>
-  func createExternalAccountKey(
-    parent: Swift.String,
-    externalAccountKey: ExternalAccountKey?,
-  ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
+  /// Creates a new `PublicCertificateAuthorityServiceClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.PublicCertificateAuthorityServiceStub =
+      try Clients.PublicCertificateAuthorityServiceTransport(options)
+    inner = Clients.PublicCertificateAuthorityServiceRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.PublicCertificateAuthorityServiceLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Creates a new
   /// [ExternalAccountKey][google.cloud.security.publicca.v1.ExternalAccountKey]
@@ -57,38 +52,39 @@ public protocol PublicCertificateAuthorityService {
   /// [google.cloud.security.publicca.v1.ExternalAccountKey]: <doc:ExternalAccountKey>
   ///
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
-  func createExternalAccountKey(
+  public func createExternalAccountKey(
     request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
+  ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
+    try await self.inner.createExternalAccountKey(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``PublicCertificateAuthorityService``.
-  public class PublicCertificateAuthorityServiceClient: PublicCertificateAuthorityService {
-    let inner: any PublicCertificateAuthorityServiceStub
+  /// A Swift protocol to mock `PublicCertificateAuthorityServiceClient`.
+  ///
+  /// To mock `PublicCertificateAuthorityServiceClient` change your functions to receive
+  /// `some PublicCertificateAuthorityServiceProtocol` or `any PublicCertificateAuthorityServiceProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol PublicCertificateAuthorityServiceProtocol {
+    /// See `PublicCertificateAuthorityServiceClient.createExternalAccountKey`.
+    func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
+      -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
 
-    /// Creates a new `PublicCertificateAuthorityServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any PublicCertificateAuthorityServiceStub =
-        try PublicCertificateAuthorityServiceTransport(options)
-      inner = PublicCertificateAuthorityServiceRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = PublicCertificateAuthorityServiceLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `PublicCertificateAuthorityServiceClient.createExternalAccountKey`.
+    func createExternalAccountKey(
+      parent: Swift.String,
+      externalAccountKey: ExternalAccountKey?,
+    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
 
-    /// See `PublicCertificateAuthorityService.createExternalAccountKey`
-    public func createExternalAccountKey(
+    /// See `PublicCertificateAuthorityServiceClient.createExternalAccountKey`.
+    func createExternalAccountKey(
       request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey {
-      try await self.inner.createExternalAccountKey(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
   }
 }
 
 // Default implementations
-extension PublicCertificateAuthorityService {
+extension Clients.PublicCertificateAuthorityServiceProtocol {
   public func createExternalAccountKey(request: CreateExternalAccountKeyRequest) async throws
     -> GoogleCloudSecurityPubliccaV1.ExternalAccountKey
   {

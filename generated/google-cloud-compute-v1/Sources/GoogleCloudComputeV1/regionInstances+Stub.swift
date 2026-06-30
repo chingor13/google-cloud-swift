@@ -28,8 +28,7 @@
   extension Clients {
     protocol RegionInstancesStub {
       func bulkInsert(
-        request: Clients.RegionInstancesClient.BulkInsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -42,8 +41,7 @@
       }
 
       public func bulkInsert(
-        request: Clients.RegionInstancesClient.BulkInsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

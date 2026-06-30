@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.AddressesClient {
+  extension AddressesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.addresses.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.addresses.aggregatedList]: <doc:Addresses/aggregatedList(request:)>

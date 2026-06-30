@@ -28,36 +28,35 @@
   extension Clients {
     protocol LicensesStub {
       func delete(
-        request: Clients.LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.License
 
       func getIamPolicy(
-        request: Clients.LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicensesListResponse
 
       func setIamPolicy(
-        request: Clients.LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.LicensesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -70,7 +69,7 @@
       }
 
       public func delete(
-        request: Clients.LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -92,7 +91,7 @@
       }
 
       public func `get`(
-        request: Clients.LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.License {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -112,7 +111,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -137,7 +136,7 @@
       }
 
       public func insert(
-        request: Clients.LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -160,7 +159,7 @@
       }
 
       public func list(
-        request: Clients.LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicensesListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -185,7 +184,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -210,8 +209,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.LicensesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -236,7 +234,7 @@
       }
 
       public func update(
-        request: Clients.LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

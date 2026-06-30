@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalVmExtensionPoliciesClient {
+  extension GlobalVmExtensionPoliciesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.globalVmExtensionPolicies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.globalVmExtensionPolicies.aggregatedList]: <doc:GlobalVmExtensionPolicies/aggregatedList(request:)>

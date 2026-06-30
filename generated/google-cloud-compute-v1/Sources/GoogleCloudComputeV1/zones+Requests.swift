@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ZonesClient {
+  extension ZonesClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.zones.get] method.
     ///
     /// [google.cloud.compute.v1.zones.get]: <doc:Zones/`get`(request:)>

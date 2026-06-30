@@ -28,32 +28,30 @@
   extension Clients {
     protocol GlobalVmExtensionPoliciesStub {
       func aggregatedList(
-        request: Clients.GlobalVmExtensionPoliciesClient.AggregatedListRequest,
+        request: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse
 
       func delete(
-        request: Clients.GlobalVmExtensionPoliciesClient.DeleteRequest,
+        request: GlobalVmExtensionPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.GlobalVmExtensionPoliciesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicy
 
       func insert(
-        request: Clients.GlobalVmExtensionPoliciesClient.InsertRequest,
+        request: GlobalVmExtensionPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalVmExtensionPoliciesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList
 
       func update(
-        request: Clients.GlobalVmExtensionPoliciesClient.UpdateRequest,
+        request: GlobalVmExtensionPoliciesClient.UpdateRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -67,7 +65,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.GlobalVmExtensionPoliciesClient.AggregatedListRequest,
+        request: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse {
         let path = try { () throws -> Swift.String in
@@ -98,7 +96,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalVmExtensionPoliciesClient.DeleteRequest,
+        request: GlobalVmExtensionPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -129,8 +127,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalVmExtensionPoliciesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -153,7 +150,7 @@
       }
 
       public func insert(
-        request: Clients.GlobalVmExtensionPoliciesClient.InsertRequest,
+        request: GlobalVmExtensionPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -177,8 +174,7 @@
       }
 
       public func list(
-        request: Clients.GlobalVmExtensionPoliciesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -203,7 +199,7 @@
       }
 
       public func update(
-        request: Clients.GlobalVmExtensionPoliciesClient.UpdateRequest,
+        request: GlobalVmExtensionPoliciesClient.UpdateRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

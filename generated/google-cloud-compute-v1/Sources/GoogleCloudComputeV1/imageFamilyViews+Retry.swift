@@ -53,15 +53,15 @@
       }
 
       public func `get`(
-        request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.ImageFamilyViewsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ImageFamilyView
+            (r: ImageFamilyViewsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ImageFamilyView
             in
             return try await self.inner.`get`(request: r, options: o)
           })

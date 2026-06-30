@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.BackendBucketsClient()
+    let client = try GoogleCloudComputeV1.BackendBucketsClient()
     let response = try await client.addSignedUrlKey(
-      request: Clients.BackendBucketsClient.AddSignedUrlKeyRequest()
+      request: BackendBucketsClient.AddSignedUrlKeyRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -60,15 +60,15 @@
       }
 
       public func list(
-        request: Clients.RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.RegionZonesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ZoneList
+            (r: RegionZonesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ZoneList
             in
             return try await self.inner.list(request: r, options: o)
           })

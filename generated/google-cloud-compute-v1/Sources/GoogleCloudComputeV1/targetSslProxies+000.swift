@@ -28,115 +28,110 @@
   /// Service for the `targetSslProxies` resource.
   ///
   /// @Snippet(path: "targetSslProxiesQuickstart")
-  public protocol TargetSslProxies {
+  public class TargetSslProxiesClient: Clients.TargetSslProxiesProtocol {
+    let inner: any Clients.TargetSslProxiesStub
+
+    /// Creates a new `TargetSslProxiesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.TargetSslProxiesStub = try Clients.TargetSslProxiesTransport(options)
+      inner = Clients.TargetSslProxiesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.TargetSslProxiesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified TargetSslProxy resource.
     ///
     /// @Snippet(path: "targetSslProxies_delete")
-    func delete(request: Clients.TargetSslProxiesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified TargetSslProxy resource.
-    func delete(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified TargetSslProxy resource.
     ///
     /// @Snippet(path: "targetSslProxies_get")
-    func `get`(request: Clients.TargetSslProxiesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.TargetSslProxy
-
-    /// Returns the specified TargetSslProxy resource.
-    func `get`(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.TargetSslProxy
+    public func `get`(
+      request: TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetSslProxy {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a TargetSslProxy resource in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "targetSslProxies_insert")
-    func insert(request: Clients.TargetSslProxiesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a TargetSslProxy resource in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      body: TargetSslProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of TargetSslProxy resources
     /// available to the specified project.
     ///
     /// @Snippet(path: "targetSslProxies_list")
-    func list(request: Clients.TargetSslProxiesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.TargetSslProxyList
+    public func list(
+      request: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TargetSslProxyList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of TargetSslProxy resources
     /// available to the specified project.
-    func list(
-      byItem: Clients.TargetSslProxiesClient.ListRequest
-    ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
-
-    /// Retrieves the list of TargetSslProxy resources
-    /// available to the specified project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
+    ///
+    /// @Snippet(path: "targetSslProxies_list")
+    public func list(
+      byItem: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Changes the BackendService for TargetSslProxy.
     ///
     /// @Snippet(path: "targetSslProxies_setBackendService")
-    func setBackendService(request: Clients.TargetSslProxiesClient.SetBackendServiceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the BackendService for TargetSslProxy.
-    func setBackendService(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-      body: TargetSslProxiesSetBackendServiceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setBackendService(
+      request: TargetSslProxiesClient.SetBackendServiceRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setBackendService(request: request, options: options)
+    }
 
     /// Changes the Certificate Map for TargetSslProxy.
     ///
     /// @Snippet(path: "targetSslProxies_setCertificateMap")
-    func setCertificateMap(request: Clients.TargetSslProxiesClient.SetCertificateMapRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the Certificate Map for TargetSslProxy.
-    func setCertificateMap(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-      body: TargetSslProxiesSetCertificateMapRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setCertificateMap(
+      request: TargetSslProxiesClient.SetCertificateMapRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setCertificateMap(request: request, options: options)
+    }
 
     /// Changes the ProxyHeaderType for TargetSslProxy.
     ///
     /// @Snippet(path: "targetSslProxies_setProxyHeader")
-    func setProxyHeader(request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Changes the ProxyHeaderType for TargetSslProxy.
-    func setProxyHeader(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-      body: TargetSslProxiesSetProxyHeaderRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setProxyHeader(
+      request: TargetSslProxiesClient.SetProxyHeaderRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setProxyHeader(request: request, options: options)
+    }
 
     /// Changes SslCertificates for TargetSslProxy.
     ///
     /// @Snippet(path: "targetSslProxies_setSslCertificates")
-    func setSslCertificates(request: Clients.TargetSslProxiesClient.SetSslCertificatesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes SslCertificates for TargetSslProxy.
-    func setSslCertificates(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-      body: TargetSslProxiesSetSslCertificatesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setSslCertificates(
+      request: TargetSslProxiesClient.SetSslCertificatesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setSslCertificates(request: request, options: options)
+    }
 
     /// Sets the SSL policy for TargetSslProxy. The SSL policy specifies the
     /// server-side support for SSL features. This affects connections between
@@ -144,238 +139,212 @@
     /// connection between the load balancer and the backends.
     ///
     /// @Snippet(path: "targetSslProxies_setSslPolicy")
-    func setSslPolicy(request: Clients.TargetSslProxiesClient.SetSslPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the SSL policy for TargetSslProxy. The SSL policy specifies the
-    /// server-side support for SSL features. This affects connections between
-    /// clients and the load balancer. They do not affect the
-    /// connection between the load balancer and the backends.
-    func setSslPolicy(
-      project: Swift.String,
-      targetSslProxy: Swift.String,
-      body: SslPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setSslPolicy(
+      request: TargetSslProxiesClient.SetSslPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setSslPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "targetSslProxies_testIamPermissions")
-    func testIamPermissions(request: Clients.TargetSslProxiesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Deletes the specified TargetSslProxy resource.
-    ///
-    /// @Snippet(path: "targetSslProxies_delete")
-    func delete(
-      request: Clients.TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified TargetSslProxy resource.
-    ///
-    /// @Snippet(path: "targetSslProxies_get")
-    func `get`(
-      request: Clients.TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetSslProxy
-
-    /// Creates a TargetSslProxy resource in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "targetSslProxies_insert")
-    func insert(
-      request: Clients.TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of TargetSslProxy resources
-    /// available to the specified project.
-    ///
-    /// @Snippet(path: "targetSslProxies_list")
-    func list(
-      request: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TargetSslProxyList
-
-    /// Retrieves the list of TargetSslProxy resources
-    /// available to the specified project.
-    func list(
-      byItem: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
-
-    /// Changes the BackendService for TargetSslProxy.
-    ///
-    /// @Snippet(path: "targetSslProxies_setBackendService")
-    func setBackendService(
-      request: Clients.TargetSslProxiesClient.SetBackendServiceRequest,
+    public func testIamPermissions(
+      request: TargetSslProxiesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the Certificate Map for TargetSslProxy.
-    ///
-    /// @Snippet(path: "targetSslProxies_setCertificateMap")
-    func setCertificateMap(
-      request: Clients.TargetSslProxiesClient.SetCertificateMapRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the ProxyHeaderType for TargetSslProxy.
-    ///
-    /// @Snippet(path: "targetSslProxies_setProxyHeader")
-    func setProxyHeader(
-      request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes SslCertificates for TargetSslProxy.
-    ///
-    /// @Snippet(path: "targetSslProxies_setSslCertificates")
-    func setSslCertificates(
-      request: Clients.TargetSslProxiesClient.SetSslCertificatesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the SSL policy for TargetSslProxy. The SSL policy specifies the
-    /// server-side support for SSL features. This affects connections between
-    /// clients and the load balancer. They do not affect the
-    /// connection between the load balancer and the backends.
-    ///
-    /// @Snippet(path: "targetSslProxies_setSslPolicy")
-    func setSslPolicy(
-      request: Clients.TargetSslProxiesClient.SetSslPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "targetSslProxies_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.TargetSslProxiesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``TargetSslProxies``.
-    public class TargetSslProxiesClient: TargetSslProxies {
-      let inner: any TargetSslProxiesStub
+    /// A Swift protocol to mock `TargetSslProxiesClient`.
+    ///
+    /// To mock `TargetSslProxiesClient` change your functions to receive
+    /// `some TargetSslProxiesProtocol` or `any TargetSslProxiesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol TargetSslProxiesProtocol {
+      /// See `TargetSslProxiesClient.delete`.
+      func delete(request: TargetSslProxiesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `TargetSslProxiesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any TargetSslProxiesStub = try TargetSslProxiesTransport(options)
-        inner = TargetSslProxiesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = TargetSslProxiesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `TargetSslProxiesClient.delete`.
+      func delete(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.delete`
-      public func delete(
-        request: Clients.TargetSslProxiesClient.DeleteRequest,
+      /// See `TargetSslProxiesClient.`get``.
+      func `get`(request: TargetSslProxiesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.TargetSslProxy
+
+      /// See `TargetSslProxiesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.TargetSslProxy
+
+      /// See `TargetSslProxiesClient.insert`.
+      func insert(request: TargetSslProxiesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: TargetSslProxy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.list`.
+      func list(request: TargetSslProxiesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.TargetSslProxyList
+
+      /// See `TargetSslProxiesClient.list`.
+      func list(
+        byItem: TargetSslProxiesClient.ListRequest
+      ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
+
+      /// See `TargetSslProxiesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
+
+      /// See `TargetSslProxiesClient.setBackendService`.
+      func setBackendService(request: TargetSslProxiesClient.SetBackendServiceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setBackendService`.
+      func setBackendService(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+        body: TargetSslProxiesSetBackendServiceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setCertificateMap`.
+      func setCertificateMap(request: TargetSslProxiesClient.SetCertificateMapRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setCertificateMap`.
+      func setCertificateMap(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+        body: TargetSslProxiesSetCertificateMapRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setProxyHeader`.
+      func setProxyHeader(request: TargetSslProxiesClient.SetProxyHeaderRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setProxyHeader`.
+      func setProxyHeader(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+        body: TargetSslProxiesSetProxyHeaderRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setSslCertificates`.
+      func setSslCertificates(request: TargetSslProxiesClient.SetSslCertificatesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setSslCertificates`.
+      func setSslCertificates(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+        body: TargetSslProxiesSetSslCertificatesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setSslPolicy`.
+      func setSslPolicy(request: TargetSslProxiesClient.SetSslPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.setSslPolicy`.
+      func setSslPolicy(
+        project: Swift.String,
+        targetSslProxy: Swift.String,
+        body: SslPolicyReference?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.testIamPermissions`.
+      func testIamPermissions(request: TargetSslProxiesClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetSslProxiesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `TargetSslProxiesClient.delete`.
+      func delete(
+        request: TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.`get``.
+      func `get`(
+        request: TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetSslProxy
+
+      /// See `TargetSslProxiesClient.insert`.
+      func insert(
+        request: TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `TargetSslProxiesClient.list`.
+      func list(
+        request: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TargetSslProxyList
+
+      /// See `TargetSslProxiesClient.list`.
+      func list(
+        byItem: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error>
+
+      /// See `TargetSslProxiesClient.setBackendService`.
+      func setBackendService(
+        request: TargetSslProxiesClient.SetBackendServiceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.`get``
-      public func `get`(
-        request: Clients.TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetSslProxy {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `TargetSslProxies.insert`
-      public func insert(
-        request: Clients.TargetSslProxiesClient.InsertRequest,
+      /// See `TargetSslProxiesClient.setCertificateMap`.
+      func setCertificateMap(
+        request: TargetSslProxiesClient.SetCertificateMapRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.list`
-      public func list(
-        request: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TargetSslProxyList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves the list of TargetSslProxy resources
-      /// available to the specified project.
-      public func list(
-        byItem: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `TargetSslProxies.setBackendService`
-      public func setBackendService(
-        request: Clients.TargetSslProxiesClient.SetBackendServiceRequest,
+      /// See `TargetSslProxiesClient.setProxyHeader`.
+      func setProxyHeader(
+        request: TargetSslProxiesClient.SetProxyHeaderRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setBackendService(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.setCertificateMap`
-      public func setCertificateMap(
-        request: Clients.TargetSslProxiesClient.SetCertificateMapRequest,
+      /// See `TargetSslProxiesClient.setSslCertificates`.
+      func setSslCertificates(
+        request: TargetSslProxiesClient.SetSslCertificatesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setCertificateMap(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.setProxyHeader`
-      public func setProxyHeader(
-        request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setProxyHeader(request: request, options: options)
-      }
+      /// See `TargetSslProxiesClient.setSslPolicy`.
+      func setSslPolicy(
+        request: TargetSslProxiesClient.SetSslPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetSslProxies.setSslCertificates`
-      public func setSslCertificates(
-        request: Clients.TargetSslProxiesClient.SetSslCertificatesRequest,
+      /// See `TargetSslProxiesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: TargetSslProxiesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setSslCertificates(request: request, options: options)
-      }
-
-      /// See `TargetSslProxies.setSslPolicy`
-      public func setSslPolicy(
-        request: Clients.TargetSslProxiesClient.SetSslPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setSslPolicy(request: request, options: options)
-      }
-
-      /// See `TargetSslProxies.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.TargetSslProxiesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension TargetSslProxies {
-    public func delete(request: Clients.TargetSslProxiesClient.DeleteRequest) async throws
+  extension Clients.TargetSslProxiesProtocol {
+    public func delete(request: TargetSslProxiesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -384,21 +353,21 @@
       project: Swift.String,
       targetSslProxy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.DeleteRequest().with {
+      let request = TargetSslProxiesClient.DeleteRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.TargetSslProxiesClient.GetRequest) async throws
+    public func `get`(request: TargetSslProxiesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetSslProxy
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetSslProxy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -407,21 +376,21 @@
       project: Swift.String,
       targetSslProxy: Swift.String,
     ) async throws -> GoogleCloudComputeV1.TargetSslProxy {
-      let request = Clients.TargetSslProxiesClient.GetRequest().with {
+      let request = TargetSslProxiesClient.GetRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.TargetSslProxiesClient.InsertRequest) async throws
+    public func insert(request: TargetSslProxiesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -430,33 +399,33 @@
       project: Swift.String,
       body: TargetSslProxy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.InsertRequest().with {
+      let request = TargetSslProxiesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.TargetSslProxiesClient.ListRequest) async throws
+    public func list(request: TargetSslProxiesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.TargetSslProxyList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TargetSslProxyList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.TargetSslProxiesClient.ListRequest
+      byItem: TargetSslProxiesClient.ListRequest
     ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -467,20 +436,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
-      let request = Clients.TargetSslProxiesClient.ListRequest().with {
+      let request = TargetSslProxiesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func setBackendService(request: Clients.TargetSslProxiesClient.SetBackendServiceRequest)
+    public func setBackendService(request: TargetSslProxiesClient.SetBackendServiceRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setBackendService(request: request, options: .init())
     }
 
     public func setBackendService(
-      request: Clients.TargetSslProxiesClient.SetBackendServiceRequest,
+      request: TargetSslProxiesClient.SetBackendServiceRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -491,7 +460,7 @@
       targetSslProxy: Swift.String,
       body: TargetSslProxiesSetBackendServiceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.SetBackendServiceRequest().with {
+      let request = TargetSslProxiesClient.SetBackendServiceRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
         $0.body = body
@@ -499,14 +468,14 @@
       return try await self.setBackendService(request: request)
     }
 
-    public func setCertificateMap(request: Clients.TargetSslProxiesClient.SetCertificateMapRequest)
+    public func setCertificateMap(request: TargetSslProxiesClient.SetCertificateMapRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setCertificateMap(request: request, options: .init())
     }
 
     public func setCertificateMap(
-      request: Clients.TargetSslProxiesClient.SetCertificateMapRequest,
+      request: TargetSslProxiesClient.SetCertificateMapRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -517,7 +486,7 @@
       targetSslProxy: Swift.String,
       body: TargetSslProxiesSetCertificateMapRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.SetCertificateMapRequest().with {
+      let request = TargetSslProxiesClient.SetCertificateMapRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
         $0.body = body
@@ -525,15 +494,14 @@
       return try await self.setCertificateMap(request: request)
     }
 
-    public func setProxyHeader(request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setProxyHeader(request: TargetSslProxiesClient.SetProxyHeaderRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setProxyHeader(request: request, options: .init())
     }
 
     public func setProxyHeader(
-      request: Clients.TargetSslProxiesClient.SetProxyHeaderRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.SetProxyHeaderRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -543,7 +511,7 @@
       targetSslProxy: Swift.String,
       body: TargetSslProxiesSetProxyHeaderRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.SetProxyHeaderRequest().with {
+      let request = TargetSslProxiesClient.SetProxyHeaderRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
         $0.body = body
@@ -551,14 +519,14 @@
       return try await self.setProxyHeader(request: request)
     }
 
-    public func setSslCertificates(
-      request: Clients.TargetSslProxiesClient.SetSslCertificatesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func setSslCertificates(request: TargetSslProxiesClient.SetSslCertificatesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.setSslCertificates(request: request, options: .init())
     }
 
     public func setSslCertificates(
-      request: Clients.TargetSslProxiesClient.SetSslCertificatesRequest,
+      request: TargetSslProxiesClient.SetSslCertificatesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -569,7 +537,7 @@
       targetSslProxy: Swift.String,
       body: TargetSslProxiesSetSslCertificatesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.SetSslCertificatesRequest().with {
+      let request = TargetSslProxiesClient.SetSslCertificatesRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
         $0.body = body
@@ -577,15 +545,14 @@
       return try await self.setSslCertificates(request: request)
     }
 
-    public func setSslPolicy(request: Clients.TargetSslProxiesClient.SetSslPolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setSslPolicy(request: TargetSslProxiesClient.SetSslPolicyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setSslPolicy(request: request, options: .init())
     }
 
     public func setSslPolicy(
-      request: Clients.TargetSslProxiesClient.SetSslPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: TargetSslProxiesClient.SetSslPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -595,7 +562,7 @@
       targetSslProxy: Swift.String,
       body: SslPolicyReference?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.TargetSslProxiesClient.SetSslPolicyRequest().with {
+      let request = TargetSslProxiesClient.SetSslPolicyRequest().with {
         $0.project = project
         $0.targetSslProxy = targetSslProxy
         $0.body = body
@@ -603,14 +570,14 @@
       return try await self.setSslPolicy(request: request)
     }
 
-    public func testIamPermissions(
-      request: Clients.TargetSslProxiesClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+    public func testIamPermissions(request: TargetSslProxiesClient.TestIamPermissionsRequest)
+      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.TargetSslProxiesClient.TestIamPermissionsRequest,
+      request: TargetSslProxiesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -621,7 +588,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.TargetSslProxiesClient.TestIamPermissionsRequest().with {
+      let request = TargetSslProxiesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body

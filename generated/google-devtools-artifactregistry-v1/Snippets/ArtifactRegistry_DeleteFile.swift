@@ -25,7 +25,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(
-  client: some ArtifactRegistry, projectId: String, locationId: String, repositoryId: String,
+  client: ArtifactRegistryClient, projectId: String, locationId: String, repositoryId: String,
   fileId: String
 ) async throws {
   let poller = try await client.deleteFile(
@@ -44,7 +44,7 @@ func sample(
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleDevtoolsArtifactregistryV1.Clients.ArtifactRegistryClient()
+      let client = try GoogleDevtoolsArtifactregistryV1.ArtifactRegistryClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         repositoryId: "[placeholder]", fileId: "[placeholder]")

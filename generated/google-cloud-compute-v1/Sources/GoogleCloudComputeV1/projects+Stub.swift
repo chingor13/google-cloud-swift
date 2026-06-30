@@ -28,67 +28,60 @@
   extension Clients {
     protocol ProjectsStub {
       func disableXpnHost(
-        request: Clients.ProjectsClient.DisableXpnHostRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func disableXpnResource(
-        request: Clients.ProjectsClient.DisableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func enableXpnHost(
-        request: Clients.ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func enableXpnResource(
-        request: Clients.ProjectsClient.EnableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project
 
       func getXpnHost(
-        request: Clients.ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project
 
       func getXpnResources(
-        request: Clients.ProjectsClient.GetXpnResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources
 
       func listXpnHosts(
-        request: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.XpnHostList
 
       func moveDisk(
-        request: Clients.ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func moveInstance(
-        request: Clients.ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setCloudArmorTier(
-        request: Clients.ProjectsClient.SetCloudArmorTierRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setCommonInstanceMetadata(
-        request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest,
+        request: ProjectsClient.SetCommonInstanceMetadataRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setDefaultNetworkTier(
-        request: Clients.ProjectsClient.SetDefaultNetworkTierRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setUsageExportBucket(
-        request: Clients.ProjectsClient.SetUsageExportBucketRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -101,8 +94,7 @@
       }
 
       public func disableXpnHost(
-        request: Clients.ProjectsClient.DisableXpnHostRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -121,8 +113,7 @@
       }
 
       public func disableXpnResource(
-        request: Clients.ProjectsClient.DisableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -145,7 +136,7 @@
       }
 
       public func enableXpnHost(
-        request: Clients.ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -164,8 +155,7 @@
       }
 
       public func enableXpnResource(
-        request: Clients.ProjectsClient.EnableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -188,7 +178,7 @@
       }
 
       public func `get`(
-        request: Clients.ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -205,7 +195,7 @@
       }
 
       public func getXpnHost(
-        request: Clients.ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -222,8 +212,7 @@
       }
 
       public func getXpnResources(
-        request: Clients.ProjectsClient.GetXpnResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -248,7 +237,7 @@
       }
 
       public func listXpnHosts(
-        request: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.XpnHostList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -277,7 +266,7 @@
       }
 
       public func moveDisk(
-        request: Clients.ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -300,7 +289,7 @@
       }
 
       public func moveInstance(
-        request: Clients.ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -323,8 +312,7 @@
       }
 
       public func setCloudArmorTier(
-        request: Clients.ProjectsClient.SetCloudArmorTierRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -347,7 +335,7 @@
       }
 
       public func setCommonInstanceMetadata(
-        request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest,
+        request: ProjectsClient.SetCommonInstanceMetadataRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -371,8 +359,7 @@
       }
 
       public func setDefaultNetworkTier(
-        request: Clients.ProjectsClient.SetDefaultNetworkTierRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -395,8 +382,7 @@
       }
 
       public func setUsageExportBucket(
-        request: Clients.ProjectsClient.SetUsageExportBucketRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

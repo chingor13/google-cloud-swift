@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstanceGroupManagersClient {
+  extension RegionInstanceGroupManagersClient {
     /// Synthetic request message for the [abandonInstances()][google.cloud.compute.v1.regionInstanceGroupManagers.abandonInstances] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroupManagers.abandonInstances]: <doc:RegionInstanceGroupManagers/abandonInstances(request:)>

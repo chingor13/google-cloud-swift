@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SecurityPoliciesClient {
+  extension SecurityPoliciesClient {
     /// Synthetic request message for the [addRule()][google.cloud.compute.v1.securityPolicies.addRule] method.
     ///
     /// [google.cloud.compute.v1.securityPolicies.addRule]: <doc:SecurityPolicies/addRule(request:)>

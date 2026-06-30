@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.TargetHttpsProxiesClient()
+    let client = try GoogleCloudComputeV1.TargetHttpsProxiesClient()
     let items = try client.aggregatedList(
-      byItem: Clients.TargetHttpsProxiesClient.AggregatedListRequest()
+      byItem: TargetHttpsProxiesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

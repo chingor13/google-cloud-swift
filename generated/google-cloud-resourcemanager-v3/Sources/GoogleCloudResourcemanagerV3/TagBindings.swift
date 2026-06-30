@@ -30,98 +30,18 @@ import Logging
 /// different Google Cloud resources throughout the GCP resource hierarchy.
 ///
 /// @Snippet(path: "TagBindingsQuickstart")
-public protocol TagBindings {
-  /// Lists the TagBindings for the given Google Cloud resource, as specified
-  /// with `parent`.
-  ///
-  /// NOTE: The `parent` field is expected to be a full resource name:
-  /// https://cloud.google.com/apis/design/resource_names#full_resource_name
-  ///
-  /// @Snippet(path: "TagBindings_ListTagBindings")
-  func listTagBindings(request: ListTagBindingsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse
+public class TagBindingsClient: Clients.TagBindingsProtocol {
+  let inner: any Clients.TagBindingsStub
 
-  /// Lists the TagBindings for the given Google Cloud resource, as specified
-  /// with `parent`.
-  ///
-  /// NOTE: The `parent` field is expected to be a full resource name:
-  /// https://cloud.google.com/apis/design/resource_names#full_resource_name
-  func listTagBindings(
-    byItem: ListTagBindingsRequest
-  ) throws -> any AsyncSequence<TagBinding, Swift.Error>
-
-  /// Lists the TagBindings for the given Google Cloud resource, as specified
-  /// with `parent`.
-  ///
-  /// NOTE: The `parent` field is expected to be a full resource name:
-  /// https://cloud.google.com/apis/design/resource_names#full_resource_name
-  func listTagBindings(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<TagBinding, Swift.Error>
-
-  /// Creates a TagBinding between a TagValue and a Google Cloud resource.
-  ///
-  /// @Snippet(path: "TagBindings_CreateTagBinding")
-  func createTagBinding(request: CreateTagBindingRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Creates a TagBinding between a TagValue and a Google Cloud resource.
-  func createTagBinding(withPolling: CreateTagBindingRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<TagBinding>
-
-  /// Creates a TagBinding between a TagValue and a Google Cloud resource.
-  func createTagBinding(
-    tagBinding: TagBinding?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding>
-
-  /// Deletes a TagBinding.
-  ///
-  /// @Snippet(path: "TagBindings_DeleteTagBinding")
-  func deleteTagBinding(request: DeleteTagBindingRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Deletes a TagBinding.
-  func deleteTagBinding(withPolling: DeleteTagBindingRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a TagBinding.
-  func deleteTagBinding(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Return a list of effective tags for the given Google Cloud resource, as
-  /// specified in `parent`.
-  ///
-  /// @Snippet(path: "TagBindings_ListEffectiveTags")
-  func listEffectiveTags(request: ListEffectiveTagsRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
-
-  /// Return a list of effective tags for the given Google Cloud resource, as
-  /// specified in `parent`.
-  func listEffectiveTags(
-    byItem: ListEffectiveTagsRequest
-  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
-
-  /// Return a list of effective tags for the given Google Cloud resource, as
-  /// specified in `parent`.
-  func listEffectiveTags(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "TagBindings_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `TagBindingsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.TagBindingsStub = try Clients.TagBindingsTransport(options)
+    inner = Clients.TagBindingsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.TagBindingsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists the TagBindings for the given Google Cloud resource, as specified
   /// with `parent`.
@@ -130,248 +50,306 @@ public protocol TagBindings {
   /// https://cloud.google.com/apis/design/resource_names#full_resource_name
   ///
   /// @Snippet(path: "TagBindings_ListTagBindings")
-  func listTagBindings(
+  public func listTagBindings(
     request: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse {
+    try await self.inner.listTagBindings(request: request, options: options)
+  }
 
   /// Lists the TagBindings for the given Google Cloud resource, as specified
   /// with `parent`.
   ///
   /// NOTE: The `parent` field is expected to be a full resource name:
   /// https://cloud.google.com/apis/design/resource_names#full_resource_name
-  func listTagBindings(
+  ///
+  /// @Snippet(path: "TagBindings_ListTagBindings")
+  public func listTagBindings(
     byItem: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<TagBinding, Swift.Error>
+  ) throws -> any AsyncSequence<TagBinding, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listTagBindings(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Creates a TagBinding between a TagValue and a Google Cloud resource.
   ///
   /// @Snippet(path: "TagBindings_CreateTagBinding")
-  func createTagBinding(
+  public func createTagBinding(
     request: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createTagBinding(request: request, options: options)
+  }
 
   /// Creates a TagBinding between a TagValue and a Google Cloud resource.
-  func createTagBinding(
+  ///
+  /// @Snippet(path: "TagBindings_CreateTagBinding")
+  public func createTagBinding(
     withPolling: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding>
+  ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<TagBinding>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try TagBinding(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createTagBinding(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagBinding>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a TagBinding.
   ///
   /// @Snippet(path: "TagBindings_DeleteTagBinding")
-  func deleteTagBinding(
+  public func deleteTagBinding(
     request: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteTagBinding(request: request, options: options)
+  }
 
   /// Deletes a TagBinding.
-  func deleteTagBinding(
+  ///
+  /// @Snippet(path: "TagBindings_DeleteTagBinding")
+  public func deleteTagBinding(
     withPolling: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteTagBinding(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Return a list of effective tags for the given Google Cloud resource, as
   /// specified in `parent`.
   ///
   /// @Snippet(path: "TagBindings_ListEffectiveTags")
-  func listEffectiveTags(
+  public func listEffectiveTags(
     request: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse {
+    try await self.inner.listEffectiveTags(request: request, options: options)
+  }
 
   /// Return a list of effective tags for the given Google Cloud resource, as
   /// specified in `parent`.
-  func listEffectiveTags(
+  ///
+  /// @Snippet(path: "TagBindings_ListEffectiveTags")
+  public func listEffectiveTags(
     byItem: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
+  ) throws -> any AsyncSequence<EffectiveTag, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listEffectiveTags(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagBindings_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``TagBindings``.
-  public class TagBindingsClient: TagBindings {
-    let inner: any TagBindingsStub
+  /// A Swift protocol to mock `TagBindingsClient`.
+  ///
+  /// To mock `TagBindingsClient` change your functions to receive
+  /// `some TagBindingsProtocol` or `any TagBindingsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol TagBindingsProtocol {
+    /// See `TagBindingsClient.listTagBindings`.
+    func listTagBindings(request: ListTagBindingsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse
 
-    /// Creates a new `TagBindingsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any TagBindingsStub = try TagBindingsTransport(options)
-      inner = TagBindingsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = TagBindingsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `TagBindingsClient.listTagBindings`.
+    func listTagBindings(
+      byItem: ListTagBindingsRequest
+    ) throws -> any AsyncSequence<TagBinding, Swift.Error>
 
-    /// See `TagBindings.listTagBindings`
-    public func listTagBindings(
+    /// See `TagBindingsClient.listTagBindings`.
+    func listTagBindings(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<TagBinding, Swift.Error>
+
+    /// See `TagBindingsClient.createTagBinding`.
+    func createTagBinding(request: CreateTagBindingRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `TagBindingsClient.createTagBinding`.
+    func createTagBinding(withPolling: CreateTagBindingRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<TagBinding>
+
+    /// See `TagBindingsClient.createTagBinding`.
+    func createTagBinding(
+      tagBinding: TagBinding?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding>
+
+    /// See `TagBindingsClient.deleteTagBinding`.
+    func deleteTagBinding(request: DeleteTagBindingRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `TagBindingsClient.deleteTagBinding`.
+    func deleteTagBinding(withPolling: DeleteTagBindingRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `TagBindingsClient.deleteTagBinding`.
+    func deleteTagBinding(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `TagBindingsClient.listEffectiveTags`.
+    func listEffectiveTags(request: ListEffectiveTagsRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
+
+    /// See `TagBindingsClient.listEffectiveTags`.
+    func listEffectiveTags(
+      byItem: ListEffectiveTagsRequest
+    ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
+
+    /// See `TagBindingsClient.listEffectiveTags`.
+    func listEffectiveTags(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
+
+    /// See `TagBindingsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `TagBindingsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `TagBindingsClient.listTagBindings`.
+    func listTagBindings(
       request: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse {
-      try await self.inner.listTagBindings(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse
 
-    /// Lists the TagBindings for the given Google Cloud resource, as specified
-    /// with `parent`.
-    ///
-    /// NOTE: The `parent` field is expected to be a full resource name:
-    /// https://cloud.google.com/apis/design/resource_names#full_resource_name
-    public func listTagBindings(
+    /// See `TagBindingsClient.listTagBindings`.
+    func listTagBindings(
       byItem: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<TagBinding, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listTagBindings(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<TagBinding, Swift.Error>
 
-    /// See `TagBindings.createTagBinding`
-    public func createTagBinding(
+    /// See `TagBindingsClient.createTagBinding`.
+    func createTagBinding(
       request: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createTagBinding(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a TagBinding between a TagValue and a Google Cloud resource.
-    public func createTagBinding(
+    /// See `TagBindingsClient.createTagBinding`.
+    func createTagBinding(
       withPolling: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TagBinding>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<TagBinding>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try TagBinding(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createTagBinding(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagBinding>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagBindings.deleteTagBinding`
-    public func deleteTagBinding(
+    /// See `TagBindingsClient.deleteTagBinding`.
+    func deleteTagBinding(
       request: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteTagBinding(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a TagBinding.
-    public func deleteTagBinding(
+    /// See `TagBindingsClient.deleteTagBinding`.
+    func deleteTagBinding(
       withPolling: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteTagBinding(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `TagBindings.listEffectiveTags`
-    public func listEffectiveTags(
+    /// See `TagBindingsClient.listEffectiveTags`.
+    func listEffectiveTags(
       request: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse {
-      try await self.inner.listEffectiveTags(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
 
-    /// Return a list of effective tags for the given Google Cloud resource, as
-    /// specified in `parent`.
-    public func listEffectiveTags(
+    /// See `TagBindingsClient.listEffectiveTags`.
+    func listEffectiveTags(
       byItem: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<EffectiveTag, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listEffectiveTags(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
 
-    /// See `TagBindings.getOperation`
-    public func getOperation(
+    /// See `TagBindingsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension TagBindings {
+extension Clients.TagBindingsProtocol {
   public func listTagBindings(request: ListTagBindingsRequest) async throws
     -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse
   {

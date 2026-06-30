@@ -28,37 +28,34 @@
   extension Clients {
     protocol PublicAdvertisedPrefixesStub {
       func announce(
-        request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest,
+        request: PublicAdvertisedPrefixesClient.AnnounceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest,
+        request: PublicAdvertisedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.PublicAdvertisedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
 
       func insert(
-        request: Clients.PublicAdvertisedPrefixesClient.InsertRequest,
+        request: PublicAdvertisedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
 
       func patch(
-        request: Clients.PublicAdvertisedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func withdraw(
-        request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest,
+        request: PublicAdvertisedPrefixesClient.WithdrawRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -72,7 +69,7 @@
       }
 
       public func announce(
-        request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest,
+        request: PublicAdvertisedPrefixesClient.AnnounceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -99,7 +96,7 @@
       }
 
       public func delete(
-        request: Clients.PublicAdvertisedPrefixesClient.DeleteRequest,
+        request: PublicAdvertisedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -126,8 +123,7 @@
       }
 
       public func `get`(
-        request: Clients.PublicAdvertisedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -151,7 +147,7 @@
       }
 
       public func insert(
-        request: Clients.PublicAdvertisedPrefixesClient.InsertRequest,
+        request: PublicAdvertisedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -175,8 +171,7 @@
       }
 
       public func list(
-        request: Clients.PublicAdvertisedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -201,8 +196,7 @@
       }
 
       public func patch(
-        request: Clients.PublicAdvertisedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -232,7 +226,7 @@
       }
 
       public func withdraw(
-        request: Clients.PublicAdvertisedPrefixesClient.WithdrawRequest,
+        request: PublicAdvertisedPrefixesClient.WithdrawRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

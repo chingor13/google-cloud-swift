@@ -28,77 +28,71 @@
   extension Clients {
     protocol RoutersStub {
       func aggregatedList(
-        request: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterAggregatedList
 
       func delete(
-        request: Clients.RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteRoutePolicy(
-        request: Clients.RoutersClient.DeleteRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Router
 
       func getNatIpInfo(
-        request: Clients.RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
 
       func getNatMappingInfo(
-        request: Clients.RoutersClient.GetNatMappingInfoRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
 
       func getRoutePolicy(
-        request: Clients.RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
 
       func getRouterStatus(
-        request: Clients.RoutersClient.GetRouterStatusRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
 
       func insert(
-        request: Clients.RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterList
 
       func listBgpRoutes(
-        request: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
 
       func listRoutePolicies(
-        request: Clients.RoutersClient.ListRoutePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
 
       func patch(
-        request: Clients.RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRoutePolicy(
-        request: Clients.RoutersClient.PatchRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func preview(
-        request: Clients.RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
 
       func update(
-        request: Clients.RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateRoutePolicy(
-        request: Clients.RoutersClient.UpdateRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -111,7 +105,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -141,7 +135,7 @@
       }
 
       public func delete(
-        request: Clients.RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -167,8 +161,7 @@
       }
 
       public func deleteRoutePolicy(
-        request: Clients.RoutersClient.DeleteRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -195,7 +188,7 @@
       }
 
       public func `get`(
-        request: Clients.RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Router {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -219,7 +212,7 @@
       }
 
       public func getNatIpInfo(
-        request: Clients.RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -245,8 +238,7 @@
       }
 
       public func getNatMappingInfo(
-        request: Clients.RoutersClient.GetNatMappingInfoRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -279,7 +271,7 @@
       }
 
       public func getRoutePolicy(
-        request: Clients.RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -305,8 +297,7 @@
       }
 
       public func getRouterStatus(
-        request: Clients.RoutersClient.GetRouterStatusRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -330,7 +321,7 @@
       }
 
       public func insert(
-        request: Clients.RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -356,7 +347,7 @@
       }
 
       public func list(
-        request: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -384,7 +375,7 @@
       }
 
       public func listBgpRoutes(
-        request: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -422,8 +413,7 @@
       }
 
       public func listRoutePolicies(
-        request: Clients.RoutersClient.ListRoutePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -455,7 +445,7 @@
       }
 
       public func patch(
-        request: Clients.RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -485,8 +475,7 @@
       }
 
       public func patchRoutePolicy(
-        request: Clients.RoutersClient.PatchRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -516,7 +505,7 @@
       }
 
       public func preview(
-        request: Clients.RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -544,7 +533,7 @@
       }
 
       public func update(
-        request: Clients.RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -574,8 +563,7 @@
       }
 
       public func updateRoutePolicy(
-        request: Clients.RoutersClient.UpdateRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

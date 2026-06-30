@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some Reservations) async throws {
+  func sample(client: ReservationsClient) async throws {
     let response = try await client.update(
-      request: Clients.ReservationsClient.UpdateRequest()
+      request: ReservationsClient.UpdateRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.ReservationsClient()
+        let client = try GoogleCloudComputeV1.ReservationsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

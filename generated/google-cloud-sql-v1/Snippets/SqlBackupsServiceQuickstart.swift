@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample(projectId: String, ) async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlBackupsServiceClient()
+    let client = try GoogleCloudSqlV1.SqlBackupsServiceClient()
     let items = try client.listBackups(
       byItem: ListBackupsRequest()
         .with {

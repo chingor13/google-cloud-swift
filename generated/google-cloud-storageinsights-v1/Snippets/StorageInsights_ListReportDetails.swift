@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(
-  client: some StorageInsights, projectId: String, locationId: String, reportConfigId: String
+  client: StorageInsightsClient, projectId: String, locationId: String, reportConfigId: String
 ) async throws {
   let items = try client.listReportDetails(
     byItem: ListReportDetailsRequest()
@@ -42,7 +42,7 @@ func sample(
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudStorageinsightsV1.Clients.StorageInsightsClient()
+      let client = try GoogleCloudStorageinsightsV1.StorageInsightsClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         reportConfigId: "[placeholder]")

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.SslPoliciesClient {
+  extension SslPoliciesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.sslPolicies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.sslPolicies.aggregatedList]: <doc:SslPolicies/aggregatedList(request:)>

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.TargetGrpcProxiesClient {
+  extension TargetGrpcProxiesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.targetGrpcProxies.delete] method.
     ///
     /// [google.cloud.compute.v1.targetGrpcProxies.delete]: <doc:TargetGrpcProxies/delete(request:)>

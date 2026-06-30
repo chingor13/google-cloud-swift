@@ -28,7 +28,7 @@
   extension Clients {
     protocol ImageFamilyViewsStub {
       func `get`(
-        request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageFamilyView
     }
 
@@ -41,7 +41,7 @@
       }
 
       public func `get`(
-        request: Clients.ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

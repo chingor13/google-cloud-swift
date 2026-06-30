@@ -28,11 +28,11 @@
   extension Clients {
     protocol NetworkProfilesStub {
       func `get`(
-        request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile
 
       func list(
-        request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -67,7 +67,7 @@
       }
 
       public func list(
-        request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

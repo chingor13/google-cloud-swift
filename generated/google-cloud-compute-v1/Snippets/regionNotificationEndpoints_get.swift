@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some RegionNotificationEndpoints) async throws {
+  func sample(client: RegionNotificationEndpointsClient) async throws {
     let response = try await client.`get`(
-      request: Clients.RegionNotificationEndpointsClient.GetRequest()
+      request: RegionNotificationEndpointsClient.GetRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.RegionNotificationEndpointsClient()
+        let client = try GoogleCloudComputeV1.RegionNotificationEndpointsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

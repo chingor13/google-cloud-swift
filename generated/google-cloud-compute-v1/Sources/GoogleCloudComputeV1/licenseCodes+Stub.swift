@@ -28,21 +28,19 @@
   extension Clients {
     protocol LicenseCodesStub {
       func `get`(
-        request: Clients.LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicenseCode
 
       func getIamPolicy(
-        request: Clients.LicenseCodesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setIamPolicy(
-        request: Clients.LicenseCodesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.LicenseCodesClient.TestIamPermissionsRequest,
+        request: LicenseCodesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -56,7 +54,7 @@
       }
 
       public func `get`(
-        request: Clients.LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicenseCode {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -78,8 +76,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.LicenseCodesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -104,8 +101,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.LicenseCodesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -130,7 +126,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.LicenseCodesClient.TestIamPermissionsRequest,
+        request: LicenseCodesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

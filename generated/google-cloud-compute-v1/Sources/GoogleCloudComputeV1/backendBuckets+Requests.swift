@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.BackendBucketsClient {
+  extension BackendBucketsClient {
     /// Synthetic request message for the [addSignedUrlKey()][google.cloud.compute.v1.backendBuckets.addSignedUrlKey] method.
     ///
     /// [google.cloud.compute.v1.backendBuckets.addSignedUrlKey]: <doc:BackendBuckets/addSignedUrlKey(request:)>

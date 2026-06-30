@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.NetworksClient()
+    let client = try GoogleCloudComputeV1.NetworksClient()
     let response = try await client.addPeering(
-      request: Clients.NetworksClient.AddPeeringRequest()
+      request: NetworksClient.AddPeeringRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

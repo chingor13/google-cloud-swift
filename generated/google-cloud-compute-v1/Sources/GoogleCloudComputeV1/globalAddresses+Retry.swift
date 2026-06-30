@@ -53,90 +53,89 @@
       }
 
       public func delete(
-        request: Clients.GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.GlobalAddressesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalAddressesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Address {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.GlobalAddressesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Address
+            (r: GlobalAddressesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Address
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.GlobalAddressesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalAddressesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AddressList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.GlobalAddressesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.AddressList
+            (r: GlobalAddressesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.AddressList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func move(
-        request: Clients.GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.GlobalAddressesClient.MoveRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalAddressesClient.MoveRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.move(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: Clients.GlobalAddressesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalAddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.GlobalAddressesClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalAddressesClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
@@ -144,7 +143,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.GlobalAddressesClient.TestIamPermissionsRequest,
+        request: GlobalAddressesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -152,10 +151,8 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.GlobalAddressesClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: GlobalAddressesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })

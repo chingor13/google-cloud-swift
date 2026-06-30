@@ -28,48 +28,48 @@
   extension Clients {
     protocol InterconnectAttachmentGroupsStub {
       func delete(
-        request: Clients.InterconnectAttachmentGroupsClient.DeleteRequest,
+        request: InterconnectAttachmentGroupsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.InterconnectAttachmentGroupsClient.GetRequest,
+        request: InterconnectAttachmentGroupsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroup
 
       func getIamPolicy(
-        request: Clients.InterconnectAttachmentGroupsClient.GetIamPolicyRequest,
+        request: InterconnectAttachmentGroupsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func getOperationalStatus(
-        request: Clients.InterconnectAttachmentGroupsClient.GetOperationalStatusRequest,
+        request: InterconnectAttachmentGroupsClient.GetOperationalStatusRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws
         -> GoogleCloudComputeV1.InterconnectAttachmentGroupsGetOperationalStatusResponse
 
       func insert(
-        request: Clients.InterconnectAttachmentGroupsClient.InsertRequest,
+        request: InterconnectAttachmentGroupsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.InterconnectAttachmentGroupsClient.ListRequest,
+        request: InterconnectAttachmentGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroupsListResponse
 
       func patch(
-        request: Clients.InterconnectAttachmentGroupsClient.PatchRequest,
+        request: InterconnectAttachmentGroupsClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.InterconnectAttachmentGroupsClient.SetIamPolicyRequest,
+        request: InterconnectAttachmentGroupsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: Clients.InterconnectAttachmentGroupsClient.TestIamPermissionsRequest,
+        request: InterconnectAttachmentGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -83,7 +83,7 @@
       }
 
       public func delete(
-        request: Clients.InterconnectAttachmentGroupsClient.DeleteRequest,
+        request: InterconnectAttachmentGroupsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -110,7 +110,7 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectAttachmentGroupsClient.GetRequest,
+        request: InterconnectAttachmentGroupsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroup {
         let path = try { () throws -> Swift.String in
@@ -135,7 +135,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.InterconnectAttachmentGroupsClient.GetIamPolicyRequest,
+        request: InterconnectAttachmentGroupsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -161,7 +161,7 @@
       }
 
       public func getOperationalStatus(
-        request: Clients.InterconnectAttachmentGroupsClient.GetOperationalStatusRequest,
+        request: InterconnectAttachmentGroupsClient.GetOperationalStatusRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws
         -> GoogleCloudComputeV1.InterconnectAttachmentGroupsGetOperationalStatusResponse
@@ -189,7 +189,7 @@
       }
 
       public func insert(
-        request: Clients.InterconnectAttachmentGroupsClient.InsertRequest,
+        request: InterconnectAttachmentGroupsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -213,7 +213,7 @@
       }
 
       public func list(
-        request: Clients.InterconnectAttachmentGroupsClient.ListRequest,
+        request: InterconnectAttachmentGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroupsListResponse {
         let path = try { () throws -> Swift.String in
@@ -239,7 +239,7 @@
       }
 
       public func patch(
-        request: Clients.InterconnectAttachmentGroupsClient.PatchRequest,
+        request: InterconnectAttachmentGroupsClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -271,7 +271,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.InterconnectAttachmentGroupsClient.SetIamPolicyRequest,
+        request: InterconnectAttachmentGroupsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -297,7 +297,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.InterconnectAttachmentGroupsClient.TestIamPermissionsRequest,
+        request: InterconnectAttachmentGroupsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

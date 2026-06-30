@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InstantSnapshotsClient {
+  extension InstantSnapshotsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.instantSnapshots.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.instantSnapshots.aggregatedList]: <doc:InstantSnapshots/aggregatedList(request:)>

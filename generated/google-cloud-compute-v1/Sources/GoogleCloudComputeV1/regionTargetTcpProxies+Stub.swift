@@ -28,23 +28,19 @@
   extension Clients {
     protocol RegionTargetTcpProxiesStub {
       func delete(
-        request: Clients.RegionTargetTcpProxiesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionTargetTcpProxiesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
 
       func insert(
-        request: Clients.RegionTargetTcpProxiesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionTargetTcpProxiesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList
     }
 
@@ -57,8 +53,7 @@
       }
 
       public func delete(
-        request: Clients.RegionTargetTcpProxiesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -86,8 +81,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionTargetTcpProxiesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -113,8 +107,7 @@
       }
 
       public func insert(
-        request: Clients.RegionTargetTcpProxiesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -140,8 +133,7 @@
       }
 
       public func list(
-        request: Clients.RegionTargetTcpProxiesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

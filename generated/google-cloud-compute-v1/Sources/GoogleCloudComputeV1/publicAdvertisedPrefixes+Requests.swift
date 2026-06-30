@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.PublicAdvertisedPrefixesClient {
+  extension PublicAdvertisedPrefixesClient {
     /// Synthetic request message for the [announce()][google.cloud.compute.v1.publicAdvertisedPrefixes.announce] method.
     ///
     /// [google.cloud.compute.v1.publicAdvertisedPrefixes.announce]: <doc:PublicAdvertisedPrefixes/announce(request:)>

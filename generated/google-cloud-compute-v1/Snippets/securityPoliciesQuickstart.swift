@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.SecurityPoliciesClient()
+    let client = try GoogleCloudComputeV1.SecurityPoliciesClient()
     let response = try await client.addRule(
-      request: Clients.SecurityPoliciesClient.AddRuleRequest()
+      request: SecurityPoliciesClient.AddRuleRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

@@ -28,7 +28,20 @@
   /// Service for the `regionInstanceGroupManagers` resource.
   ///
   /// @Snippet(path: "regionInstanceGroupManagersQuickstart")
-  public protocol RegionInstanceGroupManagers {
+  public class RegionInstanceGroupManagersClient: Clients.RegionInstanceGroupManagersProtocol {
+    let inner: any Clients.RegionInstanceGroupManagersStub
+
+    /// Creates a new `RegionInstanceGroupManagersClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionInstanceGroupManagersStub =
+        try Clients.RegionInstanceGroupManagersTransport(options)
+      inner = Clients.RegionInstanceGroupManagersRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionInstanceGroupManagersLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Flags the specified instances to be immediately removed from the managed
     /// instance group. Abandoning an instance does not delete the
     /// instance, but it does remove the instance from any target pools that are
@@ -46,46 +59,22 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_abandonInstances")
-    func abandonInstances(
-      request: Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances to be immediately removed from the managed
-    /// instance group. Abandoning an instance does not delete the
-    /// instance, but it does remove the instance from any target pools that are
-    /// applied by the managed instance group. This method reduces thetargetSize of the managed instance group by the
-    /// number of instances that you abandon. This operation is marked asDONE when the action is scheduled even if the instances have
-    /// not yet been removed from the group. You must separately verify the
-    /// status of the abandoning action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func abandonInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersAbandonInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func abandonInstances(
+      request: RegionInstanceGroupManagersClient.AbandonInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.abandonInstances(request: request, options: options)
+    }
 
     /// Apply updates to selected instances the managed instance group.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_applyUpdatesToInstances")
-    func applyUpdatesToInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Apply updates to selected instances the managed instance group.
-    func applyUpdatesToInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersApplyUpdatesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func applyUpdatesToInstances(
+      request: RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.applyUpdatesToInstances(request: request, options: options)
+    }
 
     /// Creates instances with per-instance configurations in this regional managed
     /// instance group. Instances are created using the current instance template.
@@ -95,36 +84,23 @@
     /// method.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_createInstances")
-    func createInstances(request: Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Creates instances with per-instance configurations in this regional managed
-    /// instance group. Instances are created using the current instance template.
-    /// The create instances operation is marked DONE if
-    /// the createInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of thecreating or actions with the listmanagedinstances
-    /// method.
-    func createInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersCreateInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func createInstances(
+      request: RegionInstanceGroupManagersClient.CreateInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.createInstances(request: request, options: options)
+    }
 
     /// Deletes the specified managed instance group and all of the instances
     /// in that group.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_delete")
-    func delete(request: Clients.RegionInstanceGroupManagersClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified managed instance group and all of the instances
-    /// in that group.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionInstanceGroupManagersClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Flags the specified instances in the managed instance group to be
     /// immediately deleted. The instances are also removed from any target
@@ -143,60 +119,32 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_deleteInstances")
-    func deleteInstances(request: Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately deleted. The instances are also removed from any target
-    /// pools of which they were a member. This method reduces thetargetSize of the managed instance group by the number of
-    /// instances that you delete.
-    /// The deleteInstances operation is marked DONE if
-    /// the deleteInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of thedeleting action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func deleteInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersDeleteInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func deleteInstances(
+      request: RegionInstanceGroupManagersClient.DeleteInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.deleteInstances(request: request, options: options)
+    }
 
     /// Deletes selected per-instance configurations for the managed instance
     /// group.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_deletePerInstanceConfigs")
-    func deletePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes selected per-instance configurations for the managed instance
-    /// group.
-    func deletePerInstanceConfigs(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagerDeleteInstanceConfigReq?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func deletePerInstanceConfigs(
+      request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.deletePerInstanceConfigs(request: request, options: options)
+    }
 
     /// Returns all of the details about the specified managed instance group.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_get")
-    func `get`(request: Clients.RegionInstanceGroupManagersClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.InstanceGroupManager
-
-    /// Returns all of the details about the specified managed instance group.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.InstanceGroupManager
+    public func `get`(
+      request: RegionInstanceGroupManagersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.InstanceGroupManager {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a managed instance group using the information that you specify
     /// in the request. After the group is created, instances in the group are
@@ -209,64 +157,67 @@
     /// A regional managed instance group can contain up to 2000 instances.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_insert")
-    func insert(request: Clients.RegionInstanceGroupManagersClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a managed instance group using the information that you specify
-    /// in the request. After the group is created, instances in the group are
-    /// created using the specified instance template.
-    /// This operation is marked as DONE when the group is created
-    /// even if the instances in the group have not yet been created. You must
-    /// separately verify the status of the individual instances with thelistmanagedinstances
-    /// method.
-    ///
-    /// A regional managed instance group can contain up to 2000 instances.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: InstanceGroupManager?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionInstanceGroupManagersClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of managed instance groups that are contained
     /// within the specified region.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_list")
-    func list(request: Clients.RegionInstanceGroupManagersClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.RegionInstanceGroupManagerList
+    public func list(
+      request: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of managed instance groups that are contained
     /// within the specified region.
-    func list(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListRequest
-    ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
-
-    /// Retrieves the list of managed instance groups that are contained
-    /// within the specified region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstanceGroupManagers_list")
+    public func list(
+      byItem: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists all errors thrown by actions on instances for a given regional
     /// managed instance group. The filter andorderBy query parameters are not supported.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_listErrors")
-    func listErrors(request: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest)
-      async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse
+    public func listErrors(
+      request: RegionInstanceGroupManagersClient.ListErrorsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse {
+      try await self.inner.listErrors(request: request, options: options)
+    }
 
     /// Lists all errors thrown by actions on instances for a given regional
     /// managed instance group. The filter andorderBy query parameters are not supported.
-    func listErrors(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest
-    ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
-
-    /// Lists all errors thrown by actions on instances for a given regional
-    /// managed instance group. The filter andorderBy query parameters are not supported.
-    func listErrors(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstanceGroupManagers_listErrors")
+    public func listErrors(
+      byItem: RegionInstanceGroupManagersClient.ListErrorsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listErrors(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists the instances in the managed instance group and instances that are
     /// scheduled to be created. The list includes any current actions
@@ -276,9 +227,12 @@
     /// to `PAGINATED`.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_listManagedInstances")
-    func listManagedInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse
+    public func listManagedInstances(
+      request: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse {
+      try await self.inner.listManagedInstances(request: request, options: options)
+    }
 
     /// Lists the instances in the managed instance group and instances that are
     /// scheduled to be created. The list includes any current actions
@@ -286,43 +240,50 @@
     /// query parameter is not supported.   The `pageToken` query parameter is
     /// supported only if the group's `listManagedInstancesResults` field is set
     /// to `PAGINATED`.
-    func listManagedInstances(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest
-    ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
-
-    /// Lists the instances in the managed instance group and instances that are
-    /// scheduled to be created. The list includes any current actions
-    /// that the group has scheduled for its instances. The orderBy
-    /// query parameter is not supported.   The `pageToken` query parameter is
-    /// supported only if the group's `listManagedInstancesResults` field is set
-    /// to `PAGINATED`.
-    func listManagedInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstanceGroupManagers_listManagedInstances")
+    public func listManagedInstances(
+      byItem: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listManagedInstances(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists all of the per-instance configurations defined for the managed
     /// instance group. The orderBy query parameter is not supported.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_listPerInstanceConfigs")
-    func listPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp
+    public func listPerInstanceConfigs(
+      request: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp {
+      try await self.inner.listPerInstanceConfigs(request: request, options: options)
+    }
 
     /// Lists all of the per-instance configurations defined for the managed
     /// instance group. The orderBy query parameter is not supported.
-    func listPerInstanceConfigs(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
-    ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
-
-    /// Lists all of the per-instance configurations defined for the managed
-    /// instance group. The orderBy query parameter is not supported.
-    func listPerInstanceConfigs(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-    ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
+    ///
+    /// @Snippet(path: "regionInstanceGroupManagers_listPerInstanceConfigs")
+    public func listPerInstanceConfigs(
+      byItem: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws
+          -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listPerInstanceConfigs(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates a managed instance group using the information that you specify
     /// in the request.
@@ -341,49 +302,24 @@
     /// a MIG.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_patch")
-    func patch(request: Clients.RegionInstanceGroupManagersClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates a managed instance group using the information that you specify
-    /// in the request.
-    /// This operation is marked as DONE when the group is patched
-    /// even if the instances in the group are still in the process of being
-    /// patched. You must separately verify the status of the individual instances
-    /// with the listmanagedinstances
-    /// method. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// If you update your group to specify a new template or instance
-    /// configuration, it's possible that your intended specification for each VM
-    /// in the group is different from the current state of that VM. To learn how
-    /// to apply an updated configuration to the VMs in a MIG, seeUpdating instances in
-    /// a MIG.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: InstanceGroupManager?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RegionInstanceGroupManagersClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Inserts or patches per-instance configurations for the managed instance
     /// group. perInstanceConfig.name serves as a key used to
     /// distinguish whether to perform insert or patch.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_patchPerInstanceConfigs")
-    func patchPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Inserts or patches per-instance configurations for the managed instance
-    /// group. perInstanceConfig.name serves as a key used to
-    /// distinguish whether to perform insert or patch.
-    func patchPerInstanceConfigs(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagerPatchInstanceConfigReq?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patchPerInstanceConfigs(
+      request: RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patchPerInstanceConfigs(request: request, options: options)
+    }
 
     /// Flags the specified VM instances in the managed instance group to be
     /// immediately recreated. Each instance is recreated using the group's current
@@ -400,29 +336,12 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_recreateInstances")
-    func recreateInstances(
-      request: Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified VM instances in the managed instance group to be
-    /// immediately recreated. Each instance is recreated using the group's current
-    /// configuration. This operation is marked as DONE when the flag
-    /// is set even if the instances have not yet been recreated. You must
-    /// separately verify the status of each instance by checking itscurrentAction field; for more information, see Checking
-    /// the status of managed instances.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func recreateInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersRecreateRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func recreateInstances(
+      request: RegionInstanceGroupManagersClient.RecreateInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.recreateInstances(request: request, options: options)
+    }
 
     /// Changes the intended size of the managed instance group. If you increase
     /// the size, the group creates new instances using the current instance
@@ -439,28 +358,12 @@
     /// draining duration has elapsed before the VM instance is removed or deleted.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_resize")
-    func resize(request: Clients.RegionInstanceGroupManagersClient.ResizeRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Changes the intended size of the managed instance group. If you increase
-    /// the size, the group creates new instances using the current instance
-    /// template. If you decrease the size, the group deletes one or more
-    /// instances.
-    ///
-    /// The resize operation is marked DONE if theresize request is successful. The underlying actions take
-    /// additional time. You must separately verify the status of thecreating or deleting actions with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    func resize(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      size: Swift.Int32,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func resize(
+      request: RegionInstanceGroupManagersClient.ResizeRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.resize(request: request, options: options)
+    }
 
     /// Flags the specified instances in the managed instance group to be
     /// resumed. This method increases thetargetSize and decreases the targetSuspendedSize
@@ -480,64 +383,34 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_resumeInstances")
-    func resumeInstances(request: Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// resumed. This method increases thetargetSize and decreases the targetSuspendedSize
-    /// of the managed instance group by the number of instances that you resume.
-    /// The resumeInstances operation is marked DONE if
-    /// the resumeInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theRESUMING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// In this request, you can only specify instances that are suspended. For
-    /// example, if an instance was previously suspended using the suspendInstances
-    /// method, it can be resumed using the resumeInstances method.
-    ///
-    /// If a health check is attached to the managed instance group, the specified
-    /// instances will be verified as healthy after they are resumed.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func resumeInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersResumeInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func resumeInstances(
+      request: RegionInstanceGroupManagersClient.ResumeInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.resumeInstances(request: request, options: options)
+    }
 
     /// Sets the instance template to use when creating new instances or recreating
     /// instances in this group. Existing instances are not affected.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_setInstanceTemplate")
-    func setInstanceTemplate(
-      request: Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the instance template to use when creating new instances or recreating
-    /// instances in this group. Existing instances are not affected.
-    func setInstanceTemplate(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersSetTemplateRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setInstanceTemplate(
+      request: RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setInstanceTemplate(request: request, options: options)
+    }
 
     /// Modifies the target pools to which all new instances in this group are
     /// assigned. Existing instances in the group are not affected.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_setTargetPools")
-    func setTargetPools(request: Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Modifies the target pools to which all new instances in this group are
-    /// assigned. Existing instances in the group are not affected.
-    func setTargetPools(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersSetTargetPoolsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setTargetPools(
+      request: RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setTargetPools(request: request, options: options)
+    }
 
     /// Flags the specified instances in the managed instance group to be
     /// started. This method increases thetargetSize and decreases the targetStoppedSize
@@ -557,31 +430,12 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_startInstances")
-    func startInstances(request: Clients.RegionInstanceGroupManagersClient.StartInstancesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// started. This method increases thetargetSize and decreases the targetStoppedSize
-    /// of the managed instance group by the number of instances that you start.
-    /// The startInstances operation is marked DONE if
-    /// the startInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSTARTING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// In this request, you can only specify instances that are stopped. For
-    /// example, if an instance was previously stopped using the stopInstances
-    /// method, it can be started using the startInstances method.
-    ///
-    /// If a health check is attached to the managed instance group, the specified
-    /// instances will be verified as healthy after they are started.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func startInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersStartInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func startInstances(
+      request: RegionInstanceGroupManagersClient.StartInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.startInstances(request: request, options: options)
+    }
 
     /// Flags the specified instances in the managed instance group to be
     /// immediately stopped. You can only specify instances that are running in
@@ -610,40 +464,12 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_stopInstances")
-    func stopInstances(request: Clients.RegionInstanceGroupManagersClient.StopInstancesRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately stopped. You can only specify instances that are running in
-    /// this request. This method reduces thetargetSize and increases the targetStoppedSize
-    /// of the managed instance group by the number of instances that you stop.
-    /// The stopInstances operation is marked DONE if
-    /// the stopInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSTOPPING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the standbyPolicy.initialDelaySec field is set, the group
-    /// delays stopping the instances until initialDelaySec have
-    /// passed from instance.creationTimestamp (that is, when the
-    /// instance was created). This delay gives your application time to
-    /// set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
-    /// will be zero delay.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is stopped.
-    ///
-    /// Stopped instances can be started using the startInstances
-    /// method.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func stopInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersStopInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func stopInstances(
+      request: RegionInstanceGroupManagersClient.StopInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.stopInstances(request: request, options: options)
+    }
 
     /// Flags the specified instances in the managed instance group to be
     /// immediately suspended. You can only specify instances that are running in
@@ -672,730 +498,502 @@
     /// You can specify a maximum of 1000 instances with this method per request.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_suspendInstances")
-    func suspendInstances(
-      request: Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately suspended. You can only specify instances that are running in
-    /// this request. This method reduces thetargetSize and increases the targetSuspendedSize
-    /// of the managed instance group by the number of instances that you suspend.
-    /// The suspendInstances operation is marked DONE if
-    /// the suspendInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSUSPENDING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the standbyPolicy.initialDelaySec field is set, the group
-    /// delays suspension of the instances until initialDelaySec have
-    /// passed from instance.creationTimestamp (that is, when the
-    /// instance was created). This delay gives your application time to
-    /// set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
-    /// will be zero delay.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is suspended.
-    ///
-    /// Suspended instances can be resumed using the resumeInstances
-    /// method.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    func suspendInstances(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagersSuspendInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func suspendInstances(
+      request: RegionInstanceGroupManagersClient.SuspendInstancesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.suspendInstances(request: request, options: options)
+    }
 
     /// Inserts or updates per-instance configurations for the managed instance
     /// group. perInstanceConfig.name serves as a key used to
     /// distinguish whether to perform insert or patch.
     ///
     /// @Snippet(path: "regionInstanceGroupManagers_updatePerInstanceConfigs")
-    func updatePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Inserts or updates per-instance configurations for the managed instance
-    /// group. perInstanceConfig.name serves as a key used to
-    /// distinguish whether to perform insert or patch.
-    func updatePerInstanceConfigs(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: RegionInstanceGroupManagerUpdateInstanceConfigReq?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances to be immediately removed from the managed
-    /// instance group. Abandoning an instance does not delete the
-    /// instance, but it does remove the instance from any target pools that are
-    /// applied by the managed instance group. This method reduces thetargetSize of the managed instance group by the
-    /// number of instances that you abandon. This operation is marked asDONE when the action is scheduled even if the instances have
-    /// not yet been removed from the group. You must separately verify the
-    /// status of the abandoning action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_abandonInstances")
-    func abandonInstances(
-      request: Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest,
+    public func updatePerInstanceConfigs(
+      request: RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Apply updates to selected instances the managed instance group.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_applyUpdatesToInstances")
-    func applyUpdatesToInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Creates instances with per-instance configurations in this regional managed
-    /// instance group. Instances are created using the current instance template.
-    /// The create instances operation is marked DONE if
-    /// the createInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of thecreating or actions with the listmanagedinstances
-    /// method.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_createInstances")
-    func createInstances(
-      request: Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified managed instance group and all of the instances
-    /// in that group.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_delete")
-    func delete(
-      request: Clients.RegionInstanceGroupManagersClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately deleted. The instances are also removed from any target
-    /// pools of which they were a member. This method reduces thetargetSize of the managed instance group by the number of
-    /// instances that you delete.
-    /// The deleteInstances operation is marked DONE if
-    /// the deleteInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of thedeleting action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_deleteInstances")
-    func deleteInstances(
-      request: Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes selected per-instance configurations for the managed instance
-    /// group.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_deletePerInstanceConfigs")
-    func deletePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns all of the details about the specified managed instance group.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_get")
-    func `get`(
-      request: Clients.RegionInstanceGroupManagersClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.InstanceGroupManager
-
-    /// Creates a managed instance group using the information that you specify
-    /// in the request. After the group is created, instances in the group are
-    /// created using the specified instance template.
-    /// This operation is marked as DONE when the group is created
-    /// even if the instances in the group have not yet been created. You must
-    /// separately verify the status of the individual instances with thelistmanagedinstances
-    /// method.
-    ///
-    /// A regional managed instance group can contain up to 2000 instances.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_insert")
-    func insert(
-      request: Clients.RegionInstanceGroupManagersClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of managed instance groups that are contained
-    /// within the specified region.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_list")
-    func list(
-      request: Clients.RegionInstanceGroupManagersClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList
-
-    /// Retrieves the list of managed instance groups that are contained
-    /// within the specified region.
-    func list(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
-
-    /// Lists all errors thrown by actions on instances for a given regional
-    /// managed instance group. The filter andorderBy query parameters are not supported.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_listErrors")
-    func listErrors(
-      request: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse
-
-    /// Lists all errors thrown by actions on instances for a given regional
-    /// managed instance group. The filter andorderBy query parameters are not supported.
-    func listErrors(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
-
-    /// Lists the instances in the managed instance group and instances that are
-    /// scheduled to be created. The list includes any current actions
-    /// that the group has scheduled for its instances. The orderBy
-    /// query parameter is not supported.   The `pageToken` query parameter is
-    /// supported only if the group's `listManagedInstancesResults` field is set
-    /// to `PAGINATED`.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_listManagedInstances")
-    func listManagedInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse
-
-    /// Lists the instances in the managed instance group and instances that are
-    /// scheduled to be created. The list includes any current actions
-    /// that the group has scheduled for its instances. The orderBy
-    /// query parameter is not supported.   The `pageToken` query parameter is
-    /// supported only if the group's `listManagedInstancesResults` field is set
-    /// to `PAGINATED`.
-    func listManagedInstances(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
-
-    /// Lists all of the per-instance configurations defined for the managed
-    /// instance group. The orderBy query parameter is not supported.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_listPerInstanceConfigs")
-    func listPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp
-
-    /// Lists all of the per-instance configurations defined for the managed
-    /// instance group. The orderBy query parameter is not supported.
-    func listPerInstanceConfigs(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
-
-    /// Updates a managed instance group using the information that you specify
-    /// in the request.
-    /// This operation is marked as DONE when the group is patched
-    /// even if the instances in the group are still in the process of being
-    /// patched. You must separately verify the status of the individual instances
-    /// with the listmanagedinstances
-    /// method. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// If you update your group to specify a new template or instance
-    /// configuration, it's possible that your intended specification for each VM
-    /// in the group is different from the current state of that VM. To learn how
-    /// to apply an updated configuration to the VMs in a MIG, seeUpdating instances in
-    /// a MIG.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_patch")
-    func patch(
-      request: Clients.RegionInstanceGroupManagersClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Inserts or patches per-instance configurations for the managed instance
-    /// group. perInstanceConfig.name serves as a key used to
-    /// distinguish whether to perform insert or patch.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_patchPerInstanceConfigs")
-    func patchPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified VM instances in the managed instance group to be
-    /// immediately recreated. Each instance is recreated using the group's current
-    /// configuration. This operation is marked as DONE when the flag
-    /// is set even if the instances have not yet been recreated. You must
-    /// separately verify the status of each instance by checking itscurrentAction field; for more information, see Checking
-    /// the status of managed instances.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_recreateInstances")
-    func recreateInstances(
-      request: Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Changes the intended size of the managed instance group. If you increase
-    /// the size, the group creates new instances using the current instance
-    /// template. If you decrease the size, the group deletes one or more
-    /// instances.
-    ///
-    /// The resize operation is marked DONE if theresize request is successful. The underlying actions take
-    /// additional time. You must separately verify the status of thecreating or deleting actions with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is removed or deleted.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_resize")
-    func resize(
-      request: Clients.RegionInstanceGroupManagersClient.ResizeRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// resumed. This method increases thetargetSize and decreases the targetSuspendedSize
-    /// of the managed instance group by the number of instances that you resume.
-    /// The resumeInstances operation is marked DONE if
-    /// the resumeInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theRESUMING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// In this request, you can only specify instances that are suspended. For
-    /// example, if an instance was previously suspended using the suspendInstances
-    /// method, it can be resumed using the resumeInstances method.
-    ///
-    /// If a health check is attached to the managed instance group, the specified
-    /// instances will be verified as healthy after they are resumed.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_resumeInstances")
-    func resumeInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the instance template to use when creating new instances or recreating
-    /// instances in this group. Existing instances are not affected.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_setInstanceTemplate")
-    func setInstanceTemplate(
-      request: Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Modifies the target pools to which all new instances in this group are
-    /// assigned. Existing instances in the group are not affected.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_setTargetPools")
-    func setTargetPools(
-      request: Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// started. This method increases thetargetSize and decreases the targetStoppedSize
-    /// of the managed instance group by the number of instances that you start.
-    /// The startInstances operation is marked DONE if
-    /// the startInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSTARTING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// In this request, you can only specify instances that are stopped. For
-    /// example, if an instance was previously stopped using the stopInstances
-    /// method, it can be started using the startInstances method.
-    ///
-    /// If a health check is attached to the managed instance group, the specified
-    /// instances will be verified as healthy after they are started.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_startInstances")
-    func startInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StartInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately stopped. You can only specify instances that are running in
-    /// this request. This method reduces thetargetSize and increases the targetStoppedSize
-    /// of the managed instance group by the number of instances that you stop.
-    /// The stopInstances operation is marked DONE if
-    /// the stopInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSTOPPING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the standbyPolicy.initialDelaySec field is set, the group
-    /// delays stopping the instances until initialDelaySec have
-    /// passed from instance.creationTimestamp (that is, when the
-    /// instance was created). This delay gives your application time to
-    /// set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
-    /// will be zero delay.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is stopped.
-    ///
-    /// Stopped instances can be started using the startInstances
-    /// method.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_stopInstances")
-    func stopInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StopInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Flags the specified instances in the managed instance group to be
-    /// immediately suspended. You can only specify instances that are running in
-    /// this request. This method reduces thetargetSize and increases the targetSuspendedSize
-    /// of the managed instance group by the number of instances that you suspend.
-    /// The suspendInstances operation is marked DONE if
-    /// the suspendInstances request is successful. The underlying
-    /// actions take additional time. You must separately verify the status of theSUSPENDING action with thelistmanagedinstances
-    /// method.
-    ///
-    /// If the standbyPolicy.initialDelaySec field is set, the group
-    /// delays suspension of the instances until initialDelaySec have
-    /// passed from instance.creationTimestamp (that is, when the
-    /// instance was created). This delay gives your application time to
-    /// set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
-    /// will be zero delay.
-    ///
-    /// If the group is part of a backend
-    /// service that has enabled
-    /// connection draining, it can take up to 60 seconds after the connection
-    /// draining duration has elapsed before the VM instance is suspended.
-    ///
-    /// Suspended instances can be resumed using the resumeInstances
-    /// method.
-    ///
-    /// You can specify a maximum of 1000 instances with this method per request.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_suspendInstances")
-    func suspendInstances(
-      request: Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Inserts or updates per-instance configurations for the managed instance
-    /// group. perInstanceConfig.name serves as a key used to
-    /// distinguish whether to perform insert or patch.
-    ///
-    /// @Snippet(path: "regionInstanceGroupManagers_updatePerInstanceConfigs")
-    func updatePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.updatePerInstanceConfigs(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionInstanceGroupManagers``.
-    public class RegionInstanceGroupManagersClient: RegionInstanceGroupManagers {
-      let inner: any RegionInstanceGroupManagersStub
+    /// A Swift protocol to mock `RegionInstanceGroupManagersClient`.
+    ///
+    /// To mock `RegionInstanceGroupManagersClient` change your functions to receive
+    /// `some RegionInstanceGroupManagersProtocol` or `any RegionInstanceGroupManagersProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionInstanceGroupManagersProtocol {
+      /// See `RegionInstanceGroupManagersClient.abandonInstances`.
+      func abandonInstances(request: RegionInstanceGroupManagersClient.AbandonInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionInstanceGroupManagersClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionInstanceGroupManagersStub = try RegionInstanceGroupManagersTransport(
-          options)
-        inner = RegionInstanceGroupManagersRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionInstanceGroupManagersLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionInstanceGroupManagersClient.abandonInstances`.
+      func abandonInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersAbandonInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.abandonInstances`
-      public func abandonInstances(
-        request: Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.applyUpdatesToInstances`.
+      func applyUpdatesToInstances(
+        request: RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.applyUpdatesToInstances`.
+      func applyUpdatesToInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersApplyUpdatesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.createInstances`.
+      func createInstances(request: RegionInstanceGroupManagersClient.CreateInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.createInstances`.
+      func createInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersCreateInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.delete`.
+      func delete(request: RegionInstanceGroupManagersClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.deleteInstances`.
+      func deleteInstances(request: RegionInstanceGroupManagersClient.DeleteInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.deleteInstances`.
+      func deleteInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersDeleteInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.deletePerInstanceConfigs`.
+      func deletePerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.deletePerInstanceConfigs`.
+      func deletePerInstanceConfigs(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagerDeleteInstanceConfigReq?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.`get``.
+      func `get`(request: RegionInstanceGroupManagersClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.InstanceGroupManager
+
+      /// See `RegionInstanceGroupManagersClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.InstanceGroupManager
+
+      /// See `RegionInstanceGroupManagersClient.insert`.
+      func insert(request: RegionInstanceGroupManagersClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: InstanceGroupManager?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.list`.
+      func list(request: RegionInstanceGroupManagersClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.RegionInstanceGroupManagerList
+
+      /// See `RegionInstanceGroupManagersClient.list`.
+      func list(
+        byItem: RegionInstanceGroupManagersClient.ListRequest
+      ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listErrors`.
+      func listErrors(request: RegionInstanceGroupManagersClient.ListErrorsRequest) async throws
+        -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse
+
+      /// See `RegionInstanceGroupManagersClient.listErrors`.
+      func listErrors(
+        byItem: RegionInstanceGroupManagersClient.ListErrorsRequest
+      ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listErrors`.
+      func listErrors(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listManagedInstances`.
+      func listManagedInstances(
+        request: RegionInstanceGroupManagersClient.ListManagedInstancesRequest
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse
+
+      /// See `RegionInstanceGroupManagersClient.listManagedInstances`.
+      func listManagedInstances(
+        byItem: RegionInstanceGroupManagersClient.ListManagedInstancesRequest
+      ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listManagedInstances`.
+      func listManagedInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listPerInstanceConfigs`.
+      func listPerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp
+
+      /// See `RegionInstanceGroupManagersClient.listPerInstanceConfigs`.
+      func listPerInstanceConfigs(
+        byItem: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
+      ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.listPerInstanceConfigs`.
+      func listPerInstanceConfigs(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+      ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
+
+      /// See `RegionInstanceGroupManagersClient.patch`.
+      func patch(request: RegionInstanceGroupManagersClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: InstanceGroupManager?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.patchPerInstanceConfigs`.
+      func patchPerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.patchPerInstanceConfigs`.
+      func patchPerInstanceConfigs(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagerPatchInstanceConfigReq?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.recreateInstances`.
+      func recreateInstances(request: RegionInstanceGroupManagersClient.RecreateInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.recreateInstances`.
+      func recreateInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersRecreateRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.resize`.
+      func resize(request: RegionInstanceGroupManagersClient.ResizeRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.resize`.
+      func resize(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        size: Swift.Int32,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.resumeInstances`.
+      func resumeInstances(request: RegionInstanceGroupManagersClient.ResumeInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.resumeInstances`.
+      func resumeInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersResumeInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.setInstanceTemplate`.
+      func setInstanceTemplate(
+        request: RegionInstanceGroupManagersClient.SetInstanceTemplateRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.setInstanceTemplate`.
+      func setInstanceTemplate(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersSetTemplateRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.setTargetPools`.
+      func setTargetPools(request: RegionInstanceGroupManagersClient.SetTargetPoolsRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.setTargetPools`.
+      func setTargetPools(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersSetTargetPoolsRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.startInstances`.
+      func startInstances(request: RegionInstanceGroupManagersClient.StartInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.startInstances`.
+      func startInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersStartInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.stopInstances`.
+      func stopInstances(request: RegionInstanceGroupManagersClient.StopInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.stopInstances`.
+      func stopInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersStopInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.suspendInstances`.
+      func suspendInstances(request: RegionInstanceGroupManagersClient.SuspendInstancesRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.suspendInstances`.
+      func suspendInstances(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagersSuspendInstancesRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.updatePerInstanceConfigs`.
+      func updatePerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.updatePerInstanceConfigs`.
+      func updatePerInstanceConfigs(
+        project: Swift.String,
+        region: Swift.String,
+        instanceGroupManager: Swift.String,
+        body: RegionInstanceGroupManagerUpdateInstanceConfigReq?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionInstanceGroupManagersClient.abandonInstances`.
+      func abandonInstances(
+        request: RegionInstanceGroupManagersClient.AbandonInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.abandonInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.applyUpdatesToInstances`
-      public func applyUpdatesToInstances(
-        request: Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.applyUpdatesToInstances`.
+      func applyUpdatesToInstances(
+        request: RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.applyUpdatesToInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.createInstances`
-      public func createInstances(
-        request: Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.createInstances`.
+      func createInstances(
+        request: RegionInstanceGroupManagersClient.CreateInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.createInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.delete`
-      public func delete(
-        request: Clients.RegionInstanceGroupManagersClient.DeleteRequest,
+      /// See `RegionInstanceGroupManagersClient.delete`.
+      func delete(
+        request: RegionInstanceGroupManagersClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.deleteInstances`
-      public func deleteInstances(
-        request: Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.deleteInstances`.
+      func deleteInstances(
+        request: RegionInstanceGroupManagersClient.DeleteInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.deleteInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.deletePerInstanceConfigs`
-      public func deletePerInstanceConfigs(
-        request: Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
+      /// See `RegionInstanceGroupManagersClient.deletePerInstanceConfigs`.
+      func deletePerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.deletePerInstanceConfigs(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.`get``
-      public func `get`(
-        request: Clients.RegionInstanceGroupManagersClient.GetRequest,
+      /// See `RegionInstanceGroupManagersClient.`get``.
+      func `get`(
+        request: RegionInstanceGroupManagersClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.InstanceGroupManager {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.InstanceGroupManager
 
-      /// See `RegionInstanceGroupManagers.insert`
-      public func insert(
-        request: Clients.RegionInstanceGroupManagersClient.InsertRequest,
+      /// See `RegionInstanceGroupManagersClient.insert`.
+      func insert(
+        request: RegionInstanceGroupManagersClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.list`
-      public func list(
-        request: Clients.RegionInstanceGroupManagersClient.ListRequest,
+      /// See `RegionInstanceGroupManagersClient.list`.
+      func list(
+        request: RegionInstanceGroupManagersClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList
 
-      /// Retrieves the list of managed instance groups that are contained
-      /// within the specified region.
-      public func list(
-        byItem: Clients.RegionInstanceGroupManagersClient.ListRequest,
+      /// See `RegionInstanceGroupManagersClient.list`.
+      func list(
+        byItem: RegionInstanceGroupManagersClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error>
 
-      /// See `RegionInstanceGroupManagers.listErrors`
-      public func listErrors(
-        request: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
+      /// See `RegionInstanceGroupManagersClient.listErrors`.
+      func listErrors(
+        request: RegionInstanceGroupManagersClient.ListErrorsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse {
-        try await self.inner.listErrors(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse
 
-      /// Lists all errors thrown by actions on instances for a given regional
-      /// managed instance group. The filter andorderBy query parameters are not supported.
-      public func listErrors(
-        byItem: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
+      /// See `RegionInstanceGroupManagersClient.listErrors`.
+      func listErrors(
+        byItem: RegionInstanceGroupManagersClient.ListErrorsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listErrors(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error>
 
-      /// See `RegionInstanceGroupManagers.listManagedInstances`
-      public func listManagedInstances(
-        request: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.listManagedInstances`.
+      func listManagedInstances(
+        request: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse {
-        try await self.inner.listManagedInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse
 
-      /// Lists the instances in the managed instance group and instances that are
-      /// scheduled to be created. The list includes any current actions
-      /// that the group has scheduled for its instances. The orderBy
-      /// query parameter is not supported.   The `pageToken` query parameter is
-      /// supported only if the group's `listManagedInstancesResults` field is set
-      /// to `PAGINATED`.
-      public func listManagedInstances(
-        byItem: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.listManagedInstances`.
+      func listManagedInstances(
+        byItem: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listManagedInstances(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<ManagedInstance, Swift.Error>
 
-      /// See `RegionInstanceGroupManagers.listPerInstanceConfigs`
-      public func listPerInstanceConfigs(
-        request: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      /// See `RegionInstanceGroupManagersClient.listPerInstanceConfigs`.
+      func listPerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp {
-        try await self.inner.listPerInstanceConfigs(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp
 
-      /// Lists all of the per-instance configurations defined for the managed
-      /// instance group. The orderBy query parameter is not supported.
-      public func listPerInstanceConfigs(
-        byItem: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      /// See `RegionInstanceGroupManagersClient.listPerInstanceConfigs`.
+      func listPerInstanceConfigs(
+        byItem: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws
-            -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listPerInstanceConfigs(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error>
 
-      /// See `RegionInstanceGroupManagers.patch`
-      public func patch(
-        request: Clients.RegionInstanceGroupManagersClient.PatchRequest,
+      /// See `RegionInstanceGroupManagersClient.patch`.
+      func patch(
+        request: RegionInstanceGroupManagersClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.patchPerInstanceConfigs`
-      public func patchPerInstanceConfigs(
-        request: Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
+      /// See `RegionInstanceGroupManagersClient.patchPerInstanceConfigs`.
+      func patchPerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patchPerInstanceConfigs(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.recreateInstances`
-      public func recreateInstances(
-        request: Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.recreateInstances`.
+      func recreateInstances(
+        request: RegionInstanceGroupManagersClient.RecreateInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.recreateInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.resize`
-      public func resize(
-        request: Clients.RegionInstanceGroupManagersClient.ResizeRequest,
+      /// See `RegionInstanceGroupManagersClient.resize`.
+      func resize(
+        request: RegionInstanceGroupManagersClient.ResizeRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.resize(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.resumeInstances`
-      public func resumeInstances(
-        request: Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.resumeInstances`.
+      func resumeInstances(
+        request: RegionInstanceGroupManagersClient.ResumeInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.resumeInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.setInstanceTemplate`
-      public func setInstanceTemplate(
-        request: Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
+      /// See `RegionInstanceGroupManagersClient.setInstanceTemplate`.
+      func setInstanceTemplate(
+        request: RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setInstanceTemplate(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.setTargetPools`
-      public func setTargetPools(
-        request: Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
+      /// See `RegionInstanceGroupManagersClient.setTargetPools`.
+      func setTargetPools(
+        request: RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setTargetPools(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.startInstances`
-      public func startInstances(
-        request: Clients.RegionInstanceGroupManagersClient.StartInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.startInstances`.
+      func startInstances(
+        request: RegionInstanceGroupManagersClient.StartInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.startInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.stopInstances`
-      public func stopInstances(
-        request: Clients.RegionInstanceGroupManagersClient.StopInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.stopInstances`.
+      func stopInstances(
+        request: RegionInstanceGroupManagersClient.StopInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.stopInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.suspendInstances`
-      public func suspendInstances(
-        request: Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest,
+      /// See `RegionInstanceGroupManagersClient.suspendInstances`.
+      func suspendInstances(
+        request: RegionInstanceGroupManagersClient.SuspendInstancesRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.suspendInstances(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupManagers.updatePerInstanceConfigs`
-      public func updatePerInstanceConfigs(
-        request: Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
+      /// See `RegionInstanceGroupManagersClient.updatePerInstanceConfigs`.
+      func updatePerInstanceConfigs(
+        request: RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.updatePerInstanceConfigs(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension RegionInstanceGroupManagers {
-    public func abandonInstances(
-      request: Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+  extension Clients.RegionInstanceGroupManagersProtocol {
+    public func abandonInstances(request: RegionInstanceGroupManagersClient.AbandonInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.abandonInstances(request: request, options: .init())
     }
 
     public func abandonInstances(
-      request: Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest,
+      request: RegionInstanceGroupManagersClient.AbandonInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1407,7 +1005,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersAbandonInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.AbandonInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.AbandonInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1417,13 +1015,13 @@
     }
 
     public func applyUpdatesToInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest
+      request: RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.applyUpdatesToInstances(request: request, options: .init())
     }
 
     public func applyUpdatesToInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
+      request: RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1435,8 +1033,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersApplyUpdatesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest().with
-      {
+      let request = RegionInstanceGroupManagersClient.ApplyUpdatesToInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1445,14 +1042,14 @@
       return try await self.applyUpdatesToInstances(request: request)
     }
 
-    public func createInstances(
-      request: Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func createInstances(request: RegionInstanceGroupManagersClient.CreateInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.createInstances(request: request, options: .init())
     }
 
     public func createInstances(
-      request: Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest,
+      request: RegionInstanceGroupManagersClient.CreateInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1464,7 +1061,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersCreateInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.CreateInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.CreateInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1473,14 +1070,14 @@
       return try await self.createInstances(request: request)
     }
 
-    public func delete(request: Clients.RegionInstanceGroupManagersClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: RegionInstanceGroupManagersClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionInstanceGroupManagersClient.DeleteRequest,
+      request: RegionInstanceGroupManagersClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1491,7 +1088,7 @@
       region: Swift.String,
       instanceGroupManager: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.DeleteRequest().with {
+      let request = RegionInstanceGroupManagersClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1499,14 +1096,14 @@
       return try await self.delete(request: request)
     }
 
-    public func deleteInstances(
-      request: Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func deleteInstances(request: RegionInstanceGroupManagersClient.DeleteInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.deleteInstances(request: request, options: .init())
     }
 
     public func deleteInstances(
-      request: Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest,
+      request: RegionInstanceGroupManagersClient.DeleteInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1518,7 +1115,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersDeleteInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.DeleteInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.DeleteInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1528,13 +1125,13 @@
     }
 
     public func deletePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest
+      request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.deletePerInstanceConfigs(request: request, options: .init())
     }
 
     public func deletePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
+      request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1546,8 +1143,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagerDeleteInstanceConfigReq?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest().with
-      {
+      let request = RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1556,15 +1152,14 @@
       return try await self.deletePerInstanceConfigs(request: request)
     }
 
-    public func `get`(request: Clients.RegionInstanceGroupManagersClient.GetRequest) async throws
+    public func `get`(request: RegionInstanceGroupManagersClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InstanceGroupManager
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionInstanceGroupManagersClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceGroupManagersClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupManager {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1574,7 +1169,7 @@
       region: Swift.String,
       instanceGroupManager: Swift.String,
     ) async throws -> GoogleCloudComputeV1.InstanceGroupManager {
-      let request = Clients.RegionInstanceGroupManagersClient.GetRequest().with {
+      let request = RegionInstanceGroupManagersClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1582,14 +1177,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionInstanceGroupManagersClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: RegionInstanceGroupManagersClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionInstanceGroupManagersClient.InsertRequest,
+      request: RegionInstanceGroupManagersClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1600,7 +1195,7 @@
       region: Swift.String,
       body: InstanceGroupManager?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.InsertRequest().with {
+      let request = RegionInstanceGroupManagersClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -1608,28 +1203,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionInstanceGroupManagersClient.ListRequest) async throws
+    public func list(request: RegionInstanceGroupManagersClient.ListRequest) async throws
       -> GoogleCloudComputeV1.RegionInstanceGroupManagerList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionInstanceGroupManagersClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListRequest
+      byItem: RegionInstanceGroupManagersClient.ListRequest
     ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
@@ -1642,34 +1235,34 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
-      let request = Clients.RegionInstanceGroupManagersClient.ListRequest().with {
+      let request = RegionInstanceGroupManagersClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func listErrors(request: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest)
+    public func listErrors(request: RegionInstanceGroupManagersClient.ListErrorsRequest)
       async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse
     {
       try await self.listErrors(request: request, options: .init())
     }
 
     public func listErrors(
-      request: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
+      request: RegionInstanceGroupManagersClient.ListErrorsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listErrors(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest
+      byItem: RegionInstanceGroupManagersClient.ListErrorsRequest
     ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
       try self.listErrors(byItem: byItem, options: .init())
     }
 
     public func listErrors(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListErrorsRequest,
+      byItem: RegionInstanceGroupManagersClient.ListErrorsRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
       let listRpc = {
@@ -1685,7 +1278,7 @@
       region: Swift.String,
       instanceGroupManager: Swift.String,
     ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
-      let request = Clients.RegionInstanceGroupManagersClient.ListErrorsRequest().with {
+      let request = RegionInstanceGroupManagersClient.ListErrorsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1694,26 +1287,26 @@
     }
 
     public func listManagedInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest
+      request: RegionInstanceGroupManagersClient.ListManagedInstancesRequest
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse {
       try await self.listManagedInstances(request: request, options: .init())
     }
 
     public func listManagedInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      request: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listManagedInstances(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest
+      byItem: RegionInstanceGroupManagersClient.ListManagedInstancesRequest
     ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
       try self.listManagedInstances(byItem: byItem, options: .init())
     }
 
     public func listManagedInstances(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
+      byItem: RegionInstanceGroupManagersClient.ListManagedInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
       let listRpc = {
@@ -1729,7 +1322,7 @@
       region: Swift.String,
       instanceGroupManager: Swift.String,
     ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
-      let request = Clients.RegionInstanceGroupManagersClient.ListManagedInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.ListManagedInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1738,26 +1331,26 @@
     }
 
     public func listPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
+      request: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp {
       try await self.listPerInstanceConfigs(request: request, options: .init())
     }
 
     public func listPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      request: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listPerInstanceConfigs(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
+      byItem: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest
     ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
       try self.listPerInstanceConfigs(byItem: byItem, options: .init())
     }
 
     public func listPerInstanceConfigs(
-      byItem: Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
+      byItem: RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
       let listRpc = {
@@ -1773,7 +1366,7 @@
       region: Swift.String,
       instanceGroupManager: Swift.String,
     ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
-      let request = Clients.RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest().with {
+      let request = RegionInstanceGroupManagersClient.ListPerInstanceConfigsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1781,14 +1374,14 @@
       return try self.listPerInstanceConfigs(byItem: request)
     }
 
-    public func patch(request: Clients.RegionInstanceGroupManagersClient.PatchRequest) async throws
+    public func patch(request: RegionInstanceGroupManagersClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionInstanceGroupManagersClient.PatchRequest,
+      request: RegionInstanceGroupManagersClient.PatchRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1800,7 +1393,7 @@
       instanceGroupManager: Swift.String,
       body: InstanceGroupManager?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.PatchRequest().with {
+      let request = RegionInstanceGroupManagersClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1810,13 +1403,13 @@
     }
 
     public func patchPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest
+      request: RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.patchPerInstanceConfigs(request: request, options: .init())
     }
 
     public func patchPerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
+      request: RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1828,8 +1421,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagerPatchInstanceConfigReq?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest().with
-      {
+      let request = RegionInstanceGroupManagersClient.PatchPerInstanceConfigsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1839,13 +1431,13 @@
     }
 
     public func recreateInstances(
-      request: Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest
+      request: RegionInstanceGroupManagersClient.RecreateInstancesRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.recreateInstances(request: request, options: .init())
     }
 
     public func recreateInstances(
-      request: Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest,
+      request: RegionInstanceGroupManagersClient.RecreateInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1857,7 +1449,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersRecreateRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.RecreateInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.RecreateInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1866,14 +1458,14 @@
       return try await self.recreateInstances(request: request)
     }
 
-    public func resize(request: Clients.RegionInstanceGroupManagersClient.ResizeRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func resize(request: RegionInstanceGroupManagersClient.ResizeRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.resize(request: request, options: .init())
     }
 
     public func resize(
-      request: Clients.RegionInstanceGroupManagersClient.ResizeRequest,
+      request: RegionInstanceGroupManagersClient.ResizeRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1885,7 +1477,7 @@
       instanceGroupManager: Swift.String,
       size: Swift.Int32,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.ResizeRequest().with {
+      let request = RegionInstanceGroupManagersClient.ResizeRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1894,14 +1486,14 @@
       return try await self.resize(request: request)
     }
 
-    public func resumeInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func resumeInstances(request: RegionInstanceGroupManagersClient.ResumeInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.resumeInstances(request: request, options: .init())
     }
 
     public func resumeInstances(
-      request: Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest,
+      request: RegionInstanceGroupManagersClient.ResumeInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1913,7 +1505,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersResumeInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.ResumeInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.ResumeInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1923,13 +1515,13 @@
     }
 
     public func setInstanceTemplate(
-      request: Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest
+      request: RegionInstanceGroupManagersClient.SetInstanceTemplateRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.setInstanceTemplate(request: request, options: .init())
     }
 
     public func setInstanceTemplate(
-      request: Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
+      request: RegionInstanceGroupManagersClient.SetInstanceTemplateRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1941,7 +1533,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersSetTemplateRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.SetInstanceTemplateRequest().with {
+      let request = RegionInstanceGroupManagersClient.SetInstanceTemplateRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1950,14 +1542,14 @@
       return try await self.setInstanceTemplate(request: request)
     }
 
-    public func setTargetPools(
-      request: Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func setTargetPools(request: RegionInstanceGroupManagersClient.SetTargetPoolsRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.setTargetPools(request: request, options: .init())
     }
 
     public func setTargetPools(
-      request: Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
+      request: RegionInstanceGroupManagersClient.SetTargetPoolsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1969,7 +1561,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersSetTargetPoolsRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.SetTargetPoolsRequest().with {
+      let request = RegionInstanceGroupManagersClient.SetTargetPoolsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -1978,14 +1570,14 @@
       return try await self.setTargetPools(request: request)
     }
 
-    public func startInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StartInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func startInstances(request: RegionInstanceGroupManagersClient.StartInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.startInstances(request: request, options: .init())
     }
 
     public func startInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StartInstancesRequest,
+      request: RegionInstanceGroupManagersClient.StartInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -1997,7 +1589,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersStartInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.StartInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.StartInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -2006,14 +1598,14 @@
       return try await self.startInstances(request: request)
     }
 
-    public func stopInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StopInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func stopInstances(request: RegionInstanceGroupManagersClient.StopInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.stopInstances(request: request, options: .init())
     }
 
     public func stopInstances(
-      request: Clients.RegionInstanceGroupManagersClient.StopInstancesRequest,
+      request: RegionInstanceGroupManagersClient.StopInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -2025,7 +1617,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersStopInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.StopInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.StopInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -2034,14 +1626,14 @@
       return try await self.stopInstances(request: request)
     }
 
-    public func suspendInstances(
-      request: Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func suspendInstances(request: RegionInstanceGroupManagersClient.SuspendInstancesRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.suspendInstances(request: request, options: .init())
     }
 
     public func suspendInstances(
-      request: Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest,
+      request: RegionInstanceGroupManagersClient.SuspendInstancesRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -2053,7 +1645,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagersSuspendInstancesRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.SuspendInstancesRequest().with {
+      let request = RegionInstanceGroupManagersClient.SuspendInstancesRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager
@@ -2063,13 +1655,13 @@
     }
 
     public func updatePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest
+      request: RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.updatePerInstanceConfigs(request: request, options: .init())
     }
 
     public func updatePerInstanceConfigs(
-      request: Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
+      request: RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -2081,8 +1673,7 @@
       instanceGroupManager: Swift.String,
       body: RegionInstanceGroupManagerUpdateInstanceConfigReq?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest().with
-      {
+      let request = RegionInstanceGroupManagersClient.UpdatePerInstanceConfigsRequest().with {
         $0.project = project
         $0.region = region
         $0.instanceGroupManager = instanceGroupManager

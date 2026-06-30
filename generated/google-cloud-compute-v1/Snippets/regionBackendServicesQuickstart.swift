@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionBackendServicesClient()
+    let client = try GoogleCloudComputeV1.RegionBackendServicesClient()
     let response = try await client.delete(
-      request: Clients.RegionBackendServicesClient.DeleteRequest()
+      request: RegionBackendServicesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

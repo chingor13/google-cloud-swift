@@ -28,58 +28,57 @@
   /// Service for the `projects` resource.
   ///
   /// @Snippet(path: "projectsQuickstart")
-  public protocol Projects {
+  public class ProjectsClient: Clients.ProjectsProtocol {
+    let inner: any Clients.ProjectsStub
+
+    /// Creates a new `ProjectsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ProjectsStub = try Clients.ProjectsTransport(options)
+      inner = Clients.ProjectsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ProjectsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Disable this project as a shared VPC host project.
     ///
     /// @Snippet(path: "projects_disableXpnHost")
-    func disableXpnHost(request: Clients.ProjectsClient.DisableXpnHostRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Disable this project as a shared VPC host project.
-    func disableXpnHost(
-      project: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func disableXpnHost(
+      request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.disableXpnHost(request: request, options: options)
+    }
 
     /// Disable a service resource (also known as service project) associated with
     /// this host project.
     ///
     /// @Snippet(path: "projects_disableXpnResource")
-    func disableXpnResource(request: Clients.ProjectsClient.DisableXpnResourceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Disable a service resource (also known as service project) associated with
-    /// this host project.
-    func disableXpnResource(
-      project: Swift.String,
-      body: ProjectsDisableXpnResourceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func disableXpnResource(
+      request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.disableXpnResource(request: request, options: options)
+    }
 
     /// Enable this project as a shared VPC host project.
     ///
     /// @Snippet(path: "projects_enableXpnHost")
-    func enableXpnHost(request: Clients.ProjectsClient.EnableXpnHostRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Enable this project as a shared VPC host project.
-    func enableXpnHost(
-      project: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func enableXpnHost(
+      request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.enableXpnHost(request: request, options: options)
+    }
 
     /// Enable service resource (a.k.a service project) for a host project, so that
     /// subnets in the host project can be used by instances in the service
     /// project.
     ///
     /// @Snippet(path: "projects_enableXpnResource")
-    func enableXpnResource(request: Clients.ProjectsClient.EnableXpnResourceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Enable service resource (a.k.a service project) for a host project, so that
-    /// subnets in the host project can be used by instances in the service
-    /// project.
-    func enableXpnResource(
-      project: Swift.String,
-      body: ProjectsEnableXpnResourceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func enableXpnResource(
+      request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.enableXpnResource(request: request, options: options)
+    }
 
     /// Returns the specified Project resource.
     ///
@@ -92,70 +91,70 @@
     /// your request.
     ///
     /// @Snippet(path: "projects_get")
-    func `get`(request: Clients.ProjectsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Project
-
-    /// Returns the specified Project resource.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information (the `quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    func `get`(
-      project: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Project
+    public func `get`(
+      request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Project {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the shared VPC host project that this project links to. May be empty
     /// if no link exists.
     ///
     /// @Snippet(path: "projects_getXpnHost")
-    func getXpnHost(request: Clients.ProjectsClient.GetXpnHostRequest) async throws
-      -> GoogleCloudComputeV1.Project
-
-    /// Gets the shared VPC host project that this project links to. May be empty
-    /// if no link exists.
-    func getXpnHost(
-      project: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Project
+    public func getXpnHost(
+      request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Project {
+      try await self.inner.getXpnHost(request: request, options: options)
+    }
 
     /// Gets service resources (a.k.a service project) associated with this host
     /// project.
     ///
     /// @Snippet(path: "projects_getXpnResources")
-    func getXpnResources(request: Clients.ProjectsClient.GetXpnResourcesRequest) async throws
-      -> GoogleCloudComputeV1.ProjectsGetXpnResources
+    public func getXpnResources(
+      request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources {
+      try await self.inner.getXpnResources(request: request, options: options)
+    }
 
     /// Gets service resources (a.k.a service project) associated with this host
     /// project.
-    func getXpnResources(
-      byItem: Clients.ProjectsClient.GetXpnResourcesRequest
-    ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
-
-    /// Gets service resources (a.k.a service project) associated with this host
-    /// project.
-    func getXpnResources(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
+    ///
+    /// @Snippet(path: "projects_getXpnResources")
+    public func getXpnResources(
+      byItem: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
+        var request = byItem
+        request.pageToken = token
+        return try await self.getXpnResources(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Lists all shared VPC host projects visible to the user in an organization.
     ///
     /// @Snippet(path: "projects_listXpnHosts")
-    func listXpnHosts(request: Clients.ProjectsClient.ListXpnHostsRequest) async throws
-      -> GoogleCloudComputeV1.XpnHostList
+    public func listXpnHosts(
+      request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.XpnHostList {
+      try await self.inner.listXpnHosts(request: request, options: options)
+    }
 
     /// Lists all shared VPC host projects visible to the user in an organization.
-    func listXpnHosts(
-      byItem: Clients.ProjectsClient.ListXpnHostsRequest
-    ) throws -> any AsyncSequence<Project, Swift.Error>
-
-    /// Lists all shared VPC host projects visible to the user in an organization.
-    func listXpnHosts(
-      project: Swift.String,
-      body: ProjectsListXpnHostsRequest?,
-    ) throws -> any AsyncSequence<Project, Swift.Error>
+    ///
+    /// @Snippet(path: "projects_listXpnHosts")
+    public func listXpnHosts(
+      byItem: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Project, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.XpnHostList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listXpnHosts(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Moves a persistent disk from one zone to another.
     /// *Note*: The moveDisk API will be deprecated on September 29, 2026.
@@ -173,27 +172,11 @@
     /// to continue using the service without interruption.
     ///
     /// @Snippet(path: "projects_moveDisk")
-    func moveDisk(request: Clients.ProjectsClient.MoveDiskRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Moves a persistent disk from one zone to another.
-    /// *Note*: The moveDisk API will be deprecated on September 29, 2026.
-    ///
-    /// Starting September 29, 2025, you can't use the moveDisk API on new
-    /// projects. To move a disk to a different region or zone, follow the steps in
-    /// [Change the location of a
-    /// disk](https://cloud.google.com/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd).
-    ///
-    /// Projects that already use the moveDisk API can continue usage until
-    /// September 29, 2026.
-    ///
-    /// Starting November 1, 2025, API responses will include a warning message in
-    /// the response body about the upcoming deprecation. You can skip the message
-    /// to continue using the service without interruption.
-    func moveDisk(
-      project: Swift.String,
-      body: DiskMoveRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func moveDisk(
+      request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.moveDisk(request: request, options: options)
+    }
 
     /// Moves an instance and its attached persistent disks from one zone to
     /// another.
@@ -204,20 +187,11 @@
     /// zones](/compute/docs/instances/moving-instance-across-zones) instead.
     ///
     /// @Snippet(path: "projects_moveInstance")
-    func moveInstance(request: Clients.ProjectsClient.MoveInstanceRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Moves an instance and its attached persistent disks from one zone to
-    /// another.
-    /// *Note*: Moving VMs or disks by using this method might
-    ///  cause unexpected behavior. For more information, see the [known
-    ///  issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior).
-    /// [Deprecated] This method is deprecated. See [moving instance across
-    /// zones](/compute/docs/instances/moving-instance-across-zones) instead.
-    func moveInstance(
-      project: Swift.String,
-      body: InstanceMoveRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func moveInstance(
+      request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.moveInstance(request: request, options: options)
+    }
 
     /// Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
     /// billing account of the project must be subscribed to Cloud Armor
@@ -225,380 +199,290 @@
     /// to Cloud Armor Enterprise for more information.
     ///
     /// @Snippet(path: "projects_setCloudArmorTier")
-    func setCloudArmorTier(request: Clients.ProjectsClient.SetCloudArmorTierRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
-    /// billing account of the project must be subscribed to Cloud Armor
-    /// Enterprise. See Subscribing
-    /// to Cloud Armor Enterprise for more information.
-    func setCloudArmorTier(
-      project: Swift.String,
-      body: ProjectsSetCloudArmorTierRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setCloudArmorTier(
+      request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setCloudArmorTier(request: request, options: options)
+    }
 
     /// Sets metadata common to all instances within the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "projects_setCommonInstanceMetadata")
-    func setCommonInstanceMetadata(request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets metadata common to all instances within the specified project using
-    /// the data included in the request.
-    func setCommonInstanceMetadata(
-      project: Swift.String,
-      body: Metadata?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setCommonInstanceMetadata(
+      request: ProjectsClient.SetCommonInstanceMetadataRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setCommonInstanceMetadata(request: request, options: options)
+    }
 
     /// Sets the default network tier of the project. The default network tier is
     /// used when an address/forwardingRule/instance is created without specifying
     /// the network tier field.
     ///
     /// @Snippet(path: "projects_setDefaultNetworkTier")
-    func setDefaultNetworkTier(request: Clients.ProjectsClient.SetDefaultNetworkTierRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the default network tier of the project. The default network tier is
-    /// used when an address/forwardingRule/instance is created without specifying
-    /// the network tier field.
-    func setDefaultNetworkTier(
-      project: Swift.String,
-      body: ProjectsSetDefaultNetworkTierRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setDefaultNetworkTier(
+      request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setDefaultNetworkTier(request: request, options: options)
+    }
 
     /// Enables the usage export feature and sets theusage export bucket
     /// where reports are stored. If you provide an empty request body using this
     /// method, the usage export feature will be disabled.
     ///
     /// @Snippet(path: "projects_setUsageExportBucket")
-    func setUsageExportBucket(request: Clients.ProjectsClient.SetUsageExportBucketRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Enables the usage export feature and sets theusage export bucket
-    /// where reports are stored. If you provide an empty request body using this
-    /// method, the usage export feature will be disabled.
-    func setUsageExportBucket(
-      project: Swift.String,
-      body: UsageExportLocation?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Disable this project as a shared VPC host project.
-    ///
-    /// @Snippet(path: "projects_disableXpnHost")
-    func disableXpnHost(
-      request: Clients.ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Disable a service resource (also known as service project) associated with
-    /// this host project.
-    ///
-    /// @Snippet(path: "projects_disableXpnResource")
-    func disableXpnResource(
-      request: Clients.ProjectsClient.DisableXpnResourceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Enable this project as a shared VPC host project.
-    ///
-    /// @Snippet(path: "projects_enableXpnHost")
-    func enableXpnHost(
-      request: Clients.ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Enable service resource (a.k.a service project) for a host project, so that
-    /// subnets in the host project can be used by instances in the service
-    /// project.
-    ///
-    /// @Snippet(path: "projects_enableXpnResource")
-    func enableXpnResource(
-      request: Clients.ProjectsClient.EnableXpnResourceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified Project resource.
-    ///
-    /// To decrease latency for this method, you can optionally omit any unneeded
-    /// information from the response by using a field mask. This practice is
-    /// especially recommended for unused quota information (the `quotas` field).
-    /// To exclude one or more fields, set your request's `fields` query parameter
-    /// to only include the fields you need. For example, to only include the `id`
-    /// and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
-    /// your request.
-    ///
-    /// @Snippet(path: "projects_get")
-    func `get`(
-      request: Clients.ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Project
-
-    /// Gets the shared VPC host project that this project links to. May be empty
-    /// if no link exists.
-    ///
-    /// @Snippet(path: "projects_getXpnHost")
-    func getXpnHost(
-      request: Clients.ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Project
-
-    /// Gets service resources (a.k.a service project) associated with this host
-    /// project.
-    ///
-    /// @Snippet(path: "projects_getXpnResources")
-    func getXpnResources(
-      request: Clients.ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources
-
-    /// Gets service resources (a.k.a service project) associated with this host
-    /// project.
-    func getXpnResources(
-      byItem: Clients.ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
-
-    /// Lists all shared VPC host projects visible to the user in an organization.
-    ///
-    /// @Snippet(path: "projects_listXpnHosts")
-    func listXpnHosts(
-      request: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.XpnHostList
-
-    /// Lists all shared VPC host projects visible to the user in an organization.
-    func listXpnHosts(
-      byItem: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Project, Swift.Error>
-
-    /// Moves a persistent disk from one zone to another.
-    /// *Note*: The moveDisk API will be deprecated on September 29, 2026.
-    ///
-    /// Starting September 29, 2025, you can't use the moveDisk API on new
-    /// projects. To move a disk to a different region or zone, follow the steps in
-    /// [Change the location of a
-    /// disk](https://cloud.google.com/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd).
-    ///
-    /// Projects that already use the moveDisk API can continue usage until
-    /// September 29, 2026.
-    ///
-    /// Starting November 1, 2025, API responses will include a warning message in
-    /// the response body about the upcoming deprecation. You can skip the message
-    /// to continue using the service without interruption.
-    ///
-    /// @Snippet(path: "projects_moveDisk")
-    func moveDisk(
-      request: Clients.ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Moves an instance and its attached persistent disks from one zone to
-    /// another.
-    /// *Note*: Moving VMs or disks by using this method might
-    ///  cause unexpected behavior. For more information, see the [known
-    ///  issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior).
-    /// [Deprecated] This method is deprecated. See [moving instance across
-    /// zones](/compute/docs/instances/moving-instance-across-zones) instead.
-    ///
-    /// @Snippet(path: "projects_moveInstance")
-    func moveInstance(
-      request: Clients.ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
-    /// billing account of the project must be subscribed to Cloud Armor
-    /// Enterprise. See Subscribing
-    /// to Cloud Armor Enterprise for more information.
-    ///
-    /// @Snippet(path: "projects_setCloudArmorTier")
-    func setCloudArmorTier(
-      request: Clients.ProjectsClient.SetCloudArmorTierRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets metadata common to all instances within the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "projects_setCommonInstanceMetadata")
-    func setCommonInstanceMetadata(
-      request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the default network tier of the project. The default network tier is
-    /// used when an address/forwardingRule/instance is created without specifying
-    /// the network tier field.
-    ///
-    /// @Snippet(path: "projects_setDefaultNetworkTier")
-    func setDefaultNetworkTier(
-      request: Clients.ProjectsClient.SetDefaultNetworkTierRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Enables the usage export feature and sets theusage export bucket
-    /// where reports are stored. If you provide an empty request body using this
-    /// method, the usage export feature will be disabled.
-    ///
-    /// @Snippet(path: "projects_setUsageExportBucket")
-    func setUsageExportBucket(
-      request: Clients.ProjectsClient.SetUsageExportBucketRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func setUsageExportBucket(
+      request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.setUsageExportBucket(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Projects``.
-    public class ProjectsClient: Projects {
-      let inner: any ProjectsStub
+    /// A Swift protocol to mock `ProjectsClient`.
+    ///
+    /// To mock `ProjectsClient` change your functions to receive
+    /// `some ProjectsProtocol` or `any ProjectsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ProjectsProtocol {
+      /// See `ProjectsClient.disableXpnHost`.
+      func disableXpnHost(request: ProjectsClient.DisableXpnHostRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `ProjectsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ProjectsStub = try ProjectsTransport(options)
-        inner = ProjectsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ProjectsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ProjectsClient.disableXpnHost`.
+      func disableXpnHost(
+        project: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Projects.disableXpnHost`
-      public func disableXpnHost(
-        request: Clients.ProjectsClient.DisableXpnHostRequest,
+      /// See `ProjectsClient.disableXpnResource`.
+      func disableXpnResource(request: ProjectsClient.DisableXpnResourceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.disableXpnResource`.
+      func disableXpnResource(
+        project: Swift.String,
+        body: ProjectsDisableXpnResourceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnHost`.
+      func enableXpnHost(request: ProjectsClient.EnableXpnHostRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnHost`.
+      func enableXpnHost(
+        project: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnResource`.
+      func enableXpnResource(request: ProjectsClient.EnableXpnResourceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnResource`.
+      func enableXpnResource(
+        project: Swift.String,
+        body: ProjectsEnableXpnResourceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.`get``.
+      func `get`(request: ProjectsClient.GetRequest) async throws -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.`get``.
+      func `get`(
+        project: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.getXpnHost`.
+      func getXpnHost(request: ProjectsClient.GetXpnHostRequest) async throws
+        -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.getXpnHost`.
+      func getXpnHost(
+        project: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.getXpnResources`.
+      func getXpnResources(request: ProjectsClient.GetXpnResourcesRequest) async throws
+        -> GoogleCloudComputeV1.ProjectsGetXpnResources
+
+      /// See `ProjectsClient.getXpnResources`.
+      func getXpnResources(
+        byItem: ProjectsClient.GetXpnResourcesRequest
+      ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
+
+      /// See `ProjectsClient.getXpnResources`.
+      func getXpnResources(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
+
+      /// See `ProjectsClient.listXpnHosts`.
+      func listXpnHosts(request: ProjectsClient.ListXpnHostsRequest) async throws
+        -> GoogleCloudComputeV1.XpnHostList
+
+      /// See `ProjectsClient.listXpnHosts`.
+      func listXpnHosts(
+        byItem: ProjectsClient.ListXpnHostsRequest
+      ) throws -> any AsyncSequence<Project, Swift.Error>
+
+      /// See `ProjectsClient.listXpnHosts`.
+      func listXpnHosts(
+        project: Swift.String,
+        body: ProjectsListXpnHostsRequest?,
+      ) throws -> any AsyncSequence<Project, Swift.Error>
+
+      /// See `ProjectsClient.moveDisk`.
+      func moveDisk(request: ProjectsClient.MoveDiskRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.moveDisk`.
+      func moveDisk(
+        project: Swift.String,
+        body: DiskMoveRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.moveInstance`.
+      func moveInstance(request: ProjectsClient.MoveInstanceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.moveInstance`.
+      func moveInstance(
+        project: Swift.String,
+        body: InstanceMoveRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCloudArmorTier`.
+      func setCloudArmorTier(request: ProjectsClient.SetCloudArmorTierRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCloudArmorTier`.
+      func setCloudArmorTier(
+        project: Swift.String,
+        body: ProjectsSetCloudArmorTierRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCommonInstanceMetadata`.
+      func setCommonInstanceMetadata(request: ProjectsClient.SetCommonInstanceMetadataRequest)
+        async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCommonInstanceMetadata`.
+      func setCommonInstanceMetadata(
+        project: Swift.String,
+        body: Metadata?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setDefaultNetworkTier`.
+      func setDefaultNetworkTier(request: ProjectsClient.SetDefaultNetworkTierRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setDefaultNetworkTier`.
+      func setDefaultNetworkTier(
+        project: Swift.String,
+        body: ProjectsSetDefaultNetworkTierRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setUsageExportBucket`.
+      func setUsageExportBucket(request: ProjectsClient.SetUsageExportBucketRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setUsageExportBucket`.
+      func setUsageExportBucket(
+        project: Swift.String,
+        body: UsageExportLocation?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.disableXpnHost`.
+      func disableXpnHost(
+        request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.disableXpnResource`.
+      func disableXpnResource(
+        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnHost`.
+      func enableXpnHost(
+        request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.enableXpnResource`.
+      func enableXpnResource(
+        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.`get``.
+      func `get`(
+        request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.getXpnHost`.
+      func getXpnHost(
+        request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Project
+
+      /// See `ProjectsClient.getXpnResources`.
+      func getXpnResources(
+        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources
+
+      /// See `ProjectsClient.getXpnResources`.
+      func getXpnResources(
+        byItem: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<XpnResourceId, Swift.Error>
+
+      /// See `ProjectsClient.listXpnHosts`.
+      func listXpnHosts(
+        request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.XpnHostList
+
+      /// See `ProjectsClient.listXpnHosts`.
+      func listXpnHosts(
+        byItem: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Project, Swift.Error>
+
+      /// See `ProjectsClient.moveDisk`.
+      func moveDisk(
+        request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.moveInstance`.
+      func moveInstance(
+        request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCloudArmorTier`.
+      func setCloudArmorTier(
+        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ProjectsClient.setCommonInstanceMetadata`.
+      func setCommonInstanceMetadata(
+        request: ProjectsClient.SetCommonInstanceMetadataRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.disableXpnHost(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Projects.disableXpnResource`
-      public func disableXpnResource(
-        request: Clients.ProjectsClient.DisableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.disableXpnResource(request: request, options: options)
-      }
+      /// See `ProjectsClient.setDefaultNetworkTier`.
+      func setDefaultNetworkTier(
+        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Projects.enableXpnHost`
-      public func enableXpnHost(
-        request: Clients.ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.enableXpnHost(request: request, options: options)
-      }
-
-      /// See `Projects.enableXpnResource`
-      public func enableXpnResource(
-        request: Clients.ProjectsClient.EnableXpnResourceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.enableXpnResource(request: request, options: options)
-      }
-
-      /// See `Projects.`get``
-      public func `get`(
-        request: Clients.ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Project {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `Projects.getXpnHost`
-      public func getXpnHost(
-        request: Clients.ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Project {
-        try await self.inner.getXpnHost(request: request, options: options)
-      }
-
-      /// See `Projects.getXpnResources`
-      public func getXpnResources(
-        request: Clients.ProjectsClient.GetXpnResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources {
-        try await self.inner.getXpnResources(request: request, options: options)
-      }
-
-      /// Gets service resources (a.k.a service project) associated with this host
-      /// project.
-      public func getXpnResources(
-        byItem: Clients.ProjectsClient.GetXpnResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
-          var request = byItem
-          request.pageToken = token
-          return try await self.getXpnResources(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Projects.listXpnHosts`
-      public func listXpnHosts(
-        request: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.XpnHostList {
-        try await self.inner.listXpnHosts(request: request, options: options)
-      }
-
-      /// Lists all shared VPC host projects visible to the user in an organization.
-      public func listXpnHosts(
-        byItem: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Project, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.XpnHostList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listXpnHosts(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Projects.moveDisk`
-      public func moveDisk(
-        request: Clients.ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.moveDisk(request: request, options: options)
-      }
-
-      /// See `Projects.moveInstance`
-      public func moveInstance(
-        request: Clients.ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.moveInstance(request: request, options: options)
-      }
-
-      /// See `Projects.setCloudArmorTier`
-      public func setCloudArmorTier(
-        request: Clients.ProjectsClient.SetCloudArmorTierRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setCloudArmorTier(request: request, options: options)
-      }
-
-      /// See `Projects.setCommonInstanceMetadata`
-      public func setCommonInstanceMetadata(
-        request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setCommonInstanceMetadata(request: request, options: options)
-      }
-
-      /// See `Projects.setDefaultNetworkTier`
-      public func setDefaultNetworkTier(
-        request: Clients.ProjectsClient.SetDefaultNetworkTierRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setDefaultNetworkTier(request: request, options: options)
-      }
-
-      /// See `Projects.setUsageExportBucket`
-      public func setUsageExportBucket(
-        request: Clients.ProjectsClient.SetUsageExportBucketRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.setUsageExportBucket(request: request, options: options)
-      }
+      /// See `ProjectsClient.setUsageExportBucket`.
+      func setUsageExportBucket(
+        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Projects {
-    public func disableXpnHost(request: Clients.ProjectsClient.DisableXpnHostRequest) async throws
+  extension Clients.ProjectsProtocol {
+    public func disableXpnHost(request: ProjectsClient.DisableXpnHostRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.disableXpnHost(request: request, options: .init())
     }
 
     public func disableXpnHost(
-      request: Clients.ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -606,21 +490,20 @@
     public func disableXpnHost(
       project: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.DisableXpnHostRequest().with {
+      let request = ProjectsClient.DisableXpnHostRequest().with {
         $0.project = project
       }
       return try await self.disableXpnHost(request: request)
     }
 
-    public func disableXpnResource(request: Clients.ProjectsClient.DisableXpnResourceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func disableXpnResource(request: ProjectsClient.DisableXpnResourceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.disableXpnResource(request: request, options: .init())
     }
 
     public func disableXpnResource(
-      request: Clients.ProjectsClient.DisableXpnResourceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -629,21 +512,21 @@
       project: Swift.String,
       body: ProjectsDisableXpnResourceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.DisableXpnResourceRequest().with {
+      let request = ProjectsClient.DisableXpnResourceRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.disableXpnResource(request: request)
     }
 
-    public func enableXpnHost(request: Clients.ProjectsClient.EnableXpnHostRequest) async throws
+    public func enableXpnHost(request: ProjectsClient.EnableXpnHostRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.enableXpnHost(request: request, options: .init())
     }
 
     public func enableXpnHost(
-      request: Clients.ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -651,21 +534,20 @@
     public func enableXpnHost(
       project: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.EnableXpnHostRequest().with {
+      let request = ProjectsClient.EnableXpnHostRequest().with {
         $0.project = project
       }
       return try await self.enableXpnHost(request: request)
     }
 
-    public func enableXpnResource(request: Clients.ProjectsClient.EnableXpnResourceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func enableXpnResource(request: ProjectsClient.EnableXpnResourceRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.enableXpnResource(request: request, options: .init())
     }
 
     public func enableXpnResource(
-      request: Clients.ProjectsClient.EnableXpnResourceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -674,21 +556,21 @@
       project: Swift.String,
       body: ProjectsEnableXpnResourceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.EnableXpnResourceRequest().with {
+      let request = ProjectsClient.EnableXpnResourceRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.enableXpnResource(request: request)
     }
 
-    public func `get`(request: Clients.ProjectsClient.GetRequest) async throws
+    public func `get`(request: ProjectsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Project
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Project {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -696,20 +578,20 @@
     public func `get`(
       project: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Project {
-      let request = Clients.ProjectsClient.GetRequest().with {
+      let request = ProjectsClient.GetRequest().with {
         $0.project = project
       }
       return try await self.`get`(request: request)
     }
 
-    public func getXpnHost(request: Clients.ProjectsClient.GetXpnHostRequest) async throws
+    public func getXpnHost(request: ProjectsClient.GetXpnHostRequest) async throws
       -> GoogleCloudComputeV1.Project
     {
       try await self.getXpnHost(request: request, options: .init())
     }
 
     public func getXpnHost(
-      request: Clients.ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Project {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -717,32 +599,32 @@
     public func getXpnHost(
       project: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Project {
-      let request = Clients.ProjectsClient.GetXpnHostRequest().with {
+      let request = ProjectsClient.GetXpnHostRequest().with {
         $0.project = project
       }
       return try await self.getXpnHost(request: request)
     }
 
-    public func getXpnResources(request: Clients.ProjectsClient.GetXpnResourcesRequest) async throws
+    public func getXpnResources(request: ProjectsClient.GetXpnResourcesRequest) async throws
       -> GoogleCloudComputeV1.ProjectsGetXpnResources
     {
       try await self.getXpnResources(request: request, options: .init())
     }
 
     public func getXpnResources(
-      request: Clients.ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func getXpnResources(
-      byItem: Clients.ProjectsClient.GetXpnResourcesRequest
+      byItem: ProjectsClient.GetXpnResourcesRequest
     ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
       try self.getXpnResources(byItem: byItem, options: .init())
     }
 
     public func getXpnResources(
-      byItem: Clients.ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
@@ -754,32 +636,32 @@
     public func getXpnResources(
       project: Swift.String,
     ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
-      let request = Clients.ProjectsClient.GetXpnResourcesRequest().with {
+      let request = ProjectsClient.GetXpnResourcesRequest().with {
         $0.project = project
       }
       return try self.getXpnResources(byItem: request)
     }
 
-    public func listXpnHosts(request: Clients.ProjectsClient.ListXpnHostsRequest) async throws
+    public func listXpnHosts(request: ProjectsClient.ListXpnHostsRequest) async throws
       -> GoogleCloudComputeV1.XpnHostList
     {
       try await self.listXpnHosts(request: request, options: .init())
     }
 
     public func listXpnHosts(
-      request: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.XpnHostList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listXpnHosts(
-      byItem: Clients.ProjectsClient.ListXpnHostsRequest
+      byItem: ProjectsClient.ListXpnHostsRequest
     ) throws -> any AsyncSequence<Project, Swift.Error> {
       try self.listXpnHosts(byItem: byItem, options: .init())
     }
 
     public func listXpnHosts(
-      byItem: Clients.ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Project, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.XpnHostList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -791,21 +673,21 @@
       project: Swift.String,
       body: ProjectsListXpnHostsRequest?,
     ) throws -> any AsyncSequence<Project, Swift.Error> {
-      let request = Clients.ProjectsClient.ListXpnHostsRequest().with {
+      let request = ProjectsClient.ListXpnHostsRequest().with {
         $0.project = project
         $0.body = body
       }
       return try self.listXpnHosts(byItem: request)
     }
 
-    public func moveDisk(request: Clients.ProjectsClient.MoveDiskRequest) async throws
+    public func moveDisk(request: ProjectsClient.MoveDiskRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.moveDisk(request: request, options: .init())
     }
 
     public func moveDisk(
-      request: Clients.ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -814,21 +696,21 @@
       project: Swift.String,
       body: DiskMoveRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.MoveDiskRequest().with {
+      let request = ProjectsClient.MoveDiskRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.moveDisk(request: request)
     }
 
-    public func moveInstance(request: Clients.ProjectsClient.MoveInstanceRequest) async throws
+    public func moveInstance(request: ProjectsClient.MoveInstanceRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.moveInstance(request: request, options: .init())
     }
 
     public func moveInstance(
-      request: Clients.ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -837,22 +719,21 @@
       project: Swift.String,
       body: InstanceMoveRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.MoveInstanceRequest().with {
+      let request = ProjectsClient.MoveInstanceRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.moveInstance(request: request)
     }
 
-    public func setCloudArmorTier(request: Clients.ProjectsClient.SetCloudArmorTierRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func setCloudArmorTier(request: ProjectsClient.SetCloudArmorTierRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.setCloudArmorTier(request: request, options: .init())
     }
 
     public func setCloudArmorTier(
-      request: Clients.ProjectsClient.SetCloudArmorTierRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -861,21 +742,21 @@
       project: Swift.String,
       body: ProjectsSetCloudArmorTierRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.SetCloudArmorTierRequest().with {
+      let request = ProjectsClient.SetCloudArmorTierRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.setCloudArmorTier(request: request)
     }
 
-    public func setCommonInstanceMetadata(
-      request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest
-    ) async throws -> GoogleCloudComputeV1.Operation {
+    public func setCommonInstanceMetadata(request: ProjectsClient.SetCommonInstanceMetadataRequest)
+      async throws -> GoogleCloudComputeV1.Operation
+    {
       try await self.setCommonInstanceMetadata(request: request, options: .init())
     }
 
     public func setCommonInstanceMetadata(
-      request: Clients.ProjectsClient.SetCommonInstanceMetadataRequest,
+      request: ProjectsClient.SetCommonInstanceMetadataRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -885,22 +766,21 @@
       project: Swift.String,
       body: Metadata?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.SetCommonInstanceMetadataRequest().with {
+      let request = ProjectsClient.SetCommonInstanceMetadataRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.setCommonInstanceMetadata(request: request)
     }
 
-    public func setDefaultNetworkTier(request: Clients.ProjectsClient.SetDefaultNetworkTierRequest)
+    public func setDefaultNetworkTier(request: ProjectsClient.SetDefaultNetworkTierRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setDefaultNetworkTier(request: request, options: .init())
     }
 
     public func setDefaultNetworkTier(
-      request: Clients.ProjectsClient.SetDefaultNetworkTierRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -909,22 +789,21 @@
       project: Swift.String,
       body: ProjectsSetDefaultNetworkTierRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.SetDefaultNetworkTierRequest().with {
+      let request = ProjectsClient.SetDefaultNetworkTierRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.setDefaultNetworkTier(request: request)
     }
 
-    public func setUsageExportBucket(request: Clients.ProjectsClient.SetUsageExportBucketRequest)
+    public func setUsageExportBucket(request: ProjectsClient.SetUsageExportBucketRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.setUsageExportBucket(request: request, options: .init())
     }
 
     public func setUsageExportBucket(
-      request: Clients.ProjectsClient.SetUsageExportBucketRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -933,7 +812,7 @@
       project: Swift.String,
       body: UsageExportLocation?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ProjectsClient.SetUsageExportBucketRequest().with {
+      let request = ProjectsClient.SetUsageExportBucketRequest().with {
         $0.project = project
         $0.body = body
       }

@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some EdgeContainer, projectId: String, locationId: String, machineId: String)
+func sample(client: EdgeContainerClient, projectId: String, locationId: String, machineId: String)
   async throws
 {
   let response = try await client.getMachine(
@@ -40,7 +40,7 @@ func sample(client: some EdgeContainer, projectId: String, locationId: String, m
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudEdgecontainerV1.Clients.EdgeContainerClient()
+      let client = try GoogleCloudEdgecontainerV1.EdgeContainerClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         machineId: "[placeholder]")

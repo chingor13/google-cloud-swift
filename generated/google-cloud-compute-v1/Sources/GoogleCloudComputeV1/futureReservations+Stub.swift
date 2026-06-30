@@ -28,37 +28,32 @@
   extension Clients {
     protocol FutureReservationsStub {
       func aggregatedList(
-        request: Clients.FutureReservationsClient.AggregatedListRequest,
+        request: FutureReservationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse
 
       func cancel(
-        request: Clients.FutureReservationsClient.CancelRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.FutureReservationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservation
 
       func insert(
-        request: Clients.FutureReservationsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.FutureReservationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse
 
       func update(
-        request: Clients.FutureReservationsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -71,7 +66,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.FutureReservationsClient.AggregatedListRequest,
+        request: FutureReservationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse {
         let path = try { () throws -> Swift.String in
@@ -102,8 +97,7 @@
       }
 
       public func cancel(
-        request: Clients.FutureReservationsClient.CancelRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -132,8 +126,7 @@
       }
 
       public func delete(
-        request: Clients.FutureReservationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -162,7 +155,7 @@
       }
 
       public func `get`(
-        request: Clients.FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -189,8 +182,7 @@
       }
 
       public func insert(
-        request: Clients.FutureReservationsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -216,8 +208,7 @@
       }
 
       public func list(
-        request: Clients.FutureReservationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -245,8 +236,7 @@
       }
 
       public func update(
-        request: Clients.FutureReservationsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

@@ -28,11 +28,11 @@
   extension Clients {
     protocol ZonesStub {
       func `get`(
-        request: Clients.ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Zone
 
       func list(
-        request: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Zone {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -65,7 +65,7 @@
       }
 
       public func list(
-        request: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

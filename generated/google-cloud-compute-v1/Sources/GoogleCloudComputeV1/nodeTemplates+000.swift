@@ -28,137 +28,18 @@
   /// Service for the `nodeTemplates` resource.
   ///
   /// @Snippet(path: "nodeTemplatesQuickstart")
-  public protocol NodeTemplates {
-    /// Retrieves an aggregated list of node templates.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "nodeTemplates_aggregatedList")
-    func aggregatedList(request: Clients.NodeTemplatesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.NodeTemplateAggregatedList
+  public class NodeTemplatesClient: Clients.NodeTemplatesProtocol {
+    let inner: any Clients.NodeTemplatesStub
 
-    /// Retrieves an aggregated list of node templates.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NodeTemplatesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of node templates.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
-
-    /// Deletes the specified NodeTemplate resource.
-    ///
-    /// @Snippet(path: "nodeTemplates_delete")
-    func delete(request: Clients.NodeTemplatesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified NodeTemplate resource.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      nodeTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified node template.
-    ///
-    /// @Snippet(path: "nodeTemplates_get")
-    func `get`(request: Clients.NodeTemplatesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NodeTemplate
-
-    /// Returns the specified node template.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      nodeTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NodeTemplate
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "nodeTemplates_getIamPolicy")
-    func getIamPolicy(request: Clients.NodeTemplatesClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a NodeTemplate resource in the specified project using the data
-    /// included in the request.
-    ///
-    /// @Snippet(path: "nodeTemplates_insert")
-    func insert(request: Clients.NodeTemplatesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a NodeTemplate resource in the specified project using the data
-    /// included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NodeTemplate?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of node templates available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "nodeTemplates_list")
-    func list(request: Clients.NodeTemplatesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.NodeTemplateList
-
-    /// Retrieves a list of node templates available to the specified
-    /// project.
-    func list(
-      byItem: Clients.NodeTemplatesClient.ListRequest
-    ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
-
-    /// Retrieves a list of node templates available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "nodeTemplates_setIamPolicy")
-    func setIamPolicy(request: Clients.NodeTemplatesClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "nodeTemplates_testIamPermissions")
-    func testIamPermissions(request: Clients.NodeTemplatesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `NodeTemplatesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.NodeTemplatesStub = try Clients.NodeTemplatesTransport(options)
+      inner = Clients.NodeTemplatesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.NodeTemplatesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of node templates.
     ///
@@ -166,214 +47,292 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "nodeTemplates_aggregatedList")
-    func aggregatedList(
-      request: Clients.NodeTemplatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList
+    public func aggregatedList(
+      request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of node templates.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.NodeTemplatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "nodeTemplates_aggregatedList")
+    public func aggregatedList(
+      byItem: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified NodeTemplate resource.
     ///
     /// @Snippet(path: "nodeTemplates_delete")
-    func delete(
-      request: Clients.NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified node template.
     ///
     /// @Snippet(path: "nodeTemplates_get")
-    func `get`(
-      request: Clients.NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeTemplate
+    public func `get`(
+      request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeTemplate {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "nodeTemplates_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.NodeTemplatesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a NodeTemplate resource in the specified project using the data
     /// included in the request.
     ///
     /// @Snippet(path: "nodeTemplates_insert")
-    func insert(
-      request: Clients.NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of node templates available to the specified
     /// project.
     ///
     /// @Snippet(path: "nodeTemplates_list")
-    func list(
-      request: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NodeTemplateList
+    public func list(
+      request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NodeTemplateList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of node templates available to the specified
     /// project.
-    func list(
-      byItem: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
+    ///
+    /// @Snippet(path: "nodeTemplates_list")
+    public func list(
+      byItem: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NodeTemplate, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "nodeTemplates_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.NodeTemplatesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "nodeTemplates_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.NodeTemplatesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: NodeTemplatesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``NodeTemplates``.
-    public class NodeTemplatesClient: NodeTemplates {
-      let inner: any NodeTemplatesStub
+    /// A Swift protocol to mock `NodeTemplatesClient`.
+    ///
+    /// To mock `NodeTemplatesClient` change your functions to receive
+    /// `some NodeTemplatesProtocol` or `any NodeTemplatesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol NodeTemplatesProtocol {
+      /// See `NodeTemplatesClient.aggregatedList`.
+      func aggregatedList(request: NodeTemplatesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.NodeTemplateAggregatedList
 
-      /// Creates a new `NodeTemplatesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any NodeTemplatesStub = try NodeTemplatesTransport(options)
-        inner = NodeTemplatesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = NodeTemplatesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `NodeTemplatesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NodeTemplatesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
 
-      /// See `NodeTemplates.aggregatedList`
-      public func aggregatedList(
-        request: Clients.NodeTemplatesClient.AggregatedListRequest,
+      /// See `NodeTemplatesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
+
+      /// See `NodeTemplatesClient.delete`.
+      func delete(request: NodeTemplatesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        nodeTemplate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.`get``.
+      func `get`(request: NodeTemplatesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NodeTemplate
+
+      /// See `NodeTemplatesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        nodeTemplate: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NodeTemplate
+
+      /// See `NodeTemplatesClient.getIamPolicy`.
+      func getIamPolicy(request: NodeTemplatesClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.insert`.
+      func insert(request: NodeTemplatesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: NodeTemplate?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.list`.
+      func list(request: NodeTemplatesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.NodeTemplateList
+
+      /// See `NodeTemplatesClient.list`.
+      func list(
+        byItem: NodeTemplatesClient.ListRequest
+      ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
+
+      /// See `NodeTemplatesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
+
+      /// See `NodeTemplatesClient.setIamPolicy`.
+      func setIamPolicy(request: NodeTemplatesClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: RegionSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.testIamPermissions`.
+      func testIamPermissions(request: NodeTemplatesClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `NodeTemplatesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `NodeTemplatesClient.aggregatedList`.
+      func aggregatedList(
+        request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList
+
+      /// See `NodeTemplatesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error>
+
+      /// See `NodeTemplatesClient.delete`.
+      func delete(
+        request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.`get``.
+      func `get`(
+        request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeTemplate
+
+      /// See `NodeTemplatesClient.getIamPolicy`.
+      func getIamPolicy(
+        request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.insert`.
+      func insert(
+        request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `NodeTemplatesClient.list`.
+      func list(
+        request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NodeTemplateList
+
+      /// See `NodeTemplatesClient.list`.
+      func list(
+        byItem: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<NodeTemplate, Swift.Error>
+
+      /// See `NodeTemplatesClient.setIamPolicy`.
+      func setIamPolicy(
+        request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `NodeTemplatesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: NodeTemplatesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
-
-      /// Retrieves an aggregated list of node templates.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.NodeTemplatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `NodeTemplates.delete`
-      public func delete(
-        request: Clients.NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `NodeTemplates.`get``
-      public func `get`(
-        request: Clients.NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeTemplate {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `NodeTemplates.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.NodeTemplatesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `NodeTemplates.insert`
-      public func insert(
-        request: Clients.NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `NodeTemplates.list`
-      public func list(
-        request: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NodeTemplateList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// Retrieves a list of node templates available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NodeTemplate, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `NodeTemplates.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.NodeTemplatesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `NodeTemplates.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.NodeTemplatesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension NodeTemplates {
-    public func aggregatedList(request: Clients.NodeTemplatesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList
+  extension Clients.NodeTemplatesProtocol {
+    public func aggregatedList(request: NodeTemplatesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.NodeTemplateAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.NodeTemplatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.NodeTemplatesClient.AggregatedListRequest
+      byItem: NodeTemplatesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.NodeTemplatesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList in
@@ -385,20 +344,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, NodeTemplatesScopedList), Swift.Error> {
-      let request = Clients.NodeTemplatesClient.AggregatedListRequest().with {
+      let request = NodeTemplatesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.NodeTemplatesClient.DeleteRequest) async throws
+    public func delete(request: NodeTemplatesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -408,7 +367,7 @@
       region: Swift.String,
       nodeTemplate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeTemplatesClient.DeleteRequest().with {
+      let request = NodeTemplatesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.nodeTemplate = nodeTemplate
@@ -416,14 +375,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.NodeTemplatesClient.GetRequest) async throws
+    public func `get`(request: NodeTemplatesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NodeTemplate
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTemplate {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -433,7 +392,7 @@
       region: Swift.String,
       nodeTemplate: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NodeTemplate {
-      let request = Clients.NodeTemplatesClient.GetRequest().with {
+      let request = NodeTemplatesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.nodeTemplate = nodeTemplate
@@ -441,15 +400,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.NodeTemplatesClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: NodeTemplatesClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.NodeTemplatesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -459,7 +417,7 @@
       region: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.NodeTemplatesClient.GetIamPolicyRequest().with {
+      let request = NodeTemplatesClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -467,14 +425,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.NodeTemplatesClient.InsertRequest) async throws
+    public func insert(request: NodeTemplatesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -484,7 +442,7 @@
       region: Swift.String,
       body: NodeTemplate?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.NodeTemplatesClient.InsertRequest().with {
+      let request = NodeTemplatesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -492,26 +450,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.NodeTemplatesClient.ListRequest) async throws
+    public func list(request: NodeTemplatesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.NodeTemplateList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTemplateList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.NodeTemplatesClient.ListRequest
+      byItem: NodeTemplatesClient.ListRequest
     ) throws -> any AsyncSequence<NodeTemplate, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeTemplate, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeTemplateList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -523,22 +481,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<NodeTemplate, Swift.Error> {
-      let request = Clients.NodeTemplatesClient.ListRequest().with {
+      let request = NodeTemplatesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func setIamPolicy(request: Clients.NodeTemplatesClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: NodeTemplatesClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.NodeTemplatesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -549,7 +506,7 @@
       resource: Swift.String,
       body: RegionSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.NodeTemplatesClient.SetIamPolicyRequest().with {
+      let request = NodeTemplatesClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource
@@ -558,15 +515,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(request: Clients.NodeTemplatesClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: NodeTemplatesClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.NodeTemplatesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: NodeTemplatesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -577,7 +533,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.NodeTemplatesClient.TestIamPermissionsRequest().with {
+      let request = NodeTemplatesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

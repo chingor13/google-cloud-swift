@@ -28,32 +28,32 @@
   extension Clients {
     protocol RegionNotificationEndpointsStub {
       func aggregatedList(
-        request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+        request: RegionNotificationEndpointsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
 
       func delete(
-        request: Clients.RegionNotificationEndpointsClient.DeleteRequest,
+        request: RegionNotificationEndpointsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionNotificationEndpointsClient.GetRequest,
+        request: RegionNotificationEndpointsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
 
       func insert(
-        request: Clients.RegionNotificationEndpointsClient.InsertRequest,
+        request: RegionNotificationEndpointsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionNotificationEndpointsClient.ListRequest,
+        request: RegionNotificationEndpointsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointList
 
       func testIamPermissions(
-        request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest,
+        request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -67,7 +67,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+        request: RegionNotificationEndpointsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -98,7 +98,7 @@
       }
 
       public func delete(
-        request: Clients.RegionNotificationEndpointsClient.DeleteRequest,
+        request: RegionNotificationEndpointsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -128,7 +128,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionNotificationEndpointsClient.GetRequest,
+        request: RegionNotificationEndpointsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
         let path = try { () throws -> Swift.String in
@@ -156,7 +156,7 @@
       }
 
       public func insert(
-        request: Clients.RegionNotificationEndpointsClient.InsertRequest,
+        request: RegionNotificationEndpointsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -184,7 +184,7 @@
       }
 
       public func list(
-        request: Clients.RegionNotificationEndpointsClient.ListRequest,
+        request: RegionNotificationEndpointsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointList {
         let path = try { () throws -> Swift.String in
@@ -214,7 +214,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest,
+        request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

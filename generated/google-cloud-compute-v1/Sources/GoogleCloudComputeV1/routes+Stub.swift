@@ -28,24 +28,23 @@
   extension Clients {
     protocol RoutesStub {
       func delete(
-        request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Route
 
       func insert(
-        request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouteList
 
       func testIamPermissions(
-        request: Clients.RoutesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -58,7 +57,7 @@
       }
 
       public func delete(
-        request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -80,7 +79,7 @@
       }
 
       public func `get`(
-        request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Route {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -100,7 +99,7 @@
       }
 
       public func insert(
-        request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -123,7 +122,7 @@
       }
 
       public func list(
-        request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouteList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -148,8 +147,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RoutesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

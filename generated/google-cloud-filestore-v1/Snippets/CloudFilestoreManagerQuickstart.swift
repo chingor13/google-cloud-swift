@@ -25,7 +25,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(parent: String, ) async throws {
-  let client = try GoogleCloudFilestoreV1.Clients.CloudFilestoreManagerClient()
+  let client = try GoogleCloudFilestoreV1.CloudFilestoreManagerClient()
   let items = try client.listInstances(
     byItem: ListInstancesRequest()
       .with {

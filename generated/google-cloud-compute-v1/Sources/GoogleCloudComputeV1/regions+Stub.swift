@@ -28,11 +28,11 @@
   extension Clients {
     protocol RegionsStub {
       func `get`(
-        request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region
 
       func list(
-        request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList
     }
 
@@ -45,7 +45,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -65,7 +65,7 @@
       }
 
       public func list(
-        request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

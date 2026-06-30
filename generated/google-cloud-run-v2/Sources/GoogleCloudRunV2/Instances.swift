@@ -29,584 +29,562 @@ import Logging
 /// The Cloud Run Instances API allows you to manage Cloud Run Instances.
 ///
 /// @Snippet(path: "InstancesQuickstart")
-public protocol Instances {
-  /// Creates an Instance.
-  ///
-  /// @Snippet(path: "Instances_CreateInstance")
-  func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongrunning.Operation
+public class InstancesClient: Clients.InstancesProtocol {
+  let inner: any Clients.InstancesStub
 
-  /// Creates an Instance.
-  func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Creates an Instance.
-  func createInstance(
-    parent: Swift.String,
-    instance: Instance?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Deletes a Instance
-  ///
-  /// @Snippet(path: "Instances_DeleteInstance")
-  func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a Instance
-  func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Deletes a Instance
-  func deleteInstance(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Gets a Instance
-  ///
-  /// @Snippet(path: "Instances_GetInstance")
-  func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudRunV2.Instance
-
-  /// Gets a Instance
-  func getInstance(
-    name: Swift.String,
-  ) async throws -> GoogleCloudRunV2.Instance
-
-  /// Lists Instances. Results are sorted by creation time, descending.
-  ///
-  /// @Snippet(path: "Instances_ListInstances")
-  func listInstances(request: ListInstancesRequest) async throws
-    -> GoogleCloudRunV2.ListInstancesResponse
-
-  /// Lists Instances. Results are sorted by creation time, descending.
-  func listInstances(
-    byItem: ListInstancesRequest
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
-
-  /// Lists Instances. Results are sorted by creation time, descending.
-  func listInstances(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
-
-  /// Stops an Instance.
-  ///
-  /// @Snippet(path: "Instances_StopInstance")
-  func stopInstance(request: StopInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Stops an Instance.
-  func stopInstance(withPolling: StopInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Stops an Instance.
-  func stopInstance(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Starts an Instance.
-  ///
-  /// @Snippet(path: "Instances_StartInstance")
-  func startInstance(request: StartInstanceRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Starts an Instance.
-  func startInstance(withPolling: StartInstanceRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Instance>
-
-  /// Starts an Instance.
-  func startInstance(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Instances_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Instances_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Instances_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Instances_WaitOperation")
-  func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
-    -> GoogleLongrunning.Operation
+  /// Creates a new `InstancesClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.InstancesStub = try Clients.InstancesTransport(options)
+    inner = Clients.InstancesRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.InstancesLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Creates an Instance.
   ///
   /// @Snippet(path: "Instances_CreateInstance")
-  func createInstance(
+  public func createInstance(
     request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createInstance(request: request, options: options)
+  }
 
   /// Creates an Instance.
-  func createInstance(
+  ///
+  /// @Snippet(path: "Instances_CreateInstance")
+  public func createInstance(
     withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a Instance
   ///
   /// @Snippet(path: "Instances_DeleteInstance")
-  func deleteInstance(
+  public func deleteInstance(
     request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteInstance(request: request, options: options)
+  }
 
   /// Deletes a Instance
-  func deleteInstance(
+  ///
+  /// @Snippet(path: "Instances_DeleteInstance")
+  public func deleteInstance(
     withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Gets a Instance
   ///
   /// @Snippet(path: "Instances_GetInstance")
-  func getInstance(
+  public func getInstance(
     request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.Instance
+  ) async throws -> GoogleCloudRunV2.Instance {
+    try await self.inner.getInstance(request: request, options: options)
+  }
 
   /// Lists Instances. Results are sorted by creation time, descending.
   ///
   /// @Snippet(path: "Instances_ListInstances")
-  func listInstances(
+  public func listInstances(
     request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.ListInstancesResponse
+  ) async throws -> GoogleCloudRunV2.ListInstancesResponse {
+    try await self.inner.listInstances(request: request, options: options)
+  }
 
   /// Lists Instances. Results are sorted by creation time, descending.
-  func listInstances(
+  ///
+  /// @Snippet(path: "Instances_ListInstances")
+  public func listInstances(
     byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Instance, Swift.Error>
+  ) throws -> any AsyncSequence<Instance, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListInstancesResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listInstances(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Stops an Instance.
   ///
   /// @Snippet(path: "Instances_StopInstance")
-  func stopInstance(
+  public func stopInstance(
     request: StopInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.stopInstance(request: request, options: options)
+  }
 
   /// Stops an Instance.
-  func stopInstance(
+  ///
+  /// @Snippet(path: "Instances_StopInstance")
+  public func stopInstance(
     withPolling: StopInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.stopInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Starts an Instance.
   ///
   /// @Snippet(path: "Instances_StartInstance")
-  func startInstance(
+  public func startInstance(
     request: StartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.startInstance(request: request, options: options)
+  }
 
   /// Starts an Instance.
-  func startInstance(
+  ///
+  /// @Snippet(path: "Instances_StartInstance")
+  public func startInstance(
     withPolling: StartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Instance(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.startInstance(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "Instances_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Instances_WaitOperation")
-  func waitOperation(
+  public func waitOperation(
     request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.waitOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Instances``.
-  public class InstancesClient: Instances {
-    let inner: any InstancesStub
+  /// A Swift protocol to mock `InstancesClient`.
+  ///
+  /// To mock `InstancesClient` change your functions to receive
+  /// `some InstancesProtocol` or `any InstancesProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol InstancesProtocol {
+    /// See `InstancesClient.createInstance`.
+    func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new `InstancesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any InstancesStub = try InstancesTransport(options)
-      inner = InstancesRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = InstancesLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `InstancesClient.createInstance`.
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
 
-    /// See `Instances.createInstance`
-    public func createInstance(
+    /// See `InstancesClient.createInstance`.
+    func createInstance(
+      parent: Swift.String,
+      instance: Instance?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `InstancesClient.deleteInstance`.
+    func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.deleteInstance`.
+    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `InstancesClient.deleteInstance`.
+    func deleteInstance(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `InstancesClient.getInstance`.
+    func getInstance(request: GetInstanceRequest) async throws -> GoogleCloudRunV2.Instance
+
+    /// See `InstancesClient.getInstance`.
+    func getInstance(
+      name: Swift.String,
+    ) async throws -> GoogleCloudRunV2.Instance
+
+    /// See `InstancesClient.listInstances`.
+    func listInstances(request: ListInstancesRequest) async throws
+      -> GoogleCloudRunV2.ListInstancesResponse
+
+    /// See `InstancesClient.listInstances`.
+    func listInstances(
+      byItem: ListInstancesRequest
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
+
+    /// See `InstancesClient.listInstances`.
+    func listInstances(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
+
+    /// See `InstancesClient.stopInstance`.
+    func stopInstance(request: StopInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.stopInstance`.
+    func stopInstance(withPolling: StopInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `InstancesClient.stopInstance`.
+    func stopInstance(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `InstancesClient.startInstance`.
+    func startInstance(request: StartInstanceRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.startInstance`.
+    func startInstance(withPolling: StartInstanceRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Instance>
+
+    /// See `InstancesClient.startInstance`.
+    func startInstance(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+
+    /// See `InstancesClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `InstancesClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `InstancesClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `InstancesClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `InstancesClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `InstancesClient.waitOperation`.
+    func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `InstancesClient.createInstance`.
+    func createInstance(
       request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates an Instance.
-    public func createInstance(
+    /// See `InstancesClient.createInstance`.
+    func createInstance(
       withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Instances.deleteInstance`
-    public func deleteInstance(
+    /// See `InstancesClient.deleteInstance`.
+    func deleteInstance(
       request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a Instance
-    public func deleteInstance(
+    /// See `InstancesClient.deleteInstance`.
+    func deleteInstance(
       withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Instances.getInstance`
-    public func getInstance(
+    /// See `InstancesClient.getInstance`.
+    func getInstance(
       request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.Instance {
-      try await self.inner.getInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudRunV2.Instance
 
-    /// See `Instances.listInstances`
-    public func listInstances(
+    /// See `InstancesClient.listInstances`.
+    func listInstances(
       request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.ListInstancesResponse {
-      try await self.inner.listInstances(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudRunV2.ListInstancesResponse
 
-    /// Lists Instances. Results are sorted by creation time, descending.
-    public func listInstances(
+    /// See `InstancesClient.listInstances`.
+    func listInstances(
       byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Instance, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListInstancesResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listInstances(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Instance, Swift.Error>
 
-    /// See `Instances.stopInstance`
-    public func stopInstance(
+    /// See `InstancesClient.stopInstance`.
+    func stopInstance(
       request: StopInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.stopInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Stops an Instance.
-    public func stopInstance(
+    /// See `InstancesClient.stopInstance`.
+    func stopInstance(
       withPolling: StopInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.stopInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Instances.startInstance`
-    public func startInstance(
+    /// See `InstancesClient.startInstance`.
+    func startInstance(
       request: StartInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.startInstance(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Starts an Instance.
-    public func startInstance(
+    /// See `InstancesClient.startInstance`.
+    func startInstance(
       withPolling: StartInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Instance(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.startInstance(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Instances.listOperations`
-    public func listOperations(
+    /// See `InstancesClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `InstancesClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `Instances.getOperation`
-    public func getOperation(
+    /// See `InstancesClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `Instances.deleteOperation`
-    public func deleteOperation(
+    /// See `InstancesClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `Instances.waitOperation`
-    public func waitOperation(
+    /// See `InstancesClient.waitOperation`.
+    func waitOperation(
       request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.waitOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Instances {
+extension Clients.InstancesProtocol {
   public func createInstance(request: CreateInstanceRequest) async throws
     -> GoogleLongrunning.Operation
   {

@@ -28,48 +28,47 @@
   extension Clients {
     protocol ImagesStub {
       func delete(
-        request: Clients.ImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deprecate(
-        request: Clients.ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image
 
       func getFromFamily(
-        request: Clients.ImagesClient.GetFromFamilyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetFromFamilyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image
 
       func getIamPolicy(
-        request: Clients.ImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.ImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageList
 
       func patch(
-        request: Clients.ImagesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.ImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: Clients.ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.ImagesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -82,7 +81,7 @@
       }
 
       public func delete(
-        request: Clients.ImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -104,7 +103,7 @@
       }
 
       public func deprecate(
-        request: Clients.ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -130,7 +129,7 @@
       }
 
       public func `get`(
-        request: Clients.ImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -150,7 +149,7 @@
       }
 
       public func getFromFamily(
-        request: Clients.ImagesClient.GetFromFamilyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetFromFamilyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -170,7 +169,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.ImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -194,7 +193,7 @@
       }
 
       public func insert(
-        request: Clients.ImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -218,7 +217,7 @@
       }
 
       public func list(
-        request: Clients.ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -243,7 +242,7 @@
       }
 
       public func patch(
-        request: Clients.ImagesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -269,7 +268,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.ImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -293,7 +292,7 @@
       }
 
       public func setLabels(
-        request: Clients.ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -317,8 +316,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.ImagesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

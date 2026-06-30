@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.HealthChecksClient {
+  extension HealthChecksClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.healthChecks.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.healthChecks.aggregatedList]: <doc:HealthChecks/aggregatedList(request:)>

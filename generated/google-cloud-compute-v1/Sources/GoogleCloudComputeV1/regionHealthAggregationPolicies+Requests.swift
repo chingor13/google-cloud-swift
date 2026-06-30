@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionHealthAggregationPoliciesClient {
+  extension RegionHealthAggregationPoliciesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.regionHealthAggregationPolicies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.regionHealthAggregationPolicies.aggregatedList]: <doc:RegionHealthAggregationPolicies/aggregatedList(request:)>

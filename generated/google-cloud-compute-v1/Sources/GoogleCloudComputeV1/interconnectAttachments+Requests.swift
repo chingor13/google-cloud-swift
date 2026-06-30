@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InterconnectAttachmentsClient {
+  extension InterconnectAttachmentsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.interconnectAttachments.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.interconnectAttachments.aggregatedList]: <doc:InterconnectAttachments/aggregatedList(request:)>

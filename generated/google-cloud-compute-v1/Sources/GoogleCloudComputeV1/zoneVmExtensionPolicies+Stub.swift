@@ -28,28 +28,23 @@
   extension Clients {
     protocol ZoneVmExtensionPoliciesStub {
       func delete(
-        request: Clients.ZoneVmExtensionPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.ZoneVmExtensionPoliciesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicy
 
       func insert(
-        request: Clients.ZoneVmExtensionPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.ZoneVmExtensionPoliciesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyList
 
       func update(
-        request: Clients.ZoneVmExtensionPoliciesClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -62,8 +57,7 @@
       }
 
       public func delete(
-        request: Clients.ZoneVmExtensionPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -92,8 +86,7 @@
       }
 
       public func `get`(
-        request: Clients.ZoneVmExtensionPoliciesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -120,8 +113,7 @@
       }
 
       public func insert(
-        request: Clients.ZoneVmExtensionPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -147,8 +139,7 @@
       }
 
       public func list(
-        request: Clients.ZoneVmExtensionPoliciesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -176,8 +167,7 @@
       }
 
       public func update(
-        request: Clients.ZoneVmExtensionPoliciesClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ZoneVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

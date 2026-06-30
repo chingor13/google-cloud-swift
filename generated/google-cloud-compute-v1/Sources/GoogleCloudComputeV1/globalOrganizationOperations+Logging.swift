@@ -60,7 +60,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+        request: GlobalOrganizationOperationsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws {
         try await self._intercept(
@@ -68,16 +68,14 @@
           options: options,
           name: "delete",
           action: {
-            (
-              r: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> Void in
+            (r: GlobalOrganizationOperationsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> Void in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.GlobalOrganizationOperationsClient.GetRequest,
+        request: GlobalOrganizationOperationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -85,17 +83,15 @@
           options: options,
           name: "`get`",
           action: {
-            (
-              r: Clients.GlobalOrganizationOperationsClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalOrganizationOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.GlobalOrganizationOperationsClient.ListRequest,
+        request: GlobalOrganizationOperationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         try await self._intercept(
@@ -103,10 +99,8 @@
           options: options,
           name: "list",
           action: {
-            (
-              r: Clients.GlobalOrganizationOperationsClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.OperationList
+            (r: GlobalOrganizationOperationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.OperationList
             in
             return try await self.inner.list(request: r, options: o)
           })

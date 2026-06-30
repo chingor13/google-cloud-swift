@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.DisksClient()
+    let client = try GoogleCloudComputeV1.DisksClient()
     let response = try await client.addResourcePolicies(
-      request: Clients.DisksClient.AddResourcePoliciesRequest()
+      request: DisksClient.AddResourcePoliciesRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

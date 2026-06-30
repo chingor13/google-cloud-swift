@@ -53,15 +53,14 @@
       }
 
       public func aggregatedList(
-        request: Clients.DiskTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DiskTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: DiskTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -69,14 +68,14 @@
       }
 
       public func `get`(
-        request: Clients.DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DiskTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DiskTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.DiskType
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -84,14 +83,14 @@
       }
 
       public func list(
-        request: Clients.DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.DiskTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DiskTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.DiskTypeList
             in
             return try await self.inner.list(request: r, options: o)

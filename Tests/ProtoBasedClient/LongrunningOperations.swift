@@ -31,7 +31,7 @@ public enum LongrunningOperations {
   static private func createAndDeleteWorkflow(projectId: String, location: String, logger: Logger)
     async throws
   {
-    let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+    let client = try WorkflowsClient()
     let workflowId =
       "test_wf_\(UUID().uuidString.replacingOccurrences(of: "-", with: "_").prefix(20))"
     let parent = "projects/\(projectId)/locations/\(location)"

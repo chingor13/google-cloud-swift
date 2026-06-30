@@ -28,107 +28,106 @@
   /// Service for the `zones` resource.
   ///
   /// @Snippet(path: "zonesQuickstart")
-  public protocol Zones {
-    /// Returns the specified Zone resource.
-    ///
-    /// @Snippet(path: "zones_get")
-    func `get`(request: Clients.ZonesClient.GetRequest) async throws -> GoogleCloudComputeV1.Zone
+  public class ZonesClient: Clients.ZonesProtocol {
+    let inner: any Clients.ZonesStub
 
-    /// Returns the specified Zone resource.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Zone
-
-    /// Retrieves the list of Zone resources available to the specified project.
-    ///
-    /// @Snippet(path: "zones_list")
-    func list(request: Clients.ZonesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ZoneList
-
-    /// Retrieves the list of Zone resources available to the specified project.
-    func list(
-      byItem: Clients.ZonesClient.ListRequest
-    ) throws -> any AsyncSequence<Zone, Swift.Error>
-
-    /// Retrieves the list of Zone resources available to the specified project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<Zone, Swift.Error>
+    /// Creates a new `ZonesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ZonesStub = try Clients.ZonesTransport(options)
+      inner = Clients.ZonesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ZonesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Returns the specified Zone resource.
     ///
     /// @Snippet(path: "zones_get")
-    func `get`(
-      request: Clients.ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Zone
+    public func `get`(
+      request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Zone {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves the list of Zone resources available to the specified project.
     ///
     /// @Snippet(path: "zones_list")
-    func list(
-      request: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ZoneList
+    public func list(
+      request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ZoneList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of Zone resources available to the specified project.
-    func list(
-      byItem: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Zone, Swift.Error>
+    ///
+    /// @Snippet(path: "zones_list")
+    public func list(
+      byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Zone, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ZoneList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Zones``.
-    public class ZonesClient: Zones {
-      let inner: any ZonesStub
+    /// A Swift protocol to mock `ZonesClient`.
+    ///
+    /// To mock `ZonesClient` change your functions to receive
+    /// `some ZonesProtocol` or `any ZonesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ZonesProtocol {
+      /// See `ZonesClient.`get``.
+      func `get`(request: ZonesClient.GetRequest) async throws -> GoogleCloudComputeV1.Zone
 
-      /// Creates a new `ZonesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ZonesStub = try ZonesTransport(options)
-        inner = ZonesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ZonesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ZonesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Zone
 
-      /// See `Zones.`get``
-      public func `get`(
-        request: Clients.ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Zone {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ZonesClient.list`.
+      func list(request: ZonesClient.ListRequest) async throws -> GoogleCloudComputeV1.ZoneList
 
-      /// See `Zones.list`
-      public func list(
-        request: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ZoneList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `ZonesClient.list`.
+      func list(
+        byItem: ZonesClient.ListRequest
+      ) throws -> any AsyncSequence<Zone, Swift.Error>
 
-      /// Retrieves the list of Zone resources available to the specified project.
-      public func list(
-        byItem: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Zone, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ZoneList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `ZonesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<Zone, Swift.Error>
+
+      /// See `ZonesClient.`get``.
+      func `get`(
+        request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Zone
+
+      /// See `ZonesClient.list`.
+      func list(
+        request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ZoneList
+
+      /// See `ZonesClient.list`.
+      func list(
+        byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Zone, Swift.Error>
     }
   }
 
   // Default implementations
-  extension Zones {
-    public func `get`(request: Clients.ZonesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Zone
-    {
+  extension Clients.ZonesProtocol {
+    public func `get`(request: ZonesClient.GetRequest) async throws -> GoogleCloudComputeV1.Zone {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Zone {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -137,33 +136,32 @@
       project: Swift.String,
       zone: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Zone {
-      let request = Clients.ZonesClient.GetRequest().with {
+      let request = ZonesClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.ZonesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ZoneList
+    public func list(request: ZonesClient.ListRequest) async throws -> GoogleCloudComputeV1.ZoneList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ZoneList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ZonesClient.ListRequest
+      byItem: ZonesClient.ListRequest
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ZoneList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -174,7 +172,7 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
-      let request = Clients.ZonesClient.ListRequest().with {
+      let request = ZonesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)

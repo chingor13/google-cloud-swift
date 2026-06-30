@@ -28,37 +28,32 @@
   extension Clients {
     protocol InterconnectAttachmentsStub {
       func aggregatedList(
-        request: Clients.InterconnectAttachmentsClient.AggregatedListRequest,
+        request: InterconnectAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentAggregatedList
 
       func delete(
-        request: Clients.InterconnectAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.InterconnectAttachmentsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachment
 
       func insert(
-        request: Clients.InterconnectAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.InterconnectAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentList
 
       func patch(
-        request: Clients.InterconnectAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: Clients.InterconnectAttachmentsClient.SetLabelsRequest,
+        request: InterconnectAttachmentsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -72,7 +67,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.InterconnectAttachmentsClient.AggregatedListRequest,
+        request: InterconnectAttachmentsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -103,8 +98,7 @@
       }
 
       public func delete(
-        request: Clients.InterconnectAttachmentsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -133,8 +127,7 @@
       }
 
       public func `get`(
-        request: Clients.InterconnectAttachmentsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachment {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -161,8 +154,7 @@
       }
 
       public func insert(
-        request: Clients.InterconnectAttachmentsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -190,8 +182,7 @@
       }
 
       public func list(
-        request: Clients.InterconnectAttachmentsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -220,8 +211,7 @@
       }
 
       public func patch(
-        request: Clients.InterconnectAttachmentsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -254,7 +244,7 @@
       }
 
       public func setLabels(
-        request: Clients.InterconnectAttachmentsClient.SetLabelsRequest,
+        request: InterconnectAttachmentsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

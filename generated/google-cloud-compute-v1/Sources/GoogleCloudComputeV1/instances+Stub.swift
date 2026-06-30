@@ -28,238 +28,217 @@
   extension Clients {
     protocol InstancesStub {
       func addAccessConfig(
-        request: Clients.InstancesClient.AddAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func addNetworkInterface(
-        request: Clients.InstancesClient.AddNetworkInterfaceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddNetworkInterfaceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func addResourcePolicies(
-        request: Clients.InstancesClient.AddResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: Clients.InstancesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceAggregatedList
 
       func attachDisk(
-        request: Clients.InstancesClient.AttachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AttachDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func bulkInsert(
-        request: Clients.InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.InstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteAccessConfig(
-        request: Clients.InstancesClient.DeleteAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteNetworkInterface(
-        request: Clients.InstancesClient.DeleteNetworkInterfaceRequest,
+        request: InstancesClient.DeleteNetworkInterfaceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func detachDisk(
-        request: Clients.InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.InstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Instance
 
       func getEffectiveFirewalls(
-        request: Clients.InstancesClient.GetEffectiveFirewallsRequest,
+        request: InstancesClient.GetEffectiveFirewallsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstancesGetEffectiveFirewallsResponse
 
       func getGuestAttributes(
-        request: Clients.InstancesClient.GetGuestAttributesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GuestAttributes
 
       func getIamPolicy(
-        request: Clients.InstancesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func getScreenshot(
-        request: Clients.InstancesClient.GetScreenshotRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetScreenshotRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Screenshot
 
       func getSerialPortOutput(
-        request: Clients.InstancesClient.GetSerialPortOutputRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetSerialPortOutputRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SerialPortOutput
 
       func getShieldedInstanceIdentity(
-        request: Clients.InstancesClient.GetShieldedInstanceIdentityRequest,
+        request: InstancesClient.GetShieldedInstanceIdentityRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ShieldedInstanceIdentity
 
       func insert(
-        request: Clients.InstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceList
 
       func listReferrers(
-        request: Clients.InstancesClient.ListReferrersRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListReferrersRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceListReferrers
 
       func performMaintenance(
-        request: Clients.InstancesClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeResourcePolicies(
-        request: Clients.InstancesClient.RemoveResourcePoliciesRequest,
+        request: InstancesClient.RemoveResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func reportHostAsFaulty(
-        request: Clients.InstancesClient.ReportHostAsFaultyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ReportHostAsFaultyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func reset(
-        request: Clients.InstancesClient.ResetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resume(
-        request: Clients.InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func sendDiagnosticInterrupt(
-        request: Clients.InstancesClient.SendDiagnosticInterruptRequest,
+        request: InstancesClient.SendDiagnosticInterruptRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws
 
       func setDeletionProtection(
-        request: Clients.InstancesClient.SetDeletionProtectionRequest,
+        request: InstancesClient.SetDeletionProtectionRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setDiskAutoDelete(
-        request: Clients.InstancesClient.SetDiskAutoDeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetDiskAutoDeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.InstancesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: Clients.InstancesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setMachineResources(
-        request: Clients.InstancesClient.SetMachineResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineResourcesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setMachineType(
-        request: Clients.InstancesClient.SetMachineTypeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineTypeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setMetadata(
-        request: Clients.InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setMinCpuPlatform(
-        request: Clients.InstancesClient.SetMinCpuPlatformRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMinCpuPlatformRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setName(
-        request: Clients.InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setScheduling(
-        request: Clients.InstancesClient.SetSchedulingRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSchedulingRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setSecurityPolicy(
-        request: Clients.InstancesClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setServiceAccount(
-        request: Clients.InstancesClient.SetServiceAccountRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetServiceAccountRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setShieldedInstanceIntegrityPolicy(
-        request: Clients.InstancesClient.SetShieldedInstanceIntegrityPolicyRequest,
+        request: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setTags(
-        request: Clients.InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func simulateMaintenanceEvent(
-        request: Clients.InstancesClient.SimulateMaintenanceEventRequest,
+        request: InstancesClient.SimulateMaintenanceEventRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func start(
-        request: Clients.InstancesClient.StartRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StartRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func startWithEncryptionKey(
-        request: Clients.InstancesClient.StartWithEncryptionKeyRequest,
+        request: InstancesClient.StartWithEncryptionKeyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func stop(
-        request: Clients.InstancesClient.StopRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StopRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func suspend(
-        request: Clients.InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.InstancesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.InstancesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateAccessConfig(
-        request: Clients.InstancesClient.UpdateAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateDisplayDevice(
-        request: Clients.InstancesClient.UpdateDisplayDeviceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateDisplayDeviceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateNetworkInterface(
-        request: Clients.InstancesClient.UpdateNetworkInterfaceRequest,
+        request: InstancesClient.UpdateNetworkInterfaceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateShieldedInstanceConfig(
-        request: Clients.InstancesClient.UpdateShieldedInstanceConfigRequest,
+        request: InstancesClient.UpdateShieldedInstanceConfigRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -273,8 +252,7 @@
       }
 
       public func addAccessConfig(
-        request: Clients.InstancesClient.AddAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -306,8 +284,7 @@
       }
 
       public func addNetworkInterface(
-        request: Clients.InstancesClient.AddNetworkInterfaceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddNetworkInterfaceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -337,8 +314,7 @@
       }
 
       public func addResourcePolicies(
-        request: Clients.InstancesClient.AddResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -368,8 +344,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.InstancesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -399,7 +374,7 @@
       }
 
       public func attachDisk(
-        request: Clients.InstancesClient.AttachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AttachDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -430,7 +405,7 @@
       }
 
       public func bulkInsert(
-        request: Clients.InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -456,7 +431,7 @@
       }
 
       public func delete(
-        request: Clients.InstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -482,8 +457,7 @@
       }
 
       public func deleteAccessConfig(
-        request: Clients.InstancesClient.DeleteAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -512,7 +486,7 @@
       }
 
       public func deleteNetworkInterface(
-        request: Clients.InstancesClient.DeleteNetworkInterfaceRequest,
+        request: InstancesClient.DeleteNetworkInterfaceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -542,7 +516,7 @@
       }
 
       public func detachDisk(
-        request: Clients.InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -569,7 +543,7 @@
       }
 
       public func `get`(
-        request: Clients.InstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Instance {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -593,7 +567,7 @@
       }
 
       public func getEffectiveFirewalls(
-        request: Clients.InstancesClient.GetEffectiveFirewallsRequest,
+        request: InstancesClient.GetEffectiveFirewallsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstancesGetEffectiveFirewallsResponse {
         let path = try { () throws -> Swift.String in
@@ -621,8 +595,7 @@
       }
 
       public func getGuestAttributes(
-        request: Clients.InstancesClient.GetGuestAttributesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GuestAttributes {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -649,7 +622,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.InstancesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -677,8 +650,7 @@
       }
 
       public func getScreenshot(
-        request: Clients.InstancesClient.GetScreenshotRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetScreenshotRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Screenshot {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -702,8 +674,7 @@
       }
 
       public func getSerialPortOutput(
-        request: Clients.InstancesClient.GetSerialPortOutputRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetSerialPortOutputRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SerialPortOutput {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -730,7 +701,7 @@
       }
 
       public func getShieldedInstanceIdentity(
-        request: Clients.InstancesClient.GetShieldedInstanceIdentityRequest,
+        request: InstancesClient.GetShieldedInstanceIdentityRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ShieldedInstanceIdentity {
         let path = try { () throws -> Swift.String in
@@ -755,7 +726,7 @@
       }
 
       public func insert(
-        request: Clients.InstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -786,7 +757,7 @@
       }
 
       public func list(
-        request: Clients.InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -814,8 +785,7 @@
       }
 
       public func listReferrers(
-        request: Clients.InstancesClient.ListReferrersRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListReferrersRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceListReferrers {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -847,8 +817,7 @@
       }
 
       public func performMaintenance(
-        request: Clients.InstancesClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -874,7 +843,7 @@
       }
 
       public func removeResourcePolicies(
-        request: Clients.InstancesClient.RemoveResourcePoliciesRequest,
+        request: InstancesClient.RemoveResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -905,8 +874,7 @@
       }
 
       public func reportHostAsFaulty(
-        request: Clients.InstancesClient.ReportHostAsFaultyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ReportHostAsFaultyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -936,7 +904,7 @@
       }
 
       public func reset(
-        request: Clients.InstancesClient.ResetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -962,7 +930,7 @@
       }
 
       public func resume(
-        request: Clients.InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -988,7 +956,7 @@
       }
 
       public func sendDiagnosticInterrupt(
-        request: Clients.InstancesClient.SendDiagnosticInterruptRequest,
+        request: InstancesClient.SendDiagnosticInterruptRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws {
         let path = try { () throws -> Swift.String in
@@ -1011,7 +979,7 @@
       }
 
       public func setDeletionProtection(
-        request: Clients.InstancesClient.SetDeletionProtectionRequest,
+        request: InstancesClient.SetDeletionProtectionRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -1040,8 +1008,7 @@
       }
 
       public func setDiskAutoDelete(
-        request: Clients.InstancesClient.SetDiskAutoDeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetDiskAutoDeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1069,7 +1036,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.InstancesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1097,7 +1064,7 @@
       }
 
       public func setLabels(
-        request: Clients.InstancesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1127,8 +1094,7 @@
       }
 
       public func setMachineResources(
-        request: Clients.InstancesClient.SetMachineResourcesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineResourcesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1158,8 +1124,7 @@
       }
 
       public func setMachineType(
-        request: Clients.InstancesClient.SetMachineTypeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineTypeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1189,7 +1154,7 @@
       }
 
       public func setMetadata(
-        request: Clients.InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1219,8 +1184,7 @@
       }
 
       public func setMinCpuPlatform(
-        request: Clients.InstancesClient.SetMinCpuPlatformRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMinCpuPlatformRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1250,7 +1214,7 @@
       }
 
       public func setName(
-        request: Clients.InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1280,8 +1244,7 @@
       }
 
       public func setScheduling(
-        request: Clients.InstancesClient.SetSchedulingRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSchedulingRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1311,8 +1274,7 @@
       }
 
       public func setSecurityPolicy(
-        request: Clients.InstancesClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1342,8 +1304,7 @@
       }
 
       public func setServiceAccount(
-        request: Clients.InstancesClient.SetServiceAccountRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetServiceAccountRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1373,7 +1334,7 @@
       }
 
       public func setShieldedInstanceIntegrityPolicy(
-        request: Clients.InstancesClient.SetShieldedInstanceIntegrityPolicyRequest,
+        request: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -1404,7 +1365,7 @@
       }
 
       public func setTags(
-        request: Clients.InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1434,7 +1395,7 @@
       }
 
       public func simulateMaintenanceEvent(
-        request: Clients.InstancesClient.SimulateMaintenanceEventRequest,
+        request: InstancesClient.SimulateMaintenanceEventRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -1464,7 +1425,7 @@
       }
 
       public func start(
-        request: Clients.InstancesClient.StartRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StartRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1490,7 +1451,7 @@
       }
 
       public func startWithEncryptionKey(
-        request: Clients.InstancesClient.StartWithEncryptionKeyRequest,
+        request: InstancesClient.StartWithEncryptionKeyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -1521,7 +1482,7 @@
       }
 
       public func stop(
-        request: Clients.InstancesClient.StopRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StopRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1549,7 +1510,7 @@
       }
 
       public func suspend(
-        request: Clients.InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1577,8 +1538,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.InstancesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1606,7 +1566,7 @@
       }
 
       public func update(
-        request: Clients.InstancesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1642,8 +1602,7 @@
       }
 
       public func updateAccessConfig(
-        request: Clients.InstancesClient.UpdateAccessConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateAccessConfigRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1675,8 +1634,7 @@
       }
 
       public func updateDisplayDevice(
-        request: Clients.InstancesClient.UpdateDisplayDeviceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateDisplayDeviceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -1706,7 +1664,7 @@
       }
 
       public func updateNetworkInterface(
-        request: Clients.InstancesClient.UpdateNetworkInterfaceRequest,
+        request: InstancesClient.UpdateNetworkInterfaceRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -1739,7 +1697,7 @@
       }
 
       public func updateShieldedInstanceConfig(
-        request: Clients.InstancesClient.UpdateShieldedInstanceConfigRequest,
+        request: InstancesClient.UpdateShieldedInstanceConfigRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in

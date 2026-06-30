@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.InterconnectAttachmentsClient()
+    let client = try GoogleCloudComputeV1.InterconnectAttachmentsClient()
     let items = try client.aggregatedList(
-      byItem: Clients.InterconnectAttachmentsClient.AggregatedListRequest()
+      byItem: InterconnectAttachmentsClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

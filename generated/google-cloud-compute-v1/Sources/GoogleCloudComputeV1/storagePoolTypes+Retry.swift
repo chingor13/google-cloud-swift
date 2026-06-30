@@ -53,7 +53,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.StoragePoolTypesClient.AggregatedListRequest,
+        request: StoragePoolTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
         try await self._intercept(
@@ -61,40 +61,38 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.StoragePoolTypesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
+            (r: StoragePoolTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolType {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.StoragePoolTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.StoragePoolType
+            (r: StoragePoolTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.StoragePoolType
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.StoragePoolTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.StoragePoolTypeList
+            (r: StoragePoolTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.StoragePoolTypeList
             in
             return try await self.inner.list(request: r, options: o)
           })

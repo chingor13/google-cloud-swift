@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionTargetTcpProxiesClient {
+  extension RegionTargetTcpProxiesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionTargetTcpProxies.delete] method.
     ///
     /// [google.cloud.compute.v1.regionTargetTcpProxies.delete]: <doc:RegionTargetTcpProxies/delete(request:)>

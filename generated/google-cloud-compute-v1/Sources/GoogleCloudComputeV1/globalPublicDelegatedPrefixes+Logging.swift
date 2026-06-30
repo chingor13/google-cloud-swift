@@ -60,7 +60,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.DeleteRequest,
+        request: GlobalPublicDelegatedPrefixesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -68,17 +68,15 @@
           options: options,
           name: "delete",
           action: {
-            (
-              r: Clients.GlobalPublicDelegatedPrefixesClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalPublicDelegatedPrefixesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.GetRequest,
+        request: GlobalPublicDelegatedPrefixesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
         try await self._intercept(
@@ -86,17 +84,15 @@
           options: options,
           name: "`get`",
           action: {
-            (
-              r: Clients.GlobalPublicDelegatedPrefixesClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
+            (r: GlobalPublicDelegatedPrefixesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.InsertRequest,
+        request: GlobalPublicDelegatedPrefixesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -104,17 +100,15 @@
           options: options,
           name: "insert",
           action: {
-            (
-              r: Clients.GlobalPublicDelegatedPrefixesClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalPublicDelegatedPrefixesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.ListRequest,
+        request: GlobalPublicDelegatedPrefixesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
         try await self._intercept(
@@ -122,17 +116,15 @@
           options: options,
           name: "list",
           action: {
-            (
-              r: Clients.GlobalPublicDelegatedPrefixesClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
+            (r: GlobalPublicDelegatedPrefixesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.GlobalPublicDelegatedPrefixesClient.PatchRequest,
+        request: GlobalPublicDelegatedPrefixesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -140,10 +132,8 @@
           options: options,
           name: "patch",
           action: {
-            (
-              r: Clients.GlobalPublicDelegatedPrefixesClient.PatchRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: GlobalPublicDelegatedPrefixesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })

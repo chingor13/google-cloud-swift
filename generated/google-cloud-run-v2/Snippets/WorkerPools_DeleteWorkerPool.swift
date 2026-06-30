@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some WorkerPools, projectId: String, locationId: String, workerPoolId: String)
+func sample(client: WorkerPoolsClient, projectId: String, locationId: String, workerPoolId: String)
   async throws
 {
   let poller = try await client.deleteWorkerPool(
@@ -41,7 +41,7 @@ func sample(client: some WorkerPools, projectId: String, locationId: String, wor
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.WorkerPoolsClient()
+      let client = try GoogleCloudRunV2.WorkerPoolsClient()
       try await sample(
         client: client, projectId: "[placeholder]", locationId: "[placeholder]",
         workerPoolId: "[placeholder]")

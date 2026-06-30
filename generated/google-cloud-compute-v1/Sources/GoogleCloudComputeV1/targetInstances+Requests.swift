@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.TargetInstancesClient {
+  extension TargetInstancesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.targetInstances.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.targetInstances.aggregatedList]: <doc:TargetInstances/aggregatedList(request:)>

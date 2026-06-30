@@ -28,176 +28,18 @@
   /// Service for the `urlMaps` resource.
   ///
   /// @Snippet(path: "urlMapsQuickstart")
-  public protocol UrlMaps {
-    /// Retrieves the list of all UrlMap resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "urlMaps_aggregatedList")
-    func aggregatedList(request: Clients.UrlMapsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.UrlMapsAggregatedList
+  public class UrlMapsClient: Clients.UrlMapsProtocol {
+    let inner: any Clients.UrlMapsStub
 
-    /// Retrieves the list of all UrlMap resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.UrlMapsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
-
-    /// Retrieves the list of all UrlMap resources, regional and global,
-    /// available to the specified project.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
-
-    /// Deletes the specified UrlMap resource.
-    ///
-    /// @Snippet(path: "urlMaps_delete")
-    func delete(request: Clients.UrlMapsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified UrlMap resource.
-    func delete(
-      project: Swift.String,
-      urlMap: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified UrlMap resource.
-    ///
-    /// @Snippet(path: "urlMaps_get")
-    func `get`(request: Clients.UrlMapsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.UrlMap
-
-    /// Returns the specified UrlMap resource.
-    func `get`(
-      project: Swift.String,
-      urlMap: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.UrlMap
-
-    /// Creates a UrlMap resource in the specified project using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "urlMaps_insert")
-    func insert(request: Clients.UrlMapsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a UrlMap resource in the specified project using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Initiates a cache invalidation operation, invalidating the specified path,
-    /// scoped to the specified UrlMap.
-    ///
-    /// For more information, see [Invalidating cached
-    /// content](/cdn/docs/invalidating-cached-content).
-    ///
-    /// @Snippet(path: "urlMaps_invalidateCache")
-    func invalidateCache(request: Clients.UrlMapsClient.InvalidateCacheRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Initiates a cache invalidation operation, invalidating the specified path,
-    /// scoped to the specified UrlMap.
-    ///
-    /// For more information, see [Invalidating cached
-    /// content](/cdn/docs/invalidating-cached-content).
-    func invalidateCache(
-      project: Swift.String,
-      urlMap: Swift.String,
-      body: CacheInvalidationRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "urlMaps_list")
-    func list(request: Clients.UrlMapsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.UrlMapList
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project.
-    func list(
-      byItem: Clients.UrlMapsClient.ListRequest
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
-
-    /// Retrieves the list of UrlMap resources available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
-
-    /// Patches the specified UrlMap resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "urlMaps_patch")
-    func patch(request: Clients.UrlMapsClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified UrlMap resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      urlMap: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "urlMaps_testIamPermissions")
-    func testIamPermissions(request: Clients.UrlMapsClient.TestIamPermissionsRequest) async throws
-      -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Updates the specified UrlMap resource with the data included in the
-    /// request.
-    ///
-    /// @Snippet(path: "urlMaps_update")
-    func update(request: Clients.UrlMapsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified UrlMap resource with the data included in the
-    /// request.
-    func update(
-      project: Swift.String,
-      urlMap: Swift.String,
-      body: UrlMap?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Runs static validation for the UrlMap. In particular, the tests of the
-    /// provided UrlMap will be run. Calling this method does NOT create the
-    /// UrlMap.
-    ///
-    /// @Snippet(path: "urlMaps_validate")
-    func validate(request: Clients.UrlMapsClient.ValidateRequest) async throws
-      -> GoogleCloudComputeV1.UrlMapsValidateResponse
-
-    /// Runs static validation for the UrlMap. In particular, the tests of the
-    /// provided UrlMap will be run. Calling this method does NOT create the
-    /// UrlMap.
-    func validate(
-      project: Swift.String,
-      urlMap: Swift.String,
-      body: UrlMapsValidateRequest?,
-    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+    /// Creates a new `UrlMapsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.UrlMapsStub = try Clients.UrlMapsTransport(options)
+      inner = Clients.UrlMapsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.UrlMapsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all UrlMap resources, regional and global,
     /// available to the specified project.
@@ -206,40 +48,57 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "urlMaps_aggregatedList")
-    func aggregatedList(
-      request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList
+    public func aggregatedList(
+      request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all UrlMap resources, regional and global,
     /// available to the specified project.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "urlMaps_aggregatedList")
+    public func aggregatedList(
+      byItem: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified UrlMap resource.
     ///
     /// @Snippet(path: "urlMaps_delete")
-    func delete(
-      request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified UrlMap resource.
     ///
     /// @Snippet(path: "urlMaps_get")
-    func `get`(
-      request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMap
+    public func `get`(
+      request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMap {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a UrlMap resource in the specified project using
     /// the data included in the request.
     ///
     /// @Snippet(path: "urlMaps_insert")
-    func insert(
-      request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Initiates a cache invalidation operation, invalidating the specified path,
     /// scoped to the specified UrlMap.
@@ -248,23 +107,36 @@
     /// content](/cdn/docs/invalidating-cached-content).
     ///
     /// @Snippet(path: "urlMaps_invalidateCache")
-    func invalidateCache(
-      request: Clients.UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func invalidateCache(
+      request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.invalidateCache(request: request, options: options)
+    }
 
     /// Retrieves the list of UrlMap resources available to the specified
     /// project.
     ///
     /// @Snippet(path: "urlMaps_list")
-    func list(
-      request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMapList
+    public func list(
+      request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMapList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of UrlMap resources available to the specified
     /// project.
-    func list(
-      byItem: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<UrlMap, Swift.Error>
+    ///
+    /// @Snippet(path: "urlMaps_list")
+    public func list(
+      byItem: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified UrlMap resource with the data included in the
     /// request. This method supportsPATCH
@@ -272,177 +144,244 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "urlMaps_patch")
-    func patch(
-      request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "urlMaps_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Updates the specified UrlMap resource with the data included in the
     /// request.
     ///
     /// @Snippet(path: "urlMaps_update")
-    func update(
-      request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
 
     /// Runs static validation for the UrlMap. In particular, the tests of the
     /// provided UrlMap will be run. Calling this method does NOT create the
     /// UrlMap.
     ///
     /// @Snippet(path: "urlMaps_validate")
-    func validate(
-      request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+    public func validate(
+      request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
+      try await self.inner.validate(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``UrlMaps``.
-    public class UrlMapsClient: UrlMaps {
-      let inner: any UrlMapsStub
+    /// A Swift protocol to mock `UrlMapsClient`.
+    ///
+    /// To mock `UrlMapsClient` change your functions to receive
+    /// `some UrlMapsProtocol` or `any UrlMapsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol UrlMapsProtocol {
+      /// See `UrlMapsClient.aggregatedList`.
+      func aggregatedList(request: UrlMapsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.UrlMapsAggregatedList
 
-      /// Creates a new `UrlMapsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any UrlMapsStub = try UrlMapsTransport(options)
-        inner = UrlMapsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = UrlMapsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `UrlMapsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: UrlMapsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
 
-      /// See `UrlMaps.aggregatedList`
-      public func aggregatedList(
-        request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `UrlMapsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
 
-      /// Retrieves the list of all UrlMap resources, regional and global,
-      /// available to the specified project.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `UrlMapsClient.delete`.
+      func delete(request: UrlMapsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `UrlMaps.delete`
-      public func delete(
-        request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `UrlMapsClient.delete`.
+      func delete(
+        project: Swift.String,
+        urlMap: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `UrlMaps.`get``
-      public func `get`(
-        request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMap {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `UrlMapsClient.`get``.
+      func `get`(request: UrlMapsClient.GetRequest) async throws -> GoogleCloudComputeV1.UrlMap
 
-      /// See `UrlMaps.insert`
-      public func insert(
-        request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `UrlMapsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        urlMap: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.UrlMap
 
-      /// See `UrlMaps.invalidateCache`
-      public func invalidateCache(
-        request: Clients.UrlMapsClient.InvalidateCacheRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.invalidateCache(request: request, options: options)
-      }
+      /// See `UrlMapsClient.insert`.
+      func insert(request: UrlMapsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `UrlMaps.list`
-      public func list(
-        request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMapList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `UrlMapsClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of UrlMap resources available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `UrlMapsClient.invalidateCache`.
+      func invalidateCache(request: UrlMapsClient.InvalidateCacheRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `UrlMaps.patch`
-      public func patch(
-        request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `UrlMapsClient.invalidateCache`.
+      func invalidateCache(
+        project: Swift.String,
+        urlMap: Swift.String,
+        body: CacheInvalidationRule?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `UrlMaps.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `UrlMapsClient.list`.
+      func list(request: UrlMapsClient.ListRequest) async throws -> GoogleCloudComputeV1.UrlMapList
 
-      /// See `UrlMaps.update`
-      public func update(
-        request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `UrlMapsClient.list`.
+      func list(
+        byItem: UrlMapsClient.ListRequest
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
 
-      /// See `UrlMaps.validate`
-      public func validate(
-        request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
-        try await self.inner.validate(request: request, options: options)
-      }
+      /// See `UrlMapsClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
+
+      /// See `UrlMapsClient.patch`.
+      func patch(request: UrlMapsClient.PatchRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.patch`.
+      func patch(
+        project: Swift.String,
+        urlMap: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.testIamPermissions`.
+      func testIamPermissions(request: UrlMapsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `UrlMapsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `UrlMapsClient.update`.
+      func update(request: UrlMapsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.update`.
+      func update(
+        project: Swift.String,
+        urlMap: Swift.String,
+        body: UrlMap?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.validate`.
+      func validate(request: UrlMapsClient.ValidateRequest) async throws
+        -> GoogleCloudComputeV1.UrlMapsValidateResponse
+
+      /// See `UrlMapsClient.validate`.
+      func validate(
+        project: Swift.String,
+        urlMap: Swift.String,
+        body: UrlMapsValidateRequest?,
+      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
+
+      /// See `UrlMapsClient.aggregatedList`.
+      func aggregatedList(
+        request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList
+
+      /// See `UrlMapsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error>
+
+      /// See `UrlMapsClient.delete`.
+      func delete(
+        request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.`get``.
+      func `get`(
+        request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMap
+
+      /// See `UrlMapsClient.insert`.
+      func insert(
+        request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.invalidateCache`.
+      func invalidateCache(
+        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.list`.
+      func list(
+        request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMapList
+
+      /// See `UrlMapsClient.list`.
+      func list(
+        byItem: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<UrlMap, Swift.Error>
+
+      /// See `UrlMapsClient.patch`.
+      func patch(
+        request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `UrlMapsClient.update`.
+      func update(
+        request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `UrlMapsClient.validate`.
+      func validate(
+        request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
     }
   }
 
   // Default implementations
-  extension UrlMaps {
-    public func aggregatedList(request: Clients.UrlMapsClient.AggregatedListRequest) async throws
+  extension Clients.UrlMapsProtocol {
+    public func aggregatedList(request: UrlMapsClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.UrlMapsAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.UrlMapsClient.AggregatedListRequest
+      byItem: UrlMapsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -453,20 +392,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, UrlMapsScopedList), Swift.Error> {
-      let request = Clients.UrlMapsClient.AggregatedListRequest().with {
+      let request = UrlMapsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.UrlMapsClient.DeleteRequest) async throws
+    public func delete(request: UrlMapsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -475,21 +414,20 @@
       project: Swift.String,
       urlMap: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.UrlMapsClient.DeleteRequest().with {
+      let request = UrlMapsClient.DeleteRequest().with {
         $0.project = project
         $0.urlMap = urlMap
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.UrlMapsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.UrlMap
+    public func `get`(request: UrlMapsClient.GetRequest) async throws -> GoogleCloudComputeV1.UrlMap
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMap {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -498,21 +436,21 @@
       project: Swift.String,
       urlMap: Swift.String,
     ) async throws -> GoogleCloudComputeV1.UrlMap {
-      let request = Clients.UrlMapsClient.GetRequest().with {
+      let request = UrlMapsClient.GetRequest().with {
         $0.project = project
         $0.urlMap = urlMap
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.UrlMapsClient.InsertRequest) async throws
+    public func insert(request: UrlMapsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -521,21 +459,21 @@
       project: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.UrlMapsClient.InsertRequest().with {
+      let request = UrlMapsClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func invalidateCache(request: Clients.UrlMapsClient.InvalidateCacheRequest) async throws
+    public func invalidateCache(request: UrlMapsClient.InvalidateCacheRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.invalidateCache(request: request, options: .init())
     }
 
     public func invalidateCache(
-      request: Clients.UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -545,7 +483,7 @@
       urlMap: Swift.String,
       body: CacheInvalidationRule?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.UrlMapsClient.InvalidateCacheRequest().with {
+      let request = UrlMapsClient.InvalidateCacheRequest().with {
         $0.project = project
         $0.urlMap = urlMap
         $0.body = body
@@ -553,26 +491,26 @@
       return try await self.invalidateCache(request: request)
     }
 
-    public func list(request: Clients.UrlMapsClient.ListRequest) async throws
+    public func list(request: UrlMapsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.UrlMapList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.UrlMapsClient.ListRequest
+      byItem: UrlMapsClient.ListRequest
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.UrlMapList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -583,20 +521,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<UrlMap, Swift.Error> {
-      let request = Clients.UrlMapsClient.ListRequest().with {
+      let request = UrlMapsClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.UrlMapsClient.PatchRequest) async throws
+    public func patch(request: UrlMapsClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -606,7 +544,7 @@
       urlMap: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.UrlMapsClient.PatchRequest().with {
+      let request = UrlMapsClient.PatchRequest().with {
         $0.project = project
         $0.urlMap = urlMap
         $0.body = body
@@ -614,15 +552,14 @@
       return try await self.patch(request: request)
     }
 
-    public func testIamPermissions(request: Clients.UrlMapsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: UrlMapsClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -632,7 +569,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.UrlMapsClient.TestIamPermissionsRequest().with {
+      let request = UrlMapsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body
@@ -640,14 +577,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.UrlMapsClient.UpdateRequest) async throws
+    public func update(request: UrlMapsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -657,7 +594,7 @@
       urlMap: Swift.String,
       body: UrlMap?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.UrlMapsClient.UpdateRequest().with {
+      let request = UrlMapsClient.UpdateRequest().with {
         $0.project = project
         $0.urlMap = urlMap
         $0.body = body
@@ -665,14 +602,14 @@
       return try await self.update(request: request)
     }
 
-    public func validate(request: Clients.UrlMapsClient.ValidateRequest) async throws
+    public func validate(request: UrlMapsClient.ValidateRequest) async throws
       -> GoogleCloudComputeV1.UrlMapsValidateResponse
     {
       try await self.validate(request: request, options: .init())
     }
 
     public func validate(
-      request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+      request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -682,7 +619,7 @@
       urlMap: Swift.String,
       body: UrlMapsValidateRequest?,
     ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
-      let request = Clients.UrlMapsClient.ValidateRequest().with {
+      let request = UrlMapsClient.ValidateRequest().with {
         $0.project = project
         $0.urlMap = urlMap
         $0.body = body

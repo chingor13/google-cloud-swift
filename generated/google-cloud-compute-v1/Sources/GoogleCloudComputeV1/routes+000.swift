@@ -28,191 +28,182 @@
   /// Service for the `routes` resource.
   ///
   /// @Snippet(path: "routesQuickstart")
-  public protocol Routes {
+  public class RoutesClient: Clients.RoutesProtocol {
+    let inner: any Clients.RoutesStub
+
+    /// Creates a new `RoutesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RoutesStub = try Clients.RoutesTransport(options)
+      inner = Clients.RoutesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RoutesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
+
     /// Deletes the specified Route resource.
     ///
     /// @Snippet(path: "routes_delete")
-    func delete(request: Clients.RoutesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified Route resource.
-    func delete(
-      project: Swift.String,
-      route: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified Route resource.
     ///
     /// @Snippet(path: "routes_get")
-    func `get`(request: Clients.RoutesClient.GetRequest) async throws -> GoogleCloudComputeV1.Route
-
-    /// Returns the specified Route resource.
-    func `get`(
-      project: Swift.String,
-      route: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Route
+    public func `get`(
+      request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Route {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a Route resource in the specified project using the data included
     /// in the request.
     ///
     /// @Snippet(path: "routes_insert")
-    func insert(request: Clients.RoutesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a Route resource in the specified project using the data included
-    /// in the request.
-    func insert(
-      project: Swift.String,
-      body: Route?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves the list of Route resources available to the specified project.
     ///
     /// @Snippet(path: "routes_list")
-    func list(request: Clients.RoutesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.RouteList
-
-    /// Retrieves the list of Route resources available to the specified project.
-    func list(
-      byItem: Clients.RoutesClient.ListRequest
-    ) throws -> any AsyncSequence<Route, Swift.Error>
-
-    /// Retrieves the list of Route resources available to the specified project.
-    func list(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<Route, Swift.Error>
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "routes_testIamPermissions")
-    func testIamPermissions(request: Clients.RoutesClient.TestIamPermissionsRequest) async throws
-      -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Deletes the specified Route resource.
-    ///
-    /// @Snippet(path: "routes_delete")
-    func delete(
-      request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified Route resource.
-    ///
-    /// @Snippet(path: "routes_get")
-    func `get`(
-      request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Route
-
-    /// Creates a Route resource in the specified project using the data included
-    /// in the request.
-    ///
-    /// @Snippet(path: "routes_insert")
-    func insert(
-      request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func list(
+      request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RouteList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves the list of Route resources available to the specified project.
     ///
     /// @Snippet(path: "routes_list")
-    func list(
-      request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RouteList
-
-    /// Retrieves the list of Route resources available to the specified project.
-    func list(
-      byItem: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Route, Swift.Error>
+    public func list(
+      byItem: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Route, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouteList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "routes_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RoutesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Routes``.
-    public class RoutesClient: Routes {
-      let inner: any RoutesStub
+    /// A Swift protocol to mock `RoutesClient`.
+    ///
+    /// To mock `RoutesClient` change your functions to receive
+    /// `some RoutesProtocol` or `any RoutesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RoutesProtocol {
+      /// See `RoutesClient.delete`.
+      func delete(request: RoutesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RoutesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RoutesStub = try RoutesTransport(options)
-        inner = RoutesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RoutesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RoutesClient.delete`.
+      func delete(
+        project: Swift.String,
+        route: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Routes.delete`
-      public func delete(
-        request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `RoutesClient.`get``.
+      func `get`(request: RoutesClient.GetRequest) async throws -> GoogleCloudComputeV1.Route
 
-      /// See `Routes.`get``
-      public func `get`(
-        request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Route {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RoutesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        route: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Route
 
-      /// See `Routes.insert`
-      public func insert(
-        request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RoutesClient.insert`.
+      func insert(request: RoutesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Routes.list`
-      public func list(
-        request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RouteList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RoutesClient.insert`.
+      func insert(
+        project: Swift.String,
+        body: Route?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves the list of Route resources available to the specified project.
-      public func list(
-        byItem: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Route, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouteList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutesClient.list`.
+      func list(request: RoutesClient.ListRequest) async throws -> GoogleCloudComputeV1.RouteList
 
-      /// See `Routes.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.RoutesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      /// See `RoutesClient.list`.
+      func list(
+        byItem: RoutesClient.ListRequest
+      ) throws -> any AsyncSequence<Route, Swift.Error>
+
+      /// See `RoutesClient.list`.
+      func list(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<Route, Swift.Error>
+
+      /// See `RoutesClient.testIamPermissions`.
+      func testIamPermissions(request: RoutesClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RoutesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RoutesClient.delete`.
+      func delete(
+        request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutesClient.`get``.
+      func `get`(
+        request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Route
+
+      /// See `RoutesClient.insert`.
+      func insert(
+        request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutesClient.list`.
+      func list(
+        request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RouteList
+
+      /// See `RoutesClient.list`.
+      func list(
+        byItem: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Route, Swift.Error>
+
+      /// See `RoutesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension Routes {
-    public func delete(request: Clients.RoutesClient.DeleteRequest) async throws
+  extension Clients.RoutesProtocol {
+    public func delete(request: RoutesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -221,21 +212,19 @@
       project: Swift.String,
       route: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutesClient.DeleteRequest().with {
+      let request = RoutesClient.DeleteRequest().with {
         $0.project = project
         $0.route = route
       }
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RoutesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Route
-    {
+    public func `get`(request: RoutesClient.GetRequest) async throws -> GoogleCloudComputeV1.Route {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Route {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -244,21 +233,21 @@
       project: Swift.String,
       route: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Route {
-      let request = Clients.RoutesClient.GetRequest().with {
+      let request = RoutesClient.GetRequest().with {
         $0.project = project
         $0.route = route
       }
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RoutesClient.InsertRequest) async throws
+    public func insert(request: RoutesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -267,33 +256,33 @@
       project: Swift.String,
       body: Route?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutesClient.InsertRequest().with {
+      let request = RoutesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
       }
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RoutesClient.ListRequest) async throws
+    public func list(request: RoutesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.RouteList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouteList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RoutesClient.ListRequest
+      byItem: RoutesClient.ListRequest
     ) throws -> any AsyncSequence<Route, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Route, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouteList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -304,21 +293,20 @@
     public func list(
       project: Swift.String,
     ) throws -> any AsyncSequence<Route, Swift.Error> {
-      let request = Clients.RoutesClient.ListRequest().with {
+      let request = RoutesClient.ListRequest().with {
         $0.project = project
       }
       return try self.list(byItem: request)
     }
 
-    public func testIamPermissions(request: Clients.RoutesClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(request: RoutesClient.TestIamPermissionsRequest) async throws
+      -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.RoutesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -328,7 +316,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.RoutesClient.TestIamPermissionsRequest().with {
+      let request = RoutesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.resource = resource
         $0.body = body

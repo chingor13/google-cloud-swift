@@ -32,237 +32,178 @@ import Logging
 /// networking interruptions.
 ///
 /// @Snippet(path: "WorkflowsQuickstart")
-public protocol Workflows {
-  /// Lists workflows in a given project and location.
-  /// The default order is not specified.
-  ///
-  /// @Snippet(path: "Workflows_ListWorkflows")
-  func listWorkflows(request: ListWorkflowsRequest) async throws
-    -> GoogleCloudWorkflowsV1.ListWorkflowsResponse
+public class WorkflowsClient: Clients.WorkflowsProtocol {
+  let inner: any Clients.WorkflowsStub
 
-  /// Lists workflows in a given project and location.
-  /// The default order is not specified.
-  func listWorkflows(
-    byItem: ListWorkflowsRequest
-  ) throws -> any AsyncSequence<Workflow, Swift.Error>
-
-  /// Lists workflows in a given project and location.
-  /// The default order is not specified.
-  func listWorkflows(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Workflow, Swift.Error>
-
-  /// Gets details of a single workflow.
-  ///
-  /// @Snippet(path: "Workflows_GetWorkflow")
-  func getWorkflow(request: GetWorkflowRequest) async throws -> GoogleCloudWorkflowsV1.Workflow
-
-  /// Gets details of a single workflow.
-  func getWorkflow(
-    name: Swift.String,
-  ) async throws -> GoogleCloudWorkflowsV1.Workflow
-
-  /// Creates a new workflow. If a workflow with the specified name already
-  /// exists in the specified project and location, the long running operation
-  /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
-  ///
-  /// @Snippet(path: "Workflows_CreateWorkflow")
-  func createWorkflow(request: CreateWorkflowRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a new workflow. If a workflow with the specified name already
-  /// exists in the specified project and location, the long running operation
-  /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
-  func createWorkflow(withPolling: CreateWorkflowRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Workflow>
-
-  /// Creates a new workflow. If a workflow with the specified name already
-  /// exists in the specified project and location, the long running operation
-  /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
-  func createWorkflow(
-    parent: Swift.String,
-    workflow: Workflow?,
-    workflowId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
-
-  /// Deletes a workflow with the specified name.
-  /// This method also cancels and deletes all running executions of the
-  /// workflow.
-  ///
-  /// @Snippet(path: "Workflows_DeleteWorkflow")
-  func deleteWorkflow(request: DeleteWorkflowRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a workflow with the specified name.
-  /// This method also cancels and deletes all running executions of the
-  /// workflow.
-  func deleteWorkflow(withPolling: DeleteWorkflowRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Void>
-
-  /// Deletes a workflow with the specified name.
-  /// This method also cancels and deletes all running executions of the
-  /// workflow.
-  func deleteWorkflow(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
-
-  /// Updates an existing workflow.
-  /// Running this method has no impact on already running executions of the
-  /// workflow. A new revision of the workflow might be created as a result of a
-  /// successful update operation. In that case, the new revision is used
-  /// in new workflow executions.
-  ///
-  /// @Snippet(path: "Workflows_UpdateWorkflow")
-  func updateWorkflow(request: UpdateWorkflowRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates an existing workflow.
-  /// Running this method has no impact on already running executions of the
-  /// workflow. A new revision of the workflow might be created as a result of a
-  /// successful update operation. In that case, the new revision is used
-  /// in new workflow executions.
-  func updateWorkflow(withPolling: UpdateWorkflowRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Workflow>
-
-  /// Updates an existing workflow.
-  /// Running this method has no impact on already running executions of the
-  /// workflow. A new revision of the workflow might be created as a result of a
-  /// successful update operation. In that case, the new revision is used
-  /// in new workflow executions.
-  func updateWorkflow(
-    workflow: Workflow?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
-
-  /// Lists revisions for a given workflow.
-  ///
-  /// @Snippet(path: "Workflows_ListWorkflowRevisions")
-  func listWorkflowRevisions(request: ListWorkflowRevisionsRequest) async throws
-    -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse
-
-  /// Lists revisions for a given workflow.
-  func listWorkflowRevisions(
-    byItem: ListWorkflowRevisionsRequest
-  ) throws -> any AsyncSequence<Workflow, Swift.Error>
-
-  /// Lists information about the supported locations for this service.
-  ///
-  /// @Snippet(path: "Workflows_ListLocations")
-  func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
-    -> GoogleCloudLocation.ListLocationsResponse
-
-  /// Lists information about the supported locations for this service.
-  func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
-
-  /// Gets information about a location.
-  ///
-  /// @Snippet(path: "Workflows_GetLocation")
-  func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
-    -> GoogleCloudLocation.Location
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Workflows_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Workflows_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Workflows_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
+  /// Creates a new `WorkflowsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.WorkflowsStub = try Clients.WorkflowsTransport(options)
+    inner = Clients.WorkflowsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.WorkflowsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists workflows in a given project and location.
   /// The default order is not specified.
   ///
   /// @Snippet(path: "Workflows_ListWorkflows")
-  func listWorkflows(
+  public func listWorkflows(
     request: ListWorkflowsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse
+  ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse {
+    try await self.inner.listWorkflows(request: request, options: options)
+  }
 
   /// Lists workflows in a given project and location.
   /// The default order is not specified.
-  func listWorkflows(
+  ///
+  /// @Snippet(path: "Workflows_ListWorkflows")
+  public func listWorkflows(
     byItem: ListWorkflowsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Workflow, Swift.Error>
+  ) throws -> any AsyncSequence<Workflow, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listWorkflows(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets details of a single workflow.
   ///
   /// @Snippet(path: "Workflows_GetWorkflow")
-  func getWorkflow(
+  public func getWorkflow(
     request: GetWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudWorkflowsV1.Workflow
+  ) async throws -> GoogleCloudWorkflowsV1.Workflow {
+    try await self.inner.getWorkflow(request: request, options: options)
+  }
 
   /// Creates a new workflow. If a workflow with the specified name already
   /// exists in the specified project and location, the long running operation
   /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
   ///
   /// @Snippet(path: "Workflows_CreateWorkflow")
-  func createWorkflow(
+  public func createWorkflow(
     request: CreateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createWorkflow(request: request, options: options)
+  }
 
   /// Creates a new workflow. If a workflow with the specified name already
   /// exists in the specified project and location, the long running operation
   /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
-  func createWorkflow(
+  ///
+  /// @Snippet(path: "Workflows_CreateWorkflow")
+  public func createWorkflow(
     withPolling: CreateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Workflow(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createWorkflow(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Deletes a workflow with the specified name.
   /// This method also cancels and deletes all running executions of the
   /// workflow.
   ///
   /// @Snippet(path: "Workflows_DeleteWorkflow")
-  func deleteWorkflow(
+  public func deleteWorkflow(
     request: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteWorkflow(request: request, options: options)
+  }
 
   /// Deletes a workflow with the specified name.
   /// This method also cancels and deletes all running executions of the
   /// workflow.
-  func deleteWorkflow(
+  ///
+  /// @Snippet(path: "Workflows_DeleteWorkflow")
+  public func deleteWorkflow(
     withPolling: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Void>.State
+      in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response:
+        return .init(done: true, result: .success(()))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteWorkflow(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates an existing workflow.
   /// Running this method has no impact on already running executions of the
@@ -271,390 +212,392 @@ public protocol Workflows {
   /// in new workflow executions.
   ///
   /// @Snippet(path: "Workflows_UpdateWorkflow")
-  func updateWorkflow(
+  public func updateWorkflow(
     request: UpdateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateWorkflow(request: request, options: options)
+  }
 
   /// Updates an existing workflow.
   /// Running this method has no impact on already running executions of the
   /// workflow. A new revision of the workflow might be created as a result of a
   /// successful update operation. In that case, the new revision is used
   /// in new workflow executions.
-  func updateWorkflow(
+  ///
+  /// @Snippet(path: "Workflows_UpdateWorkflow")
+  public func updateWorkflow(
     withPolling: UpdateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Workflow(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateWorkflow(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Lists revisions for a given workflow.
   ///
   /// @Snippet(path: "Workflows_ListWorkflowRevisions")
-  func listWorkflowRevisions(
+  public func listWorkflowRevisions(
     request: ListWorkflowRevisionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse
+  ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse {
+    try await self.inner.listWorkflowRevisions(request: request, options: options)
+  }
 
   /// Lists revisions for a given workflow.
-  func listWorkflowRevisions(
+  ///
+  /// @Snippet(path: "Workflows_ListWorkflowRevisions")
+  public func listWorkflowRevisions(
     byItem: ListWorkflowRevisionsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Workflow, Swift.Error>
+  ) throws -> any AsyncSequence<Workflow, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listWorkflowRevisions(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "Workflows_ListLocations")
-  func listLocations(
+  public func listLocations(
     request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.ListLocationsResponse
+  ) async throws -> GoogleCloudLocation.ListLocationsResponse {
+    try await self.inner.listLocations(request: request, options: options)
+  }
 
   /// Lists information about the supported locations for this service.
-  func listLocations(
+  ///
+  /// @Snippet(path: "Workflows_ListLocations")
+  public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listLocations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Workflows_GetLocation")
-  func getLocation(
+  public func getLocation(
     request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudLocation.Location
+  ) async throws -> GoogleCloudLocation.Location {
+    try await self.inner.getLocation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Workflows_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
+  ///
+  /// @Snippet(path: "Workflows_ListOperations")
+  public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Workflows_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Workflows_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Workflows``.
-  public class WorkflowsClient: Workflows {
-    let inner: any WorkflowsStub
+  /// A Swift protocol to mock `WorkflowsClient`.
+  ///
+  /// To mock `WorkflowsClient` change your functions to receive
+  /// `some WorkflowsProtocol` or `any WorkflowsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol WorkflowsProtocol {
+    /// See `WorkflowsClient.listWorkflows`.
+    func listWorkflows(request: ListWorkflowsRequest) async throws
+      -> GoogleCloudWorkflowsV1.ListWorkflowsResponse
 
-    /// Creates a new `WorkflowsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any WorkflowsStub = try WorkflowsTransport(options)
-      inner = WorkflowsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = WorkflowsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `WorkflowsClient.listWorkflows`.
+    func listWorkflows(
+      byItem: ListWorkflowsRequest
+    ) throws -> any AsyncSequence<Workflow, Swift.Error>
 
-    /// See `Workflows.listWorkflows`
-    public func listWorkflows(
+    /// See `WorkflowsClient.listWorkflows`.
+    func listWorkflows(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Workflow, Swift.Error>
+
+    /// See `WorkflowsClient.getWorkflow`.
+    func getWorkflow(request: GetWorkflowRequest) async throws -> GoogleCloudWorkflowsV1.Workflow
+
+    /// See `WorkflowsClient.getWorkflow`.
+    func getWorkflow(
+      name: Swift.String,
+    ) async throws -> GoogleCloudWorkflowsV1.Workflow
+
+    /// See `WorkflowsClient.createWorkflow`.
+    func createWorkflow(request: CreateWorkflowRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `WorkflowsClient.createWorkflow`.
+    func createWorkflow(withPolling: CreateWorkflowRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Workflow>
+
+    /// See `WorkflowsClient.createWorkflow`.
+    func createWorkflow(
+      parent: Swift.String,
+      workflow: Workflow?,
+      workflowId: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
+
+    /// See `WorkflowsClient.deleteWorkflow`.
+    func deleteWorkflow(request: DeleteWorkflowRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `WorkflowsClient.deleteWorkflow`.
+    func deleteWorkflow(withPolling: DeleteWorkflowRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Void>
+
+    /// See `WorkflowsClient.deleteWorkflow`.
+    func deleteWorkflow(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
+
+    /// See `WorkflowsClient.updateWorkflow`.
+    func updateWorkflow(request: UpdateWorkflowRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `WorkflowsClient.updateWorkflow`.
+    func updateWorkflow(withPolling: UpdateWorkflowRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Workflow>
+
+    /// See `WorkflowsClient.updateWorkflow`.
+    func updateWorkflow(
+      workflow: Workflow?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
+
+    /// See `WorkflowsClient.listWorkflowRevisions`.
+    func listWorkflowRevisions(request: ListWorkflowRevisionsRequest) async throws
+      -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse
+
+    /// See `WorkflowsClient.listWorkflowRevisions`.
+    func listWorkflowRevisions(
+      byItem: ListWorkflowRevisionsRequest
+    ) throws -> any AsyncSequence<Workflow, Swift.Error>
+
+    /// See `WorkflowsClient.listLocations`.
+    func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
+      -> GoogleCloudLocation.ListLocationsResponse
+
+    /// See `WorkflowsClient.listLocations`.
+    func listLocations(
+      byItem: GoogleCloudLocation.ListLocationsRequest
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
+
+    /// See `WorkflowsClient.getLocation`.
+    func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
+      -> GoogleCloudLocation.Location
+
+    /// See `WorkflowsClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `WorkflowsClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `WorkflowsClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `WorkflowsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `WorkflowsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `WorkflowsClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `WorkflowsClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `WorkflowsClient.listWorkflows`.
+    func listWorkflows(
       request: ListWorkflowsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse {
-      try await self.inner.listWorkflows(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse
 
-    /// Lists workflows in a given project and location.
-    /// The default order is not specified.
-    public func listWorkflows(
+    /// See `WorkflowsClient.listWorkflows`.
+    func listWorkflows(
       byItem: ListWorkflowsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Workflow, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudWorkflowsV1.ListWorkflowsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listWorkflows(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Workflow, Swift.Error>
 
-    /// See `Workflows.getWorkflow`
-    public func getWorkflow(
+    /// See `WorkflowsClient.getWorkflow`.
+    func getWorkflow(
       request: GetWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudWorkflowsV1.Workflow {
-      try await self.inner.getWorkflow(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudWorkflowsV1.Workflow
 
-    /// See `Workflows.createWorkflow`
-    public func createWorkflow(
+    /// See `WorkflowsClient.createWorkflow`.
+    func createWorkflow(
       request: CreateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createWorkflow(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a new workflow. If a workflow with the specified name already
-    /// exists in the specified project and location, the long running operation
-    /// returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
-    public func createWorkflow(
+    /// See `WorkflowsClient.createWorkflow`.
+    func createWorkflow(
       withPolling: CreateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Workflow(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createWorkflow(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Workflows.deleteWorkflow`
-    public func deleteWorkflow(
+    /// See `WorkflowsClient.deleteWorkflow`.
+    func deleteWorkflow(
       request: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteWorkflow(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Deletes a workflow with the specified name.
-    /// This method also cancels and deletes all running executions of the
-    /// workflow.
-    public func deleteWorkflow(
+    /// See `WorkflowsClient.deleteWorkflow`.
+    func deleteWorkflow(
       withPolling: DeleteWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Void> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Void>
 
-        switch op.result {
-        case .response:
-          return .init(done: true, result: .success(()))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteWorkflow(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Void>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Workflows.updateWorkflow`
-    public func updateWorkflow(
+    /// See `WorkflowsClient.updateWorkflow`.
+    func updateWorkflow(
       request: UpdateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateWorkflow(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates an existing workflow.
-    /// Running this method has no impact on already running executions of the
-    /// workflow. A new revision of the workflow might be created as a result of a
-    /// successful update operation. In that case, the new revision is used
-    /// in new workflow executions.
-    public func updateWorkflow(
+    /// See `WorkflowsClient.updateWorkflow`.
+    func updateWorkflow(
       withPolling: UpdateWorkflowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Workflow>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Workflow(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateWorkflow(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Workflow>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Workflows.listWorkflowRevisions`
-    public func listWorkflowRevisions(
+    /// See `WorkflowsClient.listWorkflowRevisions`.
+    func listWorkflowRevisions(
       request: ListWorkflowRevisionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse {
-      try await self.inner.listWorkflowRevisions(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse
 
-    /// Lists revisions for a given workflow.
-    public func listWorkflowRevisions(
+    /// See `WorkflowsClient.listWorkflowRevisions`.
+    func listWorkflowRevisions(
       byItem: ListWorkflowRevisionsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Workflow, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudWorkflowsV1.ListWorkflowRevisionsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listWorkflowRevisions(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Workflow, Swift.Error>
 
-    /// See `Workflows.listLocations`
-    public func listLocations(
+    /// See `WorkflowsClient.listLocations`.
+    func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      try await self.inner.listLocations(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
-    /// Lists information about the supported locations for this service.
-    public func listLocations(
+    /// See `WorkflowsClient.listLocations`.
+    func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listLocations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
-    /// See `Workflows.getLocation`
-    public func getLocation(
+    /// See `WorkflowsClient.getLocation`.
+    func getLocation(
       request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudLocation.Location {
-      try await self.inner.getLocation(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudLocation.Location
 
-    /// See `Workflows.listOperations`
-    public func listOperations(
+    /// See `WorkflowsClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `WorkflowsClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `Workflows.getOperation`
-    public func getOperation(
+    /// See `WorkflowsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `Workflows.deleteOperation`
-    public func deleteOperation(
+    /// See `WorkflowsClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
   }
 }
 
 // Default implementations
-extension Workflows {
+extension Clients.WorkflowsProtocol {
   public func listWorkflows(request: ListWorkflowsRequest) async throws
     -> GoogleCloudWorkflowsV1.ListWorkflowsResponse
   {

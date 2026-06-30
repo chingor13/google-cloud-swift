@@ -28,183 +28,18 @@
   /// Service for the `reservations` resource.
   ///
   /// @Snippet(path: "reservationsQuickstart")
-  public protocol Reservations {
-    /// Retrieves an aggregated list of reservations.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "reservations_aggregatedList")
-    func aggregatedList(request: Clients.ReservationsClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.ReservationAggregatedList
+  public class ReservationsClient: Clients.ReservationsProtocol {
+    let inner: any Clients.ReservationsStub
 
-    /// Retrieves an aggregated list of reservations.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ReservationsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of reservations.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
-
-    /// Deletes the specified reservation.
-    ///
-    /// @Snippet(path: "reservations_delete")
-    func delete(request: Clients.ReservationsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified reservation.
-    func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves information about the specified reservation.
-    ///
-    /// @Snippet(path: "reservations_get")
-    func `get`(request: Clients.ReservationsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Reservation
-
-    /// Retrieves information about the specified reservation.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Reservation
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    ///
-    /// @Snippet(path: "reservations_getIamPolicy")
-    func getIamPolicy(request: Clients.ReservationsClient.GetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Gets the access control policy for a resource. May be empty if no such
-    /// policy or resource exists.
-    func getIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Creates a new reservation. For more information, readReserving zonal
-    /// resources.
-    ///
-    /// @Snippet(path: "reservations_insert")
-    func insert(request: Clients.ReservationsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a new reservation. For more information, readReserving zonal
-    /// resources.
-    func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Reservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// A list of all the reservations that have been configured for the
-    /// specified project in specified zone.
-    ///
-    /// @Snippet(path: "reservations_list")
-    func list(request: Clients.ReservationsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ReservationList
-
-    /// A list of all the reservations that have been configured for the
-    /// specified project in specified zone.
-    func list(
-      byItem: Clients.ReservationsClient.ListRequest
-    ) throws -> any AsyncSequence<Reservation, Swift.Error>
-
-    /// A list of all the reservations that have been configured for the
-    /// specified project in specified zone.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<Reservation, Swift.Error>
-
-    /// Perform maintenance on an extended reservation
-    ///
-    /// @Snippet(path: "reservations_performMaintenance")
-    func performMaintenance(request: Clients.ReservationsClient.PerformMaintenanceRequest)
-      async throws -> GoogleCloudComputeV1.Operation
-
-    /// Perform maintenance on an extended reservation
-    func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: ReservationsPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Resizes the reservation (applicable to standalone reservations only). For
-    /// more information, readModifying
-    /// reservations.
-    ///
-    /// @Snippet(path: "reservations_resize")
-    func resize(request: Clients.ReservationsClient.ResizeRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Resizes the reservation (applicable to standalone reservations only). For
-    /// more information, readModifying
-    /// reservations.
-    func resize(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: ReservationsResizeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    ///
-    /// @Snippet(path: "reservations_setIamPolicy")
-    func setIamPolicy(request: Clients.ReservationsClient.SetIamPolicyRequest) async throws
-      -> GoogleCloudComputeV1.Policy
-
-    /// Sets the access control policy on the specified resource.
-    /// Replaces any existing policy.
-    func setIamPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Policy
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "reservations_testIamPermissions")
-    func testIamPermissions(request: Clients.ReservationsClient.TestIamPermissionsRequest)
-      async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Update share settings of the reservation.
-    ///
-    /// @Snippet(path: "reservations_update")
-    func update(request: Clients.ReservationsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Update share settings of the reservation.
-    func update(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: Reservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `ReservationsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ReservationsStub = try Clients.ReservationsTransport(options)
+      inner = Clients.ReservationsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ReservationsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of reservations.
     ///
@@ -212,260 +47,373 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "reservations_aggregatedList")
-    func aggregatedList(
-      request: Clients.ReservationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList
+    public func aggregatedList(
+      request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of reservations.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.ReservationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "reservations_aggregatedList")
+    public func aggregatedList(
+      byItem: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ReservationAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified reservation.
     ///
     /// @Snippet(path: "reservations_delete")
-    func delete(
-      request: Clients.ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves information about the specified reservation.
     ///
     /// @Snippet(path: "reservations_get")
-    func `get`(
-      request: Clients.ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Reservation
+    public func `get`(
+      request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Reservation {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Gets the access control policy for a resource. May be empty if no such
     /// policy or resource exists.
     ///
     /// @Snippet(path: "reservations_getIamPolicy")
-    func getIamPolicy(
-      request: Clients.ReservationsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func getIamPolicy(
+      request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.getIamPolicy(request: request, options: options)
+    }
 
     /// Creates a new reservation. For more information, readReserving zonal
     /// resources.
     ///
     /// @Snippet(path: "reservations_insert")
-    func insert(
-      request: Clients.ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// A list of all the reservations that have been configured for the
     /// specified project in specified zone.
     ///
     /// @Snippet(path: "reservations_list")
-    func list(
-      request: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationList
+    public func list(
+      request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// A list of all the reservations that have been configured for the
     /// specified project in specified zone.
-    func list(
-      byItem: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Reservation, Swift.Error>
+    ///
+    /// @Snippet(path: "reservations_list")
+    public func list(
+      byItem: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Reservation, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ReservationList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Perform maintenance on an extended reservation
     ///
     /// @Snippet(path: "reservations_performMaintenance")
-    func performMaintenance(
-      request: Clients.ReservationsClient.PerformMaintenanceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func performMaintenance(
+      request: ReservationsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.performMaintenance(request: request, options: options)
+    }
 
     /// Resizes the reservation (applicable to standalone reservations only). For
     /// more information, readModifying
     /// reservations.
     ///
     /// @Snippet(path: "reservations_resize")
-    func resize(
-      request: Clients.ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func resize(
+      request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.resize(request: request, options: options)
+    }
 
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
     /// @Snippet(path: "reservations_setIamPolicy")
-    func setIamPolicy(
-      request: Clients.ReservationsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Policy
+    public func setIamPolicy(
+      request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Policy {
+      try await self.inner.setIamPolicy(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "reservations_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.ReservationsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    public func testIamPermissions(
+      request: ReservationsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
 
     /// Update share settings of the reservation.
     ///
     /// @Snippet(path: "reservations_update")
-    func update(
-      request: Clients.ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Reservations``.
-    public class ReservationsClient: Reservations {
-      let inner: any ReservationsStub
+    /// A Swift protocol to mock `ReservationsClient`.
+    ///
+    /// To mock `ReservationsClient` change your functions to receive
+    /// `some ReservationsProtocol` or `any ReservationsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ReservationsProtocol {
+      /// See `ReservationsClient.aggregatedList`.
+      func aggregatedList(request: ReservationsClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.ReservationAggregatedList
 
-      /// Creates a new `ReservationsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ReservationsStub = try ReservationsTransport(options)
-        inner = ReservationsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ReservationsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ReservationsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ReservationsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
 
-      /// See `Reservations.aggregatedList`
-      public func aggregatedList(
-        request: Clients.ReservationsClient.AggregatedListRequest,
+      /// See `ReservationsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
+
+      /// See `ReservationsClient.delete`.
+      func delete(request: ReservationsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.delete`.
+      func delete(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.`get``.
+      func `get`(request: ReservationsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.Reservation
+
+      /// See `ReservationsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Reservation
+
+      /// See `ReservationsClient.getIamPolicy`.
+      func getIamPolicy(request: ReservationsClient.GetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.getIamPolicy`.
+      func getIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.insert`.
+      func insert(request: ReservationsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.insert`.
+      func insert(
+        project: Swift.String,
+        zone: Swift.String,
+        body: Reservation?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.list`.
+      func list(request: ReservationsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ReservationList
+
+      /// See `ReservationsClient.list`.
+      func list(
+        byItem: ReservationsClient.ListRequest
+      ) throws -> any AsyncSequence<Reservation, Swift.Error>
+
+      /// See `ReservationsClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<Reservation, Swift.Error>
+
+      /// See `ReservationsClient.performMaintenance`.
+      func performMaintenance(request: ReservationsClient.PerformMaintenanceRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.performMaintenance`.
+      func performMaintenance(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+        body: ReservationsPerformMaintenanceRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.resize`.
+      func resize(request: ReservationsClient.ResizeRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.resize`.
+      func resize(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+        body: ReservationsResizeRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.setIamPolicy`.
+      func setIamPolicy(request: ReservationsClient.SetIamPolicyRequest) async throws
+        -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.setIamPolicy`.
+      func setIamPolicy(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: ZoneSetPolicyRequest?,
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.testIamPermissions`.
+      func testIamPermissions(request: ReservationsClient.TestIamPermissionsRequest) async throws
+        -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ReservationsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        zone: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `ReservationsClient.update`.
+      func update(request: ReservationsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.update`.
+      func update(
+        project: Swift.String,
+        zone: Swift.String,
+        reservation: Swift.String,
+        body: Reservation?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.aggregatedList`.
+      func aggregatedList(
+        request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList
+
+      /// See `ReservationsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error>
+
+      /// See `ReservationsClient.delete`.
+      func delete(
+        request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.`get``.
+      func `get`(
+        request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Reservation
+
+      /// See `ReservationsClient.getIamPolicy`.
+      func getIamPolicy(
+        request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.insert`.
+      func insert(
+        request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.list`.
+      func list(
+        request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationList
+
+      /// See `ReservationsClient.list`.
+      func list(
+        byItem: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Reservation, Swift.Error>
+
+      /// See `ReservationsClient.performMaintenance`.
+      func performMaintenance(
+        request: ReservationsClient.PerformMaintenanceRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// Retrieves an aggregated list of reservations.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.ReservationsClient.AggregatedListRequest,
+      /// See `ReservationsClient.resize`.
+      func resize(
+        request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationsClient.setIamPolicy`.
+      func setIamPolicy(
+        request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Policy
+
+      /// See `ReservationsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: ReservationsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ReservationAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
-      /// See `Reservations.delete`
-      public func delete(
-        request: Clients.ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
-
-      /// See `Reservations.`get``
-      public func `get`(
-        request: Clients.ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Reservation {
-        try await self.inner.`get`(request: request, options: options)
-      }
-
-      /// See `Reservations.getIamPolicy`
-      public func getIamPolicy(
-        request: Clients.ReservationsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.getIamPolicy(request: request, options: options)
-      }
-
-      /// See `Reservations.insert`
-      public func insert(
-        request: Clients.ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
-
-      /// See `Reservations.list`
-      public func list(
-        request: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationList {
-        try await self.inner.list(request: request, options: options)
-      }
-
-      /// A list of all the reservations that have been configured for the
-      /// specified project in specified zone.
-      public func list(
-        byItem: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Reservation, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ReservationList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
-
-      /// See `Reservations.performMaintenance`
-      public func performMaintenance(
-        request: Clients.ReservationsClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.performMaintenance(request: request, options: options)
-      }
-
-      /// See `Reservations.resize`
-      public func resize(
-        request: Clients.ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.resize(request: request, options: options)
-      }
-
-      /// See `Reservations.setIamPolicy`
-      public func setIamPolicy(
-        request: Clients.ReservationsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Policy {
-        try await self.inner.setIamPolicy(request: request, options: options)
-      }
-
-      /// See `Reservations.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.ReservationsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
-
-      /// See `Reservations.update`
-      public func update(
-        request: Clients.ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `ReservationsClient.update`.
+      func update(
+        request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Reservations {
-    public func aggregatedList(request: Clients.ReservationsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.ReservationAggregatedList
+  extension Clients.ReservationsProtocol {
+    public func aggregatedList(request: ReservationsClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.ReservationAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.ReservationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.ReservationsClient.AggregatedListRequest
+      byItem: ReservationsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.ReservationsClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ReservationAggregatedList in
@@ -477,20 +425,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, ReservationsScopedList), Swift.Error> {
-      let request = Clients.ReservationsClient.AggregatedListRequest().with {
+      let request = ReservationsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.ReservationsClient.DeleteRequest) async throws
+    public func delete(request: ReservationsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -500,7 +448,7 @@
       zone: Swift.String,
       reservation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationsClient.DeleteRequest().with {
+      let request = ReservationsClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -508,14 +456,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.ReservationsClient.GetRequest) async throws
+    public func `get`(request: ReservationsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.Reservation
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Reservation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -525,7 +473,7 @@
       zone: Swift.String,
       reservation: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Reservation {
-      let request = Clients.ReservationsClient.GetRequest().with {
+      let request = ReservationsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -533,15 +481,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getIamPolicy(request: Clients.ReservationsClient.GetIamPolicyRequest) async throws
+    public func getIamPolicy(request: ReservationsClient.GetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.getIamPolicy(request: request, options: .init())
     }
 
     public func getIamPolicy(
-      request: Clients.ReservationsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -551,7 +498,7 @@
       zone: Swift.String,
       resource: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ReservationsClient.GetIamPolicyRequest().with {
+      let request = ReservationsClient.GetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -559,14 +506,14 @@
       return try await self.getIamPolicy(request: request)
     }
 
-    public func insert(request: Clients.ReservationsClient.InsertRequest) async throws
+    public func insert(request: ReservationsClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -576,7 +523,7 @@
       zone: Swift.String,
       body: Reservation?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationsClient.InsertRequest().with {
+      let request = ReservationsClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
         $0.body = body
@@ -584,26 +531,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.ReservationsClient.ListRequest) async throws
+    public func list(request: ReservationsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ReservationList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ReservationsClient.ListRequest
+      byItem: ReservationsClient.ListRequest
     ) throws -> any AsyncSequence<Reservation, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Reservation, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ReservationList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -615,22 +562,21 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<Reservation, Swift.Error> {
-      let request = Clients.ReservationsClient.ListRequest().with {
+      let request = ReservationsClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }
       return try self.list(byItem: request)
     }
 
-    public func performMaintenance(request: Clients.ReservationsClient.PerformMaintenanceRequest)
+    public func performMaintenance(request: ReservationsClient.PerformMaintenanceRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
       try await self.performMaintenance(request: request, options: .init())
     }
 
     public func performMaintenance(
-      request: Clients.ReservationsClient.PerformMaintenanceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -641,7 +587,7 @@
       reservation: Swift.String,
       body: ReservationsPerformMaintenanceRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationsClient.PerformMaintenanceRequest().with {
+      let request = ReservationsClient.PerformMaintenanceRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -650,14 +596,14 @@
       return try await self.performMaintenance(request: request)
     }
 
-    public func resize(request: Clients.ReservationsClient.ResizeRequest) async throws
+    public func resize(request: ReservationsClient.ResizeRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.resize(request: request, options: .init())
     }
 
     public func resize(
-      request: Clients.ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -668,7 +614,7 @@
       reservation: Swift.String,
       body: ReservationsResizeRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationsClient.ResizeRequest().with {
+      let request = ReservationsClient.ResizeRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation
@@ -677,15 +623,14 @@
       return try await self.resize(request: request)
     }
 
-    public func setIamPolicy(request: Clients.ReservationsClient.SetIamPolicyRequest) async throws
+    public func setIamPolicy(request: ReservationsClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
       try await self.setIamPolicy(request: request, options: .init())
     }
 
     public func setIamPolicy(
-      request: Clients.ReservationsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -696,7 +641,7 @@
       resource: Swift.String,
       body: ZoneSetPolicyRequest?,
     ) async throws -> GoogleCloudComputeV1.Policy {
-      let request = Clients.ReservationsClient.SetIamPolicyRequest().with {
+      let request = ReservationsClient.SetIamPolicyRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -705,15 +650,14 @@
       return try await self.setIamPolicy(request: request)
     }
 
-    public func testIamPermissions(request: Clients.ReservationsClient.TestIamPermissionsRequest)
+    public func testIamPermissions(request: ReservationsClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.ReservationsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -724,7 +668,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.ReservationsClient.TestIamPermissionsRequest().with {
+      let request = ReservationsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.zone = zone
         $0.resource = resource
@@ -733,14 +677,14 @@
       return try await self.testIamPermissions(request: request)
     }
 
-    public func update(request: Clients.ReservationsClient.UpdateRequest) async throws
+    public func update(request: ReservationsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -751,7 +695,7 @@
       reservation: Swift.String,
       body: Reservation?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationsClient.UpdateRequest().with {
+      let request = ReservationsClient.UpdateRequest().with {
         $0.project = project
         $0.zone = zone
         $0.reservation = reservation

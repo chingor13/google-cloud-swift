@@ -29,334 +29,308 @@ import Logging
 /// Cloud Run Revision Control Plane API.
 ///
 /// @Snippet(path: "RevisionsQuickstart")
-public protocol Revisions {
-  /// Gets information about a Revision.
-  ///
-  /// @Snippet(path: "Revisions_GetRevision")
-  func getRevision(request: GetRevisionRequest) async throws -> GoogleCloudRunV2.Revision
+public class RevisionsClient: Clients.RevisionsProtocol {
+  let inner: any Clients.RevisionsStub
 
-  /// Gets information about a Revision.
-  func getRevision(
-    name: Swift.String,
-  ) async throws -> GoogleCloudRunV2.Revision
-
-  /// Lists Revisions from a given Service, or from a given location.  Results
-  /// are sorted by creation time, descending.
-  ///
-  /// @Snippet(path: "Revisions_ListRevisions")
-  func listRevisions(request: ListRevisionsRequest) async throws
-    -> GoogleCloudRunV2.ListRevisionsResponse
-
-  /// Lists Revisions from a given Service, or from a given location.  Results
-  /// are sorted by creation time, descending.
-  func listRevisions(
-    byItem: ListRevisionsRequest
-  ) throws -> any AsyncSequence<Revision, Swift.Error>
-
-  /// Lists Revisions from a given Service, or from a given location.  Results
-  /// are sorted by creation time, descending.
-  func listRevisions(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Revision, Swift.Error>
-
-  /// Deletes a Revision.
-  ///
-  /// @Snippet(path: "Revisions_DeleteRevision")
-  func deleteRevision(request: DeleteRevisionRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a Revision.
-  func deleteRevision(withPolling: DeleteRevisionRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Revision>
-
-  /// Deletes a Revision.
-  func deleteRevision(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Revision>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_ListOperations")
-  func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_DeleteOperation")
-  func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_WaitOperation")
-  func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
-    -> GoogleLongrunning.Operation
+  /// Creates a new `RevisionsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.RevisionsStub = try Clients.RevisionsTransport(options)
+    inner = Clients.RevisionsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.RevisionsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Gets information about a Revision.
   ///
   /// @Snippet(path: "Revisions_GetRevision")
-  func getRevision(
+  public func getRevision(
     request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.Revision
+  ) async throws -> GoogleCloudRunV2.Revision {
+    try await self.inner.getRevision(request: request, options: options)
+  }
 
   /// Lists Revisions from a given Service, or from a given location.  Results
   /// are sorted by creation time, descending.
   ///
   /// @Snippet(path: "Revisions_ListRevisions")
-  func listRevisions(
+  public func listRevisions(
     request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudRunV2.ListRevisionsResponse
+  ) async throws -> GoogleCloudRunV2.ListRevisionsResponse {
+    try await self.inner.listRevisions(request: request, options: options)
+  }
 
   /// Lists Revisions from a given Service, or from a given location.  Results
   /// are sorted by creation time, descending.
-  func listRevisions(
+  ///
+  /// @Snippet(path: "Revisions_ListRevisions")
+  public func listRevisions(
     byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Revision, Swift.Error>
+  ) throws -> any AsyncSequence<Revision, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListRevisionsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listRevisions(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Deletes a Revision.
   ///
   /// @Snippet(path: "Revisions_DeleteRevision")
-  func deleteRevision(
+  public func deleteRevision(
     request: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteRevision(request: request, options: options)
+  }
 
   /// Deletes a Revision.
-  func deleteRevision(
+  ///
+  /// @Snippet(path: "Revisions_DeleteRevision")
+  public func deleteRevision(
     withPolling: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Revision>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_ListOperations")
-  func listOperations(
-    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func listOperations(
-    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_GetOperation")
-  func getOperation(
-    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_DeleteOperation")
-  func deleteOperation(
-    request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Revisions_WaitOperation")
-  func waitOperation(
-    request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
-}
-
-extension Clients {
-  /// The recommended implementation for ``Revisions``.
-  public class RevisionsClient: Revisions {
-    let inner: any RevisionsStub
-
-    /// Creates a new `RevisionsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any RevisionsStub = try RevisionsTransport(options)
-      inner = RevisionsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = RevisionsLogging(inner, logger: logger)
+  ) async throws -> any GoogleCloudGax.PollableOperation<Revision> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Revision>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
       }
-      self.inner = inner
-    }
 
-    /// See `Revisions.getRevision`
-    public func getRevision(
-      request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.Revision {
-      try await self.inner.getRevision(request: request, options: options)
-    }
-
-    /// See `Revisions.listRevisions`
-    public func listRevisions(
-      request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudRunV2.ListRevisionsResponse {
-      try await self.inner.listRevisions(request: request, options: options)
-    }
-
-    /// Lists Revisions from a given Service, or from a given location.  Results
-    /// are sorted by creation time, descending.
-    public func listRevisions(
-      byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Revision, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudRunV2.ListRevisionsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listRevisions(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
-
-    /// See `Revisions.deleteRevision`
-    public func deleteRevision(
-      request: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteRevision(request: request, options: options)
-    }
-
-    /// Deletes a Revision.
-    public func deleteRevision(
-      withPolling: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Revision> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Revision>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
-
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Revision(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
           return .init(
             done: true,
             result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
         }
+        let response = try Revision(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
       }
-      let rawOp = try await self.deleteRevision(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Revision>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
+    let rawOp = try await self.deleteRevision(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Revision>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
-    /// See `Revisions.listOperations`
-    public func listOperations(
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  ///
+  /// @Snippet(path: "Revisions_ListOperations")
+  public func listOperations(
+    request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  ///
+  /// @Snippet(path: "Revisions_ListOperations")
+  public func listOperations(
+    byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+  ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  ///
+  /// @Snippet(path: "Revisions_GetOperation")
+  public func getOperation(
+    request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  ///
+  /// @Snippet(path: "Revisions_DeleteOperation")
+  public func deleteOperation(
+    request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
+
+  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
+  ///
+  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
+  ///
+  /// @Snippet(path: "Revisions_WaitOperation")
+  public func waitOperation(
+    request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.waitOperation(request: request, options: options)
+  }
+}
+
+extension Clients {
+  /// A Swift protocol to mock `RevisionsClient`.
+  ///
+  /// To mock `RevisionsClient` change your functions to receive
+  /// `some RevisionsProtocol` or `any RevisionsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol RevisionsProtocol {
+    /// See `RevisionsClient.getRevision`.
+    func getRevision(request: GetRevisionRequest) async throws -> GoogleCloudRunV2.Revision
+
+    /// See `RevisionsClient.getRevision`.
+    func getRevision(
+      name: Swift.String,
+    ) async throws -> GoogleCloudRunV2.Revision
+
+    /// See `RevisionsClient.listRevisions`.
+    func listRevisions(request: ListRevisionsRequest) async throws
+      -> GoogleCloudRunV2.ListRevisionsResponse
+
+    /// See `RevisionsClient.listRevisions`.
+    func listRevisions(
+      byItem: ListRevisionsRequest
+    ) throws -> any AsyncSequence<Revision, Swift.Error>
+
+    /// See `RevisionsClient.listRevisions`.
+    func listRevisions(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Revision, Swift.Error>
+
+    /// See `RevisionsClient.deleteRevision`.
+    func deleteRevision(request: DeleteRevisionRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `RevisionsClient.deleteRevision`.
+    func deleteRevision(withPolling: DeleteRevisionRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Revision>
+
+    /// See `RevisionsClient.deleteRevision`.
+    func deleteRevision(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Revision>
+
+    /// See `RevisionsClient.listOperations`.
+    func listOperations(request: GoogleLongrunning.ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
+
+    /// See `RevisionsClient.listOperations`.
+    func listOperations(
+      byItem: GoogleLongrunning.ListOperationsRequest
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `RevisionsClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
+
+    /// See `RevisionsClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `RevisionsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `RevisionsClient.deleteOperation`.
+    func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
+
+    /// See `RevisionsClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `RevisionsClient.waitOperation`.
+    func waitOperation(request: GoogleLongrunning.WaitOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `RevisionsClient.getRevision`.
+    func getRevision(
+      request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudRunV2.Revision
+
+    /// See `RevisionsClient.listRevisions`.
+    func listRevisions(
+      request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudRunV2.ListRevisionsResponse
+
+    /// See `RevisionsClient.listRevisions`.
+    func listRevisions(
+      byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Revision, Swift.Error>
+
+    /// See `RevisionsClient.deleteRevision`.
+    func deleteRevision(
+      request: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `RevisionsClient.deleteRevision`.
+    func deleteRevision(
+      withPolling: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<Revision>
+
+    /// See `RevisionsClient.listOperations`.
+    func listOperations(
       request: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-    ///
-    /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-    public func listOperations(
+    /// See `RevisionsClient.listOperations`.
+    func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `Revisions.getOperation`
-    public func getOperation(
+    /// See `RevisionsClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `Revisions.deleteOperation`
-    public func deleteOperation(
+    /// See `RevisionsClient.deleteOperation`.
+    func deleteOperation(
       request: GoogleLongrunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `Revisions.waitOperation`
-    public func waitOperation(
+    /// See `RevisionsClient.waitOperation`.
+    func waitOperation(
       request: GoogleLongrunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.waitOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Revisions {
+extension Clients.RevisionsProtocol {
   public func getRevision(request: GetRevisionRequest) async throws -> GoogleCloudRunV2.Revision {
     try await self.getRevision(request: request, options: .init())
   }

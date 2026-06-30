@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InterconnectLocationsClient {
+  extension InterconnectLocationsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.interconnectLocations.get] method.
     ///
     /// [google.cloud.compute.v1.interconnectLocations.get]: <doc:InterconnectLocations/`get`(request:)>

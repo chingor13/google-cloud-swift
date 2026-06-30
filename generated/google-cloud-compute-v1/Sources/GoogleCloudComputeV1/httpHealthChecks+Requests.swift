@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.HttpHealthChecksClient {
+  extension HttpHealthChecksClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.httpHealthChecks.delete] method.
     ///
     /// [google.cloud.compute.v1.httpHealthChecks.delete]: <doc:HttpHealthChecks/delete(request:)>

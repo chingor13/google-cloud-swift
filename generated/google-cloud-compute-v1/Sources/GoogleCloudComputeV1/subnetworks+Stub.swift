@@ -28,57 +28,52 @@
   extension Clients {
     protocol SubnetworksStub {
       func aggregatedList(
-        request: Clients.SubnetworksClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
 
       func delete(
-        request: Clients.SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func expandIpCidrRange(
-        request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Subnetwork
 
       func getIamPolicy(
-        request: Clients.SubnetworksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkList
 
       func listUsable(
-        request: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
 
       func patch(
-        request: Clients.SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.SubnetworksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setPrivateIpGoogleAccess(
-        request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+        request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.SubnetworksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
 
@@ -91,8 +86,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.SubnetworksClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -123,7 +117,7 @@
       }
 
       public func delete(
-        request: Clients.SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -150,8 +144,7 @@
       }
 
       public func expandIpCidrRange(
-        request: Clients.SubnetworksClient.ExpandIpCidrRangeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -182,7 +175,7 @@
       }
 
       public func `get`(
-        request: Clients.SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Subnetwork {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -209,8 +202,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.SubnetworksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -238,7 +230,7 @@
       }
 
       public func insert(
-        request: Clients.SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -264,7 +256,7 @@
       }
 
       public func list(
-        request: Clients.SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -293,7 +285,7 @@
       }
 
       public func listUsable(
-        request: Clients.SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -320,7 +312,7 @@
       }
 
       public func patch(
-        request: Clients.SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -354,8 +346,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.SubnetworksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -383,7 +374,7 @@
       }
 
       public func setPrivateIpGoogleAccess(
-        request: Clients.SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+        request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -415,8 +406,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.SubnetworksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

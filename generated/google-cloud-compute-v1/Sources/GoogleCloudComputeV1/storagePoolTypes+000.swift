@@ -28,64 +28,18 @@
   /// Service for the `storagePoolTypes` resource.
   ///
   /// @Snippet(path: "storagePoolTypesQuickstart")
-  public protocol StoragePoolTypes {
-    /// Retrieves an aggregated list of storage pool types.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "storagePoolTypes_aggregatedList")
-    func aggregatedList(request: Clients.StoragePoolTypesClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
+  public class StoragePoolTypesClient: Clients.StoragePoolTypesProtocol {
+    let inner: any Clients.StoragePoolTypesStub
 
-    /// Retrieves an aggregated list of storage pool types.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.StoragePoolTypesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of storage pool types.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
-
-    /// Returns the specified storage pool type.
-    ///
-    /// @Snippet(path: "storagePoolTypes_get")
-    func `get`(request: Clients.StoragePoolTypesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.StoragePoolType
-
-    /// Returns the specified storage pool type.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      storagePoolType: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.StoragePoolType
-
-    /// Retrieves a list of storage pool types available to the specified
-    /// project.
-    ///
-    /// @Snippet(path: "storagePoolTypes_list")
-    func list(request: Clients.StoragePoolTypesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.StoragePoolTypeList
-
-    /// Retrieves a list of storage pool types available to the specified
-    /// project.
-    func list(
-      byItem: Clients.StoragePoolTypesClient.ListRequest
-    ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
-
-    /// Retrieves a list of storage pool types available to the specified
-    /// project.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-    ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
+    /// Creates a new `StoragePoolTypesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.StoragePoolTypesStub = try Clients.StoragePoolTypesTransport(options)
+      inner = Clients.StoragePoolTypesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.StoragePoolTypesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of storage pool types.
     ///
@@ -93,135 +47,162 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "storagePoolTypes_aggregatedList")
-    func aggregatedList(
-      request: Clients.StoragePoolTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
+    public func aggregatedList(
+      request: StoragePoolTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of storage pool types.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.StoragePoolTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "storagePoolTypes_aggregatedList")
+    public func aggregatedList(
+      byItem: StoragePoolTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Returns the specified storage pool type.
     ///
     /// @Snippet(path: "storagePoolTypes_get")
-    func `get`(
-      request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.StoragePoolType
+    public func `get`(
+      request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.StoragePoolType {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves a list of storage pool types available to the specified
     /// project.
     ///
     /// @Snippet(path: "storagePoolTypes_list")
-    func list(
-      request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList
+    public func list(
+      request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of storage pool types available to the specified
     /// project.
-    func list(
-      byItem: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
+    ///
+    /// @Snippet(path: "storagePoolTypes_list")
+    public func list(
+      byItem: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<StoragePoolType, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``StoragePoolTypes``.
-    public class StoragePoolTypesClient: StoragePoolTypes {
-      let inner: any StoragePoolTypesStub
+    /// A Swift protocol to mock `StoragePoolTypesClient`.
+    ///
+    /// To mock `StoragePoolTypesClient` change your functions to receive
+    /// `some StoragePoolTypesProtocol` or `any StoragePoolTypesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol StoragePoolTypesProtocol {
+      /// See `StoragePoolTypesClient.aggregatedList`.
+      func aggregatedList(request: StoragePoolTypesClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
 
-      /// Creates a new `StoragePoolTypesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any StoragePoolTypesStub = try StoragePoolTypesTransport(options)
-        inner = StoragePoolTypesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = StoragePoolTypesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `StoragePoolTypesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: StoragePoolTypesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
 
-      /// See `StoragePoolTypes.aggregatedList`
-      public func aggregatedList(
-        request: Clients.StoragePoolTypesClient.AggregatedListRequest,
+      /// See `StoragePoolTypesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
+
+      /// See `StoragePoolTypesClient.`get``.
+      func `get`(request: StoragePoolTypesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.StoragePoolType
+
+      /// See `StoragePoolTypesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        storagePoolType: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.StoragePoolType
+
+      /// See `StoragePoolTypesClient.list`.
+      func list(request: StoragePoolTypesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.StoragePoolTypeList
+
+      /// See `StoragePoolTypesClient.list`.
+      func list(
+        byItem: StoragePoolTypesClient.ListRequest
+      ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
+
+      /// See `StoragePoolTypesClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+      ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
+
+      /// See `StoragePoolTypesClient.aggregatedList`.
+      func aggregatedList(
+        request: StoragePoolTypesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
 
-      /// Retrieves an aggregated list of storage pool types.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.StoragePoolTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `StoragePoolTypesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: StoragePoolTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error>
 
-      /// See `StoragePoolTypes.`get``
-      public func `get`(
-        request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.StoragePoolType {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `StoragePoolTypesClient.`get``.
+      func `get`(
+        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.StoragePoolType
 
-      /// See `StoragePoolTypes.list`
-      public func list(
-        request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `StoragePoolTypesClient.list`.
+      func list(
+        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList
 
-      /// Retrieves a list of storage pool types available to the specified
-      /// project.
-      public func list(
-        byItem: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<StoragePoolType, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `StoragePoolTypesClient.list`.
+      func list(
+        byItem: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<StoragePoolType, Swift.Error>
     }
   }
 
   // Default implementations
-  extension StoragePoolTypes {
-    public func aggregatedList(request: Clients.StoragePoolTypesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
+  extension Clients.StoragePoolTypesProtocol {
+    public func aggregatedList(request: StoragePoolTypesClient.AggregatedListRequest) async throws
+      -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.StoragePoolTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: StoragePoolTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.StoragePoolTypesClient.AggregatedListRequest
+      byItem: StoragePoolTypesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.StoragePoolTypesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: StoragePoolTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList in
@@ -233,20 +214,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, StoragePoolTypesScopedList), Swift.Error> {
-      let request = Clients.StoragePoolTypesClient.AggregatedListRequest().with {
+      let request = StoragePoolTypesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func `get`(request: Clients.StoragePoolTypesClient.GetRequest) async throws
+    public func `get`(request: StoragePoolTypesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.StoragePoolType
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.StoragePoolType {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -256,7 +237,7 @@
       zone: Swift.String,
       storagePoolType: Swift.String,
     ) async throws -> GoogleCloudComputeV1.StoragePoolType {
-      let request = Clients.StoragePoolTypesClient.GetRequest().with {
+      let request = StoragePoolTypesClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.storagePoolType = storagePoolType
@@ -264,26 +245,26 @@
       return try await self.`get`(request: request)
     }
 
-    public func list(request: Clients.StoragePoolTypesClient.ListRequest) async throws
+    public func list(request: StoragePoolTypesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.StoragePoolTypeList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.StoragePoolTypesClient.ListRequest
+      byItem: StoragePoolTypesClient.ListRequest
     ) throws -> any AsyncSequence<StoragePoolType, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<StoragePoolType, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolTypeList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -295,7 +276,7 @@
       project: Swift.String,
       zone: Swift.String,
     ) throws -> any AsyncSequence<StoragePoolType, Swift.Error> {
-      let request = Clients.StoragePoolTypesClient.ListRequest().with {
+      let request = StoragePoolTypesClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
       }

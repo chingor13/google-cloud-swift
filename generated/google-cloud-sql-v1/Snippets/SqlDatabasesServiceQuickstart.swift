@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlDatabasesServiceClient()
+    let client = try GoogleCloudSqlV1.SqlDatabasesServiceClient()
     let response = try await client.delete(
       request: SqlDatabasesDeleteRequest()
         /* set fields using .with { $0... } */

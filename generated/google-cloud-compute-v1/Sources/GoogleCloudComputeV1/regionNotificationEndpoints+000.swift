@@ -28,281 +28,267 @@
   /// Service for the `regionNotificationEndpoints` resource.
   ///
   /// @Snippet(path: "regionNotificationEndpointsQuickstart")
-  public protocol RegionNotificationEndpoints {
-    /// Retrieves the list of all NotificationEndpoint resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_aggregatedList")
-    func aggregatedList(request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
+  public class RegionNotificationEndpointsClient: Clients.RegionNotificationEndpointsProtocol {
+    let inner: any Clients.RegionNotificationEndpointsStub
 
-    /// Retrieves the list of all NotificationEndpoint resources,
-    /// regional and global, available to the specified project.
-    func aggregatedList(
-      byItem: Clients.RegionNotificationEndpointsClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
-
-    /// Retrieves the list of all NotificationEndpoint resources,
-    /// regional and global, available to the specified project.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
-
-    /// Deletes the specified NotificationEndpoint in the given region
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_delete")
-    func delete(request: Clients.RegionNotificationEndpointsClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified NotificationEndpoint in the given region
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      notificationEndpoint: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified NotificationEndpoint resource in the given region.
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_get")
-    func `get`(request: Clients.RegionNotificationEndpointsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.NotificationEndpoint
-
-    /// Returns the specified NotificationEndpoint resource in the given region.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      notificationEndpoint: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
-
-    /// Create a NotificationEndpoint in the specified project in the given region
-    /// using the parameters that are included in the request.
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_insert")
-    func insert(request: Clients.RegionNotificationEndpointsClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Create a NotificationEndpoint in the specified project in the given region
-    /// using the parameters that are included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NotificationEndpoint?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists the NotificationEndpoints for a project in the given region.
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_list")
-    func list(request: Clients.RegionNotificationEndpointsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.NotificationEndpointList
-
-    /// Lists the NotificationEndpoints for a project in the given region.
-    func list(
-      byItem: Clients.RegionNotificationEndpointsClient.ListRequest
-    ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
-
-    /// Lists the NotificationEndpoints for a project in the given region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "regionNotificationEndpoints_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `RegionNotificationEndpointsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionNotificationEndpointsStub =
+        try Clients.RegionNotificationEndpointsTransport(options)
+      inner = Clients.RegionNotificationEndpointsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionNotificationEndpointsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all NotificationEndpoint resources,
     /// regional and global, available to the specified project.
     ///
     /// @Snippet(path: "regionNotificationEndpoints_aggregatedList")
-    func aggregatedList(
-      request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: RegionNotificationEndpointsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
+    ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all NotificationEndpoint resources,
     /// regional and global, available to the specified project.
-    func aggregatedList(
-      byItem: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+    ///
+    /// @Snippet(path: "regionNotificationEndpoints_aggregatedList")
+    public func aggregatedList(
+      byItem: RegionNotificationEndpointsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
+    ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified NotificationEndpoint in the given region
     ///
     /// @Snippet(path: "regionNotificationEndpoints_delete")
-    func delete(
-      request: Clients.RegionNotificationEndpointsClient.DeleteRequest,
+    public func delete(
+      request: RegionNotificationEndpointsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified NotificationEndpoint resource in the given region.
     ///
     /// @Snippet(path: "regionNotificationEndpoints_get")
-    func `get`(
-      request: Clients.RegionNotificationEndpointsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
+    public func `get`(
+      request: RegionNotificationEndpointsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Create a NotificationEndpoint in the specified project in the given region
     /// using the parameters that are included in the request.
     ///
     /// @Snippet(path: "regionNotificationEndpoints_insert")
-    func insert(
-      request: Clients.RegionNotificationEndpointsClient.InsertRequest,
+    public func insert(
+      request: RegionNotificationEndpointsClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists the NotificationEndpoints for a project in the given region.
     ///
     /// @Snippet(path: "regionNotificationEndpoints_list")
-    func list(
-      request: Clients.RegionNotificationEndpointsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NotificationEndpointList
+    public func list(
+      request: RegionNotificationEndpointsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NotificationEndpointList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists the NotificationEndpoints for a project in the given region.
-    func list(
-      byItem: Clients.RegionNotificationEndpointsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
+    ///
+    /// @Snippet(path: "regionNotificationEndpoints_list")
+    public func list(
+      byItem: RegionNotificationEndpointsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.NotificationEndpointList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "regionNotificationEndpoints_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionNotificationEndpoints``.
-    public class RegionNotificationEndpointsClient: RegionNotificationEndpoints {
-      let inner: any RegionNotificationEndpointsStub
+    /// A Swift protocol to mock `RegionNotificationEndpointsClient`.
+    ///
+    /// To mock `RegionNotificationEndpointsClient` change your functions to receive
+    /// `some RegionNotificationEndpointsProtocol` or `any RegionNotificationEndpointsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionNotificationEndpointsProtocol {
+      /// See `RegionNotificationEndpointsClient.aggregatedList`.
+      func aggregatedList(request: RegionNotificationEndpointsClient.AggregatedListRequest)
+        async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
 
-      /// Creates a new `RegionNotificationEndpointsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionNotificationEndpointsStub = try RegionNotificationEndpointsTransport(
-          options)
-        inner = RegionNotificationEndpointsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionNotificationEndpointsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionNotificationEndpointsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionNotificationEndpointsClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
 
-      /// See `RegionNotificationEndpoints.aggregatedList`
-      public func aggregatedList(
-        request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+      /// See `RegionNotificationEndpointsClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
+
+      /// See `RegionNotificationEndpointsClient.delete`.
+      func delete(request: RegionNotificationEndpointsClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNotificationEndpointsClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        notificationEndpoint: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNotificationEndpointsClient.`get``.
+      func `get`(request: RegionNotificationEndpointsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.NotificationEndpoint
+
+      /// See `RegionNotificationEndpointsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        notificationEndpoint: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
+
+      /// See `RegionNotificationEndpointsClient.insert`.
+      func insert(request: RegionNotificationEndpointsClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNotificationEndpointsClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: NotificationEndpoint?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionNotificationEndpointsClient.list`.
+      func list(request: RegionNotificationEndpointsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.NotificationEndpointList
+
+      /// See `RegionNotificationEndpointsClient.list`.
+      func list(
+        byItem: RegionNotificationEndpointsClient.ListRequest
+      ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
+
+      /// See `RegionNotificationEndpointsClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
+
+      /// See `RegionNotificationEndpointsClient.testIamPermissions`.
+      func testIamPermissions(request: RegionNotificationEndpointsClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionNotificationEndpointsClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionNotificationEndpointsClient.aggregatedList`.
+      func aggregatedList(
+        request: RegionNotificationEndpointsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
 
-      /// Retrieves the list of all NotificationEndpoint resources,
-      /// regional and global, available to the specified project.
-      public func aggregatedList(
-        byItem: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+      /// See `RegionNotificationEndpointsClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionNotificationEndpointsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error>
 
-      /// See `RegionNotificationEndpoints.delete`
-      public func delete(
-        request: Clients.RegionNotificationEndpointsClient.DeleteRequest,
+      /// See `RegionNotificationEndpointsClient.delete`.
+      func delete(
+        request: RegionNotificationEndpointsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNotificationEndpoints.`get``
-      public func `get`(
-        request: Clients.RegionNotificationEndpointsClient.GetRequest,
+      /// See `RegionNotificationEndpointsClient.`get``.
+      func `get`(
+        request: RegionNotificationEndpointsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
 
-      /// See `RegionNotificationEndpoints.insert`
-      public func insert(
-        request: Clients.RegionNotificationEndpointsClient.InsertRequest,
+      /// See `RegionNotificationEndpointsClient.insert`.
+      func insert(
+        request: RegionNotificationEndpointsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNotificationEndpoints.list`
-      public func list(
-        request: Clients.RegionNotificationEndpointsClient.ListRequest,
+      /// See `RegionNotificationEndpointsClient.list`.
+      func list(
+        request: RegionNotificationEndpointsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NotificationEndpointList {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.NotificationEndpointList
 
-      /// Lists the NotificationEndpoints for a project in the given region.
-      public func list(
-        byItem: Clients.RegionNotificationEndpointsClient.ListRequest,
+      /// See `RegionNotificationEndpointsClient.list`.
+      func list(
+        byItem: RegionNotificationEndpointsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.NotificationEndpointList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error>
 
-      /// See `RegionNotificationEndpoints.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest,
+      /// See `RegionNotificationEndpointsClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension RegionNotificationEndpoints {
-    public func aggregatedList(
-      request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest
-    ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
+  extension Clients.RegionNotificationEndpointsProtocol {
+    public func aggregatedList(request: RegionNotificationEndpointsClient.AggregatedListRequest)
+      async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
+    {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+      request: RegionNotificationEndpointsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionNotificationEndpointsClient.AggregatedListRequest
+      byItem: RegionNotificationEndpointsClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionNotificationEndpointsClient.AggregatedListRequest,
+      byItem: RegionNotificationEndpointsClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error> {
       let listRpc = {
@@ -315,20 +301,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, NotificationEndpointsScopedList), Swift.Error> {
-      let request = Clients.RegionNotificationEndpointsClient.AggregatedListRequest().with {
+      let request = RegionNotificationEndpointsClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.RegionNotificationEndpointsClient.DeleteRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func delete(request: RegionNotificationEndpointsClient.DeleteRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionNotificationEndpointsClient.DeleteRequest,
+      request: RegionNotificationEndpointsClient.DeleteRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -339,7 +325,7 @@
       region: Swift.String,
       notificationEndpoint: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNotificationEndpointsClient.DeleteRequest().with {
+      let request = RegionNotificationEndpointsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.notificationEndpoint = notificationEndpoint
@@ -347,15 +333,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionNotificationEndpointsClient.GetRequest) async throws
+    public func `get`(request: RegionNotificationEndpointsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.NotificationEndpoint
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionNotificationEndpointsClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionNotificationEndpointsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -365,7 +350,7 @@
       region: Swift.String,
       notificationEndpoint: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
-      let request = Clients.RegionNotificationEndpointsClient.GetRequest().with {
+      let request = RegionNotificationEndpointsClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.notificationEndpoint = notificationEndpoint
@@ -373,14 +358,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionNotificationEndpointsClient.InsertRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func insert(request: RegionNotificationEndpointsClient.InsertRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionNotificationEndpointsClient.InsertRequest,
+      request: RegionNotificationEndpointsClient.InsertRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -391,7 +376,7 @@
       region: Swift.String,
       body: NotificationEndpoint?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionNotificationEndpointsClient.InsertRequest().with {
+      let request = RegionNotificationEndpointsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -399,28 +384,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionNotificationEndpointsClient.ListRequest) async throws
+    public func list(request: RegionNotificationEndpointsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.NotificationEndpointList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionNotificationEndpointsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionNotificationEndpointsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NotificationEndpointList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionNotificationEndpointsClient.ListRequest
+      byItem: RegionNotificationEndpointsClient.ListRequest
     ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionNotificationEndpointsClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionNotificationEndpointsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.NotificationEndpointList in
@@ -433,7 +416,7 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<NotificationEndpoint, Swift.Error> {
-      let request = Clients.RegionNotificationEndpointsClient.ListRequest().with {
+      let request = RegionNotificationEndpointsClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
@@ -441,13 +424,13 @@
     }
 
     public func testIamPermissions(
-      request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest
+      request: RegionNotificationEndpointsClient.TestIamPermissionsRequest
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest,
+      request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -459,7 +442,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.RegionNotificationEndpointsClient.TestIamPermissionsRequest().with {
+      let request = RegionNotificationEndpointsClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

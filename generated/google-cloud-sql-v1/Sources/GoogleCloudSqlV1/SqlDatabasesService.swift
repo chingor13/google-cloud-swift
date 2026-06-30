@@ -28,58 +28,38 @@
   /// Service to manage databases.
   ///
   /// @Snippet(path: "SqlDatabasesServiceQuickstart")
-  public protocol SqlDatabasesService {
-    /// Deletes a database from a Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_Delete")
-    func delete(request: SqlDatabasesDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
+  public class SqlDatabasesServiceClient: Clients.SqlDatabasesServiceProtocol {
+    let inner: any Clients.SqlDatabasesServiceStub
 
-    /// Retrieves a resource containing information about a database inside a Cloud
-    /// SQL instance.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_Get")
-    func `get`(request: SqlDatabasesGetRequest) async throws -> GoogleCloudSqlV1.Database
-
-    /// Inserts a resource containing information about a database inside a Cloud
-    /// SQL instance.
-    ///
-    /// **Note:** You can't modify the default character set and collation.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_Insert")
-    func insert(request: SqlDatabasesInsertRequest) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Lists databases in the specified Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_List")
-    func list(request: SqlDatabasesListRequest) async throws
-      -> GoogleCloudSqlV1.DatabasesListResponse
-
-    /// Partially updates a resource containing information about a database inside
-    /// a Cloud SQL instance. This method supports patch semantics.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_Patch")
-    func patch(request: SqlDatabasesUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Updates a resource containing information about a database inside a Cloud
-    /// SQL instance.
-    ///
-    /// @Snippet(path: "SqlDatabasesService_Update")
-    func update(request: SqlDatabasesUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
+    /// Creates a new `SqlDatabasesServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlDatabasesServiceStub = try Clients.SqlDatabasesServiceTransport(
+        options)
+      inner = Clients.SqlDatabasesServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlDatabasesServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes a database from a Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlDatabasesService_Delete")
-    func delete(
+    public func delete(
       request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves a resource containing information about a database inside a Cloud
     /// SQL instance.
     ///
     /// @Snippet(path: "SqlDatabasesService_Get")
-    func `get`(
+    public func `get`(
       request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Database
+    ) async throws -> GoogleCloudSqlV1.Database {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Inserts a resource containing information about a database inside a Cloud
     /// SQL instance.
@@ -87,95 +67,102 @@
     /// **Note:** You can't modify the default character set and collation.
     ///
     /// @Snippet(path: "SqlDatabasesService_Insert")
-    func insert(
+    public func insert(
       request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists databases in the specified Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlDatabasesService_List")
-    func list(
+    public func list(
       request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.DatabasesListResponse
+    ) async throws -> GoogleCloudSqlV1.DatabasesListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Partially updates a resource containing information about a database inside
     /// a Cloud SQL instance. This method supports patch semantics.
     ///
     /// @Snippet(path: "SqlDatabasesService_Patch")
-    func patch(
+    public func patch(
       request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Updates a resource containing information about a database inside a Cloud
     /// SQL instance.
     ///
     /// @Snippet(path: "SqlDatabasesService_Update")
-    func update(
+    public func update(
       request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlDatabasesService``.
-    public class SqlDatabasesServiceClient: SqlDatabasesService {
-      let inner: any SqlDatabasesServiceStub
+    /// A Swift protocol to mock `SqlDatabasesServiceClient`.
+    ///
+    /// To mock `SqlDatabasesServiceClient` change your functions to receive
+    /// `some SqlDatabasesServiceProtocol` or `any SqlDatabasesServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlDatabasesServiceProtocol {
+      /// See `SqlDatabasesServiceClient.delete`.
+      func delete(request: SqlDatabasesDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
 
-      /// Creates a new `SqlDatabasesServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlDatabasesServiceStub = try SqlDatabasesServiceTransport(options)
-        inner = SqlDatabasesServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlDatabasesServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlDatabasesServiceClient.`get``.
+      func `get`(request: SqlDatabasesGetRequest) async throws -> GoogleCloudSqlV1.Database
 
-      /// See `SqlDatabasesService.delete`
-      public func delete(
+      /// See `SqlDatabasesServiceClient.insert`.
+      func insert(request: SqlDatabasesInsertRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlDatabasesServiceClient.list`.
+      func list(request: SqlDatabasesListRequest) async throws
+        -> GoogleCloudSqlV1.DatabasesListResponse
+
+      /// See `SqlDatabasesServiceClient.patch`.
+      func patch(request: SqlDatabasesUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlDatabasesServiceClient.update`.
+      func update(request: SqlDatabasesUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlDatabasesServiceClient.delete`.
+      func delete(
         request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlDatabasesService.`get``
-      public func `get`(
+      /// See `SqlDatabasesServiceClient.`get``.
+      func `get`(
         request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Database {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Database
 
-      /// See `SqlDatabasesService.insert`
-      public func insert(
+      /// See `SqlDatabasesServiceClient.insert`.
+      func insert(
         request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlDatabasesService.list`
-      public func list(
+      /// See `SqlDatabasesServiceClient.list`.
+      func list(
         request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.DatabasesListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.DatabasesListResponse
 
-      /// See `SqlDatabasesService.patch`
-      public func patch(
+      /// See `SqlDatabasesServiceClient.patch`.
+      func patch(
         request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlDatabasesService.update`
-      public func update(
+      /// See `SqlDatabasesServiceClient.update`.
+      func update(
         request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
 
   // Default implementations
-  extension SqlDatabasesService {
+  extension Clients.SqlDatabasesServiceProtocol {
     public func delete(request: SqlDatabasesDeleteRequest) async throws
       -> GoogleCloudSqlV1.Operation
     {

@@ -28,45 +28,43 @@
   extension Clients {
     protocol UrlMapsStub {
       func aggregatedList(
-        request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList
 
       func delete(
-        request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap
 
       func insert(
-        request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func invalidateCache(
-        request: Clients.UrlMapsClient.InvalidateCacheRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList
 
       func patch(
-        request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func validate(
-        request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
     }
 
@@ -79,7 +77,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -109,7 +107,7 @@
       }
 
       public func delete(
-        request: Clients.UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -131,7 +129,7 @@
       }
 
       public func `get`(
-        request: Clients.UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -151,7 +149,7 @@
       }
 
       public func insert(
-        request: Clients.UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -174,8 +172,7 @@
       }
 
       public func invalidateCache(
-        request: Clients.UrlMapsClient.InvalidateCacheRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -202,7 +199,7 @@
       }
 
       public func list(
-        request: Clients.UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -227,7 +224,7 @@
       }
 
       public func patch(
-        request: Clients.UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -253,8 +250,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.UrlMapsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -279,7 +275,7 @@
       }
 
       public func update(
-        request: Clients.UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -305,7 +301,7 @@
       }
 
       public func validate(
-        request: Clients.UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

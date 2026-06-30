@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Jobs, projectId: String, locationId: String) async throws {
+func sample(client: JobsClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createJob(
     withPolling: CreateJobRequest()
       .with {
@@ -41,7 +41,7 @@ func sample(client: some Jobs, projectId: String, locationId: String) async thro
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.JobsClient()
+      let client = try GoogleCloudRunV2.JobsClient()
       try await sample(client: client, projectId: "[placeholder]", locationId: "[placeholder]")
     } catch {
       print("Error: \(error)")

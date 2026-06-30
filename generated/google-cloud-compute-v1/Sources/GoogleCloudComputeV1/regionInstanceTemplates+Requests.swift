@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionInstanceTemplatesClient {
+  extension RegionInstanceTemplatesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionInstanceTemplates.delete] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceTemplates.delete]: <doc:RegionInstanceTemplates/delete(request:)>

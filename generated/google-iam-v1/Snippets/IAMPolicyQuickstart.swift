@@ -21,7 +21,7 @@ import GoogleIamV1
 import GoogleCloudWkt
 
 func sample() async throws {
-  let client = try GoogleIamV1.Clients.IAMPolicyClient()
+  let client = try GoogleIamV1.IAMPolicyClient()
   let response = try await client.setIamPolicy(
     request: SetIamPolicyRequest()
       /* set fields using .with { $0... } */

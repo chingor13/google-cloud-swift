@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some Disks) async throws {
+  func sample(client: DisksClient) async throws {
     let response = try await client.updateKmsKey(
-      request: Clients.DisksClient.UpdateKmsKeyRequest()
+      request: DisksClient.UpdateKmsKeyRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.DisksClient()
+        let client = try GoogleCloudComputeV1.DisksClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some TargetVpnGateways) async throws {
+  func sample(client: TargetVpnGatewaysClient) async throws {
     let items = try client.aggregatedList(
-      byItem: Clients.TargetVpnGatewaysClient.AggregatedListRequest()
+      byItem: TargetVpnGatewaysClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.TargetVpnGatewaysClient()
+        let client = try GoogleCloudComputeV1.TargetVpnGatewaysClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

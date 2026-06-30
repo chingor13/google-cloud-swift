@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalPublicDelegatedPrefixesClient {
+  extension GlobalPublicDelegatedPrefixesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.globalPublicDelegatedPrefixes.delete] method.
     ///
     /// [google.cloud.compute.v1.globalPublicDelegatedPrefixes.delete]: <doc:GlobalPublicDelegatedPrefixes/delete(request:)>

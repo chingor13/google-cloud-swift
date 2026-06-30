@@ -21,7 +21,7 @@
   import GoogleCloudSqlV1
   import GoogleCloudWkt
 
-  func sample(client: some SqlUsersService) async throws {
+  func sample(client: SqlUsersServiceClient) async throws {
     let response = try await client.list(
       request: SqlUsersListRequest()
         /* set fields using .with { $0... } */
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudSqlV1.Clients.SqlUsersServiceClient()
+        let client = try GoogleCloudSqlV1.SqlUsersServiceClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

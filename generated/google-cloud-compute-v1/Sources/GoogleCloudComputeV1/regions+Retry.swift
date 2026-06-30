@@ -53,14 +53,14 @@
       }
 
       public func `get`(
-        request: Clients.RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Region
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -68,14 +68,14 @@
       }
 
       public func list(
-        request: Clients.RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.RegionsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RegionList
             in
             return try await self.inner.list(request: r, options: o)

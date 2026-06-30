@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionNetworkEndpointGroupsClient()
+    let client = try GoogleCloudComputeV1.RegionNetworkEndpointGroupsClient()
     let response = try await client.attachNetworkEndpoints(
-      request: Clients.RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest()
+      request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

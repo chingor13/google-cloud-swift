@@ -28,23 +28,19 @@
   extension Clients {
     protocol RegionSslCertificatesStub {
       func delete(
-        request: Clients.RegionSslCertificatesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionSslCertificatesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate
 
       func insert(
-        request: Clients.RegionSslCertificatesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionSslCertificatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList
     }
 
@@ -57,8 +53,7 @@
       }
 
       public func delete(
-        request: Clients.RegionSslCertificatesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -86,8 +81,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionSslCertificatesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -113,8 +107,7 @@
       }
 
       public func insert(
-        request: Clients.RegionSslCertificatesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -140,8 +133,7 @@
       }
 
       public func list(
-        request: Clients.RegionSslCertificatesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

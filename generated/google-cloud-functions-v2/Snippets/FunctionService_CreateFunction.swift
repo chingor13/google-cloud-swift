@@ -24,7 +24,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some FunctionService, parent: String) async throws {
+func sample(client: FunctionServiceClient, parent: String) async throws {
   let poller = try await client.createFunction(
     withPolling: CreateFunctionRequest()
       .with {
@@ -42,7 +42,7 @@ func sample(client: some FunctionService, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudFunctionsV2.Clients.FunctionServiceClient()
+      let client = try GoogleCloudFunctionsV2.FunctionServiceClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.StoragePoolsClient {
+  extension StoragePoolsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.storagePools.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.storagePools.aggregatedList]: <doc:StoragePools/aggregatedList(request:)>

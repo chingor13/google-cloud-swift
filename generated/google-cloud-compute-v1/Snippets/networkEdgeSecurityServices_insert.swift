@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some NetworkEdgeSecurityServices) async throws {
+  func sample(client: NetworkEdgeSecurityServicesClient) async throws {
     let response = try await client.insert(
-      request: Clients.NetworkEdgeSecurityServicesClient.InsertRequest()
+      request: NetworkEdgeSecurityServicesClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.NetworkEdgeSecurityServicesClient()
+        let client = try GoogleCloudComputeV1.NetworkEdgeSecurityServicesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

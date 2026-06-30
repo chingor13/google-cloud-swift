@@ -21,7 +21,7 @@ import GoogleLongrunning
 import GoogleCloudWkt
 
 func sample() async throws {
-  let client = try GoogleLongrunning.Clients.OperationsClient()
+  let client = try GoogleLongrunning.OperationsClient()
   let items = try client.listOperations(
     byItem: ListOperationsRequest()
       /* set fields using .with { $0... } */

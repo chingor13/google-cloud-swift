@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RolloutsClient()
+    let client = try GoogleCloudComputeV1.RolloutsClient()
     let response = try await client.advance(
-      request: Clients.RolloutsClient.AdvanceRequest()
+      request: RolloutsClient.AdvanceRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

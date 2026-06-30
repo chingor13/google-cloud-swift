@@ -37,117 +37,54 @@ import Logging
 /// [google.longrunning.Operation]: <doc:Operation>
 ///
 /// @Snippet(path: "OperationsQuickstart")
-public protocol Operations {
-  /// Lists operations that match the specified filter in the request. If the
-  /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-  ///
-  /// @Snippet(path: "Operations_ListOperations")
-  func listOperations(request: ListOperationsRequest) async throws
-    -> GoogleLongrunning.ListOperationsResponse
+public class OperationsClient: Clients.OperationsProtocol {
+  let inner: any Clients.OperationsStub
 
-  /// Lists operations that match the specified filter in the request. If the
-  /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-  func listOperations(
-    byItem: ListOperationsRequest
-  ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-  /// Lists operations that match the specified filter in the request. If the
-  /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-  func listOperations(
-    name: Swift.String,
-    filter: Swift.String,
-  ) throws -> any AsyncSequence<Operation, Swift.Error>
-
-  /// Gets the latest state of a long-running operation.  Clients can use this
-  /// method to poll the operation result at intervals as recommended by the API
-  /// service.
-  ///
-  /// @Snippet(path: "Operations_GetOperation")
-  func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Gets the latest state of a long-running operation.  Clients can use this
-  /// method to poll the operation result at intervals as recommended by the API
-  /// service.
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
-
-  /// Deletes a long-running operation. This method indicates that the client is
-  /// no longer interested in the operation result. It does not cancel the
-  /// operation. If the server doesn't support this method, it returns
-  /// `google.rpc.Code.UNIMPLEMENTED`.
-  ///
-  /// @Snippet(path: "Operations_DeleteOperation")
-  func deleteOperation(request: DeleteOperationRequest) async throws
-
-  /// Deletes a long-running operation. This method indicates that the client is
-  /// no longer interested in the operation result. It does not cancel the
-  /// operation. If the server doesn't support this method, it returns
-  /// `google.rpc.Code.UNIMPLEMENTED`.
-  func deleteOperation(
-    name: Swift.String,
-  ) async throws
-
-  /// Starts asynchronous cancellation on a long-running operation.  The server
-  /// makes a best effort to cancel the operation, but success is not
-  /// guaranteed.  If the server doesn't support this method, it returns
-  /// `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-  /// [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
-  /// other methods to check whether the cancellation succeeded or whether the
-  /// operation completed despite cancellation. On successful cancellation,
-  /// the operation is not deleted; instead, it becomes an operation with
-  /// an [Operation.error][google.longrunning.Operation.error] value with a
-  /// [google.rpc.Status.code][google.rpc.Status.code] of `1`, corresponding to
-  /// `Code.CANCELLED`.
-  ///
-  /// [google.longrunning.Operation.error]: <doc:Operation/error>
-  /// [google.longrunning.Operations.GetOperation]: <doc:Operations/getOperation(request:)>
-  /// [google.rpc.Status.code]: https://www.google.com/search?q=Swift+google.rpc+GoogleRpc.Status/code
-  ///
-  /// @Snippet(path: "Operations_CancelOperation")
-  func cancelOperation(request: CancelOperationRequest) async throws
-
-  /// Starts asynchronous cancellation on a long-running operation.  The server
-  /// makes a best effort to cancel the operation, but success is not
-  /// guaranteed.  If the server doesn't support this method, it returns
-  /// `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-  /// [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
-  /// other methods to check whether the cancellation succeeded or whether the
-  /// operation completed despite cancellation. On successful cancellation,
-  /// the operation is not deleted; instead, it becomes an operation with
-  /// an [Operation.error][google.longrunning.Operation.error] value with a
-  /// [google.rpc.Status.code][google.rpc.Status.code] of `1`, corresponding to
-  /// `Code.CANCELLED`.
-  ///
-  /// [google.longrunning.Operation.error]: <doc:Operation/error>
-  /// [google.longrunning.Operations.GetOperation]: <doc:Operations/getOperation(request:)>
-  /// [google.rpc.Status.code]: https://www.google.com/search?q=Swift+google.rpc+GoogleRpc.Status/code
-  func cancelOperation(
-    name: Swift.String,
-  ) async throws
+  /// Creates a new `OperationsClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.OperationsStub = try Clients.OperationsTransport(options)
+    inner = Clients.OperationsRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.OperationsLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Lists operations that match the specified filter in the request. If the
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
   ///
   /// @Snippet(path: "Operations_ListOperations")
-  func listOperations(
+  public func listOperations(
     request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.ListOperationsResponse
+  ) async throws -> GoogleLongrunning.ListOperationsResponse {
+    try await self.inner.listOperations(request: request, options: options)
+  }
 
   /// Lists operations that match the specified filter in the request. If the
   /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-  func listOperations(
+  ///
+  /// @Snippet(path: "Operations_ListOperations")
+  public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Operation, Swift.Error>
+  ) throws -> any AsyncSequence<Operation, Swift.Error> {
+    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listOperations(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Gets the latest state of a long-running operation.  Clients can use this
   /// method to poll the operation result at intervals as recommended by the API
   /// service.
   ///
   /// @Snippet(path: "Operations_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 
   /// Deletes a long-running operation. This method indicates that the client is
   /// no longer interested in the operation result. It does not cancel the
@@ -155,9 +92,11 @@ public protocol Operations {
   /// `google.rpc.Code.UNIMPLEMENTED`.
   ///
   /// @Snippet(path: "Operations_DeleteOperation")
-  func deleteOperation(
+  public func deleteOperation(
     request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.deleteOperation(request: request, options: options)
+  }
 
   /// Starts asynchronous cancellation on a long-running operation.  The server
   /// makes a best effort to cancel the operation, but success is not
@@ -176,71 +115,88 @@ public protocol Operations {
   /// [google.rpc.Status.code]: https://www.google.com/search?q=Swift+google.rpc+GoogleRpc.Status/code
   ///
   /// @Snippet(path: "Operations_CancelOperation")
-  func cancelOperation(
+  public func cancelOperation(
     request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws
+  ) async throws {
+    try await self.inner.cancelOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Operations``.
-  public class OperationsClient: Operations {
-    let inner: any OperationsStub
+  /// A Swift protocol to mock `OperationsClient`.
+  ///
+  /// To mock `OperationsClient` change your functions to receive
+  /// `some OperationsProtocol` or `any OperationsProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol OperationsProtocol {
+    /// See `OperationsClient.listOperations`.
+    func listOperations(request: ListOperationsRequest) async throws
+      -> GoogleLongrunning.ListOperationsResponse
 
-    /// Creates a new `OperationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any OperationsStub = try OperationsTransport(options)
-      inner = OperationsRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = OperationsLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `OperationsClient.listOperations`.
+    func listOperations(
+      byItem: ListOperationsRequest
+    ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-    /// See `Operations.listOperations`
-    public func listOperations(
+    /// See `OperationsClient.listOperations`.
+    func listOperations(
+      name: Swift.String,
+      filter: Swift.String,
+    ) throws -> any AsyncSequence<Operation, Swift.Error>
+
+    /// See `OperationsClient.getOperation`.
+    func getOperation(request: GetOperationRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `OperationsClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `OperationsClient.deleteOperation`.
+    func deleteOperation(request: DeleteOperationRequest) async throws
+
+    /// See `OperationsClient.deleteOperation`.
+    func deleteOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `OperationsClient.cancelOperation`.
+    func cancelOperation(request: CancelOperationRequest) async throws
+
+    /// See `OperationsClient.cancelOperation`.
+    func cancelOperation(
+      name: Swift.String,
+    ) async throws
+
+    /// See `OperationsClient.listOperations`.
+    func listOperations(
       request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.ListOperationsResponse {
-      try await self.inner.listOperations(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.ListOperationsResponse
 
-    /// Lists operations that match the specified filter in the request. If the
-    /// server doesn't support this method, it returns `UNIMPLEMENTED`.
-    public func listOperations(
+    /// See `OperationsClient.listOperations`.
+    func listOperations(
       byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listOperations(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-    /// See `Operations.getOperation`
-    public func getOperation(
+    /// See `OperationsClient.getOperation`.
+    func getOperation(
       request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// See `Operations.deleteOperation`
-    public func deleteOperation(
+    /// See `OperationsClient.deleteOperation`.
+    func deleteOperation(
       request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.deleteOperation(request: request, options: options)
-    }
+    ) async throws
 
-    /// See `Operations.cancelOperation`
-    public func cancelOperation(
+    /// See `OperationsClient.cancelOperation`.
+    func cancelOperation(
       request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws {
-      try await self.inner.cancelOperation(request: request, options: options)
-    }
+    ) async throws
   }
 }
 
 // Default implementations
-extension Operations {
+extension Clients.OperationsProtocol {
   public func listOperations(request: ListOperationsRequest) async throws
     -> GoogleLongrunning.ListOperationsResponse
   {

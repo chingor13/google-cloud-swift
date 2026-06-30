@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionDisksClient {
+  extension RegionDisksClient {
     /// Synthetic request message for the [addResourcePolicies()][google.cloud.compute.v1.regionDisks.addResourcePolicies] method.
     ///
     /// [google.cloud.compute.v1.regionDisks.addResourcePolicies]: <doc:RegionDisks/addResourcePolicies(request:)>

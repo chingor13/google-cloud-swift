@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.AcceleratorTypesClient {
+  extension AcceleratorTypesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.acceleratorTypes.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.acceleratorTypes.aggregatedList]: <doc:AcceleratorTypes/aggregatedList(request:)>

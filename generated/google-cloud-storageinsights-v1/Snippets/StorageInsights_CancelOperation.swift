@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some StorageInsights) async throws {
+func sample(client: StorageInsightsClient) async throws {
   try await client.cancelOperation(
     request: GoogleLongrunning.CancelOperationRequest()
       /* set fields using .with { $0... } */
@@ -36,7 +36,7 @@ func sample(client: some StorageInsights) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudStorageinsightsV1.Clients.StorageInsightsClient()
+      let client = try GoogleCloudStorageinsightsV1.StorageInsightsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

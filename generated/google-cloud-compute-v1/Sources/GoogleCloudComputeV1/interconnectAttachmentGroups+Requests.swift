@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InterconnectAttachmentGroupsClient {
+  extension InterconnectAttachmentGroupsClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.interconnectAttachmentGroups.delete] method.
     ///
     /// [google.cloud.compute.v1.interconnectAttachmentGroups.delete]: <doc:InterconnectAttachmentGroups/delete(request:)>

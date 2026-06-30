@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.PublicAdvertisedPrefixesClient()
+    let client = try GoogleCloudComputeV1.PublicAdvertisedPrefixesClient()
     let response = try await client.announce(
-      request: Clients.PublicAdvertisedPrefixesClient.AnnounceRequest()
+      request: PublicAdvertisedPrefixesClient.AnnounceRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

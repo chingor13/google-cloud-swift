@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some InterconnectAttachments) async throws {
+  func sample(client: InterconnectAttachmentsClient) async throws {
     let response = try await client.setLabels(
-      request: Clients.InterconnectAttachmentsClient.SetLabelsRequest()
+      request: InterconnectAttachmentsClient.SetLabelsRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.InterconnectAttachmentsClient()
+        let client = try GoogleCloudComputeV1.InterconnectAttachmentsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

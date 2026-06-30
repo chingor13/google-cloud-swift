@@ -22,7 +22,7 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudSqlV1.Clients.SqlOperationsServiceClient()
+    let client = try GoogleCloudSqlV1.SqlOperationsServiceClient()
     let response = try await client.`get`(
       request: SqlOperationsGetRequest()
         /* set fields using .with { $0... } */

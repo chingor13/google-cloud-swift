@@ -60,7 +60,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.RegionCompositeHealthChecksClient.AggregatedListRequest,
+        request: RegionCompositeHealthChecksClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckAggregatedList {
         try await self._intercept(
@@ -69,7 +69,7 @@
           name: "aggregatedList",
           action: {
             (
-              r: Clients.RegionCompositeHealthChecksClient.AggregatedListRequest,
+              r: RegionCompositeHealthChecksClient.AggregatedListRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckAggregatedList
             in
@@ -78,7 +78,7 @@
       }
 
       public func delete(
-        request: Clients.RegionCompositeHealthChecksClient.DeleteRequest,
+        request: RegionCompositeHealthChecksClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -86,17 +86,15 @@
           options: options,
           name: "delete",
           action: {
-            (
-              r: Clients.RegionCompositeHealthChecksClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionCompositeHealthChecksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.RegionCompositeHealthChecksClient.GetRequest,
+        request: RegionCompositeHealthChecksClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CompositeHealthCheck {
         try await self._intercept(
@@ -104,17 +102,15 @@
           options: options,
           name: "`get`",
           action: {
-            (
-              r: Clients.RegionCompositeHealthChecksClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.CompositeHealthCheck
+            (r: RegionCompositeHealthChecksClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.CompositeHealthCheck
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getHealth(
-        request: Clients.RegionCompositeHealthChecksClient.GetHealthRequest,
+        request: RegionCompositeHealthChecksClient.GetHealthRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckHealth {
         try await self._intercept(
@@ -123,7 +119,7 @@
           name: "getHealth",
           action: {
             (
-              r: Clients.RegionCompositeHealthChecksClient.GetHealthRequest,
+              r: RegionCompositeHealthChecksClient.GetHealthRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckHealth
             in
@@ -132,7 +128,7 @@
       }
 
       public func insert(
-        request: Clients.RegionCompositeHealthChecksClient.InsertRequest,
+        request: RegionCompositeHealthChecksClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -140,17 +136,15 @@
           options: options,
           name: "insert",
           action: {
-            (
-              r: Clients.RegionCompositeHealthChecksClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionCompositeHealthChecksClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.RegionCompositeHealthChecksClient.ListRequest,
+        request: RegionCompositeHealthChecksClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckList {
         try await self._intercept(
@@ -158,17 +152,15 @@
           options: options,
           name: "list",
           action: {
-            (
-              r: Clients.RegionCompositeHealthChecksClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.CompositeHealthCheckList
+            (r: RegionCompositeHealthChecksClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.CompositeHealthCheckList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionCompositeHealthChecksClient.PatchRequest,
+        request: RegionCompositeHealthChecksClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -176,17 +168,15 @@
           options: options,
           name: "patch",
           action: {
-            (
-              r: Clients.RegionCompositeHealthChecksClient.PatchRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionCompositeHealthChecksClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: Clients.RegionCompositeHealthChecksClient.TestIamPermissionsRequest,
+        request: RegionCompositeHealthChecksClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -195,7 +185,7 @@
           name: "testIamPermissions",
           action: {
             (
-              r: Clients.RegionCompositeHealthChecksClient.TestIamPermissionsRequest,
+              r: RegionCompositeHealthChecksClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

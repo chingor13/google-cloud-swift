@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalNetworkEndpointGroupsClient {
+  extension GlobalNetworkEndpointGroupsClient {
     /// Synthetic request message for the [attachNetworkEndpoints()][google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpoints] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpoints]: <doc:GlobalNetworkEndpointGroups/attachNetworkEndpoints(request:)>

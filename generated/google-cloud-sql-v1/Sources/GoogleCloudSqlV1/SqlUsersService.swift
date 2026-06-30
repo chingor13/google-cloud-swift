@@ -28,122 +28,116 @@
   /// Cloud SQL users service.
   ///
   /// @Snippet(path: "SqlUsersServiceQuickstart")
-  public protocol SqlUsersService {
-    /// Deletes a user from a Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlUsersService_Delete")
-    func delete(request: SqlUsersDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
+  public class SqlUsersServiceClient: Clients.SqlUsersServiceProtocol {
+    let inner: any Clients.SqlUsersServiceStub
 
-    /// Retrieves a resource containing information about a user.
-    ///
-    /// @Snippet(path: "SqlUsersService_Get")
-    func `get`(request: SqlUsersGetRequest) async throws -> GoogleCloudSqlV1.User
-
-    /// Creates a new user in a Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlUsersService_Insert")
-    func insert(request: SqlUsersInsertRequest) async throws -> GoogleCloudSqlV1.Operation
-
-    /// Lists users in the specified Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlUsersService_List")
-    func list(request: SqlUsersListRequest) async throws -> GoogleCloudSqlV1.UsersListResponse
-
-    /// Updates an existing user in a Cloud SQL instance.
-    ///
-    /// @Snippet(path: "SqlUsersService_Update")
-    func update(request: SqlUsersUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
+    /// Creates a new `SqlUsersServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlUsersServiceStub = try Clients.SqlUsersServiceTransport(options)
+      inner = Clients.SqlUsersServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlUsersServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Deletes a user from a Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlUsersService_Delete")
-    func delete(
+    public func delete(
       request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Retrieves a resource containing information about a user.
     ///
     /// @Snippet(path: "SqlUsersService_Get")
-    func `get`(
+    public func `get`(
       request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.User
+    ) async throws -> GoogleCloudSqlV1.User {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a new user in a Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlUsersService_Insert")
-    func insert(
+    public func insert(
       request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists users in the specified Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlUsersService_List")
-    func list(
+    public func list(
       request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.UsersListResponse
+    ) async throws -> GoogleCloudSqlV1.UsersListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Updates an existing user in a Cloud SQL instance.
     ///
     /// @Snippet(path: "SqlUsersService_Update")
-    func update(
+    public func update(
       request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.Operation
+    ) async throws -> GoogleCloudSqlV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlUsersService``.
-    public class SqlUsersServiceClient: SqlUsersService {
-      let inner: any SqlUsersServiceStub
+    /// A Swift protocol to mock `SqlUsersServiceClient`.
+    ///
+    /// To mock `SqlUsersServiceClient` change your functions to receive
+    /// `some SqlUsersServiceProtocol` or `any SqlUsersServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlUsersServiceProtocol {
+      /// See `SqlUsersServiceClient.delete`.
+      func delete(request: SqlUsersDeleteRequest) async throws -> GoogleCloudSqlV1.Operation
 
-      /// Creates a new `SqlUsersServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlUsersServiceStub = try SqlUsersServiceTransport(options)
-        inner = SqlUsersServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlUsersServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `SqlUsersServiceClient.`get``.
+      func `get`(request: SqlUsersGetRequest) async throws -> GoogleCloudSqlV1.User
 
-      /// See `SqlUsersService.delete`
-      public func delete(
+      /// See `SqlUsersServiceClient.insert`.
+      func insert(request: SqlUsersInsertRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlUsersServiceClient.list`.
+      func list(request: SqlUsersListRequest) async throws -> GoogleCloudSqlV1.UsersListResponse
+
+      /// See `SqlUsersServiceClient.update`.
+      func update(request: SqlUsersUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
+
+      /// See `SqlUsersServiceClient.delete`.
+      func delete(
         request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlUsersService.`get``
-      public func `get`(
+      /// See `SqlUsersServiceClient.`get``.
+      func `get`(
         request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.User {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.User
 
-      /// See `SqlUsersService.insert`
-      public func insert(
+      /// See `SqlUsersServiceClient.insert`.
+      func insert(
         request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
 
-      /// See `SqlUsersService.list`
-      public func list(
+      /// See `SqlUsersServiceClient.list`.
+      func list(
         request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.UsersListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.UsersListResponse
 
-      /// See `SqlUsersService.update`
-      public func update(
+      /// See `SqlUsersServiceClient.update`.
+      func update(
         request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
 
   // Default implementations
-  extension SqlUsersService {
+  extension Clients.SqlUsersServiceProtocol {
     public func delete(request: SqlUsersDeleteRequest) async throws -> GoogleCloudSqlV1.Operation {
       try await self.delete(request: request, options: .init())
     }

@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionSslPoliciesClient {
+  extension RegionSslPoliciesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.regionSslPolicies.delete] method.
     ///
     /// [google.cloud.compute.v1.regionSslPolicies.delete]: <doc:RegionSslPolicies/delete(request:)>

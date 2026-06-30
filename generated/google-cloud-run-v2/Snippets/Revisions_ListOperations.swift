@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Revisions) async throws {
+func sample(client: RevisionsClient) async throws {
   let items = try client.listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest()
       /* set fields using .with { $0... } */
@@ -37,7 +37,7 @@ func sample(client: some Revisions) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudRunV2.Clients.RevisionsClient()
+      let client = try GoogleCloudRunV2.RevisionsClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

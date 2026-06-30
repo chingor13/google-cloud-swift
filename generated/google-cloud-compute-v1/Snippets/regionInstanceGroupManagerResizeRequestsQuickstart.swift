@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionInstanceGroupManagerResizeRequestsClient()
+    let client = try GoogleCloudComputeV1.RegionInstanceGroupManagerResizeRequestsClient()
     let response = try await client.cancel(
-      request: Clients.RegionInstanceGroupManagerResizeRequestsClient.CancelRequest()
+      request: RegionInstanceGroupManagerResizeRequestsClient.CancelRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

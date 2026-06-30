@@ -23,7 +23,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some Workflows, parent: String) async throws {
+func sample(client: WorkflowsClient, parent: String) async throws {
   let items = try client.listWorkflows(
     byItem: ListWorkflowsRequest()
       .with {
@@ -40,7 +40,7 @@ func sample(client: some Workflows, parent: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+      let client = try GoogleCloudWorkflowsV1.WorkflowsClient()
       try await sample(client: client, parent: "[placeholder]")
     } catch {
       print("Error: \(error)")

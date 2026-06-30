@@ -28,17 +28,17 @@
   extension Clients {
     protocol GlobalOrganizationOperationsStub {
       func delete(
-        request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+        request: GlobalOrganizationOperationsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws
 
       func `get`(
-        request: Clients.GlobalOrganizationOperationsClient.GetRequest,
+        request: GlobalOrganizationOperationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalOrganizationOperationsClient.ListRequest,
+        request: GlobalOrganizationOperationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
     }
@@ -52,7 +52,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalOrganizationOperationsClient.DeleteRequest,
+        request: GlobalOrganizationOperationsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws {
         let path = try { () throws -> Swift.String in
@@ -71,7 +71,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalOrganizationOperationsClient.GetRequest,
+        request: GlobalOrganizationOperationsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -92,7 +92,7 @@
       }
 
       public func list(
-        request: Clients.GlobalOrganizationOperationsClient.ListRequest,
+        request: GlobalOrganizationOperationsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         let path = try { () throws -> Swift.String in

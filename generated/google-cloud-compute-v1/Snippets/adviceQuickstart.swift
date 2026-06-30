@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.AdviceClient()
+    let client = try GoogleCloudComputeV1.AdviceClient()
     let response = try await client.calendarMode(
-      request: Clients.AdviceClient.CalendarModeRequest()
+      request: AdviceClient.CalendarModeRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")

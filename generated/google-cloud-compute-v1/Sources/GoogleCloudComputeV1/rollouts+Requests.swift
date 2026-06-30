@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RolloutsClient {
+  extension RolloutsClient {
     /// Synthetic request message for the [advance()][google.cloud.compute.v1.rollouts.advance] method.
     ///
     /// [google.cloud.compute.v1.rollouts.advance]: <doc:Rollouts/advance(request:)>

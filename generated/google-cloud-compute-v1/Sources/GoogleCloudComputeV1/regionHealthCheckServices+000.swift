@@ -28,130 +28,19 @@
   /// Service for the `regionHealthCheckServices` resource.
   ///
   /// @Snippet(path: "regionHealthCheckServicesQuickstart")
-  public protocol RegionHealthCheckServices {
-    /// Retrieves the list of all HealthCheckService resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_aggregatedList")
-    func aggregatedList(request: Clients.RegionHealthCheckServicesClient.AggregatedListRequest)
-      async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList
+  public class RegionHealthCheckServicesClient: Clients.RegionHealthCheckServicesProtocol {
+    let inner: any Clients.RegionHealthCheckServicesStub
 
-    /// Retrieves the list of all HealthCheckService resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RegionHealthCheckServicesClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
-
-    /// Retrieves the list of all HealthCheckService resources,
-    /// regional and global, available to the specified project.
-    ///
-    /// To prevent failure, it is recommended that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
-
-    /// Deletes the specified regional HealthCheckService.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_delete")
-    func delete(request: Clients.RegionHealthCheckServicesClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified regional HealthCheckService.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      healthCheckService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified regional HealthCheckService resource.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_get")
-    func `get`(request: Clients.RegionHealthCheckServicesClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.HealthCheckService
-
-    /// Returns the specified regional HealthCheckService resource.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      healthCheckService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.HealthCheckService
-
-    /// Creates a regional HealthCheckService resource in the
-    /// specified project and region using the data included in the request.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_insert")
-    func insert(request: Clients.RegionHealthCheckServicesClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a regional HealthCheckService resource in the
-    /// specified project and region using the data included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: HealthCheckService?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Lists all the HealthCheckService resources that have been
-    /// configured for the specified project in the given region.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_list")
-    func list(request: Clients.RegionHealthCheckServicesClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.HealthCheckServicesList
-
-    /// Lists all the HealthCheckService resources that have been
-    /// configured for the specified project in the given region.
-    func list(
-      byItem: Clients.RegionHealthCheckServicesClient.ListRequest
-    ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
-
-    /// Lists all the HealthCheckService resources that have been
-    /// configured for the specified project in the given region.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
-
-    /// Updates the specified regional HealthCheckService resource
-    /// with the data included in the request.  This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_patch")
-    func patch(request: Clients.RegionHealthCheckServicesClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified regional HealthCheckService resource
-    /// with the data included in the request.  This method supportsPATCH
-    /// semantics and uses theJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      healthCheckService: Swift.String,
-      body: HealthCheckService?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns permissions that a caller has on the specified resource.
-    ///
-    /// @Snippet(path: "regionHealthCheckServices_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
-
-    /// Returns permissions that a caller has on the specified resource.
-    func testIamPermissions(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: TestPermissionsRequest?,
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    /// Creates a new `RegionHealthCheckServicesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionHealthCheckServicesStub =
+        try Clients.RegionHealthCheckServicesTransport(options)
+      inner = Clients.RegionHealthCheckServicesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionHealthCheckServicesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves the list of all HealthCheckService resources,
     /// regional and global, available to the specified project.
@@ -160,61 +49,86 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "regionHealthCheckServices_aggregatedList")
-    func aggregatedList(
-      request: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+    public func aggregatedList(
+      request: RegionHealthCheckServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList
+    ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves the list of all HealthCheckService resources,
     /// regional and global, available to the specified project.
     ///
     /// To prevent failure, it is recommended that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+    ///
+    /// @Snippet(path: "regionHealthCheckServices_aggregatedList")
+    public func aggregatedList(
+      byItem: RegionHealthCheckServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
+    ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified regional HealthCheckService.
     ///
     /// @Snippet(path: "regionHealthCheckServices_delete")
-    func delete(
-      request: Clients.RegionHealthCheckServicesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RegionHealthCheckServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Returns the specified regional HealthCheckService resource.
     ///
     /// @Snippet(path: "regionHealthCheckServices_get")
-    func `get`(
-      request: Clients.RegionHealthCheckServicesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthCheckService
+    public func `get`(
+      request: RegionHealthCheckServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.HealthCheckService {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Creates a regional HealthCheckService resource in the
     /// specified project and region using the data included in the request.
     ///
     /// @Snippet(path: "regionHealthCheckServices_insert")
-    func insert(
-      request: Clients.RegionHealthCheckServicesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RegionHealthCheckServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Lists all the HealthCheckService resources that have been
     /// configured for the specified project in the given region.
     ///
     /// @Snippet(path: "regionHealthCheckServices_list")
-    func list(
-      request: Clients.RegionHealthCheckServicesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.HealthCheckServicesList
+    public func list(
+      request: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.HealthCheckServicesList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Lists all the HealthCheckService resources that have been
     /// configured for the specified project in the given region.
-    func list(
-      byItem: Clients.RegionHealthCheckServicesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
+    ///
+    /// @Snippet(path: "regionHealthCheckServices_list")
+    public func list(
+      byItem: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<HealthCheckService, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.HealthCheckServicesList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Updates the specified regional HealthCheckService resource
     /// with the data included in the request.  This method supportsPATCH
@@ -222,150 +136,192 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "regionHealthCheckServices_patch")
-    func patch(
-      request: Clients.RegionHealthCheckServicesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RegionHealthCheckServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "regionHealthCheckServices_testIamPermissions")
-    func testIamPermissions(
-      request: Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest,
+    public func testIamPermissions(
+      request: RegionHealthCheckServicesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+    ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
+      try await self.inner.testIamPermissions(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionHealthCheckServices``.
-    public class RegionHealthCheckServicesClient: RegionHealthCheckServices {
-      let inner: any RegionHealthCheckServicesStub
+    /// A Swift protocol to mock `RegionHealthCheckServicesClient`.
+    ///
+    /// To mock `RegionHealthCheckServicesClient` change your functions to receive
+    /// `some RegionHealthCheckServicesProtocol` or `any RegionHealthCheckServicesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionHealthCheckServicesProtocol {
+      /// See `RegionHealthCheckServicesClient.aggregatedList`.
+      func aggregatedList(request: RegionHealthCheckServicesClient.AggregatedListRequest)
+        async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList
 
-      /// Creates a new `RegionHealthCheckServicesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionHealthCheckServicesStub = try RegionHealthCheckServicesTransport(
-          options)
-        inner = RegionHealthCheckServicesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionHealthCheckServicesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionHealthCheckServicesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionHealthCheckServicesClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
 
-      /// See `RegionHealthCheckServices.aggregatedList`
-      public func aggregatedList(
-        request: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+      /// See `RegionHealthCheckServicesClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
+
+      /// See `RegionHealthCheckServicesClient.delete`.
+      func delete(request: RegionHealthCheckServicesClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        healthCheckService: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.`get``.
+      func `get`(request: RegionHealthCheckServicesClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.HealthCheckService
+
+      /// See `RegionHealthCheckServicesClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        healthCheckService: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.HealthCheckService
+
+      /// See `RegionHealthCheckServicesClient.insert`.
+      func insert(request: RegionHealthCheckServicesClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: HealthCheckService?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.list`.
+      func list(request: RegionHealthCheckServicesClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.HealthCheckServicesList
+
+      /// See `RegionHealthCheckServicesClient.list`.
+      func list(
+        byItem: RegionHealthCheckServicesClient.ListRequest
+      ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
+
+      /// See `RegionHealthCheckServicesClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
+
+      /// See `RegionHealthCheckServicesClient.patch`.
+      func patch(request: RegionHealthCheckServicesClient.PatchRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        healthCheckService: Swift.String,
+        body: HealthCheckService?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RegionHealthCheckServicesClient.testIamPermissions`.
+      func testIamPermissions(request: RegionHealthCheckServicesClient.TestIamPermissionsRequest)
+        async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionHealthCheckServicesClient.testIamPermissions`.
+      func testIamPermissions(
+        project: Swift.String,
+        region: Swift.String,
+        resource: Swift.String,
+        body: TestPermissionsRequest?,
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      /// See `RegionHealthCheckServicesClient.aggregatedList`.
+      func aggregatedList(
+        request: RegionHealthCheckServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList
 
-      /// Retrieves the list of all HealthCheckService resources,
-      /// regional and global, available to the specified project.
-      ///
-      /// To prevent failure, it is recommended that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+      /// See `RegionHealthCheckServicesClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RegionHealthCheckServicesClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error>
 
-      /// See `RegionHealthCheckServices.delete`
-      public func delete(
-        request: Clients.RegionHealthCheckServicesClient.DeleteRequest,
+      /// See `RegionHealthCheckServicesClient.delete`.
+      func delete(
+        request: RegionHealthCheckServicesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthCheckServices.`get``
-      public func `get`(
-        request: Clients.RegionHealthCheckServicesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthCheckService {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RegionHealthCheckServicesClient.`get``.
+      func `get`(
+        request: RegionHealthCheckServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.HealthCheckService
 
-      /// See `RegionHealthCheckServices.insert`
-      public func insert(
-        request: Clients.RegionHealthCheckServicesClient.InsertRequest,
+      /// See `RegionHealthCheckServicesClient.insert`.
+      func insert(
+        request: RegionHealthCheckServicesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthCheckServices.list`
-      public func list(
-        request: Clients.RegionHealthCheckServicesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.HealthCheckServicesList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RegionHealthCheckServicesClient.list`.
+      func list(
+        request: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.HealthCheckServicesList
 
-      /// Lists all the HealthCheckService resources that have been
-      /// configured for the specified project in the given region.
-      public func list(
-        byItem: Clients.RegionHealthCheckServicesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<HealthCheckService, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.HealthCheckServicesList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RegionHealthCheckServicesClient.list`.
+      func list(
+        byItem: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<HealthCheckService, Swift.Error>
 
-      /// See `RegionHealthCheckServices.patch`
-      public func patch(
-        request: Clients.RegionHealthCheckServicesClient.PatchRequest,
+      /// See `RegionHealthCheckServicesClient.patch`.
+      func patch(
+        request: RegionHealthCheckServicesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthCheckServices.testIamPermissions`
-      public func testIamPermissions(
-        request: Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest,
+      /// See `RegionHealthCheckServicesClient.testIamPermissions`.
+      func testIamPermissions(
+        request: RegionHealthCheckServicesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-        try await self.inner.testIamPermissions(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
 
   // Default implementations
-  extension RegionHealthCheckServices {
-    public func aggregatedList(
-      request: Clients.RegionHealthCheckServicesClient.AggregatedListRequest
-    ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList {
+  extension Clients.RegionHealthCheckServicesProtocol {
+    public func aggregatedList(request: RegionHealthCheckServicesClient.AggregatedListRequest)
+      async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList
+    {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+      request: RegionHealthCheckServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthCheckServiceAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionHealthCheckServicesClient.AggregatedListRequest
+      byItem: RegionHealthCheckServicesClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.RegionHealthCheckServicesClient.AggregatedListRequest,
+      byItem: RegionHealthCheckServicesClient.AggregatedListRequest,
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error> {
       let listRpc = {
@@ -378,21 +334,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, HealthCheckServicesScopedList), Swift.Error> {
-      let request = Clients.RegionHealthCheckServicesClient.AggregatedListRequest().with {
+      let request = RegionHealthCheckServicesClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.RegionHealthCheckServicesClient.DeleteRequest) async throws
+    public func delete(request: RegionHealthCheckServicesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RegionHealthCheckServicesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionHealthCheckServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -402,7 +357,7 @@
       region: Swift.String,
       healthCheckService: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthCheckServicesClient.DeleteRequest().with {
+      let request = RegionHealthCheckServicesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.healthCheckService = healthCheckService
@@ -410,15 +365,14 @@
       return try await self.delete(request: request)
     }
 
-    public func `get`(request: Clients.RegionHealthCheckServicesClient.GetRequest) async throws
+    public func `get`(request: RegionHealthCheckServicesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.HealthCheckService
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RegionHealthCheckServicesClient.GetRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionHealthCheckServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthCheckService {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -428,7 +382,7 @@
       region: Swift.String,
       healthCheckService: Swift.String,
     ) async throws -> GoogleCloudComputeV1.HealthCheckService {
-      let request = Clients.RegionHealthCheckServicesClient.GetRequest().with {
+      let request = RegionHealthCheckServicesClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.healthCheckService = healthCheckService
@@ -436,15 +390,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func insert(request: Clients.RegionHealthCheckServicesClient.InsertRequest) async throws
+    public func insert(request: RegionHealthCheckServicesClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RegionHealthCheckServicesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionHealthCheckServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -454,7 +407,7 @@
       region: Swift.String,
       body: HealthCheckService?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthCheckServicesClient.InsertRequest().with {
+      let request = RegionHealthCheckServicesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -462,28 +415,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RegionHealthCheckServicesClient.ListRequest) async throws
+    public func list(request: RegionHealthCheckServicesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.HealthCheckServicesList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RegionHealthCheckServicesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HealthCheckServicesList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RegionHealthCheckServicesClient.ListRequest
+      byItem: RegionHealthCheckServicesClient.ListRequest
     ) throws -> any AsyncSequence<HealthCheckService, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RegionHealthCheckServicesClient.ListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: RegionHealthCheckServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<HealthCheckService, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.HealthCheckServicesList in
@@ -496,22 +447,21 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<HealthCheckService, Swift.Error> {
-      let request = Clients.RegionHealthCheckServicesClient.ListRequest().with {
+      let request = RegionHealthCheckServicesClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func patch(request: Clients.RegionHealthCheckServicesClient.PatchRequest) async throws
+    public func patch(request: RegionHealthCheckServicesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RegionHealthCheckServicesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionHealthCheckServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -522,7 +472,7 @@
       healthCheckService: Swift.String,
       body: HealthCheckService?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionHealthCheckServicesClient.PatchRequest().with {
+      let request = RegionHealthCheckServicesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.healthCheckService = healthCheckService
@@ -532,13 +482,13 @@
     }
 
     public func testIamPermissions(
-      request: Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest
+      request: RegionHealthCheckServicesClient.TestIamPermissionsRequest
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.testIamPermissions(request: request, options: .init())
     }
 
     public func testIamPermissions(
-      request: Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest,
+      request: RegionHealthCheckServicesClient.TestIamPermissionsRequest,
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
@@ -550,7 +500,7 @@
       resource: Swift.String,
       body: TestPermissionsRequest?,
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      let request = Clients.RegionHealthCheckServicesClient.TestIamPermissionsRequest().with {
+      let request = RegionHealthCheckServicesClient.TestIamPermissionsRequest().with {
         $0.project = project
         $0.region = region
         $0.resource = resource

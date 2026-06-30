@@ -53,15 +53,14 @@
       }
 
       public func delete(
-        request: Clients.CrossSiteNetworksClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.CrossSiteNetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: CrossSiteNetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -69,30 +68,29 @@
       }
 
       public func `get`(
-        request: Clients.CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetwork {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.CrossSiteNetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.CrossSiteNetwork
+            (r: CrossSiteNetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.CrossSiteNetwork
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: Clients.CrossSiteNetworksClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.CrossSiteNetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: CrossSiteNetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -100,31 +98,30 @@
       }
 
       public func list(
-        request: Clients.CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetworkList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: Clients.CrossSiteNetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.CrossSiteNetworkList
+            (r: CrossSiteNetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.CrossSiteNetworkList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.CrossSiteNetworksClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: Clients.CrossSiteNetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: CrossSiteNetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })

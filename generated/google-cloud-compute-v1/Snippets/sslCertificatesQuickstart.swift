@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.SslCertificatesClient()
+    let client = try GoogleCloudComputeV1.SslCertificatesClient()
     let items = try client.aggregatedList(
-      byItem: Clients.SslCertificatesClient.AggregatedListRequest()
+      byItem: SslCertificatesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

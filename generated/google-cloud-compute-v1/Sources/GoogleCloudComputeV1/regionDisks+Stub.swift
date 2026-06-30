@@ -28,85 +28,80 @@
   extension Clients {
     protocol RegionDisksStub {
       func addResourcePolicies(
-        request: Clients.RegionDisksClient.AddResourcePoliciesRequest,
+        request: RegionDisksClient.AddResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func bulkInsert(
-        request: Clients.RegionDisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func createSnapshot(
-        request: Clients.RegionDisksClient.CreateSnapshotRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.RegionDisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionDisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Disk
 
       func getIamPolicy(
-        request: Clients.RegionDisksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.RegionDisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionDisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskList
 
       func removeResourcePolicies(
-        request: Clients.RegionDisksClient.RemoveResourcePoliciesRequest,
+        request: RegionDisksClient.RemoveResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resize(
-        request: Clients.RegionDisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: Clients.RegionDisksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: Clients.RegionDisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func startAsyncReplication(
-        request: Clients.RegionDisksClient.StartAsyncReplicationRequest,
+        request: RegionDisksClient.StartAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func stopAsyncReplication(
-        request: Clients.RegionDisksClient.StopAsyncReplicationRequest,
+        request: RegionDisksClient.StopAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func stopGroupAsyncReplication(
-        request: Clients.RegionDisksClient.StopGroupAsyncReplicationRequest,
+        request: RegionDisksClient.StopGroupAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionDisksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: Clients.RegionDisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateKmsKey(
-        request: Clients.RegionDisksClient.UpdateKmsKeyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -119,7 +114,7 @@
       }
 
       public func addResourcePolicies(
-        request: Clients.RegionDisksClient.AddResourcePoliciesRequest,
+        request: RegionDisksClient.AddResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -150,7 +145,7 @@
       }
 
       public func bulkInsert(
-        request: Clients.RegionDisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -176,8 +171,7 @@
       }
 
       public func createSnapshot(
-        request: Clients.RegionDisksClient.CreateSnapshotRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -207,7 +201,7 @@
       }
 
       public func delete(
-        request: Clients.RegionDisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -233,7 +227,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionDisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Disk {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -257,8 +251,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.RegionDisksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -286,7 +279,7 @@
       }
 
       public func insert(
-        request: Clients.RegionDisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -313,7 +306,7 @@
       }
 
       public func list(
-        request: Clients.RegionDisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -341,7 +334,7 @@
       }
 
       public func removeResourcePolicies(
-        request: Clients.RegionDisksClient.RemoveResourcePoliciesRequest,
+        request: RegionDisksClient.RemoveResourcePoliciesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -372,7 +365,7 @@
       }
 
       public func resize(
-        request: Clients.RegionDisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -402,8 +395,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.RegionDisksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -431,7 +423,7 @@
       }
 
       public func setLabels(
-        request: Clients.RegionDisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -461,7 +453,7 @@
       }
 
       public func startAsyncReplication(
-        request: Clients.RegionDisksClient.StartAsyncReplicationRequest,
+        request: RegionDisksClient.StartAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -492,7 +484,7 @@
       }
 
       public func stopAsyncReplication(
-        request: Clients.RegionDisksClient.StopAsyncReplicationRequest,
+        request: RegionDisksClient.StopAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -519,7 +511,7 @@
       }
 
       public func stopGroupAsyncReplication(
-        request: Clients.RegionDisksClient.StopGroupAsyncReplicationRequest,
+        request: RegionDisksClient.StopGroupAsyncReplicationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -547,8 +539,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionDisksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -576,7 +567,7 @@
       }
 
       public func update(
-        request: Clients.RegionDisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -608,8 +599,7 @@
       }
 
       public func updateKmsKey(
-        request: Clients.RegionDisksClient.UpdateKmsKeyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionDisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

@@ -60,30 +60,30 @@
       }
 
       public func `get`(
-        request: Clients.NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.NetworkProfilesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.NetworkProfile
+            (r: NetworkProfilesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.NetworkProfile
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: Clients.NetworkProfilesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
+            (r: NetworkProfilesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.NetworkProfilesListResponse
             in
             return try await self.inner.list(request: r, options: o)
           })

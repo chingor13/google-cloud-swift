@@ -28,174 +28,169 @@
   /// Service for the `reservationSlots` resource.
   ///
   /// @Snippet(path: "reservationSlotsQuickstart")
-  public protocol ReservationSlots {
-    /// Retrieves information about the specified reservation slot.
-    ///
-    /// @Snippet(path: "reservationSlots_get")
-    func `get`(request: Clients.ReservationSlotsClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.ReservationSlotsGetResponse
+  public class ReservationSlotsClient: Clients.ReservationSlotsProtocol {
+    let inner: any Clients.ReservationSlotsStub
 
-    /// Retrieves information about the specified reservation slot.
-    func `get`(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSlot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
-
-    /// Allows customers to get SBOM versions of a reservation slot.
-    ///
-    /// @Snippet(path: "reservationSlots_getVersion")
-    func getVersion(request: Clients.ReservationSlotsClient.GetVersionRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Allows customers to get SBOM versions of a reservation slot.
-    func getVersion(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSlot: Swift.String,
-      body: ReservationSlotsGetVersionRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of reservation slots under a single reservation.
-    ///
-    /// @Snippet(path: "reservationSlots_list")
-    func list(request: Clients.ReservationSlotsClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.ReservationSlotsListResponse
-
-    /// Retrieves a list of reservation slots under a single reservation.
-    func list(
-      byItem: Clients.ReservationSlotsClient.ListRequest
-    ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
-
-    /// Retrieves a list of reservation slots under a single reservation.
-    func list(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-    ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
-
-    /// Update a reservation slot in the specified sub-block.
-    ///
-    /// @Snippet(path: "reservationSlots_update")
-    func update(request: Clients.ReservationSlotsClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Update a reservation slot in the specified sub-block.
-    func update(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSlot: Swift.String,
-      body: ReservationSlot?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `ReservationSlotsClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.ReservationSlotsStub = try Clients.ReservationSlotsTransport(options)
+      inner = Clients.ReservationSlotsRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.ReservationSlotsLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves information about the specified reservation slot.
     ///
     /// @Snippet(path: "reservationSlots_get")
-    func `get`(
-      request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
+    public func `get`(
+      request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Allows customers to get SBOM versions of a reservation slot.
     ///
     /// @Snippet(path: "reservationSlots_getVersion")
-    func getVersion(
-      request: Clients.ReservationSlotsClient.GetVersionRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func getVersion(
+      request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getVersion(request: request, options: options)
+    }
 
     /// Retrieves a list of reservation slots under a single reservation.
     ///
     /// @Snippet(path: "reservationSlots_list")
-    func list(
-      request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
+    public func list(
+      request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of reservation slots under a single reservation.
-    func list(
-      byItem: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
+    ///
+    /// @Snippet(path: "reservationSlots_list")
+    public func list(
+      byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Update a reservation slot in the specified sub-block.
     ///
     /// @Snippet(path: "reservationSlots_update")
-    func update(
-      request: Clients.ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``ReservationSlots``.
-    public class ReservationSlotsClient: ReservationSlots {
-      let inner: any ReservationSlotsStub
+    /// A Swift protocol to mock `ReservationSlotsClient`.
+    ///
+    /// To mock `ReservationSlotsClient` change your functions to receive
+    /// `some ReservationSlotsProtocol` or `any ReservationSlotsProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol ReservationSlotsProtocol {
+      /// See `ReservationSlotsClient.`get``.
+      func `get`(request: ReservationSlotsClient.GetRequest) async throws
+        -> GoogleCloudComputeV1.ReservationSlotsGetResponse
 
-      /// Creates a new `ReservationSlotsClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any ReservationSlotsStub = try ReservationSlotsTransport(options)
-        inner = ReservationSlotsRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = ReservationSlotsLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `ReservationSlotsClient.`get``.
+      func `get`(
+        project: Swift.String,
+        zone: Swift.String,
+        parentName: Swift.String,
+        reservationSlot: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
 
-      /// See `ReservationSlots.`get``
-      public func `get`(
-        request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `ReservationSlotsClient.getVersion`.
+      func getVersion(request: ReservationSlotsClient.GetVersionRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationSlots.getVersion`
-      public func getVersion(
-        request: Clients.ReservationSlotsClient.GetVersionRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.getVersion(request: request, options: options)
-      }
+      /// See `ReservationSlotsClient.getVersion`.
+      func getVersion(
+        project: Swift.String,
+        zone: Swift.String,
+        parentName: Swift.String,
+        reservationSlot: Swift.String,
+        body: ReservationSlotsGetVersionRequest?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationSlots.list`
-      public func list(
-        request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `ReservationSlotsClient.list`.
+      func list(request: ReservationSlotsClient.ListRequest) async throws
+        -> GoogleCloudComputeV1.ReservationSlotsListResponse
 
-      /// Retrieves a list of reservation slots under a single reservation.
-      public func list(
-        byItem: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `ReservationSlotsClient.list`.
+      func list(
+        byItem: ReservationSlotsClient.ListRequest
+      ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
 
-      /// See `ReservationSlots.update`
-      public func update(
-        request: Clients.ReservationSlotsClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `ReservationSlotsClient.list`.
+      func list(
+        project: Swift.String,
+        zone: Swift.String,
+        parentName: Swift.String,
+      ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
+
+      /// See `ReservationSlotsClient.update`.
+      func update(request: ReservationSlotsClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationSlotsClient.update`.
+      func update(
+        project: Swift.String,
+        zone: Swift.String,
+        parentName: Swift.String,
+        reservationSlot: Swift.String,
+        body: ReservationSlot?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationSlotsClient.`get``.
+      func `get`(
+        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
+
+      /// See `ReservationSlotsClient.getVersion`.
+      func getVersion(
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `ReservationSlotsClient.list`.
+      func list(
+        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
+
+      /// See `ReservationSlotsClient.list`.
+      func list(
+        byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
+
+      /// See `ReservationSlotsClient.update`.
+      func update(
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension ReservationSlots {
-    public func `get`(request: Clients.ReservationSlotsClient.GetRequest) async throws
+  extension Clients.ReservationSlotsProtocol {
+    public func `get`(request: ReservationSlotsClient.GetRequest) async throws
       -> GoogleCloudComputeV1.ReservationSlotsGetResponse
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -206,7 +201,7 @@
       parentName: Swift.String,
       reservationSlot: Swift.String,
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
-      let request = Clients.ReservationSlotsClient.GetRequest().with {
+      let request = ReservationSlotsClient.GetRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentName = parentName
@@ -215,15 +210,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getVersion(request: Clients.ReservationSlotsClient.GetVersionRequest) async throws
+    public func getVersion(request: ReservationSlotsClient.GetVersionRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.getVersion(request: request, options: .init())
     }
 
     public func getVersion(
-      request: Clients.ReservationSlotsClient.GetVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -235,7 +229,7 @@
       reservationSlot: Swift.String,
       body: ReservationSlotsGetVersionRequest?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationSlotsClient.GetVersionRequest().with {
+      let request = ReservationSlotsClient.GetVersionRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentName = parentName
@@ -245,26 +239,26 @@
       return try await self.getVersion(request: request)
     }
 
-    public func list(request: Clients.ReservationSlotsClient.ListRequest) async throws
+    public func list(request: ReservationSlotsClient.ListRequest) async throws
       -> GoogleCloudComputeV1.ReservationSlotsListResponse
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.ReservationSlotsClient.ListRequest
+      byItem: ReservationSlotsClient.ListRequest
     ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse in
@@ -278,7 +272,7 @@
       zone: Swift.String,
       parentName: Swift.String,
     ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
-      let request = Clients.ReservationSlotsClient.ListRequest().with {
+      let request = ReservationSlotsClient.ListRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentName = parentName
@@ -286,14 +280,14 @@
       return try self.list(byItem: request)
     }
 
-    public func update(request: Clients.ReservationSlotsClient.UpdateRequest) async throws
+    public func update(request: ReservationSlotsClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -305,7 +299,7 @@
       reservationSlot: Swift.String,
       body: ReservationSlot?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.ReservationSlotsClient.UpdateRequest().with {
+      let request = ReservationSlotsClient.UpdateRequest().with {
         $0.project = project
         $0.zone = zone
         $0.parentName = parentName

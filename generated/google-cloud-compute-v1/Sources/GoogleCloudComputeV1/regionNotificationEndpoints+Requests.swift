@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionNotificationEndpointsClient {
+  extension RegionNotificationEndpointsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.regionNotificationEndpoints.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.regionNotificationEndpoints.aggregatedList]: <doc:RegionNotificationEndpoints/aggregatedList(request:)>

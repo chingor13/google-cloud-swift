@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some RegionUrlMaps) async throws {
+  func sample(client: RegionUrlMapsClient) async throws {
     let response = try await client.delete(
-      request: Clients.RegionUrlMapsClient.DeleteRequest()
+      request: RegionUrlMapsClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
     print("Success: \(response)")
@@ -34,7 +34,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.RegionUrlMapsClient()
+        let client = try GoogleCloudComputeV1.RegionUrlMapsClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

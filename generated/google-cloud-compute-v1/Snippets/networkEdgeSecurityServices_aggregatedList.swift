@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some NetworkEdgeSecurityServices) async throws {
+  func sample(client: NetworkEdgeSecurityServicesClient) async throws {
     let items = try client.aggregatedList(
-      byItem: Clients.NetworkEdgeSecurityServicesClient.AggregatedListRequest()
+      byItem: NetworkEdgeSecurityServicesClient.AggregatedListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.NetworkEdgeSecurityServicesClient()
+        let client = try GoogleCloudComputeV1.NetworkEdgeSecurityServicesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

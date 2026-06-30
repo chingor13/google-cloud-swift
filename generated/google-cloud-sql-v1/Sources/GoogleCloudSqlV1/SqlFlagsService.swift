@@ -28,46 +28,48 @@
   /// Service to manage database flags for Cloud SQL instances.
   ///
   /// @Snippet(path: "SqlFlagsServiceQuickstart")
-  public protocol SqlFlagsService {
-    /// Lists all available database flags for Cloud SQL instances.
-    ///
-    /// @Snippet(path: "SqlFlagsService_List")
-    func list(request: SqlFlagsListRequest) async throws -> GoogleCloudSqlV1.FlagsListResponse
+  public class SqlFlagsServiceClient: Clients.SqlFlagsServiceProtocol {
+    let inner: any Clients.SqlFlagsServiceStub
+
+    /// Creates a new `SqlFlagsServiceClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.SqlFlagsServiceStub = try Clients.SqlFlagsServiceTransport(options)
+      inner = Clients.SqlFlagsServiceRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.SqlFlagsServiceLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Lists all available database flags for Cloud SQL instances.
     ///
     /// @Snippet(path: "SqlFlagsService_List")
-    func list(
+    public func list(
       request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudSqlV1.FlagsListResponse
+    ) async throws -> GoogleCloudSqlV1.FlagsListResponse {
+      try await self.inner.list(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``SqlFlagsService``.
-    public class SqlFlagsServiceClient: SqlFlagsService {
-      let inner: any SqlFlagsServiceStub
+    /// A Swift protocol to mock `SqlFlagsServiceClient`.
+    ///
+    /// To mock `SqlFlagsServiceClient` change your functions to receive
+    /// `some SqlFlagsServiceProtocol` or `any SqlFlagsServiceProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol SqlFlagsServiceProtocol {
+      /// See `SqlFlagsServiceClient.list`.
+      func list(request: SqlFlagsListRequest) async throws -> GoogleCloudSqlV1.FlagsListResponse
 
-      /// Creates a new `SqlFlagsServiceClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any SqlFlagsServiceStub = try SqlFlagsServiceTransport(options)
-        inner = SqlFlagsServiceRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = SqlFlagsServiceLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
-
-      /// See `SqlFlagsService.list`
-      public func list(
+      /// See `SqlFlagsServiceClient.list`.
+      func list(
         request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudSqlV1.FlagsListResponse {
-        try await self.inner.list(request: request, options: options)
-      }
+      ) async throws -> GoogleCloudSqlV1.FlagsListResponse
     }
   }
 
   // Default implementations
-  extension SqlFlagsService {
+  extension Clients.SqlFlagsServiceProtocol {
     public func list(request: SqlFlagsListRequest) async throws
       -> GoogleCloudSqlV1.FlagsListResponse
     {

@@ -22,7 +22,7 @@ import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some TagBindings, tagBindingId: String) async throws {
+func sample(client: TagBindingsClient, tagBindingId: String) async throws {
   let poller = try await client.deleteTagBinding(
     withPolling: DeleteTagBindingRequest()
       .with {
@@ -38,7 +38,7 @@ func sample(client: some TagBindings, tagBindingId: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.TagBindingsClient()
+      let client = try GoogleCloudResourcemanagerV3.TagBindingsClient()
       try await sample(client: client, tagBindingId: "[placeholder]")
     } catch {
       print("Error: \(error)")

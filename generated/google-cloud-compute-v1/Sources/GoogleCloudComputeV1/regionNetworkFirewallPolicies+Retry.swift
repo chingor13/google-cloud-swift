@@ -55,7 +55,7 @@
       }
 
       public func addAssociation(
-        request: Clients.RegionNetworkFirewallPoliciesClient.AddAssociationRequest,
+        request: RegionNetworkFirewallPoliciesClient.AddAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -64,7 +64,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.AddAssociationRequest,
+              r: RegionNetworkFirewallPoliciesClient.AddAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -73,7 +73,7 @@
       }
 
       public func addRule(
-        request: Clients.RegionNetworkFirewallPoliciesClient.AddRuleRequest,
+        request: RegionNetworkFirewallPoliciesClient.AddRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -82,7 +82,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.AddRuleRequest,
+              r: RegionNetworkFirewallPoliciesClient.AddRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -91,7 +91,7 @@
       }
 
       public func cloneRules(
-        request: Clients.RegionNetworkFirewallPoliciesClient.CloneRulesRequest,
+        request: RegionNetworkFirewallPoliciesClient.CloneRulesRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -100,7 +100,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.CloneRulesRequest,
+              r: RegionNetworkFirewallPoliciesClient.CloneRulesRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -109,7 +109,7 @@
       }
 
       public func delete(
-        request: Clients.RegionNetworkFirewallPoliciesClient.DeleteRequest,
+        request: RegionNetworkFirewallPoliciesClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -117,17 +117,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.RegionNetworkFirewallPoliciesClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionNetworkFirewallPoliciesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: Clients.RegionNetworkFirewallPoliciesClient.GetRequest,
+        request: RegionNetworkFirewallPoliciesClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallPolicy {
         try await self._intercept(
@@ -135,17 +133,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionNetworkFirewallPoliciesClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.FirewallPolicy
+            (r: RegionNetworkFirewallPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.FirewallPolicy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getAssociation(
-        request: Clients.RegionNetworkFirewallPoliciesClient.GetAssociationRequest,
+        request: RegionNetworkFirewallPoliciesClient.GetAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallPolicyAssociation {
         try await self._intercept(
@@ -154,7 +150,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.GetAssociationRequest,
+              r: RegionNetworkFirewallPoliciesClient.GetAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.FirewallPolicyAssociation
             in
@@ -163,7 +159,7 @@
       }
 
       public func getEffectiveFirewalls(
-        request: Clients.RegionNetworkFirewallPoliciesClient.GetEffectiveFirewallsRequest,
+        request: RegionNetworkFirewallPoliciesClient.GetEffectiveFirewallsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws
         -> GoogleCloudComputeV1.RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
@@ -174,7 +170,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.GetEffectiveFirewallsRequest,
+              r: RegionNetworkFirewallPoliciesClient.GetEffectiveFirewallsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws
               -> GoogleCloudComputeV1.RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
@@ -184,7 +180,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.RegionNetworkFirewallPoliciesClient.GetIamPolicyRequest,
+        request: RegionNetworkFirewallPoliciesClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -193,7 +189,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.GetIamPolicyRequest,
+              r: RegionNetworkFirewallPoliciesClient.GetIamPolicyRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Policy
             in
@@ -202,7 +198,7 @@
       }
 
       public func getRule(
-        request: Clients.RegionNetworkFirewallPoliciesClient.GetRuleRequest,
+        request: RegionNetworkFirewallPoliciesClient.GetRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallPolicyRule {
         try await self._intercept(
@@ -211,7 +207,7 @@
           idempotent: true,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.GetRuleRequest,
+              r: RegionNetworkFirewallPoliciesClient.GetRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.FirewallPolicyRule
             in
@@ -220,7 +216,7 @@
       }
 
       public func insert(
-        request: Clients.RegionNetworkFirewallPoliciesClient.InsertRequest,
+        request: RegionNetworkFirewallPoliciesClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -228,17 +224,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.RegionNetworkFirewallPoliciesClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionNetworkFirewallPoliciesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: Clients.RegionNetworkFirewallPoliciesClient.ListRequest,
+        request: RegionNetworkFirewallPoliciesClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FirewallPolicyList {
         try await self._intercept(
@@ -246,17 +240,15 @@
           options: options,
           idempotent: true,
           action: {
-            (
-              r: Clients.RegionNetworkFirewallPoliciesClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.FirewallPolicyList
+            (r: RegionNetworkFirewallPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.FirewallPolicyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.RegionNetworkFirewallPoliciesClient.PatchRequest,
+        request: RegionNetworkFirewallPoliciesClient.PatchRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -264,17 +256,15 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: Clients.RegionNetworkFirewallPoliciesClient.PatchRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionNetworkFirewallPoliciesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func patchRule(
-        request: Clients.RegionNetworkFirewallPoliciesClient.PatchRuleRequest,
+        request: RegionNetworkFirewallPoliciesClient.PatchRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -283,7 +273,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.PatchRuleRequest,
+              r: RegionNetworkFirewallPoliciesClient.PatchRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -292,7 +282,7 @@
       }
 
       public func removeAssociation(
-        request: Clients.RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest,
+        request: RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -301,7 +291,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest,
+              r: RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -310,7 +300,7 @@
       }
 
       public func removeRule(
-        request: Clients.RegionNetworkFirewallPoliciesClient.RemoveRuleRequest,
+        request: RegionNetworkFirewallPoliciesClient.RemoveRuleRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
@@ -319,7 +309,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.RemoveRuleRequest,
+              r: RegionNetworkFirewallPoliciesClient.RemoveRuleRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
@@ -328,7 +318,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.RegionNetworkFirewallPoliciesClient.SetIamPolicyRequest,
+        request: RegionNetworkFirewallPoliciesClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
@@ -337,7 +327,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.SetIamPolicyRequest,
+              r: RegionNetworkFirewallPoliciesClient.SetIamPolicyRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Policy
             in
@@ -346,7 +336,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionNetworkFirewallPoliciesClient.TestIamPermissionsRequest,
+        request: RegionNetworkFirewallPoliciesClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
@@ -355,7 +345,7 @@
           idempotent: false,
           action: {
             (
-              r: Clients.RegionNetworkFirewallPoliciesClient.TestIamPermissionsRequest,
+              r: RegionNetworkFirewallPoliciesClient.TestIamPermissionsRequest,
               o: GoogleCloudGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in

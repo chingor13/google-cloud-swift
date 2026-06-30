@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.ImageFamilyViewsClient {
+  extension ImageFamilyViewsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.imageFamilyViews.get] method.
     ///
     /// [google.cloud.compute.v1.imageFamilyViews.get]: <doc:ImageFamilyViews/`get`(request:)>

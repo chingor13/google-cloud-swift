@@ -28,37 +28,37 @@
   extension Clients {
     protocol GlobalNetworkEndpointGroupsStub {
       func attachNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: Clients.GlobalNetworkEndpointGroupsClient.DeleteRequest,
+        request: GlobalNetworkEndpointGroupsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func detachNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.GlobalNetworkEndpointGroupsClient.GetRequest,
+        request: GlobalNetworkEndpointGroupsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
 
       func insert(
-        request: Clients.GlobalNetworkEndpointGroupsClient.InsertRequest,
+        request: GlobalNetworkEndpointGroupsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalNetworkEndpointGroupsClient.ListRequest,
+        request: GlobalNetworkEndpointGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList
 
       func listNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
     }
@@ -72,7 +72,7 @@
       }
 
       public func attachNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -103,7 +103,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalNetworkEndpointGroupsClient.DeleteRequest,
+        request: GlobalNetworkEndpointGroupsClient.DeleteRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -130,7 +130,7 @@
       }
 
       public func detachNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -161,7 +161,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalNetworkEndpointGroupsClient.GetRequest,
+        request: GlobalNetworkEndpointGroupsClient.GetRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup {
         let path = try { () throws -> Swift.String in
@@ -186,7 +186,7 @@
       }
 
       public func insert(
-        request: Clients.GlobalNetworkEndpointGroupsClient.InsertRequest,
+        request: GlobalNetworkEndpointGroupsClient.InsertRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -210,7 +210,7 @@
       }
 
       public func list(
-        request: Clients.GlobalNetworkEndpointGroupsClient.ListRequest,
+        request: GlobalNetworkEndpointGroupsClient.ListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList {
         let path = try { () throws -> Swift.String in
@@ -236,7 +236,7 @@
       }
 
       public func listNetworkEndpoints(
-        request: Clients.GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
+        request: GlobalNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints {
         let path = try { () throws -> Swift.String in

@@ -28,282 +28,18 @@
   /// Service for the `routers` resource.
   ///
   /// @Snippet(path: "routersQuickstart")
-  public protocol Routers {
-    /// Retrieves an aggregated list of routers.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    ///
-    /// @Snippet(path: "routers_aggregatedList")
-    func aggregatedList(request: Clients.RoutersClient.AggregatedListRequest) async throws
-      -> GoogleCloudComputeV1.RouterAggregatedList
+  public class RoutersClient: Clients.RoutersProtocol {
+    let inner: any Clients.RoutersStub
 
-    /// Retrieves an aggregated list of routers.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RoutersClient.AggregatedListRequest
-    ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
-
-    /// Retrieves an aggregated list of routers.
-    ///
-    /// To prevent failure, Google recommends that you set the
-    /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      project: Swift.String,
-    ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
-
-    /// Deletes the specified Router resource.
-    ///
-    /// @Snippet(path: "routers_delete")
-    func delete(request: Clients.RoutersClient.DeleteRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes the specified Router resource.
-    func delete(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Deletes Route Policy
-    ///
-    /// @Snippet(path: "routers_deleteRoutePolicy")
-    func deleteRoutePolicy(request: Clients.RoutersClient.DeleteRoutePolicyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Deletes Route Policy
-    func deleteRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Returns the specified Router resource.
-    ///
-    /// @Snippet(path: "routers_get")
-    func `get`(request: Clients.RoutersClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Router
-
-    /// Returns the specified Router resource.
-    func `get`(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Router
-
-    /// Retrieves runtime NAT IP information.
-    ///
-    /// @Snippet(path: "routers_getNatIpInfo")
-    func getNatIpInfo(request: Clients.RoutersClient.GetNatIpInfoRequest) async throws
-      -> GoogleCloudComputeV1.NatIpInfoResponse
-
-    /// Retrieves runtime NAT IP information.
-    func getNatIpInfo(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
-
-    /// Retrieves runtime Nat mapping information of VM endpoints.
-    ///
-    /// @Snippet(path: "routers_getNatMappingInfo")
-    func getNatMappingInfo(request: Clients.RoutersClient.GetNatMappingInfoRequest) async throws
-      -> GoogleCloudComputeV1.VmEndpointNatMappingsList
-
-    /// Retrieves runtime Nat mapping information of VM endpoints.
-    func getNatMappingInfo(
-      byItem: Clients.RoutersClient.GetNatMappingInfoRequest
-    ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
-
-    /// Retrieves runtime Nat mapping information of VM endpoints.
-    func getNatMappingInfo(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
-
-    /// Returns specified Route Policy
-    ///
-    /// @Snippet(path: "routers_getRoutePolicy")
-    func getRoutePolicy(request: Clients.RoutersClient.GetRoutePolicyRequest) async throws
-      -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
-
-    /// Returns specified Route Policy
-    func getRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
-
-    /// Retrieves runtime information of the specified router.
-    ///
-    /// @Snippet(path: "routers_getRouterStatus")
-    func getRouterStatus(request: Clients.RoutersClient.GetRouterStatusRequest) async throws
-      -> GoogleCloudComputeV1.RouterStatusResponse
-
-    /// Retrieves runtime information of the specified router.
-    func getRouterStatus(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
-
-    /// Creates a Router resource in the specified project and region using
-    /// the data included in the request.
-    ///
-    /// @Snippet(path: "routers_insert")
-    func insert(request: Clients.RoutersClient.InsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Creates a Router resource in the specified project and region using
-    /// the data included in the request.
-    func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Retrieves a list of Router resources available to the specified project.
-    ///
-    /// @Snippet(path: "routers_list")
-    func list(request: Clients.RoutersClient.ListRequest) async throws
-      -> GoogleCloudComputeV1.RouterList
-
-    /// Retrieves a list of Router resources available to the specified project.
-    func list(
-      byItem: Clients.RoutersClient.ListRequest
-    ) throws -> any AsyncSequence<Router, Swift.Error>
-
-    /// Retrieves a list of Router resources available to the specified project.
-    func list(
-      project: Swift.String,
-      region: Swift.String,
-    ) throws -> any AsyncSequence<Router, Swift.Error>
-
-    /// Retrieves a list of router bgp routes available to the specified project.
-    ///
-    /// @Snippet(path: "routers_listBgpRoutes")
-    func listBgpRoutes(request: Clients.RoutersClient.ListBgpRoutesRequest) async throws
-      -> GoogleCloudComputeV1.RoutersListBgpRoutes
-
-    /// Retrieves a list of router bgp routes available to the specified project.
-    func listBgpRoutes(
-      byItem: Clients.RoutersClient.ListBgpRoutesRequest
-    ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
-
-    /// Retrieves a list of router bgp routes available to the specified project.
-    func listBgpRoutes(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
-
-    /// Retrieves a list of router route policy subresources available to the
-    /// specified project.
-    ///
-    /// @Snippet(path: "routers_listRoutePolicies")
-    func listRoutePolicies(request: Clients.RoutersClient.ListRoutePoliciesRequest) async throws
-      -> GoogleCloudComputeV1.RoutersListRoutePolicies
-
-    /// Retrieves a list of router route policy subresources available to the
-    /// specified project.
-    func listRoutePolicies(
-      byItem: Clients.RoutersClient.ListRoutePoliciesRequest
-    ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
-
-    /// Retrieves a list of router route policy subresources available to the
-    /// specified project.
-    func listRoutePolicies(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
-
-    /// Patches the specified Router resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    ///
-    /// @Snippet(path: "routers_patch")
-    func patch(request: Clients.RoutersClient.PatchRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches the specified Router resource with the data included in the
-    /// request. This method supportsPATCH
-    /// semantics and usesJSON merge
-    /// patch format and processing rules.
-    func patch(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Patches Route Policy
-    ///
-    /// @Snippet(path: "routers_patchRoutePolicy")
-    func patchRoutePolicy(request: Clients.RoutersClient.PatchRoutePolicyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Patches Route Policy
-    func patchRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: RoutePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Preview fields auto-generated during router create andupdate operations.
-    /// Calling this method does NOT create or update the router.
-    ///
-    /// @Snippet(path: "routers_preview")
-    func preview(request: Clients.RoutersClient.PreviewRequest) async throws
-      -> GoogleCloudComputeV1.RoutersPreviewResponse
-
-    /// Preview fields auto-generated during router create andupdate operations.
-    /// Calling this method does NOT create or update the router.
-    func preview(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
-
-    /// Updates the specified Router resource with the data included in the
-    /// request.  This method conforms toPUT semantics, which requests that the state of the
-    /// target resource be created or replaced with the state defined by the
-    /// representation enclosed in the request message payload.
-    ///
-    /// @Snippet(path: "routers_update")
-    func update(request: Clients.RoutersClient.UpdateRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates the specified Router resource with the data included in the
-    /// request.  This method conforms toPUT semantics, which requests that the state of the
-    /// target resource be created or replaced with the state defined by the
-    /// representation enclosed in the request message payload.
-    func update(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation
-
-    /// Updates or creates new Route Policy
-    ///
-    /// @Snippet(path: "routers_updateRoutePolicy")
-    func updateRoutePolicy(request: Clients.RoutersClient.UpdateRoutePolicyRequest) async throws
-      -> GoogleCloudComputeV1.Operation
-
-    /// Updates or creates new Route Policy
-    func updateRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: RoutePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `RoutersClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RoutersStub = try Clients.RoutersTransport(options)
+      inner = Clients.RoutersRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RoutersLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Retrieves an aggregated list of routers.
     ///
@@ -311,120 +47,188 @@
     /// `returnPartialSuccess` parameter to `true`.
     ///
     /// @Snippet(path: "routers_aggregatedList")
-    func aggregatedList(
-      request: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RouterAggregatedList
+    public func aggregatedList(
+      request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
+      try await self.inner.aggregatedList(request: request, options: options)
+    }
 
     /// Retrieves an aggregated list of routers.
     ///
     /// To prevent failure, Google recommends that you set the
     /// `returnPartialSuccess` parameter to `true`.
-    func aggregatedList(
-      byItem: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
+    ///
+    /// @Snippet(path: "routers_aggregatedList")
+    public func aggregatedList(
+      byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.aggregatedList(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Deletes the specified Router resource.
     ///
     /// @Snippet(path: "routers_delete")
-    func delete(
-      request: Clients.RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func delete(
+      request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.delete(request: request, options: options)
+    }
 
     /// Deletes Route Policy
     ///
     /// @Snippet(path: "routers_deleteRoutePolicy")
-    func deleteRoutePolicy(
-      request: Clients.RoutersClient.DeleteRoutePolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func deleteRoutePolicy(
+      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.deleteRoutePolicy(request: request, options: options)
+    }
 
     /// Returns the specified Router resource.
     ///
     /// @Snippet(path: "routers_get")
-    func `get`(
-      request: Clients.RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Router
+    public func `get`(
+      request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Router {
+      try await self.inner.`get`(request: request, options: options)
+    }
 
     /// Retrieves runtime NAT IP information.
     ///
     /// @Snippet(path: "routers_getNatIpInfo")
-    func getNatIpInfo(
-      request: Clients.RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
+    public func getNatIpInfo(
+      request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
+      try await self.inner.getNatIpInfo(request: request, options: options)
+    }
 
     /// Retrieves runtime Nat mapping information of VM endpoints.
     ///
     /// @Snippet(path: "routers_getNatMappingInfo")
-    func getNatMappingInfo(
-      request: Clients.RoutersClient.GetNatMappingInfoRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
+    public func getNatMappingInfo(
+      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
+      try await self.inner.getNatMappingInfo(request: request, options: options)
+    }
 
     /// Retrieves runtime Nat mapping information of VM endpoints.
-    func getNatMappingInfo(
-      byItem: Clients.RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
+    ///
+    /// @Snippet(path: "routers_getNatMappingInfo")
+    public func getNatMappingInfo(
+      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.getNatMappingInfo(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Returns specified Route Policy
     ///
     /// @Snippet(path: "routers_getRoutePolicy")
-    func getRoutePolicy(
-      request: Clients.RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
+    public func getRoutePolicy(
+      request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
+      try await self.inner.getRoutePolicy(request: request, options: options)
+    }
 
     /// Retrieves runtime information of the specified router.
     ///
     /// @Snippet(path: "routers_getRouterStatus")
-    func getRouterStatus(
-      request: Clients.RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
+    public func getRouterStatus(
+      request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
+      try await self.inner.getRouterStatus(request: request, options: options)
+    }
 
     /// Creates a Router resource in the specified project and region using
     /// the data included in the request.
     ///
     /// @Snippet(path: "routers_insert")
-    func insert(
-      request: Clients.RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func insert(
+      request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.insert(request: request, options: options)
+    }
 
     /// Retrieves a list of Router resources available to the specified project.
     ///
     /// @Snippet(path: "routers_list")
-    func list(
-      request: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RouterList
+    public func list(
+      request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RouterList {
+      try await self.inner.list(request: request, options: options)
+    }
 
     /// Retrieves a list of Router resources available to the specified project.
-    func list(
-      byItem: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Router, Swift.Error>
+    ///
+    /// @Snippet(path: "routers_list")
+    public func list(
+      byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<Router, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterList in
+        var request = byItem
+        request.pageToken = token
+        return try await self.list(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Retrieves a list of router bgp routes available to the specified project.
     ///
     /// @Snippet(path: "routers_listBgpRoutes")
-    func listBgpRoutes(
-      request: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
+    public func listBgpRoutes(
+      request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
+      try await self.inner.listBgpRoutes(request: request, options: options)
+    }
 
     /// Retrieves a list of router bgp routes available to the specified project.
-    func listBgpRoutes(
-      byItem: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
+    ///
+    /// @Snippet(path: "routers_listBgpRoutes")
+    public func listBgpRoutes(
+      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
+      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listBgpRoutes(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Retrieves a list of router route policy subresources available to the
     /// specified project.
     ///
     /// @Snippet(path: "routers_listRoutePolicies")
-    func listRoutePolicies(
-      request: Clients.RoutersClient.ListRoutePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
+    public func listRoutePolicies(
+      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
+      try await self.inner.listRoutePolicies(request: request, options: options)
+    }
 
     /// Retrieves a list of router route policy subresources available to the
     /// specified project.
-    func listRoutePolicies(
-      byItem: Clients.RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
+    ///
+    /// @Snippet(path: "routers_listRoutePolicies")
+    public func listRoutePolicies(
+      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
+      let listRpc = {
+        (token: String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
+        var request = byItem
+        request.pageToken = token
+        return try await self.listRoutePolicies(request: request, options: options)
+      }
+      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
 
     /// Patches the specified Router resource with the data included in the
     /// request. This method supportsPATCH
@@ -432,24 +236,30 @@
     /// patch format and processing rules.
     ///
     /// @Snippet(path: "routers_patch")
-    func patch(
-      request: Clients.RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patch(
+      request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patch(request: request, options: options)
+    }
 
     /// Patches Route Policy
     ///
     /// @Snippet(path: "routers_patchRoutePolicy")
-    func patchRoutePolicy(
-      request: Clients.RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func patchRoutePolicy(
+      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.patchRoutePolicy(request: request, options: options)
+    }
 
     /// Preview fields auto-generated during router create andupdate operations.
     /// Calling this method does NOT create or update the router.
     ///
     /// @Snippet(path: "routers_preview")
-    func preview(
-      request: Clients.RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
+    public func preview(
+      request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
+      try await self.inner.preview(request: request, options: options)
+    }
 
     /// Updates the specified Router resource with the data included in the
     /// request.  This method conforms toPUT semantics, which requests that the state of the
@@ -457,251 +267,374 @@
     /// representation enclosed in the request message payload.
     ///
     /// @Snippet(path: "routers_update")
-    func update(
-      request: Clients.RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func update(
+      request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.update(request: request, options: options)
+    }
 
     /// Updates or creates new Route Policy
     ///
     /// @Snippet(path: "routers_updateRoutePolicy")
-    func updateRoutePolicy(
-      request: Clients.RoutersClient.UpdateRoutePolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func updateRoutePolicy(
+      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.updateRoutePolicy(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``Routers``.
-    public class RoutersClient: Routers {
-      let inner: any RoutersStub
+    /// A Swift protocol to mock `RoutersClient`.
+    ///
+    /// To mock `RoutersClient` change your functions to receive
+    /// `some RoutersProtocol` or `any RoutersProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RoutersProtocol {
+      /// See `RoutersClient.aggregatedList`.
+      func aggregatedList(request: RoutersClient.AggregatedListRequest) async throws
+        -> GoogleCloudComputeV1.RouterAggregatedList
 
-      /// Creates a new `RoutersClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RoutersStub = try RoutersTransport(options)
-        inner = RoutersRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RoutersLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RoutersClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RoutersClient.AggregatedListRequest
+      ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
 
-      /// See `Routers.aggregatedList`
-      public func aggregatedList(
-        request: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
-        try await self.inner.aggregatedList(request: request, options: options)
-      }
+      /// See `RoutersClient.aggregatedList`.
+      func aggregatedList(
+        project: Swift.String,
+      ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
 
-      /// Retrieves an aggregated list of routers.
-      ///
-      /// To prevent failure, Google recommends that you set the
-      /// `returnPartialSuccess` parameter to `true`.
-      public func aggregatedList(
-        byItem: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.aggregatedList(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutersClient.delete`.
+      func delete(request: RoutersClient.DeleteRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.delete`
-      public func delete(
-        request: Clients.RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.delete(request: request, options: options)
-      }
+      /// See `RoutersClient.delete`.
+      func delete(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.deleteRoutePolicy`
-      public func deleteRoutePolicy(
-        request: Clients.RoutersClient.DeleteRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.deleteRoutePolicy(request: request, options: options)
-      }
+      /// See `RoutersClient.deleteRoutePolicy`.
+      func deleteRoutePolicy(request: RoutersClient.DeleteRoutePolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.`get``
-      public func `get`(
-        request: Clients.RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Router {
-        try await self.inner.`get`(request: request, options: options)
-      }
+      /// See `RoutersClient.deleteRoutePolicy`.
+      func deleteRoutePolicy(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.getNatIpInfo`
-      public func getNatIpInfo(
-        request: Clients.RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
-        try await self.inner.getNatIpInfo(request: request, options: options)
-      }
+      /// See `RoutersClient.`get``.
+      func `get`(request: RoutersClient.GetRequest) async throws -> GoogleCloudComputeV1.Router
 
-      /// See `Routers.getNatMappingInfo`
-      public func getNatMappingInfo(
-        request: Clients.RoutersClient.GetNatMappingInfoRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
-        try await self.inner.getNatMappingInfo(request: request, options: options)
-      }
+      /// See `RoutersClient.`get``.
+      func `get`(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.Router
 
-      /// Retrieves runtime Nat mapping information of VM endpoints.
-      public func getNatMappingInfo(
-        byItem: Clients.RoutersClient.GetNatMappingInfoRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.getNatMappingInfo(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutersClient.getNatIpInfo`.
+      func getNatIpInfo(request: RoutersClient.GetNatIpInfoRequest) async throws
+        -> GoogleCloudComputeV1.NatIpInfoResponse
 
-      /// See `Routers.getRoutePolicy`
-      public func getRoutePolicy(
-        request: Clients.RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
-        try await self.inner.getRoutePolicy(request: request, options: options)
-      }
+      /// See `RoutersClient.getNatIpInfo`.
+      func getNatIpInfo(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
 
-      /// See `Routers.getRouterStatus`
-      public func getRouterStatus(
-        request: Clients.RoutersClient.GetRouterStatusRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
-        try await self.inner.getRouterStatus(request: request, options: options)
-      }
+      /// See `RoutersClient.getNatMappingInfo`.
+      func getNatMappingInfo(request: RoutersClient.GetNatMappingInfoRequest) async throws
+        -> GoogleCloudComputeV1.VmEndpointNatMappingsList
 
-      /// See `Routers.insert`
-      public func insert(
-        request: Clients.RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.insert(request: request, options: options)
-      }
+      /// See `RoutersClient.getNatMappingInfo`.
+      func getNatMappingInfo(
+        byItem: RoutersClient.GetNatMappingInfoRequest
+      ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
 
-      /// See `Routers.list`
-      public func list(
-        request: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RouterList {
-        try await self.inner.list(request: request, options: options)
-      }
+      /// See `RoutersClient.getNatMappingInfo`.
+      func getNatMappingInfo(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
 
-      /// Retrieves a list of Router resources available to the specified project.
-      public func list(
-        byItem: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<Router, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterList in
-          var request = byItem
-          request.pageToken = token
-          return try await self.list(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutersClient.getRoutePolicy`.
+      func getRoutePolicy(request: RoutersClient.GetRoutePolicyRequest) async throws
+        -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
 
-      /// See `Routers.listBgpRoutes`
-      public func listBgpRoutes(
-        request: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
-        try await self.inner.listBgpRoutes(request: request, options: options)
-      }
+      /// See `RoutersClient.getRoutePolicy`.
+      func getRoutePolicy(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
 
-      /// Retrieves a list of router bgp routes available to the specified project.
-      public func listBgpRoutes(
-        byItem: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
-        let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listBgpRoutes(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutersClient.getRouterStatus`.
+      func getRouterStatus(request: RoutersClient.GetRouterStatusRequest) async throws
+        -> GoogleCloudComputeV1.RouterStatusResponse
 
-      /// See `Routers.listRoutePolicies`
-      public func listRoutePolicies(
-        request: Clients.RoutersClient.ListRoutePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
-        try await self.inner.listRoutePolicies(request: request, options: options)
-      }
+      /// See `RoutersClient.getRouterStatus`.
+      func getRouterStatus(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
 
-      /// Retrieves a list of router route policy subresources available to the
-      /// specified project.
-      public func listRoutePolicies(
-        byItem: Clients.RoutersClient.ListRoutePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
-        let listRpc = {
-          (token: String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
-          var request = byItem
-          request.pageToken = token
-          return try await self.listRoutePolicies(request: request, options: options)
-        }
-        return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-      }
+      /// See `RoutersClient.insert`.
+      func insert(request: RoutersClient.InsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.patch`
-      public func patch(
-        request: Clients.RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patch(request: request, options: options)
-      }
+      /// See `RoutersClient.insert`.
+      func insert(
+        project: Swift.String,
+        region: Swift.String,
+        body: Router?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `Routers.patchRoutePolicy`
-      public func patchRoutePolicy(
-        request: Clients.RoutersClient.PatchRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.patchRoutePolicy(request: request, options: options)
-      }
+      /// See `RoutersClient.list`.
+      func list(request: RoutersClient.ListRequest) async throws -> GoogleCloudComputeV1.RouterList
 
-      /// See `Routers.preview`
-      public func preview(
-        request: Clients.RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
-        try await self.inner.preview(request: request, options: options)
-      }
+      /// See `RoutersClient.list`.
+      func list(
+        byItem: RoutersClient.ListRequest
+      ) throws -> any AsyncSequence<Router, Swift.Error>
 
-      /// See `Routers.update`
-      public func update(
-        request: Clients.RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.update(request: request, options: options)
-      }
+      /// See `RoutersClient.list`.
+      func list(
+        project: Swift.String,
+        region: Swift.String,
+      ) throws -> any AsyncSequence<Router, Swift.Error>
 
-      /// See `Routers.updateRoutePolicy`
-      public func updateRoutePolicy(
-        request: Clients.RoutersClient.UpdateRoutePolicyRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.updateRoutePolicy(request: request, options: options)
-      }
+      /// See `RoutersClient.listBgpRoutes`.
+      func listBgpRoutes(request: RoutersClient.ListBgpRoutesRequest) async throws
+        -> GoogleCloudComputeV1.RoutersListBgpRoutes
+
+      /// See `RoutersClient.listBgpRoutes`.
+      func listBgpRoutes(
+        byItem: RoutersClient.ListBgpRoutesRequest
+      ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
+
+      /// See `RoutersClient.listBgpRoutes`.
+      func listBgpRoutes(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
+
+      /// See `RoutersClient.listRoutePolicies`.
+      func listRoutePolicies(request: RoutersClient.ListRoutePoliciesRequest) async throws
+        -> GoogleCloudComputeV1.RoutersListRoutePolicies
+
+      /// See `RoutersClient.listRoutePolicies`.
+      func listRoutePolicies(
+        byItem: RoutersClient.ListRoutePoliciesRequest
+      ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
+
+      /// See `RoutersClient.listRoutePolicies`.
+      func listRoutePolicies(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+      ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
+
+      /// See `RoutersClient.patch`.
+      func patch(request: RoutersClient.PatchRequest) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.patch`.
+      func patch(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+        body: Router?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.patchRoutePolicy`.
+      func patchRoutePolicy(request: RoutersClient.PatchRoutePolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.patchRoutePolicy`.
+      func patchRoutePolicy(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+        body: RoutePolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.preview`.
+      func preview(request: RoutersClient.PreviewRequest) async throws
+        -> GoogleCloudComputeV1.RoutersPreviewResponse
+
+      /// See `RoutersClient.preview`.
+      func preview(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+        body: Router?,
+      ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
+
+      /// See `RoutersClient.update`.
+      func update(request: RoutersClient.UpdateRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.update`.
+      func update(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+        body: Router?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.updateRoutePolicy`.
+      func updateRoutePolicy(request: RoutersClient.UpdateRoutePolicyRequest) async throws
+        -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.updateRoutePolicy`.
+      func updateRoutePolicy(
+        project: Swift.String,
+        region: Swift.String,
+        router: Swift.String,
+        body: RoutePolicy?,
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.aggregatedList`.
+      func aggregatedList(
+        request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RouterAggregatedList
+
+      /// See `RoutersClient.aggregatedList`.
+      func aggregatedList(
+        byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
+
+      /// See `RoutersClient.delete`.
+      func delete(
+        request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.deleteRoutePolicy`.
+      func deleteRoutePolicy(
+        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.`get``.
+      func `get`(
+        request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Router
+
+      /// See `RoutersClient.getNatIpInfo`.
+      func getNatIpInfo(
+        request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
+
+      /// See `RoutersClient.getNatMappingInfo`.
+      func getNatMappingInfo(
+        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
+
+      /// See `RoutersClient.getNatMappingInfo`.
+      func getNatMappingInfo(
+        byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
+
+      /// See `RoutersClient.getRoutePolicy`.
+      func getRoutePolicy(
+        request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
+
+      /// See `RoutersClient.getRouterStatus`.
+      func getRouterStatus(
+        request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
+
+      /// See `RoutersClient.insert`.
+      func insert(
+        request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.list`.
+      func list(
+        request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RouterList
+
+      /// See `RoutersClient.list`.
+      func list(
+        byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<Router, Swift.Error>
+
+      /// See `RoutersClient.listBgpRoutes`.
+      func listBgpRoutes(
+        request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
+
+      /// See `RoutersClient.listBgpRoutes`.
+      func listBgpRoutes(
+        byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
+
+      /// See `RoutersClient.listRoutePolicies`.
+      func listRoutePolicies(
+        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
+
+      /// See `RoutersClient.listRoutePolicies`.
+      func listRoutePolicies(
+        byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
+
+      /// See `RoutersClient.patch`.
+      func patch(
+        request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.patchRoutePolicy`.
+      func patchRoutePolicy(
+        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.preview`.
+      func preview(
+        request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
+
+      /// See `RoutersClient.update`.
+      func update(
+        request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      /// See `RoutersClient.updateRoutePolicy`.
+      func updateRoutePolicy(
+        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension Routers {
-    public func aggregatedList(request: Clients.RoutersClient.AggregatedListRequest) async throws
+  extension Clients.RoutersProtocol {
+    public func aggregatedList(request: RoutersClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.RouterAggregatedList
     {
       try await self.aggregatedList(request: request, options: .init())
     }
 
     public func aggregatedList(
-      request: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
-      byItem: Clients.RoutersClient.AggregatedListRequest
+      byItem: RoutersClient.AggregatedListRequest
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
       try self.aggregatedList(byItem: byItem, options: .init())
     }
 
     public func aggregatedList(
-      byItem: Clients.RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -712,20 +645,20 @@
     public func aggregatedList(
       project: Swift.String,
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
-      let request = Clients.RoutersClient.AggregatedListRequest().with {
+      let request = RoutersClient.AggregatedListRequest().with {
         $0.project = project
       }
       return try self.aggregatedList(byItem: request)
     }
 
-    public func delete(request: Clients.RoutersClient.DeleteRequest) async throws
+    public func delete(request: RoutersClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.delete(request: request, options: .init())
     }
 
     public func delete(
-      request: Clients.RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -735,7 +668,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.DeleteRequest().with {
+      let request = RoutersClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -743,15 +676,14 @@
       return try await self.delete(request: request)
     }
 
-    public func deleteRoutePolicy(request: Clients.RoutersClient.DeleteRoutePolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func deleteRoutePolicy(request: RoutersClient.DeleteRoutePolicyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.deleteRoutePolicy(request: request, options: .init())
     }
 
     public func deleteRoutePolicy(
-      request: Clients.RoutersClient.DeleteRoutePolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -761,7 +693,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.DeleteRoutePolicyRequest().with {
+      let request = RoutersClient.DeleteRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -769,14 +701,13 @@
       return try await self.deleteRoutePolicy(request: request)
     }
 
-    public func `get`(request: Clients.RoutersClient.GetRequest) async throws
-      -> GoogleCloudComputeV1.Router
+    public func `get`(request: RoutersClient.GetRequest) async throws -> GoogleCloudComputeV1.Router
     {
       try await self.`get`(request: request, options: .init())
     }
 
     public func `get`(
-      request: Clients.RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Router {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -786,7 +717,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.Router {
-      let request = Clients.RoutersClient.GetRequest().with {
+      let request = RoutersClient.GetRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -794,14 +725,14 @@
       return try await self.`get`(request: request)
     }
 
-    public func getNatIpInfo(request: Clients.RoutersClient.GetNatIpInfoRequest) async throws
+    public func getNatIpInfo(request: RoutersClient.GetNatIpInfoRequest) async throws
       -> GoogleCloudComputeV1.NatIpInfoResponse
     {
       try await self.getNatIpInfo(request: request, options: .init())
     }
 
     public func getNatIpInfo(
-      request: Clients.RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -811,7 +742,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
-      let request = Clients.RoutersClient.GetNatIpInfoRequest().with {
+      let request = RoutersClient.GetNatIpInfoRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -819,27 +750,26 @@
       return try await self.getNatIpInfo(request: request)
     }
 
-    public func getNatMappingInfo(request: Clients.RoutersClient.GetNatMappingInfoRequest)
-      async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
+    public func getNatMappingInfo(request: RoutersClient.GetNatMappingInfoRequest) async throws
+      -> GoogleCloudComputeV1.VmEndpointNatMappingsList
     {
       try await self.getNatMappingInfo(request: request, options: .init())
     }
 
     public func getNatMappingInfo(
-      request: Clients.RoutersClient.GetNatMappingInfoRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func getNatMappingInfo(
-      byItem: Clients.RoutersClient.GetNatMappingInfoRequest
+      byItem: RoutersClient.GetNatMappingInfoRequest
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       try self.getNatMappingInfo(byItem: byItem, options: .init())
     }
 
     public func getNatMappingInfo(
-      byItem: Clients.RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
@@ -853,7 +783,7 @@
       region: Swift.String,
       router: Swift.String,
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
-      let request = Clients.RoutersClient.GetNatMappingInfoRequest().with {
+      let request = RoutersClient.GetNatMappingInfoRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -861,14 +791,14 @@
       return try self.getNatMappingInfo(byItem: request)
     }
 
-    public func getRoutePolicy(request: Clients.RoutersClient.GetRoutePolicyRequest) async throws
+    public func getRoutePolicy(request: RoutersClient.GetRoutePolicyRequest) async throws
       -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
     {
       try await self.getRoutePolicy(request: request, options: .init())
     }
 
     public func getRoutePolicy(
-      request: Clients.RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -878,7 +808,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
-      let request = Clients.RoutersClient.GetRoutePolicyRequest().with {
+      let request = RoutersClient.GetRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -886,14 +816,14 @@
       return try await self.getRoutePolicy(request: request)
     }
 
-    public func getRouterStatus(request: Clients.RoutersClient.GetRouterStatusRequest) async throws
+    public func getRouterStatus(request: RoutersClient.GetRouterStatusRequest) async throws
       -> GoogleCloudComputeV1.RouterStatusResponse
     {
       try await self.getRouterStatus(request: request, options: .init())
     }
 
     public func getRouterStatus(
-      request: Clients.RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -903,7 +833,7 @@
       region: Swift.String,
       router: Swift.String,
     ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
-      let request = Clients.RoutersClient.GetRouterStatusRequest().with {
+      let request = RoutersClient.GetRouterStatusRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -911,14 +841,14 @@
       return try await self.getRouterStatus(request: request)
     }
 
-    public func insert(request: Clients.RoutersClient.InsertRequest) async throws
+    public func insert(request: RoutersClient.InsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.insert(request: request, options: .init())
     }
 
     public func insert(
-      request: Clients.RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -928,7 +858,7 @@
       region: Swift.String,
       body: Router?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.InsertRequest().with {
+      let request = RoutersClient.InsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body
@@ -936,26 +866,26 @@
       return try await self.insert(request: request)
     }
 
-    public func list(request: Clients.RoutersClient.ListRequest) async throws
+    public func list(request: RoutersClient.ListRequest) async throws
       -> GoogleCloudComputeV1.RouterList
     {
       try await self.list(request: request, options: .init())
     }
 
     public func list(
-      request: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterList {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func list(
-      byItem: Clients.RoutersClient.ListRequest
+      byItem: RoutersClient.ListRequest
     ) throws -> any AsyncSequence<Router, Swift.Error> {
       try self.list(byItem: byItem, options: .init())
     }
 
     public func list(
-      byItem: Clients.RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Router, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterList in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -967,33 +897,33 @@
       project: Swift.String,
       region: Swift.String,
     ) throws -> any AsyncSequence<Router, Swift.Error> {
-      let request = Clients.RoutersClient.ListRequest().with {
+      let request = RoutersClient.ListRequest().with {
         $0.project = project
         $0.region = region
       }
       return try self.list(byItem: request)
     }
 
-    public func listBgpRoutes(request: Clients.RoutersClient.ListBgpRoutesRequest) async throws
+    public func listBgpRoutes(request: RoutersClient.ListBgpRoutesRequest) async throws
       -> GoogleCloudComputeV1.RoutersListBgpRoutes
     {
       try await self.listBgpRoutes(request: request, options: .init())
     }
 
     public func listBgpRoutes(
-      request: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listBgpRoutes(
-      byItem: Clients.RoutersClient.ListBgpRoutesRequest
+      byItem: RoutersClient.ListBgpRoutesRequest
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
       try self.listBgpRoutes(byItem: byItem, options: .init())
     }
 
     public func listBgpRoutes(
-      byItem: Clients.RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
       let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
         throw GoogleCloudGax.RequestError.unimplemented
@@ -1006,7 +936,7 @@
       region: Swift.String,
       router: Swift.String,
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
-      let request = Clients.RoutersClient.ListBgpRoutesRequest().with {
+      let request = RoutersClient.ListBgpRoutesRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1014,27 +944,26 @@
       return try self.listBgpRoutes(byItem: request)
     }
 
-    public func listRoutePolicies(request: Clients.RoutersClient.ListRoutePoliciesRequest)
-      async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
+    public func listRoutePolicies(request: RoutersClient.ListRoutePoliciesRequest) async throws
+      -> GoogleCloudComputeV1.RoutersListRoutePolicies
     {
       try await self.listRoutePolicies(request: request, options: .init())
     }
 
     public func listRoutePolicies(
-      request: Clients.RoutersClient.ListRoutePoliciesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
     public func listRoutePolicies(
-      byItem: Clients.RoutersClient.ListRoutePoliciesRequest
+      byItem: RoutersClient.ListRoutePoliciesRequest
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       try self.listRoutePolicies(byItem: byItem, options: .init())
     }
 
     public func listRoutePolicies(
-      byItem: Clients.RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       let listRpc = {
         (token: String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
@@ -1048,7 +977,7 @@
       region: Swift.String,
       router: Swift.String,
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
-      let request = Clients.RoutersClient.ListRoutePoliciesRequest().with {
+      let request = RoutersClient.ListRoutePoliciesRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1056,14 +985,14 @@
       return try self.listRoutePolicies(byItem: request)
     }
 
-    public func patch(request: Clients.RoutersClient.PatchRequest) async throws
+    public func patch(request: RoutersClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.patch(request: request, options: .init())
     }
 
     public func patch(
-      request: Clients.RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1074,7 +1003,7 @@
       router: Swift.String,
       body: Router?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.PatchRequest().with {
+      let request = RoutersClient.PatchRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1083,14 +1012,14 @@
       return try await self.patch(request: request)
     }
 
-    public func patchRoutePolicy(request: Clients.RoutersClient.PatchRoutePolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func patchRoutePolicy(request: RoutersClient.PatchRoutePolicyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.patchRoutePolicy(request: request, options: .init())
     }
 
     public func patchRoutePolicy(
-      request: Clients.RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1101,7 +1030,7 @@
       router: Swift.String,
       body: RoutePolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.PatchRoutePolicyRequest().with {
+      let request = RoutersClient.PatchRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1110,14 +1039,14 @@
       return try await self.patchRoutePolicy(request: request)
     }
 
-    public func preview(request: Clients.RoutersClient.PreviewRequest) async throws
+    public func preview(request: RoutersClient.PreviewRequest) async throws
       -> GoogleCloudComputeV1.RoutersPreviewResponse
     {
       try await self.preview(request: request, options: .init())
     }
 
     public func preview(
-      request: Clients.RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1128,7 +1057,7 @@
       router: Swift.String,
       body: Router?,
     ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
-      let request = Clients.RoutersClient.PreviewRequest().with {
+      let request = RoutersClient.PreviewRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1137,14 +1066,14 @@
       return try await self.preview(request: request)
     }
 
-    public func update(request: Clients.RoutersClient.UpdateRequest) async throws
+    public func update(request: RoutersClient.UpdateRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.update(request: request, options: .init())
     }
 
     public func update(
-      request: Clients.RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1155,7 +1084,7 @@
       router: Swift.String,
       body: Router?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.UpdateRequest().with {
+      let request = RoutersClient.UpdateRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router
@@ -1164,15 +1093,14 @@
       return try await self.update(request: request)
     }
 
-    public func updateRoutePolicy(request: Clients.RoutersClient.UpdateRoutePolicyRequest)
-      async throws -> GoogleCloudComputeV1.Operation
+    public func updateRoutePolicy(request: RoutersClient.UpdateRoutePolicyRequest) async throws
+      -> GoogleCloudComputeV1.Operation
     {
       try await self.updateRoutePolicy(request: request, options: .init())
     }
 
     public func updateRoutePolicy(
-      request: Clients.RoutersClient.UpdateRoutePolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1183,7 +1111,7 @@
       router: Swift.String,
       body: RoutePolicy?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RoutersClient.UpdateRoutePolicyRequest().with {
+      let request = RoutersClient.UpdateRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
         $0.router = router

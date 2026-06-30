@@ -18,10 +18,10 @@ import Logging
 
 extension ImageSamples {
   static public func listPages(
-    client: some GoogleCloudComputeV1.Images, projectId: String, logger: Logger
+    client: ImagesClient, projectId: String, logger: Logger
   ) async throws {
     logger.info("Calling listImages()")
-    var request = GoogleCloudComputeV1.Clients.ImagesClient.ListRequest().with {
+    var request = ImagesClient.ListRequest().with {
       $0.project = projectId
       // Return at most 100 items per response (page)
       $0.maxResults = 100

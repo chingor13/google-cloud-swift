@@ -28,68 +28,65 @@
   /// Service for the `regionInstances` resource.
   ///
   /// @Snippet(path: "regionInstancesQuickstart")
-  public protocol RegionInstances {
-    /// Creates multiple instances in a given region. Count specifies the number of
-    /// instances to create.
-    ///
-    /// @Snippet(path: "regionInstances_bulkInsert")
-    func bulkInsert(request: Clients.RegionInstancesClient.BulkInsertRequest) async throws
-      -> GoogleCloudComputeV1.Operation
+  public class RegionInstancesClient: Clients.RegionInstancesProtocol {
+    let inner: any Clients.RegionInstancesStub
 
-    /// Creates multiple instances in a given region. Count specifies the number of
-    /// instances to create.
-    func bulkInsert(
-      project: Swift.String,
-      region: Swift.String,
-      body: BulkInsertInstanceResource?,
-    ) async throws -> GoogleCloudComputeV1.Operation
+    /// Creates a new `RegionInstancesClient` instance.
+    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+      var inner: any Clients.RegionInstancesStub = try Clients.RegionInstancesTransport(options)
+      inner = Clients.RegionInstancesRetry(inner, options: options)
+      if let logger = options.logger {
+        inner = Clients.RegionInstancesLogging(inner, logger: logger)
+      }
+      self.inner = inner
+    }
 
     /// Creates multiple instances in a given region. Count specifies the number of
     /// instances to create.
     ///
     /// @Snippet(path: "regionInstances_bulkInsert")
-    func bulkInsert(
-      request: Clients.RegionInstancesClient.BulkInsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudComputeV1.Operation
+    public func bulkInsert(
+      request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.bulkInsert(request: request, options: options)
+    }
   }
 
   extension Clients {
-    /// The recommended implementation for ``RegionInstances``.
-    public class RegionInstancesClient: RegionInstances {
-      let inner: any RegionInstancesStub
+    /// A Swift protocol to mock `RegionInstancesClient`.
+    ///
+    /// To mock `RegionInstancesClient` change your functions to receive
+    /// `some RegionInstancesProtocol` or `any RegionInstancesProtocol`
+    /// and pass a mock implementation in your tests.
+    public protocol RegionInstancesProtocol {
+      /// See `RegionInstancesClient.bulkInsert`.
+      func bulkInsert(request: RegionInstancesClient.BulkInsertRequest) async throws
+        -> GoogleCloudComputeV1.Operation
 
-      /// Creates a new `RegionInstancesClient` instance.
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        var inner: any RegionInstancesStub = try RegionInstancesTransport(options)
-        inner = RegionInstancesRetry(inner, options: options)
-        if let logger = options.logger {
-          inner = RegionInstancesLogging(inner, logger: logger)
-        }
-        self.inner = inner
-      }
+      /// See `RegionInstancesClient.bulkInsert`.
+      func bulkInsert(
+        project: Swift.String,
+        region: Swift.String,
+        body: BulkInsertInstanceResource?,
+      ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstances.bulkInsert`
-      public func bulkInsert(
-        request: Clients.RegionInstancesClient.BulkInsertRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> GoogleCloudComputeV1.Operation {
-        try await self.inner.bulkInsert(request: request, options: options)
-      }
+      /// See `RegionInstancesClient.bulkInsert`.
+      func bulkInsert(
+        request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
 
   // Default implementations
-  extension RegionInstances {
-    public func bulkInsert(request: Clients.RegionInstancesClient.BulkInsertRequest) async throws
+  extension Clients.RegionInstancesProtocol {
+    public func bulkInsert(request: RegionInstancesClient.BulkInsertRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
       try await self.bulkInsert(request: request, options: .init())
     }
 
     public func bulkInsert(
-      request: Clients.RegionInstancesClient.BulkInsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -99,7 +96,7 @@
       region: Swift.String,
       body: BulkInsertInstanceResource?,
     ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = Clients.RegionInstancesClient.BulkInsertRequest().with {
+      let request = RegionInstancesClient.BulkInsertRequest().with {
         $0.project = project
         $0.region = region
         $0.body = body

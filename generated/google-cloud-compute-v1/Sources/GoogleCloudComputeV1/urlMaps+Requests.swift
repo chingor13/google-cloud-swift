@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.UrlMapsClient {
+  extension UrlMapsClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.urlMaps.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.urlMaps.aggregatedList]: <doc:UrlMaps/aggregatedList(request:)>

@@ -21,9 +21,9 @@
   import GoogleCloudComputeV1
   import GoogleCloudWkt
 
-  func sample(client: some PublicDelegatedPrefixes) async throws {
+  func sample(client: PublicDelegatedPrefixesClient) async throws {
     let items = try client.list(
-      byItem: Clients.PublicDelegatedPrefixesClient.ListRequest()
+      byItem: PublicDelegatedPrefixesClient.ListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {
@@ -36,7 +36,7 @@
   struct SnippetRunner {
     static func main() async throws {
       do {
-        let client = try GoogleCloudComputeV1.Clients.PublicDelegatedPrefixesClient()
+        let client = try GoogleCloudComputeV1.PublicDelegatedPrefixesClient()
         try await sample(client: client)
       } catch {
         print("Error: \(error)")

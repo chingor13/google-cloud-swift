@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.InstanceSettingsClient {
+  extension InstanceSettingsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.instanceSettings.get] method.
     ///
     /// [google.cloud.compute.v1.instanceSettings.get]: <doc:InstanceSettings/`get`(request:)>

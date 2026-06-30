@@ -28,42 +28,38 @@
   extension Clients {
     protocol RegionInstantSnapshotsStub {
       func delete(
-        request: Clients.RegionInstantSnapshotsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: Clients.RegionInstantSnapshotsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshot
 
       func getIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest,
+        request: RegionInstantSnapshotsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: Clients.RegionInstantSnapshotsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.RegionInstantSnapshotsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotList
 
       func setIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest,
+        request: RegionInstantSnapshotsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest,
+        request: RegionInstantSnapshotsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest,
+        request: RegionInstantSnapshotsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
@@ -77,8 +73,7 @@
       }
 
       public func delete(
-        request: Clients.RegionInstantSnapshotsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -106,8 +101,7 @@
       }
 
       public func `get`(
-        request: Clients.RegionInstantSnapshotsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshot {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -133,7 +127,7 @@
       }
 
       public func getIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.GetIamPolicyRequest,
+        request: RegionInstantSnapshotsClient.GetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -162,8 +156,7 @@
       }
 
       public func insert(
-        request: Clients.RegionInstantSnapshotsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -189,8 +182,7 @@
       }
 
       public func list(
-        request: Clients.RegionInstantSnapshotsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -218,7 +210,7 @@
       }
 
       public func setIamPolicy(
-        request: Clients.RegionInstantSnapshotsClient.SetIamPolicyRequest,
+        request: RegionInstantSnapshotsClient.SetIamPolicyRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let path = try { () throws -> Swift.String in
@@ -247,7 +239,7 @@
       }
 
       public func setLabels(
-        request: Clients.RegionInstantSnapshotsClient.SetLabelsRequest,
+        request: RegionInstantSnapshotsClient.SetLabelsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
@@ -278,7 +270,7 @@
       }
 
       public func testIamPermissions(
-        request: Clients.RegionInstantSnapshotsClient.TestIamPermissionsRequest,
+        request: RegionInstantSnapshotsClient.TestIamPermissionsRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let path = try { () throws -> Swift.String in

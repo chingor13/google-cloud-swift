@@ -22,9 +22,9 @@
   import GoogleCloudWkt
 
   func sample() async throws {
-    let client = try GoogleCloudComputeV1.Clients.RegionZonesClient()
+    let client = try GoogleCloudComputeV1.RegionZonesClient()
     let items = try client.list(
-      byItem: Clients.RegionZonesClient.ListRequest()
+      byItem: RegionZonesClient.ListRequest()
         /* set fields using .with { $0... } */
     )
     for try await item in items {

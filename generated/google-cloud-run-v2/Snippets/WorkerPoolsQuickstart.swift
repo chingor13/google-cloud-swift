@@ -24,7 +24,7 @@ import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, ) async throws {
-  let client = try GoogleCloudRunV2.Clients.WorkerPoolsClient()
+  let client = try GoogleCloudRunV2.WorkerPoolsClient()
   let items = try client.listWorkerPools(
     byItem: ListWorkerPoolsRequest()
       .with {

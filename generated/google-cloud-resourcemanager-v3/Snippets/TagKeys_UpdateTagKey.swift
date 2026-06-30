@@ -23,7 +23,7 @@ import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
 
-func sample(client: some TagKeys, tagKeyId: String) async throws {
+func sample(client: TagKeysClient, tagKeyId: String) async throws {
   let poller = try await client.updateTagKey(
     withPolling: UpdateTagKeyRequest()
       .with {
@@ -42,7 +42,7 @@ func sample(client: some TagKeys, tagKeyId: String) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudResourcemanagerV3.Clients.TagKeysClient()
+      let client = try GoogleCloudResourcemanagerV3.TagKeysClient()
       try await sample(client: client, tagKeyId: "[placeholder]")
     } catch {
       print("Error: \(error)")

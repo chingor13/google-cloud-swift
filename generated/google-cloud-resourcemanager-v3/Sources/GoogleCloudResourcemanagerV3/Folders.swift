@@ -32,497 +32,18 @@ import Logging
 /// organization and to control the policies applied to groups of resources.
 ///
 /// @Snippet(path: "FoldersQuickstart")
-public protocol Folders {
-  /// Retrieves a folder identified by the supplied resource name.
-  /// Valid folder resource names have the format `folders/{folder_id}`
-  /// (for example, `folders/1234`).
-  /// The caller must have `resourcemanager.folders.get` permission on the
-  /// identified folder.
-  ///
-  /// @Snippet(path: "Folders_GetFolder")
-  func getFolder(request: GetFolderRequest) async throws -> GoogleCloudResourcemanagerV3.Folder
+public class FoldersClient: Clients.FoldersProtocol {
+  let inner: any Clients.FoldersStub
 
-  /// Retrieves a folder identified by the supplied resource name.
-  /// Valid folder resource names have the format `folders/{folder_id}`
-  /// (for example, `folders/1234`).
-  /// The caller must have `resourcemanager.folders.get` permission on the
-  /// identified folder.
-  func getFolder(
-    name: Swift.String,
-  ) async throws -> GoogleCloudResourcemanagerV3.Folder
-
-  /// Lists the folders that are direct descendants of supplied parent resource.
-  /// `list()` provides a strongly consistent view of the folders underneath
-  /// the specified parent resource.
-  /// `list()` returns folders sorted based upon the (ascending) lexical ordering
-  /// of their display_name.
-  /// The caller must have `resourcemanager.folders.list` permission on the
-  /// identified parent.
-  ///
-  /// @Snippet(path: "Folders_ListFolders")
-  func listFolders(request: ListFoldersRequest) async throws
-    -> GoogleCloudResourcemanagerV3.ListFoldersResponse
-
-  /// Lists the folders that are direct descendants of supplied parent resource.
-  /// `list()` provides a strongly consistent view of the folders underneath
-  /// the specified parent resource.
-  /// `list()` returns folders sorted based upon the (ascending) lexical ordering
-  /// of their display_name.
-  /// The caller must have `resourcemanager.folders.list` permission on the
-  /// identified parent.
-  func listFolders(
-    byItem: ListFoldersRequest
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
-
-  /// Lists the folders that are direct descendants of supplied parent resource.
-  /// `list()` provides a strongly consistent view of the folders underneath
-  /// the specified parent resource.
-  /// `list()` returns folders sorted based upon the (ascending) lexical ordering
-  /// of their display_name.
-  /// The caller must have `resourcemanager.folders.list` permission on the
-  /// identified parent.
-  func listFolders(
-    parent: Swift.String,
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
-
-  /// Search for folders that match specific filter criteria.
-  /// `search()` provides an eventually consistent view of the folders a user has
-  /// access to which meet the specified filter criteria.
-  ///
-  /// This will only return folders on which the caller has the
-  /// permission `resourcemanager.folders.get`.
-  ///
-  /// @Snippet(path: "Folders_SearchFolders")
-  func searchFolders(request: SearchFoldersRequest) async throws
-    -> GoogleCloudResourcemanagerV3.SearchFoldersResponse
-
-  /// Search for folders that match specific filter criteria.
-  /// `search()` provides an eventually consistent view of the folders a user has
-  /// access to which meet the specified filter criteria.
-  ///
-  /// This will only return folders on which the caller has the
-  /// permission `resourcemanager.folders.get`.
-  func searchFolders(
-    byItem: SearchFoldersRequest
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
-
-  /// Search for folders that match specific filter criteria.
-  /// `search()` provides an eventually consistent view of the folders a user has
-  /// access to which meet the specified filter criteria.
-  ///
-  /// This will only return folders on which the caller has the
-  /// permission `resourcemanager.folders.get`.
-  func searchFolders(
-    query: Swift.String,
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
-
-  /// Creates a folder in the resource hierarchy.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder creation workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// created Folder.
-  ///
-  /// In order to succeed, the addition of this new folder must not violate
-  /// the folder naming, height, or fanout constraints.
-  ///
-  /// + The folder's `display_name` must be distinct from all other folders that
-  /// share its parent.
-  /// + The addition of the folder must not cause the active folder hierarchy
-  /// to exceed a height of 10. Note, the full active + deleted folder hierarchy
-  /// is allowed to reach a height of 20; this provides additional headroom when
-  /// moving folders that contain deleted folders.
-  /// + The addition of the folder must not cause the total number of folders
-  /// under its parent to exceed 300.
-  ///
-  /// If the operation fails due to a folder constraint violation, some errors
-  /// may be returned by the `CreateFolder` request, with status code
-  /// `FAILED_PRECONDITION` and an error description. Other folder constraint
-  /// violations will be communicated in the `Operation`, with the specific
-  /// `PreconditionFailure` returned in the details list in the `Operation.error`
-  /// field.
-  ///
-  /// The caller must have `resourcemanager.folders.create` permission on the
-  /// identified parent.
-  ///
-  /// @Snippet(path: "Folders_CreateFolder")
-  func createFolder(request: CreateFolderRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Creates a folder in the resource hierarchy.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder creation workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// created Folder.
-  ///
-  /// In order to succeed, the addition of this new folder must not violate
-  /// the folder naming, height, or fanout constraints.
-  ///
-  /// + The folder's `display_name` must be distinct from all other folders that
-  /// share its parent.
-  /// + The addition of the folder must not cause the active folder hierarchy
-  /// to exceed a height of 10. Note, the full active + deleted folder hierarchy
-  /// is allowed to reach a height of 20; this provides additional headroom when
-  /// moving folders that contain deleted folders.
-  /// + The addition of the folder must not cause the total number of folders
-  /// under its parent to exceed 300.
-  ///
-  /// If the operation fails due to a folder constraint violation, some errors
-  /// may be returned by the `CreateFolder` request, with status code
-  /// `FAILED_PRECONDITION` and an error description. Other folder constraint
-  /// violations will be communicated in the `Operation`, with the specific
-  /// `PreconditionFailure` returned in the details list in the `Operation.error`
-  /// field.
-  ///
-  /// The caller must have `resourcemanager.folders.create` permission on the
-  /// identified parent.
-  func createFolder(withPolling: CreateFolderRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Folder>
-
-  /// Creates a folder in the resource hierarchy.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder creation workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// created Folder.
-  ///
-  /// In order to succeed, the addition of this new folder must not violate
-  /// the folder naming, height, or fanout constraints.
-  ///
-  /// + The folder's `display_name` must be distinct from all other folders that
-  /// share its parent.
-  /// + The addition of the folder must not cause the active folder hierarchy
-  /// to exceed a height of 10. Note, the full active + deleted folder hierarchy
-  /// is allowed to reach a height of 20; this provides additional headroom when
-  /// moving folders that contain deleted folders.
-  /// + The addition of the folder must not cause the total number of folders
-  /// under its parent to exceed 300.
-  ///
-  /// If the operation fails due to a folder constraint violation, some errors
-  /// may be returned by the `CreateFolder` request, with status code
-  /// `FAILED_PRECONDITION` and an error description. Other folder constraint
-  /// violations will be communicated in the `Operation`, with the specific
-  /// `PreconditionFailure` returned in the details list in the `Operation.error`
-  /// field.
-  ///
-  /// The caller must have `resourcemanager.folders.create` permission on the
-  /// identified parent.
-  func createFolder(
-    folder: Folder?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
-
-  /// Updates a folder, changing its `display_name`.
-  /// Changes to the folder `display_name` will be rejected if they violate
-  /// either the `display_name` formatting rules or the naming constraints
-  /// described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation.
-  ///
-  /// The folder's `display_name` must start and end with a letter or digit,
-  /// may contain letters, digits, spaces, hyphens and underscores and can be
-  /// between 3 and 30 characters. This is captured by the regular expression:
-  /// `[\p{L}\p{N}][\p{L}\p{N}_- ]{1,28}[\p{L}\p{N}]`.
-  /// The caller must have `resourcemanager.folders.update` permission on the
-  /// identified folder.
-  ///
-  /// If the update fails due to the unique name constraint then a
-  /// `PreconditionFailure` explaining this violation will be returned
-  /// in the Status.details field.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  ///
-  /// @Snippet(path: "Folders_UpdateFolder")
-  func updateFolder(request: UpdateFolderRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Updates a folder, changing its `display_name`.
-  /// Changes to the folder `display_name` will be rejected if they violate
-  /// either the `display_name` formatting rules or the naming constraints
-  /// described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation.
-  ///
-  /// The folder's `display_name` must start and end with a letter or digit,
-  /// may contain letters, digits, spaces, hyphens and underscores and can be
-  /// between 3 and 30 characters. This is captured by the regular expression:
-  /// `[\p{L}\p{N}][\p{L}\p{N}_- ]{1,28}[\p{L}\p{N}]`.
-  /// The caller must have `resourcemanager.folders.update` permission on the
-  /// identified folder.
-  ///
-  /// If the update fails due to the unique name constraint then a
-  /// `PreconditionFailure` explaining this violation will be returned
-  /// in the Status.details field.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func updateFolder(withPolling: UpdateFolderRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Folder>
-
-  /// Updates a folder, changing its `display_name`.
-  /// Changes to the folder `display_name` will be rejected if they violate
-  /// either the `display_name` formatting rules or the naming constraints
-  /// described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation.
-  ///
-  /// The folder's `display_name` must start and end with a letter or digit,
-  /// may contain letters, digits, spaces, hyphens and underscores and can be
-  /// between 3 and 30 characters. This is captured by the regular expression:
-  /// `[\p{L}\p{N}][\p{L}\p{N}_- ]{1,28}[\p{L}\p{N}]`.
-  /// The caller must have `resourcemanager.folders.update` permission on the
-  /// identified folder.
-  ///
-  /// If the update fails due to the unique name constraint then a
-  /// `PreconditionFailure` explaining this violation will be returned
-  /// in the Status.details field.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func updateFolder(
-    folder: Folder?,
-    updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
-
-  /// Moves a folder under a new resource parent.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved folder.
-  /// Upon failure, a `FolderOperationError` categorizing the failure cause will
-  /// be returned - if the failure occurs synchronously then the
-  /// `FolderOperationError` will be returned in the `Status.details` field.
-  /// If it occurs asynchronously, then the FolderOperation will be returned
-  /// in the `Operation.error` field.
-  /// In addition, the `Operation.metadata` field will be populated with a
-  /// `FolderOperation` message as an aid to stateless clients.
-  /// Folder moves will be rejected if they violate either the naming, height,
-  /// or fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.move`
-  /// permission on the folder's current and proposed new parent.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  ///
-  /// @Snippet(path: "Folders_MoveFolder")
-  func moveFolder(request: MoveFolderRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Moves a folder under a new resource parent.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved folder.
-  /// Upon failure, a `FolderOperationError` categorizing the failure cause will
-  /// be returned - if the failure occurs synchronously then the
-  /// `FolderOperationError` will be returned in the `Status.details` field.
-  /// If it occurs asynchronously, then the FolderOperation will be returned
-  /// in the `Operation.error` field.
-  /// In addition, the `Operation.metadata` field will be populated with a
-  /// `FolderOperation` message as an aid to stateless clients.
-  /// Folder moves will be rejected if they violate either the naming, height,
-  /// or fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.move`
-  /// permission on the folder's current and proposed new parent.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func moveFolder(withPolling: MoveFolderRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Folder>
-
-  /// Moves a folder under a new resource parent.
-  /// Returns an `Operation` which can be used to track the progress of the
-  /// folder move workflow.
-  /// Upon success, the `Operation.response` field will be populated with the
-  /// moved folder.
-  /// Upon failure, a `FolderOperationError` categorizing the failure cause will
-  /// be returned - if the failure occurs synchronously then the
-  /// `FolderOperationError` will be returned in the `Status.details` field.
-  /// If it occurs asynchronously, then the FolderOperation will be returned
-  /// in the `Operation.error` field.
-  /// In addition, the `Operation.metadata` field will be populated with a
-  /// `FolderOperation` message as an aid to stateless clients.
-  /// Folder moves will be rejected if they violate either the naming, height,
-  /// or fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.move`
-  /// permission on the folder's current and proposed new parent.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func moveFolder(
-    name: Swift.String,
-    destinationParent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
-
-  /// Requests deletion of a folder. The folder is moved into the
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state immediately, and is deleted approximately 30 days later. This method
-  /// may only be called on an empty folder, where a folder is empty if it
-  /// doesn't contain any folders or projects in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. If
-  /// called on a folder in
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state the operation will result in a no-op success.
-  /// The caller must have `resourcemanager.folders.delete` permission on the
-  /// identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-  ///
-  /// @Snippet(path: "Folders_DeleteFolder")
-  func deleteFolder(request: DeleteFolderRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Requests deletion of a folder. The folder is moved into the
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state immediately, and is deleted approximately 30 days later. This method
-  /// may only be called on an empty folder, where a folder is empty if it
-  /// doesn't contain any folders or projects in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. If
-  /// called on a folder in
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state the operation will result in a no-op success.
-  /// The caller must have `resourcemanager.folders.delete` permission on the
-  /// identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-  func deleteFolder(withPolling: DeleteFolderRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Folder>
-
-  /// Requests deletion of a folder. The folder is moved into the
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state immediately, and is deleted approximately 30 days later. This method
-  /// may only be called on an empty folder, where a folder is empty if it
-  /// doesn't contain any folders or projects in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. If
-  /// called on a folder in
-  /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-  /// state the operation will result in a no-op success.
-  /// The caller must have `resourcemanager.folders.delete` permission on the
-  /// identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-  func deleteFolder(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
-
-  /// Cancels the deletion request for a folder. This method may be called on a
-  /// folder in any state. If the folder is in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state the
-  /// result will be a no-op success. In order to succeed, the folder's parent
-  /// must be in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. In
-  /// addition, reintroducing the folder into the tree must not violate folder
-  /// naming, height, and fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.undelete`
-  /// permission on the identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  ///
-  /// @Snippet(path: "Folders_UndeleteFolder")
-  func undeleteFolder(request: UndeleteFolderRequest) async throws -> GoogleLongrunning.Operation
-
-  /// Cancels the deletion request for a folder. This method may be called on a
-  /// folder in any state. If the folder is in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state the
-  /// result will be a no-op success. In order to succeed, the folder's parent
-  /// must be in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. In
-  /// addition, reintroducing the folder into the tree must not violate folder
-  /// naming, height, and fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.undelete`
-  /// permission on the identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func undeleteFolder(withPolling: UndeleteFolderRequest) async throws -> any GoogleCloudGax
-    .PollableOperation<Folder>
-
-  /// Cancels the deletion request for a folder. This method may be called on a
-  /// folder in any state. If the folder is in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state the
-  /// result will be a no-op success. In order to succeed, the folder's parent
-  /// must be in the
-  /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. In
-  /// addition, reintroducing the folder into the tree must not violate folder
-  /// naming, height, and fanout constraints described in the
-  /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-  /// documentation. The caller must have `resourcemanager.folders.undelete`
-  /// permission on the identified folder.
-  ///
-  /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-  /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func undeleteFolder(
-    name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
-
-  /// Gets the access control policy for a folder. The returned policy may be
-  /// empty if no such policy or resource exists. The `resource` field should
-  /// be the folder's resource name, for example: "folders/1234".
-  /// The caller must have `resourcemanager.folders.getIamPolicy` permission
-  /// on the identified folder.
-  ///
-  /// @Snippet(path: "Folders_GetIamPolicy")
-  func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Gets the access control policy for a folder. The returned policy may be
-  /// empty if no such policy or resource exists. The `resource` field should
-  /// be the folder's resource name, for example: "folders/1234".
-  /// The caller must have `resourcemanager.folders.getIamPolicy` permission
-  /// on the identified folder.
-  func getIamPolicy(
-    resource: Swift.String,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on a folder, replacing any existing policy.
-  /// The `resource` field should be the folder's resource name, for example:
-  /// "folders/1234".
-  /// The caller must have `resourcemanager.folders.setIamPolicy` permission
-  /// on the identified folder.
-  ///
-  /// @Snippet(path: "Folders_SetIamPolicy")
-  func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
-
-  /// Sets the access control policy on a folder, replacing any existing policy.
-  /// The `resource` field should be the folder's resource name, for example:
-  /// "folders/1234".
-  /// The caller must have `resourcemanager.folders.setIamPolicy` permission
-  /// on the identified folder.
-  func setIamPolicy(
-    resource: Swift.String,
-    policy: GoogleIamV1.Policy?,
-  ) async throws -> GoogleIamV1.Policy
-
-  /// Returns permissions that a caller has on the specified folder.
-  /// The `resource` field should be the folder's resource name,
-  /// for example: "folders/1234".
-  ///
-  /// There are no permissions required for making this API call.
-  ///
-  /// @Snippet(path: "Folders_TestIamPermissions")
-  func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
-    -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Returns permissions that a caller has on the specified folder.
-  /// The `resource` field should be the folder's resource name,
-  /// for example: "folders/1234".
-  ///
-  /// There are no permissions required for making this API call.
-  func testIamPermissions(
-    resource: Swift.String,
-    permissions: [Swift.String],
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  ///
-  /// @Snippet(path: "Folders_GetOperation")
-  func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-    -> GoogleLongrunning.Operation
-
-  /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
-  ///
-  /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
-  func getOperation(
-    name: Swift.String,
-  ) async throws -> GoogleLongrunning.Operation
+  /// Creates a new `FoldersClient` instance.
+  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    var inner: any Clients.FoldersStub = try Clients.FoldersTransport(options)
+    inner = Clients.FoldersRetry(inner, options: options)
+    if let logger = options.logger {
+      inner = Clients.FoldersLogging(inner, logger: logger)
+    }
+    self.inner = inner
+  }
 
   /// Retrieves a folder identified by the supplied resource name.
   /// Valid folder resource names have the format `folders/{folder_id}`
@@ -531,9 +52,11 @@ public protocol Folders {
   /// identified folder.
   ///
   /// @Snippet(path: "Folders_GetFolder")
-  func getFolder(
+  public func getFolder(
     request: GetFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.Folder
+  ) async throws -> GoogleCloudResourcemanagerV3.Folder {
+    try await self.inner.getFolder(request: request, options: options)
+  }
 
   /// Lists the folders that are direct descendants of supplied parent resource.
   /// `list()` provides a strongly consistent view of the folders underneath
@@ -544,9 +67,11 @@ public protocol Folders {
   /// identified parent.
   ///
   /// @Snippet(path: "Folders_ListFolders")
-  func listFolders(
+  public func listFolders(
     request: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse {
+    try await self.inner.listFolders(request: request, options: options)
+  }
 
   /// Lists the folders that are direct descendants of supplied parent resource.
   /// `list()` provides a strongly consistent view of the folders underneath
@@ -555,9 +80,19 @@ public protocol Folders {
   /// of their display_name.
   /// The caller must have `resourcemanager.folders.list` permission on the
   /// identified parent.
-  func listFolders(
+  ///
+  /// @Snippet(path: "Folders_ListFolders")
+  public func listFolders(
     byItem: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
+  ) throws -> any AsyncSequence<Folder, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.listFolders(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Search for folders that match specific filter criteria.
   /// `search()` provides an eventually consistent view of the folders a user has
@@ -567,9 +102,11 @@ public protocol Folders {
   /// permission `resourcemanager.folders.get`.
   ///
   /// @Snippet(path: "Folders_SearchFolders")
-  func searchFolders(
+  public func searchFolders(
     request: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse
+  ) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse {
+    try await self.inner.searchFolders(request: request, options: options)
+  }
 
   /// Search for folders that match specific filter criteria.
   /// `search()` provides an eventually consistent view of the folders a user has
@@ -577,9 +114,19 @@ public protocol Folders {
   ///
   /// This will only return folders on which the caller has the
   /// permission `resourcemanager.folders.get`.
-  func searchFolders(
+  ///
+  /// @Snippet(path: "Folders_SearchFolders")
+  public func searchFolders(
     byItem: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
-  ) throws -> any AsyncSequence<Folder, Swift.Error>
+  ) throws -> any AsyncSequence<Folder, Swift.Error> {
+    let listRpc = {
+      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
+      var request = byItem
+      request.pageToken = token
+      return try await self.searchFolders(request: request, options: options)
+    }
+    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+  }
 
   /// Creates a folder in the resource hierarchy.
   /// Returns an `Operation` which can be used to track the progress of the
@@ -610,9 +157,11 @@ public protocol Folders {
   /// identified parent.
   ///
   /// @Snippet(path: "Folders_CreateFolder")
-  func createFolder(
+  public func createFolder(
     request: CreateFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.createFolder(request: request, options: options)
+  }
 
   /// Creates a folder in the resource hierarchy.
   /// Returns an `Operation` which can be used to track the progress of the
@@ -641,9 +190,58 @@ public protocol Folders {
   ///
   /// The caller must have `resourcemanager.folders.create` permission on the
   /// identified parent.
-  func createFolder(
+  ///
+  /// @Snippet(path: "Folders_CreateFolder")
+  public func createFolder(
     withPolling: CreateFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Folder(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.createFolder(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Updates a folder, changing its `display_name`.
   /// Changes to the folder `display_name` will be rejected if they violate
@@ -666,9 +264,11 @@ public protocol Folders {
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
   ///
   /// @Snippet(path: "Folders_UpdateFolder")
-  func updateFolder(
+  public func updateFolder(
     request: UpdateFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.updateFolder(request: request, options: options)
+  }
 
   /// Updates a folder, changing its `display_name`.
   /// Changes to the folder `display_name` will be rejected if they violate
@@ -689,9 +289,58 @@ public protocol Folders {
   /// in the Status.details field.
   ///
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func updateFolder(
+  ///
+  /// @Snippet(path: "Folders_UpdateFolder")
+  public func updateFolder(
     withPolling: UpdateFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Folder(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.updateFolder(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Moves a folder under a new resource parent.
   /// Returns an `Operation` which can be used to track the progress of the
@@ -714,9 +363,11 @@ public protocol Folders {
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
   ///
   /// @Snippet(path: "Folders_MoveFolder")
-  func moveFolder(
+  public func moveFolder(
     request: MoveFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.moveFolder(request: request, options: options)
+  }
 
   /// Moves a folder under a new resource parent.
   /// Returns an `Operation` which can be used to track the progress of the
@@ -737,9 +388,58 @@ public protocol Folders {
   /// permission on the folder's current and proposed new parent.
   ///
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func moveFolder(
+  ///
+  /// @Snippet(path: "Folders_MoveFolder")
+  public func moveFolder(
     withPolling: MoveFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Folder(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.moveFolder(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Requests deletion of a folder. The folder is moved into the
   /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
@@ -757,9 +457,11 @@ public protocol Folders {
   /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
   ///
   /// @Snippet(path: "Folders_DeleteFolder")
-  func deleteFolder(
+  public func deleteFolder(
     request: DeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.deleteFolder(request: request, options: options)
+  }
 
   /// Requests deletion of a folder. The folder is moved into the
   /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
@@ -775,9 +477,58 @@ public protocol Folders {
   ///
   /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
   /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-  func deleteFolder(
+  ///
+  /// @Snippet(path: "Folders_DeleteFolder")
+  public func deleteFolder(
     withPolling: DeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Folder(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.deleteFolder(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Cancels the deletion request for a folder. This method may be called on a
   /// folder in any state. If the folder is in the
@@ -795,9 +546,11 @@ public protocol Folders {
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
   ///
   /// @Snippet(path: "Folders_UndeleteFolder")
-  func undeleteFolder(
+  public func undeleteFolder(
     request: UndeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.undeleteFolder(request: request, options: options)
+  }
 
   /// Cancels the deletion request for a folder. This method may be called on a
   /// folder in any state. If the folder is in the
@@ -813,9 +566,58 @@ public protocol Folders {
   ///
   /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
   /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-  func undeleteFolder(
+  ///
+  /// @Snippet(path: "Folders_UndeleteFolder")
+  public func undeleteFolder(
     withPolling: UndeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+  ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
+    let extractStatus = {
+      (op: GoogleLongrunning.Operation) throws
+        -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      guard op.done else {
+        return .init(done: false, result: nil)
+      }
+
+      switch op.result {
+      case .response(let anyValue):
+        guard let anyValueUnwrapped = anyValue else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding(
+                "Operation completed but response value was missing")))
+        }
+        let response = try Folder(fromAny: anyValueUnwrapped)
+        return .init(done: true, result: .success(response))
+      case .error(let status):
+        guard let statusUnwrapped = status else {
+          return .init(
+            done: true,
+            result: .failure(
+              GoogleCloudGax.RequestError.binding("Operation completed but error value was missing")
+            ))
+        }
+        let error = GoogleCloudGax.RequestError.service(
+          GoogleCloudGax.ServiceError(
+            code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
+            message: statusUnwrapped.message))
+        return .init(done: true, result: .failure(error))
+      case .none:
+        return .init(
+          done: true,
+          result: .failure(
+            GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
+      }
+    }
+    let rawOp = try await self.undeleteFolder(request: withPolling, options: options)
+    let initialState = try extractStatus(rawOp)
+    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
+      let op = try await self.getOperation(
+        request: .init().with { $0.name = rawOp.name }, options: options)
+      return try extractStatus(op)
+    }
+    return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+  }
 
   /// Gets the access control policy for a folder. The returned policy may be
   /// empty if no such policy or resource exists. The `resource` field should
@@ -824,9 +626,11 @@ public protocol Folders {
   /// on the identified folder.
   ///
   /// @Snippet(path: "Folders_GetIamPolicy")
-  func getIamPolicy(
+  public func getIamPolicy(
     request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
 
   /// Sets the access control policy on a folder, replacing any existing policy.
   /// The `resource` field should be the folder's resource name, for example:
@@ -835,9 +639,11 @@ public protocol Folders {
   /// on the identified folder.
   ///
   /// @Snippet(path: "Folders_SetIamPolicy")
-  func setIamPolicy(
+  public func setIamPolicy(
     request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.Policy
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
 
   /// Returns permissions that a caller has on the specified folder.
   /// The `resource` field should be the folder's resource name,
@@ -846,508 +652,264 @@ public protocol Folders {
   /// There are no permissions required for making this API call.
   ///
   /// @Snippet(path: "Folders_TestIamPermissions")
-  func testIamPermissions(
+  public func testIamPermissions(
     request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
+  }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
   ///
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Folders_GetOperation")
-  func getOperation(
+  public func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleLongrunning.Operation
+  ) async throws -> GoogleLongrunning.Operation {
+    try await self.inner.getOperation(request: request, options: options)
+  }
 }
 
 extension Clients {
-  /// The recommended implementation for ``Folders``.
-  public class FoldersClient: Folders {
-    let inner: any FoldersStub
+  /// A Swift protocol to mock `FoldersClient`.
+  ///
+  /// To mock `FoldersClient` change your functions to receive
+  /// `some FoldersProtocol` or `any FoldersProtocol`
+  /// and pass a mock implementation in your tests.
+  public protocol FoldersProtocol {
+    /// See `FoldersClient.getFolder`.
+    func getFolder(request: GetFolderRequest) async throws -> GoogleCloudResourcemanagerV3.Folder
 
-    /// Creates a new `FoldersClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      var inner: any FoldersStub = try FoldersTransport(options)
-      inner = FoldersRetry(inner, options: options)
-      if let logger = options.logger {
-        inner = FoldersLogging(inner, logger: logger)
-      }
-      self.inner = inner
-    }
+    /// See `FoldersClient.getFolder`.
+    func getFolder(
+      name: Swift.String,
+    ) async throws -> GoogleCloudResourcemanagerV3.Folder
 
-    /// See `Folders.getFolder`
-    public func getFolder(
+    /// See `FoldersClient.listFolders`.
+    func listFolders(request: ListFoldersRequest) async throws
+      -> GoogleCloudResourcemanagerV3.ListFoldersResponse
+
+    /// See `FoldersClient.listFolders`.
+    func listFolders(
+      byItem: ListFoldersRequest
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
+
+    /// See `FoldersClient.listFolders`.
+    func listFolders(
+      parent: Swift.String,
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
+
+    /// See `FoldersClient.searchFolders`.
+    func searchFolders(request: SearchFoldersRequest) async throws
+      -> GoogleCloudResourcemanagerV3.SearchFoldersResponse
+
+    /// See `FoldersClient.searchFolders`.
+    func searchFolders(
+      byItem: SearchFoldersRequest
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
+
+    /// See `FoldersClient.searchFolders`.
+    func searchFolders(
+      query: Swift.String,
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
+
+    /// See `FoldersClient.createFolder`.
+    func createFolder(request: CreateFolderRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.createFolder`.
+    func createFolder(withPolling: CreateFolderRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Folder>
+
+    /// See `FoldersClient.createFolder`.
+    func createFolder(
+      folder: Folder?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+
+    /// See `FoldersClient.updateFolder`.
+    func updateFolder(request: UpdateFolderRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.updateFolder`.
+    func updateFolder(withPolling: UpdateFolderRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Folder>
+
+    /// See `FoldersClient.updateFolder`.
+    func updateFolder(
+      folder: Folder?,
+      updateMask: GoogleCloudWkt.FieldMask?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+
+    /// See `FoldersClient.moveFolder`.
+    func moveFolder(request: MoveFolderRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.moveFolder`.
+    func moveFolder(withPolling: MoveFolderRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Folder>
+
+    /// See `FoldersClient.moveFolder`.
+    func moveFolder(
+      name: Swift.String,
+      destinationParent: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+
+    /// See `FoldersClient.deleteFolder`.
+    func deleteFolder(request: DeleteFolderRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.deleteFolder`.
+    func deleteFolder(withPolling: DeleteFolderRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Folder>
+
+    /// See `FoldersClient.deleteFolder`.
+    func deleteFolder(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+
+    /// See `FoldersClient.undeleteFolder`.
+    func undeleteFolder(request: UndeleteFolderRequest) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.undeleteFolder`.
+    func undeleteFolder(withPolling: UndeleteFolderRequest) async throws -> any GoogleCloudGax
+      .PollableOperation<Folder>
+
+    /// See `FoldersClient.undeleteFolder`.
+    func undeleteFolder(
+      name: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
+
+    /// See `FoldersClient.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `FoldersClient.getIamPolicy`.
+    func getIamPolicy(
+      resource: Swift.String,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `FoldersClient.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `FoldersClient.setIamPolicy`.
+    func setIamPolicy(
+      resource: Swift.String,
+      policy: GoogleIamV1.Policy?,
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `FoldersClient.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `FoldersClient.testIamPermissions`.
+    func testIamPermissions(
+      resource: Swift.String,
+      permissions: [Swift.String],
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `FoldersClient.getOperation`.
+    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
+      -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.getOperation`.
+    func getOperation(
+      name: Swift.String,
+    ) async throws -> GoogleLongrunning.Operation
+
+    /// See `FoldersClient.getFolder`.
+    func getFolder(
       request: GetFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.Folder {
-      try await self.inner.getFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.Folder
 
-    /// See `Folders.listFolders`
-    public func listFolders(
+    /// See `FoldersClient.listFolders`.
+    func listFolders(
       request: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse {
-      try await self.inner.listFolders(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse
 
-    /// Lists the folders that are direct descendants of supplied parent resource.
-    /// `list()` provides a strongly consistent view of the folders underneath
-    /// the specified parent resource.
-    /// `list()` returns folders sorted based upon the (ascending) lexical ordering
-    /// of their display_name.
-    /// The caller must have `resourcemanager.folders.list` permission on the
-    /// identified parent.
-    public func listFolders(
+    /// See `FoldersClient.listFolders`.
+    func listFolders(
       byItem: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Folder, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.listFolders(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
 
-    /// See `Folders.searchFolders`
-    public func searchFolders(
+    /// See `FoldersClient.searchFolders`.
+    func searchFolders(
       request: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse {
-      try await self.inner.searchFolders(request: request, options: options)
-    }
+    ) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse
 
-    /// Search for folders that match specific filter criteria.
-    /// `search()` provides an eventually consistent view of the folders a user has
-    /// access to which meet the specified filter criteria.
-    ///
-    /// This will only return folders on which the caller has the
-    /// permission `resourcemanager.folders.get`.
-    public func searchFolders(
+    /// See `FoldersClient.searchFolders`.
+    func searchFolders(
       byItem: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
-    ) throws -> any AsyncSequence<Folder, Swift.Error> {
-      let listRpc = {
-        (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
-        var request = byItem
-        request.pageToken = token
-        return try await self.searchFolders(request: request, options: options)
-      }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
+    ) throws -> any AsyncSequence<Folder, Swift.Error>
 
-    /// See `Folders.createFolder`
-    public func createFolder(
+    /// See `FoldersClient.createFolder`.
+    func createFolder(
       request: CreateFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.createFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Creates a folder in the resource hierarchy.
-    /// Returns an `Operation` which can be used to track the progress of the
-    /// folder creation workflow.
-    /// Upon success, the `Operation.response` field will be populated with the
-    /// created Folder.
-    ///
-    /// In order to succeed, the addition of this new folder must not violate
-    /// the folder naming, height, or fanout constraints.
-    ///
-    /// + The folder's `display_name` must be distinct from all other folders that
-    /// share its parent.
-    /// + The addition of the folder must not cause the active folder hierarchy
-    /// to exceed a height of 10. Note, the full active + deleted folder hierarchy
-    /// is allowed to reach a height of 20; this provides additional headroom when
-    /// moving folders that contain deleted folders.
-    /// + The addition of the folder must not cause the total number of folders
-    /// under its parent to exceed 300.
-    ///
-    /// If the operation fails due to a folder constraint violation, some errors
-    /// may be returned by the `CreateFolder` request, with status code
-    /// `FAILED_PRECONDITION` and an error description. Other folder constraint
-    /// violations will be communicated in the `Operation`, with the specific
-    /// `PreconditionFailure` returned in the details list in the `Operation.error`
-    /// field.
-    ///
-    /// The caller must have `resourcemanager.folders.create` permission on the
-    /// identified parent.
-    public func createFolder(
+    /// See `FoldersClient.createFolder`.
+    func createFolder(
       withPolling: CreateFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Folder(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.createFolder(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Folders.updateFolder`
-    public func updateFolder(
+    /// See `FoldersClient.updateFolder`.
+    func updateFolder(
       request: UpdateFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.updateFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Updates a folder, changing its `display_name`.
-    /// Changes to the folder `display_name` will be rejected if they violate
-    /// either the `display_name` formatting rules or the naming constraints
-    /// described in the
-    /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-    /// documentation.
-    ///
-    /// The folder's `display_name` must start and end with a letter or digit,
-    /// may contain letters, digits, spaces, hyphens and underscores and can be
-    /// between 3 and 30 characters. This is captured by the regular expression:
-    /// `[\p{L}\p{N}][\p{L}\p{N}_- ]{1,28}[\p{L}\p{N}]`.
-    /// The caller must have `resourcemanager.folders.update` permission on the
-    /// identified folder.
-    ///
-    /// If the update fails due to the unique name constraint then a
-    /// `PreconditionFailure` explaining this violation will be returned
-    /// in the Status.details field.
-    ///
-    /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-    public func updateFolder(
+    /// See `FoldersClient.updateFolder`.
+    func updateFolder(
       withPolling: UpdateFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Folder(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.updateFolder(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Folders.moveFolder`
-    public func moveFolder(
+    /// See `FoldersClient.moveFolder`.
+    func moveFolder(
       request: MoveFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.moveFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Moves a folder under a new resource parent.
-    /// Returns an `Operation` which can be used to track the progress of the
-    /// folder move workflow.
-    /// Upon success, the `Operation.response` field will be populated with the
-    /// moved folder.
-    /// Upon failure, a `FolderOperationError` categorizing the failure cause will
-    /// be returned - if the failure occurs synchronously then the
-    /// `FolderOperationError` will be returned in the `Status.details` field.
-    /// If it occurs asynchronously, then the FolderOperation will be returned
-    /// in the `Operation.error` field.
-    /// In addition, the `Operation.metadata` field will be populated with a
-    /// `FolderOperation` message as an aid to stateless clients.
-    /// Folder moves will be rejected if they violate either the naming, height,
-    /// or fanout constraints described in the
-    /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-    /// documentation. The caller must have `resourcemanager.folders.move`
-    /// permission on the folder's current and proposed new parent.
-    ///
-    /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-    public func moveFolder(
+    /// See `FoldersClient.moveFolder`.
+    func moveFolder(
       withPolling: MoveFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Folder(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.moveFolder(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Folders.deleteFolder`
-    public func deleteFolder(
+    /// See `FoldersClient.deleteFolder`.
+    func deleteFolder(
       request: DeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.deleteFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Requests deletion of a folder. The folder is moved into the
-    /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-    /// state immediately, and is deleted approximately 30 days later. This method
-    /// may only be called on an empty folder, where a folder is empty if it
-    /// doesn't contain any folders or projects in the
-    /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. If
-    /// called on a folder in
-    /// [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
-    /// state the operation will result in a no-op success.
-    /// The caller must have `resourcemanager.folders.delete` permission on the
-    /// identified folder.
-    ///
-    /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-    /// [google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]: <doc:Folder/State/deleteRequested>
-    public func deleteFolder(
+    /// See `FoldersClient.deleteFolder`.
+    func deleteFolder(
       withPolling: DeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Folder(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.deleteFolder(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Folders.undeleteFolder`
-    public func undeleteFolder(
+    /// See `FoldersClient.undeleteFolder`.
+    func undeleteFolder(
       request: UndeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.undeleteFolder(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
 
-    /// Cancels the deletion request for a folder. This method may be called on a
-    /// folder in any state. If the folder is in the
-    /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state the
-    /// result will be a no-op success. In order to succeed, the folder's parent
-    /// must be in the
-    /// [ACTIVE][google.cloud.resourcemanager.v3.Folder.State.ACTIVE] state. In
-    /// addition, reintroducing the folder into the tree must not violate folder
-    /// naming, height, and fanout constraints described in the
-    /// [CreateFolder][google.cloud.resourcemanager.v3.Folders.CreateFolder]
-    /// documentation. The caller must have `resourcemanager.folders.undelete`
-    /// permission on the identified folder.
-    ///
-    /// [google.cloud.resourcemanager.v3.Folder.State.ACTIVE]: <doc:Folder/State/active>
-    /// [google.cloud.resourcemanager.v3.Folders.CreateFolder]: <doc:Folders/createFolder(request:)>
-    public func undeleteFolder(
+    /// See `FoldersClient.undeleteFolder`.
+    func undeleteFolder(
       withPolling: UndeleteFolderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Folder> {
-      let extractStatus = {
-        (op: GoogleLongrunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        guard op.done else {
-          return .init(done: false, result: nil)
-        }
+    ) async throws -> any GoogleCloudGax.PollableOperation<Folder>
 
-        switch op.result {
-        case .response(let anyValue):
-          guard let anyValueUnwrapped = anyValue else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but response value was missing")))
-          }
-          let response = try Folder(fromAny: anyValueUnwrapped)
-          return .init(done: true, result: .success(response))
-        case .error(let status):
-          guard let statusUnwrapped = status else {
-            return .init(
-              done: true,
-              result: .failure(
-                GoogleCloudGax.RequestError.binding(
-                  "Operation completed but error value was missing")))
-          }
-          let error = GoogleCloudGax.RequestError.service(
-            GoogleCloudGax.ServiceError(
-              code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
-              message: statusUnwrapped.message))
-          return .init(done: true, result: .failure(error))
-        case .none:
-          return .init(
-            done: true,
-            result: .failure(
-              GoogleCloudGax.RequestError.binding("Operation completed but result was missing")))
-        }
-      }
-      let rawOp = try await self.undeleteFolder(request: withPolling, options: options)
-      let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Folder>.State in
-        let op = try await self.getOperation(
-          request: .init().with { $0.name = rawOp.name }, options: options)
-        return try extractStatus(op)
-      }
-      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
-    }
-
-    /// See `Folders.getIamPolicy`
-    public func getIamPolicy(
+    /// See `FoldersClient.getIamPolicy`.
+    func getIamPolicy(
       request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.getIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Folders.setIamPolicy`
-    public func setIamPolicy(
+    /// See `FoldersClient.setIamPolicy`.
+    func setIamPolicy(
       request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.Policy {
-      try await self.inner.setIamPolicy(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.Policy
 
-    /// See `Folders.testIamPermissions`
-    public func testIamPermissions(
+    /// See `FoldersClient.testIamPermissions`.
+    func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
-      try await self.inner.testIamPermissions(request: request, options: options)
-    }
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `Folders.getOperation`
-    public func getOperation(
+    /// See `FoldersClient.getOperation`.
+    func getOperation(
       request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation {
-      try await self.inner.getOperation(request: request, options: options)
-    }
+    ) async throws -> GoogleLongrunning.Operation
   }
 }
 
 // Default implementations
-extension Folders {
+extension Clients.FoldersProtocol {
   public func getFolder(request: GetFolderRequest) async throws
     -> GoogleCloudResourcemanagerV3.Folder
   {

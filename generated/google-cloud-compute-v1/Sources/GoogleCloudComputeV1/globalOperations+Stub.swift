@@ -28,25 +28,24 @@
   extension Clients {
     protocol GlobalOperationsStub {
       func aggregatedList(
-        request: Clients.GlobalOperationsClient.AggregatedListRequest,
+        request: GlobalOperationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
 
       func delete(
-        request: Clients.GlobalOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws
 
       func `get`(
-        request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       func wait(
-        request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
 
@@ -59,7 +58,7 @@
       }
 
       public func aggregatedList(
-        request: Clients.GlobalOperationsClient.AggregatedListRequest,
+        request: GlobalOperationsClient.AggregatedListRequest,
         options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
         let path = try { () throws -> Swift.String in
@@ -90,8 +89,7 @@
       }
 
       public func delete(
-        request: Clients.GlobalOperationsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -110,7 +108,7 @@
       }
 
       public func `get`(
-        request: Clients.GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -131,7 +129,7 @@
       }
 
       public func list(
-        request: Clients.GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
@@ -156,7 +154,7 @@
       }
 
       public func wait(
-        request: Clients.GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let path = try { () throws -> Swift.String in
           guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {

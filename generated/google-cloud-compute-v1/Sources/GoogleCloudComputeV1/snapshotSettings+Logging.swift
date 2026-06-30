@@ -60,30 +60,30 @@
       }
 
       public func `get`(
-        request: Clients.SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotSettings {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: Clients.SnapshotSettingsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.SnapshotSettings
+            (r: SnapshotSettingsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.SnapshotSettings
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func patch(
-        request: Clients.SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: Clients.SnapshotSettingsClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: SnapshotSettingsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })

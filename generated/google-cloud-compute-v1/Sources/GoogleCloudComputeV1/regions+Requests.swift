@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.RegionsClient {
+  extension RegionsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.regions.get] method.
     ///
     /// [google.cloud.compute.v1.regions.get]: <doc:Regions/`get`(request:)>

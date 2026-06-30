@@ -27,7 +27,7 @@ func cleanupStaleSecrets() async {
 
 func cleanupStaleSecretsImpl() async throws {
   let projectId = try projectId();
-  let client = try GoogleCloudSecretmanagerV1.Clients.SecretManagerServiceClient()
+  let client = try SecretManagerServiceClient()
   let secrets = try client.listSecrets(
     byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
 
@@ -60,7 +60,7 @@ func cleanUpStaleWorkflows() async {
 func cleanUpStaleWorkflowsImpl() async throws {
   let projectId = try projectId();
   let location = locationId();
-  let client = try GoogleCloudWorkflowsV1.Clients.WorkflowsClient()
+  let client = try WorkflowsClient()
   let workflows = try client.listWorkflows(
     byItem: ListWorkflowsRequest().with {
       $0.parent = "projects/\(projectId)/locations/\(location)"

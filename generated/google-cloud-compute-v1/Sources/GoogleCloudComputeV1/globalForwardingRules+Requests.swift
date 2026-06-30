@@ -18,7 +18,7 @@
   import Foundation
   import GoogleCloudWkt
 
-  extension Clients.GlobalForwardingRulesClient {
+  extension GlobalForwardingRulesClient {
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.globalForwardingRules.delete] method.
     ///
     /// [google.cloud.compute.v1.globalForwardingRules.delete]: <doc:GlobalForwardingRules/delete(request:)>
@@ -85,7 +85,7 @@
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
 
-      public var view: Clients.GlobalForwardingRulesClient.GetRequest.View? = nil
+      public var view: GlobalForwardingRulesClient.GetRequest.View? = nil
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -105,7 +105,7 @@
 
       /// The enumerated type for the [view][google.cloud.compute.v1.globalForwardingRules.getRequest.view] field.
       ///
-      /// [google.cloud.compute.v1.globalForwardingRules.getRequest.view]: <doc:Clients/GlobalForwardingRulesClient/GetRequest/View>
+      /// [google.cloud.compute.v1.globalForwardingRules.getRequest.view]: <doc:GlobalForwardingRulesClient/GetRequest/View>
       public enum View: Codable, Equatable, Sendable {
         case basic
         case full
