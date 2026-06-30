@@ -49,7 +49,8 @@ public struct ClientOptions: Sendable {
   ///   APIs.
   /// - Using the API against an emulator or some other test environment.
   ///
-  /// Use this option to override the default endpoint.
+  /// Only the scheme and authority (host and port) components of the endpoint are used, the path
+  /// and/or query parameters have no effect.
   public var endpoint: String? = nil
 
   /// Overrides the default credentials for the client.

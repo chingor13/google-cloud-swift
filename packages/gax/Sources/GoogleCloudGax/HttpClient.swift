@@ -23,31 +23,46 @@ import GoogleCloudAuth
 public struct HTTPClient {
   private static let sharedSession = URLSession(configuration: .ephemeral)
 
-  let endpoint: String
+  let baseURL: URLComponents
   let credentials: GoogleCloudAuth.Credentials
   let inner: URLSession
 
   // Creates a new client.
   public init(from: ClientOptions, withDefaultEndpoint: String) throws {
     self.credentials = try from.credentials ?? GoogleCloudAuth.Credentials()
-    self.endpoint = from.endpoint ?? withDefaultEndpoint
+    let endpoint = from.endpoint ?? withDefaultEndpoint
+    self.baseURL = try Self.validateEndpoint(endpoint)
     self.inner = Self.sharedSession
   }
 
   // Creates a new testing client.
   init(testSession: URLSession, endpoint: String, credentials: Credentials? = nil) throws {
-    self.endpoint = endpoint
+    self.baseURL = try Self.validateEndpoint(endpoint)
     self.credentials = try credentials ?? GoogleCloudAuth.Credentials(configuration: .anonymous)
     self.inner = testSession
   }
 
-  public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {
-    guard var components = URLComponents(string: "\(self.endpoint)\(path)") else {
-      throw RequestError.binding("bad URL with endpoint=\(self.endpoint) and path=\(path)")
+  static func validateEndpoint(_ endpoint: String) throws -> URLComponents {
+    guard var parsed = URLComponents(string: endpoint) else {
+      throw ClientError.invalidEndpoint(endpoint)
     }
+    parsed.queryItems = nil
+    parsed.path = ""
+    guard let scheme = parsed.scheme, (scheme == "http" || scheme == "https") else {
+      throw ClientError.invalidEndpoint(endpoint)
+    }
+    guard let host = parsed.host, !host.isEmpty else {
+      throw ClientError.invalidEndpoint(endpoint)
+    }
+    return parsed
+  }
+
+  public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {
+    var components = self.baseURL
+    components.path = path
     components.queryItems = query
     guard let url = components.url else {
-      throw RequestError.binding("bad URL with endpoint=\(self.endpoint) and path=\(path)")
+      throw RequestError.binding("bad URL for path=\(path), baseURL=\(self.baseURL)")
     }
     var request = URLRequest(url: url)
     let headers = try await self.credentials.headers()

@@ -52,6 +52,69 @@ import GoogleRpc
     override func stopLoading() {}
   }
 
+  @Test(arguments: [
+    // A `?` in the path results in a percent-encoded `?` == %3F
+    ("/path?$name=value", "path%3F$name=value"),
+    // A percent-encoded `?` in the path results in a percent-encoded `%` == %25
+    ("/path%3F$name=value", "path%253F$name=value"),
+  ]) func escapePath(
+    inputPath: String, wantPath: String
+  ) async throws {
+    let endpoint = "http://localhost:1234"
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with { $0.credentials = credentials }
+    let client = try HTTPClient(from: options, withDefaultEndpoint: endpoint)
+    let query = [URLQueryItem(name: "$alt", value: "json")]
+    let request = try await client.Request(path: inputPath, query: query)
+    // Note the percent-escaped `?`
+    #expect(
+      request.url?.absoluteString == "http://localhost:1234/\(wantPath)?$alt=json")
+  }
+
+  @Test(arguments: [
+    "bad-bad-bad",
+    "htt://localhost:1",
+    "file:///etc/passwd",
+    "http:///",
+    "https:///",
+  ]) func badEndpoint(input: String) throws {
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with {
+      $0.credentials = credentials
+      $0.endpoint = input
+    }
+    let error = #expect(throws: ClientError.self) {
+      let client = try HTTPClient(from: options, withDefaultEndpoint: "https://localhost:1234")
+      print("client=\(client)")
+    }
+    guard case let .invalidEndpoint(msg) = error else {
+      Issue.record("Mismatched error type, want .invalidEndpoint, got=\(error).")
+      return
+    }
+    #expect(msg.contains(input), "error=\(error)")
+  }
+
+  @Test(arguments: [
+    "bad-bad-bad",
+    "htt://localhost:1",
+    "file:///etc/passwd",
+    "http:///",
+    "https:///",
+  ]) func badDefaultEndpoint(input: String) throws {
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with {
+      $0.credentials = credentials
+    }
+    let error = #expect(throws: ClientError.self) {
+      let _ = try HTTPClient(from: options, withDefaultEndpoint: input)
+    }
+    guard case let .invalidEndpoint(msg) = error else {
+      Issue.record("Mismatched error type, want .invalidEndpoint, got=\(error).")
+      return
+    }
+    #expect(msg.contains(input), "error=\(error)")
+  }
+
   @Test func postRequest() async throws {
     let endpoint = "http://localhost:8080"
     let path = "/v1/projects/my-project/secrets"
