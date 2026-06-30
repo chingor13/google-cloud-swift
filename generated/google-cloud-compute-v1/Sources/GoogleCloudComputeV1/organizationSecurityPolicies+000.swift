@@ -371,11 +371,6 @@
       func insert(request: OrganizationSecurityPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.insert`.
-      func insert(
-        body: SecurityPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.list`.
       func list(request: OrganizationSecurityPoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.SecurityPolicyList
@@ -385,25 +380,14 @@
         byItem: OrganizationSecurityPoliciesClient.ListRequest
       ) throws -> any AsyncSequence<SecurityPolicy, Swift.Error>
 
-      /// See `OrganizationSecurityPoliciesClient.list`.
-      func list() throws -> any AsyncSequence<SecurityPolicy, Swift.Error>
-
       /// See `OrganizationSecurityPoliciesClient.listAssociations`.
       func listAssociations(request: OrganizationSecurityPoliciesClient.ListAssociationsRequest)
         async throws -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse
-
-      /// See `OrganizationSecurityPoliciesClient.listAssociations`.
-      func listAssociations() async throws
-        -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse
 
       /// See `OrganizationSecurityPoliciesClient.listPreconfiguredExpressionSets`.
       func listPreconfiguredExpressionSets(
         request: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
-
-      /// See `OrganizationSecurityPoliciesClient.listPreconfiguredExpressionSets`.
-      func listPreconfiguredExpressionSets() async throws
-        -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
 
       /// See `OrganizationSecurityPoliciesClient.move`.
       func move(request: OrganizationSecurityPoliciesClient.MoveRequest) async throws
@@ -728,15 +712,6 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
-    public func insert(
-      body: SecurityPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.InsertRequest().with {
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
     public func list(request: OrganizationSecurityPoliciesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.SecurityPolicyList
     {
@@ -765,12 +740,6 @@
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
-    public func list() throws -> any AsyncSequence<SecurityPolicy, Swift.Error> {
-      let request = OrganizationSecurityPoliciesClient.ListRequest().with {
-      }
-      return try self.list(byItem: request)
-    }
-
     public func listAssociations(
       request: OrganizationSecurityPoliciesClient.ListAssociationsRequest
     ) async throws -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse {
@@ -784,14 +753,6 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
-    public func listAssociations() async throws
-      -> GoogleCloudComputeV1.OrganizationSecurityPoliciesListAssociationsResponse
-    {
-      let request = OrganizationSecurityPoliciesClient.ListAssociationsRequest().with {
-      }
-      return try await self.listAssociations(request: request)
-    }
-
     public func listPreconfiguredExpressionSets(
       request: OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest
     ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse {
@@ -803,15 +764,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func listPreconfiguredExpressionSets() async throws
-      -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
-    {
-      let request = OrganizationSecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest().with
-      {
-      }
-      return try await self.listPreconfiguredExpressionSets(request: request)
     }
 
     public func move(request: OrganizationSecurityPoliciesClient.MoveRequest) async throws

@@ -122,9 +122,6 @@
         byItem: GlobalOrganizationOperationsClient.ListRequest
       ) throws -> any AsyncSequence<Operation, Swift.Error>
 
-      /// See `GlobalOrganizationOperationsClient.list`.
-      func list() throws -> any AsyncSequence<Operation, Swift.Error>
-
       /// See `GlobalOrganizationOperationsClient.delete`.
       func delete(
         request: GlobalOrganizationOperationsClient.DeleteRequest,
@@ -220,12 +217,6 @@
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
-    }
-
-    public func list() throws -> any AsyncSequence<Operation, Swift.Error> {
-      let request = GlobalOrganizationOperationsClient.ListRequest().with {
-      }
-      return try self.list(byItem: request)
     }
   }
 #endif

@@ -311,11 +311,6 @@
       func insert(request: FirewallPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `FirewallPoliciesClient.insert`.
-      func insert(
-        body: FirewallPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `FirewallPoliciesClient.list`.
       func list(request: FirewallPoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.FirewallPolicyList
@@ -325,15 +320,8 @@
         byItem: FirewallPoliciesClient.ListRequest
       ) throws -> any AsyncSequence<FirewallPolicy, Swift.Error>
 
-      /// See `FirewallPoliciesClient.list`.
-      func list() throws -> any AsyncSequence<FirewallPolicy, Swift.Error>
-
       /// See `FirewallPoliciesClient.listAssociations`.
       func listAssociations(request: FirewallPoliciesClient.ListAssociationsRequest) async throws
-        -> GoogleCloudComputeV1.FirewallPoliciesListAssociationsResponse
-
-      /// See `FirewallPoliciesClient.listAssociations`.
-      func listAssociations() async throws
         -> GoogleCloudComputeV1.FirewallPoliciesListAssociationsResponse
 
       /// See `FirewallPoliciesClient.move`.
@@ -691,15 +679,6 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
-    public func insert(
-      body: FirewallPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = FirewallPoliciesClient.InsertRequest().with {
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
     public func list(request: FirewallPoliciesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.FirewallPolicyList
     {
@@ -727,12 +706,6 @@
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
-    public func list() throws -> any AsyncSequence<FirewallPolicy, Swift.Error> {
-      let request = FirewallPoliciesClient.ListRequest().with {
-      }
-      return try self.list(byItem: request)
-    }
-
     public func listAssociations(request: FirewallPoliciesClient.ListAssociationsRequest)
       async throws -> GoogleCloudComputeV1.FirewallPoliciesListAssociationsResponse
     {
@@ -744,14 +717,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.FirewallPoliciesListAssociationsResponse {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func listAssociations() async throws
-      -> GoogleCloudComputeV1.FirewallPoliciesListAssociationsResponse
-    {
-      let request = FirewallPoliciesClient.ListAssociationsRequest().with {
-      }
-      return try await self.listAssociations(request: request)
     }
 
     public func move(request: FirewallPoliciesClient.MoveRequest) async throws
