@@ -79,16 +79,23 @@ public struct StorageClientOptions: Sendable {
     /// Default configuration inherited by data-plane operations (e.g., Uploads)
     public var upload: UploadOptions
 
-    // Note: Exact property signatures and additional categorized options
-    // will be finalized during implementation.
+    public init() {}
+
+    /// Chaining configuration helper matching project idioms
+    public func with(_ config: (inout Self) throws -> Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+    }
 }
 ```
 
 ```swift
-// Configuration
-var storageOptions = StorageClientOptions()
-storageOptions.client.credentials = ...
-storageOptions.upload.validation = .md5
+// Configuration using `.with` chaining
+let storageOptions = StorageClientOptions().with {
+    $0.client.credentials = ...
+    $0.upload.validation = .md5
+}
 
 // Initialization
 let storage = try StorageClient(storageOptions)
