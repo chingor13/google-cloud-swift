@@ -72,10 +72,16 @@
     ///
     /// [google.cloud.compute.v1.NetworkAttachmentConnectedEndpoint.status]: <doc:NetworkAttachmentConnectedEndpoint/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The consumer allows traffic from the producer to reach its VPC.
       case accepted
+      /// The consumer network attachment no longer exists.
       case closed
+      /// The consumer needs to take further action before traffic can be served.
       case needsAttention
+      /// The consumer neither allows nor prohibits traffic
+      /// from the producer to reach its VPC.
       case pending
+      /// The consumer prohibits traffic from the producer to reach its VPC.
       case rejected
       case unspecified
       /// Encodes an unknown integer value.

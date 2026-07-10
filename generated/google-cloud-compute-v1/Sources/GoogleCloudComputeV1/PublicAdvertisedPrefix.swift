@@ -202,7 +202,13 @@
     ///
     /// [google.cloud.compute.v1.PublicAdvertisedPrefix.byoipApiVersion]: <doc:PublicAdvertisedPrefix/ByoipApiVersion>
     public enum ByoipApiVersion: Codable, Equatable, Sendable {
+      /// This public advertised prefix can be used to create both regional and
+      /// global public delegated prefixes. It usually takes 4 weeks to create or
+      /// delete a public delegated prefix. The BGP status cannot be changed.
       case v1
+      /// This public advertised prefix can only be used to create regional public
+      /// delegated prefixes. Public delegated prefix creation and deletion takes
+      /// minutes and the BGP status can be modified.
       case v2
       /// Encodes an unknown integer value.
       ///
@@ -300,7 +306,13 @@
     ///
     /// [google.cloud.compute.v1.PublicAdvertisedPrefix.ipv6AccessType]: <doc:PublicAdvertisedPrefix/Ipv6AccessType>
     public enum Ipv6AccessType: Codable, Equatable, Sendable {
+      /// Default IPv6 access type. The prefix will be announced to the internet.
+      /// All children Public Delegated Prefixes will have IPv6 access type as
+      /// EXTERNAL.
       case external
+      /// The prefix will not be announced to the internet. Prefix will be used
+      /// privately within Cloud. All children Public Delegated Prefixes
+      /// will have IPv6 access type as INTERNAL.
       case `internal`
       /// Encodes an unknown integer value.
       ///
@@ -398,8 +410,14 @@
     ///
     /// [google.cloud.compute.v1.PublicAdvertisedPrefix.pdpScope]: <doc:PublicAdvertisedPrefix/PdpScope>
     public enum PdpScope: Codable, Equatable, Sendable {
+      /// The public delegated prefix is global only. The provisioning will take ~4
+      /// weeks.
       case global
+      /// The public delegated prefixes is BYOIP V1 legacy prefix. This is output
+      /// only value and no longer supported in BYOIP V2.
       case globalAndRegional
+      /// The public delegated prefix is regional only. The provisioning will take
+      /// a few minutes.
       case regional
       /// Encodes an unknown integer value.
       ///
@@ -502,14 +520,23 @@
     ///
     /// [google.cloud.compute.v1.PublicAdvertisedPrefix.status]: <doc:PublicAdvertisedPrefix/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The prefix is announced to Internet.
       case announcedToInternet
+      /// RPKI validation is complete.
       case initial
+      /// The prefix is fully configured.
       case prefixConfigurationComplete
+      /// The prefix is being configured.
       case prefixConfigurationInProgress
+      /// The prefix is being removed.
       case prefixRemovalInProgress
+      /// User has configured the PTR.
       case ptrConfigured
+      /// The prefix is currently withdrawn but ready to be announced.
       case readyToAnnounce
+      /// Reverse DNS lookup failed.
       case reverseDnsLookupFailed
+      /// Reverse DNS lookup is successful.
       case validated
       /// Encodes an unknown integer value.
       ///

@@ -49,8 +49,13 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Binary Authorization mode of operation.
   public enum EvaluationMode: Codable, Equatable, Sendable {
+    /// Default value
     case unspecified
+    /// Disable BinaryAuthorization
     case disabled
+    /// Enforce Kubernetes admission requests with BinaryAuthorization using the
+    /// project's singleton policy. This is equivalent to setting the
+    /// enabled boolean to true.
     case projectSingletonPolicyEnforce
     /// Encodes an unknown integer value.
     ///

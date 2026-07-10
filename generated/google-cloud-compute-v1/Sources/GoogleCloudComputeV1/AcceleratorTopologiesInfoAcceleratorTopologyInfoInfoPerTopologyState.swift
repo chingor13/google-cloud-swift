@@ -50,10 +50,17 @@
     ///
     /// [google.cloud.compute.v1.AcceleratorTopologiesInfoAcceleratorTopologyInfoInfoPerTopologyState.state]: <doc:AcceleratorTopologiesInfoAcceleratorTopologyInfoInfoPerTopologyState/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The accelerator topology is available.
       case available
+      /// The accelerator topology is degraded. The underlying capacity is not in a
+      /// healthy state and is not available.
       case degraded
+      /// The accelerator topology is running. If there are both running and
+      /// degraded hosts within a topology, DEGRADED state will be returned.
       case running
+      /// The state of the topology is unspecified.
       case topologyStateUnspecified
+      /// This value has been deprecated and is no longer used.
       case unhealthy
       /// Encodes an unknown integer value.
       ///

@@ -51,8 +51,11 @@
     ///
     /// [google.cloud.compute.v1.AllocationResourceStatusHealthInfo.healthStatus]: <doc:AllocationResourceStatusHealthInfo/HealthStatus>
     public enum HealthStatus: Codable, Equatable, Sendable {
+      /// The reservation is degraded.
       case degraded
+      /// The reservation is healthy.
       case healthy
+      /// The health status of the reservation is unspecified.
       case unspecified
       /// Encodes an unknown integer value.
       ///

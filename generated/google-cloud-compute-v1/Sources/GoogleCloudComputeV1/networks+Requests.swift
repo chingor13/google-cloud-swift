@@ -591,7 +591,9 @@
       ///
       /// [google.cloud.compute.v1.networks.listPeeringRoutesRequest.direction]: <doc:NetworksClient/ListPeeringRoutesRequest/Direction>
       public enum Direction: Codable, Equatable, Sendable {
+        /// For routes exported from peer network.
         case incoming
+        /// For routes exported from local network.
         case outgoing
         /// Encodes an unknown integer value.
         ///

@@ -49,9 +49,13 @@
     ///
     /// [google.cloud.compute.v1.ShareSettings.shareType]: <doc:ShareSettings/ShareType>
     public enum ShareType: Codable, Equatable, Sendable {
+      /// Default value.
       case local
+      /// Shared-reservation is open to entire Organization
       case organization
+      /// Default value. This value is unused.
       case unspecified
+      /// Shared-reservation is open to specific projects
       case specificProjects
       /// Encodes an unknown integer value.
       ///

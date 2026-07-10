@@ -46,8 +46,11 @@ public struct Identity: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Type of service account to use for the dataset configuration.
   public enum IdentityType: Codable, Equatable, Sendable {
+    /// Default is unspecified and should not be used.
     case unspecified
+    /// Google managed service account per resource.
     case perConfig
+    /// Google managed service account per project.
     case perProject
     /// Encodes an unknown integer value.
     ///

@@ -53,10 +53,21 @@
     ///
     /// [google.cloud.compute.v1.FutureResourcesRecommendationOtherLocation.status]: <doc:FutureResourcesRecommendationOtherLocation/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The requested resources are offered in this location
+      /// but the requested time window is does not meet the required conditions.
       case conditionsNotMet
+      /// The requested resources are not offered in this location.
+      /// Retrying the request will not change this status.
       case notSupported
+      /// The requested resources are offered in this location
+      /// and the requested time window is accepted
+      /// but there is no capacity within the requested time window.
       case noCapacity
+      /// Default value, unused.
       case otherLocationStatusUndefined
+      /// The requested resources are offered in this location
+      /// and it is possible to request them. However, another location
+      /// was better and was recommended.
       case recommended
       /// Encodes an unknown integer value.
       ///

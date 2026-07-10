@@ -218,9 +218,13 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// The current connection state.
     public enum State: Codable, Equatable, Sendable {
+      /// Unknown.
       case unspecified
+      /// Connected.
       case connected
+      /// Still connecting.
       case connecting
+      /// Error occurred.
       case error
       /// Encodes an unknown integer value.
       ///
@@ -337,8 +341,11 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Routing mode.
   public enum BgpRoutingMode: Codable, Equatable, Sendable {
+    /// Unknown.
     case unspecified
+    /// Regional mode.
     case regional
+    /// Global mode.
     case global
     /// Encodes an unknown integer value.
     ///

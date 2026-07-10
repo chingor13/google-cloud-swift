@@ -43,8 +43,12 @@ public struct ManagedOpenTelemetryConfig: Codable, Equatable, GoogleCloudWkt._An
 
   /// Scope is the scope of the Managed OpenTelemetry pipeline.
   public enum Scope: Codable, Equatable, Sendable {
+    /// SCOPE_UNSPECIFIED is when the scope is not set.
     case unspecified
+    /// NONE is used to disable the Managed OpenTelemetry pipeline.
     case `none`
+    /// COLLECTION_AND_INSTRUMENTATION_COMPONENTS is used to enable the Managed
+    /// OpenTelemetry pipeline for collection and instrumentation components.
     case collectionAndInstrumentationComponents
     /// Encodes an unknown integer value.
     ///

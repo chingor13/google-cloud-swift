@@ -47,8 +47,16 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
 
   /// Scope of exclusion.
   public enum Scope: Codable, Equatable, Sendable {
+    /// NO_UPGRADES excludes all upgrades, including patch upgrades and minor
+    /// upgrades across control planes and nodes. This is the default exclusion
+    /// behavior.
     case noUpgrades
+    /// NO_MINOR_UPGRADES excludes all minor upgrades for the cluster, only
+    /// patches are allowed.
     case noMinorUpgrades
+    /// NO_MINOR_OR_NODE_UPGRADES excludes all minor upgrades for the cluster,
+    /// and also exclude all node pool upgrades. Only control
+    /// plane patches are allowed.
     case noMinorOrNodeUpgrades
     /// Encodes an unknown integer value.
     ///
@@ -149,7 +157,11 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
 
   /// EndTimeBehavior specifies the behavior of the exclusion end time.
   public enum EndTimeBehavior: Codable, Equatable, Sendable {
+    /// END_TIME_BEHAVIOR_UNSPECIFIED is the default behavior, which is fixed
+    /// end time.
     case unspecified
+    /// UNTIL_END_OF_SUPPORT means the exclusion will be in effect until the end
+    /// of the support of the cluster's current version.
     case untilEndOfSupport
     /// Encodes an unknown integer value.
     ///

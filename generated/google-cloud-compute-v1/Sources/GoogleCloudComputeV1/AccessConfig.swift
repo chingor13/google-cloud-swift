@@ -149,9 +149,16 @@
     ///
     /// [google.cloud.compute.v1.AccessConfig.networkTier]: <doc:AccessConfig/NetworkTier>
     public enum NetworkTier: Codable, Equatable, Sendable {
+      /// Public internet quality with fixed bandwidth.
       case fixedStandard
+      /// High quality, Google-grade network tier, support for all networking
+      /// products.
       case premium
+      /// Public internet quality, only limited support for other networking
+      /// products.
       case standard
+      /// (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier
+      /// is expired or not configured.
       case standardOverridesFixedStandard
       /// Encodes an unknown integer value.
       ///

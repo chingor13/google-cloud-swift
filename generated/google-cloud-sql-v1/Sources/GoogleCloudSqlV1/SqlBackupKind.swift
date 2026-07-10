@@ -19,8 +19,11 @@
 
   /// Defines the supported backup kinds.
   public enum SqlBackupKind: Codable, Equatable, Sendable {
+    /// This is an unknown BackupKind.
     case unspecified
+    /// Snapshot-based backups.
     case snapshot
+    /// Physical backups.
     case physical
     /// Encodes an unknown integer value.
     ///

@@ -52,7 +52,9 @@
     ///
     /// [google.cloud.compute.v1.RegionInstanceGroupsListInstancesRequest.instanceState]: <doc:RegionInstanceGroupsListInstancesRequest/InstanceState>
     public enum InstanceState: Codable, Equatable, Sendable {
+      /// Matches any status of the instances, running, non-running and others.
       case all
+      /// Instance is in RUNNING state if it is running.
       case running
       /// Encodes an unknown integer value.
       ///

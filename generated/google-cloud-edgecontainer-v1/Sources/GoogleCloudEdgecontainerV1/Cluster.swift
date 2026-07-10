@@ -282,8 +282,13 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Represents the policy configuration about how user applications are
     /// deployed.
     public enum SharedDeploymentPolicy: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// User applications can be deployed both on control plane and worker
+      /// nodes.
       case allowed
+      /// User applications can not be deployed on control plane nodes and can
+      /// only be deployed on worker nodes.
       case disallowed
       /// Encodes an unknown integer value.
       ///
@@ -634,8 +639,11 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Indicates the maintenance event type.
     public enum Type_: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// Upgrade initiated by users.
       case userInitiatedUpgrade
+      /// Upgrade driven by Google.
       case googleDrivenUpgrade
       /// Encodes an unknown integer value.
       ///
@@ -736,7 +744,9 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Indicates when the maintenance event should be performed.
     public enum Schedule: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// Immediately after receiving the request.
       case immediately
       /// Encodes an unknown integer value.
       ///
@@ -832,9 +842,13 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Indicates the maintenance event state.
     public enum State: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// The maintenance event is ongoing. The cluster might be unusable.
       case reconciling
+      /// The maintenance event succeeded.
       case succeeded
+      /// The maintenance event failed.
       case failed
       /// Encodes an unknown integer value.
       ///
@@ -1015,9 +1029,14 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// The connection state.
     public enum State: Codable, Equatable, Sendable {
+      /// Unknown connection state.
       case unspecified
+      /// This cluster is currently disconnected from Google.
       case disconnected
+      /// This cluster is currently connected to Google.
       case connected
+      /// This cluster is currently connected to Google, but may have recently
+      /// reconnected after a disconnection. It is still syncing back.
       case connectedAndSyncing
       /// Encodes an unknown integer value.
       ///
@@ -1134,11 +1153,18 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Indicates the status of the cluster.
   public enum Status: Codable, Equatable, Sendable {
+    /// Status unknown.
     case unspecified
+    /// The cluster is being created.
     case provisioning
+    /// The cluster is created and fully usable.
     case running
+    /// The cluster is being deleted.
     case deleting
+    /// The status indicates that some errors occurred while reconciling/deleting
+    /// the cluster.
     case error
+    /// The cluster is undergoing some work such as version upgrades, etc.
     case reconciling
     /// Encodes an unknown integer value.
     ///
@@ -1254,8 +1280,11 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The release channel a cluster is subscribed to.
   public enum ReleaseChannel: Codable, Equatable, Sendable {
+    /// Unspecified release channel. This will default to the REGULAR channel.
     case unspecified
+    /// No release channel.
     case `none`
+    /// Regular release channel.
     case regular
     /// Encodes an unknown integer value.
     ///

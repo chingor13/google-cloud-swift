@@ -91,11 +91,18 @@ public struct Function: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Describes the current state of the function.
   public enum State: Codable, Equatable, Sendable {
+    /// Not specified. Invalid state.
     case unspecified
+    /// Function has been successfully deployed and is serving.
     case active
+    /// Function deployment failed and the function is not serving.
     case failed
+    /// Function is being created or updated.
     case deploying
+    /// Function is being deleted.
     case deleting
+    /// Function deployment failed and the function serving state is undefined.
+    /// The function should be updated or deleted to move it out of this state.
     case unknown
     /// Encodes an unknown integer value.
     ///

@@ -190,8 +190,16 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Docker Registry to use for storing function Docker images.
   public enum DockerRegistry: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Docker images will be stored in multi-regional Container Registry
+    /// repositories named `gcf`.
     case containerRegistry
+    /// Docker images will be stored in regional Artifact Registry repositories.
+    /// By default, GCF will create and use repositories named `gcf-artifacts`
+    /// in every region in which a function is deployed. But the repository to
+    /// use can also be specified by the user using the `docker_repository`
+    /// field.
     case artifactRegistry
     /// Encodes an unknown integer value.
     ///

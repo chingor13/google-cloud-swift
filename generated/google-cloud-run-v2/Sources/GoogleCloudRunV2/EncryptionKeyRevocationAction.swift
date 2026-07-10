@@ -18,8 +18,11 @@ import Foundation
 
 /// Specifies behavior if an encryption key used by a resource is revoked.
 public enum EncryptionKeyRevocationAction: Codable, Equatable, Sendable {
+  /// Unspecified
   case unspecified
+  /// Prevents the creation of new instances.
   case preventNew
+  /// Shuts down existing instances, and prevents creation of new ones.
   case shutdown
   /// Encodes an unknown integer value.
   ///

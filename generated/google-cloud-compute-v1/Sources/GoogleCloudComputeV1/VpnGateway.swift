@@ -181,7 +181,9 @@
     ///
     /// [google.cloud.compute.v1.VpnGateway.gatewayIpVersion]: <doc:VpnGateway/GatewayIpVersion>
     public enum GatewayIpVersion: Codable, Equatable, Sendable {
+      /// Every HA-VPN gateway interface is configured with an IPv4 address.
       case ipv4
+      /// Every HA-VPN gateway interface is configured with an IPv6 address.
       case ipv6
       /// Encodes an unknown integer value.
       ///
@@ -279,8 +281,11 @@
     ///
     /// [google.cloud.compute.v1.VpnGateway.stackType]: <doc:VpnGateway/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// Enable VPN gateway with both IPv4 and IPv6 protocols.
       case ipv4Ipv6
+      /// Enable VPN gateway with only IPv4 protocol.
       case ipv4Only
+      /// Enable VPN gateway with only IPv6 protocol.
       case ipv6Only
       /// Encodes an unknown integer value.
       ///

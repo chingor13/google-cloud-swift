@@ -115,8 +115,11 @@
     ///
     /// [google.cloud.compute.v1.SourceInstanceProperties.keyRevocationActionType]: <doc:SourceInstanceProperties/KeyRevocationActionType>
     public enum KeyRevocationActionType: Codable, Equatable, Sendable {
+      /// Default value. This value is unused.
       case unspecified
+      /// Indicates user chose no operation.
       case `none`
+      /// Indicates user chose to opt for VM shutdown on key revocation.
       case stop
       /// Encodes an unknown integer value.
       ///
@@ -219,8 +222,11 @@
     ///
     /// [google.cloud.compute.v1.SourceInstanceProperties.postKeyRevocationActionType]: <doc:SourceInstanceProperties/PostKeyRevocationActionType>
     public enum PostKeyRevocationActionType: Codable, Equatable, Sendable {
+      /// Indicates user chose no operation.
       case noop
+      /// Default value. This value is unused.
       case unspecified
+      /// Indicates user chose to opt for VM shutdown on key revocation.
       case shutdown
       /// Encodes an unknown integer value.
       ///

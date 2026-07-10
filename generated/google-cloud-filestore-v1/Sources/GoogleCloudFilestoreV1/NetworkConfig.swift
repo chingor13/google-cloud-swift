@@ -78,7 +78,9 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Internet protocol versions supported by Filestore.
   public enum AddressMode: Codable, Equatable, Sendable {
+    /// Internet protocol not set.
     case unspecified
+    /// Use the IPv4 internet protocol.
     case modeIpv4
     /// Encodes an unknown integer value.
     ///
@@ -174,8 +176,13 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Available connection modes.
   public enum ConnectMode: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// Connect via direct peering to the Filestore service.
     case directPeering
+    /// Connect to your Filestore instance using Private Service
+    /// Access. Private services access provides an IP address range for multiple
+    /// Google Cloud services, including Filestore.
     case privateServiceAccess
     /// Encodes an unknown integer value.
     ///

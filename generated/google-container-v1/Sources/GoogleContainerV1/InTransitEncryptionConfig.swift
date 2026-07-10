@@ -18,8 +18,12 @@ import Foundation
 
 /// Options for in-transit encryption.
 public enum InTransitEncryptionConfig: Codable, Equatable, Sendable {
+  /// Unspecified, will be inferred as default -
+  /// IN_TRANSIT_ENCRYPTION_UNSPECIFIED.
   case unspecified
+  /// In-transit encryption is disabled.
   case inTransitEncryptionDisabled
+  /// Data in-transit is encrypted using inter-node transparent encryption.
   case inTransitEncryptionInterNodeTransparent
   /// Encodes an unknown integer value.
   ///

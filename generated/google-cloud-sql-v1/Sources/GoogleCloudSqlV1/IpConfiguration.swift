@@ -123,9 +123,36 @@
 
     /// The SSL options for database connections.
     public enum SslMode: Codable, Equatable, Sendable {
+      /// The SSL mode is unknown.
       case unspecified
+      /// Allow non-SSL/non-TLS and SSL/TLS connections.
+      /// For SSL connections to MySQL and PostgreSQL, the client certificate
+      /// isn't verified.
+      ///
+      /// When this value is used, the legacy `require_ssl` flag must be false or
+      /// cleared to avoid a conflict between the values of the two flags.
       case allowUnencryptedAndEncrypted
+      /// Only allow connections encrypted with SSL/TLS.
+      /// For SSL connections to MySQL and PostgreSQL, the client certificate
+      /// isn't verified.
+      ///
+      /// When this value is used, the legacy `require_ssl` flag must be false or
+      /// cleared to avoid a conflict between the values of the two flags.
       case encryptedOnly
+      /// Only allow connections encrypted with SSL/TLS and with valid
+      /// client certificates.
+      ///
+      /// When this value is used, the legacy `require_ssl` flag must be true or
+      /// cleared to avoid the conflict between values of two flags.
+      /// PostgreSQL clients or users that connect using IAM database
+      /// authentication must use either the
+      /// [Cloud SQL Auth
+      /// Proxy](https://cloud.google.com/sql/docs/postgres/connect-auth-proxy) or
+      /// [Cloud SQL
+      /// Connectors](https://cloud.google.com/sql/docs/postgres/connect-connectors)
+      /// to enforce client identity verification.
+      ///
+      /// Only applicable to MySQL and PostgreSQL. Not applicable to SQL Server.
       case trustedClientCertificateRequired
       /// Encodes an unknown integer value.
       ///
@@ -231,9 +258,16 @@
 
     /// Various Certificate Authority (CA) modes for certificate signing.
     public enum CaMode: Codable, Equatable, Sendable {
+      /// CA mode is unspecified. It is effectively the same as
+      /// `GOOGLE_MANAGED_INTERNAL_CA`.
       case unspecified
+      /// Google-managed self-signed internal CA.
       case googleManagedInternalCa
+      /// Google-managed regional CA part of root CA hierarchy hosted on Google
+      /// Cloud's Certificate Authority Service (CAS).
       case googleManagedCasCa
+      /// Customer-managed CA hosted on Google Cloud's Certificate Authority
+      /// Service (CAS).
       case customerManagedCasCa
       /// Encodes an unknown integer value.
       ///
@@ -339,8 +373,17 @@
 
     /// Settings for automatic server certificate rotation.
     public enum ServerCertificateRotationMode: Codable, Equatable, Sendable {
+      /// Unspecified: no automatic server certificate rotation.
       case unspecified
+      /// No automatic server certificate rotation. The user must [manage server
+      /// certificate
+      /// rotation](/sql/docs/mysql/manage-ssl-instance#rotate-server-certificate-cas)
+      /// on their side.
       case noAutomaticRotation
+      /// Automatic server certificate rotation during Cloud SQL scheduled
+      /// maintenance or self-service maintenance updates. Requires
+      /// `server_ca_mode` to be `GOOGLE_MANAGED_CAS_CA` or
+      /// `CUSTOMER_MANAGED_CAS_CA`.
       case automaticRotationDuringMaintenance
       /// Encodes an unknown integer value.
       ///

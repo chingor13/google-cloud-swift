@@ -68,22 +68,41 @@
     ///
     /// [google.cloud.compute.v1.UpcomingMaintenance.maintenanceReasons]: <doc:UpcomingMaintenance/MaintenanceReasons>
     public enum MaintenanceReasons: Codable, Equatable, Sendable {
+      /// Maintenance due to disk errors.
       case failureDisk
+      /// Maintenance due to GPU errors.
       case failureGpu
+      /// Maintenance due to customer reported multiple faulty hosts via R&R
+      /// Subblock API.
       case failureGpuMultipleFaultyHostsCustomerReported
+      /// Maintenance due to customer reported NVLink switch failure via R&R
+      /// Subblock API.
       case failureGpuNvlinkSwitchCustomerReported
+      /// Maintenance due to high GPU temperature.
       case failureGpuTemperature
+      /// Maintenance due to GPU xid failure.
       case failureGpuXid
+      /// Maintenance due to infrastructure errors.
       case failureInfra
+      /// Maintenance due to interface errors.
       case failureInterface
+      /// Maintenance due to memory errors.
       case failureMemory
+      /// Maintenance due to network errors.
       case failureNetwork
+      /// Maintenance due to NVLink failure.
       case failureNvlink
+      /// Maintenance due to redundant hardware fault.
       case failureRedundantHardwareFault
+      /// Maintenance due to TPU errors.
       case failureTpu
+      /// Maintenance due to infrastructure relocation.
       case infrastructureRelocation
+      /// Unknown maintenance reason. Do not use this value.
       case maintenanceReasonUnknown
+      /// Maintenance due to planned network update.
       case plannedNetworkUpdate
+      /// Maintenance due to planned update to the instance.
       case plannedUpdate
       /// Encodes an unknown integer value.
       ///
@@ -260,8 +279,11 @@
     ///
     /// [google.cloud.compute.v1.UpcomingMaintenance.maintenanceStatus]: <doc:UpcomingMaintenance/MaintenanceStatus>
     public enum MaintenanceStatus: Codable, Equatable, Sendable {
+      /// There is ongoing maintenance on this VM.
       case ongoing
+      /// There is pending maintenance.
       case pending
+      /// Unknown maintenance status. Do not use this value.
       case unknown
       /// Encodes an unknown integer value.
       ///
@@ -364,9 +386,16 @@
     ///
     /// [google.cloud.compute.v1.UpcomingMaintenance.type]: <doc:UpcomingMaintenance/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Multiple maintenance types in one window.
+      /// This is only intended to be used for groups.
       case multiple
+      /// Scheduled maintenance (e.g. maintenance after uptime guarantee is
+      /// complete).
       case scheduled
+      /// No type specified. Do not use this value.
       case unknownType
+      /// Unscheduled maintenance (e.g. emergency maintenance during
+      /// uptime guarantee).
       case unscheduled
       /// Encodes an unknown integer value.
       ///

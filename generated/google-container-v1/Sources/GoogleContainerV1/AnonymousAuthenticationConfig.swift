@@ -44,8 +44,11 @@ public struct AnonymousAuthenticationConfig: Codable, Equatable, GoogleCloudWkt.
   /// Mode defines the mode of anonymous authentication
   /// allowed in the cluster.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Default value not specified.
     case unspecified
+    /// Anonymous authentication is allowed for all endpoints.
     case enabled
+    /// Anonymous authentication is allowed for only health check endpoints.
     case limited
     /// Encodes an unknown integer value.
     ///

@@ -94,10 +94,14 @@
     ///
     /// [google.cloud.compute.v1.ResourcePolicy.status]: <doc:ResourcePolicy/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Resource policy is being created.
       case creating
+      /// Resource policy is being deleted.
       case deleting
+      /// Resource policy is expired and will not run again.
       case expired
       case invalid
+      /// Resource policy is ready to be used.
       case ready
       /// Encodes an unknown integer value.
       ///

@@ -19,9 +19,13 @@ import Foundation
 /// PrivateIPv6GoogleAccess controls whether and how the pods can communicate
 /// with Google Services through gRPC over IPv6.
 public enum PrivateIPv6GoogleAccess: Codable, Equatable, Sendable {
+  /// Default value. Same as DISABLED
   case privateIpv6GoogleAccessUnspecified
+  /// No private access to or from Google Services
   case privateIpv6GoogleAccessDisabled
+  /// Enables private IPv6 access to Google Services from GKE
   case privateIpv6GoogleAccessToGoogle
+  /// Enables private IPv6 access to and from Google Services
   case privateIpv6GoogleAccessBidirectional
   /// Encodes an unknown integer value.
   ///

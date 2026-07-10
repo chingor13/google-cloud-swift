@@ -50,8 +50,13 @@
 
     /// Reset SSL mode to selectively refresh the SSL materials.
     public enum ResetSslMode: Codable, Equatable, Sendable {
+      /// Reset SSL mode is not specified.
       case unspecified
+      /// Refresh all TLS configs. This is the default behaviour.
       case all
+      /// Refreshes the replication-related TLS configuration settings provided by
+      /// the primary instance.
+      /// Not applicable to on-premises replication instances.
       case syncFromPrimary
       /// Encodes an unknown integer value.
       ///

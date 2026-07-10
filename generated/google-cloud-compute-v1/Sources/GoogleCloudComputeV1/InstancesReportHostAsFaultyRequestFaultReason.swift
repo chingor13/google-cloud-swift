@@ -46,10 +46,13 @@
     ///
     /// [google.cloud.compute.v1.InstancesReportHostAsFaultyRequestFaultReason.behavior]: <doc:InstancesReportHostAsFaultyRequestFaultReason/Behavior>
     public enum Behavior: Codable, Equatable, Sendable {
+      /// Public reportable behaviors
       case unspecified
+      /// Any GPU or TPU errors or faults where the accelerator becomes unusable
       case chipError
       case performance
       case silentDataCorruption
+      /// Unrecoverable GPU error identified by an XID
       case unrecoverableGpuError
       /// Encodes an unknown integer value.
       ///

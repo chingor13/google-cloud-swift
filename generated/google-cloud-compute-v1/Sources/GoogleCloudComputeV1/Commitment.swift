@@ -387,6 +387,8 @@
     /// [google.cloud.compute.v1.Commitment.status]: <doc:Commitment/Status>
     public enum Status: Codable, Equatable, Sendable {
       case active
+      /// Deprecate CANCELED status. Will use separate status to differentiate
+      /// cancel by mergeCud or manual cancellation.
       case cancelled
       case creating
       case expired
@@ -531,16 +533,25 @@
       case memoryOptimizedM3
       case memoryOptimizedM4
       case memoryOptimizedM46Tb
+      /// CUD bucket for X4 machine with 1440 vCPUs and 24TB of memory.
       case memoryOptimizedX4144024T
       case memoryOptimizedX416Tb
+      /// CUD bucket for X4 machine with 1920 vCPUs and 32TB of memory.
       case memoryOptimizedX4192032T
       case memoryOptimizedX424Tb
       case memoryOptimizedX432Tb
+      /// CUD bucket for X4 machine with 480 vCPUs and 6TB of memory.
       case memoryOptimizedX44806T
+      /// CUD bucket for X4 machine with 480 vCPUs and 8TB of memory.
       case memoryOptimizedX44808T
+      /// CUD bucket for X4 machine with 960 vCPUs and 12TB of memory.
       case memoryOptimizedX496012T
+      /// CUD bucket for X4 machine with 960 vCPUs and 16TB of memory.
       case memoryOptimizedX496016T
       case storageOptimizedZ3
+      /// Note for internal users: When adding a new enum Type for v1, make sure
+      /// to also add it in the comment for the `optional Type type` definition.
+      /// This ensures that the public documentation displays the new enum Type.
       case unspecified
       /// Encodes an unknown integer value.
       ///

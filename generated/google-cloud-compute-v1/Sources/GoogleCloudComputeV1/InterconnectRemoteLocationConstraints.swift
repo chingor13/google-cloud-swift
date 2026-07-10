@@ -77,7 +77,13 @@
     ///
     /// [google.cloud.compute.v1.InterconnectRemoteLocationConstraints.portPairRemoteLocation]: <doc:InterconnectRemoteLocationConstraints/PortPairRemoteLocation>
     public enum PortPairRemoteLocation: Codable, Equatable, Sendable {
+      /// If PORT_PAIR_MATCHING_REMOTE_LOCATION, the remote cloud provider
+      /// allocates ports in pairs, and the user should choose the same remote
+      /// location for both ports.
       case portPairMatchingRemoteLocation
+      /// If PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION, a user may opt to provision
+      /// a redundant pair of Cross-Cloud Interconnects using two different
+      /// remote locations in the same city.
       case portPairUnconstrainedRemoteLocation
       /// Encodes an unknown integer value.
       ///
@@ -175,7 +181,14 @@
     ///
     /// [google.cloud.compute.v1.InterconnectRemoteLocationConstraints.portPairVlan]: <doc:InterconnectRemoteLocationConstraints/PortPairVlan>
     public enum PortPairVlan: Codable, Equatable, Sendable {
+      /// If PORT_PAIR_MATCHING_VLAN, the Interconnect for this attachment is
+      /// part of a pair of ports that should have matching VLAN allocations.
+      /// This occurs with Cross-Cloud Interconnect to Azure remote locations.
+      /// While GCP's API does not explicitly group pairs of ports, the UI uses
+      /// this field to ensure matching VLAN ids when configuring a redundant
+      /// VLAN pair.
       case portPairMatchingVlan
+      /// PORT_PAIR_UNCONSTRAINED_VLAN means there is no constraint.
       case portPairUnconstrainedVlan
       /// Encodes an unknown integer value.
       ///

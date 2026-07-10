@@ -87,9 +87,22 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// safely ignore unrecognized event types or explicitly specify which event
   /// types they are prepared to accept.
   public enum EventType: Codable, Equatable, Sendable {
+    /// Illegal value, to avoid allowing a default.
     case unspecified
+    /// `TransferOperation` completed with status
+    /// [SUCCESS][google.storagetransfer.v1.TransferOperation.Status.SUCCESS].
+    ///
+    /// [google.storagetransfer.v1.TransferOperation.Status.SUCCESS]: <doc:TransferOperation/Status/success>
     case transferOperationSuccess
+    /// `TransferOperation` completed with status
+    /// [FAILED][google.storagetransfer.v1.TransferOperation.Status.FAILED].
+    ///
+    /// [google.storagetransfer.v1.TransferOperation.Status.FAILED]: <doc:TransferOperation/Status/failed>
     case transferOperationFailed
+    /// `TransferOperation` completed with status
+    /// [ABORTED][google.storagetransfer.v1.TransferOperation.Status.ABORTED].
+    ///
+    /// [google.storagetransfer.v1.TransferOperation.Status.ABORTED]: <doc:TransferOperation/Status/aborted>
     case transferOperationAborted
     /// Encodes an unknown integer value.
     ///
@@ -195,8 +208,13 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Enum for specifying the format of a notification message's payload.
   public enum PayloadFormat: Codable, Equatable, Sendable {
+    /// Illegal value, to avoid allowing a default.
     case unspecified
+    /// No payload is included with the notification.
     case `none`
+    /// `TransferOperation` is [formatted as a JSON
+    /// response](https://developers.google.com/protocol-buffers/docs/proto3#json),
+    /// in application/json.
     case json
     /// Encodes an unknown integer value.
     ///

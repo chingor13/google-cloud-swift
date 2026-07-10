@@ -46,7 +46,10 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupsListInstancesRequest.instanceState]: <doc:InstanceGroupsListInstancesRequest/InstanceState>
     public enum InstanceState: Codable, Equatable, Sendable {
+      /// Includes all instances in the generated list regardless of their state.
       case all
+      /// Includes instances in the generated list only if they have a RUNNING
+      /// state.
       case running
       /// Encodes an unknown integer value.
       ///

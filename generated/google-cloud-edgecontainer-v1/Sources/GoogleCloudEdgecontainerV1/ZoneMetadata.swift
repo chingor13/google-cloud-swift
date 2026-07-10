@@ -48,8 +48,13 @@ public struct ZoneMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Type of the rack.
   public enum RackType: Codable, Equatable, Sendable {
+    /// Unspecified rack type, single rack also belongs to this type.
     case unspecified
+    /// Base rack type, a pair of two modified Config-1 racks containing
+    /// Aggregation switches.
     case base
+    /// Expansion rack type, also known as standalone racks,
+    /// added by customers on demand.
     case expansion
     /// Encodes an unknown integer value.
     ///

@@ -19,8 +19,12 @@ import Foundation
 /// The view, which determines what version information is returned in a
 /// response.
 public enum VersionView: Codable, Equatable, Sendable {
+  /// The default / unset value.
+  /// The API will default to the BASIC view.
   case unspecified
+  /// Includes basic information about the version, but not any related tags.
   case basic
+  /// Include everything.
   case full
   /// Encodes an unknown integer value.
   ///

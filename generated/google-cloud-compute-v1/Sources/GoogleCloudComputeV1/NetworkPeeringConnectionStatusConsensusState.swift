@@ -51,11 +51,20 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState.deleteStatus]: <doc:NetworkPeeringConnectionStatusConsensusState/DeleteStatus>
     public enum DeleteStatus: Codable, Equatable, Sendable {
+      /// Both network admins have agreed this consensus peering connection can
+      /// be deleted.
       case deleteAcknowledged
       case unspecified
+      /// The local network admin requested to cancel their delete request
+      /// after DELETE_ACKNOWLEDGED.
       case localCancelRequested
+      /// Network admin has requested deletion of this peering connection.
       case localDeleteRequested
+      /// The peer network admin requested to cancel their delete request after
+      /// DELETE_ACKNOWLEDGED.
       case peerCancelRequested
+      /// The peer network admin has requested deletion of this peering
+      /// connection.
       case peerDeleteRequested
       /// Encodes an unknown integer value.
       ///
@@ -173,8 +182,13 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState.updateStatus]: <doc:NetworkPeeringConnectionStatusConsensusState/UpdateStatus>
     public enum UpdateStatus: Codable, Equatable, Sendable {
+      /// No pending configuration update proposals to the  peering connection.
       case inSync
+      /// The peer network admin has made an updatePeering call. The change is
+      /// awaiting acknowledgment from this peering's network admin.
       case pendingLocalAcknowledment
+      /// The local network admin has made an updatePeering call. The change
+      /// is awaiting acknowledgment from the peer network admin.
       case pendingPeerAcknowledgement
       case unspecified
       /// Encodes an unknown integer value.

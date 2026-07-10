@@ -49,10 +49,20 @@ public struct UsableSubnetworkSecondaryRange: Codable, Equatable, GoogleCloudWkt
 
   /// Status shows the current usage of a secondary IP range.
   public enum Status: Codable, Equatable, Sendable {
+    /// UNKNOWN is the zero value of the Status enum. It's not a valid status.
     case unknown
+    /// UNUSED denotes that this range is unclaimed by any cluster.
     case unused
+    /// IN_USE_SERVICE denotes that this range is claimed by cluster(s) for
+    /// services. User-managed services range can be shared between clusters
+    /// within the same subnetwork.
     case inUseService
+    /// IN_USE_SHAREABLE_POD denotes this range was created by the network admin
+    /// and is currently claimed by a cluster for pods. It can only be used by
+    /// other clusters as a pod range.
     case inUseShareablePod
+    /// IN_USE_MANAGED_POD denotes this range was created by GKE and is claimed
+    /// for pods. It cannot be used for other clusters.
     case inUseManagedPod
     /// Encodes an unknown integer value.
     ///

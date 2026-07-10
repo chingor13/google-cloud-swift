@@ -76,9 +76,12 @@
     ///
     /// [google.cloud.compute.v1.AdvancedMachineFeatures.performanceMonitoringUnit]: <doc:AdvancedMachineFeatures/PerformanceMonitoringUnit>
     public enum PerformanceMonitoringUnit: Codable, Equatable, Sendable {
+      /// Architecturally defined non-LLC events.
       case architectural
+      /// Most documented core/L2 and LLC events.
       case enhanced
       case unspecified
+      /// Most documented core/L2 events.
       case standard
       /// Encodes an unknown integer value.
       ///

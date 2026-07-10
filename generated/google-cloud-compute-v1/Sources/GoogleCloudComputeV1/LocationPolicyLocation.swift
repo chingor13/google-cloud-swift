@@ -48,8 +48,11 @@
     ///
     /// [google.cloud.compute.v1.LocationPolicyLocation.preference]: <doc:LocationPolicyLocation/Preference>
     public enum Preference: Codable, Equatable, Sendable {
+      /// Location is allowed for use.
       case allow
+      /// Location is prohibited.
       case deny
+      /// Default value, unused.
       case unspecified
       /// Encodes an unknown integer value.
       ///

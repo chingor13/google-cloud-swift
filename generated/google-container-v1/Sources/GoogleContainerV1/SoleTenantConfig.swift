@@ -102,8 +102,11 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Operator allows user to specify affinity or anti-affinity for the
     /// given key values.
     public enum Operator: Codable, Equatable, Sendable {
+      /// Invalid or unspecified affinity operator.
       case unspecified
+      /// Affinity operator.
       case `in`
+      /// Anti-affinity operator.
       case notIn
       /// Encodes an unknown integer value.
       ///

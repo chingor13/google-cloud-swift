@@ -189,8 +189,11 @@
     ///
     /// [google.cloud.compute.v1.AttachedDiskInitializeParams.architecture]: <doc:AttachedDiskInitializeParams/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -293,8 +296,12 @@
     ///
     /// [google.cloud.compute.v1.AttachedDiskInitializeParams.onUpdateAction]: <doc:AttachedDiskInitializeParams/OnUpdateAction>
     public enum OnUpdateAction: Codable, Equatable, Sendable {
+      /// Always recreate the disk.
       case recreateDisk
+      /// Recreate the disk if source (image, snapshot) of this disk is different
+      /// from source of existing disk.
       case recreateDiskIfSourceChanged
+      /// Use the existing disk, this is the default behaviour.
       case useExistingDisk
       /// Encodes an unknown integer value.
       ///

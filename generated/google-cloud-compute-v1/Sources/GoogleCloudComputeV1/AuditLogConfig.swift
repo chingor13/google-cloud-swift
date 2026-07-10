@@ -68,9 +68,13 @@
     ///
     /// [google.cloud.compute.v1.AuditLogConfig.logType]: <doc:AuditLogConfig/LogType>
     public enum LogType: Codable, Equatable, Sendable {
+      /// Admin reads. Example: CloudIAM getIamPolicy
       case adminRead
+      /// Data reads. Example: CloudSQL Users list
       case dataRead
+      /// Data writes. Example: CloudSQL Users create
       case dataWrite
+      /// Default case. Should never be this.
       case unspecified
       /// Encodes an unknown integer value.
       ///

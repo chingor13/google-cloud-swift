@@ -51,9 +51,13 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Provider lists the various in-cluster DNS providers.
   public enum Provider: Codable, Equatable, Sendable {
+    /// Default value
     case unspecified
+    /// Use GKE default DNS provider(kube-dns) for DNS resolution.
     case platformDefault
+    /// Use CloudDNS for DNS resolution.
     case cloudDns
+    /// Use KubeDNS for DNS resolution.
     case kubeDns
     /// Encodes an unknown integer value.
     ///
@@ -159,8 +163,11 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// DNSScope lists the various scopes of access to cluster DNS records.
   public enum DNSScope: Codable, Equatable, Sendable {
+    /// Default value, will be inferred as cluster scope.
     case unspecified
+    /// DNS records are accessible from within the cluster.
     case clusterScope
+    /// DNS records are accessible from within the VPC.
     case vpcScope
     /// Encodes an unknown integer value.
     ///

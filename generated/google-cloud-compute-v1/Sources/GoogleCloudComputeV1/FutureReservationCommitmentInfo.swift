@@ -159,7 +159,11 @@
     ///
     /// [google.cloud.compute.v1.FutureReservationCommitmentInfo.previousCommitmentTerms]: <doc:FutureReservationCommitmentInfo/PreviousCommitmentTerms>
     public enum PreviousCommitmentTerms: Codable, Equatable, Sendable {
+      /// All associated parent Committed Used Discount(s) end-date/term will be
+      /// extended to the end-time of this future reservation. Default is to
+      /// extend previous commitment(s) time to the end_time of the reservation.
       case extend
+      /// No changes to associated parents Committed Used Discount(s) terms.
       case previouscommitmenttermUnspecified
       /// Encodes an unknown integer value.
       ///

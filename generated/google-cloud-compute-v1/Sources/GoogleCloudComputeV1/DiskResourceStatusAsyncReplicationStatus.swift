@@ -44,11 +44,16 @@
     ///
     /// [google.cloud.compute.v1.DiskResourceStatusAsyncReplicationStatus.state]: <doc:DiskResourceStatusAsyncReplicationStatus/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Replication is active.
       case active
+      /// Secondary disk is created and is waiting for replication to start.
       case created
+      /// Replication is starting.
       case starting
       case unspecified
+      /// Replication is stopped.
       case stopped
+      /// Replication is stopping.
       case stopping
       /// Encodes an unknown integer value.
       ///

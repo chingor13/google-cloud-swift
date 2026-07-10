@@ -44,7 +44,9 @@
     ///
     /// [google.cloud.compute.v1.AllocationReservationSharingPolicy.serviceShareType]: <doc:AllocationReservationSharingPolicy/ServiceShareType>
     public enum ServiceShareType: Codable, Equatable, Sendable {
+      /// Allow all Google Cloud managed services to share reservations.
       case allowAll
+      /// [Default] Disallow sharing with all Google Cloud services.
       case disallowAll
       case unspecified
       /// Encodes an unknown integer value.

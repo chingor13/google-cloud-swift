@@ -528,9 +528,13 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// HostCapability configures capabilities for the registry host.
     public enum HostCapability: Codable, Equatable, Sendable {
+      /// UNKNOWN should never be set.
       case unspecified
+      /// Pull represents the capability to fetch manifests and blobs by digest.
       case pull
+      /// Resolve represents the capability to fetch manifests by name.
       case resolve
+      /// Push represents the capability to push blobs and manifests.
       case push
       /// Encodes an unknown integer value.
       ///

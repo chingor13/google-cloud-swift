@@ -107,7 +107,9 @@
       ///
       /// [google.cloud.compute.v1.globalForwardingRules.getRequest.view]: <doc:GlobalForwardingRulesClient/GetRequest/View>
       public enum View: Codable, Equatable, Sendable {
+        /// The default view of a ForwardingRule, which includes the basic fields.
         case basic
+        /// The full view, including the ForwardingRule.`attached_extensions` field.
         case full
         /// Encodes an unknown integer value.
         ///

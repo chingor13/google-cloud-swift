@@ -309,7 +309,9 @@
     ///
     /// [google.cloud.compute.v1.Firewall.direction]: <doc:Firewall/Direction>
     public enum Direction: Codable, Equatable, Sendable {
+      /// Indicates that firewall should apply to outgoing traffic.
       case egress
+      /// Indicates that firewall should apply to incoming traffic.
       case ingress
       /// Encodes an unknown integer value.
       ///

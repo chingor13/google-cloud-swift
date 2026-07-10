@@ -18,8 +18,11 @@ import Foundation
 
 /// The environment the function is hosted on.
 public enum Environment: Codable, Equatable, Sendable {
+  /// Unspecified
   case unspecified
+  /// Gen 1
   case gen1
+  /// Gen 2
   case gen2
   /// Encodes an unknown integer value.
   ///

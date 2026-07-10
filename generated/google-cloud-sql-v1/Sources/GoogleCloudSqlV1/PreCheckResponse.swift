@@ -52,9 +52,13 @@
     /// The type of message which can be an info, a warning, or an error that
     /// requires user intervention.
     public enum MessageType: Codable, Equatable, Sendable {
+      /// Default unspecified value to prevent unintended behavior changes.
       case unspecified
+      /// General informational messages that don't require action.
       case info
+      /// Warnings that might impact the upgrade but don't block it.
       case warning
+      /// Errors that a user must resolve before proceeding with the upgrade.
       case error
       /// Encodes an unknown integer value.
       ///

@@ -259,8 +259,11 @@
     ///
     /// [google.cloud.compute.v1.InstantSnapshot.architecture]: <doc:InstantSnapshot/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -363,10 +366,16 @@
     ///
     /// [google.cloud.compute.v1.InstantSnapshot.status]: <doc:InstantSnapshot/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// InstantSnapshot creation is in progress.
       case creating
+      /// InstantSnapshot is currently being deleted.
       case deleting
+      /// InstantSnapshot creation failed.
       case failed
+      /// InstantSnapshot has been created successfully.
       case ready
+      /// InstantSnapshot is currently unavailable and cannot be used for
+      /// Disk restoration
       case unavailable
       /// Encodes an unknown integer value.
       ///

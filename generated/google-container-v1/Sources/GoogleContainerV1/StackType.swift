@@ -18,8 +18,11 @@ import Foundation
 
 /// Possible values for IP stack type
 public enum StackType: Codable, Equatable, Sendable {
+  /// Default value, will be defaulted as IPV4 only
   case unspecified
+  /// Cluster is IPV4 only
   case ipv4
+  /// Cluster can use both IPv4 and IPv6
   case ipv4Ipv6
   /// Encodes an unknown integer value.
   ///

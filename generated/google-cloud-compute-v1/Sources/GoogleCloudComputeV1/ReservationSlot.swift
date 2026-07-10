@@ -77,10 +77,14 @@
     ///
     /// [google.cloud.compute.v1.ReservationSlot.state]: <doc:ReservationSlot/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The reservation slot has allocated all its resources.
       case active
+      /// The resources are being allocated for the reservation slot.
       case creating
+      /// The reservation slot is currently being deleted.
       case deleting
       case unspecified
+      /// The reservation slot is currently unavailable.
       case unavailable
       /// Encodes an unknown integer value.
       ///

@@ -100,11 +100,24 @@
     ///
     /// [google.cloud.compute.v1.PerInstanceConfig.status]: <doc:PerInstanceConfig/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The per-instance configuration is being applied to the instance, but is
+      /// not yet effective, possibly waiting for the instance to, for example,REFRESH.
       case applying
+      /// The per-instance configuration deletion is being applied on the instance,
+      /// possibly waiting for the instance to, for example, REFRESH.
       case deleting
+      /// The per-instance configuration is effective on the instance, meaning that
+      /// all disks, ips and metadata specified in this configuration are attached
+      /// or set on the instance.
       case effective
+      /// *[Default]* The default status, when no per-instance configuration
+      /// exists.
       case `none`
+      /// The per-instance configuration is set on an instance but not been applied
+      /// yet.
       case unapplied
+      /// The per-instance configuration has been deleted, but the deletion is not
+      /// yet applied.
       case unappliedDeletion
       /// Encodes an unknown integer value.
       ///

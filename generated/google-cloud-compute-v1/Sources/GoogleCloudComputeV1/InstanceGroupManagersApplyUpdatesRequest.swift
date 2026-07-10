@@ -89,9 +89,14 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagersApplyUpdatesRequest.minimalAction]: <doc:InstanceGroupManagersApplyUpdatesRequest/MinimalAction>
     public enum MinimalAction: Codable, Equatable, Sendable {
+      /// Do not perform any action.
       case `none`
+      /// Do not stop the instance.
       case refresh
+      /// (Default.) Replace the instance according to the replacement method
+      /// option.
       case replace
+      /// Stop the instance and start it again.
       case restart
       /// Encodes an unknown integer value.
       ///
@@ -199,9 +204,14 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagersApplyUpdatesRequest.mostDisruptiveAllowedAction]: <doc:InstanceGroupManagersApplyUpdatesRequest/MostDisruptiveAllowedAction>
     public enum MostDisruptiveAllowedAction: Codable, Equatable, Sendable {
+      /// Do not perform any action.
       case `none`
+      /// Do not stop the instance.
       case refresh
+      /// (Default.) Replace the instance according to the replacement method
+      /// option.
       case replace
+      /// Stop the instance and start it again.
       case restart
       /// Encodes an unknown integer value.
       ///

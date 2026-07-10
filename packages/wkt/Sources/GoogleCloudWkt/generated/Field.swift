@@ -70,24 +70,43 @@ public struct Field: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Basic field types.
   public enum Kind: Codable, Equatable, Sendable {
+    /// Field type unknown.
     case typeUnknown
+    /// Field type double.
     case typeDouble
+    /// Field type float.
     case typeFloat
+    /// Field type int64.
     case typeInt64
+    /// Field type uint64.
     case typeUint64
+    /// Field type int32.
     case typeInt32
+    /// Field type fixed64.
     case typeFixed64
+    /// Field type fixed32.
     case typeFixed32
+    /// Field type bool.
     case typeBool
+    /// Field type string.
     case typeString
+    /// Field type group. Proto2 syntax only, and deprecated.
     case typeGroup
+    /// Field type message.
     case typeMessage
+    /// Field type bytes.
     case typeBytes
+    /// Field type uint32.
     case typeUint32
+    /// Field type enum.
     case typeEnum
+    /// Field type sfixed32.
     case typeSfixed32
+    /// Field type sfixed64.
     case typeSfixed64
+    /// Field type sint32.
     case typeSint32
+    /// Field type sint64.
     case typeSint64
     /// Encodes an unknown integer value.
     ///
@@ -268,9 +287,13 @@ public struct Field: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Whether a field is optional, required, or repeated.
   public enum Cardinality: Codable, Equatable, Sendable {
+    /// For fields with unknown cardinality.
     case unknown
+    /// For optional fields.
     case `optional`
+    /// For required fields. Proto2 syntax only.
     case `required`
+    /// For repeated fields.
     case repeated
     /// Encodes an unknown integer value.
     ///

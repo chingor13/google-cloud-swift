@@ -54,8 +54,11 @@
     /// [google.cloud.compute.v1.NodeGroupAutoscalingPolicy.mode]: <doc:NodeGroupAutoscalingPolicy/Mode>
     public enum Mode: Codable, Equatable, Sendable {
       case unspecified
+      /// Autoscaling is disabled.
       case off
+      /// Autocaling is fully enabled.
       case on
+      /// Autoscaling will only scale out and will not remove nodes.
       case onlyScaleOut
       /// Encodes an unknown integer value.
       ///

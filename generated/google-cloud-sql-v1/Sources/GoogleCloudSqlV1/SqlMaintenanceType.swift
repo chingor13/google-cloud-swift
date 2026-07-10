@@ -19,10 +19,22 @@
 
   /// The type of maintenance to be performed on the instance.
   public enum SqlMaintenanceType: Codable, Equatable, Sendable {
+    /// Maintenance type is unspecified.
     case unspecified
+    /// Indicates that a standalone instance is undergoing maintenance. The
+    /// instance can be either a primary instance or a replica.
     case instanceMaintenance
+    /// Indicates that the primary instance and all of its replicas, including
+    /// cascading replicas, are undergoing maintenance. Maintenance is performed on
+    /// groups of replicas first, followed by the primary instance.
     case replicaIncludedMaintenance
+    /// Indicates that the standalone instance is undergoing maintenance, initiated
+    /// by self-service. The instance can be either a primary instance or a
+    /// replica.
     case instanceSelfServiceMaintenance
+    /// Indicates that the primary instance and all of its replicas are undergoing
+    /// maintenance, initiated by self-service. Maintenance is performed on groups
+    /// of replicas first, followed by the primary instance.
     case replicaIncludedSelfServiceMaintenance
     /// Encodes an unknown integer value.
     ///

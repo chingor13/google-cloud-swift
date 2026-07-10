@@ -75,8 +75,11 @@
     ///
     /// [google.cloud.compute.v1.MetadataFilter.filterMatchCriteria]: <doc:MetadataFilter/FilterMatchCriteria>
     public enum FilterMatchCriteria: Codable, Equatable, Sendable {
+      /// Specifies that all filterLabels must match for themetadataFilter to be considered a match.
       case matchAll
+      /// Specifies that any filterLabel must match for themetadataFilter to be considered a match.
       case matchAny
+      /// Indicates that the match criteria was not set. AmetadataFilter must never be created with this value.
       case notSet
       /// Encodes an unknown integer value.
       ///

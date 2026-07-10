@@ -18,13 +18,22 @@
   import Foundation
 
   public enum SqlFlagType: Codable, Equatable, Sendable {
+    /// This is an unknown flag type.
     case unspecified
+    /// Boolean type flag.
     case boolean
+    /// String type flag.
     case string
+    /// Integer type flag.
     case integer
+    /// Flag type used for a server startup option.
     case `none`
+    /// Type introduced specially for MySQL TimeZone offset. Accept a string value
+    /// with the format [-12:59, 13:00].
     case mysqlTimezoneOffset
+    /// Float type flag.
     case float
+    /// Comma-separated list of the strings in a SqlFlagType enum.
     case repeatedString
     /// Encodes an unknown integer value.
     ///

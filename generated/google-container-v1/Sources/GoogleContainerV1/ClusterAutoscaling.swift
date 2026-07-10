@@ -70,8 +70,11 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Defines possible options for autoscaling_profile field.
   public enum AutoscalingProfile: Codable, Equatable, Sendable {
+    /// No change to autoscaling configuration.
     case profileUnspecified
+    /// Prioritize optimizing utilization of resources.
     case optimizeUtilization
+    /// Use default (balanced) autoscaling configuration.
     case balanced
     /// Encodes an unknown integer value.
     ///
@@ -172,8 +175,11 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Defines possible options for Autopilot general profile.
   public enum AutopilotGeneralProfile: Codable, Equatable, Sendable {
+    /// Use default configuration.
     case unspecified
+    /// Avoid extra IP consumption.
     case noPerformance
+    /// Use default configuration.
     case `none`
     /// Encodes an unknown integer value.
     ///

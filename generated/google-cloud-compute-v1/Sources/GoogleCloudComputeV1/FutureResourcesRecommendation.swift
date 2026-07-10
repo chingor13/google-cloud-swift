@@ -64,7 +64,9 @@
     ///
     /// [google.cloud.compute.v1.FutureResourcesRecommendation.recommendationType]: <doc:FutureResourcesRecommendation/RecommendationType>
     public enum RecommendationType: Codable, Equatable, Sendable {
+      /// A Future Reservation is recommended.
       case futureReservation
+      /// Default value, unused.
       case unspecified
       /// Encodes an unknown integer value.
       ///

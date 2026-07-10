@@ -94,8 +94,12 @@ public struct EventTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Describes the retry policy in case of function's execution failure.
   /// Retried execution is charged as any other execution.
   public enum RetryPolicy: Codable, Equatable, Sendable {
+    /// Not specified.
     case unspecified
+    /// Do not retry.
     case doNotRetry
+    /// Retry on any failure, retry up to 7 days with an exponential backoff
+    /// (capped at 10 seconds).
     case retry
     /// Encodes an unknown integer value.
     ///

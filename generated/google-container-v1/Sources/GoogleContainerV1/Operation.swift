@@ -113,10 +113,15 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Current status of the operation.
   public enum Status: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// The operation has been created.
     case pending
+    /// The operation is currently running.
     case running
+    /// The operation is done, either cancelled or completed.
     case done
+    /// The operation is aborting.
     case aborting
     /// Encodes an unknown integer value.
     ///
@@ -227,24 +232,130 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Operation type categorizes the operation.
   public enum Type_: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// The cluster is being created. The cluster should be assumed to be
+    /// unusable until the operation finishes.
+    ///
+    /// In the event of the operation failing, the cluster will enter the
+    /// [ERROR state][google.container.v1.Cluster.Status.ERROR] and eventually be
+    /// deleted.
+    ///
+    /// [google.container.v1.Cluster.Status.ERROR]: <doc:Cluster/Status/error>
     case createCluster
+    /// The cluster is being deleted. The cluster should be assumed to be
+    /// unusable as soon as this operation starts.
+    ///
+    /// In the event of the operation failing, the cluster will enter the
+    /// [ERROR state][google.container.v1.Cluster.Status.ERROR] and the deletion
+    /// will be automatically retried until completed.
+    ///
+    /// [google.container.v1.Cluster.Status.ERROR]: <doc:Cluster/Status/error>
     case deleteCluster
+    /// The [cluster
+    /// version][google.container.v1.ClusterUpdate.desired_master_version] is
+    /// being updated. Note that this includes "upgrades" to the same version,
+    /// which are simply a recreation. This also includes
+    /// [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically).
+    /// For more details, see [documentation on cluster
+    /// upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades).
+    ///
+    /// [google.container.v1.ClusterUpdate.desired_master_version]: <doc:ClusterUpdate/desiredMasterVersion>
     case upgradeMaster
+    /// A node pool is being updated. Despite calling this an "upgrade", this
+    /// includes most forms of updates to node pools. This also includes
+    /// [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades).
+    ///
+    /// This operation sets the
+    /// [progress][google.container.v1.Operation.progress] field and may be
+    /// [canceled][google.container.v1.ClusterManager.CancelOperation].
+    ///
+    /// The upgrade strategy depends on [node pool
+    /// configuration](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies).
+    /// The nodes are generally still usable during this operation.
+    ///
+    /// [google.container.v1.ClusterManager.CancelOperation]: <doc:ClusterManager/cancelOperation(request:)>
+    /// [google.container.v1.Operation.progress]: <doc:Operation/progress>
     case upgradeNodes
+    /// A problem has been detected with the control plane and is being repaired.
+    /// This operation type is initiated by GKE. For more details, see
+    /// [documentation on
+    /// repairs](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
     case repairCluster
+    /// The cluster is being updated. This is a broad category of operations and
+    /// includes operations that only change metadata as well as those that must
+    /// recreate the entire cluster. If the control plane must be recreated, this
+    /// will cause temporary downtime for zonal clusters.
+    ///
+    /// Some features require recreating the nodes as well. Those will be
+    /// recreated as separate operations and the update may not be completely
+    /// functional until the node pools recreations finish. Node recreations will
+    /// generally follow [maintenance
+    /// policies](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions).
+    ///
+    /// Some GKE-initiated operations use this type. This includes certain types
+    /// of auto-upgrades and incident mitigations.
     case updateCluster
+    /// A node pool is being created. The node pool should be assumed to be
+    /// unusable until this operation finishes. In the event of an error, the
+    /// node pool may be partially created.
+    ///
+    /// If enabled, [node
+    /// autoprovisioning](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning)
+    /// may have automatically initiated such operations.
     case createNodePool
+    /// The node pool is being deleted. The node pool should be assumed to be
+    /// unusable as soon as this operation starts.
     case deleteNodePool
+    /// The node pool's [manamagent][google.container.v1.NodePool.management]
+    /// field is being updated. These operations only update metadata and may be
+    /// concurrent with most other operations.
+    ///
+    /// [google.container.v1.NodePool.management]: <doc:NodePool/management>
     case setNodePoolManagement
+    /// A problem has been detected with nodes and [they are being
+    /// repaired](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair).
+    /// This operation type is initiated by GKE, typically automatically. This
+    /// operation may be concurrent with other operations and there may be
+    /// multiple repairs occurring on the same node pool.
     case autoRepairNodes
+    /// Unused. Automatic node upgrade uses
+    /// [UPGRADE_NODES][google.container.v1.Operation.Type.UPGRADE_NODES].
+    ///
+    /// [google.container.v1.Operation.Type.UPGRADE_NODES]: <doc:Operation/Type_/upgradeNodes>
     case autoUpgradeNodes
+    /// Unused. Updating labels uses
+    /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    ///
+    /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
     case setLabels
+    /// Unused. Updating master auth uses
+    /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    ///
+    /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
     case setMasterAuth
+    /// The node pool is being resized. With the exception of resizing to or from
+    /// size zero, the node pool is generally usable during this operation.
     case setNodePoolSize
+    /// Unused. Updating network policy uses
+    /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    ///
+    /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
     case setNetworkPolicy
+    /// Unused. Updating maintenance policy uses
+    /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    ///
+    /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
     case setMaintenancePolicy
+    /// The control plane is being resized. This operation type is initiated by
+    /// GKE. These operations are often performed preemptively to ensure that the
+    /// control plane has sufficient resources and is not typically an indication
+    /// of issues. For more details, see
+    /// [documentation on
+    /// resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
     case resizeCluster
+    /// Fleet features of GKE Enterprise are being upgraded. The cluster should
+    /// be assumed to be blocked for other upgrades until the operation finishes.
     case fleetFeatureUpgrade
     /// Encodes an unknown integer value.
     ///

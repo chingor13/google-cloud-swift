@@ -94,8 +94,13 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The type of the disruption event.
   public enum DisruptionType: Codable, Equatable, Sendable {
+    /// DISRUPTION_TYPE_UNSPECIFIED indicates the disruption type is unspecified.
     case unspecified
+    /// POD_NOT_ENOUGH_PDB indicates there are still running pods
+    /// on the node during node drain because their evictions are blocked by PDB.
     case podNotEnoughPdb
+    /// POD_PDB_VIOLATION indicates that there are force pod
+    /// evictions during node drain which violate the PDB.
     case podPdbViolation
     /// Encodes an unknown integer value.
     ///

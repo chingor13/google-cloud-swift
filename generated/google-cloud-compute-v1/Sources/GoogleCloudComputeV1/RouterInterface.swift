@@ -210,7 +210,13 @@
     ///
     /// [google.cloud.compute.v1.RouterInterface.managementType]: <doc:RouterInterface/ManagementType>
     public enum ManagementType: Codable, Equatable, Sendable {
+      /// The interface is automatically created for PARTNER type
+      /// InterconnectAttachment, Google will automatically create/update/delete
+      /// this interface when the PARTNER InterconnectAttachment is
+      /// created/provisioned/deleted.
+      /// This type of interface cannot be manually managed by user.
       case managedByAttachment
+      /// Default value, the interface is manually created and managed by user.
       case managedByUser
       /// Encodes an unknown integer value.
       ///

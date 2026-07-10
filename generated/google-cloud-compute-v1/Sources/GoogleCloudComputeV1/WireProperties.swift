@@ -65,7 +65,14 @@
     ///
     /// [google.cloud.compute.v1.WireProperties.bandwidthAllocation]: <doc:WireProperties/BandwidthAllocation>
     public enum BandwidthAllocation: Codable, Equatable, Sendable {
+      /// Configures a separate unmetered bandwidth allocation (and associated
+      /// charges) for each wire in the group.
       case allocatePerWire
+      /// This is the default behavior. Configures one unmetered bandwidth
+      /// allocation for the wire group. The unmetered bandwidth is divided equally
+      /// across each wire in the group, but dynamic throttling reallocates unused
+      /// unmetered bandwidth from unused or underused wires to other wires in the
+      /// group.
       case sharedWithWireGroup
       /// Encodes an unknown integer value.
       ///
@@ -163,7 +170,10 @@
     ///
     /// [google.cloud.compute.v1.WireProperties.faultResponse]: <doc:WireProperties/FaultResponse>
     public enum FaultResponse: Codable, Equatable, Sendable {
+      /// Set the port line protocol down when inline probes detect a fault. This
+      /// setting is only permitted on port mode pseudowires.
       case disablePort
+      /// Default.
       case `none`
       /// Encodes an unknown integer value.
       ///

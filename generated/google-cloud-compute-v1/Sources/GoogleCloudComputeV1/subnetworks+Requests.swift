@@ -162,6 +162,7 @@
       /// [google.cloud.compute.v1.subnetworks.aggregatedListRequest.views]: <doc:SubnetworksClient/AggregatedListRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
+        /// Utilization data is included in the response.
         case withUtilization
         /// Encodes an unknown integer value.
         ///
@@ -428,6 +429,7 @@
       /// [google.cloud.compute.v1.subnetworks.getRequest.views]: <doc:SubnetworksClient/GetRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
+        /// Utilization data is included in the response.
         case withUtilization
         /// Encodes an unknown integer value.
         ///
@@ -769,6 +771,7 @@
       /// [google.cloud.compute.v1.subnetworks.listRequest.views]: <doc:SubnetworksClient/ListRequest/Views>
       public enum Views: Codable, Equatable, Sendable {
         case `default`
+        /// Utilization data is included in the response.
         case withUtilization
         /// Encodes an unknown integer value.
         ///

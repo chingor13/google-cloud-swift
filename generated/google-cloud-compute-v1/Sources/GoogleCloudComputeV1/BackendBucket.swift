@@ -112,7 +112,11 @@
     ///
     /// [google.cloud.compute.v1.BackendBucket.compressionMode]: <doc:BackendBucket/CompressionMode>
     public enum CompressionMode: Codable, Equatable, Sendable {
+      /// Automatically uses the best compression based on the Accept-Encoding
+      /// header sent by the client.
       case automatic
+      /// Disables compression. Existing compressed responses cached by
+      /// Cloud CDN will not be served to clients.
       case disabled
       /// Encodes an unknown integer value.
       ///
@@ -210,7 +214,10 @@
     ///
     /// [google.cloud.compute.v1.BackendBucket.loadBalancingScheme]: <doc:BackendBucket/LoadBalancingScheme>
     public enum LoadBalancingScheme: Codable, Equatable, Sendable {
+      /// Signifies that this will be used for regional external Application Load
+      /// Balancers.
       case externalManaged
+      /// Signifies that this will be used for internal Application Load Balancers.
       case internalManaged
       /// Encodes an unknown integer value.
       ///

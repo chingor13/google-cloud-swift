@@ -60,8 +60,13 @@ public struct AdditionalIPRangesConfig: Codable, Equatable, GoogleCloudWkt._AnyP
   /// desired_additional_ip_ranges list. IP ranges can be removed regardless of
   /// its status, as long as no node pools are using them.
   public enum Status: Codable, Equatable, Sendable {
+    /// Not set, same as ACTIVE.
     case unspecified
+    /// ACTIVE status indicates that the subnet is available for new node pool
+    /// creation.
     case active
+    /// DRAINING status indicates that the subnet is not used for new node pool
+    /// creation.
     case draining
     /// Encodes an unknown integer value.
     ///

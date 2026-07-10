@@ -18,9 +18,21 @@
   import Foundation
 
   public enum SqlUpdateTrack: Codable, Equatable, Sendable {
+    /// This is an unknown maintenance timing preference.
     case unspecified
+    /// For an instance with a scheduled maintenance window, this maintenance
+    /// timing indicates that the maintenance update is scheduled 7 to 14 days
+    /// after the notification is sent out. Also referred to as `Week 1` (Console)
+    /// and `preview` (gcloud CLI).
     case canary
+    /// For an instance with a scheduled maintenance window, this maintenance
+    /// timing indicates that the maintenance update is scheduled 15 to 21 days
+    /// after the notification is sent out. Also referred to as `Week 2` (Console)
+    /// and `production` (gcloud CLI).
     case stable
+    /// For instance with a scheduled maintenance window, this maintenance
+    /// timing indicates that the maintenance update is scheduled 35 to 42 days
+    /// after the notification is sent out.
     case week5
     /// Encodes an unknown integer value.
     ///

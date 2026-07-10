@@ -171,12 +171,20 @@
 
     /// The user type.
     public enum SqlUserType: Codable, Equatable, Sendable {
+      /// The database's built-in user type.
       case builtIn
+      /// Cloud IAM user.
       case cloudIamUser
+      /// Cloud IAM service account.
       case cloudIamServiceAccount
+      /// Cloud IAM group. Not used for login.
       case cloudIamGroup
+      /// Read-only. Login for a user that belongs to the Cloud IAM group.
       case cloudIamGroupUser
+      /// Read-only. Login for a service account that belongs to the
+      /// Cloud IAM group.
       case cloudIamGroupServiceAccount
+      /// Microsoft Entra ID user.
       case entraidUser
       /// Encodes an unknown integer value.
       ///
@@ -297,9 +305,13 @@
 
     /// The type of retained password.
     public enum DualPasswordType: Codable, Equatable, Sendable {
+      /// The default value.
       case unspecified
+      /// Do not update the user's dual password status.
       case noModifyDualPassword
+      /// No dual password usable for connecting using this user.
       case noDualPassword
+      /// Dual password usable for connecting using this user.
       case dualPassword
       /// Encodes an unknown integer value.
       ///
@@ -405,8 +417,16 @@
 
     /// Indicates if a group is available for IAM database authentication.
     public enum IamStatus: Codable, Equatable, Sendable {
+      /// The default value for users that are not of type CLOUD_IAM_GROUP.
+      /// Only CLOUD_IAM_GROUP users will be inactive or active.
+      /// Users with an IamStatus of IAM_STATUS_UNSPECIFIED will not
+      /// display whether they are active or inactive as that is not applicable to
+      /// them.
       case unspecified
+      /// INACTIVE indicates a group is not available for IAM database
+      /// authentication.
       case inactive
+      /// ACTIVE indicates a group is available for IAM database authentication.
       case active
       /// Encodes an unknown integer value.
       ///

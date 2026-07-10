@@ -60,10 +60,18 @@
     ///
     /// [google.cloud.compute.v1.NetworkEndpointGroupPscData.pscConnectionStatus]: <doc:NetworkEndpointGroupPscData/PscConnectionStatus>
     public enum PscConnectionStatus: Codable, Equatable, Sendable {
+      /// The connection has been accepted by the producer.
       case accepted
+      /// The connection has been closed by the producer and will not serve
+      /// traffic going forward.
       case closed
+      /// The connection has been accepted by the producer, but the producer
+      /// needs to take further action before the forwarding rule can serve
+      /// traffic.
       case needsAttention
+      /// The connection is pending acceptance by the producer.
       case pending
+      /// The connection has been rejected by the producer.
       case rejected
       case statusUnspecified
       /// Encodes an unknown integer value.

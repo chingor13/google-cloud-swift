@@ -53,9 +53,13 @@
     /// The connection type of the DNS name.
     /// This enum is not frozen, and new values may be added in the future.
     public enum ConnectionType: Codable, Equatable, Sendable {
+      /// Unknown connection type.
       case unspecified
+      /// Public IP.
       case `public`
+      /// Private services access (private IP).
       case privateServicesAccess
+      /// Private Service Connect.
       case privateServiceConnect
       /// Encodes an unknown integer value.
       ///
@@ -161,8 +165,11 @@
 
     /// The scope that the DNS name applies to.
     public enum DnsScope: Codable, Equatable, Sendable {
+      /// DNS scope not set. This value should not be used.
       case unspecified
+      /// Indicates an instance-level DNS name.
       case instance
+      /// Indicates a cluster-level DNS name.
       case cluster
       /// Encodes an unknown integer value.
       ///
@@ -263,8 +270,14 @@
 
     /// The system responsible for managing the DNS record.
     public enum RecordManager: Codable, Equatable, Sendable {
+      /// Record manager not set. This value should not be used.
       case unspecified
+      /// The record may be managed by the customer. It is not automatically
+      /// managed by Cloud SQL automation.
       case customer
+      /// The record is managed by Cloud SQL, which will create, update,
+      /// and delete the DNS records for the zone automatically when
+      /// the Cloud SQL database instance is created or updated.
       case cloudSqlAutomation
       /// Encodes an unknown integer value.
       ///

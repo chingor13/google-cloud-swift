@@ -75,9 +75,13 @@ public struct MessageWithEnum: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The enum type
   public enum TestEnum: Codable, Equatable, Sendable {
+    /// Open enums require a default value of `0`.
     case unspecified
+    /// A test value.
     case red
+    /// A test value.
     case green
+    /// A test value.
     case blue
     /// Encodes an unknown integer value.
     ///

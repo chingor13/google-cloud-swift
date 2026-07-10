@@ -134,34 +134,79 @@
       ///
       /// [google.cloud.compute.v1.TargetVpnGatewaysScopedList.warning.code]: <doc:TargetVpnGatewaysScopedList/Warning/Code>
       public enum Code: Codable, Equatable, Sendable {
+        /// Warning about failed cleanup of transient changes made by a failed
+        /// operation.
         case cleanupFailed
+        /// A link to a deprecated resource was created.
         case deprecatedResourceUsed
+        /// When deploying and at least one of the resources has a type marked as
+        /// deprecated
         case deprecatedTypeUsed
+        /// The user created a boot disk that is larger than image size.
         case diskSizeLargerThanImageSize
+        /// When deploying and at least one of the resources has a type marked as
+        /// experimental
         case experimentalTypeUsed
+        /// Warning that is present in an external api call
         case externalApiWarning
+        /// Warning that value of a field has been overridden.
+        /// Deprecated unused field.
         case fieldValueOverriden
+        /// The operation involved use of an injected kernel, which is deprecated.
         case injectedKernelsDeprecated
+        /// A WEIGHTED_MAGLEV backend service is associated with a health check that is
+        /// not of type HTTP/HTTPS/HTTP2.
         case invalidHealthCheckForDynamicWieghtedLb
+        /// When deploying a deployment with a exceedingly large number of resources
         case largeDeploymentWarning
+        /// Resource can't be retrieved due to list overhead quota exceed
+        /// which captures the amount of resources filtered out by
+        /// user-defined list filter.
         case listOverheadQuotaExceed
+        /// A resource depends on a missing type
         case missingTypeDependency
+        /// The route's nextHopIp address is not assigned to an instance on the
+        /// network.
         case nextHopAddressNotAssigned
+        /// The route's next hop instance cannot ip forward.
         case nextHopCannotIpForward
+        /// The route's nextHopInstance URL refers to an instance that does not have an
+        /// ipv6 interface on the same network as the route.
         case nextHopInstanceHasNoIpv6Interface
+        /// The route's nextHopInstance URL refers to an instance that does not exist.
         case nextHopInstanceNotFound
+        /// The route's nextHopInstance URL refers to an instance that is not on the
+        /// same network as the route.
         case nextHopInstanceNotOnNetwork
+        /// The route's next hop instance does not have a status of RUNNING.
         case nextHopNotRunning
+        /// Error which is not critical. We decided to continue the process despite
+        /// the mentioned error.
         case notCriticalError
+        /// No results are present on a particular list page.
         case noResultsOnPage
+        /// Success is reported, but some results may be missing due to errors
         case partialSuccess
+        /// Quota information is not available to client requests (e.g:
+        /// regions.list).
         case quotaInfoUnavailable
+        /// The user attempted to use a resource that requires a TOS they have not
+        /// accepted.
         case requiredTosAgreement
+        /// Warning that a resource is in use.
         case resourceInUseByOtherResourceWarning
+        /// One or more of the resources set to auto-delete could not be deleted
+        /// because they were in use.
         case resourceNotDeleted
+        /// When a resource schema validation is ignored.
         case schemaValidationIgnored
+        /// Instance template used in instance group manager is valid as such, but
+        /// its application does not make a lot of sense, because it allows only
+        /// single instance in instance group.
         case singleInstancePropertyTemplate
+        /// When undeclared properties in the schema are present
         case undeclaredProperties
+        /// A given scope cannot be reached.
         case unreachable
         /// Encodes an unknown integer value.
         ///

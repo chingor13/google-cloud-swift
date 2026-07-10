@@ -147,8 +147,11 @@
     ///
     /// [google.cloud.compute.v1.InstanceProperties.keyRevocationActionType]: <doc:InstanceProperties/KeyRevocationActionType>
     public enum KeyRevocationActionType: Codable, Equatable, Sendable {
+      /// Default value. This value is unused.
       case unspecified
+      /// Indicates user chose no operation.
       case `none`
+      /// Indicates user chose to opt for VM shutdown on key revocation.
       case stop
       /// Encodes an unknown integer value.
       ///
@@ -251,8 +254,18 @@
     ///
     /// [google.cloud.compute.v1.InstanceProperties.privateIpv6GoogleAccess]: <doc:InstanceProperties/PrivateIpv6GoogleAccess>
     public enum PrivateIpv6GoogleAccess: Codable, Equatable, Sendable {
+      /// Bidirectional private IPv6 access to/from Google services. If
+      /// specified, the subnetwork who is attached to the instance's default network
+      /// interface will be assigned an internal IPv6 prefix if it doesn't have
+      /// before.
       case enableBidirectionalAccessToGoogle
+      /// Outbound private IPv6 access from VMs in this subnet to Google services. If
+      /// specified, the subnetwork who is attached to the instance's default network
+      /// interface will be assigned an internal IPv6 prefix if it doesn't have
+      /// before.
       case enableOutboundVmAccessToGoogle
+      /// Each network interface inherits PrivateIpv6GoogleAccess from its
+      /// subnetwork.
       case inheritFromSubnetwork
       /// Encodes an unknown integer value.
       ///

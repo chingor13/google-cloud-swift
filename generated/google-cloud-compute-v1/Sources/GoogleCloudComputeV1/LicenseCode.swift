@@ -121,10 +121,15 @@
     ///
     /// [google.cloud.compute.v1.LicenseCode.state]: <doc:LicenseCode/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Machines are not allowed to attach boot disks with this License Code.
+      /// Requests to create new resources with this license will be rejected.
       case disabled
+      /// Use is allowed for anyone with USE_READ_ONLY access to this License Code.
       case enabled
+      /// Use of this license is limited to a project whitelist.
       case restricted
       case unspecified
+      /// Reserved state.
       case terminated
       /// Encodes an unknown integer value.
       ///

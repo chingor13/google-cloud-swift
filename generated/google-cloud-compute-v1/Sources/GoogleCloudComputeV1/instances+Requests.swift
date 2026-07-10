@@ -3018,8 +3018,11 @@
       /// [google.cloud.compute.v1.instances.updateRequest.minimalAction]: <doc:InstancesClient/UpdateRequest/MinimalAction>
       public enum MinimalAction: Codable, Equatable, Sendable {
         case invalid
+        /// No changes can be made to the instance.
         case noEffect
+        /// The instance will not restart.
         case refresh
+        /// The instance will restart, potentially on a different host.
         case restart
         /// Encodes an unknown integer value.
         ///
@@ -3128,8 +3131,11 @@
       /// [google.cloud.compute.v1.instances.updateRequest.mostDisruptiveAllowedAction]: <doc:InstancesClient/UpdateRequest/MostDisruptiveAllowedAction>
       public enum MostDisruptiveAllowedAction: Codable, Equatable, Sendable {
         case invalid
+        /// No changes can be made to the instance.
         case noEffect
+        /// The instance will not restart.
         case refresh
+        /// The instance will restart, potentially on a different host.
         case restart
         /// Encodes an unknown integer value.
         ///

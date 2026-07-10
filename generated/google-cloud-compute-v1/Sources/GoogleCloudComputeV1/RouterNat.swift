@@ -193,9 +193,16 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.autoNetworkTier]: <doc:RouterNat/AutoNetworkTier>
     public enum AutoNetworkTier: Codable, Equatable, Sendable {
+      /// Public internet quality with fixed bandwidth.
       case fixedStandard
+      /// High quality, Google-grade network tier, support for all networking
+      /// products.
       case premium
+      /// Public internet quality, only limited support for other networking
+      /// products.
       case standard
+      /// (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier
+      /// is expired or not configured.
       case standardOverridesFixedStandard
       /// Encodes an unknown integer value.
       ///
@@ -303,8 +310,13 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.endpointTypes]: <doc:RouterNat/EndpointTypes>
     public enum EndpointTypes: Codable, Equatable, Sendable {
+      /// This is used for regional Application Load Balancers (internal and
+      /// external) and regional proxy Network Load Balancers (internal and
+      /// external) endpoints.
       case endpointTypeManagedProxyLb
+      /// This is used for Secure Web Gateway endpoints.
       case endpointTypeSwg
+      /// This is the default.
       case endpointTypeVm
       /// Encodes an unknown integer value.
       ///
@@ -407,7 +419,10 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.natIpAllocateOption]: <doc:RouterNat/NatIpAllocateOption>
     public enum NatIpAllocateOption: Codable, Equatable, Sendable {
+      /// Nat IPs are allocated by GCP; customers can not specify any Nat IPs.
       case autoOnly
+      /// Only use Nat IPs provided by customers. When specified Nat IPs are not
+      /// enough then the Nat service fails for new VMs.
       case manualOnly
       /// Encodes an unknown integer value.
       ///
@@ -505,8 +520,12 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.sourceSubnetworkIpRangesToNat]: <doc:RouterNat/SourceSubnetworkIpRangesToNat>
     public enum SourceSubnetworkIpRangesToNat: Codable, Equatable, Sendable {
+      /// All the IP ranges in every Subnetwork are allowed to Nat.
       case allSubnetworksAllIpRanges
+      /// All the primary IP ranges in every Subnetwork are allowed to Nat.
       case allSubnetworksAllPrimaryIpRanges
+      /// A list of Subnetworks are allowed to Nat (specified in the field
+      /// subnetwork below)
       case listOfSubnetworks
       /// Encodes an unknown integer value.
       ///
@@ -609,7 +628,12 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.sourceSubnetworkIpRangesToNat64]: <doc:RouterNat/SourceSubnetworkIpRangesToNat64>
     public enum SourceSubnetworkIpRangesToNat64: Codable, Equatable, Sendable {
+      /// NAT64 is enabled for all the IPv6 subnet ranges.
+      /// In dual stack subnets, NAT64 will only be enabled for IPv6-only VMs.
       case allIpv6Subnetworks
+      /// NAT64 is enabled for a list of IPv6 subnet ranges.
+      /// In dual stack subnets, NAT64 will only be enabled for IPv6-only VMs.
+      /// If this option is used, the nat64_subnetworks field must be specified.
       case listOfIpv6Subnetworks
       /// Encodes an unknown integer value.
       ///
@@ -707,7 +731,10 @@
     ///
     /// [google.cloud.compute.v1.RouterNat.type]: <doc:RouterNat/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// NAT used for private IP translation.
       case `private`
+      /// NAT used for public IP translation.
+      /// This is the default.
       case `public`
       /// Encodes an unknown integer value.
       ///

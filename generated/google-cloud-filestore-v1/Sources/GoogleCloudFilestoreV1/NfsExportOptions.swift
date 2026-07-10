@@ -71,8 +71,11 @@ public struct NfsExportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The access mode.
   public enum AccessMode: Codable, Equatable, Sendable {
+    /// AccessMode not set.
     case unspecified
+    /// The client can only read the file share.
     case readOnly
+    /// The client can read and write the file share (default).
     case readWrite
     /// Encodes an unknown integer value.
     ///
@@ -173,8 +176,11 @@ public struct NfsExportOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The squash mode.
   public enum SquashMode: Codable, Equatable, Sendable {
+    /// SquashMode not set.
     case unspecified
+    /// The Root user has root access to the file share (default).
     case noRootSquash
+    /// The Root user has squashed access to the anonymous uid/gid.
     case rootSquash
     /// Encodes an unknown integer value.
     ///

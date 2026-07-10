@@ -319,18 +319,34 @@
     ///
     /// [google.cloud.compute.v1.VpnTunnel.status]: <doc:VpnTunnel/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Cloud VPN is in the process of allocating all required resources
+      /// (specifically, a borg task).
       case allocatingResources
+      /// Auth error (e.g. bad shared secret).
       case authorizationError
+      /// Resources is being deallocated for the VPN tunnel.
       case deprovisioning
+      /// Secure session is successfully established with peer VPN.
       case established
+      /// Tunnel creation has failed and the tunnel is not ready to be used.
       case failed
+      /// Successful first handshake with peer VPN.
       case firstHandshake
+      /// Handshake failed.
       case negotiationFailure
+      /// Deprecated, replaced by NO_INCOMING_PACKETS
       case networkError
+      /// No incoming packets from peer
       case noIncomingPackets
+      /// Resource is being allocated for the VPN tunnel.
       case provisioning
+      /// Tunnel configuration was rejected, can be result of being denylisted.
       case rejected
+      /// Tunnel is stopped due to its Forwarding Rules being deleted.
       case stopped
+      /// Waiting to receive all VPN-related configs from user. Network,
+      /// TargetVpnGateway, VpnTunnel, ForwardingRule and Route resources are
+      /// needed to setup VPN tunnel.
       case waitingForFullConfig
       /// Encodes an unknown integer value.
       ///

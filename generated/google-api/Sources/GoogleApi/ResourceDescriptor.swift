@@ -165,8 +165,14 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// A description of the historical or future-looking state of the
   /// resource pattern.
   public enum History: Codable, Equatable, Sendable {
+    /// The "unset" value.
     case unspecified
+    /// The resource originally had one pattern and launched as such, and
+    /// additional patterns were added later.
     case originallySinglePattern
+    /// The resource has one pattern, but the API owner expects to add more
+    /// later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+    /// that from being necessary once there are multiple patterns.)
     case futureMultiPattern
     /// Encodes an unknown integer value.
     ///
@@ -267,7 +273,16 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// A flag representing a specific style that a resource claims to conform to.
   public enum Style: Codable, Equatable, Sendable {
+    /// The unspecified value. Do not use.
     case unspecified
+    /// This resource is intended to be "declarative-friendly".
+    ///
+    /// Declarative-friendly resources must be more strictly consistent, and
+    /// setting this to true communicates to tools that this resource should
+    /// adhere to declarative-friendly expectations.
+    ///
+    /// Note: This is used by the API linter (linter.aip.dev) to enable
+    /// additional checks.
     case declarativeFriendly
     /// Encodes an unknown integer value.
     ///

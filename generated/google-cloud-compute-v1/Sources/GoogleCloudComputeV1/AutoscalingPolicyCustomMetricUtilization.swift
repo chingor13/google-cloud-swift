@@ -121,8 +121,16 @@
     ///
     /// [google.cloud.compute.v1.AutoscalingPolicyCustomMetricUtilization.utilizationTargetType]: <doc:AutoscalingPolicyCustomMetricUtilization/UtilizationTargetType>
     public enum UtilizationTargetType: Codable, Equatable, Sendable {
+      /// Sets the utilization target value for a cumulative or delta metric,
+      /// expressed as the rate of growth per minute.
       case deltaPerMinute
+      /// Sets the utilization target value for a cumulative or delta metric,
+      /// expressed as the rate of growth per second.
       case deltaPerSecond
+      /// Sets the utilization target value for a gauge metric. The autoscaler
+      /// will collect the average utilization of the virtual machines from the
+      /// last couple of minutes, and compare the value to the utilization
+      /// target value to perform autoscaling.
       case gauge
       /// Encodes an unknown integer value.
       ///

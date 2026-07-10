@@ -100,10 +100,15 @@
     ///
     /// [google.cloud.compute.v1.HttpRedirectAction.redirectResponseCode]: <doc:HttpRedirectAction/RedirectResponseCode>
     public enum RedirectResponseCode: Codable, Equatable, Sendable {
+      /// Http Status Code 302 - Found.
       case found
+      /// Http Status Code 301 - Moved Permanently.
       case movedPermanentlyDefault
+      /// Http Status Code 308 - Permanent Redirect maintaining HTTP method.
       case permanentRedirect
+      /// Http Status Code 303 - See Other.
       case seeOther
+      /// Http Status Code 307 - Temporary Redirect maintaining HTTP method.
       case temporaryRedirect
       /// Encodes an unknown integer value.
       ///

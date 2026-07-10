@@ -146,9 +146,15 @@
 
     /// Various Certificate Authority (CA) modes for certificate signing.
     public enum CaMode: Codable, Equatable, Sendable {
+      /// CA mode is unknown.
       case unspecified
+      /// Google-managed self-signed internal CA.
       case googleManagedInternalCa
+      /// Google-managed regional CA part of root CA hierarchy hosted on Google
+      /// Cloud's Certificate Authority Service (CAS).
       case googleManagedCasCa
+      /// Customer-managed CA hosted on Google Cloud's Certificate Authority
+      /// Service (CAS).
       case customerManagedCasCa
       /// Encodes an unknown integer value.
       ///
@@ -255,7 +261,9 @@
     /// MdxProtocolSupport describes parts of the MDX protocol supported by this
     /// instance.
     public enum MdxProtocolSupport: Codable, Equatable, Sendable {
+      /// Not specified.
       case unspecified
+      /// Client should send the client protocol type in the MDX request.
       case clientProtocolType
       /// Encodes an unknown integer value.
       ///

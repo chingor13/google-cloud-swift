@@ -68,7 +68,9 @@
     ///
     /// [google.cloud.compute.v1.InterconnectDiagnosticsLinkStatus.operationalStatus]: <doc:InterconnectDiagnosticsLinkStatus/OperationalStatus>
     public enum OperationalStatus: Codable, Equatable, Sendable {
+      /// The interface is unable to communicate with the remote end.
       case linkOperationalStatusDown
+      /// The interface has low level communication with the remote end.
       case linkOperationalStatusUp
       /// Encodes an unknown integer value.
       ///

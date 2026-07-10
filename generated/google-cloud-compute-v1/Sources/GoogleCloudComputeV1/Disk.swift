@@ -593,8 +593,14 @@
     ///
     /// [google.cloud.compute.v1.Disk.accessMode]: <doc:Disk/AccessMode>
     public enum AccessMode: Codable, Equatable, Sendable {
+      /// The AccessMode means the disk can be attached to multiple instances in RO
+      /// mode.
       case readOnlyMany
+      /// The AccessMode means the disk can be attached to multiple instances in RW
+      /// mode.
       case readWriteMany
+      /// The default AccessMode, means the disk can be attached to single instance
+      /// in RW mode.
       case readWriteSingle
       /// Encodes an unknown integer value.
       ///
@@ -697,8 +703,11 @@
     ///
     /// [google.cloud.compute.v1.Disk.architecture]: <doc:Disk/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -801,11 +810,18 @@
     ///
     /// [google.cloud.compute.v1.Disk.status]: <doc:Disk/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Disk is provisioning
       case creating
+      /// Disk is deleting.
       case deleting
+      /// Disk creation failed.
       case failed
+      /// Disk is ready for use.
       case ready
+      /// Source data is being copied into the disk.
       case restoring
+      /// Disk is currently unavailable and cannot be accessed, attached or
+      /// detached.
       case unavailable
       /// Encodes an unknown integer value.
       ///

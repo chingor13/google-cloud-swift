@@ -368,7 +368,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Predefined list of publicly available Docker repositories like Docker
     /// Hub.
     public enum PublicRepository: Codable, Equatable, Sendable {
+      /// Unspecified repository.
       case unspecified
+      /// Docker Hub.
       case dockerHub
       /// Encodes an unknown integer value.
       ///
@@ -589,7 +591,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Predefined list of publicly available Maven repositories like Maven
     /// Central.
     public enum PublicRepository: Codable, Equatable, Sendable {
+      /// Unspecified repository.
       case unspecified
+      /// Maven Central.
       case mavenCentral
       /// Encodes an unknown integer value.
       ///
@@ -809,7 +813,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 
     /// Predefined list of publicly available NPM repositories like npmjs.
     public enum PublicRepository: Codable, Equatable, Sendable {
+      /// Unspecified repository.
       case unspecified
+      /// npmjs.
       case npmjs
       /// Encodes an unknown integer value.
       ///
@@ -1029,7 +1035,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 
     /// Predefined list of publicly available Python repositories like PyPI.org.
     public enum PublicRepository: Codable, Equatable, Sendable {
+      /// Unspecified repository.
       case unspecified
+      /// PyPI.
       case pypi
       /// Encodes an unknown integer value.
       ///
@@ -1242,9 +1250,13 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 
       /// Predefined list of publicly available repository bases for Apt.
       public enum RepositoryBase: Codable, Equatable, Sendable {
+        /// Unspecified repository base.
         case unspecified
+        /// Debian.
         case debian
+        /// Ubuntu LTS/Pro.
         case ubuntu
+        /// Archived Debian.
         case debianSnapshot
         /// Encodes an unknown integer value.
         ///
@@ -1515,12 +1527,19 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 
       /// Predefined list of publicly available repository bases for Yum.
       public enum RepositoryBase: Codable, Equatable, Sendable {
+        /// Unspecified repository base.
         case unspecified
+        /// CentOS.
         case centos
+        /// CentOS Debug.
         case centosDebug
+        /// CentOS Vault.
         case centosVault
+        /// CentOS Stream.
         case centosStream
+        /// Rocky.
         case rocky
+        /// Fedora Extra Packages for Enterprise Linux (EPEL).
         case epel
         /// Encodes an unknown integer value.
         ///

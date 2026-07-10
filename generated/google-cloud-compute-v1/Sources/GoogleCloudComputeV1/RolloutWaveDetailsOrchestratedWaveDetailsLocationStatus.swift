@@ -46,11 +46,17 @@
     ///
     /// [google.cloud.compute.v1.RolloutWaveDetailsOrchestratedWaveDetailsLocationStatus.state]: <doc:RolloutWaveDetailsOrchestratedWaveDetailsLocationStatus/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Work on the wave failed.
       case failed
+      /// Work on the wave is in progress.
       case inProgress
+      /// Work on the wave is pending.
       case pending
+      /// Work on the wave was canceled or skipped.
       case skipped
+      /// Work on the wave succeeded.
       case succeeded
+      /// Undefined default state. Should never be exposed to users.
       case unspecified
       /// Encodes an unknown integer value.
       ///

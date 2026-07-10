@@ -123,10 +123,15 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// Types of notifications currently supported. Can be used to filter what
   /// notifications are sent.
   public enum EventType: Codable, Equatable, Sendable {
+    /// Not set, will be ignored.
     case unspecified
+    /// Corresponds with UpgradeAvailableEvent.
     case upgradeAvailableEvent
+    /// Corresponds with UpgradeEvent.
     case upgradeEvent
+    /// Corresponds with SecurityBulletinEvent.
     case securityBulletinEvent
+    /// Corresponds with UpgradeInfoEvent.
     case upgradeInfoEvent
     /// Encodes an unknown integer value.
     ///

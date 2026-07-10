@@ -72,13 +72,21 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// The status of a TransferOperation.
   public enum Status: Codable, Equatable, Sendable {
+    /// Zero is an illegal value.
     case unspecified
+    /// In progress.
     case inProgress
+    /// Paused.
     case paused
+    /// Completed successfully.
     case success
+    /// Terminated due to an unrecoverable failure.
     case failed
+    /// Aborted by the user.
     case aborted
+    /// Temporarily delayed by the system. No user action is required.
     case queued
+    /// The operation is suspending and draining the ongoing work to completion.
     case suspending
     /// Encodes an unknown integer value.
     ///

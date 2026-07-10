@@ -42,14 +42,23 @@ public struct LoggingComponentConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
 
   /// GKE components exposing logs
   public enum Component: Codable, Equatable, Sendable {
+    /// Default value. This shouldn't be used.
     case unspecified
+    /// system components
     case systemComponents
+    /// workloads
     case workloads
+    /// kube-apiserver
     case apiserver
+    /// kube-scheduler
     case scheduler
+    /// kube-controller-manager
     case controllerManager
+    /// kcp-sshd
     case kcpSshd
+    /// kcp connection logs
     case kcpConnection
+    /// horizontal pod autoscaler decision logs
     case kcpHpa
     /// Encodes an unknown integer value.
     ///

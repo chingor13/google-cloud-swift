@@ -157,6 +157,7 @@
     ///
     /// [google.cloud.compute.v1.FutureReservation.confidentialComputeType]: <doc:FutureReservation/ConfidentialComputeType>
     public enum ConfidentialComputeType: Codable, Equatable, Sendable {
+      /// Intel Trust Domain Extensions.
       case tdx
       case unspecified
       /// Encodes an unknown integer value.
@@ -255,6 +256,7 @@
     ///
     /// [google.cloud.compute.v1.FutureReservation.deploymentType]: <doc:FutureReservation/DeploymentType>
     public enum DeploymentType: Codable, Equatable, Sendable {
+      /// The reserved capacity is made up of densely deployed reservation blocks.
       case dense
       case unspecified
       /// Encodes an unknown integer value.
@@ -353,8 +355,10 @@
     ///
     /// [google.cloud.compute.v1.FutureReservation.planningStatus]: <doc:FutureReservation/PlanningStatus>
     public enum PlanningStatus: Codable, Equatable, Sendable {
+      /// Future Reservation is being drafted.
       case draft
       case unspecified
+      /// Future Reservation has been submitted for evaluation by GCP.
       case submitted
       /// Encodes an unknown integer value.
       ///
@@ -457,7 +461,12 @@
     ///
     /// [google.cloud.compute.v1.FutureReservation.reservationMode]: <doc:FutureReservation/ReservationMode>
     public enum ReservationMode: Codable, Equatable, Sendable {
+      /// The delivered reservations will delivered at specified start time and
+      /// terminated at specified end time along with terminating the VMs running
+      /// on it.
       case calendar
+      /// The delivered reservations do not terminate VMs at the end of
+      /// reservations. This is default mode.
       case `default`
       case unspecified
       /// Encodes an unknown integer value.
@@ -561,8 +570,12 @@
     ///
     /// [google.cloud.compute.v1.FutureReservation.schedulingType]: <doc:FutureReservation/SchedulingType>
     public enum SchedulingType: Codable, Equatable, Sendable {
+      /// Maintenance on all reserved instances in the reservation is synchronized.
       case grouped
+      /// Unknown maintenance type.
       case groupMaintenanceTypeUnspecified
+      /// Maintenance is not synchronized for this reservation. Instead, each
+      /// instance has its own maintenance window.
       case independent
       /// Encodes an unknown integer value.
       ///

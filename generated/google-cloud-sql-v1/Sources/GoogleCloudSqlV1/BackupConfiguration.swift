@@ -78,10 +78,21 @@
     /// This value contains the storage location of the transactional logs
     /// used to perform point-in-time recovery (PITR) for the database.
     public enum TransactionalLogStorageState: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// The transaction logs used for PITR for the instance are stored
+      /// on a data disk.
       case disk
+      /// The transaction logs used for PITR for the instance are switching from
+      /// being stored on a data disk to being stored in Cloud Storage.
+      /// Only applicable to MySQL.
       case switchingToCloudStorage
+      /// The transaction logs used for PITR for the instance are now stored
+      /// in Cloud Storage. Previously, they were stored on a data disk.
+      /// Only applicable to MySQL.
       case switchedToCloudStorage
+      /// The transaction logs used for PITR for the instance are stored in
+      /// Cloud Storage. Only applicable to MySQL and PostgreSQL.
       case cloudStorage
       /// Encodes an unknown integer value.
       ///
@@ -192,9 +203,13 @@
 
     /// Backup tier that manages the backups for the instance.
     public enum BackupTier: Codable, Equatable, Sendable {
+      /// Unspecified.
       case unspecified
+      /// Instance is managed by Cloud SQL.
       case standard
+      /// Deprecated: ADVANCED is deprecated. Please use ENHANCED instead.
       case advanced
+      /// Instance is managed by Google Cloud Backup and DR Service.
       case enhanced
       /// Encodes an unknown integer value.
       ///

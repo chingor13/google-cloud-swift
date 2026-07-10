@@ -48,8 +48,11 @@ public struct LabelDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Value types that can be used as label values.
   public enum ValueType: Codable, Equatable, Sendable {
+    /// A variable-length string. This is the default.
     case string
+    /// Boolean; true or false.
     case bool
+    /// A 64-bit signed integer.
     case int64
     /// Encodes an unknown integer value.
     ///

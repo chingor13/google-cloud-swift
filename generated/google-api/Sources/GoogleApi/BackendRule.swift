@@ -217,7 +217,49 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// unspecified.
   public enum PathTranslation: Codable, Equatable, Sendable {
     case unspecified
+    /// Use the backend address as-is, with no modification to the path. If the
+    /// URL pattern contains variables, the variable names and values will be
+    /// appended to the query string. If a query string parameter and a URL
+    /// pattern variable have the same name, this may result in duplicate keys in
+    /// the query string.
+    ///
+    /// # Examples
+    ///
+    /// Given the following operation config:
+    ///
+    ///     Method path:        /api/company/{cid}/user/{uid}
+    ///     Backend address:    https://example.cloudfunctions.net/getUser
+    ///
+    /// Requests to the following request paths will call the backend at the
+    /// translated path:
+    ///
+    ///     Request path: /api/company/widgetworks/user/johndoe
+    ///     Translated:
+    ///     https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
+    ///
+    ///     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+    ///     Translated:
+    ///     https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
     case constantAddress
+    /// The request path will be appended to the backend address.
+    ///
+    /// # Examples
+    ///
+    /// Given the following operation config:
+    ///
+    ///     Method path:        /api/company/{cid}/user/{uid}
+    ///     Backend address:    https://example.appspot.com
+    ///
+    /// Requests to the following request paths will call the backend at the
+    /// translated path:
+    ///
+    ///     Request path: /api/company/widgetworks/user/johndoe
+    ///     Translated:
+    ///     https://example.appspot.com/api/company/widgetworks/user/johndoe
+    ///
+    ///     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+    ///     Translated:
+    ///     https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
     case appendPathToAddress
     /// Encodes an unknown integer value.
     ///

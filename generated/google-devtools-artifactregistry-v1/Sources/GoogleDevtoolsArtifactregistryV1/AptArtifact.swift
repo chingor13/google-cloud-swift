@@ -59,8 +59,11 @@ public struct AptArtifact: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Package type is either binary or source.
   public enum PackageType: Codable, Equatable, Sendable {
+    /// Package type is not specified.
     case unspecified
+    /// Binary package.
     case binary
+    /// Source package.
     case source
     /// Encodes an unknown integer value.
     ///

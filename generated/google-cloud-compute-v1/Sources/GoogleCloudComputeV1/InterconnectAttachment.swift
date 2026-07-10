@@ -584,19 +584,33 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.bandwidth]: <doc:InterconnectAttachment/Bandwidth>
     public enum Bandwidth: Codable, Equatable, Sendable {
+      /// 100 Gbit/s
       case bps100G
+      /// 100 Mbit/s
       case bps100M
+      /// 10 Gbit/s
       case bps10G
+      /// 1 Gbit/s
       case bps1G
+      /// 200 Mbit/s
       case bps200M
+      /// 20 Gbit/s
       case bps20G
+      /// 2 Gbit/s
       case bps2G
+      /// 300 Mbit/s
       case bps300M
+      /// 400 Gbit/s
       case bps400G
+      /// 400 Mbit/s
       case bps400M
+      /// 500 Mbit/s
       case bps500M
+      /// 50 Gbit/s
       case bps50G
+      /// 50 Mbit/s
       case bps50M
+      /// 5 Gbit/s
       case bps5G
       /// Encodes an unknown integer value.
       ///
@@ -858,7 +872,15 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.encryption]: <doc:InterconnectAttachment/Encryption>
     public enum Encryption: Codable, Equatable, Sendable {
+      /// The interconnect attachment will carry only encrypted traffic that is
+      /// encrypted by an IPsec device such as HA VPN gateway;
+      /// VMs cannot directly send traffic to or receive traffic from such an
+      /// interconnect attachment.  To use HA VPN over Cloud Interconnect,
+      /// the interconnect attachment must be created with this option.
       case ipsec
+      /// This is the default value, which means the Interconnect Attachment will
+      /// carry unencrypted traffic. VMs will be able to send traffic to or receive
+      /// traffic from such interconnect attachment.
       case `none`
       /// Encodes an unknown integer value.
       ///
@@ -956,7 +978,11 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.operationalStatus]: <doc:InterconnectAttachment/OperationalStatus>
     public enum OperationalStatus: Codable, Equatable, Sendable {
+      /// Indicates that attachment has been turned up and is ready to
+      /// use.
       case osActive
+      /// Indicates that attachment is not ready to use yet, because
+      /// turnup is not complete.
       case osUnprovisioned
       /// Encodes an unknown integer value.
       ///
@@ -1054,7 +1080,9 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.stackType]: <doc:InterconnectAttachment/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// The interconnect attachment can have both IPv4 and IPv6 addresses.
       case ipv4Ipv6
+      /// The interconnect attachment will only be assigned IPv4 addresses.
       case ipv4Only
       /// Encodes an unknown integer value.
       ///
@@ -1152,12 +1180,24 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.state]: <doc:InterconnectAttachment/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Indicates that attachment has been turned up and is ready to use.
       case active
+      /// The attachment was deleted externally and is no longer functional.
+      /// This could be because the associated Interconnect was wiped out,
+      /// or because the other side of a Partner attachment was deleted.
       case defunct
+      /// A PARTNER attachment is in the process of provisioning after a
+      /// PARTNER_PROVIDER attachment was created that references it.
       case partnerRequestReceived
+      /// PARTNER or PARTNER_PROVIDER attachment that is waiting for the customer
+      /// to activate.
       case pendingCustomer
+      /// A newly created PARTNER attachment that has not yet been configured on
+      /// the Partner side.
       case pendingPartner
       case unspecified
+      /// Indicates that attachment is not ready to use yet, because turnup is not
+      /// complete.
       case unprovisioned
       /// Encodes an unknown integer value.
       ///
@@ -1280,9 +1320,13 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachment.type]: <doc:InterconnectAttachment/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Attachment to a dedicated interconnect.
       case dedicated
+      /// Attachment to a dedicated interconnect, forwarding L2 packets.
       case l2Dedicated
+      /// Attachment to a partner interconnect, created by the customer.
       case partner
+      /// Attachment to a partner interconnect, created by the partner.
       case partnerProvider
       /// Encodes an unknown integer value.
       ///

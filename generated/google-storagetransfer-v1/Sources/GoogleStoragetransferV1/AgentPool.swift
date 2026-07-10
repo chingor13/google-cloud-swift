@@ -89,9 +89,16 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The state of an AgentPool.
   public enum State: Codable, Equatable, Sendable {
+    /// Default value. This value is unused.
     case unspecified
+    /// This is an initialization state. During this stage, resources are
+    /// allocated for the AgentPool.
     case creating
+    /// Determines that the AgentPool is created for use. At this state, Agents
+    /// can join the AgentPool and participate in the transfer jobs in that pool.
     case created
+    /// Determines that the AgentPool deletion has been initiated, and all the
+    /// resources are scheduled to be cleaned up and freed.
     case deleting
     /// Encodes an unknown integer value.
     ///

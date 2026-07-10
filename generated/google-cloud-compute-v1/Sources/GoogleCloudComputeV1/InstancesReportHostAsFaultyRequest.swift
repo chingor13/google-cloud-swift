@@ -46,8 +46,11 @@
     ///
     /// [google.cloud.compute.v1.InstancesReportHostAsFaultyRequest.disruptionSchedule]: <doc:InstancesReportHostAsFaultyRequest/DisruptionSchedule>
     public enum DisruptionSchedule: Codable, Equatable, Sendable {
+      /// Not used. Required as per aip/126.
       case unspecified
+      /// Delay disruption for caller control. Will be default soon.
       case future
+      /// Default value. Disrupt the VM immediately.
       case immediate
       /// Encodes an unknown integer value.
       ///

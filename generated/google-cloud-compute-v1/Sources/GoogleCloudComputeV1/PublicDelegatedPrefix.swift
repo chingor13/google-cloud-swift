@@ -222,7 +222,12 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefix.byoipApiVersion]: <doc:PublicDelegatedPrefix/ByoipApiVersion>
     public enum ByoipApiVersion: Codable, Equatable, Sendable {
+      /// This public delegated prefix usually takes 4 weeks to delete, and the BGP
+      /// status cannot be changed. Announce and Withdraw APIs can not be used on
+      /// this prefix.
       case v1
+      /// This public delegated prefix takes minutes to delete. Announce and
+      /// Withdraw APIs can be used on this prefix to change the BGP status.
       case v2
       /// Encodes an unknown integer value.
       ///
@@ -320,7 +325,13 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefix.ipv6AccessType]: <doc:PublicDelegatedPrefix/Ipv6AccessType>
     public enum Ipv6AccessType: Codable, Equatable, Sendable {
+      /// The parent public advertised prefix will be announced to the internet.
+      /// All children public delegated prefixes will have IPv6 access type as
+      /// EXTERNAL.
       case external
+      /// The parent public advertised prefix will not be announced to the
+      /// internet. Prefix will be used privately within Cloud. All children
+      /// public delegated prefixes will have IPv6 access type as INTERNAL.
       case `internal`
       /// Encodes an unknown integer value.
       ///
@@ -418,9 +429,21 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefix.mode]: <doc:PublicDelegatedPrefix/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// The public delegated prefix is used for further sub-delegation only. Such
+      /// prefixes cannot set allocatablePrefixLength.
       case delegation
+      /// The public delegated prefix is used for creating forwarding rules only.
+      /// Such prefixes cannot set publicDelegatedSubPrefixes. Parent public
+      /// delegated prefix must have IPv6 access type as EXTERNAL.
       case externalIpv6ForwardingRuleCreation
+      /// The public delegated prefix is used for creating dual-mode subnetworks
+      /// only. Such prefixes cannot set publicDelegatedSubPrefixes. Parent public
+      /// delegated prefix must have IPv6 access type as EXTERNAL.
       case externalIpv6SubnetworkCreation
+      /// The public delegated prefix is used for creating dual stack or IPv6-only
+      /// subnetwork with internal access only. Such prefixes cannot set
+      /// publicDelegatedSubPrefixes and allocatablePrefixLength. Parent public
+      /// delegated prefix must have IPv6 access type as INTERNAL.
       case internalIpv6SubnetworkCreation
       /// Encodes an unknown integer value.
       ///
@@ -528,12 +551,21 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefix.status]: <doc:PublicDelegatedPrefix/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The public delegated prefix is ready to use.
       case active
+      /// The public delegated prefix is announced and ready to use.
       case announced
+      /// The prefix is announced within Google network.
       case announcedToGoogle
+      /// The prefix is announced to Internet and within Google.
       case announcedToInternet
+      /// The public delegated prefix is being deprovsioned.
       case deleting
+      /// The public delegated prefix is being initialized and addresses cannot be
+      /// created yet.
       case initializing
+      /// The public delegated prefix is currently withdrawn but ready to be
+      /// announced.
       case readyToAnnounce
       /// Encodes an unknown integer value.
       ///

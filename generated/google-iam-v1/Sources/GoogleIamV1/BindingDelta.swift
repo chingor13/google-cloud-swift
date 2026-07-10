@@ -58,8 +58,11 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The type of action performed on a Binding in a policy.
   public enum Action: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Addition of a Binding.
     case add
+    /// Removal of a Binding.
     case remove
     /// Encodes an unknown integer value.
     ///

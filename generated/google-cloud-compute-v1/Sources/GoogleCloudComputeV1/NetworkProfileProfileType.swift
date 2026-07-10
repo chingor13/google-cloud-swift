@@ -49,8 +49,11 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileProfileType.networkType]: <doc:NetworkProfileProfileType/NetworkType>
     public enum NetworkType: Codable, Equatable, Sendable {
+      /// RDMA network.
       case rdma
+      /// ULL network.
       case ull
+      /// VPC network.
       case vpc
       /// Encodes an unknown integer value.
       ///
@@ -153,8 +156,11 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileProfileType.rdmaSubtype]: <doc:NetworkProfileProfileType/RdmaSubtype>
     public enum RdmaSubtype: Codable, Equatable, Sendable {
+      /// RDMA over Falcon.
       case falcon
+      /// RDMA over Converged Ethernet (RoCE).
       case roce
+      /// RDMA over Converged Ethernet (RoCE) for Bare Metal.
       case roceMetal
       /// Encodes an unknown integer value.
       ///
@@ -257,7 +263,9 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileProfileType.ullSubtype]: <doc:NetworkProfileProfileType/UllSubtype>
     public enum UllSubtype: Codable, Equatable, Sendable {
+      /// Exchange operator.
       case `operator`
+      /// Exchange participant.
       case participant
       /// Encodes an unknown integer value.
       ///
@@ -355,6 +363,7 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileProfileType.vpcSubtype]: <doc:NetworkProfileProfileType/VpcSubtype>
     public enum VpcSubtype: Codable, Equatable, Sendable {
+      /// Regionally bound VPC network.
       case regional
       /// Encodes an unknown integer value.
       ///

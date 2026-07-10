@@ -46,7 +46,9 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Allowed Network Policy providers.
   public enum Provider: Codable, Equatable, Sendable {
+    /// Not set
     case unspecified
+    /// Tigera (Calico Felix).
     case calico
     /// Encodes an unknown integer value.
     ///

@@ -55,7 +55,10 @@
     ///
     /// [google.cloud.compute.v1.InterconnectDiagnosticsLinkLACPStatus.state]: <doc:InterconnectDiagnosticsLinkLACPStatus/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The link is configured and active within the bundle.
       case active
+      /// The link is not configured within the bundle, this means the rest of
+      /// the object should be empty.
       case detached
       /// Encodes an unknown integer value.
       ///

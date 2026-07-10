@@ -19,15 +19,28 @@
 
   /// The status of a backup run.
   public enum SqlBackupRunStatus: Codable, Equatable, Sendable {
+    /// The status of the run is unknown.
     case unspecified
+    /// The backup operation was enqueued.
     case enqueued
+    /// The backup is overdue across a given backup window. Indicates a
+    /// problem. Example: Long-running operation in progress during
+    /// the whole window.
     case overdue
+    /// The backup is in progress.
     case running
+    /// The backup failed.
     case failed
+    /// The backup was successful.
     case successful
+    /// The backup was skipped (without problems) for a given backup
+    /// window. Example: Instance was idle.
     case skipped
+    /// The backup is about to be deleted.
     case deletionPending
+    /// The backup deletion failed.
     case deletionFailed
+    /// The backup has been deleted.
     case deleted
     /// Encodes an unknown integer value.
     ///

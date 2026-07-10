@@ -142,13 +142,26 @@
     ///
     /// [google.cloud.compute.v1.NetworkEndpointGroup.networkEndpointType]: <doc:NetworkEndpointGroup/NetworkEndpointType>
     public enum NetworkEndpointType: Codable, Equatable, Sendable {
+      /// The network endpoint is represented by an IP address.
       case gceVmIp
+      /// The network endpoint is represented by IP address and port pair.
       case gceVmIpPort
+      /// The network endpoint is represented by an IP, Port and Client Destination
+      /// Port.
       case gceVmIpPortmap
+      /// The network endpoint is represented by fully qualified domain name and
+      /// port.
       case internetFqdnPort
+      /// The network endpoint is represented by an internet IP address and port.
       case internetIpPort
+      /// The network endpoint is represented by an IP address and port. The
+      /// endpoint belongs to a VM or pod running in a customer's on-premises.
       case nonGcpPrivateIpPort
+      /// The network endpoint is either public Google APIs or
+      /// services exposed by other GCP Project with a Service Attachment.
+      /// The connection is set up by private service connect
       case privateServiceConnect
+      /// The network endpoint is handled by specified serverless infrastructure.
       case serverless
       /// Encodes an unknown integer value.
       ///

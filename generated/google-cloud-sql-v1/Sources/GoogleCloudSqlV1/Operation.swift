@@ -126,58 +126,126 @@
 
     /// The type of Cloud SQL operation.
     public enum SqlOperationType: Codable, Equatable, Sendable {
+      /// Unknown operation type.
       case unspecified
+      /// Imports data into a Cloud SQL instance.
       case `import`
+      /// Exports data from a Cloud SQL instance to a Cloud Storage
+      /// bucket.
       case export
+      /// Creates a new Cloud SQL instance.
       case create
+      /// Updates the settings of a Cloud SQL instance.
       case update
+      /// Deletes a Cloud SQL instance.
       case delete
+      /// Restarts the Cloud SQL instance.
       case restart
       case backup
       case snapshot
+      /// Performs instance backup.
       case backupVolume
+      /// Deletes an instance backup.
       case deleteVolume
+      /// Restores an instance backup.
       case restoreVolume
+      /// Injects a privileged user in mysql for MOB instances.
       case injectUser
+      /// Clones a Cloud SQL instance.
       case clone
+      /// Stops replication on a Cloud SQL read replica instance.
       case stopReplica
+      /// Starts replication on a Cloud SQL read replica instance.
       case startReplica
+      /// Promotes a Cloud SQL replica instance.
       case promoteReplica
+      /// Creates a Cloud SQL replica instance.
       case createReplica
+      /// Creates a new user in a Cloud SQL instance.
       case createUser
+      /// Deletes a user from a Cloud SQL instance.
       case deleteUser
+      /// Updates an existing user in a Cloud SQL instance. If a user with the
+      /// specified username doesn't exist, a new user is created.
       case updateUser
+      /// Creates a database in the Cloud SQL instance.
       case createDatabase
+      /// Deletes a database in the Cloud SQL instance.
       case deleteDatabase
+      /// Updates a database in the Cloud SQL instance.
       case updateDatabase
+      /// Performs failover of an HA-enabled Cloud SQL
+      /// failover replica.
       case failover
+      /// Deletes the backup taken by a backup run.
       case deleteBackup
       case recreateReplica
+      /// Truncates a general or slow log table in MySQL.
       case truncateLog
+      /// Demotes the stand-alone instance to be a Cloud SQL
+      /// read replica for an external database server.
       case demoteMaster
+      /// Indicates that the instance is currently in maintenance. Maintenance
+      /// typically causes the instance to be unavailable for 1-3 minutes.
       case maintenance
+      /// This field is deprecated, and will be removed in future version of API.
       case enablePrivateIp
       case deferMaintenance
+      /// Creates clone instance.
       case createClone
+      /// Reschedule maintenance to another time.
       case rescheduleMaintenance
+      /// Starts external sync of a Cloud SQL EM replica to an external primary
+      /// instance.
       case startExternalSync
+      /// Recovers logs from an instance's old data disk.
       case logCleanup
+      /// Performs auto-restart of an HA-enabled Cloud SQL database for auto
+      /// recovery.
       case autoRestart
+      /// Re-encrypts CMEK instances with latest key version.
       case reencrypt
+      /// Switches the roles of the primary and replica pair. The target instance
+      /// should be the replica.
       case switchover
+      /// Update a backup.
       case updateBackup
+      /// Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
       case acquireSsrsLease
+      /// Release a lease for the setup of SQL Server Reporting Services (SSRS).
       case releaseSsrsLease
+      /// Reconfigures old primary after a promote replica operation. Effect of a
+      /// promote operation to the old primary is executed in this operation,
+      /// asynchronously from the promote replica operation executed to the
+      /// replica.
       case reconfigureOldPrimary
+      /// Indicates that the instance, its read replicas, and its cascading
+      /// replicas are in maintenance. Maintenance typically gets initiated on
+      /// groups of replicas first, followed by the primary instance. For each
+      /// instance, maintenance typically causes the instance to be unavailable for
+      /// 1-3 minutes.
       case clusterMaintenance
+      /// Indicates that the instance (and any of its replicas) are currently in
+      /// maintenance. This is initiated as a self-service request by using SSM.
+      /// Maintenance typically causes the instance to be unavailable for 1-3
+      /// minutes.
       case selfServiceMaintenance
+      /// Switches a primary instance to a replica. This operation runs as part of
+      /// a switchover operation to the original primary instance.
       case switchoverToReplica
+      /// Updates the major version of a Cloud SQL instance.
       case majorVersionUpgrade
+      /// Deprecated: ADVANCED_BACKUP is deprecated. Use ENHANCED_BACKUP instead.
       case advancedBackup
+      /// Changes the BackupTier of a Cloud SQL instance.
       case manageBackup
+      /// Creates a backup for an Enhanced BackupTier Cloud SQL instance.
       case enhancedBackup
+      /// Repairs entire read pool or specified read pool nodes in the read pool.
       case repairReadPool
+      /// Creates a Cloud SQL read pool instance.
       case createReadPool
+      /// Pre-checks the major version upgrade operation.
       case preCheckMajorVersionUpgrade
       /// Encodes an unknown integer value.
       ///
@@ -528,9 +596,13 @@
 
     /// The status of an operation.
     public enum SqlOperationStatus: Codable, Equatable, Sendable {
+      /// The state of the operation is unknown.
       case unspecified
+      /// The operation has been queued, but has not started yet.
       case pending
+      /// The operation is running.
       case running
+      /// The operation completed.
       case done
       /// Encodes an unknown integer value.
       ///

@@ -18,8 +18,11 @@ import Foundation
 
 /// Alternatives for execution environments.
 public enum ExecutionEnvironment: Codable, Equatable, Sendable {
+  /// Unspecified
   case unspecified
+  /// Uses the First Generation environment.
   case gen1
+  /// Uses Second Generation environment.
   case gen2
   /// Encodes an unknown integer value.
   ///

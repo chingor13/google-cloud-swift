@@ -118,9 +118,27 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public enum State: Codable, Equatable, Sendable {
+    /// Not specified. This value is unused and invalid.
     case unspecified
+    /// The [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] may be
+    /// accessed.
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     case enabled
+    /// The [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] may not
+    /// be accessed, but the secret data is still available and can be placed
+    /// back into the
+    /// [ENABLED][google.cloud.secretmanager.v1.SecretVersion.State.ENABLED]
+    /// state.
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+    /// [google.cloud.secretmanager.v1.SecretVersion.State.ENABLED]: <doc:SecretVersion/State/enabled>
     case disabled
+    /// The [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] is
+    /// destroyed and the secret data is no longer stored. A version may not
+    /// leave this state once entered.
+    ///
+    /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     case destroyed
     /// Encodes an unknown integer value.
     ///

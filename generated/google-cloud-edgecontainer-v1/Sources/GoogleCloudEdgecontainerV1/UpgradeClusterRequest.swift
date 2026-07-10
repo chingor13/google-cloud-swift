@@ -53,7 +53,11 @@ public struct UpgradeClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
 
   /// Represents the schedule about when the cluster is going to be upgraded.
   public enum Schedule: Codable, Equatable, Sendable {
+    /// Unspecified. The default is to upgrade the cluster immediately which is
+    /// the only option today.
     case unspecified
+    /// The cluster is going to be upgraded immediately after receiving the
+    /// request.
     case immediately
     /// Encodes an unknown integer value.
     ///

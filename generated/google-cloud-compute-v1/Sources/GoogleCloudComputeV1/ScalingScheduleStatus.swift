@@ -58,9 +58,15 @@
     ///
     /// [google.cloud.compute.v1.ScalingScheduleStatus.state]: <doc:ScalingScheduleStatus/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The current autoscaling recommendation is influenced by this scaling
+      /// schedule.
       case active
+      /// This scaling schedule has been disabled by the user.
       case disabled
+      /// This scaling schedule will never become active again.
       case obsolete
+      /// The current autoscaling recommendation is not influenced by this scaling
+      /// schedule.
       case ready
       /// Encodes an unknown integer value.
       ///

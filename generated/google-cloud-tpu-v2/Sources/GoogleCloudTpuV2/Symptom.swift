@@ -52,12 +52,20 @@ public struct Symptom: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// SymptomType represents the different types of Symptoms that a TPU can be
   /// at.
   public enum SymptomType: Codable, Equatable, Sendable {
+    /// Unspecified symptom.
     case unspecified
+    /// TPU VM memory is low.
     case lowMemory
+    /// TPU runtime is out of memory.
     case outOfMemory
+    /// TPU runtime execution has timed out.
     case executeTimedOut
+    /// TPU runtime fails to construct a mesh that recognizes each TPU device's
+    /// neighbors.
     case meshBuildFail
+    /// TPU HBM is out of memory.
     case hbmOutOfMemory
+    /// Abusive behaviors have been identified on the current project.
     case projectAbuse
     /// Encodes an unknown integer value.
     ///

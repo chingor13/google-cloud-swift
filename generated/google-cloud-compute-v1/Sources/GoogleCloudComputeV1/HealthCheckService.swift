@@ -184,7 +184,13 @@
     ///
     /// [google.cloud.compute.v1.HealthCheckService.healthStatusAggregationPolicy]: <doc:HealthCheckService/HealthStatusAggregationPolicy>
     public enum HealthStatusAggregationPolicy: Codable, Equatable, Sendable {
+      /// If any backend's health check reports UNHEALTHY,
+      /// then UNHEALTHY is the HealthState of
+      /// the entire health check service. If all backend's are healthy,
+      /// the HealthState of the health check service isHEALTHY.
       case and
+      /// An EndpointHealth message is returned for each
+      /// backend in the health check service.
       case noAggregation
       /// Encodes an unknown integer value.
       ///

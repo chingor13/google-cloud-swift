@@ -18,10 +18,21 @@
   import Foundation
 
   public enum SqlIpAddressType: Codable, Equatable, Sendable {
+    /// This is an unknown IP address type.
     case unspecified
+    /// IP address the customer is supposed to connect to. Usually this is the
+    /// load balancer's IP address
     case primary
+    /// Source IP address of the connection a read replica establishes to its
+    /// external primary instance. This IP address can be allowlisted by the
+    /// customer in case it has a firewall that filters incoming connection to its
+    /// on premises primary instance.
     case outgoing
+    /// Private IP used when using private IPs and network peering.
     case `private`
+    /// V1 IP of a migrated instance. We want the user to
+    /// decommission this IP as soon as the migration is complete.
+    /// Note: V1 instances with V1 ip addresses will be counted as PRIMARY.
     case migrated1StGen
     /// Encodes an unknown integer value.
     ///

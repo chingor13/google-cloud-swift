@@ -19,9 +19,13 @@
 
   /// External Sync parallel level.
   public enum ExternalSyncParallelLevel: Codable, Equatable, Sendable {
+    /// Unknown sync parallel level. Will be defaulted to OPTIMAL.
     case unspecified
+    /// Minimal parallel level.
     case min
+    /// Optimal parallel level.
     case optimal
+    /// Maximum parallel level.
     case max
     /// Encodes an unknown integer value.
     ///

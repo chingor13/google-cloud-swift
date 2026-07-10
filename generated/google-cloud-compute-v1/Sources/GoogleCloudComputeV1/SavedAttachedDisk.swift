@@ -202,7 +202,11 @@
     ///
     /// [google.cloud.compute.v1.SavedAttachedDisk.mode]: <doc:SavedAttachedDisk/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// Attaches this disk in read-only mode. Multiple virtual machines can use
+      /// a disk in read-only mode at a time.
       case readOnly
+      /// *[Default]* Attaches this disk in read-write mode. Only one
+      /// virtual machine at a time can be attached to a disk in read-write mode.
       case readWrite
       /// Encodes an unknown integer value.
       ///

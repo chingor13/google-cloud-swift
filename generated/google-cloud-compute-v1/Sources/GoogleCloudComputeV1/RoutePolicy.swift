@@ -104,7 +104,9 @@
     ///
     /// [google.cloud.compute.v1.RoutePolicy.type]: <doc:RoutePolicy/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// The Route Policy is an Export Policy.
       case routePolicyTypeExport
+      /// The Route Policy is an Import Policy.
       case routePolicyTypeImport
       /// Encodes an unknown integer value.
       ///

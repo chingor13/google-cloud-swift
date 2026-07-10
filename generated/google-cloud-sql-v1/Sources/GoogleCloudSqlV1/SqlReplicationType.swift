@@ -18,8 +18,15 @@
   import Foundation
 
   public enum SqlReplicationType: Codable, Equatable, Sendable {
+    /// This is an unknown replication type for a Cloud SQL instance.
     case unspecified
+    /// The synchronous replication mode for First Generation instances. It is the
+    /// default value.
     case synchronous
+    /// The asynchronous replication mode for First Generation instances. It
+    /// provides a slight performance gain, but if an outage occurs while this
+    /// option is set to asynchronous, you can lose up to a few seconds of updates
+    /// to your data.
     case asynchronous
     /// Encodes an unknown integer value.
     ///

@@ -20,7 +20,22 @@ import Foundation
 /// policy engine may have multiple purposes defined, however a TagKey may only
 /// specify a single purpose.
 public enum Purpose: Codable, Equatable, Sendable {
+  /// Unspecified purpose.
   case unspecified
+  /// Purpose for Compute Engine firewalls.
+  /// A corresponding `purpose_data` should be set for the network the tag is
+  /// intended for. The key should be `network` and the value should be in
+  /// either of these two formats:
+  ///
+  /// -
+  /// `https://www.googleapis.com/compute/{compute_version}/projects/{project_id}/global/networks/{network_id}`
+  /// - `{project_id}/{network_name}`
+  ///
+  /// Examples:
+  ///
+  /// -
+  /// `https://www.googleapis.com/compute/staging_v1/projects/fail-closed-load-testing/global/networks/6992953698831725600`
+  /// - `fail-closed-load-testing/load-testing-network`
   case gceFirewall
   /// Encodes an unknown integer value.
   ///

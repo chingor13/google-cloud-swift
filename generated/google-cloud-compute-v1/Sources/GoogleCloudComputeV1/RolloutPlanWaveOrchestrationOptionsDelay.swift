@@ -61,8 +61,15 @@
     ///
     /// [google.cloud.compute.v1.RolloutPlanWaveOrchestrationOptionsDelay.delimiter]: <doc:RolloutPlanWaveOrchestrationOptionsDelay/Delimiter>
     public enum Delimiter: Codable, Equatable, Sendable {
+      /// The delay will also be added between batches of projects
+      /// corresponding to the same location.
       case batch
+      /// The delay will only be added between batches of projects
+      /// corresponding to different locations.
       case location
+      /// No delay will be added between batches of projects. Processing will
+      /// continue with the next batch as soon as the previous batch of LROs
+      /// is done.
       case unspecified
       /// Encodes an unknown integer value.
       ///
@@ -165,8 +172,15 @@
     ///
     /// [google.cloud.compute.v1.RolloutPlanWaveOrchestrationOptionsDelay.type]: <doc:RolloutPlanWaveOrchestrationOptionsDelay/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// The total processing time for each batch of projects will be padded
+      /// if needed to meet the specified delay duration.
       case minimum
+      /// The specified delay will directly be added after each batch of
+      /// projects as specified by the delimiter.
       case offset
+      /// No delay will be added between batches of projects. Processing will
+      /// continue with the next batch as soon as the previous batch of LROs
+      /// is done.
       case unspecified
       /// Encodes an unknown integer value.
       ///

@@ -60,7 +60,13 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration.stackType]: <doc:NetworkPeeringConnectionStatusTrafficConfiguration/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// This Peering will allow IPv4 traffic and routes to be
+      /// exchanged. Additionally if the matching peering is
+      /// IPV4_IPV6, IPv6 traffic and routes will be exchanged as
+      /// well.
       case ipv4Ipv6
+      /// This Peering will only allow IPv4 traffic and routes to be
+      /// exchanged, even if the matching peering is IPV4_IPV6.
       case ipv4Only
       /// Encodes an unknown integer value.
       ///

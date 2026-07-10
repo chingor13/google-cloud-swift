@@ -45,9 +45,13 @@ public struct Hash: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The algorithm used to compute the hash.
   public enum HashType: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// SHA256 hash.
     case sha256
+    /// MD5 hash.
     case md5
+    /// Dirsum SHA256 hash.
     case dirsumSha256
     /// Encodes an unknown integer value.
     ///

@@ -272,8 +272,13 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// VersionPolicy is the version policy for the repository.
     public enum VersionPolicy: Codable, Equatable, Sendable {
+      /// VERSION_POLICY_UNSPECIFIED - the version policy is not defined.
+      /// When the version policy is not defined, no validation is performed
+      /// for the versions.
       case unspecified
+      /// RELEASE - repository will accept only Release versions.
       case release
+      /// SNAPSHOT - repository will accept only Snapshot versions.
       case snapshot
       /// Encodes an unknown integer value.
       ///
@@ -462,8 +467,13 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Config for vulnerability scanning of resources in this repository.
     public enum EnablementConfig: Codable, Equatable, Sendable {
+      /// Not set. This will be treated as INHERITED for Docker repositories and
+      /// DISABLED for non-Docker repositories.
       case unspecified
+      /// Scanning is Enabled, but dependent on API enablement.
       case inherited
+      /// No automatic vulnerability scanning will be performed for this
+      /// repository.
       case disabled
       /// Encodes an unknown integer value.
       ///
@@ -565,9 +575,13 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Describes the state of vulnerability scanning in this repository,
     /// including both repository enablement and API enablement.
     public enum EnablementState: Codable, Equatable, Sendable {
+      /// Enablement state is unclear.
       case unspecified
+      /// Repository does not support vulnerability scanning.
       case scanningUnsupported
+      /// Vulnerability scanning is disabled for this repository.
       case scanningDisabled
+      /// Vulnerability scanning is active for this repository.
       case scanningActive
       /// Encodes an unknown integer value.
       ///
@@ -685,16 +699,27 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// A package format.
   public enum Format: Codable, Equatable, Sendable {
+    /// Unspecified package format.
     case unspecified
+    /// Docker package format.
     case docker
+    /// Maven package format.
     case maven
+    /// NPM package format.
     case npm
+    /// APT package format.
     case apt
+    /// YUM package format.
     case yum
+    /// Python package format.
     case python
+    /// Kubeflow Pipelines package format.
     case kfp
+    /// Go package format.
     case go
+    /// Generic package format.
     case generic
+    /// Ruby package format.
     case ruby
     /// Encodes an unknown integer value.
     ///
@@ -836,9 +861,13 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The mode configures the repository to serve artifacts from different
   /// sources.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Unspecified mode.
     case unspecified
+    /// A standard repository storing artifacts.
     case standardRepository
+    /// A virtual repository to serve artifacts from one or more sources.
     case virtualRepository
+    /// A remote repository to serve artifacts from a remote source.
     case remoteRepository
     /// Encodes an unknown integer value.
     ///

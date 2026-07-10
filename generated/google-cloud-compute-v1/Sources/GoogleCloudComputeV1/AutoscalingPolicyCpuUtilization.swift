@@ -66,7 +66,11 @@
     ///
     /// [google.cloud.compute.v1.AutoscalingPolicyCpuUtilization.predictiveMethod]: <doc:AutoscalingPolicyCpuUtilization/PredictiveMethod>
     public enum PredictiveMethod: Codable, Equatable, Sendable {
+      /// No predictive method is used. The autoscaler scales the group to meet
+      /// current demand based on real-time metrics
       case `none`
+      /// Predictive autoscaling improves availability by monitoring daily and
+      /// weekly load patterns and scaling out ahead of anticipated demand.
       case optimizeAvailability
       /// Encodes an unknown integer value.
       ///

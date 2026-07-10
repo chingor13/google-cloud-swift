@@ -48,10 +48,15 @@
     ///
     /// [google.cloud.compute.v1.ConfidentialInstanceConfig.confidentialInstanceType]: <doc:ConfidentialInstanceConfig/ConfidentialInstanceType>
     public enum ConfidentialInstanceType: Codable, Equatable, Sendable {
+      /// Arm Confidential Compute Architecture.
       case cca
+      /// No type specified. Do not use this value.
       case unspecified
+      /// AMD Secure Encrypted Virtualization.
       case sev
+      /// AMD Secure Encrypted Virtualization - Secure Nested Paging.
       case sevSnp
+      /// Intel Trust Domain eXtension.
       case tdx
       /// Encodes an unknown integer value.
       ///

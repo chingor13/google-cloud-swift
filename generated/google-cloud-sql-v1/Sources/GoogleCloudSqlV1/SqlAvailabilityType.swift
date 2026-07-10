@@ -19,8 +19,11 @@
 
   /// The availability type of the given Cloud SQL instance.
   public enum SqlAvailabilityType: Codable, Equatable, Sendable {
+    /// This is an unknown Availability type.
     case unspecified
+    /// Zonal available instance.
     case zonal
+    /// Regional available instance.
     case regional
     /// Encodes an unknown integer value.
     ///

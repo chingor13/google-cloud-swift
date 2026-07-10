@@ -75,9 +75,16 @@ public struct TransferOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Specifies when to overwrite an object in the sink when an object with
   /// matching name is found in the source.
   public enum OverwriteWhen: Codable, Equatable, Sendable {
+    /// Overwrite behavior is unspecified.
     case unspecified
+    /// Overwrites destination objects with the source objects, only if the
+    /// objects have the same name but different HTTP ETags or checksum values.
     case different
+    /// Never overwrites a destination object if a source object has the
+    /// same name. In this case, the source object is not transferred.
     case never
+    /// Always overwrite the destination object with the source object, even if
+    /// the HTTP Etags or checksum values are the same.
     case always
     /// Encodes an unknown integer value.
     ///

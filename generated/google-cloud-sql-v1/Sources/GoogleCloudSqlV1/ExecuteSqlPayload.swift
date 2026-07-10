@@ -123,8 +123,14 @@
     /// Controls how the API should respond when the SQL execution result exceeds
     /// 10 MB.
     public enum PartialResultMode: Codable, Equatable, Sendable {
+      /// Unspecified mode, effectively the same as `FAIL_PARTIAL_RESULT`.
       case unspecified
+      /// Throw an error if the result exceeds 10 MB or if only a partial result
+      /// can be retrieved. Don't return the result.
       case failPartialResult
+      /// Return a truncated result and set `partial_result` to true if the result
+      /// exceeds 10 MB or if only a partial result can be retrieved due to error.
+      /// Don't throw an error.
       case allowPartialResult
       /// Encodes an unknown integer value.
       ///

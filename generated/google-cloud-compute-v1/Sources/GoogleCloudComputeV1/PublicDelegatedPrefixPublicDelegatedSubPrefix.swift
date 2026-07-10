@@ -82,7 +82,13 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefixPublicDelegatedSubPrefix.ipv6AccessType]: <doc:PublicDelegatedPrefixPublicDelegatedSubPrefix/Ipv6AccessType>
     public enum Ipv6AccessType: Codable, Equatable, Sendable {
+      /// The parent public advertised prefix will be announced to the internet.
+      /// All children public delegated prefixes will have IPv6 access type as
+      /// EXTERNAL.
       case external
+      /// The parent public advertised prefix will not be announced to the
+      /// internet. Prefix will be used privately within Cloud. All children
+      /// public delegated prefixes will have IPv6 access type as INTERNAL.
       case `internal`
       /// Encodes an unknown integer value.
       ///
@@ -180,9 +186,21 @@
     ///
     /// [google.cloud.compute.v1.PublicDelegatedPrefixPublicDelegatedSubPrefix.mode]: <doc:PublicDelegatedPrefixPublicDelegatedSubPrefix/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// The public delegated prefix is used for further sub-delegation only. Such
+      /// prefixes cannot set allocatablePrefixLength.
       case delegation
+      /// The public delegated prefix is used for creating forwarding rules only.
+      /// Such prefixes cannot set publicDelegatedSubPrefixes. Parent public
+      /// delegated prefix must have IPv6 access type as EXTERNAL.
       case externalIpv6ForwardingRuleCreation
+      /// The public delegated prefix is used for creating dual-mode subnetworks
+      /// only. Such prefixes cannot set publicDelegatedSubPrefixes. Parent public
+      /// delegated prefix must have IPv6 access type as EXTERNAL.
       case externalIpv6SubnetworkCreation
+      /// The public delegated prefix is used for creating dual stack or IPv6-only
+      /// subnetwork with internal access only. Such prefixes cannot set
+      /// publicDelegatedSubPrefixes and allocatablePrefixLength. Parent public
+      /// delegated prefix must have IPv6 access type as INTERNAL.
       case internalIpv6SubnetworkCreation
       /// Encodes an unknown integer value.
       ///

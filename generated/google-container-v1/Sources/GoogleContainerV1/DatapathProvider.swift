@@ -19,8 +19,14 @@ import Foundation
 /// The datapath provider selects the implementation of the Kubernetes networking
 /// model for service resolution and network policy enforcement.
 public enum DatapathProvider: Codable, Equatable, Sendable {
+  /// Default value.
   case unspecified
+  /// Use the IPTables implementation based on kube-proxy.
   case legacyDatapath
+  /// Use the eBPF based GKE Dataplane V2 with additional features. See the [GKE
+  /// Dataplane V2
+  /// documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2)
+  /// for more.
   case advancedDatapath
   /// Encodes an unknown integer value.
   ///

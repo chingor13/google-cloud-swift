@@ -70,6 +70,8 @@
     ///
     /// [google.cloud.compute.v1.SecurityPolicyRuleMatcher.versionedExpr]: <doc:SecurityPolicyRuleMatcher/VersionedExpr>
     public enum VersionedExpr: Codable, Equatable, Sendable {
+      /// Matches the source IP address of a request to the IP ranges supplied
+      /// in config.
       case srcIpsV1
       /// Encodes an unknown integer value.
       ///

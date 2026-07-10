@@ -45,12 +45,19 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// TPU type.
   public enum Type_: Codable, Equatable, Sendable {
+    /// Unspecified version.
     case unspecified
+    /// TPU v2.
     case v2
+    /// TPU v3.
     case v3
+    /// TPU v4.
     case v4
+    /// TPU v5lite pod.
     case v5LitePod
+    /// TPU v5p.
     case v5P
+    /// TPU v6e.
     case v6E
     /// Encodes an unknown integer value.
     ///

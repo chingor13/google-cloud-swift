@@ -233,9 +233,13 @@
 
     /// The backup type.
     public enum SqlBackupType: Codable, Equatable, Sendable {
+      /// This is an unknown backup type.
       case unspecified
+      /// The backup schedule triggers a backup automatically.
       case automated
+      /// The user triggers a backup manually.
       case onDemand
+      /// The backup created when instance is deleted.
       case `final`
       /// Encodes an unknown integer value.
       ///
@@ -341,12 +345,19 @@
 
     /// The backup's state
     public enum SqlBackupState: Codable, Equatable, Sendable {
+      /// The state of the backup is unknown.
       case unspecified
+      /// The backup that's added to a queue.
       case enqueued
+      /// The backup is in progress.
       case running
+      /// The backup failed.
       case failed
+      /// The backup is successful.
       case successful
+      /// The backup is being deleted.
       case deleting
+      /// Deletion of the backup failed.
       case deletionFailed
       /// Encodes an unknown integer value.
       ///

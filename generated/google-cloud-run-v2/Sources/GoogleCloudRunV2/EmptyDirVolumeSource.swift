@@ -57,7 +57,10 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The different types of medium supported for EmptyDir.
   public enum Medium: Codable, Equatable, Sendable {
+    /// When not specified, falls back to the default implementation which
+    /// is currently in memory (this may change over time).
     case unspecified
+    /// Explicitly set the EmptyDir to be in memory. Uses tmpfs.
     case memory
     /// Encodes an unknown integer value.
     ///

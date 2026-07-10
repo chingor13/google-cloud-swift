@@ -234,7 +234,10 @@
     ///
     /// [google.cloud.compute.v1.StoragePool.capacityProvisioningType]: <doc:StoragePool/CapacityProvisioningType>
     public enum CapacityProvisioningType: Codable, Equatable, Sendable {
+      /// Advanced provisioning "thinly" allocates the related resource.
       case advanced
+      /// Standard provisioning allocates the related resource for the pool
+      /// disks' exclusive use.
       case standard
       case unspecified
       /// Encodes an unknown integer value.
@@ -338,7 +341,10 @@
     ///
     /// [google.cloud.compute.v1.StoragePool.performanceProvisioningType]: <doc:StoragePool/PerformanceProvisioningType>
     public enum PerformanceProvisioningType: Codable, Equatable, Sendable {
+      /// Advanced provisioning "thinly" allocates the related resource.
       case advanced
+      /// Standard provisioning allocates the related resource for the pool
+      /// disks' exclusive use.
       case standard
       case unspecified
       /// Encodes an unknown integer value.
@@ -442,9 +448,13 @@
     ///
     /// [google.cloud.compute.v1.StoragePool.state]: <doc:StoragePool/State>
     public enum State: Codable, Equatable, Sendable {
+      /// StoragePool is provisioning
       case creating
+      /// StoragePool is deleting.
       case deleting
+      /// StoragePool creation failed.
       case failed
+      /// StoragePool is ready for use.
       case ready
       /// Encodes an unknown integer value.
       ///

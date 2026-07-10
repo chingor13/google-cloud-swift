@@ -110,23 +110,41 @@
     ///
     /// [google.cloud.compute.v1.Rollout.state]: <doc:Rollout/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The rollout is in a failure terminal state.
       case cancelled
+      /// The rollout is being cancelled.
       case cancelling
+      /// An attempted cancel operation was unsuccessful.
       case cancelFailed
+      /// The rollout is in a successful terminal state.
       case completed
+      /// An attempted complete operation was unsuccessful.
       case completeFailed
+      /// The rollout is being marked as completed.
       case completing
+      /// The rollout completed with failures.
       case failed
+      /// The rollout is paused.
       case paused
+      /// An attempted pause operation was unsuccessful.
       case pauseFailed
+      /// The rollout is being paused.
       case pausing
+      /// A wave is being processed by the product.
       case processing
+      /// The rollout has been successfully initialized and is ready to start.
       case ready
+      /// The rollout is being resumed after being paused.
       case resuming
+      /// An attempted rollback operation failed to complete successfully.
       case rollbackWaveFailed
+      /// A wave rollback is in progress for this rollout.
       case rollingBack
+      /// Undefined default state. Should never be exposed to users.
       case unspecified
+      /// The rollout has been created but is not yet ready to be started.
       case uninitialized
+      /// The product failed to process the wave.
       case waveFailed
       /// Encodes an unknown integer value.
       ///

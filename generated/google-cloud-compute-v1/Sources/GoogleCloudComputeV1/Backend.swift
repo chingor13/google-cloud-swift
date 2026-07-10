@@ -179,10 +179,15 @@
     ///
     /// [google.cloud.compute.v1.Backend.balancingMode]: <doc:Backend/BalancingMode>
     public enum BalancingMode: Codable, Equatable, Sendable {
+      /// Balance based on the number of simultaneous connections.
       case connection
+      /// Based on custom defined and reported metrics.
       case customMetrics
+      /// Balance based on the number of in-flight requests.
       case inFlight
+      /// Balance based on requests per second (RPS).
       case rate
+      /// Balance based on the backend utilization.
       case utilization
       /// Encodes an unknown integer value.
       ///
@@ -295,8 +300,11 @@
     ///
     /// [google.cloud.compute.v1.Backend.preference]: <doc:Backend/Preference>
     public enum Preference: Codable, Equatable, Sendable {
+      /// No preference.
       case `default`
+      /// If preference is unspecified, we set it to the DEFAULT value
       case unspecified
+      /// Traffic will be sent to this backend first.
       case preferred
       /// Encodes an unknown integer value.
       ///
@@ -399,8 +407,12 @@
     ///
     /// [google.cloud.compute.v1.Backend.trafficDuration]: <doc:Backend/TrafficDuration>
     public enum TrafficDuration: Codable, Equatable, Sendable {
+      /// Most of the requests are expected to take more than multiple seconds to
+      /// finish.
       case long
+      /// Most requests are expected to finish with a sub-second latency.
       case short
+      /// Traffic duration is unspecified.
       case unspecified
       /// Encodes an unknown integer value.
       ///

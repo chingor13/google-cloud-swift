@@ -69,9 +69,13 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The list of valid permission types for which logging can be configured.
   /// Admin writes are always logged, and are not configurable.
   public enum LogType: Codable, Equatable, Sendable {
+    /// Default case. Should never be this.
     case unspecified
+    /// Admin reads. Example: CloudIAM getIamPolicy
     case adminRead
+    /// Data writes. Example: CloudSQL Users create
     case dataWrite
+    /// Data reads. Example: CloudSQL Users list
     case dataRead
     /// Encodes an unknown integer value.
     ///

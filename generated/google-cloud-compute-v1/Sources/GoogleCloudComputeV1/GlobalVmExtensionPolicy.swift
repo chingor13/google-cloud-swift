@@ -98,7 +98,9 @@
     ///
     /// [google.cloud.compute.v1.GlobalVmExtensionPolicy.scopedResourceStatus]: <doc:GlobalVmExtensionPolicy/ScopedResourceStatus>
     public enum ScopedResourceStatus: Codable, Equatable, Sendable {
+      /// The zonal policies are being deleted.
       case deleting
+      /// Default value. This value is unused.
       case unspecified
       /// Encodes an unknown integer value.
       ///

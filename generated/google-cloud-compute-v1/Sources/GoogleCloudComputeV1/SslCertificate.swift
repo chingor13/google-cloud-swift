@@ -132,7 +132,9 @@
     ///
     /// [google.cloud.compute.v1.SslCertificate.type]: <doc:SslCertificate/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Google-managed SSLCertificate.
       case managed
+      /// Certificate uploaded by user.
       case selfManaged
       case unspecified
       /// Encodes an unknown integer value.

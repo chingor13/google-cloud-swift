@@ -51,8 +51,11 @@ public struct YumArtifact: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Package type is either binary or source.
   public enum PackageType: Codable, Equatable, Sendable {
+    /// Package type is not specified.
     case unspecified
+    /// Binary package (.rpm).
     case binary
+    /// Source package (.srpm).
     case source
     /// Encodes an unknown integer value.
     ///

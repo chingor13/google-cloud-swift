@@ -20,13 +20,25 @@ import Foundation
 /// a canonical start. Grammatically, "the start of the current
 /// `CalendarPeriod`." All calendar times begin at midnight UTC.
 public enum CalendarPeriod: Codable, Equatable, Sendable {
+  /// Undefined period, raises an error.
   case unspecified
+  /// A day.
   case day
+  /// A week. Weeks begin on Monday, following
+  /// [ISO 8601](https://en.wikipedia.org/wiki/ISO_week_date).
   case week
+  /// A fortnight. The first calendar fortnight of the year begins at the start
+  /// of week 1 according to
+  /// [ISO 8601](https://en.wikipedia.org/wiki/ISO_week_date).
   case fortnight
+  /// A month.
   case month
+  /// A quarter. Quarters start on dates 1-Jan, 1-Apr, 1-Jul, and 1-Oct of each
+  /// year.
   case quarter
+  /// A half-year. Half-years start on dates 1-Jan and 1-Jul.
   case half
+  /// A year.
   case year
   /// Encodes an unknown integer value.
   ///

@@ -119,7 +119,10 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy.instanceRedistributionType]: <doc:InstanceGroupManagerUpdatePolicy/InstanceRedistributionType>
     public enum InstanceRedistributionType: Codable, Equatable, Sendable {
+      /// No action is being proactively performed in order to bring this IGM
+      /// to its target instance distribution.
       case `none`
+      /// This IGM will actively converge to its target instance distribution.
       case proactive
       /// Encodes an unknown integer value.
       ///
@@ -217,9 +220,14 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy.minimalAction]: <doc:InstanceGroupManagerUpdatePolicy/MinimalAction>
     public enum MinimalAction: Codable, Equatable, Sendable {
+      /// Do not perform any action.
       case `none`
+      /// Do not stop the instance.
       case refresh
+      /// (Default.) Replace the instance according to the replacement method
+      /// option.
       case replace
+      /// Stop the instance and start it again.
       case restart
       /// Encodes an unknown integer value.
       ///
@@ -327,9 +335,14 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy.mostDisruptiveAllowedAction]: <doc:InstanceGroupManagerUpdatePolicy/MostDisruptiveAllowedAction>
     public enum MostDisruptiveAllowedAction: Codable, Equatable, Sendable {
+      /// Do not perform any action.
       case `none`
+      /// Do not stop the instance.
       case refresh
+      /// (Default.) Replace the instance according to the replacement method
+      /// option.
       case replace
+      /// Stop the instance and start it again.
       case restart
       /// Encodes an unknown integer value.
       ///
@@ -437,7 +450,9 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy.replacementMethod]: <doc:InstanceGroupManagerUpdatePolicy/ReplacementMethod>
     public enum ReplacementMethod: Codable, Equatable, Sendable {
+      /// Instances will be recreated (with the same name)
       case recreate
+      /// Default option: instances will be deleted and created (with a new name)
       case substitute
       /// Encodes an unknown integer value.
       ///
@@ -535,7 +550,13 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy.type]: <doc:InstanceGroupManagerUpdatePolicy/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// MIG will apply new configurations
+      /// to existing VMs only when you selectively target specific or all VMs to
+      /// be updated.
       case opportunistic
+      /// MIG will automatically apply new configurations
+      /// to all or a subset of existing VMs and also to new VMs that are added
+      /// to the group.
       case proactive
       /// Encodes an unknown integer value.
       ///

@@ -48,10 +48,19 @@
     }
 
     public enum SqlApiWarningCode: Codable, Equatable, Sendable {
+      /// An unknown or unset warning type from Cloud SQL API.
       case unspecified
+      /// Warning when one or more regions are not reachable.  The returned result
+      /// set may be incomplete.
       case regionUnreachable
+      /// Warning when user provided maxResults parameter exceeds the limit.  The
+      /// returned result set may be incomplete.
       case maxResultsExceedsLimit
+      /// Warning when user tries to create/update a user with credentials that
+      /// have previously been compromised by a public data breach.
       case compromisedCredentials
+      /// Warning when the operation succeeds but some non-critical workflow state
+      /// failed.
       case internalStateFailure
       /// Encodes an unknown integer value.
       ///

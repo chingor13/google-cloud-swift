@@ -48,10 +48,15 @@
     ///
     /// [google.cloud.compute.v1.GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadataLocationRolloutStatus.state]: <doc:GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadataLocationRolloutStatus/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The location rollout is completed.
       case locationRolloutStateCompleted
+      /// The location rollout has failed.
       case locationRolloutStateFailed
+      /// The location rollout has not started.
       case locationRolloutStateNotStarted
+      /// The location rollout is skipped.
       case locationRolloutStateSkipped
+      /// Default value. This value is unused.
       case locationRolloutStateUnspecified
       /// Encodes an unknown integer value.
       ///

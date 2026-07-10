@@ -19,8 +19,11 @@ import Foundation
 /// UpgradeResourceType is the resource type that is upgrading. It is used
 /// in upgrade notifications.
 public enum UpgradeResourceType: Codable, Equatable, Sendable {
+  /// Default value. This shouldn't be used.
   case unspecified
+  /// Master / control plane
   case master
+  /// Node pool
   case nodePool
   /// Encodes an unknown integer value.
   ///

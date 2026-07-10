@@ -18,8 +18,11 @@ import Foundation
 
 /// Represents if the resource is in lock down state or pending.
 public enum ResourceState: Codable, Equatable, Sendable {
+  /// Default value.
   case unspecified
+  /// The resource is in LOCK DOWN state.
   case lockDown
+  /// The resource is pending lock down.
   case lockDownPending
   /// Encodes an unknown integer value.
   ///

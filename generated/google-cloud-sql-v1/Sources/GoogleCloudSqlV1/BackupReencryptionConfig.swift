@@ -46,8 +46,11 @@
 
     /// Backup type for re-encryption
     public enum BackupType: Codable, Equatable, Sendable {
+      /// Unknown backup type, will be defaulted to AUTOMATIC backup type
       case unspecified
+      /// Reencrypt automatic backups
       case automated
+      /// Reencrypt on-demand backups
       case onDemand
       /// Encodes an unknown integer value.
       ///

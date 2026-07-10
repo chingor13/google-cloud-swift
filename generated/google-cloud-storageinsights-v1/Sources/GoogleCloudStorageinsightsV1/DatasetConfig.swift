@@ -792,10 +792,17 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// State of the configuration.
   public enum ConfigState: Codable, Equatable, Sendable {
+    /// Unspecified state.
     case unspecified
+    /// Active configuration indicates that the configuration is
+    /// actively ingesting data.
     case active
+    /// In this state, the configuration is being verified for various
+    /// permissions.
     case verificationInProgress
+    /// Configuration is created and further processing needs to happen.
     case created
+    /// Configuration is under processing
     case processing
     /// Encodes an unknown integer value.
     ///

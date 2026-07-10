@@ -18,10 +18,17 @@
   import Foundation
 
   public enum SqlInstanceType: Codable, Equatable, Sendable {
+    /// This is an unknown Cloud SQL instance type.
     case unspecified
+    /// A regular Cloud SQL instance that is not replicating from a primary
+    /// instance.
     case cloudSqlInstance
+    /// An instance running on the customer's premises that is not managed by
+    /// Cloud SQL.
     case onPremisesInstance
+    /// A Cloud SQL instance acting as a read-replica.
     case readReplicaInstance
+    /// A Cloud SQL read pool.
     case readPoolInstance
     /// Encodes an unknown integer value.
     ///

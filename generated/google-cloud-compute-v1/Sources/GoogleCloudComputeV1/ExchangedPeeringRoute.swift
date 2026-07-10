@@ -60,8 +60,11 @@
     ///
     /// [google.cloud.compute.v1.ExchangedPeeringRoute.type]: <doc:ExchangedPeeringRoute/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// For routes exported from local network.
       case dynamicPeeringRoute
+      /// The peering route.
       case staticPeeringRoute
+      /// The peering route corresponding to subnetwork range.
       case subnetPeeringRoute
       /// Encodes an unknown integer value.
       ///

@@ -19,60 +19,115 @@
 
   /// The database engine type and version.
   public enum SqlDatabaseVersion: Codable, Equatable, Sendable {
+    /// This is an unknown database version.
     case unspecified
+    /// The database version is MySQL 5.1.
     case mysql51
+    /// The database version is MySQL 5.5.
     case mysql55
+    /// The database version is MySQL 5.6.
     case mysql56
+    /// The database version is MySQL 5.7.
     case mysql57
+    /// The database version is PostgreSQL 9.6.
     case postgres96
+    /// The database version is PostgreSQL 11.
     case postgres11
+    /// The database version is SQL Server 2017 Standard.
     case sqlserver2017Standard
+    /// The database version is SQL Server 2017 Enterprise.
     case sqlserver2017Enterprise
+    /// The database version is SQL Server 2017 Express.
     case sqlserver2017Express
+    /// The database version is SQL Server 2017 Web.
     case sqlserver2017Web
+    /// The database version is PostgreSQL 10.
     case postgres10
+    /// The database version is PostgreSQL 12.
     case postgres12
+    /// The database version is MySQL 8.
     case mysql80
+    /// The database version is PostgreSQL 13.
     case postgres13
+    /// The database version is SQL Server 2019 Standard.
     case sqlserver2019Standard
+    /// The database version is SQL Server 2019 Enterprise.
     case sqlserver2019Enterprise
+    /// The database version is SQL Server 2019 Express.
     case sqlserver2019Express
+    /// The database version is SQL Server 2019 Web.
     case sqlserver2019Web
+    /// The database major version is MySQL 8.0 and the minor version is 18.
     case mysql8018
+    /// The database major version is MySQL 8.0 and the minor version is 26.
     case mysql8026
+    /// The database version is PostgreSQL 14.
     case postgres14
+    /// The database major version is MySQL 8.0 and the minor version is 27.
     case mysql8027
+    /// The database major version is MySQL 8.0 and the minor version is 28.
     case mysql8028
+    /// The database major version is MySQL 8.0 and the minor version is 29.
     case mysql8029
+    /// The database version is PostgreSQL 15.
     case postgres15
+    /// The database major version is MySQL 8.0 and the minor version is 30.
     case mysql8030
+    /// The database major version is MySQL 8.0 and the minor version is 31.
     case mysql8031
+    /// The database version is SQL Server 2022 Standard.
     case sqlserver2022Standard
+    /// The database version is SQL Server 2022 Enterprise.
     case sqlserver2022Enterprise
+    /// The database version is SQL Server 2022 Express.
     case sqlserver2022Express
+    /// The database version is SQL Server 2022 Web.
     case sqlserver2022Web
+    /// The database major version is MySQL 8.0 and the minor version is 32.
     case mysql8032
+    /// The database major version is MySQL 8.0 and the minor version is 33.
     case mysql8033
+    /// The database major version is MySQL 8.0 and the minor version is 34.
     case mysql8034
+    /// The database major version is MySQL 8.0 and the minor version is 35.
     case mysql8035
+    /// The database major version is MySQL 8.0 and the minor version is 36.
     case mysql8036
+    /// The database version is PostgreSQL 16.
     case postgres16
+    /// The database major version is MySQL 8.0 and the minor version is 37.
     case mysql8037
+    /// The database major version is MySQL 8.0 and the minor version is 39.
     case mysql8039
+    /// The database major version is MySQL 8.0 and the minor version is 40.
     case mysql8040
+    /// The database version is MySQL 8.4.
     case mysql84
+    /// The database version is PostgreSQL 17.
     case postgres17
+    /// The database major version is MySQL 8.0 and the minor version is 41.
     case mysql8041
+    /// The database major version is MySQL 8.0 and the minor version is 42.
     case mysql8042
+    /// The database version is SQL Server 2025 Standard.
     case sqlserver2025Standard
+    /// The database version is SQL Server 2025 Enterprise.
     case sqlserver2025Enterprise
+    /// The database version is SQL Server 2025 Express.
     case sqlserver2025Express
+    /// The database major version is MySQL 8.0 and the minor version is 43.
     case mysql8043
+    /// The database major version is MySQL 8.0 and the minor version is 44.
     case mysql8044
+    /// The database major version is MySQL 8.0 and the minor version is 45.
     case mysql8045
+    /// The database major version is MySQL 8.0 and the minor version is 46.
     case mysql8046
+    /// The database version is PostgreSQL 18.
     case postgres18
+    /// The database version is MySQL 9.7.
     case mysql97
+    /// The database version is PostgreSQL 19.
     case postgres19
     /// Encodes an unknown integer value.
     ///

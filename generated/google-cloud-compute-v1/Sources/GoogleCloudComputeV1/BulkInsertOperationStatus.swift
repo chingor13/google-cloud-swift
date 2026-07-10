@@ -58,8 +58,11 @@
     ///
     /// [google.cloud.compute.v1.BulkInsertOperationStatus.status]: <doc:BulkInsertOperationStatus/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Rolling forward - creating VMs.
       case creating
+      /// Done
       case done
+      /// Rolling back - cleaning up after an error.
       case rollingBack
       case unspecified
       /// Encodes an unknown integer value.

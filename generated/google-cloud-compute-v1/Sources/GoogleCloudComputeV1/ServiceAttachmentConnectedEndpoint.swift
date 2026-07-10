@@ -65,10 +65,17 @@
     ///
     /// [google.cloud.compute.v1.ServiceAttachmentConnectedEndpoint.status]: <doc:ServiceAttachmentConnectedEndpoint/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The connection has been accepted by the producer.
       case accepted
+      /// The connection has been closed by the producer.
       case closed
+      /// The connection has been accepted by the producer, but the producer
+      /// needs to take further action before the forwarding rule can serve
+      /// traffic.
       case needsAttention
+      /// The connection is pending acceptance by the producer.
       case pending
+      /// The consumer is still connected but not using the connection.
       case rejected
       case unspecified
       /// Encodes an unknown integer value.

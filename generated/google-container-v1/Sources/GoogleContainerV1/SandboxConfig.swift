@@ -42,7 +42,9 @@ public struct SandboxConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible types of sandboxes.
   public enum Type_: Codable, Equatable, Sendable {
+    /// Default value. This should not be used.
     case unspecified
+    /// Run sandbox using gvisor.
     case gvisor
     /// Encodes an unknown integer value.
     ///

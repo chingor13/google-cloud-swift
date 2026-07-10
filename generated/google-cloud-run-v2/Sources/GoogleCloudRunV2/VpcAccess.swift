@@ -103,8 +103,11 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Egress options for VPC access.
   public enum VpcEgress: Codable, Equatable, Sendable {
+    /// Unspecified
     case unspecified
+    /// All outbound traffic is routed through the VPC connector.
     case allTraffic
+    /// Only private IP ranges are routed through the VPC connector.
     case privateRangesOnly
     /// Encodes an unknown integer value.
     ///

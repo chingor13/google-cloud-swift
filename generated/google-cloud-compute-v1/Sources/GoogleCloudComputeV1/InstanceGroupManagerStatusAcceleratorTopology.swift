@@ -54,11 +54,18 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerStatusAcceleratorTopology.state]: <doc:InstanceGroupManagerStatusAcceleratorTopology/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The accelerator topology is being activated.
       case activating
+      /// The accelerator topology is active.
       case active
+      /// The accelerator topology is being deactivated.
       case deactivating
+      /// The accelerator topology failed.
       case failed
+      /// The configuration is incomplete and the accelerator topology cannot
+      /// be activated due to insufficient number of running VMs.
       case incomplete
+      /// The accelerator topology is being reactivated.
       case reactivating
       /// Encodes an unknown integer value.
       ///

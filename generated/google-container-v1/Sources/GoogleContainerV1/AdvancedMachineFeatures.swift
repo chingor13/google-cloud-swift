@@ -51,9 +51,13 @@ public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWkt._AnyPa
 
   /// Level of PMU access.
   public enum PerformanceMonitoringUnit: Codable, Equatable, Sendable {
+    /// PMU not enabled.
     case unspecified
+    /// Architecturally defined non-LLC events.
     case architectural
+    /// Most documented core/L2 events.
     case standard
+    /// Most documented core/L2 and LLC events.
     case enhanced
     /// Encodes an unknown integer value.
     ///

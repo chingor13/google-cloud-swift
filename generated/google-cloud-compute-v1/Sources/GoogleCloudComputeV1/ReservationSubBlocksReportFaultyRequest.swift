@@ -52,6 +52,7 @@
     /// [google.cloud.compute.v1.ReservationSubBlocksReportFaultyRequest.disruptionSchedule]: <doc:ReservationSubBlocksReportFaultyRequest/DisruptionSchedule>
     public enum DisruptionSchedule: Codable, Equatable, Sendable {
       case unspecified
+      /// All VMs will be disrupted immediately.
       case immediate
       /// Encodes an unknown integer value.
       ///
@@ -150,7 +151,9 @@
     /// [google.cloud.compute.v1.ReservationSubBlocksReportFaultyRequest.failureComponent]: <doc:ReservationSubBlocksReportFaultyRequest/FailureComponent>
     public enum FailureComponent: Codable, Equatable, Sendable {
       case unspecified
+      /// Multiple hosts experienced the fault.
       case multipleFaultyHosts
+      /// The NVLink switch experienced the fault.
       case nvlinkSwitch
       /// Encodes an unknown integer value.
       ///

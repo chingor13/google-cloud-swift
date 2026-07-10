@@ -57,11 +57,17 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Possible execution completion status.
   public enum CompletionStatus: Codable, Equatable, Sendable {
+    /// The default value. This value is used if the state is omitted.
     case unspecified
+    /// Job execution has succeeded.
     case executionSucceeded
+    /// Job execution has failed.
     case executionFailed
+    /// Job execution is running normally.
     case executionRunning
+    /// Waiting for backing resources to be provisioned.
     case executionPending
+    /// Job execution has been cancelled by the user.
     case executionCancelled
     /// Encodes an unknown integer value.
     ///

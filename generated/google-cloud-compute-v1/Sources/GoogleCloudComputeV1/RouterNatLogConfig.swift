@@ -56,8 +56,11 @@
     ///
     /// [google.cloud.compute.v1.RouterNatLogConfig.filter]: <doc:RouterNatLogConfig/Filter>
     public enum Filter: Codable, Equatable, Sendable {
+      /// Export logs for all (successful and unsuccessful) connections.
       case all
+      /// Export logs for connection failures only.
       case errorsOnly
+      /// Export logs for successful connections only.
       case translationsOnly
       /// Encodes an unknown integer value.
       ///

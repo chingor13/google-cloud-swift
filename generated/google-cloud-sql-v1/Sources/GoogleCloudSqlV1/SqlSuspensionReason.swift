@@ -19,11 +19,20 @@
 
   /// The suspension reason of the database instance if the state is SUSPENDED.
   public enum SqlSuspensionReason: Codable, Equatable, Sendable {
+    /// This is an unknown suspension reason.
     case unspecified
+    /// The instance is suspended due to billing issues (for example:, account
+    /// issue)
     case billingIssue
+    /// The instance is suspended due to illegal content (for example:, child
+    /// pornography, copyrighted material, etc.).
     case legalIssue
+    /// The instance is causing operational issues (for example:, causing the
+    /// database to crash).
     case operationalIssue
+    /// The KMS key used by the instance is either revoked or denied access to
     case kmsKeyIssue
+    /// The project is suspended due to abuse detected by Ares.
     case projectAbuse
     /// Encodes an unknown integer value.
     ///

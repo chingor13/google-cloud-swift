@@ -100,8 +100,19 @@ public struct Project: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Project lifecycle states.
   public enum State: Codable, Equatable, Sendable {
+    /// Unspecified state.  This is only used/useful for distinguishing
+    /// unset values.
     case unspecified
+    /// The normal and active state.
     case active
+    /// The project has been marked for deletion by the user
+    /// (by invoking
+    /// [DeleteProject][google.cloud.resourcemanager.v3.Projects.DeleteProject])
+    /// or by the system (Google Cloud Platform).
+    /// This can generally be reversed by invoking [UndeleteProject]
+    /// [google.cloud.resourcemanager.v3.Projects.UndeleteProject].
+    ///
+    /// [google.cloud.resourcemanager.v3.Projects.DeleteProject]: <doc:Projects/deleteProject(request:)>
     case deleteRequested
     /// Encodes an unknown integer value.
     ///

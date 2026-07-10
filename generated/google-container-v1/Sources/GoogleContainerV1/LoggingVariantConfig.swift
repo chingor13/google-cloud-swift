@@ -42,8 +42,11 @@ public struct LoggingVariantConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// Logging component variants.
   public enum Variant: Codable, Equatable, Sendable {
+    /// Default value. This shouldn't be used.
     case unspecified
+    /// default logging variant.
     case `default`
+    /// maximum logging throughput variant.
     case maxThroughput
     /// Encodes an unknown integer value.
     ///

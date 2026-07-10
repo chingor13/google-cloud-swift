@@ -44,8 +44,11 @@
     ///
     /// [google.cloud.compute.v1.ProjectsSetCloudArmorTierRequest.cloudArmorTier]: <doc:ProjectsSetCloudArmorTierRequest/CloudArmorTier>
     public enum CloudArmorTier: Codable, Equatable, Sendable {
+      /// Enterprise tier protection billed annually.
       case caEnterpriseAnnual
+      /// Enterprise tier protection billed monthly.
       case caEnterprisePaygo
+      /// Standard protection.
       case caStandard
       /// Encodes an unknown integer value.
       ///

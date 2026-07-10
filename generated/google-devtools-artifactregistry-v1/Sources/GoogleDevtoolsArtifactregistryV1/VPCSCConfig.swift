@@ -52,8 +52,15 @@ public struct VPCSCConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// VPCSCPolicy is the VPC SC policy for project and location.
   public enum VPCSCPolicy: Codable, Equatable, Sendable {
+    /// VPCSC_POLICY_UNSPECIFIED - the VPS SC policy is not defined.
+    /// When VPS SC policy is not defined - the Service will use the default
+    /// behavior (VPCSC_DENY).
     case unspecified
+    /// VPCSC_DENY - repository will block the requests to the Upstreams for the
+    /// Remote Repositories if the resource is in the perimeter.
     case deny
+    /// VPCSC_ALLOW - repository will allow the requests to the Upstreams for the
+    /// Remote Repositories if the resource is in the perimeter.
     case allow
     /// Encodes an unknown integer value.
     ///

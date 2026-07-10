@@ -59,9 +59,13 @@ public struct LoggingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Loggable actions.
   public enum LoggableAction: Codable, Equatable, Sendable {
+    /// Default value. This value is unused.
     case unspecified
+    /// Listing objects in a bucket.
     case find
+    /// Deleting objects at the source or the destination.
     case delete
+    /// Copying objects to the destination.
     case copy
     /// Encodes an unknown integer value.
     ///
@@ -167,9 +171,17 @@ public struct LoggingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Loggable action states.
   public enum LoggableActionState: Codable, Equatable, Sendable {
+    /// Default value. This value is unused.
     case unspecified
+    /// `LoggableAction` completed successfully. `SUCCEEDED` actions are
+    /// logged as [INFO][google.logging.type.LogSeverity.INFO].
     case succeeded
+    /// `LoggableAction` terminated in an error state. `FAILED` actions are
+    /// logged as [ERROR][google.logging.type.LogSeverity.ERROR].
     case failed
+    /// The `COPY` action was skipped for this file. Only supported for
+    /// agent-based transfers. `SKIPPED` actions are
+    /// logged as [INFO][google.logging.type.LogSeverity.INFO].
     case skipped
     /// Encodes an unknown integer value.
     ///

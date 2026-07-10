@@ -18,9 +18,13 @@ import Foundation
 
 /// The behavior to take when the flow control limit is exceeded.
 public enum FlowControlLimitExceededBehaviorProto: Codable, Equatable, Sendable {
+  /// Default behavior, system-defined.
   case unsetBehavior
+  /// Stop operation, raise error.
   case throwException
+  /// Pause operation until limit clears.
   case block
+  /// Continue operation, disregard limit.
   case ignore
   /// Encodes an unknown integer value.
   ///

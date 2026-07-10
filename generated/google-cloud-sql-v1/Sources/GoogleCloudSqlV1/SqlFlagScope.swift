@@ -19,8 +19,11 @@
 
   /// Scopes of a flag describe where the flag is used.
   public enum SqlFlagScope: Codable, Equatable, Sendable {
+    /// Assume database flags if unspecified
     case unspecified
+    /// database flags
     case database
+    /// connection pool configuration flags
     case connectionPool
     /// Encodes an unknown integer value.
     ///

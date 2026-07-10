@@ -256,7 +256,9 @@
     ///
     /// [google.cloud.compute.v1.NetworkInterface.igmpQuery]: <doc:NetworkInterface/IgmpQuery>
     public enum IgmpQuery: Codable, Equatable, Sendable {
+      /// The network interface has disabled IGMP query.
       case disabled
+      /// The network interface has enabled IGMP query - v2.
       case v2
       /// Encodes an unknown integer value.
       ///
@@ -354,7 +356,9 @@
     ///
     /// [google.cloud.compute.v1.NetworkInterface.ipv6AccessType]: <doc:NetworkInterface/Ipv6AccessType>
     public enum Ipv6AccessType: Codable, Equatable, Sendable {
+      /// This network interface can have external IPv6.
       case external
+      /// This network interface can have internal IPv6.
       case `internal`
       /// Encodes an unknown integer value.
       ///
@@ -452,11 +456,17 @@
     ///
     /// [google.cloud.compute.v1.NetworkInterface.nicType]: <doc:NetworkInterface/NicType>
     public enum NicType: Codable, Equatable, Sendable {
+      /// GVNIC
       case gvnic
+      /// IDPF
       case idpf
+      /// IRDMA
       case irdma
+      /// MRDMA
       case mrdma
+      /// No type specified.
       case unspecifiedNicType
+      /// VIRTIO
       case virtioNet
       /// Encodes an unknown integer value.
       ///
@@ -574,8 +584,11 @@
     ///
     /// [google.cloud.compute.v1.NetworkInterface.stackType]: <doc:NetworkInterface/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// The network interface can have both IPv4 and IPv6 addresses.
       case ipv4Ipv6
+      /// The network interface will only be assigned IPv4 addresses.
       case ipv4Only
+      /// The network interface will only be assigned IPv6 addresses.
       case ipv6Only
       /// Encodes an unknown integer value.
       ///

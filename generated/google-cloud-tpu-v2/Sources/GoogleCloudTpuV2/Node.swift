@@ -133,21 +133,39 @@ public struct Node: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Represents the different states of a TPU node during its lifecycle.
   public enum State: Codable, Equatable, Sendable {
+    /// TPU node state is not known/set.
     case unspecified
+    /// TPU node is being created.
     case creating
+    /// TPU node has been created.
     case ready
+    /// TPU node is restarting.
     case restarting
+    /// TPU node is undergoing reimaging.
     case reimaging
+    /// TPU node is being deleted.
     case deleting
+    /// TPU node is being repaired and may be unusable. Details can be
+    /// found in the 'help_description' field.
     case repairing
+    /// TPU node is stopped.
     case stopped
+    /// TPU node is currently stopping.
     case stopping
+    /// TPU node is currently starting.
     case starting
+    /// TPU node has been preempted. Only applies to Preemptible TPU Nodes.
     case preempted
+    /// TPU node has been terminated due to maintenance or has reached the end of
+    /// its life cycle (for preemptible nodes).
     case terminated
+    /// TPU node is currently hiding.
     case hiding
+    /// TPU node has been hidden.
     case hidden
+    /// TPU node is currently unhiding.
     case unhiding
+    /// TPU node has unknown state after a failed repair.
     case unknown
     /// Encodes an unknown integer value.
     ///
@@ -314,10 +332,16 @@ public struct Node: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Health defines the status of a TPU node as reported by
   /// Health Monitor.
   public enum Health: Codable, Equatable, Sendable {
+    /// Health status is unknown: not initialized or failed to retrieve.
     case unspecified
+    /// The resource is healthy.
     case healthy
+    /// The resource is unresponsive.
     case timeout
+    /// The in-guest ML stack is unhealthy.
     case unhealthyTensorflow
+    /// The node is under maintenance/priority boost caused rescheduling and
+    /// will resume running once rescheduled.
     case unhealthyMaintenance
     /// Encodes an unknown integer value.
     ///
@@ -428,10 +452,15 @@ public struct Node: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// TPU API Version.
   public enum ApiVersion: Codable, Equatable, Sendable {
+    /// API version is unknown.
     case unspecified
+    /// TPU API V1Alpha1 version.
     case v1Alpha1
+    /// TPU API V1 version.
     case v1
+    /// TPU API V2Alpha1 version.
     case v2Alpha1
+    /// TPU API V2 version.
     case v2
     /// Encodes an unknown integer value.
     ///

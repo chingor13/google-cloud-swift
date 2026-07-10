@@ -62,7 +62,11 @@
     ///
     /// [google.cloud.compute.v1.QuotaExceededInfo.rolloutStatus]: <doc:QuotaExceededInfo/RolloutStatus>
     public enum RolloutStatus: Codable, Equatable, Sendable {
+      /// IN_PROGRESS - A rollout is in process which will change the limit value
+      /// to future limit.
       case inProgress
+      /// ROLLOUT_STATUS_UNSPECIFIED - Rollout status is not specified. The default
+      /// value.
       case unspecified
       /// Encodes an unknown integer value.
       ///

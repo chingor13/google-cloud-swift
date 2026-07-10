@@ -65,7 +65,10 @@
     ///
     /// [google.cloud.compute.v1.ResourcePolicyGroupPlacementPolicy.acceleratorTopologyMode]: <doc:ResourcePolicyGroupPlacementPolicy/AcceleratorTopologyMode>
     public enum AcceleratorTopologyMode: Codable, Equatable, Sendable {
+      /// The interconnected chips are pre-configured at the time of VM creation.
       case autoConnect
+      /// The interconnected chips are connected on demand. At the time of VM
+      /// creation, the chips are not connected.
       case provisionOnly
       /// Encodes an unknown integer value.
       ///

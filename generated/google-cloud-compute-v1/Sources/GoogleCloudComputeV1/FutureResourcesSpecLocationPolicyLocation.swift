@@ -46,8 +46,11 @@
     ///
     /// [google.cloud.compute.v1.FutureResourcesSpecLocationPolicyLocation.preference]: <doc:FutureResourcesSpecLocationPolicyLocation/Preference>
     public enum Preference: Codable, Equatable, Sendable {
+      /// Location is allowed for use.
       case allow
+      /// Location is prohibited.
       case deny
+      /// Default value, unused.
       case unspecified
       /// Encodes an unknown integer value.
       ///

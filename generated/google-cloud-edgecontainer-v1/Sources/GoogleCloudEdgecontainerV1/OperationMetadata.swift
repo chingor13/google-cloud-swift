@@ -70,7 +70,9 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// Indicates the reason for the status of the operation.
   public enum StatusReason: Codable, Equatable, Sendable {
+    /// Reason unknown.
     case unspecified
+    /// The cluster upgrade is currently paused.
     case upgradePaused
     /// Encodes an unknown integer value.
     ///

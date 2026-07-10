@@ -384,7 +384,11 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.ipv6AccessType]: <doc:Subnetwork/Ipv6AccessType>
     public enum Ipv6AccessType: Codable, Equatable, Sendable {
+      /// VMs on this subnet will be assigned IPv6 addresses that are accessible
+      /// via the Internet, as well as the VPC network.
       case external
+      /// VMs on this subnet will be assigned IPv6 addresses that are only
+      /// accessible over the VPC network.
       case `internal`
       /// Encodes an unknown integer value.
       ///
@@ -580,8 +584,11 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.privateIpv6GoogleAccess]: <doc:Subnetwork/PrivateIpv6GoogleAccess>
     public enum PrivateIpv6GoogleAccess: Codable, Equatable, Sendable {
+      /// Disable private IPv6 access to/from Google services.
       case disableGoogleAccess
+      /// Bidirectional private IPv6 access to/from Google services.
       case enableBidirectionalAccessToGoogle
+      /// Outbound private IPv6 access from VMs in this subnet to Google services.
       case enableOutboundVmAccessToGoogle
       /// Encodes an unknown integer value.
       ///
@@ -684,13 +691,24 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.purpose]: <doc:Subnetwork/Purpose>
     public enum Purpose: Codable, Equatable, Sendable {
+      /// Subnet reserved for Global Envoy-based Load Balancing.
       case globalManagedProxy
+      /// Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy
+      /// purpose, please use REGIONAL_MANAGED_PROXY instead.
       case internalHttpsLoadBalancer
+      /// Subnetwork will be used for Migration from one peered VPC to another.
+      /// (a transient state of subnetwork
+      /// while migrating resources from one project to another).
       case peerMigration
+      /// Regular user created or automatically created subnet.
       case `private`
+      /// Subnetwork used as source range for Private NAT Gateways.
       case privateNat
+      /// Regular user created or automatically created subnet.
       case privateRfc1918
+      /// Subnetworks created for Private Service Connect in the producer network.
       case privateServiceConnect
+      /// Subnetwork used for Regional Envoy-based Load Balancing.
       case regionalManagedProxy
       /// Encodes an unknown integer value.
       ///
@@ -818,7 +836,9 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.resolveSubnetMask]: <doc:Subnetwork/ResolveSubnetMask>
     public enum ResolveSubnetMask: Codable, Equatable, Sendable {
+      /// All ranges assigned to the VM NIC will respond to ARP.
       case arpAllRanges
+      /// Only the primary range of the VM NIC will respond to ARP.
       case arpPrimaryRange
       /// Encodes an unknown integer value.
       ///
@@ -916,7 +936,9 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.role]: <doc:Subnetwork/Role>
     public enum Role: Codable, Equatable, Sendable {
+      /// The ACTIVE subnet that is currently used.
       case active
+      /// The BACKUP subnet that could be promoted to ACTIVE.
       case backup
       /// Encodes an unknown integer value.
       ///
@@ -1014,8 +1036,11 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.stackType]: <doc:Subnetwork/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// New VMs in this subnet can have both IPv4 and IPv6 addresses.
       case ipv4Ipv6
+      /// New VMs in this subnet will only be assigned IPv4 addresses.
       case ipv4Only
+      /// New VMs in this subnet will only  be assigned IPv6 addresses.
       case ipv6Only
       /// Encodes an unknown integer value.
       ///
@@ -1118,7 +1143,9 @@
     ///
     /// [google.cloud.compute.v1.Subnetwork.state]: <doc:Subnetwork/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Subnetwork is being drained.
       case draining
+      /// Subnetwork is ready for use.
       case ready
       /// Encodes an unknown integer value.
       ///

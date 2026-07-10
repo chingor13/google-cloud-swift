@@ -190,6 +190,7 @@
     ///
     /// [google.cloud.compute.v1.RouterBgp.advertisedGroups]: <doc:RouterBgp/AdvertisedGroups>
     public enum AdvertisedGroups: Codable, Equatable, Sendable {
+      /// Advertise all available subnets (including peer VPC subnets).
       case allSubnets
       /// Encodes an unknown integer value.
       ///

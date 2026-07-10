@@ -56,7 +56,10 @@
     ///
     /// [google.cloud.compute.v1.ResourcePolicyWorkloadPolicy.acceleratorTopologyMode]: <doc:ResourcePolicyWorkloadPolicy/AcceleratorTopologyMode>
     public enum AcceleratorTopologyMode: Codable, Equatable, Sendable {
+      /// The interconnected chips are pre-configured at the time of VM creation.
       case autoConnect
+      /// The interconnected chips are connected on demand. At the time of VM
+      /// creation, the chips are not connected.
       case provisionOnly
       /// Encodes an unknown integer value.
       ///
@@ -154,8 +157,11 @@
     ///
     /// [google.cloud.compute.v1.ResourcePolicyWorkloadPolicy.maxTopologyDistance]: <doc:ResourcePolicyWorkloadPolicy/MaxTopologyDistance>
     public enum MaxTopologyDistance: Codable, Equatable, Sendable {
+      /// VMs must be provisioned in the same block.
       case block
+      /// VMs must be provisioned in the same cluster.
       case cluster
+      /// VMs must be provisioned in the same subblock.
       case subblock
       /// Encodes an unknown integer value.
       ///
@@ -258,7 +264,10 @@
     ///
     /// [google.cloud.compute.v1.ResourcePolicyWorkloadPolicy.type]: <doc:ResourcePolicyWorkloadPolicy/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// MIG spreads out the instances as much as possible for high availability.
       case highAvailability
+      /// MIG provisions instances as close to each other as possible for high
+      /// throughput.
       case highThroughput
       /// Encodes an unknown integer value.
       ///

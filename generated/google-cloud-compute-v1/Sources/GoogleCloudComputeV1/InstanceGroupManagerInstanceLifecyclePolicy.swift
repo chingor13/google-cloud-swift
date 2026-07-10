@@ -83,7 +83,11 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerInstanceLifecyclePolicy.defaultActionOnFailure]: <doc:InstanceGroupManagerInstanceLifecyclePolicy/DefaultActionOnFailure>
     public enum DefaultActionOnFailure: Codable, Equatable, Sendable {
+      /// MIG does not repair a failed or an unhealthy VM.
       case doNothing
+      /// (Default) MIG automatically repairs a failed or an unhealthy
+      /// VM by recreating it. For more information, see About
+      /// repairing VMs in a MIG.
       case repair
       /// Encodes an unknown integer value.
       ///
@@ -279,8 +283,12 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerInstanceLifecyclePolicy.onFailedHealthCheck]: <doc:InstanceGroupManagerInstanceLifecyclePolicy/OnFailedHealthCheck>
     public enum OnFailedHealthCheck: Codable, Equatable, Sendable {
+      /// (Default) MIG uses the same action configured for
+      /// instanceLifecyclePolicy.defaultActionOnFailure field.
       case defaultAction
+      /// MIG doesn't repair an unhealthy VM.
       case doNothing
+      /// MIG automatically repairs an unhealthy VM by recreating it.
       case repair
       /// Encodes an unknown integer value.
       ///

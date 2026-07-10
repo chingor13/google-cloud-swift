@@ -18,10 +18,14 @@
   import Foundation
 
   public enum SqlFileType: Codable, Equatable, Sendable {
+    /// Unknown file type.
     case unspecified
+    /// File containing SQL statements.
     case sql
+    /// File in CSV format.
     case csv
     case bak
+    /// TDE certificate.
     case tde
     /// Encodes an unknown integer value.
     ///

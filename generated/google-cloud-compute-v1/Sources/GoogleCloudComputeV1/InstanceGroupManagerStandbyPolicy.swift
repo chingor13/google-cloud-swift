@@ -52,7 +52,11 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerStandbyPolicy.mode]: <doc:InstanceGroupManagerStandbyPolicy/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// MIG does not automatically resume or start VMs in the standby pool when
+      /// the group scales out.
       case manual
+      /// MIG automatically resumes or starts VMs in the standby pool when the
+      /// group scales out, and replenishes the standby pool afterwards.
       case scaleOutPool
       /// Encodes an unknown integer value.
       ///

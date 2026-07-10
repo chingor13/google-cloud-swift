@@ -100,9 +100,16 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// State of etcd encryption.
   public enum State: Codable, Equatable, Sendable {
+    /// Should never be set
     case unknown
+    /// Secrets in etcd are encrypted.
     case encrypted
+    /// Secrets in etcd are stored in plain text (at etcd level) - this is
+    /// unrelated to Compute Engine level full disk encryption.
     case decrypted
+    /// Encryption of all objects in the storage is enabled. There is no
+    /// guarantee that all objects in the storage are encrypted, but eventually
+    /// they will be.
     case allObjectsEncryptionEnabled
     /// Encodes an unknown integer value.
     ///
@@ -208,15 +215,30 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Current State of etcd encryption.
   public enum CurrentState: Codable, Equatable, Sendable {
+    /// Should never be set
     case unspecified
+    /// Secrets in etcd are stored in plain text (at etcd level) - this is
+    /// unrelated to Compute Engine level full disk encryption.
     case decrypted
+    /// Encryption (or re-encryption with a different CloudKMS key)
+    /// of Secrets is in progress.
     case encryptionPending
+    /// Encryption (or re-encryption with a different CloudKMS key) of Secrets in
+    /// etcd encountered an error.
     case encryptionError
+    /// De-crypting Secrets to plain text in etcd is in progress.
     case decryptionPending
+    /// De-crypting Secrets to plain text in etcd encountered an error.
     case decryptionError
+    /// Secrets in etcd are encrypted.
     case encrypted
+    /// Encryption of all objects in the storage is enabled.
+    /// It does not guarantee that all objects in the storage are encrypted,
+    /// but eventually they will be.
     case allObjectsEncryptionEnabled
+    /// Enablement of the encryption of all objects in storage is pending.
     case allObjectsEncryptionPending
+    /// Enabling encryption of all objects in storage encountered an error.
     case allObjectsEncryptionError
     /// Encodes an unknown integer value.
     ///

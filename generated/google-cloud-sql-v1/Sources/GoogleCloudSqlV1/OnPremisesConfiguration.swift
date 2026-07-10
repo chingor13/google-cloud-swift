@@ -76,9 +76,13 @@
     /// SslOption defines the SSL mode to be used for replica connection to the
     /// on-premises source.
     public enum SslOption: Codable, Equatable, Sendable {
+      /// Unknown SSL option i.e. SSL option not specified by user.
       case unspecified
+      /// SSL is not used for replica connection to the on-premises source.
       case disable
+      /// SSL is required for replica connection to the on-premises source.
       case require
+      /// Verify CA is required for replica connection to the on-premises source.
       case verifyCa
       /// Encodes an unknown integer value.
       ///

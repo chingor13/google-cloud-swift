@@ -18,8 +18,13 @@ import Foundation
 
 /// To where should client libraries be published?
 public enum ClientLibraryDestination: Codable, Equatable, Sendable {
+  /// Client libraries will neither be generated nor published to package
+  /// managers.
   case unspecified
+  /// Generate the client library in a repo under github.com/googleapis,
+  /// but don't publish it to package managers.
   case github
+  /// Publish the library to package managers like nuget.org and npmjs.com.
   case packageManager
   /// Encodes an unknown integer value.
   ///

@@ -58,9 +58,17 @@
     ///
     /// [google.cloud.compute.v1.InterconnectLocationRegionInfo.locationPresence]: <doc:InterconnectLocationRegionInfo/LocationPresence>
     public enum LocationPresence: Codable, Equatable, Sendable {
+      /// This region is not in any common network presence with this
+      /// InterconnectLocation.
       case global
+      /// This region shares the same regional network presence as this
+      /// InterconnectLocation.
       case localRegion
+      /// [Deprecated] This region is not in any common network presence with
+      /// this InterconnectLocation.
       case lpGlobal
+      /// [Deprecated] This region shares the same regional network presence as
+      /// this InterconnectLocation.
       case lpLocalRegion
       /// Encodes an unknown integer value.
       ///

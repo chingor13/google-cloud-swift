@@ -137,9 +137,13 @@
     ///
     /// [google.cloud.compute.v1.Autoscaler.status]: <doc:Autoscaler/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Configuration is acknowledged to be effective
       case active
+      /// Configuration is being deleted
       case deleting
+      /// Configuration has errors. Actionable for users.
       case error
+      /// Autoscaler backend hasn't read new/updated configuration
       case pending
       /// Encodes an unknown integer value.
       ///

@@ -19,10 +19,16 @@
 
   /// The type of disk that is used for a v2 instance to use.
   public enum SqlDataDiskType: Codable, Equatable, Sendable {
+    /// This is an unknown data disk type.
     case unspecified
+    /// An SSD data disk.
     case pdSsd
+    /// An HDD data disk.
     case pdHdd
+    /// This field is deprecated and will be removed from a future version of the
+    /// API.
     case obsoleteLocalSsd
+    /// A Hyperdisk Balanced data disk.
     case hyperdiskBalanced
     /// Encodes an unknown integer value.
     ///

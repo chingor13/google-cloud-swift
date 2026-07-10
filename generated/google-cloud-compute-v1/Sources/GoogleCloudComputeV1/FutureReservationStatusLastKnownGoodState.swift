@@ -67,18 +67,38 @@
     ///
     /// [google.cloud.compute.v1.FutureReservationStatusLastKnownGoodState.procurementStatus]: <doc:FutureReservationStatusLastKnownGoodState/ProcurementStatus>
     public enum ProcurementStatus: Codable, Equatable, Sendable {
+      /// Future reservation is approved by GCP.
       case approved
+      /// Future reservation is cancelled by the customer.
       case cancelled
+      /// Future reservation is committed by the customer.
       case committed
+      /// Future reservation is rejected by GCP.
       case declined
+      /// Related status for PlanningStatus.Draft. Transitions to
+      /// PENDING_APPROVAL upon user submitting FR.
       case drafting
+      /// Future reservation failed. No additional reservations were provided.
       case failed
+      /// Future reservation is partially fulfilled. Additional reservations were
+      /// provided but did not reach total_count reserved instance slots.
       case failedPartiallyFulfilled
+      /// Future reservation is fulfilled completely.
       case fulfilled
+      /// An Amendment to the Future Reservation has been requested. If the
+      /// Amendment is declined, the Future Reservation will be restored to the
+      /// last known good state.
       case pendingAmendmentApproval
+      /// Future reservation is pending approval by GCP.
       case pendingApproval
       case unspecified
+      /// Future reservation is being procured by GCP. Beyond this point, Future
+      /// reservation is locked and no further modifications are allowed.
       case procuring
+      /// Future reservation capacity is being provisioned. This state will be
+      /// entered after start_time, while reservations are being created to
+      /// provide total_count reserved instance slots. This state will not
+      /// persist past start_time + 24h.
       case provisioning
       /// Encodes an unknown integer value.
       ///

@@ -19,8 +19,11 @@
 
   /// Type of backup (i.e. automated, on demand, etc).
   public enum SqlBackupRunType: Codable, Equatable, Sendable {
+    /// This is an unknown BackupRun type.
     case unspecified
+    /// The backup schedule automatically triggers a backup.
     case automated
+    /// The user manually triggers a backup.
     case onDemand
     /// Encodes an unknown integer value.
     ///

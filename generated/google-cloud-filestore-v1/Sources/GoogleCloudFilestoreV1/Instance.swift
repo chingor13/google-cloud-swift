@@ -430,17 +430,34 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The instance state.
   public enum State: Codable, Equatable, Sendable {
+    /// State not set.
     case unspecified
+    /// The instance is being created.
     case creating
+    /// The instance is available for use.
     case ready
+    /// Work is being done on the instance. You can get further details from the
+    /// `statusMessage` field of the `Instance` resource.
     case repairing
+    /// The instance is shutting down.
     case deleting
+    /// The instance is experiencing an issue and might be unusable. You can get
+    /// further details from the `statusMessage` field of the `Instance`
+    /// resource.
     case error
+    /// The instance is restoring a backup to an existing file share and may be
+    /// unusable during this time.
     case restoring
+    /// The instance is suspended. You can get further details from
+    /// the `suspension_reasons` field of the `Instance` resource.
     case suspended
+    /// The instance is in the process of becoming suspended.
     case suspending
+    /// The instance is in the process of becoming active.
     case resuming
+    /// The instance is reverting to a snapshot.
     case reverting
+    /// The replica instance is being promoted.
     case promoting
     /// Encodes an unknown integer value.
     ///
@@ -586,14 +603,31 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Available service tiers.
   public enum Tier: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// STANDARD tier. BASIC_HDD is the preferred term for this tier.
     case standard
+    /// PREMIUM tier. BASIC_SSD is the preferred term for this tier.
     case premium
+    /// BASIC instances offer a maximum capacity of 63.9 TB.
+    /// BASIC_HDD is an alias for STANDARD Tier, offering economical
+    /// performance backed by HDD.
     case basicHdd
+    /// BASIC instances offer a maximum capacity of 63.9 TB.
+    /// BASIC_SSD is an alias for PREMIUM Tier, and offers improved
+    /// performance backed by SSD.
     case basicSsd
+    /// HIGH_SCALE instances offer expanded capacity and performance scaling
+    /// capabilities.
     case highScaleSsd
+    /// ENTERPRISE instances offer the features and availability needed for
+    /// mission-critical workloads.
     case enterprise
+    /// ZONAL instances offer expanded capacity and performance scaling
+    /// capabilities.
     case zonal
+    /// REGIONAL instances offer the features and availability needed for
+    /// mission-critical workloads.
     case regional
     /// Encodes an unknown integer value.
     ///
@@ -724,7 +758,9 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// SuspensionReason contains the possible reasons for a suspension.
   public enum SuspensionReason: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// The KMS key used by the instance is either revoked or denied access to.
     case kmsKeyIssue
     /// Encodes an unknown integer value.
     ///
@@ -820,8 +856,12 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// File access protocol.
   public enum FileProtocol: Codable, Equatable, Sendable {
+    /// FILE_PROTOCOL_UNSPECIFIED serves a "not set" default value when
+    /// a FileProtocol is a separate field in a message.
     case unspecified
+    /// NFS 3.0.
     case nfsV3
+    /// NFS 4.1.
     case nfsV41
     /// Encodes an unknown integer value.
     ///

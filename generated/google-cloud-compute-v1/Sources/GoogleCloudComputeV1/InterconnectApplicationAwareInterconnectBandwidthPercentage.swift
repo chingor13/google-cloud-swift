@@ -52,11 +52,17 @@
     ///
     /// [google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage.trafficClass]: <doc:InterconnectApplicationAwareInterconnectBandwidthPercentage/TrafficClass>
     public enum TrafficClass: Codable, Equatable, Sendable {
+      /// Traffic Class 1, corresponding to DSCP ranges (0-7) 000xxx.
       case tc1
+      /// Traffic Class 2, corresponding to DSCP ranges (8-15) 001xxx.
       case tc2
+      /// Traffic Class 3, corresponding to DSCP ranges (16-23) 010xxx.
       case tc3
+      /// Traffic Class 4, corresponding to DSCP ranges (24-31) 011xxx.
       case tc4
+      /// Traffic Class 5, corresponding to DSCP ranges (32-47) 10xxxx.
       case tc5
+      /// Traffic Class 6, corresponding to DSCP ranges (48-63) 11xxxx.
       case tc6
       /// Encodes an unknown integer value.
       ///

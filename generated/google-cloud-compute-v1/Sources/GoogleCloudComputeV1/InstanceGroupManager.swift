@@ -351,7 +351,13 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManager.listManagedInstancesResults]: <doc:InstanceGroupManager/ListManagedInstancesResults>
     public enum ListManagedInstancesResults: Codable, Equatable, Sendable {
+      /// (Default) Pagination is disabled for the group'slistManagedInstances API method. maxResults
+      /// and pageToken query parameters are ignored and all
+      /// instances are returned in a single response.
       case pageless
+      /// Pagination is enabled for the group's listManagedInstances
+      /// API method. maxResults and pageToken query
+      /// parameters are respected.
       case paginated
       /// Encodes an unknown integer value.
       ///

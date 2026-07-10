@@ -48,7 +48,10 @@
     ///
     /// [google.cloud.compute.v1.NetworkEndpointGroupsListEndpointsRequest.healthStatus]: <doc:NetworkEndpointGroupsListEndpointsRequest/HealthStatus>
     public enum HealthStatus: Codable, Equatable, Sendable {
+      /// Show the health status for each network endpoint. Impacts latency of the
+      /// call.
       case show
+      /// Health status for network endpoints will not be provided.
       case skip
       /// Encodes an unknown integer value.
       ///

@@ -19,13 +19,42 @@ import Foundation
 /// The launch stage as defined by [Google Cloud Platform
 /// Launch Stages](https://cloud.google.com/terms/launch-stages).
 public enum LaunchStage: Codable, Equatable, Sendable {
+  /// Do not use this default value.
   case unspecified
+  /// Early Access features are limited to a closed group of testers. To use
+  /// these features, you must sign up in advance and sign a Trusted Tester
+  /// agreement (which includes confidentiality provisions). These features may
+  /// be unstable, changed in backward-incompatible ways, and are not
+  /// guaranteed to be released.
   case earlyAccess
+  /// Alpha is a limited availability test for releases before they are cleared
+  /// for widespread use. By Alpha, all significant design issues are resolved
+  /// and we are in the process of verifying functionality. Alpha customers
+  /// need to apply for access, agree to applicable terms, and have their
+  /// projects allowlisted. Alpha releases don't have to be feature complete,
+  /// no SLAs are provided, and there are no technical support obligations, but
+  /// they will be far enough along that customers can actually use them in
+  /// test environments or for limited-use tests -- just like they would in
+  /// normal production cases.
   case alpha
+  /// Beta is the point at which we are ready to open a release for any
+  /// customer to use. There are no SLA or technical support obligations in a
+  /// Beta release. Products will be complete from a feature perspective, but
+  /// may have some open outstanding issues. Beta releases are suitable for
+  /// limited production use cases.
   case beta
+  /// GA features are open to all developers and are considered stable and
+  /// fully qualified for production use.
   case ga
+  /// Deprecated features are scheduled to be shut down and removed. For more
+  /// information, see the "Deprecation Policy" section of our [Terms of
+  /// Service](https://cloud.google.com/terms/)
+  /// and the [Google Cloud Platform Subject to the Deprecation
+  /// Policy](https://cloud.google.com/terms/deprecation) documentation.
   case deprecated
+  /// The feature is not yet implemented. Users can not use it.
   case unimplemented
+  /// Prelaunch features are hidden from users and are only visible internally.
   case prelaunch
   /// Encodes an unknown integer value.
   ///

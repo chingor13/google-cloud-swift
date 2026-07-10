@@ -57,8 +57,12 @@
     ///
     /// [google.cloud.compute.v1.ReservationAffinity.consumeReservationType]: <doc:ReservationAffinity/ConsumeReservationType>
     public enum ConsumeReservationType: Codable, Equatable, Sendable {
+      /// Consume any allocation available.
       case anyReservation
+      /// Do not consume from any allocated capacity.
       case noReservation
+      /// Must consume from a specific reservation. Must specify key value fields
+      /// for specifying the reservations.
       case specificReservation
       case unspecified
       /// Encodes an unknown integer value.

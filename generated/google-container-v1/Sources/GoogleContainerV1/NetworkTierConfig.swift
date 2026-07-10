@@ -42,9 +42,19 @@ public struct NetworkTierConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// Network tier configuration.
   public enum NetworkTier: Codable, Equatable, Sendable {
+    /// By default, use project-level configuration. When unspecified, the
+    /// behavior defaults to NETWORK_TIER_DEFAULT. For cluster updates, this
+    /// implies no action (no-op).
     case unspecified
+    /// Default network tier. Use project-level configuration. User can specify
+    /// this value, meaning they want to keep the same behaviour as before
+    /// cluster level network tier configuration is introduced. This field
+    /// ensures backward compatibility for the network tier of cluster resources,
+    /// such as node pools and load balancers, for their external IP addresses.
     case `default`
+    /// Premium network tier.
     case premium
+    /// Standard network tier.
     case standard
     /// Encodes an unknown integer value.
     ///

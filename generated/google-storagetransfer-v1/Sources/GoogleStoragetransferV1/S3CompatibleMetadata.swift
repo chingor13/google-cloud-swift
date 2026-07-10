@@ -85,8 +85,11 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The authentication and authorization method used by the storage service.
   public enum AuthMethod: Codable, Equatable, Sendable {
+    /// AuthMethod is not specified.
     case unspecified
+    /// Auth requests with AWS SigV4.
     case awsSignatureV4
+    /// Auth requests with AWS SigV2.
     case awsSignatureV2
     /// Encodes an unknown integer value.
     ///
@@ -187,8 +190,13 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The request model of the API.
   public enum RequestModel: Codable, Equatable, Sendable {
+    /// RequestModel is not specified.
     case unspecified
+    /// Perform requests using Virtual Hosted Style.
+    /// Example: https://bucket-name.s3.region.amazonaws.com/key-name
     case virtualHostedStyle
+    /// Perform requests using Path Style.
+    /// Example: https://s3.region.amazonaws.com/bucket-name/key-name
     case pathStyle
     /// Encodes an unknown integer value.
     ///
@@ -289,8 +297,13 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The agent network protocol to access the storage service.
   public enum NetworkProtocol: Codable, Equatable, Sendable {
+    /// NetworkProtocol is not specified.
     case unspecified
+    /// Perform requests using HTTPS.
     case https
+    /// Not recommended: This sends data in clear-text. This is only
+    /// appropriate within a closed network or for publicly available data.
+    /// Perform requests using HTTP.
     case http
     /// Encodes an unknown integer value.
     ///
@@ -391,8 +404,11 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The Listing API to use for discovering objects.
   public enum ListApi: Codable, Equatable, Sendable {
+    /// ListApi is not specified.
     case unspecified
+    /// Perform listing using ListObjectsV2 API.
     case listObjectsV2
+    /// Legacy ListObjects API.
     case listObjects
     /// Encodes an unknown integer value.
     ///

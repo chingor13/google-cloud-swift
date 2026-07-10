@@ -65,9 +65,13 @@
     ///
     /// [google.cloud.compute.v1.HealthStatusForNetworkEndpoint.healthState]: <doc:HealthStatusForNetworkEndpoint/HealthState>
     public enum HealthState: Codable, Equatable, Sendable {
+      /// Endpoint is being drained.
       case draining
+      /// Endpoint is healthy.
       case healthy
+      /// Endpoint is unhealthy.
       case unhealthy
+      /// Health status of the endpoint is unknown.
       case unknown
       /// Encodes an unknown integer value.
       ///
@@ -175,9 +179,13 @@
     ///
     /// [google.cloud.compute.v1.HealthStatusForNetworkEndpoint.ipv6HealthState]: <doc:HealthStatusForNetworkEndpoint/Ipv6HealthState>
     public enum Ipv6HealthState: Codable, Equatable, Sendable {
+      /// Endpoint is being drained.
       case draining
+      /// Endpoint is healthy.
       case healthy
+      /// Endpoint is unhealthy.
       case unhealthy
+      /// Health status of the endpoint is unknown.
       case unknown
       /// Encodes an unknown integer value.
       ///

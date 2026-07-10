@@ -43,7 +43,9 @@
     ///
     /// [google.cloud.compute.v1.ServerBinding.type]: <doc:ServerBinding/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Node may associate with any physical server over its lifetime.
       case restartNodeOnAnyServer
+      /// Node may associate with minimal physical servers over its lifetime.
       case restartNodeOnMinimalServers
       case serverBindingTypeUnspecified
       /// Encodes an unknown integer value.

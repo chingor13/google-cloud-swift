@@ -81,11 +81,17 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The state of the upgrade.
   public enum State: Codable, Equatable, Sendable {
+    /// STATE_UNSPECIFIED indicates the state is unspecified.
     case unspecified
+    /// SCHEDULED indicates the upgrade was scheduled.
     case scheduled
+    /// STARTED indicates the upgrade has started.
     case started
+    /// SUCCEEDED indicates the upgrade has completed successfully.
     case succeeded
+    /// FAILED indicates the upgrade has failed.
     case failed
+    /// CANCELED indicates the upgrade has canceled.
     case canceled
     /// Encodes an unknown integer value.
     ///
@@ -201,10 +207,18 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The type of the event.
   public enum EventType: Codable, Equatable, Sendable {
+    /// EVENT_TYPE_UNSPECIFIED indicates the event type is unspecified.
     case unspecified
+    /// END_OF_SUPPORT indicates GKE version reaches end of support, check
+    /// standard_support_end_time and extended_support_end_time for more details.
     case endOfSupport
+    /// COS_MILESTONE_VERSION_UPDATE indicates that the COS node image will
+    /// update COS milestone version for new patch versions starting with
+    /// the one in the description.
     case cosMilestoneVersionUpdate
+    /// UPGRADE_LIFECYCLE indicates the event is about the upgrade lifecycle.
     case upgradeLifecycle
+    /// DISRUPTION_EVENT indicates the event is about the disruption.
     case disruptionEvent
     /// Encodes an unknown integer value.
     ///

@@ -62,6 +62,7 @@
     public enum Duration: Codable, Equatable, Sendable {
       case unspecified
       case hour
+      /// From BfdSession object creation time.
       case max
       case minute
       /// Encodes an unknown integer value.
@@ -170,8 +171,12 @@
     ///
     /// [google.cloud.compute.v1.PacketIntervals.type]: <doc:PacketIntervals/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Only applies to Echo packets. This shows the intervals between sending
+      /// and receiving the same packet.
       case loopback
+      /// Intervals between received packets.
       case receive
+      /// Intervals between transmitted packets.
       case transmit
       case unspecified
       /// Encodes an unknown integer value.

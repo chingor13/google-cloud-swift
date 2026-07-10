@@ -47,10 +47,24 @@ public struct ReleaseChannel: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible values for 'channel'.
   public enum Channel: Codable, Equatable, Sendable {
+    /// No channel specified.
     case unspecified
+    /// RAPID channel is offered on an early access basis for customers who want
+    /// to test new releases.
+    ///
+    /// WARNING: Versions available in the RAPID Channel may be subject to
+    /// unresolved issues with no known workaround and are not subject to any
+    /// SLAs.
     case rapid
+    /// Clusters subscribed to REGULAR receive versions that are considered GA
+    /// quality. REGULAR is intended for production users who want to take
+    /// advantage of new features.
     case regular
+    /// Clusters subscribed to STABLE receive versions that are known to be
+    /// stable and reliable in production.
     case stable
+    /// Clusters subscribed to EXTENDED receive extended support and availability
+    /// for versions which are known to be stable and reliable in production.
     case extended
     /// Encodes an unknown integer value.
     ///

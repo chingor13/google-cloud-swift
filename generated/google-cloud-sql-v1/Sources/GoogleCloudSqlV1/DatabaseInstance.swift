@@ -371,8 +371,12 @@
 
       /// This enum lists all possible states regarding out-of-disk issues.
       public enum SqlOutOfDiskState: Codable, Equatable, Sendable {
+        /// Unspecified state
         case unspecified
+        /// The instance has plenty space on data disk
         case normal
+        /// Data disk is almost used up. It is shutdown to prevent data
+        /// corruption.
         case softShutdown
         /// Encodes an unknown integer value.
         ///
@@ -544,14 +548,25 @@
 
     /// The current serving state of the database instance.
     public enum SqlInstanceState: Codable, Equatable, Sendable {
+      /// The state of the instance is unknown.
       case unspecified
+      /// The instance is running, or has been stopped by owner.
       case runnable
+      /// The instance is not available, for example due to problems with billing.
       case suspended
+      /// The instance is being deleted.
       case pendingDelete
+      /// The instance is being created.
       case pendingCreate
+      /// The instance is down for maintenance.
       case maintenance
+      /// The creation of the instance failed or a fatal error occurred during
+      /// maintenance.
       case failed
+      /// Deprecated
       case onlineMaintenance
+      /// (Applicable to read pool nodes only.) The read pool node needs to be
+      /// repaired. The database might be unavailable.
       case repairing
       /// Encodes an unknown integer value.
       ///
@@ -683,7 +698,9 @@
     /// The SQL network architecture for the instance.
     public enum SqlNetworkArchitecture: Codable, Equatable, Sendable {
       case unspecified
+      /// The instance uses the new network architecture.
       case newNetworkArchitecture
+      /// The instance uses the old network architecture.
       case oldNetworkArchitecture
       /// Encodes an unknown integer value.
       ///

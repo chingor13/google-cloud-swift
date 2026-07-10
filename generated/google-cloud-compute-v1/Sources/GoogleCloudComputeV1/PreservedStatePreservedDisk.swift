@@ -155,7 +155,11 @@
     ///
     /// [google.cloud.compute.v1.PreservedStatePreservedDisk.mode]: <doc:PreservedStatePreservedDisk/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// Attaches this disk in read-only mode. Multiple VM instances can use
+      /// a disk in READ_ONLY mode at a time.
       case readOnly
+      /// *[Default]* Attaches this disk in READ_WRITE mode. Only
+      /// one VM instance at a time can be attached to a disk inREAD_WRITE mode.
       case readWrite
       /// Encodes an unknown integer value.
       ///

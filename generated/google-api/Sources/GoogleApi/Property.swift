@@ -57,10 +57,15 @@ public struct Property: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Supported data type of the property values
   public enum PropertyType: Codable, Equatable, Sendable {
+    /// The type is unspecified, and will result in an error.
     case unspecified
+    /// The type is `int64`.
     case int64
+    /// The type is `bool`.
     case bool
+    /// The type is `string`.
     case string
+    /// The type is 'double'.
     case double
     /// Encodes an unknown integer value.
     ///

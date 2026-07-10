@@ -53,9 +53,14 @@ public struct ReservationAffinity: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Indicates whether to consume capacity from a reservation or not.
   public enum Type_: Codable, Equatable, Sendable {
+    /// Default value. This should not be used.
     case unspecified
+    /// Do not consume from any reserved capacity.
     case noReservation
+    /// Consume any reservation available.
     case anyReservation
+    /// Must consume from a specific reservation. Must specify key value fields
+    /// for specifying the reservations.
     case specificReservation
     /// Encodes an unknown integer value.
     ///

@@ -97,8 +97,11 @@ public struct CleanupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Action type for a cleanup policy.
   public enum Action: Codable, Equatable, Sendable {
+    /// Action not specified.
     case unspecified
+    /// Delete action.
     case delete
+    /// Keep action.
     case keep
     /// Encodes an unknown integer value.
     ///

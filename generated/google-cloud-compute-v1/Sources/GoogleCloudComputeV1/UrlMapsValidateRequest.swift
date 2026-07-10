@@ -61,8 +61,14 @@
     ///
     /// [google.cloud.compute.v1.UrlMapsValidateRequest.loadBalancingSchemes]: <doc:UrlMapsValidateRequest/LoadBalancingSchemes>
     public enum LoadBalancingSchemes: Codable, Equatable, Sendable {
+      /// Signifies that this will be used for classic Application Load Balancers.
       case external
+      /// Signifies that this will be used for Envoy-based global external
+      /// Application Load Balancers.
       case externalManaged
+      /// If unspecified, the validation will try to infer the scheme from the
+      /// backend service resources this Url map references. If the inference is not
+      /// possible, EXTERNAL will be used as the default type.
       case loadBalancingSchemeUnspecified
       /// Encodes an unknown integer value.
       ///

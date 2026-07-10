@@ -62,12 +62,19 @@
     ///
     /// [google.cloud.compute.v1.GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadata.state]: <doc:GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadata/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Iteration was explicitly cancelled.
       case cancelled
+      /// Iteration completed, with all actions being successful.
       case completed
+      /// Iteration completed, with failures.
       case failed
+      /// The rollout is paused.
       case paused
+      /// Iteration is in progress.
       case processing
+      /// Impossible to determine current state of the iteration.
       case unknown
+      /// Default value. This value is unused.
       case unspecified
       /// Encodes an unknown integer value.
       ///

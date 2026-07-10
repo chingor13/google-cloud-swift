@@ -45,8 +45,15 @@ public struct WorkloadMetadataConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
   /// Mode is the configuration for how to expose metadata to workloads running
   /// on the node.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// Expose all Compute Engine metadata to pods.
     case gceMetadata
+    /// Run the GKE Metadata Server on this node. The GKE Metadata Server exposes
+    /// a metadata API to workloads that is compatible with the V1 Compute
+    /// Metadata APIs exposed by the Compute Engine and App Engine Metadata
+    /// Servers. This feature can only be enabled if Workload Identity is enabled
+    /// at the cluster level.
     case gkeMetadata
     /// Encodes an unknown integer value.
     ///

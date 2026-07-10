@@ -753,12 +753,24 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The current status of the cluster.
   public enum Status: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// The PROVISIONING state indicates the cluster is being created.
     case provisioning
+    /// The RUNNING state indicates the cluster has been created and is fully
+    /// usable.
     case running
+    /// The RECONCILING state indicates that some work is actively being done on
+    /// the cluster, such as upgrading the master or node software. Details can
+    /// be found in the `statusMessage` field.
     case reconciling
+    /// The STOPPING state indicates the cluster is being deleted.
     case stopping
+    /// The ERROR state indicates the cluster is unusable. It will be
+    /// automatically deleted. Details can be found in the `statusMessage` field.
     case error
+    /// The DEGRADED state indicates the cluster requires user action to restore
+    /// full functionality. Details can be found in the `statusMessage` field.
     case degraded
     /// Encodes an unknown integer value.
     ///

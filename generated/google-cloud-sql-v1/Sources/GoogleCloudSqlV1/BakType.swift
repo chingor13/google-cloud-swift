@@ -18,9 +18,13 @@
   import Foundation
 
   public enum BakType: Codable, Equatable, Sendable {
+    /// Default type.
     case unspecified
+    /// Full backup.
     case full
+    /// Differential backup.
     case diff
+    /// Transaction Log backup
     case tlog
     /// Encodes an unknown integer value.
     ///

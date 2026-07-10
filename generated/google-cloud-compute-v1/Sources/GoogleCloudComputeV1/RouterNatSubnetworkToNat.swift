@@ -58,8 +58,11 @@
     ///
     /// [google.cloud.compute.v1.RouterNatSubnetworkToNat.sourceIpRangesToNat]: <doc:RouterNatSubnetworkToNat/SourceIpRangesToNat>
     public enum SourceIpRangesToNat: Codable, Equatable, Sendable {
+      /// The primary and all the secondary ranges are allowed to Nat.
       case allIpRanges
+      /// A list of secondary ranges are allowed to Nat.
       case listOfSecondaryIpRanges
+      /// The primary range is allowed to Nat.
       case primaryIpRange
       /// Encodes an unknown integer value.
       ///

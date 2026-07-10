@@ -18,9 +18,17 @@ import Foundation
 
 /// Strategy used for node pool update.
 public enum NodePoolUpdateStrategy: Codable, Equatable, Sendable {
+  /// Default value if unset. GKE internally defaults the update strategy to
+  /// SURGE for unspecified strategies.
   case unspecified
+  /// blue-green upgrade.
   case blueGreen
+  /// SURGE is the traditional way of upgrade a node pool.
+  /// max_surge and max_unavailable determines the level of upgrade parallelism.
   case surge
+  /// SHORT_LIVED is the dedicated upgrade strategy for
+  /// QueuedProvisioning and flex start node pools scaled up only by enqueueing
+  /// to the Dynamic Workload Scheduler (DWS).
   case shortLived
   /// Encodes an unknown integer value.
   ///

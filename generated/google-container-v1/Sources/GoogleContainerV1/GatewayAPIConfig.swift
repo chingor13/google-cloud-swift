@@ -43,9 +43,14 @@ public struct GatewayAPIConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Channel describes if/how Gateway API should be installed and implemented in
   /// a cluster.
   public enum Channel: Codable, Equatable, Sendable {
+    /// Default value.
     case unspecified
+    /// Gateway API support is disabled
     case disabled
+    /// Deprecated: use CHANNEL_STANDARD instead.
+    /// Gateway API support is enabled, experimental CRDs are installed
     case experimental
+    /// Gateway API support is enabled, standard CRDs are installed
     case standard
     /// Encodes an unknown integer value.
     ///

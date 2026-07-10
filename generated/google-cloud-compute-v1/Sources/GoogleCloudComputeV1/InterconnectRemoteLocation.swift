@@ -261,7 +261,12 @@
     ///
     /// [google.cloud.compute.v1.InterconnectRemoteLocation.lacp]: <doc:InterconnectRemoteLocation/Lacp>
     public enum Lacp: Codable, Equatable, Sendable {
+      /// LACP_SUPPORTED: LACP is supported, and enabled by default on
+      /// the Cross-Cloud Interconnect.
       case supported
+      /// LACP_UNSUPPORTED: LACP is not supported and is not be enabled on this
+      /// port. GetDiagnostics shows bundleAggregationType as "static". GCP does
+      /// not support LAGs without LACP, so requestedLinkCount must be 1.
       case unsupported
       /// Encodes an unknown integer value.
       ///
@@ -359,7 +364,11 @@
     ///
     /// [google.cloud.compute.v1.InterconnectRemoteLocation.status]: <doc:InterconnectRemoteLocation/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The InterconnectRemoteLocation is available for provisioning new
+      /// Cross-Cloud Interconnects.
       case available
+      /// The InterconnectRemoteLocation is closed for provisioning new
+      /// Cross-Cloud Interconnects.
       case closed
       /// Encodes an unknown integer value.
       ///

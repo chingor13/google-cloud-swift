@@ -163,7 +163,9 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
     /// Node network tier
     public enum Tier: Codable, Equatable, Sendable {
+      /// Default value
       case unspecified
+      /// Higher bandwidth, actual values based on VM size.
       case tier1
       /// Encodes an unknown integer value.
       ///

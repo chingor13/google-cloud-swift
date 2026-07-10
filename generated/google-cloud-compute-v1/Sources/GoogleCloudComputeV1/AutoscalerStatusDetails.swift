@@ -100,25 +100,63 @@
     ///
     /// [google.cloud.compute.v1.AutoscalerStatusDetails.type]: <doc:AutoscalerStatusDetails/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// All instances in the instance group are unhealthy (not in RUNNING state).
       case allInstancesUnhealthy
+      /// There is no backend service attached to the instance group.
       case backendServiceDoesNotExist
+      /// Autoscaler recommends a size greater than maxNumReplicas.
       case cappedAtMaxNumReplicas
+      /// The custom metric samples are not exported often enough to be a credible
+      /// base for autoscaling.
       case customMetricDataPointsTooSparse
+      /// The custom metric that was specified does not exist or does not have the
+      /// necessary labels.
       case customMetricInvalid
+      /// The minNumReplicas is equal to maxNumReplicas. This means the autoscaler
+      /// cannot add or remove instances from the instance group.
       case minEqualsMax
+      /// The autoscaler did not receive any data from the custom metric configured
+      /// for autoscaling.
       case missingCustomMetricDataPoints
+      /// The autoscaler is configured to scale based on a load balancing signal
+      /// but the instance group has not received any requests from the load
+      /// balancer.
       case missingLoadBalancingDataPoints
+      /// Autoscaling is turned off. The number of instances in the group won't
+      /// change automatically. The autoscaling configuration is preserved.
       case modeOff
+      /// Autoscaling is in the "Autoscale only scale out" mode.
+      /// Instances in the group will be only added.
       case modeOnlyScaleOut
+      /// Autoscaling is in the "Autoscale only out" mode. Instances in the group
+      /// will be only added.
       case modeOnlyUp
+      /// The instance group cannot be autoscaled because it has more than one
+      /// backend service attached to it.
       case moreThanOneBackendService
+      /// There is insufficient quota for the necessary resources, such as CPU or
+      /// number of instances.
       case notEnoughQuotaAvailable
+      /// Showed only for regional autoscalers: there is a resource stockout in
+      /// the chosen region.
       case regionResourceStockout
+      /// The target to be scaled does not exist.
       case scalingTargetDoesNotExist
+      /// For some scaling schedules minRequiredReplicas is greater than
+      /// maxNumReplicas. Autoscaler always recommends at most maxNumReplicas
+      /// instances.
       case scheduledInstancesGreaterThanAutoscalerMax
+      /// For some scaling schedules minRequiredReplicas is less than
+      /// minNumReplicas. Autoscaler always recommends at least minNumReplicas
+      /// instances.
       case scheduledInstancesLessThanAutoscalerMin
       case unknown
+      /// Autoscaling does not work with an HTTP/S load balancer that has been
+      /// configured for maxRate.
       case unsupportedMaxRateLoadBalancingConfiguration
+      /// For zonal autoscalers: there is a resource stockout in the chosen zone.
+      /// For regional autoscalers: in at least one of the zones you're using there
+      /// is a resource stockout.
       case zoneResourceStockout
       /// Encodes an unknown integer value.
       ///

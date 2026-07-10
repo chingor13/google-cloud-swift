@@ -47,7 +47,10 @@ public struct SecondaryBootDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable
   /// Mode specifies how the secondary boot disk will be used.
   /// This triggers mode-specified logic in the control plane.
   public enum Mode: Codable, Equatable, Sendable {
+    /// MODE_UNSPECIFIED is when mode is not set.
     case unspecified
+    /// CONTAINER_IMAGE_CACHE is for using the secondary boot disk as
+    /// a container image cache.
     case containerImageCache
     /// Encodes an unknown integer value.
     ///

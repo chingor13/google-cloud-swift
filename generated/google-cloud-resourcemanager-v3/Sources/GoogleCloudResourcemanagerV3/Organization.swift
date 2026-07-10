@@ -136,8 +136,11 @@ public struct Organization: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Organization lifecycle states.
   public enum State: Codable, Equatable, Sendable {
+    /// Unspecified state.  This is only useful for distinguishing unset values.
     case unspecified
+    /// The normal and active state.
     case active
+    /// The organization has been marked for deletion by the user.
     case deleteRequested
     /// Encodes an unknown integer value.
     ///

@@ -42,7 +42,9 @@ public struct GPUDirectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Option for GPU direct Strategies
   public enum GPUDirectStrategy: Codable, Equatable, Sendable {
+    /// Default value. No GPU Direct strategy is enabled on the node.
     case unspecified
+    /// GPUDirect-RDMA on A3 Ultra, and A4 machine types
     case rdma
     /// Encodes an unknown integer value.
     ///

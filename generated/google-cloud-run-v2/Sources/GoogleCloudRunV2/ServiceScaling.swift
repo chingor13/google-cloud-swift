@@ -59,8 +59,11 @@ public struct ServiceScaling: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The scaling mode for the service. If not provided, it defaults to
   /// AUTOMATIC.
   public enum ScalingMode: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Scale based on traffic between min and max instances.
     case automatic
+    /// Scale to exactly min instances and ignore max instances.
     case manual
     /// Encodes an unknown integer value.
     ///

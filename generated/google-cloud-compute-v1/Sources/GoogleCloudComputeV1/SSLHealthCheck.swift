@@ -89,8 +89,15 @@
     ///
     /// [google.cloud.compute.v1.SSLHealthCheck.portSpecification]: <doc:SSLHealthCheck/PortSpecification>
     public enum PortSpecification: Codable, Equatable, Sendable {
+      /// The port number in the health check's port is used for health
+      /// checking. Applies to network endpoint group and instance group backends.
       case useFixedPort
+      /// Not supported.
       case useNamedPort
+      /// For network endpoint group backends, the health check uses the port number
+      /// specified on each endpoint in the network endpoint group. For instance
+      /// group backends, the health check uses the port number specified for the
+      /// backend service's named port defined in the instance group's named ports.
       case useServingPort
       /// Encodes an unknown integer value.
       ///

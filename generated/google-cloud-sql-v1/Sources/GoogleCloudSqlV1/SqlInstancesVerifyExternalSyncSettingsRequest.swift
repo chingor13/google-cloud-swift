@@ -138,8 +138,13 @@
     }
 
     public enum ExternalSyncMode: Codable, Equatable, Sendable {
+      /// Unknown external sync mode, will be defaulted to ONLINE mode
       case unspecified
+      /// Online external sync will set up replication after initial data external
+      /// sync
       case online
+      /// Offline external sync only dumps and loads a one-time snapshot of
+      /// the primary instance's data
       case offline
       /// Encodes an unknown integer value.
       ///
@@ -241,8 +246,11 @@
     /// MigrationType determines whether the migration is a physical file-based
     /// migration or a logical dump file-based migration.
     public enum MigrationType: Codable, Equatable, Sendable {
+      /// Default value is a logical dump file-based migration
       case unspecified
+      /// Logical dump file-based migration
       case logical
+      /// Physical file-based migration
       case physical
       /// Encodes an unknown integer value.
       ///

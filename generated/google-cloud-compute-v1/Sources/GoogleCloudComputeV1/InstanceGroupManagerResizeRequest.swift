@@ -95,11 +95,20 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerResizeRequest.state]: <doc:InstanceGroupManagerResizeRequest/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The request was created successfully and was accepted for provisioning
+      /// when the capacity becomes available.
       case accepted
+      /// The request is cancelled.
       case cancelled
+      /// Resize request is being created and may still fail creation.
       case creating
+      /// The request failed before or during provisioning. If the request fails
+      /// during provisioning, any VMs that were created during provisioning are
+      /// rolled back and removed from the MIG.
       case failed
+      /// Default value. This value should never be returned.
       case unspecified
+      /// The request succeeded.
       case succeeded
       /// Encodes an unknown integer value.
       ///

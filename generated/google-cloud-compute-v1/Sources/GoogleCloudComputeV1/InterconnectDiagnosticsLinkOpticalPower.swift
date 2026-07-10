@@ -64,10 +64,19 @@
     ///
     /// [google.cloud.compute.v1.InterconnectDiagnosticsLinkOpticalPower.state]: <doc:InterconnectDiagnosticsLinkOpticalPower/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The value has crossed above the high alarm threshold.
       case highAlarm
+      /// The value of the current optical power has crossed above the high
+      /// warning threshold.
       case highWarning
+      /// The value of the current optical power has crossed below the low alarm
+      /// threshold.
       case lowAlarm
+      /// The value of the current optical power has crossed below the low
+      /// warning threshold.
       case lowWarning
+      /// The value of the current optical power has not crossed a warning
+      /// threshold.
       case ok
       /// Encodes an unknown integer value.
       ///

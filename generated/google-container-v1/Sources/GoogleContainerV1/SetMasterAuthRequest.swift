@@ -64,9 +64,16 @@ public struct SetMasterAuthRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// Operation type: what type update to perform.
   public enum Action: Codable, Equatable, Sendable {
+    /// Operation is unknown and will error out.
     case unknown
+    /// Set the password to a user generated value.
     case setPassword
+    /// Generate a new password and set it to that.
     case generatePassword
+    /// Set the username.  If an empty username is provided, basic authentication
+    /// is disabled for the cluster.  If a non-empty username is provided, basic
+    /// authentication is enabled, with either a provided password or a generated
+    /// one.
     case setUsername
     /// Encodes an unknown integer value.
     ///

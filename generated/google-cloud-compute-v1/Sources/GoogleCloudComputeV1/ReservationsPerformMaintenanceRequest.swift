@@ -45,9 +45,16 @@
     ///
     /// [google.cloud.compute.v1.ReservationsPerformMaintenanceRequest.maintenanceScope]: <doc:ReservationsPerformMaintenanceRequest/MaintenanceScope>
     public enum MaintenanceScope: Codable, Equatable, Sendable {
+      /// Trigger maintenance for all hosts belonging to this reservation
+      /// irrespective of whether VMs are running on them or not.
       case all
+      /// Internal only
       case unspecified
+      /// Trigger maintenance only on the hosts belonging to this reservation which
+      /// have VMs running on them.
       case runningVms
+      /// Trigger maintenance only on the hosts belonging to this reservation which
+      /// do not have any VMs running on them. This is not allowed for Standard ExR
       case unusedCapacity
       /// Encodes an unknown integer value.
       ///

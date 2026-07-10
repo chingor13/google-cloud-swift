@@ -18,9 +18,13 @@ import Foundation
 
 /// The type of the long running operation.
 public enum OperationType: Codable, Equatable, Sendable {
+  /// Unspecified
   case operationtypeUnspecified
+  /// CreateFunction
   case createFunction
+  /// UpdateFunction
   case updateFunction
+  /// DeleteFunction
   case deleteFunction
   /// Encodes an unknown integer value.
   ///

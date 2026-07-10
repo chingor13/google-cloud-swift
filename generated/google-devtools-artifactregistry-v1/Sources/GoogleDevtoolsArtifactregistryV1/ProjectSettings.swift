@@ -56,11 +56,17 @@ public struct ProjectSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The possible redirection states for legacy repositories.
   public enum RedirectionState: Codable, Equatable, Sendable {
+    /// No redirection status has been set.
     case unspecified
+    /// Redirection is disabled.
     case redirectionFromGcrIoDisabled
+    /// Redirection is enabled.
     case redirectionFromGcrIoEnabled
+    /// Redirection is enabled, and has been finalized so cannot be reverted.
     case redirectionFromGcrIoFinalized
+    /// Redirection is enabled and missing images are copied from GCR
     case redirectionFromGcrIoEnabledAndCopying
+    /// Redirection is partially enabled and missing images are copied from GCR
     case redirectionFromGcrIoPartialAndCopying
     /// Encodes an unknown integer value.
     ///

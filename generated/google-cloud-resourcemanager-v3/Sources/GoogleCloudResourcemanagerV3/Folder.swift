@@ -83,8 +83,11 @@ public struct Folder: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Folder lifecycle states.
   public enum State: Codable, Equatable, Sendable {
+    /// Unspecified state.
     case unspecified
+    /// The normal and active state.
     case active
+    /// The folder has been marked for deletion by the user.
     case deleteRequested
     /// Encodes an unknown integer value.
     ///

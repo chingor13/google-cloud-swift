@@ -43,8 +43,11 @@ public struct ControlPlaneEgress: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// Mode defines the mode of control plane egress.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Default value not specified.
     case unspecified
+    /// Control plane has public IP and no restriction on egress.
     case viaControlPlane
+    /// No public IP on control plane and only internal allowlisted egress.
     case `none`
     /// Encodes an unknown integer value.
     ///

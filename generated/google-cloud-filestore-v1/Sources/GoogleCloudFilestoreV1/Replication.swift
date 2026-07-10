@@ -46,8 +46,13 @@ public struct Replication: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Replication role.
   public enum Role: Codable, Equatable, Sendable {
+    /// Role not set.
     case unspecified
+    /// The instance is the `ACTIVE` replication member, functions as
+    /// the replication source instance.
     case active
+    /// The instance is the `STANDBY` replication member, functions as
+    /// the replication destination instance.
     case standby
     /// Encodes an unknown integer value.
     ///

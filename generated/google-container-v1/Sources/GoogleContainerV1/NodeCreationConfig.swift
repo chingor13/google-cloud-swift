@@ -42,8 +42,12 @@ public struct NodeCreationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
 
   /// The mode of node creation.
   public enum Mode: Codable, Equatable, Sendable {
+    /// When no user input is provided.
     case unspecified
+    /// Kubelet registers itself.
     case viaKubelet
+    /// gcp-controller-manager automatically creates the node object after
+    /// CSR approval.
     case viaControlPlane
     /// Encodes an unknown integer value.
     ///

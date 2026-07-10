@@ -57,7 +57,9 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// MembershipType describes if the membership supports all features or only
   /// lightweight compatible ones.
   public enum MembershipType: Codable, Equatable, Sendable {
+    /// The MembershipType is not set.
     case unspecified
+    /// The membership supports only lightweight compatible features.
     case lightweight
     /// Encodes an unknown integer value.
     ///

@@ -415,8 +415,11 @@
     ///
     /// [google.cloud.compute.v1.Snapshot.architecture]: <doc:Snapshot/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -617,10 +620,15 @@
     ///
     /// [google.cloud.compute.v1.Snapshot.status]: <doc:Snapshot/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Snapshot creation is in progress.
       case creating
+      /// Snapshot is currently being deleted.
       case deleting
+      /// Snapshot creation failed.
       case failed
+      /// Snapshot has been created successfully.
       case ready
+      /// Snapshot is being uploaded.
       case uploading
       /// Encodes an unknown integer value.
       ///

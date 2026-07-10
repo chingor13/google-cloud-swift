@@ -113,7 +113,13 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeering.stackType]: <doc:NetworkPeering/StackType>
     public enum StackType: Codable, Equatable, Sendable {
+      /// This Peering will allow IPv4 traffic and routes to be
+      /// exchanged. Additionally if the matching peering is
+      /// IPV4_IPV6, IPv6 traffic and routes will be exchanged as
+      /// well.
       case ipv4Ipv6
+      /// This Peering will only allow IPv4 traffic and routes to be
+      /// exchanged, even if the matching peering is IPV4_IPV6.
       case ipv4Only
       /// Encodes an unknown integer value.
       ///
@@ -211,7 +217,10 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeering.state]: <doc:NetworkPeering/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Matching configuration exists on the peer.
       case active
+      /// There is no matching configuration on the peer, including the case when
+      /// peer does not exist.
       case inactive
       /// Encodes an unknown integer value.
       ///
@@ -309,8 +318,19 @@
     ///
     /// [google.cloud.compute.v1.NetworkPeering.updateStrategy]: <doc:NetworkPeering/UpdateStrategy>
     public enum UpdateStrategy: Codable, Equatable, Sendable {
+      /// Updates are reflected in the local peering but aren't applied to the
+      /// peering connection until a complementary change is made to the
+      /// matching peering.
+      /// To delete a peering with the consensus update strategy, both the peerings
+      /// must request the deletion of the peering before the peering can be
+      /// deleted.
       case consensus
+      /// In this mode, changes to the peering configuration can
+      /// be unilaterally altered by changing either side of the peering.
+      /// This is the default value if the field is unspecified.
       case independent
+      /// Peerings with update strategy UNSPECIFIED are created with
+      /// update strategy INDEPENDENT.
       case unspecified
       /// Encodes an unknown integer value.
       ///

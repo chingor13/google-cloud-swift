@@ -46,8 +46,11 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The type of GPU sharing strategy currently provided.
   public enum GPUSharingStrategy: Codable, Equatable, Sendable {
+    /// Default value.
     case unspecified
+    /// GPUs are time-shared between containers.
     case timeSharing
+    /// GPUs are shared between containers with NVIDIA MPS.
     case mps
     /// Encodes an unknown integer value.
     ///

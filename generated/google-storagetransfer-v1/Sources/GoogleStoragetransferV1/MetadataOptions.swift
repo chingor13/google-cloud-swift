@@ -96,8 +96,11 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Whether symlinks should be skipped or preserved during a transfer job.
   public enum Symlink: Codable, Equatable, Sendable {
+    /// Symlink behavior is unspecified.
     case unspecified
+    /// Do not preserve symlinks during a transfer job.
     case skip
+    /// Preserve symlinks during a transfer job.
     case preserve
     /// Encodes an unknown integer value.
     ///
@@ -198,8 +201,11 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling file mode attribute.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Mode behavior is unspecified.
     case unspecified
+    /// Do not preserve mode during a transfer job.
     case skip
+    /// Preserve mode during a transfer job.
     case preserve
     /// Encodes an unknown integer value.
     ///
@@ -300,8 +306,11 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling file GID attribute.
   public enum GID: Codable, Equatable, Sendable {
+    /// GID behavior is unspecified.
     case unspecified
+    /// Do not preserve GID during a transfer job.
     case skip
+    /// Preserve GID during a transfer job.
     case number
     /// Encodes an unknown integer value.
     ///
@@ -402,8 +411,11 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling file UID attribute.
   public enum UID: Codable, Equatable, Sendable {
+    /// UID behavior is unspecified.
     case unspecified
+    /// Do not preserve UID during a transfer job.
     case skip
+    /// Preserve UID during a transfer job.
     case number
     /// Encodes an unknown integer value.
     ///
@@ -504,8 +516,15 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling Cloud Storage object ACLs.
   public enum Acl: Codable, Equatable, Sendable {
+    /// ACL behavior is unspecified.
     case unspecified
+    /// Use the destination bucket's default object ACLS, if applicable.
     case destinationBucketDefault
+    /// Preserve the object's original ACLs. This requires the service account
+    /// to have `storage.objects.getIamPolicy` permission for the source object.
+    /// [Uniform bucket-level
+    /// access](https://cloud.google.com/storage/docs/uniform-bucket-level-access)
+    /// must not be enabled on either the source or destination buckets.
     case preserve
     /// Encodes an unknown integer value.
     ///
@@ -606,12 +625,22 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling Google Cloud Storage object storage class.
   public enum StorageClass: Codable, Equatable, Sendable {
+    /// Storage class behavior is unspecified.
     case unspecified
+    /// Use the destination bucket's default storage class.
     case destinationBucketDefault
+    /// Preserve the object's original storage class. This is only supported for
+    /// transfers from Google Cloud Storage buckets. REGIONAL and MULTI_REGIONAL
+    /// storage classes will be mapped to STANDARD to ensure they can be written
+    /// to the destination bucket.
     case preserve
+    /// Set the storage class to STANDARD.
     case standard
+    /// Set the storage class to NEARLINE.
     case nearline
+    /// Set the storage class to COLDLINE.
     case coldline
+    /// Set the storage class to ARCHIVE.
     case archive
     /// Encodes an unknown integer value.
     ///
@@ -732,8 +761,11 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling temporary holds for Google Cloud Storage objects.
   public enum TemporaryHold: Codable, Equatable, Sendable {
+    /// Temporary hold behavior is unspecified.
     case unspecified
+    /// Do not set a temporary hold on the destination object.
     case skip
+    /// Preserve the object's original temporary hold status.
     case preserve
     /// Encodes an unknown integer value.
     ///
@@ -834,8 +866,13 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Options for handling the KmsKey setting for Google Cloud Storage objects.
   public enum KmsKey: Codable, Equatable, Sendable {
+    /// KmsKey behavior is unspecified.
     case unspecified
+    /// Use the destination bucket's default encryption settings.
     case destinationBucketDefault
+    /// Preserve the object's original Cloud KMS customer-managed encryption key
+    /// (CMEK) if present. Objects that do not use a Cloud KMS encryption key
+    /// will be encrypted using the destination bucket's encryption settings.
     case preserve
     /// Encodes an unknown integer value.
     ///
@@ -937,8 +974,14 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Options for handling `timeCreated` metadata for Google Cloud Storage
   /// objects.
   public enum TimeCreated: Codable, Equatable, Sendable {
+    /// TimeCreated behavior is unspecified.
     case unspecified
+    /// Do not preserve the `timeCreated` metadata from the source object.
     case skip
+    /// Preserves the source object's `timeCreated` or `lastModified` metadata in
+    /// the `customTime` field in the destination object.  Note that any value
+    /// stored in the source object's `customTime` field will not be propagated
+    /// to the destination object.
     case preserveAsCustomTime
     /// Encodes an unknown integer value.
     ///

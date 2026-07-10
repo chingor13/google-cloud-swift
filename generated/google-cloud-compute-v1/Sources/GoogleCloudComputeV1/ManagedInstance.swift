@@ -109,18 +109,48 @@
     ///
     /// [google.cloud.compute.v1.ManagedInstance.currentAction]: <doc:ManagedInstance/CurrentAction>
     public enum CurrentAction: Codable, Equatable, Sendable {
+      /// The managed instance group is abandoning this instance. The instance
+      /// will be removed from the instance group and from any target pools that
+      /// are associated with this group.
       case abandoning
+      /// The managed instance group is creating this instance. If the group
+      /// fails to create this instance, it will try again until it is
+      /// successful.
       case creating
+      /// The managed instance group is attempting to create this instance
+      /// only once. If the group fails to create this instance, it does
+      /// not try again and the group's targetSize value is
+      /// decreased.
       case creatingWithoutRetries
+      /// The managed instance group is permanently deleting this instance.
       case deleting
+      /// The managed instance group has not scheduled any actions for this
+      /// instance.
       case `none`
+      /// The managed instance group is recreating this instance.
       case recreating
+      /// The managed instance group is applying configuration changes to the
+      /// instance without stopping it. For example, the group can update the
+      /// target pool list for an instance without stopping that instance.
       case refreshing
+      /// The managed instance group is restarting this instance.
       case restarting
+      /// The managed instance group is resuming this instance.
       case resuming
+      /// The managed instance group is starting this instance.
       case starting
+      /// The managed instance group is stopping this instance.
       case stopping
+      /// The managed instance group is suspending this instance.
       case suspending
+      /// The managed instance group is verifying this already created instance.
+      /// Verification happens every time the instance is (re)created or restarted
+      /// and consists of:
+      ///  1. Waiting until health check specified as part of this managed instance
+      ///     group's autohealing policy reports HEALTHY.
+      ///     Note: Applies only if autohealing policy has a health check specified
+      ///  2. Waiting for addition verification steps performed as post-instance
+      ///     creation (subject to future extensions).
       case verifying
       /// Encodes an unknown integer value.
       ///
@@ -273,16 +303,31 @@
     ///
     /// [google.cloud.compute.v1.ManagedInstance.instanceStatus]: <doc:ManagedInstance/InstanceStatus>
     public enum InstanceStatus: Codable, Equatable, Sendable {
+      /// The instance is halted and we are performing tear down tasks like network
+      /// deprogramming, releasing quota, IP, tearing down disks etc.
       case deprovisioning
+      /// For Flex Start provisioning instance is waiting for available capacity
+      /// from Dynamic Workload Scheduler (DWS).
       case pending
+      /// Resources are being allocated for the instance.
       case provisioning
+      /// The instance is in repair.
       case repairing
+      /// The instance is running.
       case running
+      /// All required resources have been allocated and the instance
+      /// is being started.
       case staging
+      /// The instance has stopped successfully.
       case stopped
+      /// The instance is currently stopping (either being deleted or killed).
       case stopping
+      /// The instance has suspended.
       case suspended
+      /// The instance is suspending.
       case suspending
+      /// The instance has stopped (either by explicit action or underlying
+      /// failure).
       case terminated
       /// Encodes an unknown integer value.
       ///

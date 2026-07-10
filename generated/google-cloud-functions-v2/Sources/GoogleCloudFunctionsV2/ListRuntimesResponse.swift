@@ -96,12 +96,19 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// The various stages that a runtime can be in.
   public enum RuntimeStage: Codable, Equatable, Sendable {
+    /// Not specified.
     case unspecified
+    /// The runtime is in development.
     case development
+    /// The runtime is in the Alpha stage.
     case alpha
+    /// The runtime is in the Beta stage.
     case beta
+    /// The runtime is generally available.
     case ga
+    /// The runtime is deprecated.
     case deprecated
+    /// The runtime is no longer supported.
     case decommissioned
     /// Encodes an unknown integer value.
     ///

@@ -117,8 +117,11 @@
     ///
     /// [google.cloud.compute.v1.Scheduling.instanceTerminationAction]: <doc:Scheduling/InstanceTerminationAction>
     public enum InstanceTerminationAction: Codable, Equatable, Sendable {
+      /// Delete the VM.
       case delete
+      /// Default value. This value is unused.
       case unspecified
+      /// Stop the VM without storing in-memory content. default action.
       case stop
       /// Encodes an unknown integer value.
       ///
@@ -221,7 +224,14 @@
     ///
     /// [google.cloud.compute.v1.Scheduling.onHostMaintenance]: <doc:Scheduling/OnHostMaintenance>
     public enum OnHostMaintenance: Codable, Equatable, Sendable {
+      /// *[Default]* Allows Compute Engine to automatically migrate instances
+      /// out of the way of maintenance events.
       case migrate
+      /// Tells Compute Engine to terminate and (optionally) restart the instance
+      /// away from the maintenance activity. If you would like your instance to be
+      /// restarted, set the automaticRestart flag to true. Your
+      /// instance may be restarted more than once, and it may be restarted outside
+      /// the window of maintenance events.
       case terminate
       /// Encodes an unknown integer value.
       ///
@@ -319,9 +329,14 @@
     ///
     /// [google.cloud.compute.v1.Scheduling.provisioningModel]: <doc:Scheduling/ProvisioningModel>
     public enum ProvisioningModel: Codable, Equatable, Sendable {
+      /// Instance is provisioned using the Flex Start provisioning model and
+      /// has a limited runtime.
       case flexStart
+      /// Bound to the lifecycle of the reservation in which it is provisioned.
       case reservationBound
+      /// Heavily discounted, no guaranteed runtime.
       case spot
+      /// Standard provisioning with user controlled runtime, no discounts.
       case standard
       /// Encodes an unknown integer value.
       ///

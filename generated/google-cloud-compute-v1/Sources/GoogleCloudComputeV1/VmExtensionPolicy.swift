@@ -102,8 +102,14 @@
     ///
     /// [google.cloud.compute.v1.VmExtensionPolicy.state]: <doc:VmExtensionPolicy/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The policy is active and applied to matching VMs.
+      /// Newly created VMs that match the policy will also receive the
+      /// extension policy.
       case active
+      /// The policy is in the process of being deleted. After the extension is
+      /// removed from all matching VMs, the policy will be deleted.
       case deleting
+      /// Default value. Do not use.
       case unspecified
       /// Encodes an unknown integer value.
       ///

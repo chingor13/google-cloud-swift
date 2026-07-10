@@ -48,9 +48,13 @@ public struct StateMessage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Severity of the state message.
   public enum Severity: Codable, Equatable, Sendable {
+    /// Not specified. Invalid severity.
     case unspecified
+    /// ERROR-level severity.
     case error
+    /// WARNING-level severity.
     case warning
+    /// INFO-level severity.
     case info
     /// Encodes an unknown integer value.
     ///

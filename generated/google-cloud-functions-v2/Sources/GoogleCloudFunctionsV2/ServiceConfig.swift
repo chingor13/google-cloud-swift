@@ -146,8 +146,12 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// This controls what traffic is diverted through the VPC Access Connector
   /// resource. By default PRIVATE_RANGES_ONLY will be used.
   public enum VpcConnectorEgressSettings: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Use the VPC Access Connector only for private IP space from RFC1918.
     case privateRangesOnly
+    /// Force the use of VPC Access Connector for all egress traffic from the
+    /// function.
     case allTraffic
     /// Encodes an unknown integer value.
     ///
@@ -252,9 +256,13 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If unspecified, ALLOW_ALL will be used.
   public enum IngressSettings: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Allow HTTP traffic from public and private sources.
     case allowAll
+    /// Allow HTTP traffic from only private VPC sources.
     case allowInternalOnly
+    /// Allow HTTP traffic from private VPC sources and through GCLB.
     case allowInternalAndGclb
     /// Encodes an unknown integer value.
     ///
@@ -365,8 +373,15 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Security level is only configurable for 1st Gen functions, If unspecified,
   /// SECURE_OPTIONAL will be used. 2nd Gen functions are SECURE_ALWAYS ONLY.
   public enum SecurityLevel: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Requests for a URL that match this handler that do not use HTTPS are
+    /// automatically redirected to the HTTPS URL with the same path. Query
+    /// parameters are reserved for the redirect.
     case secureAlways
+    /// Both HTTP and HTTPS requests with URLs that match the handler succeed
+    /// without redirects. The application can examine the request to determine
+    /// which protocol was used and respond accordingly.
     case secureOptional
     /// Encodes an unknown integer value.
     ///

@@ -19,9 +19,16 @@ import Foundation
 /// Classifies set of possible modifications to an object in the service
 /// configuration.
 public enum ChangeType: Codable, Equatable, Sendable {
+  /// No value was provided.
   case unspecified
+  /// The changed object exists in the 'new' service configuration, but not
+  /// in the 'old' service configuration.
   case added
+  /// The changed object exists in the 'old' service configuration, but not
+  /// in the 'new' service configuration.
   case removed
+  /// The changed object exists in both service configurations, but its value
+  /// is different.
   case modified
   /// Encodes an unknown integer value.
   ///

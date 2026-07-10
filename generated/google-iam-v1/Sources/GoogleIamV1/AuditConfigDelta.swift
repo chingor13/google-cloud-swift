@@ -60,8 +60,11 @@ public struct AuditConfigDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The type of action performed on an audit configuration in a policy.
   public enum Action: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Addition of an audit configuration.
     case add
+    /// Removal of an audit configuration.
     case remove
     /// Encodes an unknown integer value.
     ///

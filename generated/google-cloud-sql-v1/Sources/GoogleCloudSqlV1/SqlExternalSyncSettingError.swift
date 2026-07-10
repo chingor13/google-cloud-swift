@@ -55,59 +55,153 @@
       case binlogNotEnabled
       case incompatibleDatabaseVersion
       case replicaAlreadySetup
+      /// The replication user is missing privileges that are required.
       case insufficientPrivilege
+      /// Unsupported migration type.
       case unsupportedMigrationType
+      /// No pglogical extension installed on databases, applicable for postgres.
       case noPglogicalInstalled
+      /// pglogical node already exists on databases, applicable for postgres.
       case pglogicalNodeAlreadyExists
+      /// The value of parameter wal_level is not set to logical.
       case invalidWalLevel
+      /// The value of parameter shared_preload_libraries does not include
+      /// pglogical.
       case invalidSharedPreloadLibrary
+      /// The value of parameter max_replication_slots is not sufficient.
       case insufficientMaxReplicationSlots
+      /// The value of parameter max_wal_senders is not sufficient.
       case insufficientMaxWalSenders
+      /// The value of parameter max_worker_processes is not sufficient.
       case insufficientMaxWorkerProcesses
+      /// Extensions installed are either not supported or having unsupported
+      /// versions.
       case unsupportedExtensions
+      /// The value of parameter rds.logical_replication is not set to 1.
       case invalidRdsLogicalReplication
+      /// The primary instance logging setup doesn't allow EM sync.
       case invalidLoggingSetup
+      /// The primary instance database parameter setup doesn't allow EM sync.
       case invalidDbParam
+      /// The gtid_mode is not supported, applicable for MySQL.
       case unsupportedGtidMode
+      /// SQL Server Agent is not running.
       case sqlserverAgentNotRunning
+      /// The table definition is not support due to missing primary key or replica
+      /// identity, applicable for postgres. Note that this is a warning and won't
+      /// block the migration.
       case unsupportedTableDefinition
+      /// The customer has a definer that will break EM setup.
       case unsupportedDefiner
+      /// SQL Server @@SERVERNAME does not match actual host name.
       case sqlserverServernameMismatch
+      /// The primary instance has been setup and will fail the setup.
       case primaryAlreadySetup
+      /// The primary instance has unsupported binary log format.
       case unsupportedBinlogFormat
+      /// The primary instance's binary log retention setting.
       case binlogRetentionSetting
+      /// The primary instance has tables with unsupported storage engine.
       case unsupportedStorageEngine
+      /// Source has tables with limited support
+      /// eg: PostgreSQL tables without primary keys.
       case limitedSupportTables
+      /// The replica instance contains existing data.
       case existingDataInReplica
+      /// The replication user is missing privileges that are optional.
       case missingOptionalPrivileges
+      /// Additional BACKUP_ADMIN privilege is granted to the replication user
+      /// which may lock source MySQL 8 instance for DDLs during initial sync.
       case riskyBackupAdminPrivilege
+      /// The Cloud Storage bucket is missing necessary permissions.
       case insufficientGcsPermissions
+      /// The Cloud Storage bucket has an error in the file or contains invalid
+      /// file information.
       case invalidFileInfo
+      /// The source instance has unsupported database settings for migration.
       case unsupportedDatabaseSettings
+      /// The replication user is missing parallel import specific privileges.
+      /// (e.g. LOCK TABLES) for MySQL.
       case mysqlParallelImportInsufficientPrivilege
+      /// The global variable local_infile is off on external server replica.
       case localInfileOff
+      /// This code instructs customers to turn on point-in-time recovery manually
+      /// for the instance after promoting the Cloud SQL for PostgreSQL instance.
       case turnOnPitrAfterPromote
+      /// The minor version of replica database is incompatible with the source.
       case incompatibleDatabaseMinorVersion
+      /// This warning message indicates that Cloud SQL uses the maximum number of
+      /// subscriptions to migrate data from the source to the destination.
       case sourceMaxSubscriptions
+      /// Unable to verify definers on the source for MySQL.
       case unableToVerifyDefiners
+      /// If a time out occurs while the subscription counts are calculated, then
+      /// this value is set to 1. Otherwise, this value is set to 2.
       case subscriptionCalculationStatus
+      /// Count of subscriptions needed to sync source data for PostgreSQL
+      /// database.
       case pgSubscriptionCount
+      /// Final parallel level that is used to do migration.
       case pgSyncParallelLevel
+      /// The disk size of the replica instance is smaller than the data size of
+      /// the source instance.
       case insufficientDiskSize
+      /// The data size of the source instance is greater than 1 TB, the number of
+      /// cores of the replica instance is less than 8, and the memory of the
+      /// replica is less than 32 GB.
       case insufficientMachineTier
+      /// The warning message indicates the unsupported extensions will not be
+      /// migrated to the destination.
       case unsupportedExtensionsNotMigrated
+      /// The warning message indicates the pg_cron extension and settings will not
+      /// be migrated to the destination.
       case extensionsNotMigrated
+      /// The error message indicates that pg_cron flags are enabled on the
+      /// destination which is not supported during the migration.
       case pgCronFlagEnabledInReplica
+      /// This error message indicates that the specified extensions are not
+      /// enabled on destination instance. For example, before you can migrate
+      /// data to the destination instance, you must enable the PGAudit extension
+      /// on the instance.
       case extensionsNotEnabledInReplica
+      /// The source database has generated columns that can't be migrated. Please
+      /// change them to regular columns before migration.
       case unsupportedColumns
+      /// The source database has users that aren't created in the replica.
+      /// First, create all users, which are in the pg_user_mappings table
+      /// of the source database, in the destination instance. Then, perform the
+      /// migration.
       case usersNotCreatedInReplica
+      /// The selected objects include system objects that aren't supported for
+      /// migration.
       case unsupportedSystemObjects
+      /// The source database has tables with the FULL or NOTHING replica identity.
+      /// Before starting your migration, either remove the identity or change it
+      /// to DEFAULT. Note that this is an error and will block the migration.
       case unsupportedTablesWithReplicaIdentity
+      /// The selected objects don't exist on the source instance.
       case selectedObjectsNotExistOnSource
+      /// PSC only destination instance does not have a network attachment URI.
       case pscOnlyInstanceWithNoNetworkAttachmentUri
+      /// Selected objects reference unselected objects. Based on their object type
+      /// (foreign key constraint or view), selected objects will fail during
+      /// migration.
       case selectedObjectsReferenceUnselectedObjects
+      /// The migration will delete existing data in the replica; set
+      /// [replica_overwrite_enabled][google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.replica_overwrite_enabled]
+      /// in the request to acknowledge this. This is an error. MySQL only.
+      ///
+      /// [google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.replica_overwrite_enabled]: <doc:SqlInstancesStartExternalSyncRequest/replicaOverwriteEnabled>
       case promptDeleteExisting
+      /// The migration will delete existing data in the replica;
+      /// [replica_overwrite_enabled][google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.replica_overwrite_enabled]
+      /// was set in the request acknowledging this. This is a warning rather than
+      /// an error. MySQL only.
+      ///
+      /// [google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.replica_overwrite_enabled]: <doc:SqlInstancesStartExternalSyncRequest/replicaOverwriteEnabled>
       case willDeleteExisting
+      /// The replication user is missing specific privileges to setup DDL
+      /// replication. (e.g. CREATE EVENT TRIGGER, CREATE SCHEMA) for PostgreSQL.
       case pgDdlReplicationInsufficientPrivilege
       /// Encodes an unknown integer value.
       ///

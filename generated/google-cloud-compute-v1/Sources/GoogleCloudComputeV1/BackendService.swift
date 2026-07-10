@@ -764,7 +764,11 @@
     ///
     /// [google.cloud.compute.v1.BackendService.compressionMode]: <doc:BackendService/CompressionMode>
     public enum CompressionMode: Codable, Equatable, Sendable {
+      /// Automatically uses the best compression based on the Accept-Encoding
+      /// header sent by the client.
       case automatic
+      /// Disables compression. Existing compressed responses cached by
+      /// Cloud CDN will not be served to clients.
       case disabled
       /// Encodes an unknown integer value.
       ///
@@ -966,9 +970,21 @@
     ///
     /// [google.cloud.compute.v1.BackendService.ipAddressSelectionPolicy]: <doc:BackendService/IpAddressSelectionPolicy>
     public enum IpAddressSelectionPolicy: Codable, Equatable, Sendable {
+      /// Only send IPv4 traffic to the backends of the Backend Service
+      /// (Instance Group, Managed Instance Group, Network Endpoint Group)
+      /// regardless of traffic from the client to the proxy.
+      /// Only IPv4 health-checks are used to check the health of the backends.
+      /// This is the default setting.
       case ipv4Only
+      /// Only send IPv6 traffic to the backends of the Backend Service
+      /// (Instance Group, Managed Instance Group, Network Endpoint Group)
+      /// regardless of traffic from the client to the proxy. Only IPv6
+      /// health-checks are used to check the health of the backends.
       case ipv6Only
+      /// Unspecified IP address selection policy.
       case unspecified
+      /// Prioritize the connection to the endpoints IPv6 address
+      /// over its IPv4 address (provided there is a healthy IPv6 address).
       case preferIpv6
       /// Encodes an unknown integer value.
       ///
@@ -1076,10 +1092,20 @@
     ///
     /// [google.cloud.compute.v1.BackendService.loadBalancingScheme]: <doc:BackendService/LoadBalancingScheme>
     public enum LoadBalancingScheme: Codable, Equatable, Sendable {
+      /// Signifies that this will be used for classic Application Load Balancers,
+      /// global external proxy Network Load Balancers,
+      /// or external passthrough Network Load Balancers.
       case external
+      /// Signifies that this will be used for global external Application Load
+      /// Balancers, regional external Application Load Balancers, or regional
+      /// external proxy Network Load Balancers.
       case externalManaged
+      /// Signifies that this will be used for internal passthrough Network Load
+      /// Balancers.
       case `internal`
+      /// Signifies that this will be used for internal Application Load Balancers.
       case internalManaged
+      /// Signifies that this will be used by Traffic Director.
       case internalSelfManaged
       case invalidLoadBalancingScheme
       /// Encodes an unknown integer value.
@@ -1199,14 +1225,52 @@
     /// [google.cloud.compute.v1.BackendService.localityLbPolicy]: <doc:BackendService/LocalityLbPolicy>
     public enum LocalityLbPolicy: Codable, Equatable, Sendable {
       case invalidLbPolicy
+      /// An O(1) algorithm which selects two random healthy hosts and
+      /// picks the host which has fewer active requests.
       case leastRequest
+      /// This algorithm implements consistent hashing to backends. Maglev can be
+      /// used as a drop in replacement for the ring hash load balancer. Maglev is
+      /// not as stable as ring hash but has faster table lookup build times and
+      /// host selection times. For more information about Maglev, seeMaglev:
+      /// A Fast and Reliable Software Network Load Balancer.
       case maglev
+      /// Backend host is selected based on the client connection metadata, i.e.,
+      /// connections are opened to the same address as the destination address of
+      /// the incoming connection before the connection was redirected to the load
+      /// balancer.
       case originalDestination
+      /// The load balancer selects a random healthy host.
       case random
+      /// The ring/modulo hash load balancer implements consistent hashing to
+      /// backends. The algorithm has the property that the addition/removal
+      /// of a host from a set of N hosts only affects 1/N of the requests.
       case ringHash
+      /// This is a simple policy in which each healthy backend is selected
+      /// in round robin order. This is the default.
       case roundRobin
+      /// Per-instance weighted Load Balancing via health check reported weights.
+      /// In internal passthrough network load balancing, it is weighted
+      /// rendezvous hashing.
+      /// This option is only supported in internal passthrough network load
+      /// balancing.
       case weightedGcpRendezvous
+      /// Per-instance weighted Load Balancing via health check reported weights.
+      /// If set, the Backend Service must configure a non legacy HTTP-based Health
+      /// Check, and health check replies are expected to contain non-standard HTTP
+      /// response header field X-Load-Balancing-Endpoint-Weight to specify the
+      /// per-instance weights.
+      /// If set, Load Balancing is weighted based on the
+      /// per-instance weights reported in the last processed health check replies,
+      /// as long as every instance either reported a valid weight or had
+      /// UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight.
+      /// This option is only supported in Network Load Balancing.
       case weightedMaglev
+      /// Per-endpoint weighted round-robin Load Balancing using weights computed
+      /// from Backend reported Custom Metrics. If set, the Backend Service
+      /// responses are expected to contain non-standard HTTP response header field
+      /// Endpoint-Load-Metrics. The reported metrics
+      /// to use for computing the weights are specified via the
+      /// customMetrics fields.
       case weightedRoundRobin
       /// Encodes an unknown integer value.
       ///
@@ -1344,14 +1408,22 @@
     ///
     /// [google.cloud.compute.v1.BackendService.protocol]: <doc:BackendService/Protocol_>
     public enum Protocol_: Codable, Equatable, Sendable {
+      /// gRPC (available for Traffic Director).
       case grpc
+      /// HTTP2 over cleartext
       case h2C
       case http
+      /// HTTP/2 with SSL.
       case http2
       case https
+      /// TCP proxying with SSL.
       case ssl
+      /// TCP proxying or TCP pass-through.
       case tcp
+      /// UDP.
       case udp
+      /// If a Backend Service has UNSPECIFIED as its protocol, it can be used with
+      /// any L3/L4 Forwarding Rules.
       case unspecified
       /// Encodes an unknown integer value.
       ///
@@ -1484,14 +1556,40 @@
     ///
     /// [google.cloud.compute.v1.BackendService.sessionAffinity]: <doc:BackendService/SessionAffinity>
     public enum SessionAffinity: Codable, Equatable, Sendable {
+      /// 2-tuple hash on packet's source and destination IP addresses. Connections
+      /// from the same source IP address to the same destination IP address will be
+      /// served by the same backend VM while that VM remains healthy.
       case clientIp
+      /// 1-tuple hash only on packet's source IP address. Connections from the
+      /// same source IP address will be served by the same backend VM while that VM
+      /// remains healthy. This option can only be used for Internal TCP/UDP
+      /// Load Balancing.
       case clientIpNoDestination
+      /// 5-tuple hash on packet's source and destination IP addresses, IP protocol,
+      /// and source and destination ports. Connections for the same IP protocol
+      /// from the same source IP address and port to the same destination IP address
+      /// and port will be served by the same backend VM while that VM remains
+      /// healthy. This option cannot be used for HTTP(S) load balancing.
       case clientIpPortProto
+      /// 3-tuple hash on packet's source and destination IP addresses, and IP
+      /// protocol. Connections for the same IP protocol from the same source IP
+      /// address to the same destination IP address will be served by the same
+      /// backend VM while that VM remains healthy. This option cannot be used for
+      /// HTTP(S) load balancing.
       case clientIpProto
+      /// Hash based on a cookie generated by the L7 loadbalancer.
+      /// Only valid for HTTP(S) load balancing.
       case generatedCookie
+      /// The hash is based on a user specified header field.
       case headerField
+      /// The hash is based on a user provided cookie.
       case httpCookie
+      /// No session affinity. Connections from the same client IP may go
+      /// to any instance in the pool.
       case `none`
+      /// Strong cookie-based affinity. Connections bearing the same cookie will be
+      /// served by the same backend VM while that VM remains healthy, as long as the
+      /// cookie has not expired.
       case strongCookieAffinity
       /// Encodes an unknown integer value.
       ///

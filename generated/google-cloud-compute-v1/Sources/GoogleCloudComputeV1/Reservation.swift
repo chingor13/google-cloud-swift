@@ -166,6 +166,7 @@
     ///
     /// [google.cloud.compute.v1.Reservation.confidentialComputeType]: <doc:Reservation/ConfidentialComputeType>
     public enum ConfidentialComputeType: Codable, Equatable, Sendable {
+      /// Intel Trust Domain Extensions.
       case tdx
       case unspecified
       /// Encodes an unknown integer value.
@@ -264,6 +265,7 @@
     ///
     /// [google.cloud.compute.v1.Reservation.deploymentType]: <doc:Reservation/DeploymentType>
     public enum DeploymentType: Codable, Equatable, Sendable {
+      /// The reserved capacity is made up of densely deployed reservation blocks.
       case dense
       case unspecified
       /// Encodes an unknown integer value.
@@ -362,8 +364,11 @@
     ///
     /// [google.cloud.compute.v1.Reservation.earlyAccessMaintenance]: <doc:Reservation/EarlyAccessMaintenance>
     public enum EarlyAccessMaintenance: Codable, Equatable, Sendable {
+      /// No early access.
       case noEarlyAccess
+      /// Wave 1: Fastest notification period
       case wave1
+      /// Wave 2: Medium notification period
       case wave2
       /// Encodes an unknown integer value.
       ///
@@ -466,8 +471,19 @@
     ///
     /// [google.cloud.compute.v1.Reservation.protectionTier]: <doc:Reservation/ProtectionTier>
     public enum ProtectionTier: Codable, Equatable, Sendable {
+      /// CAPACITY_OPTIMIZED capacity leverages redundancies (e.g. power, cooling)
+      /// at the data center during normal operating conditions. In the event of
+      /// infrastructure failures at data center (e.g. power and/or cooling
+      /// failures), this workload may be disrupted. As a consequence, it has a
+      /// weaker availability SLO than STANDARD.
       case capacityOptimized
+      /// Unspecified protection tier.
       case unspecified
+      /// STANDARD protection for workload that should be protected by redundancies
+      /// (e.g. power, cooling) at the data center level. In the event of
+      /// infrastructure failures at data center (e.g. power and/or cooling
+      /// failures), this workload is expected to continue as normal using the
+      /// redundancies.
       case standard
       /// Encodes an unknown integer value.
       ///
@@ -570,8 +586,12 @@
     ///
     /// [google.cloud.compute.v1.Reservation.schedulingType]: <doc:Reservation/SchedulingType>
     public enum SchedulingType: Codable, Equatable, Sendable {
+      /// Maintenance on all reserved instances in the reservation is synchronized.
       case grouped
+      /// Unknown maintenance type.
       case groupMaintenanceTypeUnspecified
+      /// Maintenance is not synchronized for this reservation. Instead, each
+      /// instance has its own maintenance window.
       case independent
       /// Encodes an unknown integer value.
       ///
@@ -674,10 +694,15 @@
     ///
     /// [google.cloud.compute.v1.Reservation.status]: <doc:Reservation/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Reservation resources are being allocated.
       case creating
+      /// Reservation deletion is in progress.
       case deleting
       case invalid
+      /// Reservation resources have been allocated, and the reservation is ready
+      /// for use.
       case ready
+      /// Reservation update is in progress.
       case updating
       /// Encodes an unknown integer value.
       ///

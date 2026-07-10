@@ -48,7 +48,11 @@
     ///
     /// [google.cloud.compute.v1.ReservationAdvancedDeploymentControl.reservationOperationalMode]: <doc:ReservationAdvancedDeploymentControl/ReservationOperationalMode>
     public enum ReservationOperationalMode: Codable, Equatable, Sendable {
+      /// Google Cloud does not manage the failure of machines, but provides
+      /// additional capacity, which is not guaranteed to be available.
       case allCapacity
+      /// Google Cloud manages the failure of machines to provide high
+      /// availability.
       case highlyAvailableCapacity
       case unspecified
       /// Encodes an unknown integer value.

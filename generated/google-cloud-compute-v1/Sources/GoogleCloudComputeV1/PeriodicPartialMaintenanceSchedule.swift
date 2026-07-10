@@ -61,10 +61,18 @@
     ///
     /// [google.cloud.compute.v1.PeriodicPartialMaintenanceSchedule.subType]: <doc:PeriodicPartialMaintenanceSchedule/SubType>
     public enum SubType: Codable, Equatable, Sendable {
+      /// Default value.
       case maintenanceSubtypeUnspecified
+      /// A dedicated window for customers to perform their own maintenance. This
+      /// often runs concurrently with a DISRUPTIVE_UPGRADE.
       case maintenanceTypeCustomerMaintenance
+      /// For disruptive updates, including host machine kernel or firmware
+      /// upgrades.
       case maintenanceTypeDisruptiveUpgrade
+      /// A post-maintenance window for customers to conduct final testing and
+      /// performance validation before resuming full business operations.
       case maintenanceTypeStable
+      /// For preliminary, non-disruptive tasks such as key rotations.
       case maintenanceTypeTransition
       /// Encodes an unknown integer value.
       ///
@@ -177,7 +185,9 @@
     ///
     /// [google.cloud.compute.v1.PeriodicPartialMaintenanceSchedule.type]: <doc:PeriodicPartialMaintenanceSchedule/Type_>
     public enum Type_: Codable, Equatable, Sendable {
+      /// Default value.
       case maintenanceTypeUnspecified
+      /// The zone is in a private maintenance window.
       case privateZoneMaintenance
       /// Encodes an unknown integer value.
       ///

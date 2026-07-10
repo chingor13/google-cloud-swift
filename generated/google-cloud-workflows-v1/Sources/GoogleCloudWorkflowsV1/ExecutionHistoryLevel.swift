@@ -18,8 +18,11 @@ import Foundation
 
 /// Define possible options for enabling the execution history level.
 public enum ExecutionHistoryLevel: Codable, Equatable, Sendable {
+  /// The default/unset value.
   case unspecified
+  /// Enable execution history basic feature.
   case executionHistoryBasic
+  /// Enable execution history detailed feature.
   case executionHistoryDetailed
   /// Encodes an unknown integer value.
   ///

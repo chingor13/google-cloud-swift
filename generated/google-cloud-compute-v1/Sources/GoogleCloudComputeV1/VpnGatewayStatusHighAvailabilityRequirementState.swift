@@ -54,7 +54,15 @@
     ///
     /// [google.cloud.compute.v1.VpnGatewayStatusHighAvailabilityRequirementState.state]: <doc:VpnGatewayStatusHighAvailabilityRequirementState/State>
     public enum State: Codable, Equatable, Sendable {
+      /// VPN tunnels are configured with adequate redundancy from Cloud VPN
+      /// gateway to the peer VPN gateway. For both GCP-to-non-GCP and GCP-to-GCP
+      /// connections, the adequate redundancy is a pre-requirement for users to
+      /// get 99.99% availability on GCP side; please note that for any
+      /// connection, end-to-end 99.99% availability is subject to proper
+      /// configuration on the peer VPN gateway.
       case connectionRedundancyMet
+      /// VPN tunnels are not configured with adequate redundancy from the Cloud
+      /// VPN gateway to the peer gateway
       case connectionRedundancyNotMet
       /// Encodes an unknown integer value.
       ///

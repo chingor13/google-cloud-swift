@@ -335,13 +335,29 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileNetworkFeatures.addressPurposes]: <doc:NetworkProfileNetworkFeatures/AddressPurposes>
     public enum AddressPurposes: Codable, Equatable, Sendable {
+      /// DNS resolver address in the subnetwork.
       case dnsResolver
+      /// VM internal/alias IP, Internal LB service IP, etc.
       case gceEndpoint
+      /// A regional internal IP address range reserved for the VLAN attachment
+      /// that is used in HA VPN over Cloud Interconnect. This regional
+      /// internal IP address range must not overlap with any IP address range
+      /// of subnet/route in the VPC network and its peering networks. After the
+      /// VLAN attachment is created with the reserved IP address range, when
+      /// creating a new VPN gateway, its interface IP address is allocated
+      /// from the associated VLAN attachment’s IP address range.
       case ipsecInterconnect
+      /// External IP automatically reserved for Cloud NAT.
       case natAuto
+      /// A private network IP address that can be used to configure Private
+      /// Service Connect. This purpose can be specified only forGLOBAL addresses of Type INTERNAL
       case privateServiceConnect
+      /// A regional internal IP address range reserved for Serverless.
       case serverless
+      /// A private network IP address that can be shared by multiple Internal
+      /// Load Balancer forwarding rules.
       case sharedLoadbalancerVip
+      /// IP range for peer networks.
       case vpcPeering
       /// Encodes an unknown integer value.
       ///
@@ -3219,11 +3235,17 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileNetworkFeatures.interfaceTypes]: <doc:NetworkProfileNetworkFeatures/InterfaceTypes>
     public enum InterfaceTypes: Codable, Equatable, Sendable {
+      /// GVNIC
       case gvnic
+      /// IDPF
       case idpf
+      /// IRDMA
       case irdma
+      /// MRDMA
       case mrdma
+      /// No type specified.
       case unspecifiedNicType
+      /// VIRTIO
       case virtioNet
       /// Encodes an unknown integer value.
       ///
@@ -3641,13 +3663,24 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileNetworkFeatures.subnetworkPurposes]: <doc:NetworkProfileNetworkFeatures/SubnetworkPurposes>
     public enum SubnetworkPurposes: Codable, Equatable, Sendable {
+      /// Subnet reserved for Global Envoy-based Load Balancing.
       case globalManagedProxy
+      /// Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy
+      /// purpose, please use REGIONAL_MANAGED_PROXY instead.
       case internalHttpsLoadBalancer
+      /// Subnetwork will be used for Migration from one peered VPC to another.
+      /// (a transient state of subnetwork
+      /// while migrating resources from one project to another).
       case peerMigration
+      /// Regular user created or automatically created subnet.
       case `private`
+      /// Subnetwork used as source range for Private NAT Gateways.
       case privateNat
+      /// Regular user created or automatically created subnet.
       case privateRfc1918
+      /// Subnetworks created for Private Service Connect in the producer network.
       case privateServiceConnect
+      /// Subnetwork used for Regional Envoy-based Load Balancing.
       case regionalManagedProxy
       /// Encodes an unknown integer value.
       ///
@@ -3775,8 +3808,11 @@
     ///
     /// [google.cloud.compute.v1.NetworkProfileNetworkFeatures.subnetworkStackTypes]: <doc:NetworkProfileNetworkFeatures/SubnetworkStackTypes>
     public enum SubnetworkStackTypes: Codable, Equatable, Sendable {
+      /// New VMs in this subnet can have both IPv4 and IPv6 addresses.
       case ipv4Ipv6
+      /// New VMs in this subnet will only be assigned IPv4 addresses.
       case ipv4Only
+      /// New VMs in this subnet will only  be assigned IPv6 addresses.
       case ipv6Only
       /// Encodes an unknown integer value.
       ///

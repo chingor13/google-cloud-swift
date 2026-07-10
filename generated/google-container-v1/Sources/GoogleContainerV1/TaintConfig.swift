@@ -43,8 +43,11 @@ public struct TaintConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Controls architecture tainting behavior for a node pool.
   /// New values may be added in the future.
   public enum ArchitectureTaintBehavior: Codable, Equatable, Sendable {
+    /// Specifies that the behavior is unspecified, defaults to ARM.
     case unspecified
+    /// Disables default architecture taints on the node pool.
     case `none`
+    /// Taints all the nodes in the node pool with the default ARM taint.
     case arm
     /// Encodes an unknown integer value.
     ///

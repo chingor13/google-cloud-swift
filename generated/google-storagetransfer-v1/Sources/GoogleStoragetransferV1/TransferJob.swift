@@ -143,9 +143,16 @@ public struct TransferJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The status of the transfer job.
   public enum Status: Codable, Equatable, Sendable {
+    /// Zero is an illegal value.
     case unspecified
+    /// New transfers are performed based on the schedule.
     case enabled
+    /// New transfers are not scheduled.
     case disabled
+    /// This is a soft delete state. After a transfer job is set to this
+    /// state, the job and all the transfer executions are subject to
+    /// garbage collection. Transfer jobs become eligible for garbage collection
+    /// 30 days after their status is set to `DELETED`.
     case deleted
     /// Encodes an unknown integer value.
     ///

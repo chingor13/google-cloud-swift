@@ -43,8 +43,13 @@ public struct PodAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible types of Horizontal Pod Autoscaling profile.
   public enum HPAProfile: Codable, Equatable, Sendable {
+    /// HPA_PROFILE_UNSPECIFIED is used when no custom HPA profile is set.
     case unspecified
+    /// Customers explicitly opt-out of HPA profiles.
     case `none`
+    /// PERFORMANCE is used when customers opt-in to the performance HPA profile.
+    /// In this profile we support a higher number of HPAs per cluster and faster
+    /// metrics collection for workload autoscaling.
     case performance
     /// Encodes an unknown integer value.
     ///

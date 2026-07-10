@@ -51,14 +51,27 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Code for each condition
   public enum Code: Codable, Equatable, Sendable {
+    /// UNKNOWN indicates a generic condition.
     case unknown
+    /// GCE_STOCKOUT indicates that Google Compute Engine resources are
+    /// temporarily unavailable.
     case gceStockout
+    /// GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot
+    /// service account.
     case gkeServiceAccountDeleted
+    /// Google Compute Engine quota was exceeded.
     case gceQuotaExceeded
+    /// Cluster state was manually changed by an SRE due to a system logic error.
     case setByOperator
+    /// Unable to perform an encrypt operation against the CloudKMS key used for
+    /// etcd level encryption.
     case cloudKmsKeyError
+    /// Cluster CA is expiring soon.
     case caExpiring
+    /// Node service account is missing permissions.
     case nodeServiceAccountMissingPermissions
+    /// Cloud KMS key version used for etcd level encryption has been destroyed.
+    /// This is a permanent error.
     case cloudKmsKeyDestroyed
     /// Encodes an unknown integer value.
     ///

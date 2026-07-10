@@ -69,7 +69,10 @@
 
     /// The complexity choices of the password.
     public enum Complexity: Codable, Equatable, Sendable {
+      /// Complexity check is not specified.
       case unspecified
+      /// A combination of lowercase, uppercase, numeric, and non-alphanumeric
+      /// characters.
       case `default`
       /// Encodes an unknown integer value.
       ///

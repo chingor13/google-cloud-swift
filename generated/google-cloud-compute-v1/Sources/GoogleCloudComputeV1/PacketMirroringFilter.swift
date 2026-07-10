@@ -81,8 +81,11 @@
     ///
     /// [google.cloud.compute.v1.PacketMirroringFilter.direction]: <doc:PacketMirroringFilter/Direction>
     public enum Direction: Codable, Equatable, Sendable {
+      /// Default, both directions are mirrored.
       case both
+      /// Only egress traffic is mirrored.
       case egress
+      /// Only ingress traffic is mirrored.
       case ingress
       /// Encodes an unknown integer value.
       ///

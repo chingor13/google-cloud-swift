@@ -73,7 +73,9 @@
     ///
     /// [google.cloud.compute.v1.SchedulingNodeAffinity.operator]: <doc:SchedulingNodeAffinity/Operator>
     public enum Operator: Codable, Equatable, Sendable {
+      /// Requires Compute Engine to seek for matched nodes.
       case `in`
+      /// Requires Compute Engine to avoid certain nodes.
       case notIn
       case unspecified
       /// Encodes an unknown integer value.

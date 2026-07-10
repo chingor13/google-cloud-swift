@@ -74,12 +74,33 @@
     ///
     /// [google.cloud.compute.v1.DiskInstantiationConfig.instantiateFrom]: <doc:DiskInstantiationConfig/InstantiateFrom>
     public enum InstantiateFrom: Codable, Equatable, Sendable {
+      /// Attach the existing disk in read-only mode. The request will fail if the
+      /// disk was attached in read-write mode on the source instance. Applicable
+      /// to: read-only disks.
       case attachReadOnly
+      /// Create a blank disk. The disk will be created unformatted. Applicable to:
+      /// additional read-write disks, local SSDs.
       case blank
+      /// Use the custom image specified in the custom_image field. Applicable to:
+      /// boot disk, additional read-write disks.
       case customImage
+      /// Use the default instantiation option for the corresponding type of disk.
+      /// For boot disk and any other R/W disks, new custom images will be created
+      /// from each disk. For read-only disks, they will be attached in read-only
+      /// mode. Local SSD disks will be created as blank volumes.
       case `default`
+      /// Do not include the disk in the instance template. Applicable to:
+      /// additional read-write disks, local SSDs, read-only disks.
       case doNotInclude
+      /// Use the same source image used for creation of the source instance's
+      /// corresponding disk. The request will fail if the source VM's disk was
+      /// created from a snapshot. Applicable to: boot disk, additional read-write
+      /// disks.
       case sourceImage
+      /// Use the same source image family used for creation of the source
+      /// instance's corresponding disk. The request will fail if the source image
+      /// of the source disk does not belong to any image family. Applicable to:
+      /// boot disk, additional read-write disks.
       case sourceImageFamily
       /// Encodes an unknown integer value.
       ///

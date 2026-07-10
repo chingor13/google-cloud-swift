@@ -110,9 +110,18 @@
     ///
     /// [google.cloud.compute.v1.AutoscalingPolicy.mode]: <doc:AutoscalingPolicy/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// Do not automatically scale the MIG in or out.
+      /// The recommended_size field contains the size of MIG that would be set if
+      /// the actuation mode was enabled.
       case off
+      /// Automatically scale the MIG in and out according to the policy.
       case on
+      /// Automatically create VMs according to the policy, but do not scale
+      /// the MIG in.
       case onlyScaleOut
+      /// Automatically create VMs according to the policy, but do not scale
+      /// the MIG in.
+      /// It's recommended to use ONLY_SCALE_OUT instead of ONLY_UP.
       case onlyUp
       /// Encodes an unknown integer value.
       ///

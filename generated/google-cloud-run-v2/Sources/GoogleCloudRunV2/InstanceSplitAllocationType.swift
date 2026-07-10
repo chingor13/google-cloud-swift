@@ -18,8 +18,11 @@ import Foundation
 
 /// The type of instance split allocation.
 public enum InstanceSplitAllocationType: Codable, Equatable, Sendable {
+  /// Unspecified instance allocation type.
   case unspecified
+  /// Allocates instances to the Service's latest ready Revision.
   case latest
+  /// Allocates instances to a Revision by name.
   case revision
   /// Encodes an unknown integer value.
   ///

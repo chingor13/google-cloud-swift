@@ -43,9 +43,13 @@ public struct GPUDriverInstallationConfig: Codable, Equatable, GoogleCloudWkt._A
 
   /// The GPU driver version to install.
   public enum GPUDriverVersion: Codable, Equatable, Sendable {
+    /// Default value is to not install any GPU driver.
     case unspecified
+    /// Disable GPU driver auto installation and needs manual installation
     case installationDisabled
+    /// "Default" GPU driver in COS and Ubuntu.
     case `default`
+    /// "Latest" GPU driver in COS.
     case latest
     /// Encodes an unknown integer value.
     ///

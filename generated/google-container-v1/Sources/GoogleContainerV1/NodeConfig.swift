@@ -314,8 +314,18 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// LocalSsdEncryptionMode specifies the method used for encrypting the Local
   /// SSDs attached to the node.
   public enum LocalSsdEncryptionMode: Codable, Equatable, Sendable {
+    /// The given node will be encrypted using keys managed by Google
+    /// infrastructure and the keys will be deleted when the node is
+    /// deleted.
     case unspecified
+    /// The given node will be encrypted using keys managed by Google
+    /// infrastructure and the keys will be deleted when the node is
+    /// deleted.
     case standardEncryption
+    /// The given node will opt-in for using ephemeral key for
+    /// encryption of Local SSDs.
+    /// The Local SSDs will not be able to recover data in case of node
+    /// crash.
     case ephemeralKeyEncryption
     /// Encodes an unknown integer value.
     ///
@@ -416,8 +426,14 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible effective cgroup modes for the node.
   public enum EffectiveCgroupMode: Codable, Equatable, Sendable {
+    /// EFFECTIVE_CGROUP_MODE_UNSPECIFIED means the cgroup configuration for the
+    /// node pool is unspecified, i.e. the node pool is a Windows node pool.
     case unspecified
+    /// CGROUP_MODE_V1 means the node pool is configured to use cgroupv1 for the
+    /// cgroup configuration.
     case v1
+    /// CGROUP_MODE_V2 means the node pool is configured to use cgroupv2 for the
+    /// cgroup configuration.
     case v2
     /// Encodes an unknown integer value.
     ///

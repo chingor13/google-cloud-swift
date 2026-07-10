@@ -63,7 +63,9 @@
     ///
     /// [google.cloud.compute.v1.InterconnectDiagnostics.bundleAggregationType]: <doc:InterconnectDiagnostics/BundleAggregationType>
     public enum BundleAggregationType: Codable, Equatable, Sendable {
+      /// LACP is enabled.
       case lacp
+      /// LACP is disabled.
       case `static`
       /// Encodes an unknown integer value.
       ///
@@ -161,7 +163,15 @@
     ///
     /// [google.cloud.compute.v1.InterconnectDiagnostics.bundleOperationalStatus]: <doc:InterconnectDiagnostics/BundleOperationalStatus>
     public enum BundleOperationalStatus: Codable, Equatable, Sendable {
+      /// If bundleAggregationType is LACP: LACP is not established and/or all
+      /// links in the bundle have DOWN operational status. If
+      /// bundleAggregationType is STATIC: one or more links in the bundle has
+      /// DOWN operational status.
       case down
+      /// If bundleAggregationType is LACP: LACP is established and at least one
+      /// link in the bundle has UP operational status. If bundleAggregationType
+      /// is STATIC: all links in the bundle (typically just one) have UP
+      /// operational status.
       case up
       /// Encodes an unknown integer value.
       ///

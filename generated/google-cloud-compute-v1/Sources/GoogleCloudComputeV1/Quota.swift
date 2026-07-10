@@ -89,6 +89,7 @@
       case committedT2ACpus
       case committedT2DCpus
       case committedZ3Cpus
+      /// Guest CPUs
       case cpus
       case cpusAllRegions
       case disksTotalGb
@@ -194,6 +195,7 @@
       case securityPolicyRules
       case securityPolicyRulesPerRegion
       case serviceAttachments
+      /// The total number of snapshots allowed for a single project.
       case snapshots
       case ssdTotalGb
       case sslCertificates

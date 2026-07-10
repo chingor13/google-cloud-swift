@@ -49,8 +49,11 @@
     ///
     /// [google.cloud.compute.v1.SnapshotSettingsAccessLocation.policy]: <doc:SnapshotSettingsAccessLocation/Policy>
     public enum Policy: Codable, Equatable, Sendable {
+      /// Any regions will be able to access the source location.
       case allRegions
       case unspecified
+      /// Only allowlisted regions will be able to restore region scoped
+      /// snapshots
       case specificRegions
       /// Encodes an unknown integer value.
       ///

@@ -50,16 +50,31 @@
     ///
     /// [google.cloud.compute.v1.InstanceWithNamedPorts.status]: <doc:InstanceWithNamedPorts/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The instance is halted and we are performing tear down tasks like network
+      /// deprogramming, releasing quota, IP, tearing down disks etc.
       case deprovisioning
+      /// For Flex Start provisioning instance is waiting for available capacity
+      /// from Dynamic Workload Scheduler (DWS).
       case pending
+      /// Resources are being allocated for the instance.
       case provisioning
+      /// The instance is in repair.
       case repairing
+      /// The instance is running.
       case running
+      /// All required resources have been allocated and the instance
+      /// is being started.
       case staging
+      /// The instance has stopped successfully.
       case stopped
+      /// The instance is currently stopping (either being deleted or killed).
       case stopping
+      /// The instance has suspended.
       case suspended
+      /// The instance is suspending.
       case suspending
+      /// The instance has stopped (either by explicit action or underlying
+      /// failure).
       case terminated
       /// Encodes an unknown integer value.
       ///

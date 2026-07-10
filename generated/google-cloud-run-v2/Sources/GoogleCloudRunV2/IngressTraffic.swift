@@ -18,10 +18,15 @@ import Foundation
 
 /// Allowed ingress traffic for the Container.
 public enum IngressTraffic: Codable, Equatable, Sendable {
+  /// Unspecified
   case unspecified
+  /// All inbound traffic is allowed.
   case all
+  /// Only internal traffic is allowed.
   case internalOnly
+  /// Both internal and Google Cloud Load Balancer traffic is allowed.
   case internalLoadBalancer
+  /// No ingress traffic is allowed.
   case `none`
   /// Encodes an unknown integer value.
   ///

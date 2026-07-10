@@ -19,8 +19,12 @@ import Foundation
 /// Represents the accessibility state of a customer-managed KMS key used for
 /// CMEK integration.
 public enum KmsKeyState: Codable, Equatable, Sendable {
+  /// Unspecified.
   case unspecified
+  /// The key is available for use, and dependent resources should be accessible.
   case keyAvailable
+  /// The key is unavailable for an unspecified reason. Dependent resources may
+  /// be inaccessible.
   case keyUnavailable
   /// Encodes an unknown integer value.
   ///

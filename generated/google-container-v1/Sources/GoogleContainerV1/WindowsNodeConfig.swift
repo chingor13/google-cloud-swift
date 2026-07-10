@@ -44,8 +44,11 @@ public struct WindowsNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// Possible OS version that can be used.
   public enum OSVersion: Codable, Equatable, Sendable {
+    /// When OSVersion is not specified.
     case unspecified
+    /// LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image.
     case ltsc2019
+    /// LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image.
     case ltsc2022
     /// Encodes an unknown integer value.
     ///

@@ -278,7 +278,9 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Describes the possibled types of a state error.
     public enum Type_: Codable, Equatable, Sendable {
+      /// No type specified.
       case unspecified
+      /// Caused by an issue with KMS.
       case kmsError
       /// Encodes an unknown integer value.
       ///
@@ -385,8 +387,11 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Describes the current state of workflow deployment.
   public enum State: Codable, Equatable, Sendable {
+    /// Invalid state.
     case unspecified
+    /// The workflow has been deployed successfully and is serving.
     case active
+    /// Workflow data is unavailable. See the `state_error` field.
     case unavailable
     /// Encodes an unknown integer value.
     ///
@@ -488,9 +493,14 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Describes the level of platform logging to apply to calls and call
   /// responses during workflow executions.
   public enum CallLogLevel: Codable, Equatable, Sendable {
+    /// No call logging level specified.
     case unspecified
+    /// Log all call steps within workflows, all call returns, and all exceptions
+    /// raised.
     case logAllCalls
+    /// Log only exceptions that are raised from call steps within workflows.
     case logErrorsOnly
+    /// Explicitly log nothing.
     case logNone
     /// Encodes an unknown integer value.
     ///

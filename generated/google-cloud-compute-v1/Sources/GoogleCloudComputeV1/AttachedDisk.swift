@@ -160,8 +160,11 @@
     ///
     /// [google.cloud.compute.v1.AttachedDisk.architecture]: <doc:AttachedDisk/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -362,7 +365,11 @@
     ///
     /// [google.cloud.compute.v1.AttachedDisk.mode]: <doc:AttachedDisk/Mode>
     public enum Mode: Codable, Equatable, Sendable {
+      /// Attaches this disk in read-only mode. Multiple virtual machines can use
+      /// a disk in read-only mode at a time.
       case readOnly
+      /// *[Default]* Attaches this disk in read-write mode. Only one
+      /// virtual machine at a time can be attached to a disk in read-write mode.
       case readWrite
       /// Encodes an unknown integer value.
       ///
@@ -460,7 +467,9 @@
     ///
     /// [google.cloud.compute.v1.AttachedDisk.savedState]: <doc:AttachedDisk/SavedState>
     public enum SavedState: Codable, Equatable, Sendable {
+      /// *[Default]* Disk state has not been preserved.
       case diskSavedStateUnspecified
+      /// Disk state has been preserved.
       case preserved
       /// Encodes an unknown integer value.
       ///

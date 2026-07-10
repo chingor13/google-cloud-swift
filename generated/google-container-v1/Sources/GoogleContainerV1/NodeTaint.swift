@@ -53,9 +53,13 @@ public struct NodeTaint: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible values for Effect in taint.
   public enum Effect: Codable, Equatable, Sendable {
+    /// Not set
     case unspecified
+    /// NoSchedule
     case noSchedule
+    /// PreferNoSchedule
     case preferNoSchedule
+    /// NoExecute
     case noExecute
     /// Encodes an unknown integer value.
     ///

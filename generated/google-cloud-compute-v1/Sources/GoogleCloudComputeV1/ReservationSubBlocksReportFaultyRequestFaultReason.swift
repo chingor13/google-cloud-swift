@@ -50,9 +50,13 @@
     /// [google.cloud.compute.v1.ReservationSubBlocksReportFaultyRequestFaultReason.behavior]: <doc:ReservationSubBlocksReportFaultyRequestFaultReason/Behavior>
     public enum Behavior: Codable, Equatable, Sendable {
       case faultBehaviorUnspecified
+      /// The subBlock experienced a GPU error.
       case gpuError
+      /// The subBlock experienced performance issues.
       case performance
+      /// The subBlock experienced silent data corruption.
       case silentDataCorruption
+      /// The subBlock experienced a switch failure.
       case switchFailure
       /// Encodes an unknown integer value.
       ///

@@ -42,8 +42,11 @@ public struct DataplaneV2Config: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// Options on how to scale the cluster.
   public enum ScalabilityMode: Codable, Equatable, Sendable {
+    /// Default value.
     case unspecified
+    /// Disables the scale optimized mode for DPv2.
     case disabled
+    /// Enables the scale optimized mode for DPv2.
     case scaleOptimized
     /// Encodes an unknown integer value.
     ///

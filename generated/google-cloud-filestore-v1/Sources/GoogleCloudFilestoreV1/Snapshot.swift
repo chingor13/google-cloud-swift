@@ -72,9 +72,13 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The snapshot state.
   public enum State: Codable, Equatable, Sendable {
+    /// State not set.
     case unspecified
+    /// Snapshot is being created.
     case creating
+    /// Snapshot is available for use.
     case ready
+    /// Snapshot is being deleted.
     case deleting
     /// Encodes an unknown integer value.
     ///

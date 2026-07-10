@@ -53,10 +53,17 @@ public struct ReplicaConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The replica state.
   public enum State: Codable, Equatable, Sendable {
+    /// State not set.
     case unspecified
+    /// The replica is being created.
     case creating
+    /// The replica is ready.
     case ready
+    /// The replica is being removed.
     case removing
+    /// The replica is experiencing an issue and might be unusable. You can get
+    /// further details from the `stateReasons` field of the `ReplicaConfig`
+    /// object.
     case failed
     /// Encodes an unknown integer value.
     ///
@@ -167,8 +174,11 @@ public struct ReplicaConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Additional information about the replication state, if available.
   public enum StateReason: Codable, Equatable, Sendable {
+    /// Reason not specified.
     case unspecified
+    /// The peer instance is unreachable.
     case peerInstanceUnreachable
+    /// The remove replica peer instance operation failed.
     case removeFailed
     /// Encodes an unknown integer value.
     ///

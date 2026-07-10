@@ -62,9 +62,14 @@
 
     /// The modes of Active Directory configuration.
     public enum ActiveDirectoryMode: Codable, Equatable, Sendable {
+      /// Unspecified mode. Will default to MANAGED_ACTIVE_DIRECTORY if the mode is
+      /// not specified to maintain backward compatibility.
       case unspecified
+      /// Managed Active Directory mode.
       case managedActiveDirectory
+      /// Deprecated: Use CUSTOMER_MANAGED_ACTIVE_DIRECTORY instead.
       case selfManagedActiveDirectory
+      /// Customer-managed Active Directory mode.
       case customerManagedActiveDirectory
       /// Encodes an unknown integer value.
       ///

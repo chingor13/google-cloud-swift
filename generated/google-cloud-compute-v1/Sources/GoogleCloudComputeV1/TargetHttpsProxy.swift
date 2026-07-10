@@ -320,8 +320,12 @@
     ///
     /// [google.cloud.compute.v1.TargetHttpsProxy.quicOverride]: <doc:TargetHttpsProxy/QuicOverride>
     public enum QuicOverride: Codable, Equatable, Sendable {
+      /// The load balancer will not attempt to negotiate QUIC with clients.
       case disable
+      /// The load balancer will attempt to negotiate QUIC with clients.
       case enable
+      /// No overrides to the default QUIC policy. This option is implicit if
+      /// no QUIC override has been specified in the request.
       case `none`
       /// Encodes an unknown integer value.
       ///
@@ -424,9 +428,25 @@
     ///
     /// [google.cloud.compute.v1.TargetHttpsProxy.tlsEarlyData]: <doc:TargetHttpsProxy/TlsEarlyData>
     public enum TlsEarlyData: Codable, Equatable, Sendable {
+      /// TLS 1.3 Early Data is not advertised, and any (invalid) attempts to send
+      /// Early Data will be rejected by closing the connection.
       case disabled
+      /// This enables TLS 1.3 0-RTT, and only allows Early Data to be included on
+      /// requests with safe HTTP methods (GET, HEAD, OPTIONS, TRACE). This mode
+      /// does not enforce any other limitations for requests with Early Data. The
+      /// application owner should validate that Early Data is acceptable for a
+      /// given request path.
       case permissive
+      /// This enables TLS 1.3 0-RTT, and only allows Early Data to be included on
+      /// requests with safe HTTP methods (GET, HEAD, OPTIONS, TRACE) without query
+      /// parameters. Requests that send Early Data with non-idempotent HTTP
+      /// methods or with query parameters will be rejected with a HTTP 425.
       case strict
+      /// This enables TLS 1.3 Early Data for requests with any HTTP method
+      /// including non-idempotent methods list POST. This mode does not enforce
+      /// any other limitations. This may be valuable for gRPC use cases. However,
+      /// we do not recommend this method unless you have evaluated your security
+      /// stance and mitigated the risk of replay attacks using other mechanisms.
       case unrestricted
       /// Encodes an unknown integer value.
       ///

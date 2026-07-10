@@ -18,8 +18,11 @@ import Foundation
 
 /// Possible values for IPv6 access type
 public enum IPv6AccessType: Codable, Equatable, Sendable {
+  /// Default value, will be defaulted as type external.
   case ipv6AccessTypeUnspecified
+  /// Access type internal (all v6 addresses are internal IPs)
   case `internal`
+  /// Access type external (all v6 addresses are external IPs)
   case external
   /// Encodes an unknown integer value.
   ///

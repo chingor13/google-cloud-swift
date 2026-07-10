@@ -123,8 +123,11 @@
     ///
     /// [google.cloud.compute.v1.InterconnectGroupsCreateMembersInterconnectInput.interconnectType]: <doc:InterconnectGroupsCreateMembersInterconnectInput/InterconnectType>
     public enum InterconnectType: Codable, Equatable, Sendable {
+      /// A dedicated physical interconnection with the customer.
       case dedicated
+      /// [Deprecated] A private, physical interconnection with the customer.
       case itPrivate
+      /// A partner-managed interconnection shared between customers via partner.
       case partner
       /// Encodes an unknown integer value.
       ///
@@ -227,8 +230,12 @@
     ///
     /// [google.cloud.compute.v1.InterconnectGroupsCreateMembersInterconnectInput.linkType]: <doc:InterconnectGroupsCreateMembersInterconnectInput/LinkType>
     public enum LinkType: Codable, Equatable, Sendable {
+      /// 100G Ethernet, LR Optics.
       case ethernet100GLr
+      /// 10G Ethernet, LR Optics.
+      /// [(rate_bps) =  10000000000];
       case ethernet10GLr
+      /// 400G Ethernet, LR4 Optics.
       case ethernet400GLr4
       /// Encodes an unknown integer value.
       ///
@@ -331,8 +338,11 @@
     ///
     /// [google.cloud.compute.v1.InterconnectGroupsCreateMembersInterconnectInput.requestedFeatures]: <doc:InterconnectGroupsCreateMembersInterconnectInput/RequestedFeatures>
     public enum RequestedFeatures: Codable, Equatable, Sendable {
+      /// Cross-Site Networking
       case ifCrossSiteNetwork
+      /// L2 Interconnect Attachment Forwarding
       case ifL2Forwarding
+      /// Media Access Control security (MACsec)
       case ifMacsec
       /// Encodes an unknown integer value.
       ///

@@ -50,9 +50,13 @@ public struct AdvancedDatapathObservabilityConfig: Codable, Equatable, GoogleClo
 
   /// Supported Relay modes
   public enum RelayMode: Codable, Equatable, Sendable {
+    /// Default value. This shouldn't be used.
     case unspecified
+    /// disabled
     case disabled
+    /// exposed via internal load balancer
     case internalVpcLb
+    /// exposed via external load balancer
     case externalLb
     /// Encodes an unknown integer value.
     ///

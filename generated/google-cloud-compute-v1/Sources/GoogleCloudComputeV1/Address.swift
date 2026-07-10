@@ -279,7 +279,10 @@
     ///
     /// [google.cloud.compute.v1.Address.addressType]: <doc:Address/AddressType>
     public enum AddressType: Codable, Equatable, Sendable {
+      /// A publicly visible external IP address.
       case external
+      /// A private network IP address, for use with an Instance or Internal Load
+      /// Balancer forwarding rule.
       case `internal`
       case unspecifiedType
       /// Encodes an unknown integer value.
@@ -487,7 +490,9 @@
     ///
     /// [google.cloud.compute.v1.Address.ipv6EndpointType]: <doc:Address/Ipv6EndpointType>
     public enum Ipv6EndpointType: Codable, Equatable, Sendable {
+      /// Reserved IPv6 address can be used on network load balancer.
       case netlb
+      /// Reserved IPv6 address can be used on VM.
       case vm
       /// Encodes an unknown integer value.
       ///
@@ -585,9 +590,16 @@
     ///
     /// [google.cloud.compute.v1.Address.networkTier]: <doc:Address/NetworkTier>
     public enum NetworkTier: Codable, Equatable, Sendable {
+      /// Public internet quality with fixed bandwidth.
       case fixedStandard
+      /// High quality, Google-grade network tier, support for all networking
+      /// products.
       case premium
+      /// Public internet quality, only limited support for other networking
+      /// products.
       case standard
+      /// (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier
+      /// is expired or not configured.
       case standardOverridesFixedStandard
       /// Encodes an unknown integer value.
       ///
@@ -695,13 +707,29 @@
     ///
     /// [google.cloud.compute.v1.Address.purpose]: <doc:Address/Purpose>
     public enum Purpose: Codable, Equatable, Sendable {
+      /// DNS resolver address in the subnetwork.
       case dnsResolver
+      /// VM internal/alias IP, Internal LB service IP, etc.
       case gceEndpoint
+      /// A regional internal IP address range reserved for the VLAN attachment
+      /// that is used in HA VPN over Cloud Interconnect. This regional
+      /// internal IP address range must not overlap with any IP address range
+      /// of subnet/route in the VPC network and its peering networks. After the
+      /// VLAN attachment is created with the reserved IP address range, when
+      /// creating a new VPN gateway, its interface IP address is allocated
+      /// from the associated VLAN attachment’s IP address range.
       case ipsecInterconnect
+      /// External IP automatically reserved for Cloud NAT.
       case natAuto
+      /// A private network IP address that can be used to configure Private
+      /// Service Connect. This purpose can be specified only forGLOBAL addresses of Type INTERNAL
       case privateServiceConnect
+      /// A regional internal IP address range reserved for Serverless.
       case serverless
+      /// A private network IP address that can be shared by multiple Internal
+      /// Load Balancer forwarding rules.
       case sharedLoadbalancerVip
+      /// IP range for peer networks.
       case vpcPeering
       /// Encodes an unknown integer value.
       ///
@@ -829,8 +857,11 @@
     ///
     /// [google.cloud.compute.v1.Address.status]: <doc:Address/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Address is being used by another resource and is not available.
       case inUse
+      /// Address is reserved and available to use.
       case reserved
+      /// Address is being reserved.
       case reserving
       /// Encodes an unknown integer value.
       ///

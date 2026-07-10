@@ -43,8 +43,11 @@ public struct AutoMonitoringConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
 
   /// Scope for applications monitored by Auto-Monitoring
   public enum Scope: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// Auto-Monitoring is enabled for all supported applications.
     case all
+    /// Disable Auto-Monitoring.
     case `none`
     /// Encodes an unknown integer value.
     ///

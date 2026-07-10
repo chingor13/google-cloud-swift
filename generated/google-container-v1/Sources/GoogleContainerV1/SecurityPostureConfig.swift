@@ -46,9 +46,17 @@ public struct SecurityPostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
 
   /// Mode defines enablement mode for GKE Security posture features.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Default value not specified.
     case unspecified
+    /// Disables Security Posture features on the cluster.
     case disabled
+    /// Applies Security Posture features on the cluster.
     case basic
+    /// Deprecated: Security Posture Enterprise features are no longer supported.
+    /// For more details, see
+    /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
+    ///
+    /// Applies the Security Posture off cluster Enterprise level features.
     case enterprise
     /// Encodes an unknown integer value.
     ///
@@ -154,9 +162,18 @@ public struct SecurityPostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
 
   /// VulnerabilityMode defines enablement mode for vulnerability scanning.
   public enum VulnerabilityMode: Codable, Equatable, Sendable {
+    /// Default value not specified.
     case unspecified
+    /// Disables vulnerability scanning on the cluster.
     case vulnerabilityDisabled
+    /// Deprecated: Basic vulnerability scanning is no longer supported.
+    /// For more details, see
+    /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
+    ///
+    /// Applies basic vulnerability scanning on the cluster.
     case vulnerabilityBasic
+    /// Applies the Security Posture's vulnerability on cluster Enterprise level
+    /// features.
     case vulnerabilityEnterprise
     /// Encodes an unknown integer value.
     ///

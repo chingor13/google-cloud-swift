@@ -84,8 +84,11 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
 
   /// Mode defines enablement mode for Compliance Posture.
   public enum Mode: Codable, Equatable, Sendable {
+    /// Default value not specified.
     case unspecified
+    /// Disables Compliance Posture features on the cluster.
     case disabled
+    /// Enables Compliance Posture features on the cluster.
     case enabled
     /// Encodes an unknown integer value.
     ///

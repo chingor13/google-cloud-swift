@@ -51,8 +51,11 @@
     ///
     /// [google.cloud.compute.v1.ReservationBlockHealthInfo.healthStatus]: <doc:ReservationBlockHealthInfo/HealthStatus>
     public enum HealthStatus: Codable, Equatable, Sendable {
+      /// The reservation block is degraded.
       case degraded
+      /// The reservation block is healthy.
       case healthy
+      /// The health status of the reservation block is unspecified.
       case unspecified
       /// Encodes an unknown integer value.
       ///

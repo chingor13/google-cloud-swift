@@ -59,6 +59,7 @@
     ///
     /// [google.cloud.compute.v1.FutureResourcesSpec.deploymentType]: <doc:FutureResourcesSpec/DeploymentType>
     public enum DeploymentType: Codable, Equatable, Sendable {
+      /// The reserved capacity is made up of densely deployed reservation blocks.
       case dense
       case unspecified
       /// Encodes an unknown integer value.

@@ -51,10 +51,15 @@
     ///
     /// [google.cloud.compute.v1.SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo.state]: <doc:SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo/State>
     public enum State: Codable, Equatable, Sendable {
+      /// Operation not tracked in this location e.g. zone is marked as DOWN.
       case abandoned
+      /// Operation has completed successfully.
       case done
+      /// Operation is in an error state.
       case failed
+      /// Operation is confirmed to be in the location.
       case propagated
+      /// Operation is not yet confirmed to have been created in the location.
       case propagating
       case unspecified
       /// Encodes an unknown integer value.

@@ -242,9 +242,13 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// The resource hierarchy level of the timeseries data of a metric.
     public enum TimeSeriesResourceHierarchyLevel: Codable, Equatable, Sendable {
+      /// Do not use this default value.
       case unspecified
+      /// Scopes a metric to a project.
       case project
+      /// Scopes a metric to an organization.
       case organization
+      /// Scopes a metric to a folder.
       case folder
       /// Encodes an unknown integer value.
       ///
@@ -363,9 +367,17 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// For information on setting the start time and end time based on
   /// the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
   public enum MetricKind: Codable, Equatable, Sendable {
+    /// Do not use this default value.
     case unspecified
+    /// An instantaneous measurement of a value.
     case gauge
+    /// The change in a value during a time interval.
     case delta
+    /// A value accumulated over a time interval.  Cumulative
+    /// measurements in a time series should have the same start time
+    /// and increasing end times, until an event resets the cumulative
+    /// value to zero and sets a new start time for the following
+    /// points.
     case cumulative
     /// Encodes an unknown integer value.
     ///
@@ -471,12 +483,23 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The value type of a metric.
   public enum ValueType: Codable, Equatable, Sendable {
+    /// Do not use this default value.
     case unspecified
+    /// The value is a boolean.
+    /// This value type can be used only if the metric kind is `GAUGE`.
     case bool
+    /// The value is a signed 64-bit integer.
     case int64
+    /// The value is a double precision floating point number.
     case double
+    /// The value is a text string.
+    /// This value type can be used only if the metric kind is `GAUGE`.
     case string
+    /// The value is a [`Distribution`][google.api.Distribution].
+    ///
+    /// [google.api.Distribution]: <doc:Distribution>
     case distribution
+    /// The value is money.
     case money
     /// Encodes an unknown integer value.
     ///

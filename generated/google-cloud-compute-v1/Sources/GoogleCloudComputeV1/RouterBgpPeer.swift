@@ -264,6 +264,7 @@
     ///
     /// [google.cloud.compute.v1.RouterBgpPeer.advertisedGroups]: <doc:RouterBgpPeer/AdvertisedGroups>
     public enum AdvertisedGroups: Codable, Equatable, Sendable {
+      /// Advertise all available subnets (including peer VPC subnets).
       case allSubnets
       /// Encodes an unknown integer value.
       ///
@@ -454,7 +455,15 @@
     ///
     /// [google.cloud.compute.v1.RouterBgpPeer.managementType]: <doc:RouterBgpPeer/ManagementType>
     public enum ManagementType: Codable, Equatable, Sendable {
+      /// The BGP peer is automatically created for PARTNER type
+      /// InterconnectAttachment; Google will automatically create/delete
+      /// this BGP peer when the PARTNER InterconnectAttachment is
+      /// created/deleted, and Google will update the ipAddress and
+      /// peerIpAddress when the PARTNER InterconnectAttachment is provisioned.
+      /// This type of BGP peer cannot be created or deleted, but can be
+      /// modified for all fields except for name, ipAddress and peerIpAddress.
       case managedByAttachment
+      /// Default value, the BGP peer is manually created and managed by user.
       case managedByUser
       /// Encodes an unknown integer value.
       ///

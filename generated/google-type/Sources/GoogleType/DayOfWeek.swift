@@ -18,13 +18,21 @@ import Foundation
 
 /// Represents a day of the week.
 public enum DayOfWeek: Codable, Equatable, Sendable {
+  /// The day of the week is unspecified.
   case unspecified
+  /// Monday
   case monday
+  /// Tuesday
   case tuesday
+  /// Wednesday
   case wednesday
+  /// Thursday
   case thursday
+  /// Friday
   case friday
+  /// Saturday
   case saturday
+  /// Sunday
   case sunday
   /// Encodes an unknown integer value.
   ///

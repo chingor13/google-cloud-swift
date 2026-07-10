@@ -214,8 +214,15 @@
     ///
     /// [google.cloud.compute.v1.RouterStatusBgpPeerStatus.statusReason]: <doc:RouterStatusBgpPeerStatus/StatusReason>
     public enum StatusReason: Codable, Equatable, Sendable {
+      /// BGP peer disabled because it requires IPv4 but the underlying
+      /// connection is IPv6-only.
       case ipv4PeerOnIpv6OnlyConnection
+      /// BGP peer disabled because it requires IPv6 but the underlying
+      /// connection is IPv4-only.
       case ipv6PeerOnIpv4OnlyConnection
+      /// Indicates internal problems with configuration of MD5 authentication.
+      /// This particular reason can only be returned when md5AuthEnabled is true
+      /// and status is DOWN.
       case md5AuthInternalProblem
       case unspecified
       /// Encodes an unknown integer value.

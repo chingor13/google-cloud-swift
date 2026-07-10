@@ -194,7 +194,16 @@
     ///
     /// [google.cloud.compute.v1.NodeGroup.maintenanceInterval]: <doc:NodeGroup/MaintenanceInterval>
     public enum MaintenanceInterval: Codable, Equatable, Sendable {
+      /// VMs are eligible to receive infrastructure and hypervisor updates as they
+      /// become available.  This may result in more maintenance operations (live
+      /// migrations or terminations) for the VM than the PERIODIC andRECURRENT options.
       case asNeeded
+      /// VMs receive infrastructure and hypervisor updates on a periodic basis,
+      /// minimizing the number of maintenance operations (live migrations or
+      /// terminations) on an individual VM.  This may mean a VM will take longer
+      /// to receive an update than if it was configured forAS_NEEDED.  Security updates will still be applied as soon
+      /// as they are available. RECURRENT is used for GEN3 and Slice
+      /// of Hardware VMs.
       case recurrent
       /// Encodes an unknown integer value.
       ///
@@ -292,9 +301,20 @@
     ///
     /// [google.cloud.compute.v1.NodeGroup.maintenancePolicy]: <doc:NodeGroup/MaintenancePolicy>
     public enum MaintenancePolicy: Codable, Equatable, Sendable {
+      /// Allow the node and corresponding instances to retain default
+      /// maintenance behavior.
       case `default`
       case unspecified
+      /// When maintenance must be done on a node, the instances on that node will
+      /// be moved to other nodes in the group.
+      /// Instances with onHostMaintenance = MIGRATE will live migrate to their
+      /// destinations while instances with onHostMaintenance = TERMINATE will
+      /// terminate and then restart on their destination nodes if
+      /// automaticRestart = true.
       case migrateWithinNodeGroup
+      /// Instances in this group will restart on the same node when maintenance
+      /// has completed. Instances must have onHostMaintenance = TERMINATE, and
+      /// they will only restart if automaticRestart = true.
       case restartInPlace
       /// Encodes an unknown integer value.
       ///

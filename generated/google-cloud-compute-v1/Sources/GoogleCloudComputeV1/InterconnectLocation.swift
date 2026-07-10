@@ -144,8 +144,11 @@
     ///
     /// [google.cloud.compute.v1.InterconnectLocation.availableFeatures]: <doc:InterconnectLocation/AvailableFeatures>
     public enum AvailableFeatures: Codable, Equatable, Sendable {
+      /// Cross-Site Networking
       case ifCrossSiteNetwork
+      /// L2 Interconnect Attachment Forwarding
       case ifL2Forwarding
+      /// Media Access Control security (MACsec)
       case ifMacsec
       /// Encodes an unknown integer value.
       ///
@@ -248,8 +251,12 @@
     ///
     /// [google.cloud.compute.v1.InterconnectLocation.availableLinkTypes]: <doc:InterconnectLocation/AvailableLinkTypes>
     public enum AvailableLinkTypes: Codable, Equatable, Sendable {
+      /// 100G Ethernet, LR Optics.
       case linkTypeEthernet100GLr
+      /// 10G Ethernet, LR Optics.
+      /// [(rate_bps) =  10000000000];
       case linkTypeEthernet10GLr
+      /// 400G Ethernet, LR4 Optics.
       case linkTypeEthernet400GLr4
       /// Encodes an unknown integer value.
       ///
@@ -498,7 +505,9 @@
     ///
     /// [google.cloud.compute.v1.InterconnectLocation.status]: <doc:InterconnectLocation/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The InterconnectLocation is available for provisioning new Interconnects.
       case available
+      /// The InterconnectLocation is closed for provisioning new Interconnects.
       case closed
       /// Encodes an unknown integer value.
       ///

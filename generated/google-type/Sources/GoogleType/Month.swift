@@ -18,18 +18,31 @@ import Foundation
 
 /// Represents a month in the Gregorian calendar.
 public enum Month: Codable, Equatable, Sendable {
+  /// The unspecified month.
   case unspecified
+  /// The month of January.
   case january
+  /// The month of February.
   case february
+  /// The month of March.
   case march
+  /// The month of April.
   case april
+  /// The month of May.
   case may
+  /// The month of June.
   case june
+  /// The month of July.
   case july
+  /// The month of August.
   case august
+  /// The month of September.
   case september
+  /// The month of October.
   case october
+  /// The month of November.
   case november
+  /// The month of December.
   case december
   /// Encodes an unknown integer value.
   ///

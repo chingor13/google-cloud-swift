@@ -85,8 +85,12 @@
 
     public enum RescheduleType: Codable, Equatable, Sendable {
       case unspecified
+      /// Reschedules maintenance to happen now (within 5 minutes).
       case immediate
+      /// Reschedules maintenance to occur within one week from the originally
+      /// scheduled day and time.
       case nextAvailableWindow
+      /// Reschedules maintenance to a specific time and day.
       case specificTime
       /// Encodes an unknown integer value.
       ///

@@ -85,8 +85,11 @@
     ///
     /// [google.cloud.compute.v1.RolloutPlan.locationScope]: <doc:RolloutPlan/LocationScope>
     public enum LocationScope: Codable, Equatable, Sendable {
+      /// Unspecified value. Considered as ZONAL.
       case unspecified
+      /// Regional scope.
       case regional
+      /// Zonal scope.
       case zonal
       /// Encodes an unknown integer value.
       ///

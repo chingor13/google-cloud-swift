@@ -106,11 +106,19 @@ public struct Backup: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The backup state.
   public enum State: Codable, Equatable, Sendable {
+    /// State not set.
     case unspecified
+    /// Backup is being created.
     case creating
+    /// Backup has been taken and the operation is being finalized. At this
+    /// point, changes to the file share will not be reflected in the backup.
     case finalizing
+    /// Backup is available for use.
     case ready
+    /// Backup is being deleted.
     case deleting
+    /// Backup is not valid and cannot be used for creating new instances or
+    /// restoring existing instances.
     case invalid
     /// Encodes an unknown integer value.
     ///

@@ -550,8 +550,11 @@
     ///
     /// [google.cloud.compute.v1.Image.architecture]: <doc:Image/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///
@@ -746,9 +749,13 @@
     ///
     /// [google.cloud.compute.v1.Image.status]: <doc:Image/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Image is deleting.
       case deleting
+      /// Image creation failed due to an error.
       case failed
+      /// Image hasn't been created as yet.
       case pending
+      /// Image has been successfully created.
       case ready
       /// Encodes an unknown integer value.
       ///

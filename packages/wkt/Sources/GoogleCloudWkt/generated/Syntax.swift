@@ -18,8 +18,11 @@ import Foundation
 
 /// The syntax in which a protocol buffer element is defined.
 public enum Syntax: Codable, Equatable, Sendable {
+  /// Syntax `proto2`.
   case proto2
+  /// Syntax `proto3`.
   case proto3
+  /// Syntax `editions`.
   case editions
   /// Encodes an unknown integer value.
   ///

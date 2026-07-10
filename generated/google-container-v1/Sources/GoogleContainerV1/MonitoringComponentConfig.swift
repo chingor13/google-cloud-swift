@@ -43,20 +43,35 @@ public struct MonitoringComponentConfig: Codable, Equatable, GoogleCloudWkt._Any
 
   /// GKE components exposing metrics
   public enum Component: Codable, Equatable, Sendable {
+    /// Default value. This shouldn't be used.
     case unspecified
+    /// system components
     case systemComponents
+    /// kube-apiserver
     case apiserver
+    /// kube-scheduler
     case scheduler
+    /// kube-controller-manager
     case controllerManager
+    /// Storage
     case storage
+    /// Horizontal Pod Autoscaling
     case hpa
+    /// Pod
     case pod
+    /// DaemonSet
     case daemonset
+    /// Deployment
     case deployment
+    /// Statefulset
     case statefulset
+    /// CADVISOR
     case cadvisor
+    /// KUBELET
     case kubelet
+    /// NVIDIA Data Center GPU Manager (DCGM)
     case dcgm
+    /// JobSet
     case jobset
     /// Encodes an unknown integer value.
     ///

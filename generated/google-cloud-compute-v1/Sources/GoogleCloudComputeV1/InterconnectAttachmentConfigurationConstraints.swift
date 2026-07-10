@@ -64,8 +64,12 @@
     ///
     /// [google.cloud.compute.v1.InterconnectAttachmentConfigurationConstraints.bgpMd5]: <doc:InterconnectAttachmentConfigurationConstraints/BgpMd5>
     public enum BgpMd5: Codable, Equatable, Sendable {
+      /// MD5_OPTIONAL: BGP MD5 authentication is supported and can optionally be
+      /// configured.
       case md5Optional
+      /// MD5_REQUIRED: BGP MD5 authentication must be configured.
       case md5Required
+      /// MD5_UNSUPPORTED: BGP MD5 authentication must not be configured
       case md5Unsupported
       /// Encodes an unknown integer value.
       ///

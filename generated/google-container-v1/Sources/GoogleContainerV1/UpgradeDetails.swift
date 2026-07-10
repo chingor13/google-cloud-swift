@@ -58,10 +58,15 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// State indicates the state of the upgrade.
   public enum State: Codable, Equatable, Sendable {
+    /// Upgrade state is unknown.
     case unknown
+    /// Upgrade has failed with an error.
     case failed
+    /// Upgrade has succeeded.
     case succeeded
+    /// Upgrade has been canceled.
     case canceled
+    /// Upgrade is running.
     case running
     /// Encodes an unknown integer value.
     ///
@@ -172,8 +177,11 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// StartType indicates the type of starting the upgrade.
   public enum StartType: Codable, Equatable, Sendable {
+    /// Upgrade start type is unspecified.
     case unspecified
+    /// Upgrade started automatically.
     case automatic
+    /// Upgrade started manually.
     case manual
     /// Encodes an unknown integer value.
     ///

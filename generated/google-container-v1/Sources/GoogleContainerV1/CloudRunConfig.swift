@@ -45,8 +45,11 @@ public struct CloudRunConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Load balancer type of ingress service of Cloud Run.
   public enum LoadBalancerType: Codable, Equatable, Sendable {
+    /// Load balancer type for Cloud Run is unspecified.
     case unspecified
+    /// Install external load balancer for Cloud Run.
     case external
+    /// Install internal load balancer for Cloud Run.
     case `internal`
     /// Encodes an unknown integer value.
     ///

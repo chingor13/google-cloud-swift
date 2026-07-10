@@ -74,8 +74,12 @@
     ///
     /// [google.cloud.compute.v1.GroupMaintenanceInfo.schedulingType]: <doc:GroupMaintenanceInfo/SchedulingType>
     public enum SchedulingType: Codable, Equatable, Sendable {
+      /// Maintenance on all reserved instances in the reservation is synchronized.
       case grouped
+      /// Unknown maintenance type.
       case groupMaintenanceTypeUnspecified
+      /// Maintenance is not synchronized for this reservation. Instead, each
+      /// instance has its own maintenance window.
       case independent
       /// Encodes an unknown integer value.
       ///

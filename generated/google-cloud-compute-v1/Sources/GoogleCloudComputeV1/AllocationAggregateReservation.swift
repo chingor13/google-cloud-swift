@@ -191,7 +191,11 @@
     ///
     /// [google.cloud.compute.v1.AllocationAggregateReservation.workloadType]: <doc:AllocationAggregateReservation/WorkloadType>
     public enum WorkloadType: Codable, Equatable, Sendable {
+      /// Reserved resources will be optimized for BATCH workloads, such as ML
+      /// training.
       case batch
+      /// Reserved resources will be optimized for SERVING workloads, such as ML
+      /// inference.
       case serving
       case unspecified
       /// Encodes an unknown integer value.

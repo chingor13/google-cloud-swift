@@ -472,8 +472,11 @@
     ///
     /// [google.cloud.compute.v1.Instance.keyRevocationActionType]: <doc:Instance/KeyRevocationActionType>
     public enum KeyRevocationActionType: Codable, Equatable, Sendable {
+      /// Default value. This value is unused.
       case unspecified
+      /// Indicates user chose no operation.
       case `none`
+      /// Indicates user chose to opt for VM shutdown on key revocation.
       case stop
       /// Encodes an unknown integer value.
       ///
@@ -576,8 +579,18 @@
     ///
     /// [google.cloud.compute.v1.Instance.privateIpv6GoogleAccess]: <doc:Instance/PrivateIpv6GoogleAccess>
     public enum PrivateIpv6GoogleAccess: Codable, Equatable, Sendable {
+      /// Bidirectional private IPv6 access to/from Google services. If
+      /// specified, the subnetwork who is attached to the instance's default network
+      /// interface will be assigned an internal IPv6 prefix if it doesn't have
+      /// before.
       case enableBidirectionalAccessToGoogle
+      /// Outbound private IPv6 access from VMs in this subnet to Google services. If
+      /// specified, the subnetwork who is attached to the instance's default network
+      /// interface will be assigned an internal IPv6 prefix if it doesn't have
+      /// before.
       case enableOutboundVmAccessToGoogle
+      /// Each network interface inherits PrivateIpv6GoogleAccess from its
+      /// subnetwork.
       case inheritFromSubnetwork
       /// Encodes an unknown integer value.
       ///
@@ -680,16 +693,31 @@
     ///
     /// [google.cloud.compute.v1.Instance.status]: <doc:Instance/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The instance is halted and we are performing tear down tasks like network
+      /// deprogramming, releasing quota, IP, tearing down disks etc.
       case deprovisioning
+      /// For Flex Start provisioning instance is waiting for available capacity
+      /// from Dynamic Workload Scheduler (DWS).
       case pending
+      /// Resources are being allocated for the instance.
       case provisioning
+      /// The instance is in repair.
       case repairing
+      /// The instance is running.
       case running
+      /// All required resources have been allocated and the instance
+      /// is being started.
       case staging
+      /// The instance has stopped successfully.
       case stopped
+      /// The instance is currently stopping (either being deleted or killed).
       case stopping
+      /// The instance has suspended.
       case suspended
+      /// The instance is suspending.
       case suspending
+      /// The instance has stopped (either by explicit action or underlying
+      /// failure).
       case terminated
       /// Encodes an unknown integer value.
       ///

@@ -129,10 +129,15 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Represents the possible Condition states.
   public enum State: Codable, Equatable, Sendable {
+    /// The default value. This value is used if the state is omitted.
     case unspecified
+    /// Transient state: Reconciliation has not started yet.
     case conditionPending
+    /// Transient state: reconciliation is still in progress.
     case conditionReconciling
+    /// Terminal state: Reconciliation did not succeed.
     case conditionFailed
+    /// Terminal state: Reconciliation completed successfully.
     case conditionSucceeded
     /// Encodes an unknown integer value.
     ///
@@ -243,9 +248,13 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Represents the severity of the condition failures.
   public enum Severity: Codable, Equatable, Sendable {
+    /// Unspecified severity
     case unspecified
+    /// Error severity.
     case error
+    /// Warning severity.
     case warning
+    /// Info severity.
     case info
     /// Encodes an unknown integer value.
     ///
@@ -351,21 +360,37 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Reasons common to all types of conditions.
   public enum CommonReason: Codable, Equatable, Sendable {
+    /// Default value.
     case undefined
+    /// Reason unknown. Further details will be in message.
     case unknown
+    /// Revision creation process failed.
     case revisionFailed
+    /// Timed out waiting for completion.
     case progressDeadlineExceeded
+    /// The container image path is incorrect.
     case containerMissing
+    /// Insufficient permissions on the container image.
     case containerPermissionDenied
+    /// Container image is not authorized by policy.
     case containerImageUnauthorized
+    /// Container image policy authorization check failed.
     case containerImageAuthorizationCheckFailed
+    /// Insufficient permissions on encryption key.
     case encryptionKeyPermissionDenied
+    /// Permission check on encryption key failed.
     case encryptionKeyCheckFailed
+    /// At least one Access check on secrets failed.
     case secretsAccessCheckFailed
+    /// Waiting for operation to complete.
     case waitingForOperation
+    /// System will retry immediately.
     case immediateRetry
+    /// System will retry later; current attempt failed.
     case postponedRetry
+    /// An internal error occurred. Further information may be in the message.
     case `internal`
+    /// User-provided VPC network was not found.
     case vpcNetworkNotFound
     /// Encodes an unknown integer value.
     ///
@@ -533,18 +558,38 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Reasons specific to Revision resource.
   public enum RevisionReason: Codable, Equatable, Sendable {
+    /// Default value.
     case undefined
+    /// Revision in Pending state.
     case pending
+    /// Revision is in Reserve state.
     case reserve
+    /// Revision is Retired.
     case retired
+    /// Revision is being retired.
     case retiring
+    /// Revision is being recreated.
     case recreating
+    /// There was a health check error.
     case healthCheckContainerError
+    /// Health check failed due to user error from customized path of the
+    /// container. System will retry.
     case customizedPathResponsePending
+    /// A revision with min_instance_count > 0 was created and is reserved, but
+    /// it was not configured to serve traffic, so it's not live. This can also
+    /// happen momentarily during traffic migration.
     case minInstancesNotProvisioned
+    /// The maximum allowed number of active revisions has been reached.
     case activeRevisionLimitReached
+    /// There was no deployment defined.
+    /// This value is no longer used, but Services created in older versions of
+    /// the API might contain this value.
     case noDeployment
+    /// A revision's container has no port specified since the revision is of a
+    /// manually scaled service with 0 instance count
     case healthCheckSkipped
+    /// A revision with min_instance_count > 0 was created and is waiting for
+    /// enough instances to begin a traffic migration.
     case minInstancesWarming
     /// Encodes an unknown integer value.
     ///
@@ -695,12 +740,20 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Reasons specific to Execution resource.
   public enum ExecutionReason: Codable, Equatable, Sendable {
+    /// Default value.
     case undefined
+    /// Internal system error getting execution status. System will retry.
     case jobStatusServicePollingError
+    /// A task reached its retry limit and the last attempt failed due to the
+    /// user container exiting with a non-zero exit code.
     case nonZeroExitCode
+    /// The execution was cancelled by users.
     case cancelled
+    /// The execution is in the process of being cancelled.
     case cancelling
+    /// The execution was deleted.
     case deleted
+    /// A delayed execution is waiting for a start time.
     case delayedStartPending
     /// Encodes an unknown integer value.
     ///

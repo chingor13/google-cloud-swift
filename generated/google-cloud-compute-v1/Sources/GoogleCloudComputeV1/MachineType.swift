@@ -144,8 +144,11 @@
     ///
     /// [google.cloud.compute.v1.MachineType.architecture]: <doc:MachineType/Architecture>
     public enum Architecture: Codable, Equatable, Sendable {
+      /// Default value indicating Architecture is not set.
       case unspecified
+      /// Machines with architecture ARM64
       case arm64
+      /// Machines with architecture X86_64
       case x8664
       /// Encodes an unknown integer value.
       ///

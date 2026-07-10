@@ -59,8 +59,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Defines the action of the rule.
   public enum Action: Codable, Equatable, Sendable {
+    /// Action not specified.
     case unspecified
+    /// Allow the operation.
     case allow
+    /// Deny the operation.
     case deny
     /// Encodes an unknown integer value.
     ///
@@ -161,7 +164,9 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The operation the rule applies to.
   public enum Operation: Codable, Equatable, Sendable {
+    /// Operation not specified.
     case unspecified
+    /// Download operation.
     case download
     /// Encodes an unknown integer value.
     ///

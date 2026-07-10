@@ -238,9 +238,13 @@
 
     /// Specifies when the instance is activated.
     public enum SqlActivationPolicy: Codable, Equatable, Sendable {
+      /// Unknown activation plan.
       case unspecified
+      /// The instance is always up and running.
       case always
+      /// The instance never starts.
       case never
+      /// The instance starts upon receiving requests.
       case onDemand
       /// Encodes an unknown integer value.
       ///
@@ -346,8 +350,11 @@
 
     /// The edition of the instance.
     public enum Edition: Codable, Equatable, Sendable {
+      /// The instance did not specify the edition.
       case unspecified
+      /// The instance is an enterprise edition.
       case enterprise
+      /// The instance is an Enterprise Plus edition.
       case enterprisePlus
       /// Encodes an unknown integer value.
       ///
@@ -448,8 +455,13 @@
 
     /// The options for enforcing Cloud SQL connectors in the instance.
     public enum ConnectorEnforcement: Codable, Equatable, Sendable {
+      /// The requirement for Cloud SQL connectors is unknown.
       case unspecified
+      /// Do not require Cloud SQL connectors.
       case notRequired
+      /// Require all connections to use Cloud SQL connectors, including the
+      /// Cloud SQL Auth Proxy and Cloud SQL Java, Python, and Go connectors.
+      /// Note: This disables all existing authorized networks.
       case `required`
       /// Encodes an unknown integer value.
       ///
@@ -550,8 +562,13 @@
 
     /// ExecuteSql API's access to the instance.
     public enum DataApiAccess: Codable, Equatable, Sendable {
+      /// Unspecified, effectively the same as `DISALLOW_DATA_API`.
       case unspecified
+      /// Disallow using ExecuteSql API to connect to the instance.
       case disallowDataApi
+      /// Allow using ExecuteSql API to connect to the instance. For private IP
+      /// instances, this allows authorized users to access the instance from
+      /// the public internet using ExecuteSql API.
       case allowDataApi
       /// Encodes an unknown integer value.
       ///

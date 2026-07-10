@@ -76,11 +76,18 @@
     ///
     /// [google.cloud.compute.v1.StoragePoolDisk.status]: <doc:StoragePoolDisk/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Disk is provisioning
       case creating
+      /// Disk is deleting.
       case deleting
+      /// Disk creation failed.
       case failed
+      /// Disk is ready for use.
       case ready
+      /// Source data is being copied into the disk.
       case restoring
+      /// Disk is currently unavailable and cannot be accessed, attached or
+      /// detached.
       case unavailable
       /// Encodes an unknown integer value.
       ///

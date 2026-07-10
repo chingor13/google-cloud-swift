@@ -218,9 +218,13 @@
     ///
     /// [google.cloud.compute.v1.NodeTemplate.status]: <doc:NodeTemplate/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Resources are being allocated.
       case creating
+      /// The node template is currently being deleted.
       case deleting
+      /// Invalid status.
       case invalid
+      /// The node template is ready.
       case ready
       /// Encodes an unknown integer value.
       ///

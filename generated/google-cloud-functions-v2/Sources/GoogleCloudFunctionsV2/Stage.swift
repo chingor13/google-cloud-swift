@@ -57,12 +57,19 @@ public struct Stage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible names for a Stage
   public enum Name: Codable, Equatable, Sendable {
+    /// Not specified. Invalid name.
     case unspecified
+    /// Artifact Registry Stage
     case artifactRegistry
+    /// Build Stage
     case build
+    /// Service Stage
     case service
+    /// Trigger Stage
     case trigger
+    /// Service Rollback Stage
     case serviceRollback
+    /// Trigger Rollback Stage
     case triggerRollback
     /// Encodes an unknown integer value.
     ///
@@ -183,9 +190,13 @@ public struct Stage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible states for a Stage
   public enum State: Codable, Equatable, Sendable {
+    /// Not specified. Invalid state.
     case unspecified
+    /// Stage has not started.
     case notStarted
+    /// Stage is in progress.
     case inProgress
+    /// Stage has completed.
     case complete
     /// Encodes an unknown integer value.
     ///

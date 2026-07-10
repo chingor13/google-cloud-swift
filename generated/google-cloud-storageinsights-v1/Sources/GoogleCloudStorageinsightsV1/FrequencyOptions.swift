@@ -53,8 +53,11 @@ public struct FrequencyOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// This ENUM specifies possible frequencies of report generation.
   public enum Frequency: Codable, Equatable, Sendable {
+    /// Unspecified.
     case unspecified
+    /// Report will be generated daily.
     case daily
+    /// Report will be generated weekly.
     case weekly
     /// Encodes an unknown integer value.
     ///

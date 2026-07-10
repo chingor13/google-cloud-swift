@@ -19,8 +19,11 @@
 
   /// The pricing plan for this instance.
   public enum SqlPricingPlan: Codable, Equatable, Sendable {
+    /// This is an unknown pricing plan for this instance.
     case unspecified
+    /// The instance is billed at a monthly flat rate.
     case `package`
+    /// The instance is billed per usage.
     case perUse
     /// Encodes an unknown integer value.
     ///

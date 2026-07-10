@@ -71,8 +71,12 @@ public struct NodePoolAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Location policy specifies how zones are picked when scaling up the
   /// node pool.
   public enum LocationPolicy: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// BALANCED is a best effort policy that aims to balance the sizes of
+    /// different zones.
     case balanced
+    /// ANY policy picks zones that have the highest capacity available.
     case any
     /// Encodes an unknown integer value.
     ///

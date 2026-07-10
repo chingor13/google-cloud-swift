@@ -44,7 +44,12 @@ public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// PatchMode specifies how auto upgrade patch builds should be
   /// selected.
   public enum PatchMode: Codable, Equatable, Sendable {
+    /// PATCH_MODE_UNSPECIFIED defaults to using the upgrade target from the
+    /// channel's patch upgrade targets as the upgrade target for the
+    /// version.
     case unspecified
+    /// ACCELERATED denotes that the latest patch build in the channel should be
+    /// used as the upgrade target for the version.
     case accelerated
     /// Encodes an unknown integer value.
     ///

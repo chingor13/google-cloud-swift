@@ -671,8 +671,23 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Defines the kernel module loading policy for nodes in the node pool.
     public enum Policy: Codable, Equatable, Sendable {
+      /// Default behavior. GKE selects the image based on node type.
+      /// For CPU and TPU nodes, the image will not allow loading external
+      /// kernel modules.
+      /// For GPU nodes, the image will allow loading any module, whether it
+      /// is signed or not.
       case unspecified
+      /// Enforced signature verification: Node pools will use a
+      /// Container-Optimized OS image configured to allow loading of
+      /// *Google-signed* external kernel modules.
+      /// Loadpin is enabled but configured to exclude modules, and kernel
+      /// module signature checking is enforced.
       case enforceSignedModules
+      /// Mirrors existing DEFAULT behavior:
+      /// For CPU and TPU nodes, the image will not allow loading external
+      /// kernel modules.
+      /// For GPU nodes, the image will allow loading any module, whether it
+      /// is signed or not.
       case doNotEnforceSignedModules
       /// Encodes an unknown integer value.
       ///
@@ -819,8 +834,14 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible cgroup modes that can be used.
   public enum CgroupMode: Codable, Equatable, Sendable {
+    /// CGROUP_MODE_UNSPECIFIED is when unspecified cgroup configuration is used.
+    /// The default for the GKE node OS image will be used.
     case unspecified
+    /// CGROUP_MODE_V1 specifies to use cgroupv1 for the cgroup configuration on
+    /// the node image.
     case v1
+    /// CGROUP_MODE_V2 specifies to use cgroupv2 for the cgroup configuration on
+    /// the node image.
     case v2
     /// Encodes an unknown integer value.
     ///
@@ -921,9 +942,14 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible values for transparent hugepage enabled support.
   public enum TransparentHugepageEnabled: Codable, Equatable, Sendable {
+    /// Default value. GKE will not modify the kernel configuration.
     case unspecified
+    /// Transparent hugepage support for anonymous memory is enabled system wide.
     case always
+    /// Transparent hugepage support for anonymous memory is enabled inside
+    /// MADV_HUGEPAGE regions. This is the default kernel configuration.
     case madvise
+    /// Transparent hugepage support for anonymous memory is disabled.
     case never
     /// Encodes an unknown integer value.
     ///
@@ -1029,11 +1055,29 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Possible values for transparent hugepage defrag support.
   public enum TransparentHugepageDefrag: Codable, Equatable, Sendable {
+    /// Default value. GKE will not modify the kernel configuration.
     case unspecified
+    /// It means that an application requesting THP will stall on allocation
+    /// failure and directly reclaim pages and compact memory in an effort to
+    /// allocate a THP immediately.
     case always
+    /// It means that an application will wake kswapd in the background to
+    /// reclaim pages and wake kcompactd to compact memory so that THP is
+    /// available in the near future. It's the responsibility of khugepaged to
+    /// then install the THP pages later.
     case `defer`
+    /// It means that an application will enter direct reclaim and compaction
+    /// like always, but only for regions that have used madvise(MADV_HUGEPAGE);
+    /// all other regions will wake kswapd in the background to reclaim pages and
+    /// wake kcompactd to compact memory so that THP is available in the near
+    /// future.
     case deferWithMadvise
+    /// It means that an application will enter direct reclaim like always but
+    /// only for regions that are have used madvise(MADV_HUGEPAGE). This is the
+    /// default kernel configuration.
     case madvise
+    /// It means that an application will never enter direct reclaim or
+    /// compaction.
     case never
     /// Encodes an unknown integer value.
     ///

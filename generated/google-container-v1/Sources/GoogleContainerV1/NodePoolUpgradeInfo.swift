@@ -60,9 +60,14 @@ public struct NodePoolUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// AutoUpgradeStatus indicates the status of auto upgrade.
   public enum AutoUpgradeStatus: Codable, Equatable, Sendable {
+    /// UNKNOWN indicates an unknown status.
     case unknown
+    /// ACTIVE indicates an active status.
     case active
+    /// MINOR_UPGRADE_PAUSED indicates the minor version upgrade is
+    /// paused.
     case minorUpgradePaused
+    /// UPGRADE_PAUSED indicates the upgrade is paused.
     case upgradePaused
     /// Encodes an unknown integer value.
     ///
@@ -169,10 +174,18 @@ public struct NodePoolUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// AutoUpgradePausedReason indicates the reason for auto upgrade paused
   /// status.
   public enum AutoUpgradePausedReason: Codable, Equatable, Sendable {
+    /// AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED indicates an unspecified reason.
     case unspecified
+    /// MAINTENANCE_WINDOW indicates the cluster is outside customer maintenance
+    /// window.
     case maintenanceWindow
+    /// MAINTENANCE_EXCLUSION_NO_UPGRADES indicates the cluster is in a
+    /// maintenance exclusion with scope NO_UPGRADES.
     case maintenanceExclusionNoUpgrades
+    /// MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES indicates the cluster is in a
+    /// maintenance exclusion with scope NO_MINOR_UPGRADES.
     case maintenanceExclusionNoMinorUpgrades
+    /// SYSTEM_CONFIG indicates the cluster upgrade is paused by system config.
     case systemConfig
     /// Encodes an unknown integer value.
     ///

@@ -62,8 +62,11 @@
       ///
       /// [google.cloud.compute.v1.reservationBlocks.getRequest.view]: <doc:ReservationBlocksClient/GetRequest/View>
       public enum View: Codable, Equatable, Sendable {
+        /// This view includes basic information about the reservation block
         case basic
+        /// The default / unset value. The API will default to the BASIC view.
         case blockViewUnspecified
+        /// Includes detailed topology view.
         case full
         /// Encodes an unknown integer value.
         ///

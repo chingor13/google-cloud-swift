@@ -48,10 +48,22 @@
     ///
     /// [google.cloud.compute.v1.ManagedInstanceInstanceHealth.detailedHealthState]: <doc:ManagedInstanceInstanceHealth/DetailedHealthState>
     public enum DetailedHealthState: Codable, Equatable, Sendable {
+      /// The instance is being drained. The existing connections to the instance
+      /// have time to complete, but the new ones are being refused.
       case draining
+      /// The instance is reachable i.e. a connection to the application health
+      /// checking endpoint can be established, and conforms to the requirements
+      /// defined by the health check.
       case healthy
+      /// The instance is unreachable i.e. a connection to the application health
+      /// checking endpoint cannot be established, or the server does not respond
+      /// within the specified timeout.
       case timeout
+      /// The instance is reachable, but does not conform to the requirements
+      /// defined by the health check.
       case unhealthy
+      /// The health checking system is aware of the instance but its health is
+      /// not known at the moment.
       case unknown
       /// Encodes an unknown integer value.
       ///

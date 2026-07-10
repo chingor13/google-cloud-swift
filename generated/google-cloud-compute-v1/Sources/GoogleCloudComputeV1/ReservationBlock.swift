@@ -99,9 +99,12 @@
     ///
     /// [google.cloud.compute.v1.ReservationBlock.status]: <doc:ReservationBlock/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// Resources are being allocated for the reservation block.
       case creating
+      /// Reservation block is currently being deleted.
       case deleting
       case invalid
+      /// Reservation block has allocated all its resources.
       case ready
       /// Encodes an unknown integer value.
       ///

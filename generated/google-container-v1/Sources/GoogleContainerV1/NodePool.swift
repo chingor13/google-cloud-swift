@@ -296,13 +296,21 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
       /// Phase represents the different stages blue-green upgrade is running in.
       public enum Phase: Codable, Equatable, Sendable {
+        /// Unspecified phase.
         case unspecified
+        /// blue-green upgrade has been initiated.
         case updateStarted
+        /// Start creating green pool nodes.
         case creatingGreenPool
+        /// Start cordoning blue pool nodes.
         case cordoningBluePool
+        /// Start draining blue pool nodes.
         case drainingBluePool
+        /// Start soaking time after draining entire blue pool.
         case nodePoolSoaking
+        /// Start deleting blue nodes.
         case deletingBluePool
+        /// Rollback has been initiated.
         case rollbackStarted
         /// Encodes an unknown integer value.
         ///
@@ -482,7 +490,11 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Type defines the type of placement policy.
     public enum Type_: Codable, Equatable, Sendable {
+      /// TYPE_UNSPECIFIED specifies no requirements on nodes
+      /// placement.
       case unspecified
+      /// COMPACT specifies node placement in the same availability domain to
+      /// ensure low communication latency.
       case compact
       /// Encodes an unknown integer value.
       ///
@@ -744,12 +756,26 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The current status of the node pool instance.
   public enum Status: Codable, Equatable, Sendable {
+    /// Not set.
     case unspecified
+    /// The PROVISIONING state indicates the node pool is being created.
     case provisioning
+    /// The RUNNING state indicates the node pool has been created
+    /// and is fully usable.
     case running
+    /// The RUNNING_WITH_ERROR state indicates the node pool has been created
+    /// and is partially usable. Some error state has occurred and some
+    /// functionality may be impaired. Customer may need to reissue a request
+    /// or trigger a new update.
     case runningWithError
+    /// The RECONCILING state indicates that some work is actively being done on
+    /// the node pool, such as upgrading node software. Details can
+    /// be found in the `statusMessage` field.
     case reconciling
+    /// The STOPPING state indicates the node pool is being deleted.
     case stopping
+    /// The ERROR state indicates the node pool may be unusable. Details
+    /// can be found in the `statusMessage` field.
     case error
     /// Encodes an unknown integer value.
     ///

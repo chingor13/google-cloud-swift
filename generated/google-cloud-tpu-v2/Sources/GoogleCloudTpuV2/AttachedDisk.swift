@@ -49,8 +49,13 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The different mode of the attached disk.
   public enum DiskMode: Codable, Equatable, Sendable {
+    /// The disk mode is not known/set.
     case unspecified
+    /// Attaches the disk in read-write mode. Only one TPU node can attach a disk
+    /// in read-write mode at a time.
     case readWrite
+    /// Attaches the disk in read-only mode. Multiple TPU nodes can attach
+    /// a disk in read-only mode at a time.
     case readOnly
     /// Encodes an unknown integer value.
     ///

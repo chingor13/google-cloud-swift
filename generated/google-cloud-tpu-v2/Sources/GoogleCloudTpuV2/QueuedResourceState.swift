@@ -403,15 +403,44 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// Output only state of the request
   public enum State: Codable, Equatable, Sendable {
+    /// State of the QueuedResource request is not known/set.
     case unspecified
+    /// The QueuedResource request has been received. We're still working on
+    /// determining if we will be able to honor this request.
     case creating
+    /// The QueuedResource request has passed initial validation/admission
+    /// control and has been persisted in the queue.
     case accepted
+    /// The QueuedResource request has been selected. The
+    /// associated resources are currently being provisioned (or very soon
+    /// will begin provisioning).
     case provisioning
+    /// The request could not be completed. This may be due to some
+    /// late-discovered problem with the request itself, or due to
+    /// unavailability of resources within the constraints of the request
+    /// (e.g., the 'valid until' start timing constraint expired).
     case failed
+    /// The QueuedResource is being deleted.
     case deleting
+    /// The resources specified in the QueuedResource request have been
+    /// provisioned and are ready for use by the end-user/consumer.
     case active
+    /// The resources specified in the QueuedResource request are being
+    /// deleted. This may have been initiated by the user, or
+    /// the Cloud TPU service. Inspect the state data for more details.
     case suspending
+    /// The resources specified in the QueuedResource request have been
+    /// deleted.
     case suspended
+    /// The QueuedResource request has passed initial validation and has been
+    /// persisted in the queue. It will remain in this state until there are
+    /// sufficient free resources to begin provisioning your request. Wait times
+    /// will vary significantly depending on demand levels. When demand is high,
+    /// not all requests can be immediately provisioned. If you
+    /// need more reliable obtainability of TPUs consider purchasing a
+    /// reservation. To put a limit on how long you are willing to wait, use
+    /// [timing
+    /// constraints](https://cloud.google.com/tpu/docs/queued-resources#request_a_queued_resource_before_a_specified_time).
     case waitingForResources
     /// Encodes an unknown integer value.
     ///
@@ -547,8 +576,11 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
 
   /// The initiator of the QueuedResource's SUSPENDING/SUSPENDED state.
   public enum StateInitiator: Codable, Equatable, Sendable {
+    /// The state initiator is unspecified.
     case unspecified
+    /// The current QueuedResource state was initiated by the user.
     case user
+    /// The current QueuedResource state was initiated by the service.
     case service
     /// Encodes an unknown integer value.
     ///

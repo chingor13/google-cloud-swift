@@ -104,6 +104,7 @@
     ///
     /// [google.cloud.compute.v1.TargetInstance.natPolicy]: <doc:TargetInstance/NatPolicy>
     public enum NatPolicy: Codable, Equatable, Sendable {
+      /// No NAT performed.
       case noNat
       /// Encodes an unknown integer value.
       ///

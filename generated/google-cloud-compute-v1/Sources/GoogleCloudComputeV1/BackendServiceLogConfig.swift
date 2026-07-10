@@ -73,8 +73,11 @@
     ///
     /// [google.cloud.compute.v1.BackendServiceLogConfig.optionalMode]: <doc:BackendServiceLogConfig/OptionalMode>
     public enum OptionalMode: Codable, Equatable, Sendable {
+      /// A subset of optional fields.
       case custom
+      /// None optional fields.
       case excludeAllOptional
+      /// All optional fields.
       case includeAllOptional
       /// Encodes an unknown integer value.
       ///

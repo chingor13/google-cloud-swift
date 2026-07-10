@@ -19,13 +19,21 @@ import Foundation
 /// The organization for which the client libraries are being published.
 /// Affects the url where generated docs are published, etc.
 public enum ClientLibraryOrganization: Codable, Equatable, Sendable {
+  /// Not useful.
   case unspecified
+  /// Google Cloud Platform Org.
   case cloud
+  /// Ads (Advertising) Org.
   case ads
+  /// Photos Org.
   case photos
+  /// Street View Org.
   case streetView
+  /// Shopping Org.
   case shopping
+  /// Geo Org.
   case geo
+  /// Generative AI - https://developers.generativeai.google
   case generativeAi
   /// Encodes an unknown integer value.
   ///

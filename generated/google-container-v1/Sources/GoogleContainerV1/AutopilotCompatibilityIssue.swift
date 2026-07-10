@@ -59,9 +59,17 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWkt._A
 
   /// The type of the reported issue.
   public enum IssueType: Codable, Equatable, Sendable {
+    /// Default value, should not be used.
     case unspecified
+    /// Indicates that the issue is a known incompatibility between the
+    /// cluster and Autopilot mode.
     case incompatibility
+    /// Indicates the issue is an incompatibility if customers take no further
+    /// action to resolve.
     case additionalConfigRequired
+    /// Indicates the issue is not an incompatibility, but depending on the
+    /// workloads business logic, there is a potential that they won't work on
+    /// Autopilot.
     case passedWithOptionalConfig
     /// Encodes an unknown integer value.
     ///

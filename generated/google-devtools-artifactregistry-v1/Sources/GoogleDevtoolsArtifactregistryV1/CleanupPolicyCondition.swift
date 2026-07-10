@@ -59,9 +59,13 @@ public struct CleanupPolicyCondition: Codable, Equatable, GoogleCloudWkt._AnyPac
 
   /// Statuses applying to versions.
   public enum TagState: Codable, Equatable, Sendable {
+    /// Tag status not specified.
     case unspecified
+    /// Applies to tagged versions only.
     case tagged
+    /// Applies to untagged versions only.
     case untagged
+    /// Applies to all versions.
     case any
     /// Encodes an unknown integer value.
     ///

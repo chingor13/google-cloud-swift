@@ -48,10 +48,19 @@
     ///
     /// [google.cloud.compute.v1.SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams.op]: <doc:SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams/Op>
     public enum Op: Codable, Equatable, Sendable {
+      /// The operator matches if the field value contains the specified
+      /// value.
       case contains
+      /// The operator matches if the field value ends with the specified
+      /// value.
       case endsWith
+      /// The operator matches if the field value equals the specified
+      /// value.
       case equals
+      /// The operator matches if the field value is any value.
       case equalsAny
+      /// The operator matches if the field value starts with the specified
+      /// value.
       case startsWith
       /// Encodes an unknown integer value.
       ///

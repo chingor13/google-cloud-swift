@@ -400,8 +400,11 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.availableFeatures]: <doc:Interconnect/AvailableFeatures>
     public enum AvailableFeatures: Codable, Equatable, Sendable {
+      /// Cross-Site Networking
       case ifCrossSiteNetwork
+      /// L2 Interconnect Attachment Forwarding
       case ifL2Forwarding
+      /// Media Access Control security (MACsec)
       case ifMacsec
       /// Encodes an unknown integer value.
       ///
@@ -504,8 +507,11 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.interconnectType]: <doc:Interconnect/InterconnectType>
     public enum InterconnectType: Codable, Equatable, Sendable {
+      /// A dedicated physical interconnection with the customer.
       case dedicated
+      /// [Deprecated] A private, physical interconnection with the customer.
       case itPrivate
+      /// A partner-managed interconnection shared between customers via partner.
       case partner
       /// Encodes an unknown integer value.
       ///
@@ -608,8 +614,12 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.linkType]: <doc:Interconnect/LinkType>
     public enum LinkType: Codable, Equatable, Sendable {
+      /// 100G Ethernet, LR Optics.
       case ethernet100GLr
+      /// 10G Ethernet, LR Optics.
+      /// [(rate_bps) =  10000000000];
       case ethernet10GLr
+      /// 400G Ethernet, LR4 Optics.
       case ethernet400GLr4
       /// Encodes an unknown integer value.
       ///
@@ -712,7 +722,11 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.operationalStatus]: <doc:Interconnect/OperationalStatus>
     public enum OperationalStatus: Codable, Equatable, Sendable {
+      /// The interconnect is valid, turned up, and ready to use. Attachments may
+      /// be provisioned on this interconnect.
       case osActive
+      /// The interconnect has not completed turnup. No attachments may be
+      /// provisioned on this interconnect.
       case osUnprovisioned
       /// Encodes an unknown integer value.
       ///
@@ -810,8 +824,11 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.requestedFeatures]: <doc:Interconnect/RequestedFeatures>
     public enum RequestedFeatures: Codable, Equatable, Sendable {
+      /// Cross-Site Networking
       case ifCrossSiteNetwork
+      /// L2 Interconnect Attachment Forwarding
       case ifL2Forwarding
+      /// Media Access Control security (MACsec)
       case ifMacsec
       /// Encodes an unknown integer value.
       ///
@@ -914,7 +931,11 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.state]: <doc:Interconnect/State>
     public enum State: Codable, Equatable, Sendable {
+      /// The interconnect is valid, turned up, and ready to use. Attachments may
+      /// be provisioned on this interconnect.
       case active
+      /// The interconnect has not completed turnup. No attachments may be
+      /// provisioned on this interconnect.
       case unprovisioned
       /// Encodes an unknown integer value.
       ///
@@ -1012,7 +1033,9 @@
     ///
     /// [google.cloud.compute.v1.Interconnect.subzone]: <doc:Interconnect/Subzone>
     public enum Subzone: Codable, Equatable, Sendable {
+      /// Subzone A.
       case a
+      /// Subzone B.
       case b
       /// Encodes an unknown integer value.
       ///
