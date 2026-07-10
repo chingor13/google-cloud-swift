@@ -1,6 +1,6 @@
 # How-To Guide: Generated Code Maintenance
 
-This guide is intended for contributors to the `google-cloud-rust` SDK. It will
+This guide is intended for contributors to the `google-cloud-swift` SDK. It will
 walk you through the steps necessary to generate a new library, update libraries
 with new changes in the proto specifications, and refresh the generated code
 when the generator changes.
@@ -17,7 +17,11 @@ protoc --version
 If not, follow the steps in [Protocol Buffer Compiler Installation] to download
 a suitable version.
 
-Make sure your workstation has up-to-date versions of Rust and Go. Follow the
+If you are generating Swift protobufs (e.g. `swift-protobuf` modules), you must
+also install the `protoc` plugins for Swift. Follow the instructions in
+[Installing Protobuf Compiler & Plugins].
+
+Make sure your workstation has up-to-date versions of Swift and Go. Follow the
 instructions in [Set Up Development Environment].
 
 ## Generate new library
@@ -62,21 +66,23 @@ Cloud APIs are automatically allowed for all languages except the ones in
 
 Check the [sdk.yaml] file:
 
-- **If the library is missing and it is not a Cloud API:** Add it, but enable it
-  _only_ for Rust.
-- **If the library is already there:** Verify that Rust is included in the
-  accepted languages for that specific library.
+-   **If the library is missing and it is not a Cloud API:** Add it, but enable
+    it *only* for Swift.
+-   **If the library is already there:** Verify that Swift is included in the
+    accepted languages for that specific library.
 
 If you still have issues, please contact librarian team.
 
 #### How to update an unlisted language:
 
-1. Send a PR adding the language to the [sdk.yaml] in librarian and merge it.
-1. Get latest librarian version
-   ```bash
-   go list -m -json github.com/googleapis/librarian@main | jq -r '.Version'
-   ```
-1. Send a PR to update the version field in [librarian.yaml].
+1.  Send a PR adding the language to the [sdk.yaml] in librarian and merge it.
+1.  Get latest librarian version
+
+    ```bash
+    go list -m -json github.com/googleapis/librarian@main | jq -r '.Version'
+    ```
+
+1.  Send a PR to update the version field in [librarian.yaml].
 
 ## Update the code generation sources
 
@@ -160,18 +166,18 @@ Wait for the PR to be approved and merged.
 
 Then finish your PR in `google-cloud-swift`.
 
-1. Update the librarian version in `librarian.yaml`:
+1.  Update the librarian version in `librarian.yaml`:
 
-   ```bash
-   V=$(GOPROXY=direct go list -m -f '{{.Version}}' github.com/googleapis/librarian@main)
-   sed -i.bak "s;^version: .*;version: ${V};" librarian.yaml && rm librarian.yaml.bak
-   ```
+    ```bash
+    V=$(GOPROXY=direct go list -m -f '{{.Version}}' github.com/googleapis/librarian@main)
+    sed -i.bak "s;^version: .*;version: ${V};" librarian.yaml && rm librarian.yaml.bak
+    ```
 
-1. Update the generated code:
+1.  Update the generated code:
 
-   ```bash
-   go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
-   ```
+    ```bash
+    go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
+    ```
 
 Use a single PR to update the librarian version and any generated code.
 
@@ -181,8 +187,8 @@ Sometimes it may be useful to re-generate an existing library, to test the
 generation step, practice before generating a new library, or to test the
 documentation.
 
-We will use `GoogleCloudSecretmanagerV1` as an example. Start by removing the existing
-library:
+We will use `GoogleCloudSecretmanagerV1` as an example. Start by removing the
+existing library:
 
 ```shell
 git rm -fr generated/google-cloud-secretmanager-v1
@@ -203,3 +209,4 @@ go run github.com/googleapis/librarian/cmd/librarian@${V} generate GoogleCloudSe
 [protocol buffer compiler installation]: https://protobuf.dev/installation/
 [sdk.yaml]: https://github.com/googleapis/librarian/blob/main/internal/serviceconfig/sdk.yaml
 [set up development environment]: /doc/contributor/howto-guide-set-up-development-environment.md
+[Installing Protobuf Compiler & Plugins]: /doc/contributor/howto-guide-set-up-development-environment.md#installing-protobuf-compiler-plugins
