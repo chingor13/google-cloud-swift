@@ -79,6 +79,8 @@ libraries:
     apis:
       - path: discoveries/compute.v1.json
     copyright_year: "2026"
+    keep:
+      - Sources/GoogleCloudComputeV1/Operation+Additions.swift
     output: generated/google-cloud-compute-v1
     roots:
       - discovery
