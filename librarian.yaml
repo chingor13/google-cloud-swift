@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.23.1-0.20260630155202-bb40e83a4e60
+version: v0.25.1-0.20260709172925-62f83a06fd43
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -126,6 +126,23 @@ libraries:
     copyright_year: "2026"
     swift:
       per_service_traits: true
+  - name: GoogleCloudStorage
+    copyright_year: "2026"
+    output: packages/storage/Sources/Generated/StorageControlProtos
+    swift:
+      modules:
+        - output: packages/storage/Sources/Generated/StorageControlProtos
+          api_path: google/storage/control/v2
+          module_type: swift-protobuf
+          include_list:
+            - storage_control.proto
+            - ../../../longrunning/operations.proto
+            - ../../../iam/v1/iam_policy.proto
+            - ../../../iam/v1/policy.proto
+            - ../../../iam/v1/options.proto
+            - ../../../rpc/status.proto
+            - ../../../type/expr.proto
+            - ../../../type/interval.proto
   - name: GoogleCloudStorageinsightsV1
     apis:
       - path: google/cloud/storageinsights/v1

@@ -35,6 +35,7 @@ let package = Package(
     ),
     .package(path: "./packages/test-helpers"),
     .package(path: "./packages/wkt"),
+    .package(path: "./packages/storage"),
     .package(path: "./guide"),
     .package(path: "./generated/google-cloud-compute-v1", traits: ["Instances", "Images", "ZoneOperations"]),
     .package(path: "./generated/google-cloud-location"),
@@ -93,6 +94,7 @@ let package = Package(
           name: "GoogleIamV1", package: "google-iam-v1"),
         .product(
           name: "GoogleCloudWkt", package: "wkt"),
+        .product(name: "GoogleCloudStorage", package: "storage"),
         .product(name: "GoogleCloudTestHelpers", package: "test-helpers"),
         .product(name: "CryptoSwift", package: "CryptoSwift"),
         .product(name: "InMemoryLogging", package: "swift-log"),

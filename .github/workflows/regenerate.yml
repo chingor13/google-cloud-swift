@@ -33,6 +33,8 @@ jobs:
           cache: false
       - name: Set up protoc
         uses: ./.github/actions/install-protoc
+      - name: Install Swift Protobuf Plugins
+        uses: ./.github/actions/install-protobuf-plugins
       - name: Re-generate
         run: |
           set -e

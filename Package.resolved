@@ -1,5 +1,5 @@
 {
-  "originHash" : "ed0d41a6ac8b24621cebb810975e978b96ee037a57615c04b421376d60c18207",
+  "originHash" : "8688997acd291bc8098637f4fc4028167b9928026b0271de3a5bcd0c3d211bd7",
   "pins" : [
     {
       "identity" : "cryptoswift",
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
       "state" : {
-        "revision" : "7c6ad0fc39d0763e0b699210e4124afd5041c5df",
-        "version" : "1.6.4"
+        "revision" : "38cd4aaf65feb0ef9bad77d330014f0f256577f5",
+        "version" : "1.7.3"
       }
     }
   ],
