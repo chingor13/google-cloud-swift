@@ -45,7 +45,7 @@ extension InstanceSamples {
       $0.networkInterfaces = [nic]
     }
     var operation = try await client.insert(
-      request: InstancesClient.InsertRequest().with {
+      request: .init().with {
         $0.project = projectId
         $0.zone = zoneId
         $0.body = instance

@@ -110,7 +110,7 @@ import GoogleCloudGax
   func aggregateAll(_ service: Service) async throws -> [String: Item] {
     var result: [String: Item] = [:]
     for try await (group, item) in service.aggregatedListItems(
-      byItem: Request()
+      byItem: .init()
     ) {
       result[group] = item
     }

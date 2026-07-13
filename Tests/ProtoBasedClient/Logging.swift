@@ -33,7 +33,7 @@ public enum Logging {
 
     logger.info("\nTesting listLocations()")
     let _ = try await client.listLocations(
-      request: ListLocationsRequest().with { $0.name = "projects/\(projectId)" })
+      request: .init().with { $0.name = "projects/\(projectId)" })
 
     let enter = try #require(
       handler.entries.first(where: { $0.message.description.starts(with: "enter  : ") }),
@@ -46,7 +46,7 @@ public enum Logging {
 
     await #expect(throws: GoogleCloudGax.RequestError.self) {
       _ = try await client.listLocations(
-        request: ListLocationsRequest().with { $0.name = "" })
+        request: .init().with { $0.name = "" })
     }
     let error = try #require(
       handler.entries.first(where: { $0.message.description.starts(with: "error  : ") }),

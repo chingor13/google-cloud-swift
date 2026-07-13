@@ -29,7 +29,7 @@ public enum GlobalEndpoint {
 
     logger.info("Testing createSecret()")
     let create = try await client.createSecret(
-      request: CreateSecretRequest().with {
+      request: .init().with {
         $0.parent = "projects/\(projectId)"
         $0.secretId = secretId
         $0.secret = Secret().with {
@@ -42,7 +42,7 @@ public enum GlobalEndpoint {
     logger.info("create = \(create)")
 
     logger.info("\nTesting getSecret()")
-    let get = try await client.getSecret(request: GetSecretRequest().with { $0.name = create.name })
+    let get = try await client.getSecret(request: .init().with { $0.name = create.name })
     logger.info("get = \(get)")
 
     try await testSecretVersions(client: client, secretName: create.name, logger: logger)
@@ -56,7 +56,7 @@ public enum GlobalEndpoint {
     updatedAnnotations["updated"] = "test-1"
 
     let update = try await client.updateSecret(
-      request: UpdateSecretRequest().with {
+      request: .init().with {
         $0.updateMask = GoogleCloudWkt.FieldMask(paths: ["annotations", "labels", "versionAliases"])
         $0.secret = Secret().with {
           $0.name = create.name
@@ -71,7 +71,7 @@ public enum GlobalEndpoint {
 
     logger.info("\nTesting listSecrets()")
     let secrets = try client.listSecrets(
-      byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
+      byItem: .init().with { $0.parent = "projects/\(projectId)" })
     var count: UInt64 = 0
     for try await secret in secrets {
       logger.info("  secret = \(secret)")
@@ -80,7 +80,7 @@ public enum GlobalEndpoint {
     logger.info("item count = \(count)")
 
     logger.info("\nTesting deleteSecret()")
-    try await client.deleteSecret(request: DeleteSecretRequest().with { $0.name = get.name })
+    try await client.deleteSecret(request: .init().with { $0.name = get.name })
     logger.info("deleteSecret() was successful")
   }
 
@@ -93,7 +93,7 @@ public enum GlobalEndpoint {
     let data = "the quick brown fox jumps over the lazy dog".data(using: .utf8)!
     let checksum = CryptoSwift.Checksum.crc32c(data.byteArray)
     let version = try await client.addSecretVersion(
-      request: AddSecretVersionRequest().with {
+      request: .init().with {
         $0.parent = secretName
         $0.payload = SecretPayload().with {
           $0.data = data
@@ -104,34 +104,34 @@ public enum GlobalEndpoint {
 
     logger.info("\nTesting getSecretVersion()")
     let getVersion = try await client.getSecretVersion(
-      request: GetSecretVersionRequest().with { $0.name = version.name })
+      request: .init().with { $0.name = version.name })
     logger.info("getVersion = \(getVersion)")
 
     logger.info("\nTesting accessSecretVersion()")
     let accessVersion = try await client.accessSecretVersion(
-      request: AccessSecretVersionRequest().with { $0.name = version.name })
+      request: .init().with { $0.name = version.name })
     logger.info("accessVersion payload length = \(accessVersion.payload?.data.count ?? 0)")
 
     logger.info("\nTesting disableSecretVersion()")
     let disabledVersion = try await client.disableSecretVersion(
-      request: DisableSecretVersionRequest().with { $0.name = version.name })
+      request: .init().with { $0.name = version.name })
     logger.info("disabledVersion state = \(disabledVersion.state)")
 
     logger.info("\nTesting enableSecretVersion()")
     let enabledVersion = try await client.enableSecretVersion(
-      request: EnableSecretVersionRequest().with { $0.name = version.name })
+      request: .init().with { $0.name = version.name })
     logger.info("enabledVersion state = \(enabledVersion.state)")
 
     logger.info("\nTesting listSecretVersions()")
     let versions = try client.listSecretVersions(
-      byItem: ListSecretVersionsRequest().with { $0.parent = secretName })
+      byItem: .init().with { $0.parent = secretName })
     for try await version in versions {
       logger.info("  version = \(version)")
     }
 
     logger.info("\nTesting destroySecretVersion()")
     let destroyedVersion = try await client.destroySecretVersion(
-      request: DestroySecretVersionRequest().with { $0.name = version.name })
+      request: .init().with { $0.name = version.name })
     logger.info("destroyedVersion state = \(destroyedVersion.state)")
   }
 
@@ -144,12 +144,12 @@ public enum GlobalEndpoint {
     let serviceAccount = try testServiceAccount();
     logger.info("Testing getIamPolicy()")
     var policy = try await client.getIamPolicy(
-      request: GetIamPolicyRequest().with { $0.resource = secretName })
+      request: .init().with { $0.resource = secretName })
     logger.info("policy = \(policy)")
 
     logger.info("Testing testIamPermissions()")
     let permissions = try await client.testIamPermissions(
-      request: TestIamPermissionsRequest().with {
+      request: .init().with {
         $0.resource = secretName
         $0.permissions = ["secretmanager.versions.access"]
       })
@@ -167,7 +167,7 @@ public enum GlobalEndpoint {
         })
     }
     let updatedPolicy = try await client.setIamPolicy(
-      request: SetIamPolicyRequest().with {
+      request: .init().with {
         $0.resource = secretName
         $0.policy = policy
       })
@@ -184,7 +184,7 @@ public enum GlobalEndpoint {
     var count: Int64 = 0
     var first: Location? = nil
     let locations = try client.listLocations(
-      byItem: ListLocationsRequest().with { $0.name = "projects/\(projectId)" })
+      byItem: .init().with { $0.name = "projects/\(projectId)" })
     for try await location in locations {
       logger.info("  location = \(location)")
       count += 1
@@ -197,7 +197,7 @@ public enum GlobalEndpoint {
     if let firstLocation = first {
       logger.info("Testing getLocation() for \(firstLocation.name)")
       let location = try await client.getLocation(
-        request: GetLocationRequest().with { $0.name = firstLocation.name })
+        request: .init().with { $0.name = firstLocation.name })
       logger.info("location = \(location)")
     }
   }

@@ -64,7 +64,7 @@ public enum LongrunningOperations {
 
     logger.info("\nTesting deleteWorkflow() for \(workflow.name)")
     let deleteLro = try await client.deleteWorkflow(
-      withPolling: DeleteWorkflowRequest().with { $0.name = workflow.name })
+      withPolling: .init().with { $0.name = workflow.name })
     _ = try await deleteLro.wait()
     logger.info("deleteWorkflow() was successful")
   }

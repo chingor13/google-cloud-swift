@@ -29,7 +29,7 @@ func cleanupStaleSecretsImpl() async throws {
   let projectId = try projectId();
   let client = try SecretManagerServiceClient()
   let secrets = try client.listSecrets(
-    byItem: ListSecretsRequest().with { $0.parent = "projects/\(projectId)" })
+    byItem: .init().with { $0.parent = "projects/\(projectId)" })
 
   // Wait at least 48 hours before deleting the resources.
   let slack = UInt64(48 * 3600)
@@ -42,7 +42,7 @@ func cleanupStaleSecretsImpl() async throws {
       continue
     }
     try await client.deleteSecret(
-      request: DeleteSecretRequest().with {
+      request: .init().with {
         $0.name = secret.name
         $0.etag = secret.etag
       })
@@ -62,7 +62,7 @@ func cleanUpStaleWorkflowsImpl() async throws {
   let location = locationId();
   let client = try WorkflowsClient()
   let workflows = try client.listWorkflows(
-    byItem: ListWorkflowsRequest().with {
+    byItem: .init().with {
       $0.parent = "projects/\(projectId)/locations/\(location)"
     })
 
@@ -78,6 +78,6 @@ func cleanUpStaleWorkflowsImpl() async throws {
     }
     // Start deletion and don't wait for it to complete.
     _ = try await client.deleteWorkflow(
-      request: DeleteWorkflowRequest().with { $0.name = workflow.name })
+      request: .init().with { $0.name = workflow.name })
   }
 }

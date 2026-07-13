@@ -75,7 +75,7 @@ import Testing
       ])
     var array: [Item] = []
     for try await item in service.listItems(
-      byItem: ListItemsRequest()
+      byItem: .init()
     ) {
       array.append(item)
     }
@@ -91,7 +91,7 @@ import Testing
       ])
     var array: [Item] = []
     for try await item in service.listItems(
-      byItem: ListItemsRequest()
+      byItem: .init()
     ) {
       array.append(item)
     }
@@ -109,7 +109,7 @@ import Testing
       ])
     var array: [Item] = []
     for try await item in service.listItems(
-      byItem: ListItemsRequest()
+      byItem: .init()
     ) {
       array.append(item)
     }
