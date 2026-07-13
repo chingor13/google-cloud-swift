@@ -38,12 +38,15 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   public var subnetworkName: Swift.String = Swift.String()
 
   /// This field is deprecated, use cluster_ipv4_cidr_block.
+  @available(*, deprecated)
   public var clusterIpv4Cidr: Swift.String = Swift.String()
 
   /// This field is deprecated, use node_ipv4_cidr_block.
+  @available(*, deprecated)
   public var nodeIpv4Cidr: Swift.String = Swift.String()
 
   /// This field is deprecated, use services_ipv4_cidr_block.
+  @available(*, deprecated)
   public var servicesIpv4Cidr: Swift.String = Swift.String()
 
   /// The name of the secondary range to be used for the cluster CIDR
@@ -132,6 +135,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   ///
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
+  @available(*, deprecated)
   public var tpuIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Whether routes will be used for pod IPs in the cluster.

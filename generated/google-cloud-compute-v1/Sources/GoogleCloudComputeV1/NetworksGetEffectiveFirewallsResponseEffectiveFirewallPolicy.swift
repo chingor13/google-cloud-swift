@@ -24,6 +24,7 @@
   {
     /// Output only. [Output Only] Deprecated, please use short name instead. The display name
     /// of the firewall policy.
+    @available(*, deprecated)
     public var displayName: Swift.String? = nil
 
     /// Output only. [Output Only] The name of the firewall policy.

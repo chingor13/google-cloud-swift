@@ -149,6 +149,7 @@
         case externalApiWarning
         /// Warning that value of a field has been overridden.
         /// Deprecated unused field.
+        @available(*, deprecated)
         case fieldValueOverriden
         /// The operation involved use of an injected kernel, which is deprecated.
         case injectedKernelsDeprecated

@@ -278,6 +278,7 @@
       public var bakType: BakType = BakType()
 
       /// Deprecated: copy_only is deprecated. Use differential_base instead
+      @available(*, deprecated)
       public var copyOnly: GoogleCloudWkt.BoolValue? = nil
 
       /// Whether or not the backup can be used as a differential base

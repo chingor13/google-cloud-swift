@@ -172,6 +172,7 @@
     /// to continue using the service without interruption.
     ///
     /// @Snippet(path: "projects_moveDisk")
+    @available(*, deprecated)
     public func moveDisk(
       request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
@@ -187,6 +188,7 @@
     /// zones](/compute/docs/instances/moving-instance-across-zones) instead.
     ///
     /// @Snippet(path: "projects_moveInstance")
+    @available(*, deprecated)
     public func moveInstance(
       request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
@@ -331,20 +333,24 @@
       ) throws -> any AsyncSequence<Project, Swift.Error>
 
       /// See `ProjectsClient.moveDisk`.
+      @available(*, deprecated)
       func moveDisk(request: ProjectsClient.MoveDiskRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
       /// See `ProjectsClient.moveDisk`.
+      @available(*, deprecated)
       func moveDisk(
         project: Swift.String,
         body: DiskMoveRequest?,
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ProjectsClient.moveInstance`.
+      @available(*, deprecated)
       func moveInstance(request: ProjectsClient.MoveInstanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
       /// See `ProjectsClient.moveInstance`.
+      @available(*, deprecated)
       func moveInstance(
         project: Swift.String,
         body: InstanceMoveRequest?,
@@ -441,11 +447,13 @@
       ) throws -> any AsyncSequence<Project, Swift.Error>
 
       /// See `ProjectsClient.moveDisk`.
+      @available(*, deprecated)
       func moveDisk(
         request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ProjectsClient.moveInstance`.
+      @available(*, deprecated)
       func moveInstance(
         request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation

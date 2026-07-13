@@ -405,6 +405,7 @@
       /// [Deprecated] This field is deprecated.
       /// An optional SHA1 checksum of the disk image before unpackaging provided
       /// by the client when the disk image is created.
+      @available(*, deprecated)
       public var sha1Checksum: Swift.String? = nil
 
       /// The full Google Cloud Storage URL or Artifact Registry path where the raw

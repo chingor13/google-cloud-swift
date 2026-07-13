@@ -30,6 +30,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.NetworkConfig.default_enable_private_nodes]: <doc:NetworkConfig/defaultEnablePrivateNodes>
+  @available(*, deprecated)
   public var enablePrivateNodes: Swift.Bool = Swift.Bool()
 
   /// Whether the master's internal IP address is used as the cluster endpoint.
@@ -40,6 +41,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// enable_private_endpoint is false, then enable_public_endpoint will be true.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_public_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/enablePublicEndpoint>
+  @available(*, deprecated)
   public var enablePrivateEndpoint: Swift.Bool = Swift.Bool()
 
   /// The IP range in CIDR notation to use for the hosted master network. This
@@ -55,6 +57,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/privateEndpoint>
+  @available(*, deprecated)
   public var privateEndpoint: Swift.String = Swift.String()
 
   /// Output only. The external IP address of this cluster's master endpoint.
@@ -64,6 +67,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.public_endpoint]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/publicEndpoint>
+  @available(*, deprecated)
   public var publicEndpoint: Swift.String = Swift.String()
 
   /// Output only. The peering name in the customer VPC used by this cluster.
@@ -74,6 +78,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Deprecated: Use
   /// [ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_global_access][]
   /// instead.
+  @available(*, deprecated)
   public var masterGlobalAccessConfig: PrivateClusterMasterGlobalAccessConfig? = nil
 
   /// Subnet to provision the master's private endpoint during cluster creation.
@@ -84,6 +89,7 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint_subnetwork]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/privateEndpointSubnetwork>
+  @available(*, deprecated)
   public var privateEndpointSubnetwork: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PrivateClusterConfig`.

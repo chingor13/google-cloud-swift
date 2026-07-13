@@ -30,6 +30,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the operation is taking place. This field is deprecated, use
   /// location instead.
+  @available(*, deprecated)
   public var zone: Swift.String = Swift.String()
 
   /// Output only. The operation type.
@@ -43,6 +44,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Output only. If an error has occurred, a textual description of the error.
   /// Deprecated. Use the field error instead.
+  @available(*, deprecated)
   public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. Server-defined URI for the operation. Example:
@@ -86,10 +88,12 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Which conditions caused the current cluster state.
   /// Deprecated. Use field error instead.
+  @available(*, deprecated)
   public var clusterConditions: [StatusCondition] = []
 
   /// Which conditions caused the current node pool state.
   /// Deprecated. Use field error instead.
+  @available(*, deprecated)
   public var nodepoolConditions: [StatusCondition] = []
 
   /// The error result of the operation in case of failure.
@@ -323,16 +327,19 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// [UPGRADE_NODES][google.container.v1.Operation.Type.UPGRADE_NODES].
     ///
     /// [google.container.v1.Operation.Type.UPGRADE_NODES]: <doc:Operation/Type_/upgradeNodes>
+    @available(*, deprecated)
     case autoUpgradeNodes
     /// Unused. Updating labels uses
     /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
     ///
     /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
+    @available(*, deprecated)
     case setLabels
     /// Unused. Updating master auth uses
     /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
     ///
     /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
+    @available(*, deprecated)
     case setMasterAuth
     /// The node pool is being resized. With the exception of resizing to or from
     /// size zero, the node pool is generally usable during this operation.
@@ -341,11 +348,13 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
     ///
     /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
+    @available(*, deprecated)
     case setNetworkPolicy
     /// Unused. Updating maintenance policy uses
     /// [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
     ///
     /// [google.container.v1.Operation.Type.UPDATE_CLUSTER]: <doc:Operation/Type_/updateCluster>
+    @available(*, deprecated)
     case setMaintenancePolicy
     /// The control plane is being resized. This operation type is initiated by
     /// GKE. These operations are often performed preemptively to ensure that the

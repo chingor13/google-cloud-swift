@@ -75,6 +75,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// If unspecified, it defaults to `ARTIFACT_REGISTRY`.
   /// If `docker_repository` field is specified, this field should either be left
   /// unspecified or set to `ARTIFACT_REGISTRY`.
+  @available(*, deprecated)
   public var dockerRegistry: BuildConfig.DockerRegistry = BuildConfig.DockerRegistry()
 
   /// Repository in Artifact Registry to which the function docker image will be

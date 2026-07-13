@@ -50,6 +50,7 @@
     public var replicaNames: [Swift.String] = []
 
     /// The maximum disk size of the instance in bytes.
+    @available(*, deprecated)
     public var maxDiskSize: GoogleCloudWkt.Int64Value? = nil
 
     /// The current disk usage of the instance in bytes. This property has been
@@ -58,6 +59,7 @@
     /// Monitoring API instead. Please see [this
     /// announcement](https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ)
     /// for details.
+    @available(*, deprecated)
     public var currentDiskSize: GoogleCloudWkt.Int64Value? = nil
 
     /// The assigned IP addresses for the instance.
@@ -76,6 +78,7 @@
     /// The IPv6 address assigned to the instance.
     /// (Deprecated) This property was applicable only
     /// to First Generation instances.
+    @available(*, deprecated)
     public var ipv6Address: Swift.String = Swift.String()
 
     /// The service account email address assigned to the instance.\This
@@ -183,6 +186,7 @@
     public var dnsName: Swift.String? = nil
 
     /// Output only. DEPRECATED: please use write_endpoint instead.
+    @available(*, deprecated)
     public var primaryDnsName: Swift.String? = nil
 
     /// Output only. The dns name of the primary instance in a replication group.
@@ -299,6 +303,7 @@
       /// The start time of any upcoming scheduled maintenance for this instance.
       public var startTime: GoogleCloudWkt.Timestamp? = nil
 
+      @available(*, deprecated)
       public var canDefer: Swift.Bool = Swift.Bool()
 
       /// If the scheduled maintenance can be rescheduled.
@@ -564,6 +569,7 @@
       /// maintenance.
       case failed
       /// Deprecated
+      @available(*, deprecated)
       case onlineMaintenance
       /// (Applicable to read pool nodes only.) The read pool node needs to be
       /// repaired. The database might be unavailable.

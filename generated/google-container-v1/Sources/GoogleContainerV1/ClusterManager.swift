@@ -141,6 +141,7 @@ public class ClusterManagerClient: Clients.ClusterManagerProtocol {
   /// instead.
   ///
   /// @Snippet(path: "ClusterManager_SetLocations")
+  @available(*, deprecated)
   public func setLocations(
     request: SetLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleContainerV1.Operation {
@@ -547,9 +548,11 @@ extension Clients {
     ) async throws -> GoogleContainerV1.Operation
 
     /// See `ClusterManagerClient.setLocations`.
+    @available(*, deprecated)
     func setLocations(request: SetLocationsRequest) async throws -> GoogleContainerV1.Operation
 
     /// See `ClusterManagerClient.setLocations`.
+    @available(*, deprecated)
     func setLocations(
       projectId: Swift.String,
       zone: Swift.String,
@@ -558,6 +561,7 @@ extension Clients {
     ) async throws -> GoogleContainerV1.Operation
 
     /// See `ClusterManagerClient.setLocations`.
+    @available(*, deprecated)
     func setLocations(
       name: Swift.String,
       locations: [Swift.String],
@@ -920,6 +924,7 @@ extension Clients {
     ) async throws -> GoogleContainerV1.Operation
 
     /// See `ClusterManagerClient.setLocations`.
+    @available(*, deprecated)
     func setLocations(
       request: SetLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleContainerV1.Operation

@@ -23,6 +23,7 @@ import GoogleCloudWkt
 ///
 /// CompliancePostureConfig defines the settings needed to enable/disable
 /// features for the Compliance Posture.
+@available(*, deprecated)
 public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

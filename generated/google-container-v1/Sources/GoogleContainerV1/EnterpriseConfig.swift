@@ -21,6 +21,7 @@ import GoogleCloudWkt
 ///
 /// Deprecated: GKE Enterprise features are now available without an Enterprise
 /// tier.
+@available(*, deprecated)
 public struct EnterpriseConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
@@ -50,6 +51,7 @@ public struct EnterpriseConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Deprecated: GKE Enterprise features are now available without an Enterprise
   /// tier.
+  @available(*, deprecated)
   public enum ClusterTier: Codable, Equatable, Sendable {
     /// CLUSTER_TIER_UNSPECIFIED is when cluster_tier is not set.
     case unspecified

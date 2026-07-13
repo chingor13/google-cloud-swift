@@ -44,6 +44,7 @@
     /// means the first character must be a lowercase letter, and all following
     /// characters must be a dash, lowercase letter, or digit, except the last
     /// character, which cannot be a dash.
+    @available(*, deprecated)
     public var displayName: Swift.String? = nil
 
     /// Specifies a fingerprint for this resource, which is essentially a hash of

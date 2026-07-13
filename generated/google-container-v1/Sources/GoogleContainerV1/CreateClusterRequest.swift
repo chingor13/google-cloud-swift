@@ -24,12 +24,14 @@ public struct CreateClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the parent field.
+  @available(*, deprecated)
   public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the parent field.
+  @available(*, deprecated)
   public var zone: Swift.String = Swift.String()
 
   /// Required. A [cluster

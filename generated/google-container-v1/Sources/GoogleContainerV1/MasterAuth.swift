@@ -31,6 +31,7 @@ public struct MasterAuth: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// control plane versions 1.19 and newer. For a list of recommended
   /// authentication methods, see:
   /// https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication
+  @available(*, deprecated)
   public var username: Swift.String = Swift.String()
 
   /// The password to use for HTTP basic authentication to the master endpoint.
@@ -42,6 +43,7 @@ public struct MasterAuth: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// control plane versions 1.19 and newer. For a list of recommended
   /// authentication methods, see:
   /// https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication
+  @available(*, deprecated)
   public var password: Swift.String = Swift.String()
 
   /// Configuration for client certificate authentication on the cluster. For

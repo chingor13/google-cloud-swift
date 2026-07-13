@@ -30,6 +30,7 @@
 
     /// The App Engine app IDs that can access this instance.
     /// (Deprecated) Applied to First Generation instances only.
+    @available(*, deprecated)
     public var authorizedGaeApplications: [Swift.String] = []
 
     /// The tier (or machine type) for this instance, for example
@@ -60,6 +61,7 @@
     /// The type of replication this instance uses. This can be either
     /// `ASYNCHRONOUS` or `SYNCHRONOUS`. (Deprecated) This property was only
     /// applicable to First Generation instances.
+    @available(*, deprecated)
     public var replicationType: SqlReplicationType = SqlReplicationType()
 
     /// The maximum size to which storage capacity can be automatically increased.
@@ -111,6 +113,7 @@
     /// Configuration specific to read replica instances. Indicates whether
     /// database flags for crash-safe replication are enabled. This property was
     /// only applicable to First Generation instances.
+    @available(*, deprecated)
     public var crashSafeReplicationEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// The size of data disk, in GB. The data disk size minimum is 10GB.
@@ -245,6 +248,7 @@
       /// The instance never starts.
       case never
       /// The instance starts upon receiving requests.
+      @available(*, deprecated)
       case onDemand
       /// Encodes an unknown integer value.
       ///

@@ -49,6 +49,7 @@
 
     /// This field is deprecated and will be removed in a future version of the
     /// API.
+    @available(*, deprecated)
     public var disallowCompromisedCredentials: GoogleCloudWkt.BoolValue? = nil
 
     /// Initialize a new instance of `PasswordValidationPolicy`.

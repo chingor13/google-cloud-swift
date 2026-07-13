@@ -571,6 +571,7 @@
     /// Synthetic request message for the [moveDisk()][google.cloud.compute.v1.projects.moveDisk] method.
     ///
     /// [google.cloud.compute.v1.projects.moveDisk]: <doc:Projects/moveDisk(request:)>
+    @available(*, deprecated)
     public struct MoveDiskRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
@@ -627,6 +628,7 @@
     /// Synthetic request message for the [moveInstance()][google.cloud.compute.v1.projects.moveInstance] method.
     ///
     /// [google.cloud.compute.v1.projects.moveInstance]: <doc:Projects/moveInstance(request:)>
+    @available(*, deprecated)
     public struct MoveInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {

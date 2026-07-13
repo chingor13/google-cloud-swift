@@ -58,6 +58,7 @@ public struct BackendRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var deadline: Swift.Double = Swift.Double()
 
   /// Deprecated, do not use.
+  @available(*, deprecated)
   public var minDeadline: Swift.Double = Swift.Double()
 
   /// The number of seconds to wait for the completion of a long running

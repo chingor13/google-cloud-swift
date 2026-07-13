@@ -54,6 +54,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// successful before the system can start ingesting data. This field can only
   /// be updated before the system ingests data for the first time. Any attempt
   /// to modify the field after data ingestion starts results in an error.
+  @available(*, deprecated)
   public var skipVerificationAndIngest: Swift.Bool = Swift.Bool()
 
   /// Number of days of history that must be retained.
@@ -546,6 +547,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Optional. Count of buckets that are not subscribed to Storage
     /// Intelligence.
+    @available(*, deprecated)
     public var nonManagementHubEntitledCount: Swift.Int64 = Swift.Int64()
 
     /// Optional. Number of buckets that encountered internal errors during the
@@ -604,10 +606,12 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Optional. Count of projects that are not subscribed to Storage
     /// Intelligence.
+    @available(*, deprecated)
     public var nonManagementHubEntitledErrorCount: Swift.Int64? = nil
 
     /// Optional. Subset of project numbers that are not subscribed to Storage
     /// Intelligence.
+    @available(*, deprecated)
     public var nonManagementHubEntitledProjectNumbers: [Swift.Int64] = []
 
     /// Optional. Count of projects that are not subscribed to Storage

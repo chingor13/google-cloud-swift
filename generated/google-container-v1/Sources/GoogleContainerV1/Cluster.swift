@@ -44,6 +44,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// auto-generated name. Do not use this and a node_pool at the same time.
   ///
   /// This field is deprecated, use node_pool.initial_node_count instead.
+  @available(*, deprecated)
   public var initialNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Parameters used in creating the cluster's nodes.
@@ -57,6 +58,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// If unspecified, the defaults are used.
   /// This field is deprecated, use node_pool.config instead.
+  @available(*, deprecated)
   public var nodeConfig: NodeConfig? = nil
 
   /// The authentication information for accessing the master endpoint.
@@ -166,6 +168,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// instead.
   ///
   /// [google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.authorized_networks_config]: <doc:ControlPlaneEndpointsConfig/IPEndpointsConfig/authorizedNetworksConfig>
+  @available(*, deprecated)
   public var masterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil
 
   /// Configure the maintenance policy for this cluster.
@@ -239,6 +242,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field is deprecated, use location
   /// instead.
+  @available(*, deprecated)
   public var zone: Swift.String = Swift.String()
 
   /// Output only. The IP address of this cluster's master endpoint.
@@ -272,6 +276,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// instead. The current version of the node software components. If they are
   /// currently at multiple versions because they're in the process of being
   /// upgraded, this reflects the minimum version of all nodes.
+  @available(*, deprecated)
   public var currentNodeVersion: Swift.String = Swift.String()
 
   /// Output only. The time the cluster was created, in
@@ -284,6 +289,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Output only. Deprecated. Use conditions instead.
   /// Additional information about the current status of this
   /// cluster, if available.
+  @available(*, deprecated)
   public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. The size of the address space on each node for hosting
@@ -300,10 +306,12 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var servicesIpv4Cidr: Swift.String = Swift.String()
 
   /// Output only. Deprecated. Use node_pools.instance_group_urls.
+  @available(*, deprecated)
   public var instanceGroupUrls: [Swift.String] = []
 
   /// Output only. The number of nodes currently in the cluster. Deprecated.
   /// Call Kubernetes API directly to retrieve node information.
+  @available(*, deprecated)
   public var currentNodeCount: Swift.Int32 = Swift.Int32()
 
   /// Output only. The time the cluster will be automatically
@@ -320,6 +328,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Enable the ability to use Cloud TPUs in this cluster.
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
+  @available(*, deprecated)
   public var enableTpu: Swift.Bool = Swift.Bool()
 
   /// Output only. The IP address range of the Cloud TPUs in this cluster, in
@@ -327,6 +336,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// notation (e.g. `1.2.3.4/29`).
   /// This field is deprecated due to the deprecation of 2VM TPU. The end of life
   /// date for 2VM TPU is 2025-04-25.
+  @available(*, deprecated)
   public var tpuIpv4CidrBlock: Swift.String = Swift.String()
 
   /// Which conditions caused the current cluster state.
@@ -376,6 +386,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Deprecated: GKE Enterprise features are now available without an Enterprise
   /// tier.
+  @available(*, deprecated)
   public var enterpriseConfig: EnterpriseConfig? = nil
 
   /// Secret CSI driver configuration.
@@ -386,6 +397,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
   ///
   /// Enable/Disable Compliance Posture features for the cluster.
+  @available(*, deprecated)
   public var compliancePostureConfig: CompliancePostureConfig? = nil
 
   /// Output only. Reserved for future use.

@@ -21,6 +21,7 @@ import GoogleCloudWkt
 ///
 /// Deprecated: GKE Enterprise features are now available without an Enterprise
 /// tier.
+@available(*, deprecated)
 public struct DesiredEnterpriseConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

@@ -25,20 +25,24 @@ public struct SetNodePoolManagementRequest: Codable, Equatable, GoogleCloudWkt._
   /// Deprecated. The Google Developers Console [project ID or project
   /// number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
   /// This field has been deprecated and replaced by the name field.
+  @available(*, deprecated)
   public var projectId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the Google Compute Engine
   /// [zone](https://cloud.google.com/compute/docs/zones#available)
   /// in which the cluster resides. This field has been deprecated and replaced
   /// by the name field.
+  @available(*, deprecated)
   public var zone: Swift.String = Swift.String()
 
   /// Deprecated. The name of the cluster to update.
   /// This field has been deprecated and replaced by the name field.
+  @available(*, deprecated)
   public var clusterId: Swift.String = Swift.String()
 
   /// Deprecated. The name of the node pool to update.
   /// This field has been deprecated and replaced by the name field.
+  @available(*, deprecated)
   public var nodePoolId: Swift.String = Swift.String()
 
   /// Required. NodeManagement configuration for the node pool.

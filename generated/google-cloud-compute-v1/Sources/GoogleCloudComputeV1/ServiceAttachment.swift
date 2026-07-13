@@ -106,6 +106,7 @@
 
     /// The URL of a forwarding rule with loadBalancingScheme INTERNAL* that is
     /// serving the endpoint identified by this service attachment.
+    @available(*, deprecated)
     public var producerForwardingRule: Swift.String? = nil
 
     /// The number of consumer spokes that connected Private Service Connect

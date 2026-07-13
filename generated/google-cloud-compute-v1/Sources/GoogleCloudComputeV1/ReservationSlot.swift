@@ -36,6 +36,7 @@
     public var name: Swift.String? = nil
 
     /// Output only. [Output Only] The physical topology of the reservation slot.
+    @available(*, deprecated)
     public var physicalTopology: ReservationSlotPhysicalTopology? = nil
 
     /// Output only. [Output Only] A server-defined fully-qualified URL for this resource.

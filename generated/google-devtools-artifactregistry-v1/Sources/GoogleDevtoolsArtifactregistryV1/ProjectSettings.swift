@@ -63,6 +63,7 @@ public struct ProjectSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Redirection is enabled.
     case redirectionFromGcrIoEnabled
     /// Redirection is enabled, and has been finalized so cannot be reverted.
+    @available(*, deprecated)
     case redirectionFromGcrIoFinalized
     /// Redirection is enabled and missing images are copied from GCR
     case redirectionFromGcrIoEnabledAndCopying

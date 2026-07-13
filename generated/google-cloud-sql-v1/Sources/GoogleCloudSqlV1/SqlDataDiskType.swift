@@ -27,6 +27,7 @@
     case pdHdd
     /// This field is deprecated and will be removed from a future version of the
     /// API.
+    @available(*, deprecated)
     case obsoleteLocalSsd
     /// A Hyperdisk Balanced data disk.
     case hyperdiskBalanced

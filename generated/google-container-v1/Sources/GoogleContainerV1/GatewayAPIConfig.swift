@@ -49,6 +49,7 @@ public struct GatewayAPIConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case disabled
     /// Deprecated: use CHANNEL_STANDARD instead.
     /// Gateway API support is enabled, experimental CRDs are installed
+    @available(*, deprecated)
     case experimental
     /// Gateway API support is enabled, standard CRDs are installed
     case standard

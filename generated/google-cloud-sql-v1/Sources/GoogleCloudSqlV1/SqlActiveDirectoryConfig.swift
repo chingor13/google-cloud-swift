@@ -68,6 +68,7 @@
       /// Managed Active Directory mode.
       case managedActiveDirectory
       /// Deprecated: Use CUSTOMER_MANAGED_ACTIVE_DIRECTORY instead.
+      @available(*, deprecated)
       case selfManagedActiveDirectory
       /// Customer-managed Active Directory mode.
       case customerManagedActiveDirectory

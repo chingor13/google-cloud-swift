@@ -25,6 +25,7 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Machine-friendly representation of the condition
   /// Deprecated. Use canonical_code instead.
+  @available(*, deprecated)
   public var code: StatusCondition.Code = StatusCondition.Code()
 
   /// Human-friendly representation of the condition

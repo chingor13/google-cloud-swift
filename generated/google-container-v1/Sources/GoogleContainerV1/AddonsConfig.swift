@@ -36,6 +36,7 @@ public struct AddonsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// to use the Cloud Console to manage and monitor your Kubernetes clusters,
   /// workloads and applications. For more information, see:
   /// https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards
+  @available(*, deprecated)
   public var kubernetesDashboard: KubernetesDashboard? = nil
 
   /// Configuration for NetworkPolicy. This only tracks whether the addon

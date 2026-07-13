@@ -434,6 +434,7 @@
     /// the backend. The default value is 80.
     /// For internal passthrough Network Load Balancers and external passthrough
     /// Network Load Balancers, omit port.
+    @available(*, deprecated)
     public var port: Swift.Int32? = nil
 
     /// A named port on a backend instance group representing the port for

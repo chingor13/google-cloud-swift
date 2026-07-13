@@ -61,6 +61,7 @@
       /// The state of the topology is unspecified.
       case topologyStateUnspecified
       /// This value has been deprecated and is no longer used.
+      @available(*, deprecated)
       case unhealthy
       /// Encodes an unknown integer value.
       ///

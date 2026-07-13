@@ -141,7 +141,9 @@
       case delete
       /// Restarts the Cloud SQL instance.
       case restart
+      @available(*, deprecated)
       case backup
+      @available(*, deprecated)
       case snapshot
       /// Performs instance backup.
       case backupVolume
@@ -189,9 +191,12 @@
       /// typically causes the instance to be unavailable for 1-3 minutes.
       case maintenance
       /// This field is deprecated, and will be removed in future version of API.
+      @available(*, deprecated)
       case enablePrivateIp
+      @available(*, deprecated)
       case deferMaintenance
       /// Creates clone instance.
+      @available(*, deprecated)
       case createClone
       /// Reschedule maintenance to another time.
       case rescheduleMaintenance
@@ -224,11 +229,13 @@
       /// groups of replicas first, followed by the primary instance. For each
       /// instance, maintenance typically causes the instance to be unavailable for
       /// 1-3 minutes.
+      @available(*, deprecated)
       case clusterMaintenance
       /// Indicates that the instance (and any of its replicas) are currently in
       /// maintenance. This is initiated as a self-service request by using SSM.
       /// Maintenance typically causes the instance to be unavailable for 1-3
       /// minutes.
+      @available(*, deprecated)
       case selfServiceMaintenance
       /// Switches a primary instance to a replica. This operation runs as part of
       /// a switchover operation to the original primary instance.
@@ -236,6 +243,7 @@
       /// Updates the major version of a Cloud SQL instance.
       case majorVersionUpgrade
       /// Deprecated: ADVANCED_BACKUP is deprecated. Use ENHANCED_BACKUP instead.
+      @available(*, deprecated)
       case advancedBackup
       /// Changes the BackupTier of a Cloud SQL instance.
       case manageBackup

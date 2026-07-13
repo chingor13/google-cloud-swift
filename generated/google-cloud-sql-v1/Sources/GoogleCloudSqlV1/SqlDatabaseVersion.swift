@@ -22,8 +22,10 @@
     /// This is an unknown database version.
     case unspecified
     /// The database version is MySQL 5.1.
+    @available(*, deprecated)
     case mysql51
     /// The database version is MySQL 5.5.
+    @available(*, deprecated)
     case mysql55
     /// The database version is MySQL 5.6.
     case mysql56
@@ -68,6 +70,7 @@
     /// The database major version is MySQL 8.0 and the minor version is 28.
     case mysql8028
     /// The database major version is MySQL 8.0 and the minor version is 29.
+    @available(*, deprecated)
     case mysql8029
     /// The database version is PostgreSQL 15.
     case postgres15

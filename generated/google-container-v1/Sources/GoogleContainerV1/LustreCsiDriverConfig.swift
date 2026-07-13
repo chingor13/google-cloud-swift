@@ -35,6 +35,7 @@ public struct LustreCsiDriverConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// Deprecated: This flag is no longer required as of GKE node version
   /// 1.33.2-gke.4655000, unless you are connecting to a Lustre instance
   /// that has the `gke-support-enabled` flag.
+  @available(*, deprecated)
   public var enableLegacyLustrePort: Swift.Bool = Swift.Bool()
 
   /// When set to true, this disables multi-NIC support for the Lustre CSI

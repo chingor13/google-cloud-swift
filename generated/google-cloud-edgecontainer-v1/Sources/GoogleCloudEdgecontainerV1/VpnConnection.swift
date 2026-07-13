@@ -39,6 +39,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var natGatewayIp: Swift.String = Swift.String()
 
   /// Dynamic routing mode of the VPC network, `regional` or `global`.
+  @available(*, deprecated)
   public var bgpRoutingMode: VpnConnection.BgpRoutingMode = VpnConnection.BgpRoutingMode()
 
   /// The canonical Cluster name to connect to. It is in the form of
@@ -87,6 +88,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public var projectId: Swift.String = Swift.String()
 
     /// Optional. Deprecated: do not use.
+    @available(*, deprecated)
     public var serviceAccount: Swift.String = Swift.String()
 
     /// Initialize a new instance of `VpcProject`.

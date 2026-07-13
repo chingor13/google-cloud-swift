@@ -21,6 +21,7 @@
     /// This is an unknown backend type for instance.
     case unspecified
     /// V1 speckle instance.
+    @available(*, deprecated)
     case firstGen
     /// V2 speckle instance.
     case secondGen

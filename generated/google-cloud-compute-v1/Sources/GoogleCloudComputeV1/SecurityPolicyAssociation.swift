@@ -25,6 +25,7 @@
     public var attachmentId: Swift.String? = nil
 
     /// Output only. [Output Only] The display name of the security policy of the association.
+    @available(*, deprecated)
     public var displayName: Swift.String? = nil
 
     /// A list of folders to exclude from the security policy.

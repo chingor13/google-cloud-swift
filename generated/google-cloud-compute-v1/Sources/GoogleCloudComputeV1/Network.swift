@@ -29,6 +29,7 @@
     /// The range of internal addresses that are legal on this network. This
     /// range is aCIDR specification, for example:192.168.0.0/16. Provided by the client when the network is
     /// created.
+    @available(*, deprecated)
     public var ipv4Range: Swift.String? = nil
 
     /// Must be set to create a VPC network. If not set, a legacy network is

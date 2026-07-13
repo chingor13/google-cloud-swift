@@ -208,6 +208,7 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     Sendable
   {
     /// The runtime name, e.g. 'go113'. Leave blank for generic builds.
+    @available(*, deprecated)
     public var runtime: Swift.String = Swift.String()
 
     /// Optional. Name of the function target if the source is a function source.

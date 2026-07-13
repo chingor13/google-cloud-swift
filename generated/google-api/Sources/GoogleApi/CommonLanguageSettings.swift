@@ -23,6 +23,7 @@ public struct CommonLanguageSettings: Codable, Equatable, GoogleCloudWkt._AnyPac
 {
   /// Link to automatically generated reference documentation.  Example:
   /// https://cloud.google.com/nodejs/docs/reference/asset/latest
+  @available(*, deprecated)
   public var referenceDocsUri: Swift.String = Swift.String()
 
   /// The destination where API teams want this client library to be published.

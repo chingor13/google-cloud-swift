@@ -27,6 +27,7 @@
   {
     /// The App Engine application to follow, it must be in the same region as the
     /// Cloud SQL instance. WARNING: Changing this might restart the instance.
+    @available(*, deprecated)
     public var followGaeApplication: Swift.String = Swift.String()
 
     /// The preferred Compute Engine zone (for example: us-central1-a,

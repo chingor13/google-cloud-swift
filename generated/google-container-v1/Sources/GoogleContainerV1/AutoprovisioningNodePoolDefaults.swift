@@ -45,6 +45,7 @@ public struct AutoprovisioningNodePoolDefaults: Codable, Equatable, GoogleCloudW
   /// `cloud.google.com/requested-min-cpu-platform` label selector on the pod.
   /// To unset the min cpu platform field pass "automatic"
   /// as field value.
+  @available(*, deprecated)
   public var minCpuPlatform: Swift.String = Swift.String()
 
   /// Size of the disk attached to each node, specified in GB.

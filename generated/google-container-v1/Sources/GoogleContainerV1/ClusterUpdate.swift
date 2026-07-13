@@ -112,6 +112,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Deprecated: Use
   /// desired_control_plane_endpoints_config.ip_endpoints_config.authorized_networks_config
   /// instead.
+  @available(*, deprecated)
   public var desiredMasterAuthorizedNetworksConfig: MasterAuthorizedNetworksConfig? = nil
 
   /// Cluster-level autoscaling configuration.
@@ -152,6 +153,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// [google.container.v1.ClusterUpdate.desired_enable_private_endpoint]: <doc:ClusterUpdate/desiredEnablePrivateEndpoint>
   /// [google.container.v1.PrivateClusterConfig]: <doc:PrivateClusterConfig>
+  @available(*, deprecated)
   public var desiredPrivateClusterConfig: PrivateClusterConfig? = nil
 
   /// The desired config of Intra-node visibility.
@@ -197,6 +199,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// desired_control_plane_endpoints_config.ip_endpoints_config.enable_public_endpoint
   /// instead. Note that the value of enable_public_endpoint is reversed: if
   /// enable_private_endpoint is false, then enable_public_endpoint will be true.
+  @available(*, deprecated)
   public var desiredEnablePrivateEndpoint: Swift.Bool? = nil
 
   /// Override the default setting of whether future created
@@ -305,6 +308,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
   ///
   /// Enable/Disable Compliance Posture features for the cluster.
+  @available(*, deprecated)
   public var desiredCompliancePostureConfig: CompliancePostureConfig? = nil
 
   /// The desired node kubelet config for the cluster.
@@ -322,6 +326,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// instead.
   ///
   /// [google.container.v1.ClusterUpdate.desired_user_managed_keys_config]: <doc:ClusterUpdate/desiredUserManagedKeysConfig>
+  @available(*, deprecated)
   public var userManagedKeysConfig: UserManagedKeysConfig? = nil
 
   /// RBACBindingConfig allows user to restrict ClusterRoleBindings an
@@ -335,6 +340,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   ///
   /// Deprecated: GKE Enterprise features are now available without an Enterprise
   /// tier.
+  @available(*, deprecated)
   public var desiredEnterpriseConfig: DesiredEnterpriseConfig? = nil
 
   /// AutoIpamConfig contains all information related to Auto IPAM

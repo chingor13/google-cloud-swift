@@ -207,6 +207,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// instead.
     ///
     /// [google.api.MetricDescriptor.launch_stage]: <doc:MetricDescriptor/launchStage>
+    @available(*, deprecated)
     public var launchStage: LaunchStage = LaunchStage()
 
     /// The sampling period of metric data points. For metrics which are written

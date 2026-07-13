@@ -29,6 +29,7 @@
     public var items: [User] = []
 
     /// Unused.
+    @available(*, deprecated)
     public var nextPageToken: Swift.String = Swift.String()
 
     /// Initialize a new instance of `UsersListResponse`.

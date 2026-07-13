@@ -76,6 +76,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Output only. Deprecated. Use conditions instead.
   /// Additional information about the current status of this
   /// node pool instance, if available.
+  @available(*, deprecated)
   public var statusMessage: Swift.String = Swift.String()
 
   /// Autoscaler configuration for this NodePool. Autoscaler is enabled

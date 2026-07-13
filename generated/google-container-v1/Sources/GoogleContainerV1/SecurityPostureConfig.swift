@@ -57,6 +57,7 @@ public struct SecurityPostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
     ///
     /// Applies the Security Posture off cluster Enterprise level features.
+    @available(*, deprecated)
     case enterprise
     /// Encodes an unknown integer value.
     ///
@@ -171,6 +172,7 @@ public struct SecurityPostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation.
     ///
     /// Applies basic vulnerability scanning on the cluster.
+    @available(*, deprecated)
     case vulnerabilityBasic
     /// Applies the Security Posture's vulnerability on cluster Enterprise level
     /// features.

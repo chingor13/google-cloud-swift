@@ -167,6 +167,7 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var threatDetectionEnabled: Swift.Bool = Swift.Bool()
 
   /// Deprecated: Not supported, and ignored by Cloud Run.
+  @available(*, deprecated)
   public var customAudiences: [Swift.String] = []
 
   /// Output only. Reserved for future use.

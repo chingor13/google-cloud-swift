@@ -208,6 +208,7 @@
       /// Instance is managed by Cloud SQL.
       case standard
       /// Deprecated: ADVANCED is deprecated. Please use ENHANCED instead.
+      @available(*, deprecated)
       case advanced
       /// Instance is managed by Google Cloud Backup and DR Service.
       case enhanced

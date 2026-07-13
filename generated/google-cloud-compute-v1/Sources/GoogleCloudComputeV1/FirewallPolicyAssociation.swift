@@ -26,6 +26,7 @@
 
     /// [Output Only] Deprecated, please use short name instead. The display name
     /// of the firewall policy of the association.
+    @available(*, deprecated)
     public var displayName: Swift.String? = nil
 
     /// Output only. [Output Only] The firewall policy ID of the association.

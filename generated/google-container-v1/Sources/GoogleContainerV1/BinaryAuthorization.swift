@@ -24,6 +24,7 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// This field is deprecated. Leave this unset and instead configure
   /// BinaryAuthorization using evaluation_mode. If evaluation_mode is set to
   /// anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
+  @available(*, deprecated)
   public var enabled: Swift.Bool = Swift.Bool()
 
   /// Mode of operation for binauthz policy evaluation. If unspecified, defaults
