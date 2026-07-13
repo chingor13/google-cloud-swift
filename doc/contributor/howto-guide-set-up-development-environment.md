@@ -141,6 +141,8 @@ stest --package-path generated/google-cloud-secretmanager-v1
 You can customize these aliases even further. Consider
 
 -   Add `-Xswiftc -warnings-as-errors` to catch build problems earlier
+    -   You may need to suppress some warnings too, with
+        `-Xswiftc -Wwarning -Xswiftc DeprecatedDeclaration`
 -   Add `--quiet` to `stest` to reduce the noise and only see test failures
 
 ## Exhaustive builds and tests

@@ -25,3 +25,9 @@ extend-exclude = [
 
 [default.extend-words]
 IZ = "IZ"
+
+[default]
+extend-ignore-re = [
+    # Wwarning seems like a typo, but it is not.
+    "-Xswiftc -Wwarning"
+]

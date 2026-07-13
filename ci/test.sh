@@ -31,12 +31,17 @@ count=0
 IFS=$'\n'
 packages=($(git ls-files -- 'Package.swift' 'packages/*Package.swift' 'guide/*Package.swift' | xargs -I{} dirname {} | sort))
 unset IFS
+flags=(
+    -Xswiftc -warnings-as-errors
+    -Xswiftc -Wwarning
+    -Xswiftc DeprecatedDeclaration
+)
 for dir in "${packages[@]}"; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
 
     echo "--- Building ${dir} ---"
-    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+    if swift build --build-tests "${flags[@]}" --package-path "${dir}"; then
         echo "✓ ${dir} built"
     else
         echo "✗ ${dir} failed to build" >&2
@@ -46,7 +51,7 @@ for dir in "${packages[@]}"; do
 
     [[ -d "${dir}/Tests" ]] || continue
     echo "--- Testing ${dir} ---"
-    if swift test -Xswiftc -warnings-as-errors --quiet --package-path "${dir}"; then
+    if swift test "${flags[@]}" --quiet --package-path "${dir}"; then
         echo "✓ ${dir} passed"
     else
         echo "✗ ${dir} failed" >&2

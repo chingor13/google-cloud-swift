@@ -32,12 +32,17 @@ generated=(
   "generated/google-cloud-secretmanager-v1"
   "generated/google-cloud-security-publicca-v1"
 )
+flags=(
+    -Xswiftc -warnings-as-errors
+    -Xswiftc -Wwarning
+    -Xswiftc DeprecatedDeclaration
+)
 for dir in "${generated[@]}"; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
 
     echo "--- Building ${dir} ---"
-    if swift build --build-tests -Xswiftc -warnings-as-errors --package-path "${dir}"; then
+    if swift build --build-tests "${flags[@]}" --package-path "${dir}"; then
         echo "✓ ${dir} built"
     else
         echo "✗ ${dir} failed to build" >&2
