@@ -224,7 +224,7 @@ public class TagBindingsClient: Clients.TagBindingsProtocol {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagBindings_GetOperation")
-  public func getOperation(
+  func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
@@ -292,15 +292,6 @@ extension Clients {
       parent: Swift.String,
     ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
 
-    /// See `TagBindingsClient.getOperation`.
-    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-      -> GoogleLongrunning.Operation
-
-    /// See `TagBindingsClient.getOperation`.
-    func getOperation(
-      name: Swift.String,
-    ) async throws -> GoogleLongrunning.Operation
-
     /// See `TagBindingsClient.listTagBindings`.
     func listTagBindings(
       request: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
@@ -340,11 +331,6 @@ extension Clients {
     func listEffectiveTags(
       byItem: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<EffectiveTag, Swift.Error>
-
-    /// See `TagBindingsClient.getOperation`.
-    func getOperation(
-      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation
   }
 }
 

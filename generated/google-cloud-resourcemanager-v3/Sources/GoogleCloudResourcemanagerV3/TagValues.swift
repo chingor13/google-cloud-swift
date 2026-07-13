@@ -330,7 +330,7 @@ public class TagValuesClient: Clients.TagValuesProtocol {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagValues_GetOperation")
-  public func getOperation(
+  func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
@@ -440,15 +440,6 @@ extension Clients {
       permissions: [Swift.String],
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `TagValuesClient.getOperation`.
-    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-      -> GoogleLongrunning.Operation
-
-    /// See `TagValuesClient.getOperation`.
-    func getOperation(
-      name: Swift.String,
-    ) async throws -> GoogleLongrunning.Operation
-
     /// See `TagValuesClient.listTagValues`.
     func listTagValues(
       request: ListTagValuesRequest, options: GoogleCloudGax.RequestOptions
@@ -513,11 +504,6 @@ extension Clients {
     func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-    /// See `TagValuesClient.getOperation`.
-    func getOperation(
-      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation
   }
 }
 

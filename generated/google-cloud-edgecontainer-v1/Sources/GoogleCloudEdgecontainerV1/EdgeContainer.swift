@@ -810,7 +810,7 @@ public class EdgeContainerClient: Clients.EdgeContainerProtocol {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "EdgeContainer_GetOperation")
-  public func getOperation(
+  func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
@@ -1111,15 +1111,6 @@ extension Clients {
       filter: Swift.String,
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
 
-    /// See `EdgeContainerClient.getOperation`.
-    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-      -> GoogleLongrunning.Operation
-
-    /// See `EdgeContainerClient.getOperation`.
-    func getOperation(
-      name: Swift.String,
-    ) async throws -> GoogleLongrunning.Operation
-
     /// See `EdgeContainerClient.deleteOperation`.
     func deleteOperation(request: GoogleLongrunning.DeleteOperationRequest) async throws
 
@@ -1325,11 +1316,6 @@ extension Clients {
     func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error>
-
-    /// See `EdgeContainerClient.getOperation`.
-    func getOperation(
-      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation
 
     /// See `EdgeContainerClient.deleteOperation`.
     func deleteOperation(

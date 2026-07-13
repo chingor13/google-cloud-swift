@@ -195,7 +195,7 @@ public class TagHoldsClient: Clients.TagHoldsProtocol {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "TagHolds_GetOperation")
-  public func getOperation(
+  func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
@@ -248,15 +248,6 @@ extension Clients {
       parent: Swift.String,
     ) throws -> any AsyncSequence<TagHold, Swift.Error>
 
-    /// See `TagHoldsClient.getOperation`.
-    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-      -> GoogleLongrunning.Operation
-
-    /// See `TagHoldsClient.getOperation`.
-    func getOperation(
-      name: Swift.String,
-    ) async throws -> GoogleLongrunning.Operation
-
     /// See `TagHoldsClient.createTagHold`.
     func createTagHold(
       request: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
@@ -286,11 +277,6 @@ extension Clients {
     func listTagHolds(
       byItem: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TagHold, Swift.Error>
-
-    /// See `TagHoldsClient.getOperation`.
-    func getOperation(
-      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation
   }
 }
 

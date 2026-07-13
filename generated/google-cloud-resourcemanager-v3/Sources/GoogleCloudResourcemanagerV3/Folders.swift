@@ -663,7 +663,7 @@ public class FoldersClient: Clients.FoldersProtocol {
   /// [google.longrunning.Operations]: https://www.google.com/search?q=Swift+google.longrunning+Operations
   ///
   /// @Snippet(path: "Folders_GetOperation")
-  public func getOperation(
+  func getOperation(
     request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleLongrunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
@@ -802,15 +802,6 @@ extension Clients {
       permissions: [Swift.String],
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
-    /// See `FoldersClient.getOperation`.
-    func getOperation(request: GoogleLongrunning.GetOperationRequest) async throws
-      -> GoogleLongrunning.Operation
-
-    /// See `FoldersClient.getOperation`.
-    func getOperation(
-      name: Swift.String,
-    ) async throws -> GoogleLongrunning.Operation
-
     /// See `FoldersClient.getFolder`.
     func getFolder(
       request: GetFolderRequest, options: GoogleCloudGax.RequestOptions
@@ -900,11 +891,6 @@ extension Clients {
     func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
-
-    /// See `FoldersClient.getOperation`.
-    func getOperation(
-      request: GoogleLongrunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleLongrunning.Operation
   }
 }
 

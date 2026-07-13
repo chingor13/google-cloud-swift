@@ -24,131 +24,381 @@ let package = Package(
     .library(name: "GoogleCloudComputeV1", targets: ["GoogleCloudComputeV1"])
   ],
   traits: [
-    .trait(name: "AcceleratorTypes"),
-    .trait(name: "Addresses"),
-    .trait(name: "Advice"),
-    .trait(name: "Autoscalers"),
-    .trait(name: "BackendBuckets"),
-    .trait(name: "BackendServices"),
-    .trait(name: "CrossSiteNetworks"),
-    .trait(name: "DiskTypes"),
-    .trait(name: "Disks"),
-    .trait(name: "ExternalVpnGateways"),
-    .trait(name: "FirewallPolicies"),
-    .trait(name: "Firewalls"),
-    .trait(name: "ForwardingRules"),
-    .trait(name: "FutureReservations"),
-    .trait(name: "GlobalAddresses"),
-    .trait(name: "GlobalForwardingRules"),
-    .trait(name: "GlobalNetworkEndpointGroups"),
-    .trait(name: "GlobalOperations"),
-    .trait(name: "GlobalOrganizationOperations"),
-    .trait(name: "GlobalPublicDelegatedPrefixes"),
-    .trait(name: "GlobalVmExtensionPolicies"),
-    .trait(name: "HealthChecks"),
-    .trait(name: "HttpHealthChecks"),
-    .trait(name: "HttpsHealthChecks"),
-    .trait(name: "ImageFamilyViews"),
-    .trait(name: "Images"),
-    .trait(name: "InstanceGroupManagerResizeRequests"),
-    .trait(name: "InstanceGroupManagers"),
-    .trait(name: "InstanceGroups"),
-    .trait(name: "InstanceSettings"),
-    .trait(name: "InstanceTemplates"),
-    .trait(name: "Instances"),
-    .trait(name: "InstantSnapshotGroups"),
-    .trait(name: "InstantSnapshots"),
-    .trait(name: "InterconnectAttachmentGroups"),
-    .trait(name: "InterconnectAttachments"),
-    .trait(name: "InterconnectGroups"),
-    .trait(name: "InterconnectLocations"),
-    .trait(name: "InterconnectRemoteLocations"),
-    .trait(name: "Interconnects"),
-    .trait(name: "LicenseCodes"),
-    .trait(name: "Licenses"),
-    .trait(name: "MachineImages"),
-    .trait(name: "MachineTypes"),
-    .trait(name: "NetworkAttachments"),
-    .trait(name: "NetworkEdgeSecurityServices"),
-    .trait(name: "NetworkEndpointGroups"),
-    .trait(name: "NetworkFirewallPolicies"),
-    .trait(name: "NetworkProfiles"),
-    .trait(name: "Networks"),
-    .trait(name: "NodeGroups"),
-    .trait(name: "NodeTemplates"),
-    .trait(name: "NodeTypes"),
-    .trait(name: "OrganizationSecurityPolicies"),
-    .trait(name: "PacketMirrorings"),
-    .trait(name: "PreviewFeatures"),
-    .trait(name: "Projects"),
-    .trait(name: "PublicAdvertisedPrefixes"),
-    .trait(name: "PublicDelegatedPrefixes"),
-    .trait(name: "RegionAutoscalers"),
-    .trait(name: "RegionBackendBuckets"),
-    .trait(name: "RegionBackendServices"),
-    .trait(name: "RegionCommitments"),
-    .trait(name: "RegionCompositeHealthChecks"),
-    .trait(name: "RegionDiskTypes"),
-    .trait(name: "RegionDisks"),
-    .trait(name: "RegionHealthAggregationPolicies"),
-    .trait(name: "RegionHealthCheckServices"),
-    .trait(name: "RegionHealthChecks"),
-    .trait(name: "RegionHealthSources"),
-    .trait(name: "RegionInstanceGroupManagerResizeRequests"),
-    .trait(name: "RegionInstanceGroupManagers"),
-    .trait(name: "RegionInstanceGroups"),
-    .trait(name: "RegionInstanceTemplates"),
-    .trait(name: "RegionInstances"),
-    .trait(name: "RegionInstantSnapshotGroups"),
-    .trait(name: "RegionInstantSnapshots"),
-    .trait(name: "RegionNetworkEndpointGroups"),
-    .trait(name: "RegionNetworkFirewallPolicies"),
-    .trait(name: "RegionNotificationEndpoints"),
-    .trait(name: "RegionOperations"),
-    .trait(name: "RegionSecurityPolicies"),
-    .trait(name: "RegionSnapshotSettings"),
-    .trait(name: "RegionSnapshots"),
-    .trait(name: "RegionSslCertificates"),
-    .trait(name: "RegionSslPolicies"),
-    .trait(name: "RegionTargetHttpProxies"),
-    .trait(name: "RegionTargetHttpsProxies"),
-    .trait(name: "RegionTargetTcpProxies"),
-    .trait(name: "RegionUrlMaps"),
-    .trait(name: "RegionZones"),
-    .trait(name: "Regions"),
-    .trait(name: "ReservationBlocks"),
-    .trait(name: "ReservationSlots"),
-    .trait(name: "ReservationSubBlocks"),
-    .trait(name: "Reservations"),
-    .trait(name: "ResourcePolicies"),
-    .trait(name: "RolloutPlans"),
-    .trait(name: "Rollouts"),
-    .trait(name: "Routers"),
-    .trait(name: "Routes"),
-    .trait(name: "SecurityPolicies"),
-    .trait(name: "ServiceAttachments"),
-    .trait(name: "SnapshotSettings"),
-    .trait(name: "Snapshots"),
-    .trait(name: "SslCertificates"),
-    .trait(name: "SslPolicies"),
-    .trait(name: "StoragePoolTypes"),
-    .trait(name: "StoragePools"),
-    .trait(name: "Subnetworks"),
-    .trait(name: "TargetGrpcProxies"),
-    .trait(name: "TargetHttpProxies"),
-    .trait(name: "TargetHttpsProxies"),
-    .trait(name: "TargetInstances"),
-    .trait(name: "TargetPools"),
-    .trait(name: "TargetSslProxies"),
-    .trait(name: "TargetTcpProxies"),
-    .trait(name: "TargetVpnGateways"),
-    .trait(name: "UrlMaps"),
-    .trait(name: "VpnGateways"),
-    .trait(name: "VpnTunnels"),
-    .trait(name: "WireGroups"),
-    .trait(name: "ZoneOperations"),
-    .trait(name: "ZoneVmExtensionPolicies"),
-    .trait(name: "Zones"),
+    .trait(
+      name: "AcceleratorTypes",
+    ),
+    .trait(
+      name: "Addresses",
+    ),
+    .trait(
+      name: "Advice",
+    ),
+    .trait(
+      name: "Autoscalers",
+    ),
+    .trait(
+      name: "BackendBuckets",
+    ),
+    .trait(
+      name: "BackendServices",
+    ),
+    .trait(
+      name: "CrossSiteNetworks",
+    ),
+    .trait(
+      name: "DiskTypes",
+    ),
+    .trait(
+      name: "Disks",
+    ),
+    .trait(
+      name: "ExternalVpnGateways",
+    ),
+    .trait(
+      name: "FirewallPolicies",
+    ),
+    .trait(
+      name: "Firewalls",
+    ),
+    .trait(
+      name: "ForwardingRules",
+    ),
+    .trait(
+      name: "FutureReservations",
+    ),
+    .trait(
+      name: "GlobalAddresses",
+    ),
+    .trait(
+      name: "GlobalForwardingRules",
+    ),
+    .trait(
+      name: "GlobalNetworkEndpointGroups",
+    ),
+    .trait(
+      name: "GlobalOperations",
+    ),
+    .trait(
+      name: "GlobalOrganizationOperations",
+    ),
+    .trait(
+      name: "GlobalPublicDelegatedPrefixes",
+    ),
+    .trait(
+      name: "GlobalVmExtensionPolicies",
+    ),
+    .trait(
+      name: "HealthChecks",
+    ),
+    .trait(
+      name: "HttpHealthChecks",
+    ),
+    .trait(
+      name: "HttpsHealthChecks",
+    ),
+    .trait(
+      name: "ImageFamilyViews",
+    ),
+    .trait(
+      name: "Images",
+    ),
+    .trait(
+      name: "InstanceGroupManagerResizeRequests",
+    ),
+    .trait(
+      name: "InstanceGroupManagers",
+    ),
+    .trait(
+      name: "InstanceGroups",
+    ),
+    .trait(
+      name: "InstanceSettings",
+    ),
+    .trait(
+      name: "InstanceTemplates",
+    ),
+    .trait(
+      name: "Instances",
+    ),
+    .trait(
+      name: "InstantSnapshotGroups",
+    ),
+    .trait(
+      name: "InstantSnapshots",
+    ),
+    .trait(
+      name: "InterconnectAttachmentGroups",
+    ),
+    .trait(
+      name: "InterconnectAttachments",
+    ),
+    .trait(
+      name: "InterconnectGroups",
+    ),
+    .trait(
+      name: "InterconnectLocations",
+    ),
+    .trait(
+      name: "InterconnectRemoteLocations",
+    ),
+    .trait(
+      name: "Interconnects",
+    ),
+    .trait(
+      name: "LicenseCodes",
+    ),
+    .trait(
+      name: "Licenses",
+    ),
+    .trait(
+      name: "MachineImages",
+    ),
+    .trait(
+      name: "MachineTypes",
+    ),
+    .trait(
+      name: "NetworkAttachments",
+    ),
+    .trait(
+      name: "NetworkEdgeSecurityServices",
+    ),
+    .trait(
+      name: "NetworkEndpointGroups",
+    ),
+    .trait(
+      name: "NetworkFirewallPolicies",
+    ),
+    .trait(
+      name: "NetworkProfiles",
+    ),
+    .trait(
+      name: "Networks",
+    ),
+    .trait(
+      name: "NodeGroups",
+    ),
+    .trait(
+      name: "NodeTemplates",
+    ),
+    .trait(
+      name: "NodeTypes",
+    ),
+    .trait(
+      name: "OrganizationSecurityPolicies",
+    ),
+    .trait(
+      name: "PacketMirrorings",
+    ),
+    .trait(
+      name: "PreviewFeatures",
+    ),
+    .trait(
+      name: "Projects",
+    ),
+    .trait(
+      name: "PublicAdvertisedPrefixes",
+    ),
+    .trait(
+      name: "PublicDelegatedPrefixes",
+    ),
+    .trait(
+      name: "RegionAutoscalers",
+    ),
+    .trait(
+      name: "RegionBackendBuckets",
+    ),
+    .trait(
+      name: "RegionBackendServices",
+    ),
+    .trait(
+      name: "RegionCommitments",
+    ),
+    .trait(
+      name: "RegionCompositeHealthChecks",
+    ),
+    .trait(
+      name: "RegionDiskTypes",
+    ),
+    .trait(
+      name: "RegionDisks",
+    ),
+    .trait(
+      name: "RegionHealthAggregationPolicies",
+    ),
+    .trait(
+      name: "RegionHealthCheckServices",
+    ),
+    .trait(
+      name: "RegionHealthChecks",
+    ),
+    .trait(
+      name: "RegionHealthSources",
+    ),
+    .trait(
+      name: "RegionInstanceGroupManagerResizeRequests",
+    ),
+    .trait(
+      name: "RegionInstanceGroupManagers",
+    ),
+    .trait(
+      name: "RegionInstanceGroups",
+    ),
+    .trait(
+      name: "RegionInstanceTemplates",
+    ),
+    .trait(
+      name: "RegionInstances",
+    ),
+    .trait(
+      name: "RegionInstantSnapshotGroups",
+    ),
+    .trait(
+      name: "RegionInstantSnapshots",
+    ),
+    .trait(
+      name: "RegionNetworkEndpointGroups",
+    ),
+    .trait(
+      name: "RegionNetworkFirewallPolicies",
+    ),
+    .trait(
+      name: "RegionNotificationEndpoints",
+    ),
+    .trait(
+      name: "RegionOperations",
+    ),
+    .trait(
+      name: "RegionSecurityPolicies",
+    ),
+    .trait(
+      name: "RegionSnapshotSettings",
+    ),
+    .trait(
+      name: "RegionSnapshots",
+    ),
+    .trait(
+      name: "RegionSslCertificates",
+    ),
+    .trait(
+      name: "RegionSslPolicies",
+    ),
+    .trait(
+      name: "RegionTargetHttpProxies",
+    ),
+    .trait(
+      name: "RegionTargetHttpsProxies",
+    ),
+    .trait(
+      name: "RegionTargetTcpProxies",
+    ),
+    .trait(
+      name: "RegionUrlMaps",
+    ),
+    .trait(
+      name: "RegionZones",
+    ),
+    .trait(
+      name: "Regions",
+    ),
+    .trait(
+      name: "ReservationBlocks",
+    ),
+    .trait(
+      name: "ReservationSlots",
+    ),
+    .trait(
+      name: "ReservationSubBlocks",
+    ),
+    .trait(
+      name: "Reservations",
+    ),
+    .trait(
+      name: "ResourcePolicies",
+    ),
+    .trait(
+      name: "RolloutPlans",
+    ),
+    .trait(
+      name: "Rollouts",
+    ),
+    .trait(
+      name: "Routers",
+    ),
+    .trait(
+      name: "Routes",
+    ),
+    .trait(
+      name: "SecurityPolicies",
+    ),
+    .trait(
+      name: "ServiceAttachments",
+    ),
+    .trait(
+      name: "SnapshotSettings",
+    ),
+    .trait(
+      name: "Snapshots",
+    ),
+    .trait(
+      name: "SslCertificates",
+    ),
+    .trait(
+      name: "SslPolicies",
+    ),
+    .trait(
+      name: "StoragePoolTypes",
+    ),
+    .trait(
+      name: "StoragePools",
+    ),
+    .trait(
+      name: "Subnetworks",
+    ),
+    .trait(
+      name: "TargetGrpcProxies",
+    ),
+    .trait(
+      name: "TargetHttpProxies",
+    ),
+    .trait(
+      name: "TargetHttpsProxies",
+    ),
+    .trait(
+      name: "TargetInstances",
+    ),
+    .trait(
+      name: "TargetPools",
+    ),
+    .trait(
+      name: "TargetSslProxies",
+    ),
+    .trait(
+      name: "TargetTcpProxies",
+    ),
+    .trait(
+      name: "TargetVpnGateways",
+    ),
+    .trait(
+      name: "UrlMaps",
+    ),
+    .trait(
+      name: "VpnGateways",
+    ),
+    .trait(
+      name: "VpnTunnels",
+    ),
+    .trait(
+      name: "WireGroups",
+    ),
+    .trait(
+      name: "ZoneOperations",
+    ),
+    .trait(
+      name: "ZoneVmExtensionPolicies",
+    ),
+    .trait(
+      name: "Zones",
+    ),
     .default(enabledTraits: [
       "Instances"
     ]),

@@ -24,22 +24,54 @@ let package = Package(
     .library(name: "GoogleCloudSqlV1", targets: ["GoogleCloudSqlV1"])
   ],
   traits: [
-    .trait(name: "SqlAvailableDatabaseVersionsService"),
-    .trait(name: "SqlBackupRunsService"),
-    .trait(name: "SqlBackupsService"),
-    .trait(name: "SqlConnectService"),
-    .trait(name: "SqlDatabasesService"),
-    .trait(name: "SqlEventsService"),
-    .trait(name: "SqlFeatureEligibilityService"),
-    .trait(name: "SqlFlagsService"),
-    .trait(name: "SqlIamPoliciesService"),
-    .trait(name: "SqlInstanceNamesService"),
-    .trait(name: "SqlInstancesService"),
-    .trait(name: "SqlOperationsService"),
-    .trait(name: "SqlRegionsService"),
-    .trait(name: "SqlSslCertsService"),
-    .trait(name: "SqlTiersService"),
-    .trait(name: "SqlUsersService"),
+    .trait(
+      name: "SqlAvailableDatabaseVersionsService",
+    ),
+    .trait(
+      name: "SqlBackupRunsService",
+    ),
+    .trait(
+      name: "SqlBackupsService",
+    ),
+    .trait(
+      name: "SqlConnectService",
+    ),
+    .trait(
+      name: "SqlDatabasesService",
+    ),
+    .trait(
+      name: "SqlEventsService",
+    ),
+    .trait(
+      name: "SqlFeatureEligibilityService",
+    ),
+    .trait(
+      name: "SqlFlagsService",
+    ),
+    .trait(
+      name: "SqlIamPoliciesService",
+    ),
+    .trait(
+      name: "SqlInstanceNamesService",
+    ),
+    .trait(
+      name: "SqlInstancesService",
+    ),
+    .trait(
+      name: "SqlOperationsService",
+    ),
+    .trait(
+      name: "SqlRegionsService",
+    ),
+    .trait(
+      name: "SqlSslCertsService",
+    ),
+    .trait(
+      name: "SqlTiersService",
+    ),
+    .trait(
+      name: "SqlUsersService",
+    ),
     .default(enabledTraits: []),
   ],
   dependencies: [
