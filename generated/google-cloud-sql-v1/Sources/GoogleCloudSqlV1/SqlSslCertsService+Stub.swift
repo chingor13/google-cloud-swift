@@ -70,7 +70,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/sslCerts/\(pathVariable2)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "DELETE"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -96,7 +98,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/sslCerts/\(pathVariable2)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -116,7 +120,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/sslCerts"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -140,7 +146,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/sslCerts"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()

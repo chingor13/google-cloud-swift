@@ -222,7 +222,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/addServerCa"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -242,7 +244,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/addServerCertificate"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -262,7 +266,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/addEntraIdCertificate"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -282,7 +288,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/clone"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -306,7 +314,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(
           contentsOf: try encoder.encode(request.enableFinalBackup, prefix: "enableFinalBackup"))
@@ -342,7 +352,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/demoteMaster"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -366,7 +378,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/demote"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -390,7 +404,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/export"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -414,7 +430,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/failover"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -438,7 +456,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/reencrypt"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -462,7 +482,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -482,7 +504,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/import"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -503,7 +527,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -524,7 +550,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
         query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
@@ -548,7 +576,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/listServerCas"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -568,7 +598,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/listServerCertificates"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -588,7 +620,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/listEntraIdCertificates"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -608,7 +642,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "PATCH"
         if let body = request.body {
@@ -632,7 +668,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/promoteReplica"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.failover, prefix: "failover"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -654,7 +692,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/switchover"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.dbTimeout, prefix: "dbTimeout"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -676,7 +716,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/resetSslConfig"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.mode, prefix: "mode"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -698,7 +740,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/restart"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -718,7 +762,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/restoreBackup"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -742,7 +788,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/rotateServerCa"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -766,7 +814,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/rotateServerCertificate"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -790,7 +840,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/rotateEntraIdCertificate"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -814,7 +866,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/startReplica"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -834,7 +888,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/stopReplica"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -854,7 +910,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/truncateLog"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -878,7 +936,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "PUT"
         if let body = request.body {
@@ -902,7 +962,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/createEphemeral"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -926,7 +988,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/rescheduleMaintenance"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -952,7 +1016,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/verifyExternalSyncSettings"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -974,7 +1040,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/startExternalSync"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -996,7 +1064,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/performDiskShrink"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -1020,7 +1090,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/getDiskShrinkConfig"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1040,7 +1112,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/resetReplicaSize"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1062,7 +1136,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/getLatestRecoveryTime"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(
           contentsOf: try encoder.encode(
@@ -1086,7 +1162,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/executeSql"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -1110,7 +1188,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/acquireSsrsLease"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -1134,7 +1214,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/releaseSsrsLease"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1156,7 +1238,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/preCheckMajorVersionUpgrade"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -1177,7 +1261,9 @@
           }
           return "/v1/\(pathVariable0):pointInTimeRestore"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.context {

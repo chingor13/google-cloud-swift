@@ -105,7 +105,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/addPeering"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -133,7 +135,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/cancelRequestRemovePeering"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -159,7 +163,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -181,7 +187,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -202,7 +210,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/getEffectiveFirewalls"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -219,7 +229,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -242,7 +254,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
         query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
@@ -271,7 +285,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/listPeeringRoutes"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.direction, prefix: "direction"))
         query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
@@ -302,7 +318,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -329,7 +347,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/removePeering"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -356,7 +376,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/requestRemovePeering"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -383,7 +405,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/switchToCustomMode"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -406,7 +430,9 @@
           return
             "/compute/v1/projects/\(pathVariable0)/global/networks/\(pathVariable1)/updatePeering"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -433,7 +459,9 @@
           }
           return "/compute/v1/projects/\(pathVariable0)/global/operations/\(pathVariable1)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()

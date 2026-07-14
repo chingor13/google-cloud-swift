@@ -62,7 +62,9 @@
           }
           return "/compute/v1/locations/global/operations/\(pathVariable0)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.parentId, prefix: "parentId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -81,7 +83,9 @@
           }
           return "/compute/v1/locations/global/operations/\(pathVariable0)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.parentId, prefix: "parentId"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -98,7 +102,9 @@
         let path = try { () throws -> Swift.String in
           return "/compute/v1/locations/global/operations"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
         query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))

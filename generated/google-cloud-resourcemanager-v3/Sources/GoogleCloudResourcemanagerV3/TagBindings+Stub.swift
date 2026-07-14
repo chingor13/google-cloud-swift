@@ -63,7 +63,9 @@ extension Clients {
       let path = try { () throws -> Swift.String in
         return "/v3/tagBindings"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.parent, prefix: "parent"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -81,7 +83,9 @@ extension Clients {
       let path = try { () throws -> Swift.String in
         return "/v3/tagBindings"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.validateOnly, prefix: "validateOnly"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -104,7 +108,9 @@ extension Clients {
         }
         return "/v3/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -118,7 +124,9 @@ extension Clients {
       let path = try { () throws -> Swift.String in
         return "/v3/effectiveTags"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.parent, prefix: "parent"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -139,7 +147,9 @@ extension Clients {
         }
         return "/v3/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()

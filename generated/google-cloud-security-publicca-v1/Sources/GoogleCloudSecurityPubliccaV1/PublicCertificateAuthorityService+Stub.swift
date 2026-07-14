@@ -48,7 +48,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/externalAccountKeys"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       if let body = request.externalAccountKey {

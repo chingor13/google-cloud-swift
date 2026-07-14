@@ -68,7 +68,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/backupRuns/\(pathVariable2)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "DELETE"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -92,7 +94,9 @@
           return
             "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/backupRuns/\(pathVariable2)"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -112,7 +116,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/backupRuns"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -136,7 +142,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/backupRuns"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
         query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))

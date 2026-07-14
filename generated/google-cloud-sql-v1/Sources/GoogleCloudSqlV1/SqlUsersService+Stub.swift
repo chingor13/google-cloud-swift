@@ -68,7 +68,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/users"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.host, prefix: "host"))
         query.append(contentsOf: try encoder.encode(request.name, prefix: "name"))
@@ -94,7 +96,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/users/\(pathVariable2)"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.host, prefix: "host"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -116,7 +120,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/users"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         if let body = request.body {
@@ -140,7 +146,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/users"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         let (data, _) = try await self.inner.rpc(for: req).get()
@@ -160,7 +168,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/users"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.host, prefix: "host"))
         query.append(contentsOf: try encoder.encode(request.name, prefix: "name"))

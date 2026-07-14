@@ -260,7 +260,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/dockerImages"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -281,7 +283,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -298,7 +302,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/mavenArtifacts"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -318,7 +324,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -335,7 +343,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/npmPackages"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -355,7 +365,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -372,7 +384,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/pythonPackages"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -392,7 +406,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -409,7 +425,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/aptArtifacts:import"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -428,7 +446,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/yumArtifacts:import"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -447,7 +467,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/repositories"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -469,7 +491,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -486,7 +510,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/repositories"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.repositoryId, prefix: "repositoryId"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -510,7 +536,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -533,7 +561,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -550,7 +580,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/packages"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -572,7 +604,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -589,7 +623,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -606,7 +642,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/versions"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -629,7 +667,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.view, prefix: "view"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -648,7 +688,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.force, prefix: "force"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -667,7 +709,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/versions:batchDelete"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -686,7 +730,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -709,7 +755,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/files"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -731,7 +779,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -748,7 +798,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -765,7 +817,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -788,7 +842,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/tags"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -809,7 +865,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -826,7 +884,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/tags"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.tagId, prefix: "tagId"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -849,7 +909,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -872,7 +934,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       _ = try await self.inner.rpc(for: req).get()
@@ -887,7 +951,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/rules"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.ruleId, prefix: "ruleId"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -910,7 +976,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/rules"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -930,7 +998,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -947,7 +1017,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -970,7 +1042,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       _ = try await self.inner.rpc(for: req).get()
@@ -985,7 +1059,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0):setIamPolicy"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1004,7 +1080,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0):getIamPolicy"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.options, prefix: "options"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -1023,7 +1101,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0):testIamPermissions"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1042,7 +1122,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1061,7 +1143,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -1084,7 +1168,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1103,7 +1189,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -1126,7 +1214,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.updateMask, prefix: "updateMask"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -1149,7 +1239,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/attachments"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -1170,7 +1262,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1187,7 +1281,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/attachments"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.attachmentId, prefix: "attachmentId"))
       var req = try await self.inner.Request(path: path, query: query)
@@ -1210,7 +1306,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "DELETE"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1227,7 +1325,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0):exportArtifact"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1246,7 +1346,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)/locations"
       }()
-      var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
@@ -1267,7 +1369,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()
@@ -1284,7 +1388,9 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       let (data, _) = try await self.inner.rpc(for: req).get()

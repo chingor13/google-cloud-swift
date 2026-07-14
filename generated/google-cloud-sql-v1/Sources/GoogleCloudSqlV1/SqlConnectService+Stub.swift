@@ -56,7 +56,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)/connectSettings"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.readTime, prefix: "readTime"))
         var req = try await self.inner.Request(path: path, query: query)
@@ -78,7 +80,9 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1):generateEphemeralCert"
         }()
-        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")

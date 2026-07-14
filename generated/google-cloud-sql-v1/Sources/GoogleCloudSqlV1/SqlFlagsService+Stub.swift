@@ -46,7 +46,9 @@
         let path = try { () throws -> Swift.String in
           return "/v1/flags"
         }()
-        var query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(
           contentsOf: try encoder.encode(request.databaseVersion, prefix: "databaseVersion"))
