@@ -52,6 +52,44 @@
       try await self.inner.addResourcePolicies(request: request, options: options)
     }
 
+    /// Adds existing resource policies to a disk. You can only add one
+    /// policy which will be applied to this disk for scheduling snapshot
+    /// creation.
+    ///
+    /// @Snippet(path: "disks_addResourcePolicies")
+    public func addResourcePolicies(
+      withPolling: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.addResourcePolicies(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Retrieves an aggregated list of persistent disks.
     ///
     /// To prevent failure, it is recommended that you set the
@@ -90,6 +128,42 @@
       try await self.inner.bulkInsert(request: request, options: options)
     }
 
+    /// Bulk create a set of disks.
+    ///
+    /// @Snippet(path: "disks_bulkInsert")
+    public func bulkInsert(
+      withPolling: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.bulkInsert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Sets the labels on many disks at once. To learn more about labels, read theLabeling
     /// Resources documentation.
     ///
@@ -98,6 +172,43 @@
       request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.bulkSetLabels(request: request, options: options)
+    }
+
+    /// Sets the labels on many disks at once. To learn more about labels, read theLabeling
+    /// Resources documentation.
+    ///
+    /// @Snippet(path: "disks_bulkSetLabels")
+    public func bulkSetLabels(
+      withPolling: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.bulkSetLabels(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Creates a snapshot of a specified persistent disk. For regular snapshot
@@ -112,6 +223,45 @@
       try await self.inner.createSnapshot(request: request, options: options)
     }
 
+    /// Creates a snapshot of a specified persistent disk. For regular snapshot
+    /// creation, consider using snapshots.insert
+    /// instead, as that method supports more features, such as creating snapshots
+    /// in a project different from the source disk project.
+    ///
+    /// @Snippet(path: "disks_createSnapshot")
+    public func createSnapshot(
+      withPolling: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.createSnapshot(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes the specified persistent disk. Deleting a disk removes its data
     /// permanently and is irreversible. However, deleting a disk does not
     /// delete any snapshots
@@ -123,6 +273,46 @@
       request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
+    }
+
+    /// Deletes the specified persistent disk. Deleting a disk removes its data
+    /// permanently and is irreversible. However, deleting a disk does not
+    /// delete any snapshots
+    /// previously made from the disk. You must separatelydelete
+    /// snapshots.
+    ///
+    /// @Snippet(path: "disks_delete")
+    public func delete(
+      withPolling: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns the specified persistent disk.
@@ -155,6 +345,46 @@
       request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a persistent disk in the specified project using the data
+    /// in the request. You can create a disk from a source
+    /// (sourceImage, sourceSnapshot, orsourceDisk) or create an empty 500 GB data disk by
+    /// omitting all properties. You can also create a disk that is larger than
+    /// the default size by specifying the sizeGb property.
+    ///
+    /// @Snippet(path: "disks_insert")
+    public func insert(
+      withPolling: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves a list of persistent disks contained within
@@ -191,6 +421,42 @@
       try await self.inner.removeResourcePolicies(request: request, options: options)
     }
 
+    /// Removes resource policies from a disk.
+    ///
+    /// @Snippet(path: "disks_removeResourcePolicies")
+    public func removeResourcePolicies(
+      withPolling: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.removeResourcePolicies(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Resizes the specified persistent disk.
     /// You can only increase the size of the disk.
     ///
@@ -199,6 +465,43 @@
       request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.resize(request: request, options: options)
+    }
+
+    /// Resizes the specified persistent disk.
+    /// You can only increase the size of the disk.
+    ///
+    /// @Snippet(path: "disks_resize")
+    public func resize(
+      withPolling: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.resize(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Sets the access control policy on the specified resource.
@@ -221,6 +524,43 @@
       try await self.inner.setLabels(request: request, options: options)
     }
 
+    /// Sets the labels on a disk. To learn more about labels, read theLabeling
+    /// Resources documentation.
+    ///
+    /// @Snippet(path: "disks_setLabels")
+    public func setLabels(
+      withPolling: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setLabels(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Starts asynchronous replication.
     /// Must be invoked on the primary disk.
     ///
@@ -229,6 +569,43 @@
       request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.startAsyncReplication(request: request, options: options)
+    }
+
+    /// Starts asynchronous replication.
+    /// Must be invoked on the primary disk.
+    ///
+    /// @Snippet(path: "disks_startAsyncReplication")
+    public func startAsyncReplication(
+      withPolling: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.startAsyncReplication(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Stops asynchronous replication.
@@ -241,6 +618,43 @@
       try await self.inner.stopAsyncReplication(request: request, options: options)
     }
 
+    /// Stops asynchronous replication.
+    /// Can be invoked either on the primary or on the secondary disk.
+    ///
+    /// @Snippet(path: "disks_stopAsyncReplication")
+    public func stopAsyncReplication(
+      withPolling: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.stopAsyncReplication(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Stops asynchronous replication for a consistency group of disks.
     /// Can be invoked either in the primary or secondary scope.
     ///
@@ -249,6 +663,44 @@
       request: DisksClient.StopGroupAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.stopGroupAsyncReplication(request: request, options: options)
+    }
+
+    /// Stops asynchronous replication for a consistency group of disks.
+    /// Can be invoked either in the primary or secondary scope.
+    ///
+    /// @Snippet(path: "disks_stopGroupAsyncReplication")
+    public func stopGroupAsyncReplication(
+      withPolling: DisksClient.StopGroupAsyncReplicationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.stopGroupAsyncReplication(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns permissions that a caller has on the specified resource.
@@ -271,6 +723,44 @@
       try await self.inner.update(request: request, options: options)
     }
 
+    /// Updates the specified disk with the data included in the request.
+    /// The update is performed only on selected fields included as part
+    /// of update-mask.
+    ///
+    /// @Snippet(path: "disks_update")
+    public func update(
+      withPolling: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.update(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Rotates the customer-managed
     /// encryption key to the latest version for the specified persistent disk.
     ///
@@ -279,6 +769,52 @@
       request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.updateKmsKey(request: request, options: options)
+    }
+
+    /// Rotates the customer-managed
+    /// encryption key to the latest version for the specified persistent disk.
+    ///
+    /// @Snippet(path: "disks_updateKmsKey")
+    public func updateKmsKey(
+      withPolling: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.updateKmsKey(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified zone-specific Operations resource.
+    ///
+    /// @Snippet(path: "disks_getOperation")
+    func getOperation(
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -662,6 +1198,39 @@
       return try await self.addResourcePolicies(request: request)
     }
 
+    public func addResourcePolicies(
+      withPolling: DisksClient.AddResourcePoliciesRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.addResourcePolicies(withPolling: withPolling, options: .init())
+    }
+
+    public func addResourcePolicies(
+      withPolling: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func addResourcePolicies(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: DisksAddResourcePoliciesRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.AddResourcePoliciesRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.addResourcePolicies(withPolling: request)
+    }
+
     public func aggregatedList(request: DisksClient.AggregatedListRequest) async throws
       -> GoogleCloudComputeV1.DiskAggregatedList
     {
@@ -723,6 +1292,37 @@
       return try await self.bulkInsert(request: request)
     }
 
+    public func bulkInsert(
+      withPolling: DisksClient.BulkInsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.bulkInsert(withPolling: withPolling, options: .init())
+    }
+
+    public func bulkInsert(
+      withPolling: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func bulkInsert(
+      project: Swift.String,
+      zone: Swift.String,
+      body: BulkInsertDiskResource?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.BulkInsertRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.body = body
+      }
+      return try await self.bulkInsert(withPolling: request)
+    }
+
     public func bulkSetLabels(request: DisksClient.BulkSetLabelsRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -746,6 +1346,37 @@
         $0.body = body
       }
       return try await self.bulkSetLabels(request: request)
+    }
+
+    public func bulkSetLabels(
+      withPolling: DisksClient.BulkSetLabelsRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.bulkSetLabels(withPolling: withPolling, options: .init())
+    }
+
+    public func bulkSetLabels(
+      withPolling: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func bulkSetLabels(
+      project: Swift.String,
+      zone: Swift.String,
+      body: BulkZoneSetLabelsRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.BulkSetLabelsRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.body = body
+      }
+      return try await self.bulkSetLabels(withPolling: request)
     }
 
     public func createSnapshot(request: DisksClient.CreateSnapshotRequest) async throws
@@ -775,6 +1406,39 @@
       return try await self.createSnapshot(request: request)
     }
 
+    public func createSnapshot(
+      withPolling: DisksClient.CreateSnapshotRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.createSnapshot(withPolling: withPolling, options: .init())
+    }
+
+    public func createSnapshot(
+      withPolling: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func createSnapshot(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: Snapshot?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.CreateSnapshotRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.createSnapshot(withPolling: request)
+    }
+
     public func delete(request: DisksClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -798,6 +1462,37 @@
         $0.disk = disk
       }
       return try await self.delete(request: request)
+    }
+
+    public func delete(
+      withPolling: DisksClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.DeleteRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+      }
+      return try await self.delete(withPolling: request)
     }
 
     public func `get`(request: DisksClient.GetRequest) async throws -> GoogleCloudComputeV1.Disk {
@@ -873,6 +1568,37 @@
       return try await self.insert(request: request)
     }
 
+    public func insert(
+      withPolling: DisksClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      zone: Swift.String,
+      body: Disk?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.InsertRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
+    }
+
     public func list(request: DisksClient.ListRequest) async throws -> GoogleCloudComputeV1.DiskList
     {
       try await self.list(request: request, options: .init())
@@ -937,6 +1663,39 @@
       return try await self.removeResourcePolicies(request: request)
     }
 
+    public func removeResourcePolicies(
+      withPolling: DisksClient.RemoveResourcePoliciesRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.removeResourcePolicies(withPolling: withPolling, options: .init())
+    }
+
+    public func removeResourcePolicies(
+      withPolling: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func removeResourcePolicies(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: DisksRemoveResourcePoliciesRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.RemoveResourcePoliciesRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.removeResourcePolicies(withPolling: request)
+    }
+
     public func resize(request: DisksClient.ResizeRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -962,6 +1721,39 @@
         $0.body = body
       }
       return try await self.resize(request: request)
+    }
+
+    public func resize(
+      withPolling: DisksClient.ResizeRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.resize(withPolling: withPolling, options: .init())
+    }
+
+    public func resize(
+      withPolling: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func resize(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: DisksResizeRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.ResizeRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.resize(withPolling: request)
     }
 
     public func setIamPolicy(request: DisksClient.SetIamPolicyRequest) async throws
@@ -1018,6 +1810,39 @@
       return try await self.setLabels(request: request)
     }
 
+    public func setLabels(
+      withPolling: DisksClient.SetLabelsRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setLabels(withPolling: withPolling, options: .init())
+    }
+
+    public func setLabels(
+      withPolling: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setLabels(
+      project: Swift.String,
+      zone: Swift.String,
+      resource: Swift.String,
+      body: ZoneSetLabelsRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.SetLabelsRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.resource = resource
+        $0.body = body
+      }
+      return try await self.setLabels(withPolling: request)
+    }
+
     public func startAsyncReplication(request: DisksClient.StartAsyncReplicationRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
@@ -1045,6 +1870,39 @@
       return try await self.startAsyncReplication(request: request)
     }
 
+    public func startAsyncReplication(
+      withPolling: DisksClient.StartAsyncReplicationRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.startAsyncReplication(withPolling: withPolling, options: .init())
+    }
+
+    public func startAsyncReplication(
+      withPolling: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func startAsyncReplication(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: DisksStartAsyncReplicationRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.StartAsyncReplicationRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.startAsyncReplication(withPolling: request)
+    }
+
     public func stopAsyncReplication(request: DisksClient.StopAsyncReplicationRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -1070,6 +1928,37 @@
       return try await self.stopAsyncReplication(request: request)
     }
 
+    public func stopAsyncReplication(
+      withPolling: DisksClient.StopAsyncReplicationRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.stopAsyncReplication(withPolling: withPolling, options: .init())
+    }
+
+    public func stopAsyncReplication(
+      withPolling: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func stopAsyncReplication(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.StopAsyncReplicationRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+      }
+      return try await self.stopAsyncReplication(withPolling: request)
+    }
+
     public func stopGroupAsyncReplication(request: DisksClient.StopGroupAsyncReplicationRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
@@ -1093,6 +1982,38 @@
         $0.body = body
       }
       return try await self.stopGroupAsyncReplication(request: request)
+    }
+
+    public func stopGroupAsyncReplication(
+      withPolling: DisksClient.StopGroupAsyncReplicationRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.stopGroupAsyncReplication(withPolling: withPolling, options: .init())
+    }
+
+    public func stopGroupAsyncReplication(
+      withPolling: DisksClient.StopGroupAsyncReplicationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func stopGroupAsyncReplication(
+      project: Swift.String,
+      zone: Swift.String,
+      body: DisksStopGroupAsyncReplicationResource?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.StopGroupAsyncReplicationRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.body = body
+      }
+      return try await self.stopGroupAsyncReplication(withPolling: request)
     }
 
     public func testIamPermissions(request: DisksClient.TestIamPermissionsRequest) async throws
@@ -1149,6 +2070,39 @@
       return try await self.update(request: request)
     }
 
+    public func update(
+      withPolling: DisksClient.UpdateRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.update(withPolling: withPolling, options: .init())
+    }
+
+    public func update(
+      withPolling: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func update(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: Disk?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.UpdateRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.update(withPolling: request)
+    }
+
     public func updateKmsKey(request: DisksClient.UpdateKmsKeyRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -1174,6 +2128,51 @@
         $0.body = body
       }
       return try await self.updateKmsKey(request: request)
+    }
+
+    public func updateKmsKey(
+      withPolling: DisksClient.UpdateKmsKeyRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.updateKmsKey(withPolling: withPolling, options: .init())
+    }
+
+    public func updateKmsKey(
+      withPolling: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func updateKmsKey(
+      project: Swift.String,
+      zone: Swift.String,
+      disk: Swift.String,
+      body: DiskUpdateKmsKeyRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = DisksClient.UpdateKmsKeyRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.disk = disk
+        $0.body = body
+      }
+      return try await self.updateKmsKey(withPolling: request)
+    }
+
+    public func getOperation(request: ZoneOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionDisksClient) async throws {
-    let response = try await client.resize(
-      request: RegionDisksClient.ResizeRequest()
+    let poller = try await client.resize(
+      withPolling: RegionDisksClient.ResizeRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

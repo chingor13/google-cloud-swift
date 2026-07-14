@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: TargetTcpProxiesClient) async throws {
-    let response = try await client.setProxyHeader(
-      request: TargetTcpProxiesClient.SetProxyHeaderRequest()
+    let poller = try await client.setProxyHeader(
+      withPolling: TargetTcpProxiesClient.SetProxyHeaderRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

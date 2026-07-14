@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionTargetHttpsProxiesClient) async throws {
-    let response = try await client.insert(
-      request: RegionTargetHttpsProxiesClient.InsertRequest()
+    let poller = try await client.insert(
+      withPolling: RegionTargetHttpsProxiesClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

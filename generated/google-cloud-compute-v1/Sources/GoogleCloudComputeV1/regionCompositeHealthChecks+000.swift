@@ -86,6 +86,43 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified CompositeHealthCheck in the given region
+    ///
+    /// @Snippet(path: "regionCompositeHealthChecks_delete")
+    public func delete(
+      withPolling: RegionCompositeHealthChecksClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns the specified CompositeHealthCheck resource in the given region.
     ///
     /// @Snippet(path: "regionCompositeHealthChecks_get")
@@ -115,6 +152,44 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Create a CompositeHealthCheck in the specified project in the given region
+    /// using the parameters that are included in the request.
+    ///
+    /// @Snippet(path: "regionCompositeHealthChecks_insert")
+    public func insert(
+      withPolling: RegionCompositeHealthChecksClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Lists the CompositeHealthChecks for a project in the given region.
@@ -154,6 +229,46 @@
       try await self.inner.patch(request: request, options: options)
     }
 
+    /// Updates the specified regional CompositeHealthCheck resource
+    /// with the data included in the request.  This method supportsPATCH
+    /// semantics and uses theJSON merge
+    /// patch format and processing rules.
+    ///
+    /// @Snippet(path: "regionCompositeHealthChecks_patch")
+    public func patch(
+      withPolling: RegionCompositeHealthChecksClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "regionCompositeHealthChecks_testIamPermissions")
@@ -162,6 +277,15 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
+    }
+
+    /// Retrieves the specified region-specific Operations resource.
+    ///
+    /// @Snippet(path: "regionCompositeHealthChecks_getOperation")
+    func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -398,6 +522,38 @@
       return try await self.delete(request: request)
     }
 
+    public func delete(
+      withPolling: RegionCompositeHealthChecksClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: RegionCompositeHealthChecksClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      region: Swift.String,
+      compositeHealthCheck: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionCompositeHealthChecksClient.DeleteRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.compositeHealthCheck = compositeHealthCheck
+      }
+      return try await self.delete(withPolling: request)
+    }
+
     public func `get`(request: RegionCompositeHealthChecksClient.GetRequest) async throws
       -> GoogleCloudComputeV1.CompositeHealthCheck
     {
@@ -475,6 +631,38 @@
       return try await self.insert(request: request)
     }
 
+    public func insert(
+      withPolling: RegionCompositeHealthChecksClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: RegionCompositeHealthChecksClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      region: Swift.String,
+      body: CompositeHealthCheck?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionCompositeHealthChecksClient.InsertRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
+    }
+
     public func list(request: RegionCompositeHealthChecksClient.ListRequest) async throws
       -> GoogleCloudComputeV1.CompositeHealthCheckList
     {
@@ -542,6 +730,40 @@
       return try await self.patch(request: request)
     }
 
+    public func patch(
+      withPolling: RegionCompositeHealthChecksClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: RegionCompositeHealthChecksClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      project: Swift.String,
+      region: Swift.String,
+      compositeHealthCheck: Swift.String,
+      body: CompositeHealthCheck?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionCompositeHealthChecksClient.PatchRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.compositeHealthCheck = compositeHealthCheck
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
+    }
+
     public func testIamPermissions(
       request: RegionCompositeHealthChecksClient.TestIamPermissionsRequest
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
@@ -568,6 +790,18 @@
         $0.body = body
       }
       return try await self.testIamPermissions(request: request)
+    }
+
+    public func getOperation(request: RegionOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

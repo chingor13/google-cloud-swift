@@ -70,6 +70,10 @@
       func testIamPermissions(
         request: ImagesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+
+      func getOperation(
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
     }
 
     class ImagesTransport: ImagesStub {
@@ -338,6 +342,27 @@
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.TestPermissionsResponse.self, from: data)
+      }
+
+      public func getOperation(
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.operation as Swift.String?, !pathVariable1.isEmpty
+          else {
+            throw GoogleCloudGax.RequestError.binding("'request.operation' is not set or is empty")
+          }
+          return "/compute/v1/projects/\(pathVariable0)/global/operations/\(pathVariable1)"
+        }()
+        let query = [URLQueryItem(name: "$alt", value: "json;enum-encoding=int")]
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "GET"
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.Operation.self, from: data)
       }
     }
   }

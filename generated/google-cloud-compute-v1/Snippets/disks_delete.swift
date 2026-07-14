@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: DisksClient) async throws {
-    let response = try await client.delete(
-      request: DisksClient.DeleteRequest()
+    let poller = try await client.delete(
+      withPolling: DisksClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionUrlMapsClient) async throws {
-    let response = try await client.patch(
-      request: RegionUrlMapsClient.PatchRequest()
+    let poller = try await client.patch(
+      withPolling: RegionUrlMapsClient.PatchRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

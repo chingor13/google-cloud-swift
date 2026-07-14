@@ -84,6 +84,43 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified instance template. Deleting an instance template is
+    /// permanent and cannot be undone. It is not possible to delete templates
+    /// that are already in use by a managed instance group.
+    ///
+    /// @Snippet(path: "instanceTemplates_delete")
+    public func delete(
+      withPolling: InstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns the specified instance template.
     ///
     /// @Snippet(path: "instanceTemplates_get")
@@ -114,6 +151,45 @@
       request: InstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates an instance template in the specified project using the
+    /// data that is included in the request. If you are creating a new template to
+    /// update an existing instance group, your new instance template must use the
+    /// same network or, if applicable, the same subnetwork as the original
+    /// template.
+    ///
+    /// @Snippet(path: "instanceTemplates_insert")
+    public func insert(
+      withPolling: InstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves a list of instance templates that are contained within
@@ -159,6 +235,15 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
+    }
+
+    /// Retrieves the specified Operations resource.
+    ///
+    /// @Snippet(path: "instanceTemplates_getOperation")
+    func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -376,6 +461,35 @@
       return try await self.delete(request: request)
     }
 
+    public func delete(
+      withPolling: InstanceTemplatesClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: InstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      instanceTemplate: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = InstanceTemplatesClient.DeleteRequest().with {
+        $0.project = project
+        $0.instanceTemplate = instanceTemplate
+      }
+      return try await self.delete(withPolling: request)
+    }
+
     public func `get`(request: InstanceTemplatesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.InstanceTemplate
     {
@@ -443,6 +557,35 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: InstanceTemplatesClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: InstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      body: InstanceTemplate?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = InstanceTemplatesClient.InsertRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: InstanceTemplatesClient.ListRequest) async throws
@@ -530,6 +673,18 @@
         $0.body = body
       }
       return try await self.testIamPermissions(request: request)
+    }
+
+    public func getOperation(request: GlobalOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

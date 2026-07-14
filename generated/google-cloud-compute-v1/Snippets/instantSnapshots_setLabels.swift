@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstantSnapshotsClient) async throws {
-    let response = try await client.setLabels(
-      request: InstantSnapshotsClient.SetLabelsRequest()
+    let poller = try await client.setLabels(
+      withPolling: InstantSnapshotsClient.SetLabelsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

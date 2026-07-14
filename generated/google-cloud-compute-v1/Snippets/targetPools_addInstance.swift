@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: TargetPoolsClient) async throws {
-    let response = try await client.addInstance(
-      request: TargetPoolsClient.AddInstanceRequest()
+    let poller = try await client.addInstance(
+      withPolling: TargetPoolsClient.AddInstanceRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

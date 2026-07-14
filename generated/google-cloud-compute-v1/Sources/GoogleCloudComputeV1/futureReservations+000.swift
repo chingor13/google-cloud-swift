@@ -83,6 +83,42 @@
       try await self.inner.cancel(request: request, options: options)
     }
 
+    /// Cancel the specified future reservation.
+    ///
+    /// @Snippet(path: "futureReservations_cancel")
+    public func cancel(
+      withPolling: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.cancel(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes the specified future reservation.
     ///
     /// @Snippet(path: "futureReservations_delete")
@@ -90,6 +126,42 @@
       request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
+    }
+
+    /// Deletes the specified future reservation.
+    ///
+    /// @Snippet(path: "futureReservations_delete")
+    public func delete(
+      withPolling: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves information about the specified future reservation.
@@ -108,6 +180,42 @@
       request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a new Future Reservation.
+    ///
+    /// @Snippet(path: "futureReservations_insert")
+    public func insert(
+      withPolling: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// A list of all the future reservations that have been configured for the
@@ -143,6 +251,51 @@
       request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.update(request: request, options: options)
+    }
+
+    /// Updates the specified future reservation.
+    ///
+    /// @Snippet(path: "futureReservations_update")
+    public func update(
+      withPolling: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.update(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.zone = withPolling.zone
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified zone-specific Operations resource.
+    ///
+    /// @Snippet(path: "futureReservations_getOperation")
+    func getOperation(
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -353,6 +506,37 @@
       return try await self.cancel(request: request)
     }
 
+    public func cancel(
+      withPolling: FutureReservationsClient.CancelRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.cancel(withPolling: withPolling, options: .init())
+    }
+
+    public func cancel(
+      withPolling: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func cancel(
+      project: Swift.String,
+      zone: Swift.String,
+      futureReservation: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = FutureReservationsClient.CancelRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.futureReservation = futureReservation
+      }
+      return try await self.cancel(withPolling: request)
+    }
+
     public func delete(request: FutureReservationsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -376,6 +560,37 @@
         $0.futureReservation = futureReservation
       }
       return try await self.delete(request: request)
+    }
+
+    public func delete(
+      withPolling: FutureReservationsClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      zone: Swift.String,
+      futureReservation: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = FutureReservationsClient.DeleteRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.futureReservation = futureReservation
+      }
+      return try await self.delete(withPolling: request)
     }
 
     public func `get`(request: FutureReservationsClient.GetRequest) async throws
@@ -426,6 +641,37 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: FutureReservationsClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      zone: Swift.String,
+      body: FutureReservation?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = FutureReservationsClient.InsertRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: FutureReservationsClient.ListRequest) async throws
@@ -492,6 +738,51 @@
         $0.body = body
       }
       return try await self.update(request: request)
+    }
+
+    public func update(
+      withPolling: FutureReservationsClient.UpdateRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.update(withPolling: withPolling, options: .init())
+    }
+
+    public func update(
+      withPolling: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func update(
+      project: Swift.String,
+      zone: Swift.String,
+      futureReservation: Swift.String,
+      body: FutureReservation?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = FutureReservationsClient.UpdateRequest().with {
+        $0.project = project
+        $0.zone = zone
+        $0.futureReservation = futureReservation
+        $0.body = body
+      }
+      return try await self.update(withPolling: request)
+    }
+
+    public func getOperation(request: ZoneOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: GlobalAddressesClient) async throws {
-    let response = try await client.insert(
-      request: GlobalAddressesClient.InsertRequest()
+    let poller = try await client.insert(
+      withPolling: GlobalAddressesClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

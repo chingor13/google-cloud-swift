@@ -50,6 +50,52 @@
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.bulkInsert(request: request, options: options)
     }
+
+    /// Creates multiple instances in a given region. Count specifies the number of
+    /// instances to create.
+    ///
+    /// @Snippet(path: "regionInstances_bulkInsert")
+    public func bulkInsert(
+      withPolling: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.bulkInsert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified region-specific Operations resource.
+    ///
+    /// @Snippet(path: "regionInstances_getOperation")
+    func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
+    }
   }
 
   extension Clients {
@@ -102,6 +148,49 @@
         $0.body = body
       }
       return try await self.bulkInsert(request: request)
+    }
+
+    public func bulkInsert(
+      withPolling: RegionInstancesClient.BulkInsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.bulkInsert(withPolling: withPolling, options: .init())
+    }
+
+    public func bulkInsert(
+      withPolling: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func bulkInsert(
+      project: Swift.String,
+      region: Swift.String,
+      body: BulkInsertInstanceResource?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionInstancesClient.BulkInsertRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.body = body
+      }
+      return try await self.bulkInsert(withPolling: request)
+    }
+
+    public func getOperation(request: RegionOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

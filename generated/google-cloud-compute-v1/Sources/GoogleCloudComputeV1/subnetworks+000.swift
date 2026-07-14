@@ -80,6 +80,42 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified subnetwork.
+    ///
+    /// @Snippet(path: "subnetworks_delete")
+    public func delete(
+      withPolling: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Expands the IP CIDR range of the subnetwork to a specified value.
     ///
     /// @Snippet(path: "subnetworks_expandIpCidrRange")
@@ -87,6 +123,43 @@
       request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.expandIpCidrRange(request: request, options: options)
+    }
+
+    /// Expands the IP CIDR range of the subnetwork to a specified value.
+    ///
+    /// @Snippet(path: "subnetworks_expandIpCidrRange")
+    public func expandIpCidrRange(
+      withPolling: SubnetworksClient.ExpandIpCidrRangeRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.expandIpCidrRange(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns the specified subnetwork.
@@ -116,6 +189,43 @@
       request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a subnetwork in the specified project using the data
+    /// included in the request.
+    ///
+    /// @Snippet(path: "subnetworks_insert")
+    public func insert(
+      withPolling: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves a list of subnetworks available to the specified
@@ -180,6 +290,46 @@
       try await self.inner.patch(request: request, options: options)
     }
 
+    /// Patches the specified subnetwork with the data included in the request.
+    /// Only certain fields can be updated with a patch request
+    /// as indicated in the field descriptions.
+    /// You must specify the current fingerprint of the
+    /// subnetwork resource being patched.
+    ///
+    /// @Snippet(path: "subnetworks_patch")
+    public func patch(
+      withPolling: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Sets the access control policy on the specified resource.
     /// Replaces any existing policy.
     ///
@@ -201,6 +351,44 @@
       try await self.inner.setPrivateIpGoogleAccess(request: request, options: options)
     }
 
+    /// Set whether VMs in this subnet can access Google services without assigning
+    /// external IP addresses through Private Google Access.
+    ///
+    /// @Snippet(path: "subnetworks_setPrivateIpGoogleAccess")
+    public func setPrivateIpGoogleAccess(
+      withPolling: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setPrivateIpGoogleAccess(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "subnetworks_testIamPermissions")
@@ -208,6 +396,15 @@
       request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
+    }
+
+    /// Retrieves the specified region-specific Operations resource.
+    ///
+    /// @Snippet(path: "subnetworks_getOperation")
+    func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -507,6 +704,37 @@
       return try await self.delete(request: request)
     }
 
+    public func delete(
+      withPolling: SubnetworksClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      region: Swift.String,
+      subnetwork: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = SubnetworksClient.DeleteRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.subnetwork = subnetwork
+      }
+      return try await self.delete(withPolling: request)
+    }
+
     public func expandIpCidrRange(request: SubnetworksClient.ExpandIpCidrRangeRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -532,6 +760,40 @@
         $0.body = body
       }
       return try await self.expandIpCidrRange(request: request)
+    }
+
+    public func expandIpCidrRange(
+      withPolling: SubnetworksClient.ExpandIpCidrRangeRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.expandIpCidrRange(withPolling: withPolling, options: .init())
+    }
+
+    public func expandIpCidrRange(
+      withPolling: SubnetworksClient.ExpandIpCidrRangeRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func expandIpCidrRange(
+      project: Swift.String,
+      region: Swift.String,
+      subnetwork: Swift.String,
+      body: SubnetworksExpandIpCidrRangeRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = SubnetworksClient.ExpandIpCidrRangeRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.subnetwork = subnetwork
+        $0.body = body
+      }
+      return try await self.expandIpCidrRange(withPolling: request)
     }
 
     public func `get`(request: SubnetworksClient.GetRequest) async throws
@@ -607,6 +869,37 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: SubnetworksClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      region: Swift.String,
+      body: Subnetwork?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = SubnetworksClient.InsertRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: SubnetworksClient.ListRequest) async throws
@@ -711,6 +1004,39 @@
       return try await self.patch(request: request)
     }
 
+    public func patch(
+      withPolling: SubnetworksClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      project: Swift.String,
+      region: Swift.String,
+      subnetwork: Swift.String,
+      body: Subnetwork?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = SubnetworksClient.PatchRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.subnetwork = subnetwork
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
+    }
+
     public func setIamPolicy(request: SubnetworksClient.SetIamPolicyRequest) async throws
       -> GoogleCloudComputeV1.Policy
     {
@@ -766,6 +1092,40 @@
       return try await self.setPrivateIpGoogleAccess(request: request)
     }
 
+    public func setPrivateIpGoogleAccess(
+      withPolling: SubnetworksClient.SetPrivateIpGoogleAccessRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setPrivateIpGoogleAccess(withPolling: withPolling, options: .init())
+    }
+
+    public func setPrivateIpGoogleAccess(
+      withPolling: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setPrivateIpGoogleAccess(
+      project: Swift.String,
+      region: Swift.String,
+      subnetwork: Swift.String,
+      body: SubnetworksSetPrivateIpGoogleAccessRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = SubnetworksClient.SetPrivateIpGoogleAccessRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.subnetwork = subnetwork
+        $0.body = body
+      }
+      return try await self.setPrivateIpGoogleAccess(withPolling: request)
+    }
+
     public func testIamPermissions(request: SubnetworksClient.TestIamPermissionsRequest)
       async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     {
@@ -791,6 +1151,18 @@
         $0.body = body
       }
       return try await self.testIamPermissions(request: request)
+    }
+
+    public func getOperation(request: RegionOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

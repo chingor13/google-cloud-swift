@@ -51,6 +51,43 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified TargetHttpsProxy resource.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_delete")
+    public func delete(
+      withPolling: RegionTargetHttpsProxiesClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns the specified TargetHttpsProxy resource in the specified region.
     ///
     /// @Snippet(path: "regionTargetHttpsProxies_get")
@@ -68,6 +105,44 @@
       request: RegionTargetHttpsProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a TargetHttpsProxy resource in the specified project and region
+    /// using the data included in the request.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_insert")
+    public func insert(
+      withPolling: RegionTargetHttpsProxiesClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves the list of TargetHttpsProxy resources available
@@ -107,6 +182,46 @@
       try await self.inner.patch(request: request, options: options)
     }
 
+    /// Patches the specified regional TargetHttpsProxy resource with the data
+    /// included in the request. This method supports PATCH
+    /// semantics and usesJSON merge
+    /// patch format and processing rules.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_patch")
+    public func patch(
+      withPolling: RegionTargetHttpsProxiesClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Replaces SslCertificates for TargetHttpsProxy.
     ///
     /// @Snippet(path: "regionTargetHttpsProxies_setSslCertificates")
@@ -117,6 +232,43 @@
       try await self.inner.setSslCertificates(request: request, options: options)
     }
 
+    /// Replaces SslCertificates for TargetHttpsProxy.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_setSslCertificates")
+    public func setSslCertificates(
+      withPolling: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setSslCertificates(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Changes the URL map for TargetHttpsProxy.
     ///
     /// @Snippet(path: "regionTargetHttpsProxies_setUrlMap")
@@ -125,6 +277,52 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.setUrlMap(request: request, options: options)
+    }
+
+    /// Changes the URL map for TargetHttpsProxy.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_setUrlMap")
+    public func setUrlMap(
+      withPolling: RegionTargetHttpsProxiesClient.SetUrlMapRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setUrlMap(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+            $0.region = withPolling.region
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified region-specific Operations resource.
+    ///
+    /// @Snippet(path: "regionTargetHttpsProxies_getOperation")
+    func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -292,6 +490,38 @@
       return try await self.delete(request: request)
     }
 
+    public func delete(
+      withPolling: RegionTargetHttpsProxiesClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: RegionTargetHttpsProxiesClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      region: Swift.String,
+      targetHttpsProxy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionTargetHttpsProxiesClient.DeleteRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.targetHttpsProxy = targetHttpsProxy
+      }
+      return try await self.delete(withPolling: request)
+    }
+
     public func `get`(request: RegionTargetHttpsProxiesClient.GetRequest) async throws
       -> GoogleCloudComputeV1.TargetHttpsProxy
     {
@@ -340,6 +570,38 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: RegionTargetHttpsProxiesClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: RegionTargetHttpsProxiesClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      region: Swift.String,
+      body: TargetHttpsProxy?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionTargetHttpsProxiesClient.InsertRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: RegionTargetHttpsProxiesClient.ListRequest) async throws
@@ -407,6 +669,40 @@
       return try await self.patch(request: request)
     }
 
+    public func patch(
+      withPolling: RegionTargetHttpsProxiesClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: RegionTargetHttpsProxiesClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      project: Swift.String,
+      region: Swift.String,
+      targetHttpsProxy: Swift.String,
+      body: TargetHttpsProxy?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionTargetHttpsProxiesClient.PatchRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.targetHttpsProxy = targetHttpsProxy
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
+    }
+
     public func setSslCertificates(
       request: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
@@ -435,6 +731,40 @@
       return try await self.setSslCertificates(request: request)
     }
 
+    public func setSslCertificates(
+      withPolling: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setSslCertificates(withPolling: withPolling, options: .init())
+    }
+
+    public func setSslCertificates(
+      withPolling: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setSslCertificates(
+      project: Swift.String,
+      region: Swift.String,
+      targetHttpsProxy: Swift.String,
+      body: RegionTargetHttpsProxiesSetSslCertificatesRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionTargetHttpsProxiesClient.SetSslCertificatesRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.targetHttpsProxy = targetHttpsProxy
+        $0.body = body
+      }
+      return try await self.setSslCertificates(withPolling: request)
+    }
+
     public func setUrlMap(request: RegionTargetHttpsProxiesClient.SetUrlMapRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -461,6 +791,52 @@
         $0.body = body
       }
       return try await self.setUrlMap(request: request)
+    }
+
+    public func setUrlMap(
+      withPolling: RegionTargetHttpsProxiesClient.SetUrlMapRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setUrlMap(withPolling: withPolling, options: .init())
+    }
+
+    public func setUrlMap(
+      withPolling: RegionTargetHttpsProxiesClient.SetUrlMapRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setUrlMap(
+      project: Swift.String,
+      region: Swift.String,
+      targetHttpsProxy: Swift.String,
+      body: UrlMapReference?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = RegionTargetHttpsProxiesClient.SetUrlMapRequest().with {
+        $0.project = project
+        $0.region = region
+        $0.targetHttpsProxy = targetHttpsProxy
+        $0.body = body
+      }
+      return try await self.setUrlMap(withPolling: request)
+    }
+
+    public func getOperation(request: RegionOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

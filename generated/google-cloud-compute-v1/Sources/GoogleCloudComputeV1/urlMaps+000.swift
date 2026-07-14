@@ -81,6 +81,41 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified UrlMap resource.
+    ///
+    /// @Snippet(path: "urlMaps_delete")
+    public func delete(
+      withPolling: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns the specified UrlMap resource.
     ///
     /// @Snippet(path: "urlMaps_get")
@@ -100,6 +135,42 @@
       try await self.inner.insert(request: request, options: options)
     }
 
+    /// Creates a UrlMap resource in the specified project using
+    /// the data included in the request.
+    ///
+    /// @Snippet(path: "urlMaps_insert")
+    public func insert(
+      withPolling: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Initiates a cache invalidation operation, invalidating the specified path,
     /// scoped to the specified UrlMap.
     ///
@@ -111,6 +182,45 @@
       request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.invalidateCache(request: request, options: options)
+    }
+
+    /// Initiates a cache invalidation operation, invalidating the specified path,
+    /// scoped to the specified UrlMap.
+    ///
+    /// For more information, see [Invalidating cached
+    /// content](/cdn/docs/invalidating-cached-content).
+    ///
+    /// @Snippet(path: "urlMaps_invalidateCache")
+    public func invalidateCache(
+      withPolling: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.invalidateCache(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves the list of UrlMap resources available to the specified
@@ -150,6 +260,44 @@
       try await self.inner.patch(request: request, options: options)
     }
 
+    /// Patches the specified UrlMap resource with the data included in the
+    /// request. This method supportsPATCH
+    /// semantics and uses theJSON merge
+    /// patch format and processing rules.
+    ///
+    /// @Snippet(path: "urlMaps_patch")
+    public func patch(
+      withPolling: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Returns permissions that a caller has on the specified resource.
     ///
     /// @Snippet(path: "urlMaps_testIamPermissions")
@@ -169,6 +317,42 @@
       try await self.inner.update(request: request, options: options)
     }
 
+    /// Updates the specified UrlMap resource with the data included in the
+    /// request.
+    ///
+    /// @Snippet(path: "urlMaps_update")
+    public func update(
+      withPolling: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.update(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Runs static validation for the UrlMap. In particular, the tests of the
     /// provided UrlMap will be run. Calling this method does NOT create the
     /// UrlMap.
@@ -178,6 +362,15 @@
       request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse {
       try await self.inner.validate(request: request, options: options)
+    }
+
+    /// Retrieves the specified Operations resource.
+    ///
+    /// @Snippet(path: "urlMaps_getOperation")
+    func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -421,6 +614,35 @@
       return try await self.delete(request: request)
     }
 
+    public func delete(
+      withPolling: UrlMapsClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      urlMap: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = UrlMapsClient.DeleteRequest().with {
+        $0.project = project
+        $0.urlMap = urlMap
+      }
+      return try await self.delete(withPolling: request)
+    }
+
     public func `get`(request: UrlMapsClient.GetRequest) async throws -> GoogleCloudComputeV1.UrlMap
     {
       try await self.`get`(request: request, options: .init())
@@ -466,6 +688,35 @@
       return try await self.insert(request: request)
     }
 
+    public func insert(
+      withPolling: UrlMapsClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      body: UrlMap?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = UrlMapsClient.InsertRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
+    }
+
     public func invalidateCache(request: UrlMapsClient.InvalidateCacheRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -489,6 +740,37 @@
         $0.body = body
       }
       return try await self.invalidateCache(request: request)
+    }
+
+    public func invalidateCache(
+      withPolling: UrlMapsClient.InvalidateCacheRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.invalidateCache(withPolling: withPolling, options: .init())
+    }
+
+    public func invalidateCache(
+      withPolling: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func invalidateCache(
+      project: Swift.String,
+      urlMap: Swift.String,
+      body: CacheInvalidationRule?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = UrlMapsClient.InvalidateCacheRequest().with {
+        $0.project = project
+        $0.urlMap = urlMap
+        $0.body = body
+      }
+      return try await self.invalidateCache(withPolling: request)
     }
 
     public func list(request: UrlMapsClient.ListRequest) async throws
@@ -552,6 +834,37 @@
       return try await self.patch(request: request)
     }
 
+    public func patch(
+      withPolling: UrlMapsClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      project: Swift.String,
+      urlMap: Swift.String,
+      body: UrlMap?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = UrlMapsClient.PatchRequest().with {
+        $0.project = project
+        $0.urlMap = urlMap
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
+    }
+
     public func testIamPermissions(request: UrlMapsClient.TestIamPermissionsRequest) async throws
       -> GoogleCloudComputeV1.TestPermissionsResponse
     {
@@ -602,6 +915,37 @@
       return try await self.update(request: request)
     }
 
+    public func update(
+      withPolling: UrlMapsClient.UpdateRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.update(withPolling: withPolling, options: .init())
+    }
+
+    public func update(
+      withPolling: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func update(
+      project: Swift.String,
+      urlMap: Swift.String,
+      body: UrlMap?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = UrlMapsClient.UpdateRequest().with {
+        $0.project = project
+        $0.urlMap = urlMap
+        $0.body = body
+      }
+      return try await self.update(withPolling: request)
+    }
+
     public func validate(request: UrlMapsClient.ValidateRequest) async throws
       -> GoogleCloudComputeV1.UrlMapsValidateResponse
     {
@@ -625,6 +969,18 @@
         $0.body = body
       }
       return try await self.validate(request: request)
+    }
+
+    public func getOperation(request: GlobalOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

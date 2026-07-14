@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionInstanceGroupManagersClient) async throws {
-    let response = try await client.deletePerInstanceConfigs(
-      request: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest()
+    let poller = try await client.deletePerInstanceConfigs(
+      withPolling: RegionInstanceGroupManagersClient.DeletePerInstanceConfigsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

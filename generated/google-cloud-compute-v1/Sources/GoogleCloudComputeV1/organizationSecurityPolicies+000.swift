@@ -61,6 +61,50 @@
       try await self.inner.addAssociation(request: request, options: options)
     }
 
+    /// Inserts an association for the specified security policy.
+    ///
+    /// This has billing implications.  Projects in the hierarchy with effective
+    /// hierarchical security policies will be automatically enrolled into Cloud
+    /// Armor Enterprise if not already enrolled.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.addAssociation
+    /// instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_addAssociation")
+    public func addAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.AddAssociationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.addAssociation(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Inserts a rule into a security policy.
     ///
     /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
@@ -73,6 +117,45 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.addRule(request: request, options: options)
+    }
+
+    /// Inserts a rule into a security policy.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.addRule instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_addRule")
+    public func addRule(
+      withPolling: OrganizationSecurityPoliciesClient.AddRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.addRule(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Copies rules to the specified security policy.
@@ -90,6 +173,46 @@
       try await self.inner.copyRules(request: request, options: options)
     }
 
+    /// Copies rules to the specified security policy.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.cloneRules
+    /// instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_copyRules")
+    public func copyRules(
+      withPolling: OrganizationSecurityPoliciesClient.CopyRulesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.copyRules(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes the specified policy.
     ///
     /// Use this API to remove Cloud Armor policies. Previously, alpha and beta
@@ -102,6 +225,45 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
+    }
+
+    /// Deletes the specified policy.
+    ///
+    /// Use this API to remove Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to remove firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.delete instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_delete")
+    public func delete(
+      withPolling: OrganizationSecurityPoliciesClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// List all of the ordered rules present in a single specified policy.
@@ -159,6 +321,46 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a new policy in the specified organization using the data included
+    /// in the request.
+    ///
+    /// Use this API to add Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to add firewall policies. This usage is now
+    /// disabled for most organizations. Use firewallPolicies.insert instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_insert")
+    public func insert(
+      withPolling: OrganizationSecurityPoliciesClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// List all the policies that have been configured for the specified
@@ -235,6 +437,45 @@
       try await self.inner.move(request: request, options: options)
     }
 
+    /// Moves the specified security policy.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.move instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_move")
+    public func move(
+      withPolling: OrganizationSecurityPoliciesClient.MoveRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.move(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Patches the specified policy with the data included in the request.
     ///
     /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
@@ -247,6 +488,45 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patch(request: request, options: options)
+    }
+
+    /// Patches the specified policy with the data included in the request.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.patch instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_patch")
+    public func patch(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Patches a rule at the specified priority.
@@ -264,6 +544,46 @@
       try await self.inner.patchRule(request: request, options: options)
     }
 
+    /// Patches a rule at the specified priority.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.patchRule
+    /// instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_patchRule")
+    public func patchRule(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patchRule(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Removes an association for the specified security policy.
     ///
     /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
@@ -279,6 +599,46 @@
       try await self.inner.removeAssociation(request: request, options: options)
     }
 
+    /// Removes an association for the specified security policy.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.removeAssociation
+    /// instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_removeAssociation")
+    public func removeAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.removeAssociation(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes a rule at the specified priority.
     ///
     /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
@@ -292,6 +652,56 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.removeRule(request: request, options: options)
+    }
+
+    /// Deletes a rule at the specified priority.
+    ///
+    /// Use this API to modify Cloud Armor policies. Previously, alpha and beta
+    /// versions of this API were used to modify firewall policies. This usage is
+    /// now disabled for most organizations. Use firewallPolicies.removeRule
+    /// instead.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_removeRule")
+    public func removeRule(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.removeRule(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified Operations resource. Gets a list of operations
+    /// by making a `list()` request.
+    ///
+    /// @Snippet(path: "organizationSecurityPolicies_getOperation")
+    func getOperation(
+      request: GlobalOrganizationOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -566,6 +976,36 @@
       return try await self.addAssociation(request: request)
     }
 
+    public func addAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.AddAssociationRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.addAssociation(withPolling: withPolling, options: .init())
+    }
+
+    public func addAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.AddAssociationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func addAssociation(
+      securityPolicy: Swift.String,
+      body: SecurityPolicyAssociation?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.AddAssociationRequest().with {
+        $0.securityPolicy = securityPolicy
+        $0.body = body
+      }
+      return try await self.addAssociation(withPolling: request)
+    }
+
     public func addRule(request: OrganizationSecurityPoliciesClient.AddRuleRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -590,6 +1030,36 @@
       return try await self.addRule(request: request)
     }
 
+    public func addRule(
+      withPolling: OrganizationSecurityPoliciesClient.AddRuleRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.addRule(withPolling: withPolling, options: .init())
+    }
+
+    public func addRule(
+      withPolling: OrganizationSecurityPoliciesClient.AddRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func addRule(
+      securityPolicy: Swift.String,
+      body: SecurityPolicyRule?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.AddRuleRequest().with {
+        $0.securityPolicy = securityPolicy
+        $0.body = body
+      }
+      return try await self.addRule(withPolling: request)
+    }
+
     public func copyRules(request: OrganizationSecurityPoliciesClient.CopyRulesRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -612,6 +1082,34 @@
       return try await self.copyRules(request: request)
     }
 
+    public func copyRules(
+      withPolling: OrganizationSecurityPoliciesClient.CopyRulesRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.copyRules(withPolling: withPolling, options: .init())
+    }
+
+    public func copyRules(
+      withPolling: OrganizationSecurityPoliciesClient.CopyRulesRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func copyRules(
+      securityPolicy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.CopyRulesRequest().with {
+        $0.securityPolicy = securityPolicy
+      }
+      return try await self.copyRules(withPolling: request)
+    }
+
     public func delete(request: OrganizationSecurityPoliciesClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -632,6 +1130,34 @@
         $0.securityPolicy = securityPolicy
       }
       return try await self.delete(request: request)
+    }
+
+    public func delete(
+      withPolling: OrganizationSecurityPoliciesClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: OrganizationSecurityPoliciesClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      securityPolicy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.DeleteRequest().with {
+        $0.securityPolicy = securityPolicy
+      }
+      return try await self.delete(withPolling: request)
     }
 
     public func `get`(request: OrganizationSecurityPoliciesClient.GetRequest) async throws
@@ -712,6 +1238,25 @@
       throw GoogleCloudGax.RequestError.unimplemented
     }
 
+    public func insert(
+      withPolling: OrganizationSecurityPoliciesClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: OrganizationSecurityPoliciesClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
     public func list(request: OrganizationSecurityPoliciesClient.ListRequest) async throws
       -> GoogleCloudComputeV1.SecurityPolicyList
     {
@@ -788,6 +1333,34 @@
       return try await self.move(request: request)
     }
 
+    public func move(
+      withPolling: OrganizationSecurityPoliciesClient.MoveRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.move(withPolling: withPolling, options: .init())
+    }
+
+    public func move(
+      withPolling: OrganizationSecurityPoliciesClient.MoveRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func move(
+      securityPolicy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.MoveRequest().with {
+        $0.securityPolicy = securityPolicy
+      }
+      return try await self.move(withPolling: request)
+    }
+
     public func patch(request: OrganizationSecurityPoliciesClient.PatchRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -810,6 +1383,36 @@
         $0.body = body
       }
       return try await self.patch(request: request)
+    }
+
+    public func patch(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      securityPolicy: Swift.String,
+      body: SecurityPolicy?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.PatchRequest().with {
+        $0.securityPolicy = securityPolicy
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
     }
 
     public func patchRule(request: OrganizationSecurityPoliciesClient.PatchRuleRequest) async throws
@@ -836,6 +1439,36 @@
       return try await self.patchRule(request: request)
     }
 
+    public func patchRule(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRuleRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patchRule(withPolling: withPolling, options: .init())
+    }
+
+    public func patchRule(
+      withPolling: OrganizationSecurityPoliciesClient.PatchRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patchRule(
+      securityPolicy: Swift.String,
+      body: SecurityPolicyRule?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.PatchRuleRequest().with {
+        $0.securityPolicy = securityPolicy
+        $0.body = body
+      }
+      return try await self.patchRule(withPolling: request)
+    }
+
     public func removeAssociation(
       request: OrganizationSecurityPoliciesClient.RemoveAssociationRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
@@ -858,6 +1491,34 @@
       return try await self.removeAssociation(request: request)
     }
 
+    public func removeAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveAssociationRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.removeAssociation(withPolling: withPolling, options: .init())
+    }
+
+    public func removeAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveAssociationRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func removeAssociation(
+      securityPolicy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.RemoveAssociationRequest().with {
+        $0.securityPolicy = securityPolicy
+      }
+      return try await self.removeAssociation(withPolling: request)
+    }
+
     public func removeRule(request: OrganizationSecurityPoliciesClient.RemoveRuleRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
@@ -878,6 +1539,46 @@
         $0.securityPolicy = securityPolicy
       }
       return try await self.removeRule(request: request)
+    }
+
+    public func removeRule(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveRuleRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.removeRule(withPolling: withPolling, options: .init())
+    }
+
+    public func removeRule(
+      withPolling: OrganizationSecurityPoliciesClient.RemoveRuleRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func removeRule(
+      securityPolicy: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = OrganizationSecurityPoliciesClient.RemoveRuleRequest().with {
+        $0.securityPolicy = securityPolicy
+      }
+      return try await self.removeRule(withPolling: request)
+    }
+
+    public func getOperation(request: GlobalOrganizationOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOrganizationOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

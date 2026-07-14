@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.SecurityPoliciesClient()
-    let response = try await client.addRule(
-      request: SecurityPoliciesClient.AddRuleRequest()
+    let poller = try await client.addRule(
+      withPolling: SecurityPoliciesClient.AddRuleRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

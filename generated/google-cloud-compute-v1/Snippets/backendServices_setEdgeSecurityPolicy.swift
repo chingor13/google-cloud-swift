@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: BackendServicesClient) async throws {
-    let response = try await client.setEdgeSecurityPolicy(
-      request: BackendServicesClient.SetEdgeSecurityPolicyRequest()
+    let poller = try await client.setEdgeSecurityPolicy(
+      withPolling: BackendServicesClient.SetEdgeSecurityPolicyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

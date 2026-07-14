@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ProjectsClient) async throws {
-    let response = try await client.enableXpnHost(
-      request: ProjectsClient.EnableXpnHostRequest()
+    let poller = try await client.enableXpnHost(
+      withPolling: ProjectsClient.EnableXpnHostRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

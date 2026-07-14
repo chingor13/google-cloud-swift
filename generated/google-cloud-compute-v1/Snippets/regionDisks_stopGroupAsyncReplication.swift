@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionDisksClient) async throws {
-    let response = try await client.stopGroupAsyncReplication(
-      request: RegionDisksClient.StopGroupAsyncReplicationRequest()
+    let poller = try await client.stopGroupAsyncReplication(
+      withPolling: RegionDisksClient.StopGroupAsyncReplicationRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

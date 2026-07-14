@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: FirewallPoliciesClient) async throws {
-    let response = try await client.patchRule(
-      request: FirewallPoliciesClient.PatchRuleRequest()
+    let poller = try await client.patchRule(
+      withPolling: FirewallPoliciesClient.PatchRuleRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

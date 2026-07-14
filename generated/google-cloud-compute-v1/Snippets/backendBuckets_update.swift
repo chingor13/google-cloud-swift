@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: BackendBucketsClient) async throws {
-    let response = try await client.update(
-      request: BackendBucketsClient.UpdateRequest()
+    let poller = try await client.update(
+      withPolling: BackendBucketsClient.UpdateRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

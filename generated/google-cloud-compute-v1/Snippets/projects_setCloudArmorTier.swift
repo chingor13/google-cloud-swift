@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ProjectsClient) async throws {
-    let response = try await client.setCloudArmorTier(
-      request: ProjectsClient.SetCloudArmorTierRequest()
+    let poller = try await client.setCloudArmorTier(
+      withPolling: ProjectsClient.SetCloudArmorTierRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

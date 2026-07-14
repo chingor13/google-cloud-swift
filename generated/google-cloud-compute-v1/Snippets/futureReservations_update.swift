@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: FutureReservationsClient) async throws {
-    let response = try await client.update(
-      request: FutureReservationsClient.UpdateRequest()
+    let poller = try await client.update(
+      withPolling: FutureReservationsClient.UpdateRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

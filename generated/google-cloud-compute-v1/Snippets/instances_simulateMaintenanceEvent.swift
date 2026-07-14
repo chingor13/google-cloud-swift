@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstancesClient) async throws {
-    let response = try await client.simulateMaintenanceEvent(
-      request: InstancesClient.SimulateMaintenanceEventRequest()
+    let poller = try await client.simulateMaintenanceEvent(
+      withPolling: InstancesClient.SimulateMaintenanceEventRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

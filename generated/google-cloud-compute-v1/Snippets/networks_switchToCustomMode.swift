@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: NetworksClient) async throws {
-    let response = try await client.switchToCustomMode(
-      request: NetworksClient.SwitchToCustomModeRequest()
+    let poller = try await client.switchToCustomMode(
+      withPolling: NetworksClient.SwitchToCustomModeRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

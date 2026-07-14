@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: NetworkFirewallPoliciesClient) async throws {
-    let response = try await client.removePacketMirroringRule(
-      request: NetworkFirewallPoliciesClient.RemovePacketMirroringRuleRequest()
+    let poller = try await client.removePacketMirroringRule(
+      withPolling: NetworkFirewallPoliciesClient.RemovePacketMirroringRuleRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

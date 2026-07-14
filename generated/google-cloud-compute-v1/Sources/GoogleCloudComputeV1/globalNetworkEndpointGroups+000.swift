@@ -52,6 +52,42 @@
       try await self.inner.attachNetworkEndpoints(request: request, options: options)
     }
 
+    /// Attach a network endpoint to the specified network endpoint group.
+    ///
+    /// @Snippet(path: "globalNetworkEndpointGroups_attachNetworkEndpoints")
+    public func attachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.attachNetworkEndpoints(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes the specified network endpoint group.Note that the NEG cannot be
     /// deleted if there are backend services referencing it.
     ///
@@ -63,6 +99,43 @@
       try await self.inner.delete(request: request, options: options)
     }
 
+    /// Deletes the specified network endpoint group.Note that the NEG cannot be
+    /// deleted if there are backend services referencing it.
+    ///
+    /// @Snippet(path: "globalNetworkEndpointGroups_delete")
+    public func delete(
+      withPolling: GlobalNetworkEndpointGroupsClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Detach the network endpoint from the specified network endpoint group.
     ///
     /// @Snippet(path: "globalNetworkEndpointGroups_detachNetworkEndpoints")
@@ -71,6 +144,42 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.detachNetworkEndpoints(request: request, options: options)
+    }
+
+    /// Detach the network endpoint from the specified network endpoint group.
+    ///
+    /// @Snippet(path: "globalNetworkEndpointGroups_detachNetworkEndpoints")
+    public func detachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.detachNetworkEndpoints(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns the specified network endpoint group.
@@ -105,6 +214,57 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a network endpoint group in the specified project using the
+    /// parameters that are included in the request.
+    ///
+    /// Note: Use the following APIs to manage network endpoint groups:
+    ///
+    ///    -
+    ///    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity
+    ///    NEGs): zonal
+    ///    API
+    ///    -
+    ///    To manage NEGs with regional scope (such as regional internet NEGs,
+    ///    serverless NEGs, Private Service Connect NEGs): regional
+    ///    API
+    ///    -
+    ///    To manage NEGs with global scope (such as global internet NEGs):global
+    ///    API
+    ///
+    /// @Snippet(path: "globalNetworkEndpointGroups_insert")
+    public func insert(
+      withPolling: GlobalNetworkEndpointGroupsClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves the list of network endpoint groups that are located in the
@@ -158,6 +318,15 @@
         return try await self.listNetworkEndpoints(request: request, options: options)
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    }
+
+    /// Retrieves the specified Operations resource.
+    ///
+    /// @Snippet(path: "globalNetworkEndpointGroups_getOperation")
+    func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -336,6 +505,38 @@
       return try await self.attachNetworkEndpoints(request: request)
     }
 
+    public func attachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.attachNetworkEndpoints(withPolling: withPolling, options: .init())
+    }
+
+    public func attachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func attachNetworkEndpoints(
+      project: Swift.String,
+      networkEndpointGroup: Swift.String,
+      body: GlobalNetworkEndpointGroupsAttachEndpointsRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest().with {
+        $0.project = project
+        $0.networkEndpointGroup = networkEndpointGroup
+        $0.body = body
+      }
+      return try await self.attachNetworkEndpoints(withPolling: request)
+    }
+
     public func delete(request: GlobalNetworkEndpointGroupsClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -358,6 +559,36 @@
         $0.networkEndpointGroup = networkEndpointGroup
       }
       return try await self.delete(request: request)
+    }
+
+    public func delete(
+      withPolling: GlobalNetworkEndpointGroupsClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: GlobalNetworkEndpointGroupsClient.DeleteRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      networkEndpointGroup: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = GlobalNetworkEndpointGroupsClient.DeleteRequest().with {
+        $0.project = project
+        $0.networkEndpointGroup = networkEndpointGroup
+      }
+      return try await self.delete(withPolling: request)
     }
 
     public func detachNetworkEndpoints(
@@ -384,6 +615,38 @@
         $0.body = body
       }
       return try await self.detachNetworkEndpoints(request: request)
+    }
+
+    public func detachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.detachNetworkEndpoints(withPolling: withPolling, options: .init())
+    }
+
+    public func detachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func detachNetworkEndpoints(
+      project: Swift.String,
+      networkEndpointGroup: Swift.String,
+      body: GlobalNetworkEndpointGroupsDetachEndpointsRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = GlobalNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest().with {
+        $0.project = project
+        $0.networkEndpointGroup = networkEndpointGroup
+        $0.body = body
+      }
+      return try await self.detachNetworkEndpoints(withPolling: request)
     }
 
     public func `get`(request: GlobalNetworkEndpointGroupsClient.GetRequest) async throws
@@ -431,6 +694,36 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: GlobalNetworkEndpointGroupsClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: GlobalNetworkEndpointGroupsClient.InsertRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      body: NetworkEndpointGroup?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = GlobalNetworkEndpointGroupsClient.InsertRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: GlobalNetworkEndpointGroupsClient.ListRequest) async throws
@@ -510,6 +803,18 @@
         $0.networkEndpointGroup = networkEndpointGroup
       }
       return try self.listNetworkEndpoints(byItem: request)
+    }
+
+    public func getOperation(request: GlobalOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

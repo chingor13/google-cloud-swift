@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: BackendServicesClient) async throws {
-    let response = try await client.deleteSignedUrlKey(
-      request: BackendServicesClient.DeleteSignedUrlKeyRequest()
+    let poller = try await client.deleteSignedUrlKey(
+      withPolling: BackendServicesClient.DeleteSignedUrlKeyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

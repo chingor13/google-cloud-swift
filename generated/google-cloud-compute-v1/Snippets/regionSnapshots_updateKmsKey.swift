@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionSnapshotsClient) async throws {
-    let response = try await client.updateKmsKey(
-      request: RegionSnapshotsClient.UpdateKmsKeyRequest()
+    let poller = try await client.updateKmsKey(
+      withPolling: RegionSnapshotsClient.UpdateKmsKeyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

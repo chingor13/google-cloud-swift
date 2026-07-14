@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ProjectsClient) async throws {
-    let response = try await client.setDefaultNetworkTier(
-      request: ProjectsClient.SetDefaultNetworkTierRequest()
+    let poller = try await client.setDefaultNetworkTier(
+      withPolling: ProjectsClient.SetDefaultNetworkTierRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

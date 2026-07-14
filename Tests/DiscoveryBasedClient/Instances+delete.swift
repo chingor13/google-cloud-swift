@@ -25,21 +25,14 @@ extension InstanceSamples {
     name: String,
     logger: Logger
   ) async throws {
-    logger.info("Calling Instances::list()")
-    var operation = try await client.delete(
-      project: projectId, zone: zoneId, instance: name)
-    guard let operationName = operation.name else {
-      throw GoogleCloudGax.RequestError.malformedResponse("missing operation name")
-    }
-    let poller = try ZoneOperationsClient()
-    for _ in 0...10 {
-      operation = try await poller.get(project: projectId, zone: zoneId, operation: operationName)
-      if let status = operation.status, status == .done {
-        break
-      }
-      logger.info("backoff")
-      try await Task.sleep(for: .seconds(1))
-    }
+    logger.info("Calling Instances::delete()")
+    let operation = try await client.delete(
+      withPolling: .init().with {
+        $0.project = projectId
+        $0.zone = zoneId
+        $0.instance = name
+      }, options: .init())
+    logger.info("Instances::list() - response=\(operation)")
   }
 }
 // [END compute_instances_delete]

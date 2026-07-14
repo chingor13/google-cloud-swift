@@ -29,51 +29,93 @@ let package = Package(
     ),
     .trait(
       name: "Addresses",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "Advice",
     ),
     .trait(
       name: "Autoscalers",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "BackendBuckets",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "BackendServices",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "CrossSiteNetworks",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "DiskTypes",
     ),
     .trait(
       name: "Disks",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "ExternalVpnGateways",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "FirewallPolicies",
+      enabledTraits: [
+        "GlobalOrganizationOperations"
+      ]
     ),
     .trait(
       name: "Firewalls",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "ForwardingRules",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "FutureReservations",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "GlobalAddresses",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "GlobalForwardingRules",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "GlobalNetworkEndpointGroups",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "GlobalOperations",
@@ -83,57 +125,108 @@ let package = Package(
     ),
     .trait(
       name: "GlobalPublicDelegatedPrefixes",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "GlobalVmExtensionPolicies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "HealthChecks",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "HttpHealthChecks",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "HttpsHealthChecks",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "ImageFamilyViews",
     ),
     .trait(
       name: "Images",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "InstanceGroupManagerResizeRequests",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstanceGroupManagers",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstanceGroups",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstanceSettings",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstanceTemplates",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "Instances",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstantSnapshotGroups",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InstantSnapshots",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "InterconnectAttachmentGroups",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "InterconnectAttachments",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "InterconnectGroups",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "InterconnectLocations",
@@ -143,156 +236,291 @@ let package = Package(
     ),
     .trait(
       name: "Interconnects",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "LicenseCodes",
     ),
     .trait(
       name: "Licenses",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "MachineImages",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "MachineTypes",
     ),
     .trait(
       name: "NetworkAttachments",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "NetworkEdgeSecurityServices",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "NetworkEndpointGroups",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "NetworkFirewallPolicies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "NetworkProfiles",
     ),
     .trait(
       name: "Networks",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "NodeGroups",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "NodeTemplates",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "NodeTypes",
     ),
     .trait(
       name: "OrganizationSecurityPolicies",
+      enabledTraits: [
+        "GlobalOrganizationOperations"
+      ]
     ),
     .trait(
       name: "PacketMirrorings",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "PreviewFeatures",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "Projects",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "PublicAdvertisedPrefixes",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "PublicDelegatedPrefixes",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionAutoscalers",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionBackendBuckets",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionBackendServices",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionCommitments",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionCompositeHealthChecks",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionDiskTypes",
     ),
     .trait(
       name: "RegionDisks",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionHealthAggregationPolicies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionHealthCheckServices",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionHealthChecks",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionHealthSources",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstanceGroupManagerResizeRequests",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstanceGroupManagers",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstanceGroups",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstanceTemplates",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstances",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstantSnapshotGroups",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionInstantSnapshots",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionNetworkEndpointGroups",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionNetworkFirewallPolicies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionNotificationEndpoints",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionOperations",
     ),
     .trait(
       name: "RegionSecurityPolicies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionSnapshotSettings",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionSnapshots",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionSslCertificates",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionSslPolicies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionTargetHttpProxies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionTargetHttpsProxies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionTargetTcpProxies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionUrlMaps",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RegionZones",
@@ -302,99 +530,189 @@ let package = Package(
     ),
     .trait(
       name: "ReservationBlocks",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "ReservationSlots",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "ReservationSubBlocks",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "Reservations",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "ResourcePolicies",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "RolloutPlans",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "Rollouts",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "Routers",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "Routes",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "SecurityPolicies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "ServiceAttachments",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "SnapshotSettings",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "Snapshots",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "SslCertificates",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "SslPolicies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "StoragePoolTypes",
     ),
     .trait(
       name: "StoragePools",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "Subnetworks",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "TargetGrpcProxies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "TargetHttpProxies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "TargetHttpsProxies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "TargetInstances",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "TargetPools",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "TargetSslProxies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "TargetTcpProxies",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "TargetVpnGateways",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "UrlMaps",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "VpnGateways",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "VpnTunnels",
+      enabledTraits: [
+        "RegionOperations"
+      ]
     ),
     .trait(
       name: "WireGroups",
+      enabledTraits: [
+        "GlobalOperations"
+      ]
     ),
     .trait(
       name: "ZoneOperations",
     ),
     .trait(
       name: "ZoneVmExtensionPolicies",
+      enabledTraits: [
+        "ZoneOperations"
+      ]
     ),
     .trait(
       name: "Zones",

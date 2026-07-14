@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: TargetHttpsProxiesClient) async throws {
-    let response = try await client.setSslCertificates(
-      request: TargetHttpsProxiesClient.SetSslCertificatesRequest()
+    let poller = try await client.setSslCertificates(
+      withPolling: TargetHttpsProxiesClient.SetSslCertificatesRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

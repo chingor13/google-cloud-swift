@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RolloutsClient) async throws {
-    let response = try await client.pause(
-      request: RolloutsClient.PauseRequest()
+    let poller = try await client.pause(
+      withPolling: RolloutsClient.PauseRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

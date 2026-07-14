@@ -50,6 +50,41 @@
       try await self.inner.addPeering(request: request, options: options)
     }
 
+    /// Adds a peering to the specified network.
+    ///
+    /// @Snippet(path: "networks_addPeering")
+    public func addPeering(
+      withPolling: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.addPeering(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Cancel requests to remove a peering from the specified network. Applicable
     /// only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a
     /// request to remove a peering from the specified network.
@@ -62,6 +97,44 @@
       try await self.inner.cancelRequestRemovePeering(request: request, options: options)
     }
 
+    /// Cancel requests to remove a peering from the specified network. Applicable
+    /// only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a
+    /// request to remove a peering from the specified network.
+    ///
+    /// @Snippet(path: "networks_cancelRequestRemovePeering")
+    public func cancelRequestRemovePeering(
+      withPolling: NetworksClient.CancelRequestRemovePeeringRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.cancelRequestRemovePeering(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Deletes the specified network.
     ///
     /// @Snippet(path: "networks_delete")
@@ -69,6 +142,41 @@
       request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
+    }
+
+    /// Deletes the specified network.
+    ///
+    /// @Snippet(path: "networks_delete")
+    public func delete(
+      withPolling: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.delete(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns the specified network.
@@ -97,6 +205,42 @@
       request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
+    }
+
+    /// Creates a network in the specified project using the data included
+    /// in the request.
+    ///
+    /// @Snippet(path: "networks_insert")
+    public func insert(
+      withPolling: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.insert(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Retrieves the list of networks available to the specified project.
@@ -156,6 +300,42 @@
       try await self.inner.patch(request: request, options: options)
     }
 
+    /// Patches the specified network with the data included in the request.
+    /// Only routingConfig can be modified.
+    ///
+    /// @Snippet(path: "networks_patch")
+    public func patch(
+      withPolling: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.patch(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Removes a peering from the specified network.
     ///
     /// @Snippet(path: "networks_removePeering")
@@ -163,6 +343,41 @@
       request: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.removePeering(request: request, options: options)
+    }
+
+    /// Removes a peering from the specified network.
+    ///
+    /// @Snippet(path: "networks_removePeering")
+    public func removePeering(
+      withPolling: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.removePeering(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Requests to remove a peering from the specified network. Applicable only
@@ -175,6 +390,43 @@
       try await self.inner.requestRemovePeering(request: request, options: options)
     }
 
+    /// Requests to remove a peering from the specified network. Applicable only
+    /// for PeeringConnection with update_strategy=CONSENSUS.
+    ///
+    /// @Snippet(path: "networks_requestRemovePeering")
+    public func requestRemovePeering(
+      withPolling: NetworksClient.RequestRemovePeeringRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.requestRemovePeering(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Switches the network mode from auto subnet mode to custom subnet mode.
     ///
     /// @Snippet(path: "networks_switchToCustomMode")
@@ -182,6 +434,41 @@
       request: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.switchToCustomMode(request: request, options: options)
+    }
+
+    /// Switches the network mode from auto subnet mode to custom subnet mode.
+    ///
+    /// @Snippet(path: "networks_switchToCustomMode")
+    public func switchToCustomMode(
+      withPolling: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.switchToCustomMode(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Updates the specified network peering with the data included in the
@@ -193,6 +480,52 @@
       request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.updatePeering(request: request, options: options)
+    }
+
+    /// Updates the specified network peering with the data included in the
+    /// request. You can only modify the NetworkPeering.export_custom_routes field
+    /// and the NetworkPeering.import_custom_routes field.
+    ///
+    /// @Snippet(path: "networks_updatePeering")
+    public func updatePeering(
+      withPolling: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.updatePeering(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified Operations resource.
+    ///
+    /// @Snippet(path: "networks_getOperation")
+    func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -452,6 +785,37 @@
       return try await self.addPeering(request: request)
     }
 
+    public func addPeering(
+      withPolling: NetworksClient.AddPeeringRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.addPeering(withPolling: withPolling, options: .init())
+    }
+
+    public func addPeering(
+      withPolling: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func addPeering(
+      project: Swift.String,
+      network: Swift.String,
+      body: NetworksAddPeeringRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.AddPeeringRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.addPeering(withPolling: request)
+    }
+
     public func cancelRequestRemovePeering(
       request: NetworksClient.CancelRequestRemovePeeringRequest
     ) async throws -> GoogleCloudComputeV1.Operation {
@@ -478,6 +842,38 @@
       return try await self.cancelRequestRemovePeering(request: request)
     }
 
+    public func cancelRequestRemovePeering(
+      withPolling: NetworksClient.CancelRequestRemovePeeringRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.cancelRequestRemovePeering(withPolling: withPolling, options: .init())
+    }
+
+    public func cancelRequestRemovePeering(
+      withPolling: NetworksClient.CancelRequestRemovePeeringRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func cancelRequestRemovePeering(
+      project: Swift.String,
+      network: Swift.String,
+      body: NetworksCancelRequestRemovePeeringRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.CancelRequestRemovePeeringRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.cancelRequestRemovePeering(withPolling: request)
+    }
+
     public func delete(request: NetworksClient.DeleteRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -499,6 +895,35 @@
         $0.network = network
       }
       return try await self.delete(request: request)
+    }
+
+    public func delete(
+      withPolling: NetworksClient.DeleteRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.delete(withPolling: withPolling, options: .init())
+    }
+
+    public func delete(
+      withPolling: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func delete(
+      project: Swift.String,
+      network: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.DeleteRequest().with {
+        $0.project = project
+        $0.network = network
+      }
+      return try await self.delete(withPolling: request)
     }
 
     public func `get`(request: NetworksClient.GetRequest) async throws
@@ -568,6 +993,35 @@
         $0.body = body
       }
       return try await self.insert(request: request)
+    }
+
+    public func insert(
+      withPolling: NetworksClient.InsertRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.insert(withPolling: withPolling, options: .init())
+    }
+
+    public func insert(
+      withPolling: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func insert(
+      project: Swift.String,
+      body: Network?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.InsertRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.insert(withPolling: request)
     }
 
     public func list(request: NetworksClient.ListRequest) async throws
@@ -670,6 +1124,37 @@
       return try await self.patch(request: request)
     }
 
+    public func patch(
+      withPolling: NetworksClient.PatchRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.patch(withPolling: withPolling, options: .init())
+    }
+
+    public func patch(
+      withPolling: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func patch(
+      project: Swift.String,
+      network: Swift.String,
+      body: Network?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.PatchRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.patch(withPolling: request)
+    }
+
     public func removePeering(request: NetworksClient.RemovePeeringRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -693,6 +1178,37 @@
         $0.body = body
       }
       return try await self.removePeering(request: request)
+    }
+
+    public func removePeering(
+      withPolling: NetworksClient.RemovePeeringRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.removePeering(withPolling: withPolling, options: .init())
+    }
+
+    public func removePeering(
+      withPolling: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func removePeering(
+      project: Swift.String,
+      network: Swift.String,
+      body: NetworksRemovePeeringRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.RemovePeeringRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.removePeering(withPolling: request)
     }
 
     public func requestRemovePeering(request: NetworksClient.RequestRemovePeeringRequest)
@@ -720,6 +1236,38 @@
       return try await self.requestRemovePeering(request: request)
     }
 
+    public func requestRemovePeering(
+      withPolling: NetworksClient.RequestRemovePeeringRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.requestRemovePeering(withPolling: withPolling, options: .init())
+    }
+
+    public func requestRemovePeering(
+      withPolling: NetworksClient.RequestRemovePeeringRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func requestRemovePeering(
+      project: Swift.String,
+      network: Swift.String,
+      body: NetworksRequestRemovePeeringRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.RequestRemovePeeringRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.requestRemovePeering(withPolling: request)
+    }
+
     public func switchToCustomMode(request: NetworksClient.SwitchToCustomModeRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -741,6 +1289,35 @@
         $0.network = network
       }
       return try await self.switchToCustomMode(request: request)
+    }
+
+    public func switchToCustomMode(
+      withPolling: NetworksClient.SwitchToCustomModeRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.switchToCustomMode(withPolling: withPolling, options: .init())
+    }
+
+    public func switchToCustomMode(
+      withPolling: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func switchToCustomMode(
+      project: Swift.String,
+      network: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.SwitchToCustomModeRequest().with {
+        $0.project = project
+        $0.network = network
+      }
+      return try await self.switchToCustomMode(withPolling: request)
     }
 
     public func updatePeering(request: NetworksClient.UpdatePeeringRequest) async throws
@@ -766,6 +1343,49 @@
         $0.body = body
       }
       return try await self.updatePeering(request: request)
+    }
+
+    public func updatePeering(
+      withPolling: NetworksClient.UpdatePeeringRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.updatePeering(withPolling: withPolling, options: .init())
+    }
+
+    public func updatePeering(
+      withPolling: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func updatePeering(
+      project: Swift.String,
+      network: Swift.String,
+      body: NetworksUpdatePeeringRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = NetworksClient.UpdatePeeringRequest().with {
+        $0.project = project
+        $0.network = network
+        $0.body = body
+      }
+      return try await self.updatePeering(withPolling: request)
+    }
+
+    public func getOperation(request: GlobalOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionInstanceGroupManagersClient) async throws {
-    let response = try await client.startInstances(
-      request: RegionInstanceGroupManagersClient.StartInstancesRequest()
+    let poller = try await client.startInstances(
+      withPolling: RegionInstanceGroupManagersClient.StartInstancesRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

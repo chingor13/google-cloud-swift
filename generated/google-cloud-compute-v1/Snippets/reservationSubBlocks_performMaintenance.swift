@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ReservationSubBlocksClient) async throws {
-    let response = try await client.performMaintenance(
-      request: ReservationSubBlocksClient.PerformMaintenanceRequest()
+    let poller = try await client.performMaintenance(
+      withPolling: ReservationSubBlocksClient.PerformMaintenanceRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

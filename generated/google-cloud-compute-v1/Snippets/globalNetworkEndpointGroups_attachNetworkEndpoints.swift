@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: GlobalNetworkEndpointGroupsClient) async throws {
-    let response = try await client.attachNetworkEndpoints(
-      request: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest()
+    let poller = try await client.attachNetworkEndpoints(
+      withPolling: GlobalNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

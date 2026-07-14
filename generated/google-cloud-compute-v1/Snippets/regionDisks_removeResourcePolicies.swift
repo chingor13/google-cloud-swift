@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionDisksClient) async throws {
-    let response = try await client.removeResourcePolicies(
-      request: RegionDisksClient.RemoveResourcePoliciesRequest()
+    let poller = try await client.removeResourcePolicies(
+      withPolling: RegionDisksClient.RemoveResourcePoliciesRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

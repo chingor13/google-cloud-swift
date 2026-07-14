@@ -50,6 +50,41 @@
       try await self.inner.disableXpnHost(request: request, options: options)
     }
 
+    /// Disable this project as a shared VPC host project.
+    ///
+    /// @Snippet(path: "projects_disableXpnHost")
+    public func disableXpnHost(
+      withPolling: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.disableXpnHost(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Disable a service resource (also known as service project) associated with
     /// this host project.
     ///
@@ -58,6 +93,42 @@
       request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.disableXpnResource(request: request, options: options)
+    }
+
+    /// Disable a service resource (also known as service project) associated with
+    /// this host project.
+    ///
+    /// @Snippet(path: "projects_disableXpnResource")
+    public func disableXpnResource(
+      withPolling: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.disableXpnResource(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Enable this project as a shared VPC host project.
@@ -69,6 +140,41 @@
       try await self.inner.enableXpnHost(request: request, options: options)
     }
 
+    /// Enable this project as a shared VPC host project.
+    ///
+    /// @Snippet(path: "projects_enableXpnHost")
+    public func enableXpnHost(
+      withPolling: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.enableXpnHost(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Enable service resource (a.k.a service project) for a host project, so that
     /// subnets in the host project can be used by instances in the service
     /// project.
@@ -78,6 +184,43 @@
       request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.enableXpnResource(request: request, options: options)
+    }
+
+    /// Enable service resource (a.k.a service project) for a host project, so that
+    /// subnets in the host project can be used by instances in the service
+    /// project.
+    ///
+    /// @Snippet(path: "projects_enableXpnResource")
+    public func enableXpnResource(
+      withPolling: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.enableXpnResource(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Returns the specified Project resource.
@@ -179,6 +322,54 @@
       try await self.inner.moveDisk(request: request, options: options)
     }
 
+    /// Moves a persistent disk from one zone to another.
+    /// *Note*: The moveDisk API will be deprecated on September 29, 2026.
+    ///
+    /// Starting September 29, 2025, you can't use the moveDisk API on new
+    /// projects. To move a disk to a different region or zone, follow the steps in
+    /// [Change the location of a
+    /// disk](https://cloud.google.com/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd).
+    ///
+    /// Projects that already use the moveDisk API can continue usage until
+    /// September 29, 2026.
+    ///
+    /// Starting November 1, 2025, API responses will include a warning message in
+    /// the response body about the upcoming deprecation. You can skip the message
+    /// to continue using the service without interruption.
+    ///
+    /// @Snippet(path: "projects_moveDisk")
+    public func moveDisk(
+      withPolling: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.moveDisk(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Moves an instance and its attached persistent disks from one zone to
     /// another.
     /// *Note*: Moving VMs or disks by using this method might
@@ -195,6 +386,47 @@
       try await self.inner.moveInstance(request: request, options: options)
     }
 
+    /// Moves an instance and its attached persistent disks from one zone to
+    /// another.
+    /// *Note*: Moving VMs or disks by using this method might
+    ///  cause unexpected behavior. For more information, see the [known
+    ///  issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior).
+    /// [Deprecated] This method is deprecated. See [moving instance across
+    /// zones](/compute/docs/instances/moving-instance-across-zones) instead.
+    ///
+    /// @Snippet(path: "projects_moveInstance")
+    public func moveInstance(
+      withPolling: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.moveInstance(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
     /// billing account of the project must be subscribed to Cloud Armor
     /// Enterprise. See Subscribing
@@ -205,6 +437,44 @@
       request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.setCloudArmorTier(request: request, options: options)
+    }
+
+    /// Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
+    /// billing account of the project must be subscribed to Cloud Armor
+    /// Enterprise. See Subscribing
+    /// to Cloud Armor Enterprise for more information.
+    ///
+    /// @Snippet(path: "projects_setCloudArmorTier")
+    public func setCloudArmorTier(
+      withPolling: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setCloudArmorTier(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
     }
 
     /// Sets metadata common to all instances within the specified project using
@@ -218,6 +488,43 @@
       try await self.inner.setCommonInstanceMetadata(request: request, options: options)
     }
 
+    /// Sets metadata common to all instances within the specified project using
+    /// the data included in the request.
+    ///
+    /// @Snippet(path: "projects_setCommonInstanceMetadata")
+    public func setCommonInstanceMetadata(
+      withPolling: ProjectsClient.SetCommonInstanceMetadataRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setCommonInstanceMetadata(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Sets the default network tier of the project. The default network tier is
     /// used when an address/forwardingRule/instance is created without specifying
     /// the network tier field.
@@ -229,6 +536,44 @@
       try await self.inner.setDefaultNetworkTier(request: request, options: options)
     }
 
+    /// Sets the default network tier of the project. The default network tier is
+    /// used when an address/forwardingRule/instance is created without specifying
+    /// the network tier field.
+    ///
+    /// @Snippet(path: "projects_setDefaultNetworkTier")
+    public func setDefaultNetworkTier(
+      withPolling: ProjectsClient.SetDefaultNetworkTierRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setDefaultNetworkTier(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
     /// Enables the usage export feature and sets theusage export bucket
     /// where reports are stored. If you provide an empty request body using this
     /// method, the usage export feature will be disabled.
@@ -238,6 +583,53 @@
       request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.setUsageExportBucket(request: request, options: options)
+    }
+
+    /// Enables the usage export feature and sets theusage export bucket
+    /// where reports are stored. If you provide an empty request body using this
+    /// method, the usage export feature will be disabled.
+    ///
+    /// @Snippet(path: "projects_setUsageExportBucket")
+    public func setUsageExportBucket(
+      withPolling: ProjectsClient.SetUsageExportBucketRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let extractStatus = {
+        (op: GoogleCloudComputeV1.Operation) throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        guard op._done() else {
+          return .init(done: false, result: nil)
+        }
+
+        do {
+          try op._detectErrors()
+        } catch let e as GoogleCloudGax.RequestError {
+          return .init(done: true, result: .failure(e))
+        }
+        return .init(done: true, result: .success(op))
+      }
+      let rawOp = try await self.setUsageExportBucket(request: withPolling, options: options)
+      let initialState = try extractStatus(rawOp)
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        let op = try await self.getOperation(
+          request: .init().with {
+            $0.operation = rawOp._name()
+            $0.project = withPolling.project
+          }, options: options)
+        return try extractStatus(op)
+      }
+      return GoogleCloudGax._PollableOperationImpl(initialState: initialState, poll: poll)
+    }
+
+    /// Retrieves the specified Operations resource.
+    ///
+    /// @Snippet(path: "projects_getOperation")
+    func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      try await self.inner.getOperation(request: request, options: options)
     }
   }
 
@@ -504,6 +896,33 @@
       return try await self.disableXpnHost(request: request)
     }
 
+    public func disableXpnHost(
+      withPolling: ProjectsClient.DisableXpnHostRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.disableXpnHost(withPolling: withPolling, options: .init())
+    }
+
+    public func disableXpnHost(
+      withPolling: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func disableXpnHost(
+      project: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.DisableXpnHostRequest().with {
+        $0.project = project
+      }
+      return try await self.disableXpnHost(withPolling: request)
+    }
+
     public func disableXpnResource(request: ProjectsClient.DisableXpnResourceRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -527,6 +946,35 @@
       return try await self.disableXpnResource(request: request)
     }
 
+    public func disableXpnResource(
+      withPolling: ProjectsClient.DisableXpnResourceRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.disableXpnResource(withPolling: withPolling, options: .init())
+    }
+
+    public func disableXpnResource(
+      withPolling: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func disableXpnResource(
+      project: Swift.String,
+      body: ProjectsDisableXpnResourceRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.DisableXpnResourceRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.disableXpnResource(withPolling: request)
+    }
+
     public func enableXpnHost(request: ProjectsClient.EnableXpnHostRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -546,6 +994,33 @@
         $0.project = project
       }
       return try await self.enableXpnHost(request: request)
+    }
+
+    public func enableXpnHost(
+      withPolling: ProjectsClient.EnableXpnHostRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.enableXpnHost(withPolling: withPolling, options: .init())
+    }
+
+    public func enableXpnHost(
+      withPolling: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func enableXpnHost(
+      project: Swift.String,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.EnableXpnHostRequest().with {
+        $0.project = project
+      }
+      return try await self.enableXpnHost(withPolling: request)
     }
 
     public func enableXpnResource(request: ProjectsClient.EnableXpnResourceRequest) async throws
@@ -569,6 +1044,35 @@
         $0.body = body
       }
       return try await self.enableXpnResource(request: request)
+    }
+
+    public func enableXpnResource(
+      withPolling: ProjectsClient.EnableXpnResourceRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.enableXpnResource(withPolling: withPolling, options: .init())
+    }
+
+    public func enableXpnResource(
+      withPolling: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func enableXpnResource(
+      project: Swift.String,
+      body: ProjectsEnableXpnResourceRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.EnableXpnResourceRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.enableXpnResource(withPolling: request)
     }
 
     public func `get`(request: ProjectsClient.GetRequest) async throws
@@ -711,6 +1215,35 @@
       return try await self.moveDisk(request: request)
     }
 
+    public func moveDisk(
+      withPolling: ProjectsClient.MoveDiskRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.moveDisk(withPolling: withPolling, options: .init())
+    }
+
+    public func moveDisk(
+      withPolling: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func moveDisk(
+      project: Swift.String,
+      body: DiskMoveRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.MoveDiskRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.moveDisk(withPolling: request)
+    }
+
     public func moveInstance(request: ProjectsClient.MoveInstanceRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -734,6 +1267,35 @@
       return try await self.moveInstance(request: request)
     }
 
+    public func moveInstance(
+      withPolling: ProjectsClient.MoveInstanceRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.moveInstance(withPolling: withPolling, options: .init())
+    }
+
+    public func moveInstance(
+      withPolling: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func moveInstance(
+      project: Swift.String,
+      body: InstanceMoveRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.MoveInstanceRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.moveInstance(withPolling: request)
+    }
+
     public func setCloudArmorTier(request: ProjectsClient.SetCloudArmorTierRequest) async throws
       -> GoogleCloudComputeV1.Operation
     {
@@ -755,6 +1317,35 @@
         $0.body = body
       }
       return try await self.setCloudArmorTier(request: request)
+    }
+
+    public func setCloudArmorTier(
+      withPolling: ProjectsClient.SetCloudArmorTierRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setCloudArmorTier(withPolling: withPolling, options: .init())
+    }
+
+    public func setCloudArmorTier(
+      withPolling: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setCloudArmorTier(
+      project: Swift.String,
+      body: ProjectsSetCloudArmorTierRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.SetCloudArmorTierRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.setCloudArmorTier(withPolling: request)
     }
 
     public func setCommonInstanceMetadata(request: ProjectsClient.SetCommonInstanceMetadataRequest)
@@ -781,6 +1372,36 @@
       return try await self.setCommonInstanceMetadata(request: request)
     }
 
+    public func setCommonInstanceMetadata(
+      withPolling: ProjectsClient.SetCommonInstanceMetadataRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setCommonInstanceMetadata(withPolling: withPolling, options: .init())
+    }
+
+    public func setCommonInstanceMetadata(
+      withPolling: ProjectsClient.SetCommonInstanceMetadataRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setCommonInstanceMetadata(
+      project: Swift.String,
+      body: Metadata?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.SetCommonInstanceMetadataRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.setCommonInstanceMetadata(withPolling: request)
+    }
+
     public func setDefaultNetworkTier(request: ProjectsClient.SetDefaultNetworkTierRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
@@ -804,6 +1425,36 @@
       return try await self.setDefaultNetworkTier(request: request)
     }
 
+    public func setDefaultNetworkTier(
+      withPolling: ProjectsClient.SetDefaultNetworkTierRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setDefaultNetworkTier(withPolling: withPolling, options: .init())
+    }
+
+    public func setDefaultNetworkTier(
+      withPolling: ProjectsClient.SetDefaultNetworkTierRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setDefaultNetworkTier(
+      project: Swift.String,
+      body: ProjectsSetDefaultNetworkTierRequest?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.SetDefaultNetworkTierRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.setDefaultNetworkTier(withPolling: request)
+    }
+
     public func setUsageExportBucket(request: ProjectsClient.SetUsageExportBucketRequest)
       async throws -> GoogleCloudComputeV1.Operation
     {
@@ -825,6 +1476,48 @@
         $0.body = body
       }
       return try await self.setUsageExportBucket(request: request)
+    }
+
+    public func setUsageExportBucket(
+      withPolling: ProjectsClient.SetUsageExportBucketRequest
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      try await self.setUsageExportBucket(withPolling: withPolling, options: .init())
+    }
+
+    public func setUsageExportBucket(
+      withPolling: ProjectsClient.SetUsageExportBucketRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let poll = {
+        () async throws
+          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleCloudGax.RequestError.unimplemented
+      }
+      return GoogleCloudGax._PollableOperationImpl(
+        initialState: .init(done: false, result: nil), poll: poll)
+    }
+
+    public func setUsageExportBucket(
+      project: Swift.String,
+      body: UsageExportLocation?,
+    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      let request = ProjectsClient.SetUsageExportBucketRequest().with {
+        $0.project = project
+        $0.body = body
+      }
+      return try await self.setUsageExportBucket(withPolling: request)
+    }
+
+    public func getOperation(request: GlobalOperationsClient.GetRequest) async throws
+      -> GoogleCloudComputeV1.Operation
+    {
+      try await self.getOperation(request: request, options: .init())
+    }
+
+    public func getOperation(
+      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudComputeV1.Operation {
+      throw GoogleCloudGax.RequestError.unimplemented
     }
   }
 #endif

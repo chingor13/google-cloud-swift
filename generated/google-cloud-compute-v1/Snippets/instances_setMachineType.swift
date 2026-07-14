@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstancesClient) async throws {
-    let response = try await client.setMachineType(
-      request: InstancesClient.SetMachineTypeRequest()
+    let poller = try await client.setMachineType(
+      withPolling: InstancesClient.SetMachineTypeRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

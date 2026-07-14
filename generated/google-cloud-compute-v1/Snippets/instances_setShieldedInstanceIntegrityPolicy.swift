@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstancesClient) async throws {
-    let response = try await client.setShieldedInstanceIntegrityPolicy(
-      request: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest()
+    let poller = try await client.setShieldedInstanceIntegrityPolicy(
+      withPolling: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

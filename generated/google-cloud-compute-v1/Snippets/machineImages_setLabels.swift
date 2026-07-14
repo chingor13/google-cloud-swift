@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: MachineImagesClient) async throws {
-    let response = try await client.setLabels(
-      request: MachineImagesClient.SetLabelsRequest()
+    let poller = try await client.setLabels(
+      withPolling: MachineImagesClient.SetLabelsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

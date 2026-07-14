@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsClient()
-    let response = try await client.cancel(
-      request: InstanceGroupManagerResizeRequestsClient.CancelRequest()
+    let poller = try await client.cancel(
+      withPolling: InstanceGroupManagerResizeRequestsClient.CancelRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

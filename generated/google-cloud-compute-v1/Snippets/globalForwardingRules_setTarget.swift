@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: GlobalForwardingRulesClient) async throws {
-    let response = try await client.setTarget(
-      request: GlobalForwardingRulesClient.SetTargetRequest()
+    let poller = try await client.setTarget(
+      withPolling: GlobalForwardingRulesClient.SetTargetRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

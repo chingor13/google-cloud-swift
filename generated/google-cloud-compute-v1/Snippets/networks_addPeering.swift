@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: NetworksClient) async throws {
-    let response = try await client.addPeering(
-      request: NetworksClient.AddPeeringRequest()
+    let poller = try await client.addPeering(
+      withPolling: NetworksClient.AddPeeringRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

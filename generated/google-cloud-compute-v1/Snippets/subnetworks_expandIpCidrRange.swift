@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: SubnetworksClient) async throws {
-    let response = try await client.expandIpCidrRange(
-      request: SubnetworksClient.ExpandIpCidrRangeRequest()
+    let poller = try await client.expandIpCidrRange(
+      withPolling: SubnetworksClient.ExpandIpCidrRangeRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

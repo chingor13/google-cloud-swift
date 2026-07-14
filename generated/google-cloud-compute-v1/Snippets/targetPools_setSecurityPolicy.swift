@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: TargetPoolsClient) async throws {
-    let response = try await client.setSecurityPolicy(
-      request: TargetPoolsClient.SetSecurityPolicyRequest()
+    let poller = try await client.setSecurityPolicy(
+      withPolling: TargetPoolsClient.SetSecurityPolicyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

@@ -223,6 +223,21 @@
             return try await self.inner.setUrlMap(request: r, options: o)
           })
       }
+
+      public func getOperation(
+        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        try await self._intercept(
+          request: request,
+          options: options,
+          idempotent: true,
+          action: {
+            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
+            in
+            return try await self.inner.getOperation(request: r, options: o)
+          })
+      }
     }
   }
 #endif

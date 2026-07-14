@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: DisksClient) async throws {
-    let response = try await client.startAsyncReplication(
-      request: DisksClient.StartAsyncReplicationRequest()
+    let poller = try await client.startAsyncReplication(
+      withPolling: DisksClient.StartAsyncReplicationRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

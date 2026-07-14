@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: NetworkAttachmentsClient) async throws {
-    let response = try await client.insert(
-      request: NetworkAttachmentsClient.InsertRequest()
+    let poller = try await client.insert(
+      withPolling: NetworkAttachmentsClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: TargetVpnGatewaysClient) async throws {
-    let response = try await client.setLabels(
-      request: TargetVpnGatewaysClient.SetLabelsRequest()
+    let poller = try await client.setLabels(
+      withPolling: TargetVpnGatewaysClient.SetLabelsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

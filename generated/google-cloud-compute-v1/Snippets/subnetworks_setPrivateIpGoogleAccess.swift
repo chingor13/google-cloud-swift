@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: SubnetworksClient) async throws {
-    let response = try await client.setPrivateIpGoogleAccess(
-      request: SubnetworksClient.SetPrivateIpGoogleAccessRequest()
+    let poller = try await client.setPrivateIpGoogleAccess(
+      withPolling: SubnetworksClient.SetPrivateIpGoogleAccessRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

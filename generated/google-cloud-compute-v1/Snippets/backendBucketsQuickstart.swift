@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.BackendBucketsClient()
-    let response = try await client.addSignedUrlKey(
-      request: BackendBucketsClient.AddSignedUrlKeyRequest()
+    let poller = try await client.addSignedUrlKey(
+      withPolling: BackendBucketsClient.AddSignedUrlKeyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

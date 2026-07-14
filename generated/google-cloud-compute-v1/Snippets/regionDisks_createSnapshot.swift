@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionDisksClient) async throws {
-    let response = try await client.createSnapshot(
-      request: RegionDisksClient.CreateSnapshotRequest()
+    let poller = try await client.createSnapshot(
+      withPolling: RegionDisksClient.CreateSnapshotRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

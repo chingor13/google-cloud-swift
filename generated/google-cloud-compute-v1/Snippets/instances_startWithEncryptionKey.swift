@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstancesClient) async throws {
-    let response = try await client.startWithEncryptionKey(
-      request: InstancesClient.StartWithEncryptionKeyRequest()
+    let poller = try await client.startWithEncryptionKey(
+      withPolling: InstancesClient.StartWithEncryptionKeyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

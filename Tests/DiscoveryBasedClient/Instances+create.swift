@@ -44,25 +44,13 @@ extension InstanceSamples {
       $0.disks = [bootDisk]
       $0.networkInterfaces = [nic]
     }
-    var operation = try await client.insert(
+    let operation = try await client.insert(
       request: .init().with {
         $0.project = projectId
         $0.zone = zoneId
         $0.body = instance
-      })
-    guard let operationName = operation.name else {
-      throw GoogleCloudGax.RequestError.malformedResponse("missing operation name")
-    }
-    let poller = try ZoneOperationsClient()
-    for _ in 0...10 {
-      operation = try await poller.get(project: projectId, zone: zoneId, operation: operationName)
-      if let status = operation.status, status == .done {
-        break
-      }
-      logger.info("backoff")
-      try await Task.sleep(for: .seconds(1))
-    }
-    logger.info("Instance.insert() completed successfully")
+      }, options: .init())
+    logger.info("Instance.insert() - response=\(operation)")
   }
 }
 // [END compute_instances_create]

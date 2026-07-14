@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RegionTargetHttpProxiesClient) async throws {
-    let response = try await client.delete(
-      request: RegionTargetHttpProxiesClient.DeleteRequest()
+    let poller = try await client.delete(
+      withPolling: RegionTargetHttpProxiesClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

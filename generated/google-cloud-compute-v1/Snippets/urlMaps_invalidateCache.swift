@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: UrlMapsClient) async throws {
-    let response = try await client.invalidateCache(
-      request: UrlMapsClient.InvalidateCacheRequest()
+    let poller = try await client.invalidateCache(
+      withPolling: UrlMapsClient.InvalidateCacheRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

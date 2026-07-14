@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstancesClient) async throws {
-    let response = try await client.setMetadata(
-      request: InstancesClient.SetMetadataRequest()
+    let poller = try await client.setMetadata(
+      withPolling: InstancesClient.SetMetadataRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

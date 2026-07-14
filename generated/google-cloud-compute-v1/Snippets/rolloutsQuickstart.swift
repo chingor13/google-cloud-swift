@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.RolloutsClient()
-    let response = try await client.advance(
-      request: RolloutsClient.AdvanceRequest()
+    let poller = try await client.advance(
+      withPolling: RolloutsClient.AdvanceRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

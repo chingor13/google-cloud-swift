@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: DisksClient) async throws {
-    let response = try await client.bulkInsert(
-      request: DisksClient.BulkInsertRequest()
+    let poller = try await client.bulkInsert(
+      withPolling: DisksClient.BulkInsertRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

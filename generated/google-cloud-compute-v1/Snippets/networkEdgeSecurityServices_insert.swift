@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: NetworkEdgeSecurityServicesClient) async throws {
-    let response = try await client.insert(
-      request: NetworkEdgeSecurityServicesClient.InsertRequest()
+    let poller = try await client.insert(
+      withPolling: NetworkEdgeSecurityServicesClient.InsertRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

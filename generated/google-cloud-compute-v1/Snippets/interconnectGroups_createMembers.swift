@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InterconnectGroupsClient) async throws {
-    let response = try await client.createMembers(
-      request: InterconnectGroupsClient.CreateMembersRequest()
+    let poller = try await client.createMembers(
+      withPolling: InterconnectGroupsClient.CreateMembersRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

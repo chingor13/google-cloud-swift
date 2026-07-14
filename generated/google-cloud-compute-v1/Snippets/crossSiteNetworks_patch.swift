@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: CrossSiteNetworksClient) async throws {
-    let response = try await client.patch(
-      request: CrossSiteNetworksClient.PatchRequest()
+    let poller = try await client.patch(
+      withPolling: CrossSiteNetworksClient.PatchRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

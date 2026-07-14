@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.NetworksClient()
-    let response = try await client.addPeering(
-      request: NetworksClient.AddPeeringRequest()
+    let poller = try await client.addPeering(
+      withPolling: NetworksClient.AddPeeringRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

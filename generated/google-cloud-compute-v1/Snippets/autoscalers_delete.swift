@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: AutoscalersClient) async throws {
-    let response = try await client.delete(
-      request: AutoscalersClient.DeleteRequest()
+    let poller = try await client.delete(
+      withPolling: AutoscalersClient.DeleteRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.RegionNetworkFirewallPoliciesClient()
-    let response = try await client.addAssociation(
-      request: RegionNetworkFirewallPoliciesClient.AddAssociationRequest()
+    let poller = try await client.addAssociation(
+      withPolling: RegionNetworkFirewallPoliciesClient.AddAssociationRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

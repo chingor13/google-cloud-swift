@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: InstanceGroupsClient) async throws {
-    let response = try await client.setNamedPorts(
-      request: InstanceGroupsClient.SetNamedPortsRequest()
+    let poller = try await client.setNamedPorts(
+      withPolling: InstanceGroupsClient.SetNamedPortsRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

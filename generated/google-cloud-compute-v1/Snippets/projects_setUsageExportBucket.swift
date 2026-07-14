@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ProjectsClient) async throws {
-    let response = try await client.setUsageExportBucket(
-      request: ProjectsClient.SetUsageExportBucketRequest()
+    let poller = try await client.setUsageExportBucket(
+      withPolling: ProjectsClient.SetUsageExportBucketRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

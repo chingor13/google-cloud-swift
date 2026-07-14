@@ -90,6 +90,17 @@ libraries:
       per_service_traits: true
       default_traits:
         - Instances
+      discovery:
+        operation_id: .google.cloud.compute.v1.Operation
+        pollers:
+          - prefix: compute/v1/projects/{project}/zones/{zone}
+            method_id: .google.cloud.compute.v1.zoneOperations.get
+          - prefix: compute/v1/projects/{project}/regions/{region}
+            method_id: .google.cloud.compute.v1.regionOperations.get
+          - prefix: compute/v1/projects/{project}
+            method_id: .google.cloud.compute.v1.globalOperations.get
+          - prefix: compute/v1/
+            method_id: .google.cloud.compute.v1.globalOrganizationOperations.get
   - name: GoogleCloudEdgecontainerV1
     apis:
       - path: google/cloud/edgecontainer/v1

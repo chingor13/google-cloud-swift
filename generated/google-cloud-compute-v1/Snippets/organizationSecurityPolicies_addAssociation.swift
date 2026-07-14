@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: OrganizationSecurityPoliciesClient) async throws {
-    let response = try await client.addAssociation(
-      request: OrganizationSecurityPoliciesClient.AddAssociationRequest()
+    let poller = try await client.addAssociation(
+      withPolling: OrganizationSecurityPoliciesClient.AddAssociationRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

@@ -23,10 +23,11 @@
 
   func sample() async throws {
     let client = try GoogleCloudComputeV1.InstancesClient()
-    let response = try await client.addAccessConfig(
-      request: InstancesClient.AddAccessConfigRequest()
+    let poller = try await client.addAccessConfig(
+      withPolling: InstancesClient.AddAccessConfigRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

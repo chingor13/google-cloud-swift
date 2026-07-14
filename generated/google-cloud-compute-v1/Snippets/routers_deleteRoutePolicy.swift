@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: RoutersClient) async throws {
-    let response = try await client.deleteRoutePolicy(
-      request: RoutersClient.DeleteRoutePolicyRequest()
+    let poller = try await client.deleteRoutePolicy(
+      withPolling: RoutersClient.DeleteRoutePolicyRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide

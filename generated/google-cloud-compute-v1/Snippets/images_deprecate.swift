@@ -22,10 +22,11 @@
   import GoogleCloudWkt
 
   func sample(client: ImagesClient) async throws {
-    let response = try await client.deprecate(
-      request: ImagesClient.DeprecateRequest()
+    let poller = try await client.deprecate(
+      withPolling: ImagesClient.DeprecateRequest()
         /* set fields using .with { $0... } */
     )
+    let response = try await poller.wait()
     print("Success: \(response)")
   }
   // snippet.hide
