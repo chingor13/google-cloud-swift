@@ -71,6 +71,15 @@ libraries:
     apis:
       - path: google/api
     copyright_year: "2026"
+  - name: GoogleCloudAuth
+    version: 0.0.0-preview
+    copyright_year: "2026"
+    output: packages/auth/Sources/GoogleCloudAuth/generated
+    swift:
+      modules:
+        - output: packages/auth/Sources/GoogleCloudAuth/generated
+          api_path: ""
+          module_type: package-version
   - name: GoogleCloudCommon
     apis:
       - path: google/cloud/common
@@ -113,6 +122,15 @@ libraries:
     apis:
       - path: google/cloud/functions/v2
     copyright_year: "2026"
+  - name: GoogleCloudGax
+    version: 0.0.0-preview
+    copyright_year: "2026"
+    output: packages/gax/Sources/GoogleCloudGax/generated
+    swift:
+      modules:
+        - output: packages/gax/Sources/GoogleCloudGax/generated
+          api_path: ""
+          module_type: package-version
   - name: GoogleCloudLocation
     apis:
       - path: google/cloud/location
@@ -165,6 +183,7 @@ libraries:
       - path: google/cloud/tpu/v2
     copyright_year: "2026"
   - name: GoogleCloudWkt
+    version: 0.0.0-preview
     copyright_year: "2026"
     output: packages/wkt/Sources/GoogleCloudWkt/generated
     roots:
@@ -175,8 +194,12 @@ libraries:
         - type.proto
         - source_context.proto
       modules:
-        - output: packages/wkt/Sources/GoogleCloudWkt/generated
+        - output: packages/wkt/Sources/GoogleCloudWkt/generated/messages
           api_path: google/protobuf
+          module_type: default
+        - output: packages/wkt/Sources/GoogleCloudWkt/generated/version
+          api_path: google/protobuf
+          module_type: package-version
   - name: GoogleCloudWorkflowsV1
     apis:
       - path: google/cloud/workflows/v1
