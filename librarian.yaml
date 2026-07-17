@@ -295,6 +295,11 @@ libraries:
     apis:
       - path: google/iam/v1
     copyright_year: "2026"
+  - name: GoogleIamV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/iam/v2
+    copyright_year: "2026"
   - name: GoogleLongrunning
     version: 0.0.0-preview
     apis:
