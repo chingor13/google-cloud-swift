@@ -315,6 +315,11 @@ libraries:
     apis:
       - path: google/longrunning
     copyright_year: "2026"
+  - name: GooglePrivacyDlpV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/privacy/dlp/v2
+    copyright_year: "2026"
   - name: GoogleRpc
     version: 0.0.0-preview
     apis:
