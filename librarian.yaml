@@ -199,6 +199,11 @@ libraries:
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
+  - name: GoogleCloudSchedulerV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/scheduler/v1
+    copyright_year: "2026"
   - name: GoogleCloudSecretmanagerV1
     version: 0.0.0-preview
     apis:
