@@ -335,6 +335,11 @@ libraries:
     apis:
       - path: google/rpc
     copyright_year: "2026"
+  - name: GoogleRpcContext
+    version: 0.0.0-preview
+    apis:
+      - path: google/rpc/context
+    copyright_year: "2026"
   - name: GoogleStoragetransferV1
     version: 0.0.0-preview
     apis:
