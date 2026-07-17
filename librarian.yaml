@@ -271,6 +271,11 @@ libraries:
         - output: packages/wkt/Sources/GoogleCloudWkt/generated/version
           api_path: google/protobuf
           module_type: package-version
+  - name: GoogleCloudWorkflowsExecutionsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/workflows/executions/v1
+    copyright_year: "2026"
   - name: GoogleCloudWorkflowsV1
     version: 0.0.0-preview
     apis:
