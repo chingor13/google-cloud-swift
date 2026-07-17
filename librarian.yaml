@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.26.1-0.20260717140412-9ebd4bc82f84
+version: v0.27.2-0.20260717180127-000c0e0462e2
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -75,6 +75,7 @@ default:
         url: https://github.com/apple/swift-log
         version: 1.12.0
         required_by_services: true
+    default_version: 0.0.0-preview
 libraries:
   - name: GoogleApi
     version: 0.0.0-preview
