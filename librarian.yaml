@@ -275,6 +275,11 @@ libraries:
     apis:
       - path: google/devtools/artifactregistry/v1
     copyright_year: "2026"
+  - name: GoogleGrafeasV1
+    version: 0.0.0-preview
+    apis:
+      - path: grafeas/v1
+    copyright_year: "2026"
   - name: GoogleIamV1
     version: 0.0.0-preview
     apis:
