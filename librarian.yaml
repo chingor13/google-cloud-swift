@@ -189,6 +189,11 @@ libraries:
     apis:
       - path: google/cloud/resourcemanager/v3
     copyright_year: "2026"
+  - name: GoogleCloudRetailV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/retail/v2
+    copyright_year: "2026"
   - name: GoogleCloudRunV2
     version: 0.0.0-preview
     apis:
