@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `previewFeatures` resource.
   ///
@@ -164,13 +161,6 @@
       func update(request: PreviewFeaturesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `PreviewFeaturesClient.update`.
-      func update(
-        project: Swift.String,
-        previewFeature: Swift.String,
-        body: PreviewFeature?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `PreviewFeaturesClient.`get``.
       func `get`(
         request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
@@ -264,19 +254,6 @@
       request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      previewFeature: Swift.String,
-      body: PreviewFeature?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = PreviewFeaturesClient.UpdateRequest().with {
-        $0.project = project
-        $0.previewFeature = previewFeature
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

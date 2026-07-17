@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `nodeGroups` resource.
   ///
@@ -548,14 +545,6 @@
       func addNodes(request: NodeGroupsClient.AddNodesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeGroupsClient.addNodes`.
-      func addNodes(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroupsAddNodesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NodeGroupsClient.aggregatedList`.
       func aggregatedList(request: NodeGroupsClient.AggregatedListRequest) async throws
         -> GoogleCloudComputeV1.NodeGroupAggregatedList
@@ -574,24 +563,9 @@
       func delete(request: NodeGroupsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeGroupsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NodeGroupsClient.deleteNodes`.
       func deleteNodes(request: NodeGroupsClient.DeleteNodesRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NodeGroupsClient.deleteNodes`.
-      func deleteNodes(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroupsDeleteNodesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NodeGroupsClient.`get``.
       func `get`(request: NodeGroupsClient.GetRequest) async throws
@@ -618,14 +592,6 @@
       /// See `NodeGroupsClient.insert`.
       func insert(request: NodeGroupsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NodeGroupsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        initialNodeCount: Swift.Int32,
-        body: NodeGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NodeGroupsClient.list`.
       func list(request: NodeGroupsClient.ListRequest) async throws
@@ -662,25 +628,9 @@
       func patch(request: NodeGroupsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeGroupsClient.patch`.
-      func patch(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NodeGroupsClient.performMaintenance`.
       func performMaintenance(request: NodeGroupsClient.PerformMaintenanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NodeGroupsClient.performMaintenance`.
-      func performMaintenance(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroupsPerformMaintenanceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NodeGroupsClient.setIamPolicy`.
       func setIamPolicy(request: NodeGroupsClient.SetIamPolicyRequest) async throws
@@ -698,25 +648,9 @@
       func setNodeTemplate(request: NodeGroupsClient.SetNodeTemplateRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeGroupsClient.setNodeTemplate`.
-      func setNodeTemplate(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroupsSetNodeTemplateRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NodeGroupsClient.simulateMaintenanceEvent`.
       func simulateMaintenanceEvent(request: NodeGroupsClient.SimulateMaintenanceEventRequest)
         async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `NodeGroupsClient.simulateMaintenanceEvent`.
-      func simulateMaintenanceEvent(
-        project: Swift.String,
-        zone: Swift.String,
-        nodeGroup: Swift.String,
-        body: NodeGroupsSimulateMaintenanceEventRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NodeGroupsClient.testIamPermissions`.
       func testIamPermissions(request: NodeGroupsClient.TestIamPermissionsRequest) async throws
@@ -838,21 +772,6 @@
     }
 
     public func addNodes(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsAddNodesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.AddNodesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.addNodes(request: request)
-    }
-
-    public func addNodes(
       withPolling: NodeGroupsClient.AddNodesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addNodes(withPolling: withPolling, options: .init())
@@ -935,19 +854,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: NodeGroupsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -988,21 +894,6 @@
       request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func deleteNodes(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsDeleteNodesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.DeleteNodesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.deleteNodes(request: request)
     }
 
     public func deleteNodes(
@@ -1098,21 +989,6 @@
       request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      initialNodeCount: Swift.Int32,
-      body: NodeGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.initialNodeCount = initialNodeCount
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -1239,21 +1115,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.PatchRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: NodeGroupsClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1296,21 +1157,6 @@
       request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.PerformMaintenanceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.performMaintenance(request: request)
     }
 
     public func performMaintenance(
@@ -1387,21 +1233,6 @@
     }
 
     public func setNodeTemplate(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsSetNodeTemplateRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.SetNodeTemplateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.setNodeTemplate(request: request)
-    }
-
-    public func setNodeTemplate(
       withPolling: NodeGroupsClient.SetNodeTemplateRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setNodeTemplate(withPolling: withPolling, options: .init())
@@ -1445,21 +1276,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func simulateMaintenanceEvent(
-      project: Swift.String,
-      zone: Swift.String,
-      nodeGroup: Swift.String,
-      body: NodeGroupsSimulateMaintenanceEventRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeGroupsClient.SimulateMaintenanceEventRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.nodeGroup = nodeGroup
-        $0.body = body
-      }
-      return try await self.simulateMaintenanceEvent(request: request)
     }
 
     public func simulateMaintenanceEvent(

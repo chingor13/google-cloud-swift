@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `snapshots` resource.
   ///
@@ -327,12 +324,6 @@
       func delete(request: SnapshotsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `SnapshotsClient.delete`.
-      func delete(
-        project: Swift.String,
-        snapshot: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `SnapshotsClient.`get``.
       func `get`(request: SnapshotsClient.GetRequest) async throws -> GoogleCloudComputeV1.Snapshot
 
@@ -355,12 +346,6 @@
       /// See `SnapshotsClient.insert`.
       func insert(request: SnapshotsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `SnapshotsClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: Snapshot?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SnapshotsClient.list`.
       func list(request: SnapshotsClient.ListRequest) async throws
@@ -391,13 +376,6 @@
       func setLabels(request: SnapshotsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `SnapshotsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        resource: Swift.String,
-        body: GlobalSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `SnapshotsClient.testIamPermissions`.
       func testIamPermissions(request: SnapshotsClient.TestIamPermissionsRequest) async throws
         -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -412,13 +390,6 @@
       /// See `SnapshotsClient.updateKmsKey`.
       func updateKmsKey(request: SnapshotsClient.UpdateKmsKeyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `SnapshotsClient.updateKmsKey`.
-      func updateKmsKey(
-        project: Swift.String,
-        snapshot: Swift.String,
-        body: SnapshotUpdateKmsKeyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SnapshotsClient.delete`.
       func delete(
@@ -484,17 +455,6 @@
       request: SnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      snapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SnapshotsClient.DeleteRequest().with {
-        $0.project = project
-        $0.snapshot = snapshot
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -582,17 +542,6 @@
       request: SnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: Snapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SnapshotsClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -698,19 +647,6 @@
     }
 
     public func setLabels(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SnapshotsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
-    }
-
-    public func setLabels(
       withPolling: SnapshotsClient.SetLabelsRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setLabels(withPolling: withPolling, options: .init())
@@ -776,19 +712,6 @@
       request: SnapshotsClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateKmsKey(
-      project: Swift.String,
-      snapshot: Swift.String,
-      body: SnapshotUpdateKmsKeyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SnapshotsClient.UpdateKmsKeyRequest().with {
-        $0.project = project
-        $0.snapshot = snapshot
-        $0.body = body
-      }
-      return try await self.updateKmsKey(request: request)
     }
 
     public func updateKmsKey(

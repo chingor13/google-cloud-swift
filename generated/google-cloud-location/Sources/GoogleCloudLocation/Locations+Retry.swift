@@ -18,11 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
 
 extension Clients {
   final class LocationsRetry: LocationsStub {

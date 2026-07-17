@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `sslCertificates` resource.
   ///
@@ -232,12 +229,6 @@
       func delete(request: SslCertificatesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `SslCertificatesClient.delete`.
-      func delete(
-        project: Swift.String,
-        sslCertificate: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `SslCertificatesClient.`get``.
       func `get`(request: SslCertificatesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.SslCertificate
@@ -251,12 +242,6 @@
       /// See `SslCertificatesClient.insert`.
       func insert(request: SslCertificatesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `SslCertificatesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: SslCertificate?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SslCertificatesClient.list`.
       func list(request: SslCertificatesClient.ListRequest) async throws
@@ -361,17 +346,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      sslCertificate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SslCertificatesClient.DeleteRequest().with {
-        $0.project = project
-        $0.sslCertificate = sslCertificate
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: SslCertificatesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -433,17 +407,6 @@
       request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: SslCertificate?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SslCertificatesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

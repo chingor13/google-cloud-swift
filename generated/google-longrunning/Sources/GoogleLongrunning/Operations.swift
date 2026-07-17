@@ -18,11 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
 
 /// Manages long-running operations with an API service.
 ///

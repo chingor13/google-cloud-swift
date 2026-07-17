@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionSecurityPolicies` resource.
   ///
@@ -444,24 +441,9 @@
       func addRule(request: RegionSecurityPoliciesClient.AddRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSecurityPoliciesClient.addRule`.
-      func addRule(
-        project: Swift.String,
-        region: Swift.String,
-        securityPolicy: Swift.String,
-        body: SecurityPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSecurityPoliciesClient.delete`.
       func delete(request: RegionSecurityPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionSecurityPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionSecurityPoliciesClient.`get``.
       func `get`(request: RegionSecurityPoliciesClient.GetRequest) async throws
@@ -489,13 +471,6 @@
       func insert(request: RegionSecurityPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSecurityPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: SecurityPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSecurityPoliciesClient.list`.
       func list(request: RegionSecurityPoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.SecurityPolicyList
@@ -515,48 +490,17 @@
       func patch(request: RegionSecurityPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSecurityPoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        securityPolicy: Swift.String,
-        body: SecurityPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSecurityPoliciesClient.patchRule`.
       func patchRule(request: RegionSecurityPoliciesClient.PatchRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionSecurityPoliciesClient.patchRule`.
-      func patchRule(
-        project: Swift.String,
-        region: Swift.String,
-        securityPolicy: Swift.String,
-        body: SecurityPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionSecurityPoliciesClient.removeRule`.
       func removeRule(request: RegionSecurityPoliciesClient.RemoveRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSecurityPoliciesClient.removeRule`.
-      func removeRule(
-        project: Swift.String,
-        region: Swift.String,
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSecurityPoliciesClient.setLabels`.
       func setLabels(request: RegionSecurityPoliciesClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionSecurityPoliciesClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionSecurityPoliciesClient.addRule`.
       func addRule(
@@ -633,21 +577,6 @@
     }
 
     public func addRule(
-      project: Swift.String,
-      region: Swift.String,
-      securityPolicy: Swift.String,
-      body: SecurityPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.AddRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.addRule(request: request)
-    }
-
-    public func addRule(
       withPolling: RegionSecurityPoliciesClient.AddRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addRule(withPolling: withPolling, options: .init())
@@ -691,19 +620,6 @@
       request: RegionSecurityPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -801,19 +717,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: SecurityPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RegionSecurityPoliciesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -896,21 +799,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      securityPolicy: Swift.String,
-      body: SecurityPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RegionSecurityPoliciesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -953,21 +841,6 @@
       request: RegionSecurityPoliciesClient.PatchRuleRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patchRule(
-      project: Swift.String,
-      region: Swift.String,
-      securityPolicy: Swift.String,
-      body: SecurityPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.PatchRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.patchRule(request: request)
     }
 
     public func patchRule(
@@ -1018,19 +891,6 @@
     }
 
     public func removeRule(
-      project: Swift.String,
-      region: Swift.String,
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.RemoveRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.removeRule(request: request)
-    }
-
-    public func removeRule(
       withPolling: RegionSecurityPoliciesClient.RemoveRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeRule(withPolling: withPolling, options: .init())
@@ -1072,21 +932,6 @@
       request: RegionSecurityPoliciesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSecurityPoliciesClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

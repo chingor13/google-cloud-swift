@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `targetInstances` resource.
   ///
@@ -293,13 +290,6 @@
       func delete(request: TargetInstancesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetInstancesClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        targetInstance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetInstancesClient.`get``.
       func `get`(request: TargetInstancesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.TargetInstance
@@ -314,13 +304,6 @@
       /// See `TargetInstancesClient.insert`.
       func insert(request: TargetInstancesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetInstancesClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: TargetInstance?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetInstancesClient.list`.
       func list(request: TargetInstancesClient.ListRequest) async throws
@@ -340,14 +323,6 @@
       /// See `TargetInstancesClient.setSecurityPolicy`.
       func setSecurityPolicy(request: TargetInstancesClient.SetSecurityPolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetInstancesClient.setSecurityPolicy`.
-      func setSecurityPolicy(
-        project: Swift.String,
-        zone: Swift.String,
-        targetInstance: Swift.String,
-        body: SecurityPolicyReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetInstancesClient.testIamPermissions`.
       func testIamPermissions(request: TargetInstancesClient.TestIamPermissionsRequest) async throws
@@ -462,19 +437,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      targetInstance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetInstancesClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.targetInstance = targetInstance
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: TargetInstancesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -540,19 +502,6 @@
       request: TargetInstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: TargetInstance?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetInstancesClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -635,21 +584,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setSecurityPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      targetInstance: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetInstancesClient.SetSecurityPolicyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.targetInstance = targetInstance
-        $0.body = body
-      }
-      return try await self.setSecurityPolicy(request: request)
     }
 
     public func setSecurityPolicy(

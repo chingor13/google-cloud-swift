@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionCommitments` resource.
   ///
@@ -247,13 +244,6 @@
       func insert(request: RegionCommitmentsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionCommitmentsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: Commitment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionCommitmentsClient.list`.
       func list(request: RegionCommitmentsClient.ListRequest) async throws
         -> GoogleCloudComputeV1.CommitmentList
@@ -272,14 +262,6 @@
       /// See `RegionCommitmentsClient.update`.
       func update(request: RegionCommitmentsClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionCommitmentsClient.update`.
-      func update(
-        project: Swift.String,
-        region: Swift.String,
-        commitment: Swift.String,
-        body: Commitment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionCommitmentsClient.aggregatedList`.
       func aggregatedList(
@@ -397,19 +379,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Commitment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionCommitmentsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RegionCommitmentsClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -488,21 +457,6 @@
       request: RegionCommitmentsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      region: Swift.String,
-      commitment: Swift.String,
-      body: Commitment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionCommitmentsClient.UpdateRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.commitment = commitment
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

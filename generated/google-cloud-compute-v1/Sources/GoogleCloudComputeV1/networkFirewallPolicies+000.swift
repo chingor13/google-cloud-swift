@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `networkFirewallPolicies` resource.
   ///
@@ -742,35 +739,14 @@
       func addAssociation(request: NetworkFirewallPoliciesClient.AddAssociationRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.addAssociation`.
-      func addAssociation(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyAssociation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.addPacketMirroringRule`.
       func addPacketMirroringRule(
         request: NetworkFirewallPoliciesClient.AddPacketMirroringRuleRequest
       ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.addPacketMirroringRule`.
-      func addPacketMirroringRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.addRule`.
       func addRule(request: NetworkFirewallPoliciesClient.AddRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkFirewallPoliciesClient.addRule`.
-      func addRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkFirewallPoliciesClient.aggregatedList`.
       func aggregatedList(request: NetworkFirewallPoliciesClient.AggregatedListRequest) async throws
@@ -790,21 +766,9 @@
       func cloneRules(request: NetworkFirewallPoliciesClient.CloneRulesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.cloneRules`.
-      func cloneRules(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.delete`.
       func delete(request: NetworkFirewallPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkFirewallPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkFirewallPoliciesClient.`get``.
       func `get`(request: NetworkFirewallPoliciesClient.GetRequest) async throws
@@ -861,12 +825,6 @@
       func insert(request: NetworkFirewallPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: FirewallPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.list`.
       func list(request: NetworkFirewallPoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.FirewallPolicyList
@@ -885,66 +843,27 @@
       func patch(request: NetworkFirewallPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.patchPacketMirroringRule`.
       func patchPacketMirroringRule(
         request: NetworkFirewallPoliciesClient.PatchPacketMirroringRuleRequest
-      ) async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkFirewallPoliciesClient.patchPacketMirroringRule`.
-      func patchPacketMirroringRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkFirewallPoliciesClient.patchRule`.
       func patchRule(request: NetworkFirewallPoliciesClient.PatchRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.patchRule`.
-      func patchRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.removeAssociation`.
       func removeAssociation(request: NetworkFirewallPoliciesClient.RemoveAssociationRequest)
         async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkFirewallPoliciesClient.removeAssociation`.
-      func removeAssociation(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkFirewallPoliciesClient.removePacketMirroringRule`.
       func removePacketMirroringRule(
         request: NetworkFirewallPoliciesClient.RemovePacketMirroringRuleRequest
       ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkFirewallPoliciesClient.removePacketMirroringRule`.
-      func removePacketMirroringRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkFirewallPoliciesClient.removeRule`.
       func removeRule(request: NetworkFirewallPoliciesClient.RemoveRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkFirewallPoliciesClient.removeRule`.
-      func removeRule(
-        project: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkFirewallPoliciesClient.setIamPolicy`.
       func setIamPolicy(request: NetworkFirewallPoliciesClient.SetIamPolicyRequest) async throws
@@ -1118,19 +1037,6 @@
     }
 
     public func addAssociation(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyAssociation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.AddAssociationRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.addAssociation(request: request)
-    }
-
-    public func addAssociation(
       withPolling: NetworkFirewallPoliciesClient.AddAssociationRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addAssociation(withPolling: withPolling, options: .init())
@@ -1176,19 +1082,6 @@
     }
 
     public func addPacketMirroringRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.AddPacketMirroringRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.addPacketMirroringRule(request: request)
-    }
-
-    public func addPacketMirroringRule(
       withPolling: NetworkFirewallPoliciesClient.AddPacketMirroringRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addPacketMirroringRule(withPolling: withPolling, options: .init())
@@ -1230,19 +1123,6 @@
       request: NetworkFirewallPoliciesClient.AddRuleRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func addRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.AddRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.addRule(request: request)
     }
 
     public func addRule(
@@ -1330,17 +1210,6 @@
     }
 
     public func cloneRules(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.CloneRulesRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.cloneRules(request: request)
-    }
-
-    public func cloneRules(
       withPolling: NetworkFirewallPoliciesClient.CloneRulesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cloneRules(withPolling: withPolling, options: .init())
@@ -1380,17 +1249,6 @@
       request: NetworkFirewallPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -1554,17 +1412,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      body: FirewallPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: NetworkFirewallPoliciesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -1643,19 +1490,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: NetworkFirewallPoliciesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1698,19 +1532,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patchPacketMirroringRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.PatchPacketMirroringRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.patchPacketMirroringRule(request: request)
     }
 
     public func patchPacketMirroringRule(
@@ -1759,19 +1580,6 @@
     }
 
     public func patchRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.PatchRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.patchRule(request: request)
-    }
-
-    public func patchRule(
       withPolling: NetworkFirewallPoliciesClient.PatchRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patchRule(withPolling: withPolling, options: .init())
@@ -1814,17 +1622,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeAssociation(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.RemoveAssociationRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.removeAssociation(request: request)
     }
 
     public func removeAssociation(
@@ -1871,17 +1668,6 @@
     }
 
     public func removePacketMirroringRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.RemovePacketMirroringRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.removePacketMirroringRule(request: request)
-    }
-
-    public func removePacketMirroringRule(
       withPolling: NetworkFirewallPoliciesClient.RemovePacketMirroringRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removePacketMirroringRule(withPolling: withPolling, options: .init())
@@ -1922,17 +1708,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeRule(
-      project: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkFirewallPoliciesClient.RemoveRuleRequest().with {
-        $0.project = project
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.removeRule(request: request)
     }
 
     public func removeRule(

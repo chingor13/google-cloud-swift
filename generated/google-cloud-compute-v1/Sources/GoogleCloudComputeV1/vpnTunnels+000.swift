@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `vpnTunnels` resource.
   ///
@@ -279,13 +276,6 @@
       func delete(request: VpnTunnelsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `VpnTunnelsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        vpnTunnel: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `VpnTunnelsClient.`get``.
       func `get`(request: VpnTunnelsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.VpnTunnel
@@ -300,13 +290,6 @@
       /// See `VpnTunnelsClient.insert`.
       func insert(request: VpnTunnelsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `VpnTunnelsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: VpnTunnel?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `VpnTunnelsClient.list`.
       func list(request: VpnTunnelsClient.ListRequest) async throws
@@ -326,14 +309,6 @@
       /// See `VpnTunnelsClient.setLabels`.
       func setLabels(request: VpnTunnelsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `VpnTunnelsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `VpnTunnelsClient.aggregatedList`.
       func aggregatedList(
@@ -429,19 +404,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      vpnTunnel: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnTunnelsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.vpnTunnel = vpnTunnel
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: VpnTunnelsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -507,19 +469,6 @@
       request: VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: VpnTunnel?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnTunnelsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -601,21 +550,6 @@
       request: VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnTunnelsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

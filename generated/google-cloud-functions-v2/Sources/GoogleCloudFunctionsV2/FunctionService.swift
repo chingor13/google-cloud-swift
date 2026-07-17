@@ -18,15 +18,12 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
 
 /// Google Cloud Functions is used to deploy functions that are executed by
 /// Google in response to various events. Data connected with that event is

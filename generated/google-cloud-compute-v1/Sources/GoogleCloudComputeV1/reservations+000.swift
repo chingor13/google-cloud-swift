@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `reservations` resource.
   ///
@@ -401,13 +398,6 @@
       func delete(request: ReservationsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        reservation: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationsClient.`get``.
       func `get`(request: ReservationsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.Reservation
@@ -434,13 +424,6 @@
       func insert(request: ReservationsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: Reservation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationsClient.list`.
       func list(request: ReservationsClient.ListRequest) async throws
         -> GoogleCloudComputeV1.ReservationList
@@ -460,25 +443,9 @@
       func performMaintenance(request: ReservationsClient.PerformMaintenanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationsClient.performMaintenance`.
-      func performMaintenance(
-        project: Swift.String,
-        zone: Swift.String,
-        reservation: Swift.String,
-        body: ReservationsPerformMaintenanceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationsClient.resize`.
       func resize(request: ReservationsClient.ResizeRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ReservationsClient.resize`.
-      func resize(
-        project: Swift.String,
-        zone: Swift.String,
-        reservation: Swift.String,
-        body: ReservationsResizeRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationsClient.setIamPolicy`.
       func setIamPolicy(request: ReservationsClient.SetIamPolicyRequest) async throws
@@ -507,14 +474,6 @@
       /// See `ReservationsClient.update`.
       func update(request: ReservationsClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ReservationsClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        reservation: Swift.String,
-        body: Reservation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationsClient.aggregatedList`.
       func aggregatedList(
@@ -637,19 +596,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.reservation = reservation
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: ReservationsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -743,19 +689,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Reservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: ReservationsClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -837,21 +770,6 @@
     }
 
     public func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: ReservationsPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationsClient.PerformMaintenanceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.reservation = reservation
-        $0.body = body
-      }
-      return try await self.performMaintenance(request: request)
-    }
-
-    public func performMaintenance(
       withPolling: ReservationsClient.PerformMaintenanceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.performMaintenance(withPolling: withPolling, options: .init())
@@ -895,21 +813,6 @@
       request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func resize(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: ReservationsResizeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationsClient.ResizeRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.reservation = reservation
-        $0.body = body
-      }
-      return try await self.resize(request: request)
     }
 
     public func resize(
@@ -1009,21 +912,6 @@
       request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      body: Reservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationsClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.reservation = reservation
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

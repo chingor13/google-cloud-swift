@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionAutoscalers` resource.
   ///
@@ -296,13 +293,6 @@
       func delete(request: RegionAutoscalersClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionAutoscalersClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        autoscaler: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionAutoscalersClient.`get``.
       func `get`(request: RegionAutoscalersClient.GetRequest) async throws
         -> GoogleCloudComputeV1.Autoscaler
@@ -317,13 +307,6 @@
       /// See `RegionAutoscalersClient.insert`.
       func insert(request: RegionAutoscalersClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionAutoscalersClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: Autoscaler?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionAutoscalersClient.list`.
       func list(request: RegionAutoscalersClient.ListRequest) async throws
@@ -344,13 +327,6 @@
       func patch(request: RegionAutoscalersClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionAutoscalersClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        body: Autoscaler?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionAutoscalersClient.testIamPermissions`.
       func testIamPermissions(request: RegionAutoscalersClient.TestIamPermissionsRequest)
         async throws -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -366,13 +342,6 @@
       /// See `RegionAutoscalersClient.update`.
       func update(request: RegionAutoscalersClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionAutoscalersClient.update`.
-      func update(
-        project: Swift.String,
-        region: Swift.String,
-        body: Autoscaler?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionAutoscalersClient.delete`.
       func delete(
@@ -429,19 +398,6 @@
       request: RegionAutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      autoscaler: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionAutoscalersClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.autoscaler = autoscaler
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -510,19 +466,6 @@
       request: RegionAutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionAutoscalersClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -607,19 +550,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionAutoscalersClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RegionAutoscalersClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -688,19 +618,6 @@
       request: RegionAutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      region: Swift.String,
-      body: Autoscaler?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionAutoscalersClient.UpdateRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

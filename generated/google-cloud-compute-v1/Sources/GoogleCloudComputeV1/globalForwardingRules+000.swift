@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `globalForwardingRules` resource.
   ///
@@ -336,12 +333,6 @@
       func delete(request: GlobalForwardingRulesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalForwardingRulesClient.delete`.
-      func delete(
-        project: Swift.String,
-        forwardingRule: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalForwardingRulesClient.`get``.
       func `get`(request: GlobalForwardingRulesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.ForwardingRule
@@ -355,12 +346,6 @@
       /// See `GlobalForwardingRulesClient.insert`.
       func insert(request: GlobalForwardingRulesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalForwardingRulesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: ForwardingRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalForwardingRulesClient.list`.
       func list(request: GlobalForwardingRulesClient.ListRequest) async throws
@@ -380,34 +365,13 @@
       func patch(request: GlobalForwardingRulesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalForwardingRulesClient.patch`.
-      func patch(
-        project: Swift.String,
-        forwardingRule: Swift.String,
-        body: ForwardingRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalForwardingRulesClient.setLabels`.
       func setLabels(request: GlobalForwardingRulesClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalForwardingRulesClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        resource: Swift.String,
-        body: GlobalSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalForwardingRulesClient.setTarget`.
       func setTarget(request: GlobalForwardingRulesClient.SetTargetRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalForwardingRulesClient.setTarget`.
-      func setTarget(
-        project: Swift.String,
-        forwardingRule: Swift.String,
-        body: TargetReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalForwardingRulesClient.delete`.
       func delete(
@@ -465,17 +429,6 @@
       request: GlobalForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      forwardingRule: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalForwardingRulesClient.DeleteRequest().with {
-        $0.project = project
-        $0.forwardingRule = forwardingRule
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -540,17 +493,6 @@
       request: GlobalForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: ForwardingRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalForwardingRulesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -631,19 +573,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      forwardingRule: Swift.String,
-      body: ForwardingRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalForwardingRulesClient.PatchRequest().with {
-        $0.project = project
-        $0.forwardingRule = forwardingRule
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: GlobalForwardingRulesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -684,19 +613,6 @@
       request: GlobalForwardingRulesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalForwardingRulesClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(
@@ -741,19 +657,6 @@
       request: GlobalForwardingRulesClient.SetTargetRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setTarget(
-      project: Swift.String,
-      forwardingRule: Swift.String,
-      body: TargetReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalForwardingRulesClient.SetTargetRequest().with {
-        $0.project = project
-        $0.forwardingRule = forwardingRule
-        $0.body = body
-      }
-      return try await self.setTarget(request: request)
     }
 
     public func setTarget(

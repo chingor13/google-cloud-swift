@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `licenses` resource.
   ///
@@ -301,12 +298,6 @@
       func delete(request: LicensesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `LicensesClient.delete`.
-      func delete(
-        project: Swift.String,
-        license: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `LicensesClient.`get``.
       func `get`(request: LicensesClient.GetRequest) async throws -> GoogleCloudComputeV1.License
 
@@ -329,12 +320,6 @@
       /// See `LicensesClient.insert`.
       func insert(request: LicensesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `LicensesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: License?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `LicensesClient.list`.
       func list(request: LicensesClient.ListRequest) async throws
@@ -375,13 +360,6 @@
       /// See `LicensesClient.update`.
       func update(request: LicensesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `LicensesClient.update`.
-      func update(
-        project: Swift.String,
-        license: Swift.String,
-        body: License?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `LicensesClient.delete`.
       func delete(
@@ -442,17 +420,6 @@
       request: LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      license: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = LicensesClient.DeleteRequest().with {
-        $0.project = project
-        $0.license = license
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -540,17 +507,6 @@
       request: LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: License?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = LicensesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -678,19 +634,6 @@
       request: LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      license: Swift.String,
-      body: License?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = LicensesClient.UpdateRequest().with {
-        $0.project = project
-        $0.license = license
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instanceTemplates` resource.
   ///
@@ -272,12 +269,6 @@
       func delete(request: InstanceTemplatesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceTemplatesClient.delete`.
-      func delete(
-        project: Swift.String,
-        instanceTemplate: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceTemplatesClient.`get``.
       func `get`(request: InstanceTemplatesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InstanceTemplate
@@ -301,12 +292,6 @@
       /// See `InstanceTemplatesClient.insert`.
       func insert(request: InstanceTemplatesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstanceTemplatesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: InstanceTemplate?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceTemplatesClient.list`.
       func list(request: InstanceTemplatesClient.ListRequest) async throws
@@ -451,17 +436,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      instanceTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceTemplatesClient.DeleteRequest().with {
-        $0.project = project
-        $0.instanceTemplate = instanceTemplate
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InstanceTemplatesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -546,17 +520,6 @@
       request: InstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: InstanceTemplate?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceTemplatesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

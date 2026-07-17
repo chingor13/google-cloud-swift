@@ -18,11 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
 
 /// An abstract interface that provides location-related information for
 /// a service. Service-specific metadata is provided through the

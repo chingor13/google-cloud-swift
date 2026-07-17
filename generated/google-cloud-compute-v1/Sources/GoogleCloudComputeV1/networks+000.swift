@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `networks` resource.
   ///
@@ -540,33 +537,13 @@
       func addPeering(request: NetworksClient.AddPeeringRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworksClient.addPeering`.
-      func addPeering(
-        project: Swift.String,
-        network: Swift.String,
-        body: NetworksAddPeeringRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworksClient.cancelRequestRemovePeering`.
       func cancelRequestRemovePeering(request: NetworksClient.CancelRequestRemovePeeringRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworksClient.cancelRequestRemovePeering`.
-      func cancelRequestRemovePeering(
-        project: Swift.String,
-        network: Swift.String,
-        body: NetworksCancelRequestRemovePeeringRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworksClient.delete`.
       func delete(request: NetworksClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworksClient.delete`.
-      func delete(
-        project: Swift.String,
-        network: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworksClient.`get``.
       func `get`(request: NetworksClient.GetRequest) async throws -> GoogleCloudComputeV1.Network
@@ -590,12 +567,6 @@
       /// See `NetworksClient.insert`.
       func insert(request: NetworksClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworksClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: Network?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworksClient.list`.
       func list(request: NetworksClient.ListRequest) async throws
@@ -630,55 +601,21 @@
       func patch(request: NetworksClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworksClient.patch`.
-      func patch(
-        project: Swift.String,
-        network: Swift.String,
-        body: Network?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworksClient.removePeering`.
       func removePeering(request: NetworksClient.RemovePeeringRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworksClient.removePeering`.
-      func removePeering(
-        project: Swift.String,
-        network: Swift.String,
-        body: NetworksRemovePeeringRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworksClient.requestRemovePeering`.
       func requestRemovePeering(request: NetworksClient.RequestRemovePeeringRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworksClient.requestRemovePeering`.
-      func requestRemovePeering(
-        project: Swift.String,
-        network: Swift.String,
-        body: NetworksRequestRemovePeeringRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworksClient.switchToCustomMode`.
       func switchToCustomMode(request: NetworksClient.SwitchToCustomModeRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworksClient.switchToCustomMode`.
-      func switchToCustomMode(
-        project: Swift.String,
-        network: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworksClient.updatePeering`.
       func updatePeering(request: NetworksClient.UpdatePeeringRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworksClient.updatePeering`.
-      func updatePeering(
-        project: Swift.String,
-        network: Swift.String,
-        body: NetworksUpdatePeeringRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworksClient.addPeering`.
       func addPeering(
@@ -773,19 +710,6 @@
     }
 
     public func addPeering(
-      project: Swift.String,
-      network: Swift.String,
-      body: NetworksAddPeeringRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.AddPeeringRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.addPeering(request: request)
-    }
-
-    public func addPeering(
       withPolling: NetworksClient.AddPeeringRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addPeering(withPolling: withPolling, options: .init())
@@ -830,19 +754,6 @@
     }
 
     public func cancelRequestRemovePeering(
-      project: Swift.String,
-      network: Swift.String,
-      body: NetworksCancelRequestRemovePeeringRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.CancelRequestRemovePeeringRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.cancelRequestRemovePeering(request: request)
-    }
-
-    public func cancelRequestRemovePeering(
       withPolling: NetworksClient.CancelRequestRemovePeeringRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cancelRequestRemovePeering(withPolling: withPolling, options: .init())
@@ -884,17 +795,6 @@
       request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      network: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.DeleteRequest().with {
-        $0.project = project
-        $0.network = network
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -982,17 +882,6 @@
       request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: Network?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -1112,19 +1001,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      network: Swift.String,
-      body: Network?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.PatchRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: NetworksClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1168,19 +1044,6 @@
     }
 
     public func removePeering(
-      project: Swift.String,
-      network: Swift.String,
-      body: NetworksRemovePeeringRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.RemovePeeringRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.removePeering(request: request)
-    }
-
-    public func removePeering(
       withPolling: NetworksClient.RemovePeeringRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removePeering(withPolling: withPolling, options: .init())
@@ -1221,19 +1084,6 @@
       request: NetworksClient.RequestRemovePeeringRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func requestRemovePeering(
-      project: Swift.String,
-      network: Swift.String,
-      body: NetworksRequestRemovePeeringRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.RequestRemovePeeringRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.requestRemovePeering(request: request)
     }
 
     public func requestRemovePeering(
@@ -1281,17 +1131,6 @@
     }
 
     public func switchToCustomMode(
-      project: Swift.String,
-      network: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.SwitchToCustomModeRequest().with {
-        $0.project = project
-        $0.network = network
-      }
-      return try await self.switchToCustomMode(request: request)
-    }
-
-    public func switchToCustomMode(
       withPolling: NetworksClient.SwitchToCustomModeRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.switchToCustomMode(withPolling: withPolling, options: .init())
@@ -1330,19 +1169,6 @@
       request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updatePeering(
-      project: Swift.String,
-      network: Swift.String,
-      body: NetworksUpdatePeeringRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworksClient.UpdatePeeringRequest().with {
-        $0.project = project
-        $0.network = network
-        $0.body = body
-      }
-      return try await self.updatePeering(request: request)
     }
 
     public func updatePeering(

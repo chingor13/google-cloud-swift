@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `snapshotSettings` resource.
   ///
@@ -124,12 +121,6 @@
       func patch(request: SnapshotSettingsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `SnapshotSettingsClient.patch`.
-      func patch(
-        project: Swift.String,
-        body: SnapshotSettings?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `SnapshotSettingsClient.`get``.
       func `get`(
         request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
@@ -175,17 +166,6 @@
       request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      body: SnapshotSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SnapshotSettingsClient.PatchRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

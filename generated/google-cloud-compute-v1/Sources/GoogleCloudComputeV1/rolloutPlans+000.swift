@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `rolloutPlans` resource.
   ///
@@ -183,12 +180,6 @@
       func delete(request: RolloutPlansClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutPlansClient.delete`.
-      func delete(
-        project: Swift.String,
-        rolloutPlan: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RolloutPlansClient.`get``.
       func `get`(request: RolloutPlansClient.GetRequest) async throws
         -> GoogleCloudComputeV1.RolloutPlan
@@ -202,12 +193,6 @@
       /// See `RolloutPlansClient.insert`.
       func insert(request: RolloutPlansClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RolloutPlansClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: RolloutPlan?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RolloutPlansClient.list`.
       func list(request: RolloutPlansClient.ListRequest) async throws
@@ -262,17 +247,6 @@
       request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      rolloutPlan: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutPlansClient.DeleteRequest().with {
-        $0.project = project
-        $0.rolloutPlan = rolloutPlan
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -337,17 +311,6 @@
       request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: RolloutPlan?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutPlansClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

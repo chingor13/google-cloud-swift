@@ -18,20 +18,18 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class TagBindingsLogging: TagBindingsStub {
     let inner: any TagBindingsStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any TagBindingsStub, logger: Logging.Logger) {
+    public init(_ inner: any TagBindingsStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudResourcemanagerV3"
       logger[metadataKey: "gcp.client.service"] = "cloudresourcemanager"

@@ -19,18 +19,16 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
+  import struct Logging.Logger
 
   extension Clients {
     final class NetworkEdgeSecurityServicesLogging: NetworkEdgeSecurityServicesStub {
       let inner: any NetworkEdgeSecurityServicesStub
-      let logger: Logging.Logger
+      let logger: Logger
 
-      public init(_ inner: any NetworkEdgeSecurityServicesStub, logger: Logging.Logger) {
+      public init(_ inner: any NetworkEdgeSecurityServicesStub, logger: Logger) {
         var logger = logger
         logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudComputeV1"
         logger[metadataKey: "gcp.client.service"] = "compute"

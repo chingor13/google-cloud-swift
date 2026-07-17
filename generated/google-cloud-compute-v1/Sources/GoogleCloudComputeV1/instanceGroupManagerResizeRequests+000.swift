@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instanceGroupManagerResizeRequests` resource.
   ///
@@ -257,25 +254,9 @@
       func cancel(request: InstanceGroupManagerResizeRequestsClient.CancelRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupManagerResizeRequestsClient.cancel`.
-      func cancel(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroupManager: Swift.String,
-        resizeRequest: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceGroupManagerResizeRequestsClient.delete`.
       func delete(request: InstanceGroupManagerResizeRequestsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstanceGroupManagerResizeRequestsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroupManager: Swift.String,
-        resizeRequest: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupManagerResizeRequestsClient.`get``.
       func `get`(request: InstanceGroupManagerResizeRequestsClient.GetRequest) async throws
@@ -292,14 +273,6 @@
       /// See `InstanceGroupManagerResizeRequestsClient.insert`.
       func insert(request: InstanceGroupManagerResizeRequestsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstanceGroupManagerResizeRequestsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroupManager: Swift.String,
-        body: InstanceGroupManagerResizeRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupManagerResizeRequestsClient.list`.
       func list(request: InstanceGroupManagerResizeRequestsClient.ListRequest) async throws
@@ -371,21 +344,6 @@
     }
 
     public func cancel(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      resizeRequest: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupManagerResizeRequestsClient.CancelRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroupManager = instanceGroupManager
-        $0.resizeRequest = resizeRequest
-      }
-      return try await self.cancel(request: request)
-    }
-
-    public func cancel(
       withPolling: InstanceGroupManagerResizeRequestsClient.CancelRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cancel(withPolling: withPolling, options: .init())
@@ -430,21 +388,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      resizeRequest: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupManagerResizeRequestsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroupManager = instanceGroupManager
-        $0.resizeRequest = resizeRequest
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -520,21 +463,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroupManager: Swift.String,
-      body: InstanceGroupManagerResizeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupManagerResizeRequestsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroupManager = instanceGroupManager
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `globalVmExtensionPolicies` resource.
   ///
@@ -290,13 +287,6 @@
       func delete(request: GlobalVmExtensionPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalVmExtensionPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        globalVmExtensionPolicy: Swift.String,
-        body: GlobalVmExtensionPolicyRolloutOperationRolloutInput?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalVmExtensionPoliciesClient.`get``.
       func `get`(request: GlobalVmExtensionPoliciesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.GlobalVmExtensionPolicy
@@ -310,12 +300,6 @@
       /// See `GlobalVmExtensionPoliciesClient.insert`.
       func insert(request: GlobalVmExtensionPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalVmExtensionPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: GlobalVmExtensionPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalVmExtensionPoliciesClient.list`.
       func list(request: GlobalVmExtensionPoliciesClient.ListRequest) async throws
@@ -334,13 +318,6 @@
       /// See `GlobalVmExtensionPoliciesClient.update`.
       func update(request: GlobalVmExtensionPoliciesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalVmExtensionPoliciesClient.update`.
-      func update(
-        project: Swift.String,
-        globalVmExtensionPolicy: Swift.String,
-        body: GlobalVmExtensionPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalVmExtensionPoliciesClient.aggregatedList`.
       func aggregatedList(
@@ -444,19 +421,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      globalVmExtensionPolicy: Swift.String,
-      body: GlobalVmExtensionPolicyRolloutOperationRolloutInput?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalVmExtensionPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.globalVmExtensionPolicy = globalVmExtensionPolicy
-        $0.body = body
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -521,17 +485,6 @@
       request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: GlobalVmExtensionPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalVmExtensionPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -611,19 +564,6 @@
       request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      globalVmExtensionPolicy: Swift.String,
-      body: GlobalVmExtensionPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalVmExtensionPoliciesClient.UpdateRequest().with {
-        $0.project = project
-        $0.globalVmExtensionPolicy = globalVmExtensionPolicy
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

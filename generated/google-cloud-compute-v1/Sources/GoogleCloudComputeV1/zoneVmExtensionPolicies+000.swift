@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `zoneVmExtensionPolicies` resource.
   ///
@@ -233,13 +230,6 @@
       func delete(request: ZoneVmExtensionPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ZoneVmExtensionPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        vmExtensionPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ZoneVmExtensionPoliciesClient.`get``.
       func `get`(request: ZoneVmExtensionPoliciesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.VmExtensionPolicy
@@ -254,13 +244,6 @@
       /// See `ZoneVmExtensionPoliciesClient.insert`.
       func insert(request: ZoneVmExtensionPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ZoneVmExtensionPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: VmExtensionPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ZoneVmExtensionPoliciesClient.list`.
       func list(request: ZoneVmExtensionPoliciesClient.ListRequest) async throws
@@ -280,14 +263,6 @@
       /// See `ZoneVmExtensionPoliciesClient.update`.
       func update(request: ZoneVmExtensionPoliciesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ZoneVmExtensionPoliciesClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        vmExtensionPolicy: Swift.String,
-        body: VmExtensionPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ZoneVmExtensionPoliciesClient.delete`.
       func delete(
@@ -333,19 +308,6 @@
       request: ZoneVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      vmExtensionPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ZoneVmExtensionPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.vmExtensionPolicy = vmExtensionPolicy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -415,19 +377,6 @@
       request: ZoneVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: VmExtensionPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ZoneVmExtensionPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -510,21 +459,6 @@
       request: ZoneVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      vmExtensionPolicy: Swift.String,
-      body: VmExtensionPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ZoneVmExtensionPoliciesClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.vmExtensionPolicy = vmExtensionPolicy
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

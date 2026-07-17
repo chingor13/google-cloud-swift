@@ -18,13 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
 
 /// Storage Transfer Service and its protos.
 /// Transfers data between between Google Cloud Storage buckets or from a data

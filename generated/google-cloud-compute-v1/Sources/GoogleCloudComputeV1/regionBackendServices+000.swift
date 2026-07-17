@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionBackendServices` resource.
   ///
@@ -414,13 +411,6 @@
       func delete(request: RegionBackendServicesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionBackendServicesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        backendService: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionBackendServicesClient.`get``.
       func `get`(request: RegionBackendServicesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.BackendService
@@ -459,13 +449,6 @@
       func insert(request: RegionBackendServicesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionBackendServicesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionBackendServicesClient.list`.
       func list(request: RegionBackendServicesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.BackendServiceList
@@ -500,14 +483,6 @@
       func patch(request: RegionBackendServicesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionBackendServicesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        backendService: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionBackendServicesClient.setIamPolicy`.
       func setIamPolicy(request: RegionBackendServicesClient.SetIamPolicyRequest) async throws
         -> GoogleCloudComputeV1.Policy
@@ -524,14 +499,6 @@
       func setSecurityPolicy(request: RegionBackendServicesClient.SetSecurityPolicyRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionBackendServicesClient.setSecurityPolicy`.
-      func setSecurityPolicy(
-        project: Swift.String,
-        region: Swift.String,
-        backendService: Swift.String,
-        body: SecurityPolicyReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionBackendServicesClient.testIamPermissions`.
       func testIamPermissions(request: RegionBackendServicesClient.TestIamPermissionsRequest)
         async throws -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -547,14 +514,6 @@
       /// See `RegionBackendServicesClient.update`.
       func update(request: RegionBackendServicesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionBackendServicesClient.update`.
-      func update(
-        project: Swift.String,
-        region: Swift.String,
-        backendService: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendServicesClient.delete`.
       func delete(
@@ -647,19 +606,6 @@
       request: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      backendService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendServicesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendService = backendService
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -784,19 +730,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendServicesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RegionBackendServicesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -917,21 +850,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      backendService: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendServicesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RegionBackendServicesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1006,21 +924,6 @@
     }
 
     public func setSecurityPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      backendService: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendServicesClient.SetSecurityPolicyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.setSecurityPolicy(request: request)
-    }
-
-    public func setSecurityPolicy(
       withPolling: RegionBackendServicesClient.SetSecurityPolicyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setSecurityPolicy(withPolling: withPolling, options: .init())
@@ -1092,21 +995,6 @@
       request: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      region: Swift.String,
-      backendService: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendServicesClient.UpdateRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

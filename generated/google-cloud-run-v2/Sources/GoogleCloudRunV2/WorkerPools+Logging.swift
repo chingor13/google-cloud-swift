@@ -18,21 +18,19 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleIamV1
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class WorkerPoolsLogging: WorkerPoolsStub {
     let inner: any WorkerPoolsStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any WorkerPoolsStub, logger: Logging.Logger) {
+    public init(_ inner: any WorkerPoolsStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudRunV2"
       logger[metadataKey: "gcp.client.service"] = "run"

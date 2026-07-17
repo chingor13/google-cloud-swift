@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `organizationSecurityPolicies` resource.
   ///
@@ -716,39 +713,17 @@
       func addAssociation(request: OrganizationSecurityPoliciesClient.AddAssociationRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.addAssociation`.
-      func addAssociation(
-        securityPolicy: Swift.String,
-        body: SecurityPolicyAssociation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.addRule`.
       func addRule(request: OrganizationSecurityPoliciesClient.AddRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `OrganizationSecurityPoliciesClient.addRule`.
-      func addRule(
-        securityPolicy: Swift.String,
-        body: SecurityPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `OrganizationSecurityPoliciesClient.copyRules`.
       func copyRules(request: OrganizationSecurityPoliciesClient.CopyRulesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.copyRules`.
-      func copyRules(
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.delete`.
       func delete(request: OrganizationSecurityPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `OrganizationSecurityPoliciesClient.delete`.
-      func delete(
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `OrganizationSecurityPoliciesClient.`get``.
       func `get`(request: OrganizationSecurityPoliciesClient.GetRequest) async throws
@@ -803,48 +778,21 @@
       func move(request: OrganizationSecurityPoliciesClient.MoveRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.move`.
-      func move(
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.patch`.
       func patch(request: OrganizationSecurityPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `OrganizationSecurityPoliciesClient.patch`.
-      func patch(
-        securityPolicy: Swift.String,
-        body: SecurityPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `OrganizationSecurityPoliciesClient.patchRule`.
       func patchRule(request: OrganizationSecurityPoliciesClient.PatchRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.patchRule`.
-      func patchRule(
-        securityPolicy: Swift.String,
-        body: SecurityPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.removeAssociation`.
       func removeAssociation(request: OrganizationSecurityPoliciesClient.RemoveAssociationRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `OrganizationSecurityPoliciesClient.removeAssociation`.
-      func removeAssociation(
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `OrganizationSecurityPoliciesClient.removeRule`.
       func removeRule(request: OrganizationSecurityPoliciesClient.RemoveRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `OrganizationSecurityPoliciesClient.removeRule`.
-      func removeRule(
-        securityPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `OrganizationSecurityPoliciesClient.addAssociation`.
       func addAssociation(
@@ -966,17 +914,6 @@
     }
 
     public func addAssociation(
-      securityPolicy: Swift.String,
-      body: SecurityPolicyAssociation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.AddAssociationRequest().with {
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.addAssociation(request: request)
-    }
-
-    public func addAssociation(
       withPolling: OrganizationSecurityPoliciesClient.AddAssociationRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addAssociation(withPolling: withPolling, options: .init())
@@ -1017,17 +954,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func addRule(
-      securityPolicy: Swift.String,
-      body: SecurityPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.AddRuleRequest().with {
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.addRule(request: request)
     }
 
     public func addRule(
@@ -1074,15 +1000,6 @@
     }
 
     public func copyRules(
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.CopyRulesRequest().with {
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.copyRules(request: request)
-    }
-
-    public func copyRules(
       withPolling: OrganizationSecurityPoliciesClient.CopyRulesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.copyRules(withPolling: withPolling, options: .init())
@@ -1121,15 +1038,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.DeleteRequest().with {
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -1325,15 +1233,6 @@
     }
 
     public func move(
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.MoveRequest().with {
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.move(request: request)
-    }
-
-    public func move(
       withPolling: OrganizationSecurityPoliciesClient.MoveRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.move(withPolling: withPolling, options: .init())
@@ -1372,17 +1271,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      securityPolicy: Swift.String,
-      body: SecurityPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.PatchRequest().with {
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(
@@ -1429,17 +1317,6 @@
     }
 
     public func patchRule(
-      securityPolicy: Swift.String,
-      body: SecurityPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.PatchRuleRequest().with {
-        $0.securityPolicy = securityPolicy
-        $0.body = body
-      }
-      return try await self.patchRule(request: request)
-    }
-
-    public func patchRule(
       withPolling: OrganizationSecurityPoliciesClient.PatchRuleRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patchRule(withPolling: withPolling, options: .init())
@@ -1483,15 +1360,6 @@
     }
 
     public func removeAssociation(
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.RemoveAssociationRequest().with {
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.removeAssociation(request: request)
-    }
-
-    public func removeAssociation(
       withPolling: OrganizationSecurityPoliciesClient.RemoveAssociationRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeAssociation(withPolling: withPolling, options: .init())
@@ -1530,15 +1398,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeRule(
-      securityPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = OrganizationSecurityPoliciesClient.RemoveRuleRequest().with {
-        $0.securityPolicy = securityPolicy
-      }
-      return try await self.removeRule(request: request)
     }
 
     public func removeRule(

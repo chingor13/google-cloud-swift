@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionInstanceGroups` resource.
   ///
@@ -230,14 +227,6 @@
       func setNamedPorts(request: RegionInstanceGroupsClient.SetNamedPortsRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstanceGroupsClient.setNamedPorts`.
-      func setNamedPorts(
-        project: Swift.String,
-        region: Swift.String,
-        instanceGroup: Swift.String,
-        body: RegionInstanceGroupsSetNamedPortsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionInstanceGroupsClient.testIamPermissions`.
       func testIamPermissions(request: RegionInstanceGroupsClient.TestIamPermissionsRequest)
         async throws -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -413,21 +402,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setNamedPorts(
-      project: Swift.String,
-      region: Swift.String,
-      instanceGroup: Swift.String,
-      body: RegionInstanceGroupsSetNamedPortsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionInstanceGroupsClient.SetNamedPortsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.instanceGroup = instanceGroup
-        $0.body = body
-      }
-      return try await self.setNamedPorts(request: request)
     }
 
     public func setNamedPorts(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `resourcePolicies` resource.
   ///
@@ -305,13 +302,6 @@
       func delete(request: ResourcePoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ResourcePoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        resourcePolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ResourcePoliciesClient.`get``.
       func `get`(request: ResourcePoliciesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.ResourcePolicy
@@ -338,13 +328,6 @@
       func insert(request: ResourcePoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ResourcePoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: ResourcePolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ResourcePoliciesClient.list`.
       func list(request: ResourcePoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.ResourcePolicyList
@@ -363,14 +346,6 @@
       /// See `ResourcePoliciesClient.patch`.
       func patch(request: ResourcePoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ResourcePoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        resourcePolicy: Swift.String,
-        body: ResourcePolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ResourcePoliciesClient.setIamPolicy`.
       func setIamPolicy(request: ResourcePoliciesClient.SetIamPolicyRequest) async throws
@@ -507,19 +482,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      resourcePolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ResourcePoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resourcePolicy = resourcePolicy
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: ResourcePoliciesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -613,19 +575,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: ResourcePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ResourcePoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: ResourcePoliciesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -704,21 +653,6 @@
       request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      resourcePolicy: Swift.String,
-      body: ResourcePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ResourcePoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resourcePolicy = resourcePolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

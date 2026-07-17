@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `globalAddresses` resource.
   ///
@@ -284,12 +281,6 @@
       func delete(request: GlobalAddressesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalAddressesClient.delete`.
-      func delete(
-        project: Swift.String,
-        address: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalAddressesClient.`get``.
       func `get`(request: GlobalAddressesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.Address
@@ -303,12 +294,6 @@
       /// See `GlobalAddressesClient.insert`.
       func insert(request: GlobalAddressesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalAddressesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: Address?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalAddressesClient.list`.
       func list(request: GlobalAddressesClient.ListRequest) async throws
@@ -328,23 +313,9 @@
       func move(request: GlobalAddressesClient.MoveRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `GlobalAddressesClient.move`.
-      func move(
-        project: Swift.String,
-        address: Swift.String,
-        body: GlobalAddressesMoveRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `GlobalAddressesClient.setLabels`.
       func setLabels(request: GlobalAddressesClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `GlobalAddressesClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        resource: Swift.String,
-        body: GlobalSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalAddressesClient.testIamPermissions`.
       func testIamPermissions(request: GlobalAddressesClient.TestIamPermissionsRequest) async throws
@@ -415,17 +386,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      address: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalAddressesClient.DeleteRequest().with {
-        $0.project = project
-        $0.address = address
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: GlobalAddressesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -487,17 +447,6 @@
       request: GlobalAddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: Address?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalAddressesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -578,19 +527,6 @@
     }
 
     public func move(
-      project: Swift.String,
-      address: Swift.String,
-      body: GlobalAddressesMoveRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalAddressesClient.MoveRequest().with {
-        $0.project = project
-        $0.address = address
-        $0.body = body
-      }
-      return try await self.move(request: request)
-    }
-
-    public func move(
       withPolling: GlobalAddressesClient.MoveRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.move(withPolling: withPolling, options: .init())
@@ -631,19 +567,6 @@
       request: GlobalAddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = GlobalAddressesClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `rollouts` resource.
   ///
@@ -314,31 +311,13 @@
       func advance(request: RolloutsClient.AdvanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutsClient.advance`.
-      func advance(
-        project: Swift.String,
-        rollout: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RolloutsClient.cancel`.
       func cancel(request: RolloutsClient.CancelRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutsClient.cancel`.
-      func cancel(
-        project: Swift.String,
-        rollout: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RolloutsClient.delete`.
       func delete(request: RolloutsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RolloutsClient.delete`.
-      func delete(
-        project: Swift.String,
-        rollout: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RolloutsClient.`get``.
       func `get`(request: RolloutsClient.GetRequest) async throws -> GoogleCloudComputeV1.Rollout
@@ -367,21 +346,9 @@
       func pause(request: RolloutsClient.PauseRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RolloutsClient.pause`.
-      func pause(
-        project: Swift.String,
-        rollout: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RolloutsClient.resume`.
       func resume(request: RolloutsClient.ResumeRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RolloutsClient.resume`.
-      func resume(
-        project: Swift.String,
-        rollout: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RolloutsClient.advance`.
       func advance(
@@ -440,17 +407,6 @@
     }
 
     public func advance(
-      project: Swift.String,
-      rollout: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutsClient.AdvanceRequest().with {
-        $0.project = project
-        $0.rollout = rollout
-      }
-      return try await self.advance(request: request)
-    }
-
-    public func advance(
       withPolling: RolloutsClient.AdvanceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.advance(withPolling: withPolling, options: .init())
@@ -492,17 +448,6 @@
     }
 
     public func cancel(
-      project: Swift.String,
-      rollout: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutsClient.CancelRequest().with {
-        $0.project = project
-        $0.rollout = rollout
-      }
-      return try await self.cancel(request: request)
-    }
-
-    public func cancel(
       withPolling: RolloutsClient.CancelRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cancel(withPolling: withPolling, options: .init())
@@ -541,17 +486,6 @@
       request: RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      rollout: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutsClient.DeleteRequest().with {
-        $0.project = project
-        $0.rollout = rollout
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -655,17 +589,6 @@
     }
 
     public func pause(
-      project: Swift.String,
-      rollout: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutsClient.PauseRequest().with {
-        $0.project = project
-        $0.rollout = rollout
-      }
-      return try await self.pause(request: request)
-    }
-
-    public func pause(
       withPolling: RolloutsClient.PauseRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.pause(withPolling: withPolling, options: .init())
@@ -704,17 +627,6 @@
       request: RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func resume(
-      project: Swift.String,
-      rollout: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RolloutsClient.ResumeRequest().with {
-        $0.project = project
-        $0.rollout = rollout
-      }
-      return try await self.resume(request: request)
     }
 
     public func resume(

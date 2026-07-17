@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `backendServices` resource.
   ///
@@ -591,13 +588,6 @@
       func addSignedUrlKey(request: BackendServicesClient.AddSignedUrlKeyRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendServicesClient.addSignedUrlKey`.
-      func addSignedUrlKey(
-        project: Swift.String,
-        backendService: Swift.String,
-        body: SignedUrlKey?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `BackendServicesClient.aggregatedList`.
       func aggregatedList(request: BackendServicesClient.AggregatedListRequest) async throws
         -> GoogleCloudComputeV1.BackendServiceAggregatedList
@@ -616,22 +606,9 @@
       func delete(request: BackendServicesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendServicesClient.delete`.
-      func delete(
-        project: Swift.String,
-        backendService: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `BackendServicesClient.deleteSignedUrlKey`.
       func deleteSignedUrlKey(request: BackendServicesClient.DeleteSignedUrlKeyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `BackendServicesClient.deleteSignedUrlKey`.
-      func deleteSignedUrlKey(
-        project: Swift.String,
-        backendService: Swift.String,
-        keyName: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `BackendServicesClient.`get``.
       func `get`(request: BackendServicesClient.GetRequest) async throws
@@ -678,12 +655,6 @@
       func insert(request: BackendServicesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendServicesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `BackendServicesClient.list`.
       func list(request: BackendServicesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.BackendServiceList
@@ -716,23 +687,9 @@
       func patch(request: BackendServicesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendServicesClient.patch`.
-      func patch(
-        project: Swift.String,
-        backendService: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `BackendServicesClient.setEdgeSecurityPolicy`.
       func setEdgeSecurityPolicy(request: BackendServicesClient.SetEdgeSecurityPolicyRequest)
         async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `BackendServicesClient.setEdgeSecurityPolicy`.
-      func setEdgeSecurityPolicy(
-        project: Swift.String,
-        backendService: Swift.String,
-        body: SecurityPolicyReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `BackendServicesClient.setIamPolicy`.
       func setIamPolicy(request: BackendServicesClient.SetIamPolicyRequest) async throws
@@ -749,13 +706,6 @@
       func setSecurityPolicy(request: BackendServicesClient.SetSecurityPolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `BackendServicesClient.setSecurityPolicy`.
-      func setSecurityPolicy(
-        project: Swift.String,
-        backendService: Swift.String,
-        body: SecurityPolicyReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `BackendServicesClient.testIamPermissions`.
       func testIamPermissions(request: BackendServicesClient.TestIamPermissionsRequest) async throws
         -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -770,13 +720,6 @@
       /// See `BackendServicesClient.update`.
       func update(request: BackendServicesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `BackendServicesClient.update`.
-      func update(
-        project: Swift.String,
-        backendService: Swift.String,
-        body: BackendService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `BackendServicesClient.addSignedUrlKey`.
       func addSignedUrlKey(
@@ -901,19 +844,6 @@
     }
 
     public func addSignedUrlKey(
-      project: Swift.String,
-      backendService: Swift.String,
-      body: SignedUrlKey?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.AddSignedUrlKeyRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.addSignedUrlKey(request: request)
-    }
-
-    public func addSignedUrlKey(
       withPolling: BackendServicesClient.AddSignedUrlKeyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addSignedUrlKey(withPolling: withPolling, options: .init())
@@ -995,17 +925,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      backendService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.DeleteRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: BackendServicesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -1045,19 +964,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func deleteSignedUrlKey(
-      project: Swift.String,
-      backendService: Swift.String,
-      keyName: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.DeleteSignedUrlKeyRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.keyName = keyName
-      }
-      return try await self.deleteSignedUrlKey(request: request)
     }
 
     public func deleteSignedUrlKey(
@@ -1200,17 +1106,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: BackendServicesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -1325,19 +1220,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      backendService: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.PatchRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: BackendServicesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1379,19 +1261,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setEdgeSecurityPolicy(
-      project: Swift.String,
-      backendService: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.SetEdgeSecurityPolicyRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.setEdgeSecurityPolicy(request: request)
     }
 
     public func setEdgeSecurityPolicy(
@@ -1465,19 +1334,6 @@
     }
 
     public func setSecurityPolicy(
-      project: Swift.String,
-      backendService: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.SetSecurityPolicyRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.setSecurityPolicy(request: request)
-    }
-
-    public func setSecurityPolicy(
       withPolling: BackendServicesClient.SetSecurityPolicyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setSecurityPolicy(withPolling: withPolling, options: .init())
@@ -1545,19 +1401,6 @@
       request: BackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      backendService: Swift.String,
-      body: BackendService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = BackendServicesClient.UpdateRequest().with {
-        $0.project = project
-        $0.backendService = backendService
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

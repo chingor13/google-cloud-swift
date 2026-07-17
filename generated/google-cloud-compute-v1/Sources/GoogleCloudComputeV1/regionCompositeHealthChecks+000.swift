@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionCompositeHealthChecks` resource.
   ///
@@ -314,13 +311,6 @@
       func delete(request: RegionCompositeHealthChecksClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionCompositeHealthChecksClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        compositeHealthCheck: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionCompositeHealthChecksClient.`get``.
       func `get`(request: RegionCompositeHealthChecksClient.GetRequest) async throws
         -> GoogleCloudComputeV1.CompositeHealthCheck
@@ -347,13 +337,6 @@
       func insert(request: RegionCompositeHealthChecksClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionCompositeHealthChecksClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: CompositeHealthCheck?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionCompositeHealthChecksClient.list`.
       func list(request: RegionCompositeHealthChecksClient.ListRequest) async throws
         -> GoogleCloudComputeV1.CompositeHealthCheckList
@@ -372,14 +355,6 @@
       /// See `RegionCompositeHealthChecksClient.patch`.
       func patch(request: RegionCompositeHealthChecksClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionCompositeHealthChecksClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        compositeHealthCheck: Swift.String,
-        body: CompositeHealthCheck?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionCompositeHealthChecksClient.testIamPermissions`.
       func testIamPermissions(request: RegionCompositeHealthChecksClient.TestIamPermissionsRequest)
@@ -510,19 +485,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      compositeHealthCheck: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionCompositeHealthChecksClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.compositeHealthCheck = compositeHealthCheck
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RegionCompositeHealthChecksClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -619,19 +581,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: CompositeHealthCheck?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionCompositeHealthChecksClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RegionCompositeHealthChecksClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -713,21 +662,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      compositeHealthCheck: Swift.String,
-      body: CompositeHealthCheck?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionCompositeHealthChecksClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.compositeHealthCheck = compositeHealthCheck
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `wireGroups` resource.
   ///
@@ -234,13 +231,6 @@
       func delete(request: WireGroupsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `WireGroupsClient.delete`.
-      func delete(
-        project: Swift.String,
-        crossSiteNetwork: Swift.String,
-        wireGroup: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `WireGroupsClient.`get``.
       func `get`(request: WireGroupsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.WireGroup
@@ -255,13 +245,6 @@
       /// See `WireGroupsClient.insert`.
       func insert(request: WireGroupsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `WireGroupsClient.insert`.
-      func insert(
-        project: Swift.String,
-        crossSiteNetwork: Swift.String,
-        body: WireGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `WireGroupsClient.list`.
       func list(request: WireGroupsClient.ListRequest) async throws
@@ -281,14 +264,6 @@
       /// See `WireGroupsClient.patch`.
       func patch(request: WireGroupsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `WireGroupsClient.patch`.
-      func patch(
-        project: Swift.String,
-        crossSiteNetwork: Swift.String,
-        wireGroup: Swift.String,
-        body: WireGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `WireGroupsClient.delete`.
       func delete(
@@ -334,19 +309,6 @@
       request: WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      crossSiteNetwork: Swift.String,
-      wireGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = WireGroupsClient.DeleteRequest().with {
-        $0.project = project
-        $0.crossSiteNetwork = crossSiteNetwork
-        $0.wireGroup = wireGroup
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -415,19 +377,6 @@
       request: WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      crossSiteNetwork: Swift.String,
-      body: WireGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = WireGroupsClient.InsertRequest().with {
-        $0.project = project
-        $0.crossSiteNetwork = crossSiteNetwork
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -509,21 +458,6 @@
       request: WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      crossSiteNetwork: Swift.String,
-      wireGroup: Swift.String,
-      body: WireGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = WireGroupsClient.PatchRequest().with {
-        $0.project = project
-        $0.crossSiteNetwork = crossSiteNetwork
-        $0.wireGroup = wireGroup
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

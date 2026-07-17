@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `networkEndpointGroups` resource.
   ///
@@ -404,36 +401,13 @@
         request: NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
       ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkEndpointGroupsClient.attachNetworkEndpoints`.
-      func attachNetworkEndpoints(
-        project: Swift.String,
-        zone: Swift.String,
-        networkEndpointGroup: Swift.String,
-        body: NetworkEndpointGroupsAttachEndpointsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkEndpointGroupsClient.delete`.
       func delete(request: NetworkEndpointGroupsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkEndpointGroupsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        networkEndpointGroup: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkEndpointGroupsClient.detachNetworkEndpoints`.
       func detachNetworkEndpoints(
         request: NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest
-      ) async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkEndpointGroupsClient.detachNetworkEndpoints`.
-      func detachNetworkEndpoints(
-        project: Swift.String,
-        zone: Swift.String,
-        networkEndpointGroup: Swift.String,
-        body: NetworkEndpointGroupsDetachEndpointsRequest?,
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkEndpointGroupsClient.`get``.
@@ -450,13 +424,6 @@
       /// See `NetworkEndpointGroupsClient.insert`.
       func insert(request: NetworkEndpointGroupsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkEndpointGroupsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: NetworkEndpointGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkEndpointGroupsClient.list`.
       func list(request: NetworkEndpointGroupsClient.ListRequest) async throws
@@ -626,21 +593,6 @@
     }
 
     public func attachNetworkEndpoints(
-      project: Swift.String,
-      zone: Swift.String,
-      networkEndpointGroup: Swift.String,
-      body: NetworkEndpointGroupsAttachEndpointsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.networkEndpointGroup = networkEndpointGroup
-        $0.body = body
-      }
-      return try await self.attachNetworkEndpoints(request: request)
-    }
-
-    public func attachNetworkEndpoints(
       withPolling: NetworkEndpointGroupsClient.AttachNetworkEndpointsRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.attachNetworkEndpoints(withPolling: withPolling, options: .init())
@@ -687,19 +639,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      networkEndpointGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkEndpointGroupsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.networkEndpointGroup = networkEndpointGroup
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: NetworkEndpointGroupsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -741,21 +680,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func detachNetworkEndpoints(
-      project: Swift.String,
-      zone: Swift.String,
-      networkEndpointGroup: Swift.String,
-      body: NetworkEndpointGroupsDetachEndpointsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkEndpointGroupsClient.DetachNetworkEndpointsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.networkEndpointGroup = networkEndpointGroup
-        $0.body = body
-      }
-      return try await self.detachNetworkEndpoints(request: request)
     }
 
     public func detachNetworkEndpoints(
@@ -827,19 +751,6 @@
       request: NetworkEndpointGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: NetworkEndpointGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkEndpointGroupsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

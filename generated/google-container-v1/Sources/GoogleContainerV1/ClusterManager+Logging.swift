@@ -18,18 +18,16 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class ClusterManagerLogging: ClusterManagerStub {
     let inner: any ClusterManagerStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any ClusterManagerStub, logger: Logging.Logger) {
+    public init(_ inner: any ClusterManagerStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleContainerV1"
       logger[metadataKey: "gcp.client.service"] = "container"

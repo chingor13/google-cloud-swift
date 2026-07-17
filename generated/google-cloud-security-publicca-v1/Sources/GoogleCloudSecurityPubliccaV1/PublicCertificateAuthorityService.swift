@@ -18,11 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
 
 /// Manages the resources required for ACME [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for

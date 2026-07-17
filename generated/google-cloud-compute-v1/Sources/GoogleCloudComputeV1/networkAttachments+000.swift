@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `networkAttachments` resource.
   ///
@@ -315,13 +312,6 @@
       func delete(request: NetworkAttachmentsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkAttachmentsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        networkAttachment: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkAttachmentsClient.`get``.
       func `get`(request: NetworkAttachmentsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.NetworkAttachment
@@ -348,13 +338,6 @@
       func insert(request: NetworkAttachmentsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NetworkAttachmentsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: NetworkAttachment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NetworkAttachmentsClient.list`.
       func list(request: NetworkAttachmentsClient.ListRequest) async throws
         -> GoogleCloudComputeV1.NetworkAttachmentList
@@ -373,14 +356,6 @@
       /// See `NetworkAttachmentsClient.patch`.
       func patch(request: NetworkAttachmentsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NetworkAttachmentsClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        networkAttachment: Swift.String,
-        body: NetworkAttachment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NetworkAttachmentsClient.setIamPolicy`.
       func setIamPolicy(request: NetworkAttachmentsClient.SetIamPolicyRequest) async throws
@@ -521,19 +496,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      networkAttachment: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkAttachmentsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.networkAttachment = networkAttachment
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: NetworkAttachmentsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -627,19 +589,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NetworkAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkAttachmentsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: NetworkAttachmentsClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -718,21 +667,6 @@
       request: NetworkAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      networkAttachment: Swift.String,
-      body: NetworkAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NetworkAttachmentsClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.networkAttachment = networkAttachment
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

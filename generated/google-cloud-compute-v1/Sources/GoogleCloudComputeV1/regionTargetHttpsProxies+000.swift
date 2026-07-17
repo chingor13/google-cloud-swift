@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionTargetHttpsProxies` resource.
   ///
@@ -337,13 +334,6 @@
       func delete(request: RegionTargetHttpsProxiesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionTargetHttpsProxiesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        targetHttpsProxy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionTargetHttpsProxiesClient.`get``.
       func `get`(request: RegionTargetHttpsProxiesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.TargetHttpsProxy
@@ -358,13 +348,6 @@
       /// See `RegionTargetHttpsProxiesClient.insert`.
       func insert(request: RegionTargetHttpsProxiesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionTargetHttpsProxiesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: TargetHttpsProxy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionTargetHttpsProxiesClient.list`.
       func list(request: RegionTargetHttpsProxiesClient.ListRequest) async throws
@@ -385,37 +368,13 @@
       func patch(request: RegionTargetHttpsProxiesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionTargetHttpsProxiesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        targetHttpsProxy: Swift.String,
-        body: TargetHttpsProxy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionTargetHttpsProxiesClient.setSslCertificates`.
       func setSslCertificates(request: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionTargetHttpsProxiesClient.setSslCertificates`.
-      func setSslCertificates(
-        project: Swift.String,
-        region: Swift.String,
-        targetHttpsProxy: Swift.String,
-        body: RegionTargetHttpsProxiesSetSslCertificatesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionTargetHttpsProxiesClient.setUrlMap`.
       func setUrlMap(request: RegionTargetHttpsProxiesClient.SetUrlMapRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionTargetHttpsProxiesClient.setUrlMap`.
-      func setUrlMap(
-        project: Swift.String,
-        region: Swift.String,
-        targetHttpsProxy: Swift.String,
-        body: UrlMapReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionTargetHttpsProxiesClient.delete`.
       func delete(
@@ -475,19 +434,6 @@
       request: RegionTargetHttpsProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      targetHttpsProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetHttpsProxiesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetHttpsProxy = targetHttpsProxy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -557,19 +503,6 @@
       request: RegionTargetHttpsProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: TargetHttpsProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetHttpsProxiesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -655,21 +588,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      targetHttpsProxy: Swift.String,
-      body: TargetHttpsProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetHttpsProxiesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetHttpsProxy = targetHttpsProxy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RegionTargetHttpsProxiesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -717,21 +635,6 @@
     }
 
     public func setSslCertificates(
-      project: Swift.String,
-      region: Swift.String,
-      targetHttpsProxy: Swift.String,
-      body: RegionTargetHttpsProxiesSetSslCertificatesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetHttpsProxiesClient.SetSslCertificatesRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetHttpsProxy = targetHttpsProxy
-        $0.body = body
-      }
-      return try await self.setSslCertificates(request: request)
-    }
-
-    public func setSslCertificates(
       withPolling: RegionTargetHttpsProxiesClient.SetSslCertificatesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setSslCertificates(withPolling: withPolling, options: .init())
@@ -776,21 +679,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setUrlMap(
-      project: Swift.String,
-      region: Swift.String,
-      targetHttpsProxy: Swift.String,
-      body: UrlMapReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetHttpsProxiesClient.SetUrlMapRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetHttpsProxy = targetHttpsProxy
-        $0.body = body
-      }
-      return try await self.setUrlMap(request: request)
     }
 
     public func setUrlMap(

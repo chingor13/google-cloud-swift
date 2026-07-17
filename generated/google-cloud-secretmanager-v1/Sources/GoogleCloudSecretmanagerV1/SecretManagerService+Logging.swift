@@ -18,20 +18,18 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleIamV1
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class SecretManagerServiceLogging: SecretManagerServiceStub {
     let inner: any SecretManagerServiceStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any SecretManagerServiceStub, logger: Logging.Logger) {
+    public init(_ inner: any SecretManagerServiceStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudSecretmanagerV1"
       logger[metadataKey: "gcp.client.service"] = "secretmanager"

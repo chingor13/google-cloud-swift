@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instanceGroups` resource.
   ///
@@ -431,14 +428,6 @@
       func addInstances(request: InstanceGroupsClient.AddInstancesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupsClient.addInstances`.
-      func addInstances(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroup: Swift.String,
-        body: InstanceGroupsAddInstancesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceGroupsClient.aggregatedList`.
       func aggregatedList(request: InstanceGroupsClient.AggregatedListRequest) async throws
         -> GoogleCloudComputeV1.InstanceGroupAggregatedList
@@ -457,13 +446,6 @@
       func delete(request: InstanceGroupsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroup: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceGroupsClient.`get``.
       func `get`(request: InstanceGroupsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InstanceGroup
@@ -478,13 +460,6 @@
       /// See `InstanceGroupsClient.insert`.
       func insert(request: InstanceGroupsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstanceGroupsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: InstanceGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.list`.
       func list(request: InstanceGroupsClient.ListRequest) async throws
@@ -522,25 +497,9 @@
       func removeInstances(request: InstanceGroupsClient.RemoveInstancesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceGroupsClient.removeInstances`.
-      func removeInstances(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroup: Swift.String,
-        body: InstanceGroupsRemoveInstancesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceGroupsClient.setNamedPorts`.
       func setNamedPorts(request: InstanceGroupsClient.SetNamedPortsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstanceGroupsClient.setNamedPorts`.
-      func setNamedPorts(
-        project: Swift.String,
-        zone: Swift.String,
-        instanceGroup: Swift.String,
-        body: InstanceGroupsSetNamedPortsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.testIamPermissions`.
       func testIamPermissions(request: InstanceGroupsClient.TestIamPermissionsRequest) async throws
@@ -637,21 +596,6 @@
     }
 
     public func addInstances(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroup: Swift.String,
-      body: InstanceGroupsAddInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupsClient.AddInstancesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroup = instanceGroup
-        $0.body = body
-      }
-      return try await self.addInstances(request: request)
-    }
-
-    public func addInstances(
       withPolling: InstanceGroupsClient.AddInstancesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addInstances(withPolling: withPolling, options: .init())
@@ -734,19 +678,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroup = instanceGroup
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InstanceGroupsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -812,19 +743,6 @@
       request: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: InstanceGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -952,21 +870,6 @@
     }
 
     public func removeInstances(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroup: Swift.String,
-      body: InstanceGroupsRemoveInstancesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupsClient.RemoveInstancesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroup = instanceGroup
-        $0.body = body
-      }
-      return try await self.removeInstances(request: request)
-    }
-
-    public func removeInstances(
       withPolling: InstanceGroupsClient.RemoveInstancesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeInstances(withPolling: withPolling, options: .init())
@@ -1010,21 +913,6 @@
       request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setNamedPorts(
-      project: Swift.String,
-      zone: Swift.String,
-      instanceGroup: Swift.String,
-      body: InstanceGroupsSetNamedPortsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceGroupsClient.SetNamedPortsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instanceGroup = instanceGroup
-        $0.body = body
-      }
-      return try await self.setNamedPorts(request: request)
     }
 
     public func setNamedPorts(

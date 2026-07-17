@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionHealthAggregationPolicies` resource.
   ///
@@ -314,13 +311,6 @@
       func delete(request: RegionHealthAggregationPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthAggregationPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        healthAggregationPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionHealthAggregationPoliciesClient.`get``.
       func `get`(request: RegionHealthAggregationPoliciesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.HealthAggregationPolicy
@@ -335,13 +325,6 @@
       /// See `RegionHealthAggregationPoliciesClient.insert`.
       func insert(request: RegionHealthAggregationPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionHealthAggregationPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: HealthAggregationPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionHealthAggregationPoliciesClient.list`.
       func list(request: RegionHealthAggregationPoliciesClient.ListRequest) async throws
@@ -361,14 +344,6 @@
       /// See `RegionHealthAggregationPoliciesClient.patch`.
       func patch(request: RegionHealthAggregationPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionHealthAggregationPoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        healthAggregationPolicy: Swift.String,
-        body: HealthAggregationPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionHealthAggregationPoliciesClient.testIamPermissions`.
       func testIamPermissions(
@@ -500,19 +475,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      healthAggregationPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthAggregationPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.healthAggregationPolicy = healthAggregationPolicy
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RegionHealthAggregationPoliciesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -581,19 +543,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: HealthAggregationPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthAggregationPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -680,21 +629,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      healthAggregationPolicy: Swift.String,
-      body: HealthAggregationPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthAggregationPoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.healthAggregationPolicy = healthAggregationPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

@@ -18,18 +18,16 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class PublicCertificateAuthorityServiceLogging: PublicCertificateAuthorityServiceStub {
     let inner: any PublicCertificateAuthorityServiceStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any PublicCertificateAuthorityServiceStub, logger: Logging.Logger) {
+    public init(_ inner: any PublicCertificateAuthorityServiceStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudSecurityPubliccaV1"
       logger[metadataKey: "gcp.client.service"] = "publicca"

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `sslPolicies` resource.
   ///
@@ -289,12 +286,6 @@
       func delete(request: SslPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `SslPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        sslPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `SslPoliciesClient.`get``.
       func `get`(request: SslPoliciesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.SslPolicy
@@ -308,12 +299,6 @@
       /// See `SslPoliciesClient.insert`.
       func insert(request: SslPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `SslPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: SslPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SslPoliciesClient.list`.
       func list(request: SslPoliciesClient.ListRequest) async throws
@@ -341,13 +326,6 @@
       /// See `SslPoliciesClient.patch`.
       func patch(request: SslPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `SslPoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        sslPolicy: Swift.String,
-        body: SslPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SslPoliciesClient.aggregatedList`.
       func aggregatedList(
@@ -449,17 +427,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      sslPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SslPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.sslPolicy = sslPolicy
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: SslPoliciesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -521,17 +488,6 @@
       request: SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: SslPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SslPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -631,19 +587,6 @@
       request: SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      sslPolicy: Swift.String,
-      body: SslPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = SslPoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.sslPolicy = sslPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

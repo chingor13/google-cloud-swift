@@ -18,13 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
 
 /// Allow users to create and manage TagHolds for TagValues. TagHolds represent
 /// the use of a Tag Value that is not captured by TagBindings but

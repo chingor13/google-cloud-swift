@@ -19,18 +19,16 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
+  import struct Logging.Logger
 
   extension Clients {
     final class SqlTiersServiceLogging: SqlTiersServiceStub {
       let inner: any SqlTiersServiceStub
-      let logger: Logging.Logger
+      let logger: Logger
 
-      public init(_ inner: any SqlTiersServiceStub, logger: Logging.Logger) {
+      public init(_ inner: any SqlTiersServiceStub, logger: Logger) {
         var logger = logger
         logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudSqlV1"
         logger[metadataKey: "gcp.client.service"] = "sqladmin"

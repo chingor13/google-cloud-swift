@@ -18,13 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
 
 extension Clients {
   final class RevisionsRetry: RevisionsStub {

@@ -18,18 +18,16 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class IAMPolicyLogging: IAMPolicyStub {
     let inner: any IAMPolicyStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any IAMPolicyStub, logger: Logging.Logger) {
+    public init(_ inner: any IAMPolicyStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleIamV1"
       logger[metadataKey: "gcp.client.service"] = "iam-meta-api"

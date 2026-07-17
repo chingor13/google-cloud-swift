@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `images` resource.
   ///
@@ -378,22 +375,9 @@
       func delete(request: ImagesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ImagesClient.delete`.
-      func delete(
-        project: Swift.String,
-        image: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ImagesClient.deprecate`.
       func deprecate(request: ImagesClient.DeprecateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ImagesClient.deprecate`.
-      func deprecate(
-        project: Swift.String,
-        image: Swift.String,
-        body: DeprecationStatus?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ImagesClient.`get``.
       func `get`(request: ImagesClient.GetRequest) async throws -> GoogleCloudComputeV1.Image
@@ -428,12 +412,6 @@
       func insert(request: ImagesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ImagesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: Image?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ImagesClient.list`.
       func list(request: ImagesClient.ListRequest) async throws -> GoogleCloudComputeV1.ImageList
 
@@ -450,13 +428,6 @@
       /// See `ImagesClient.patch`.
       func patch(request: ImagesClient.PatchRequest) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ImagesClient.patch`.
-      func patch(
-        project: Swift.String,
-        image: Swift.String,
-        body: Image?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ImagesClient.setIamPolicy`.
       func setIamPolicy(request: ImagesClient.SetIamPolicyRequest) async throws
         -> GoogleCloudComputeV1.Policy
@@ -471,13 +442,6 @@
       /// See `ImagesClient.setLabels`.
       func setLabels(request: ImagesClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ImagesClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        resource: Swift.String,
-        body: GlobalSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ImagesClient.testIamPermissions`.
       func testIamPermissions(request: ImagesClient.TestIamPermissionsRequest) async throws
@@ -567,17 +531,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      image: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ImagesClient.DeleteRequest().with {
-        $0.project = project
-        $0.image = image
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: ImagesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -616,19 +569,6 @@
       request: ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func deprecate(
-      project: Swift.String,
-      image: Swift.String,
-      body: DeprecationStatus?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ImagesClient.DeprecateRequest().with {
-        $0.project = project
-        $0.image = image
-        $0.body = body
-      }
-      return try await self.deprecate(request: request)
     }
 
     public func deprecate(
@@ -742,17 +682,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      body: Image?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ImagesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: ImagesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -830,19 +759,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      image: Swift.String,
-      body: Image?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ImagesClient.PatchRequest().with {
-        $0.project = project
-        $0.image = image
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: ImagesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -908,19 +824,6 @@
       request: ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      resource: Swift.String,
-      body: GlobalSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ImagesClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `reservationSubBlocks` resource.
   ///
@@ -292,15 +289,6 @@
       func getVersion(request: ReservationSubBlocksClient.GetVersionRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationSubBlocksClient.getVersion`.
-      func getVersion(
-        project: Swift.String,
-        zone: Swift.String,
-        parentName: Swift.String,
-        reservationSubBlock: Swift.String,
-        body: ReservationSubBlocksGetVersionRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationSubBlocksClient.list`.
       func list(request: ReservationSubBlocksClient.ListRequest) async throws
         -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
@@ -321,26 +309,9 @@
       func performMaintenance(request: ReservationSubBlocksClient.PerformMaintenanceRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationSubBlocksClient.performMaintenance`.
-      func performMaintenance(
-        project: Swift.String,
-        zone: Swift.String,
-        parentName: Swift.String,
-        reservationSubBlock: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationSubBlocksClient.reportFaulty`.
       func reportFaulty(request: ReservationSubBlocksClient.ReportFaultyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ReservationSubBlocksClient.reportFaulty`.
-      func reportFaulty(
-        project: Swift.String,
-        zone: Swift.String,
-        parentName: Swift.String,
-        reservationSubBlock: Swift.String,
-        body: ReservationSubBlocksReportFaultyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationSubBlocksClient.setIamPolicy`.
       func setIamPolicy(request: ReservationSubBlocksClient.SetIamPolicyRequest) async throws
@@ -491,23 +462,6 @@
     }
 
     public func getVersion(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSubBlock: Swift.String,
-      body: ReservationSubBlocksGetVersionRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationSubBlocksClient.GetVersionRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.parentName = parentName
-        $0.reservationSubBlock = reservationSubBlock
-        $0.body = body
-      }
-      return try await self.getVersion(request: request)
-    }
-
-    public func getVersion(
       withPolling: ReservationSubBlocksClient.GetVersionRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.getVersion(withPolling: withPolling, options: .init())
@@ -598,21 +552,6 @@
     }
 
     public func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSubBlock: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationSubBlocksClient.PerformMaintenanceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.parentName = parentName
-        $0.reservationSubBlock = reservationSubBlock
-      }
-      return try await self.performMaintenance(request: request)
-    }
-
-    public func performMaintenance(
       withPolling: ReservationSubBlocksClient.PerformMaintenanceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.performMaintenance(withPolling: withPolling, options: .init())
@@ -657,23 +596,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func reportFaulty(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSubBlock: Swift.String,
-      body: ReservationSubBlocksReportFaultyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationSubBlocksClient.ReportFaultyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.parentName = parentName
-        $0.reservationSubBlock = reservationSubBlock
-        $0.body = body
-      }
-      return try await self.reportFaulty(request: request)
     }
 
     public func reportFaulty(

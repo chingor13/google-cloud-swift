@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instances` resource.
   ///
@@ -2114,38 +2111,13 @@
       func addAccessConfig(request: InstancesClient.AddAccessConfigRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.addAccessConfig`.
-      func addAccessConfig(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        networkInterface: Swift.String,
-        body: AccessConfig?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.addNetworkInterface`.
       func addNetworkInterface(request: InstancesClient.AddNetworkInterfaceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.addNetworkInterface`.
-      func addNetworkInterface(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: NetworkInterface?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.addResourcePolicies`.
       func addResourcePolicies(request: InstancesClient.AddResourcePoliciesRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.addResourcePolicies`.
-      func addResourcePolicies(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesAddResourcePoliciesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.aggregatedList`.
       func aggregatedList(request: InstancesClient.AggregatedListRequest) async throws
@@ -2165,72 +2137,25 @@
       func attachDisk(request: InstancesClient.AttachDiskRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.attachDisk`.
-      func attachDisk(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: AttachedDisk?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.bulkInsert`.
       func bulkInsert(request: InstancesClient.BulkInsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.bulkInsert`.
-      func bulkInsert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: BulkInsertInstanceResource?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.delete`.
       func delete(request: InstancesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.deleteAccessConfig`.
       func deleteAccessConfig(request: InstancesClient.DeleteAccessConfigRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.deleteAccessConfig`.
-      func deleteAccessConfig(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        accessConfig: Swift.String,
-        networkInterface: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.deleteNetworkInterface`.
       func deleteNetworkInterface(request: InstancesClient.DeleteNetworkInterfaceRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.deleteNetworkInterface`.
-      func deleteNetworkInterface(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        networkInterfaceName: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.detachDisk`.
       func detachDisk(request: InstancesClient.DetachDiskRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.detachDisk`.
-      func detachDisk(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        deviceName: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.`get``.
       func `get`(request: InstancesClient.GetRequest) async throws -> GoogleCloudComputeV1.Instance
@@ -2313,13 +2238,6 @@
       func insert(request: InstancesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: Instance?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.list`.
       func list(request: InstancesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.InstanceList
@@ -2355,58 +2273,21 @@
       func performMaintenance(request: InstancesClient.PerformMaintenanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.performMaintenance`.
-      func performMaintenance(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.removeResourcePolicies`.
       func removeResourcePolicies(request: InstancesClient.RemoveResourcePoliciesRequest)
         async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.removeResourcePolicies`.
-      func removeResourcePolicies(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesRemoveResourcePoliciesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.reportHostAsFaulty`.
       func reportHostAsFaulty(request: InstancesClient.ReportHostAsFaultyRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.reportHostAsFaulty`.
-      func reportHostAsFaulty(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesReportHostAsFaultyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.reset`.
       func reset(request: InstancesClient.ResetRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.reset`.
-      func reset(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.resume`.
       func resume(request: InstancesClient.ResumeRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.resume`.
-      func resume(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.sendDiagnosticInterrupt`.
       func sendDiagnosticInterrupt(request: InstancesClient.SendDiagnosticInterruptRequest)
@@ -2423,25 +2304,9 @@
       func setDeletionProtection(request: InstancesClient.SetDeletionProtectionRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setDeletionProtection`.
-      func setDeletionProtection(
-        project: Swift.String,
-        zone: Swift.String,
-        resource: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setDiskAutoDelete`.
       func setDiskAutoDelete(request: InstancesClient.SetDiskAutoDeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setDiskAutoDelete`.
-      func setDiskAutoDelete(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        autoDelete: Swift.Bool,
-        deviceName: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.setIamPolicy`.
       func setIamPolicy(request: InstancesClient.SetIamPolicyRequest) async throws
@@ -2459,189 +2324,65 @@
       func setLabels(request: InstancesClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setMachineResources`.
       func setMachineResources(request: InstancesClient.SetMachineResourcesRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setMachineResources`.
-      func setMachineResources(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetMachineResourcesRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.setMachineType`.
       func setMachineType(request: InstancesClient.SetMachineTypeRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setMachineType`.
-      func setMachineType(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetMachineTypeRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setMetadata`.
       func setMetadata(request: InstancesClient.SetMetadataRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setMetadata`.
-      func setMetadata(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: Metadata?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.setMinCpuPlatform`.
       func setMinCpuPlatform(request: InstancesClient.SetMinCpuPlatformRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setMinCpuPlatform`.
-      func setMinCpuPlatform(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetMinCpuPlatformRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setName`.
       func setName(request: InstancesClient.SetNameRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setName`.
-      func setName(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetNameRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.setScheduling`.
       func setScheduling(request: InstancesClient.SetSchedulingRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setScheduling`.
-      func setScheduling(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: Scheduling?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setSecurityPolicy`.
       func setSecurityPolicy(request: InstancesClient.SetSecurityPolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setSecurityPolicy`.
-      func setSecurityPolicy(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetSecurityPolicyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setServiceAccount`.
       func setServiceAccount(request: InstancesClient.SetServiceAccountRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setServiceAccount`.
-      func setServiceAccount(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesSetServiceAccountRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.setShieldedInstanceIntegrityPolicy`.
       func setShieldedInstanceIntegrityPolicy(
         request: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest
       ) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.setShieldedInstanceIntegrityPolicy`.
-      func setShieldedInstanceIntegrityPolicy(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: ShieldedInstanceIntegrityPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.setTags`.
       func setTags(request: InstancesClient.SetTagsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.setTags`.
-      func setTags(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: Tags?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.simulateMaintenanceEvent`.
       func simulateMaintenanceEvent(request: InstancesClient.SimulateMaintenanceEventRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.simulateMaintenanceEvent`.
-      func simulateMaintenanceEvent(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.start`.
       func start(request: InstancesClient.StartRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.start`.
-      func start(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.startWithEncryptionKey`.
       func startWithEncryptionKey(request: InstancesClient.StartWithEncryptionKeyRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.startWithEncryptionKey`.
-      func startWithEncryptionKey(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: InstancesStartWithEncryptionKeyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.stop`.
       func stop(request: InstancesClient.StopRequest) async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.stop`.
-      func stop(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.suspend`.
       func suspend(request: InstancesClient.SuspendRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.suspend`.
-      func suspend(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.testIamPermissions`.
       func testIamPermissions(request: InstancesClient.TestIamPermissionsRequest) async throws
@@ -2659,63 +2400,21 @@
       func update(request: InstancesClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: Instance?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.updateAccessConfig`.
       func updateAccessConfig(request: InstancesClient.UpdateAccessConfigRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.updateAccessConfig`.
-      func updateAccessConfig(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        networkInterface: Swift.String,
-        body: AccessConfig?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.updateDisplayDevice`.
       func updateDisplayDevice(request: InstancesClient.UpdateDisplayDeviceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.updateDisplayDevice`.
-      func updateDisplayDevice(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: DisplayDevice?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.updateNetworkInterface`.
       func updateNetworkInterface(request: InstancesClient.UpdateNetworkInterfaceRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `InstancesClient.updateNetworkInterface`.
-      func updateNetworkInterface(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        networkInterface: Swift.String,
-        body: NetworkInterface?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstancesClient.updateShieldedInstanceConfig`.
       func updateShieldedInstanceConfig(
         request: InstancesClient.UpdateShieldedInstanceConfigRequest
-      ) async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `InstancesClient.updateShieldedInstanceConfig`.
-      func updateShieldedInstanceConfig(
-        project: Swift.String,
-        zone: Swift.String,
-        instance: Swift.String,
-        body: ShieldedInstanceConfig?,
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstancesClient.addAccessConfig`.
@@ -3016,23 +2715,6 @@
     }
 
     public func addAccessConfig(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      networkInterface: Swift.String,
-      body: AccessConfig?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.AddAccessConfigRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.networkInterface = networkInterface
-        $0.body = body
-      }
-      return try await self.addAccessConfig(request: request)
-    }
-
-    public func addAccessConfig(
       withPolling: InstancesClient.AddAccessConfigRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addAccessConfig(withPolling: withPolling, options: .init())
@@ -3080,21 +2762,6 @@
     }
 
     public func addNetworkInterface(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: NetworkInterface?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.AddNetworkInterfaceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.addNetworkInterface(request: request)
-    }
-
-    public func addNetworkInterface(
       withPolling: InstancesClient.AddNetworkInterfaceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addNetworkInterface(withPolling: withPolling, options: .init())
@@ -3138,21 +2805,6 @@
       request: InstancesClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func addResourcePolicies(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesAddResourcePoliciesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.AddResourcePoliciesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.addResourcePolicies(request: request)
     }
 
     public func addResourcePolicies(
@@ -3238,21 +2890,6 @@
     }
 
     public func attachDisk(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: AttachedDisk?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.AttachDiskRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.attachDisk(request: request)
-    }
-
-    public func attachDisk(
       withPolling: InstancesClient.AttachDiskRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.attachDisk(withPolling: withPolling, options: .init())
@@ -3295,19 +2932,6 @@
       request: InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func bulkInsert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: BulkInsertInstanceResource?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.BulkInsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.bulkInsert(request: request)
     }
 
     public func bulkInsert(
@@ -3354,19 +2978,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InstancesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -3407,23 +3018,6 @@
       request: InstancesClient.DeleteAccessConfigRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func deleteAccessConfig(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      accessConfig: Swift.String,
-      networkInterface: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.DeleteAccessConfigRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.accessConfig = accessConfig
-        $0.networkInterface = networkInterface
-      }
-      return try await self.deleteAccessConfig(request: request)
     }
 
     public func deleteAccessConfig(
@@ -3474,21 +3068,6 @@
     }
 
     public func deleteNetworkInterface(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      networkInterfaceName: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.DeleteNetworkInterfaceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.networkInterfaceName = networkInterfaceName
-      }
-      return try await self.deleteNetworkInterface(request: request)
-    }
-
-    public func deleteNetworkInterface(
       withPolling: InstancesClient.DeleteNetworkInterfaceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.deleteNetworkInterface(withPolling: withPolling, options: .init())
@@ -3532,21 +3111,6 @@
       request: InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func detachDisk(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      deviceName: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.DetachDiskRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.deviceName = deviceName
-      }
-      return try await self.detachDisk(request: request)
     }
 
     public func detachDisk(
@@ -3773,19 +3337,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: Instance?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: InstancesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -3907,19 +3458,6 @@
     }
 
     public func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.PerformMaintenanceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.performMaintenance(request: request)
-    }
-
-    public func performMaintenance(
       withPolling: InstancesClient.PerformMaintenanceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.performMaintenance(withPolling: withPolling, options: .init())
@@ -3960,21 +3498,6 @@
       request: InstancesClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeResourcePolicies(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesRemoveResourcePoliciesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.RemoveResourcePoliciesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.removeResourcePolicies(request: request)
     }
 
     public func removeResourcePolicies(
@@ -4024,21 +3547,6 @@
     }
 
     public func reportHostAsFaulty(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesReportHostAsFaultyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.ReportHostAsFaultyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.reportHostAsFaulty(request: request)
-    }
-
-    public func reportHostAsFaulty(
       withPolling: InstancesClient.ReportHostAsFaultyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.reportHostAsFaulty(withPolling: withPolling, options: .init())
@@ -4084,19 +3592,6 @@
     }
 
     public func reset(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.ResetRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.reset(request: request)
-    }
-
-    public func reset(
       withPolling: InstancesClient.ResetRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.reset(withPolling: withPolling, options: .init())
@@ -4137,19 +3632,6 @@
       request: InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func resume(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.ResumeRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.resume(request: request)
     }
 
     public func resume(
@@ -4222,19 +3704,6 @@
     }
 
     public func setDeletionProtection(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetDeletionProtectionRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.resource = resource
-      }
-      return try await self.setDeletionProtection(request: request)
-    }
-
-    public func setDeletionProtection(
       withPolling: InstancesClient.SetDeletionProtectionRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setDeletionProtection(withPolling: withPolling, options: .init())
@@ -4276,23 +3745,6 @@
       request: InstancesClient.SetDiskAutoDeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setDiskAutoDelete(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      autoDelete: Swift.Bool,
-      deviceName: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetDiskAutoDeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.autoDelete = autoDelete
-        $0.deviceName = deviceName
-      }
-      return try await self.setDiskAutoDelete(request: request)
     }
 
     public func setDiskAutoDelete(
@@ -4370,21 +3822,6 @@
     }
 
     public func setLabels(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
-    }
-
-    public func setLabels(
       withPolling: InstancesClient.SetLabelsRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setLabels(withPolling: withPolling, options: .init())
@@ -4427,21 +3864,6 @@
       request: InstancesClient.SetMachineResourcesRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setMachineResources(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetMachineResourcesRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetMachineResourcesRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setMachineResources(request: request)
     }
 
     public func setMachineResources(
@@ -4491,21 +3913,6 @@
     }
 
     public func setMachineType(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetMachineTypeRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetMachineTypeRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setMachineType(request: request)
-    }
-
-    public func setMachineType(
       withPolling: InstancesClient.SetMachineTypeRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setMachineType(withPolling: withPolling, options: .init())
@@ -4548,21 +3955,6 @@
       request: InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setMetadata(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: Metadata?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetMetadataRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setMetadata(request: request)
     }
 
     public func setMetadata(
@@ -4611,21 +4003,6 @@
     }
 
     public func setMinCpuPlatform(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetMinCpuPlatformRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetMinCpuPlatformRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setMinCpuPlatform(request: request)
-    }
-
-    public func setMinCpuPlatform(
       withPolling: InstancesClient.SetMinCpuPlatformRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setMinCpuPlatform(withPolling: withPolling, options: .init())
@@ -4668,21 +4045,6 @@
       request: InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setName(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetNameRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetNameRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setName(request: request)
     }
 
     public func setName(
@@ -4731,21 +4093,6 @@
     }
 
     public func setScheduling(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: Scheduling?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetSchedulingRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setScheduling(request: request)
-    }
-
-    public func setScheduling(
       withPolling: InstancesClient.SetSchedulingRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setScheduling(withPolling: withPolling, options: .init())
@@ -4791,21 +4138,6 @@
     }
 
     public func setSecurityPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetSecurityPolicyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetSecurityPolicyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setSecurityPolicy(request: request)
-    }
-
-    public func setSecurityPolicy(
       withPolling: InstancesClient.SetSecurityPolicyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setSecurityPolicy(withPolling: withPolling, options: .init())
@@ -4848,21 +4180,6 @@
       request: InstancesClient.SetServiceAccountRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setServiceAccount(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesSetServiceAccountRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetServiceAccountRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setServiceAccount(request: request)
     }
 
     public func setServiceAccount(
@@ -4912,21 +4229,6 @@
     }
 
     public func setShieldedInstanceIntegrityPolicy(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: ShieldedInstanceIntegrityPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetShieldedInstanceIntegrityPolicyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setShieldedInstanceIntegrityPolicy(request: request)
-    }
-
-    public func setShieldedInstanceIntegrityPolicy(
       withPolling: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setShieldedInstanceIntegrityPolicy(withPolling: withPolling, options: .init())
@@ -4970,21 +4272,6 @@
       request: InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setTags(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: Tags?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SetTagsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.setTags(request: request)
     }
 
     public func setTags(
@@ -5034,19 +4321,6 @@
     }
 
     public func simulateMaintenanceEvent(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SimulateMaintenanceEventRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.simulateMaintenanceEvent(request: request)
-    }
-
-    public func simulateMaintenanceEvent(
       withPolling: InstancesClient.SimulateMaintenanceEventRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.simulateMaintenanceEvent(withPolling: withPolling, options: .init())
@@ -5091,19 +4365,6 @@
     }
 
     public func start(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.StartRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.start(request: request)
-    }
-
-    public func start(
       withPolling: InstancesClient.StartRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.start(withPolling: withPolling, options: .init())
@@ -5144,21 +4405,6 @@
       request: InstancesClient.StartWithEncryptionKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func startWithEncryptionKey(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: InstancesStartWithEncryptionKeyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.StartWithEncryptionKeyRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.startWithEncryptionKey(request: request)
     }
 
     public func startWithEncryptionKey(
@@ -5208,19 +4454,6 @@
     }
 
     public func stop(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.StopRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.stop(request: request)
-    }
-
-    public func stop(
       withPolling: InstancesClient.StopRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.stop(withPolling: withPolling, options: .init())
@@ -5261,19 +4494,6 @@
       request: InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func suspend(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.SuspendRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-      }
-      return try await self.suspend(request: request)
     }
 
     public func suspend(
@@ -5347,21 +4567,6 @@
     }
 
     public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: Instance?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.update(request: request)
-    }
-
-    public func update(
       withPolling: InstancesClient.UpdateRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
@@ -5404,23 +4609,6 @@
       request: InstancesClient.UpdateAccessConfigRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateAccessConfig(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      networkInterface: Swift.String,
-      body: AccessConfig?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.UpdateAccessConfigRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.networkInterface = networkInterface
-        $0.body = body
-      }
-      return try await self.updateAccessConfig(request: request)
     }
 
     public func updateAccessConfig(
@@ -5471,21 +4659,6 @@
     }
 
     public func updateDisplayDevice(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: DisplayDevice?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.UpdateDisplayDeviceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.updateDisplayDevice(request: request)
-    }
-
-    public func updateDisplayDevice(
       withPolling: InstancesClient.UpdateDisplayDeviceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.updateDisplayDevice(withPolling: withPolling, options: .init())
@@ -5529,23 +4702,6 @@
       request: InstancesClient.UpdateNetworkInterfaceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateNetworkInterface(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      networkInterface: Swift.String,
-      body: NetworkInterface?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.UpdateNetworkInterfaceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.networkInterface = networkInterface
-        $0.body = body
-      }
-      return try await self.updateNetworkInterface(request: request)
     }
 
     public func updateNetworkInterface(
@@ -5595,21 +4751,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateShieldedInstanceConfig(
-      project: Swift.String,
-      zone: Swift.String,
-      instance: Swift.String,
-      body: ShieldedInstanceConfig?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstancesClient.UpdateShieldedInstanceConfigRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instance = instance
-        $0.body = body
-      }
-      return try await self.updateShieldedInstanceConfig(request: request)
     }
 
     public func updateShieldedInstanceConfig(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instantSnapshotGroups` resource.
   ///
@@ -220,13 +217,6 @@
       func delete(request: InstantSnapshotGroupsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstantSnapshotGroupsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        instantSnapshotGroup: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstantSnapshotGroupsClient.`get``.
       func `get`(request: InstantSnapshotGroupsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InstantSnapshotGroup
@@ -252,13 +242,6 @@
       /// See `InstantSnapshotGroupsClient.insert`.
       func insert(request: InstantSnapshotGroupsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstantSnapshotGroupsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: InstantSnapshotGroup?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstantSnapshotGroupsClient.list`.
       func list(request: InstantSnapshotGroupsClient.ListRequest) async throws
@@ -359,19 +342,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instantSnapshotGroup: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstantSnapshotGroupsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instantSnapshotGroup = instantSnapshotGroup
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InstantSnapshotGroupsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -463,19 +433,6 @@
       request: InstantSnapshotGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: InstantSnapshotGroup?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstantSnapshotGroupsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

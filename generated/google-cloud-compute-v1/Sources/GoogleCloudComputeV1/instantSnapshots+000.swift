@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instantSnapshots` resource.
   ///
@@ -323,13 +320,6 @@
       func delete(request: InstantSnapshotsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstantSnapshotsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        instantSnapshot: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstantSnapshotsClient.`get``.
       func `get`(request: InstantSnapshotsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InstantSnapshot
@@ -355,13 +345,6 @@
       /// See `InstantSnapshotsClient.insert`.
       func insert(request: InstantSnapshotsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstantSnapshotsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: InstantSnapshot?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstantSnapshotsClient.list`.
       func list(request: InstantSnapshotsClient.ListRequest) async throws
@@ -393,14 +376,6 @@
       /// See `InstantSnapshotsClient.setLabels`.
       func setLabels(request: InstantSnapshotsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InstantSnapshotsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        zone: Swift.String,
-        resource: Swift.String,
-        body: ZoneSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstantSnapshotsClient.testIamPermissions`.
       func testIamPermissions(request: InstantSnapshotsClient.TestIamPermissionsRequest)
@@ -525,19 +500,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      instantSnapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstantSnapshotsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.instantSnapshot = instantSnapshot
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InstantSnapshotsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -628,19 +590,6 @@
       request: InstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: InstantSnapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstantSnapshotsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -749,21 +698,6 @@
       request: InstantSnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      zone: Swift.String,
-      resource: Swift.String,
-      body: ZoneSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstantSnapshotsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

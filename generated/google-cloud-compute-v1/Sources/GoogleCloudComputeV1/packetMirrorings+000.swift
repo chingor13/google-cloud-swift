@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `packetMirrorings` resource.
   ///
@@ -293,13 +290,6 @@
       func delete(request: PacketMirroringsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `PacketMirroringsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        packetMirroring: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `PacketMirroringsClient.`get``.
       func `get`(request: PacketMirroringsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.PacketMirroring
@@ -314,13 +304,6 @@
       /// See `PacketMirroringsClient.insert`.
       func insert(request: PacketMirroringsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `PacketMirroringsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: PacketMirroring?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PacketMirroringsClient.list`.
       func list(request: PacketMirroringsClient.ListRequest) async throws
@@ -340,14 +323,6 @@
       /// See `PacketMirroringsClient.patch`.
       func patch(request: PacketMirroringsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `PacketMirroringsClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        packetMirroring: Swift.String,
-        body: PacketMirroring?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PacketMirroringsClient.testIamPermissions`.
       func testIamPermissions(request: PacketMirroringsClient.TestIamPermissionsRequest)
@@ -462,19 +437,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      packetMirroring: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = PacketMirroringsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.packetMirroring = packetMirroring
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: PacketMirroringsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -540,19 +502,6 @@
       request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: PacketMirroring?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = PacketMirroringsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -634,21 +583,6 @@
       request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      packetMirroring: Swift.String,
-      body: PacketMirroring?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = PacketMirroringsClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.packetMirroring = packetMirroring
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

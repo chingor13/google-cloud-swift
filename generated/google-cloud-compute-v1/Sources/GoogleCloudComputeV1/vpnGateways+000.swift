@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `vpnGateways` resource.
   ///
@@ -297,13 +294,6 @@
       func delete(request: VpnGatewaysClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `VpnGatewaysClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        vpnGateway: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `VpnGatewaysClient.`get``.
       func `get`(request: VpnGatewaysClient.GetRequest) async throws
         -> GoogleCloudComputeV1.VpnGateway
@@ -330,13 +320,6 @@
       func insert(request: VpnGatewaysClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `VpnGatewaysClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: VpnGateway?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `VpnGatewaysClient.list`.
       func list(request: VpnGatewaysClient.ListRequest) async throws
         -> GoogleCloudComputeV1.VpnGatewayList
@@ -355,14 +338,6 @@
       /// See `VpnGatewaysClient.setLabels`.
       func setLabels(request: VpnGatewaysClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `VpnGatewaysClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `VpnGatewaysClient.testIamPermissions`.
       func testIamPermissions(request: VpnGatewaysClient.TestIamPermissionsRequest) async throws
@@ -480,19 +455,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      vpnGateway: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnGatewaysClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.vpnGateway = vpnGateway
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: VpnGatewaysClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -586,19 +548,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: VpnGateway?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnGatewaysClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: VpnGatewaysClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -677,21 +626,6 @@
       request: VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = VpnGatewaysClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

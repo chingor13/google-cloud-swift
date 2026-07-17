@@ -18,13 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
 
 /// Allow users to create and manage TagBindings between TagValues and
 /// different Google Cloud resources throughout the GCP resource hierarchy.

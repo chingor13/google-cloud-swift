@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionNetworkFirewallPolicies` resource.
   ///
@@ -587,47 +584,17 @@
       func addAssociation(request: RegionNetworkFirewallPoliciesClient.AddAssociationRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkFirewallPoliciesClient.addAssociation`.
-      func addAssociation(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyAssociation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNetworkFirewallPoliciesClient.addRule`.
       func addRule(request: RegionNetworkFirewallPoliciesClient.AddRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionNetworkFirewallPoliciesClient.addRule`.
-      func addRule(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionNetworkFirewallPoliciesClient.cloneRules`.
       func cloneRules(request: RegionNetworkFirewallPoliciesClient.CloneRulesRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkFirewallPoliciesClient.cloneRules`.
-      func cloneRules(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNetworkFirewallPoliciesClient.delete`.
       func delete(request: RegionNetworkFirewallPoliciesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionNetworkFirewallPoliciesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionNetworkFirewallPoliciesClient.`get``.
       func `get`(request: RegionNetworkFirewallPoliciesClient.GetRequest) async throws
@@ -691,13 +658,6 @@
       func insert(request: RegionNetworkFirewallPoliciesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkFirewallPoliciesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: FirewallPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNetworkFirewallPoliciesClient.list`.
       func list(request: RegionNetworkFirewallPoliciesClient.ListRequest) async throws
         -> GoogleCloudComputeV1.FirewallPolicyList
@@ -717,47 +677,17 @@
       func patch(request: RegionNetworkFirewallPoliciesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkFirewallPoliciesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNetworkFirewallPoliciesClient.patchRule`.
       func patchRule(request: RegionNetworkFirewallPoliciesClient.PatchRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionNetworkFirewallPoliciesClient.patchRule`.
-      func patchRule(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-        body: FirewallPolicyRule?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionNetworkFirewallPoliciesClient.removeAssociation`.
       func removeAssociation(request: RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNetworkFirewallPoliciesClient.removeAssociation`.
-      func removeAssociation(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNetworkFirewallPoliciesClient.removeRule`.
       func removeRule(request: RegionNetworkFirewallPoliciesClient.RemoveRuleRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionNetworkFirewallPoliciesClient.removeRule`.
-      func removeRule(
-        project: Swift.String,
-        region: Swift.String,
-        firewallPolicy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionNetworkFirewallPoliciesClient.setIamPolicy`.
       func setIamPolicy(request: RegionNetworkFirewallPoliciesClient.SetIamPolicyRequest)
@@ -911,21 +841,6 @@
     }
 
     public func addAssociation(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyAssociation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.AddAssociationRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.addAssociation(request: request)
-    }
-
-    public func addAssociation(
       withPolling: RegionNetworkFirewallPoliciesClient.AddAssociationRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addAssociation(withPolling: withPolling, options: .init())
@@ -970,21 +885,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func addRule(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.AddRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.addRule(request: request)
     }
 
     public func addRule(
@@ -1035,19 +935,6 @@
     }
 
     public func cloneRules(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.CloneRulesRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.cloneRules(request: request)
-    }
-
-    public func cloneRules(
       withPolling: RegionNetworkFirewallPoliciesClient.CloneRulesRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cloneRules(withPolling: withPolling, options: .init())
@@ -1090,19 +977,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -1287,19 +1161,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: FirewallPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RegionNetworkFirewallPoliciesClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -1385,21 +1246,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RegionNetworkFirewallPoliciesClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1444,21 +1290,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patchRule(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-      body: FirewallPolicyRule?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.PatchRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-        $0.body = body
-      }
-      return try await self.patchRule(request: request)
     }
 
     public func patchRule(
@@ -1509,19 +1340,6 @@
     }
 
     public func removeAssociation(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.removeAssociation(request: request)
-    }
-
-    public func removeAssociation(
       withPolling: RegionNetworkFirewallPoliciesClient.RemoveAssociationRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeAssociation(withPolling: withPolling, options: .init())
@@ -1564,19 +1382,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeRule(
-      project: Swift.String,
-      region: Swift.String,
-      firewallPolicy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNetworkFirewallPoliciesClient.RemoveRuleRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.firewallPolicy = firewallPolicy
-      }
-      return try await self.removeRule(request: request)
     }
 
     public func removeRule(

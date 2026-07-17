@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `reservationBlocks` resource.
   ///
@@ -212,15 +209,6 @@
       func performMaintenance(request: ReservationBlocksClient.PerformMaintenanceRequest)
         async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationBlocksClient.performMaintenance`.
-      func performMaintenance(
-        project: Swift.String,
-        zone: Swift.String,
-        reservation: Swift.String,
-        reservationBlock: Swift.String,
-        body: ReservationsBlocksPerformMaintenanceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationBlocksClient.setIamPolicy`.
       func setIamPolicy(request: ReservationBlocksClient.SetIamPolicyRequest) async throws
         -> GoogleCloudComputeV1.Policy
@@ -394,23 +382,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func performMaintenance(
-      project: Swift.String,
-      zone: Swift.String,
-      reservation: Swift.String,
-      reservationBlock: Swift.String,
-      body: ReservationsBlocksPerformMaintenanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationBlocksClient.PerformMaintenanceRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.reservation = reservation
-        $0.reservationBlock = reservationBlock
-        $0.body = body
-      }
-      return try await self.performMaintenance(request: request)
     }
 
     public func performMaintenance(

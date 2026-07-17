@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `routers` resource.
   ///
@@ -576,23 +573,9 @@
       func delete(request: RoutersClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RoutersClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RoutersClient.deleteRoutePolicy`.
       func deleteRoutePolicy(request: RoutersClient.DeleteRoutePolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RoutersClient.deleteRoutePolicy`.
-      func deleteRoutePolicy(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.`get``.
       func `get`(request: RoutersClient.GetRequest) async throws -> GoogleCloudComputeV1.Router
@@ -657,13 +640,6 @@
       func insert(request: RoutersClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RoutersClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: Router?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RoutersClient.list`.
       func list(request: RoutersClient.ListRequest) async throws -> GoogleCloudComputeV1.RouterList
 
@@ -713,25 +689,9 @@
       /// See `RoutersClient.patch`.
       func patch(request: RoutersClient.PatchRequest) async throws -> GoogleCloudComputeV1.Operation
 
-      /// See `RoutersClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-        body: Router?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RoutersClient.patchRoutePolicy`.
       func patchRoutePolicy(request: RoutersClient.PatchRoutePolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RoutersClient.patchRoutePolicy`.
-      func patchRoutePolicy(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-        body: RoutePolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.preview`.
       func preview(request: RoutersClient.PreviewRequest) async throws
@@ -749,25 +709,9 @@
       func update(request: RoutersClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RoutersClient.update`.
-      func update(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-        body: Router?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RoutersClient.updateRoutePolicy`.
       func updateRoutePolicy(request: RoutersClient.UpdateRoutePolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RoutersClient.updateRoutePolicy`.
-      func updateRoutePolicy(
-        project: Swift.String,
-        region: Swift.String,
-        router: Swift.String,
-        body: RoutePolicy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.aggregatedList`.
       func aggregatedList(
@@ -932,19 +876,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RoutersClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -985,19 +916,6 @@
       request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func deleteRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.DeleteRoutePolicyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-      }
-      return try await self.deleteRoutePolicy(request: request)
     }
 
     public func deleteRoutePolicy(
@@ -1184,19 +1102,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: RoutersClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -1359,21 +1264,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: RoutersClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -1416,21 +1306,6 @@
       request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patchRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: RoutePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.PatchRoutePolicyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-        $0.body = body
-      }
-      return try await self.patchRoutePolicy(request: request)
     }
 
     public func patchRoutePolicy(
@@ -1506,21 +1381,6 @@
     }
 
     public func update(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: Router?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.UpdateRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-        $0.body = body
-      }
-      return try await self.update(request: request)
-    }
-
-    public func update(
       withPolling: RoutersClient.UpdateRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
@@ -1563,21 +1423,6 @@
       request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateRoutePolicy(
-      project: Swift.String,
-      region: Swift.String,
-      router: Swift.String,
-      body: RoutePolicy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutersClient.UpdateRoutePolicyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.router = router
-        $0.body = body
-      }
-      return try await self.updateRoutePolicy(request: request)
     }
 
     public func updateRoutePolicy(

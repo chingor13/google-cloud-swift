@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionHealthCheckServices` resource.
   ///
@@ -302,13 +299,6 @@
       func delete(request: RegionHealthCheckServicesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionHealthCheckServicesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        healthCheckService: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionHealthCheckServicesClient.`get``.
       func `get`(request: RegionHealthCheckServicesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.HealthCheckService
@@ -323,13 +313,6 @@
       /// See `RegionHealthCheckServicesClient.insert`.
       func insert(request: RegionHealthCheckServicesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionHealthCheckServicesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: HealthCheckService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionHealthCheckServicesClient.list`.
       func list(request: RegionHealthCheckServicesClient.ListRequest) async throws
@@ -349,14 +332,6 @@
       /// See `RegionHealthCheckServicesClient.patch`.
       func patch(request: RegionHealthCheckServicesClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionHealthCheckServicesClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        healthCheckService: Swift.String,
-        body: HealthCheckService?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionHealthCheckServicesClient.testIamPermissions`.
       func testIamPermissions(request: RegionHealthCheckServicesClient.TestIamPermissionsRequest)
@@ -477,19 +452,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      healthCheckService: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthCheckServicesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.healthCheckService = healthCheckService
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RegionHealthCheckServicesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -556,19 +518,6 @@
       request: RegionHealthCheckServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: HealthCheckService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthCheckServicesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -652,21 +601,6 @@
       request: RegionHealthCheckServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      healthCheckService: Swift.String,
-      body: HealthCheckService?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionHealthCheckServicesClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.healthCheckService = healthCheckService
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

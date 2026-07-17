@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionInstances` resource.
   ///
@@ -111,13 +108,6 @@
 
       /// See `RegionInstancesClient.bulkInsert`.
       func bulkInsert(
-        project: Swift.String,
-        region: Swift.String,
-        body: BulkInsertInstanceResource?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionInstancesClient.bulkInsert`.
-      func bulkInsert(
         request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
@@ -135,19 +125,6 @@
       request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func bulkInsert(
-      project: Swift.String,
-      region: Swift.String,
-      body: BulkInsertInstanceResource?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionInstancesClient.BulkInsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.bulkInsert(request: request)
     }
 
     public func bulkInsert(

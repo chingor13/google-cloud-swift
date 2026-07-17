@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionSnapshots` resource.
   ///
@@ -328,13 +325,6 @@
       func delete(request: RegionSnapshotsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSnapshotsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        snapshot: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSnapshotsClient.`get``.
       func `get`(request: RegionSnapshotsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.Snapshot
@@ -360,13 +350,6 @@
       /// See `RegionSnapshotsClient.insert`.
       func insert(request: RegionSnapshotsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionSnapshotsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: Snapshot?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionSnapshotsClient.list`.
       func list(request: RegionSnapshotsClient.ListRequest) async throws
@@ -399,14 +382,6 @@
       func setLabels(request: RegionSnapshotsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSnapshotsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSnapshotsClient.testIamPermissions`.
       func testIamPermissions(request: RegionSnapshotsClient.TestIamPermissionsRequest) async throws
         -> GoogleCloudComputeV1.TestPermissionsResponse
@@ -422,14 +397,6 @@
       /// See `RegionSnapshotsClient.updateKmsKey`.
       func updateKmsKey(request: RegionSnapshotsClient.UpdateKmsKeyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionSnapshotsClient.updateKmsKey`.
-      func updateKmsKey(
-        project: Swift.String,
-        region: Swift.String,
-        snapshot: Swift.String,
-        body: RegionSnapshotUpdateKmsKeyRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionSnapshotsClient.delete`.
       func delete(
@@ -496,19 +463,6 @@
       request: RegionSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      snapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSnapshotsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.snapshot = snapshot
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -602,19 +556,6 @@
       request: RegionSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: Snapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSnapshotsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -726,21 +667,6 @@
     }
 
     public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSnapshotsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
-    }
-
-    public func setLabels(
       withPolling: RegionSnapshotsClient.SetLabelsRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setLabels(withPolling: withPolling, options: .init())
@@ -811,21 +737,6 @@
       request: RegionSnapshotsClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func updateKmsKey(
-      project: Swift.String,
-      region: Swift.String,
-      snapshot: Swift.String,
-      body: RegionSnapshotUpdateKmsKeyRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSnapshotsClient.UpdateKmsKeyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.snapshot = snapshot
-        $0.body = body
-      }
-      return try await self.updateKmsKey(request: request)
     }
 
     public func updateKmsKey(

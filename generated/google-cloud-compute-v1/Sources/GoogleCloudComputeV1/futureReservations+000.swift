@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `futureReservations` resource.
   ///
@@ -324,23 +321,9 @@
       func cancel(request: FutureReservationsClient.CancelRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `FutureReservationsClient.cancel`.
-      func cancel(
-        project: Swift.String,
-        zone: Swift.String,
-        futureReservation: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `FutureReservationsClient.delete`.
       func delete(request: FutureReservationsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `FutureReservationsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        futureReservation: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `FutureReservationsClient.`get``.
       func `get`(request: FutureReservationsClient.GetRequest) async throws
@@ -356,13 +339,6 @@
       /// See `FutureReservationsClient.insert`.
       func insert(request: FutureReservationsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `FutureReservationsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: FutureReservation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `FutureReservationsClient.list`.
       func list(request: FutureReservationsClient.ListRequest) async throws
@@ -382,14 +358,6 @@
       /// See `FutureReservationsClient.update`.
       func update(request: FutureReservationsClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `FutureReservationsClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        futureReservation: Swift.String,
-        body: FutureReservation?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `FutureReservationsClient.aggregatedList`.
       func aggregatedList(
@@ -494,19 +462,6 @@
     }
 
     public func cancel(
-      project: Swift.String,
-      zone: Swift.String,
-      futureReservation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = FutureReservationsClient.CancelRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.futureReservation = futureReservation
-      }
-      return try await self.cancel(request: request)
-    }
-
-    public func cancel(
       withPolling: FutureReservationsClient.CancelRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.cancel(withPolling: withPolling, options: .init())
@@ -547,19 +502,6 @@
       request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      futureReservation: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = FutureReservationsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.futureReservation = futureReservation
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -628,19 +570,6 @@
       request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: FutureReservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = FutureReservationsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -723,21 +652,6 @@
       request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      futureReservation: Swift.String,
-      body: FutureReservation?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = FutureReservationsClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.futureReservation = futureReservation
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

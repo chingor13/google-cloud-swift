@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `storagePools` resource.
   ///
@@ -346,13 +343,6 @@
       func delete(request: StoragePoolsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `StoragePoolsClient.delete`.
-      func delete(
-        project: Swift.String,
-        zone: Swift.String,
-        storagePool: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `StoragePoolsClient.`get``.
       func `get`(request: StoragePoolsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.StoragePool
@@ -378,13 +368,6 @@
       /// See `StoragePoolsClient.insert`.
       func insert(request: StoragePoolsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `StoragePoolsClient.insert`.
-      func insert(
-        project: Swift.String,
-        zone: Swift.String,
-        body: StoragePool?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `StoragePoolsClient.list`.
       func list(request: StoragePoolsClient.ListRequest) async throws
@@ -444,14 +427,6 @@
       /// See `StoragePoolsClient.update`.
       func update(request: StoragePoolsClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `StoragePoolsClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        storagePool: Swift.String,
-        body: StoragePool?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `StoragePoolsClient.aggregatedList`.
       func aggregatedList(
@@ -573,19 +548,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      zone: Swift.String,
-      storagePool: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = StoragePoolsClient.DeleteRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.storagePool = storagePool
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: StoragePoolsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -676,19 +638,6 @@
       request: StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      zone: Swift.String,
-      body: StoragePool?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = StoragePoolsClient.InsertRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -864,21 +813,6 @@
       request: StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      storagePool: Swift.String,
-      body: StoragePool?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = StoragePoolsClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.storagePool = storagePool
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

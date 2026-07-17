@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionBackendBuckets` resource.
   ///
@@ -298,13 +295,6 @@
       func delete(request: RegionBackendBucketsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionBackendBucketsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        backendBucket: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionBackendBucketsClient.`get``.
       func `get`(request: RegionBackendBucketsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.BackendBucket
@@ -330,13 +320,6 @@
       /// See `RegionBackendBucketsClient.insert`.
       func insert(request: RegionBackendBucketsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionBackendBucketsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: BackendBucket?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendBucketsClient.list`.
       func list(request: RegionBackendBucketsClient.ListRequest) async throws
@@ -371,14 +354,6 @@
       /// See `RegionBackendBucketsClient.patch`.
       func patch(request: RegionBackendBucketsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionBackendBucketsClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        backendBucket: Swift.String,
-        body: BackendBucket?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendBucketsClient.setIamPolicy`.
       func setIamPolicy(request: RegionBackendBucketsClient.SetIamPolicyRequest) async throws
@@ -480,19 +455,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      backendBucket: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendBucketsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendBucket = backendBucket
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RegionBackendBucketsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -584,19 +546,6 @@
       request: RegionBackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: BackendBucket?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendBucketsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -717,21 +666,6 @@
       request: RegionBackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      backendBucket: Swift.String,
-      body: BackendBucket?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionBackendBucketsClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.backendBucket = backendBucket
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionSnapshotSettings` resource.
   ///
@@ -127,13 +124,6 @@
       func patch(request: RegionSnapshotSettingsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionSnapshotSettingsClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        body: SnapshotSettings?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionSnapshotSettingsClient.`get``.
       func `get`(
         request: RegionSnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
@@ -181,19 +171,6 @@
       request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      body: SnapshotSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionSnapshotSettingsClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

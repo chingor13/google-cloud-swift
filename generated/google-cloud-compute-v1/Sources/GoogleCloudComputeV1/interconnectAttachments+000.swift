@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `interconnectAttachments` resource.
   ///
@@ -341,13 +338,6 @@
       func delete(request: InterconnectAttachmentsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InterconnectAttachmentsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        interconnectAttachment: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InterconnectAttachmentsClient.`get``.
       func `get`(request: InterconnectAttachmentsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InterconnectAttachment
@@ -362,13 +352,6 @@
       /// See `InterconnectAttachmentsClient.insert`.
       func insert(request: InterconnectAttachmentsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InterconnectAttachmentsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: InterconnectAttachment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InterconnectAttachmentsClient.list`.
       func list(request: InterconnectAttachmentsClient.ListRequest) async throws
@@ -389,25 +372,9 @@
       func patch(request: InterconnectAttachmentsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InterconnectAttachmentsClient.patch`.
-      func patch(
-        project: Swift.String,
-        region: Swift.String,
-        interconnectAttachment: Swift.String,
-        body: InterconnectAttachment?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InterconnectAttachmentsClient.setLabels`.
       func setLabels(request: InterconnectAttachmentsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `InterconnectAttachmentsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InterconnectAttachmentsClient.aggregatedList`.
       func aggregatedList(
@@ -513,19 +480,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      interconnectAttachment: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InterconnectAttachmentsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.interconnectAttachment = interconnectAttachment
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: InterconnectAttachmentsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -592,19 +546,6 @@
       request: InterconnectAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: InterconnectAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InterconnectAttachmentsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -691,21 +632,6 @@
     }
 
     public func patch(
-      project: Swift.String,
-      region: Swift.String,
-      interconnectAttachment: Swift.String,
-      body: InterconnectAttachment?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InterconnectAttachmentsClient.PatchRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.interconnectAttachment = interconnectAttachment
-        $0.body = body
-      }
-      return try await self.patch(request: request)
-    }
-
-    public func patch(
       withPolling: InterconnectAttachmentsClient.PatchRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
@@ -750,21 +676,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InterconnectAttachmentsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

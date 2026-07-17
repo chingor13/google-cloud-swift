@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionTargetTcpProxies` resource.
   ///
@@ -191,13 +188,6 @@
       func delete(request: RegionTargetTcpProxiesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionTargetTcpProxiesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        targetTcpProxy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionTargetTcpProxiesClient.`get``.
       func `get`(request: RegionTargetTcpProxiesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.TargetTcpProxy
@@ -212,13 +202,6 @@
       /// See `RegionTargetTcpProxiesClient.insert`.
       func insert(request: RegionTargetTcpProxiesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionTargetTcpProxiesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: TargetTcpProxy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionTargetTcpProxiesClient.list`.
       func list(request: RegionTargetTcpProxiesClient.ListRequest) async throws
@@ -274,19 +257,6 @@
       request: RegionTargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      targetTcpProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetTcpProxiesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetTcpProxy = targetTcpProxy
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -356,19 +326,6 @@
       request: RegionTargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: TargetTcpProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionTargetTcpProxiesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

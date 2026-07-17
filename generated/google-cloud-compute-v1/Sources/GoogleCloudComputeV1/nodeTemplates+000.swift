@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `nodeTemplates` resource.
   ///
@@ -261,13 +258,6 @@
       func delete(request: NodeTemplatesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `NodeTemplatesClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        nodeTemplate: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `NodeTemplatesClient.`get``.
       func `get`(request: NodeTemplatesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.NodeTemplate
@@ -293,13 +283,6 @@
       /// See `NodeTemplatesClient.insert`.
       func insert(request: NodeTemplatesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `NodeTemplatesClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: NodeTemplate?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `NodeTemplatesClient.list`.
       func list(request: NodeTemplatesClient.ListRequest) async throws
@@ -445,19 +428,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      nodeTemplate: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeTemplatesClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.nodeTemplate = nodeTemplate
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: NodeTemplatesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -548,19 +518,6 @@
       request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NodeTemplate?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = NodeTemplatesClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

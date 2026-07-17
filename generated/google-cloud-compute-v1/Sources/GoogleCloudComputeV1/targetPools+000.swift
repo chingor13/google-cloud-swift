@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `targetPools` resource.
   ///
@@ -513,25 +510,9 @@
       func addHealthCheck(request: TargetPoolsClient.AddHealthCheckRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPoolsClient.addHealthCheck`.
-      func addHealthCheck(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: TargetPoolsAddHealthCheckRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetPoolsClient.addInstance`.
       func addInstance(request: TargetPoolsClient.AddInstanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetPoolsClient.addInstance`.
-      func addInstance(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: TargetPoolsAddInstanceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetPoolsClient.aggregatedList`.
       func aggregatedList(request: TargetPoolsClient.AggregatedListRequest) async throws
@@ -550,13 +531,6 @@
       /// See `TargetPoolsClient.delete`.
       func delete(request: TargetPoolsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetPoolsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetPoolsClient.`get``.
       func `get`(request: TargetPoolsClient.GetRequest) async throws
@@ -585,13 +559,6 @@
       func insert(request: TargetPoolsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPoolsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: TargetPool?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetPoolsClient.list`.
       func list(request: TargetPoolsClient.ListRequest) async throws
         -> GoogleCloudComputeV1.TargetPoolList
@@ -611,49 +578,17 @@
       func removeHealthCheck(request: TargetPoolsClient.RemoveHealthCheckRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPoolsClient.removeHealthCheck`.
-      func removeHealthCheck(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: TargetPoolsRemoveHealthCheckRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetPoolsClient.removeInstance`.
       func removeInstance(request: TargetPoolsClient.RemoveInstanceRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetPoolsClient.removeInstance`.
-      func removeInstance(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: TargetPoolsRemoveInstanceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetPoolsClient.setBackup`.
       func setBackup(request: TargetPoolsClient.SetBackupRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetPoolsClient.setBackup`.
-      func setBackup(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: TargetReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetPoolsClient.setSecurityPolicy`.
       func setSecurityPolicy(request: TargetPoolsClient.SetSecurityPolicyRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetPoolsClient.setSecurityPolicy`.
-      func setSecurityPolicy(
-        project: Swift.String,
-        region: Swift.String,
-        targetPool: Swift.String,
-        body: SecurityPolicyReference?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetPoolsClient.testIamPermissions`.
       func testIamPermissions(request: TargetPoolsClient.TestIamPermissionsRequest) async throws
@@ -759,21 +694,6 @@
     }
 
     public func addHealthCheck(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsAddHealthCheckRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.AddHealthCheckRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.addHealthCheck(request: request)
-    }
-
-    public func addHealthCheck(
       withPolling: TargetPoolsClient.AddHealthCheckRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addHealthCheck(withPolling: withPolling, options: .init())
@@ -816,21 +736,6 @@
       request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func addInstance(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsAddInstanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.AddInstanceRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.addInstance(request: request)
     }
 
     public func addInstance(
@@ -913,19 +818,6 @@
       request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -1024,19 +916,6 @@
     }
 
     public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: TargetPool?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
-    }
-
-    public func insert(
       withPolling: TargetPoolsClient.InsertRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
@@ -1118,21 +997,6 @@
     }
 
     public func removeHealthCheck(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsRemoveHealthCheckRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.RemoveHealthCheckRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.removeHealthCheck(request: request)
-    }
-
-    public func removeHealthCheck(
       withPolling: TargetPoolsClient.RemoveHealthCheckRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeHealthCheck(withPolling: withPolling, options: .init())
@@ -1176,21 +1040,6 @@
       request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func removeInstance(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetPoolsRemoveInstanceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.RemoveInstanceRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.removeInstance(request: request)
     }
 
     public func removeInstance(
@@ -1239,21 +1088,6 @@
     }
 
     public func setBackup(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: TargetReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.SetBackupRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.setBackup(request: request)
-    }
-
-    public func setBackup(
       withPolling: TargetPoolsClient.SetBackupRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setBackup(withPolling: withPolling, options: .init())
@@ -1296,21 +1130,6 @@
       request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setSecurityPolicy(
-      project: Swift.String,
-      region: Swift.String,
-      targetPool: Swift.String,
-      body: SecurityPolicyReference?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetPoolsClient.SetSecurityPolicyRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.targetPool = targetPool
-        $0.body = body
-      }
-      return try await self.setSecurityPolicy(request: request)
     }
 
     public func setSecurityPolicy(

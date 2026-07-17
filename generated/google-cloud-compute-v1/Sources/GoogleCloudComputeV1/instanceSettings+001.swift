@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `instanceSettings` resource.
   ///
@@ -126,13 +123,6 @@
       func patch(request: InstanceSettingsClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `InstanceSettingsClient.patch`.
-      func patch(
-        project: Swift.String,
-        zone: Swift.String,
-        body: InstanceSettings?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `InstanceSettingsClient.`get``.
       func `get`(
         request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
@@ -180,19 +170,6 @@
       request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      zone: Swift.String,
-      body: InstanceSettings?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = InstanceSettingsClient.PatchRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

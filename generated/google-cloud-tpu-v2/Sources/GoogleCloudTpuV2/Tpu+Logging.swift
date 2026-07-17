@@ -18,21 +18,19 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class TpuLogging: TpuStub {
     let inner: any TpuStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any TpuStub, logger: Logging.Logger) {
+    public init(_ inner: any TpuStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudTpuV2"
       logger[metadataKey: "gcp.client.service"] = "tpu"

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionInstantSnapshots` resource.
   ///
@@ -285,13 +282,6 @@
       func delete(request: RegionInstantSnapshotsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionInstantSnapshotsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        instantSnapshot: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionInstantSnapshotsClient.`get``.
       func `get`(request: RegionInstantSnapshotsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.InstantSnapshot
@@ -317,13 +307,6 @@
       /// See `RegionInstantSnapshotsClient.insert`.
       func insert(request: RegionInstantSnapshotsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionInstantSnapshotsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: InstantSnapshot?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionInstantSnapshotsClient.list`.
       func list(request: RegionInstantSnapshotsClient.ListRequest) async throws
@@ -355,14 +338,6 @@
       /// See `RegionInstantSnapshotsClient.setLabels`.
       func setLabels(request: RegionInstantSnapshotsClient.SetLabelsRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionInstantSnapshotsClient.setLabels`.
-      func setLabels(
-        project: Swift.String,
-        region: Swift.String,
-        resource: Swift.String,
-        body: RegionSetLabelsRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionInstantSnapshotsClient.testIamPermissions`.
       func testIamPermissions(request: RegionInstantSnapshotsClient.TestIamPermissionsRequest)
@@ -439,19 +414,6 @@
       request: RegionInstantSnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      instantSnapshot: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionInstantSnapshotsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.instantSnapshot = instantSnapshot
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -547,19 +509,6 @@
       request: RegionInstantSnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: InstantSnapshot?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionInstantSnapshotsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -670,21 +619,6 @@
       request: RegionInstantSnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setLabels(
-      project: Swift.String,
-      region: Swift.String,
-      resource: Swift.String,
-      body: RegionSetLabelsRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionInstantSnapshotsClient.SetLabelsRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.resource = resource
-        $0.body = body
-      }
-      return try await self.setLabels(request: request)
     }
 
     public func setLabels(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `reservationSlots` resource.
   ///
@@ -197,15 +194,6 @@
       func getVersion(request: ReservationSlotsClient.GetVersionRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `ReservationSlotsClient.getVersion`.
-      func getVersion(
-        project: Swift.String,
-        zone: Swift.String,
-        parentName: Swift.String,
-        reservationSlot: Swift.String,
-        body: ReservationSlotsGetVersionRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `ReservationSlotsClient.list`.
       func list(request: ReservationSlotsClient.ListRequest) async throws
         -> GoogleCloudComputeV1.ReservationSlotsListResponse
@@ -225,15 +213,6 @@
       /// See `ReservationSlotsClient.update`.
       func update(request: ReservationSlotsClient.UpdateRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `ReservationSlotsClient.update`.
-      func update(
-        project: Swift.String,
-        zone: Swift.String,
-        parentName: Swift.String,
-        reservationSlot: Swift.String,
-        body: ReservationSlot?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationSlotsClient.`get``.
       func `get`(
@@ -301,23 +280,6 @@
       request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func getVersion(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSlot: Swift.String,
-      body: ReservationSlotsGetVersionRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationSlotsClient.GetVersionRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.parentName = parentName
-        $0.reservationSlot = reservationSlot
-        $0.body = body
-      }
-      return try await self.getVersion(request: request)
     }
 
     public func getVersion(
@@ -406,23 +368,6 @@
       request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func update(
-      project: Swift.String,
-      zone: Swift.String,
-      parentName: Swift.String,
-      reservationSlot: Swift.String,
-      body: ReservationSlot?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = ReservationSlotsClient.UpdateRequest().with {
-        $0.project = project
-        $0.zone = zone
-        $0.parentName = parentName
-        $0.reservationSlot = reservationSlot
-        $0.body = body
-      }
-      return try await self.update(request: request)
     }
 
     public func update(

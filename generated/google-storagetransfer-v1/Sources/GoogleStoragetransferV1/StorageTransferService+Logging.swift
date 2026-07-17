@@ -18,20 +18,18 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class StorageTransferServiceLogging: StorageTransferServiceStub {
     let inner: any StorageTransferServiceStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any StorageTransferServiceStub, logger: Logging.Logger) {
+    public init(_ inner: any StorageTransferServiceStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleStoragetransferV1"
       logger[metadataKey: "gcp.client.service"] = "storagetransfer"

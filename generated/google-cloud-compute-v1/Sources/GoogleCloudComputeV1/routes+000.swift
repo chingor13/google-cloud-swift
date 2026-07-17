@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `routes` resource.
   ///
@@ -193,12 +190,6 @@
       func delete(request: RoutesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RoutesClient.delete`.
-      func delete(
-        project: Swift.String,
-        route: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RoutesClient.`get``.
       func `get`(request: RoutesClient.GetRequest) async throws -> GoogleCloudComputeV1.Route
 
@@ -211,12 +202,6 @@
       /// See `RoutesClient.insert`.
       func insert(request: RoutesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RoutesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: Route?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutesClient.list`.
       func list(request: RoutesClient.ListRequest) async throws -> GoogleCloudComputeV1.RouteList
@@ -289,17 +274,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      route: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutesClient.DeleteRequest().with {
-        $0.project = project
-        $0.route = route
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RoutesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -359,17 +333,6 @@
       request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: Route?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RoutesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

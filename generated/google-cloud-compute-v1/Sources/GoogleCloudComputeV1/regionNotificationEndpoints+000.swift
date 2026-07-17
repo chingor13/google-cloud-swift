@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `regionNotificationEndpoints` resource.
   ///
@@ -244,13 +241,6 @@
       func delete(request: RegionNotificationEndpointsClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `RegionNotificationEndpointsClient.delete`.
-      func delete(
-        project: Swift.String,
-        region: Swift.String,
-        notificationEndpoint: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `RegionNotificationEndpointsClient.`get``.
       func `get`(request: RegionNotificationEndpointsClient.GetRequest) async throws
         -> GoogleCloudComputeV1.NotificationEndpoint
@@ -265,13 +255,6 @@
       /// See `RegionNotificationEndpointsClient.insert`.
       func insert(request: RegionNotificationEndpointsClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `RegionNotificationEndpointsClient.insert`.
-      func insert(
-        project: Swift.String,
-        region: Swift.String,
-        body: NotificationEndpoint?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionNotificationEndpointsClient.list`.
       func list(request: RegionNotificationEndpointsClient.ListRequest) async throws
@@ -405,19 +388,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      region: Swift.String,
-      notificationEndpoint: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNotificationEndpointsClient.DeleteRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.notificationEndpoint = notificationEndpoint
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: RegionNotificationEndpointsClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -485,19 +455,6 @@
       options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      region: Swift.String,
-      body: NotificationEndpoint?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = RegionNotificationEndpointsClient.InsertRequest().with {
-        $0.project = project
-        $0.region = region
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(

@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `crossSiteNetworks` resource.
   ///
@@ -234,12 +231,6 @@
       func delete(request: CrossSiteNetworksClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `CrossSiteNetworksClient.delete`.
-      func delete(
-        project: Swift.String,
-        crossSiteNetwork: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `CrossSiteNetworksClient.`get``.
       func `get`(request: CrossSiteNetworksClient.GetRequest) async throws
         -> GoogleCloudComputeV1.CrossSiteNetwork
@@ -253,12 +244,6 @@
       /// See `CrossSiteNetworksClient.insert`.
       func insert(request: CrossSiteNetworksClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `CrossSiteNetworksClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: CrossSiteNetwork?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `CrossSiteNetworksClient.list`.
       func list(request: CrossSiteNetworksClient.ListRequest) async throws
@@ -277,13 +262,6 @@
       /// See `CrossSiteNetworksClient.patch`.
       func patch(request: CrossSiteNetworksClient.PatchRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `CrossSiteNetworksClient.patch`.
-      func patch(
-        project: Swift.String,
-        crossSiteNetwork: Swift.String,
-        body: CrossSiteNetwork?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `CrossSiteNetworksClient.delete`.
       func delete(
@@ -329,17 +307,6 @@
       request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func delete(
-      project: Swift.String,
-      crossSiteNetwork: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = CrossSiteNetworksClient.DeleteRequest().with {
-        $0.project = project
-        $0.crossSiteNetwork = crossSiteNetwork
-      }
-      return try await self.delete(request: request)
     }
 
     public func delete(
@@ -404,17 +371,6 @@
       request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: CrossSiteNetwork?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = CrossSiteNetworksClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -492,19 +448,6 @@
       request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func patch(
-      project: Swift.String,
-      crossSiteNetwork: Swift.String,
-      body: CrossSiteNetwork?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = CrossSiteNetworksClient.PatchRequest().with {
-        $0.project = project
-        $0.crossSiteNetwork = crossSiteNetwork
-        $0.body = body
-      }
-      return try await self.patch(request: request)
     }
 
     public func patch(

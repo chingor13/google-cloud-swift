@@ -18,21 +18,19 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-
-import GoogleCloudAuth
-import GoogleCloudGax
 import GoogleCloudLocation
 import GoogleCloudWkt
 import GoogleLongrunning
 import GoogleRpc
-import Logging
+import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
   final class EdgeContainerLogging: EdgeContainerStub {
     let inner: any EdgeContainerStub
-    let logger: Logging.Logger
+    let logger: Logger
 
-    public init(_ inner: any EdgeContainerStub, logger: Logging.Logger) {
+    public init(_ inner: any EdgeContainerStub, logger: Logger) {
       var logger = logger
       logger[metadataKey: "gcp.artifact.id"] = "GoogleCloudEdgecontainerV1"
       logger[metadataKey: "gcp.client.service"] = "edgecontainer"

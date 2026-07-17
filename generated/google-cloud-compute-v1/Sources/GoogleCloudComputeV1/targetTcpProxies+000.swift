@@ -19,11 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-
-  import GoogleCloudAuth
-  import GoogleCloudGax
   import GoogleCloudWkt
-  import Logging
+  import GoogleCloudGax
 
   /// Service for the `targetTcpProxies` resource.
   ///
@@ -333,12 +330,6 @@
       func delete(request: TargetTcpProxiesClient.DeleteRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetTcpProxiesClient.delete`.
-      func delete(
-        project: Swift.String,
-        targetTcpProxy: Swift.String,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetTcpProxiesClient.`get``.
       func `get`(request: TargetTcpProxiesClient.GetRequest) async throws
         -> GoogleCloudComputeV1.TargetTcpProxy
@@ -352,12 +343,6 @@
       /// See `TargetTcpProxiesClient.insert`.
       func insert(request: TargetTcpProxiesClient.InsertRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetTcpProxiesClient.insert`.
-      func insert(
-        project: Swift.String,
-        body: TargetTcpProxy?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetTcpProxiesClient.list`.
       func list(request: TargetTcpProxiesClient.ListRequest) async throws
@@ -377,23 +362,9 @@
       func setBackendService(request: TargetTcpProxiesClient.SetBackendServiceRequest) async throws
         -> GoogleCloudComputeV1.Operation
 
-      /// See `TargetTcpProxiesClient.setBackendService`.
-      func setBackendService(
-        project: Swift.String,
-        targetTcpProxy: Swift.String,
-        body: TargetTcpProxiesSetBackendServiceRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
-
       /// See `TargetTcpProxiesClient.setProxyHeader`.
       func setProxyHeader(request: TargetTcpProxiesClient.SetProxyHeaderRequest) async throws
         -> GoogleCloudComputeV1.Operation
-
-      /// See `TargetTcpProxiesClient.setProxyHeader`.
-      func setProxyHeader(
-        project: Swift.String,
-        targetTcpProxy: Swift.String,
-        body: TargetTcpProxiesSetProxyHeaderRequest?,
-      ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `TargetTcpProxiesClient.testIamPermissions`.
       func testIamPermissions(request: TargetTcpProxiesClient.TestIamPermissionsRequest)
@@ -514,17 +485,6 @@
     }
 
     public func delete(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetTcpProxiesClient.DeleteRequest().with {
-        $0.project = project
-        $0.targetTcpProxy = targetTcpProxy
-      }
-      return try await self.delete(request: request)
-    }
-
-    public func delete(
       withPolling: TargetTcpProxiesClient.DeleteRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
@@ -586,17 +546,6 @@
       request: TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func insert(
-      project: Swift.String,
-      body: TargetTcpProxy?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetTcpProxiesClient.InsertRequest().with {
-        $0.project = project
-        $0.body = body
-      }
-      return try await self.insert(request: request)
     }
 
     public func insert(
@@ -678,19 +627,6 @@
     }
 
     public func setBackendService(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-      body: TargetTcpProxiesSetBackendServiceRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetTcpProxiesClient.SetBackendServiceRequest().with {
-        $0.project = project
-        $0.targetTcpProxy = targetTcpProxy
-        $0.body = body
-      }
-      return try await self.setBackendService(request: request)
-    }
-
-    public func setBackendService(
       withPolling: TargetTcpProxiesClient.SetBackendServiceRequest
     ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setBackendService(withPolling: withPolling, options: .init())
@@ -732,19 +668,6 @@
       request: TargetTcpProxiesClient.SetProxyHeaderRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       throw GoogleCloudGax.RequestError.unimplemented
-    }
-
-    public func setProxyHeader(
-      project: Swift.String,
-      targetTcpProxy: Swift.String,
-      body: TargetTcpProxiesSetProxyHeaderRequest?,
-    ) async throws -> GoogleCloudComputeV1.Operation {
-      let request = TargetTcpProxiesClient.SetProxyHeaderRequest().with {
-        $0.project = project
-        $0.targetTcpProxy = targetTcpProxy
-        $0.body = body
-      }
-      return try await self.setProxyHeader(request: request)
     }
 
     public func setProxyHeader(
