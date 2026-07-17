@@ -72,6 +72,15 @@ libraries:
     apis:
       - path: google/api
     copyright_year: "2026"
+  - name: GoogleCloudAiplatformV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/aiplatform/v1
+    copyright_year: "2026"
+    swift:
+      per_service_traits: true
+      default_traits:
+        - PredictionService
   - name: GoogleCloudAuth
     version: 0.0.0-preview
     copyright_year: "2026"
