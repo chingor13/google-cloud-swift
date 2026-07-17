@@ -44,6 +44,15 @@ default:
       - name: GoogleCloudGax
         path: packages/gax
         required_by_services: true
+      - name: GoogleCloudGkehubConfigmanagementV1
+        path: generated/google-cloud-gkehub-configmanagement-v1
+        api_package: google.cloud.gkehub.configmanagement.v1
+      - name: GoogleCloudGkehubMulticlusteringressV1
+        path: generated/google-cloud-gkehub-multiclusteringress-v1
+        api_package: google.cloud.gkehub.multiclusteringress.v1
+      - name: GoogleCloudGkehubRbacrolebindingactuationV1
+        path: generated/google-cloud-gkehub-rbacrolebindingactuation-v1
+        api_package: google.cloud.gkehub.rbacrolebindingactuation.v1
       - name: GoogleCloudLocation
         path: generated/google-cloud-location
         api_package: google.cloud.location
@@ -146,6 +155,29 @@ libraries:
         - output: packages/gax/Sources/GoogleCloudGax/generated
           api_path: ""
           module_type: package-version
+  - name: GoogleCloudGkehubConfigmanagementV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkehub/v1/configmanagement
+    copyright_year: "2026"
+    output: generated/google-cloud-gkehub-configmanagement-v1
+  - name: GoogleCloudGkehubMulticlusteringressV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkehub/v1/multiclusteringress
+    copyright_year: "2026"
+    output: generated/google-cloud-gkehub-multiclusteringress-v1
+  - name: GoogleCloudGkehubRbacrolebindingactuationV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkehub/v1/rbacrolebindingactuation
+    copyright_year: "2026"
+    output: generated/google-cloud-gkehub-rbacrolebindingactuation-v1
+  - name: GoogleCloudGkehubV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkehub/v1
+    copyright_year: "2026"
   - name: GoogleCloudLocation
     version: 0.0.0-preview
     apis:
