@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.26.1-0.20260715221151-eb684c96123b
+version: v0.26.1-0.20260716175508-c5bca346e5b7
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -68,6 +68,7 @@ default:
         required_by_services: true
 libraries:
   - name: GoogleApi
+    version: 0.0.0-preview
     apis:
       - path: google/api
     copyright_year: "2026"
@@ -81,10 +82,12 @@ libraries:
           api_path: ""
           module_type: package-version
   - name: GoogleCloudCommon
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/common
     copyright_year: "2026"
   - name: GoogleCloudComputeV1
+    version: 0.0.0-preview
     apis:
       - path: discoveries/compute.v1.json
     copyright_year: "2026"
@@ -111,14 +114,17 @@ libraries:
           - prefix: compute/v1/
             method_id: .google.cloud.compute.v1.globalOrganizationOperations.get
   - name: GoogleCloudEdgecontainerV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/edgecontainer/v1
     copyright_year: "2026"
   - name: GoogleCloudFilestoreV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/filestore/v1
     copyright_year: "2026"
   - name: GoogleCloudFunctionsV2
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/functions/v2
     copyright_year: "2026"
@@ -132,32 +138,39 @@ libraries:
           api_path: ""
           module_type: package-version
   - name: GoogleCloudLocation
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/location
     copyright_year: "2026"
   - name: GoogleCloudResourcemanagerV3
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/resourcemanager/v3
     copyright_year: "2026"
   - name: GoogleCloudRunV2
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
   - name: GoogleCloudSecretmanagerV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/secretmanager/v1
     copyright_year: "2026"
   - name: GoogleCloudSecurityPubliccaV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
   - name: GoogleCloudSqlV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/sql/v1
     copyright_year: "2026"
     swift:
       per_service_traits: true
   - name: GoogleCloudStorage
+    version: 0.0.0-preview
     copyright_year: "2026"
     output: packages/storage/Sources/generated/StorageControlProtos
     swift:
@@ -179,10 +192,12 @@ libraries:
           module_type: convert-swift
           module_path: StorageControlProtos
   - name: GoogleCloudStorageinsightsV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/storageinsights/v1
     copyright_year: "2026"
   - name: GoogleCloudTpuV2
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/tpu/v2
     copyright_year: "2026"
@@ -205,6 +220,7 @@ libraries:
           api_path: google/protobuf
           module_type: package-version
   - name: GoogleCloudWorkflowsV1
+    version: 0.0.0-preview
     apis:
       - path: google/cloud/workflows/v1
     copyright_year: "2026"
@@ -213,26 +229,32 @@ libraries:
       - path: google/container/v1
     copyright_year: "2026"
   - name: GoogleDevtoolsArtifactregistryV1
+    version: 0.0.0-preview
     apis:
       - path: google/devtools/artifactregistry/v1
     copyright_year: "2026"
   - name: GoogleIamV1
+    version: 0.0.0-preview
     apis:
       - path: google/iam/v1
     copyright_year: "2026"
   - name: GoogleLongrunning
+    version: 0.0.0-preview
     apis:
       - path: google/longrunning
     copyright_year: "2026"
   - name: GoogleRpc
+    version: 0.0.0-preview
     apis:
       - path: google/rpc
     copyright_year: "2026"
   - name: GoogleStoragetransferV1
+    version: 0.0.0-preview
     apis:
       - path: google/storagetransfer/v1
     copyright_year: "2026"
   - name: GoogleType
+    version: 0.0.0-preview
     apis:
       - path: google/type
     copyright_year: "2026"

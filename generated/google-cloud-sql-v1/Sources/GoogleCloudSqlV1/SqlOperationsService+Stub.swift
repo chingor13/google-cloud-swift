@@ -66,6 +66,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudSqlV1.Operation.self, from: data)
@@ -89,6 +90,7 @@
         query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudSqlV1.OperationsListResponse.self, from: data)
@@ -112,6 +114,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         _ = try await self.inner.rpc(for: req).get()
       }
     }

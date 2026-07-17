@@ -63,6 +63,7 @@
         query.append(contentsOf: try encoder.encode(request.readTime, prefix: "readTime"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudSqlV1.ConnectSettings.self, from: data)
@@ -85,6 +86,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try JSONEncoder().encode(request)
         let (data, _) = try await self.inner.rpc(for: req).get()

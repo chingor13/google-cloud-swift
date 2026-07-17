@@ -55,6 +55,7 @@
         query.append(contentsOf: try encoder.encode(request.flagScope, prefix: "flagScope"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudSqlV1.FlagsListResponse.self, from: data)

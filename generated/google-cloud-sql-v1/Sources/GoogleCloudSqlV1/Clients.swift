@@ -14,5 +14,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+import GoogleCloudGax
+
 // Defines concrete implementations of the client protocols.
-public enum Clients {}
+public enum Clients {
+  static let clientHeader: String =
+    GoogleCloudGax._gapicApiClientHeader(packageVersion: "0.0.0-preview")
+}

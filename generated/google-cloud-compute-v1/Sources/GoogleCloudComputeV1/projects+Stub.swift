@@ -113,6 +113,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Operation.self, from: data)
@@ -134,6 +135,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -159,6 +161,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Operation.self, from: data)
@@ -180,6 +183,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -203,6 +207,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Project.self, from: data)
@@ -222,6 +227,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Project.self, from: data)
@@ -249,6 +255,7 @@
             request.returnPartialSuccess, prefix: "returnPartialSuccess"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.ProjectsGetXpnResources.self, from: data)
@@ -276,6 +283,7 @@
             request.returnPartialSuccess, prefix: "returnPartialSuccess"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -301,6 +309,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -326,6 +335,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -351,6 +361,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -377,6 +388,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -402,6 +414,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -427,6 +440,7 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
           req.httpBody = try JSONEncoder().encode(body)
@@ -454,6 +468,7 @@
         ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Operation.self, from: data)
