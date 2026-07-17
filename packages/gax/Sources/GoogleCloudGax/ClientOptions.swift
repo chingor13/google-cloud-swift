@@ -62,6 +62,9 @@ public struct ClientOptions: Sendable {
   /// [Application Default Credentials]: https://docs.cloud.google.com/docs/authentication/client-libraries
   public var credentials: Credentials? = nil
 
+  /// Overrides the URLSession used by the client for testing purposes.
+  public var _testSession: URLSession? = nil
+
   /// Enables logging and sets the logger.
   ///
   /// When logging is enabled, the client will log the full contents of each request, response, and

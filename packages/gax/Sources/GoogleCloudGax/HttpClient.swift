@@ -32,7 +32,7 @@ public struct HTTPClient {
     self.credentials = try from.credentials ?? GoogleCloudAuth.Credentials()
     let endpoint = from.endpoint ?? withDefaultEndpoint
     self.baseURL = try Self.validateEndpoint(endpoint)
-    self.inner = Self.sharedSession
+    self.inner = from._testSession ?? Self.sharedSession
   }
 
   // Creates a new testing client.
