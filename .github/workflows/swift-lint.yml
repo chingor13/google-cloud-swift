@@ -27,4 +27,4 @@ jobs:
       - name: Install Swift
         uses: ./.github/actions/install-swift
       - name: Lint Swift Code
-        run: ./ci/lint.sh
+        run: ./ci/lint.sh ${{ github.event }}

@@ -43,7 +43,6 @@ let package = Package(
     .package(path: "./generated/google-cloud-secretmanager-v1"),
     .package(path: "./generated/google-cloud-security-publicca-v1"),
     .package(path: "./generated/google-cloud-workflows-v1"),
-    .package(url: "https://github.com/swiftlang/swift-format", from: "602.0.0"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     // Used in the integration tests.
     .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.10.0"),
