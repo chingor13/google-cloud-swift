@@ -35,16 +35,19 @@ flags=(
     -Xswiftc -warnings-as-errors
     -Xswiftc -Wwarning
     -Xswiftc DeprecatedDeclaration
+    --scratch-path "$(git rev-parse --show-toplevel)/.build-cache"
+    --build-path "$(git rev-parse --show-toplevel)/.build"
 )
 for dir in "${packages[@]}"; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
 
-    echo "--- Building ${dir} ---"
+    echo "::group::--- Building ${dir} ---"
     if swift build --build-tests "${flags[@]}" --package-path "${dir}"; then
         echo "✓ ${dir} built"
     else
         echo "✗ ${dir} failed to build" >&2
+        echo "::endgroup::"
         errors=$((errors + 1))
         continue
     fi
@@ -57,6 +60,7 @@ for dir in "${packages[@]}"; do
         echo "✗ ${dir} failed" >&2
         errors=$((errors + 1))
     fi
+    echo "::endgroup::"
 done
 
 echo ""
