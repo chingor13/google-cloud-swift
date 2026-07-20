@@ -253,6 +253,11 @@ libraries:
     apis:
       - path: google/cloud/secretmanager/v1
     copyright_year: "2026"
+  - name: GoogleCloudSecurityPrivatecaV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/security/privateca/v1
+    copyright_year: "2026"
   - name: GoogleCloudSecurityPubliccaV1
     version: 0.0.0-preview
     apis:
