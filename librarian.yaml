@@ -273,6 +273,11 @@ libraries:
     apis:
       - path: google/cloud/storageinsights/v1
     copyright_year: "2026"
+  - name: GoogleCloudTalentV4
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/talent/v4
+    copyright_year: "2026"
   - name: GoogleCloudTelcoautomationV1
     version: 0.0.0-preview
     apis:
