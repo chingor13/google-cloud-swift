@@ -157,6 +157,11 @@ libraries:
             method_id: .google.cloud.compute.v1.globalOperations.get
           - prefix: compute/v1/
             method_id: .google.cloud.compute.v1.globalOrganizationOperations.get
+  - name: GoogleCloudDataformV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/dataform/v1
+    copyright_year: "2026"
   - name: GoogleCloudDialogflowCxV3
     version: 0.0.0-preview
     apis:
