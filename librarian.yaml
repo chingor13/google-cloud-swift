@@ -320,6 +320,11 @@ libraries:
     apis:
       - path: google/cloud/locationfinder/v1
     copyright_year: "2026"
+  - name: GoogleCloudMemorystoreV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/memorystore/v1
+    copyright_year: "2026"
   - name: GoogleCloudNotebooksV2
     version: 0.0.0-preview
     apis:
