@@ -297,6 +297,11 @@ libraries:
     apis:
       - path: google/cloud/tpu/v2
     copyright_year: "2026"
+  - name: GoogleCloudVisionV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/vision/v1
+    copyright_year: "2026"
   - name: GoogleCloudWkt
     version: 0.0.0-preview
     copyright_year: "2026"
