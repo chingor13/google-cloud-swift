@@ -181,6 +181,11 @@ libraries:
     apis:
       - path: google/cloud/edgecontainer/v1
     copyright_year: "2026"
+  - name: GoogleCloudEdgenetworkV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/edgenetwork/v1
+    copyright_year: "2026"
   - name: GoogleCloudFilestoreV1
     version: 0.0.0-preview
     apis:
