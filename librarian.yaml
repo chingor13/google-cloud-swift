@@ -114,6 +114,11 @@ libraries:
       per_service_traits: true
       default_traits:
         - PredictionService
+  - name: GoogleCloudAlloydbConnectorsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/alloydb/connectors/v1
+    copyright_year: "2026"
   - name: GoogleCloudAlloydbV1
     version: 0.0.0-preview
     apis:
