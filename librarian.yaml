@@ -138,6 +138,11 @@ libraries:
     apis:
       - path: google/cloud/biglake/v1
     copyright_year: "2026"
+  - name: GoogleCloudBigqueryAnalyticshubV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/bigquery/analyticshub/v1
+    copyright_year: "2026"
   - name: GoogleCloudBillingV1
     version: 0.0.0-preview
     apis:
