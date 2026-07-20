@@ -190,6 +190,11 @@ libraries:
     apis:
       - path: google/cloud/confidentialcomputing/v1
     copyright_year: "2026"
+  - name: GoogleCloudConfigV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/config/v1
+    copyright_year: "2026"
   - name: GoogleCloudDataformV1
     version: 0.0.0-preview
     apis:
