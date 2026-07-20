@@ -157,6 +157,15 @@ libraries:
             method_id: .google.cloud.compute.v1.globalOperations.get
           - prefix: compute/v1/
             method_id: .google.cloud.compute.v1.globalOrganizationOperations.get
+  - name: GoogleCloudDialogflowCxV3
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/dialogflow/cx/v3
+    copyright_year: "2026"
+    swift:
+      per_service_traits: true
+      default_traits:
+        - Agents
   - name: GoogleCloudEdgecontainerV1
     version: 0.0.0-preview
     apis:
