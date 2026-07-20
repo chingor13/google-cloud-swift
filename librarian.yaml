@@ -138,6 +138,11 @@ libraries:
     apis:
       - path: google/cloud/batch/v1
     copyright_year: "2026"
+  - name: GoogleCloudBeyondcorpAppconnectionsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/beyondcorp/appconnections/v1
+    copyright_year: "2026"
   - name: GoogleCloudBiglakeV1
     version: 0.0.0-preview
     apis:
