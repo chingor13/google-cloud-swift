@@ -130,6 +130,11 @@ libraries:
     apis:
       - path: google/cloud/biglake/v1
     copyright_year: "2026"
+  - name: GoogleCloudBillingV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/billing/v1
+    copyright_year: "2026"
   - name: GoogleCloudCommon
     version: 0.0.0-preview
     apis:
