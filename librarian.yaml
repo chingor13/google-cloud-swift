@@ -100,6 +100,11 @@ libraries:
     apis:
       - path: google/appengine/v1
     copyright_year: "2026"
+  - name: GoogleBigtableAdminV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/bigtable/admin/v2
+    copyright_year: "2026"
   - name: GoogleCloudAiplatformV1
     version: 0.0.0-preview
     apis:
