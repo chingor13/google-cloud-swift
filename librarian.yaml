@@ -87,6 +87,11 @@ libraries:
     apis:
       - path: google/api/apikeys/v2
     copyright_year: "2026"
+  - name: GoogleApiCloudquotasV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/api/cloudquotas/v1
+    copyright_year: "2026"
   - name: GoogleAppengineV1
     version: 0.0.0-preview
     apis:
