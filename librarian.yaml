@@ -233,6 +233,11 @@ libraries:
     apis:
       - path: google/cloud/location
     copyright_year: "2026"
+  - name: GoogleCloudLocationfinderV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/locationfinder/v1
+    copyright_year: "2026"
   - name: GoogleCloudNotebooksV2
     version: 0.0.0-preview
     apis:
