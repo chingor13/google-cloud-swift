@@ -53,7 +53,7 @@ public struct TransferOperationMetadata: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case sourceParallelstore = "sourceParallelstore"
     case sourceGcsBucket = "sourceGcsBucket"
     case destinationGcsBucket = "destinationGcsBucket"
@@ -155,7 +155,7 @@ public struct TransferOperationMetadata: Codable, Equatable, GoogleCloudWkt._Any
     indirect case destinationParallelstore(DestinationParallelstore?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.parallelstore.v1.TransferOperationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

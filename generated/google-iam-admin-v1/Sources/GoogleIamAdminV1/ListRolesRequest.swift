@@ -86,7 +86,7 @@ public struct ListRolesRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.ListRolesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

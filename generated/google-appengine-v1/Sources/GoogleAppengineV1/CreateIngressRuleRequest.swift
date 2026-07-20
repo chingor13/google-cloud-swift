@@ -53,7 +53,7 @@ public struct CreateIngressRuleRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.CreateIngressRuleRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

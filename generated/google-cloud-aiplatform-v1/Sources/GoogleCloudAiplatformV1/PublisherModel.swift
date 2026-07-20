@@ -97,7 +97,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case uri = "uri"
         case resourceName = "resourceName"
         case useCase = "useCase"
@@ -165,7 +165,7 @@
         case description(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.ResourceReference"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -203,7 +203,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.Documentation"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -313,7 +313,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.RegionalResourceReferences"
         }
@@ -351,7 +351,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.ViewRestApi"
         }
@@ -386,7 +386,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.OpenNotebooks"
         }
@@ -422,7 +422,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.OpenFineTuningPipelines"
         }
@@ -488,7 +488,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case dedicatedResources = "dedicatedResources"
           case automaticResources = "automaticResources"
           case sharedResources = "sharedResources"
@@ -597,7 +597,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.Deploy.DeployMetadata"
           }
@@ -624,7 +624,7 @@
           case sharedResources(Swift.String)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.Deploy"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -658,7 +658,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction.DeployGke"
         }
@@ -670,7 +670,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel.CallToAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -734,7 +734,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "OPEN_SOURCE_CATEGORY_UNSPECIFIED"
         case .proprietary: return "PROPRIETARY"
@@ -751,7 +751,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "OPEN_SOURCE_CATEGORY_UNSPECIFIED": self = .unspecified
         case "PROPRIETARY": self = .proprietary
@@ -866,7 +866,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "LAUNCH_STAGE_UNSPECIFIED"
         case .experimental: return "EXPERIMENTAL"
@@ -881,7 +881,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LAUNCH_STAGE_UNSPECIFIED": self = .unspecified
         case "EXPERIMENTAL": self = .experimental
@@ -979,7 +979,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "VERSION_STATE_UNSPECIFIED"
         case .stable: return "VERSION_STATE_STABLE"
@@ -992,7 +992,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VERSION_STATE_UNSPECIFIED": self = .unspecified
         case "VERSION_STATE_STABLE": self = .stable
@@ -1043,7 +1043,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PublisherModel"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

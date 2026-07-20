@@ -110,7 +110,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case mavenConfig = "mavenConfig"
     case dockerConfig = "dockerConfig"
     case virtualRepositoryConfig = "virtualRepositoryConfig"
@@ -313,7 +313,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "VERSION_POLICY_UNSPECIFIED"
         case .release: return "RELEASE"
@@ -326,7 +326,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VERSION_POLICY_UNSPECIFIED": self = .unspecified
         case "RELEASE": self = .release
@@ -377,7 +377,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig"
     }
@@ -416,7 +416,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.DockerRepositoryConfig"
     }
@@ -508,7 +508,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ENABLEMENT_CONFIG_UNSPECIFIED"
         case .inherited: return "INHERITED"
@@ -521,7 +521,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ENABLEMENT_CONFIG_UNSPECIFIED": self = .unspecified
         case "INHERITED": self = .inherited
@@ -617,7 +617,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ENABLEMENT_STATE_UNSPECIFIED"
         case .scanningUnsupported: return "SCANNING_UNSUPPORTED"
@@ -631,7 +631,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ENABLEMENT_STATE_UNSPECIFIED": self = .unspecified
         case "SCANNING_UNSUPPORTED": self = .scanningUnsupported
@@ -685,7 +685,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig"
     }
@@ -762,7 +762,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "FORMAT_UNSPECIFIED"
       case .docker: return "DOCKER"
@@ -783,7 +783,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "FORMAT_UNSPECIFIED": self = .unspecified
       case "DOCKER": self = .docker
@@ -903,7 +903,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MODE_UNSPECIFIED"
       case .standardRepository: return "STANDARD_REPOSITORY"
@@ -917,7 +917,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MODE_UNSPECIFIED": self = .unspecified
       case "STANDARD_REPOSITORY": self = .standardRepository
@@ -990,7 +990,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case remoteRepositoryConfig(RemoteRepositoryConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.Repository"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

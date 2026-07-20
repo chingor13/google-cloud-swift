@@ -88,7 +88,7 @@ public struct PredictResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.PredictResponse.PredictionResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -99,7 +99,7 @@ public struct PredictResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PredictResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

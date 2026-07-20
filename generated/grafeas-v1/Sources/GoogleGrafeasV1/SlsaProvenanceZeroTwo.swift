@@ -71,7 +71,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -107,7 +107,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -144,7 +144,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -182,7 +182,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -223,7 +223,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -261,7 +261,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -272,7 +272,7 @@ public struct SlsaProvenanceZeroTwo: Codable, Equatable, GoogleCloudWkt._AnyPack
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.SlsaProvenanceZeroTwo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

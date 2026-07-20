@@ -117,7 +117,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .portPairMatchingRemoteLocation: return "PORT_PAIR_MATCHING_REMOTE_LOCATION"
         case .portPairUnconstrainedRemoteLocation: return "PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION"
@@ -129,7 +129,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PORT_PAIR_MATCHING_REMOTE_LOCATION": self = .portPairMatchingRemoteLocation
         case "PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION": self = .portPairUnconstrainedRemoteLocation
@@ -222,7 +222,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .portPairMatchingVlan: return "PORT_PAIR_MATCHING_VLAN"
         case .portPairUnconstrainedVlan: return "PORT_PAIR_UNCONSTRAINED_VLAN"
@@ -234,7 +234,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PORT_PAIR_MATCHING_VLAN": self = .portPairMatchingVlan
         case "PORT_PAIR_UNCONSTRAINED_VLAN": self = .portPairUnconstrainedVlan
@@ -282,7 +282,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectRemoteLocationConstraints"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

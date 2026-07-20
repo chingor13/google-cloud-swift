@@ -58,7 +58,7 @@ public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleCloudWkt.
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.KeyAccessJustificationsPolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

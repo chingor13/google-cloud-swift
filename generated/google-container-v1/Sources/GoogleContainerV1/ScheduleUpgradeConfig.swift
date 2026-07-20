@@ -40,7 +40,7 @@ public struct ScheduleUpgradeConfig: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ScheduleUpgradeConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

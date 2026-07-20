@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case partialFailuresGcsPath = "partialFailuresGcsPath"
       case partialFailuresBigqueryTable = "partialFailuresBigqueryTable"
       case importedRagFilesCount = "importedRagFilesCount"
@@ -119,7 +119,7 @@
       case partialFailuresBigqueryTable(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ImportRagFilesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

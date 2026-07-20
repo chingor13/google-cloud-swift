@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case scaled = "scaled"
       case basic = "basic"
       case unprovisioned = "unprovisioned"
@@ -113,7 +113,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -151,7 +151,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagManagedDbConfig.Basic"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -187,7 +187,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -208,7 +208,7 @@
       indirect case unprovisioned(RagManagedDbConfig.Unprovisioned?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagManagedDbConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

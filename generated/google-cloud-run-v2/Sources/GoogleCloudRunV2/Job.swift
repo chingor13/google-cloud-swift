@@ -178,7 +178,7 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case uid = "uid"
     case generation = "generation"
@@ -312,7 +312,9 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case runExecutionToken(Swift.String)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.Job" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.run.v2.Job"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

@@ -45,7 +45,7 @@ public struct PinControlMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case allMatchedPins = "allMatchedPins"
     case droppedPins = "droppedPins"
   }
@@ -125,7 +125,7 @@ public struct PinControlMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.PinControlMetadata.ProductPins"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -136,7 +136,7 @@ public struct PinControlMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PinControlMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

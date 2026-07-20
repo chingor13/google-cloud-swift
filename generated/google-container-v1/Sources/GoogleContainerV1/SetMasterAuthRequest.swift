@@ -112,7 +112,7 @@ public struct SetMasterAuthRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unknown: return "UNKNOWN"
       case .setPassword: return "SET_PASSWORD"
@@ -126,7 +126,7 @@ public struct SetMasterAuthRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNKNOWN": self = .unknown
       case "SET_PASSWORD": self = .setPassword
@@ -180,7 +180,7 @@ public struct SetMasterAuthRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.SetMasterAuthRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

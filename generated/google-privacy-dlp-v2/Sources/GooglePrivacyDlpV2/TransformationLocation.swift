@@ -44,7 +44,7 @@ public struct TransformationLocation: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case findingId = "findingId"
     case recordTransformation = "recordTransformation"
     case containerType = "containerType"
@@ -102,7 +102,7 @@ public struct TransformationLocation: Codable, Equatable, GoogleCloudWkt._AnyPac
     indirect case recordTransformation(RecordTransformation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

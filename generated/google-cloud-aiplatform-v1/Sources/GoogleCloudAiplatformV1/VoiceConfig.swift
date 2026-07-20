@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case prebuiltVoiceConfig = "prebuiltVoiceConfig"
       case replicatedVoiceConfig = "replicatedVoiceConfig"
     }
@@ -94,7 +94,7 @@
       indirect case replicatedVoiceConfig(ReplicatedVoiceConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.VoiceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

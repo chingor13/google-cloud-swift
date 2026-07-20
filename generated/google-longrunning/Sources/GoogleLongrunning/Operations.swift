@@ -64,7 +64,8 @@ public class OperationsClient: Clients.OperationsProtocol {
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -215,7 +216,8 @@ extension Clients.OperationsProtocol {
   public func listOperations(
     byItem: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

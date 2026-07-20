@@ -71,7 +71,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case createTime = "createTime"
     case updateTime = "updateTime"
     case resource = "resource"
@@ -298,7 +298,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case batchRecognizeMetadata(BatchRecognizeMetadata?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.OperationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

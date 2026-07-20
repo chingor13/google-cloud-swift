@@ -45,7 +45,7 @@ public struct VmImage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case project = "project"
     case name = "name"
     case family = "family"
@@ -97,7 +97,7 @@ public struct VmImage: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case family(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.notebooks.v2.VmImage"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

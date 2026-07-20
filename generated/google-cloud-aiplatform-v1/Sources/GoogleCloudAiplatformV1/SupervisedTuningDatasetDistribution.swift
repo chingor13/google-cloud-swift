@@ -96,7 +96,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case count = "count"
         case `left` = "left"
         case `right` = "right"
@@ -116,7 +116,7 @@
         try container.encode(self.`right`, forKey: .`right`)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SupervisedTuningDatasetDistribution.DatasetBucket"
       }
@@ -128,7 +128,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SupervisedTuningDatasetDistribution"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

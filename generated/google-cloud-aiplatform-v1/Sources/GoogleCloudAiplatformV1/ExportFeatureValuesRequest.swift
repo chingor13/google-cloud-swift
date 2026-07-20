@@ -58,7 +58,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case snapshotExport = "snapshotExport"
       case fullExport = "fullExport"
       case entityType = "entityType"
@@ -147,7 +147,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest.SnapshotExport"
       }
@@ -190,7 +190,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest.FullExport"
       }
@@ -212,7 +212,7 @@
       indirect case fullExport(ExportFeatureValuesRequest.FullExport?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

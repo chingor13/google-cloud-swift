@@ -96,7 +96,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "TYPE_UNSPECIFIED"
         case .articleSuggestion: return "ARTICLE_SUGGESTION"
@@ -113,7 +113,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TYPE_UNSPECIFIED": self = .unspecified
         case "ARTICLE_SUGGESTION": self = .articleSuggestion
@@ -176,7 +176,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SuggestionFeature"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

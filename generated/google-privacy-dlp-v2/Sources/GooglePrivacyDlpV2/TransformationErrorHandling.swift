@@ -47,7 +47,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case throwError = "throwError"
     case leaveUntransformed = "leaveUntransformed"
   }
@@ -111,7 +111,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling.ThrowError"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -145,7 +145,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed"
     }
@@ -165,7 +165,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWkt._A
     indirect case leaveUntransformed(TransformationErrorHandling.LeaveUntransformed?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

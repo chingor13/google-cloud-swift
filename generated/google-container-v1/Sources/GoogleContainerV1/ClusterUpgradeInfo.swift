@@ -103,7 +103,7 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unknown: return "UNKNOWN"
       case .active: return "ACTIVE"
@@ -117,7 +117,7 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNKNOWN": self = .unknown
       case "ACTIVE": self = .active
@@ -230,7 +230,7 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED"
       case .maintenanceWindow: return "MAINTENANCE_WINDOW"
@@ -247,7 +247,7 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED": self = .unspecified
       case "MAINTENANCE_WINDOW": self = .maintenanceWindow
@@ -267,9 +267,9 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       switch intValue {
       case 0: self = .unspecified
       case 1: self = .maintenanceWindow
+      case 4: self = .clusterDisruptionBudget
       case 5: self = .maintenanceExclusionNoUpgrades
       case 6: self = .maintenanceExclusionNoMinorUpgrades
-      case 4: self = .clusterDisruptionBudget
       case 7: self = .clusterDisruptionBudgetMinorUpgrade
       case 8: self = .systemConfig
       default: self = .unknownIntValue(intValue)
@@ -310,7 +310,7 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ClusterUpgradeInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

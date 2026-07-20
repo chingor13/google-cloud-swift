@@ -98,7 +98,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case dataset = "dataset"
         case gcsSource = "gcsSource"
         case bigquerySource = "bigquerySource"
@@ -167,7 +167,7 @@
         indirect case bigquerySource(BigQuerySource?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.TrainingDataset"
       }
@@ -217,7 +217,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.TrainingPredictionSkewDetectionConfig"
       }
@@ -264,7 +264,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.PredictionDriftDetectionConfig"
       }
@@ -340,7 +340,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case gcs = "gcs"
           case bigquery = "bigquery"
           case predictionFormat = "predictionFormat"
@@ -428,7 +428,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "PREDICTION_FORMAT_UNSPECIFIED"
             case .jsonl: return "JSONL"
@@ -441,7 +441,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "PREDICTION_FORMAT_UNSPECIFIED": self = .unspecified
             case "JSONL": self = .jsonl
@@ -501,7 +501,7 @@
           indirect case bigquery(BigQueryDestination?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.ExplanationConfig.ExplanationBaseline"
         }
@@ -513,7 +513,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.ExplanationConfig"
       }
@@ -525,7 +525,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

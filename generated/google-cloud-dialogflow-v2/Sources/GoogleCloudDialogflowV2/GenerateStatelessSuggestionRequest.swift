@@ -71,7 +71,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case parent = "parent"
       case generator = "generator"
       case generatorName = "generatorName"
@@ -140,7 +140,7 @@
       case generatorName(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.GenerateStatelessSuggestionRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

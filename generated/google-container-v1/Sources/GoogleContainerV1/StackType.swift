@@ -57,7 +57,7 @@ public enum StackType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "STACK_TYPE_UNSPECIFIED"
     case .ipv4: return "IPV4"
@@ -70,7 +70,7 @@ public enum StackType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "STACK_TYPE_UNSPECIFIED": self = .unspecified
     case "IPV4": self = .ipv4

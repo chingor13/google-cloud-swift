@@ -95,7 +95,7 @@ public enum TransformationType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "TRANSFORMATION_TYPE_UNSPECIFIED"
     case .recordSuppression: return "RECORD_SUPPRESSION"
@@ -120,7 +120,7 @@ public enum TransformationType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "TRANSFORMATION_TYPE_UNSPECIFIED": self = .unspecified
     case "RECORD_SUPPRESSION": self = .recordSuppression
@@ -149,7 +149,6 @@ public enum TransformationType: Codable, Equatable, Sendable {
     case 0: self = .unspecified
     case 1: self = .recordSuppression
     case 2: self = .replaceValue
-    case 15: self = .replaceDictionary
     case 3: self = .redact
     case 4: self = .characterMask
     case 5: self = .cryptoReplaceFfxFpe
@@ -161,6 +160,7 @@ public enum TransformationType: Codable, Equatable, Sendable {
     case 12: self = .dateShift
     case 13: self = .cryptoDeterministicConfig
     case 14: self = .redactImage
+    case 15: self = .replaceDictionary
     default: self = .unknownIntValue(intValue)
     }
   }

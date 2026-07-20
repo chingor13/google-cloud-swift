@@ -76,7 +76,7 @@ public struct ExportDataRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case sourceParallelstore = "sourceParallelstore"
     case destinationGcsBucket = "destinationGcsBucket"
     case name = "name"
@@ -162,7 +162,7 @@ public struct ExportDataRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case destinationGcsBucket(DestinationGcsBucket?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.parallelstore.v1.ExportDataRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

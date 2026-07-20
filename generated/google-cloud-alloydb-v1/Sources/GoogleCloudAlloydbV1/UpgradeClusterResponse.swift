@@ -79,7 +79,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.StageInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -119,7 +119,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.InstanceUpgradeDetails"
     }
@@ -171,7 +171,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.ClusterUpgradeDetails"
     }
@@ -239,7 +239,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATUS_UNSPECIFIED"
       case .success: return "SUCCESS"
@@ -257,7 +257,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATUS_UNSPECIFIED": self = .unspecified
       case "NOT_STARTED": self = .notStarted
@@ -277,11 +277,11 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
-      case 4: self = .notStarted
-      case 5: self = .inProgress
       case 1: self = .success
       case 2: self = .failed
       case 3: self = .partialSuccess
+      case 4: self = .notStarted
+      case 5: self = .inProgress
       case 6: self = .cancelInProgress
       case 7: self = .cancelled
       default: self = .unknownIntValue(intValue)
@@ -379,7 +379,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STAGE_UNSPECIFIED"
       case .alloydbPrecheck: return "ALLOYDB_PRECHECK"
@@ -397,7 +397,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STAGE_UNSPECIFIED": self = .unspecified
       case "ALLOYDB_PRECHECK": self = .alloydbPrecheck
@@ -419,9 +419,9 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
       case 0: self = .unspecified
       case 1: self = .alloydbPrecheck
       case 2: self = .pgUpgradeCheck
-      case 5: self = .prepareForUpgrade
       case 3: self = .primaryInstanceUpgrade
       case 4: self = .readPoolInstancesUpgrade
+      case 5: self = .prepareForUpgrade
       case 6: self = .rollback
       case 7: self = .cleanup
       default: self = .unknownIntValue(intValue)
@@ -463,7 +463,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

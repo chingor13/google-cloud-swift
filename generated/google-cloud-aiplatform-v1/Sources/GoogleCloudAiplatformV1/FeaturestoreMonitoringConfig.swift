@@ -107,7 +107,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.SnapshotAnalysis"
       }
@@ -209,7 +209,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "STATE_UNSPECIFIED"
           case .`default`: return "DEFAULT"
@@ -223,7 +223,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "STATE_UNSPECIFIED": self = .unspecified
           case "DEFAULT": self = .`default`
@@ -330,7 +330,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "BASELINE_UNSPECIFIED"
           case .latestStats: return "LATEST_STATS"
@@ -344,7 +344,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "BASELINE_UNSPECIFIED": self = .unspecified
           case "LATEST_STATS": self = .latestStats
@@ -398,7 +398,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.ImportFeaturesAnalysis"
       }
@@ -432,7 +432,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case value = "value"
       }
 
@@ -477,7 +477,7 @@
         case value(Swift.Double)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.ThresholdConfig"
       }
@@ -489,7 +489,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

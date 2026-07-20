@@ -116,7 +116,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case creationTimestamp = "creationTimestamp"
       case customFeatures = "customFeatures"
       case description = "description"
@@ -258,7 +258,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.compute.v1.SslPolicy.warnings.data"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -407,7 +407,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .cleanupFailed: return "CLEANUP_FAILED"
           case .deprecatedResourceUsed: return "DEPRECATED_RESOURCE_USED"
@@ -448,7 +448,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "CLEANUP_FAILED": self = .cleanupFailed
           case "DEPRECATED_RESOURCE_USED": self = .deprecatedResourceUsed
@@ -579,7 +579,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.SslPolicy.warnings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -636,7 +636,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .tls10: return "TLS_1_0"
         case .tls11: return "TLS_1_1"
@@ -650,7 +650,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TLS_1_0": self = .tls10
         case "TLS_1_1": self = .tls11
@@ -747,7 +747,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .`default`: return "DEFAULT"
         case .deferred: return "DEFERRED"
@@ -760,7 +760,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEFAULT": self = .`default`
         case "DEFERRED": self = .deferred
@@ -866,7 +866,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .compatible: return "COMPATIBLE"
         case .custom: return "CUSTOM"
@@ -881,7 +881,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "COMPATIBLE": self = .compatible
         case "CUSTOM": self = .custom
@@ -938,7 +938,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SslPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

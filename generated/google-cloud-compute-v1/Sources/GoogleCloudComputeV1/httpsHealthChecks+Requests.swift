@@ -62,7 +62,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -101,7 +101,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -157,7 +157,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -286,7 +286,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -345,7 +345,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.patchRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -389,7 +389,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.testIamPermissionsRequest"
       }
@@ -449,7 +449,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.httpsHealthChecks.updateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -102,7 +102,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case createTime = "createTime"
     case updateTime = "updateTime"
@@ -299,7 +299,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.SourceProjects"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -333,7 +333,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.SourceFolders"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -366,7 +366,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations"
     }
@@ -422,7 +422,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case bucketName = "bucketName"
         case bucketPrefixRegex = "bucketPrefixRegex"
       }
@@ -472,7 +472,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case bucketPrefixRegex(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket"
       }
@@ -484,7 +484,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -521,7 +521,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.Link"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -579,7 +579,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.BucketErrors"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -647,7 +647,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case validatedCount = "validatedCount"
       case outsideOrgErrorCount = "outsideOrgErrorCount"
       case outsideOrgProjectNumbers = "outsideOrgProjectNumbers"
@@ -745,7 +745,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case destinationProjectCheckHasInternalError(Swift.Bool)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -782,7 +782,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion"
     }
@@ -843,7 +843,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CONFIG_STATE_UNSPECIFIED"
       case .active: return "CONFIG_STATE_ACTIVE"
@@ -858,7 +858,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CONFIG_STATE_UNSPECIFIED": self = .unspecified
       case "CONFIG_STATE_ACTIVE": self = .active
@@ -950,7 +950,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case excludeCloudStorageBuckets(DatasetConfig.CloudStorageBuckets?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

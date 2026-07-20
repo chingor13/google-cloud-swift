@@ -104,7 +104,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "HARM_PROBABILITY_UNSPECIFIED"
         case .negligible: return "NEGLIGIBLE"
@@ -119,7 +119,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HARM_PROBABILITY_UNSPECIFIED": self = .unspecified
         case "NEGLIGIBLE": self = .negligible
@@ -223,7 +223,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "HARM_SEVERITY_UNSPECIFIED"
         case .negligible: return "HARM_SEVERITY_NEGLIGIBLE"
@@ -238,7 +238,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HARM_SEVERITY_UNSPECIFIED": self = .unspecified
         case "HARM_SEVERITY_NEGLIGIBLE": self = .negligible
@@ -295,7 +295,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SafetyRating"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

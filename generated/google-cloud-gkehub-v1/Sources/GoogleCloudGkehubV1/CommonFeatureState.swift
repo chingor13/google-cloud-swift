@@ -43,7 +43,7 @@ public struct CommonFeatureState: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case rbacrolebindingactuation = "rbacrolebindingactuation"
     case state = "state"
   }
@@ -89,7 +89,7 @@ public struct CommonFeatureState: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       GoogleCloudGkehubRbacrolebindingactuationV1.FeatureState?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.CommonFeatureState"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

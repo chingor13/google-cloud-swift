@@ -93,7 +93,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .autoConnect: return "AUTO_CONNECT"
         case .provisionOnly: return "PROVISION_ONLY"
@@ -105,7 +105,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AUTO_CONNECT": self = .autoConnect
         case "PROVISION_ONLY": self = .provisionOnly
@@ -196,7 +196,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .block: return "BLOCK"
         case .cluster: return "CLUSTER"
@@ -209,7 +209,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BLOCK": self = .block
         case "CLUSTER": self = .cluster
@@ -301,7 +301,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .highAvailability: return "HIGH_AVAILABILITY"
         case .highThroughput: return "HIGH_THROUGHPUT"
@@ -313,7 +313,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HIGH_AVAILABILITY": self = .highAvailability
         case "HIGH_THROUGHPUT": self = .highThroughput
@@ -361,7 +361,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ResourcePolicyWorkloadPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

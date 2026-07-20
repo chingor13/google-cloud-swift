@@ -57,7 +57,7 @@ public enum SharedResourceType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "SHARED_RESOURCE_TYPE_UNSPECIFIED"
     case .bigqueryDataset: return "BIGQUERY_DATASET"
@@ -70,7 +70,7 @@ public enum SharedResourceType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "SHARED_RESOURCE_TYPE_UNSPECIFIED": self = .unspecified
     case "BIGQUERY_DATASET": self = .bigqueryDataset

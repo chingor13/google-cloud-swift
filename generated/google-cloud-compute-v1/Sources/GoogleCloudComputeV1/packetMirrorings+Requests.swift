@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.aggregatedListRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -207,7 +207,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -249,7 +249,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -308,7 +308,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -440,7 +440,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -502,7 +502,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.patchRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -549,7 +549,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.packetMirrorings.testIamPermissionsRequest"
       }

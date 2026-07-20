@@ -40,7 +40,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case bigqueryDestination = "bigqueryDestination"
       case tfrecordDestination = "tfrecordDestination"
       case csvDestination = "csvDestination"
@@ -119,7 +119,7 @@
       indirect case csvDestination(CsvDestination?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureValueDestination"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

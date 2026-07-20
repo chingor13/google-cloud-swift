@@ -60,7 +60,7 @@ public struct GetPublicKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.GetPublicKeyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

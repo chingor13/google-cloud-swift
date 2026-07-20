@@ -50,7 +50,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case state = "state"
     case creatingData = "creatingData"
     case acceptedData = "acceptedData"
@@ -169,7 +169,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.CreatingData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -200,7 +200,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.AcceptedData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -231,7 +231,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.ProvisioningData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -266,7 +266,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.FailedData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -297,7 +297,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.DeletingData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -328,7 +328,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.ActiveData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -359,7 +359,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.SuspendingData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -390,7 +390,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState.SuspendedData"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -482,7 +482,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .creating: return "CREATING"
@@ -502,7 +502,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "CREATING": self = .creating
@@ -615,7 +615,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_INITIATOR_UNSPECIFIED"
       case .user: return "USER"
@@ -628,7 +628,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_INITIATOR_UNSPECIFIED": self = .unspecified
       case "USER": self = .user
@@ -699,7 +699,7 @@ public struct QueuedResourceState: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case suspendedData(QueuedResourceState.SuspendedData?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tpu.v2.QueuedResourceState"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

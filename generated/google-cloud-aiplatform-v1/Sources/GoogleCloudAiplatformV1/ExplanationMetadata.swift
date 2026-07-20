@@ -253,7 +253,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata.FeatureValueDomain"
         }
@@ -381,7 +381,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "TYPE_UNSPECIFIED"
             case .pixels: return "PIXELS"
@@ -394,7 +394,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "TYPE_UNSPECIFIED": self = .unspecified
             case "PIXELS": self = .pixels
@@ -492,7 +492,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "POLARITY_UNSPECIFIED"
             case .positive: return "POSITIVE"
@@ -506,7 +506,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "POLARITY_UNSPECIFIED": self = .unspecified
             case "POSITIVE": self = .positive
@@ -615,7 +615,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "COLOR_MAP_UNSPECIFIED"
             case .pinkGreen: return "PINK_GREEN"
@@ -632,7 +632,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "COLOR_MAP_UNSPECIFIED": self = .unspecified
             case "PINK_GREEN": self = .pinkGreen
@@ -655,8 +655,8 @@
             case 2: self = .viridis
             case 3: self = .red
             case 4: self = .green
-            case 6: self = .redGreen
             case 5: self = .pinkWhiteGreen
+            case 6: self = .redGreen
             default: self = .unknownIntValue(intValue)
             }
           }
@@ -744,7 +744,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "OVERLAY_TYPE_UNSPECIFIED"
             case .`none`: return "NONE"
@@ -759,7 +759,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "OVERLAY_TYPE_UNSPECIFIED": self = .unspecified
             case "NONE": self = .`none`
@@ -816,7 +816,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata.Visualization"
         }
@@ -932,7 +932,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "ENCODING_UNSPECIFIED"
           case .identity: return "IDENTITY"
@@ -949,7 +949,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "ENCODING_UNSPECIFIED": self = .unspecified
           case "IDENTITY": self = .identity
@@ -1012,7 +1012,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1060,7 +1060,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case indexDisplayNameMapping = "indexDisplayNameMapping"
         case displayNameMappingKey = "displayNameMappingKey"
         case outputTensorName = "outputTensorName"
@@ -1150,7 +1150,7 @@
         case displayNameMappingKey(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationMetadata.OutputMetadata"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1161,7 +1161,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationMetadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -50,7 +50,7 @@ public struct DebugInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.DebugInstanceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

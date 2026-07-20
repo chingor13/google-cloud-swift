@@ -48,7 +48,7 @@ public struct RedactImageResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.RedactImageResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

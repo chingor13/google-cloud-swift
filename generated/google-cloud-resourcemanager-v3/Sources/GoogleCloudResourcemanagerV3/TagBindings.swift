@@ -64,7 +64,7 @@ public class TagBindingsClient: Clients.TagBindingsProtocol {
     byItem: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTagBindings(request: request, options: options)
@@ -208,7 +208,8 @@ public class TagBindingsClient: Clients.TagBindingsProtocol {
     byItem: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<EffectiveTag, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listEffectiveTags(request: request, options: options)
@@ -355,7 +356,7 @@ extension Clients.TagBindingsProtocol {
     byItem: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagBindingsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -466,7 +467,8 @@ extension Clients.TagBindingsProtocol {
     byItem: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<EffectiveTag, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListEffectiveTagsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

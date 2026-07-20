@@ -76,7 +76,8 @@ public class OrganizationsClient: Clients.OrganizationsProtocol {
     byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Organization, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.searchOrganizations(request: request, options: options)
@@ -270,7 +271,8 @@ extension Clients.OrganizationsProtocol {
     byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Organization, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.SearchOrganizationsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

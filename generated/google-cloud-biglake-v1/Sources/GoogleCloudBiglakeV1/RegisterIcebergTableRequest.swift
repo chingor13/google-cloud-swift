@@ -52,7 +52,7 @@ public struct RegisterIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case name = "name"
     case metadataLocation = "metadata-location"
@@ -75,7 +75,7 @@ public struct RegisterIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._A
     try container.encode(self.overwrite, forKey: .overwrite)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.RegisterIcebergTableRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

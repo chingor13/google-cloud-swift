@@ -115,7 +115,7 @@ public struct Router: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgenetwork.v1.Router.Interface"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -174,7 +174,7 @@ public struct Router: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgenetwork.v1.Router.BgpPeer"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -212,7 +212,7 @@ public struct Router: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgenetwork.v1.Router.Bgp"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -223,7 +223,7 @@ public struct Router: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.Router"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

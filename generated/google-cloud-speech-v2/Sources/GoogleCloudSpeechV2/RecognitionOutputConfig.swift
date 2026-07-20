@@ -43,7 +43,7 @@ public struct RecognitionOutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsOutputConfig = "gcsOutputConfig"
     case inlineResponseConfig = "inlineResponseConfig"
     case outputFormatConfig = "outputFormatConfig"
@@ -106,7 +106,7 @@ public struct RecognitionOutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case inlineResponseConfig(InlineOutputConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.RecognitionOutputConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

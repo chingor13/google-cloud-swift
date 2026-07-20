@@ -139,7 +139,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer"
       }
@@ -151,7 +151,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion"
     }
@@ -188,7 +188,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -255,7 +255,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter"
       }
@@ -267,7 +267,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult"
     }
@@ -320,7 +320,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .streaming: return "STREAMING"
@@ -333,7 +333,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "STREAMING": self = .streaming
@@ -384,7 +384,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWkt._
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

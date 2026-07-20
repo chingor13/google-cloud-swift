@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.aggregatedListRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -207,7 +207,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -249,7 +249,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -308,7 +308,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -440,7 +440,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -502,7 +502,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.moveRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -564,7 +564,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.setLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -611,7 +611,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.addresses.testIamPermissionsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

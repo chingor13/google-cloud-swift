@@ -228,7 +228,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ARCHITECTURE_UNSPECIFIED"
         case .arm64: return "ARM64"
@@ -241,7 +241,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ARCHITECTURE_UNSPECIFIED": self = .unspecified
         case "ARM64": self = .arm64
@@ -336,7 +336,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .recreateDisk: return "RECREATE_DISK"
         case .recreateDiskIfSourceChanged: return "RECREATE_DISK_IF_SOURCE_CHANGED"
@@ -349,7 +349,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RECREATE_DISK": self = .recreateDisk
         case "RECREATE_DISK_IF_SOURCE_CHANGED": self = .recreateDiskIfSourceChanged
@@ -400,7 +400,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AttachedDiskInitializeParams"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

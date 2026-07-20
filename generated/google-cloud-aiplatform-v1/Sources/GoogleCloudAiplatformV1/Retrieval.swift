@@ -45,7 +45,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case vertexAiSearch = "vertexAiSearch"
       case vertexRagStore = "vertexRagStore"
       case disableAttribution = "disableAttribution"
@@ -101,7 +101,7 @@
       indirect case vertexRagStore(VertexRagStore?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Retrieval"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

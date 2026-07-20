@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.aggregatedListRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -207,7 +207,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -249,7 +249,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -294,7 +294,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.getIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -353,7 +353,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -485,7 +485,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -532,7 +532,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.setIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -579,7 +579,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.nodeTemplates.testIamPermissionsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

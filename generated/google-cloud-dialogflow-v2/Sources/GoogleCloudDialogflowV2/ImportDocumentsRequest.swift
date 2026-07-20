@@ -63,7 +63,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case parent = "parent"
       case gcsSource = "gcsSource"
       case documentTemplate = "documentTemplate"
@@ -126,7 +126,7 @@
       indirect case gcsSource(GcsSources?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ImportDocumentsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

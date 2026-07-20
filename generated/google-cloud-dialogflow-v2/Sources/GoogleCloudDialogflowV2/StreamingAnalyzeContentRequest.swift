@@ -160,7 +160,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case participant = "participant"
       case audioConfig = "audioConfig"
       case textConfig = "textConfig"
@@ -300,7 +300,7 @@
       indirect case inputDtmf(TelephonyDtmfEvents?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

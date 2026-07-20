@@ -69,7 +69,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case modelId = "modelId"
       case parentModel = "parentModel"
       case parent = "parent"
@@ -137,7 +137,7 @@
       case parentModel(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CopyModelRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

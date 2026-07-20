@@ -156,7 +156,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case description = "description"
     case state = "state"
@@ -314,7 +314,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "TYPE_UNSPECIFIED"
         case .kmsError: return "KMS_ERROR"
@@ -326,7 +326,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TYPE_UNSPECIFIED": self = .unspecified
         case "KMS_ERROR": self = .kmsError
@@ -374,7 +374,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.v1.Workflow.StateError"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -426,7 +426,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .active: return "ACTIVE"
@@ -439,7 +439,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "ACTIVE": self = .active
@@ -536,7 +536,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CALL_LOG_LEVEL_UNSPECIFIED"
       case .logAllCalls: return "LOG_ALL_CALLS"
@@ -550,7 +550,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CALL_LOG_LEVEL_UNSPECIFIED": self = .unspecified
       case "LOG_ALL_CALLS": self = .logAllCalls
@@ -612,7 +612,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case sourceContents(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workflows.v1.Workflow"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

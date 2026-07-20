@@ -47,7 +47,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case ragManagedDb = "ragManagedDb"
       case pinecone = "pinecone"
       case vertexVectorSearch = "vertexVectorSearch"
@@ -129,7 +129,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case knn = "knn"
         case ann = "ann"
       }
@@ -193,7 +193,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig.RagManagedDb.KNN"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -247,7 +247,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig.RagManagedDb.ANN"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -268,7 +268,7 @@
         indirect case ann(RagVectorDbConfig.RagManagedDb.ANN?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig.RagManagedDb"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -303,7 +303,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig.Pinecone"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -344,7 +344,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig.VertexVectorSearch"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -365,7 +365,7 @@
       indirect case vertexVectorSearch(RagVectorDbConfig.VertexVectorSearch?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagVectorDbConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

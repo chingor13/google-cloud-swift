@@ -46,7 +46,7 @@ public struct MessageWithUInt64Value: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithUInt64Value"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

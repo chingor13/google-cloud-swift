@@ -47,7 +47,7 @@ public struct ListScopesResponse: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.ListScopesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

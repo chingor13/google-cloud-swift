@@ -46,7 +46,7 @@ public struct NotebookRuntimeOptions: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsOutputBucket = "gcsOutputBucket"
     case aiPlatformNotebookRuntimeTemplate = "aiPlatformNotebookRuntimeTemplate"
   }
@@ -94,7 +94,7 @@ public struct NotebookRuntimeOptions: Codable, Equatable, GoogleCloudWkt._AnyPac
     case gcsOutputBucket(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.NotebookRuntimeOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -45,7 +45,7 @@ public struct ListTransferJobsResponse: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.ListTransferJobsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

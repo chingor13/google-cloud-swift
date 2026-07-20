@@ -69,7 +69,7 @@ public class SecretManagerServiceClient: Clients.SecretManagerServiceProtocol {
     byItem: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Secret, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSecrets(request: request, options: options)
@@ -160,7 +160,7 @@ public class SecretManagerServiceClient: Clients.SecretManagerServiceProtocol {
     byItem: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SecretVersion, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSecretVersions(request: request, options: options)
@@ -308,7 +308,8 @@ public class SecretManagerServiceClient: Clients.SecretManagerServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -602,7 +603,7 @@ extension Clients.SecretManagerServiceProtocol {
     byItem: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Secret, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecretmanagerV1.ListSecretsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -749,7 +750,7 @@ extension Clients.SecretManagerServiceProtocol {
     byItem: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SecretVersion, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecretmanagerV1.ListSecretVersionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -926,7 +927,8 @@ extension Clients.SecretManagerServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -65,7 +65,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.SamplingStrategy.RandomSampleConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -76,7 +76,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SamplingStrategy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

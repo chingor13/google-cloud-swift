@@ -45,7 +45,7 @@ public struct DiscoveryCloudStorageFilter: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case collection = "collection"
     case cloudStorageResourceReference = "cloudStorageResourceReference"
     case others = "others"
@@ -114,7 +114,7 @@ public struct DiscoveryCloudStorageFilter: Codable, Equatable, GoogleCloudWkt._A
     indirect case others(AllOtherResources?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudStorageFilter"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

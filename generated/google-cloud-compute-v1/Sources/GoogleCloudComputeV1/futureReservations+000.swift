@@ -62,7 +62,7 @@
       byItem: FutureReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, FutureReservationsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse in
         var request = byItem
         request.pageToken = token
@@ -233,7 +233,7 @@
       byItem: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<FutureReservation, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -433,7 +433,7 @@
       byItem: FutureReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, FutureReservationsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
@@ -625,7 +625,7 @@
       byItem: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<FutureReservation, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

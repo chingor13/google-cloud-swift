@@ -136,7 +136,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case text = "text"
         case steps = "steps"
       }
@@ -179,7 +179,7 @@
         case text(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Playbook.Step"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -219,7 +219,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Playbook.Instruction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -271,7 +271,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PLAYBOOK_TYPE_UNSPECIFIED"
         case .task: return "TASK"
@@ -284,7 +284,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PLAYBOOK_TYPE_UNSPECIFIED": self = .unspecified
         case "TASK": self = .task
@@ -335,7 +335,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Playbook"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

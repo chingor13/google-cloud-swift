@@ -40,7 +40,7 @@ public struct LoadIcebergTableCredentialsResponse: Codable, Equatable, GoogleClo
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case storageCredentials = "storage-credentials"
   }
 
@@ -55,7 +55,7 @@ public struct LoadIcebergTableCredentialsResponse: Codable, Equatable, GoogleClo
     try container.encode(self.storageCredentials, forKey: .storageCredentials)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.LoadIcebergTableCredentialsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

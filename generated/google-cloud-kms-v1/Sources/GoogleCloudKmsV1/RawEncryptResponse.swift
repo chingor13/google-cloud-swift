@@ -157,7 +157,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case ciphertext = "ciphertext"
     case initializationVector = "initializationVector"
     case tagLength = "tagLength"
@@ -207,7 +207,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     try container.encode(self.protectionLevel, forKey: .protectionLevel)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.RawEncryptResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

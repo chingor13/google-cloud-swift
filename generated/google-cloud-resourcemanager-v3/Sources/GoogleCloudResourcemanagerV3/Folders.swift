@@ -83,7 +83,7 @@ public class FoldersClient: Clients.FoldersProtocol {
     byItem: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Folder, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listFolders(request: request, options: options)
@@ -117,7 +117,7 @@ public class FoldersClient: Clients.FoldersProtocol {
     byItem: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Folder, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.searchFolders(request: request, options: options)
@@ -936,7 +936,7 @@ extension Clients.FoldersProtocol {
     byItem: ListFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Folder, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListFoldersResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -973,7 +973,7 @@ extension Clients.FoldersProtocol {
     byItem: SearchFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Folder, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.SearchFoldersResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

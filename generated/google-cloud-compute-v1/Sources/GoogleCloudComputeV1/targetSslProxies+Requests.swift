@@ -62,7 +62,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -101,7 +101,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -157,7 +157,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -286,7 +286,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -346,7 +346,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.setBackendServiceRequest"
       }
@@ -407,7 +407,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.setCertificateMapRequest"
       }
@@ -467,7 +467,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.setProxyHeaderRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -527,7 +527,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.setSslCertificatesRequest"
       }
@@ -588,7 +588,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.setSslPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -632,7 +632,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.targetSslProxies.testIamPermissionsRequest"
       }

@@ -43,7 +43,7 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case dailyMaintenanceWindow = "dailyMaintenanceWindow"
     case recurringWindow = "recurringWindow"
     case recurringMaintenanceWindow = "recurringMaintenanceWindow"
@@ -113,7 +113,7 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case recurringMaintenanceWindow(RecurringMaintenanceWindow?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.MaintenanceWindow"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

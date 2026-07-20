@@ -85,7 +85,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case sharepointFolderPath = "sharepointFolderPath"
         case sharepointFolderId = "sharepointFolderId"
         case driveName = "driveName"
@@ -191,7 +191,7 @@
         case driveId(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.SharePointSources.SharePointSource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -202,7 +202,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SharePointSources"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

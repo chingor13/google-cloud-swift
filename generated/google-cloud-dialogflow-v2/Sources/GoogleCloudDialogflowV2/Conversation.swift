@@ -162,7 +162,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo.SipHeader"
         }
@@ -200,7 +200,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo.MimeContent"
         }
@@ -212,7 +212,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -335,7 +335,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "CONTENT_FORMAT_UNSPECIFIED"
             case .json: return "JSON"
@@ -348,7 +348,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "CONTENT_FORMAT_UNSPECIFIED": self = .unspecified
             case "JSON": self = .json
@@ -399,7 +399,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.ContextReference.ContextContent"
         }
@@ -452,7 +452,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "UPDATE_MODE_UNSPECIFIED"
           case .append: return "APPEND"
@@ -465,7 +465,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "UPDATE_MODE_UNSPECIFIED": self = .unspecified
           case "APPEND": self = .append
@@ -516,7 +516,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.ContextReference"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -604,7 +604,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "GENERATOR_TYPE_UNSPECIFIED"
           case .freeForm: return "FREE_FORM"
@@ -621,7 +621,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "GENERATOR_TYPE_UNSPECIFIED": self = .unspecified
           case "FREE_FORM": self = .freeForm
@@ -684,7 +684,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.GeneratorContext"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -736,7 +736,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "LIFECYCLE_STATE_UNSPECIFIED"
         case .inProgress: return "IN_PROGRESS"
@@ -749,7 +749,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LIFECYCLE_STATE_UNSPECIFIED": self = .unspecified
         case "IN_PROGRESS": self = .inProgress
@@ -846,7 +846,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CONVERSATION_STAGE_UNSPECIFIED"
         case .virtualAgentStage: return "VIRTUAL_AGENT_STAGE"
@@ -859,7 +859,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONVERSATION_STAGE_UNSPECIFIED": self = .unspecified
         case "VIRTUAL_AGENT_STAGE": self = .virtualAgentStage
@@ -910,7 +910,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

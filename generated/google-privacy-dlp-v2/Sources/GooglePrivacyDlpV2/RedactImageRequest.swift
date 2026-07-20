@@ -118,7 +118,7 @@ public struct RedactImageRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case infoType = "infoType"
       case redactAllText = "redactAllText"
       case redactionColor = "redactionColor"
@@ -174,7 +174,7 @@ public struct RedactImageRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       case redactAllText(Swift.Bool)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.RedactImageRequest.ImageRedactionConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -185,7 +185,7 @@ public struct RedactImageRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.RedactImageRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

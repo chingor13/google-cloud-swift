@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case maxDataItemCount = "maxDataItemCount"
       case maxDataItemPercentage = "maxDataItemPercentage"
       case sampleConfig = "sampleConfig"
@@ -113,7 +113,7 @@
       case maxDataItemPercentage(Swift.Int32)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ActiveLearningConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

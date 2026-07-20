@@ -54,7 +54,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -96,7 +96,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -144,7 +144,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -276,7 +276,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -327,7 +327,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.patchRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -378,7 +378,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.updateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -425,7 +425,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionUrlMaps.validateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

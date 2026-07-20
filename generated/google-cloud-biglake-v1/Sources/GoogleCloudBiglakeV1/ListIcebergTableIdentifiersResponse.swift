@@ -43,7 +43,7 @@ public struct ListIcebergTableIdentifiersResponse: Codable, Equatable, GoogleClo
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case identifiers = "identifiers"
     case nextPageToken = "next-page-token"
   }
@@ -60,7 +60,7 @@ public struct ListIcebergTableIdentifiersResponse: Codable, Equatable, GoogleClo
     try container.encode(self.nextPageToken, forKey: .nextPageToken)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.ListIcebergTableIdentifiersResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

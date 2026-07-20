@@ -62,7 +62,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case decayCurveStoppingSpec = "decayCurveStoppingSpec"
       case medianAutomatedStoppingSpec = "medianAutomatedStoppingSpec"
       case convexAutomatedStoppingSpec = "convexAutomatedStoppingSpec"
@@ -200,7 +200,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.MetricSpec.SafetyMetricConfig"
         }
@@ -253,7 +253,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "GOAL_TYPE_UNSPECIFIED"
           case .maximize: return "MAXIMIZE"
@@ -266,7 +266,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "GOAL_TYPE_UNSPECIFIED": self = .unspecified
           case "MAXIMIZE": self = .maximize
@@ -317,7 +317,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.MetricSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -365,7 +365,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case doubleValueSpec = "doubleValueSpec"
         case integerValueSpec = "integerValueSpec"
         case categoricalValueSpec = "categoricalValueSpec"
@@ -471,7 +471,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.DoubleValueSpec"
         }
@@ -517,7 +517,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.IntegerValueSpec"
         }
@@ -560,7 +560,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.CategoricalValueSpec"
         }
@@ -607,7 +607,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.DiscreteValueSpec"
         }
@@ -646,7 +646,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case parentDiscreteValues = "parentDiscreteValues"
           case parentIntValues = "parentIntValues"
           case parentCategoricalValues = "parentCategoricalValues"
@@ -731,7 +731,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.ConditionalParameterSpec.DiscreteValueCondition"
           }
@@ -767,7 +767,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.ConditionalParameterSpec.IntValueCondition"
           }
@@ -804,7 +804,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.ConditionalParameterSpec.CategoricalValueCondition"
           }
@@ -833,7 +833,7 @@
             StudySpec.ParameterSpec.ConditionalParameterSpec.CategoricalValueCondition?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec.ConditionalParameterSpec"
         }
@@ -893,7 +893,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SCALE_TYPE_UNSPECIFIED"
           case .unitLinearScale: return "UNIT_LINEAR_SCALE"
@@ -907,7 +907,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SCALE_TYPE_UNSPECIFIED": self = .unspecified
           case "UNIT_LINEAR_SCALE": self = .unitLinearScale
@@ -972,7 +972,7 @@
         indirect case discreteValueSpec(StudySpec.ParameterSpec.DiscreteValueSpec?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ParameterSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1017,7 +1017,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.DecayCurveAutomatedStoppingSpec"
       }
@@ -1062,7 +1062,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.MedianAutomatedStoppingSpec"
       }
@@ -1148,7 +1148,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.ConvexAutomatedStoppingSpec"
       }
@@ -1233,7 +1233,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec.StudyStoppingConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1288,7 +1288,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ALGORITHM_UNSPECIFIED"
         case .gridSearch: return "GRID_SEARCH"
@@ -1301,7 +1301,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALGORITHM_UNSPECIFIED": self = .unspecified
         case "GRID_SEARCH": self = .gridSearch
@@ -1399,7 +1399,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "OBSERVATION_NOISE_UNSPECIFIED"
         case .low: return "LOW"
@@ -1412,7 +1412,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "OBSERVATION_NOISE_UNSPECIFIED": self = .unspecified
         case "LOW": self = .low
@@ -1516,7 +1516,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MEASUREMENT_SELECTION_TYPE_UNSPECIFIED"
         case .lastMeasurement: return "LAST_MEASUREMENT"
@@ -1529,7 +1529,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MEASUREMENT_SELECTION_TYPE_UNSPECIFIED": self = .unspecified
         case "LAST_MEASUREMENT": self = .lastMeasurement
@@ -1589,7 +1589,7 @@
       indirect case convexAutomatedStoppingSpec(StudySpec.ConvexAutomatedStoppingSpec?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.StudySpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

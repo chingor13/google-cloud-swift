@@ -114,7 +114,7 @@ public struct HttpTarget: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case uri = "uri"
     case httpMethod = "httpMethod"
     case headers = "headers"
@@ -193,7 +193,7 @@ public struct HttpTarget: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case oidcToken(OidcToken?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.scheduler.v1.HttpTarget"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

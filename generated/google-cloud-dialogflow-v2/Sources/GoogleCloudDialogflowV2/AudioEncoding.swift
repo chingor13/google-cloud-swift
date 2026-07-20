@@ -98,7 +98,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AUDIO_ENCODING_UNSPECIFIED"
       case .linear16: return "AUDIO_ENCODING_LINEAR_16"
@@ -117,7 +117,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AUDIO_ENCODING_UNSPECIFIED": self = .unspecified
       case "AUDIO_ENCODING_LINEAR_16": self = .linear16

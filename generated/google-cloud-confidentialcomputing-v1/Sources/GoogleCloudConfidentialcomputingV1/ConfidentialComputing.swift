@@ -107,7 +107,8 @@ public class ConfidentialComputingClient: Clients.ConfidentialComputingProtocol 
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -286,7 +287,8 @@ extension Clients.ConfidentialComputingProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

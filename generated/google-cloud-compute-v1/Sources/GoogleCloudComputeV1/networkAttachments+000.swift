@@ -64,7 +64,8 @@
       byItem: NetworkAttachmentsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NetworkAttachmentsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkAttachmentAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkAttachmentAggregatedList
+        in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -198,7 +199,8 @@
     public func list(
       byItem: NetworkAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkAttachment, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NetworkAttachmentList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkAttachmentList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -468,7 +470,8 @@
       byItem: NetworkAttachmentsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NetworkAttachmentsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkAttachmentAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkAttachmentAggregatedList
+        in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -640,7 +643,8 @@
     public func list(
       byItem: NetworkAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkAttachment, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NetworkAttachmentList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkAttachmentList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -114,7 +114,7 @@ public struct AsymmetricSignResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case signature = "signature"
     case signatureCrc32C = "signatureCrc32c"
     case verifiedDigestCrc32C = "verifiedDigestCrc32c"
@@ -144,7 +144,7 @@ public struct AsymmetricSignResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     try container.encode(self.protectionLevel, forKey: .protectionLevel)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.AsymmetricSignResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

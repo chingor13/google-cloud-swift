@@ -93,7 +93,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "METRICX_VERSION_UNSPECIFIED"
         case .metricx24Ref: return "METRICX_24_REF"
@@ -107,7 +107,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "METRICX_VERSION_UNSPECIFIED": self = .unspecified
         case "METRICX_24_REF": self = .metricx24Ref
@@ -161,7 +161,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MetricxSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

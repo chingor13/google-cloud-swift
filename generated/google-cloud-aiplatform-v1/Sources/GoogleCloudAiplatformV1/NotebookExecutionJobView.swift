@@ -58,7 +58,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "NOTEBOOK_EXECUTION_JOB_VIEW_UNSPECIFIED"
       case .basic: return "NOTEBOOK_EXECUTION_JOB_VIEW_BASIC"
@@ -71,7 +71,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "NOTEBOOK_EXECUTION_JOB_VIEW_UNSPECIFIED": self = .unspecified
       case "NOTEBOOK_EXECUTION_JOB_VIEW_BASIC": self = .basic

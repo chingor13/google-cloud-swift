@@ -40,7 +40,7 @@ public struct GetKeyStringResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.apikeys.v2.GetKeyStringResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

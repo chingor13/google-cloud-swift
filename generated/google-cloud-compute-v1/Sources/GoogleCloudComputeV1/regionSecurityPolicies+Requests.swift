@@ -58,7 +58,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.addRuleRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -115,7 +115,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -157,7 +157,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -202,7 +202,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.getRuleRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -264,7 +264,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -396,7 +396,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -461,7 +461,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.patchRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -517,7 +517,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.patchRuleRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -562,7 +562,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.removeRuleRequest"
       }
@@ -625,7 +625,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionSecurityPolicies.setLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

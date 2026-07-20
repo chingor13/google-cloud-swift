@@ -188,7 +188,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SSL_MODE_UNSPECIFIED"
         case .allowUnencryptedAndEncrypted: return "ALLOW_UNENCRYPTED_AND_ENCRYPTED"
@@ -202,7 +202,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SSL_MODE_UNSPECIFIED": self = .unspecified
         case "ALLOW_UNENCRYPTED_AND_ENCRYPTED": self = .allowUnencryptedAndEncrypted
@@ -303,7 +303,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CA_MODE_UNSPECIFIED"
         case .googleManagedInternalCa: return "GOOGLE_MANAGED_INTERNAL_CA"
@@ -317,7 +317,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CA_MODE_UNSPECIFIED": self = .unspecified
         case "GOOGLE_MANAGED_INTERNAL_CA": self = .googleManagedInternalCa
@@ -418,7 +418,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SERVER_CERTIFICATE_ROTATION_MODE_UNSPECIFIED"
         case .noAutomaticRotation: return "NO_AUTOMATIC_ROTATION"
@@ -431,7 +431,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SERVER_CERTIFICATE_ROTATION_MODE_UNSPECIFIED": self = .unspecified
         case "NO_AUTOMATIC_ROTATION": self = .noAutomaticRotation
@@ -482,7 +482,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.IpConfiguration"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

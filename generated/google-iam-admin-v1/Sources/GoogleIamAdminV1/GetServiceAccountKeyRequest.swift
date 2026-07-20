@@ -49,7 +49,7 @@ public struct GetServiceAccountKeyRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.GetServiceAccountKeyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

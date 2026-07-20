@@ -62,7 +62,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -121,7 +121,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.deprecateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -160,7 +160,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -200,7 +200,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.getFromFamilyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -242,7 +242,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.getIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -301,7 +301,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -430,7 +430,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -489,7 +489,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.patchRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -533,7 +533,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.setIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -577,7 +577,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.setLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -621,7 +621,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.images.testIamPermissionsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -93,7 +93,7 @@ public struct ListServiceAccountKeysRequest: Codable, Equatable, GoogleCloudWkt.
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "KEY_TYPE_UNSPECIFIED"
       case .userManaged: return "USER_MANAGED"
@@ -106,7 +106,7 @@ public struct ListServiceAccountKeysRequest: Codable, Equatable, GoogleCloudWkt.
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "KEY_TYPE_UNSPECIFIED": self = .unspecified
       case "USER_MANAGED": self = .userManaged
@@ -157,7 +157,7 @@ public struct ListServiceAccountKeysRequest: Codable, Equatable, GoogleCloudWkt.
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.ListServiceAccountKeysRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -111,7 +111,7 @@
       byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstanceGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -256,7 +256,8 @@
     public func list(
       byItem: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -286,7 +287,7 @@
       byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceWithNamedPorts, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
         var request = byItem
         request.pageToken = token
         return try await self.listInstances(request: request, options: options)
@@ -650,7 +651,7 @@
       byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstanceGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -797,7 +798,8 @@
     public func list(
       byItem: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -836,7 +838,7 @@
       byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceWithNamedPorts, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

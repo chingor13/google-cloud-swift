@@ -43,7 +43,7 @@ public struct GetOperationRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.longrunning.GetOperationRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

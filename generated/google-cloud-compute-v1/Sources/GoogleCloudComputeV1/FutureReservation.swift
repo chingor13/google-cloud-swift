@@ -192,7 +192,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .tdx: return "CONFIDENTIAL_COMPUTE_TYPE_TDX"
         case .unspecified: return "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED"
@@ -204,7 +204,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONFIDENTIAL_COMPUTE_TYPE_TDX": self = .tdx
         case "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED": self = .unspecified
@@ -291,7 +291,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .dense: return "DENSE"
         case .unspecified: return "DEPLOYMENT_TYPE_UNSPECIFIED"
@@ -303,7 +303,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DENSE": self = .dense
         case "DEPLOYMENT_TYPE_UNSPECIFIED": self = .unspecified
@@ -393,7 +393,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .draft: return "DRAFT"
         case .unspecified: return "PLANNING_STATUS_UNSPECIFIED"
@@ -406,7 +406,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DRAFT": self = .draft
         case "PLANNING_STATUS_UNSPECIFIED": self = .unspecified
@@ -502,7 +502,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .calendar: return "CALENDAR"
         case .`default`: return "DEFAULT"
@@ -515,7 +515,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CALENDAR": self = .calendar
         case "DEFAULT": self = .`default`
@@ -610,7 +610,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .grouped: return "GROUPED"
         case .groupMaintenanceTypeUnspecified: return "GROUP_MAINTENANCE_TYPE_UNSPECIFIED"
@@ -623,7 +623,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GROUPED": self = .grouped
         case "GROUP_MAINTENANCE_TYPE_UNSPECIFIED": self = .groupMaintenanceTypeUnspecified
@@ -674,7 +674,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FutureReservation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

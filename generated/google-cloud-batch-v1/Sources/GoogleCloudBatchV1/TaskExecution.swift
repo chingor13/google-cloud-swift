@@ -51,7 +51,7 @@ public struct TaskExecution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.TaskExecution"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

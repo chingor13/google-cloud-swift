@@ -407,7 +407,7 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.Job.ApplicationInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -456,7 +456,7 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.Job.DerivedInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -508,7 +508,7 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.Job.ProcessingOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -519,7 +519,9 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.talent.v4.Job" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.talent.v4.Job"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

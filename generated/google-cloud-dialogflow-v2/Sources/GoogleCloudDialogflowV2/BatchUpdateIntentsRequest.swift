@@ -57,7 +57,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case parent = "parent"
       case intentBatchUri = "intentBatchUri"
       case intentBatchInline = "intentBatchInline"
@@ -124,7 +124,7 @@
       indirect case intentBatchInline(IntentBatch?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.BatchUpdateIntentsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

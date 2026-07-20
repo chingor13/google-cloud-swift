@@ -114,7 +114,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .matchAll: return "MATCH_ALL"
         case .matchAny: return "MATCH_ANY"
@@ -127,7 +127,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MATCH_ALL": self = .matchAll
         case "MATCH_ANY": self = .matchAny
@@ -178,7 +178,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.MetadataFilter"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

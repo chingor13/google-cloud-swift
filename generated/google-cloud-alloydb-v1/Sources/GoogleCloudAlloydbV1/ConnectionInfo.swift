@@ -56,7 +56,7 @@ public struct ConnectionInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ConnectionInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

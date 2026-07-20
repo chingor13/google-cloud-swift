@@ -145,7 +145,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case remote = "remote"
       case local = "local"
     }
@@ -208,7 +208,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -268,7 +268,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -323,7 +323,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SHARED_DEPLOYMENT_POLICY_UNSPECIFIED"
         case .allowed: return "ALLOWED"
@@ -336,7 +336,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SHARED_DEPLOYMENT_POLICY_UNSPECIFIED": self = .unspecified
         case "ALLOWED": self = .allowed
@@ -400,7 +400,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case local(Cluster.ControlPlane.Local?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.ControlPlane"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -465,7 +465,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress"
       }
@@ -500,7 +500,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig"
       }
@@ -512,7 +512,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -568,7 +568,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -678,7 +678,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "TYPE_UNSPECIFIED"
         case .userInitiatedUpgrade: return "USER_INITIATED_UPGRADE"
@@ -691,7 +691,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TYPE_UNSPECIFIED": self = .unspecified
         case "USER_INITIATED_UPGRADE": self = .userInitiatedUpgrade
@@ -780,7 +780,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SCHEDULE_UNSPECIFIED"
         case .immediately: return "IMMEDIATELY"
@@ -792,7 +792,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SCHEDULE_UNSPECIFIED": self = .unspecified
         case "IMMEDIATELY": self = .immediately
@@ -884,7 +884,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .reconciling: return "RECONCILING"
@@ -898,7 +898,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "RECONCILING": self = .reconciling
@@ -952,7 +952,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -989,7 +989,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1072,7 +1072,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .disconnected: return "DISCONNECTED"
@@ -1086,7 +1086,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "DISCONNECTED": self = .disconnected
@@ -1140,7 +1140,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster.ConnectionState"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1202,7 +1202,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATUS_UNSPECIFIED"
       case .provisioning: return "PROVISIONING"
@@ -1218,7 +1218,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATUS_UNSPECIFIED": self = .unspecified
       case "PROVISIONING": self = .provisioning
@@ -1319,7 +1319,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "RELEASE_CHANNEL_UNSPECIFIED"
       case .`none`: return "NONE"
@@ -1332,7 +1332,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "RELEASE_CHANNEL_UNSPECIFIED": self = .unspecified
       case "NONE": self = .`none`
@@ -1383,7 +1383,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.Cluster"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

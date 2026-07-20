@@ -104,7 +104,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .conditionsNotMet: return "CONDITIONS_NOT_MET"
         case .notSupported: return "NOT_SUPPORTED"
@@ -119,7 +119,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONDITIONS_NOT_MET": self = .conditionsNotMet
         case "NOT_SUPPORTED": self = .notSupported
@@ -176,7 +176,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.FutureResourcesRecommendationOtherLocation"
     }

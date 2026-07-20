@@ -481,7 +481,7 @@
       byItem: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -509,7 +509,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse in
         var request = byItem
         request.pageToken = token
@@ -546,7 +546,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse in
         var request = byItem
         request.pageToken = token
@@ -575,7 +575,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp in
         var request = byItem
         request.pageToken = token
@@ -2053,7 +2053,7 @@
       byItem: RegionInstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManager, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2094,7 +2094,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceManagedByIgmError, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListErrorsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
@@ -2138,7 +2138,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ManagedInstance, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstancesResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
@@ -2182,7 +2182,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PerInstanceConfig, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.RegionInstanceGroupManagersListInstanceConfigsResp in
         throw GoogleCloudGax.RequestError.unimplemented
       }

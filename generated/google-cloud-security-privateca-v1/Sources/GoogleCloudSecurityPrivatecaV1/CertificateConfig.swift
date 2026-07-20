@@ -96,7 +96,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig"
     }
@@ -133,7 +133,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig.KeyId"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -144,7 +144,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

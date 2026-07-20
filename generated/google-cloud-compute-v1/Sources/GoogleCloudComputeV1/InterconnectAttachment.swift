@@ -386,7 +386,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case adminEnabled = "adminEnabled"
       case attachmentGroup = "attachmentGroup"
       case bandwidth = "bandwidth"
@@ -657,7 +657,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .bps100G: return "BPS_100G"
         case .bps100M: return "BPS_100M"
@@ -681,7 +681,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BPS_100G": self = .bps100G
         case "BPS_100M": self = .bps100M
@@ -805,7 +805,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .availabilityDomain1: return "AVAILABILITY_DOMAIN_1"
         case .availabilityDomain2: return "AVAILABILITY_DOMAIN_2"
@@ -818,7 +818,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AVAILABILITY_DOMAIN_1": self = .availabilityDomain1
         case "AVAILABILITY_DOMAIN_2": self = .availabilityDomain2
@@ -915,7 +915,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipsec: return "IPSEC"
         case .`none`: return "NONE"
@@ -927,7 +927,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IPSEC": self = .ipsec
         case "NONE": self = .`none`
@@ -1017,7 +1017,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .osActive: return "OS_ACTIVE"
         case .osUnprovisioned: return "OS_UNPROVISIONED"
@@ -1029,7 +1029,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "OS_ACTIVE": self = .osActive
         case "OS_UNPROVISIONED": self = .osUnprovisioned
@@ -1117,7 +1117,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipv4Ipv6: return "IPV4_IPV6"
         case .ipv4Only: return "IPV4_ONLY"
@@ -1129,7 +1129,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IPV4_IPV6": self = .ipv4Ipv6
         case "IPV4_ONLY": self = .ipv4Only
@@ -1237,7 +1237,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .defunct: return "DEFUNCT"
@@ -1254,7 +1254,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "DEFUNCT": self = .defunct
@@ -1363,7 +1363,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .dedicated: return "DEDICATED"
         case .l2Dedicated: return "L2_DEDICATED"
@@ -1377,7 +1377,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEDICATED": self = .dedicated
         case "L2_DEDICATED": self = .l2Dedicated
@@ -1431,7 +1431,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectAttachment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

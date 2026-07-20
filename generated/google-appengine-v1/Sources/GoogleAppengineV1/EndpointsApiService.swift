@@ -112,7 +112,7 @@ public struct EndpointsApiService: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecifiedRolloutStrategy: return "UNSPECIFIED_ROLLOUT_STRATEGY"
       case .fixed: return "FIXED"
@@ -125,7 +125,7 @@ public struct EndpointsApiService: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNSPECIFIED_ROLLOUT_STRATEGY": self = .unspecifiedRolloutStrategy
       case "FIXED": self = .fixed
@@ -176,7 +176,7 @@ public struct EndpointsApiService: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.EndpointsApiService"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

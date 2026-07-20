@@ -131,7 +131,7 @@ public class ApiKeysClient: Clients.ApiKeysProtocol {
   public func listKeys(
     byItem: ListKeysRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Key, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleApiApikeysV2.ListKeysResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleApiApikeysV2.ListKeysResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listKeys(request: request, options: options)
@@ -614,7 +614,7 @@ extension Clients.ApiKeysProtocol {
   public func listKeys(
     byItem: ListKeysRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Key, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleApiApikeysV2.ListKeysResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleApiApikeysV2.ListKeysResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

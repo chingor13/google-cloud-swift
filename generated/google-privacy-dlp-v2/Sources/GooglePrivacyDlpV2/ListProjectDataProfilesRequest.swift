@@ -95,7 +95,7 @@ public struct ListProjectDataProfilesRequest: Codable, Equatable, GoogleCloudWkt
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ListProjectDataProfilesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

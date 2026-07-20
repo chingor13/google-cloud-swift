@@ -65,7 +65,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SQL_INSTANCE_TYPE_UNSPECIFIED"
       case .cloudSqlInstance: return "CLOUD_SQL_INSTANCE"
@@ -80,7 +80,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SQL_INSTANCE_TYPE_UNSPECIFIED": self = .unspecified
       case "CLOUD_SQL_INSTANCE": self = .cloudSqlInstance

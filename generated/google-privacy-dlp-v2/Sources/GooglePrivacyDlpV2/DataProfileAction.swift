@@ -40,7 +40,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case exportData = "exportData"
     case pubSubNotification = "pubSubNotification"
     case publishToChronicle = "publishToChronicle"
@@ -176,7 +176,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.Export"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -271,7 +271,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DETAIL_LEVEL_UNSPECIFIED"
         case .tableProfile: return "TABLE_PROFILE"
@@ -285,7 +285,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DETAIL_LEVEL_UNSPECIFIED": self = .unspecified
         case "TABLE_PROFILE": self = .tableProfile
@@ -339,7 +339,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PubSubNotification"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -370,7 +370,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToChronicle"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -402,7 +402,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter"
     }
@@ -444,7 +444,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -528,7 +528,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case tag = "tag"
         case sensitivityScore = "sensitivityScore"
       }
@@ -575,7 +575,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
         indirect case sensitivityScore(SensitivityScore?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition"
       }
@@ -610,7 +610,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case namespacedValue = "namespacedValue"
       }
 
@@ -655,7 +655,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
         case namespacedValue(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -666,7 +666,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -726,7 +726,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EVENT_TYPE_UNSPECIFIED"
       case .newProfile: return "NEW_PROFILE"
@@ -741,7 +741,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EVENT_TYPE_UNSPECIFIED": self = .unspecified
       case "NEW_PROFILE": self = .newProfile
@@ -818,7 +818,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case publishToDataplexCatalog(DataProfileAction.PublishToDataplexCatalog?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

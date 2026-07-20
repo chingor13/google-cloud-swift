@@ -69,7 +69,7 @@ public struct CreateDlpJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case inspectJob = "inspectJob"
     case riskJob = "riskJob"
@@ -127,7 +127,7 @@ public struct CreateDlpJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case riskJob(RiskAnalysisJobConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CreateDlpJobRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

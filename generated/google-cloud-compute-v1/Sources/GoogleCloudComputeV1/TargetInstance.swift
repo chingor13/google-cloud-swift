@@ -137,7 +137,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .noNat: return "NO_NAT"
         case .unknownIntValue: return nil
@@ -148,7 +148,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NO_NAT": self = .noNat
         default: self = .unknownStringValue(stringValue)
@@ -193,7 +193,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.TargetInstance"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

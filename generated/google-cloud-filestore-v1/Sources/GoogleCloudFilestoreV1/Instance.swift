@@ -121,7 +121,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case description = "description"
     case state = "state"
@@ -230,7 +230,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.IOPSPerTB"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -264,7 +264,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.FixedIOPS"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -303,7 +303,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case iopsPerTb = "iopsPerTb"
       case fixedIops = "fixedIops"
     }
@@ -370,7 +370,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case fixedIops(Instance.FixedIOPS?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.PerformanceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -417,7 +417,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.PerformanceLimits"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -501,7 +501,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .creating: return "CREATING"
@@ -523,7 +523,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "CREATING": self = .creating
@@ -668,7 +668,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TIER_UNSPECIFIED"
       case .standard: return "STANDARD"
@@ -687,7 +687,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TIER_UNSPECIFIED": self = .unspecified
       case "STANDARD": self = .standard
@@ -794,7 +794,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SUSPENSION_REASON_UNSPECIFIED"
       case .kmsKeyIssue: return "KMS_KEY_ISSUE"
@@ -806,7 +806,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SUSPENSION_REASON_UNSPECIFIED": self = .unspecified
       case "KMS_KEY_ISSUE": self = .kmsKeyIssue
@@ -896,7 +896,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "FILE_PROTOCOL_UNSPECIFIED"
       case .nfsV3: return "NFS_V3"
@@ -909,7 +909,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "FILE_PROTOCOL_UNSPECIFIED": self = .unspecified
       case "NFS_V3": self = .nfsV3
@@ -960,7 +960,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.filestore.v1.Instance"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

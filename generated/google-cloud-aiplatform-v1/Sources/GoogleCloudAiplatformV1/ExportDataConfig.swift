@@ -114,7 +114,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case gcsDestination = "gcsDestination"
       case fractionSplit = "fractionSplit"
       case filterSplit = "filterSplit"
@@ -237,7 +237,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "EXPORT_USE_UNSPECIFIED"
         case .customCodeTraining: return "CUSTOM_CODE_TRAINING"
@@ -249,7 +249,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXPORT_USE_UNSPECIFIED": self = .unspecified
         case "CUSTOM_CODE_TRAINING": self = .customCodeTraining
@@ -320,7 +320,7 @@
       indirect case filterSplit(ExportFilterSplit?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportDataConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

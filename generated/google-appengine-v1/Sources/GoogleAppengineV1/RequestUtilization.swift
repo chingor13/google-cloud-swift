@@ -44,7 +44,7 @@ public struct RequestUtilization: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.RequestUtilization"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

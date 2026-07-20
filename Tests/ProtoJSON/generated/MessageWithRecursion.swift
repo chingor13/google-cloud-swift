@@ -49,7 +49,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case singular = "singular"
     case `optional` = "optional"
     case repeated = "repeated"
@@ -97,7 +97,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.Level0"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -129,7 +129,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.Level1"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -161,7 +161,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.NonRecursive"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -172,7 +172,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -57,7 +57,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case instance = "instance"
       case project = "project"
       case publicKey = "public_key"
@@ -88,7 +88,7 @@
       try container.encode(self.validDuration, forKey: .validDuration)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.GenerateEphemeralCertRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

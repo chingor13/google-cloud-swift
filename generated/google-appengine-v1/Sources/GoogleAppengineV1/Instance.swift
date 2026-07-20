@@ -178,7 +178,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "LIVENESS_STATE_UNSPECIFIED"
         case .unknown: return "UNKNOWN"
@@ -194,7 +194,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LIVENESS_STATE_UNSPECIFIED": self = .unspecified
         case "UNKNOWN": self = .unknown
@@ -254,7 +254,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.appengine.v1.Instance.Liveness"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -303,7 +303,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "UNSPECIFIED"
       case .resident: return "RESIDENT"
@@ -316,7 +316,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNSPECIFIED": self = .unspecified
       case "RESIDENT": self = .resident
@@ -367,7 +367,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.Instance"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

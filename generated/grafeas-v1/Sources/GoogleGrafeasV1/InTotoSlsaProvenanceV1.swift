@@ -46,7 +46,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case type = "_type"
     case subject = "subject"
     case predicateType = "predicateType"
@@ -96,7 +96,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -134,7 +134,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -178,7 +178,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -214,7 +214,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.RunDetails"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -250,7 +250,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -286,7 +286,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -297,7 +297,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWkt._AnyPac
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

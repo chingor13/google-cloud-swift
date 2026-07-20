@@ -40,7 +40,7 @@ public struct DeleteServiceRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.DeleteServiceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

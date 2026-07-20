@@ -60,7 +60,7 @@ public struct DateShiftConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case upperBoundDays = "upperBoundDays"
     case lowerBoundDays = "lowerBoundDays"
     case context = "context"
@@ -112,7 +112,7 @@ public struct DateShiftConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case cryptoKey(CryptoKey?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DateShiftConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

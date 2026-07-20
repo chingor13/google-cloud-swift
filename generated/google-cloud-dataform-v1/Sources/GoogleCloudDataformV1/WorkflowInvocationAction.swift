@@ -68,7 +68,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case bigqueryAction = "bigqueryAction"
     case notebookAction = "notebookAction"
     case dataPreparationAction = "dataPreparationAction"
@@ -167,7 +167,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -206,7 +206,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.NotebookAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -248,7 +248,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case contentsYaml = "contentsYaml"
       case contentsSql = "contentsSql"
       case generatedSql = "generatedSql"
@@ -328,7 +328,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition"
       }
@@ -368,7 +368,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable"
       }
@@ -403,7 +403,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case replace = "replace"
         case append = "append"
         case maximum = "maximum"
@@ -482,7 +482,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
           WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig"
       }
@@ -514,7 +514,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode"
       }
@@ -549,7 +549,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode"
       }
@@ -571,7 +571,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
       indirect case contentsSql(WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction.DataPreparationAction"
     }
@@ -638,7 +638,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .pending: return "PENDING"
       case .running: return "RUNNING"
@@ -655,7 +655,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PENDING": self = .pending
       case "RUNNING": self = .running
@@ -728,7 +728,7 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
     indirect case dataPreparationAction(WorkflowInvocationAction.DataPreparationAction?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocationAction"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

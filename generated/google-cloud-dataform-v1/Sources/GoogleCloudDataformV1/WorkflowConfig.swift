@@ -105,7 +105,7 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case workflowInvocation = "workflowInvocation"
       case errorStatus = "errorStatus"
       case executionTime = "executionTime"
@@ -164,7 +164,7 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case errorStatus(GoogleRpc.Status?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.WorkflowConfig.ScheduledExecutionRecord"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -175,7 +175,7 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.WorkflowConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

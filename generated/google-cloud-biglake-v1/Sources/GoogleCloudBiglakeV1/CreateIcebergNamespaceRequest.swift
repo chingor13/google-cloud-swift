@@ -44,7 +44,7 @@ public struct CreateIcebergNamespaceRequest: Codable, Equatable, GoogleCloudWkt.
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case icebergNamespace = "namespace"
   }
@@ -62,7 +62,7 @@ public struct CreateIcebergNamespaceRequest: Codable, Equatable, GoogleCloudWkt.
     try container.encode(self.icebergNamespace, forKey: .icebergNamespace)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.CreateIcebergNamespaceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

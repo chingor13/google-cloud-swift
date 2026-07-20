@@ -55,7 +55,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case parent = "parent"
       case flowUri = "flowUri"
       case flowContent = "flowContent"
@@ -152,7 +152,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "IMPORT_OPTION_UNSPECIFIED"
         case .keep: return "KEEP"
@@ -165,7 +165,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IMPORT_OPTION_UNSPECIFIED": self = .unspecified
         case "KEEP": self = .keep
@@ -232,7 +232,7 @@
       case flowContent(Foundation.Data)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ImportFlowRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

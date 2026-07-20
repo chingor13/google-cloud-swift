@@ -52,7 +52,7 @@ public struct TokenOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case awsPrincipalTagsOptions = "awsPrincipalTagsOptions"
     case audience = "audience"
     case nonce = "nonce"
@@ -103,7 +103,7 @@ public struct TokenOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case awsPrincipalTagsOptions(AwsPrincipalTagsOptions?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.TokenOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

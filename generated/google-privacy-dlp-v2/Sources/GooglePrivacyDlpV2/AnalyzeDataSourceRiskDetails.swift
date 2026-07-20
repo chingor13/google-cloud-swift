@@ -49,7 +49,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case requestedPrivacyMetric = "requestedPrivacyMetric"
     case requestedSourceTable = "requestedSourceTable"
     case numericalStatsResult = "numericalStatsResult"
@@ -168,7 +168,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.NumericalStatsResult"
     }
@@ -240,7 +240,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult.CategoricalStatsHistogramBucket"
       }
@@ -252,7 +252,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult"
     }
@@ -317,7 +317,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityEquivalenceClass"
       }
@@ -366,7 +366,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityHistogramBucket"
       }
@@ -378,7 +378,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult"
     }
@@ -447,7 +447,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityEquivalenceClass"
       }
@@ -498,7 +498,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityHistogramBucket"
       }
@@ -510,7 +510,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult"
     }
@@ -580,7 +580,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationQuasiIdValues"
       }
@@ -636,7 +636,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationHistogramBucket"
       }
@@ -648,7 +648,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult"
     }
@@ -727,7 +727,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues"
       }
@@ -786,7 +786,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket"
       }
@@ -798,7 +798,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult"
     }
@@ -833,7 +833,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions"
     }
@@ -862,7 +862,7 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleCloudWkt._
       AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

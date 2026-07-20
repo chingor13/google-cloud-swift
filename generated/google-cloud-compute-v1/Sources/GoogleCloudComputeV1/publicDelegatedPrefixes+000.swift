@@ -65,7 +65,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -238,7 +239,7 @@
       byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -503,7 +504,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -697,7 +699,7 @@
       byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

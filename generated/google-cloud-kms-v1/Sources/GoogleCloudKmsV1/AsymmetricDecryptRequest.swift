@@ -79,7 +79,7 @@ public struct AsymmetricDecryptRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case ciphertext = "ciphertext"
     case ciphertextCrc32C = "ciphertextCrc32c"
@@ -100,7 +100,7 @@ public struct AsymmetricDecryptRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     try container.encode(self.ciphertextCrc32C, forKey: .ciphertextCrc32C)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.AsymmetricDecryptRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

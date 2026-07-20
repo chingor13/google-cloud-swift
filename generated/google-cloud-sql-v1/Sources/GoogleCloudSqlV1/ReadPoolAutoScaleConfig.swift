@@ -86,7 +86,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ReadPoolAutoScaleConfig.TargetMetric"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -97,7 +97,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ReadPoolAutoScaleConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

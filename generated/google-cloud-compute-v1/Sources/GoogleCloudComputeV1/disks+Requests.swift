@@ -70,7 +70,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.addResourcePoliciesRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -212,7 +212,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.aggregatedListRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -271,7 +271,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.bulkInsertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -333,7 +333,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.bulkSetLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -399,7 +399,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.createSnapshotRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -456,7 +456,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -498,7 +498,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -543,7 +543,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.getIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -605,7 +605,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -737,7 +737,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -799,7 +799,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.removeResourcePoliciesRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -861,7 +861,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.resizeRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -908,7 +908,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.setIamPolicyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -970,7 +970,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.setLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1032,7 +1032,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.startAsyncReplicationRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1089,7 +1089,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.stopAsyncReplicationRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1149,7 +1149,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.stopGroupAsyncReplicationRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1196,7 +1196,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.testIamPermissionsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1263,7 +1263,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.updateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1325,7 +1325,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.disks.updateKmsKeyRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

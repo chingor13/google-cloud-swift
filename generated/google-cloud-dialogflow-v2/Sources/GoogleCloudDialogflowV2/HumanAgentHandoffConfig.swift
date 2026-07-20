@@ -45,7 +45,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case livePersonConfig = "livePersonConfig"
       case salesforceLiveAgentConfig = "salesforceLiveAgentConfig"
     }
@@ -113,7 +113,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentHandoffConfig.LivePersonConfig"
       }
@@ -160,7 +160,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentHandoffConfig.SalesforceLiveAgentConfig"
       }
@@ -180,7 +180,7 @@
       indirect case salesforceLiveAgentConfig(HumanAgentHandoffConfig.SalesforceLiveAgentConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentHandoffConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

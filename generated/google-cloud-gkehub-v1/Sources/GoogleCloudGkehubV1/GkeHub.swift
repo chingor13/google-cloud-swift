@@ -73,7 +73,8 @@ public class GkeHubClient: Clients.GkeHubProtocol {
   public func listMemberships(
     byItem: ListMembershipsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Membership, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListMembershipsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listMemberships(request: request, options: options)
@@ -99,7 +100,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListBoundMembershipsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Membership, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListBoundMembershipsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListBoundMembershipsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listBoundMemberships(request: request, options: options)
@@ -122,7 +123,8 @@ public class GkeHubClient: Clients.GkeHubProtocol {
   public func listFeatures(
     byItem: ListFeaturesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Feature, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListFeaturesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListFeaturesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listFeatures(request: request, options: options)
@@ -745,7 +747,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
   public func listFleets(
     byItem: ListFleetsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Fleet, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListFleetsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListFleetsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listFleets(request: request, options: options)
@@ -959,7 +961,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListScopeNamespacesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Namespace, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListScopeNamespacesResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopeNamespacesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listScopeNamespaces(request: request, options: options)
@@ -1173,7 +1175,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListScopeRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RBACRoleBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListScopeRBACRoleBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopeRBACRoleBindingsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listScopeRbacroleBindings(request: request, options: options)
@@ -1386,7 +1388,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
   public func listScopes(
     byItem: ListScopesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Scope, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListScopesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listScopes(request: request, options: options)
@@ -1410,7 +1412,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListPermittedScopesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Scope, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListPermittedScopesResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListPermittedScopesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPermittedScopes(request: request, options: options)
@@ -1626,7 +1628,7 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListMembershipBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<MembershipBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListMembershipBindingsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listMembershipBindings(request: request, options: options)
@@ -1843,7 +1845,8 @@ public class GkeHubClient: Clients.GkeHubProtocol {
     byItem: ListMembershipRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RBACRoleBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipRBACRoleBindingsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudGkehubV1.ListMembershipRBACRoleBindingsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listMembershipRbacroleBindings(request: request, options: options)
@@ -1880,7 +1883,8 @@ public class GkeHubClient: Clients.GkeHubProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -2940,7 +2944,8 @@ extension Clients.GkeHubProtocol {
   public func listMemberships(
     byItem: ListMembershipsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Membership, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListMembershipsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2977,7 +2982,7 @@ extension Clients.GkeHubProtocol {
     byItem: ListBoundMembershipsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Membership, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListBoundMembershipsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListBoundMembershipsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3013,7 +3018,8 @@ extension Clients.GkeHubProtocol {
   public func listFeatures(
     byItem: ListFeaturesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Feature, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListFeaturesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListFeaturesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3467,7 +3473,7 @@ extension Clients.GkeHubProtocol {
   public func listFleets(
     byItem: ListFleetsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Fleet, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListFleetsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListFleetsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3642,7 +3648,7 @@ extension Clients.GkeHubProtocol {
     byItem: ListScopeNamespacesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Namespace, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListScopeNamespacesResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopeNamespacesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3817,7 +3823,7 @@ extension Clients.GkeHubProtocol {
     byItem: ListScopeRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RBACRoleBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListScopeRBACRoleBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopeRBACRoleBindingsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3983,7 +3989,7 @@ extension Clients.GkeHubProtocol {
   public func listScopes(
     byItem: ListScopesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Scope, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudGkehubV1.ListScopesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListScopesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4020,7 +4026,7 @@ extension Clients.GkeHubProtocol {
     byItem: ListPermittedScopesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Scope, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListPermittedScopesResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListPermittedScopesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4197,7 +4203,7 @@ extension Clients.GkeHubProtocol {
     byItem: ListMembershipBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<MembershipBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipBindingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudGkehubV1.ListMembershipBindingsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4372,7 +4378,8 @@ extension Clients.GkeHubProtocol {
     byItem: ListMembershipRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RBACRoleBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudGkehubV1.ListMembershipRBACRoleBindingsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudGkehubV1.ListMembershipRBACRoleBindingsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4420,7 +4427,8 @@ extension Clients.GkeHubProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

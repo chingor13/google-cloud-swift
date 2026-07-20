@@ -105,7 +105,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case bigQuerySource = "bigQuerySource"
       case featureRegistrySource = "featureRegistrySource"
       case vertexRagSource = "vertexRagSource"
@@ -230,7 +230,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.BigQuerySource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -273,7 +273,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.SyncConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -339,7 +339,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case treeAhConfig = "treeAhConfig"
         case bruteForceConfig = "bruteForceConfig"
         case embeddingColumn = "embeddingColumn"
@@ -420,7 +420,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.IndexConfig.BruteForceConfig"
         }
@@ -456,7 +456,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.IndexConfig.TreeAHConfig"
         }
@@ -518,7 +518,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "DISTANCE_MEASURE_TYPE_UNSPECIFIED"
           case .squaredL2Distance: return "SQUARED_L2_DISTANCE"
@@ -532,7 +532,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "DISTANCE_MEASURE_TYPE_UNSPECIFIED": self = .unspecified
           case "SQUARED_L2_DISTANCE": self = .squaredL2Distance
@@ -600,7 +600,7 @@
         indirect case bruteForceConfig(FeatureView.IndexConfig.BruteForceConfig?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.IndexConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -665,7 +665,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.FeatureRegistrySource.FeatureGroup"
         }
@@ -677,7 +677,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.FeatureRegistrySource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -724,7 +724,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.VertexRagSource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -762,7 +762,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.OptimizedConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -797,7 +797,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView.BigtableMetadata"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -853,7 +853,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SERVICE_AGENT_TYPE_UNSPECIFIED"
         case .project: return "SERVICE_AGENT_TYPE_PROJECT"
@@ -866,7 +866,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SERVICE_AGENT_TYPE_UNSPECIFIED": self = .unspecified
         case "SERVICE_AGENT_TYPE_PROJECT": self = .project
@@ -928,7 +928,7 @@
       indirect case vertexRagSource(FeatureView.VertexRagSource?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureView"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

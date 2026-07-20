@@ -109,7 +109,7 @@ public struct DecryptRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case ciphertext = "ciphertext"
     case additionalAuthenticatedData = "additionalAuthenticatedData"
@@ -139,7 +139,7 @@ public struct DecryptRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       self.additionalAuthenticatedDataCrc32C, forKey: .additionalAuthenticatedDataCrc32C)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.DecryptRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

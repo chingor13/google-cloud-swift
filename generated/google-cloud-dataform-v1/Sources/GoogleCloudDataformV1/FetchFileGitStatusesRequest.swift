@@ -40,7 +40,7 @@ public struct FetchFileGitStatusesRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.FetchFileGitStatusesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

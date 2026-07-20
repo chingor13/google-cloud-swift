@@ -51,7 +51,7 @@ public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case outputPath = "outputPath"
     case cloudStorageFileSet = "cloudStorageFileSet"
     case bigQueryField = "bigQueryField"
@@ -106,7 +106,7 @@ public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWkt._A
     indirect case bigQueryField(BigQueryField?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.LargeCustomDictionaryConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

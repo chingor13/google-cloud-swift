@@ -338,7 +338,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_OPERATION_TYPE_UNSPECIFIED"
         case .`import`: return "IMPORT"
@@ -401,7 +401,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_OPERATION_TYPE_UNSPECIFIED": self = .unspecified
         case "IMPORT": self = .`import`
@@ -646,7 +646,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_OPERATION_STATUS_UNSPECIFIED"
         case .pending: return "PENDING"
@@ -660,7 +660,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_OPERATION_STATUS_UNSPECIFIED": self = .unspecified
         case "PENDING": self = .pending
@@ -714,7 +714,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Operation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -61,7 +61,7 @@ public enum RecommendationsFilteringOption: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED"
     case .recommendationsFilteringDisabled: return "RECOMMENDATIONS_FILTERING_DISABLED"
@@ -74,7 +74,7 @@ public enum RecommendationsFilteringOption: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED": self = .unspecified
     case "RECOMMENDATIONS_FILTERING_DISABLED": self = .recommendationsFilteringDisabled

@@ -48,7 +48,7 @@ public struct UpdateProductSetRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.UpdateProductSetRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -98,7 +98,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case creationTimestamp = "creationTimestamp"
       case description = "description"
       case fingerprint = "fingerprint"
@@ -157,7 +157,7 @@
       try container.encode(self.selfLinkWithId, forKey: .selfLinkWithId)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.CompositeHealthCheck"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

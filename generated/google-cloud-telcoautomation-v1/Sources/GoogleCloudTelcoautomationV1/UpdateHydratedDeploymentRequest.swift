@@ -44,7 +44,7 @@ public struct UpdateHydratedDeploymentRequest: Codable, Equatable, GoogleCloudWk
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.UpdateHydratedDeploymentRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

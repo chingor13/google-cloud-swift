@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.aggregatedListRequest"
       }
@@ -208,7 +208,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.deleteRequest"
       }
@@ -251,7 +251,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -310,7 +310,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.insertRequest"
       }
@@ -443,7 +443,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -490,7 +490,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionNotificationEndpoints.testIamPermissionsRequest"
       }

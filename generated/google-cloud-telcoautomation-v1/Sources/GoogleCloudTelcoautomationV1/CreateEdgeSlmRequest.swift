@@ -63,7 +63,7 @@ public struct CreateEdgeSlmRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.CreateEdgeSlmRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

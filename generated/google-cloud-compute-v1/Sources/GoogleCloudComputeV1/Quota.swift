@@ -415,7 +415,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .a2Cpus: return "A2_CPUS"
         case .affinityGroups: return "AFFINITY_GROUPS"
@@ -602,7 +602,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "A2_CPUS": self = .a2Cpus
         case "AFFINITY_GROUPS": self = .affinityGroups
@@ -1149,7 +1149,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Quota"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

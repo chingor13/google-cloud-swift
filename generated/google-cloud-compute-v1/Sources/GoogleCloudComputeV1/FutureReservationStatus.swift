@@ -121,7 +121,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .amendmentApproved: return "AMENDMENT_APPROVED"
         case .amendmentDeclined: return "AMENDMENT_DECLINED"
@@ -135,7 +135,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AMENDMENT_APPROVED": self = .amendmentApproved
         case "AMENDMENT_DECLINED": self = .amendmentDeclined
@@ -269,7 +269,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .approved: return "APPROVED"
         case .cancelled: return "CANCELLED"
@@ -292,7 +292,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "APPROVED": self = .approved
         case "CANCELLED": self = .cancelled
@@ -373,7 +373,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FutureReservationStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

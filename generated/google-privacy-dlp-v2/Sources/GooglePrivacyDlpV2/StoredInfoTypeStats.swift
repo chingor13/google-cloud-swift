@@ -40,7 +40,7 @@ public struct StoredInfoTypeStats: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case largeCustomDictionary = "largeCustomDictionary"
   }
 
@@ -82,7 +82,7 @@ public struct StoredInfoTypeStats: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case largeCustomDictionary(LargeCustomDictionaryStats?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.StoredInfoTypeStats"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -52,7 +52,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case instance = "instance"
       case project = "project"
       case enableFinalBackup = "enableFinalBackup"
@@ -118,7 +118,7 @@
       indirect case finalBackupExpiryTime(GoogleCloudWkt.Timestamp?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesDeleteRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

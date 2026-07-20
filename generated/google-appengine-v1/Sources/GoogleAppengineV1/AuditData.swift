@@ -43,7 +43,7 @@ public struct AuditData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case updateService = "updateService"
     case createVersion = "createVersion"
   }
@@ -98,7 +98,7 @@ public struct AuditData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case createVersion(CreateVersionMethod?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.AuditData"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

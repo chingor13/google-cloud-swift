@@ -339,7 +339,7 @@
                   return copy
                 }
 
-                public static var _anyTypeUrl: String {
+                public static var _anyTypeUrl: Swift.String {
                   return
                     "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.BoostSpecs.BoostSpec.ConditionBoostSpec.BoostControlSpec.ControlPoint"
                 }
@@ -401,7 +401,7 @@
                 /// Returns the string value (or name) associated with the enumeration.
                 ///
                 /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-                public var stringValue: String? {
+                public var stringValue: Swift.String? {
                   switch self {
                   case .unspecified: return "ATTRIBUTE_TYPE_UNSPECIFIED"
                   case .numerical: return "NUMERICAL"
@@ -414,7 +414,7 @@
                 /// Initialize from a string value.
                 ///
                 /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-                public init(stringValue: String) {
+                public init(stringValue: Swift.String) {
                   switch stringValue {
                   case "ATTRIBUTE_TYPE_UNSPECIFIED": self = .unspecified
                   case "NUMERICAL": self = .numerical
@@ -506,7 +506,7 @@
                 /// Returns the string value (or name) associated with the enumeration.
                 ///
                 /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-                public var stringValue: String? {
+                public var stringValue: Swift.String? {
                   switch self {
                   case .unspecified: return "INTERPOLATION_TYPE_UNSPECIFIED"
                   case .linear: return "LINEAR"
@@ -518,7 +518,7 @@
                 /// Initialize from a string value.
                 ///
                 /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-                public init(stringValue: String) {
+                public init(stringValue: Swift.String) {
                   switch stringValue {
                   case "INTERPOLATION_TYPE_UNSPECIFIED": self = .unspecified
                   case "LINEAR": self = .linear
@@ -567,7 +567,7 @@
                 }
               }
 
-              public static var _anyTypeUrl: String {
+              public static var _anyTypeUrl: Swift.String {
                 return
                   "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.BoostSpecs.BoostSpec.ConditionBoostSpec.BoostControlSpec"
               }
@@ -579,7 +579,7 @@
               }
             }
 
-            public static var _anyTypeUrl: String {
+            public static var _anyTypeUrl: Swift.String {
               return
                 "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.BoostSpecs.BoostSpec.ConditionBoostSpec"
             }
@@ -591,7 +591,7 @@
             }
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.BoostSpecs.BoostSpec"
           }
@@ -603,7 +603,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.BoostSpecs"
         }
@@ -646,7 +646,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig.FilterSpecs"
         }
@@ -658,7 +658,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -719,7 +719,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "QUERY_SOURCE_UNSPECIFIED"
         case .agentQuery: return "AGENT_QUERY"
@@ -732,7 +732,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "QUERY_SOURCE_UNSPECIFIED": self = .unspecified
         case "AGENT_QUERY": self = .agentQuery
@@ -783,7 +783,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

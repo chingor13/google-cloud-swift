@@ -122,7 +122,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .external: return "EXTERNAL"
         case .`internal`: return "INTERNAL"
@@ -134,7 +134,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXTERNAL": self = .external
         case "INTERNAL": self = .`internal`
@@ -243,7 +243,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .globalManagedProxy: return "GLOBAL_MANAGED_PROXY"
         case .internalHttpsLoadBalancer: return "INTERNAL_HTTPS_LOAD_BALANCER"
@@ -261,7 +261,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GLOBAL_MANAGED_PROXY": self = .globalManagedProxy
         case "INTERNAL_HTTPS_LOAD_BALANCER": self = .internalHttpsLoadBalancer
@@ -367,7 +367,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .backup: return "BACKUP"
@@ -379,7 +379,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "BACKUP": self = .backup
@@ -470,7 +470,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipv4Ipv6: return "IPV4_IPV6"
         case .ipv4Only: return "IPV4_ONLY"
@@ -483,7 +483,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IPV4_IPV6": self = .ipv4Ipv6
         case "IPV4_ONLY": self = .ipv4Only
@@ -534,7 +534,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.UsableSubnetwork"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

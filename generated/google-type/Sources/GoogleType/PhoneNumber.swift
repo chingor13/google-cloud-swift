@@ -78,7 +78,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case e164Number = "e164Number"
     case shortCode = "shortCode"
     case `extension` = "extension"
@@ -163,7 +163,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.type.PhoneNumber.ShortCode"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -206,7 +206,9 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case shortCode(PhoneNumber.ShortCode?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.PhoneNumber" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.type.PhoneNumber"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

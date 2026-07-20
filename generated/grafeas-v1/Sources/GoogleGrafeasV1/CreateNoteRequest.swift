@@ -47,7 +47,7 @@ public struct CreateNoteRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.CreateNoteRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -50,7 +50,7 @@ public struct CreateQueryTemplateRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

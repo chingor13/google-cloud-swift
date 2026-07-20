@@ -40,7 +40,7 @@ public struct PrimitiveTransformation: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case replaceConfig = "replaceConfig"
     case redactConfig = "redactConfig"
     case characterMaskConfig = "characterMaskConfig"
@@ -191,7 +191,7 @@ public struct PrimitiveTransformation: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case replaceDictionaryConfig(ReplaceDictionaryConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.PrimitiveTransformation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

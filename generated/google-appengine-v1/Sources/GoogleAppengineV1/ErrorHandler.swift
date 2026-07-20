@@ -91,7 +91,7 @@ public struct ErrorHandler: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .`default`: return "ERROR_CODE_DEFAULT"
       case .overQuota: return "ERROR_CODE_OVER_QUOTA"
@@ -105,7 +105,7 @@ public struct ErrorHandler: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ERROR_CODE_UNSPECIFIED": self = .`default`
       case "ERROR_CODE_DEFAULT": self = .`default`
@@ -121,7 +121,6 @@ public struct ErrorHandler: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
     public init(intValue: Int) {
       switch intValue {
-      case 0: self = .`default`
       case 0: self = .`default`
       case 1: self = .overQuota
       case 2: self = .dosApiDenial
@@ -161,7 +160,7 @@ public struct ErrorHandler: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.ErrorHandler"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

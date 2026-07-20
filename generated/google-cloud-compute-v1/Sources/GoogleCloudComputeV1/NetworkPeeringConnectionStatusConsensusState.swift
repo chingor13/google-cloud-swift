@@ -102,7 +102,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .deleteAcknowledged: return "DELETE_ACKNOWLEDGED"
         case .unspecified: return "DELETE_STATUS_UNSPECIFIED"
@@ -118,7 +118,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELETE_ACKNOWLEDGED": self = .deleteAcknowledged
         case "DELETE_STATUS_UNSPECIFIED": self = .unspecified
@@ -225,7 +225,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .inSync: return "IN_SYNC"
         case .pendingLocalAcknowledment: return "PENDING_LOCAL_ACKNOWLEDMENT"
@@ -239,7 +239,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IN_SYNC": self = .inSync
         case "PENDING_LOCAL_ACKNOWLEDMENT": self = .pendingLocalAcknowledment
@@ -293,7 +293,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState"
     }

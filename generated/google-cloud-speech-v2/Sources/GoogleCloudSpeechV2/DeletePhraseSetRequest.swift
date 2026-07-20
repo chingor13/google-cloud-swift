@@ -57,7 +57,7 @@ public struct DeletePhraseSetRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.DeletePhraseSetRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case boolValue = "boolValue"
       case doubleValue = "doubleValue"
       case int64Value = "int64Value"
@@ -173,7 +173,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureValue.Metadata"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -208,7 +208,7 @@
       indirect case structValue(StructValue?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureValue"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

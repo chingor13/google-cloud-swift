@@ -117,7 +117,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case bigqueryDataset = "bigqueryDataset"
     case pubsubTopic = "pubsubTopic"
     case name = "name"
@@ -291,7 +291,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case table = "table"
         case routine = "routine"
       }
@@ -344,7 +344,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case routine(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource"
       }
@@ -388,7 +388,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy"
       }
@@ -478,7 +478,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "REPLICA_STATE_UNSPECIFIED"
           case .readyToUse: return "READY_TO_USE"
@@ -491,7 +491,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "REPLICA_STATE_UNSPECIFIED": self = .unspecified
           case "READY_TO_USE": self = .readyToUse
@@ -580,7 +580,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "PRIMARY_STATE_UNSPECIFIED"
           case .primaryReplica: return "PRIMARY_REPLICA"
@@ -592,7 +592,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "PRIMARY_STATE_UNSPECIFIED": self = .unspecified
           case "PRIMARY_REPLICA": self = .primaryReplica
@@ -640,7 +640,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica"
       }
@@ -652,7 +652,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource"
     }
@@ -693,7 +693,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -736,7 +736,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig"
     }
@@ -843,7 +843,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "COMMERCIAL_STATE_UNSPECIFIED"
           case .onboarding: return "ONBOARDING"
@@ -856,7 +856,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "COMMERCIAL_STATE_UNSPECIFIED": self = .unspecified
           case "ONBOARDING": self = .onboarding
@@ -907,7 +907,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo"
       }
@@ -919,7 +919,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -969,7 +969,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .active: return "ACTIVE"
@@ -981,7 +981,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "ACTIVE": self = .active
@@ -1103,7 +1103,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CATEGORY_UNSPECIFIED"
       case .others: return "CATEGORY_OTHERS"
@@ -1134,7 +1134,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CATEGORY_UNSPECIFIED": self = .unspecified
       case "CATEGORY_OTHERS": self = .others
@@ -1247,7 +1247,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case pubsubTopic(Listing.PubSubTopicSource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

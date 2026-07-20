@@ -135,7 +135,7 @@ public struct AzureBlobStorageData: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig"
     }
@@ -147,7 +147,7 @@ public struct AzureBlobStorageData: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.AzureBlobStorageData"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

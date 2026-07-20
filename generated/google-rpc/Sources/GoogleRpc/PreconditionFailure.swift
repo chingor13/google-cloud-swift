@@ -80,7 +80,7 @@ public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.PreconditionFailure.Violation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -91,7 +91,7 @@ public struct PreconditionFailure: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.rpc.PreconditionFailure"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -43,7 +43,7 @@ public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.cloudquotas.v1.GetQuotaInfoRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -48,7 +48,7 @@ public struct Restrictions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case browserKeyRestrictions = "browserKeyRestrictions"
     case serverKeyRestrictions = "serverKeyRestrictions"
     case androidKeyRestrictions = "androidKeyRestrictions"
@@ -125,7 +125,7 @@ public struct Restrictions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case iosKeyRestrictions(IosKeyRestrictions?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.apikeys.v2.Restrictions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

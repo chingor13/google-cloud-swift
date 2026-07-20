@@ -55,7 +55,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSlots.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -122,7 +122,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSlots.getVersionRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -258,7 +258,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSlots.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -311,7 +311,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSlots.updateRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

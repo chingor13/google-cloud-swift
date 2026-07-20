@@ -97,7 +97,7 @@ public struct ReportDetail: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.ReportDetail.Metrics"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -108,7 +108,7 @@ public struct ReportDetail: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storageinsights.v1.ReportDetail"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

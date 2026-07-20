@@ -58,7 +58,7 @@ public struct ChecksummedData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case data = "data"
     case crc32CChecksum = "crc32cChecksum"
   }
@@ -76,7 +76,7 @@ public struct ChecksummedData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.crc32CChecksum, forKey: .crc32CChecksum)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.ChecksummedData"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

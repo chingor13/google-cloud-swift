@@ -44,7 +44,7 @@ public struct RecordKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case datastoreKey = "datastoreKey"
     case bigQueryKey = "bigQueryKey"
     case idValues = "idValues"
@@ -95,7 +95,7 @@ public struct RecordKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case bigQueryKey(BigQueryKey?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.RecordKey"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -135,7 +135,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SYMLINK_UNSPECIFIED"
       case .skip: return "SYMLINK_SKIP"
@@ -148,7 +148,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SYMLINK_UNSPECIFIED": self = .unspecified
       case "SYMLINK_SKIP": self = .skip
@@ -240,7 +240,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MODE_UNSPECIFIED"
       case .skip: return "MODE_SKIP"
@@ -253,7 +253,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MODE_UNSPECIFIED": self = .unspecified
       case "MODE_SKIP": self = .skip
@@ -345,7 +345,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "GID_UNSPECIFIED"
       case .skip: return "GID_SKIP"
@@ -358,7 +358,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "GID_UNSPECIFIED": self = .unspecified
       case "GID_SKIP": self = .skip
@@ -450,7 +450,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "UID_UNSPECIFIED"
       case .skip: return "UID_SKIP"
@@ -463,7 +463,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UID_UNSPECIFIED": self = .unspecified
       case "UID_SKIP": self = .skip
@@ -559,7 +559,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACL_UNSPECIFIED"
       case .destinationBucketDefault: return "ACL_DESTINATION_BUCKET_DEFAULT"
@@ -572,7 +572,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACL_UNSPECIFIED": self = .unspecified
       case "ACL_DESTINATION_BUCKET_DEFAULT": self = .destinationBucketDefault
@@ -679,7 +679,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STORAGE_CLASS_UNSPECIFIED"
       case .destinationBucketDefault: return "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT"
@@ -696,7 +696,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STORAGE_CLASS_UNSPECIFIED": self = .unspecified
       case "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT": self = .destinationBucketDefault
@@ -800,7 +800,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TEMPORARY_HOLD_UNSPECIFIED"
       case .skip: return "TEMPORARY_HOLD_SKIP"
@@ -813,7 +813,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TEMPORARY_HOLD_UNSPECIFIED": self = .unspecified
       case "TEMPORARY_HOLD_SKIP": self = .skip
@@ -907,7 +907,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "KMS_KEY_UNSPECIFIED"
       case .destinationBucketDefault: return "KMS_KEY_DESTINATION_BUCKET_DEFAULT"
@@ -920,7 +920,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "KMS_KEY_UNSPECIFIED": self = .unspecified
       case "KMS_KEY_DESTINATION_BUCKET_DEFAULT": self = .destinationBucketDefault
@@ -1016,7 +1016,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TIME_CREATED_UNSPECIFIED"
       case .skip: return "TIME_CREATED_SKIP"
@@ -1029,7 +1029,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TIME_CREATED_UNSPECIFIED": self = .unspecified
       case "TIME_CREATED_SKIP": self = .skip
@@ -1080,7 +1080,7 @@ public struct MetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.MetadataOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

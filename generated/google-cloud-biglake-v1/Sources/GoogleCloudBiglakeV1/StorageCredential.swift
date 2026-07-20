@@ -46,7 +46,7 @@ public struct StorageCredential: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case `prefix` = "prefix"
     case config = "config"
   }
@@ -63,7 +63,7 @@ public struct StorageCredential: Codable, Equatable, GoogleCloudWkt._AnyPackable
     try container.encode(self.config, forKey: .config)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.StorageCredential"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

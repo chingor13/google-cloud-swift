@@ -103,7 +103,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters.CaOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -186,7 +186,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters.NameConstraints"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -197,7 +197,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

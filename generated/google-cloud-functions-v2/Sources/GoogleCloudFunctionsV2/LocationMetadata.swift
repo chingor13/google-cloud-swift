@@ -40,7 +40,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.LocationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

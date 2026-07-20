@@ -57,7 +57,7 @@ public enum ServiceAccountPublicKeyType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .typeNone: return "TYPE_NONE"
     case .typeX509PemFile: return "TYPE_X509_PEM_FILE"
@@ -70,7 +70,7 @@ public enum ServiceAccountPublicKeyType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "TYPE_NONE": self = .typeNone
     case "TYPE_X509_PEM_FILE": self = .typeX509PemFile

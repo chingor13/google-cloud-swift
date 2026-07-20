@@ -96,7 +96,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .connectionRedundancyMet: return "CONNECTION_REDUNDANCY_MET"
         case .connectionRedundancyNotMet: return "CONNECTION_REDUNDANCY_NOT_MET"
@@ -108,7 +108,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONNECTION_REDUNDANCY_MET": self = .connectionRedundancyMet
         case "CONNECTION_REDUNDANCY_NOT_MET": self = .connectionRedundancyNotMet
@@ -192,7 +192,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .incompleteTunnelsCoverage: return "INCOMPLETE_TUNNELS_COVERAGE"
         case .unknownIntValue: return nil
@@ -203,7 +203,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INCOMPLETE_TUNNELS_COVERAGE": self = .incompleteTunnelsCoverage
         default: self = .unknownStringValue(stringValue)
@@ -248,7 +248,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.VpnGatewayStatusHighAvailabilityRequirementState"
     }

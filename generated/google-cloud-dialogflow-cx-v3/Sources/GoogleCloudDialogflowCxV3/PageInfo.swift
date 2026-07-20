@@ -173,7 +173,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case displayName = "displayName"
           case `required` = "required"
           case state = "state"
@@ -246,7 +246,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "PARAMETER_STATE_UNSPECIFIED"
             case .empty: return "EMPTY"
@@ -260,7 +260,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "PARAMETER_STATE_UNSPECIFIED": self = .unspecified
             case "EMPTY": self = .empty
@@ -314,7 +314,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -325,7 +325,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.PageInfo.FormInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -336,7 +336,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.PageInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

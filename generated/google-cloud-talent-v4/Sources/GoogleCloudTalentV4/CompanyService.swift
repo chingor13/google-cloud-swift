@@ -90,7 +90,8 @@ public class CompanyServiceClient: Clients.CompanyServiceProtocol {
   public func listCompanies(
     byItem: ListCompaniesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Company, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTalentV4.ListCompaniesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTalentV4.ListCompaniesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listCompanies(request: request, options: options)
@@ -304,7 +305,8 @@ extension Clients.CompanyServiceProtocol {
   public func listCompanies(
     byItem: ListCompaniesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Company, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTalentV4.ListCompaniesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTalentV4.ListCompaniesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

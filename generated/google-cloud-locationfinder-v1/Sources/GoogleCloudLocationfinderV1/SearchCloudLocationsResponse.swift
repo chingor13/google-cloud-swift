@@ -48,7 +48,7 @@ public struct SearchCloudLocationsResponse: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.locationfinder.v1.SearchCloudLocationsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

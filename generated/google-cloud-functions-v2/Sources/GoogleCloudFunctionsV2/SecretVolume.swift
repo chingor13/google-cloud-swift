@@ -90,7 +90,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.functions.v2.SecretVolume.SecretVersion"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -101,7 +101,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.SecretVolume"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

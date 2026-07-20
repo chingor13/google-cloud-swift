@@ -172,7 +172,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case text = "text"
       case triggerIntent = "triggerIntent"
       case transcript = "transcript"
@@ -321,7 +321,7 @@
       indirect case dtmf(DtmfInput?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.QueryResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

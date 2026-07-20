@@ -61,7 +61,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PAIRWISE_CHOICE_UNSPECIFIED"
       case .baseline: return "BASELINE"
@@ -75,7 +75,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PAIRWISE_CHOICE_UNSPECIFIED": self = .unspecified
       case "BASELINE": self = .baseline

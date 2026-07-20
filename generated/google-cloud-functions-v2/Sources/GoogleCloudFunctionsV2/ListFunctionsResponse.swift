@@ -50,7 +50,7 @@ public struct ListFunctionsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.ListFunctionsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

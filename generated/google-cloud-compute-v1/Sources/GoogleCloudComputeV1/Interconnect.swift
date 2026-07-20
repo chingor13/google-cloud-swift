@@ -249,7 +249,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case aaiEnabled = "aaiEnabled"
       case adminEnabled = "adminEnabled"
       case applicationAwareInterconnect = "applicationAwareInterconnect"
@@ -439,7 +439,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ifCrossSiteNetwork: return "IF_CROSS_SITE_NETWORK"
         case .ifL2Forwarding: return "IF_L2_FORWARDING"
@@ -452,7 +452,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IF_CROSS_SITE_NETWORK": self = .ifCrossSiteNetwork
         case "IF_L2_FORWARDING": self = .ifL2Forwarding
@@ -546,7 +546,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .dedicated: return "DEDICATED"
         case .itPrivate: return "IT_PRIVATE"
@@ -559,7 +559,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEDICATED": self = .dedicated
         case "IT_PRIVATE": self = .itPrivate
@@ -654,7 +654,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ethernet100GLr: return "LINK_TYPE_ETHERNET_100G_LR"
         case .ethernet10GLr: return "LINK_TYPE_ETHERNET_10G_LR"
@@ -667,7 +667,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LINK_TYPE_ETHERNET_100G_LR": self = .ethernet100GLr
         case "LINK_TYPE_ETHERNET_10G_LR": self = .ethernet10GLr
@@ -760,7 +760,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .osActive: return "OS_ACTIVE"
         case .osUnprovisioned: return "OS_UNPROVISIONED"
@@ -772,7 +772,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "OS_ACTIVE": self = .osActive
         case "OS_UNPROVISIONED": self = .osUnprovisioned
@@ -863,7 +863,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ifCrossSiteNetwork: return "IF_CROSS_SITE_NETWORK"
         case .ifL2Forwarding: return "IF_L2_FORWARDING"
@@ -876,7 +876,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IF_CROSS_SITE_NETWORK": self = .ifCrossSiteNetwork
         case "IF_L2_FORWARDING": self = .ifL2Forwarding
@@ -969,7 +969,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .unprovisioned: return "UNPROVISIONED"
@@ -981,7 +981,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "UNPROVISIONED": self = .unprovisioned
@@ -1069,7 +1069,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .a: return "SUBZONE_A"
         case .b: return "SUBZONE_B"
@@ -1081,7 +1081,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SUBZONE_A": self = .a
         case "SUBZONE_B": self = .b
@@ -1129,7 +1129,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Interconnect"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

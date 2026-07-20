@@ -62,7 +62,7 @@ public enum ClusterView: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "CLUSTER_VIEW_UNSPECIFIED"
     case .basic: return "CLUSTER_VIEW_BASIC"
@@ -75,7 +75,7 @@ public enum ClusterView: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "CLUSTER_VIEW_UNSPECIFIED": self = .unspecified
     case "CLUSTER_VIEW_BASIC": self = .basic

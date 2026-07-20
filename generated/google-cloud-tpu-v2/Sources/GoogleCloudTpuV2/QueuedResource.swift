@@ -62,7 +62,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case createTime = "createTime"
     case tpu = "tpu"
@@ -198,7 +198,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case parent = "parent"
         case nodeId = "nodeId"
         case multisliceParams = "multisliceParams"
@@ -280,7 +280,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.Tpu.NodeSpec.MultisliceParams"
         }
@@ -303,7 +303,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         indirect case multisliceParams(QueuedResource.Tpu.NodeSpec.MultisliceParams?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.Tpu.NodeSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -314,7 +314,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.Tpu"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -345,7 +345,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.Spot"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -381,7 +381,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.Guaranteed"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -415,7 +415,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case validUntilDuration = "validUntilDuration"
       case validUntilTime = "validUntilTime"
       case validAfterDuration = "validAfterDuration"
@@ -502,7 +502,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case validInterval(GoogleType.Interval?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource.QueueingPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -527,7 +527,7 @@ public struct QueuedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case guaranteed(QueuedResource.Guaranteed?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tpu.v2.QueuedResource"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

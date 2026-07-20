@@ -41,7 +41,7 @@ public struct DiagnoseInterconnectRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.DiagnoseInterconnectRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

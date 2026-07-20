@@ -45,7 +45,7 @@ public struct DiscoveryOtherCloudConditions: Codable, Equatable, GoogleCloudWkt.
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case minAge = "minAge"
     case amazonS3BucketConditions = "amazonS3BucketConditions"
   }
@@ -90,7 +90,7 @@ public struct DiscoveryOtherCloudConditions: Codable, Equatable, GoogleCloudWkt.
     indirect case amazonS3BucketConditions(AmazonS3BucketConditions?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryOtherCloudConditions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

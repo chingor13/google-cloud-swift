@@ -62,7 +62,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalPublicDelegatedPrefixes.deleteRequest"
       }
@@ -102,7 +102,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalPublicDelegatedPrefixes.getRequest"
       }
@@ -159,7 +159,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalPublicDelegatedPrefixes.insertRequest"
       }
@@ -289,7 +289,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalPublicDelegatedPrefixes.listRequest"
       }
@@ -349,7 +349,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalPublicDelegatedPrefixes.patchRequest"
       }

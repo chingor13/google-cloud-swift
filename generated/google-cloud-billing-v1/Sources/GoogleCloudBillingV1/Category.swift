@@ -52,7 +52,7 @@ public struct Category: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.v1.Category"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

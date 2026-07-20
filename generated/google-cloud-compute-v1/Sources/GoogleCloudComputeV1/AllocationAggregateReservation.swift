@@ -103,7 +103,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .cloudTpuDeviceCt3: return "VM_FAMILY_CLOUD_TPU_DEVICE_CT3"
         case .cloudTpuLiteDeviceCt5L: return "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L"
@@ -121,7 +121,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VM_FAMILY_CLOUD_TPU_DEVICE_CT3": self = .cloudTpuDeviceCt3
         case "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L": self = .cloudTpuLiteDeviceCt5L
@@ -231,7 +231,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .batch: return "BATCH"
         case .serving: return "SERVING"
@@ -244,7 +244,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BATCH": self = .batch
         case "SERVING": self = .serving
@@ -295,7 +295,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AllocationAggregateReservation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

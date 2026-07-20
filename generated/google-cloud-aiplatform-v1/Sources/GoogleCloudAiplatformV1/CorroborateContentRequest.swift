@@ -80,7 +80,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.CorroborateContentRequest.Parameters"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -91,7 +91,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CorroborateContentRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

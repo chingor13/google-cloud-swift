@@ -48,7 +48,7 @@ public struct GetFunctionRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.GetFunctionRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

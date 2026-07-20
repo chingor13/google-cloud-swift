@@ -50,7 +50,7 @@ public struct OutputFormatConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.OutputFormatConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -63,7 +63,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case containerName = "containerName"
     case recordLocation = "recordLocation"
     case imageLocation = "imageLocation"
@@ -155,7 +155,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case conversationLocation(ConversationLocation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ContentLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

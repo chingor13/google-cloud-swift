@@ -85,7 +85,7 @@ public enum PostingRegion: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "POSTING_REGION_UNSPECIFIED"
     case .administrativeArea: return "ADMINISTRATIVE_AREA"
@@ -99,7 +99,7 @@ public enum PostingRegion: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "POSTING_REGION_UNSPECIFIED": self = .unspecified
     case "ADMINISTRATIVE_AREA": self = .administrativeArea

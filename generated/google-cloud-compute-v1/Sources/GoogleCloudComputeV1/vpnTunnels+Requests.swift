@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.aggregatedListRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -207,7 +207,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -249,7 +249,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -308,7 +308,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.insertRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -440,7 +440,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -502,7 +502,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.vpnTunnels.setLabelsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

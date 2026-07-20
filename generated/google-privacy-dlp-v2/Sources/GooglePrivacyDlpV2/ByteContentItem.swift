@@ -134,7 +134,7 @@ public struct ByteContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "BYTES_TYPE_UNSPECIFIED"
       case .imageJpeg: return "IMAGE_JPEG"
@@ -162,7 +162,7 @@ public struct ByteContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "BYTES_TYPE_UNSPECIFIED": self = .unspecified
       case "IMAGE": self = .image
@@ -192,12 +192,12 @@ public struct ByteContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
-      case 6: self = .image
       case 1: self = .imageJpeg
       case 2: self = .imageBmp
       case 3: self = .imagePng
       case 4: self = .imageSvg
       case 5: self = .textUtf8
+      case 6: self = .image
       case 7: self = .wordDocument
       case 8: self = .pdf
       case 9: self = .powerpointDocument
@@ -258,7 +258,7 @@ public struct ByteContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ByteContentItem"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

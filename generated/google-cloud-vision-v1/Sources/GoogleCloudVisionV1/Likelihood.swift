@@ -67,7 +67,7 @@ public enum Likelihood: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unknown: return "UNKNOWN"
     case .veryUnlikely: return "VERY_UNLIKELY"
@@ -83,7 +83,7 @@ public enum Likelihood: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "UNKNOWN": self = .unknown
     case "VERY_UNLIKELY": self = .veryUnlikely

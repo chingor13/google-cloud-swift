@@ -47,7 +47,7 @@ public struct ListPythonPackagesRequest: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ListPythonPackagesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

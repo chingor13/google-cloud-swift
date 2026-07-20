@@ -70,7 +70,7 @@ public struct BinaryAuthorizationConfig: Codable, Equatable, GoogleCloudWkt._Any
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -122,7 +122,7 @@ public struct BinaryAuthorizationConfig: Codable, Equatable, GoogleCloudWkt._Any
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EVALUATION_MODE_UNSPECIFIED"
       case .disabled: return "DISABLED"
@@ -135,7 +135,7 @@ public struct BinaryAuthorizationConfig: Codable, Equatable, GoogleCloudWkt._Any
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EVALUATION_MODE_UNSPECIFIED": self = .unspecified
       case "DISABLED": self = .disabled
@@ -186,7 +186,7 @@ public struct BinaryAuthorizationConfig: Codable, Equatable, GoogleCloudWkt._Any
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.BinaryAuthorizationConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

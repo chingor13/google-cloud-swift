@@ -202,7 +202,7 @@
       byItem: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -588,7 +588,7 @@
       byItem: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<PublicAdvertisedPrefix, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

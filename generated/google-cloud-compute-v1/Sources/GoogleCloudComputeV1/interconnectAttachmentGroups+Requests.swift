@@ -63,7 +63,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.deleteRequest"
       }
@@ -103,7 +103,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -145,7 +145,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.getIamPolicyRequest"
       }
@@ -185,7 +185,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.getOperationalStatusRequest"
       }
@@ -243,7 +243,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.insertRequest"
       }
@@ -373,7 +373,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.listRequest"
       }
@@ -437,7 +437,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.patchRequest"
       }
@@ -482,7 +482,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.setIamPolicyRequest"
       }
@@ -527,7 +527,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.interconnectAttachmentGroups.testIamPermissionsRequest"
       }

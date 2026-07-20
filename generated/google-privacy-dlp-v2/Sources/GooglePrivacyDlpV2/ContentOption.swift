@@ -57,7 +57,7 @@ public enum ContentOption: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .contentUnspecified: return "CONTENT_UNSPECIFIED"
     case .contentText: return "CONTENT_TEXT"
@@ -70,7 +70,7 @@ public enum ContentOption: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "CONTENT_UNSPECIFIED": self = .contentUnspecified
     case "CONTENT_TEXT": self = .contentText

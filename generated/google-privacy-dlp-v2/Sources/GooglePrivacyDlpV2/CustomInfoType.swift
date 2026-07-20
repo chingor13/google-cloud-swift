@@ -71,7 +71,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case infoType = "infoType"
     case likelihood = "likelihood"
     case dictionary = "dictionary"
@@ -198,7 +198,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case wordList = "wordList"
       case cloudStoragePath = "cloudStoragePath"
     }
@@ -267,7 +267,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Dictionary.WordList"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -287,7 +287,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case cloudStoragePath(CloudStoragePath?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Dictionary"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -327,7 +327,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Regex"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -365,7 +365,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.SurrogateType"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -404,7 +404,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -441,7 +441,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case hotwordRule = "hotwordRule"
     }
 
@@ -508,7 +508,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -543,7 +543,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case fixedLikelihood = "fixedLikelihood"
         case relativeLikelihood = "relativeLikelihood"
       }
@@ -602,7 +602,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case relativeLikelihood(Swift.Int32)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment"
       }
@@ -656,7 +656,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -673,7 +673,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case hotwordRule(CustomInfoType.DetectionRule.HotwordRule?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -723,7 +723,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EXCLUSION_TYPE_UNSPECIFIED"
       case .exclude: return "EXCLUSION_TYPE_EXCLUDE"
@@ -735,7 +735,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EXCLUSION_TYPE_UNSPECIFIED": self = .unspecified
       case "EXCLUSION_TYPE_EXCLUDE": self = .exclude
@@ -798,7 +798,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case metadataKeyValueExpression(CustomInfoType.MetadataKeyValueExpression?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

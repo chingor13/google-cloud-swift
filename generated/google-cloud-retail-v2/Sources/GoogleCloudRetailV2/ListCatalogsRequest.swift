@@ -75,7 +75,7 @@ public struct ListCatalogsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ListCatalogsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

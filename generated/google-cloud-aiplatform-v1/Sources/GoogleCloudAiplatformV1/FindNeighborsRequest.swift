@@ -115,7 +115,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case rrf = "rrf"
         case datapoint = "datapoint"
         case neighborCount = "neighborCount"
@@ -196,7 +196,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsRequest.Query.RRF"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -212,7 +212,7 @@
         indirect case rrf(FindNeighborsRequest.Query.RRF?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsRequest.Query"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -223,7 +223,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

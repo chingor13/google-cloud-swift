@@ -109,7 +109,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .profileUnspecified: return "PROFILE_UNSPECIFIED"
       case .optimizeUtilization: return "OPTIMIZE_UTILIZATION"
@@ -122,7 +122,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PROFILE_UNSPECIFIED": self = .profileUnspecified
       case "OPTIMIZE_UTILIZATION": self = .optimizeUtilization
@@ -214,7 +214,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED"
       case .noPerformance: return "NO_PERFORMANCE"
@@ -227,7 +227,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED": self = .unspecified
       case "NO_PERFORMANCE": self = .noPerformance
@@ -278,7 +278,7 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ClusterAutoscaling"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

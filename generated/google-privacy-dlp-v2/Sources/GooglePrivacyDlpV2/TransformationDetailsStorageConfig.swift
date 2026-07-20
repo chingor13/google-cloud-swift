@@ -40,7 +40,7 @@ public struct TransformationDetailsStorageConfig: Codable, Equatable, GoogleClou
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case table = "table"
   }
 
@@ -85,7 +85,7 @@ public struct TransformationDetailsStorageConfig: Codable, Equatable, GoogleClou
     indirect case table(BigQueryTable?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationDetailsStorageConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

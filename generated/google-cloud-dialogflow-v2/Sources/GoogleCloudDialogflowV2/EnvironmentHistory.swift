@@ -90,7 +90,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.EnvironmentHistory.Entry"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -101,7 +101,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.EnvironmentHistory"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

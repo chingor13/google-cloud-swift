@@ -63,7 +63,7 @@ public struct ListTagHoldsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.ListTagHoldsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

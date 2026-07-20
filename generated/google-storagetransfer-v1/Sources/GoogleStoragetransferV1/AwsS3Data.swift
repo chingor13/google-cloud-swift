@@ -113,7 +113,7 @@ public struct AwsS3Data: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case bucketName = "bucketName"
     case awsAccessKey = "awsAccessKey"
     case path = "path"
@@ -173,7 +173,7 @@ public struct AwsS3Data: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case managedPrivateNetwork(Swift.Bool)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.AwsS3Data"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -91,7 +91,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case detectIntentResponseId = "detectIntentResponseId"
       case text = "text"
       case triggerIntent = "triggerIntent"
@@ -217,7 +217,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -299,7 +299,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue"
         }
@@ -311,7 +311,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -351,7 +351,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult"
       }
@@ -394,7 +394,7 @@
       case dtmfDigits(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -81,7 +81,7 @@ public struct BucketingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.BucketingConfig.Bucket"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -92,7 +92,7 @@ public struct BucketingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.BucketingConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

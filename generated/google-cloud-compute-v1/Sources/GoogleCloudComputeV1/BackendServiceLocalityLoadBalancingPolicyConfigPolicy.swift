@@ -139,7 +139,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .invalidLbPolicy: return "INVALID_LB_POLICY"
         case .leastRequest: return "LEAST_REQUEST"
@@ -159,7 +159,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INVALID_LB_POLICY": self = .invalidLbPolicy
         case "LEAST_REQUEST": self = .leastRequest
@@ -231,7 +231,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.BackendServiceLocalityLoadBalancingPolicyConfigPolicy"
     }

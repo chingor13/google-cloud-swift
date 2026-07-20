@@ -45,7 +45,7 @@ public struct ListNoteOccurrencesResponse: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.ListNoteOccurrencesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

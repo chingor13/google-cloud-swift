@@ -62,7 +62,7 @@ public struct UndeleteCertificateAuthorityRequest: Codable, Equatable, GoogleClo
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return
       "type.googleapis.com/google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest"
   }

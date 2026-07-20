@@ -67,7 +67,9 @@ public struct Sku: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.billing.v1.Sku" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.billing.v1.Sku"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

@@ -45,7 +45,7 @@ public struct CloudStorageDestinationOptions: Codable, Equatable, GoogleCloudWkt
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storageinsights.v1.CloudStorageDestinationOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -94,7 +94,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.TransformationSummary.SummaryResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -146,7 +146,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TRANSFORMATION_RESULT_CODE_UNSPECIFIED"
       case .success: return "SUCCESS"
@@ -159,7 +159,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TRANSFORMATION_RESULT_CODE_UNSPECIFIED": self = .unspecified
       case "SUCCESS": self = .success
@@ -210,7 +210,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWkt._AnyPack
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationSummary"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

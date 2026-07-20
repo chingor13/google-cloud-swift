@@ -84,7 +84,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case readPoolInstancesUpgrade = "readPoolInstancesUpgrade"
       case stage = "stage"
       case state = "state"
@@ -165,7 +165,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule"
       }
@@ -184,7 +184,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
         UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -251,7 +251,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.Stats"
       }
@@ -263,7 +263,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus"
     }
@@ -275,7 +275,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -77,7 +77,8 @@ public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol 
   public func listInstances(
     byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listInstances(request: request, options: options)
@@ -432,7 +433,8 @@ public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol 
   public func listSnapshots(
     byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSnapshots(request: request, options: options)
@@ -647,7 +649,8 @@ public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol 
   public func listBackups(
     byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listBackups(request: request, options: options)
@@ -923,7 +926,8 @@ public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol 
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -959,7 +963,8 @@ public class CloudFilestoreManagerClient: Clients.CloudFilestoreManagerProtocol 
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -1482,7 +1487,8 @@ extension Clients.CloudFilestoreManagerProtocol {
   public func listInstances(
     byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListInstancesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1712,7 +1718,8 @@ extension Clients.CloudFilestoreManagerProtocol {
   public func listSnapshots(
     byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListSnapshotsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1886,7 +1893,8 @@ extension Clients.CloudFilestoreManagerProtocol {
   public func listBackups(
     byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudFilestoreV1.ListBackupsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2083,7 +2091,8 @@ extension Clients.CloudFilestoreManagerProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2122,7 +2131,8 @@ extension Clients.CloudFilestoreManagerProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

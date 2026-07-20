@@ -88,7 +88,7 @@ public struct VpcAccessConnector: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EGRESS_SETTING_UNSPECIFIED"
       case .allTraffic: return "ALL_TRAFFIC"
@@ -101,7 +101,7 @@ public struct VpcAccessConnector: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EGRESS_SETTING_UNSPECIFIED": self = .unspecified
       case "ALL_TRAFFIC": self = .allTraffic
@@ -152,7 +152,7 @@ public struct VpcAccessConnector: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.VpcAccessConnector"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

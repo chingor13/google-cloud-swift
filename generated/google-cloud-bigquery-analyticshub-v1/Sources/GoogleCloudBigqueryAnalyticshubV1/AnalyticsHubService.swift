@@ -62,7 +62,8 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListDataExchangesResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListDataExchangesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listDataExchanges(request: request, options: options)
@@ -88,8 +89,8 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListOrgDataExchangesResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListOrgDataExchangesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOrgDataExchanges(request: request, options: options)
@@ -149,7 +150,8 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListListingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Listing, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListListingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListListingsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listListings(request: request, options: options)
@@ -371,7 +373,8 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListSubscriptionsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListSubscriptionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSubscriptions(request: request, options: options)
@@ -395,7 +398,7 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudBigqueryAnalyticshubV1.ListSharedResourceSubscriptionsResponse in
       var request = byItem
       request.pageToken = token
@@ -529,8 +532,8 @@ public class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol {
     byItem: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryTemplate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListQueryTemplatesResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListQueryTemplatesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQueryTemplates(request: request, options: options)
@@ -1099,7 +1102,8 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListDataExchangesResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListDataExchangesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1136,8 +1140,8 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListOrgDataExchangesResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListOrgDataExchangesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1260,7 +1264,8 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListListingsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Listing, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListListingsResponse in
+      (token: Swift.String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListListingsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1502,7 +1507,8 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListSubscriptionsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListSubscriptionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1539,7 +1545,7 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudBigqueryAnalyticshubV1.ListSharedResourceSubscriptionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1717,8 +1723,8 @@ extension Clients.AnalyticsHubServiceProtocol {
     byItem: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryTemplate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBigqueryAnalyticshubV1.ListQueryTemplatesResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudBigqueryAnalyticshubV1.ListQueryTemplatesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

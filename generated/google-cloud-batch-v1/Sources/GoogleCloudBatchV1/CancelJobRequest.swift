@@ -55,7 +55,7 @@ public struct CancelJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.CancelJobRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

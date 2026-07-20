@@ -69,7 +69,7 @@ public enum TransformationResultStatusType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .stateTypeUnspecified: return "STATE_TYPE_UNSPECIFIED"
     case .invalidTransform: return "INVALID_TRANSFORM"
@@ -84,7 +84,7 @@ public enum TransformationResultStatusType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "STATE_TYPE_UNSPECIFIED": self = .stateTypeUnspecified
     case "INVALID_TRANSFORM": self = .invalidTransform

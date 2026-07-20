@@ -83,7 +83,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case description = "description"
       case freeFormContext = "freeFormContext"
@@ -219,7 +219,7 @@
       case publishedModel(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Generator"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

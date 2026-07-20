@@ -99,7 +99,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource.SlackChannels.SlackChannel"
         }
@@ -111,7 +111,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource.SlackChannels"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -122,7 +122,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

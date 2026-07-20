@@ -87,7 +87,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .asPathTypeSequence: return "AS_PATH_TYPE_SEQUENCE"
         case .asPathTypeSet: return "AS_PATH_TYPE_SET"
@@ -99,7 +99,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AS_PATH_TYPE_SEQUENCE": self = .asPathTypeSequence
         case "AS_PATH_TYPE_SET": self = .asPathTypeSet
@@ -147,7 +147,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BgpRouteAsPath"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

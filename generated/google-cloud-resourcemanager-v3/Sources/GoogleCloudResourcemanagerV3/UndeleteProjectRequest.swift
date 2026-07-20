@@ -44,7 +44,7 @@ public struct UndeleteProjectRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.UndeleteProjectRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

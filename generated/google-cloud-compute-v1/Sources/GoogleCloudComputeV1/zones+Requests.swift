@@ -47,7 +47,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zones.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -176,7 +176,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zones.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

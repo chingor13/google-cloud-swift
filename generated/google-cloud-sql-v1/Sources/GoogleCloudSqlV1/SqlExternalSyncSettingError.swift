@@ -292,7 +292,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED"
         case .connectionFailure: return "CONNECTION_FAILURE"
@@ -366,7 +366,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED": self = .unspecified
         case "CONNECTION_FAILURE": self = .connectionFailure
@@ -590,7 +590,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlExternalSyncSettingError"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

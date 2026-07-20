@@ -257,7 +257,8 @@ public class PrincipalAccessBoundaryPoliciesClient: Clients.PrincipalAccessBound
     byItem: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PrincipalAccessBoundaryPolicy, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleIamV3.ListPrincipalAccessBoundaryPoliciesResponse in
+      (token: Swift.String) async throws -> GoogleIamV3.ListPrincipalAccessBoundaryPoliciesResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listPrincipalAccessBoundaryPolicies(request: request, options: options)
@@ -286,7 +287,7 @@ public class PrincipalAccessBoundaryPoliciesClient: Clients.PrincipalAccessBound
     options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PolicyBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleIamV3.SearchPrincipalAccessBoundaryPolicyBindingsResponse in
       var request = byItem
       request.pageToken = token
@@ -626,7 +627,8 @@ extension Clients.PrincipalAccessBoundaryPoliciesProtocol {
     byItem: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PrincipalAccessBoundaryPolicy, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleIamV3.ListPrincipalAccessBoundaryPoliciesResponse in
+      (token: Swift.String) async throws -> GoogleIamV3.ListPrincipalAccessBoundaryPoliciesResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -665,7 +667,7 @@ extension Clients.PrincipalAccessBoundaryPoliciesProtocol {
     options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PolicyBinding, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleIamV3.SearchPrincipalAccessBoundaryPolicyBindingsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }

@@ -67,7 +67,7 @@ public struct Subject: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.Subject"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

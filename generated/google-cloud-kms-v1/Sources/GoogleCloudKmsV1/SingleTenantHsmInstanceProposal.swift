@@ -109,7 +109,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case createTime = "createTime"
     case state = "state"
@@ -325,7 +325,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters"
     }
@@ -379,7 +379,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters"
     }
@@ -435,7 +435,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys"
     }
@@ -475,7 +475,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance"
     }
@@ -515,7 +515,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance"
     }
@@ -563,7 +563,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance"
     }
@@ -611,7 +611,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember"
     }
@@ -659,7 +659,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember"
     }
@@ -705,7 +705,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance"
     }
@@ -804,7 +804,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .creating: return "CREATING"
@@ -822,7 +822,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "CREATING": self = .creating
@@ -1038,7 +1038,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
       SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

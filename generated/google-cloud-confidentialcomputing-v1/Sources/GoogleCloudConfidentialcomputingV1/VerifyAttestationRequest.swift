@@ -69,7 +69,7 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case tdCcel = "tdCcel"
     case sevSnpAttestation = "sevSnpAttestation"
     case nvidiaAttestation = "nvidiaAttestation"
@@ -172,7 +172,7 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     indirect case nvidiaAttestation(NvidiaAttestation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyAttestationRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -50,7 +50,7 @@ public struct DataProfileFindingLocation: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case containerName = "containerName"
     case dataProfileFindingRecordLocation = "dataProfileFindingRecordLocation"
   }
@@ -99,7 +99,7 @@ public struct DataProfileFindingLocation: Codable, Equatable, GoogleCloudWkt._An
     indirect case dataProfileFindingRecordLocation(DataProfileFindingRecordLocation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileFindingLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

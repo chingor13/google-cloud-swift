@@ -55,7 +55,7 @@ public struct EventStream: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.EventStream"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

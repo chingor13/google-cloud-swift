@@ -197,7 +197,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.kms.v1.ImportJob.WrappingPublicKey"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -292,7 +292,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "IMPORT_METHOD_UNSPECIFIED"
       case .rsaOaep3072Sha1Aes256: return "RSA_OAEP_3072_SHA1_AES_256"
@@ -309,7 +309,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "IMPORT_METHOD_UNSPECIFIED": self = .unspecified
       case "RSA_OAEP_3072_SHA1_AES_256": self = .rsaOaep3072Sha1Aes256
@@ -431,7 +431,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "IMPORT_JOB_STATE_UNSPECIFIED"
       case .pendingGeneration: return "PENDING_GENERATION"
@@ -445,7 +445,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "IMPORT_JOB_STATE_UNSPECIFIED": self = .unspecified
       case "PENDING_GENERATION": self = .pendingGeneration
@@ -499,7 +499,7 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.ImportJob"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

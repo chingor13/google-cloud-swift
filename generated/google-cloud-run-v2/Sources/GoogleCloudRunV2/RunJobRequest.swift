@@ -120,7 +120,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -131,7 +131,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.RunJobRequest.Overrides"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -142,7 +142,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.RunJobRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

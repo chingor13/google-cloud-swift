@@ -58,7 +58,8 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   public func listQuotaInfos(
     byItem: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaInfo, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQuotaInfos(request: request, options: options)
@@ -91,7 +92,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
     byItem: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaPreference, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQuotaPreferences(request: request, options: options)
@@ -272,7 +273,8 @@ extension Clients.CloudQuotasProtocol {
   public func listQuotaInfos(
     byItem: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaInfo, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -330,7 +332,7 @@ extension Clients.CloudQuotasProtocol {
     byItem: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaPreference, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

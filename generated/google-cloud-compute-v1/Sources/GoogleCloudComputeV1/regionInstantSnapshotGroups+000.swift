@@ -172,7 +172,7 @@
       byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstantSnapshotGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -502,7 +502,7 @@
       byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstantSnapshotGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

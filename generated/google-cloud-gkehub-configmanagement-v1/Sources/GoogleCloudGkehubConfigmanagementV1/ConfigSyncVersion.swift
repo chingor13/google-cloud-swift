@@ -58,7 +58,7 @@ public struct ConfigSyncVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.configmanagement.v1.ConfigSyncVersion"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

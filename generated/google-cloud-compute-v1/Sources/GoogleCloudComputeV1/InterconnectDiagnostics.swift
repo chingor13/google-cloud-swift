@@ -99,7 +99,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .lacp: return "BUNDLE_AGGREGATION_TYPE_LACP"
         case .`static`: return "BUNDLE_AGGREGATION_TYPE_STATIC"
@@ -111,7 +111,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BUNDLE_AGGREGATION_TYPE_LACP": self = .lacp
         case "BUNDLE_AGGREGATION_TYPE_STATIC": self = .`static`
@@ -205,7 +205,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .down: return "BUNDLE_OPERATIONAL_STATUS_DOWN"
         case .up: return "BUNDLE_OPERATIONAL_STATUS_UP"
@@ -217,7 +217,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BUNDLE_OPERATIONAL_STATUS_DOWN": self = .down
         case "BUNDLE_OPERATIONAL_STATUS_UP": self = .up
@@ -265,7 +265,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectDiagnostics"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

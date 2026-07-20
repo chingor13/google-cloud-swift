@@ -41,7 +41,7 @@ public struct CharsToIgnore: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case charactersToSkip = "charactersToSkip"
     case commonCharactersToIgnore = "commonCharactersToIgnore"
   }
@@ -135,7 +135,7 @@ public struct CharsToIgnore: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "COMMON_CHARS_TO_IGNORE_UNSPECIFIED"
       case .numeric: return "NUMERIC"
@@ -151,7 +151,7 @@ public struct CharsToIgnore: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "COMMON_CHARS_TO_IGNORE_UNSPECIFIED": self = .unspecified
       case "NUMERIC": self = .numeric
@@ -220,7 +220,7 @@ public struct CharsToIgnore: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case commonCharactersToIgnore(CharsToIgnore.CommonCharsToIgnore)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CharsToIgnore"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

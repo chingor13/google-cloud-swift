@@ -64,7 +64,7 @@ public struct UpdateCertificateRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.UpdateCertificateRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

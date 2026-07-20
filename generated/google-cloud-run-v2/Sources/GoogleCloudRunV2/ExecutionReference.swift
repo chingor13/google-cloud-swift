@@ -105,7 +105,7 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "COMPLETION_STATUS_UNSPECIFIED"
       case .executionSucceeded: return "EXECUTION_SUCCEEDED"
@@ -121,7 +121,7 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "COMPLETION_STATUS_UNSPECIFIED": self = .unspecified
       case "EXECUTION_SUCCEEDED": self = .executionSucceeded
@@ -181,7 +181,7 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.ExecutionReference"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

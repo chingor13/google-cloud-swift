@@ -81,7 +81,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.DisruptionEvent.PdbBlockedPod"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -135,7 +135,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DISRUPTION_TYPE_UNSPECIFIED"
       case .podNotEnoughPdb: return "POD_NOT_ENOUGH_PDB"
@@ -148,7 +148,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DISRUPTION_TYPE_UNSPECIFIED": self = .unspecified
       case "POD_NOT_ENOUGH_PDB": self = .podNotEnoughPdb
@@ -199,7 +199,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DisruptionEvent"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

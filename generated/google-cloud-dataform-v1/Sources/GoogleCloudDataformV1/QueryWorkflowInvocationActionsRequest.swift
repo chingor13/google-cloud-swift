@@ -55,7 +55,7 @@ public struct QueryWorkflowInvocationActionsRequest: Codable, Equatable, GoogleC
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.QueryWorkflowInvocationActionsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

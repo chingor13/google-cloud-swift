@@ -273,7 +273,7 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.Service.MultiRegionSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -284,7 +284,9 @@ public struct Service: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.Service" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.run.v2.Service"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

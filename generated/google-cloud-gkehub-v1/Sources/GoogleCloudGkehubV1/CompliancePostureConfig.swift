@@ -66,7 +66,7 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -117,7 +117,7 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MODE_UNSPECIFIED"
       case .disabled: return "DISABLED"
@@ -130,7 +130,7 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MODE_UNSPECIFIED": self = .unspecified
       case "DISABLED": self = .disabled
@@ -181,7 +181,7 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.CompliancePostureConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

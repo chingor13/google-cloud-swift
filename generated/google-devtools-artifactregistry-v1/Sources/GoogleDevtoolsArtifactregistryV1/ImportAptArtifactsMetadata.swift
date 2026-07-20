@@ -37,7 +37,7 @@ public struct ImportAptArtifactsMetadata: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

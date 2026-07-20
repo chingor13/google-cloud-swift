@@ -85,7 +85,7 @@ public struct GPUDriverInstallationConfig: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "GPU_DRIVER_VERSION_UNSPECIFIED"
       case .installationDisabled: return "INSTALLATION_DISABLED"
@@ -99,7 +99,7 @@ public struct GPUDriverInstallationConfig: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "GPU_DRIVER_VERSION_UNSPECIFIED": self = .unspecified
       case "INSTALLATION_DISABLED": self = .installationDisabled
@@ -153,7 +153,7 @@ public struct GPUDriverInstallationConfig: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.GPUDriverInstallationConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

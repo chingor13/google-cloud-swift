@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case layoutParser = "layoutParser"
       case llmParser = "llmParser"
     }
@@ -120,7 +120,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagFileParsingConfig.LayoutParser"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -167,7 +167,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagFileParsingConfig.LlmParser"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -186,7 +186,7 @@
       indirect case llmParser(RagFileParsingConfig.LlmParser?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagFileParsingConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

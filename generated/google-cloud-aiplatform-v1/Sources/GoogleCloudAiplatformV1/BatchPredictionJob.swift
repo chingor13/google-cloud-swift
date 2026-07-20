@@ -305,7 +305,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case gcsSource = "gcsSource"
         case bigquerySource = "bigquerySource"
         case vertexMultimodalDatasetSource = "vertexMultimodalDatasetSource"
@@ -373,7 +373,7 @@
         indirect case vertexMultimodalDatasetSource(VertexMultimodalDatasetSource?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -510,7 +510,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -559,7 +559,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case gcsDestination = "gcsDestination"
         case bigqueryDestination = "bigqueryDestination"
         case vertexMultimodalDatasetDestination = "vertexMultimodalDatasetDestination"
@@ -675,7 +675,7 @@
         indirect case vertexMultimodalDatasetDestination(VertexMultimodalDatasetDestination?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -719,7 +719,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case gcsOutputDirectory = "gcsOutputDirectory"
         case bigqueryOutputDataset = "bigqueryOutputDataset"
         case vertexMultimodalDatasetName = "vertexMultimodalDatasetName"
@@ -790,7 +790,7 @@
         case vertexMultimodalDatasetName(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.OutputInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -801,7 +801,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

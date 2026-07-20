@@ -78,7 +78,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case toolKey = "toolKey"
       case displayName = "displayName"
@@ -194,7 +194,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.ExtensionTool"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -245,7 +245,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.FunctionTool"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -289,7 +289,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case textSchema = "textSchema"
         case authentication = "authentication"
         case tlsConfig = "tlsConfig"
@@ -340,7 +340,7 @@
         case textSchema(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.OpenApiTool"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -409,7 +409,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case connectionActionId = "connectionActionId"
           case entityOperation = "entityOperation"
           case inputFields = "inputFields"
@@ -537,7 +537,7 @@
             /// Returns the string value (or name) associated with the enumeration.
             ///
             /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-            public var stringValue: String? {
+            public var stringValue: Swift.String? {
               switch self {
               case .unspecified: return "OPERATION_TYPE_UNSPECIFIED"
               case .list: return "LIST"
@@ -553,7 +553,7 @@
             /// Initialize from a string value.
             ///
             /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-            public init(stringValue: String) {
+            public init(stringValue: Swift.String) {
               switch stringValue {
               case "OPERATION_TYPE_UNSPECIFIED": self = .unspecified
               case "LIST": self = .list
@@ -613,7 +613,7 @@
             }
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Tool.ConnectorTool.Action.EntityOperation"
           }
@@ -633,7 +633,7 @@
           indirect case entityOperation(Tool.ConnectorTool.Action.EntityOperation?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.ConnectorTool.Action"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -644,7 +644,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.ConnectorTool"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -678,7 +678,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case apiKeyConfig = "apiKeyConfig"
         case oauthConfig = "oauthConfig"
         case serviceAgentAuthConfig = "serviceAgentAuthConfig"
@@ -776,7 +776,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.Authentication.ApiKeyConfig"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -873,7 +873,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "OAUTH_GRANT_TYPE_UNSPECIFIED"
             case .clientCredential: return "CLIENT_CREDENTIAL"
@@ -885,7 +885,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "OAUTH_GRANT_TYPE_UNSPECIFIED": self = .unspecified
             case "CLIENT_CREDENTIAL": self = .clientCredential
@@ -933,7 +933,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.Authentication.OAuthConfig"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1022,7 +1022,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "SERVICE_AGENT_AUTH_UNSPECIFIED"
             case .idToken: return "ID_TOKEN"
@@ -1035,7 +1035,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "SERVICE_AGENT_AUTH_UNSPECIFIED": self = .unspecified
             case "ID_TOKEN": self = .idToken
@@ -1086,7 +1086,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Tool.Authentication.ServiceAgentAuthConfig"
         }
@@ -1132,7 +1132,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Tool.Authentication.BearerTokenConfig"
         }
@@ -1185,7 +1185,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "REQUEST_LOCATION_UNSPECIFIED"
           case .header: return "HEADER"
@@ -1198,7 +1198,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "REQUEST_LOCATION_UNSPECIFIED": self = .unspecified
           case "HEADER": self = .header
@@ -1263,7 +1263,7 @@
         indirect case bearerTokenConfig(Tool.Authentication.BearerTokenConfig?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.Authentication"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1336,7 +1336,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.TLSConfig.CACert"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1347,7 +1347,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.TLSConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1386,7 +1386,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Tool.ServiceDirectoryConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1439,7 +1439,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CONFIRMATION_REQUIREMENT_UNSPECIFIED"
         case .`required`: return "REQUIRED"
@@ -1452,7 +1452,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONFIRMATION_REQUIREMENT_UNSPECIFIED": self = .unspecified
         case "REQUIRED": self = .`required`
@@ -1553,7 +1553,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "METHOD_TYPE_UNSPECIFIED"
         case .`get`: return "GET"
@@ -1569,7 +1569,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "METHOD_TYPE_UNSPECIFIED": self = .unspecified
         case "GET": self = .`get`
@@ -1642,7 +1642,7 @@
       indirect case openApiSpec(Tool.OpenApiTool?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Tool"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

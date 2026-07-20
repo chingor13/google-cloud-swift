@@ -47,7 +47,7 @@ public struct AttributeTypeAndValue: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case type = "type"
     case objectId = "objectId"
     case value = "value"
@@ -98,7 +98,7 @@ public struct AttributeTypeAndValue: Codable, Equatable, GoogleCloudWkt._AnyPack
     indirect case objectId(ObjectId?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.AttributeTypeAndValue"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

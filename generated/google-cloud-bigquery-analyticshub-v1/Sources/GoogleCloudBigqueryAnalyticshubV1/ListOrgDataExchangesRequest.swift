@@ -50,7 +50,7 @@ public struct ListOrgDataExchangesRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

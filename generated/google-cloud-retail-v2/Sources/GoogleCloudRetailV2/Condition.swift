@@ -91,7 +91,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Condition.QueryTerm"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -129,7 +129,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Condition.TimeRange"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -140,7 +140,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Condition"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

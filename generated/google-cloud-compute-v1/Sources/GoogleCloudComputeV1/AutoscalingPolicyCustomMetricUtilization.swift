@@ -165,7 +165,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .deltaPerMinute: return "DELTA_PER_MINUTE"
         case .deltaPerSecond: return "DELTA_PER_SECOND"
@@ -178,7 +178,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELTA_PER_MINUTE": self = .deltaPerMinute
         case "DELTA_PER_SECOND": self = .deltaPerSecond
@@ -229,7 +229,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AutoscalingPolicyCustomMetricUtilization"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

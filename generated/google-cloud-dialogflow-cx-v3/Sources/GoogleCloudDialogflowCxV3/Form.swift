@@ -111,7 +111,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case displayName = "displayName"
         case `required` = "required"
         case entityType = "entityType"
@@ -207,7 +207,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form.Parameter.FillBehavior"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -218,7 +218,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form.Parameter"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -229,7 +229,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

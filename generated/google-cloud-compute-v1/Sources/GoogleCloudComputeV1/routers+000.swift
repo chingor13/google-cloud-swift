@@ -59,7 +59,8 @@
     public func aggregatedList(
       byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -191,7 +192,7 @@
       byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
         var request = byItem
         request.pageToken = token
         return try await self.getNatMappingInfo(request: request, options: options)
@@ -279,7 +280,7 @@
     public func list(
       byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Router, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -302,7 +303,8 @@
     public func listBgpRoutes(
       byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
         var request = byItem
         request.pageToken = token
         return try await self.listBgpRoutes(request: request, options: options)
@@ -328,7 +330,7 @@
       byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
         var request = byItem
         request.pageToken = token
         return try await self.listRoutePolicies(request: request, options: options)
@@ -848,7 +850,8 @@
     public func aggregatedList(
       byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1020,7 +1023,7 @@
       byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1153,7 +1156,7 @@
     public func list(
       byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Router, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RouterList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1191,7 +1194,8 @@
     public func listBgpRoutes(
       byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1232,7 +1236,7 @@
       byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

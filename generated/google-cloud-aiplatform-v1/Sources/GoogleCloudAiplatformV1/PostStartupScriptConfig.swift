@@ -94,7 +94,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED"
         case .runOnce: return "RUN_ONCE"
@@ -108,7 +108,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED": self = .unspecified
         case "RUN_ONCE": self = .runOnce
@@ -162,7 +162,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PostStartupScriptConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

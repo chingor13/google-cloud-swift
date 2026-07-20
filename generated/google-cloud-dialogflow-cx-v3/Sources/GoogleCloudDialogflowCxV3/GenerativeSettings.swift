@@ -116,7 +116,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.FallbackSettings.PromptTemplate"
         }
@@ -128,7 +128,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.FallbackSettings"
       }
@@ -186,7 +186,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.KnowledgeConnectorSettings"
       }
@@ -198,7 +198,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

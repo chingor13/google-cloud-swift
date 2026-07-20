@@ -44,7 +44,7 @@ public struct ShowEffectiveAutokeyConfigResponse: Codable, Equatable, GoogleClou
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

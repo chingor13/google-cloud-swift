@@ -50,7 +50,7 @@ public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case bigQuerySource = "bigQuerySource"
   }
 
@@ -106,7 +106,7 @@ public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWkt._Any
     indirect case bigQuerySource(BigQuerySource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CompletionDataInputConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

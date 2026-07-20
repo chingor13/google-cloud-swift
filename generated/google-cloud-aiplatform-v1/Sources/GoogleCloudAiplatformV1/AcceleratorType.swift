@@ -108,7 +108,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACCELERATOR_TYPE_UNSPECIFIED"
       case .nvidiaTeslaK80: return "NVIDIA_TESLA_K80"
@@ -137,7 +137,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACCELERATOR_TYPE_UNSPECIFIED": self = .unspecified
       case "NVIDIA_TESLA_K80": self = .nvidiaTeslaK80
@@ -173,19 +173,19 @@
       case 3: self = .nvidiaTeslaV100
       case 4: self = .nvidiaTeslaP4
       case 5: self = .nvidiaTeslaT4
+      case 6: self = .tpuV2
+      case 7: self = .tpuV3
       case 8: self = .nvidiaTeslaA100
       case 9: self = .nvidiaA10080Gb
+      case 10: self = .tpuV4Pod
       case 11: self = .nvidiaL4
+      case 12: self = .tpuV5Litepod
       case 13: self = .nvidiaH10080Gb
       case 14: self = .nvidiaH100Mega80Gb
       case 15: self = .nvidiaH200141Gb
       case 16: self = .nvidiaB200
       case 17: self = .nvidiaGb200
       case 18: self = .nvidiaRtxPro6000
-      case 6: self = .tpuV2
-      case 7: self = .tpuV3
-      case 10: self = .tpuV4Pod
-      case 12: self = .tpuV5Litepod
       default: self = .unknownIntValue(intValue)
       }
     }

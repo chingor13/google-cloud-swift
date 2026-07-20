@@ -70,7 +70,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case instance = "instance"
       case project = "project"
       case syncMode = "syncMode"
@@ -136,7 +136,7 @@
       indirect case mysqlSyncConfig(MySqlSyncConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

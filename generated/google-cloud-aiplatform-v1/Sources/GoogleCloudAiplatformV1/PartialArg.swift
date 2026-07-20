@@ -50,7 +50,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case nullValue = "nullValue"
       case numberValue = "numberValue"
       case stringValue = "stringValue"
@@ -122,7 +122,7 @@
       case boolValue(Swift.Bool)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PartialArg"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

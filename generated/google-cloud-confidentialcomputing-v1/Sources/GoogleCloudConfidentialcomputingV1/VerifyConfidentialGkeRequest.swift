@@ -51,7 +51,7 @@ public struct VerifyConfidentialGkeRequest: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case tpmAttestation = "tpmAttestation"
     case challenge = "challenge"
     case options = "options"
@@ -127,7 +127,7 @@ public struct VerifyConfidentialGkeRequest: Codable, Equatable, GoogleCloudWkt._
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions"
     }
@@ -147,7 +147,7 @@ public struct VerifyConfidentialGkeRequest: Codable, Equatable, GoogleCloudWkt._
     indirect case tpmAttestation(TpmAttestation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

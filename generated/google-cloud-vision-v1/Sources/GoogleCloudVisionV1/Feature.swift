@@ -128,7 +128,7 @@ public struct Feature: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TYPE_UNSPECIFIED"
       case .faceDetection: return "FACE_DETECTION"
@@ -151,7 +151,7 @@ public struct Feature: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TYPE_UNSPECIFIED": self = .unspecified
       case "FACE_DETECTION": self = .faceDetection
@@ -181,11 +181,11 @@ public struct Feature: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 3: self = .logoDetection
       case 4: self = .labelDetection
       case 5: self = .textDetection
-      case 11: self = .documentTextDetection
       case 6: self = .safeSearchDetection
       case 7: self = .imageProperties
       case 9: self = .cropHints
       case 10: self = .webDetection
+      case 11: self = .documentTextDetection
       case 12: self = .productSearch
       case 19: self = .objectLocalization
       default: self = .unknownIntValue(intValue)
@@ -232,7 +232,7 @@ public struct Feature: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.Feature"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

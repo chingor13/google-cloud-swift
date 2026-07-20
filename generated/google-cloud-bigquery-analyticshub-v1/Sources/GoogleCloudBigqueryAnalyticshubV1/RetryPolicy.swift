@@ -56,7 +56,7 @@ public struct RetryPolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.RetryPolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

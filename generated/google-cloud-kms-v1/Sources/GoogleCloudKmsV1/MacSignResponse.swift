@@ -94,7 +94,7 @@ public struct MacSignResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case mac = "mac"
     case macCrc32C = "macCrc32c"
@@ -121,7 +121,7 @@ public struct MacSignResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.protectionLevel, forKey: .protectionLevel)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.MacSignResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

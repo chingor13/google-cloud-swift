@@ -126,7 +126,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case condition = "condition"
         case versionVariants = "versionVariants"
       }
@@ -172,7 +172,7 @@
         indirect case versionVariants(VersionVariants?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment.Definition"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -246,7 +246,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment.Result.ConfidenceInterval"
         }
@@ -293,7 +293,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case type = "type"
           case countType = "countType"
           case ratio = "ratio"
@@ -352,7 +352,7 @@
           case count(Swift.Double)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment.Result.Metric"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -397,7 +397,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment.Result.VersionMetrics"
         }
@@ -460,7 +460,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .metricUnspecified: return "METRIC_UNSPECIFIED"
           case .containedSessionNoCallbackRate: return "CONTAINED_SESSION_NO_CALLBACK_RATE"
@@ -476,7 +476,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "METRIC_UNSPECIFIED": self = .metricUnspecified
           case "CONTAINED_SESSION_NO_CALLBACK_RATE": self = .containedSessionNoCallbackRate
@@ -580,7 +580,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "COUNT_TYPE_UNSPECIFIED"
           case .totalNoMatchCount: return "TOTAL_NO_MATCH_COUNT"
@@ -594,7 +594,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "COUNT_TYPE_UNSPECIFIED": self = .unspecified
           case "TOTAL_NO_MATCH_COUNT": self = .totalNoMatchCount
@@ -648,7 +648,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment.Result"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -706,7 +706,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .draft: return "DRAFT"
@@ -721,7 +721,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "DRAFT": self = .draft
@@ -778,7 +778,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Experiment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

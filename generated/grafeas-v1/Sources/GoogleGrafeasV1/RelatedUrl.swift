@@ -43,7 +43,9 @@ public struct RelatedUrl: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.RelatedUrl" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.RelatedUrl"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

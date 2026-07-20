@@ -106,7 +106,7 @@
       byItem: SecurityPoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SecurityPoliciesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -237,7 +237,8 @@
     public func list(
       byItem: SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityPolicy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -690,7 +691,7 @@
       byItem: SecurityPoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SecurityPoliciesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -854,7 +855,8 @@
     public func list(
       byItem: SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityPolicy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

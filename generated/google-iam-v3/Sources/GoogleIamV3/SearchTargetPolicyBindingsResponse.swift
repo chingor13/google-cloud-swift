@@ -46,7 +46,7 @@ public struct SearchTargetPolicyBindingsResponse: Codable, Equatable, GoogleClou
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v3.SearchTargetPolicyBindingsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

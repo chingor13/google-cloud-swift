@@ -48,7 +48,7 @@ public struct RestoreInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case fileShare = "fileShare"
     case sourceBackup = "sourceBackup"
@@ -94,7 +94,7 @@ public struct RestoreInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     case sourceBackup(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.filestore.v1.RestoreInstanceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

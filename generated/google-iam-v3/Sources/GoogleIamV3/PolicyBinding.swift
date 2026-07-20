@@ -154,7 +154,7 @@ public struct PolicyBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case principalSet = "principalSet"
     }
 
@@ -216,7 +216,7 @@ public struct PolicyBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case principalSet(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.iam.v3.PolicyBinding.Target"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -265,7 +265,7 @@ public struct PolicyBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "POLICY_KIND_UNSPECIFIED"
       case .principalAccessBoundary: return "PRINCIPAL_ACCESS_BOUNDARY"
@@ -277,7 +277,7 @@ public struct PolicyBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "POLICY_KIND_UNSPECIFIED": self = .unspecified
       case "PRINCIPAL_ACCESS_BOUNDARY": self = .principalAccessBoundary
@@ -325,7 +325,9 @@ public struct PolicyBinding: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v3.PolicyBinding" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.iam.v3.PolicyBinding"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

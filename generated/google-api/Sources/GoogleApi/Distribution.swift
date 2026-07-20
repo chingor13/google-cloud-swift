@@ -124,7 +124,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.Distribution.Range"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -172,7 +172,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case linearBuckets = "linearBuckets"
       case exponentialBuckets = "exponentialBuckets"
       case explicitBuckets = "explicitBuckets"
@@ -262,7 +262,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.api.Distribution.BucketOptions.Linear"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -311,7 +311,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.api.Distribution.BucketOptions.Exponential"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -355,7 +355,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.api.Distribution.BucketOptions.Explicit"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -376,7 +376,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case explicitBuckets(Distribution.BucketOptions.Explicit?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.Distribution.BucketOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -431,7 +431,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.Distribution.Exemplar"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -442,7 +442,9 @@ public struct Distribution: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Distribution" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.api.Distribution"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

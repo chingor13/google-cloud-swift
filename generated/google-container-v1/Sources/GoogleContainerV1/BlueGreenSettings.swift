@@ -44,7 +44,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case standardRolloutPolicy = "standardRolloutPolicy"
     case autoscaledRolloutPolicy = "autoscaledRolloutPolicy"
     case nodePoolSoakDuration = "nodePoolSoakDuration"
@@ -118,7 +118,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case batchPercentage = "batchPercentage"
       case batchNodeCount = "batchNodeCount"
       case batchSoakDuration = "batchSoakDuration"
@@ -175,7 +175,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
       case batchNodeCount(Swift.Int32)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.BlueGreenSettings.StandardRolloutPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -212,7 +212,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.BlueGreenSettings.AutoscaledRolloutPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -231,7 +231,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case autoscaledRolloutPolicy(BlueGreenSettings.AutoscaledRolloutPolicy?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.BlueGreenSettings"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

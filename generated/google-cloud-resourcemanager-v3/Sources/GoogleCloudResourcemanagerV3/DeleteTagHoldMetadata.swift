@@ -39,7 +39,7 @@ public struct DeleteTagHoldMetadata: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.DeleteTagHoldMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

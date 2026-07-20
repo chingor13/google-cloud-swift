@@ -46,7 +46,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case automatic = "automatic"
     case userManaged = "userManaged"
   }
@@ -125,7 +125,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -204,7 +204,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus"
       }
@@ -216,7 +216,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -256,7 +256,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case userManaged(ReplicationStatus.UserManagedStatus?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

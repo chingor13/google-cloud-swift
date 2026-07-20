@@ -48,7 +48,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case agent = "agent"
       case intentCoverage = "intentCoverage"
       case transitionCoverage = "transitionCoverage"
@@ -113,7 +113,7 @@
       indirect case routeGroupCoverage(TransitionRouteGroupCoverage?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.CalculateCoverageResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

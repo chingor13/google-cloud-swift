@@ -61,7 +61,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case type = "type"
     case state = "state"
     case message = "message"
@@ -174,7 +174,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .conditionPending: return "CONDITION_PENDING"
@@ -189,7 +189,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "CONDITION_PENDING": self = .conditionPending
@@ -290,7 +290,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SEVERITY_UNSPECIFIED"
       case .error: return "ERROR"
@@ -304,7 +304,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SEVERITY_UNSPECIFIED": self = .unspecified
       case "ERROR": self = .error
@@ -438,7 +438,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .undefined: return "COMMON_REASON_UNDEFINED"
       case .unknown: return "UNKNOWN"
@@ -465,7 +465,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "COMMON_REASON_UNDEFINED": self = .undefined
       case "UNKNOWN": self = .unknown
@@ -634,7 +634,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .undefined: return "REVISION_REASON_UNDEFINED"
       case .pending: return "PENDING"
@@ -657,7 +657,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "REVISION_REASON_UNDEFINED": self = .undefined
       case "PENDING": self = .pending
@@ -792,7 +792,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .undefined: return "EXECUTION_REASON_UNDEFINED"
       case .jobStatusServicePollingError: return "JOB_STATUS_SERVICE_POLLING_ERROR"
@@ -809,7 +809,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EXECUTION_REASON_UNDEFINED": self = .undefined
       case "JOB_STATUS_SERVICE_POLLING_ERROR": self = .jobStatusServicePollingError
@@ -884,7 +884,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case executionReason(Condition.ExecutionReason)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.Condition"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

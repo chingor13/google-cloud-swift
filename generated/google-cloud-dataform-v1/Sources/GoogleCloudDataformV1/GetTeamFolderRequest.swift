@@ -40,7 +40,7 @@ public struct GetTeamFolderRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.GetTeamFolderRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

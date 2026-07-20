@@ -376,7 +376,7 @@ public class ClusterManagerClient: Clients.ClusterManagerProtocol {
     byItem: ListUsableSubnetworksRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleContainerV1.ListUsableSubnetworksResponse in
+      (token: Swift.String) async throws -> GoogleContainerV1.ListUsableSubnetworksResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listUsableSubnetworks(request: request, options: options)
@@ -2028,7 +2028,7 @@ extension Clients.ClusterManagerProtocol {
     byItem: ListUsableSubnetworksRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<UsableSubnetwork, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleContainerV1.ListUsableSubnetworksResponse in
+      (token: Swift.String) async throws -> GoogleContainerV1.ListUsableSubnetworksResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

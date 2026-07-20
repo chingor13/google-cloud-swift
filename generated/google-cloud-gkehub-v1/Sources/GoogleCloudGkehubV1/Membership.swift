@@ -104,7 +104,7 @@ public struct Membership: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case endpoint = "endpoint"
     case name = "name"
     case labels = "labels"
@@ -185,7 +185,7 @@ public struct Membership: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case endpoint(MembershipEndpoint?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.Membership"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

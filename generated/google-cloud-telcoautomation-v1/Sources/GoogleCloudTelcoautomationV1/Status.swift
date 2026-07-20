@@ -73,7 +73,7 @@ public enum Status: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "STATUS_UNSPECIFIED"
     case .inProgress: return "STATUS_IN_PROGRESS"
@@ -91,7 +91,7 @@ public enum Status: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "STATUS_UNSPECIFIED": self = .unspecified
     case "STATUS_IN_PROGRESS": self = .inProgress

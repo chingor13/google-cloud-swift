@@ -52,7 +52,7 @@ public struct ListJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.ListJobsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

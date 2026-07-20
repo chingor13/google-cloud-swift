@@ -57,7 +57,7 @@ public enum ExecutionEnvironment: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "EXECUTION_ENVIRONMENT_UNSPECIFIED"
     case .gen1: return "EXECUTION_ENVIRONMENT_GEN1"
@@ -70,7 +70,7 @@ public enum ExecutionEnvironment: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "EXECUTION_ENVIRONMENT_UNSPECIFIED": self = .unspecified
     case "EXECUTION_ENVIRONMENT_GEN1": self = .gen1

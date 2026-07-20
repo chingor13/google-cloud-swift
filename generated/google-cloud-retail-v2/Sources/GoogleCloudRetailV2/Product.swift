@@ -555,7 +555,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case expireTime = "expireTime"
     case ttl = "ttl"
     case name = "name"
@@ -777,7 +777,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TYPE_UNSPECIFIED"
       case .primary: return "PRIMARY"
@@ -791,7 +791,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TYPE_UNSPECIFIED": self = .unspecified
       case "PRIMARY": self = .primary
@@ -897,7 +897,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AVAILABILITY_UNSPECIFIED"
       case .inStock: return "IN_STOCK"
@@ -912,7 +912,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AVAILABILITY_UNSPECIFIED": self = .unspecified
       case "IN_STOCK": self = .inStock
@@ -1038,7 +1038,7 @@ public struct Product: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case ttl(GoogleCloudWkt.Duration?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Product"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

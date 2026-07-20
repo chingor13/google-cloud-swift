@@ -43,7 +43,7 @@ public struct EnvVar: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case value = "value"
     case valueSource = "valueSource"
@@ -95,7 +95,9 @@ public struct EnvVar: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case valueSource(EnvVarSource?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.EnvVar" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.run.v2.EnvVar"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

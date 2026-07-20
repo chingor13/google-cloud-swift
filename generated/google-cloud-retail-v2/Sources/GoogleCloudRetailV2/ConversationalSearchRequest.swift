@@ -185,7 +185,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchRequest.SearchParams"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -221,7 +221,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case textAnswer = "textAnswer"
       case selectedAnswer = "selectedAnswer"
     }
@@ -288,7 +288,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer"
       }
@@ -311,7 +311,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       indirect case selectedAnswer(ConversationalSearchRequest.UserAnswer.SelectedAnswer?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -413,7 +413,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODE_UNSPECIFIED"
         case .disabled: return "DISABLED"
@@ -427,7 +427,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODE_UNSPECIFIED": self = .unspecified
         case "DISABLED": self = .disabled
@@ -481,7 +481,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec"
     }
@@ -493,7 +493,7 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -85,7 +85,7 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "GPU_SHARING_STRATEGY_UNSPECIFIED"
       case .timeSharing: return "TIME_SHARING"
@@ -98,7 +98,7 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "GPU_SHARING_STRATEGY_UNSPECIFIED": self = .unspecified
       case "TIME_SHARING": self = .timeSharing
@@ -149,7 +149,7 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.GPUSharingConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

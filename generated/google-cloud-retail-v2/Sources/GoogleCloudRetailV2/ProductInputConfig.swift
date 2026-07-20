@@ -40,7 +40,7 @@ public struct ProductInputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case productInlineSource = "productInlineSource"
     case gcsSource = "gcsSource"
     case bigQuerySource = "bigQuerySource"
@@ -100,7 +100,7 @@ public struct ProductInputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     indirect case bigQuerySource(BigQuerySource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ProductInputConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

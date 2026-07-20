@@ -100,7 +100,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case value = "value"
           case name = "name"
         }
@@ -144,7 +144,7 @@
           indirect case value(FeatureValue?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature"
         }
@@ -156,7 +156,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues"
       }
@@ -168,7 +168,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

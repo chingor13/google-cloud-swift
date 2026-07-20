@@ -47,7 +47,7 @@ public struct UpdateIcebergNamespaceResponse: Codable, Equatable, GoogleCloudWkt
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case removed = "removed"
     case updated = "added"
     case missing = "missing"
@@ -67,7 +67,7 @@ public struct UpdateIcebergNamespaceResponse: Codable, Equatable, GoogleCloudWkt
     try container.encode(self.missing, forKey: .missing)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.UpdateIcebergNamespaceResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

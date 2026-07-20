@@ -253,7 +253,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case architecture = "architecture"
       case archiveSizeBytes = "archiveSizeBytes"
       case creationTimestamp = "creationTimestamp"
@@ -480,7 +480,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .tar: return "TAR"
           case .unknownIntValue: return nil
@@ -491,7 +491,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "TAR": self = .tar
           default: self = .unknownStringValue(stringValue)
@@ -536,7 +536,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Image.rawDisk"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -590,7 +590,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ARCHITECTURE_UNSPECIFIED"
         case .arm64: return "ARM64"
@@ -603,7 +603,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ARCHITECTURE_UNSPECIFIED": self = .unspecified
         case "ARM64": self = .arm64
@@ -690,7 +690,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .raw: return "RAW"
         case .unknownIntValue: return nil
@@ -701,7 +701,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RAW": self = .raw
         default: self = .unknownStringValue(stringValue)
@@ -792,7 +792,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .deleting: return "DELETING"
         case .failed: return "FAILED"
@@ -806,7 +806,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELETING": self = .deleting
         case "FAILED": self = .failed
@@ -860,7 +860,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Image"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

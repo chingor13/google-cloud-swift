@@ -40,7 +40,7 @@ public struct GetInterconnectAttachmentRequest: Codable, Equatable, GoogleCloudW
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.GetInterconnectAttachmentRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

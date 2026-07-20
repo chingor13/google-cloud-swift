@@ -44,7 +44,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.LocationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

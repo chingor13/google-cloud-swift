@@ -48,7 +48,7 @@ public struct ListPoliciesResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v2.ListPoliciesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

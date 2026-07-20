@@ -51,7 +51,7 @@ public struct DiscoveryVertexDatasetGenerationCadence: Codable, Equatable, Googl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryVertexDatasetGenerationCadence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

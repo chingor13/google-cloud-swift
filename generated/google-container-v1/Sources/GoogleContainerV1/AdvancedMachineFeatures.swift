@@ -93,7 +93,7 @@ public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PERFORMANCE_MONITORING_UNIT_UNSPECIFIED"
       case .architectural: return "ARCHITECTURAL"
@@ -107,7 +107,7 @@ public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PERFORMANCE_MONITORING_UNIT_UNSPECIFIED": self = .unspecified
       case "ARCHITECTURAL": self = .architectural
@@ -161,7 +161,7 @@ public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.AdvancedMachineFeatures"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

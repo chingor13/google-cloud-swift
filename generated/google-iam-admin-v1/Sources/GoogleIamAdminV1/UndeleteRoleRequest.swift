@@ -65,7 +65,7 @@ public struct UndeleteRoleRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.UndeleteRoleRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

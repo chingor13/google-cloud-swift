@@ -41,7 +41,7 @@ public struct SourceParallelstore: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.parallelstore.v1.SourceParallelstore"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

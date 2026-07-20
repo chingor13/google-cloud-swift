@@ -199,7 +199,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "HEALTH_STATE_UNSPECIFIED"
         case .healthy: return "HEALTHY"
@@ -212,7 +212,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HEALTH_STATE_UNSPECIFIED": self = .unspecified
         case "HEALTHY": self = .healthy
@@ -322,7 +322,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RUNTIME_STATE_UNSPECIFIED"
         case .running: return "RUNNING"
@@ -340,7 +340,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RUNTIME_STATE_UNSPECIFIED": self = .unspecified
         case "RUNNING": self = .running
@@ -406,7 +406,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NotebookRuntime"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

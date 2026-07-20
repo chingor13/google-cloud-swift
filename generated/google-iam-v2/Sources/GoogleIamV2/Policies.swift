@@ -62,7 +62,7 @@ public class PoliciesClient: Clients.PoliciesProtocol {
   public func listPolicies(
     byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamV2.ListPoliciesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleIamV2.ListPoliciesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPolicies(request: request, options: options)
@@ -435,7 +435,7 @@ extension Clients.PoliciesProtocol {
   public func listPolicies(
     byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamV2.ListPoliciesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleIamV2.ListPoliciesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

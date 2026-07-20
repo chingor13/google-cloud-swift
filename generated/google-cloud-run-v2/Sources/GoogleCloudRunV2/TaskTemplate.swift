@@ -78,7 +78,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case containers = "containers"
     case volumes = "volumes"
     case maxRetries = "maxRetries"
@@ -147,7 +147,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case maxRetries(Swift.Int32)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.TaskTemplate"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

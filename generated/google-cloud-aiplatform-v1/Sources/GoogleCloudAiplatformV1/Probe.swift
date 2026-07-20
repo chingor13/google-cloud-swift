@@ -71,7 +71,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case exec = "exec"
       case httpGet = "httpGet"
       case grpc = "grpc"
@@ -169,7 +169,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Probe.ExecAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -218,7 +218,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Probe.HttpGetAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -259,7 +259,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Probe.GrpcAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -299,7 +299,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Probe.TcpSocketAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -338,7 +338,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Probe.HttpHeader"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -362,7 +362,7 @@
       indirect case tcpSocket(Probe.TcpSocketAction?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Probe"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

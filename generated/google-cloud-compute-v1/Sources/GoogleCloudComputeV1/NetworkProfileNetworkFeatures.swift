@@ -159,7 +159,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case addressPurposes = "addressPurposes"
       case allowAddressCreation = "allowAddressCreation"
       case allowAliasIpRanges = "allowAliasIpRanges"
@@ -397,7 +397,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .dnsResolver: return "DNS_RESOLVER"
         case .gceEndpoint: return "GCE_ENDPOINT"
@@ -415,7 +415,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DNS_RESOLVER": self = .dnsResolver
         case "GCE_ENDPOINT": self = .gceEndpoint
@@ -519,7 +519,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .addressCreationAllowed: return "ADDRESS_CREATION_ALLOWED"
         case .addressCreationBlocked: return "ADDRESS_CREATION_BLOCKED"
@@ -531,7 +531,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADDRESS_CREATION_ALLOWED": self = .addressCreationAllowed
         case "ADDRESS_CREATION_BLOCKED": self = .addressCreationBlocked
@@ -617,7 +617,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .aliasIpRangesAllowed: return "ALIAS_IP_RANGES_ALLOWED"
         case .aliasIpRangesBlocked: return "ALIAS_IP_RANGES_BLOCKED"
@@ -629,7 +629,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALIAS_IP_RANGES_ALLOWED": self = .aliasIpRangesAllowed
         case "ALIAS_IP_RANGES_BLOCKED": self = .aliasIpRangesBlocked
@@ -715,7 +715,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .autoModeSubnetAllowed: return "AUTO_MODE_SUBNET_ALLOWED"
         case .autoModeSubnetBlocked: return "AUTO_MODE_SUBNET_BLOCKED"
@@ -727,7 +727,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AUTO_MODE_SUBNET_ALLOWED": self = .autoModeSubnetAllowed
         case "AUTO_MODE_SUBNET_BLOCKED": self = .autoModeSubnetBlocked
@@ -813,7 +813,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .classDFirewallsAllowed: return "CLASS_D_FIREWALLS_ALLOWED"
         case .classDFirewallsBlocked: return "CLASS_D_FIREWALLS_BLOCKED"
@@ -825,7 +825,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CLASS_D_FIREWALLS_ALLOWED": self = .classDFirewallsAllowed
         case "CLASS_D_FIREWALLS_BLOCKED": self = .classDFirewallsBlocked
@@ -911,7 +911,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .cloudNatAllowed: return "CLOUD_NAT_ALLOWED"
         case .cloudNatBlocked: return "CLOUD_NAT_BLOCKED"
@@ -923,7 +923,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CLOUD_NAT_ALLOWED": self = .cloudNatAllowed
         case "CLOUD_NAT_BLOCKED": self = .cloudNatBlocked
@@ -1009,7 +1009,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .cloudRouterAllowed: return "CLOUD_ROUTER_ALLOWED"
         case .cloudRouterBlocked: return "CLOUD_ROUTER_BLOCKED"
@@ -1021,7 +1021,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CLOUD_ROUTER_ALLOWED": self = .cloudRouterAllowed
         case "CLOUD_ROUTER_BLOCKED": self = .cloudRouterBlocked
@@ -1107,7 +1107,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .defaultNicAttachmentAllowed: return "DEFAULT_NIC_ATTACHMENT_ALLOWED"
         case .defaultNicAttachmentBlocked: return "DEFAULT_NIC_ATTACHMENT_BLOCKED"
@@ -1119,7 +1119,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEFAULT_NIC_ATTACHMENT_ALLOWED": self = .defaultNicAttachmentAllowed
         case "DEFAULT_NIC_ATTACHMENT_BLOCKED": self = .defaultNicAttachmentBlocked
@@ -1205,7 +1205,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .externalIpAccessAllowed: return "EXTERNAL_IP_ACCESS_ALLOWED"
         case .externalIpAccessBlocked: return "EXTERNAL_IP_ACCESS_BLOCKED"
@@ -1217,7 +1217,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXTERNAL_IP_ACCESS_ALLOWED": self = .externalIpAccessAllowed
         case "EXTERNAL_IP_ACCESS_BLOCKED": self = .externalIpAccessBlocked
@@ -1303,7 +1303,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .firewallPolicyAllowed: return "FIREWALL_POLICY_ALLOWED"
         case .firewallPolicyBlocked: return "FIREWALL_POLICY_BLOCKED"
@@ -1315,7 +1315,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FIREWALL_POLICY_ALLOWED": self = .firewallPolicyAllowed
         case "FIREWALL_POLICY_BLOCKED": self = .firewallPolicyBlocked
@@ -1401,7 +1401,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .interconnectAllowed: return "INTERCONNECT_ALLOWED"
         case .interconnectBlocked: return "INTERCONNECT_BLOCKED"
@@ -1413,7 +1413,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INTERCONNECT_ALLOWED": self = .interconnectAllowed
         case "INTERCONNECT_BLOCKED": self = .interconnectBlocked
@@ -1499,7 +1499,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipForwardingAllowed: return "IP_FORWARDING_ALLOWED"
         case .ipForwardingBlocked: return "IP_FORWARDING_BLOCKED"
@@ -1511,7 +1511,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IP_FORWARDING_ALLOWED": self = .ipForwardingAllowed
         case "IP_FORWARDING_BLOCKED": self = .ipForwardingBlocked
@@ -1597,7 +1597,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .loadBalancingAllowed: return "LOAD_BALANCING_ALLOWED"
         case .loadBalancingBlocked: return "LOAD_BALANCING_BLOCKED"
@@ -1609,7 +1609,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LOAD_BALANCING_ALLOWED": self = .loadBalancingAllowed
         case "LOAD_BALANCING_BLOCKED": self = .loadBalancingBlocked
@@ -1695,7 +1695,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .multiNicInSameNetworkAllowed: return "MULTI_NIC_IN_SAME_NETWORK_ALLOWED"
         case .multiNicInSameNetworkBlocked: return "MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
@@ -1707,7 +1707,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MULTI_NIC_IN_SAME_NETWORK_ALLOWED": self = .multiNicInSameNetworkAllowed
         case "MULTI_NIC_IN_SAME_NETWORK_BLOCKED": self = .multiNicInSameNetworkBlocked
@@ -1793,7 +1793,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .multiNicInSameSubnetworkAllowed: return "MULTI_NIC_IN_SAME_SUBNETWORK_ALLOWED"
         case .multiNicInSameSubnetworkBlocked: return "MULTI_NIC_IN_SAME_SUBNETWORK_BLOCKED"
@@ -1805,7 +1805,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MULTI_NIC_IN_SAME_SUBNETWORK_ALLOWED": self = .multiNicInSameSubnetworkAllowed
         case "MULTI_NIC_IN_SAME_SUBNETWORK_BLOCKED": self = .multiNicInSameSubnetworkBlocked
@@ -1891,7 +1891,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .multicastAllowed: return "MULTICAST_ALLOWED"
         case .multicastBlocked: return "MULTICAST_BLOCKED"
@@ -1903,7 +1903,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MULTICAST_ALLOWED": self = .multicastAllowed
         case "MULTICAST_BLOCKED": self = .multicastBlocked
@@ -1989,7 +1989,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .nccAllowed: return "NCC_ALLOWED"
         case .nccBlocked: return "NCC_BLOCKED"
@@ -2001,7 +2001,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NCC_ALLOWED": self = .nccAllowed
         case "NCC_BLOCKED": self = .nccBlocked
@@ -2087,7 +2087,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .networkMigrationAllowed: return "NETWORK_MIGRATION_ALLOWED"
         case .networkMigrationBlocked: return "NETWORK_MIGRATION_BLOCKED"
@@ -2099,7 +2099,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NETWORK_MIGRATION_ALLOWED": self = .networkMigrationAllowed
         case "NETWORK_MIGRATION_BLOCKED": self = .networkMigrationBlocked
@@ -2185,7 +2185,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .packetMirroringAllowed: return "PACKET_MIRRORING_ALLOWED"
         case .packetMirroringBlocked: return "PACKET_MIRRORING_BLOCKED"
@@ -2197,7 +2197,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PACKET_MIRRORING_ALLOWED": self = .packetMirroringAllowed
         case "PACKET_MIRRORING_BLOCKED": self = .packetMirroringBlocked
@@ -2283,7 +2283,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .privateGoogleAccessAllowed: return "PRIVATE_GOOGLE_ACCESS_ALLOWED"
         case .privateGoogleAccessBlocked: return "PRIVATE_GOOGLE_ACCESS_BLOCKED"
@@ -2295,7 +2295,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PRIVATE_GOOGLE_ACCESS_ALLOWED": self = .privateGoogleAccessAllowed
         case "PRIVATE_GOOGLE_ACCESS_BLOCKED": self = .privateGoogleAccessBlocked
@@ -2381,7 +2381,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .pscAllowed: return "PSC_ALLOWED"
         case .pscBlocked: return "PSC_BLOCKED"
@@ -2393,7 +2393,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PSC_ALLOWED": self = .pscAllowed
         case "PSC_BLOCKED": self = .pscBlocked
@@ -2479,7 +2479,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .sameNetworkUnicastAllowed: return "SAME_NETWORK_UNICAST_ALLOWED"
         case .sameNetworkUnicastBlocked: return "SAME_NETWORK_UNICAST_BLOCKED"
@@ -2491,7 +2491,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SAME_NETWORK_UNICAST_ALLOWED": self = .sameNetworkUnicastAllowed
         case "SAME_NETWORK_UNICAST_BLOCKED": self = .sameNetworkUnicastBlocked
@@ -2577,7 +2577,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .staticRoutesAllowed: return "STATIC_ROUTES_ALLOWED"
         case .staticRoutesBlocked: return "STATIC_ROUTES_BLOCKED"
@@ -2589,7 +2589,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATIC_ROUTES_ALLOWED": self = .staticRoutesAllowed
         case "STATIC_ROUTES_BLOCKED": self = .staticRoutesBlocked
@@ -2675,7 +2675,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .subinterfacesAllowed: return "SUBINTERFACES_ALLOWED"
         case .subinterfacesBlocked: return "SUBINTERFACES_BLOCKED"
@@ -2687,7 +2687,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SUBINTERFACES_ALLOWED": self = .subinterfacesAllowed
         case "SUBINTERFACES_BLOCKED": self = .subinterfacesBlocked
@@ -2773,7 +2773,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .subnetworkCreationAllowed: return "SUBNETWORK_CREATION_ALLOWED"
         case .subnetworkCreationBlocked: return "SUBNETWORK_CREATION_BLOCKED"
@@ -2785,7 +2785,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SUBNETWORK_CREATION_ALLOWED": self = .subnetworkCreationAllowed
         case "SUBNETWORK_CREATION_BLOCKED": self = .subnetworkCreationBlocked
@@ -2871,7 +2871,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .vpcFirewallRulesAllowed: return "VPC_FIREWALL_RULES_ALLOWED"
         case .vpcFirewallRulesBlocked: return "VPC_FIREWALL_RULES_BLOCKED"
@@ -2883,7 +2883,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VPC_FIREWALL_RULES_ALLOWED": self = .vpcFirewallRulesAllowed
         case "VPC_FIREWALL_RULES_BLOCKED": self = .vpcFirewallRulesBlocked
@@ -2969,7 +2969,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .vpcPeeringAllowed: return "VPC_PEERING_ALLOWED"
         case .vpcPeeringBlocked: return "VPC_PEERING_BLOCKED"
@@ -2981,7 +2981,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VPC_PEERING_ALLOWED": self = .vpcPeeringAllowed
         case "VPC_PEERING_BLOCKED": self = .vpcPeeringBlocked
@@ -3067,7 +3067,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .vpnAllowed: return "VPN_ALLOWED"
         case .vpnBlocked: return "VPN_BLOCKED"
@@ -3079,7 +3079,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VPN_ALLOWED": self = .vpnAllowed
         case "VPN_BLOCKED": self = .vpnBlocked
@@ -3167,7 +3167,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .rdmaRocePolicy: return "RDMA_ROCE_POLICY"
         case .ullPolicy: return "ULL_POLICY"
@@ -3180,7 +3180,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RDMA_ROCE_POLICY": self = .rdmaRocePolicy
         case "ULL_POLICY": self = .ullPolicy
@@ -3283,7 +3283,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .gvnic: return "GVNIC"
         case .idpf: return "IDPF"
@@ -3299,7 +3299,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GVNIC": self = .gvnic
         case "IDPF": self = .idpf
@@ -3397,7 +3397,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .sdn: return "MULTICAST_SDN"
         case .ull: return "MULTICAST_ULL"
@@ -3409,7 +3409,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MULTICAST_SDN": self = .sdn
         case "MULTICAST_ULL": self = .ull
@@ -3495,7 +3495,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .subnetPurposeCustomHardware: return "SUBNET_PURPOSE_CUSTOM_HARDWARE"
         case .subnetPurposePrivate: return "SUBNET_PURPOSE_PRIVATE"
@@ -3507,7 +3507,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SUBNET_PURPOSE_CUSTOM_HARDWARE": self = .subnetPurposeCustomHardware
         case "SUBNET_PURPOSE_PRIVATE": self = .subnetPurposePrivate
@@ -3595,7 +3595,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .subnetStackTypeIpv4Ipv6: return "SUBNET_STACK_TYPE_IPV4_IPV6"
         case .subnetStackTypeIpv4Only: return "SUBNET_STACK_TYPE_IPV4_ONLY"
@@ -3608,7 +3608,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SUBNET_STACK_TYPE_IPV4_IPV6": self = .subnetStackTypeIpv4Ipv6
         case "SUBNET_STACK_TYPE_IPV4_ONLY": self = .subnetStackTypeIpv4Only
@@ -3720,7 +3720,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .globalManagedProxy: return "GLOBAL_MANAGED_PROXY"
         case .internalHttpsLoadBalancer: return "INTERNAL_HTTPS_LOAD_BALANCER"
@@ -3738,7 +3738,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GLOBAL_MANAGED_PROXY": self = .globalManagedProxy
         case "INTERNAL_HTTPS_LOAD_BALANCER": self = .internalHttpsLoadBalancer
@@ -3847,7 +3847,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipv4Ipv6: return "IPV4_IPV6"
         case .ipv4Only: return "IPV4_ONLY"
@@ -3860,7 +3860,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IPV4_IPV6": self = .ipv4Ipv6
         case "IPV4_ONLY": self = .ipv4Only
@@ -3949,7 +3949,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .sdn: return "UNICAST_SDN"
         case .ull: return "UNICAST_ULL"
@@ -3961,7 +3961,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "UNICAST_SDN": self = .sdn
         case "UNICAST_ULL": self = .ull
@@ -4009,7 +4009,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NetworkProfileNetworkFeatures"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

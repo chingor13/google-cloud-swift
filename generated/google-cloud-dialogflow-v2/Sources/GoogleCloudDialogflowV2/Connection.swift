@@ -77,7 +77,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Connection.ErrorDetails"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -135,7 +135,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .connected: return "CONNECTED"
@@ -150,7 +150,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "CONNECTED": self = .connected
@@ -266,7 +266,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CERTIFICATE_STATE_UNSPECIFIED"
         case .certificateValid: return "CERTIFICATE_VALID"
@@ -285,7 +285,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CERTIFICATE_STATE_UNSPECIFIED": self = .unspecified
         case "CERTIFICATE_VALID": self = .certificateValid
@@ -354,7 +354,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Connection"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -118,7 +118,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.compute.v1.TargetVpnGatewaysScopedList.warning.data"
         }
@@ -268,7 +268,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .cleanupFailed: return "CLEANUP_FAILED"
           case .deprecatedResourceUsed: return "DEPRECATED_RESOURCE_USED"
@@ -309,7 +309,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "CLEANUP_FAILED": self = .cleanupFailed
           case "DEPRECATED_RESOURCE_USED": self = .deprecatedResourceUsed
@@ -440,7 +440,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.TargetVpnGatewaysScopedList.warning"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -451,7 +451,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.TargetVpnGatewaysScopedList"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

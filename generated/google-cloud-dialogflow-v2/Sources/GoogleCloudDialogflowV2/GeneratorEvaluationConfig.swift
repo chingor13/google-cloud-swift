@@ -50,7 +50,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case inputDataConfig = "inputDataConfig"
       case outputGcsBucketPath = "outputGcsBucketPath"
       case summarizationConfig = "summarizationConfig"
@@ -123,7 +123,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorEvaluationConfig.AgentAssistInputDataConfig"
       }
@@ -160,7 +160,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorEvaluationConfig.DatasetInputDataConfig"
       }
@@ -222,7 +222,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case inputDataSourceType = "inputDataSourceType"
         case startTime = "startTime"
         case endTime = "endTime"
@@ -336,7 +336,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SUMMARY_GENERATION_OPTION_UNSPECIFIED"
           case .alwaysGenerate: return "ALWAYS_GENERATE"
@@ -350,7 +350,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SUMMARY_GENERATION_OPTION_UNSPECIFIED": self = .unspecified
           case "ALWAYS_GENERATE": self = .alwaysGenerate
@@ -414,7 +414,7 @@
         indirect case datasetInputDataConfig(GeneratorEvaluationConfig.DatasetInputDataConfig?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorEvaluationConfig.InputDataConfig"
       }
@@ -467,7 +467,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorEvaluationConfig.SummarizationConfig"
       }
@@ -524,7 +524,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "INPUT_DATA_SOURCE_TYPE_UNSPECIFIED"
         case .agentAssistConversations: return "AGENT_ASSIST_CONVERSATIONS"
@@ -537,7 +537,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INPUT_DATA_SOURCE_TYPE_UNSPECIFIED": self = .unspecified
         case "AGENT_ASSIST_CONVERSATIONS": self = .agentAssistConversations
@@ -594,7 +594,7 @@
       indirect case summarizationConfig(GeneratorEvaluationConfig.SummarizationConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorEvaluationConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

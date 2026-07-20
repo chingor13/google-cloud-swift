@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case rawOutputs = "rawOutputs"
     }
 
@@ -81,7 +81,7 @@
       indirect case rawOutputs(RawOutput?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CustomOutput"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

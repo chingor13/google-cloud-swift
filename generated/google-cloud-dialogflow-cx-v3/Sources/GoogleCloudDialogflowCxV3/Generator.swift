@@ -95,7 +95,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Generator.Placeholder"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -150,7 +150,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Generator.ModelParameter"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -161,7 +161,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Generator"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

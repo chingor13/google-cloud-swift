@@ -54,7 +54,8 @@ public class CloudCatalogClient: Clients.CloudCatalogProtocol {
   public func listServices(
     byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listServices(request: request, options: options)
@@ -77,7 +78,7 @@ public class CloudCatalogClient: Clients.CloudCatalogProtocol {
   public func listSkus(
     byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSkus(request: request, options: options)
@@ -160,7 +161,8 @@ extension Clients.CloudCatalogProtocol {
   public func listServices(
     byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -187,7 +189,7 @@ extension Clients.CloudCatalogProtocol {
   public func listSkus(
     byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

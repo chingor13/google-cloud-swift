@@ -47,7 +47,7 @@ public struct AutoUpgradeOptions: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.AutoUpgradeOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

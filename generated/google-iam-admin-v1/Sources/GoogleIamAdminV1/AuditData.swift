@@ -69,7 +69,7 @@ public struct AuditData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.iam.admin.v1.AuditData.PermissionDelta"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -80,7 +80,7 @@ public struct AuditData: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.AuditData"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

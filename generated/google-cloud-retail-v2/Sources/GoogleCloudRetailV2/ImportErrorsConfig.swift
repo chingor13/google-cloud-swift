@@ -40,7 +40,7 @@ public struct ImportErrorsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsPrefix = "gcsPrefix"
   }
 
@@ -83,7 +83,7 @@ public struct ImportErrorsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     case gcsPrefix(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ImportErrorsConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

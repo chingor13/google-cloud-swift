@@ -82,7 +82,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DEPLOYMENT_STAGE_UNSPECIFIED"
       case .startingModelServer: return "STARTING_MODEL_SERVER"
@@ -103,7 +103,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DEPLOYMENT_STAGE_UNSPECIFIED": self = .unspecified
       case "STARTING_DEPLOYMENT": self = .startingDeployment
@@ -126,13 +126,13 @@
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
+      case 3: self = .startingModelServer
+      case 4: self = .finishingUp
       case 5: self = .startingDeployment
       case 6: self = .preparingModel
       case 7: self = .creatingServingCluster
       case 8: self = .addingNodesToCluster
       case 9: self = .gettingContainerImage
-      case 3: self = .startingModelServer
-      case 4: self = .finishingUp
       case 10: self = .deploymentTerminated
       case 11: self = .successfullyDeployed
       case 12: self = .failedToDeploy

@@ -169,7 +169,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case hugepageSize2M = "hugepageSize2m"
       case hugepageSize1G = "hugepageSize1g"
     }
@@ -186,7 +186,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       try container.encode(self.hugepageSize1G, forKey: .hugepageSize1G)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.HugepagesConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -269,7 +269,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit.InitScript"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -280,7 +280,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -321,7 +321,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case enabled = "enabled"
       case encryptionConfig = "encryptionConfig"
       case bootDiskProfile = "bootDiskProfile"
@@ -404,7 +404,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -439,7 +439,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case swapSizeGib = "swapSizeGib"
         case swapSizePercent = "swapSizePercent"
       }
@@ -491,7 +491,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case swapSizePercent(Swift.Int32)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -525,7 +525,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case swapSizeGib = "swapSizeGib"
         case swapSizePercent = "swapSizePercent"
       }
@@ -576,7 +576,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case swapSizePercent(Swift.Int32)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile"
       }
@@ -611,7 +611,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile"
       }
@@ -634,7 +634,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case dedicatedLocalSsdProfile(LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -722,7 +722,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "POLICY_UNSPECIFIED"
         case .enforceSignedModules: return "ENFORCE_SIGNED_MODULES"
@@ -735,7 +735,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "POLICY_UNSPECIFIED": self = .unspecified
         case "ENFORCE_SIGNED_MODULES": self = .enforceSignedModules
@@ -786,7 +786,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -821,7 +821,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.AccurateTimeConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -876,7 +876,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CGROUP_MODE_UNSPECIFIED"
       case .v1: return "CGROUP_MODE_V1"
@@ -889,7 +889,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CGROUP_MODE_UNSPECIFIED": self = .unspecified
       case "CGROUP_MODE_V1": self = .v1
@@ -985,7 +985,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TRANSPARENT_HUGEPAGE_ENABLED_UNSPECIFIED"
       case .always: return "TRANSPARENT_HUGEPAGE_ENABLED_ALWAYS"
@@ -999,7 +999,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TRANSPARENT_HUGEPAGE_ENABLED_UNSPECIFIED": self = .unspecified
       case "TRANSPARENT_HUGEPAGE_ENABLED_ALWAYS": self = .always
@@ -1115,7 +1115,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TRANSPARENT_HUGEPAGE_DEFRAG_UNSPECIFIED"
       case .always: return "TRANSPARENT_HUGEPAGE_DEFRAG_ALWAYS"
@@ -1131,7 +1131,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TRANSPARENT_HUGEPAGE_DEFRAG_UNSPECIFIED": self = .unspecified
       case "TRANSPARENT_HUGEPAGE_DEFRAG_ALWAYS": self = .always
@@ -1191,7 +1191,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.LinuxNodeConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

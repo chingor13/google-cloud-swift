@@ -87,7 +87,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AccuracyDecomposition"
       }
@@ -129,7 +129,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AdherenceDecomposition"
       }
@@ -173,7 +173,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AdherenceRubric"
       }
@@ -213,7 +213,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.CompletenessRubric"
       }
@@ -249,7 +249,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case accuracyDecomposition = "accuracyDecomposition"
         case adherenceDecomposition = "adherenceDecomposition"
       }
@@ -302,7 +302,7 @@
         indirect case adherenceDecomposition(SummarizationEvaluationMetrics.AdherenceDecomposition?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.Decomposition"
       }
@@ -338,7 +338,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case accuracyDecomposition = "accuracyDecomposition"
         case adherenceRubric = "adherenceRubric"
         case completenessRubric = "completenessRubric"
@@ -400,7 +400,7 @@
         indirect case completenessRubric(SummarizationEvaluationMetrics.CompletenessRubric?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.EvaluationResult"
       }
@@ -455,7 +455,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.SummarizationEvaluationResult"
       }
@@ -492,7 +492,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.OverallScoresByMetric"
       }
@@ -530,7 +530,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.SectionToken"
       }
@@ -646,7 +646,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail.MetricDetail.SectionDetail"
           }
@@ -658,7 +658,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail.MetricDetail"
         }
@@ -670,7 +670,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail"
       }
@@ -682,7 +682,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

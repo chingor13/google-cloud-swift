@@ -45,7 +45,7 @@ public struct UpdatePackageRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case `package` = "package"
     case updateMask = "updateMask"
   }
@@ -63,7 +63,7 @@ public struct UpdatePackageRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     try container.encode(self.updateMask, forKey: .updateMask)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.UpdatePackageRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

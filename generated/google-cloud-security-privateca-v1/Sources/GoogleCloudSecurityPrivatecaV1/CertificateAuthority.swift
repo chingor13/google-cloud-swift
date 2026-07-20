@@ -232,7 +232,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls"
     }
@@ -270,7 +270,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case cloudKmsKeyVersion = "cloudKmsKeyVersion"
       case algorithm = "algorithm"
     }
@@ -327,7 +327,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
       case algorithm(CertificateAuthority.SignHashAlgorithm)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec"
     }
@@ -382,7 +382,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls"
     }
@@ -443,7 +443,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TYPE_UNSPECIFIED"
       case .selfSigned: return "SELF_SIGNED"
@@ -456,7 +456,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TYPE_UNSPECIFIED": self = .unspecified
       case "SELF_SIGNED": self = .selfSigned
@@ -597,7 +597,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .enabled: return "ENABLED"
@@ -613,7 +613,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "ENABLED": self = .enabled
@@ -740,7 +740,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SIGN_HASH_ALGORITHM_UNSPECIFIED"
       case .rsaPss2048Sha256: return "RSA_PSS_2048_SHA256"
@@ -759,7 +759,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SIGN_HASH_ALGORITHM_UNSPECIFIED": self = .unspecified
       case "RSA_PSS_2048_SHA256": self = .rsaPss2048Sha256
@@ -783,11 +783,11 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
       case 1: self = .rsaPss2048Sha256
       case 2: self = .rsaPss3072Sha256
       case 3: self = .rsaPss4096Sha256
+      case 4: self = .ecP256Sha256
+      case 5: self = .ecP384Sha384
       case 6: self = .rsaPkcs12048Sha256
       case 7: self = .rsaPkcs13072Sha256
       case 8: self = .rsaPkcs14096Sha256
-      case 4: self = .ecP256Sha256
-      case 5: self = .ecP384Sha384
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -828,7 +828,7 @@ public struct CertificateAuthority: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateAuthority"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

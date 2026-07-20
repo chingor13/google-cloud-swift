@@ -83,7 +83,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case error = "error"
         case model = "model"
         case dataset = "dataset"
@@ -144,7 +144,7 @@
         case dataset(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.BatchMigrateResourcesOperationMetadata.PartialResult"
       }
@@ -156,7 +156,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.BatchMigrateResourcesOperationMetadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

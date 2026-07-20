@@ -179,7 +179,7 @@ public class TagHoldsClient: Clients.TagHoldsProtocol {
     byItem: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagHold, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTagHolds(request: request, options: options)
@@ -377,7 +377,7 @@ extension Clients.TagHoldsProtocol {
     byItem: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagHold, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagHoldsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

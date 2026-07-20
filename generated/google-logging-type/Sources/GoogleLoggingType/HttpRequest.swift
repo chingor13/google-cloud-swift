@@ -102,7 +102,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case requestMethod = "requestMethod"
     case requestUrl = "requestUrl"
     case requestSize = "requestSize"
@@ -160,7 +160,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.`protocol`, forKey: .`protocol`)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.logging.type.HttpRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

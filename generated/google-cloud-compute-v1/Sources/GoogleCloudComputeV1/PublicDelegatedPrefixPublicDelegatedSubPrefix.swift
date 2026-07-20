@@ -122,7 +122,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .external: return "EXTERNAL"
         case .`internal`: return "INTERNAL"
@@ -134,7 +134,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXTERNAL": self = .external
         case "INTERNAL": self = .`internal`
@@ -236,7 +236,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .delegation: return "DELEGATION"
         case .externalIpv6ForwardingRuleCreation: return "EXTERNAL_IPV6_FORWARDING_RULE_CREATION"
@@ -250,7 +250,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELEGATION": self = .delegation
         case "EXTERNAL_IPV6_FORWARDING_RULE_CREATION": self = .externalIpv6ForwardingRuleCreation
@@ -342,7 +342,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .inactive: return "INACTIVE"
@@ -354,7 +354,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "INACTIVE": self = .inactive
@@ -402,7 +402,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.PublicDelegatedPrefixPublicDelegatedSubPrefix"
     }

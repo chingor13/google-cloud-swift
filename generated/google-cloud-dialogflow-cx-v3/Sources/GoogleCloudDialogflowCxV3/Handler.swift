@@ -42,7 +42,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case eventHandler = "eventHandler"
       case lifecycleHandler = "lifecycleHandler"
     }
@@ -118,7 +118,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Handler.EventHandler"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -166,7 +166,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -185,7 +185,7 @@
       indirect case lifecycleHandler(Handler.LifecycleHandler?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Handler"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

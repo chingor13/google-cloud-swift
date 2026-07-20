@@ -238,7 +238,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .fixedStandard: return "FIXED_STANDARD"
         case .premium: return "PREMIUM"
@@ -252,7 +252,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FIXED_STANDARD": self = .fixedStandard
         case "PREMIUM": self = .premium
@@ -351,7 +351,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .endpointTypeManagedProxyLb: return "ENDPOINT_TYPE_MANAGED_PROXY_LB"
         case .endpointTypeSwg: return "ENDPOINT_TYPE_SWG"
@@ -364,7 +364,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ENDPOINT_TYPE_MANAGED_PROXY_LB": self = .endpointTypeManagedProxyLb
         case "ENDPOINT_TYPE_SWG": self = .endpointTypeSwg
@@ -456,7 +456,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .autoOnly: return "AUTO_ONLY"
         case .manualOnly: return "MANUAL_ONLY"
@@ -468,7 +468,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AUTO_ONLY": self = .autoOnly
         case "MANUAL_ONLY": self = .manualOnly
@@ -560,7 +560,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .allSubnetworksAllIpRanges: return "ALL_SUBNETWORKS_ALL_IP_RANGES"
         case .allSubnetworksAllPrimaryIpRanges: return "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES"
@@ -573,7 +573,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALL_SUBNETWORKS_ALL_IP_RANGES": self = .allSubnetworksAllIpRanges
         case "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES": self = .allSubnetworksAllPrimaryIpRanges
@@ -667,7 +667,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .allIpv6Subnetworks: return "ALL_IPV6_SUBNETWORKS"
         case .listOfIpv6Subnetworks: return "LIST_OF_IPV6_SUBNETWORKS"
@@ -679,7 +679,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALL_IPV6_SUBNETWORKS": self = .allIpv6Subnetworks
         case "LIST_OF_IPV6_SUBNETWORKS": self = .listOfIpv6Subnetworks
@@ -768,7 +768,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .`private`: return "PRIVATE"
         case .`public`: return "PUBLIC"
@@ -780,7 +780,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PRIVATE": self = .`private`
         case "PUBLIC": self = .`public`
@@ -828,7 +828,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RouterNat"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

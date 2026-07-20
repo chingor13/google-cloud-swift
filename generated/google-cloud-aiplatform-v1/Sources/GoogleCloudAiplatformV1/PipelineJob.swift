@@ -241,7 +241,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case artifactId = "artifactId"
         }
 
@@ -285,7 +285,7 @@
           case artifactId(Swift.String)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig.InputArtifact"
         }
@@ -297,7 +297,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -308,7 +308,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineJob"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

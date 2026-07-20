@@ -67,7 +67,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case user = "user"
       case sqlStatement = "sqlStatement"
       case database = "database"
@@ -165,7 +165,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PARTIAL_RESULT_MODE_UNSPECIFIED"
         case .failPartialResult: return "FAIL_PARTIAL_RESULT"
@@ -178,7 +178,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PARTIAL_RESULT_MODE_UNSPECIFIED": self = .unspecified
         case "FAIL_PARTIAL_RESULT": self = .failPartialResult
@@ -237,7 +237,7 @@
       case autoIamAuthn(Swift.Bool)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ExecuteSqlPayload"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

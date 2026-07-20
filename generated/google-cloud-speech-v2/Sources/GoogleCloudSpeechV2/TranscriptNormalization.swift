@@ -75,7 +75,7 @@ public struct TranscriptNormalization: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.speech.v2.TranscriptNormalization.Entry"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -86,7 +86,7 @@ public struct TranscriptNormalization: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.TranscriptNormalization"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -52,7 +52,7 @@ public struct X509Extension: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.X509Extension"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -40,7 +40,7 @@ extension Clients {
     func _intercept<Input, Output>(
       request: Input,
       options: GoogleCloudGax.RequestOptions,
-      name: String,
+      name: Swift.String,
       action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger

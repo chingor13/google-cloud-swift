@@ -40,7 +40,7 @@ public struct DeleteIcebergCatalogRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.DeleteIcebergCatalogRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

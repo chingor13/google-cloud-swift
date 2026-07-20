@@ -56,7 +56,7 @@ public class TagValuesClient: Clients.TagValuesProtocol {
     byItem: ListTagValuesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagValue, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagValuesResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagValuesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTagValues(request: request, options: options)
@@ -528,7 +528,7 @@ extension Clients.TagValuesProtocol {
     byItem: ListTagValuesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TagValue, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudResourcemanagerV3.ListTagValuesResponse in
+      (token: Swift.String) async throws -> GoogleCloudResourcemanagerV3.ListTagValuesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

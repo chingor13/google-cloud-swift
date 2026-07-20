@@ -66,7 +66,7 @@ public enum SearchSolutionUseCase: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "SEARCH_SOLUTION_USE_CASE_UNSPECIFIED"
     case .search: return "SEARCH_SOLUTION_USE_CASE_SEARCH"
@@ -79,7 +79,7 @@ public enum SearchSolutionUseCase: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "SEARCH_SOLUTION_USE_CASE_UNSPECIFIED": self = .unspecified
     case "SEARCH_SOLUTION_USE_CASE_SEARCH": self = .search

@@ -145,7 +145,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.kms.v1.EkmConnection.ServiceResolver"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -237,7 +237,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "KEY_MANAGEMENT_MODE_UNSPECIFIED"
       case .manual: return "MANUAL"
@@ -250,7 +250,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "KEY_MANAGEMENT_MODE_UNSPECIFIED": self = .unspecified
       case "MANUAL": self = .manual
@@ -301,7 +301,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.EkmConnection"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

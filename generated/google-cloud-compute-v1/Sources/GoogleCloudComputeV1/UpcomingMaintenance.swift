@@ -151,7 +151,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .failureDisk: return "FAILURE_DISK"
         case .failureGpu: return "FAILURE_GPU"
@@ -180,7 +180,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FAILURE_DISK": self = .failureDisk
         case "FAILURE_GPU": self = .failureGpu
@@ -318,7 +318,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ongoing: return "ONGOING"
         case .pending: return "PENDING"
@@ -331,7 +331,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ONGOING": self = .ongoing
         case "PENDING": self = .pending
@@ -431,7 +431,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .multiple: return "MULTIPLE"
         case .scheduled: return "SCHEDULED"
@@ -445,7 +445,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MULTIPLE": self = .multiple
         case "SCHEDULED": self = .scheduled
@@ -499,7 +499,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.UpcomingMaintenance"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

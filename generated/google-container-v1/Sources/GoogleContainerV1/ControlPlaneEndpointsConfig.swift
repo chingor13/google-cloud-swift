@@ -82,7 +82,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case endpoint = "endpoint"
       case allowExternalTraffic = "allowExternalTraffic"
       case enableK8STokensViaDns = "enableK8sTokensViaDns"
@@ -108,7 +108,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
       try container.encode(self.enableK8SCertsViaDns, forKey: .enableK8SCertsViaDns)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig.DNSEndpointConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -179,7 +179,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -190,7 +190,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

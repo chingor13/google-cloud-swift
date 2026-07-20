@@ -56,7 +56,7 @@ public class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesProtoco
     byItem: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedCertificate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleAppengineV1.ListAuthorizedCertificatesResponse in
+      (token: Swift.String) async throws -> GoogleAppengineV1.ListAuthorizedCertificatesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listAuthorizedCertificates(request: request, options: options)
@@ -123,7 +123,8 @@ public class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesProtoco
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -255,7 +256,7 @@ extension Clients.AuthorizedCertificatesProtocol {
     byItem: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedCertificate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleAppengineV1.ListAuthorizedCertificatesResponse in
+      (token: Swift.String) async throws -> GoogleAppengineV1.ListAuthorizedCertificatesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -329,7 +330,8 @@ extension Clients.AuthorizedCertificatesProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

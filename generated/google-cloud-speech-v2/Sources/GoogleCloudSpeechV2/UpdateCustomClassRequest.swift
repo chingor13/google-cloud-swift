@@ -55,7 +55,7 @@ public struct UpdateCustomClassRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.UpdateCustomClassRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

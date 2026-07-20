@@ -168,7 +168,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case displayName = "displayName"
       case defaultLanguageCode = "defaultLanguageCode"
@@ -312,7 +312,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case githubSettings = "githubSettings"
       }
 
@@ -384,7 +384,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings"
         }
@@ -402,7 +402,7 @@
         indirect case githubSettings(Agent.GitIntegrationSettings.GithubSettings?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -438,7 +438,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.GenAppBuilderSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -477,7 +477,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.AnswerFeedbackSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -521,7 +521,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.PersonalizationSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -567,7 +567,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent.ClientCertificateSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -599,7 +599,7 @@
       case startPlaybook(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Agent"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -41,7 +41,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case locationCategory = "locationCategory"
     case industryCategory = "industryCategory"
     case typeCategory = "typeCategory"
@@ -286,7 +286,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .locationUnspecified: return "LOCATION_UNSPECIFIED"
       case .global: return "GLOBAL"
@@ -349,7 +349,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "LOCATION_UNSPECIFIED": self = .locationUnspecified
       case "GLOBAL": self = .global
@@ -416,19 +416,13 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 0: self = .locationUnspecified
       case 1: self = .global
       case 2: self = .argentina
-      case 51: self = .armenia
       case 3: self = .australia
-      case 53: self = .austria
-      case 48: self = .azerbaijan
-      case 50: self = .belarus
       case 4: self = .belgium
       case 5: self = .brazil
       case 6: self = .canada
       case 7: self = .chile
       case 8: self = .china
       case 9: self = .colombia
-      case 42: self = .croatia
-      case 52: self = .czechia
       case 10: self = .denmark
       case 11: self = .france
       case 12: self = .finland
@@ -440,32 +434,38 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 18: self = .israel
       case 19: self = .italy
       case 20: self = .japan
-      case 47: self = .kazakhstan
       case 21: self = .korea
       case 22: self = .mexico
       case 23: self = .theNetherlands
-      case 41: self = .newZealand
       case 24: self = .norway
       case 25: self = .paraguay
       case 26: self = .peru
       case 27: self = .poland
       case 28: self = .portugal
-      case 44: self = .russia
       case 29: self = .singapore
       case 30: self = .southAfrica
       case 31: self = .spain
       case 32: self = .sweden
-      case 43: self = .switzerland
       case 33: self = .taiwan
       case 34: self = .thailand
       case 35: self = .turkey
-      case 45: self = .ukraine
       case 36: self = .unitedKingdom
       case 37: self = .unitedStates
       case 38: self = .uruguay
-      case 46: self = .uzbekistan
       case 39: self = .venezuela
       case 40: self = .`internal`
+      case 41: self = .newZealand
+      case 42: self = .croatia
+      case 43: self = .switzerland
+      case 44: self = .russia
+      case 45: self = .ukraine
+      case 46: self = .uzbekistan
+      case 47: self = .kazakhstan
+      case 48: self = .azerbaijan
+      case 50: self = .belarus
+      case 51: self = .armenia
+      case 52: self = .czechia
+      case 53: self = .austria
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -595,7 +595,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .industryUnspecified: return "INDUSTRY_UNSPECIFIED"
       case .finance: return "FINANCE"
@@ -609,7 +609,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "INDUSTRY_UNSPECIFIED": self = .industryUnspecified
       case "FINANCE": self = .finance
@@ -727,7 +727,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .typeUnspecified: return "TYPE_UNSPECIFIED"
       case .pii: return "PII"
@@ -746,7 +746,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TYPE_UNSPECIFIED": self = .typeUnspecified
       case "PII": self = .pii
@@ -826,7 +826,7 @@ public struct InfoTypeCategory: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case typeCategory(InfoTypeCategory.TypeCategory)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InfoTypeCategory"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

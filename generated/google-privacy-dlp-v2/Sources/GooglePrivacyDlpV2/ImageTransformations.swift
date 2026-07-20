@@ -67,7 +67,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case selectedInfoTypes = "selectedInfoTypes"
       case allInfoTypes = "allInfoTypes"
       case allText = "allText"
@@ -146,7 +146,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.SelectedInfoTypes"
       }
@@ -178,7 +178,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllInfoTypes"
       }
@@ -210,7 +210,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllText"
       }
@@ -235,7 +235,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
       indirect case allText(ImageTransformations.ImageTransformation.AllText?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -246,7 +246,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

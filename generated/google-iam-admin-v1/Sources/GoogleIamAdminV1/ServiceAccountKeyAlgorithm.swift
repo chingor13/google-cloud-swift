@@ -57,7 +57,7 @@ public enum ServiceAccountKeyAlgorithm: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .keyAlgUnspecified: return "KEY_ALG_UNSPECIFIED"
     case .keyAlgRsa1024: return "KEY_ALG_RSA_1024"
@@ -70,7 +70,7 @@ public enum ServiceAccountKeyAlgorithm: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "KEY_ALG_UNSPECIFIED": self = .keyAlgUnspecified
     case "KEY_ALG_RSA_1024": self = .keyAlgRsa1024

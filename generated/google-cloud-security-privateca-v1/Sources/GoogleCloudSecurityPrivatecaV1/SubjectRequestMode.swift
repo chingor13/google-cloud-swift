@@ -98,7 +98,7 @@ public enum SubjectRequestMode: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "SUBJECT_REQUEST_MODE_UNSPECIFIED"
     case .`default`: return "DEFAULT"
@@ -112,7 +112,7 @@ public enum SubjectRequestMode: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "SUBJECT_REQUEST_MODE_UNSPECIFIED": self = .unspecified
     case "DEFAULT": self = .`default`
@@ -129,8 +129,8 @@ public enum SubjectRequestMode: Codable, Equatable, Sendable {
     switch intValue {
     case 0: self = .unspecified
     case 1: self = .`default`
-    case 3: self = .rdnSequence
     case 2: self = .reflectedSpiffe
+    case 3: self = .rdnSequence
     default: self = .unknownIntValue(intValue)
     }
   }

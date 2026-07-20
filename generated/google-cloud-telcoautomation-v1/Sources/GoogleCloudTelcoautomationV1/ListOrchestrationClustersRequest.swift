@@ -53,7 +53,7 @@ public struct ListOrchestrationClustersRequest: Codable, Equatable, GoogleCloudW
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.ListOrchestrationClustersRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

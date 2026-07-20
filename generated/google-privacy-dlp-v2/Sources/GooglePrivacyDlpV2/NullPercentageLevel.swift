@@ -64,7 +64,7 @@ public enum NullPercentageLevel: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "NULL_PERCENTAGE_LEVEL_UNSPECIFIED"
     case .nullPercentageVeryLow: return "NULL_PERCENTAGE_VERY_LOW"
@@ -79,7 +79,7 @@ public enum NullPercentageLevel: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "NULL_PERCENTAGE_LEVEL_UNSPECIFIED": self = .unspecified
     case "NULL_PERCENTAGE_VERY_LOW": self = .nullPercentageVeryLow

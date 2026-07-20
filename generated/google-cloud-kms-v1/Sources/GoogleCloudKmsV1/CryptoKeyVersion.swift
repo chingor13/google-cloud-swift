@@ -432,7 +432,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"
       case .googleSymmetricEncryption: return "GOOGLE_SYMMETRIC_ENCRYPTION"
@@ -489,7 +489,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED": self = .unspecified
       case "GOOGLE_SYMMETRIC_ENCRYPTION": self = .googleSymmetricEncryption
@@ -549,50 +549,50 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch intValue {
       case 0: self = .unspecified
       case 1: self = .googleSymmetricEncryption
-      case 41: self = .aes128Gcm
-      case 19: self = .aes256Gcm
-      case 42: self = .aes128Cbc
-      case 43: self = .aes256Cbc
-      case 44: self = .aes128Ctr
-      case 45: self = .aes256Ctr
       case 2: self = .rsaSignPss2048Sha256
       case 3: self = .rsaSignPss3072Sha256
       case 4: self = .rsaSignPss4096Sha256
-      case 15: self = .rsaSignPss4096Sha512
       case 5: self = .rsaSignPkcs12048Sha256
       case 6: self = .rsaSignPkcs13072Sha256
       case 7: self = .rsaSignPkcs14096Sha256
-      case 16: self = .rsaSignPkcs14096Sha512
-      case 28: self = .rsaSignRawPkcs12048
-      case 29: self = .rsaSignRawPkcs13072
-      case 30: self = .rsaSignRawPkcs14096
       case 8: self = .rsaDecryptOaep2048Sha256
       case 9: self = .rsaDecryptOaep3072Sha256
       case 10: self = .rsaDecryptOaep4096Sha256
-      case 17: self = .rsaDecryptOaep4096Sha512
-      case 37: self = .rsaDecryptOaep2048Sha1
-      case 38: self = .rsaDecryptOaep3072Sha1
-      case 39: self = .rsaDecryptOaep4096Sha1
       case 12: self = .ecSignP256Sha256
       case 13: self = .ecSignP384Sha384
+      case 15: self = .rsaSignPss4096Sha512
+      case 16: self = .rsaSignPkcs14096Sha512
+      case 17: self = .rsaDecryptOaep4096Sha512
+      case 18: self = .externalSymmetricEncryption
+      case 19: self = .aes256Gcm
+      case 28: self = .rsaSignRawPkcs12048
+      case 29: self = .rsaSignRawPkcs13072
+      case 30: self = .rsaSignRawPkcs14096
       case 31: self = .ecSignSecp256K1Sha256
-      case 40: self = .ecSignEd25519
       case 32: self = .hmacSha256
       case 33: self = .hmacSha1
       case 34: self = .hmacSha384
       case 35: self = .hmacSha512
       case 36: self = .hmacSha224
-      case 18: self = .externalSymmetricEncryption
+      case 37: self = .rsaDecryptOaep2048Sha1
+      case 38: self = .rsaDecryptOaep3072Sha1
+      case 39: self = .rsaDecryptOaep4096Sha1
+      case 40: self = .ecSignEd25519
+      case 41: self = .aes128Gcm
+      case 42: self = .aes128Cbc
+      case 43: self = .aes256Cbc
+      case 44: self = .aes128Ctr
+      case 45: self = .aes256Ctr
       case 47: self = .mlKem768
       case 48: self = .mlKem1024
-      case 63: self = .kemXwing
-      case 68: self = .pqSignMlDsa44
       case 56: self = .pqSignMlDsa65
-      case 69: self = .pqSignMlDsa87
       case 57: self = .pqSignSlhDsaSha2128S
       case 60: self = .pqSignHashSlhDsaSha2128SSha256
-      case 70: self = .pqSignMlDsa44ExternalMu
+      case 63: self = .kemXwing
       case 67: self = .pqSignMlDsa65ExternalMu
+      case 68: self = .pqSignMlDsa44
+      case 69: self = .pqSignMlDsa87
+      case 70: self = .pqSignMlDsa44ExternalMu
       case 71: self = .pqSignMlDsa87ExternalMu
       default: self = .unknownIntValue(intValue)
       }
@@ -792,7 +792,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED"
       case .enabled: return "ENABLED"
@@ -813,7 +813,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED": self = .unspecified
       case "PENDING_GENERATION": self = .pendingGeneration
@@ -836,11 +836,11 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
-      case 5: self = .pendingGeneration
       case 1: self = .enabled
       case 2: self = .disabled
       case 3: self = .destroyed
       case 4: self = .destroyScheduled
+      case 5: self = .pendingGeneration
       case 6: self = .pendingImport
       case 7: self = .importFailed
       case 8: self = .generationFailed
@@ -946,7 +946,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED"
       case .full: return "FULL"
@@ -958,7 +958,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED": self = .unspecified
       case "FULL": self = .full
@@ -1006,7 +1006,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.CryptoKeyVersion"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

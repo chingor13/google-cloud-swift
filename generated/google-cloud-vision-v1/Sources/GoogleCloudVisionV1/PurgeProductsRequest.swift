@@ -49,7 +49,7 @@ public struct PurgeProductsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case productSetPurgeConfig = "productSetPurgeConfig"
     case deleteOrphanProducts = "deleteOrphanProducts"
     case parent = "parent"
@@ -108,7 +108,7 @@ public struct PurgeProductsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     case deleteOrphanProducts(Swift.Bool)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.PurgeProductsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

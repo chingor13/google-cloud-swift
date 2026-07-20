@@ -130,7 +130,8 @@
     public func listModels(
       byItem: ListModelsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Model, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudAiplatformV1.ListModelsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listModels(request: request, options: options)
@@ -154,7 +155,7 @@
       byItem: ListModelVersionsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Model, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelVersionsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelVersionsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listModelVersions(request: request, options: options)
@@ -178,8 +179,8 @@
       byItem: ListModelVersionCheckpointsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelVersionCheckpoint, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelVersionCheckpointsResponse
-        in
+        (token: Swift.String) async throws
+          -> GoogleCloudAiplatformV1.ListModelVersionCheckpointsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listModelVersionCheckpoints(request: request, options: options)
@@ -624,7 +625,8 @@
       byItem: ListModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelEvaluation, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationsResponse
+        in
         var request = byItem
         request.pageToken = token
         return try await self.listModelEvaluations(request: request, options: options)
@@ -657,7 +659,8 @@
       byItem: ListModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelEvaluationSlice, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationSlicesResponse in
+        (token: Swift.String) async throws
+          -> GoogleCloudAiplatformV1.ListModelEvaluationSlicesResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listModelEvaluationSlices(request: request, options: options)
@@ -680,7 +683,8 @@
     public func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
@@ -754,7 +758,8 @@
     public func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
@@ -1382,7 +1387,8 @@
     public func listModels(
       byItem: ListModelsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Model, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudAiplatformV1.ListModelsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1419,7 +1425,7 @@
       byItem: ListModelVersionsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Model, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelVersionsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelVersionsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1456,8 +1462,8 @@
       byItem: ListModelVersionCheckpointsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelVersionCheckpoint, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelVersionCheckpointsResponse
-        in
+        (token: Swift.String) async throws
+          -> GoogleCloudAiplatformV1.ListModelVersionCheckpointsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1819,7 +1825,8 @@
       byItem: ListModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelEvaluation, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationsResponse
+        in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1877,7 +1884,8 @@
       byItem: ListModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ModelEvaluationSlice, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListModelEvaluationSlicesResponse in
+        (token: Swift.String) async throws
+          -> GoogleCloudAiplatformV1.ListModelEvaluationSlicesResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1913,7 +1921,8 @@
     public func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1988,7 +1997,8 @@
     public func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

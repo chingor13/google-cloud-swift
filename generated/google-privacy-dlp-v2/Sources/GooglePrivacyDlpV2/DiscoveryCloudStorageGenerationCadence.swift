@@ -50,7 +50,7 @@ public struct DiscoveryCloudStorageGenerationCadence: Codable, Equatable, Google
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

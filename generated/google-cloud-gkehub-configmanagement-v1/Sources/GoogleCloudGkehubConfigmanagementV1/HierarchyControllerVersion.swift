@@ -43,7 +43,7 @@ public struct HierarchyControllerVersion: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case hnc = "hnc"
     case `extension` = "extension"
   }
@@ -60,7 +60,7 @@ public struct HierarchyControllerVersion: Codable, Equatable, GoogleCloudWkt._An
     try container.encode(self.`extension`, forKey: .`extension`)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.configmanagement.v1.HierarchyControllerVersion"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -53,7 +53,7 @@ public struct UpgradeNote: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case `package` = "package"
     case version = "version"
     case distributions = "distributions"
@@ -76,7 +76,9 @@ public struct UpgradeNote: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.windowsUpdate, forKey: .windowsUpdate)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.UpgradeNote" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.UpgradeNote"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

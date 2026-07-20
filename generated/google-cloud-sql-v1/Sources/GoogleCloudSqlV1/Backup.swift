@@ -120,7 +120,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case kind = "kind"
       case selfLink = "selfLink"
@@ -275,7 +275,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_BACKUP_TYPE_UNSPECIFIED"
         case .automated: return "AUTOMATED"
@@ -289,7 +289,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_BACKUP_TYPE_UNSPECIFIED": self = .unspecified
         case "AUTOMATED": self = .automated
@@ -396,7 +396,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_BACKUP_STATE_UNSPECIFIED"
         case .enqueued: return "ENQUEUED"
@@ -413,7 +413,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_BACKUP_STATE_UNSPECIFIED": self = .unspecified
         case "ENQUEUED": self = .enqueued
@@ -487,7 +487,7 @@
       indirect case expiryTime(GoogleCloudWkt.Timestamp?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Backup"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

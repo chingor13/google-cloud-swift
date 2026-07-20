@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case userUtterance = "userUtterance"
       case agentUtterance = "agentUtterance"
       case toolUse = "toolUse"
@@ -145,7 +145,7 @@
       indirect case flowTransition(FlowTransition?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Action"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

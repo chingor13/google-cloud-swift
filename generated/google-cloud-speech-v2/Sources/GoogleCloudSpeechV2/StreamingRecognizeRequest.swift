@@ -71,7 +71,7 @@ public struct StreamingRecognizeRequest: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case recognizer = "recognizer"
     case streamingConfig = "streamingConfig"
     case audio = "audio"
@@ -126,7 +126,7 @@ public struct StreamingRecognizeRequest: Codable, Equatable, GoogleCloudWkt._Any
     case audio(Foundation.Data)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.StreamingRecognizeRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -74,7 +74,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case stringRestrictions = "stringRestrictions"
     case integerRestrictions = "integerRestrictions"
     case recommendedStringValue = "recommendedStringValue"
@@ -198,7 +198,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.SupportedDatabaseFlag.StringRestrictions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -235,7 +235,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.SupportedDatabaseFlag.IntegerRestrictions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -295,7 +295,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "VALUE_TYPE_UNSPECIFIED"
       case .string: return "STRING"
@@ -310,7 +310,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "VALUE_TYPE_UNSPECIFIED": self = .unspecified
       case "STRING": self = .string
@@ -408,7 +408,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SCOPE_UNSPECIFIED"
       case .database: return "DATABASE"
@@ -421,7 +421,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SCOPE_UNSPECIFIED": self = .unspecified
       case "DATABASE": self = .database
@@ -488,7 +488,7 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleCloudWkt._AnyPack
     indirect case recommendedIntegerValue(GoogleCloudWkt.Int64Value?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.SupportedDatabaseFlag"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

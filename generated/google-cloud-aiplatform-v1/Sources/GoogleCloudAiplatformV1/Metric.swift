@@ -45,7 +45,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case predefinedMetricSpec = "predefinedMetricSpec"
       case computationBasedMetricSpec = "computationBasedMetricSpec"
       case llmBasedMetricSpec = "llmBasedMetricSpec"
@@ -203,7 +203,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "AGGREGATION_METRIC_UNSPECIFIED"
         case .average: return "AVERAGE"
@@ -224,7 +224,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AGGREGATION_METRIC_UNSPECIFIED": self = .unspecified
         case "AVERAGE": self = .average
@@ -320,7 +320,7 @@
       indirect case rougeSpec(RougeSpec?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Metric"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

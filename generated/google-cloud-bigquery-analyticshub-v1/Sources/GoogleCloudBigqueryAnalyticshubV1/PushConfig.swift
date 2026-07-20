@@ -75,7 +75,7 @@ public struct PushConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case oidcToken = "oidcToken"
     case pubsubWrapper = "pubsubWrapper"
     case noWrapper = "noWrapper"
@@ -186,7 +186,7 @@ public struct PushConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -219,7 +219,7 @@ public struct PushConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -255,7 +255,7 @@ public struct PushConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -289,7 +289,7 @@ public struct PushConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case noWrapper(PushConfig.NoWrapper?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.PushConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case entityTypesUri = "entityTypesUri"
       case entityTypesContent = "entityTypesContent"
     }
@@ -104,7 +104,7 @@
       indirect case entityTypesContent(InlineDestination?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ExportEntityTypesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

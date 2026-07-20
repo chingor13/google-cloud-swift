@@ -98,7 +98,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACTION_UNSPECIFIED"
       case .allow: return "ALLOW"
@@ -111,7 +111,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACTION_UNSPECIFIED": self = .unspecified
       case "ALLOW": self = .allow
@@ -200,7 +200,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "OPERATION_UNSPECIFIED"
       case .download: return "DOWNLOAD"
@@ -212,7 +212,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "OPERATION_UNSPECIFIED": self = .unspecified
       case "DOWNLOAD": self = .download
@@ -260,7 +260,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.Rule"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -104,7 +104,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage.Coverage.Transition"
         }
@@ -116,7 +116,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage.Coverage"
       }
@@ -128,7 +128,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

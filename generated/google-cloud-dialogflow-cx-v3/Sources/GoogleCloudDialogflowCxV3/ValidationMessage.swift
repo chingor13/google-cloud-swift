@@ -131,7 +131,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RESOURCE_TYPE_UNSPECIFIED"
         case .agent: return "AGENT"
@@ -156,7 +156,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RESOURCE_TYPE_UNSPECIFIED": self = .unspecified
         case "AGENT": self = .agent
@@ -185,17 +185,17 @@
         case 0: self = .unspecified
         case 1: self = .agent
         case 2: self = .intent
+        case 3: self = .entityType
+        case 4: self = .webhook
+        case 5: self = .flow
+        case 6: self = .page
+        case 7: self = .transitionRouteGroup
         case 8: self = .intentTrainingPhrase
         case 9: self = .intentParameter
         case 10: self = .intents
         case 11: self = .intentTrainingPhrases
-        case 3: self = .entityType
         case 12: self = .entityTypes
-        case 4: self = .webhook
-        case 5: self = .flow
-        case 6: self = .page
         case 13: self = .pages
-        case 7: self = .transitionRouteGroup
         case 14: self = .agentTransitionRouteGroup
         default: self = .unknownIntValue(intValue)
         }
@@ -287,7 +287,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SEVERITY_UNSPECIFIED"
         case .info: return "INFO"
@@ -301,7 +301,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SEVERITY_UNSPECIFIED": self = .unspecified
         case "INFO": self = .info
@@ -355,7 +355,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ValidationMessage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

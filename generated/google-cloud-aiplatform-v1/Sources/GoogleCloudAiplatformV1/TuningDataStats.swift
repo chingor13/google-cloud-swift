@@ -43,7 +43,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case supervisedTuningDataStats = "supervisedTuningDataStats"
     }
 
@@ -84,7 +84,7 @@
       indirect case supervisedTuningDataStats(SupervisedTuningDataStats?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.TuningDataStats"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

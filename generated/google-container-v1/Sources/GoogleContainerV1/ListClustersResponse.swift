@@ -45,7 +45,7 @@ public struct ListClustersResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ListClustersResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

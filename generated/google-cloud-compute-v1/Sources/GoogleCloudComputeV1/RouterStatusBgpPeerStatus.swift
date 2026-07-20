@@ -146,7 +146,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .down: return "DOWN"
         case .unknown: return "UNKNOWN"
@@ -159,7 +159,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DOWN": self = .down
         case "UNKNOWN": self = .unknown
@@ -259,7 +259,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ipv4PeerOnIpv6OnlyConnection: return "IPV4_PEER_ON_IPV6_ONLY_CONNECTION"
         case .ipv6PeerOnIpv4OnlyConnection: return "IPV6_PEER_ON_IPV4_ONLY_CONNECTION"
@@ -273,7 +273,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IPV4_PEER_ON_IPV6_ONLY_CONNECTION": self = .ipv4PeerOnIpv6OnlyConnection
         case "IPV6_PEER_ON_IPV4_ONLY_CONNECTION": self = .ipv6PeerOnIpv4OnlyConnection
@@ -327,7 +327,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RouterStatusBgpPeerStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

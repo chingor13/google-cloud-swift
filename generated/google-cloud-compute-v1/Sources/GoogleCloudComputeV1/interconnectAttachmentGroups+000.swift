@@ -183,7 +183,7 @@
       byItem: InterconnectAttachmentGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InterconnectAttachmentGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.InterconnectAttachmentGroupsListResponse in
         var request = byItem
         request.pageToken = token
@@ -611,7 +611,7 @@
       byItem: InterconnectAttachmentGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InterconnectAttachmentGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.InterconnectAttachmentGroupsListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }

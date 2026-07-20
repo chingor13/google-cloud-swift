@@ -68,7 +68,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case text = "text"
       case payload = "payload"
       case conversationSuccess = "conversationSuccess"
@@ -215,7 +215,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.Text"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -266,7 +266,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.LiveAgentHandoff"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -319,7 +319,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.ConversationSuccess"
       }
@@ -360,7 +360,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case text = "text"
         case ssml = "ssml"
         case allowPlaybackInterruption = "allowPlaybackInterruption"
@@ -413,7 +413,7 @@
         case ssml(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.OutputAudioText"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -446,7 +446,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.EndInteraction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -486,7 +486,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.PlayAudio"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -556,7 +556,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case audio = "audio"
           case uri = "uri"
           case allowPlaybackInterruption = "allowPlaybackInterruption"
@@ -610,7 +610,7 @@
           case uri(Swift.String)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio.Segment"
         }
@@ -622,7 +622,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -657,7 +657,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case phoneNumber = "phoneNumber"
       }
 
@@ -699,7 +699,7 @@
         case phoneNumber(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall"
       }
@@ -735,7 +735,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage.KnowledgeInfoCard"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -803,7 +803,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RESPONSE_TYPE_UNSPECIFIED"
         case .entryPrompt: return "ENTRY_PROMPT"
@@ -817,7 +817,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RESPONSE_TYPE_UNSPECIFIED": self = .unspecified
         case "ENTRY_PROMPT": self = .entryPrompt
@@ -918,7 +918,7 @@
       indirect case toolCall(ToolCall?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ResponseMessage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

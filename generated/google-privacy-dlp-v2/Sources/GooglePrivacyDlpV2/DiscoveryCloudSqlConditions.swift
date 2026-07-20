@@ -91,7 +91,7 @@ public struct DiscoveryCloudSqlConditions: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DATABASE_ENGINE_UNSPECIFIED"
       case .allSupportedDatabaseEngines: return "ALL_SUPPORTED_DATABASE_ENGINES"
@@ -105,7 +105,7 @@ public struct DiscoveryCloudSqlConditions: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DATABASE_ENGINE_UNSPECIFIED": self = .unspecified
       case "ALL_SUPPORTED_DATABASE_ENGINES": self = .allSupportedDatabaseEngines
@@ -200,7 +200,7 @@ public struct DiscoveryCloudSqlConditions: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DATABASE_RESOURCE_TYPE_UNSPECIFIED"
       case .allSupportedTypes: return "DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES"
@@ -213,7 +213,7 @@ public struct DiscoveryCloudSqlConditions: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DATABASE_RESOURCE_TYPE_UNSPECIFIED": self = .unspecified
       case "DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES": self = .allSupportedTypes
@@ -264,7 +264,7 @@ public struct DiscoveryCloudSqlConditions: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudSqlConditions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

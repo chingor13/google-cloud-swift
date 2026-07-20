@@ -90,7 +90,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apigateway.v1.OperationMetadata.Diagnostic"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -101,7 +101,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apigateway.v1.OperationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

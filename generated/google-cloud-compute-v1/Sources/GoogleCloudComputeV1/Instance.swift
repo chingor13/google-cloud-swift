@@ -268,7 +268,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case advancedMachineFeatures = "advancedMachineFeatures"
       case canIpForward = "canIpForward"
       case confidentialInstanceConfig = "confidentialInstanceConfig"
@@ -511,7 +511,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
         case .`none`: return "NONE"
@@ -524,7 +524,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": self = .unspecified
         case "NONE": self = .`none`
@@ -625,7 +625,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .enableBidirectionalAccessToGoogle: return "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
         case .enableOutboundVmAccessToGoogle: return "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
@@ -638,7 +638,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE": self = .enableBidirectionalAccessToGoogle
         case "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE": self = .enableOutboundVmAccessToGoogle
@@ -760,7 +760,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .deprovisioning: return "DEPROVISIONING"
         case .pending: return "PENDING"
@@ -781,7 +781,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEPROVISIONING": self = .deprovisioning
         case "PENDING": self = .pending
@@ -856,7 +856,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Instance"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

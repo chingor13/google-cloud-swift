@@ -55,7 +55,7 @@
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.MaintenanceWindow"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

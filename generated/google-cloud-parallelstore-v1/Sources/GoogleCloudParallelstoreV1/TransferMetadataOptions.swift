@@ -87,7 +87,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "UID_UNSPECIFIED"
       case .skip: return "UID_SKIP"
@@ -100,7 +100,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UID_UNSPECIFIED": self = .unspecified
       case "UID_SKIP": self = .skip
@@ -192,7 +192,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "GID_UNSPECIFIED"
       case .skip: return "GID_SKIP"
@@ -205,7 +205,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "GID_UNSPECIFIED": self = .unspecified
       case "GID_SKIP": self = .skip
@@ -297,7 +297,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MODE_UNSPECIFIED"
       case .skip: return "MODE_SKIP"
@@ -310,7 +310,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MODE_UNSPECIFIED": self = .unspecified
       case "MODE_SKIP": self = .skip
@@ -361,7 +361,7 @@ public struct TransferMetadataOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.parallelstore.v1.TransferMetadataOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

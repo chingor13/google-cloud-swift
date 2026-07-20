@@ -92,7 +92,7 @@ public struct BigQuerySource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case partitionDate = "partitionDate"
     case projectId = "projectId"
     case datasetId = "datasetId"
@@ -150,7 +150,7 @@ public struct BigQuerySource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case partitionDate(GoogleType.Date?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.BigQuerySource"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

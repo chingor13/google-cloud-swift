@@ -52,7 +52,7 @@ public struct UpdateProjectRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.UpdateProjectRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

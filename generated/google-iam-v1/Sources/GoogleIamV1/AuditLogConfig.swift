@@ -111,7 +111,7 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "LOG_TYPE_UNSPECIFIED"
       case .adminRead: return "ADMIN_READ"
@@ -125,7 +125,7 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "LOG_TYPE_UNSPECIFIED": self = .unspecified
       case "ADMIN_READ": self = .adminRead
@@ -179,7 +179,7 @@ public struct AuditLogConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v1.AuditLogConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

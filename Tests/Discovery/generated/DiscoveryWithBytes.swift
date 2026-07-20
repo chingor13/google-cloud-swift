@@ -46,7 +46,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case map = "map"
     case `optional` = "optional"
     case repeated = "repeated"
@@ -107,7 +107,9 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     )
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/.DiscoveryWithBytes" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/.DiscoveryWithBytes"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

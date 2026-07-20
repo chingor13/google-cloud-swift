@@ -284,7 +284,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_ACTIVATION_POLICY_UNSPECIFIED"
         case .always: return "ALWAYS"
@@ -298,7 +298,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_ACTIVATION_POLICY_UNSPECIFIED": self = .unspecified
         case "ALWAYS": self = .always
@@ -393,7 +393,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "EDITION_UNSPECIFIED"
         case .enterprise: return "ENTERPRISE"
@@ -406,7 +406,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EDITION_UNSPECIFIED": self = .unspecified
         case "ENTERPRISE": self = .enterprise
@@ -500,7 +500,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CONNECTOR_ENFORCEMENT_UNSPECIFIED"
         case .notRequired: return "NOT_REQUIRED"
@@ -513,7 +513,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONNECTOR_ENFORCEMENT_UNSPECIFIED": self = .unspecified
         case "NOT_REQUIRED": self = .notRequired
@@ -607,7 +607,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DATA_API_ACCESS_UNSPECIFIED"
         case .disallowDataApi: return "DISALLOW_DATA_API"
@@ -620,7 +620,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DATA_API_ACCESS_UNSPECIFIED": self = .unspecified
         case "DISALLOW_DATA_API": self = .disallowDataApi
@@ -671,7 +671,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Settings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

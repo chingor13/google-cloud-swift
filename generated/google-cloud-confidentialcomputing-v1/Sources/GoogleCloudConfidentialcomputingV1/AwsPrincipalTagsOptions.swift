@@ -91,7 +91,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures"
       }
@@ -103,7 +103,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions.AllowedPrincipalTags"
     }
@@ -115,7 +115,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

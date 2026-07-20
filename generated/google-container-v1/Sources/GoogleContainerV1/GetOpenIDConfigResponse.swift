@@ -59,7 +59,7 @@ public struct GetOpenIDConfigResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case issuer = "issuer"
     case jwksUri = "jwks_uri"
     case responseTypesSupported = "response_types_supported"
@@ -95,7 +95,7 @@ public struct GetOpenIDConfigResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
     try container.encode(self.grantTypes, forKey: .grantTypes)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.GetOpenIDConfigResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

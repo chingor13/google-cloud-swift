@@ -63,7 +63,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NetworkEndpointGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -320,7 +321,7 @@
       byItem: NetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -346,7 +347,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints in
         var request = byItem
         request.pageToken = token
@@ -564,7 +565,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NetworkEndpointGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.NetworkEndpointGroupAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -806,7 +808,7 @@
       byItem: NetworkEndpointGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointGroup, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -847,7 +849,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkEndpointWithHealthStatus, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints in
         throw GoogleCloudGax.RequestError.unimplemented
       }

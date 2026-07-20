@@ -103,7 +103,7 @@ public struct DecapsulateResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case sharedSecret = "sharedSecret"
     case sharedSecretCrc32C = "sharedSecretCrc32c"
@@ -131,7 +131,7 @@ public struct DecapsulateResponse: Codable, Equatable, GoogleCloudWkt._AnyPackab
     try container.encode(self.protectionLevel, forKey: .protectionLevel)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.DecapsulateResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

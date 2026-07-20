@@ -153,7 +153,7 @@ public class DataformClient: Clients.DataformProtocol {
     QueryTeamFolderContentsResponse.TeamFolderContentsEntry, Swift.Error
   > {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryTeamFolderContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryTeamFolderContentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryTeamFolderContents(request: request, options: options)
@@ -179,7 +179,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: SearchTeamFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SearchTeamFoldersResponse.TeamFolderSearchResult, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.SearchTeamFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.SearchTeamFoldersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.searchTeamFolders(request: request, options: options)
@@ -296,7 +296,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryFolderContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryFolderContentsResponse.FolderContentsEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryFolderContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryFolderContentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryFolderContents(request: request, options: options)
@@ -324,7 +324,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryUserRootContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryUserRootContentsResponse.RootContentsEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryUserRootContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryUserRootContentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryUserRootContents(request: request, options: options)
@@ -409,7 +409,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListRepositoriesResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListRepositoriesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRepositories(request: request, options: options)
@@ -551,8 +551,8 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryRepositoryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DirectoryEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryRepositoryDirectoryContentsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryRepositoryDirectoryContentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryRepositoryDirectoryContents(request: request, options: options)
@@ -578,7 +578,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: FetchRepositoryHistoryRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CommitLogEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.FetchRepositoryHistoryResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.FetchRepositoryHistoryResponse in
       var request = byItem
       request.pageToken = token
       return try await self.fetchRepositoryHistory(request: request, options: options)
@@ -619,7 +619,8 @@ public class DataformClient: Clients.DataformProtocol {
   public func listWorkspaces(
     byItem: ListWorkspacesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Workspace, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudDataformV1.ListWorkspacesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkspacesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listWorkspaces(request: request, options: options)
@@ -742,7 +743,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DirectoryEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryDirectoryContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryDirectoryContentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryDirectoryContents(request: request, options: options)
@@ -765,7 +766,8 @@ public class DataformClient: Clients.DataformProtocol {
   public func searchFiles(
     byItem: SearchFilesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SearchResult, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudDataformV1.SearchFilesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.SearchFilesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.searchFiles(request: request, options: options)
@@ -853,7 +855,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: ListReleaseConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReleaseConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListReleaseConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListReleaseConfigsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listReleaseConfigs(request: request, options: options)
@@ -918,7 +920,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: ListCompilationResultsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CompilationResult, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListCompilationResultsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListCompilationResultsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listCompilationResults(request: request, options: options)
@@ -960,7 +962,8 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryCompilationResultActionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CompilationResultAction, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryCompilationResultActionsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryCompilationResultActionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryCompilationResultActions(request: request, options: options)
@@ -984,7 +987,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: ListWorkflowConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListWorkflowConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkflowConfigsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listWorkflowConfigs(request: request, options: options)
@@ -1049,7 +1052,7 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: ListWorkflowInvocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowInvocation, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListWorkflowInvocationsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkflowInvocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listWorkflowInvocations(request: request, options: options)
@@ -1109,8 +1112,8 @@ public class DataformClient: Clients.DataformProtocol {
     byItem: QueryWorkflowInvocationActionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowInvocationAction, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryWorkflowInvocationActionsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryWorkflowInvocationActionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryWorkflowInvocationActions(request: request, options: options)
@@ -1226,7 +1229,8 @@ public class DataformClient: Clients.DataformProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -1262,7 +1266,8 @@ public class DataformClient: Clients.DataformProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -2627,7 +2632,7 @@ extension Clients.DataformProtocol {
     QueryTeamFolderContentsResponse.TeamFolderContentsEntry, Swift.Error
   > {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryTeamFolderContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryTeamFolderContentsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2666,7 +2671,7 @@ extension Clients.DataformProtocol {
     byItem: SearchTeamFoldersRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SearchTeamFoldersResponse.TeamFolderSearchResult, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.SearchTeamFoldersResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.SearchTeamFoldersResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2817,7 +2822,7 @@ extension Clients.DataformProtocol {
     byItem: QueryFolderContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryFolderContentsResponse.FolderContentsEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryFolderContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryFolderContentsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2854,7 +2859,7 @@ extension Clients.DataformProtocol {
     byItem: QueryUserRootContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueryUserRootContentsResponse.RootContentsEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryUserRootContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryUserRootContentsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2928,7 +2933,7 @@ extension Clients.DataformProtocol {
     byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListRepositoriesResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListRepositoriesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3116,8 +3121,8 @@ extension Clients.DataformProtocol {
     byItem: QueryRepositoryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DirectoryEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryRepositoryDirectoryContentsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryRepositoryDirectoryContentsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3145,7 +3150,7 @@ extension Clients.DataformProtocol {
     byItem: FetchRepositoryHistoryRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CommitLogEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.FetchRepositoryHistoryResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.FetchRepositoryHistoryResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3196,7 +3201,8 @@ extension Clients.DataformProtocol {
   public func listWorkspaces(
     byItem: ListWorkspacesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Workspace, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudDataformV1.ListWorkspacesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkspacesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3394,7 +3400,7 @@ extension Clients.DataformProtocol {
     byItem: QueryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DirectoryEntry, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryDirectoryContentsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.QueryDirectoryContentsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3421,7 +3427,8 @@ extension Clients.DataformProtocol {
   public func searchFiles(
     byItem: SearchFilesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SearchResult, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudDataformV1.SearchFilesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.SearchFilesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3533,7 +3540,7 @@ extension Clients.DataformProtocol {
     byItem: ListReleaseConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReleaseConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListReleaseConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListReleaseConfigsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3658,7 +3665,7 @@ extension Clients.DataformProtocol {
     byItem: ListCompilationResultsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CompilationResult, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListCompilationResultsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListCompilationResultsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3739,7 +3746,8 @@ extension Clients.DataformProtocol {
     byItem: QueryCompilationResultActionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CompilationResultAction, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryCompilationResultActionsResponse in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryCompilationResultActionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3767,7 +3775,7 @@ extension Clients.DataformProtocol {
     byItem: ListWorkflowConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListWorkflowConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkflowConfigsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3892,7 +3900,7 @@ extension Clients.DataformProtocol {
     byItem: ListWorkflowInvocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowInvocation, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.ListWorkflowInvocationsResponse in
+      (token: Swift.String) async throws -> GoogleCloudDataformV1.ListWorkflowInvocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4004,8 +4012,8 @@ extension Clients.DataformProtocol {
     byItem: QueryWorkflowInvocationActionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowInvocationAction, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudDataformV1.QueryWorkflowInvocationActionsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudDataformV1.QueryWorkflowInvocationActionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4119,7 +4127,8 @@ extension Clients.DataformProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -4158,7 +4167,8 @@ extension Clients.DataformProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

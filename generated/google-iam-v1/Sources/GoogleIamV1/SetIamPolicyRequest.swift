@@ -54,7 +54,7 @@ public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v1.SetIamPolicyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -143,7 +143,7 @@ public struct AppEngineRouting: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.scheduler.v1.AppEngineRouting"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

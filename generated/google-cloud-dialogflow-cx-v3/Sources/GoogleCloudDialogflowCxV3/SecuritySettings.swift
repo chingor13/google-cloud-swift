@@ -145,7 +145,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case displayName = "displayName"
       case redactionStrategy = "redactionStrategy"
@@ -313,7 +313,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "AUDIO_FORMAT_UNSPECIFIED"
           case .mulaw: return "MULAW"
@@ -327,7 +327,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "AUDIO_FORMAT_UNSPECIFIED": self = .unspecified
           case "MULAW": self = .mulaw
@@ -381,7 +381,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings.AudioExportSettings"
       }
@@ -418,7 +418,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings"
       }
@@ -468,7 +468,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "REDACTION_STRATEGY_UNSPECIFIED"
         case .redactWithService: return "REDACT_WITH_SERVICE"
@@ -480,7 +480,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "REDACTION_STRATEGY_UNSPECIFIED": self = .unspecified
         case "REDACT_WITH_SERVICE": self = .redactWithService
@@ -568,7 +568,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "REDACTION_SCOPE_UNSPECIFIED"
         case .redactDiskStorage: return "REDACT_DISK_STORAGE"
@@ -580,7 +580,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "REDACTION_SCOPE_UNSPECIFIED": self = .unspecified
         case "REDACT_DISK_STORAGE": self = .redactDiskStorage
@@ -668,7 +668,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RETENTION_STRATEGY_UNSPECIFIED"
         case .removeAfterConversation: return "REMOVE_AFTER_CONVERSATION"
@@ -680,7 +680,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RETENTION_STRATEGY_UNSPECIFIED": self = .unspecified
         case "REMOVE_AFTER_CONVERSATION": self = .removeAfterConversation
@@ -767,7 +767,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PURGE_DATA_TYPE_UNSPECIFIED"
         case .dialogflowHistory: return "DIALOGFLOW_HISTORY"
@@ -779,7 +779,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PURGE_DATA_TYPE_UNSPECIFIED": self = .unspecified
         case "DIALOGFLOW_HISTORY": self = .dialogflowHistory
@@ -847,7 +847,7 @@
       case retentionStrategy(SecuritySettings.RetentionStrategy)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

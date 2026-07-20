@@ -149,7 +149,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MATCH_MODE_UNSPECIFIED"
         case .hybrid: return "MATCH_MODE_HYBRID"
@@ -162,7 +162,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MATCH_MODE_UNSPECIFIED": self = .unspecified
         case "MATCH_MODE_HYBRID": self = .hybrid
@@ -257,7 +257,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "API_VERSION_UNSPECIFIED"
         case .v1: return "API_VERSION_V1"
@@ -271,7 +271,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "API_VERSION_UNSPECIFIED": self = .unspecified
         case "API_VERSION_V1": self = .v1
@@ -371,7 +371,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "TIER_UNSPECIFIED"
         case .standard: return "TIER_STANDARD"
@@ -385,7 +385,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TIER_UNSPECIFIED": self = .unspecified
         case "TIER_STANDARD": self = .standard
@@ -439,7 +439,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Agent"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

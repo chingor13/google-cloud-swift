@@ -67,7 +67,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWkt
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case tdCcel = "tdCcel"
     case tpmAttestation = "tpmAttestation"
     case challenge = "challenge"
@@ -170,7 +170,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWkt
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case awsPrincipalTagsOptions = "awsPrincipalTagsOptions"
       case audience = "audience"
       case tokenProfile = "tokenProfile"
@@ -224,7 +224,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWkt
       indirect case awsPrincipalTagsOptions(AwsPrincipalTagsOptions?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions"
     }
@@ -246,7 +246,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWkt
     indirect case tpmAttestation(TpmAttestation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return
       "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest"
   }

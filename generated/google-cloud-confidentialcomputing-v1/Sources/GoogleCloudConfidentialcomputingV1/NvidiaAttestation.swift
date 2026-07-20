@@ -42,7 +42,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case spt = "spt"
     case ppcie = "ppcie"
     case mpt = "mpt"
@@ -135,7 +135,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -177,7 +177,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo"
     }
@@ -212,7 +212,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation"
     }
@@ -251,7 +251,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation"
     }
@@ -288,7 +288,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation"
     }
@@ -341,7 +341,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "GPU_ARCHITECTURE_TYPE_UNSPECIFIED"
       case .hopper: return "GPU_ARCHITECTURE_TYPE_HOPPER"
@@ -354,7 +354,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "GPU_ARCHITECTURE_TYPE_UNSPECIFIED": self = .unspecified
       case "GPU_ARCHITECTURE_TYPE_HOPPER": self = .hopper
@@ -415,7 +415,7 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case mpt(NvidiaAttestation.MultiGpuSecurePassthroughAttestation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.NvidiaAttestation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -45,7 +45,9 @@ public struct EnumValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.protobuf.EnumValue" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.protobuf.EnumValue"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

@@ -58,7 +58,7 @@ public struct ResourceOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case connectVersion = "connectVersion"
     case v1Beta1Crd = "v1beta1Crd"
     case k8SVersion = "k8sVersion"
@@ -81,7 +81,7 @@ public struct ResourceOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.k8SGitVersion, forKey: .k8SGitVersion)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.ResourceOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

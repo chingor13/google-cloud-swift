@@ -116,7 +116,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.SpeechSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -167,7 +167,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.DtmfSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -209,7 +209,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -220,7 +220,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

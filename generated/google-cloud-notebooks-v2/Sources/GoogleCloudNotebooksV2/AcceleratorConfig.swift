@@ -114,7 +114,7 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACCELERATOR_TYPE_UNSPECIFIED"
       case .nvidiaTeslaP100: return "NVIDIA_TESLA_P100"
@@ -135,7 +135,7 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACCELERATOR_TYPE_UNSPECIFIED": self = .unspecified
       case "NVIDIA_TESLA_P100": self = .nvidiaTeslaP100
@@ -162,12 +162,12 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
       case 3: self = .nvidiaTeslaV100
       case 4: self = .nvidiaTeslaP4
       case 5: self = .nvidiaTeslaT4
-      case 11: self = .nvidiaTeslaA100
-      case 12: self = .nvidiaA10080Gb
-      case 13: self = .nvidiaL4
       case 8: self = .nvidiaTeslaT4Vws
       case 9: self = .nvidiaTeslaP100Vws
       case 10: self = .nvidiaTeslaP4Vws
+      case 11: self = .nvidiaTeslaA100
+      case 12: self = .nvidiaA10080Gb
+      case 13: self = .nvidiaL4
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -210,7 +210,7 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.notebooks.v2.AcceleratorConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

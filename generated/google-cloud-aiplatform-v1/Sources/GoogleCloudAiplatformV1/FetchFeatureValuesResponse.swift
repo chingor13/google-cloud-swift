@@ -48,7 +48,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case keyValues = "keyValues"
       case protoStruct = "protoStruct"
       case dataKey = "dataKey"
@@ -145,7 +145,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case value = "value"
           case name = "name"
         }
@@ -187,7 +187,7 @@
           indirect case value(FeatureValue?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FetchFeatureValuesResponse.FeatureNameValuePairList.FeatureNameValuePair"
         }
@@ -199,7 +199,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FetchFeatureValuesResponse.FeatureNameValuePairList"
       }
@@ -218,7 +218,7 @@
       indirect case protoStruct(GoogleCloudWkt.Struct?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FetchFeatureValuesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

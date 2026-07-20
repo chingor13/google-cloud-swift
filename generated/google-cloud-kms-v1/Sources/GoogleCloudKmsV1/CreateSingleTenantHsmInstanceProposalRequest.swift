@@ -62,7 +62,7 @@ public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, 
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

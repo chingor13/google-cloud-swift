@@ -40,7 +40,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case defaultExchangeConfig = "defaultExchangeConfig"
     case dcrExchangeConfig = "dcrExchangeConfig"
   }
@@ -104,7 +104,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig"
     }
@@ -151,7 +151,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig"
     }
@@ -170,7 +170,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWkt._AnyP
     indirect case dcrExchangeConfig(SharingEnvironmentConfig.DcrExchangeConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

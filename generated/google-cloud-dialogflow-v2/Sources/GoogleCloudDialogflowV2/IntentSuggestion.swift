@@ -48,7 +48,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case displayName = "displayName"
       case intentV2 = "intentV2"
       case description = "description"
@@ -98,7 +98,7 @@
       case intentV2(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.IntentSuggestion"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

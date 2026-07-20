@@ -69,7 +69,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case page = "page"
         case flow = "flow"
       }
@@ -123,7 +123,7 @@
         indirect case flow(Flow?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionCoverage.TransitionNode"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -170,7 +170,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case source = "source"
         case index = "index"
         case target = "target"
@@ -236,7 +236,7 @@
         indirect case eventHandler(EventHandler?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionCoverage.Transition"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -247,7 +247,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionCoverage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

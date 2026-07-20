@@ -88,7 +88,7 @@ public struct Key: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case kind = "kind"
       case id = "id"
       case name = "name"
@@ -144,7 +144,7 @@ public struct Key: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case name(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Key.PathElement"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -155,7 +155,9 @@ public struct Key: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.privacy.dlp.v2.Key" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.privacy.dlp.v2.Key"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

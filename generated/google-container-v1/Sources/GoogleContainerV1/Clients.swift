@@ -22,6 +22,6 @@ import GoogleCloudGax
 
 // Defines concrete implementations of the client protocols.
 public enum Clients {
-  static let clientHeader: String =
+  static let clientHeader: Swift.String =
     GoogleCloudGax._gapicApiClientHeader(packageVersion: "")
 }

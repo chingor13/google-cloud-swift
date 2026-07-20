@@ -78,7 +78,7 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case method = "method"
     case insertTime = "insertTime"
     case endTime = "endTime"
@@ -142,7 +142,7 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case createVersionMetadata(CreateVersionMetadataV1?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.OperationMetadataV1"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

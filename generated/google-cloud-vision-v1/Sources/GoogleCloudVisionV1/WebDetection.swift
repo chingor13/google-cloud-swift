@@ -89,7 +89,7 @@ public struct WebDetection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.WebDetection.WebEntity"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -126,7 +126,7 @@ public struct WebDetection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.WebDetection.WebImage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -176,7 +176,7 @@ public struct WebDetection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.WebDetection.WebPage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -215,7 +215,7 @@ public struct WebDetection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.WebDetection.WebLabel"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -226,7 +226,7 @@ public struct WebDetection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.WebDetection"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

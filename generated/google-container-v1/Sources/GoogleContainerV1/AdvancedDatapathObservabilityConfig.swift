@@ -92,7 +92,7 @@ public struct AdvancedDatapathObservabilityConfig: Codable, Equatable, GoogleClo
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "RELAY_MODE_UNSPECIFIED"
       case .disabled: return "DISABLED"
@@ -106,7 +106,7 @@ public struct AdvancedDatapathObservabilityConfig: Codable, Equatable, GoogleClo
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "RELAY_MODE_UNSPECIFIED": self = .unspecified
       case "DISABLED": self = .disabled
@@ -160,7 +160,7 @@ public struct AdvancedDatapathObservabilityConfig: Codable, Equatable, GoogleClo
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.AdvancedDatapathObservabilityConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -102,7 +102,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ADAPTER_SIZE_UNSPECIFIED"
         case .one: return "ADAPTER_SIZE_ONE"
@@ -119,7 +119,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADAPTER_SIZE_UNSPECIFIED": self = .unspecified
         case "ADAPTER_SIZE_ONE": self = .one
@@ -139,11 +139,11 @@
         switch intValue {
         case 0: self = .unspecified
         case 1: self = .one
-        case 6: self = .two
         case 2: self = .four
         case 3: self = .eight
         case 4: self = .sixteen
         case 5: self = .thirtyTwo
+        case 6: self = .two
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -182,7 +182,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SupervisedHyperParameters"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

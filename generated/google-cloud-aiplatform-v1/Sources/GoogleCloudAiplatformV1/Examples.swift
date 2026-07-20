@@ -46,7 +46,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case exampleGcsSource = "exampleGcsSource"
       case nearestNeighborSearchConfig = "nearestNeighborSearchConfig"
       case presets = "presets"
@@ -182,7 +182,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "DATA_FORMAT_UNSPECIFIED"
           case .jsonl: return "JSONL"
@@ -194,7 +194,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "DATA_FORMAT_UNSPECIFIED": self = .unspecified
           case "JSONL": self = .jsonl
@@ -242,7 +242,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Examples.ExampleGcsSource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -271,7 +271,7 @@
       indirect case presets(Presets?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Examples"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

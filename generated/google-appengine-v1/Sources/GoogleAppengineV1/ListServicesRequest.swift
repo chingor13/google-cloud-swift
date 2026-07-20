@@ -46,7 +46,7 @@ public struct ListServicesRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.ListServicesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

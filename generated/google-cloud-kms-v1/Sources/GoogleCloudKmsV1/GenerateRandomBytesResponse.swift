@@ -60,7 +60,7 @@ public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case data = "data"
     case dataCrc32C = "dataCrc32c"
   }
@@ -78,7 +78,7 @@ public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWkt._A
     try container.encode(self.dataCrc32C, forKey: .dataCrc32C)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.GenerateRandomBytesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

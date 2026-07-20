@@ -60,7 +60,7 @@
       byItem: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -186,7 +186,8 @@
     public func list(
       byItem: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -409,7 +410,7 @@
       byItem: TargetInstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, TargetInstancesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetInstanceAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -556,7 +557,8 @@
     public func list(
       byItem: TargetInstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetInstance, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetInstanceList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

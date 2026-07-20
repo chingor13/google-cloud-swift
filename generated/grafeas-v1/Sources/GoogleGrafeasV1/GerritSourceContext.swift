@@ -49,7 +49,7 @@ public struct GerritSourceContext: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case hostUri = "hostUri"
     case gerritProject = "gerritProject"
     case revisionId = "revisionId"
@@ -104,7 +104,7 @@ public struct GerritSourceContext: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case aliasContext(AliasContext?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.GerritSourceContext"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

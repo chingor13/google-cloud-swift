@@ -50,7 +50,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case dockerRepository = "dockerRepository"
     case mavenRepository = "mavenRepository"
     case npmRepository = "npmRepository"
@@ -167,7 +167,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case usernamePasswordCredentials = "usernamePasswordCredentials"
     }
 
@@ -232,7 +232,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.UpstreamCredentials.UsernamePasswordCredentials"
       }
@@ -250,7 +250,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         RemoteRepositoryConfig.UpstreamCredentials.UsernamePasswordCredentials?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.UpstreamCredentials"
     }
@@ -285,7 +285,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -353,7 +353,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository"
       }
@@ -404,7 +404,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PUBLIC_REPOSITORY_UNSPECIFIED"
         case .dockerHub: return "DOCKER_HUB"
@@ -416,7 +416,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PUBLIC_REPOSITORY_UNSPECIFIED": self = .unspecified
         case "DOCKER_HUB": self = .dockerHub
@@ -473,7 +473,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.DockerRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository"
     }
@@ -508,7 +508,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -576,7 +576,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository"
       }
@@ -627,7 +627,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PUBLIC_REPOSITORY_UNSPECIFIED"
         case .mavenCentral: return "MAVEN_CENTRAL"
@@ -639,7 +639,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PUBLIC_REPOSITORY_UNSPECIFIED": self = .unspecified
         case "MAVEN_CENTRAL": self = .mavenCentral
@@ -696,7 +696,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.MavenRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository"
     }
@@ -731,7 +731,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -799,7 +799,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository"
       }
@@ -849,7 +849,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PUBLIC_REPOSITORY_UNSPECIFIED"
         case .npmjs: return "NPMJS"
@@ -861,7 +861,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PUBLIC_REPOSITORY_UNSPECIFIED": self = .unspecified
         case "NPMJS": self = .npmjs
@@ -918,7 +918,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.NpmRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository"
     }
@@ -953,7 +953,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -1021,7 +1021,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository"
       }
@@ -1071,7 +1071,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PUBLIC_REPOSITORY_UNSPECIFIED"
         case .pypi: return "PYPI"
@@ -1083,7 +1083,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PUBLIC_REPOSITORY_UNSPECIFIED": self = .unspecified
         case "PYPI": self = .pypi
@@ -1140,7 +1140,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.PythonRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository"
     }
@@ -1175,7 +1175,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -1292,7 +1292,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "REPOSITORY_BASE_UNSPECIFIED"
           case .debian: return "DEBIAN"
@@ -1306,7 +1306,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "REPOSITORY_BASE_UNSPECIFIED": self = .unspecified
           case "DEBIAN": self = .debian
@@ -1360,7 +1360,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.PublicRepository"
       }
@@ -1396,7 +1396,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository"
       }
@@ -1417,7 +1417,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.AptRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository"
     }
@@ -1452,7 +1452,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicRepository = "publicRepository"
       case customRepository = "customRepository"
     }
@@ -1578,7 +1578,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "REPOSITORY_BASE_UNSPECIFIED"
           case .centos: return "CENTOS"
@@ -1595,7 +1595,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "REPOSITORY_BASE_UNSPECIFIED": self = .unspecified
           case "CENTOS": self = .centos
@@ -1658,7 +1658,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.PublicRepository"
       }
@@ -1694,7 +1694,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository"
       }
@@ -1715,7 +1715,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       indirect case customRepository(RemoteRepositoryConfig.YumRepository.CustomRepository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository"
     }
@@ -1750,7 +1750,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository"
     }
@@ -1781,7 +1781,7 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleCloudWkt._AnyPac
     indirect case commonRepository(RemoteRepositoryConfig.CommonRemoteRepository?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.RemoteRepositoryConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

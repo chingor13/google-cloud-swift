@@ -48,7 +48,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case labelFingerprint = "labelFingerprint"
       case labels = "labels"
     }
@@ -77,7 +77,7 @@
       try container.encode(self.labels, forKey: .labels)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ZoneSetLabelsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

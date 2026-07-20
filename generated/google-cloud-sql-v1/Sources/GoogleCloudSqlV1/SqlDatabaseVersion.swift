@@ -217,7 +217,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SQL_DATABASE_VERSION_UNSPECIFIED"
       case .mysql51: return "MYSQL_5_1"
@@ -282,7 +282,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SQL_DATABASE_VERSION_UNSPECIFIED": self = .unspecified
       case "MYSQL_5_1": self = .mysql51
@@ -353,56 +353,56 @@
       case 3: self = .mysql55
       case 5: self = .mysql56
       case 6: self = .mysql57
+      case 9: self = .postgres96
+      case 10: self = .postgres11
+      case 11: self = .sqlserver2017Standard
+      case 14: self = .sqlserver2017Enterprise
+      case 15: self = .sqlserver2017Express
+      case 16: self = .sqlserver2017Web
+      case 18: self = .postgres10
+      case 19: self = .postgres12
       case 20: self = .mysql80
+      case 23: self = .postgres13
+      case 26: self = .sqlserver2019Standard
+      case 27: self = .sqlserver2019Enterprise
+      case 28: self = .sqlserver2019Express
+      case 29: self = .sqlserver2019Web
       case 41: self = .mysql8018
       case 85: self = .mysql8026
+      case 110: self = .postgres14
       case 111: self = .mysql8027
       case 132: self = .mysql8028
       case 148: self = .mysql8029
+      case 172: self = .postgres15
       case 174: self = .mysql8030
       case 197: self = .mysql8031
+      case 199: self = .sqlserver2022Standard
+      case 200: self = .sqlserver2022Enterprise
+      case 201: self = .sqlserver2022Express
+      case 202: self = .sqlserver2022Web
       case 213: self = .mysql8032
       case 238: self = .mysql8033
       case 239: self = .mysql8034
       case 240: self = .mysql8035
       case 241: self = .mysql8036
+      case 272: self = .postgres16
       case 355: self = .mysql8037
       case 357: self = .mysql8039
       case 358: self = .mysql8040
+      case 398: self = .mysql84
+      case 408: self = .postgres17
       case 488: self = .mysql8041
       case 489: self = .mysql8042
+      case 549: self = .sqlserver2025Standard
+      case 550: self = .sqlserver2025Enterprise
+      case 551: self = .sqlserver2025Express
       case 553: self = .mysql8043
       case 554: self = .mysql8044
       case 555: self = .mysql8045
       case 556: self = .mysql8046
-      case 398: self = .mysql84
-      case 654: self = .mysql97
-      case 11: self = .sqlserver2017Standard
-      case 14: self = .sqlserver2017Enterprise
-      case 15: self = .sqlserver2017Express
-      case 16: self = .sqlserver2017Web
-      case 9: self = .postgres96
-      case 18: self = .postgres10
-      case 10: self = .postgres11
-      case 19: self = .postgres12
-      case 23: self = .postgres13
-      case 110: self = .postgres14
-      case 172: self = .postgres15
-      case 272: self = .postgres16
-      case 408: self = .postgres17
       case 557: self = .postgres18
+      case 654: self = .mysql97
       case 684: self = .postgres19
-      case 26: self = .sqlserver2019Standard
-      case 27: self = .sqlserver2019Enterprise
-      case 28: self = .sqlserver2019Express
-      case 29: self = .sqlserver2019Web
-      case 199: self = .sqlserver2022Standard
-      case 200: self = .sqlserver2022Enterprise
-      case 201: self = .sqlserver2022Express
-      case 202: self = .sqlserver2022Web
-      case 549: self = .sqlserver2025Standard
-      case 550: self = .sqlserver2025Enterprise
-      case 551: self = .sqlserver2025Express
       default: self = .unknownIntValue(intValue)
       }
     }

@@ -64,7 +64,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case requestId = "requestId"
     case eventId = "eventId"
     case createTime = "createTime"
@@ -120,7 +120,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case jobEvent(JobEvent?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.ClientEvent"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

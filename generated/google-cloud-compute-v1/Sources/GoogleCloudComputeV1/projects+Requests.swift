@@ -59,7 +59,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.disableXpnHostRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -115,7 +115,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.disableXpnResourceRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -166,7 +166,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.enableXpnHostRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -222,7 +222,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.enableXpnResourceRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -258,7 +258,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -294,7 +294,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.getXpnHostRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -423,7 +423,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.getXpnResourcesRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -557,7 +557,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.listXpnHostsRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -614,7 +614,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.moveDiskRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -671,7 +671,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.moveInstanceRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -727,7 +727,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.setCloudArmorTierRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -783,7 +783,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.projects.setCommonInstanceMetadataRequest"
       }
@@ -840,7 +840,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.setDefaultNetworkTierRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -896,7 +896,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.projects.setUsageExportBucketRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

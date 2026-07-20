@@ -68,7 +68,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpointsRequest"
       }
@@ -124,7 +124,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.deleteRequest"
       }
@@ -185,7 +185,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.detachNetworkEndpointsRequest"
       }
@@ -225,7 +225,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -281,7 +281,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.insertRequest"
       }
@@ -411,7 +411,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -544,7 +544,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.listNetworkEndpointsRequest"
       }

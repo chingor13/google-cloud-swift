@@ -259,7 +259,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.SearchResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -346,7 +346,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case value = "value"
         case interval = "interval"
         case count = "count"
@@ -403,7 +403,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         indirect case interval(Interval?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.Facet.FacetValue"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -414,7 +414,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.Facet"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -457,7 +457,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.QueryExpansionInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -556,7 +556,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer"
       }
@@ -592,7 +592,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter"
       }
@@ -604,7 +604,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.ConversationalSearchResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -640,7 +640,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchResponse.TileNavigationResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -651,7 +651,7 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.SearchResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -82,7 +82,7 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case intValue = "intValue"
       case doubleValue = "doubleValue"
@@ -141,7 +141,7 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
       case stringValue(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.OperationProgress.Metric"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -152,7 +152,7 @@ public struct OperationProgress: Codable, Equatable, GoogleCloudWkt._AnyPackable
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.OperationProgress"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

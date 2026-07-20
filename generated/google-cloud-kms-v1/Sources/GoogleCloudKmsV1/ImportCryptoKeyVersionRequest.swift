@@ -158,7 +158,7 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case cryptoKeyVersion = "cryptoKeyVersion"
     case algorithm = "algorithm"
@@ -225,7 +225,7 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
     case rsaAesWrappedKey(Foundation.Data)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.ImportCryptoKeyVersionRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

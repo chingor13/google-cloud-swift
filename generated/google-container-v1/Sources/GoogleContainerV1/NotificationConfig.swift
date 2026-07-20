@@ -72,7 +72,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NotificationConfig.PubSub"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -109,7 +109,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NotificationConfig.Filter"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -168,7 +168,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EVENT_TYPE_UNSPECIFIED"
       case .upgradeAvailableEvent: return "UPGRADE_AVAILABLE_EVENT"
@@ -183,7 +183,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EVENT_TYPE_UNSPECIFIED": self = .unspecified
       case "UPGRADE_AVAILABLE_EVENT": self = .upgradeAvailableEvent
@@ -240,7 +240,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NotificationConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

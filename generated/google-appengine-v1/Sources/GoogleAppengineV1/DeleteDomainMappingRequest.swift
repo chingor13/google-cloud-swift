@@ -41,7 +41,7 @@ public struct DeleteDomainMappingRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.DeleteDomainMappingRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

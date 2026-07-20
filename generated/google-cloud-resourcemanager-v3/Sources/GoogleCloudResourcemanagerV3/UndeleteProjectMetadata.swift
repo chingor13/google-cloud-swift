@@ -38,7 +38,7 @@ public struct UndeleteProjectMetadata: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.UndeleteProjectMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

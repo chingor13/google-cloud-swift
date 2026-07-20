@@ -72,7 +72,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "IMPORT_STRATEGY_UNSPECIFIED"
       case .createNew: return "IMPORT_STRATEGY_CREATE_NEW"
@@ -88,7 +88,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "IMPORT_STRATEGY_UNSPECIFIED": self = .unspecified
       case "IMPORT_STRATEGY_CREATE_NEW": self = .createNew

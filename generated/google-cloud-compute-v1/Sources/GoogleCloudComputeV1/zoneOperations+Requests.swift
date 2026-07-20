@@ -51,7 +51,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zoneOperations.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -94,7 +94,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zoneOperations.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -226,7 +226,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zoneOperations.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -269,7 +269,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.zoneOperations.waitRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -73,7 +73,7 @@ public struct TransferSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsDataSink = "gcsDataSink"
     case posixDataSink = "posixDataSink"
     case gcsDataSource = "gcsDataSource"
@@ -262,7 +262,7 @@ public struct TransferSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case gcsIntermediateDataLocation(GcsData?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.TransferSpec"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

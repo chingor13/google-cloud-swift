@@ -112,7 +112,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case automaticUpdatePolicy = "automaticUpdatePolicy"
     case onDeployUpdatePolicy = "onDeployUpdatePolicy"
     case build = "build"
@@ -235,7 +235,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DOCKER_REGISTRY_UNSPECIFIED"
       case .containerRegistry: return "CONTAINER_REGISTRY"
@@ -248,7 +248,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DOCKER_REGISTRY_UNSPECIFIED": self = .unspecified
       case "CONTAINER_REGISTRY": self = .containerRegistry
@@ -305,7 +305,7 @@ public struct BuildConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case onDeployUpdatePolicy(OnDeployUpdatePolicy?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.BuildConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -47,7 +47,7 @@ public struct RevertInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.filestore.v1.RevertInstanceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -87,7 +87,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case container = "container"
     case script = "script"
     case barrier = "barrier"
@@ -266,7 +266,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.Runnable.Container"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -300,7 +300,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case path = "path"
       case text = "text"
     }
@@ -364,7 +364,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case text(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.Runnable.Script"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -400,7 +400,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.Runnable.Barrier"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -421,7 +421,7 @@ public struct Runnable: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case barrier(Runnable.Barrier?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.Runnable"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

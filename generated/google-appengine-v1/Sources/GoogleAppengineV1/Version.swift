@@ -230,7 +230,7 @@ public struct Version: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case id = "id"
     case automaticScaling = "automaticScaling"
@@ -419,7 +419,9 @@ public struct Version: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case manualScaling(ManualScaling?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.appengine.v1.Version" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.appengine.v1.Version"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

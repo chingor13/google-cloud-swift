@@ -65,7 +65,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.deleteRequest"
       }
@@ -108,7 +108,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -153,7 +153,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.getIamPolicyRequest"
       }
@@ -216,7 +216,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.insertRequest"
       }
@@ -349,7 +349,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -396,7 +396,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.setIamPolicyRequest"
       }
@@ -444,7 +444,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstantSnapshotGroups.testIamPermissionsRequest"
       }

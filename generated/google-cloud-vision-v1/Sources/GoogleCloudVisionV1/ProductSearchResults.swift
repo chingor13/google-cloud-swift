@@ -82,7 +82,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.Result"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -127,7 +127,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -168,7 +168,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.GroupedResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -179,7 +179,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

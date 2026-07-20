@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case migrateMlEngineModelVersionConfig = "migrateMlEngineModelVersionConfig"
       case migrateAutomlModelConfig = "migrateAutomlModelConfig"
       case migrateAutomlDatasetConfig = "migrateAutomlDatasetConfig"
@@ -145,7 +145,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateMlEngineModelVersionConfig"
       }
@@ -186,7 +186,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateAutomlModelConfig"
       }
@@ -228,7 +228,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateAutomlDatasetConfig"
       }
@@ -304,7 +304,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateDataLabelingDatasetConfig.MigrateDataLabelingAnnotatedDatasetConfig"
         }
@@ -316,7 +316,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateDataLabelingDatasetConfig"
       }
@@ -344,7 +344,7 @@
         MigrateResourceRequest.MigrateDataLabelingDatasetConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

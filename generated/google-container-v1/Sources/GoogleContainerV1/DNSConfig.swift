@@ -93,7 +93,7 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PROVIDER_UNSPECIFIED"
       case .platformDefault: return "PLATFORM_DEFAULT"
@@ -107,7 +107,7 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PROVIDER_UNSPECIFIED": self = .unspecified
       case "PLATFORM_DEFAULT": self = .platformDefault
@@ -202,7 +202,7 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DNS_SCOPE_UNSPECIFIED"
       case .clusterScope: return "CLUSTER_SCOPE"
@@ -215,7 +215,7 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DNS_SCOPE_UNSPECIFIED": self = .unspecified
       case "CLUSTER_SCOPE": self = .clusterScope
@@ -266,7 +266,7 @@ public struct DNSConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DNSConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

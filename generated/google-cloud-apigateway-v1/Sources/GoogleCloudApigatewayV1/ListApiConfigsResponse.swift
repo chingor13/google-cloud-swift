@@ -48,7 +48,7 @@ public struct ListApiConfigsResponse: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apigateway.v1.ListApiConfigsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

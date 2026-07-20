@@ -143,7 +143,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "BLOCKED_REASON_UNSPECIFIED"
           case .safety: return "SAFETY"
@@ -160,7 +160,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "BLOCKED_REASON_UNSPECIFIED": self = .unspecified
           case "SAFETY": self = .safety
@@ -223,7 +223,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse.PromptFeedback"
       }
@@ -340,7 +340,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "TRAFFIC_TYPE_UNSPECIFIED"
           case .onDemand: return "ON_DEMAND"
@@ -355,7 +355,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "TRAFFIC_TYPE_UNSPECIFIED": self = .unspecified
           case "ON_DEMAND": self = .onDemand
@@ -373,9 +373,9 @@
           switch intValue {
           case 0: self = .unspecified
           case 1: self = .onDemand
+          case 2: self = .provisionedThroughput
           case 3: self = .onDemandPriority
           case 4: self = .onDemandFlex
-          case 2: self = .provisionedThroughput
           default: self = .unknownIntValue(intValue)
           }
         }
@@ -412,7 +412,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata"
       }
@@ -424,7 +424,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

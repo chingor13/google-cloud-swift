@@ -59,7 +59,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case text = "text"
       case inlineData = "inlineData"
       case fileData = "fileData"
@@ -194,7 +194,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case level = "level"
       }
 
@@ -277,7 +277,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .mediaResolutionUnspecified: return "MEDIA_RESOLUTION_UNSPECIFIED"
           case .mediaResolutionLow: return "MEDIA_RESOLUTION_LOW"
@@ -292,7 +292,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "MEDIA_RESOLUTION_UNSPECIFIED": self = .mediaResolutionUnspecified
           case "MEDIA_RESOLUTION_LOW": self = .mediaResolutionLow
@@ -354,7 +354,7 @@
         case level(Part.MediaResolution.Level)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Part.MediaResolution"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -393,7 +393,7 @@
       indirect case videoMetadata(VideoMetadata?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Part"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

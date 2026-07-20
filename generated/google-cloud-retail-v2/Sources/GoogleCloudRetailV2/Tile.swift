@@ -45,7 +45,7 @@ public struct Tile: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case productAttributeValue = "productAttributeValue"
     case productAttributeInterval = "productAttributeInterval"
     case representativeProductId = "representativeProductId"
@@ -101,7 +101,9 @@ public struct Tile: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case productAttributeInterval(ProductAttributeInterval?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.retail.v2.Tile" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.retail.v2.Tile"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

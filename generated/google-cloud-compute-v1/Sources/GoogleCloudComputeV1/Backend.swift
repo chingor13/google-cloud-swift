@@ -224,7 +224,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .connection: return "CONNECTION"
         case .customMetrics: return "CUSTOM_METRICS"
@@ -239,7 +239,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONNECTION": self = .connection
         case "CUSTOM_METRICS": self = .customMetrics
@@ -339,7 +339,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .`default`: return "DEFAULT"
         case .unspecified: return "PREFERENCE_UNSPECIFIED"
@@ -352,7 +352,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEFAULT": self = .`default`
         case "PREFERENCE_UNSPECIFIED": self = .unspecified
@@ -447,7 +447,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .long: return "LONG"
         case .short: return "SHORT"
@@ -460,7 +460,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LONG": self = .long
         case "SHORT": self = .short
@@ -511,7 +511,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Backend"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

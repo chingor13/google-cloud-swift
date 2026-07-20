@@ -45,7 +45,7 @@ public struct BatchUpdateGenerativeQuestionConfigsRequest: Codable, Equatable, G
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.BatchUpdateGenerativeQuestionConfigsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

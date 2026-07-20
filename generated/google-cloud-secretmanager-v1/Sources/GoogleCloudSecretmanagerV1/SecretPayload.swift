@@ -67,7 +67,7 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case data = "data"
     case dataCrc32C = "dataCrc32c"
   }
@@ -84,7 +84,7 @@ public struct SecretPayload: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.dataCrc32C, forKey: .dataCrc32C)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.SecretPayload"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

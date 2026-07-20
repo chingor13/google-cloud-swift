@@ -46,7 +46,7 @@ public struct DiscoveryVertexDatasetConditions: Codable, Equatable, GoogleCloudW
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryVertexDatasetConditions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -146,7 +146,7 @@ public struct InspectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectConfig.InfoTypeLikelihood"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -248,7 +248,7 @@ public struct InspectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.InspectConfig.FindingLimits.InfoTypeLimit"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -259,7 +259,7 @@ public struct InspectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectConfig.FindingLimits"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -270,7 +270,7 @@ public struct InspectConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InspectConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

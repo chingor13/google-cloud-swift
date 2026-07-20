@@ -87,7 +87,7 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CATEGORY_UNSPECIFIED"
       case .ai: return "AI"
@@ -100,7 +100,7 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CATEGORY_UNSPECIFIED": self = .unspecified
       case "AI": self = .ai
@@ -215,7 +215,7 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SIGNAL_UNSPECIFIED"
       case .model: return "MODEL"
@@ -233,7 +233,7 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SIGNAL_UNSPECIFIED": self = .unspecified
       case "MODEL": self = .model
@@ -255,11 +255,11 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 0: self = .unspecified
       case 1: self = .model
       case 2: self = .textEmbedding
-      case 7: self = .embedding
       case 3: self = .vertexPlugin
       case 4: self = .vectorPlugin
       case 5: self = .sourceCode
       case 6: self = .service
+      case 7: self = .embedding
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -299,7 +299,7 @@ public struct Domain: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Domain"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -103,7 +103,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case abandoning = "abandoning"
       case creating = "creating"
       case creatingWithoutRetries = "creatingWithoutRetries"
@@ -154,7 +154,7 @@
       try container.encode(self.verifying, forKey: .verifying)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerActionsSummary"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

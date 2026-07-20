@@ -63,7 +63,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case enabled = "enabled"
       case triggerFulfillment = "triggerFulfillment"
       case targetPage = "targetPage"
@@ -131,7 +131,7 @@
       case targetFlow(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.KnowledgeConnectorSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

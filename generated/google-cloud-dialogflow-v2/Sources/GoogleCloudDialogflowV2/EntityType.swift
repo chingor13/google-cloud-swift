@@ -120,7 +120,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.EntityType.Entity"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -179,7 +179,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "KIND_UNSPECIFIED"
         case .map: return "KIND_MAP"
@@ -193,7 +193,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "KIND_UNSPECIFIED": self = .unspecified
         case "KIND_MAP": self = .map
@@ -288,7 +288,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "AUTO_EXPANSION_MODE_UNSPECIFIED"
         case .`default`: return "AUTO_EXPANSION_MODE_DEFAULT"
@@ -300,7 +300,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AUTO_EXPANSION_MODE_UNSPECIFIED": self = .unspecified
         case "AUTO_EXPANSION_MODE_DEFAULT": self = .`default`
@@ -348,7 +348,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.EntityType"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

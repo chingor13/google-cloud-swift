@@ -210,7 +210,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.MachineConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -259,7 +259,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.Node"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -307,7 +307,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.QueryInsightsInstanceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -373,7 +373,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.ObservabilityInstanceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -407,7 +407,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.ReadPoolConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -445,7 +445,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.ClientConnectionConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -483,7 +483,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.PscInterfaceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -558,7 +558,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.PscAutoConnectionConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -613,7 +613,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.PscInstanceConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -693,7 +693,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.alloydb.v1.Instance.InstanceNetworkConfig.AuthorizedNetwork"
       }
@@ -705,7 +705,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.InstanceNetworkConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -745,7 +745,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Instance.ConnectionPoolConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -821,7 +821,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .ready: return "READY"
@@ -840,7 +840,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "READY": self = .ready
@@ -958,7 +958,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "INSTANCE_TYPE_UNSPECIFIED"
       case .primary: return "PRIMARY"
@@ -972,7 +972,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "INSTANCE_TYPE_UNSPECIFIED": self = .unspecified
       case "PRIMARY": self = .primary
@@ -1072,7 +1072,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AVAILABILITY_TYPE_UNSPECIFIED"
       case .zonal: return "ZONAL"
@@ -1085,7 +1085,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AVAILABILITY_TYPE_UNSPECIFIED": self = .unspecified
       case "ZONAL": self = .zonal
@@ -1177,7 +1177,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACTIVATION_POLICY_UNSPECIFIED"
       case .always: return "ALWAYS"
@@ -1190,7 +1190,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACTIVATION_POLICY_UNSPECIFIED": self = .unspecified
       case "ALWAYS": self = .always
@@ -1241,7 +1241,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.Instance"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

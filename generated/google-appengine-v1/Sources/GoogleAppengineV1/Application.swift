@@ -157,7 +157,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.appengine.v1.Application.IdentityAwareProxy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -201,7 +201,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.appengine.v1.Application.FeatureSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -255,7 +255,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "UNSPECIFIED"
       case .serving: return "SERVING"
@@ -269,7 +269,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNSPECIFIED": self = .unspecified
       case "SERVING": self = .serving
@@ -366,7 +366,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DATABASE_TYPE_UNSPECIFIED"
       case .cloudDatastore: return "CLOUD_DATASTORE"
@@ -380,7 +380,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DATABASE_TYPE_UNSPECIFIED": self = .unspecified
       case "CLOUD_DATASTORE": self = .cloudDatastore
@@ -434,7 +434,7 @@ public struct Application: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.Application"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

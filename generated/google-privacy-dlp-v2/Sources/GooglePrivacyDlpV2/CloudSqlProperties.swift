@@ -60,7 +60,7 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case connectionName = "connectionName"
     case usernamePassword = "usernamePassword"
     case cloudSqlIam = "cloudSqlIam"
@@ -156,7 +156,7 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unknown: return "DATABASE_ENGINE_UNKNOWN"
       case .mysql: return "DATABASE_ENGINE_MYSQL"
@@ -169,7 +169,7 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DATABASE_ENGINE_UNKNOWN": self = .unknown
       case "DATABASE_ENGINE_MYSQL": self = .mysql
@@ -228,7 +228,7 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     indirect case cloudSqlIam(CloudSqlIamCredential?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CloudSqlProperties"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

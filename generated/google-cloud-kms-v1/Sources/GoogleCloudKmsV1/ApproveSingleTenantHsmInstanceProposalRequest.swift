@@ -54,7 +54,7 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case quorumReply = "quorumReply"
     case requiredActionQuorumReply = "requiredActionQuorumReply"
@@ -135,7 +135,7 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply"
     }
@@ -184,7 +184,7 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply"
     }
@@ -214,7 +214,7 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
       ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

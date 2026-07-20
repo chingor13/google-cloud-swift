@@ -255,7 +255,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.TrainingPhrase.Part"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -314,7 +314,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "TYPE_UNSPECIFIED"
           case .example: return "EXAMPLE"
@@ -327,7 +327,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "TYPE_UNSPECIFIED": self = .unspecified
           case "EXAMPLE": self = .example
@@ -378,7 +378,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.TrainingPhrase"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -447,7 +447,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Parameter"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -488,7 +488,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case text = "text"
         case image = "image"
         case quickReplies = "quickReplies"
@@ -648,7 +648,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Text"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -686,7 +686,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Image"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -723,7 +723,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.QuickReplies"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -793,7 +793,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Card.Button"
           }
           public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -804,7 +804,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Card"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -847,7 +847,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SimpleResponse"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -884,7 +884,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SimpleResponses"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -979,7 +979,7 @@
               return copy
             }
 
-            public static var _anyTypeUrl: String {
+            public static var _anyTypeUrl: Swift.String {
               return
                 "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard.Button.OpenUriAction"
             }
@@ -991,7 +991,7 @@
             }
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard.Button"
           }
           public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1002,7 +1002,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1037,7 +1037,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Suggestion"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1071,7 +1071,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Suggestions"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1110,7 +1110,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.LinkOutSuggestion"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1182,7 +1182,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ListSelect.Item"
           }
           public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1193,7 +1193,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ListSelect"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1259,7 +1259,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.CarouselSelect.Item"
           }
@@ -1271,7 +1271,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.CarouselSelect"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1311,7 +1311,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SelectItemInfo"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1381,7 +1381,7 @@
             return copy
           }
 
-          private enum CodingKeys: String, CodingKey {
+          private enum CodingKeys: Swift.String, CodingKey {
             case name = "name"
             case description = "description"
             case largeImage = "largeImage"
@@ -1440,7 +1440,7 @@
             indirect case icon(Intent.Message.Image?)
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject"
           }
@@ -1490,7 +1490,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "RESPONSE_MEDIA_TYPE_UNSPECIFIED"
             case .audio: return "AUDIO"
@@ -1502,7 +1502,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "RESPONSE_MEDIA_TYPE_UNSPECIFIED": self = .unspecified
             case "AUDIO": self = .audio
@@ -1550,7 +1550,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.MediaContent"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1702,7 +1702,7 @@
               /// Returns the string value (or name) associated with the enumeration.
               ///
               /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-              public var stringValue: String? {
+              public var stringValue: Swift.String? {
                 switch self {
                 case .unspecified: return "URL_TYPE_HINT_UNSPECIFIED"
                 case .ampAction: return "AMP_ACTION"
@@ -1715,7 +1715,7 @@
               /// Initialize from a string value.
               ///
               /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-              public init(stringValue: String) {
+              public init(stringValue: Swift.String) {
                 switch stringValue {
                 case "URL_TYPE_HINT_UNSPECIFIED": self = .unspecified
                 case "AMP_ACTION": self = .ampAction
@@ -1767,7 +1767,7 @@
               }
             }
 
-            public static var _anyTypeUrl: String {
+            public static var _anyTypeUrl: Swift.String {
               return
                 "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction"
             }
@@ -1779,7 +1779,7 @@
             }
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem"
           }
@@ -1849,7 +1849,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "IMAGE_DISPLAY_OPTIONS_UNSPECIFIED"
             case .gray: return "GRAY"
@@ -1864,7 +1864,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "IMAGE_DISPLAY_OPTIONS_UNSPECIFIED": self = .unspecified
             case "GRAY": self = .gray
@@ -1921,7 +1921,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1970,7 +1970,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCard"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2055,7 +2055,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "HORIZONTAL_ALIGNMENT_UNSPECIFIED"
             case .leading: return "LEADING"
@@ -2069,7 +2069,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "HORIZONTAL_ALIGNMENT_UNSPECIFIED": self = .unspecified
             case "LEADING": self = .leading
@@ -2123,7 +2123,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ColumnProperties"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2162,7 +2162,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCardRow"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2199,7 +2199,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCardCell"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2275,7 +2275,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "PLATFORM_UNSPECIFIED"
           case .facebook: return "FACEBOOK"
@@ -2295,7 +2295,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "PLATFORM_UNSPECIFIED": self = .unspecified
           case "FACEBOOK": self = .facebook
@@ -2399,7 +2399,7 @@
         indirect case mediaContent(Intent.Message.MediaContent?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2438,7 +2438,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.FollowupIntentInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -2491,7 +2491,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "WEBHOOK_STATE_UNSPECIFIED"
         case .enabled: return "WEBHOOK_STATE_ENABLED"
@@ -2504,7 +2504,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "WEBHOOK_STATE_UNSPECIFIED": self = .unspecified
         case "WEBHOOK_STATE_ENABLED": self = .enabled
@@ -2555,7 +2555,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Intent"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

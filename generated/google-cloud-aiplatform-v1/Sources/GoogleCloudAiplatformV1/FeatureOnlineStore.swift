@@ -86,7 +86,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case bigtable = "bigtable"
       case optimized = "optimized"
       case name = "name"
@@ -233,7 +233,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.AutoScaling"
         }
@@ -275,7 +275,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata"
         }
@@ -287,7 +287,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -318,7 +318,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore.Optimized"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -369,7 +369,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore.DedicatedServingEndpoint"
       }
@@ -427,7 +427,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .stable: return "STABLE"
@@ -440,7 +440,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "STABLE": self = .stable
@@ -506,7 +506,7 @@
       indirect case optimized(FeatureOnlineStore.Optimized?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureOnlineStore"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

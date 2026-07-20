@@ -56,7 +56,7 @@ public struct OtherCloudDiscoveryTarget: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case dataSourceType = "dataSourceType"
     case filter = "filter"
     case conditions = "conditions"
@@ -119,7 +119,7 @@ public struct OtherCloudDiscoveryTarget: Codable, Equatable, GoogleCloudWkt._Any
     indirect case disabled(Disabled?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudDiscoveryTarget"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

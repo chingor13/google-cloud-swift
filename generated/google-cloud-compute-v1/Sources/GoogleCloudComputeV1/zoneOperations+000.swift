@@ -73,7 +73,7 @@
     public func list(
       byItem: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -257,7 +257,7 @@
     public func list(
       byItem: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.OperationList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

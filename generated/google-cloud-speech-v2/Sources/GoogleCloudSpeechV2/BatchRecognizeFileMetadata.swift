@@ -72,7 +72,7 @@ public struct BatchRecognizeFileMetadata: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case uri = "uri"
     case config = "config"
     case configMask = "configMask"
@@ -119,7 +119,7 @@ public struct BatchRecognizeFileMetadata: Codable, Equatable, GoogleCloudWkt._An
     case uri(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.BatchRecognizeFileMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

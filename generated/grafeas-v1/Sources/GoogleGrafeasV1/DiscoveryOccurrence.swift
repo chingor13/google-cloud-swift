@@ -101,7 +101,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.DiscoveryOccurrence.AnalysisCompleted"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -181,7 +181,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SBOM_STATE_UNSPECIFIED"
         case .pending: return "PENDING"
@@ -194,7 +194,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SBOM_STATE_UNSPECIFIED": self = .unspecified
         case "PENDING": self = .pending
@@ -245,7 +245,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.DiscoveryOccurrence.SBOMStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -327,7 +327,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED"
         case .success: return "SUCCESS"
@@ -340,7 +340,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED": self = .unspecified
         case "SUCCESS": self = .success
@@ -391,7 +391,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -425,7 +425,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.DiscoveryOccurrence.File"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -477,7 +477,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CONTINUOUS_ANALYSIS_UNSPECIFIED"
       case .active: return "ACTIVE"
@@ -490,7 +490,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CONTINUOUS_ANALYSIS_UNSPECIFIED": self = .unspecified
       case "ACTIVE": self = .active
@@ -593,7 +593,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ANALYSIS_STATUS_UNSPECIFIED"
       case .pending: return "PENDING"
@@ -609,7 +609,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ANALYSIS_STATUS_UNSPECIFIED": self = .unspecified
       case "PENDING": self = .pending
@@ -630,7 +630,6 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
       case 0: self = .unspecified
       case 1: self = .pending
       case 2: self = .scanning
-      case 3: self = .complete
       case 3: self = .complete
       case 4: self = .finishedFailed
       case 5: self = .finishedUnsupported
@@ -671,7 +670,7 @@ public struct DiscoveryOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.DiscoveryOccurrence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

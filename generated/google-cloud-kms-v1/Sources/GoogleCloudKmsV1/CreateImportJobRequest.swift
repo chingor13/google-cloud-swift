@@ -59,7 +59,7 @@ public struct CreateImportJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.CreateImportJobRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

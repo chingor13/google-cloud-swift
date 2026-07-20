@@ -107,7 +107,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.VpnConnection.VpcProject"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -173,7 +173,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.edgecontainer.v1.VpnConnection.Details.CloudRouter"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -207,7 +207,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.edgecontainer.v1.VpnConnection.Details.CloudVpn"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -262,7 +262,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "STATE_UNSPECIFIED"
         case .connected: return "STATE_CONNECTED"
@@ -276,7 +276,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "STATE_UNSPECIFIED": self = .unspecified
         case "STATE_CONNECTED": self = .connected
@@ -330,7 +330,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.VpnConnection.Details"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -382,7 +382,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "BGP_ROUTING_MODE_UNSPECIFIED"
       case .regional: return "REGIONAL"
@@ -395,7 +395,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "BGP_ROUTING_MODE_UNSPECIFIED": self = .unspecified
       case "REGIONAL": self = .regional
@@ -446,7 +446,7 @@ public struct VpnConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.VpnConnection"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

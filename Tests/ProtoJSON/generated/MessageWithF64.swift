@@ -50,7 +50,7 @@ public struct MessageWithF64: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithF64"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

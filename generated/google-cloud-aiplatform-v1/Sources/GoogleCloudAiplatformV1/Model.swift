@@ -471,7 +471,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "EXPORTABLE_CONTENT_UNSPECIFIED"
           case .artifact: return "ARTIFACT"
@@ -484,7 +484,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "EXPORTABLE_CONTENT_UNSPECIFIED": self = .unspecified
           case "ARTIFACT": self = .artifact
@@ -535,7 +535,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.ExportFormat"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -592,7 +592,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.DataStats"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -628,7 +628,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.OriginalModelInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -662,7 +662,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case modelGardenSource = "modelGardenSource"
         case genieSource = "genieSource"
       }
@@ -712,7 +712,7 @@
         indirect case genieSource(GenieSource?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.BaseModelSource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -779,7 +779,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED"
         case .dedicatedResources: return "DEDICATED_RESOURCES"
@@ -793,7 +793,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED": self = .unspecified
         case "DEDICATED_RESOURCES": self = .dedicatedResources
@@ -847,7 +847,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Model"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

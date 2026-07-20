@@ -40,7 +40,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case intValue = "intValue"
       case doubleValue = "doubleValue"
       case stringValue = "stringValue"
@@ -95,7 +95,7 @@
       case stringValue(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Value"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

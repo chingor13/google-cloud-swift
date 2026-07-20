@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case vertexRagStore = "vertexRagStore"
       case parent = "parent"
       case query = "query"
@@ -155,7 +155,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest.VertexRagStore.RagResource"
         }
@@ -167,7 +167,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest.VertexRagStore"
       }
@@ -185,7 +185,7 @@
       indirect case vertexRagStore(RetrieveContextsRequest.VertexRagStore?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -71,7 +71,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -122,7 +122,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod"
     }
@@ -134,7 +134,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWkt._AnyPa
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

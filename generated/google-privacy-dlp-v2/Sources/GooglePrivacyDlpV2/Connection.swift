@@ -52,7 +52,7 @@ public struct Connection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case state = "state"
     case errors = "errors"
@@ -101,7 +101,7 @@ public struct Connection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case cloudSql(CloudSqlProperties?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Connection"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

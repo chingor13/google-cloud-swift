@@ -54,7 +54,7 @@ public struct UpdateRecognizerRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.UpdateRecognizerRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

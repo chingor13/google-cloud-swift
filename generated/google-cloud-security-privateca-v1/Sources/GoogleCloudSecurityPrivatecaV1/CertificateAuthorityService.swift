@@ -91,7 +91,8 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
     byItem: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Certificate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCertificatesResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCertificatesResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listCertificates(request: request, options: options)
@@ -486,7 +487,7 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
     byItem: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateAuthority, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateAuthoritiesResponse in
       var request = byItem
       request.pageToken = token
@@ -872,7 +873,7 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
     byItem: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CaPool, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCaPoolsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCaPoolsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listCaPools(request: request, options: options)
@@ -987,7 +988,7 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
     byItem: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateRevocationList, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateRevocationListsResponse in
       var request = byItem
       request.pageToken = token
@@ -1234,7 +1235,7 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
     byItem: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateTemplate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateTemplatesResponse in
       var request = byItem
       request.pageToken = token
@@ -1362,7 +1363,8 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -1436,7 +1438,8 @@ public class CertificateAuthorityServiceClient: Clients.CertificateAuthorityServ
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -2252,7 +2255,8 @@ extension Clients.CertificateAuthorityServiceProtocol {
     byItem: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Certificate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCertificatesResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCertificatesResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2531,7 +2535,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     byItem: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateAuthority, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateAuthoritiesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -2784,7 +2788,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     byItem: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CaPool, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCaPoolsResponse in
+      (token: Swift.String) async throws -> GoogleCloudSecurityPrivatecaV1.ListCaPoolsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2899,7 +2903,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     byItem: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateRevocationList, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateRevocationListsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -3077,7 +3081,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     byItem: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateTemplate, Swift.Error> {
     let listRpc = {
-      (token: String) async throws
+      (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivatecaV1.ListCertificateTemplatesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -3154,7 +3158,8 @@ extension Clients.CertificateAuthorityServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3229,7 +3234,8 @@ extension Clients.CertificateAuthorityServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -120,7 +120,7 @@ public struct InfoTypeDescription: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED"
       case .generalAvailability: return "GENERAL_AVAILABILITY"
@@ -134,7 +134,7 @@ public struct InfoTypeDescription: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED": self = .unspecified
       case "GENERAL_AVAILABILITY": self = .generalAvailability
@@ -188,7 +188,7 @@ public struct InfoTypeDescription: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InfoTypeDescription"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

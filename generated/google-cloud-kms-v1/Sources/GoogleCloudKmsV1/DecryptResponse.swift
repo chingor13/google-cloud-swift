@@ -80,7 +80,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case plaintext = "plaintext"
     case plaintextCrc32C = "plaintextCrc32c"
     case usedPrimary = "usedPrimary"
@@ -104,7 +104,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.protectionLevel, forKey: .protectionLevel)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.DecryptResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

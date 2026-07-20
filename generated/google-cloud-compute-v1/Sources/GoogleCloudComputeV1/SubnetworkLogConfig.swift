@@ -120,7 +120,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .interval10Min: return "INTERVAL_10_MIN"
         case .interval15Min: return "INTERVAL_15_MIN"
@@ -136,7 +136,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INTERVAL_10_MIN": self = .interval10Min
         case "INTERVAL_15_MIN": self = .interval15Min
@@ -236,7 +236,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .customMetadata: return "CUSTOM_METADATA"
         case .excludeAllMetadata: return "EXCLUDE_ALL_METADATA"
@@ -249,7 +249,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CUSTOM_METADATA": self = .customMetadata
         case "EXCLUDE_ALL_METADATA": self = .excludeAllMetadata
@@ -300,7 +300,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SubnetworkLogConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

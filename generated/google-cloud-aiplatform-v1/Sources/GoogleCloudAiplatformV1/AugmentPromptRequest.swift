@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case vertexRagStore = "vertexRagStore"
       case parent = "parent"
       case contents = "contents"
@@ -125,7 +125,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.AugmentPromptRequest.Model"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -142,7 +142,7 @@
       indirect case vertexRagStore(VertexRagStore?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.AugmentPromptRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

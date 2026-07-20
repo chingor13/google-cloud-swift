@@ -42,7 +42,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case saveFindings = "saveFindings"
     case pubSub = "pubSub"
     case publishSummaryToCscc = "publishSummaryToCscc"
@@ -157,7 +157,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.SaveFindings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -198,7 +198,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.PublishToPubSub"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -236,7 +236,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.PublishSummaryToCscc"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -286,7 +286,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -329,7 +329,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -446,7 +446,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case transformationConfig = "transformationConfig"
       case transformationDetailsStorageConfig = "transformationDetailsStorageConfig"
       case cloudStorageOutput = "cloudStorageOutput"
@@ -507,7 +507,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case cloudStorageOutput(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.Deidentify"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -540,7 +540,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.JobNotificationEmails"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -574,7 +574,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Action.PublishToStackdriver"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -610,7 +610,7 @@ public struct Action: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case publishToStackdriver(Action.PublishToStackdriver?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Action"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -67,7 +67,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case credentialMode = "credential-mode"
     case biglakeServiceAccount = "biglake-service-account"
@@ -144,7 +144,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CATALOG_TYPE_UNSPECIFIED"
       case .gcsBucket: return "CATALOG_TYPE_GCS_BUCKET"
@@ -156,7 +156,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CATALOG_TYPE_UNSPECIFIED": self = .unspecified
       case "CATALOG_TYPE_GCS_BUCKET": self = .gcsBucket
@@ -257,7 +257,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CREDENTIAL_MODE_UNSPECIFIED"
       case .endUser: return "CREDENTIAL_MODE_END_USER"
@@ -270,7 +270,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CREDENTIAL_MODE_UNSPECIFIED": self = .unspecified
       case "CREDENTIAL_MODE_END_USER": self = .endUser
@@ -321,7 +321,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

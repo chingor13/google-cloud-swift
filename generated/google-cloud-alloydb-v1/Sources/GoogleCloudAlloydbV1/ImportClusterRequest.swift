@@ -60,7 +60,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case sqlImportOptions = "sqlImportOptions"
     case csvImportOptions = "csvImportOptions"
     case name = "name"
@@ -136,7 +136,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest.SqlImportOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -190,7 +190,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest.CsvImportOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -209,7 +209,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
     indirect case csvImportOptions(ImportClusterRequest.CsvImportOptions?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

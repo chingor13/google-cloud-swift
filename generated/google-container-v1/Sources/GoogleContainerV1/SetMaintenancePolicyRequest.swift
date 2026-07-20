@@ -58,7 +58,7 @@ public struct SetMaintenancePolicyRequest: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.SetMaintenancePolicyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

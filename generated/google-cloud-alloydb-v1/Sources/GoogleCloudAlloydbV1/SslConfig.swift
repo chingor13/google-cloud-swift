@@ -101,7 +101,7 @@ public struct SslConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SSL_MODE_UNSPECIFIED"
       case .allow: return "SSL_MODE_ALLOW"
@@ -117,7 +117,7 @@ public struct SslConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SSL_MODE_UNSPECIFIED": self = .unspecified
       case "SSL_MODE_ALLOW": self = .allow
@@ -216,7 +216,7 @@ public struct SslConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CA_SOURCE_UNSPECIFIED"
       case .managed: return "CA_SOURCE_MANAGED"
@@ -228,7 +228,7 @@ public struct SslConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CA_SOURCE_UNSPECIFIED": self = .unspecified
       case "CA_SOURCE_MANAGED": self = .managed
@@ -276,7 +276,7 @@ public struct SslConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.SslConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

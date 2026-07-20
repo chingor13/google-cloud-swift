@@ -71,7 +71,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.Sources"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -142,7 +142,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.DuplicateCheckResult.DuplicateSuggestion"
         }
@@ -154,7 +154,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.DuplicateCheckResult"
       }
@@ -195,7 +195,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.AgentActionSuggestion"
       }
@@ -237,7 +237,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.SampleResponse"
       }
@@ -249,7 +249,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

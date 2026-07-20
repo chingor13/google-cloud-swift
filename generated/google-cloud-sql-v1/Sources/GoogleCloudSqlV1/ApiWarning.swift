@@ -97,7 +97,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_API_WARNING_CODE_UNSPECIFIED"
         case .regionUnreachable: return "REGION_UNREACHABLE"
@@ -112,7 +112,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_API_WARNING_CODE_UNSPECIFIED": self = .unspecified
         case "REGION_UNREACHABLE": self = .regionUnreachable
@@ -169,7 +169,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ApiWarning"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

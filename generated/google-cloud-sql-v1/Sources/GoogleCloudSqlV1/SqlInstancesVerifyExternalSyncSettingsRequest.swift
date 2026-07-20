@@ -71,7 +71,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case instance = "instance"
       case project = "project"
       case verifyConnectionOnly = "verifyConnectionOnly"
@@ -179,7 +179,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "EXTERNAL_SYNC_MODE_UNSPECIFIED"
         case .online: return "ONLINE"
@@ -192,7 +192,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXTERNAL_SYNC_MODE_UNSPECIFIED": self = .unspecified
         case "ONLINE": self = .online
@@ -285,7 +285,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MIGRATION_TYPE_UNSPECIFIED"
         case .logical: return "LOGICAL"
@@ -298,7 +298,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MIGRATION_TYPE_UNSPECIFIED": self = .unspecified
         case "LOGICAL": self = .logical
@@ -354,7 +354,7 @@
       indirect case mysqlSyncConfig(MySqlSyncConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

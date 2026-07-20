@@ -154,7 +154,8 @@
     public func list(
       byItem: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -507,7 +508,8 @@
     public func list(
       byItem: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<HttpsHealthCheck, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

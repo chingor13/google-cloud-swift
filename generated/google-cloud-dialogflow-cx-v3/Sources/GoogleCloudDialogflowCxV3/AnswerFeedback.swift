@@ -79,7 +79,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AnswerFeedback.RatingReason"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -131,7 +131,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RATING_UNSPECIFIED"
         case .thumbsUp: return "THUMBS_UP"
@@ -144,7 +144,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RATING_UNSPECIFIED": self = .unspecified
         case "THUMBS_UP": self = .thumbsUp
@@ -195,7 +195,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AnswerFeedback"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

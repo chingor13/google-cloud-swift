@@ -67,7 +67,7 @@ public struct EvictionGracePeriod: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.EvictionGracePeriod"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

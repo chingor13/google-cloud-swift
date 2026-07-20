@@ -224,7 +224,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse in
         var request = byItem
         request.pageToken = token
@@ -523,7 +523,7 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroupManagerResizeRequest, Swift.Error> {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequestsListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }

@@ -49,7 +49,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case mlEngineModelVersion = "mlEngineModelVersion"
       case automlModel = "automlModel"
       case automlDataset = "automlDataset"
@@ -151,7 +151,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource.MlEngineModelVersion"
       }
@@ -191,7 +191,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource.AutomlModel"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -230,7 +230,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource.AutomlDataset"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -302,7 +302,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource.DataLabelingDataset.DataLabelingAnnotatedDataset"
         }
@@ -314,7 +314,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource.DataLabelingDataset"
       }
@@ -337,7 +337,7 @@
       indirect case dataLabelingDataset(MigratableResource.DataLabelingDataset?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MigratableResource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

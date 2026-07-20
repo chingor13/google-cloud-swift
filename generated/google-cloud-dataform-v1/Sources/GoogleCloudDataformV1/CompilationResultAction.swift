@@ -56,7 +56,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case relation = "relation"
     case operations = "operations"
     case assertion = "assertion"
@@ -280,7 +280,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Relation.IncrementalTableConfig"
       }
@@ -339,7 +339,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RELATION_TYPE_UNSPECIFIED"
         case .table: return "TABLE"
@@ -354,7 +354,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RELATION_TYPE_UNSPECIFIED": self = .unspecified
         case "TABLE": self = .table
@@ -449,7 +449,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "TABLE_FORMAT_UNSPECIFIED"
         case .iceberg: return "ICEBERG"
@@ -461,7 +461,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TABLE_FORMAT_UNSPECIFIED": self = .unspecified
         case "ICEBERG": self = .iceberg
@@ -547,7 +547,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "FILE_FORMAT_UNSPECIFIED"
         case .parquet: return "PARQUET"
@@ -559,7 +559,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FILE_FORMAT_UNSPECIFIED": self = .unspecified
         case "PARQUET": self = .parquet
@@ -607,7 +607,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Relation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -658,7 +658,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Operations"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -711,7 +711,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Assertion"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -747,7 +747,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Declaration"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -790,7 +790,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Notebook"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -833,7 +833,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case contentsYaml = "contentsYaml"
       case contentsSql = "contentsSql"
       case dependencyTargets = "dependencyTargets"
@@ -915,7 +915,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation.SqlDefinition"
       }
@@ -955,7 +955,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation.ErrorTable"
       }
@@ -976,7 +976,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       indirect case contentsSql(CompilationResultAction.DataPreparation.SqlDefinition?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1010,7 +1010,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case replace = "replace"
       case append = "append"
       case maximum = "maximum"
@@ -1084,7 +1084,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       indirect case unique(CompilationResultAction.IncrementalLoadMode?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.LoadConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1115,7 +1115,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.SimpleLoadMode"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1149,7 +1149,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.IncrementalLoadMode"
     }
@@ -1177,7 +1177,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case dataPreparation(CompilationResultAction.DataPreparation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

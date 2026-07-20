@@ -44,7 +44,7 @@ public struct UpdateBlueprintRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.UpdateBlueprintRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

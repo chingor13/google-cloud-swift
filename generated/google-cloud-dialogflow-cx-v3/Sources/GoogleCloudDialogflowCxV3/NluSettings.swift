@@ -94,7 +94,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODEL_TYPE_UNSPECIFIED"
         case .standard: return "MODEL_TYPE_STANDARD"
@@ -107,7 +107,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODEL_TYPE_UNSPECIFIED": self = .unspecified
         case "MODEL_TYPE_STANDARD": self = .standard
@@ -201,7 +201,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODEL_TRAINING_MODE_UNSPECIFIED"
         case .automatic: return "MODEL_TRAINING_MODE_AUTOMATIC"
@@ -214,7 +214,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODEL_TRAINING_MODE_UNSPECIFIED": self = .unspecified
         case "MODEL_TRAINING_MODE_AUTOMATIC": self = .automatic
@@ -265,7 +265,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.NluSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

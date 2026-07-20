@@ -44,7 +44,7 @@ public struct DeidentifyConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case infoTypeTransformations = "infoTypeTransformations"
     case recordTransformations = "recordTransformations"
     case imageTransformations = "imageTransformations"
@@ -113,7 +113,7 @@ public struct DeidentifyConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case imageTransformations(ImageTransformations?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DeidentifyConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

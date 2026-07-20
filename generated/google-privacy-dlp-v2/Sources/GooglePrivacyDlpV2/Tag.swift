@@ -52,7 +52,9 @@ public struct Tag: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.privacy.dlp.v2.Tag" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.privacy.dlp.v2.Tag"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

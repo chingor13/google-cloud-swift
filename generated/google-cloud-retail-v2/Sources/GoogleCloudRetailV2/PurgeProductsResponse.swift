@@ -47,7 +47,7 @@ public struct PurgeProductsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PurgeProductsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

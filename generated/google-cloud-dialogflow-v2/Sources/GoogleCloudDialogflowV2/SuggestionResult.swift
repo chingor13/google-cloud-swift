@@ -51,7 +51,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case error = "error"
       case suggestArticlesResponse = "suggestArticlesResponse"
       case suggestKnowledgeAssistResponse = "suggestKnowledgeAssistResponse"
@@ -143,7 +143,7 @@
       indirect case generateSuggestionsResponse(GenerateSuggestionsResponse?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SuggestionResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

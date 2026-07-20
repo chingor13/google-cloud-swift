@@ -69,7 +69,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case batchCreateInstancesMetadata = "batchCreateInstancesMetadata"
     case upgradeClusterStatus = "upgradeClusterStatus"
     case createTime = "createTime"
@@ -144,7 +144,7 @@ public struct OperationMetadata: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case upgradeClusterStatus(UpgradeClusterStatus?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.OperationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

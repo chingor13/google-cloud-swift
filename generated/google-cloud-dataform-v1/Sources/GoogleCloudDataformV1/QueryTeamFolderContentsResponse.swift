@@ -69,7 +69,7 @@ public struct QueryTeamFolderContentsResponse: Codable, Equatable, GoogleCloudWk
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case folder = "folder"
       case repository = "repository"
     }
@@ -117,7 +117,7 @@ public struct QueryTeamFolderContentsResponse: Codable, Equatable, GoogleCloudWk
       indirect case repository(Repository?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.dataform.v1.QueryTeamFolderContentsResponse.TeamFolderContentsEntry"
     }
@@ -129,7 +129,7 @@ public struct QueryTeamFolderContentsResponse: Codable, Equatable, GoogleCloudWk
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.QueryTeamFolderContentsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

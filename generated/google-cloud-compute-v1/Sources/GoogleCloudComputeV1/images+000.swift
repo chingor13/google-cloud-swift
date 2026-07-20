@@ -233,7 +233,7 @@
     public func list(
       byItem: ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Image, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ImageList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ImageList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -731,7 +731,7 @@
     public func list(
       byItem: ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Image, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ImageList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ImageList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

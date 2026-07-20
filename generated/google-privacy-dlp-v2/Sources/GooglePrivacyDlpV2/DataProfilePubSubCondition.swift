@@ -63,7 +63,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case minimumRiskScore = "minimumRiskScore"
       case minimumSensitivityScore = "minimumSensitivityScore"
     }
@@ -115,7 +115,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
       case minimumSensitivityScore(DataProfilePubSubCondition.ProfileScoreBucket)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -194,7 +194,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .logicalOperatorUnspecified: return "LOGICAL_OPERATOR_UNSPECIFIED"
         case .or: return "OR"
@@ -207,7 +207,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LOGICAL_OPERATOR_UNSPECIFIED": self = .logicalOperatorUnspecified
         case "OR": self = .or
@@ -258,7 +258,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions"
     }
@@ -311,7 +311,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PROFILE_SCORE_BUCKET_UNSPECIFIED"
       case .high: return "HIGH"
@@ -324,7 +324,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PROFILE_SCORE_BUCKET_UNSPECIFIED": self = .unspecified
       case "HIGH": self = .high
@@ -375,7 +375,7 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleCloudWkt._An
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfilePubSubCondition"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

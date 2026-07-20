@@ -142,7 +142,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .alwaysPersist: return "ALWAYS_PERSIST"
         case .defaultForProtocol: return "DEFAULT_FOR_PROTOCOL"
@@ -155,7 +155,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALWAYS_PERSIST": self = .alwaysPersist
         case "DEFAULT_FOR_PROTOCOL": self = .defaultForProtocol
@@ -246,7 +246,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .invalidTrackingMode: return "INVALID_TRACKING_MODE"
         case .perConnection: return "PER_CONNECTION"
@@ -259,7 +259,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INVALID_TRACKING_MODE": self = .invalidTrackingMode
         case "PER_CONNECTION": self = .perConnection
@@ -310,7 +310,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BackendServiceConnectionTrackingPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

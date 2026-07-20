@@ -78,7 +78,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case event = "event"
       case triggerFulfillment = "triggerFulfillment"
@@ -157,7 +157,7 @@
       case targetPlaybook(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.EventHandler"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

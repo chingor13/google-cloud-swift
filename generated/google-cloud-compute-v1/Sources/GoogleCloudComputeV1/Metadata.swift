@@ -57,7 +57,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case fingerprint = "fingerprint"
       case items = "items"
       case kind = "kind"
@@ -124,7 +124,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Metadata.items"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -135,7 +135,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Metadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

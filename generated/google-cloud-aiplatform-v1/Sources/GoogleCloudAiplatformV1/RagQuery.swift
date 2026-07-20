@@ -45,7 +45,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case text = "text"
       case ragRetrievalConfig = "ragRetrievalConfig"
     }
@@ -90,7 +90,7 @@
       case text(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagQuery"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -85,7 +85,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case expireTime = "expireTime"
       case ttl = "ttl"
       case name = "name"
@@ -200,7 +200,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.CachedContent.UsageMetadata"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -222,7 +222,7 @@
       indirect case ttl(GoogleCloudWkt.Duration?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CachedContent"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

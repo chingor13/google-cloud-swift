@@ -58,7 +58,7 @@ public enum InTransitEncryptionConfig: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED"
     case .inTransitEncryptionDisabled: return "IN_TRANSIT_ENCRYPTION_DISABLED"
@@ -72,7 +72,7 @@ public enum InTransitEncryptionConfig: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED": self = .unspecified
     case "IN_TRANSIT_ENCRYPTION_DISABLED": self = .inTransitEncryptionDisabled

@@ -141,7 +141,7 @@ public struct CompensationFilter: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "FILTER_TYPE_UNSPECIFIED"
       case .unitOnly: return "UNIT_ONLY"
@@ -156,7 +156,7 @@ public struct CompensationFilter: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "FILTER_TYPE_UNSPECIFIED": self = .unspecified
       case "UNIT_ONLY": self = .unitOnly
@@ -213,7 +213,7 @@ public struct CompensationFilter: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.CompensationFilter"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

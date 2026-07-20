@@ -70,7 +70,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case sourceCodeSpec = "sourceCodeSpec"
       case containerSpec = "containerSpec"
       case serviceAccount = "serviceAccount"
@@ -167,7 +167,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.PackageSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -238,7 +238,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.DeploymentSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -276,7 +276,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case inlineSource = "inlineSource"
         case developerConnectSource = "developerConnectSource"
         case pythonSpec = "pythonSpec"
@@ -378,7 +378,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource"
         }
@@ -415,7 +415,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.ImageSpec"
         }
@@ -461,7 +461,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig"
         }
@@ -499,7 +499,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource"
         }
@@ -553,7 +553,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec"
         }
@@ -583,7 +583,7 @@
         indirect case imageSpec(ReasoningEngineSpec.SourceCodeSpec.ImageSpec?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -619,7 +619,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -640,7 +640,7 @@
       indirect case containerSpec(ReasoningEngineSpec.ContainerSpec?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

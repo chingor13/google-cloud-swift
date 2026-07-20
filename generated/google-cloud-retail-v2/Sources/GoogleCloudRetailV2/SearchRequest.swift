@@ -670,7 +670,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -681,7 +681,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.FacetSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -761,7 +761,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODE_UNSPECIFIED"
         case .disabled: return "DISABLED"
@@ -774,7 +774,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODE_UNSPECIFIED": self = .unspecified
         case "DISABLED": self = .disabled
@@ -825,7 +825,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.DynamicFacetSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -927,7 +927,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec"
       }
@@ -939,7 +939,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.BoostSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1033,7 +1033,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CONDITION_UNSPECIFIED"
         case .disabled: return "DISABLED"
@@ -1046,7 +1046,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONDITION_UNSPECIFIED": self = .unspecified
         case "DISABLED": self = .disabled
@@ -1097,7 +1097,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.QueryExpansionSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1180,7 +1180,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODE_UNSPECIFIED"
         case .auto: return "AUTO"
@@ -1193,7 +1193,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODE_UNSPECIFIED": self = .unspecified
         case "AUTO": self = .auto
@@ -1244,7 +1244,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.PersonalizationSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1334,7 +1334,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODE_UNSPECIFIED"
         case .suggestionOnly: return "SUGGESTION_ONLY"
@@ -1347,7 +1347,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODE_UNSPECIFIED": self = .unspecified
         case "SUGGESTION_ONLY": self = .suggestionOnly
@@ -1398,7 +1398,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1472,7 +1472,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case textAnswer = "textAnswer"
         case selectedAnswer = "selectedAnswer"
       }
@@ -1544,7 +1544,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer"
         }
@@ -1568,7 +1568,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer"
       }
@@ -1580,7 +1580,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1628,7 +1628,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.SearchRequest.TileNavigationSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -1719,7 +1719,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SEARCH_MODE_UNSPECIFIED"
       case .productSearchOnly: return "PRODUCT_SEARCH_ONLY"
@@ -1732,7 +1732,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SEARCH_MODE_UNSPECIFIED": self = .unspecified
       case "PRODUCT_SEARCH_ONLY": self = .productSearchOnly
@@ -1783,7 +1783,7 @@ public struct SearchRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.SearchRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -52,7 +52,7 @@ public struct TdxCcelAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.TdxCcelAttestation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

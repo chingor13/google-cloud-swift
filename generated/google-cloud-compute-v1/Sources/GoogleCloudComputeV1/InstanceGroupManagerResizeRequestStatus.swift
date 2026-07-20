@@ -150,7 +150,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors.errorDetails"
           }
@@ -162,7 +162,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors"
         }
@@ -174,7 +174,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error"
       }
@@ -186,7 +186,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

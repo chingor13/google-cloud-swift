@@ -43,7 +43,7 @@ public struct KeyValueMetadataProperty: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.KeyValueMetadataProperty"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

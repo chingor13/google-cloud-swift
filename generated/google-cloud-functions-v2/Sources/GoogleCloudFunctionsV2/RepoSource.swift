@@ -59,7 +59,7 @@ public struct RepoSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case branchName = "branchName"
     case tagName = "tagName"
     case commitSha = "commitSha"
@@ -134,7 +134,7 @@ public struct RepoSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case commitSha(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.RepoSource"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -103,7 +103,7 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PLATFORM_UNSPECIFIED"
       case .gke: return "GKE"
@@ -117,7 +117,7 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PLATFORM_UNSPECIFIED": self = .unspecified
       case "GKE": self = .gke
@@ -171,7 +171,7 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.DeploymentOccurrence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

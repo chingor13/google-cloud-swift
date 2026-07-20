@@ -266,7 +266,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.IgnoredFacetValues"
       }
@@ -315,7 +315,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.MergedFacetValue"
       }
@@ -361,7 +361,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.MergedFacet"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -408,7 +408,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.RerankConfig"
       }
@@ -420,7 +420,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -477,7 +477,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unknown: return "UNKNOWN"
       case .textual: return "TEXTUAL"
@@ -490,7 +490,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNKNOWN": self = .unknown
       case "TEXTUAL": self = .textual
@@ -582,7 +582,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "INDEXABLE_OPTION_UNSPECIFIED"
       case .indexableEnabled: return "INDEXABLE_ENABLED"
@@ -595,7 +595,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "INDEXABLE_OPTION_UNSPECIFIED": self = .unspecified
       case "INDEXABLE_ENABLED": self = .indexableEnabled
@@ -687,7 +687,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DYNAMIC_FACETABLE_OPTION_UNSPECIFIED"
       case .dynamicFacetableEnabled: return "DYNAMIC_FACETABLE_ENABLED"
@@ -700,7 +700,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DYNAMIC_FACETABLE_OPTION_UNSPECIFIED": self = .unspecified
       case "DYNAMIC_FACETABLE_ENABLED": self = .dynamicFacetableEnabled
@@ -792,7 +792,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SEARCHABLE_OPTION_UNSPECIFIED"
       case .searchableEnabled: return "SEARCHABLE_ENABLED"
@@ -805,7 +805,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SEARCHABLE_OPTION_UNSPECIFIED": self = .unspecified
       case "SEARCHABLE_ENABLED": self = .searchableEnabled
@@ -897,7 +897,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "EXACT_SEARCHABLE_OPTION_UNSPECIFIED"
       case .exactSearchableEnabled: return "EXACT_SEARCHABLE_ENABLED"
@@ -910,7 +910,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "EXACT_SEARCHABLE_OPTION_UNSPECIFIED": self = .unspecified
       case "EXACT_SEARCHABLE_ENABLED": self = .exactSearchableEnabled
@@ -1002,7 +1002,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "RETRIEVABLE_OPTION_UNSPECIFIED"
       case .retrievableEnabled: return "RETRIEVABLE_ENABLED"
@@ -1015,7 +1015,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "RETRIEVABLE_OPTION_UNSPECIFIED": self = .unspecified
       case "RETRIEVABLE_ENABLED": self = .retrievableEnabled
@@ -1066,7 +1066,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

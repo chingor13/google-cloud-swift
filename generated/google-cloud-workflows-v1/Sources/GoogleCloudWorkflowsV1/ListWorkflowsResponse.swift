@@ -53,7 +53,7 @@ public struct ListWorkflowsResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workflows.v1.ListWorkflowsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

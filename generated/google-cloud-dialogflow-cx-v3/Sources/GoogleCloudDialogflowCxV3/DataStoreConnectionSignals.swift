@@ -102,7 +102,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.RewriterModelCallSignals"
       }
@@ -146,7 +146,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.SearchSnippet"
       }
@@ -188,7 +188,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.AnswerGenerationModelCallSignals"
       }
@@ -226,7 +226,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.AnswerPart"
       }
@@ -264,7 +264,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.CitedSnippet"
       }
@@ -345,7 +345,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "GROUNDING_DECISION_UNSPECIFIED"
           case .acceptedByGrounding: return "ACCEPTED_BY_GROUNDING"
@@ -358,7 +358,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "GROUNDING_DECISION_UNSPECIFIED": self = .unspecified
           case "ACCEPTED_BY_GROUNDING": self = .acceptedByGrounding
@@ -459,7 +459,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "GROUNDING_SCORE_BUCKET_UNSPECIFIED"
           case .veryLow: return "VERY_LOW"
@@ -475,7 +475,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "GROUNDING_SCORE_BUCKET_UNSPECIFIED": self = .unspecified
           case "VERY_LOW": self = .veryLow
@@ -535,7 +535,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.GroundingSignals"
       }
@@ -621,7 +621,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SAFETY_DECISION_UNSPECIFIED"
           case .acceptedBySafetyCheck: return "ACCEPTED_BY_SAFETY_CHECK"
@@ -634,7 +634,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SAFETY_DECISION_UNSPECIFIED": self = .unspecified
           case "ACCEPTED_BY_SAFETY_CHECK": self = .acceptedBySafetyCheck
@@ -729,7 +729,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "BANNED_PHRASE_MATCH_UNSPECIFIED"
           case .`none`: return "BANNED_PHRASE_MATCH_NONE"
@@ -743,7 +743,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "BANNED_PHRASE_MATCH_UNSPECIFIED": self = .unspecified
           case "BANNED_PHRASE_MATCH_NONE": self = .`none`
@@ -797,7 +797,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.SafetySignals"
       }
@@ -809,7 +809,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

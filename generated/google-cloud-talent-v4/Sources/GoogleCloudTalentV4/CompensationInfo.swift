@@ -155,7 +155,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case type = "type"
       case unit = "unit"
       case amount = "amount"
@@ -218,7 +218,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case range(CompensationInfo.CompensationRange?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo.CompensationEntry"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -264,7 +264,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo.CompensationRange"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -368,7 +368,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "COMPENSATION_TYPE_UNSPECIFIED"
       case .base: return "BASE"
@@ -387,7 +387,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "COMPENSATION_TYPE_UNSPECIFIED": self = .unspecified
       case "BASE": self = .base
@@ -512,7 +512,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "COMPENSATION_UNIT_UNSPECIFIED"
       case .hourly: return "HOURLY"
@@ -530,7 +530,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "COMPENSATION_UNIT_UNSPECIFIED": self = .unspecified
       case "HOURLY": self = .hourly
@@ -596,7 +596,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

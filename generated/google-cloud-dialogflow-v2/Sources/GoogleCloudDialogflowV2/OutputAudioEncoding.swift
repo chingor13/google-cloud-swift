@@ -74,7 +74,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
       case .linear16: return "OUTPUT_AUDIO_ENCODING_LINEAR_16"
@@ -91,7 +91,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": self = .unspecified
       case "OUTPUT_AUDIO_ENCODING_LINEAR_16": self = .linear16
@@ -112,8 +112,8 @@
       case 0: self = .unspecified
       case 1: self = .linear16
       case 2: self = .mp3
-      case 4: self = .mp364Kbps
       case 3: self = .oggOpus
+      case 4: self = .mp364Kbps
       case 5: self = .mulaw
       case 6: self = .alaw
       default: self = .unknownIntValue(intValue)

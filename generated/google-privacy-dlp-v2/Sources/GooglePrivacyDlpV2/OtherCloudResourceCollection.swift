@@ -40,7 +40,7 @@ public struct OtherCloudResourceCollection: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case includeRegexes = "includeRegexes"
   }
 
@@ -82,7 +82,7 @@ public struct OtherCloudResourceCollection: Codable, Equatable, GoogleCloudWkt._
     indirect case includeRegexes(OtherCloudResourceRegexes?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudResourceCollection"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

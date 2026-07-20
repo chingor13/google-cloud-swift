@@ -37,7 +37,7 @@ public struct CreateTagBindingMetadata: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.CreateTagBindingMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

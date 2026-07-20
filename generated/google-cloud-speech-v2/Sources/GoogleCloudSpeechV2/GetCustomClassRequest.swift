@@ -44,7 +44,7 @@ public struct GetCustomClassRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.GetCustomClassRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

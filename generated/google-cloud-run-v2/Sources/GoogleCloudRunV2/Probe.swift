@@ -60,7 +60,7 @@ public struct Probe: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case initialDelaySeconds = "initialDelaySeconds"
     case timeoutSeconds = "timeoutSeconds"
     case periodSeconds = "periodSeconds"
@@ -130,7 +130,9 @@ public struct Probe: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case grpc(GRPCAction?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.Probe" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.run.v2.Probe"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

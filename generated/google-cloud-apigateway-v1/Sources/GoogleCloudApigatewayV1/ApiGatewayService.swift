@@ -54,7 +54,8 @@ public class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol {
   public func listGateways(
     byItem: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Gateway, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudApigatewayV1.ListGatewaysResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListGatewaysResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listGateways(request: request, options: options)
@@ -267,7 +268,8 @@ public class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol {
   public func listApis(
     byItem: ListApisRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Api, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudApigatewayV1.ListApisResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListApisResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listApis(request: request, options: options)
@@ -481,7 +483,7 @@ public class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol {
     byItem: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ApiConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudApigatewayV1.ListApiConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListApiConfigsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listApiConfigs(request: request, options: options)
@@ -698,7 +700,8 @@ public class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -1144,7 +1147,8 @@ extension Clients.ApiGatewayServiceProtocol {
   public func listGateways(
     byItem: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Gateway, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudApigatewayV1.ListGatewaysResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListGatewaysResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1317,7 +1321,8 @@ extension Clients.ApiGatewayServiceProtocol {
   public func listApis(
     byItem: ListApisRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Api, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudApigatewayV1.ListApisResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListApisResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1484,7 +1489,7 @@ extension Clients.ApiGatewayServiceProtocol {
     byItem: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ApiConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudApigatewayV1.ListApiConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudApigatewayV1.ListApiConfigsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1658,7 +1663,8 @@ extension Clients.ApiGatewayServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

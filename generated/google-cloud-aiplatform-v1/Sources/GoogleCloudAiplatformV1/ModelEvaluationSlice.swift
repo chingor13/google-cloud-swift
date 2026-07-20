@@ -212,7 +212,7 @@
             return copy
           }
 
-          private enum CodingKeys: String, CodingKey {
+          private enum CodingKeys: Swift.String, CodingKey {
             case value = "value"
             case range = "range"
             case allValues = "allValues"
@@ -278,7 +278,7 @@
             indirect case allValues(GoogleCloudWkt.BoolValue?)
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.SliceConfig"
           }
@@ -317,7 +317,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Range"
           }
@@ -351,7 +351,7 @@
             return copy
           }
 
-          private enum CodingKeys: String, CodingKey {
+          private enum CodingKeys: Swift.String, CodingKey {
             case stringValue = "stringValue"
             case floatValue = "floatValue"
           }
@@ -401,7 +401,7 @@
             case floatValue(Swift.Float)
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Value"
           }
@@ -413,7 +413,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec"
         }
@@ -425,7 +425,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -436,7 +436,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelEvaluationSlice"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

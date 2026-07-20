@@ -40,7 +40,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case awsLocation = "awsLocation"
   }
 
@@ -99,7 +99,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case accountId = "accountId"
       case allAssetInventoryAssets = "allAssetInventoryAssets"
     }
@@ -153,7 +153,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
       case allAssetInventoryAssets(Swift.Bool)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation"
     }
@@ -171,7 +171,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
     indirect case awsLocation(OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

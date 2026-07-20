@@ -82,7 +82,7 @@ public struct ControlPlaneEgress: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MODE_UNSPECIFIED"
       case .viaControlPlane: return "VIA_CONTROL_PLANE"
@@ -95,7 +95,7 @@ public struct ControlPlaneEgress: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MODE_UNSPECIFIED": self = .unspecified
       case "VIA_CONTROL_PLANE": self = .viaControlPlane
@@ -146,7 +146,7 @@ public struct ControlPlaneEgress: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ControlPlaneEgress"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

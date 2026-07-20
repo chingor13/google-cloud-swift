@@ -285,7 +285,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.DatabaseInstance.SqlFailoverReplica"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -328,7 +328,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.DatabaseInstance.SqlScheduledMaintenance"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -416,7 +416,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SQL_OUT_OF_DISK_STATE_UNSPECIFIED"
           case .normal: return "NORMAL"
@@ -429,7 +429,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SQL_OUT_OF_DISK_STATE_UNSPECIFIED": self = .unspecified
           case "NORMAL": self = .normal
@@ -480,7 +480,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.DatabaseInstance.SqlOutOfDiskReport"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -540,7 +540,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.DatabaseInstance.PoolNodeConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -613,7 +613,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_INSTANCE_STATE_UNSPECIFIED"
         case .runnable: return "RUNNABLE"
@@ -632,7 +632,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_INSTANCE_STATE_UNSPECIFIED": self = .unspecified
         case "RUNNABLE": self = .runnable
@@ -741,7 +741,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED"
         case .newNetworkArchitecture: return "NEW_NETWORK_ARCHITECTURE"
@@ -754,7 +754,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": self = .unspecified
         case "NEW_NETWORK_ARCHITECTURE": self = .newNetworkArchitecture
@@ -805,7 +805,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.DatabaseInstance"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

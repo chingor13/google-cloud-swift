@@ -44,7 +44,7 @@ public struct ImportYumArtifactsErrorInfo: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsSource = "gcsSource"
     case error = "error"
   }
@@ -89,7 +89,7 @@ public struct ImportYumArtifactsErrorInfo: Codable, Equatable, GoogleCloudWkt._A
     indirect case gcsSource(ImportYumArtifactsGcsSource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

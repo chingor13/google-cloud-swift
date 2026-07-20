@@ -54,7 +54,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case noiseSigma = "noiseSigma"
       case featureNoiseSigma = "featureNoiseSigma"
       case noisySampleCount = "noisySampleCount"
@@ -132,7 +132,7 @@
       indirect case featureNoiseSigma(FeatureNoiseSigma?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SmoothGradConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

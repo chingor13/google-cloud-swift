@@ -336,7 +336,7 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case selector = "selector"
     case `get` = "get"
     case put = "put"
@@ -434,7 +434,9 @@ public struct HttpRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case custom(CustomHttpPattern?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.HttpRule" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.api.HttpRule"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

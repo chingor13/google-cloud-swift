@@ -59,7 +59,7 @@ public enum VersionView: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "VERSION_VIEW_UNSPECIFIED"
     case .basic: return "BASIC"
@@ -72,7 +72,7 @@ public enum VersionView: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "VERSION_VIEW_UNSPECIFIED": self = .unspecified
     case "BASIC": self = .basic

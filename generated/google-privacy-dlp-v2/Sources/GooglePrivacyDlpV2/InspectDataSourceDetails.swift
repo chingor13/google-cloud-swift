@@ -70,7 +70,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails.RequestedOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -118,7 +118,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWkt._AnyP
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails.Result"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -129,7 +129,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWkt._AnyP
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

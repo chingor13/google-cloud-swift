@@ -52,7 +52,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case view = "view"
     case pageSize = "page-size"
@@ -116,7 +116,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CATALOG_VIEW_UNSPECIFIED"
       case .basic: return "CATALOG_VIEW_BASIC"
@@ -129,7 +129,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CATALOG_VIEW_UNSPECIFIED": self = .unspecified
       case "CATALOG_VIEW_BASIC": self = .basic
@@ -180,7 +180,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.ListIcebergCatalogsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

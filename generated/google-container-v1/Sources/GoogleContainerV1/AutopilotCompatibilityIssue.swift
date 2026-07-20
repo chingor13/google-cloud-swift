@@ -105,7 +105,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "UNSPECIFIED"
       case .incompatibility: return "INCOMPATIBILITY"
@@ -119,7 +119,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNSPECIFIED": self = .unspecified
       case "INCOMPATIBILITY": self = .incompatibility
@@ -173,7 +173,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.AutopilotCompatibilityIssue"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

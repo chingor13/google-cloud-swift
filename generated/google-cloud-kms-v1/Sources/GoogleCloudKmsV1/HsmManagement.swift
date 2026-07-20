@@ -72,7 +72,7 @@ public class HsmManagementClient: Clients.HsmManagementProtocol {
     byItem: ListSingleTenantHsmInstancesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SingleTenantHsmInstance, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstancesResponse in
+      (token: Swift.String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstancesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSingleTenantHsmInstances(request: request, options: options)
@@ -392,8 +392,8 @@ public class HsmManagementClient: Clients.HsmManagementProtocol {
     byItem: ListSingleTenantHsmInstanceProposalsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SingleTenantHsmInstanceProposal, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstanceProposalsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudKmsV1.ListSingleTenantHsmInstanceProposalsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSingleTenantHsmInstanceProposals(request: request, options: options)
@@ -460,7 +460,8 @@ public class HsmManagementClient: Clients.HsmManagementProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -804,7 +805,7 @@ extension Clients.HsmManagementProtocol {
     byItem: ListSingleTenantHsmInstancesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SingleTenantHsmInstance, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstancesResponse in
+      (token: Swift.String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstancesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1040,8 +1041,8 @@ extension Clients.HsmManagementProtocol {
     byItem: ListSingleTenantHsmInstanceProposalsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<SingleTenantHsmInstanceProposal, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudKmsV1.ListSingleTenantHsmInstanceProposalsResponse
-      in
+      (token: Swift.String) async throws
+        -> GoogleCloudKmsV1.ListSingleTenantHsmInstanceProposalsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1098,7 +1099,8 @@ extension Clients.HsmManagementProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

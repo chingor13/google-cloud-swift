@@ -47,7 +47,7 @@ public struct UpdateDiscoveryConfigRequest: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.UpdateDiscoveryConfigRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -53,7 +53,7 @@ public struct ListWorkerPoolsRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.ListWorkerPoolsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

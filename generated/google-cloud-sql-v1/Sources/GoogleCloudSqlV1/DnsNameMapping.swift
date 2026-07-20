@@ -95,7 +95,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CONNECTION_TYPE_UNSPECIFIED"
         case .`public`: return "PUBLIC"
@@ -109,7 +109,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CONNECTION_TYPE_UNSPECIFIED": self = .unspecified
         case "PUBLIC": self = .`public`
@@ -204,7 +204,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DNS_SCOPE_UNSPECIFIED"
         case .instance: return "INSTANCE"
@@ -217,7 +217,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DNS_SCOPE_UNSPECIFIED": self = .unspecified
         case "INSTANCE": self = .instance
@@ -312,7 +312,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "RECORD_MANAGER_UNSPECIFIED"
         case .customer: return "CUSTOMER"
@@ -325,7 +325,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "RECORD_MANAGER_UNSPECIFIED": self = .unspecified
         case "CUSTOMER": self = .customer
@@ -376,7 +376,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.DnsNameMapping"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

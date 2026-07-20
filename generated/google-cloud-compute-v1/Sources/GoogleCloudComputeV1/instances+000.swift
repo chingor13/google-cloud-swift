@@ -208,7 +208,8 @@
     public func aggregatedList(
       byItem: InstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstancesScopedList), Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceAggregatedList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -636,7 +637,7 @@
     public func list(
       byItem: InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -667,7 +668,8 @@
     public func listReferrers(
       byItem: InstancesClient.ListReferrersRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Reference, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceListReferrers in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceListReferrers in
         var request = byItem
         request.pageToken = token
         return try await self.listReferrers(request: request, options: options)
@@ -2862,7 +2864,8 @@
     public func aggregatedList(
       byItem: InstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstancesScopedList), Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceAggregatedList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3388,7 +3391,7 @@
     public func list(
       byItem: InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3426,7 +3429,8 @@
     public func listReferrers(
       byItem: InstancesClient.ListReferrersRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Reference, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InstanceListReferrers in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceListReferrers in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

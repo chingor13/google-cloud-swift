@@ -177,7 +177,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .errorTypeUnspecified: return "ERROR_TYPE_UNSPECIFIED"
           case .emptyLine: return "EMPTY_LINE"
@@ -205,7 +205,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "ERROR_TYPE_UNSPECIFIED": self = .errorTypeUnspecified
           case "EMPTY_LINE": self = .emptyLine
@@ -301,7 +301,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.RecordError"
       }
@@ -352,7 +352,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.ContentValidationStats"
       }
@@ -364,7 +364,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

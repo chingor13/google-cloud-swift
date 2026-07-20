@@ -73,7 +73,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.ServiceLatency.InternalServiceLatency"
       }
@@ -85,7 +85,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ServiceLatency"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

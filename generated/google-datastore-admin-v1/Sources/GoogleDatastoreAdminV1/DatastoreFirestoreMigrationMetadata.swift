@@ -52,7 +52,7 @@ public struct DatastoreFirestoreMigrationMetadata: Codable, Equatable, GoogleClo
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -65,7 +65,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.advanceRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -125,7 +125,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.cancelRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -179,7 +179,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.deleteRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -218,7 +218,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -347,7 +347,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -406,7 +406,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.pauseRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -465,7 +465,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.rollouts.resumeRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {

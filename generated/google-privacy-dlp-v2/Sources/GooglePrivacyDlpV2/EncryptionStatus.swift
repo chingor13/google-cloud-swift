@@ -57,7 +57,7 @@ public enum EncryptionStatus: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "ENCRYPTION_STATUS_UNSPECIFIED"
     case .encryptionGoogleManaged: return "ENCRYPTION_GOOGLE_MANAGED"
@@ -70,7 +70,7 @@ public enum EncryptionStatus: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "ENCRYPTION_STATUS_UNSPECIFIED": self = .unspecified
     case "ENCRYPTION_GOOGLE_MANAGED": self = .encryptionGoogleManaged

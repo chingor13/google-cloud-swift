@@ -63,7 +63,7 @@ public struct ExecuteSqlRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case password = "password"
     case instance = "instance"
     case database = "database"
@@ -119,7 +119,7 @@ public struct ExecuteSqlRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     case password(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ExecuteSqlRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

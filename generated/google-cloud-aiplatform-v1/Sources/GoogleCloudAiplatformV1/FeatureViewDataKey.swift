@@ -40,7 +40,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case key = "key"
       case compositeKey = "compositeKey"
     }
@@ -106,7 +106,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDataKey.CompositeKey"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -125,7 +125,7 @@
       indirect case compositeKey(FeatureViewDataKey.CompositeKey?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDataKey"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

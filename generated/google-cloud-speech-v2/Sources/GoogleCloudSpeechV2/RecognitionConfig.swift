@@ -86,7 +86,7 @@ public struct RecognitionConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case autoDecodingConfig = "autoDecodingConfig"
     case explicitDecodingConfig = "explicitDecodingConfig"
     case model = "model"
@@ -164,7 +164,7 @@ public struct RecognitionConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case explicitDecodingConfig(ExplicitDecodingConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.RecognitionConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

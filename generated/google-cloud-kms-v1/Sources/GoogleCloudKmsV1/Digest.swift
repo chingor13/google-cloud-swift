@@ -42,7 +42,7 @@ public struct Digest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case sha256 = "sha256"
     case sha384 = "sha384"
     case sha512 = "sha512"
@@ -109,7 +109,9 @@ public struct Digest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case externalMu(Foundation.Data)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.kms.v1.Digest" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.kms.v1.Digest"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

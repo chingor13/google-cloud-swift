@@ -51,7 +51,7 @@ public struct Interval: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case minimum = "minimum"
     case exclusiveMinimum = "exclusiveMinimum"
     case maximum = "maximum"
@@ -148,7 +148,7 @@ public struct Interval: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case exclusiveMaximum(Swift.Double)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Interval"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

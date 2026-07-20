@@ -156,7 +156,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case type = "type"
       case format = "format"
       case title = "title"
@@ -244,7 +244,7 @@
       try container.encode(self.defs, forKey: .defs)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Schema"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

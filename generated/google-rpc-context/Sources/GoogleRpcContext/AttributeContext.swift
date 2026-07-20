@@ -127,7 +127,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Peer"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -178,7 +178,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case service = "service"
       case operation = "operation"
       case `protocol` = "protocol"
@@ -201,7 +201,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       try container.encode(self.version, forKey: .version)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Api"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -289,7 +289,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Auth"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -375,7 +375,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case id = "id"
       case method = "method"
       case headers = "headers"
@@ -425,7 +425,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       try container.encode(self.origin, forKey: .origin)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Request"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -478,7 +478,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Response"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -587,7 +587,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.context.AttributeContext.Resource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -598,7 +598,7 @@ public struct AttributeContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.rpc.context.AttributeContext"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -175,7 +175,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ROLE_UNSPECIFIED"
         case .humanAgent: return "HUMAN_AGENT"
@@ -189,7 +189,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ROLE_UNSPECIFIED": self = .unspecified
         case "HUMAN_AGENT": self = .humanAgent
@@ -295,7 +295,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "AGENT_DESKTOP_SOURCE_UNSPECIFIED"
         case .livePerson: return "LIVE_PERSON"
@@ -311,7 +311,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AGENT_DESKTOP_SOURCE_UNSPECIFIED": self = .unspecified
         case "LIVE_PERSON": self = .livePerson
@@ -371,7 +371,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Participant"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

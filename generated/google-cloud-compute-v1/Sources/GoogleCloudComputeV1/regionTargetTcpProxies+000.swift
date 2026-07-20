@@ -159,7 +159,8 @@
     public func list(
       byItem: RegionTargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -381,7 +382,8 @@
     public func list(
       byItem: RegionTargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetTcpProxy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetTcpProxyList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

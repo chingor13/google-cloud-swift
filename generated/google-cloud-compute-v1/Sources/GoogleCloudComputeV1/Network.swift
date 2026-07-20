@@ -149,7 +149,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case ipv4Range = "IPv4Range"
       case autoCreateSubnetworks = "autoCreateSubnetworks"
       case creationTimestamp = "creationTimestamp"
@@ -269,7 +269,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .afterClassicFirewall: return "AFTER_CLASSIC_FIREWALL"
         case .beforeClassicFirewall: return "BEFORE_CLASSIC_FIREWALL"
@@ -281,7 +281,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AFTER_CLASSIC_FIREWALL": self = .afterClassicFirewall
         case "BEFORE_CLASSIC_FIREWALL": self = .beforeClassicFirewall
@@ -329,7 +329,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Network"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

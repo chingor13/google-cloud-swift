@@ -40,7 +40,7 @@ public struct CommonFeatureSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case multiclusteringress = "multiclusteringress"
   }
 
@@ -81,7 +81,7 @@ public struct CommonFeatureSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case multiclusteringress(GoogleCloudGkehubMulticlusteringressV1.FeatureSpec?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.CommonFeatureSpec"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

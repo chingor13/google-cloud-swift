@@ -121,7 +121,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlCsvExportOptions"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -198,7 +198,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlExportOptions.MysqlExportOptions"
         }
@@ -239,7 +239,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions"
         }
@@ -251,7 +251,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlExportOptions"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -315,7 +315,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlBakExportOptions"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -364,7 +364,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ExportContext.SqlTdeExportOptions"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -375,7 +375,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ExportContext"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

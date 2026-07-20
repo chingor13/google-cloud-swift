@@ -70,7 +70,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.abandonInstancesRequest"
       }
@@ -118,7 +118,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.applyUpdatesToInstancesRequest"
       }
@@ -183,7 +183,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.createInstancesRequest"
       }
@@ -241,7 +241,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.deleteRequest"
       }
@@ -304,7 +304,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.deleteInstancesRequest"
       }
@@ -352,7 +352,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.deletePerInstanceConfigsRequest"
       }
@@ -395,7 +395,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -454,7 +454,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.insertRequest"
       }
@@ -587,7 +587,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -726,7 +726,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.listErrorsRequest"
       }
@@ -862,7 +862,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.listManagedInstancesRequest"
       }
@@ -998,7 +998,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.listPerInstanceConfigsRequest"
       }
@@ -1061,7 +1061,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.patchRequest"
       }
@@ -1125,7 +1125,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.patchPerInstanceConfigsRequest"
       }
@@ -1188,7 +1188,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.recreateInstancesRequest"
       }
@@ -1250,7 +1250,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.resizeRequest"
       }
@@ -1313,7 +1313,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.resumeInstancesRequest"
       }
@@ -1376,7 +1376,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.setInstanceTemplateRequest"
       }
@@ -1439,7 +1439,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.setTargetPoolsRequest"
       }
@@ -1502,7 +1502,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.startInstancesRequest"
       }
@@ -1565,7 +1565,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.stopInstancesRequest"
       }
@@ -1628,7 +1628,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.suspendInstancesRequest"
       }
@@ -1692,7 +1692,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroupManagers.updatePerInstanceConfigsRequest"
       }

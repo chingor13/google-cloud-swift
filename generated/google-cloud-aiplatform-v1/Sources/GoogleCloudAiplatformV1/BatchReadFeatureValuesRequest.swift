@@ -69,7 +69,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case csvReadInstances = "csvReadInstances"
       case bigqueryReadInstances = "bigqueryReadInstances"
       case featurestore = "featurestore"
@@ -159,7 +159,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.PassThroughField"
       }
@@ -207,7 +207,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.EntityTypeSpec"
       }
@@ -249,7 +249,7 @@
       indirect case bigqueryReadInstances(BigQuerySource?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

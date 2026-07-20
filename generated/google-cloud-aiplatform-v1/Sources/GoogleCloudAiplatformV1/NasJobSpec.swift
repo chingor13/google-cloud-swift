@@ -50,7 +50,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case multiTrialAlgorithmSpec = "multiTrialAlgorithmSpec"
       case resumeNasJobId = "resumeNasJobId"
       case searchSpaceSpec = "searchSpaceSpec"
@@ -197,7 +197,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "GOAL_TYPE_UNSPECIFIED"
             case .maximize: return "MAXIMIZE"
@@ -210,7 +210,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "GOAL_TYPE_UNSPECIFIED": self = .unspecified
             case "MAXIMIZE": self = .maximize
@@ -261,7 +261,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.MetricSpec"
         }
@@ -311,7 +311,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.SearchTrialSpec"
         }
@@ -356,7 +356,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.TrainTrialSpec"
         }
@@ -411,7 +411,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "MULTI_TRIAL_ALGORITHM_UNSPECIFIED"
           case .reinforcementLearning: return "REINFORCEMENT_LEARNING"
@@ -424,7 +424,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "MULTI_TRIAL_ALGORITHM_UNSPECIFIED": self = .unspecified
           case "REINFORCEMENT_LEARNING": self = .reinforcementLearning
@@ -475,7 +475,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -492,7 +492,7 @@
       indirect case multiTrialAlgorithmSpec(NasJobSpec.MultiTrialAlgorithmSpec?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

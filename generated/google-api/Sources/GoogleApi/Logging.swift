@@ -113,7 +113,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.Logging.LoggingDestination"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -124,7 +124,9 @@ public struct Logging: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.Logging" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.api.Logging"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

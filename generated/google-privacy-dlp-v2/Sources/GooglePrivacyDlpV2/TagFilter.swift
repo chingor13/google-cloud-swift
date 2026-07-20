@@ -41,7 +41,7 @@ public struct TagFilter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case namespacedTagValue = "namespacedTagValue"
     case namespacedTagKey = "namespacedTagKey"
   }
@@ -99,7 +99,7 @@ public struct TagFilter: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case namespacedTagKey(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TagFilter"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

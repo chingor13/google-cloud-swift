@@ -98,7 +98,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "LOG_SOURCE_UNSPECIFIED"
         case .training: return "TRAINING"
@@ -111,7 +111,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LOG_SOURCE_UNSPECIFIED": self = .unspecified
         case "TRAINING": self = .training
@@ -203,7 +203,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "LOG_TYPE_UNSPECIFIED"
         case .predict: return "PREDICT"
@@ -216,7 +216,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LOG_TYPE_UNSPECIFIED": self = .unspecified
         case "PREDICT": self = .predict
@@ -267,7 +267,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelDeploymentMonitoringBigQueryTable"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

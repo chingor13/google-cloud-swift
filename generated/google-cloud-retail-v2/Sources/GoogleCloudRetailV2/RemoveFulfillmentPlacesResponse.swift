@@ -42,7 +42,7 @@ public struct RemoveFulfillmentPlacesResponse: Codable, Equatable, GoogleCloudWk
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.RemoveFulfillmentPlacesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

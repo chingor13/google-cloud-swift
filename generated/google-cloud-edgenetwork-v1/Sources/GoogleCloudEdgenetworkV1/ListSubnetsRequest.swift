@@ -53,7 +53,7 @@ public struct ListSubnetsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.ListSubnetsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

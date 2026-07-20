@@ -45,7 +45,7 @@ public struct CloudRepoSourceContext: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case repoId = "repoId"
     case revisionId = "revisionId"
     case aliasContext = "aliasContext"
@@ -97,7 +97,7 @@ public struct CloudRepoSourceContext: Codable, Equatable, GoogleCloudWkt._AnyPac
     indirect case aliasContext(AliasContext?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.CloudRepoSourceContext"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -267,7 +267,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.compute.v1.Route.warnings.data"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -416,7 +416,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .cleanupFailed: return "CLEANUP_FAILED"
           case .deprecatedResourceUsed: return "DEPRECATED_RESOURCE_USED"
@@ -457,7 +457,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "CLEANUP_FAILED": self = .cleanupFailed
           case "DEPRECATED_RESOURCE_USED": self = .deprecatedResourceUsed
@@ -588,7 +588,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Route.warnings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -639,7 +639,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .egp: return "EGP"
         case .igp: return "IGP"
@@ -652,7 +652,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EGP": self = .egp
         case "IGP": self = .igp
@@ -753,7 +753,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .dropped: return "DROPPED"
@@ -767,7 +767,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "DROPPED": self = .dropped
@@ -863,7 +863,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .bgp: return "BGP"
         case .`static`: return "STATIC"
@@ -877,7 +877,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BGP": self = .bgp
         case "STATIC": self = .`static`
@@ -931,7 +931,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Route"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

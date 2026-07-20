@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case conversationContext = "conversationContext"
       case extraInfo = "extraInfo"
       case summarizationSectionList = "summarizationSectionList"
@@ -105,7 +105,7 @@
       indirect case summarizationSectionList(SummarizationSectionList?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.FewShotExample"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

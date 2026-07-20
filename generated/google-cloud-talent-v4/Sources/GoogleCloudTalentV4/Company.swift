@@ -148,7 +148,7 @@ public struct Company: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.Company.DerivedInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -159,7 +159,7 @@ public struct Company: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.Company"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

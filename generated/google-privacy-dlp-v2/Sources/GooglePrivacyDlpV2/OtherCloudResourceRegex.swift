@@ -43,7 +43,7 @@ public struct OtherCloudResourceRegex: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case amazonS3BucketRegex = "amazonS3BucketRegex"
   }
 
@@ -85,7 +85,7 @@ public struct OtherCloudResourceRegex: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case amazonS3BucketRegex(AmazonS3BucketRegex?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudResourceRegex"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -38,7 +38,7 @@ public struct UndeleteOrganizationMetadata: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.UndeleteOrganizationMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

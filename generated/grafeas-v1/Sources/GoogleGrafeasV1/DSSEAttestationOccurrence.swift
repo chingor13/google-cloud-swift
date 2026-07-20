@@ -44,7 +44,7 @@ public struct DSSEAttestationOccurrence: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case envelope = "envelope"
     case statement = "statement"
   }
@@ -85,7 +85,7 @@ public struct DSSEAttestationOccurrence: Codable, Equatable, GoogleCloudWkt._Any
     indirect case statement(InTotoStatement?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.DSSEAttestationOccurrence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

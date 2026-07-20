@@ -46,7 +46,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case pathId = "pathId"
       case `prefix` = "prefix"
     }
@@ -63,7 +63,7 @@
       try container.encode(self.`prefix`, forKey: .`prefix`)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.BgpRouteNetworkLayerReachabilityInformation"
     }

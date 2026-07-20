@@ -154,7 +154,8 @@
     public func list(
       byItem: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -676,7 +677,8 @@
     public func list(
       byItem: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<TargetSslProxy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.TargetSslProxyList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

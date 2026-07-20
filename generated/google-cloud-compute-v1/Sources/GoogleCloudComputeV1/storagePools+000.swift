@@ -60,7 +60,7 @@
       byItem: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, StoragePoolsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -205,7 +205,7 @@
     public func list(
       byItem: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<StoragePool, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -228,7 +228,8 @@
     public func listDisks(
       byItem: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<StoragePoolDisk, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolListDisks in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolListDisks in
         var request = byItem
         request.pageToken = token
         return try await self.listDisks(request: request, options: options)
@@ -520,7 +521,7 @@
       byItem: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, StoragePoolsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -692,7 +693,7 @@
     public func list(
       byItem: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<StoragePool, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -730,7 +731,8 @@
     public func listDisks(
       byItem: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<StoragePoolDisk, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.StoragePoolListDisks in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.StoragePoolListDisks in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

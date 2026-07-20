@@ -117,7 +117,7 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleCloudWk
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED"
       case .allSupportedObjects: return "ALL_SUPPORTED_OBJECTS"
@@ -136,7 +136,7 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleCloudWk
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED": self = .unspecified
       case "ALL_SUPPORTED_OBJECTS": self = .allSupportedObjects
@@ -254,7 +254,7 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleCloudWk
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED"
       case .allSupportedBuckets: return "ALL_SUPPORTED_BUCKETS"
@@ -268,7 +268,7 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleCloudWk
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED": self = .unspecified
       case "ALL_SUPPORTED_BUCKETS": self = .allSupportedBuckets
@@ -322,7 +322,7 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleCloudWk
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudStorageConditions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

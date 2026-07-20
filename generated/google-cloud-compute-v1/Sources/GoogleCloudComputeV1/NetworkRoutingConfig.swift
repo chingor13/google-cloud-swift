@@ -107,7 +107,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .legacy: return "LEGACY"
         case .standard: return "STANDARD"
@@ -119,7 +119,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LEGACY": self = .legacy
         case "STANDARD": self = .standard
@@ -205,7 +205,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .addCostToMed: return "ADD_COST_TO_MED"
         case .`default`: return "DEFAULT"
@@ -217,7 +217,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADD_COST_TO_MED": self = .addCostToMed
         case "DEFAULT": self = .`default`
@@ -303,7 +303,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .addCostToMed: return "ADD_COST_TO_MED"
         case .`default`: return "DEFAULT"
@@ -315,7 +315,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADD_COST_TO_MED": self = .addCostToMed
         case "DEFAULT": self = .`default`
@@ -401,7 +401,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .global: return "GLOBAL"
         case .regional: return "REGIONAL"
@@ -413,7 +413,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GLOBAL": self = .global
         case "REGIONAL": self = .regional
@@ -461,7 +461,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NetworkRoutingConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

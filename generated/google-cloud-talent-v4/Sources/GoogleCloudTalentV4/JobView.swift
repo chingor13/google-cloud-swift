@@ -106,7 +106,7 @@ public enum JobView: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "JOB_VIEW_UNSPECIFIED"
     case .idOnly: return "JOB_VIEW_ID_ONLY"
@@ -121,7 +121,7 @@ public enum JobView: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "JOB_VIEW_UNSPECIFIED": self = .unspecified
     case "JOB_VIEW_ID_ONLY": self = .idOnly

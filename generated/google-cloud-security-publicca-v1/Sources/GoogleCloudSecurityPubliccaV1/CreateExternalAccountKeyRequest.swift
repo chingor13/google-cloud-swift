@@ -52,7 +52,7 @@ public struct CreateExternalAccountKeyRequest: Codable, Equatable, GoogleCloudWk
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

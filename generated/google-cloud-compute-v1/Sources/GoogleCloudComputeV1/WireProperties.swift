@@ -106,7 +106,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .allocatePerWire: return "ALLOCATE_PER_WIRE"
         case .sharedWithWireGroup: return "SHARED_WITH_WIRE_GROUP"
@@ -118,7 +118,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ALLOCATE_PER_WIRE": self = .allocatePerWire
         case "SHARED_WITH_WIRE_GROUP": self = .sharedWithWireGroup
@@ -207,7 +207,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .disablePort: return "DISABLE_PORT"
         case .`none`: return "NONE"
@@ -219,7 +219,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DISABLE_PORT": self = .disablePort
         case "NONE": self = .`none`
@@ -267,7 +267,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.WireProperties"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

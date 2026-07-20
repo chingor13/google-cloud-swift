@@ -162,7 +162,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .dedicated: return "DEDICATED"
         case .itPrivate: return "IT_PRIVATE"
@@ -175,7 +175,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DEDICATED": self = .dedicated
         case "IT_PRIVATE": self = .itPrivate
@@ -270,7 +270,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ethernet100GLr: return "LINK_TYPE_ETHERNET_100G_LR"
         case .ethernet10GLr: return "LINK_TYPE_ETHERNET_10G_LR"
@@ -283,7 +283,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LINK_TYPE_ETHERNET_100G_LR": self = .ethernet100GLr
         case "LINK_TYPE_ETHERNET_10G_LR": self = .ethernet10GLr
@@ -377,7 +377,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .ifCrossSiteNetwork: return "IF_CROSS_SITE_NETWORK"
         case .ifL2Forwarding: return "IF_L2_FORWARDING"
@@ -390,7 +390,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IF_CROSS_SITE_NETWORK": self = .ifCrossSiteNetwork
         case "IF_L2_FORWARDING": self = .ifL2Forwarding
@@ -441,7 +441,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.InterconnectGroupsCreateMembersInterconnectInput"
     }

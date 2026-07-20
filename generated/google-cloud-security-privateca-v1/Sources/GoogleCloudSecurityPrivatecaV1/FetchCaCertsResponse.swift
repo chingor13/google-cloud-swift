@@ -69,7 +69,7 @@ public struct FetchCaCertsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -80,7 +80,7 @@ public struct FetchCaCertsResponse: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.FetchCaCertsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -85,7 +85,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.VertexRagStore.RagResource"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -96,7 +96,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.VertexRagStore"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

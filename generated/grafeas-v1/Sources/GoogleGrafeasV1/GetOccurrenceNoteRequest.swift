@@ -41,7 +41,7 @@ public struct GetOccurrenceNoteRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.GetOccurrenceNoteRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

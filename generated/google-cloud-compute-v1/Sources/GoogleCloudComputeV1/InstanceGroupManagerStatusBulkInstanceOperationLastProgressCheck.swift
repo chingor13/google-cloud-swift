@@ -143,7 +143,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors.errorDetails"
           }
@@ -155,7 +155,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors"
         }
@@ -167,7 +167,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error"
       }
@@ -179,7 +179,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck"
     }

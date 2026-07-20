@@ -46,7 +46,7 @@ public struct GetIndexRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.GetIndexRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -91,7 +91,7 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .noUpgrades: return "NO_UPGRADES"
       case .noMinorUpgrades: return "NO_MINOR_UPGRADES"
@@ -104,7 +104,7 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "NO_UPGRADES": self = .noUpgrades
       case "NO_MINOR_UPGRADES": self = .noMinorUpgrades
@@ -195,7 +195,7 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "END_TIME_BEHAVIOR_UNSPECIFIED"
       case .untilEndOfSupport: return "UNTIL_END_OF_SUPPORT"
@@ -207,7 +207,7 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "END_TIME_BEHAVIOR_UNSPECIFIED": self = .unspecified
       case "UNTIL_END_OF_SUPPORT": self = .untilEndOfSupport
@@ -255,7 +255,7 @@ public struct MaintenanceExclusionOptions: Codable, Equatable, GoogleCloudWkt._A
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.MaintenanceExclusionOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

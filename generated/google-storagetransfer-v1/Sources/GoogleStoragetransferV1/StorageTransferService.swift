@@ -113,7 +113,7 @@ public class StorageTransferServiceClient: Clients.StorageTransferServiceProtoco
     byItem: ListTransferJobsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TransferJob, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleStoragetransferV1.ListTransferJobsResponse in
+      (token: Swift.String) async throws -> GoogleStoragetransferV1.ListTransferJobsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTransferJobs(request: request, options: options)
@@ -255,7 +255,7 @@ public class StorageTransferServiceClient: Clients.StorageTransferServiceProtoco
     byItem: ListAgentPoolsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AgentPool, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleStoragetransferV1.ListAgentPoolsResponse in
+      (token: Swift.String) async throws -> GoogleStoragetransferV1.ListAgentPoolsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listAgentPools(request: request, options: options)
@@ -289,7 +289,8 @@ public class StorageTransferServiceClient: Clients.StorageTransferServiceProtoco
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -641,7 +642,7 @@ extension Clients.StorageTransferServiceProtocol {
     byItem: ListTransferJobsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<TransferJob, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleStoragetransferV1.ListTransferJobsResponse in
+      (token: Swift.String) async throws -> GoogleStoragetransferV1.ListTransferJobsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -796,7 +797,7 @@ extension Clients.StorageTransferServiceProtocol {
     byItem: ListAgentPoolsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AgentPool, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleStoragetransferV1.ListAgentPoolsResponse in
+      (token: Swift.String) async throws -> GoogleStoragetransferV1.ListAgentPoolsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -851,7 +852,8 @@ extension Clients.StorageTransferServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

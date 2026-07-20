@@ -44,7 +44,7 @@ public struct SubscribeListingRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case destinationDataset = "destinationDataset"
     case destinationPubsubSubscription = "destinationPubsubSubscription"
     case name = "name"
@@ -100,7 +100,7 @@ public struct SubscribeListingRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
     indirect case destinationPubsubSubscription(DestinationPubSubSubscription?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

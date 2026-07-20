@@ -41,7 +41,7 @@ public struct GetTableDataProfileRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.GetTableDataProfileRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

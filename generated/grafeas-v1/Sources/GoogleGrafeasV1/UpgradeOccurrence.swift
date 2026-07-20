@@ -56,7 +56,7 @@ public struct UpgradeOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case `package` = "package"
     case parsedVersion = "parsedVersion"
     case distribution = "distribution"
@@ -80,7 +80,7 @@ public struct UpgradeOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackable
     try container.encode(self.windowsUpdate, forKey: .windowsUpdate)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.UpgradeOccurrence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

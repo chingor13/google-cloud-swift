@@ -41,7 +41,7 @@ public struct AsyncBatchAnnotateFilesResponse: Codable, Equatable, GoogleCloudWk
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

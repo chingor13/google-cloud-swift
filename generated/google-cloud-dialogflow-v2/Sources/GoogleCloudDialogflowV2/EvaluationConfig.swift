@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case datasets = "datasets"
       case smartReplyConfig = "smartReplyConfig"
       case smartComposeConfig = "smartComposeConfig"
@@ -122,7 +122,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -164,7 +164,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -183,7 +183,7 @@
       indirect case smartComposeConfig(EvaluationConfig.SmartComposeConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.EvaluationConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

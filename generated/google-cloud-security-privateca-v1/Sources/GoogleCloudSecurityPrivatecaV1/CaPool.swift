@@ -213,7 +213,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ENCODING_FORMAT_UNSPECIFIED"
         case .pem: return "PEM"
@@ -226,7 +226,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ENCODING_FORMAT_UNSPECIFIED": self = .unspecified
         case "PEM": self = .pem
@@ -277,7 +277,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.PublishingOptions"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -455,7 +455,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case rsa = "rsa"
         case ellipticCurve = "ellipticCurve"
       }
@@ -534,7 +534,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType"
         }
@@ -630,7 +630,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unspecified: return "EC_SIGNATURE_ALGORITHM_UNSPECIFIED"
             case .ecdsaP256: return "ECDSA_P256"
@@ -644,7 +644,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "EC_SIGNATURE_ALGORITHM_UNSPECIFIED": self = .unspecified
             case "ECDSA_P256": self = .ecdsaP256
@@ -698,7 +698,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType"
         }
@@ -717,7 +717,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         indirect case ellipticCurve(CaPool.IssuancePolicy.AllowedKeyType.EcKeyType?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType"
       }
@@ -772,7 +772,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes"
       }
@@ -784,7 +784,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.CaPool.IssuancePolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -839,7 +839,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TIER_UNSPECIFIED"
       case .enterprise: return "ENTERPRISE"
@@ -852,7 +852,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TIER_UNSPECIFIED": self = .unspecified
       case "ENTERPRISE": self = .enterprise
@@ -903,7 +903,7 @@ public struct CaPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CaPool"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

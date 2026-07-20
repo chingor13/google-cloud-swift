@@ -54,7 +54,7 @@ public struct SbomReferenceIntotoPayload: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case type = "_type"
     case predicateType = "predicateType"
     case subject = "subject"
@@ -78,7 +78,7 @@ public struct SbomReferenceIntotoPayload: Codable, Equatable, GoogleCloudWkt._An
     try container.encode(self.predicate, forKey: .predicate)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.SbomReferenceIntotoPayload"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

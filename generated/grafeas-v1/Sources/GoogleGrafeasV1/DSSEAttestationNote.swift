@@ -69,7 +69,7 @@ public struct DSSEAttestationNote: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.DSSEAttestationNote.DSSEHint"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -80,7 +80,7 @@ public struct DSSEAttestationNote: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.DSSEAttestationNote"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

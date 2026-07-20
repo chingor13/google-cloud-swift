@@ -87,7 +87,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .applyRetentionPolicy: return "APPLY_RETENTION_POLICY"
         case .keepAutoSnapshots: return "KEEP_AUTO_SNAPSHOTS"
@@ -100,7 +100,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "APPLY_RETENTION_POLICY": self = .applyRetentionPolicy
         case "KEEP_AUTO_SNAPSHOTS": self = .keepAutoSnapshots
@@ -151,7 +151,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.ResourcePolicySnapshotSchedulePolicyRetentionPolicy"
     }

@@ -46,7 +46,7 @@ public struct FetchRepositoryHistoryResponse: Codable, Equatable, GoogleCloudWkt
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.FetchRepositoryHistoryResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

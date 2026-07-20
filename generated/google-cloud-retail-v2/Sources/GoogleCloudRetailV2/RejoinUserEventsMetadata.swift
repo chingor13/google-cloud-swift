@@ -37,7 +37,7 @@ public struct RejoinUserEventsMetadata: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.RejoinUserEventsMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

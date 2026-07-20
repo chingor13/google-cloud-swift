@@ -87,7 +87,7 @@ public struct AggregationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AGGREGATION_LEVEL_UNSPECIFIED"
       case .account: return "ACCOUNT"
@@ -100,7 +100,7 @@ public struct AggregationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AGGREGATION_LEVEL_UNSPECIFIED": self = .unspecified
       case "ACCOUNT": self = .account
@@ -191,7 +191,7 @@ public struct AggregationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AGGREGATION_INTERVAL_UNSPECIFIED"
       case .daily: return "DAILY"
@@ -204,7 +204,7 @@ public struct AggregationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AGGREGATION_INTERVAL_UNSPECIFIED": self = .unspecified
       case "DAILY": self = .daily
@@ -255,7 +255,7 @@ public struct AggregationInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.v1.AggregationInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

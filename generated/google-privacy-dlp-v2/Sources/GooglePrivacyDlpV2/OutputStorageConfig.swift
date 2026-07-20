@@ -53,7 +53,7 @@ public struct OutputStorageConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case table = "table"
     case storagePath = "storagePath"
     case outputSchema = "outputSchema"
@@ -150,7 +150,7 @@ public struct OutputStorageConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "OUTPUT_SCHEMA_UNSPECIFIED"
       case .basicColumns: return "BASIC_COLUMNS"
@@ -166,7 +166,7 @@ public struct OutputStorageConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "OUTPUT_SCHEMA_UNSPECIFIED": self = .unspecified
       case "BASIC_COLUMNS": self = .basicColumns
@@ -261,7 +261,7 @@ public struct OutputStorageConfig: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case storagePath(CloudStoragePath?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OutputStorageConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

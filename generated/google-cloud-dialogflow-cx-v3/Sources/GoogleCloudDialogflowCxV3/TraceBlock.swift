@@ -60,7 +60,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case playbookTraceMetadata = "playbookTraceMetadata"
       case flowTraceMetadata = "flowTraceMetadata"
       case speechProcessingMetadata = "speechProcessingMetadata"
@@ -144,7 +144,7 @@
       indirect case speechProcessingMetadata(SpeechProcessingMetadata?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TraceBlock"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

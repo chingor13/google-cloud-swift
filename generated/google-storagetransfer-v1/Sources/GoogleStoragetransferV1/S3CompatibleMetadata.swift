@@ -57,7 +57,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case authMethod = "authMethod"
     case requestModel = "requestModel"
     case `protocol` = "protocol"
@@ -124,7 +124,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AUTH_METHOD_UNSPECIFIED"
       case .awsSignatureV4: return "AUTH_METHOD_AWS_SIGNATURE_V4"
@@ -137,7 +137,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AUTH_METHOD_UNSPECIFIED": self = .unspecified
       case "AUTH_METHOD_AWS_SIGNATURE_V4": self = .awsSignatureV4
@@ -231,7 +231,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "REQUEST_MODEL_UNSPECIFIED"
       case .virtualHostedStyle: return "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE"
@@ -244,7 +244,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "REQUEST_MODEL_UNSPECIFIED": self = .unspecified
       case "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE": self = .virtualHostedStyle
@@ -338,7 +338,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "NETWORK_PROTOCOL_UNSPECIFIED"
       case .https: return "NETWORK_PROTOCOL_HTTPS"
@@ -351,7 +351,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "NETWORK_PROTOCOL_UNSPECIFIED": self = .unspecified
       case "NETWORK_PROTOCOL_HTTPS": self = .https
@@ -443,7 +443,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "LIST_API_UNSPECIFIED"
       case .listObjectsV2: return "LIST_OBJECTS_V2"
@@ -456,7 +456,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "LIST_API_UNSPECIFIED": self = .unspecified
       case "LIST_OBJECTS_V2": self = .listObjectsV2
@@ -507,7 +507,7 @@ public struct S3CompatibleMetadata: Codable, Equatable, GoogleCloudWkt._AnyPacka
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.S3CompatibleMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

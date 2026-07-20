@@ -104,7 +104,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .batch: return "DELIMITER_BATCH"
         case .location: return "DELIMITER_LOCATION"
@@ -117,7 +117,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELIMITER_BATCH": self = .batch
         case "DELIMITER_LOCATION": self = .location
@@ -215,7 +215,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .minimum: return "TYPE_MINIMUM"
         case .offset: return "TYPE_OFFSET"
@@ -228,7 +228,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "TYPE_MINIMUM": self = .minimum
         case "TYPE_OFFSET": self = .offset
@@ -279,7 +279,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RolloutPlanWaveOrchestrationOptionsDelay"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

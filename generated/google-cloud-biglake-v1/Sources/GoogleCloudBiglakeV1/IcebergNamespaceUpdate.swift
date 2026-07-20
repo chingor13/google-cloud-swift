@@ -43,7 +43,7 @@ public struct IcebergNamespaceUpdate: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.IcebergNamespaceUpdate"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -65,8 +65,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, VmExtensionPoliciesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse
-        in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -199,7 +199,7 @@
       byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GlobalVmExtensionPolicy, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -392,8 +392,8 @@
       options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, VmExtensionPoliciesScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse
-        in
+        (token: Swift.String) async throws
+          -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -539,7 +539,7 @@
       byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GlobalVmExtensionPolicy, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

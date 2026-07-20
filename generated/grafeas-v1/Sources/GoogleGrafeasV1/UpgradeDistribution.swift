@@ -55,7 +55,7 @@ public struct UpgradeDistribution: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.UpgradeDistribution"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

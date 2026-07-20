@@ -47,7 +47,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case exactMatchResults = "exactMatchResults"
       case bleuResults = "bleuResults"
       case rougeResults = "rougeResults"
@@ -345,7 +345,7 @@
       indirect case metricxResult(MetricxResult?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EvaluateInstancesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

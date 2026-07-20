@@ -67,7 +67,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case displayName = "displayName"
       case genericWebService = "genericWebService"
@@ -245,7 +245,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue"
         }
@@ -297,7 +297,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.OAuthConfig"
         }
@@ -340,7 +340,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig"
         }
@@ -405,7 +405,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SERVICE_AGENT_AUTH_UNSPECIFIED"
           case .`none`: return "NONE"
@@ -419,7 +419,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SERVICE_AGENT_AUTH_UNSPECIFIED": self = .unspecified
           case "NONE": self = .`none`
@@ -514,7 +514,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "WEBHOOK_TYPE_UNSPECIFIED"
           case .standard: return "STANDARD"
@@ -527,7 +527,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "WEBHOOK_TYPE_UNSPECIFIED": self = .unspecified
           case "STANDARD": self = .standard
@@ -634,7 +634,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "HTTP_METHOD_UNSPECIFIED"
           case .post: return "POST"
@@ -652,7 +652,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "HTTP_METHOD_UNSPECIFIED": self = .unspecified
           case "POST": self = .post
@@ -718,7 +718,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -761,7 +761,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -781,7 +781,7 @@
       indirect case serviceDirectory(Webhook.ServiceDirectoryConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

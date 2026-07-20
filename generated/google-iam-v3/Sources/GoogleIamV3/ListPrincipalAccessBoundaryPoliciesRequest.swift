@@ -62,7 +62,7 @@ public struct ListPrincipalAccessBoundaryPoliciesRequest: Codable, Equatable, Go
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

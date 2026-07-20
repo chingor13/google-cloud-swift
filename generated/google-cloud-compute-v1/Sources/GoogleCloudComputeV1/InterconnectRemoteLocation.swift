@@ -185,7 +185,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .africa: return "AFRICA"
         case .asiaPac: return "ASIA_PAC"
@@ -200,7 +200,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AFRICA": self = .africa
         case "ASIA_PAC": self = .asiaPac
@@ -300,7 +300,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .supported: return "LACP_SUPPORTED"
         case .unsupported: return "LACP_UNSUPPORTED"
@@ -312,7 +312,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "LACP_SUPPORTED": self = .supported
         case "LACP_UNSUPPORTED": self = .unsupported
@@ -402,7 +402,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .available: return "AVAILABLE"
         case .closed: return "CLOSED"
@@ -414,7 +414,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AVAILABLE": self = .available
         case "CLOSED": self = .closed
@@ -462,7 +462,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectRemoteLocation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -214,7 +214,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CATEGORY_UNSPECIFIED"
         case .license: return "LICENSE"
@@ -227,7 +227,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CATEGORY_UNSPECIFIED": self = .unspecified
         case "LICENSE": self = .license
@@ -318,7 +318,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .invalid: return "INVALID"
         case .thirtySixMonth: return "THIRTY_SIX_MONTH"
@@ -331,7 +331,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INVALID": self = .invalid
         case "THIRTY_SIX_MONTH": self = .thirtySixMonth
@@ -428,7 +428,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .active: return "ACTIVE"
         case .cancelled: return "CANCELLED"
@@ -443,7 +443,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACTIVE": self = .active
         case "CANCELLED": self = .cancelled
@@ -623,7 +623,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .acceleratorOptimized: return "ACCELERATOR_OPTIMIZED"
         case .acceleratorOptimizedA3: return "ACCELERATOR_OPTIMIZED_A3"
@@ -673,7 +673,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ACCELERATOR_OPTIMIZED": self = .acceleratorOptimized
         case "ACCELERATOR_OPTIMIZED_A3": self = .acceleratorOptimizedA3
@@ -835,7 +835,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Commitment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

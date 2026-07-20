@@ -136,7 +136,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.SetParameterAction"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -230,7 +230,7 @@
             return copy
           }
 
-          private enum CodingKeys: String, CodingKey {
+          private enum CodingKeys: Swift.String, CodingKey {
             case message = "message"
             case additionalCases = "additionalCases"
           }
@@ -281,7 +281,7 @@
             indirect case additionalCases(Fulfillment.ConditionalCases?)
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases.Case.CaseContent"
           }
@@ -293,7 +293,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases.Case"
         }
@@ -305,7 +305,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -358,7 +358,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -369,7 +369,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

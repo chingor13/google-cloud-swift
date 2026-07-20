@@ -127,7 +127,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Tool.GoogleSearch"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -185,7 +185,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Tool.ParallelAiSearch"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -220,7 +220,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Tool.CodeExecution"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -300,7 +300,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "ENVIRONMENT_UNSPECIFIED"
           case .browser: return "ENVIRONMENT_BROWSER"
@@ -312,7 +312,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "ENVIRONMENT_UNSPECIFIED": self = .unspecified
           case "ENVIRONMENT_BROWSER": self = .browser
@@ -360,7 +360,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Tool.ComputerUse"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -427,7 +427,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PHISH_BLOCK_THRESHOLD_UNSPECIFIED"
         case .blockLowAndAbove: return "BLOCK_LOW_AND_ABOVE"
@@ -444,7 +444,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PHISH_BLOCK_THRESHOLD_UNSPECIFIED": self = .unspecified
         case "BLOCK_LOW_AND_ABOVE": self = .blockLowAndAbove
@@ -507,7 +507,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Tool"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

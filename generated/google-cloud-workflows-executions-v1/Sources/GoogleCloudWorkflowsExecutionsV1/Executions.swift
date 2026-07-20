@@ -60,7 +60,8 @@ public class ExecutionsClient: Clients.ExecutionsProtocol {
     byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse in
+      (token: Swift.String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listExecutions(request: request, options: options)
@@ -196,7 +197,8 @@ extension Clients.ExecutionsProtocol {
     byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse in
+      (token: Swift.String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

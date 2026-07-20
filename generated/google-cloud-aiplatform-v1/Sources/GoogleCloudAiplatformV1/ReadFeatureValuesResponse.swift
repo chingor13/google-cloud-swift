@@ -73,7 +73,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.FeatureDescriptor"
       }
@@ -123,7 +123,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.Header"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -190,7 +190,7 @@
           return copy
         }
 
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: Swift.String, CodingKey {
           case value = "value"
           case values = "values"
         }
@@ -240,7 +240,7 @@
           indirect case values(FeatureValueList?)
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.EntityView.Data"
         }
@@ -252,7 +252,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.EntityView"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -263,7 +263,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

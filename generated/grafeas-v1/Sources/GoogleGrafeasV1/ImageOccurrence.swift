@@ -55,7 +55,9 @@ public struct ImageOccurrence: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.ImageOccurrence" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.ImageOccurrence"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

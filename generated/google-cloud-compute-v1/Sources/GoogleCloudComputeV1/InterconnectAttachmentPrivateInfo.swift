@@ -43,7 +43,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case tag8021Q = "tag8021q"
     }
 
@@ -57,7 +57,7 @@
       try container.encode(self.tag8021Q, forKey: .tag8021Q)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectAttachmentPrivateInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

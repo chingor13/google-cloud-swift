@@ -45,7 +45,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case stringContents = "stringContents"
     case stringContentsOne = "stringContentsOne"
     case stringContentsTwo = "stringContentsTwo"
@@ -199,7 +199,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithOneOf.Message"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -229,7 +229,7 @@ public struct MessageWithOneOf: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case duration(GoogleCloudWkt.Duration?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithOneOf"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

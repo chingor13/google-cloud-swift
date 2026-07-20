@@ -90,7 +90,7 @@ public struct Error: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .errorInfoUnspecified: return "ERROR_INFO_UNSPECIFIED"
       case .imageScanUnavailableInRegion: return "IMAGE_SCAN_UNAVAILABLE_IN_REGION"
@@ -103,7 +103,7 @@ public struct Error: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ERROR_INFO_UNSPECIFIED": self = .errorInfoUnspecified
       case "IMAGE_SCAN_UNAVAILABLE_IN_REGION": self = .imageScanUnavailableInRegion
@@ -154,7 +154,9 @@ public struct Error: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.privacy.dlp.v2.Error" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.privacy.dlp.v2.Error"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

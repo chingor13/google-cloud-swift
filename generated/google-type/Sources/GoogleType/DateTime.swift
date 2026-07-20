@@ -95,7 +95,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case year = "year"
     case month = "month"
     case day = "day"
@@ -172,7 +172,9 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case timeZone(TimeZone?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.type.DateTime" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.type.DateTime"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

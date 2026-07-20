@@ -85,7 +85,8 @@ public class IAMClient: Clients.IAMProtocol {
   public func listServiceAccounts(
     byItem: ListServiceAccountsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ServiceAccount, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.ListServiceAccountsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleIamAdminV1.ListServiceAccountsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listServiceAccounts(request: request, options: options)
@@ -438,7 +439,8 @@ public class IAMClient: Clients.IAMProtocol {
   public func queryGrantableRoles(
     byItem: QueryGrantableRolesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Role, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.QueryGrantableRolesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleIamAdminV1.QueryGrantableRolesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryGrantableRoles(request: request, options: options)
@@ -467,7 +469,7 @@ public class IAMClient: Clients.IAMProtocol {
   public func listRoles(
     byItem: ListRolesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Role, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.ListRolesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleIamAdminV1.ListRolesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRoles(request: request, options: options)
@@ -568,7 +570,7 @@ public class IAMClient: Clients.IAMProtocol {
     byItem: QueryTestablePermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Permission, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleIamAdminV1.QueryTestablePermissionsResponse in
+      (token: Swift.String) async throws -> GoogleIamAdminV1.QueryTestablePermissionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.queryTestablePermissions(request: request, options: options)
@@ -1036,7 +1038,8 @@ extension Clients.IAMProtocol {
   public func listServiceAccounts(
     byItem: ListServiceAccountsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ServiceAccount, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.ListServiceAccountsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleIamAdminV1.ListServiceAccountsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1442,7 +1445,8 @@ extension Clients.IAMProtocol {
   public func queryGrantableRoles(
     byItem: QueryGrantableRolesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Role, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.QueryGrantableRolesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleIamAdminV1.QueryGrantableRolesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1478,7 +1482,7 @@ extension Clients.IAMProtocol {
   public func listRoles(
     byItem: ListRolesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Role, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleIamAdminV1.ListRolesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleIamAdminV1.ListRolesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1556,7 +1560,7 @@ extension Clients.IAMProtocol {
     byItem: QueryTestablePermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Permission, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleIamAdminV1.QueryTestablePermissionsResponse in
+      (token: Swift.String) async throws -> GoogleIamAdminV1.QueryTestablePermissionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -42,7 +42,7 @@ public struct GetServiceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.GetServiceRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

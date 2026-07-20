@@ -208,7 +208,7 @@ public enum Code: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .ok: return "OK"
     case .cancelled: return "CANCELLED"
@@ -235,7 +235,7 @@ public enum Code: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "OK": self = .ok
     case "CANCELLED": self = .cancelled
@@ -271,7 +271,6 @@ public enum Code: Codable, Equatable, Sendable {
     case 5: self = .notFound
     case 6: self = .alreadyExists
     case 7: self = .permissionDenied
-    case 16: self = .unauthenticated
     case 8: self = .resourceExhausted
     case 9: self = .failedPrecondition
     case 10: self = .aborted
@@ -280,6 +279,7 @@ public enum Code: Codable, Equatable, Sendable {
     case 13: self = .`internal`
     case 14: self = .unavailable
     case 15: self = .dataLoss
+    case 16: self = .unauthenticated
     default: self = .unknownIntValue(intValue)
     }
   }

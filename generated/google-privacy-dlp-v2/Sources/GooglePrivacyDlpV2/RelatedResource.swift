@@ -44,7 +44,7 @@ public struct RelatedResource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.RelatedResource"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

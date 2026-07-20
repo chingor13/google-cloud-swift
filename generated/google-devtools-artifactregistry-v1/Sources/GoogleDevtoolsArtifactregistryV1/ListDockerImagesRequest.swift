@@ -50,7 +50,7 @@ public struct ListDockerImagesRequest: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ListDockerImagesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

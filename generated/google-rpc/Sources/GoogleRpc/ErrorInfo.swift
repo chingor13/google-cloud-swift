@@ -86,7 +86,9 @@ public struct ErrorInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.ErrorInfo" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.rpc.ErrorInfo"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

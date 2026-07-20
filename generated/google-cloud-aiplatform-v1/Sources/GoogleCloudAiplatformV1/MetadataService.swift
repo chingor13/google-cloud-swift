@@ -130,7 +130,7 @@
       byItem: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataStore, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListMetadataStoresResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListMetadataStoresResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listMetadataStores(request: request, options: options)
@@ -229,7 +229,7 @@
       byItem: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Artifact, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListArtifactsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListArtifactsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listArtifacts(request: request, options: options)
@@ -399,7 +399,7 @@
       byItem: ListContextsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Context, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListContextsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListContextsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listContexts(request: request, options: options)
@@ -614,7 +614,7 @@
       byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListExecutionsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListExecutionsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listExecutions(request: request, options: options)
@@ -807,7 +807,7 @@
       byItem: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataSchema, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListMetadataSchemasResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListMetadataSchemasResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listMetadataSchemas(request: request, options: options)
@@ -840,7 +840,8 @@
     public func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
@@ -914,7 +915,8 @@
     public func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
@@ -1759,7 +1761,7 @@
       byItem: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataStore, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListMetadataStoresResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListMetadataStoresResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1879,7 +1881,7 @@
       byItem: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Artifact, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListArtifactsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListArtifactsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2060,7 +2062,7 @@
       byItem: ListContextsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Context, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListContextsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListContextsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2333,7 +2335,7 @@
       byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListExecutionsResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListExecutionsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2558,7 +2560,7 @@
       byItem: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataSchema, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudAiplatformV1.ListMetadataSchemasResponse in
+        (token: Swift.String) async throws -> GoogleCloudAiplatformV1.ListMetadataSchemasResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2615,7 +2617,8 @@
     public func listLocations(
       byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2690,7 +2693,8 @@
     public func listOperations(
       byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

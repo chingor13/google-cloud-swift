@@ -66,7 +66,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -97,7 +97,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -137,7 +137,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -177,7 +177,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -188,7 +188,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

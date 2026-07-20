@@ -97,7 +97,8 @@ public class ProductSearchClient: Clients.ProductSearchProtocol {
   public func listProductSets(
     byItem: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ProductSet, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listProductSets(request: request, options: options)
@@ -185,7 +186,8 @@ public class ProductSearchClient: Clients.ProductSearchProtocol {
   public func listProducts(
     byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listProducts(request: request, options: options)
@@ -312,7 +314,7 @@ public class ProductSearchClient: Clients.ProductSearchProtocol {
     byItem: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceImage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listReferenceImages(request: request, options: options)
@@ -386,7 +388,7 @@ public class ProductSearchClient: Clients.ProductSearchProtocol {
     byItem: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listProductsInProductSet(request: request, options: options)
@@ -983,7 +985,8 @@ extension Clients.ProductSearchProtocol {
   public func listProductSets(
     byItem: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ProductSet, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1107,7 +1110,8 @@ extension Clients.ProductSearchProtocol {
   public func listProducts(
     byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1249,7 +1253,7 @@ extension Clients.ProductSearchProtocol {
     byItem: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceImage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1350,7 +1354,7 @@ extension Clients.ProductSearchProtocol {
     byItem: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
+      (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

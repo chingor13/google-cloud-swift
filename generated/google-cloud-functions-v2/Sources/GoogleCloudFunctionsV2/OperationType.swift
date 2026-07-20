@@ -60,7 +60,7 @@ public enum OperationType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .operationtypeUnspecified: return "OPERATIONTYPE_UNSPECIFIED"
     case .createFunction: return "CREATE_FUNCTION"
@@ -74,7 +74,7 @@ public enum OperationType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "OPERATIONTYPE_UNSPECIFIED": self = .operationtypeUnspecified
     case "CREATE_FUNCTION": self = .createFunction

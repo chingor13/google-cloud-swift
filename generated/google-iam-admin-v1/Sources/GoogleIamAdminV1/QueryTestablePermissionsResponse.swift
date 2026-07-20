@@ -46,7 +46,7 @@ public struct QueryTestablePermissionsResponse: Codable, Equatable, GoogleCloudW
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.QueryTestablePermissionsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

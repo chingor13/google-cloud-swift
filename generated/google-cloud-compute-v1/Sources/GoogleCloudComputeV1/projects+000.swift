@@ -265,7 +265,7 @@
       byItem: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
         var request = byItem
         request.pageToken = token
         return try await self.getXpnResources(request: request, options: options)
@@ -288,7 +288,7 @@
     public func listXpnHosts(
       byItem: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Project, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.XpnHostList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.XpnHostList in
         var request = byItem
         request.pageToken = token
         return try await self.listXpnHosts(request: request, options: options)
@@ -1036,7 +1036,7 @@
       byItem: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<XpnResourceId, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1072,7 +1072,7 @@
     public func listXpnHosts(
       byItem: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Project, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.XpnHostList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.XpnHostList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

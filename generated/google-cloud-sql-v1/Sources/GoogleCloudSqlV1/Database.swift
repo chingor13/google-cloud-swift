@@ -67,7 +67,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case kind = "kind"
       case charset = "charset"
       case collation = "collation"
@@ -131,7 +131,7 @@
       indirect case sqlserverDatabaseDetails(SqlServerDatabaseDetails?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Database"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

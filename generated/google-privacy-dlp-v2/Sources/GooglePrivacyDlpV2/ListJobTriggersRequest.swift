@@ -114,7 +114,7 @@ public struct ListJobTriggersRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ListJobTriggersRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

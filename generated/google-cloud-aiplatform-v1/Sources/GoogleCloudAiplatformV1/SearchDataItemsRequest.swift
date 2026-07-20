@@ -120,7 +120,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case orderByDataItem = "orderByDataItem"
       case orderByAnnotation = "orderByAnnotation"
       case dataset = "dataset"
@@ -227,7 +227,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SearchDataItemsRequest.OrderByAnnotation"
       }
@@ -247,7 +247,7 @@
       indirect case orderByAnnotation(SearchDataItemsRequest.OrderByAnnotation?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SearchDataItemsRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

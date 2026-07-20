@@ -47,7 +47,7 @@ public struct MessageWithBytesValue: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithBytesValue"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

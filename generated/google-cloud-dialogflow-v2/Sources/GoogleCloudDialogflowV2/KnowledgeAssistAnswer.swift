@@ -77,7 +77,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -115,7 +115,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case answerText = "answerText"
         case faqSource = "faqSource"
         case generativeSource = "generativeSource"
@@ -185,7 +185,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.FaqSource"
         }
@@ -253,7 +253,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.Snippet"
           }
@@ -265,7 +265,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource"
         }
@@ -285,7 +285,7 @@
         indirect case generativeSource(KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer"
       }
@@ -297,7 +297,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

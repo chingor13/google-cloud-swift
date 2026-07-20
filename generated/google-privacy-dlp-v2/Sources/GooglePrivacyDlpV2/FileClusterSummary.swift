@@ -69,7 +69,7 @@ public struct FileClusterSummary: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.FileClusterSummary"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

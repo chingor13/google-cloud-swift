@@ -70,7 +70,7 @@ public class CloudBillingClient: Clients.CloudBillingProtocol {
     byItem: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<BillingAccount, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listBillingAccounts(request: request, options: options)
@@ -137,7 +137,7 @@ public class CloudBillingClient: Clients.CloudBillingProtocol {
     byItem: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ProjectBillingInfo, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listProjectBillingInfo(request: request, options: options)
@@ -475,7 +475,7 @@ extension Clients.CloudBillingProtocol {
     byItem: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<BillingAccount, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -567,7 +567,7 @@ extension Clients.CloudBillingProtocol {
     byItem: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ProjectBillingInfo, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
+      (token: Swift.String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

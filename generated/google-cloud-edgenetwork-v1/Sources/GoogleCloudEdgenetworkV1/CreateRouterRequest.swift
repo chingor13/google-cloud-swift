@@ -63,7 +63,7 @@ public struct CreateRouterRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.CreateRouterRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

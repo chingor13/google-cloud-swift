@@ -40,7 +40,7 @@ public struct GetNetworkRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgenetwork.v1.GetNetworkRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -113,7 +113,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWkt._AnyPackab
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CloudStorageOptions.FileSet"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -168,7 +168,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SAMPLE_METHOD_UNSPECIFIED"
       case .top: return "TOP"
@@ -181,7 +181,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWkt._AnyPackab
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SAMPLE_METHOD_UNSPECIFIED": self = .unspecified
       case "TOP": self = .top
@@ -232,7 +232,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWkt._AnyPackab
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CloudStorageOptions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

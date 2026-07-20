@@ -82,7 +82,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SafetySettings.Phrase"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -144,7 +144,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter"
         }
@@ -203,7 +203,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SAFETY_FILTER_LEVEL_UNSPECIFIED"
           case .blockNone: return "BLOCK_NONE"
@@ -218,7 +218,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SAFETY_FILTER_LEVEL_UNSPECIFIED": self = .unspecified
           case "BLOCK_NONE": self = .blockNone
@@ -322,7 +322,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SAFETY_CATEGORY_UNSPECIFIED"
           case .dangerousContent: return "DANGEROUS_CONTENT"
@@ -337,7 +337,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SAFETY_CATEGORY_UNSPECIFIED": self = .unspecified
           case "DANGEROUS_CONTENT": self = .dangerousContent
@@ -394,7 +394,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -428,7 +428,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings"
       }
@@ -483,7 +483,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "PHRASE_MATCH_STRATEGY_UNSPECIFIED"
         case .partialMatch: return "PARTIAL_MATCH"
@@ -496,7 +496,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PHRASE_MATCH_STRATEGY_UNSPECIFIED": self = .unspecified
         case "PARTIAL_MATCH": self = .partialMatch
@@ -547,7 +547,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SafetySettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

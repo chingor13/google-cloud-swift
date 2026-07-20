@@ -48,7 +48,7 @@ public struct StoredInfoTypeConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case displayName = "displayName"
     case description = "description"
     case largeCustomDictionary = "largeCustomDictionary"
@@ -114,7 +114,7 @@ public struct StoredInfoTypeConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
     indirect case regex(CustomInfoType.Regex?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.StoredInfoTypeConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

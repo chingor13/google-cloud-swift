@@ -57,7 +57,7 @@ public struct FieldTransformation: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case fields = "fields"
     case condition = "condition"
     case primitiveTransformation = "primitiveTransformation"
@@ -116,7 +116,7 @@ public struct FieldTransformation: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case infoTypeTransformations(InfoTypeTransformations?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.FieldTransformation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

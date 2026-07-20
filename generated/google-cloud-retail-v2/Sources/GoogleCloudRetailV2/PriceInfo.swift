@@ -194,7 +194,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.PriceInfo.PriceRange"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -205,7 +205,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PriceInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

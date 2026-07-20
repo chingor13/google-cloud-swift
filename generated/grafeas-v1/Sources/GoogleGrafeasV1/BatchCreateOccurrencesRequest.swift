@@ -44,7 +44,7 @@ public struct BatchCreateOccurrencesRequest: Codable, Equatable, GoogleCloudWkt.
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.BatchCreateOccurrencesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

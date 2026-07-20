@@ -104,7 +104,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case description = "description"
       case intent = "intent"
@@ -177,7 +177,7 @@
       case targetFlow(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRoute"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case freeFormSuggestion = "freeFormSuggestion"
       case summarySuggestion = "summarySuggestion"
       case agentCoachingSuggestion = "agentCoachingSuggestion"
@@ -126,7 +126,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorSuggestion.ToolCallInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -147,7 +147,7 @@
       indirect case agentCoachingSuggestion(AgentCoachingSuggestion?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.GeneratorSuggestion"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

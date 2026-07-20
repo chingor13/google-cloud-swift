@@ -41,7 +41,7 @@ public struct DeleteAuthorizedCertificateRequest: Codable, Equatable, GoogleClou
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.DeleteAuthorizedCertificateRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

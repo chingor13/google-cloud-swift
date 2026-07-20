@@ -61,7 +61,7 @@ public enum PrivateIPv6GoogleAccess: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .privateIpv6GoogleAccessUnspecified: return "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED"
     case .privateIpv6GoogleAccessDisabled: return "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED"
@@ -75,7 +75,7 @@ public enum PrivateIPv6GoogleAccess: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED": self = .privateIpv6GoogleAccessUnspecified
     case "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED": self = .privateIpv6GoogleAccessDisabled

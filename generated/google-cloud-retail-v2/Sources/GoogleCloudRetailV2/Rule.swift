@@ -52,7 +52,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case boostAction = "boostAction"
     case redirectAction = "redirectAction"
     case onewaySynonymsAction = "onewaySynonymsAction"
@@ -225,7 +225,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.BoostAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -291,7 +291,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.FilterAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -333,7 +333,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.RedirectAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -373,7 +373,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.TwowaySynonymsAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -422,7 +422,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.OnewaySynonymsAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -467,7 +467,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.DoNotAssociateAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -511,7 +511,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.ReplacementAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -546,7 +546,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.IgnoreAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -642,7 +642,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.retail.v2.Rule.ForceReturnFacetAction.FacetPositionAdjustment"
       }
@@ -654,7 +654,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.ForceReturnFacetAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -711,7 +711,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.RemoveFacetAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -784,7 +784,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case pinMap = "pinMap"
     }
 
@@ -817,7 +817,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.PinAction"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -856,7 +856,9 @@ public struct Rule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case pinAction(Rule.PinAction?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.retail.v2.Rule" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.retail.v2.Rule"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

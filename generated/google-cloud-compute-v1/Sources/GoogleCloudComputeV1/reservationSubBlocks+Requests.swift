@@ -101,7 +101,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .subBlockViewBasic: return "SUB_BLOCK_VIEW_BASIC"
           case .subBlockViewFull: return "SUB_BLOCK_VIEW_FULL"
@@ -114,7 +114,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SUB_BLOCK_VIEW_BASIC": self = .subBlockViewBasic
           case "SUB_BLOCK_VIEW_FULL": self = .subBlockViewFull
@@ -165,7 +165,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.getRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -213,7 +213,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.getIamPolicyRequest"
       }
@@ -281,7 +281,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.getVersionRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -417,7 +417,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.listRequest"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -479,7 +479,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.performMaintenanceRequest"
       }
@@ -547,7 +547,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.reportFaultyRequest"
       }
@@ -598,7 +598,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.setIamPolicyRequest"
       }
@@ -649,7 +649,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.reservationSubBlocks.testIamPermissionsRequest"
       }

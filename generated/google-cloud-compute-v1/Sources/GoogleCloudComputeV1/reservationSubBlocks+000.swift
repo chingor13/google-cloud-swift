@@ -121,7 +121,8 @@
       byItem: ReservationSubBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationSubBlock, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
+        in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -519,7 +520,8 @@
       byItem: ReservationSubBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationSubBlock, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
+        in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

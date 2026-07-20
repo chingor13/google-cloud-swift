@@ -57,7 +57,7 @@ public enum IPv6AccessType: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .ipv6AccessTypeUnspecified: return "IPV6_ACCESS_TYPE_UNSPECIFIED"
     case .`internal`: return "INTERNAL"
@@ -70,7 +70,7 @@ public enum IPv6AccessType: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "IPV6_ACCESS_TYPE_UNSPECIFIED": self = .ipv6AccessTypeUnspecified
     case "INTERNAL": self = .`internal`

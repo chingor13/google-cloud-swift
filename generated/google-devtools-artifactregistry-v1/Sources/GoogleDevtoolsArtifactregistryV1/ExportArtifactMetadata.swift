@@ -70,7 +70,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWkt._AnyPac
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case gcsObjectPath = "gcsObjectPath"
       case name = "name"
       case hashes = "hashes"
@@ -119,7 +119,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWkt._AnyPac
       case gcsObjectPath(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.ExportArtifactMetadata.ExportedFile"
     }
@@ -131,7 +131,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWkt._AnyPac
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ExportArtifactMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

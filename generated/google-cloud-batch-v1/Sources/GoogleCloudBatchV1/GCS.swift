@@ -41,7 +41,9 @@ public struct GCS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.batch.v1.GCS" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.batch.v1.GCS"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

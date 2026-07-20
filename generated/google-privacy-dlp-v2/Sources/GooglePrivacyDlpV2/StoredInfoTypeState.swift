@@ -66,7 +66,7 @@ public enum StoredInfoTypeState: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "STORED_INFO_TYPE_STATE_UNSPECIFIED"
     case .pending: return "PENDING"
@@ -81,7 +81,7 @@ public enum StoredInfoTypeState: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "STORED_INFO_TYPE_STATE_UNSPECIFIED": self = .unspecified
     case "PENDING": self = .pending

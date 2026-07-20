@@ -108,7 +108,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case dataformRepositorySource = "dataformRepositorySource"
       case gcsNotebookSource = "gcsNotebookSource"
       case directNotebookSource = "directNotebookSource"
@@ -342,7 +342,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.DataformRepositorySource"
       }
@@ -383,7 +383,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.GcsNotebookSource"
       }
@@ -418,7 +418,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.DirectNotebookSource"
       }
@@ -459,7 +459,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.CustomEnvironmentSpec"
       }
@@ -491,7 +491,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.WorkbenchRuntime"
       }
@@ -544,7 +544,7 @@
       indirect case workbenchRuntime(NotebookExecutionJob.WorkbenchRuntime?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

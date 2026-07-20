@@ -49,7 +49,7 @@ public struct Config: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.Config"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

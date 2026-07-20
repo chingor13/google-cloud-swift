@@ -41,7 +41,7 @@ public struct MembershipFeatureSpec: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case configmanagement = "configmanagement"
   }
 
@@ -82,7 +82,7 @@ public struct MembershipFeatureSpec: Codable, Equatable, GoogleCloudWkt._AnyPack
     indirect case configmanagement(GoogleCloudGkehubConfigmanagementV1.MembershipSpec?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.MembershipFeatureSpec"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

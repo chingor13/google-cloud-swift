@@ -138,7 +138,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.KnowledgeAssistBehavior"
       }
@@ -222,7 +222,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "QUERY_GENERATION_FAILURE_REASON_UNSPECIFIED"
         case .queryGenerationOutOfQuota: return "QUERY_GENERATION_OUT_OF_QUOTA"
@@ -245,7 +245,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "QUERY_GENERATION_FAILURE_REASON_UNSPECIFIED": self = .unspecified
         case "QUERY_GENERATION_OUT_OF_QUOTA": self = .queryGenerationOutOfQuota
@@ -366,7 +366,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "QUERY_CATEGORIZATION_FAILURE_REASON_UNSPECIFIED"
         case .queryCategorizationInvalidConfig: return "QUERY_CATEGORIZATION_INVALID_CONFIG"
@@ -380,7 +380,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "QUERY_CATEGORIZATION_FAILURE_REASON_UNSPECIFIED": self = .unspecified
         case "QUERY_CATEGORIZATION_INVALID_CONFIG": self = .queryCategorizationInvalidConfig
@@ -434,7 +434,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

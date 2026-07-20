@@ -149,7 +149,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case creationTimestamp = "creationTimestamp"
       case description = "description"
       case guestFlush = "guestFlush"
@@ -286,7 +286,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .creating: return "CREATING"
         case .deleting: return "DELETING"
@@ -301,7 +301,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CREATING": self = .creating
         case "DELETING": self = .deleting
@@ -358,7 +358,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.MachineImage"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

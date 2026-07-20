@@ -40,7 +40,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case gcsDestination = "gcsDestination"
     case bigqueryDestination = "bigqueryDestination"
   }
@@ -113,7 +113,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.OutputConfig.GcsDestination"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -156,7 +156,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.OutputConfig.BigQueryDestination"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -175,7 +175,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case bigqueryDestination(OutputConfig.BigQueryDestination?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.OutputConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

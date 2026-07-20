@@ -52,7 +52,7 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.GenerateUploadUrlResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

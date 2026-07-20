@@ -63,7 +63,7 @@ public struct PricingInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.v1.PricingInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

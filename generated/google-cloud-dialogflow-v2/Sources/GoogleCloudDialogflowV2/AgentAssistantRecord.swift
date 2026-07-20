@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case articleSuggestionAnswer = "articleSuggestionAnswer"
       case faqAnswer = "faqAnswer"
       case dialogflowAssistAnswer = "dialogflowAssistAnswer"
@@ -111,7 +111,7 @@
       indirect case generatorSuggestion(GeneratorSuggestion?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AgentAssistantRecord"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

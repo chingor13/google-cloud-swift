@@ -71,7 +71,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerUserUsageData"
       }
@@ -106,7 +106,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerMonthUsageData"
       }
@@ -118,7 +118,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

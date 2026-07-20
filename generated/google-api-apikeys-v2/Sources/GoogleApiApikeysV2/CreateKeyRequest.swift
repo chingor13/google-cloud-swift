@@ -56,7 +56,7 @@ public struct CreateKeyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.apikeys.v2.CreateKeyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

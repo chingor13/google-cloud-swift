@@ -109,7 +109,7 @@
       byItem: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -291,7 +291,8 @@
     public func list(
       byItem: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.BackendBucketList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -315,7 +316,7 @@
       byItem: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
         var request = byItem
         request.pageToken = token
         return try await self.listUsable(request: request, options: options)
@@ -772,7 +773,7 @@
       byItem: BackendBucketsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, BackendBucketsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -981,7 +982,8 @@
     public func list(
       byItem: BackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.BackendBucketList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1018,7 +1020,7 @@
       byItem: BackendBucketsClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<BackendBucket, Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendBucketListUsable in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

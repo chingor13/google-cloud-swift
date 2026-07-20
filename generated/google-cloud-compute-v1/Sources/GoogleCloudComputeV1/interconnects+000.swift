@@ -181,7 +181,7 @@
     public func list(
       byItem: InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Interconnect, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InterconnectList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.InterconnectList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -585,7 +585,7 @@
     public func list(
       byItem: InterconnectsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Interconnect, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.InterconnectList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.InterconnectList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

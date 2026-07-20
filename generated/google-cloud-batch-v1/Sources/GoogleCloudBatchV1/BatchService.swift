@@ -194,7 +194,7 @@ public class BatchServiceClient: Clients.BatchServiceProtocol {
   public func listJobs(
     byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listJobs(request: request, options: options)
@@ -226,7 +226,7 @@ public class BatchServiceClient: Clients.BatchServiceProtocol {
   public func listTasks(
     byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTasks(request: request, options: options)
@@ -249,7 +249,8 @@ public class BatchServiceClient: Clients.BatchServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -285,7 +286,8 @@ public class BatchServiceClient: Clients.BatchServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -681,7 +683,7 @@ extension Clients.BatchServiceProtocol {
   public func listJobs(
     byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -736,7 +738,7 @@ extension Clients.BatchServiceProtocol {
   public func listTasks(
     byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -772,7 +774,8 @@ extension Clients.BatchServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -811,7 +814,8 @@ extension Clients.BatchServiceProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

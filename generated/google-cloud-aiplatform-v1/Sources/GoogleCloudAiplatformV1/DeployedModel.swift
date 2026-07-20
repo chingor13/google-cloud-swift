@@ -160,7 +160,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case dedicatedResources = "dedicatedResources"
       case automaticResources = "automaticResources"
       case sharedResources = "sharedResources"
@@ -296,7 +296,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedModel.Status"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -328,7 +328,7 @@
       case sharedResources(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedModel"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

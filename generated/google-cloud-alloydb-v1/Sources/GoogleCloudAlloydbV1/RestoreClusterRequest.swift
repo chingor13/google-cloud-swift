@@ -73,7 +73,7 @@ public struct RestoreClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case backupSource = "backupSource"
     case continuousBackupSource = "continuousBackupSource"
     case parent = "parent"
@@ -140,7 +140,7 @@ public struct RestoreClusterRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
     indirect case continuousBackupSource(ContinuousBackupSource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.RestoreClusterRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

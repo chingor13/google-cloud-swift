@@ -123,7 +123,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.CompletionResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -158,7 +158,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.RecentSearchResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -192,7 +192,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.AttributeResult"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -203,7 +203,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWkt._AnyPack
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

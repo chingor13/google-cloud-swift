@@ -118,7 +118,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.NodePool.LocalDiskEncryption"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -159,7 +159,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.edgecontainer.v1.NodePool.NodeConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -170,7 +170,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.NodePool"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

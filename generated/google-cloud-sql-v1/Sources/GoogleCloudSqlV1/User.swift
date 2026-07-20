@@ -92,7 +92,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case kind = "kind"
       case password = "password"
       case etag = "etag"
@@ -223,7 +223,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .builtIn: return "BUILT_IN"
         case .cloudIamUser: return "CLOUD_IAM_USER"
@@ -240,7 +240,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "BUILT_IN": self = .builtIn
         case "CLOUD_IAM_USER": self = .cloudIamUser
@@ -347,7 +347,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DUAL_PASSWORD_TYPE_UNSPECIFIED"
         case .noModifyDualPassword: return "NO_MODIFY_DUAL_PASSWORD"
@@ -361,7 +361,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DUAL_PASSWORD_TYPE_UNSPECIFIED": self = .unspecified
         case "NO_MODIFY_DUAL_PASSWORD": self = .noModifyDualPassword
@@ -461,7 +461,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "IAM_STATUS_UNSPECIFIED"
         case .inactive: return "INACTIVE"
@@ -474,7 +474,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IAM_STATUS_UNSPECIFIED": self = .unspecified
         case "INACTIVE": self = .inactive
@@ -530,7 +530,9 @@
       indirect case sqlserverUserDetails(SqlServerUserDetails?)
     }
 
-    public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.sql.v1.User" }
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.sql.v1.User"
+    }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
     }

@@ -64,7 +64,7 @@ public struct QueryAuditableServicesResponse: Codable, Equatable, GoogleCloudWkt
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.iam.admin.v1.QueryAuditableServicesResponse.AuditableService"
     }
@@ -76,7 +76,7 @@ public struct QueryAuditableServicesResponse: Codable, Equatable, GoogleCloudWkt
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.QueryAuditableServicesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

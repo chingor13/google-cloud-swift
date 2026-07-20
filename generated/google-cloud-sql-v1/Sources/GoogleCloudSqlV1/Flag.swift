@@ -88,7 +88,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case name = "name"
       case type = "type"
       case appliesTo = "appliesTo"
@@ -177,7 +177,9 @@
       indirect case recommendedIntValue(GoogleCloudWkt.Int64Value?)
     }
 
-    public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.sql.v1.Flag" }
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.sql.v1.Flag"
+    }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
     }

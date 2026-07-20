@@ -45,7 +45,7 @@ public struct DeleteVpnConnectionRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

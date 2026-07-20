@@ -45,7 +45,7 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case useDefault = "useDefault"
     case policy = "policy"
     case breakglassJustification = "breakglassJustification"
@@ -98,7 +98,7 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWkt._AnyPackab
     case policy(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.BinaryAuthorization"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

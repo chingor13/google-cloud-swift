@@ -42,7 +42,7 @@ public struct Volume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case secret = "secret"
     case cloudSqlInstance = "cloudSqlInstance"
@@ -120,7 +120,9 @@ public struct Volume: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case gcs(GCSVolumeSource?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.run.v2.Volume" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.run.v2.Volume"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

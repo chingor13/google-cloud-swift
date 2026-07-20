@@ -76,7 +76,7 @@ public struct TagValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.TagValue"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

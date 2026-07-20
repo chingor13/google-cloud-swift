@@ -71,7 +71,7 @@ public struct Occurrence: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case resourceUri = "resourceUri"
     case noteName = "noteName"
@@ -240,7 +240,9 @@ public struct Occurrence: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case secret(SecretOccurrence?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.Occurrence" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.Occurrence"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

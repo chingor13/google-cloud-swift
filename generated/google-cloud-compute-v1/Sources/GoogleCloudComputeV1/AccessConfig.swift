@@ -100,7 +100,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case externalIpv6 = "externalIpv6"
       case externalIpv6PrefixLength = "externalIpv6PrefixLength"
       case kind = "kind"
@@ -194,7 +194,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .fixedStandard: return "FIXED_STANDARD"
         case .premium: return "PREMIUM"
@@ -208,7 +208,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FIXED_STANDARD": self = .fixedStandard
         case "PREMIUM": self = .premium
@@ -300,7 +300,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .directIpv6: return "DIRECT_IPV6"
         case .oneToOneNat: return "ONE_TO_ONE_NAT"
@@ -312,7 +312,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DIRECT_IPV6": self = .directIpv6
         case "ONE_TO_ONE_NAT": self = .oneToOneNat
@@ -360,7 +360,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AccessConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

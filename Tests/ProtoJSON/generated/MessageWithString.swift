@@ -55,7 +55,7 @@ public struct MessageWithString: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case singular = "singular"
     case option = "option"
     case repeated = "repeated"
@@ -102,7 +102,7 @@ public struct MessageWithString: Codable, Equatable, GoogleCloudWkt._AnyPackable
     try container.encode(self.mapKeyValue, forKey: .mapKeyValue)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithString"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

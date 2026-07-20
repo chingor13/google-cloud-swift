@@ -66,7 +66,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TRIGGER_EVENT_UNSPECIFIED"
       case .endOfUtterance: return "END_OF_UTTERANCE"
@@ -81,7 +81,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TRIGGER_EVENT_UNSPECIFIED": self = .unspecified
       case "END_OF_UTTERANCE": self = .endOfUtterance

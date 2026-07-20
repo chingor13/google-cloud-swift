@@ -45,7 +45,7 @@ public struct ExperimentInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case servingConfigExperiment = "servingConfigExperiment"
     case experiment = "experiment"
   }
@@ -118,7 +118,7 @@ public struct ExperimentInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -138,7 +138,7 @@ public struct ExperimentInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case servingConfigExperiment(ExperimentInfo.ServingConfigExperiment?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ExperimentInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

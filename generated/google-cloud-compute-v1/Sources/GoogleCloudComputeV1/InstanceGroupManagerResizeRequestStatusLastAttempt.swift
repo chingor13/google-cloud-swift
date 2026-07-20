@@ -137,7 +137,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatusLastAttempt.error.errors.errorDetails"
           }
@@ -149,7 +149,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatusLastAttempt.error.errors"
         }
@@ -161,7 +161,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatusLastAttempt.error"
       }
@@ -173,7 +173,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatusLastAttempt"
     }

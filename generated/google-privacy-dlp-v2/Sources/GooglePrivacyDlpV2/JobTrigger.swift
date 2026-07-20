@@ -77,7 +77,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case displayName = "displayName"
     case description = "description"
@@ -164,7 +164,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case schedule = "schedule"
       case manual = "manual"
     }
@@ -212,7 +212,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case manual(Manual?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.JobTrigger.Trigger"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -270,7 +270,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATUS_UNSPECIFIED"
       case .healthy: return "HEALTHY"
@@ -284,7 +284,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATUS_UNSPECIFIED": self = .unspecified
       case "HEALTHY": self = .healthy
@@ -344,7 +344,7 @@ public struct JobTrigger: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case inspectJob(InspectJobConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.JobTrigger"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

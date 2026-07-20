@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case playbookUri = "playbookUri"
       case playbookContent = "playbookContent"
     }
@@ -98,7 +98,7 @@
       case playbookContent(Foundation.Data)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ExportPlaybookResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

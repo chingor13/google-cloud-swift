@@ -40,7 +40,7 @@ public struct ConversationLocation: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case messageIndex = "messageIndex"
     case allMessages = "allMessages"
   }
@@ -103,7 +103,7 @@ public struct ConversationLocation: Codable, Equatable, GoogleCloudWkt._AnyPacka
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ConversationLocation.AllMessages"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -124,7 +124,7 @@ public struct ConversationLocation: Codable, Equatable, GoogleCloudWkt._AnyPacka
     indirect case allMessages(ConversationLocation.AllMessages?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ConversationLocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

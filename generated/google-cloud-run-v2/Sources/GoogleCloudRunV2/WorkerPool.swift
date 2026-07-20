@@ -217,7 +217,7 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.WorkerPool"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

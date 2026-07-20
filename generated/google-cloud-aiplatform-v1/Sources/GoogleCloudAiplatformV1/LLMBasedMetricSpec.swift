@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case rubricGroupKey = "rubricGroupKey"
       case predefinedRubricGenerationSpec = "predefinedRubricGenerationSpec"
       case metricPromptTemplate = "metricPromptTemplate"
@@ -123,7 +123,7 @@
       indirect case predefinedRubricGenerationSpec(PredefinedMetricSpec?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.LLMBasedMetricSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

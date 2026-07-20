@@ -41,7 +41,7 @@ public struct PolicyControllerVersion: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.configmanagement.v1.PolicyControllerVersion"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

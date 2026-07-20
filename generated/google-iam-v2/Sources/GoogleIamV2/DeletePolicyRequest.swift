@@ -57,7 +57,7 @@ public struct DeletePolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v2.DeletePolicyRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

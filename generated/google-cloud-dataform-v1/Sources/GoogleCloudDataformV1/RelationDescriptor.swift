@@ -76,7 +76,7 @@ public struct RelationDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.RelationDescriptor.ColumnDescriptor"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -87,7 +87,7 @@ public struct RelationDescriptor: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.RelationDescriptor"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

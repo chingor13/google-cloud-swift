@@ -70,7 +70,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ResourceUsageExportConfig.BigQueryDestination"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -106,7 +106,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.container.v1.ResourceUsageExportConfig.ConsumptionMeteringConfig"
     }
@@ -118,7 +118,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWkt._Any
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ResourceUsageExportConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

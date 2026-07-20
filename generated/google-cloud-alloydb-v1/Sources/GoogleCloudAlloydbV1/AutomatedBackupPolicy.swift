@@ -87,7 +87,7 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPack
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case weeklySchedule = "weeklySchedule"
     case timeBasedRetention = "timeBasedRetention"
     case quantityBasedRetention = "quantityBasedRetention"
@@ -212,7 +212,7 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.AutomatedBackupPolicy.WeeklySchedule"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -247,7 +247,7 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.AutomatedBackupPolicy.TimeBasedRetention"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -282,7 +282,7 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPack
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.alloydb.v1.AutomatedBackupPolicy.QuantityBasedRetention"
     }
@@ -322,7 +322,7 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWkt._AnyPack
     indirect case quantityBasedRetention(AutomatedBackupPolicy.QuantityBasedRetention?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.AutomatedBackupPolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

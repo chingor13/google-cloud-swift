@@ -188,7 +188,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Model.ServingConfigList"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -228,7 +228,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.retail.v2.Model.FrequentlyBoughtTogetherFeaturesConfig"
     }
@@ -262,7 +262,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case frequentlyBoughtTogetherConfig = "frequentlyBoughtTogetherConfig"
     }
 
@@ -304,7 +304,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case frequentlyBoughtTogetherConfig(Model.FrequentlyBoughtTogetherFeaturesConfig?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Model.ModelFeaturesConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -360,7 +360,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SERVING_STATE_UNSPECIFIED"
       case .inactive: return "INACTIVE"
@@ -374,7 +374,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SERVING_STATE_UNSPECIFIED": self = .unspecified
       case "INACTIVE": self = .inactive
@@ -469,7 +469,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "TRAINING_STATE_UNSPECIFIED"
       case .paused: return "PAUSED"
@@ -482,7 +482,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "TRAINING_STATE_UNSPECIFIED": self = .unspecified
       case "PAUSED": self = .paused
@@ -588,7 +588,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PERIODIC_TUNING_STATE_UNSPECIFIED"
       case .periodicTuningDisabled: return "PERIODIC_TUNING_DISABLED"
@@ -602,7 +602,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PERIODIC_TUNING_STATE_UNSPECIFIED": self = .unspecified
       case "PERIODIC_TUNING_DISABLED": self = .periodicTuningDisabled
@@ -619,8 +619,8 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch intValue {
       case 0: self = .unspecified
       case 1: self = .periodicTuningDisabled
-      case 3: self = .allTuningDisabled
       case 2: self = .periodicTuningEnabled
+      case 3: self = .allTuningDisabled
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -699,7 +699,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DATA_STATE_UNSPECIFIED"
       case .dataOk: return "DATA_OK"
@@ -712,7 +712,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DATA_STATE_UNSPECIFIED": self = .unspecified
       case "DATA_OK": self = .dataOk
@@ -810,7 +810,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CONTEXT_PRODUCTS_TYPE_UNSPECIFIED"
       case .singleContextProduct: return "SINGLE_CONTEXT_PRODUCT"
@@ -823,7 +823,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CONTEXT_PRODUCTS_TYPE_UNSPECIFIED": self = .unspecified
       case "SINGLE_CONTEXT_PRODUCT": self = .singleContextProduct
@@ -874,7 +874,7 @@ public struct Model: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Model"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

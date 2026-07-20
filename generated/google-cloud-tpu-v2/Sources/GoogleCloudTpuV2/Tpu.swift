@@ -57,7 +57,7 @@ public class TpuClient: Clients.TpuProtocol {
   public func listNodes(
     byItem: ListNodesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Node, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listNodes(request: request, options: options)
@@ -396,7 +396,8 @@ public class TpuClient: Clients.TpuProtocol {
   public func listQueuedResources(
     byItem: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueuedResource, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQueuedResources(request: request, options: options)
@@ -618,7 +619,8 @@ public class TpuClient: Clients.TpuProtocol {
   public func listAcceleratorTypes(
     byItem: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listAcceleratorTypes(request: request, options: options)
@@ -650,7 +652,8 @@ public class TpuClient: Clients.TpuProtocol {
   public func listRuntimeVersions(
     byItem: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRuntimeVersions(request: request, options: options)
@@ -691,7 +694,8 @@ public class TpuClient: Clients.TpuProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -727,7 +731,8 @@ public class TpuClient: Clients.TpuProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -1222,7 +1227,7 @@ extension Clients.TpuProtocol {
   public func listNodes(
     byItem: ListNodesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Node, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1440,7 +1445,8 @@ extension Clients.TpuProtocol {
   public func listQueuedResources(
     byItem: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QueuedResource, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1624,7 +1630,8 @@ extension Clients.TpuProtocol {
   public func listAcceleratorTypes(
     byItem: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1681,7 +1688,8 @@ extension Clients.TpuProtocol {
   public func listRuntimeVersions(
     byItem: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1750,7 +1758,8 @@ extension Clients.TpuProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1789,7 +1798,8 @@ extension Clients.TpuProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

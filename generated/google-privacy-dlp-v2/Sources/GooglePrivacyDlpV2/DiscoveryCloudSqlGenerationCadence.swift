@@ -123,7 +123,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .sqlSchemaModificationUnspecified: return "SQL_SCHEMA_MODIFICATION_UNSPECIFIED"
         case .newColumns: return "NEW_COLUMNS"
@@ -136,7 +136,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "SQL_SCHEMA_MODIFICATION_UNSPECIFIED": self = .sqlSchemaModificationUnspecified
         case "NEW_COLUMNS": self = .newColumns
@@ -187,7 +187,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence"
     }
@@ -199,7 +199,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

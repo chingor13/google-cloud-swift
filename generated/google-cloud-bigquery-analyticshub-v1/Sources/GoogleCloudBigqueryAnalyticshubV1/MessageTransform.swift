@@ -49,7 +49,7 @@ public struct MessageTransform: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case javascriptUdf = "javascriptUdf"
     case enabled = "enabled"
     case disabled = "disabled"
@@ -98,7 +98,7 @@ public struct MessageTransform: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case javascriptUdf(JavaScriptUDF?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.MessageTransform"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

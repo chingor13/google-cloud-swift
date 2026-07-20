@@ -104,7 +104,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.VersionConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -154,7 +154,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.TestCasesConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -195,7 +195,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.WebhookConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -206,7 +206,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

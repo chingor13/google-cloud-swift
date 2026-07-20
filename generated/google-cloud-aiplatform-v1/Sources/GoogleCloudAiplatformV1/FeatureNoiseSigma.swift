@@ -79,7 +79,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeatureNoiseSigma.NoiseSigmaForFeature"
       }
@@ -91,7 +91,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureNoiseSigma"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

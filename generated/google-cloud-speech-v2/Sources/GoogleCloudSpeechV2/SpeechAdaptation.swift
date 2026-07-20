@@ -69,7 +69,7 @@ public struct SpeechAdaptation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case phraseSet = "phraseSet"
       case inlinePhraseSet = "inlinePhraseSet"
     }
@@ -119,7 +119,7 @@ public struct SpeechAdaptation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       indirect case inlinePhraseSet(PhraseSet?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.speech.v2.SpeechAdaptation.AdaptationPhraseSet"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -130,7 +130,7 @@ public struct SpeechAdaptation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.SpeechAdaptation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

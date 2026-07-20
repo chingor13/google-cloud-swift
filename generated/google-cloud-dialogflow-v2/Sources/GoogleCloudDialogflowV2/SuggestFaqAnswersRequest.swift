@@ -61,7 +61,7 @@
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SuggestFaqAnswersRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

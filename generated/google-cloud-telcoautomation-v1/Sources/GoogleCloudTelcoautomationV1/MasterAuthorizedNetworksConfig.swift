@@ -71,7 +71,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWkt
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.telcoautomation.v1.MasterAuthorizedNetworksConfig.CidrBlock"
     }
@@ -83,7 +83,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWkt
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.MasterAuthorizedNetworksConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

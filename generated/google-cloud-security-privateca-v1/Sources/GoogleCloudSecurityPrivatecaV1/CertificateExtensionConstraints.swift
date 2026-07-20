@@ -151,7 +151,7 @@ public struct CertificateExtensionConstraints: Codable, Equatable, GoogleCloudWk
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED"
       case .baseKeyUsage: return "BASE_KEY_USAGE"
@@ -168,7 +168,7 @@ public struct CertificateExtensionConstraints: Codable, Equatable, GoogleCloudWk
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED": self = .unspecified
       case "BASE_KEY_USAGE": self = .baseKeyUsage
@@ -231,7 +231,7 @@ public struct CertificateExtensionConstraints: Codable, Equatable, GoogleCloudWk
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateExtensionConstraints"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

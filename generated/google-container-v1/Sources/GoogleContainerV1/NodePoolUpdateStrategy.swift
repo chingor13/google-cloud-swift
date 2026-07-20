@@ -64,7 +64,7 @@ public enum NodePoolUpdateStrategy: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED"
     case .blueGreen: return "BLUE_GREEN"
@@ -78,7 +78,7 @@ public enum NodePoolUpdateStrategy: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED": self = .unspecified
     case "BLUE_GREEN": self = .blueGreen

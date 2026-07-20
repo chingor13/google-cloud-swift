@@ -120,7 +120,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentAssistantFeedback.SummarizationFeedback"
       }
@@ -170,7 +170,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentAssistantFeedback.KnowledgeSearchFeedback"
       }
@@ -219,7 +219,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentAssistantFeedback.KnowledgeAssistFeedback"
       }
@@ -272,7 +272,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ANSWER_RELEVANCE_UNSPECIFIED"
         case .irrelevant: return "IRRELEVANT"
@@ -285,7 +285,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ANSWER_RELEVANCE_UNSPECIFIED": self = .unspecified
         case "IRRELEVANT": self = .irrelevant
@@ -377,7 +377,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DOCUMENT_CORRECTNESS_UNSPECIFIED"
         case .incorrect: return "INCORRECT"
@@ -390,7 +390,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DOCUMENT_CORRECTNESS_UNSPECIFIED": self = .unspecified
         case "INCORRECT": self = .incorrect
@@ -482,7 +482,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "DOCUMENT_EFFICIENCY_UNSPECIFIED"
         case .inefficient: return "INEFFICIENT"
@@ -495,7 +495,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DOCUMENT_EFFICIENCY_UNSPECIFIED": self = .unspecified
         case "INEFFICIENT": self = .inefficient
@@ -546,7 +546,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AgentAssistantFeedback"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

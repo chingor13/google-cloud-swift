@@ -40,7 +40,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case containerDetail = "containerDetail"
       case customJobDetail = "customJobDetail"
     }
@@ -140,7 +140,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.ContainerDetail"
       }
@@ -185,7 +185,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.CustomJobDetail"
       }
@@ -204,7 +204,7 @@
       indirect case customJobDetail(PipelineTaskExecutorDetail.CustomJobDetail?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -45,7 +45,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case selectEntity = "selectEntity"
       case selectTimeRangeAndFeature = "selectTimeRangeAndFeature"
     }
@@ -119,7 +119,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectEntity"
       }
@@ -168,7 +168,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectTimeRangeAndFeature"
       }
@@ -190,7 +190,7 @@
         DeleteFeatureValuesResponse.SelectTimeRangeAndFeature?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

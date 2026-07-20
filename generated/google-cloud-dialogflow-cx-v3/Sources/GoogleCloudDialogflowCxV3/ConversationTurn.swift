@@ -87,7 +87,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn.UserInput"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -155,7 +155,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn.VirtualAgentOutput"
       }
@@ -167,7 +167,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

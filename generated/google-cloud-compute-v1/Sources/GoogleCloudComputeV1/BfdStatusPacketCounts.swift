@@ -53,7 +53,7 @@
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BfdStatusPacketCounts"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

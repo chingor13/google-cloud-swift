@@ -47,7 +47,9 @@ public struct ZipInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.appengine.v1.ZipInfo" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.appengine.v1.ZipInfo"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

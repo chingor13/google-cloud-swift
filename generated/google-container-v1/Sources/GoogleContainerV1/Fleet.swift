@@ -93,7 +93,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "MEMBERSHIP_TYPE_UNSPECIFIED"
       case .lightweight: return "LIGHTWEIGHT"
@@ -105,7 +105,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "MEMBERSHIP_TYPE_UNSPECIFIED": self = .unspecified
       case "LIGHTWEIGHT": self = .lightweight
@@ -153,7 +153,9 @@ public struct Fleet: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.container.v1.Fleet" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.container.v1.Fleet"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

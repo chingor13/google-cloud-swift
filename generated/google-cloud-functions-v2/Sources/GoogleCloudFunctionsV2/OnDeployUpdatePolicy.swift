@@ -41,7 +41,7 @@ public struct OnDeployUpdatePolicy: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.OnDeployUpdatePolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

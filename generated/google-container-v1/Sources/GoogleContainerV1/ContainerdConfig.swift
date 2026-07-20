@@ -111,7 +111,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case fqdns = "fqdns"
         case gcpSecretManagerCertificateConfig = "gcpSecretManagerCertificateConfig"
       }
@@ -179,7 +179,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.container.v1.ContainerdConfig.PrivateRegistryAccessConfig.CertificateAuthorityDomainConfig.GCPSecretManagerCertificateConfig"
         }
@@ -200,7 +200,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
             .GCPSecretManagerCertificateConfig?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.ContainerdConfig.PrivateRegistryAccessConfig.CertificateAuthorityDomainConfig"
       }
@@ -212,7 +212,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ContainerdConfig.PrivateRegistryAccessConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -246,7 +246,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ContainerdConfig.WritableCgroups"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -318,7 +318,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case gcpSecretManagerSecretUri = "gcpSecretManagerSecretUri"
       }
 
@@ -366,7 +366,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         case gcpSecretManagerSecretUri(Swift.String)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig"
       }
@@ -405,7 +405,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair"
       }
@@ -443,7 +443,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader"
       }
@@ -514,7 +514,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig"
       }
@@ -570,7 +570,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "HOST_CAPABILITY_UNSPECIFIED"
         case .pull: return "HOST_CAPABILITY_PULL"
@@ -584,7 +584,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HOST_CAPABILITY_UNSPECIFIED": self = .unspecified
         case "HOST_CAPABILITY_PULL": self = .pull
@@ -638,7 +638,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ContainerdConfig.RegistryHostConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -649,7 +649,7 @@ public struct ContainerdConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ContainerdConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

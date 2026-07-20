@@ -109,7 +109,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .maintenanceSubtypeUnspecified: return "MAINTENANCE_SUBTYPE_UNSPECIFIED"
         case .maintenanceTypeCustomerMaintenance: return "MAINTENANCE_TYPE_CUSTOMER_MAINTENANCE"
@@ -124,7 +124,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MAINTENANCE_SUBTYPE_UNSPECIFIED": self = .maintenanceSubtypeUnspecified
         case "MAINTENANCE_TYPE_CUSTOMER_MAINTENANCE": self = .maintenanceTypeCustomerMaintenance
@@ -221,7 +221,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .maintenanceTypeUnspecified: return "MAINTENANCE_TYPE_UNSPECIFIED"
         case .privateZoneMaintenance: return "PRIVATE_ZONE_MAINTENANCE"
@@ -233,7 +233,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MAINTENANCE_TYPE_UNSPECIFIED": self = .maintenanceTypeUnspecified
         case "PRIVATE_ZONE_MAINTENANCE": self = .privateZoneMaintenance
@@ -281,7 +281,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.PeriodicPartialMaintenanceSchedule"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

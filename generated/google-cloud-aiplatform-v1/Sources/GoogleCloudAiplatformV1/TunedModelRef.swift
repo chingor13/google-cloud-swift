@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case tunedModel = "tunedModel"
       case tuningJob = "tuningJob"
       case pipelineJob = "pipelineJob"
@@ -99,7 +99,7 @@
       case pipelineJob(Swift.String)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.TunedModelRef"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

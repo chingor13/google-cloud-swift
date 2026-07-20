@@ -70,7 +70,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case bigQuery = "bigQuery"
       case name = "name"
       case createTime = "createTime"
@@ -204,7 +204,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureGroup.BigQuery.TimeSeries"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -215,7 +215,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureGroup.BigQuery"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -234,7 +234,7 @@
       indirect case bigQuery(FeatureGroup.BigQuery?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureGroup"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

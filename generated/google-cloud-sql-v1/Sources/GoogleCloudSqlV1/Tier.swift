@@ -54,7 +54,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case tier = "tier"
       case ram = "RAM"
       case kind = "kind"
@@ -80,7 +80,9 @@
       try container.encode(self.region, forKey: .region)
     }
 
-    public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.sql.v1.Tier" }
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.sql.v1.Tier"
+    }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
     }

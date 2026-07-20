@@ -46,7 +46,7 @@ public struct GuestAttributesEntry: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tpu.v2.GuestAttributesEntry"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

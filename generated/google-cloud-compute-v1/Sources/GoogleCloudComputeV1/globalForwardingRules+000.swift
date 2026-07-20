@@ -156,7 +156,8 @@
     public func list(
       byItem: GlobalForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ForwardingRule, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ForwardingRuleList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ForwardingRuleList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -545,7 +546,8 @@
     public func list(
       byItem: GlobalForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<ForwardingRule, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.ForwardingRuleList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.ForwardingRuleList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -40,7 +40,7 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case cloudStorageSource = "cloudStorageSource"
   }
 
@@ -105,7 +105,7 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.SourceCode.CloudStorageSource"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -122,7 +122,7 @@ public struct SourceCode: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case cloudStorageSource(SourceCode.CloudStorageSource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.SourceCode"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

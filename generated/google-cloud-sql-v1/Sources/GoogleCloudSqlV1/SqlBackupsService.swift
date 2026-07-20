@@ -71,7 +71,7 @@
     public func listBackups(
       byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Backup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
         var request = byItem
         request.pageToken = token
         return try await self.listBackups(request: request, options: options)
@@ -251,7 +251,7 @@
     public func listBackups(
       byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Backup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudSqlV1.ListBackupsResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

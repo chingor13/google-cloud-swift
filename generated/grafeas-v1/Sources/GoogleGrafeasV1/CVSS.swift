@@ -109,7 +109,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ATTACK_VECTOR_UNSPECIFIED"
       case .network: return "ATTACK_VECTOR_NETWORK"
@@ -124,7 +124,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ATTACK_VECTOR_UNSPECIFIED": self = .unspecified
       case "ATTACK_VECTOR_NETWORK": self = .network
@@ -220,7 +220,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ATTACK_COMPLEXITY_UNSPECIFIED"
       case .low: return "ATTACK_COMPLEXITY_LOW"
@@ -234,7 +234,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ATTACK_COMPLEXITY_UNSPECIFIED": self = .unspecified
       case "ATTACK_COMPLEXITY_LOW": self = .low
@@ -327,7 +327,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "AUTHENTICATION_UNSPECIFIED"
       case .multiple: return "AUTHENTICATION_MULTIPLE"
@@ -341,7 +341,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "AUTHENTICATION_UNSPECIFIED": self = .unspecified
       case "AUTHENTICATION_MULTIPLE": self = .multiple
@@ -434,7 +434,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "PRIVILEGES_REQUIRED_UNSPECIFIED"
       case .`none`: return "PRIVILEGES_REQUIRED_NONE"
@@ -448,7 +448,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "PRIVILEGES_REQUIRED_UNSPECIFIED": self = .unspecified
       case "PRIVILEGES_REQUIRED_NONE": self = .`none`
@@ -539,7 +539,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "USER_INTERACTION_UNSPECIFIED"
       case .`none`: return "USER_INTERACTION_NONE"
@@ -552,7 +552,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "USER_INTERACTION_UNSPECIFIED": self = .unspecified
       case "USER_INTERACTION_NONE": self = .`none`
@@ -640,7 +640,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SCOPE_UNSPECIFIED"
       case .unchanged: return "SCOPE_UNCHANGED"
@@ -653,7 +653,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SCOPE_UNSPECIFIED": self = .unspecified
       case "SCOPE_UNCHANGED": self = .unchanged
@@ -747,7 +747,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "IMPACT_UNSPECIFIED"
       case .high: return "IMPACT_HIGH"
@@ -763,7 +763,7 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "IMPACT_UNSPECIFIED": self = .unspecified
       case "IMPACT_HIGH": self = .high
@@ -823,7 +823,9 @@ public struct CVSS: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.CVSS" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.CVSS"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

@@ -152,7 +152,7 @@
     public func list(
       byItem: GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Address, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.AddressList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -499,7 +499,7 @@
     public func list(
       byItem: GlobalAddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Address, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.AddressList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.AddressList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

@@ -41,7 +41,7 @@ public struct DataProfileBigQueryRowSchema: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case tableProfile = "tableProfile"
     case columnProfile = "columnProfile"
     case fileStoreProfile = "fileStoreProfile"
@@ -103,7 +103,7 @@ public struct DataProfileBigQueryRowSchema: Codable, Equatable, GoogleCloudWkt._
     indirect case fileStoreProfile(FileStoreDataProfile?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileBigQueryRowSchema"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

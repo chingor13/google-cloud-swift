@@ -71,7 +71,7 @@ public struct WorkflowInvocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case compilationResult = "compilationResult"
     case workflowConfig = "workflowConfig"
     case name = "name"
@@ -196,7 +196,7 @@ public struct WorkflowInvocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .running: return "RUNNING"
@@ -212,7 +212,7 @@ public struct WorkflowInvocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "RUNNING": self = .running
@@ -283,7 +283,7 @@ public struct WorkflowInvocation: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     case workflowConfig(Swift.String)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.WorkflowInvocation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

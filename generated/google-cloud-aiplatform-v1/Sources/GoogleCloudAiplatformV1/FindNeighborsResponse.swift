@@ -76,7 +76,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsResponse.Neighbor"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -113,7 +113,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsResponse.NearestNeighbors"
       }
@@ -125,7 +125,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FindNeighborsResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

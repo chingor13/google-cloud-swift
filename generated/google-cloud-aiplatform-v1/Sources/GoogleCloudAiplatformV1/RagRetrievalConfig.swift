@@ -74,7 +74,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case vectorDistanceThreshold = "vectorDistanceThreshold"
         case vectorSimilarityThreshold = "vectorSimilarityThreshold"
         case metadataFilter = "metadataFilter"
@@ -132,7 +132,7 @@
         case vectorSimilarityThreshold(Swift.Double)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagRetrievalConfig.Filter"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -166,7 +166,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case rankService = "rankService"
         case llmRanker = "llmRanker"
       }
@@ -234,7 +234,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.RagRetrievalConfig.Ranking.RankService"
         }
@@ -270,7 +270,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.RagRetrievalConfig.Ranking.LlmRanker"
         }
@@ -290,7 +290,7 @@
         indirect case llmRanker(RagRetrievalConfig.Ranking.LlmRanker?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagRetrievalConfig.Ranking"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -301,7 +301,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagRetrievalConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

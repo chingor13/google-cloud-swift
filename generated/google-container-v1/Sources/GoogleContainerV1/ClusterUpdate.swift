@@ -406,7 +406,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case desiredNodeVersion = "desiredNodeVersion"
     case desiredMonitoringService = "desiredMonitoringService"
     case desiredAddonsConfig = "desiredAddonsConfig"
@@ -765,7 +765,7 @@ public struct ClusterUpdate: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.desiredNodeCreationConfig, forKey: .desiredNodeCreationConfig)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ClusterUpdate"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

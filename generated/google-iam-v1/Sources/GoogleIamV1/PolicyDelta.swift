@@ -43,7 +43,9 @@ public struct PolicyDelta: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v1.PolicyDelta" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.iam.v1.PolicyDelta"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

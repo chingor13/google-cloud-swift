@@ -75,7 +75,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.Environment.KMSEnvMap"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -86,7 +86,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.Environment"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

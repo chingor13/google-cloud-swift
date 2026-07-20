@@ -51,7 +51,7 @@ public struct OAuthToken: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.scheduler.v1.OAuthToken"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

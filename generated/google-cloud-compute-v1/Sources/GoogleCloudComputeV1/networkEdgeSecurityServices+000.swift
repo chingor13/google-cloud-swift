@@ -67,7 +67,7 @@
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
     > {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList in
         var request = byItem
         request.pageToken = token
@@ -356,7 +356,7 @@
       (Swift.String, NetworkEdgeSecurityServicesScopedList), Swift.Error
     > {
       let listRpc = {
-        (token: String) async throws
+        (token: Swift.String) async throws
           -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }

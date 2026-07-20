@@ -386,7 +386,8 @@
     public func list(
       byItem: OrganizationSecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityPolicy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -1187,7 +1188,8 @@
     public func list(
       byItem: OrganizationSecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityPolicy, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.SecurityPolicyList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

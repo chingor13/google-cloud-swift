@@ -45,7 +45,7 @@ public struct DiscoveryVertexDatasetFilter: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case collection = "collection"
     case vertexDatasetResourceReference = "vertexDatasetResourceReference"
     case others = "others"
@@ -112,7 +112,7 @@ public struct DiscoveryVertexDatasetFilter: Codable, Equatable, GoogleCloudWkt._
     indirect case others(AllOtherResources?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryVertexDatasetFilter"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -79,7 +79,7 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case parent = "parent"
     case storageSource = "storageSource"
     case imageUri = "imageUri"
@@ -192,7 +192,7 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.SubmitBuildRequest.DockerBuild"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -254,7 +254,7 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -279,7 +279,7 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     indirect case dockerBuild(SubmitBuildRequest.DockerBuild?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.SubmitBuildRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

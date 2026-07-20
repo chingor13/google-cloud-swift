@@ -75,7 +75,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWkt
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case writeFile = "writeFile"
       case deleteFile = "deleteFile"
     }
@@ -142,7 +142,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWkt
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation.WriteFile"
       }
@@ -174,7 +174,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWkt
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation.DeleteFile"
       }
@@ -194,7 +194,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWkt
       indirect case deleteFile(CommitRepositoryChangesRequest.FileOperation.DeleteFile?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation"
     }
@@ -206,7 +206,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWkt
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

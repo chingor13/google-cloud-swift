@@ -44,7 +44,7 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case certificateAuthority = "certificateAuthority"
     case pemIssuerChain = "pemIssuerChain"
   }
@@ -112,7 +112,7 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain"
     }
@@ -143,7 +143,7 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable
     indirect case pemIssuerChain(SubordinateConfig.SubordinateConfigChain?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.SubordinateConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

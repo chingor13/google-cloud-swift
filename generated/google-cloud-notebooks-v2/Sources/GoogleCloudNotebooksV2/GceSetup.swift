@@ -89,7 +89,7 @@ public struct GceSetup: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case machineType = "machineType"
     case acceleratorConfigs = "acceleratorConfigs"
     case serviceAccounts = "serviceAccounts"
@@ -179,7 +179,7 @@ public struct GceSetup: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case containerImage(ContainerImage?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.notebooks.v2.GceSetup"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

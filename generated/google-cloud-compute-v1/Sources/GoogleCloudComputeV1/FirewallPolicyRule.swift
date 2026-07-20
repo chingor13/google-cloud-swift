@@ -171,7 +171,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .egress: return "EGRESS"
         case .ingress: return "INGRESS"
@@ -183,7 +183,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EGRESS": self = .egress
         case "INGRESS": self = .ingress
@@ -269,7 +269,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .instances: return "INSTANCES"
         case .internalManagedLb: return "INTERNAL_MANAGED_LB"
@@ -281,7 +281,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "INSTANCES": self = .instances
         case "INTERNAL_MANAGED_LB": self = .internalManagedLb
@@ -329,7 +329,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FirewallPolicyRule"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

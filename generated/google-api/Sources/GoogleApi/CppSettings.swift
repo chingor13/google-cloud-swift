@@ -40,7 +40,9 @@ public struct CppSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.api.CppSettings" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.api.CppSettings"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

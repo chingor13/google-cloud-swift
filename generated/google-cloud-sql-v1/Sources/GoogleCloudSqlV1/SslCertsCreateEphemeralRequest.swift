@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case publicKey = "public_key"
       case accessToken = "access_token"
     }
@@ -61,7 +61,7 @@
       try container.encode(self.accessToken, forKey: .accessToken)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SslCertsCreateEphemeralRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

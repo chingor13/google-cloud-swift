@@ -74,7 +74,7 @@ public struct LifecyclePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.LifecyclePolicy.ActionCondition"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -126,7 +126,7 @@ public struct LifecyclePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ACTION_UNSPECIFIED"
       case .retryTask: return "RETRY_TASK"
@@ -139,7 +139,7 @@ public struct LifecyclePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ACTION_UNSPECIFIED": self = .unspecified
       case "RETRY_TASK": self = .retryTask
@@ -190,7 +190,7 @@ public struct LifecyclePolicy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.LifecyclePolicy"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

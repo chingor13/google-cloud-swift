@@ -53,7 +53,7 @@ public struct BatchDeleteJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.BatchDeleteJobsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

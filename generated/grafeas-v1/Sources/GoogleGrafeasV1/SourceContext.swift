@@ -44,7 +44,7 @@ public struct SourceContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case cloudRepo = "cloudRepo"
     case gerrit = "gerrit"
     case git = "git"
@@ -105,7 +105,9 @@ public struct SourceContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case git(GitSourceContext?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.SourceContext" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.SourceContext"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

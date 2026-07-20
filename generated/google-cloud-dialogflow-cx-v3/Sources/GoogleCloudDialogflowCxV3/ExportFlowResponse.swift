@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case flowUri = "flowUri"
       case flowContent = "flowContent"
     }
@@ -97,7 +97,7 @@
       case flowContent(Foundation.Data)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ExportFlowResponse"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

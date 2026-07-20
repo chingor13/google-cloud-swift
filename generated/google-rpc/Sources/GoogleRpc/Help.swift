@@ -70,7 +70,9 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Help.Link" }
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.rpc.Help.Link"
+    }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
       self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
     }
@@ -79,7 +81,9 @@ public struct Help: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.rpc.Help" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.rpc.Help"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

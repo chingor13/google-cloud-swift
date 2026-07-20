@@ -156,7 +156,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .delete: return "DELETE"
         case .unspecified: return "INSTANCE_TERMINATION_ACTION_UNSPECIFIED"
@@ -169,7 +169,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DELETE": self = .delete
         case "INSTANCE_TERMINATION_ACTION_UNSPECIFIED": self = .unspecified
@@ -265,7 +265,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .migrate: return "MIGRATE"
         case .terminate: return "TERMINATE"
@@ -277,7 +277,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MIGRATE": self = .migrate
         case "TERMINATE": self = .terminate
@@ -372,7 +372,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .flexStart: return "FLEX_START"
         case .reservationBound: return "RESERVATION_BOUND"
@@ -386,7 +386,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FLEX_START": self = .flexStart
         case "RESERVATION_BOUND": self = .reservationBound
@@ -440,7 +440,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Scheduling"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

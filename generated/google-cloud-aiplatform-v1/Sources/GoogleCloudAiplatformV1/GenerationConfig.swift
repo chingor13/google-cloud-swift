@@ -183,7 +183,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case autoMode = "autoMode"
         case manualMode = "manualMode"
       }
@@ -297,7 +297,7 @@
           /// Returns the string value (or name) associated with the enumeration.
           ///
           /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-          public var stringValue: String? {
+          public var stringValue: Swift.String? {
             switch self {
             case .unknown: return "UNKNOWN"
             case .prioritizeQuality: return "PRIORITIZE_QUALITY"
@@ -311,7 +311,7 @@
           /// Initialize from a string value.
           ///
           /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-          public init(stringValue: String) {
+          public init(stringValue: Swift.String) {
             switch stringValue {
             case "UNKNOWN": self = .unknown
             case "PRIORITIZE_QUALITY": self = .prioritizeQuality
@@ -365,7 +365,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig.AutoRoutingMode"
         }
@@ -401,7 +401,7 @@
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig.ManualRoutingMode"
         }
@@ -421,7 +421,7 @@
         indirect case manualMode(GenerationConfig.RoutingConfig.ManualRoutingMode?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -510,7 +510,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "THINKING_LEVEL_UNSPECIFIED"
           case .low: return "LOW"
@@ -525,7 +525,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "THINKING_LEVEL_UNSPECIFIED": self = .unspecified
           case "LOW": self = .low
@@ -582,7 +582,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -637,7 +637,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MODALITY_UNSPECIFIED"
         case .text: return "TEXT"
@@ -651,7 +651,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MODALITY_UNSPECIFIED": self = .unspecified
         case "TEXT": self = .text
@@ -749,7 +749,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MEDIA_RESOLUTION_UNSPECIFIED"
         case .low: return "MEDIA_RESOLUTION_LOW"
@@ -763,7 +763,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MEDIA_RESOLUTION_UNSPECIFIED": self = .unspecified
         case "MEDIA_RESOLUTION_LOW": self = .low
@@ -817,7 +817,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -41,7 +41,7 @@ public struct RepoId: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case projectRepoId = "projectRepoId"
     case uid = "uid"
   }
@@ -91,7 +91,9 @@ public struct RepoId: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case uid(Swift.String)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.RepoId" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.RepoId"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

@@ -65,7 +65,8 @@
     public func list(
       byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -160,7 +161,8 @@
     public func list(
       byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

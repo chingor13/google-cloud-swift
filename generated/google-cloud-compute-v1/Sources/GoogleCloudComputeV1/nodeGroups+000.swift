@@ -107,7 +107,7 @@
       byItem: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
         var request = byItem
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
@@ -291,7 +291,7 @@
     public func list(
       byItem: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
@@ -314,7 +314,8 @@
     public func listNodes(
       byItem: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
         var request = byItem
         request.pageToken = token
         return try await self.listNodes(request: request, options: options)
@@ -826,7 +827,7 @@
       byItem: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeGroupsScopedList), Swift.Error> {
       let listRpc = {
-        (token: String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1045,7 +1046,7 @@
     public func list(
       byItem: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroup, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupList in
+      let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupList in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1083,7 +1084,8 @@
     public func listNodes(
       byItem: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
     ) throws -> any AsyncSequence<NodeGroupNode, Swift.Error> {
-      let listRpc = { (token: String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
+      let listRpc = {
+        (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes in
         throw GoogleCloudGax.RequestError.unimplemented
       }
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

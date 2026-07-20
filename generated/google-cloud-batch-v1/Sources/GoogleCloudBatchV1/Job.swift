@@ -86,7 +86,9 @@ public struct Job: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.cloud.batch.v1.Job" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.cloud.batch.v1.Job"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

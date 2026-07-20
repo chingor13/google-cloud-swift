@@ -199,7 +199,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ARCHITECTURE_UNSPECIFIED"
         case .arm64: return "ARM64"
@@ -212,7 +212,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ARCHITECTURE_UNSPECIFIED": self = .unspecified
         case "ARM64": self = .arm64
@@ -301,7 +301,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .nvme: return "NVME"
         case .scsi: return "SCSI"
@@ -313,7 +313,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NVME": self = .nvme
         case "SCSI": self = .scsi
@@ -403,7 +403,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .readOnly: return "READ_ONLY"
         case .readWrite: return "READ_WRITE"
@@ -415,7 +415,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "READ_ONLY": self = .readOnly
         case "READ_WRITE": self = .readWrite
@@ -503,7 +503,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .diskSavedStateUnspecified: return "DISK_SAVED_STATE_UNSPECIFIED"
         case .preserved: return "PRESERVED"
@@ -515,7 +515,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "DISK_SAVED_STATE_UNSPECIFIED": self = .diskSavedStateUnspecified
         case "PRESERVED": self = .preserved
@@ -601,7 +601,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .persistent: return "PERSISTENT"
         case .scratch: return "SCRATCH"
@@ -613,7 +613,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "PERSISTENT": self = .persistent
         case "SCRATCH": self = .scratch
@@ -661,7 +661,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AttachedDisk"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

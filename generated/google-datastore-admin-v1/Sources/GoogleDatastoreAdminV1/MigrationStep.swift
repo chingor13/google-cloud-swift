@@ -73,7 +73,7 @@ public enum MigrationStep: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "MIGRATION_STEP_UNSPECIFIED"
     case .start: return "START"
@@ -91,7 +91,7 @@ public enum MigrationStep: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "MIGRATION_STEP_UNSPECIFIED": self = .unspecified
     case "PREPARE": self = .prepare
@@ -111,13 +111,13 @@ public enum MigrationStep: Codable, Equatable, Sendable {
   public init(intValue: Int) {
     switch intValue {
     case 0: self = .unspecified
-    case 6: self = .prepare
     case 1: self = .start
-    case 7: self = .applyWritesSynchronously
     case 2: self = .copyAndVerify
     case 3: self = .redirectEventuallyConsistentReads
     case 4: self = .redirectStronglyConsistentReads
     case 5: self = .redirectWrites
+    case 6: self = .prepare
+    case 7: self = .applyWritesSynchronously
     default: self = .unknownIntValue(intValue)
     }
   }

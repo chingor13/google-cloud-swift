@@ -43,7 +43,7 @@ public struct UpdateVPCSCConfigRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

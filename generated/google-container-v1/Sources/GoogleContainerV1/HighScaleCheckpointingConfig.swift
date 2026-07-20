@@ -41,7 +41,7 @@ public struct HighScaleCheckpointingConfig: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.HighScaleCheckpointingConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

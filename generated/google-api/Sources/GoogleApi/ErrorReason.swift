@@ -829,7 +829,7 @@ public enum ErrorReason: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "ERROR_REASON_UNSPECIFIED"
     case .serviceDisabled: return "SERVICE_DISABLED"
@@ -883,7 +883,7 @@ public enum ErrorReason: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "ERROR_REASON_UNSPECIFIED": self = .unspecified
     case "SERVICE_DISABLED": self = .serviceDisabled
@@ -943,15 +943,15 @@ public enum ErrorReason: Codable, Equatable, Sendable {
     case 2: self = .billingDisabled
     case 3: self = .apiKeyInvalid
     case 4: self = .apiKeyServiceBlocked
+    case 5: self = .rateLimitExceeded
+    case 6: self = .resourceQuotaExceeded
     case 7: self = .apiKeyHttpReferrerBlocked
     case 8: self = .apiKeyIpAddressBlocked
     case 9: self = .apiKeyAndroidAppBlocked
-    case 13: self = .apiKeyIosAppBlocked
-    case 5: self = .rateLimitExceeded
-    case 6: self = .resourceQuotaExceeded
     case 10: self = .locationTaxPolicyViolated
     case 11: self = .userProjectDenied
     case 12: self = .consumerSuspended
+    case 13: self = .apiKeyIosAppBlocked
     case 14: self = .consumerInvalid
     case 15: self = .securityPolicyViolated
     case 16: self = .accessTokenExpired

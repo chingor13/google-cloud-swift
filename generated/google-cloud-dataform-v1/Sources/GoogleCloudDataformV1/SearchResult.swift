@@ -40,7 +40,7 @@ public struct SearchResult: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case file = "file"
     case directory = "directory"
   }
@@ -90,7 +90,7 @@ public struct SearchResult: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case directory(DirectorySearchResult?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.SearchResult"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

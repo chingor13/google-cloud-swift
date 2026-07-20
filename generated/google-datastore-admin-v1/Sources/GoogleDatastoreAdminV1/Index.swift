@@ -87,7 +87,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.datastore.admin.v1.Index.IndexedProperty"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -140,7 +140,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "ANCESTOR_MODE_UNSPECIFIED"
       case .`none`: return "NONE"
@@ -153,7 +153,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "ANCESTOR_MODE_UNSPECIFIED": self = .unspecified
       case "NONE": self = .`none`
@@ -247,7 +247,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DIRECTION_UNSPECIFIED"
       case .ascending: return "ASCENDING"
@@ -260,7 +260,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DIRECTION_UNSPECIFIED": self = .unspecified
       case "ASCENDING": self = .ascending
@@ -371,7 +371,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "STATE_UNSPECIFIED"
       case .creating: return "CREATING"
@@ -386,7 +386,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "STATE_UNSPECIFIED": self = .unspecified
       case "CREATING": self = .creating
@@ -443,7 +443,7 @@ public struct Index: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.Index"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

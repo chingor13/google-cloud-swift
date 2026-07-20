@@ -61,7 +61,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case name = "name"
     case metadata = "metadata"
     case done = "done"
@@ -128,7 +128,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case response(GoogleCloudWkt.`Any`?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.longrunning.Operation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

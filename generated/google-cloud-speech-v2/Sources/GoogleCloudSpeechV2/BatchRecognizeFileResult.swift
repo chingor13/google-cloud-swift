@@ -53,7 +53,7 @@ public struct BatchRecognizeFileResult: Codable, Equatable, GoogleCloudWkt._AnyP
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case error = "error"
     case metadata = "metadata"
     case cloudStorageResult = "cloudStorageResult"
@@ -126,7 +126,7 @@ public struct BatchRecognizeFileResult: Codable, Equatable, GoogleCloudWkt._AnyP
     indirect case inlineResult(InlineResult?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.BatchRecognizeFileResult"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

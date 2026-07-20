@@ -87,7 +87,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.DatabaseEncryption.OperationError"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -145,7 +145,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unknown: return "UNKNOWN"
       case .encrypted: return "ENCRYPTED"
@@ -159,7 +159,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "UNKNOWN": self = .unknown
       case "ENCRYPTED": self = .encrypted
@@ -280,7 +280,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "CURRENT_STATE_UNSPECIFIED"
       case .decrypted: return "CURRENT_STATE_DECRYPTED"
@@ -300,7 +300,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "CURRENT_STATE_UNSPECIFIED": self = .unspecified
       case "CURRENT_STATE_ENCRYPTED": self = .encrypted
@@ -322,12 +322,12 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
-      case 7: self = .encrypted
       case 2: self = .decrypted
       case 3: self = .encryptionPending
       case 4: self = .encryptionError
       case 5: self = .decryptionPending
       case 6: self = .decryptionError
+      case 7: self = .encrypted
       case 8: self = .allObjectsEncryptionEnabled
       case 9: self = .allObjectsEncryptionPending
       case 10: self = .allObjectsEncryptionError
@@ -372,7 +372,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWkt._AnyPackabl
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DatabaseEncryption"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

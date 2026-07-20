@@ -56,7 +56,8 @@ public class StorageInsightsClient: Clients.StorageInsightsProtocol {
     byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listReportConfigs(request: request, options: options)
@@ -116,7 +117,8 @@ public class StorageInsightsClient: Clients.StorageInsightsProtocol {
     byItem: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReportDetail, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listReportDetails(request: request, options: options)
@@ -149,7 +151,8 @@ public class StorageInsightsClient: Clients.StorageInsightsProtocol {
     byItem: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DatasetConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listDatasetConfigs(request: request, options: options)
@@ -483,7 +486,8 @@ public class StorageInsightsClient: Clients.StorageInsightsProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -519,7 +523,8 @@ public class StorageInsightsClient: Clients.StorageInsightsProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
@@ -946,7 +951,8 @@ extension Clients.StorageInsightsProtocol {
     byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListReportConfigsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1069,7 +1075,8 @@ extension Clients.StorageInsightsProtocol {
     byItem: ListReportDetailsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ReportDetail, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListReportDetailsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1127,7 +1134,8 @@ extension Clients.StorageInsightsProtocol {
     byItem: ListDatasetConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DatasetConfig, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse in
+      (token: Swift.String) async throws -> GoogleCloudStorageinsightsV1.ListDatasetConfigsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1374,7 +1382,8 @@ extension Clients.StorageInsightsProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1413,7 +1422,8 @@ extension Clients.StorageInsightsProtocol {
   public func listOperations(
     byItem: GoogleLongrunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongrunning.Operation, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleLongrunning.ListOperationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleLongrunning.ListOperationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

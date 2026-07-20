@@ -172,7 +172,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case adaptiveProtectionConfig = "adaptiveProtectionConfig"
       case advancedOptionsConfig = "advancedOptionsConfig"
       case associations = "associations"
@@ -314,7 +314,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .cloudArmor: return "CLOUD_ARMOR"
         case .cloudArmorEdge: return "CLOUD_ARMOR_EDGE"
@@ -327,7 +327,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CLOUD_ARMOR": self = .cloudArmor
         case "CLOUD_ARMOR_EDGE": self = .cloudArmorEdge
@@ -378,7 +378,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SecurityPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

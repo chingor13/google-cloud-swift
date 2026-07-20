@@ -40,7 +40,7 @@ public struct UserEventInputConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case userEventInlineSource = "userEventInlineSource"
     case gcsSource = "gcsSource"
     case bigQuerySource = "bigQuerySource"
@@ -100,7 +100,7 @@ public struct UserEventInputConfig: Codable, Equatable, GoogleCloudWkt._AnyPacka
     indirect case bigQuerySource(BigQuerySource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.UserEventInputConfig"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

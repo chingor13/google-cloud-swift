@@ -102,7 +102,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .autoConnect: return "AUTO_CONNECT"
         case .provisionOnly: return "PROVISION_ONLY"
@@ -114,7 +114,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "AUTO_CONNECT": self = .autoConnect
         case "PROVISION_ONLY": self = .provisionOnly
@@ -200,7 +200,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .collocated: return "COLLOCATED"
         case .unspecifiedCollocation: return "UNSPECIFIED_COLLOCATION"
@@ -212,7 +212,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "COLLOCATED": self = .collocated
         case "UNSPECIFIED_COLLOCATION": self = .unspecifiedCollocation
@@ -260,7 +260,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ResourcePolicyGroupPlacementPolicy"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -47,7 +47,7 @@ public struct ListPrincipalAccessBoundaryPoliciesResponse: Codable, Equatable, G
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

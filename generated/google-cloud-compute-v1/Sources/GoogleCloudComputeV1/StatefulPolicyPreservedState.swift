@@ -53,7 +53,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case disks = "disks"
       case externalIps = "externalIPs"
       case internalIps = "internalIPs"
@@ -76,7 +76,7 @@
       try container.encode(self.internalIps, forKey: .internalIps)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.StatefulPolicyPreservedState"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

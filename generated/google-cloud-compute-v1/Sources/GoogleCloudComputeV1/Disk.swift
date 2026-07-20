@@ -394,7 +394,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case accessMode = "accessMode"
       case architecture = "architecture"
       case asyncPrimaryDisk = "asyncPrimaryDisk"
@@ -635,7 +635,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .readOnlyMany: return "READ_ONLY_MANY"
         case .readWriteMany: return "READ_WRITE_MANY"
@@ -648,7 +648,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "READ_ONLY_MANY": self = .readOnlyMany
         case "READ_WRITE_MANY": self = .readWriteMany
@@ -742,7 +742,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "ARCHITECTURE_UNSPECIFIED"
         case .arm64: return "ARM64"
@@ -755,7 +755,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ARCHITECTURE_UNSPECIFIED": self = .unspecified
         case "ARM64": self = .arm64
@@ -859,7 +859,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .creating: return "CREATING"
         case .deleting: return "DELETING"
@@ -875,7 +875,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CREATING": self = .creating
         case "DELETING": self = .deleting
@@ -935,7 +935,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Disk"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

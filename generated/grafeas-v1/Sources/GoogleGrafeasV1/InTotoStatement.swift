@@ -50,7 +50,7 @@ public struct InTotoStatement: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case type = "_type"
     case subject = "subject"
     case predicateType = "predicateType"
@@ -115,7 +115,9 @@ public struct InTotoStatement: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case slsaProvenanceZeroTwo(SlsaProvenanceZeroTwo?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/grafeas.v1.InTotoStatement" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/grafeas.v1.InTotoStatement"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

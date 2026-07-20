@@ -69,7 +69,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListDockerImagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DockerImage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListDockerImagesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListDockerImagesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listDockerImages(request: request, options: options)
@@ -102,7 +103,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListMavenArtifactsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<MavenArtifact, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListMavenArtifactsResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListMavenArtifactsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listMavenArtifacts(request: request, options: options)
@@ -135,7 +137,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListNpmPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<NpmPackage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListNpmPackagesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListNpmPackagesResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listNpmPackages(request: request, options: options)
@@ -168,7 +171,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListPythonPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PythonPackage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPythonPackagesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListPythonPackagesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPythonPackages(request: request, options: options)
@@ -341,7 +345,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRepositoriesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListRepositoriesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRepositories(request: request, options: options)
@@ -507,7 +512,7 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Package, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPackagesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPackagesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPackages(request: request, options: options)
@@ -597,7 +602,7 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Version, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListVersionsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListVersionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listVersions(request: request, options: options)
@@ -753,7 +758,7 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListFilesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<File, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListFilesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListFilesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listFiles(request: request, options: options)
@@ -854,7 +859,7 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListTagsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Tag, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListTagsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListTagsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTags(request: request, options: options)
@@ -923,7 +928,7 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListRulesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Rule, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRulesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRulesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRules(request: request, options: options)
@@ -1046,7 +1051,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
     byItem: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Attachment, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListAttachmentsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListAttachmentsResponse
+      in
       var request = byItem
       request.pageToken = token
       return try await self.listAttachments(request: request, options: options)
@@ -1280,7 +1286,8 @@ public class ArtifactRegistryClient: Clients.ArtifactRegistryProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -2253,7 +2260,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListDockerImagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<DockerImage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListDockerImagesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListDockerImagesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2311,7 +2319,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListMavenArtifactsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<MavenArtifact, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListMavenArtifactsResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListMavenArtifactsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2369,7 +2378,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListNpmPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<NpmPackage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListNpmPackagesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListNpmPackagesResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2427,7 +2437,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListPythonPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<PythonPackage, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPythonPackagesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListPythonPackagesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2543,7 +2554,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRepositoriesResponse in
+      (token: Swift.String) async throws
+        -> GoogleDevtoolsArtifactregistryV1.ListRepositoriesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2702,7 +2714,7 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListPackagesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Package, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPackagesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListPackagesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2797,7 +2809,7 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Version, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListVersionsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListVersionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -2954,7 +2966,7 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListFilesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<File, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListFilesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListFilesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3069,7 +3081,7 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListTagsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Tag, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListTagsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListTagsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3217,7 +3229,7 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListRulesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Rule, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRulesResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListRulesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3463,7 +3475,8 @@ extension Clients.ArtifactRegistryProtocol {
     byItem: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Attachment, Swift.Error> {
     let listRpc = {
-      (token: String) async throws -> GoogleDevtoolsArtifactregistryV1.ListAttachmentsResponse in
+      (token: Swift.String) async throws -> GoogleDevtoolsArtifactregistryV1.ListAttachmentsResponse
+      in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -3627,7 +3640,8 @@ extension Clients.ArtifactRegistryProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

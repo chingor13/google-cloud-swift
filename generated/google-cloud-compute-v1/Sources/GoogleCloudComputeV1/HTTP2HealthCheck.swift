@@ -137,7 +137,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .useFixedPort: return "USE_FIXED_PORT"
         case .useNamedPort: return "USE_NAMED_PORT"
@@ -150,7 +150,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "USE_FIXED_PORT": self = .useFixedPort
         case "USE_NAMED_PORT": self = .useNamedPort
@@ -239,7 +239,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .`none`: return "NONE"
         case .proxyV1: return "PROXY_V1"
@@ -251,7 +251,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NONE": self = .`none`
         case "PROXY_V1": self = .proxyV1
@@ -299,7 +299,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.HTTP2HealthCheck"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

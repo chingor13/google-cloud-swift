@@ -85,7 +85,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore.MetadataStoreState"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -120,7 +120,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore.DataplexConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -131,7 +131,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

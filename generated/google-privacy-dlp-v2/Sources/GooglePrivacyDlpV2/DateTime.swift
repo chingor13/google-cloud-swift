@@ -76,7 +76,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DateTime.TimeZone"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -87,7 +87,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DateTime"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

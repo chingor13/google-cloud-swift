@@ -59,7 +59,7 @@ public struct AwsS3CompatibleData: Codable, Equatable, GoogleCloudWkt._AnyPackab
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case bucketName = "bucketName"
     case path = "path"
     case endpoint = "endpoint"
@@ -115,7 +115,7 @@ public struct AwsS3CompatibleData: Codable, Equatable, GoogleCloudWkt._AnyPackab
     indirect case s3Metadata(S3CompatibleMetadata?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.AwsS3CompatibleData"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

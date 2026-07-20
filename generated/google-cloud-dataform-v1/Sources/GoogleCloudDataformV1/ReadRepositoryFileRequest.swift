@@ -47,7 +47,7 @@ public struct ReadRepositoryFileRequest: Codable, Equatable, GoogleCloudWkt._Any
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.ReadRepositoryFileRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

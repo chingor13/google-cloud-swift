@@ -40,7 +40,7 @@ public struct QuoteInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case dateTime = "dateTime"
   }
 
@@ -80,7 +80,7 @@ public struct QuoteInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case dateTime(DateTime?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.QuoteInfo"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

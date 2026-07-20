@@ -94,7 +94,7 @@ public enum LaunchStage: Codable, Equatable, Sendable {
   /// Returns the string value (or name) associated with the enumeration.
   ///
   /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-  public var stringValue: String? {
+  public var stringValue: Swift.String? {
     switch self {
     case .unspecified: return "LAUNCH_STAGE_UNSPECIFIED"
     case .earlyAccess: return "EARLY_ACCESS"
@@ -112,7 +112,7 @@ public enum LaunchStage: Codable, Equatable, Sendable {
   /// Initialize from a string value.
   ///
   /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-  public init(stringValue: String) {
+  public init(stringValue: Swift.String) {
     switch stringValue {
     case "LAUNCH_STAGE_UNSPECIFIED": self = .unspecified
     case "UNIMPLEMENTED": self = .unimplemented
@@ -132,13 +132,13 @@ public enum LaunchStage: Codable, Equatable, Sendable {
   public init(intValue: Int) {
     switch intValue {
     case 0: self = .unspecified
-    case 6: self = .unimplemented
-    case 7: self = .prelaunch
     case 1: self = .earlyAccess
     case 2: self = .alpha
     case 3: self = .beta
     case 4: self = .ga
     case 5: self = .deprecated
+    case 6: self = .unimplemented
+    case 7: self = .prelaunch
     default: self = .unknownIntValue(intValue)
     }
   }

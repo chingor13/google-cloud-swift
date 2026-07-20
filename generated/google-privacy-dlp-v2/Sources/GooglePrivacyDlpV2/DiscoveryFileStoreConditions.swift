@@ -50,7 +50,7 @@ public struct DiscoveryFileStoreConditions: Codable, Equatable, GoogleCloudWkt._
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case createdAfter = "createdAfter"
     case minAge = "minAge"
     case cloudStorageConditions = "cloudStorageConditions"
@@ -99,7 +99,7 @@ public struct DiscoveryFileStoreConditions: Codable, Equatable, GoogleCloudWkt._
     indirect case cloudStorageConditions(DiscoveryCloudStorageConditions?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryFileStoreConditions"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

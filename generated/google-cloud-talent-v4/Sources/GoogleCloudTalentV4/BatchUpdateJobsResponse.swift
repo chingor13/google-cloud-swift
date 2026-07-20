@@ -48,7 +48,7 @@ public struct BatchUpdateJobsResponse: Codable, Equatable, GoogleCloudWkt._AnyPa
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.BatchUpdateJobsResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

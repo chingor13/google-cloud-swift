@@ -505,7 +505,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "IMPORTANCE_LEVEL_UNSPECIFIED"
         case .`none`: return "NONE"
@@ -522,7 +522,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "IMPORTANCE_LEVEL_UNSPECIFIED": self = .unspecified
         case "NONE": self = .`none`
@@ -585,7 +585,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -644,7 +644,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SEARCH_MODE_UNSPECIFIED"
       case .jobSearch: return "JOB_SEARCH"
@@ -657,7 +657,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SEARCH_MODE_UNSPECIFIED": self = .unspecified
       case "JOB_SEARCH": self = .jobSearch
@@ -783,7 +783,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "DIVERSIFICATION_LEVEL_UNSPECIFIED"
       case .disabled: return "DISABLED"
@@ -800,7 +800,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "DIVERSIFICATION_LEVEL_UNSPECIFIED": self = .unspecified
       case "DISABLED": self = .disabled
@@ -823,8 +823,8 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
       case 2: self = .simple
       case 3: self = .onePerCompany
       case 4: self = .twoPerCompany
-      case 6: self = .maxThreePerCompany
       case 5: self = .diversifyByLooserSimilarity
+      case 6: self = .maxThreePerCompany
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -947,7 +947,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "KEYWORD_MATCH_MODE_UNSPECIFIED"
       case .keywordMatchDisabled: return "KEYWORD_MATCH_DISABLED"
@@ -961,7 +961,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "KEYWORD_MATCH_MODE_UNSPECIFIED": self = .unspecified
       case "KEYWORD_MATCH_DISABLED": self = .keywordMatchDisabled
@@ -1065,7 +1065,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "RELEVANCE_THRESHOLD_UNSPECIFIED"
       case .lowest: return "LOWEST"
@@ -1080,7 +1080,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "RELEVANCE_THRESHOLD_UNSPECIFIED": self = .unspecified
       case "LOWEST": self = .lowest
@@ -1137,7 +1137,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.SearchJobsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

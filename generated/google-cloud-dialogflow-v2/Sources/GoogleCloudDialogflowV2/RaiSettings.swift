@@ -116,7 +116,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "RAI_CATEGORY_UNSPECIFIED"
           case .dangerousContent: return "DANGEROUS_CONTENT"
@@ -131,7 +131,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "RAI_CATEGORY_UNSPECIFIED": self = .unspecified
           case "DANGEROUS_CONTENT": self = .dangerousContent
@@ -240,7 +240,7 @@
         /// Returns the string value (or name) associated with the enumeration.
         ///
         /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-        public var stringValue: String? {
+        public var stringValue: Swift.String? {
           switch self {
           case .unspecified: return "SENSITIVITY_LEVEL_UNSPECIFIED"
           case .blockMost: return "BLOCK_MOST"
@@ -255,7 +255,7 @@
         /// Initialize from a string value.
         ///
         /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-        public init(stringValue: String) {
+        public init(stringValue: Swift.String) {
           switch stringValue {
           case "SENSITIVITY_LEVEL_UNSPECIFIED": self = .unspecified
           case "BLOCK_MOST": self = .blockMost
@@ -312,7 +312,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.RaiSettings.RaiCategoryConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -323,7 +323,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.RaiSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

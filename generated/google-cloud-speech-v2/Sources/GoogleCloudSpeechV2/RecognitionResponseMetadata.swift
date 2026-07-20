@@ -47,7 +47,7 @@ public struct RecognitionResponseMetadata: Codable, Equatable, GoogleCloudWkt._A
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.RecognitionResponseMetadata"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

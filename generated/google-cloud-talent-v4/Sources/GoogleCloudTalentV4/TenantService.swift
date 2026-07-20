@@ -89,7 +89,7 @@ public class TenantServiceClient: Clients.TenantServiceProtocol {
   public func listTenants(
     byItem: ListTenantsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Tenant, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTalentV4.ListTenantsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudTalentV4.ListTenantsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTenants(request: request, options: options)
@@ -301,7 +301,7 @@ extension Clients.TenantServiceProtocol {
   public func listTenants(
     byItem: ListTenantsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Tenant, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudTalentV4.ListTenantsResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleCloudTalentV4.ListTenantsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

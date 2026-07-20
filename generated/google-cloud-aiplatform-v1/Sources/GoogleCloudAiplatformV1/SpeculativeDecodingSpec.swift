@@ -44,7 +44,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case draftModelSpeculation = "draftModelSpeculation"
       case ngramSpeculation = "ngramSpeculation"
       case speculativeTokenCount = "speculativeTokenCount"
@@ -116,7 +116,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec.DraftModelSpeculation"
       }
@@ -156,7 +156,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec.NgramSpeculation"
       }
@@ -176,7 +176,7 @@
       indirect case ngramSpeculation(SpeculativeDecodingSpec.NgramSpeculation?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

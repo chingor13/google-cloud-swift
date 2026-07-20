@@ -45,7 +45,7 @@ public struct ListAuthorizedCertificatesResponse: Codable, Equatable, GoogleClou
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.ListAuthorizedCertificatesResponse"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

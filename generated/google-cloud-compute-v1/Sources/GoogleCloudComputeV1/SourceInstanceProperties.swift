@@ -154,7 +154,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
         case .`none`: return "NONE"
@@ -167,7 +167,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": self = .unspecified
         case "NONE": self = .`none`
@@ -261,7 +261,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .noop: return "NOOP"
         case .unspecified: return "POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
@@ -274,7 +274,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "NOOP": self = .noop
         case "POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": self = .unspecified
@@ -325,7 +325,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SourceInstanceProperties"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

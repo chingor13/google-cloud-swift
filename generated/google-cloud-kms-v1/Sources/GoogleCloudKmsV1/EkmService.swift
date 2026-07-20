@@ -65,7 +65,8 @@ public class EkmServiceClient: Clients.EkmServiceProtocol {
   public func listEkmConnections(
     byItem: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<EkmConnection, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudKmsV1.ListEkmConnectionsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudKmsV1.ListEkmConnectionsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listEkmConnections(request: request, options: options)
@@ -194,7 +195,8 @@ public class EkmServiceClient: Clients.EkmServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
@@ -456,7 +458,8 @@ extension Clients.EkmServiceProtocol {
   public func listEkmConnections(
     byItem: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<EkmConnection, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudKmsV1.ListEkmConnectionsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudKmsV1.ListEkmConnectionsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -625,7 +628,8 @@ extension Clients.EkmServiceProtocol {
   public func listLocations(
     byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleCloudLocation.ListLocationsResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

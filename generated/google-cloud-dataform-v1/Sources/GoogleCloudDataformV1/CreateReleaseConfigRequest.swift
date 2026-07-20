@@ -48,7 +48,7 @@ public struct CreateReleaseConfigRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CreateReleaseConfigRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

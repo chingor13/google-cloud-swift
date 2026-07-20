@@ -50,7 +50,7 @@ public struct RestoreFromCloudSQLRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case cloudsqlBackupRunSource = "cloudsqlBackupRunSource"
     case parent = "parent"
     case clusterId = "clusterId"
@@ -101,7 +101,7 @@ public struct RestoreFromCloudSQLRequest: Codable, Equatable, GoogleCloudWkt._An
     indirect case cloudsqlBackupRunSource(CloudSQLBackupRunSource?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.RestoreFromCloudSQLRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

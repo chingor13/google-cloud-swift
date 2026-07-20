@@ -61,7 +61,7 @@
     /// Returns the string value (or name) associated with the enumeration.
     ///
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-    public var stringValue: String? {
+    public var stringValue: Swift.String? {
       switch self {
       case .unspecified: return "SQL_BACKEND_TYPE_UNSPECIFIED"
       case .firstGen: return "FIRST_GEN"
@@ -75,7 +75,7 @@
     /// Initialize from a string value.
     ///
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-    public init(stringValue: String) {
+    public init(stringValue: Swift.String) {
       switch stringValue {
       case "SQL_BACKEND_TYPE_UNSPECIFIED": self = .unspecified
       case "FIRST_GEN": self = .firstGen

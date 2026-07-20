@@ -120,7 +120,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.EmbedContentRequest.EmbedContentConfig"
       }
@@ -191,7 +191,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "UNSPECIFIED"
         case .retrievalQuery: return "RETRIEVAL_QUERY"
@@ -210,7 +210,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "UNSPECIFIED": self = .unspecified
         case "RETRIEVAL_QUERY": self = .retrievalQuery
@@ -279,7 +279,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EmbedContentRequest"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

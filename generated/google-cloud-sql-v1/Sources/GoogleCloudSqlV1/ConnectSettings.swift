@@ -133,7 +133,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ConnectSettings.ConnectPoolNodeConfig"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -190,7 +190,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "CA_MODE_UNSPECIFIED"
         case .googleManagedInternalCa: return "GOOGLE_MANAGED_INTERNAL_CA"
@@ -204,7 +204,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CA_MODE_UNSPECIFIED": self = .unspecified
         case "GOOGLE_MANAGED_INTERNAL_CA": self = .googleManagedInternalCa
@@ -297,7 +297,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .unspecified: return "MDX_PROTOCOL_SUPPORT_UNSPECIFIED"
         case .clientProtocolType: return "CLIENT_PROTOCOL_TYPE"
@@ -309,7 +309,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "MDX_PROTOCOL_SUPPORT_UNSPECIFIED": self = .unspecified
         case "CLIENT_PROTOCOL_TYPE": self = .clientProtocolType
@@ -357,7 +357,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ConnectSettings"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

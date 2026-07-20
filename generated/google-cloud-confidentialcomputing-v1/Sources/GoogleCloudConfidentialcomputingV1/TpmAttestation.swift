@@ -92,7 +92,7 @@ public struct TpmAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case hashAlgo = "hashAlgo"
       case pcrValues = "pcrValues"
       case rawQuote = "rawQuote"
@@ -135,7 +135,7 @@ public struct TpmAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       try container.encode(self.rawSignature, forKey: .rawSignature)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.confidentialcomputing.v1.TpmAttestation.Quote"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -146,7 +146,7 @@ public struct TpmAttestation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     }
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.TpmAttestation"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

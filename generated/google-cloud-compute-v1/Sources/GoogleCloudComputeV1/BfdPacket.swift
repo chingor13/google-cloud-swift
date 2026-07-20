@@ -98,7 +98,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case authenticationPresent = "authenticationPresent"
       case controlPlaneIndependent = "controlPlaneIndependent"
       case demand = "demand"
@@ -219,7 +219,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .administrativelyDown: return "ADMINISTRATIVELY_DOWN"
         case .concatenatedPathDown: return "CONCATENATED_PATH_DOWN"
@@ -239,7 +239,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADMINISTRATIVELY_DOWN": self = .administrativelyDown
         case "CONCATENATED_PATH_DOWN": self = .concatenatedPathDown
@@ -355,7 +355,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .adminDown: return "ADMIN_DOWN"
         case .down: return "DOWN"
@@ -370,7 +370,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ADMIN_DOWN": self = .adminDown
         case "DOWN": self = .down
@@ -427,7 +427,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BfdPacket"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

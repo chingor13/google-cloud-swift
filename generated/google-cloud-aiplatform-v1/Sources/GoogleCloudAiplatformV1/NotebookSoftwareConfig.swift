@@ -49,7 +49,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case colabImage = "colabImage"
       case env = "env"
       case postStartupScriptConfig = "postStartupScriptConfig"
@@ -96,7 +96,7 @@
       indirect case colabImage(ColabImage?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NotebookSoftwareConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

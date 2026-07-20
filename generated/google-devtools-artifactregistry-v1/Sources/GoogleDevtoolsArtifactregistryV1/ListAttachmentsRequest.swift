@@ -54,7 +54,7 @@ public struct ListAttachmentsRequest: Codable, Equatable, GoogleCloudWkt._AnyPac
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ListAttachmentsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

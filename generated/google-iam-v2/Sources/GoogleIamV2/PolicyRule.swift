@@ -43,7 +43,7 @@ public struct PolicyRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case denyRule = "denyRule"
     case description = "description"
   }
@@ -85,7 +85,9 @@ public struct PolicyRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case denyRule(DenyRule?)
   }
 
-  public static var _anyTypeUrl: String { return "type.googleapis.com/google.iam.v2.PolicyRule" }
+  public static var _anyTypeUrl: Swift.String {
+    return "type.googleapis.com/google.iam.v2.PolicyRule"
+  }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
   }

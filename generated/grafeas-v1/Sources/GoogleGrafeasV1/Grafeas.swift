@@ -74,7 +74,7 @@ public class GrafeasClient: Clients.GrafeasProtocol {
   public func listOccurrences(
     byItem: ListOccurrencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Occurrence, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListOccurrencesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleGrafeasV1.ListOccurrencesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOccurrences(request: request, options: options)
@@ -154,7 +154,7 @@ public class GrafeasClient: Clients.GrafeasProtocol {
   public func listNotes(
     byItem: ListNotesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Note, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListNotesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleGrafeasV1.ListNotesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listNotes(request: request, options: options)
@@ -217,7 +217,8 @@ public class GrafeasClient: Clients.GrafeasProtocol {
   public func listNoteOccurrences(
     byItem: ListNoteOccurrencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Occurrence, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listNoteOccurrences(request: request, options: options)
@@ -509,7 +510,7 @@ extension Clients.GrafeasProtocol {
   public func listOccurrences(
     byItem: ListOccurrencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Occurrence, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListOccurrencesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleGrafeasV1.ListOccurrencesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -676,7 +677,7 @@ extension Clients.GrafeasProtocol {
   public func listNotes(
     byItem: ListNotesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Note, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListNotesResponse in
+    let listRpc = { (token: Swift.String) async throws -> GoogleGrafeasV1.ListNotesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -802,7 +803,8 @@ extension Clients.GrafeasProtocol {
   public func listNoteOccurrences(
     byItem: ListNoteOccurrencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Occurrence, Swift.Error> {
-    let listRpc = { (token: String) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse in
+    let listRpc = {
+      (token: Swift.String) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)

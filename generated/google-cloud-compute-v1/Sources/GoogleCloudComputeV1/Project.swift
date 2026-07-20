@@ -146,7 +146,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .caEnterpriseAnnual: return "CA_ENTERPRISE_ANNUAL"
         case .caEnterprisePaygo: return "CA_ENTERPRISE_PAYGO"
@@ -159,7 +159,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "CA_ENTERPRISE_ANNUAL": self = .caEnterpriseAnnual
         case "CA_ENTERPRISE_PAYGO": self = .caEnterprisePaygo
@@ -259,7 +259,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .fixedStandard: return "FIXED_STANDARD"
         case .premium: return "PREMIUM"
@@ -273,7 +273,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "FIXED_STANDARD": self = .fixedStandard
         case "PREMIUM": self = .premium
@@ -369,7 +369,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .globalDefault: return "GLOBAL_DEFAULT"
         case .unspecifiedVmDnsSetting: return "UNSPECIFIED_VM_DNS_SETTING"
@@ -383,7 +383,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GLOBAL_DEFAULT": self = .globalDefault
         case "UNSPECIFIED_VM_DNS_SETTING": self = .unspecifiedVmDnsSetting
@@ -475,7 +475,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .host: return "HOST"
         case .unspecifiedXpnProjectStatus: return "UNSPECIFIED_XPN_PROJECT_STATUS"
@@ -487,7 +487,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "HOST": self = .host
         case "UNSPECIFIED_XPN_PROJECT_STATUS": self = .unspecifiedXpnProjectStatus
@@ -535,7 +535,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Project"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

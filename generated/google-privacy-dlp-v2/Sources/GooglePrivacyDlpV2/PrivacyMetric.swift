@@ -40,7 +40,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case numericalStatsConfig = "numericalStatsConfig"
     case categoricalStatsConfig = "categoricalStatsConfig"
     case kAnonymityConfig = "kAnonymityConfig"
@@ -141,7 +141,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -179,7 +179,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.CategoricalStatsConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -229,7 +229,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.KAnonymityConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -268,7 +268,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.LDiversityConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -346,7 +346,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case field = "field"
         case infoType = "infoType"
         case customTag = "customTag"
@@ -416,7 +416,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         indirect case inferred(GoogleCloudWkt.Empty?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.TaggedField"
       }
@@ -491,7 +491,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           return copy
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable.QuasiIdField"
         }
@@ -503,7 +503,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable"
       }
@@ -515,7 +515,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -563,7 +563,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       return copy
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -590,7 +590,7 @@ public struct PrivacyMetric: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case deltaPresenceEstimationConfig(PrivacyMetric.DeltaPresenceEstimationConfig?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.PrivacyMetric"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

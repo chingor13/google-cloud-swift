@@ -40,7 +40,7 @@ public struct OtherCloudSingleResourceReference: Codable, Equatable, GoogleCloud
     return copy
   }
 
-  private enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: Swift.String, CodingKey {
     case amazonS3Bucket = "amazonS3Bucket"
   }
 
@@ -82,7 +82,7 @@ public struct OtherCloudSingleResourceReference: Codable, Equatable, GoogleCloud
     indirect case amazonS3Bucket(AmazonS3Bucket?)
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudSingleResourceReference"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

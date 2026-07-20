@@ -123,7 +123,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case byoipApiVersion = "byoipApiVersion"
       case creationTimestamp = "creationTimestamp"
       case description = "description"
@@ -242,7 +242,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .v1: return "V1"
         case .v2: return "V2"
@@ -254,7 +254,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "V1": self = .v1
         case "V2": self = .v2
@@ -346,7 +346,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .external: return "EXTERNAL"
         case .`internal`: return "INTERNAL"
@@ -358,7 +358,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "EXTERNAL": self = .external
         case "INTERNAL": self = .`internal`
@@ -452,7 +452,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .global: return "GLOBAL"
         case .globalAndRegional: return "GLOBAL_AND_REGIONAL"
@@ -465,7 +465,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "GLOBAL": self = .global
         case "GLOBAL_AND_REGIONAL": self = .globalAndRegional
@@ -577,7 +577,7 @@
       /// Returns the string value (or name) associated with the enumeration.
       ///
       /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
-      public var stringValue: String? {
+      public var stringValue: Swift.String? {
         switch self {
         case .announcedToInternet: return "ANNOUNCED_TO_INTERNET"
         case .initial: return "INITIAL"
@@ -596,7 +596,7 @@
       /// Initialize from a string value.
       ///
       /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
-      public init(stringValue: String) {
+      public init(stringValue: Swift.String) {
         switch stringValue {
         case "ANNOUNCED_TO_INTERNET": self = .announcedToInternet
         case "INITIAL": self = .initial
@@ -665,7 +665,7 @@
       }
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.PublicAdvertisedPrefix"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {

@@ -55,7 +55,7 @@ public struct UndeleteCustomClassRequest: Codable, Equatable, GoogleCloudWkt._An
     return copy
   }
 
-  public static var _anyTypeUrl: String {
+  public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.UndeleteCustomClassRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {

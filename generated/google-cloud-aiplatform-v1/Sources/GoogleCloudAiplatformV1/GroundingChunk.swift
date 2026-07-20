@@ -41,7 +41,7 @@
       return copy
     }
 
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Swift.String, CodingKey {
       case web = "web"
       case retrievedContext = "retrievedContext"
       case maps = "maps"
@@ -115,7 +115,7 @@
         return copy
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Web"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -162,7 +162,7 @@
         return copy
       }
 
-      private enum CodingKeys: String, CodingKey {
+      private enum CodingKeys: Swift.String, CodingKey {
         case ragChunk = "ragChunk"
         case uri = "uri"
         case title = "title"
@@ -215,7 +215,7 @@
         indirect case ragChunk(RagChunk?)
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.RetrievedContext"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -315,7 +315,7 @@
             return copy
           }
 
-          public static var _anyTypeUrl: String {
+          public static var _anyTypeUrl: Swift.String {
             return
               "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet"
           }
@@ -327,7 +327,7 @@
           }
         }
 
-        public static var _anyTypeUrl: String {
+        public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Maps.PlaceAnswerSources"
         }
@@ -339,7 +339,7 @@
         }
       }
 
-      public static var _anyTypeUrl: String {
+      public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Maps"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
@@ -360,7 +360,7 @@
       indirect case maps(GroundingChunk.Maps?)
     }
 
-    public static var _anyTypeUrl: String {
+    public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk"
     }
     public init(fromAny any: GoogleCloudWkt.`Any`) throws {
