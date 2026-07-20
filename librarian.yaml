@@ -258,6 +258,11 @@ libraries:
     apis:
       - path: google/cloud/security/publicca/v1
     copyright_year: "2026"
+  - name: GoogleCloudSpeechV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/speech/v2
+    copyright_year: "2026"
   - name: GoogleCloudSqlV1
     version: 0.0.0-preview
     apis:
