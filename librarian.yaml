@@ -349,6 +349,11 @@ libraries:
     apis:
       - path: google/cloud/gkehub/v1
     copyright_year: "2026"
+  - name: GoogleCloudGkemulticloudV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkemulticloud/v1
+    copyright_year: "2026"
   - name: GoogleCloudKmsV1
     version: 0.0.0-preview
     apis:
