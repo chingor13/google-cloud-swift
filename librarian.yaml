@@ -227,6 +227,11 @@ libraries:
     apis:
       - path: google/cloud/bigquery/datapolicies/v1
     copyright_year: "2026"
+  - name: GoogleCloudBillingBudgetsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/billing/budgets/v1
+    copyright_year: "2026"
   - name: GoogleCloudBillingV1
     version: 0.0.0-preview
     apis:
