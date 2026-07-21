@@ -354,6 +354,11 @@ libraries:
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
+  - name: GoogleCloudLanguageV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/language/v2
+    copyright_year: "2026"
   - name: GoogleCloudLicensemanagerV1
     version: 0.0.0-preview
     apis:
