@@ -326,6 +326,11 @@ libraries:
         - output: packages/gax/Sources/GoogleCloudGax/generated
           api_path: ""
           module_type: package-version
+  - name: GoogleCloudGkebackupLoggingV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/gkebackup/logging/v1
+    copyright_year: "2026"
   - name: GoogleCloudGkehubConfigmanagementV1
     version: 0.0.0-preview
     apis:
