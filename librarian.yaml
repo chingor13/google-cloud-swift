@@ -59,6 +59,9 @@ default:
       - name: GoogleCloudWkt
         path: packages/wkt
         api_package: google.protobuf
+      - name: GoogleGrafeasV1
+        path: generated/grafeas-v1
+        api_package: grafeas.v1
       - name: GoogleIamV1
         path: generated/google-iam-v1
         api_package: google.iam.v1
@@ -170,6 +173,11 @@ libraries:
     version: 0.0.0-preview
     apis:
       - path: google/cloud/billing/v1
+    copyright_year: "2026"
+  - name: GoogleCloudBinaryauthorizationV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/binaryauthorization/v1
     copyright_year: "2026"
   - name: GoogleCloudCommon
     version: 0.0.0-preview
