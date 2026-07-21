@@ -22,7 +22,8 @@ let package = Package(
     .macOS(.v15)
   ],
   products: [
-    .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"])
+    .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"]),
+    .library(name: "GoogleCloudWktConvert", targets: ["GoogleCloudWktConvert"]),
   ],
   dependencies: [
     .package(url: "https://github.com/swift-extras/swift-extras-base64", from: "1.0.0")
@@ -34,6 +35,12 @@ let package = Package(
       dependencies: [
         .product(name: "ExtrasBase64", package: "swift-extras-base64")
       ],
+    ),
+    .target(
+      name: "GoogleCloudWktConvert",
+      dependencies: [
+        "GoogleCloudWkt",
+      ]
     ),
     .testTarget(
       name: "GoogleCloudWktTests",
