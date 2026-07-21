@@ -289,6 +289,11 @@ libraries:
     apis:
       - path: google/cloud/configdelivery/v1
     copyright_year: "2026"
+  - name: GoogleCloudConnectorsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/connectors/v1
+    copyright_year: "2026"
   - name: GoogleCloudDataformV1
     version: 0.0.0-preview
     apis:
