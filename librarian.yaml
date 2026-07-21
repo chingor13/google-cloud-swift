@@ -140,6 +140,11 @@ libraries:
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
+  - name: GoogleCloudApphubV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/apphub/v1
+    copyright_year: "2026"
   - name: GoogleCloudAuth
     version: 0.0.0-preview
     copyright_year: "2026"
