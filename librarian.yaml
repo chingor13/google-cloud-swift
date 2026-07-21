@@ -167,6 +167,11 @@ libraries:
         - output: packages/auth/Sources/GoogleCloudAuth/generated
           api_path: ""
           module_type: package-version
+  - name: GoogleCloudBaremetalsolutionV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/baremetalsolution/v2
+    copyright_year: "2026"
   - name: GoogleCloudBatchV1
     version: 0.0.0-preview
     apis:
