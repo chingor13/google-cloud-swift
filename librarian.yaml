@@ -62,6 +62,9 @@ default:
       - name: GoogleIamV1
         path: generated/google-iam-v1
         api_package: google.iam.v1
+      - name: GoogleIdentityAccesscontextmanagerType
+        path: generated/google-identity-accesscontextmanager-type
+        api_package: google.identity.accesscontextmanager.type
       - name: GoogleLoggingType
         path: generated/google-logging-type
         api_package: google.logging.type
@@ -505,6 +508,16 @@ libraries:
     version: 0.0.0-preview
     apis:
       - path: google/iam/v3
+    copyright_year: "2026"
+  - name: GoogleIdentityAccesscontextmanagerType
+    version: 0.0.0-preview
+    apis:
+      - path: google/identity/accesscontextmanager/type
+    copyright_year: "2026"
+  - name: GoogleIdentityAccesscontextmanagerV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/identity/accesscontextmanager/v1
     copyright_year: "2026"
   - name: GoogleLoggingType
     version: 0.0.0-preview
