@@ -207,6 +207,11 @@ libraries:
     apis:
       - path: google/cloud/binaryauthorization/v1
     copyright_year: "2026"
+  - name: GoogleCloudBlockchainnodeengineV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/blockchainnodeengine/v1
+    copyright_year: "2026"
   - name: GoogleCloudCommon
     version: 0.0.0-preview
     apis:
