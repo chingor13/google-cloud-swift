@@ -129,6 +129,11 @@ libraries:
     apis:
       - path: google/cloud/abuseevent/logging/v1
     copyright_year: "2026"
+  - name: GoogleCloudAccessapprovalV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/accessapproval/v1
+    copyright_year: "2026"
   - name: GoogleCloudAiplatformV1
     version: 0.0.0-preview
     apis:
