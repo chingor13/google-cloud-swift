@@ -331,6 +331,11 @@ libraries:
     apis:
       - path: google/cloud/dataplex/v1
     copyright_year: "2026"
+  - name: GoogleCloudDeployV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/deploy/v1
+    copyright_year: "2026"
   - name: GoogleCloudDialogflowCxV3
     version: 0.0.0-preview
     apis:
