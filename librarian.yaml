@@ -114,6 +114,11 @@ libraries:
     apis:
       - path: google/api/servicecontrol/v2
     copyright_year: "2026"
+  - name: GoogleApiServicemanagementV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/api/servicemanagement/v1
+    copyright_year: "2026"
   - name: GoogleAppengineV1
     version: 0.0.0-preview
     apis:
