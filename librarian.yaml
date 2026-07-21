@@ -595,6 +595,11 @@ libraries:
     apis:
       - path: google/logging/type
     copyright_year: "2026"
+  - name: GoogleLoggingV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/logging/v2
+    copyright_year: "2026"
   - name: GoogleLongrunning
     version: 0.0.0-preview
     apis:
