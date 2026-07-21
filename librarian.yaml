@@ -175,6 +175,11 @@ libraries:
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
+  - name: GoogleCloudApihubV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/apihub/v1
+    copyright_year: "2026"
   - name: GoogleCloudApiregistryV1
     version: 0.0.0-preview
     apis:
