@@ -77,6 +77,9 @@ default:
       - name: GoogleRpc
         path: generated/google-rpc
         api_package: google.rpc
+      - name: GoogleRpcContext
+        path: generated/google-rpc-context
+        api_package: google.rpc.context
       - name: GoogleType
         path: generated/google-type
         api_package: google.type
@@ -105,6 +108,11 @@ libraries:
     version: 0.0.0-preview
     apis:
       - path: google/api/servicecontrol/v1
+    copyright_year: "2026"
+  - name: GoogleApiServicecontrolV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/api/servicecontrol/v2
     copyright_year: "2026"
   - name: GoogleAppengineV1
     version: 0.0.0-preview
