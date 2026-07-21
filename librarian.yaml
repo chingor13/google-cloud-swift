@@ -151,6 +151,11 @@ libraries:
     apis:
       - path: google/cloud/accessapproval/v1
     copyright_year: "2026"
+  - name: GoogleCloudAdvisorynotificationsV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/advisorynotifications/v1
+    copyright_year: "2026"
   - name: GoogleCloudAiplatformV1
     version: 0.0.0-preview
     apis:
