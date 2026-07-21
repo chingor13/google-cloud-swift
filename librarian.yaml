@@ -53,6 +53,9 @@ default:
       - name: GoogleCloudGkehubRbacrolebindingactuationV1
         path: generated/google-cloud-gkehub-rbacrolebindingactuation-v1
         api_package: google.cloud.gkehub.rbacrolebindingactuation.v1
+      - name: GoogleCloudKmsV1
+        path: generated/google-cloud-kms-v1
+        api_package: google.cloud.kms.v1
       - name: GoogleCloudLocation
         path: generated/google-cloud-location
         api_package: google.cloud.location
@@ -427,6 +430,11 @@ libraries:
     version: 0.0.0-preview
     apis:
       - path: google/cloud/gkemulticloud/v1
+    copyright_year: "2026"
+  - name: GoogleCloudKmsInventoryV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
   - name: GoogleCloudKmsV1
     version: 0.0.0-preview
