@@ -56,6 +56,12 @@ default:
       - name: GoogleCloudLocation
         path: generated/google-cloud-location
         api_package: google.cloud.location
+      - name: GoogleCloudOrgpolicyV1
+        path: generated/google-cloud-orgpolicy-v1
+        api_package: google.cloud.orgpolicy.v1
+      - name: GoogleCloudOsconfigV1
+        path: generated/google-cloud-osconfig-v1
+        api_package: google.cloud.osconfig.v1
       - name: GoogleCloudWkt
         path: packages/wkt
         api_package: google.protobuf
@@ -68,6 +74,9 @@ default:
       - name: GoogleIdentityAccesscontextmanagerType
         path: generated/google-identity-accesscontextmanager-type
         api_package: google.identity.accesscontextmanager.type
+      - name: GoogleIdentityAccesscontextmanagerV1
+        path: generated/google-identity-accesscontextmanager-v1
+        api_package: google.identity.accesscontextmanager.v1
       - name: GoogleLoggingType
         path: generated/google-logging-type
         api_package: google.logging.type
@@ -172,6 +181,11 @@ libraries:
     version: 0.0.0-preview
     apis:
       - path: google/cloud/apphub/v1
+    copyright_year: "2026"
+  - name: GoogleCloudAssetV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/asset/v1
     copyright_year: "2026"
   - name: GoogleCloudAuth
     version: 0.0.0-preview
