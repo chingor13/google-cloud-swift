@@ -21,7 +21,7 @@ import GoogleCloudWkt
 public struct QueryUserRootContentsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Location of the user root folder whose contents to list.
+  /// Required. Location of the user root folder to list contents for.
   /// Format: projects/*/locations/*
   public var location: Swift.String = Swift.String()
 
@@ -42,15 +42,17 @@ public struct QueryUserRootContentsRequest: Codable, Equatable, GoogleCloudWkt._
   /// Will order Folders before Repositories, and then by `order_by` in ascending
   /// order. Supported keywords: display_name (default), created_at,
   /// last_modified_at. Examples:
-  ///   - `orderBy="display_name"`
-  ///   - `orderBy="display_name desc"`
+  ///
+  /// * `orderBy="display_name"`
+  /// * `orderBy="display_name desc"`
   public var orderBy: Swift.String = Swift.String()
 
   /// Optional. Optional filtering for the returned list. Filtering is currently
   /// only supported on the `display_name` field.
   ///
   /// Example:
-  ///  - `filter="display_name="MyFolder""`
+  ///
+  /// * `filter="display_name="MyFolder""`
   public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `QueryUserRootContentsRequest`.

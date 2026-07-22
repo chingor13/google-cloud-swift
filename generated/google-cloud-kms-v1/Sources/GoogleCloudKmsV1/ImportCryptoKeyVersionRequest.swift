@@ -135,6 +135,20 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
   /// [google.cloud.kms.v1.ImportJob.public_key]: <doc:ImportJob/publicKey>
   public var wrappedKey: Foundation.Data = Foundation.Data()
 
+  /// Optional. Whether trusted wrapping will be enabled on the imported
+  /// [CryptoKeyVersion]. This field is only supported for keys with
+  /// [CryptoKeyVersionTemplate.protection_level][google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level]
+  /// [HSM_SINGLE_TENANT][google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT].
+  /// This field is supported for all
+  /// [CryptoKeyPurposes][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose] besides
+  /// [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
+  ///
+  /// [google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose]: <doc:CryptoKey/CryptoKeyPurpose>
+  /// [google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT]: <doc:CryptoKey/CryptoKeyPurpose/encryptDecrypt>
+  /// [google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level]: <doc:CryptoKeyVersionTemplate/protectionLevel>
+  /// [google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT]: <doc:ProtectionLevel/hsmSingleTenant>
+  public var trustedWrappingEnabled: Swift.Bool = Swift.Bool()
+
   /// This field is legacy. Use the field
   /// [wrapped_key][google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key]
   /// instead.
@@ -165,6 +179,7 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
     case importJob = "importJob"
     case wrappedKey = "wrappedKey"
     case rsaAesWrappedKey = "rsaAesWrappedKey"
+    case trustedWrappingEnabled = "trustedWrappingEnabled"
   }
 
   public init(from decoder: Decoder) throws {
@@ -175,6 +190,8 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
       CryptoKeyVersion.CryptoKeyVersionAlgorithm.self, forKey: .algorithm)
     self.importJob = try container.decode(Swift.String.self, forKey: .importJob)
     self.wrappedKey = try container.decode(Foundation.Data.self, forKey: .wrappedKey)
+    self.trustedWrappingEnabled = try container.decode(
+      Swift.Bool.self, forKey: .trustedWrappingEnabled)
 
     var wrappedKeyMaterial: OneOf_WrappedKeyMaterial? = nil
     let wrappedKeyMaterialCheckAndSet = {
@@ -201,6 +218,7 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWkt.
     try container.encode(self.algorithm, forKey: .algorithm)
     try container.encode(self.importJob, forKey: .importJob)
     try container.encode(self.wrappedKey, forKey: .wrappedKey)
+    try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
 
     if let choice = self.wrappedKeyMaterial {
       switch choice {

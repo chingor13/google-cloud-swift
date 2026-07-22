@@ -46,6 +46,11 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
   /// products.
   public var attester: Swift.String = Swift.String()
 
+  /// Optional. Optional resource link of the Compute Engine instance.
+  /// Format:
+  /// `projects/{project_number}/zones/{zone}/instances/{instance_id}`
+  public var instance: Swift.String = Swift.String()
+
   /// An optional tee attestation report, used to populate hardware rooted
   /// claims.
   public var teeAttestation: OneOf_TeeAttestation? = nil
@@ -79,6 +84,7 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     case confidentialSpaceInfo = "confidentialSpaceInfo"
     case tokenOptions = "tokenOptions"
     case attester = "attester"
+    case instance = "instance"
   }
 
   public init(from decoder: Decoder) throws {
@@ -92,6 +98,7 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
       ConfidentialSpaceInfo.self, forKey: .confidentialSpaceInfo)
     self.tokenOptions = try container.decodeIfPresent(TokenOptions.self, forKey: .tokenOptions)
     self.attester = try container.decode(Swift.String.self, forKey: .attester)
+    self.instance = try container.decode(Swift.String.self, forKey: .instance)
 
     var teeAttestation: OneOf_TeeAttestation? = nil
     let teeAttestationCheckAndSet = {
@@ -139,6 +146,7 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleCloudWkt._AnyP
     try container.encode(self.confidentialSpaceInfo, forKey: .confidentialSpaceInfo)
     try container.encode(self.tokenOptions, forKey: .tokenOptions)
     try container.encode(self.attester, forKey: .attester)
+    try container.encode(self.instance, forKey: .instance)
 
     if let choice = self.teeAttestation {
       switch choice {

@@ -23,12 +23,10 @@ public struct UpdateIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// Required. Table to commit in the format:
-  /// `projects/{project_id}/namespaces/{namespace}/tables/{table}`.
+  /// `projects/{projectId}/catalogs/{catalogId}/namespaces/{namespace}/tables/{table}`.
   public var name: Swift.String = Swift.String()
 
-  /// Required. The request body that should be in the format of Apache Iceberg's
-  /// `#/components/schemas/CommitTableRequest`. Content type is expected to be
-  /// `application/json`. Added this field for easier json parsing.
+  /// Required.
   public var httpBody: GoogleApi.HttpBody? = nil
 
   /// Initialize a new instance of `UpdateIcebergTableRequest`.
@@ -45,23 +43,6 @@ public struct UpdateIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._Any
     var copy = self
     try config(&copy)
     return copy
-  }
-
-  private enum CodingKeys: Swift.String, CodingKey {
-    case name = "name"
-    case httpBody = "updates"
-  }
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.name = try container.decode(Swift.String.self, forKey: .name)
-    self.httpBody = try container.decodeIfPresent(GoogleApi.HttpBody.self, forKey: .httpBody)
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.httpBody, forKey: .httpBody)
   }
 
   public static var _anyTypeUrl: Swift.String {

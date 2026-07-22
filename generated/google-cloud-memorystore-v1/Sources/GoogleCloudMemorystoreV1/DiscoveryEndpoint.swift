@@ -29,7 +29,7 @@ public struct DiscoveryEndpoint: Codable, Equatable, GoogleCloudWkt._AnyPackable
 
   /// Output only. The network where the IP address of the discovery endpoint
   /// will be reserved, in the form of
-  /// projects/{network_project}/global/networks/{network_id}.
+  /// projects/{network_project}/global/networks/{network_name}.
   public var network: Swift.String = Swift.String()
 
   /// Initialize a new instance of `DiscoveryEndpoint`.

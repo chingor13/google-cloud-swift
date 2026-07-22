@@ -48,7 +48,7 @@ public struct ValidateAttestationOccurrenceResponse: Codable, Equatable, GoogleC
     return copy
   }
 
-  /// The enum returned in the "result" field.
+  /// The enum returned in the `result` field.
   public enum Result: Codable, Equatable, Sendable {
     /// Unspecified.
     case unspecified

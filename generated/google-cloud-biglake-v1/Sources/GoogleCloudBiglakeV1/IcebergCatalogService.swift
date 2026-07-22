@@ -22,34 +22,14 @@ import GoogleApi
 import GoogleCloudWkt
 import GoogleCloudGax
 
-/// Iceberg Catalog Service API: this implements the open-source Iceberg REST
-/// Catalog API.
-/// See the API definition here:
-/// https://github.com/apache/iceberg/blob/main/open-api/rest-catalog-open-api.yaml
 ///
-/// The API is defined as OpenAPI 3.1.1 spec.
-///
-/// Currently we only support the following methods:
-/// - GetConfig/GetIcebergCatalogConfig
-/// - ListIcebergNamespaces
-/// - CheckIcebergNamespaceExists
-/// - GetIcebergNamespace
-/// - CreateIcebergNamespace (only supports single level)
-/// - DeleteIcebergNamespace
-/// - UpdateIcebergNamespace properties
-/// - ListTableIdentifiers
-/// - CreateIcebergTable
-/// - DeleteIcebergTable
-/// - GetIcebergTable
-/// - UpdateIcebergTable (CommitTable)
-/// - LoadIcebergTableCredentials
-/// - RegisterTable
-///
-/// Users are required to provided the `X-Goog-User-Project` header with the
-/// project id or number which can be different from the bucket project id.
-/// That project will be charged for the API calls and the calling user must have
-/// access to that project. The caller must have `serviceusage.services.use`
-/// permission on the project.
+/// Lakehouse runtime catalog supports the following catalog management methods:
+/// - GetIcebergCatalog
+/// - ListIcebergCatalogs
+/// - DeleteIcebergCatalog
+/// - UpdateIcebergCatalog
+/// - CreateIcebergCatalog
+/// - FailoverIcebergCatalog
 ///
 /// @Snippet(path: "IcebergCatalogServiceQuickstart")
 public class IcebergCatalogServiceClient: Clients.IcebergCatalogServiceProtocol {
@@ -193,6 +173,15 @@ public class IcebergCatalogServiceClient: Clients.IcebergCatalogServiceProtocol 
     try await self.inner.registerIcebergTable(request: request, options: options)
   }
 
+  /// Reports a metrics report for a table.
+  ///
+  /// @Snippet(path: "IcebergCatalogService_ReportIcebergTableMetrics")
+  public func reportIcebergTableMetrics(
+    request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws {
+    try await self.inner.reportIcebergTableMetrics(request: request, options: options)
+  }
+
   /// Returns the Iceberg REST Catalog configuration options.
   ///
   /// @Snippet(path: "IcebergCatalogService_GetIcebergCatalog")
@@ -234,7 +223,6 @@ public class IcebergCatalogServiceClient: Clients.IcebergCatalogServiceProtocol 
   }
 
   /// Creates the Iceberg REST Catalog.
-  /// Currently only supports Google Cloud Storage Bucket catalogs.
   /// Google Cloud Storage Bucket catalog id is the bucket for which the
   /// catalog is created (e.g. `my-catalog` for `gs://my-catalog`).
   ///
@@ -324,7 +312,6 @@ extension Clients {
     /// See `IcebergCatalogServiceClient.createIcebergTable`.
     func createIcebergTable(
       parent: Swift.String,
-      httpBody: GoogleApi.HttpBody?,
     ) async throws -> GoogleApi.HttpBody
 
     /// See `IcebergCatalogServiceClient.deleteIcebergTable`.
@@ -359,6 +346,14 @@ extension Clients {
     /// See `IcebergCatalogServiceClient.registerIcebergTable`.
     func registerIcebergTable(request: RegisterIcebergTableRequest) async throws
       -> GoogleApi.HttpBody
+
+    /// See `IcebergCatalogServiceClient.reportIcebergTableMetrics`.
+    func reportIcebergTableMetrics(request: ReportIcebergTableMetricsRequest) async throws
+
+    /// See `IcebergCatalogServiceClient.reportIcebergTableMetrics`.
+    func reportIcebergTableMetrics(
+      name: Swift.String,
+    ) async throws
 
     /// See `IcebergCatalogServiceClient.getIcebergCatalog`.
     func getIcebergCatalog(request: GetIcebergCatalogRequest) async throws
@@ -405,6 +400,14 @@ extension Clients {
       parent: Swift.String,
       icebergCatalog: IcebergCatalog?,
       icebergCatalogId: Swift.String,
+    ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
+
+    /// See `IcebergCatalogServiceClient.createIcebergCatalog`.
+    func createIcebergCatalog(
+      parent: Swift.String,
+      icebergCatalog: IcebergCatalog?,
+      icebergCatalogId: Swift.String,
+      primaryLocation: Swift.String,
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
 
     /// See `IcebergCatalogServiceClient.failoverIcebergCatalog`.
@@ -481,6 +484,11 @@ extension Clients {
     func registerIcebergTable(
       request: RegisterIcebergTableRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
+
+    /// See `IcebergCatalogServiceClient.reportIcebergTableMetrics`.
+    func reportIcebergTableMetrics(
+      request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws
 
     /// See `IcebergCatalogServiceClient.getIcebergCatalog`.
     func getIcebergCatalog(
@@ -659,11 +667,9 @@ extension Clients.IcebergCatalogServiceProtocol {
 
   public func createIcebergTable(
     parent: Swift.String,
-    httpBody: GoogleApi.HttpBody?,
   ) async throws -> GoogleApi.HttpBody {
     let request = CreateIcebergTableRequest().with {
       $0.parent = parent
-      $0.httpBody = httpBody
     }
     return try await self.createIcebergTable(request: request)
   }
@@ -751,6 +757,25 @@ extension Clients.IcebergCatalogServiceProtocol {
     request: RegisterIcebergTableRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleApi.HttpBody {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func reportIcebergTableMetrics(request: ReportIcebergTableMetricsRequest) async throws {
+    try await self.reportIcebergTableMetrics(request: request, options: .init())
+  }
+
+  public func reportIcebergTableMetrics(
+    request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func reportIcebergTableMetrics(
+    name: Swift.String,
+  ) async throws {
+    let request = ReportIcebergTableMetricsRequest().with {
+      $0.name = name
+    }
+    try await self.reportIcebergTableMetrics(request: request)
   }
 
   public func getIcebergCatalog(request: GetIcebergCatalogRequest) async throws
@@ -858,6 +883,21 @@ extension Clients.IcebergCatalogServiceProtocol {
       $0.parent = parent
       $0.icebergCatalog = icebergCatalog
       $0.icebergCatalogId = icebergCatalogId
+    }
+    return try await self.createIcebergCatalog(request: request)
+  }
+
+  public func createIcebergCatalog(
+    parent: Swift.String,
+    icebergCatalog: IcebergCatalog?,
+    icebergCatalogId: Swift.String,
+    primaryLocation: Swift.String,
+  ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog {
+    let request = CreateIcebergCatalogRequest().with {
+      $0.parent = parent
+      $0.icebergCatalog = icebergCatalog
+      $0.icebergCatalogId = icebergCatalogId
+      $0.primaryLocation = primaryLocation
     }
     return try await self.createIcebergCatalog(request: request)
   }

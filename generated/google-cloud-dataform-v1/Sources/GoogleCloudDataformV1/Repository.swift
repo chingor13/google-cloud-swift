@@ -107,8 +107,14 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Required. The Git remote's URL.
     public var url: Swift.String = Swift.String()
 
-    /// Required. The Git remote's default branch name.
+    /// Optional. The Git remote's default branch name.
+    /// If not set, `main` will be used.
     public var defaultBranch: Swift.String = Swift.String()
+
+    /// Output only. The Git remote's effective default branch name.
+    /// This is the default branch name of the Git remote if it is set,
+    /// otherwise it is `main`.
+    public var effectiveDefaultBranch: Swift.String = Swift.String()
 
     /// Optional. The name of the Secret Manager secret version to use as an
     /// authentication token for Git operations. Must be in the format
@@ -117,6 +123,11 @@ public struct Repository: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
     /// Optional. Authentication fields for remote uris using SSH protocol.
     public var sshAuthenticationConfig: Repository.GitRemoteSettings.SshAuthenticationConfig? = nil
+
+    /// Optional. Resource name for the `GitRepositoryLink` used for machine
+    /// credentials. Must be in the format
+    /// `projects/*/locations/*/connections/*/gitRepositoryLinks/*`
+    public var gitRepositoryLink: Swift.String? = nil
 
     /// Output only. Deprecated: The field does not contain any token status
     /// information.

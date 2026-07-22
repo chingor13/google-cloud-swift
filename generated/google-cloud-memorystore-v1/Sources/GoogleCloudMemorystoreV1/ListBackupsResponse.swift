@@ -18,7 +18,7 @@ import Foundation
 import GoogleCloudGax
 import GoogleCloudWkt
 
-/// Response for [ListBackups].
+/// Response for `ListBackups`.
 public struct ListBackupsResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   GoogleCloudGax._PaginatedResponse,
   Sendable

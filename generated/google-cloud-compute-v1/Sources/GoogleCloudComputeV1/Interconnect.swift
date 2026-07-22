@@ -70,6 +70,11 @@
     /// create the resource.
     public var description: Swift.String? = nil
 
+    /// Output only. URL of the InterconnectLocation object that represents where
+    /// this connection is to be provisioned. By default it will be the same as the
+    /// location field.
+    public var effectiveLocation: Swift.String? = nil
+
     /// Output only. [Output Only] A list of outages expected for this Interconnect.
     public var expectedOutages: [InterconnectOutageNotification] = []
 
@@ -258,6 +263,7 @@
       case creationTimestamp = "creationTimestamp"
       case customerName = "customerName"
       case description = "description"
+      case effectiveLocation = "effectiveLocation"
       case expectedOutages = "expectedOutages"
       case googleIpAddress = "googleIpAddress"
       case googleReferenceId = "googleReferenceId"
@@ -302,6 +308,8 @@
         Swift.String.self, forKey: .creationTimestamp)
       self.customerName = try container.decodeIfPresent(Swift.String.self, forKey: .customerName)
       self.description = try container.decodeIfPresent(Swift.String.self, forKey: .description)
+      self.effectiveLocation = try container.decodeIfPresent(
+        Swift.String.self, forKey: .effectiveLocation)
       self.expectedOutages = try container.decode(
         [InterconnectOutageNotification].self, forKey: .expectedOutages)
       self.googleIpAddress = try container.decodeIfPresent(
@@ -362,6 +370,7 @@
       try container.encode(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encode(self.customerName, forKey: .customerName)
       try container.encode(self.description, forKey: .description)
+      try container.encode(self.effectiveLocation, forKey: .effectiveLocation)
       try container.encode(self.expectedOutages, forKey: .expectedOutages)
       try container.encode(self.googleIpAddress, forKey: .googleIpAddress)
       try container.encode(self.googleReferenceId, forKey: .googleReferenceId)

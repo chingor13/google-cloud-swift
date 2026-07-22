@@ -63,9 +63,8 @@
     /// Lists information about the supported locations for this service.
     ///
     /// This method lists locations based on the resource scope provided in
-    /// the [ListLocationsRequest.name] field:
-    ///
-    /// * **Global locations**: If `name` is empty, the method lists the
+    /// the [ListLocationsRequest.name][google.cloud.location.ListLocationsRequest.name] field: *
+    /// **Global locations**: If `name` is empty, the method lists the
     /// public locations available to all projects. * **Project-specific
     /// locations**: If `name` follows the format
     /// `projects/{project}`, the method lists locations visible to that
@@ -77,6 +76,8 @@
     /// name is
     /// incorporated into the request path based on the specific service
     /// implementation and version.
+    ///
+    /// [google.cloud.location.ListLocationsRequest.name]: https://www.google.com/search?q=Swift+google.cloud.location+GoogleCloudLocation.ListLocationsRequest/name
     ///
     /// @Snippet(path: "Fulfillments_ListLocations")
     public func listLocations(
@@ -88,9 +89,8 @@
     /// Lists information about the supported locations for this service.
     ///
     /// This method lists locations based on the resource scope provided in
-    /// the [ListLocationsRequest.name] field:
-    ///
-    /// * **Global locations**: If `name` is empty, the method lists the
+    /// the [ListLocationsRequest.name][google.cloud.location.ListLocationsRequest.name] field: *
+    /// **Global locations**: If `name` is empty, the method lists the
     /// public locations available to all projects. * **Project-specific
     /// locations**: If `name` follows the format
     /// `projects/{project}`, the method lists locations visible to that
@@ -102,6 +102,8 @@
     /// name is
     /// incorporated into the request path based on the specific service
     /// implementation and version.
+    ///
+    /// [google.cloud.location.ListLocationsRequest.name]: https://www.google.com/search?q=Swift+google.cloud.location+GoogleCloudLocation.ListLocationsRequest/name
     ///
     /// @Snippet(path: "Fulfillments_ListLocations")
     public func listLocations(

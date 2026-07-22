@@ -49,6 +49,12 @@
     /// "llama-index", "custom".
     public var agentFramework: Swift.String = Swift.String()
 
+    /// Optional. The identity type to use for the Reasoning Engine. If not
+    /// specified, the `service_account` field will be used if set, otherwise the
+    /// default Vertex AI Reasoning Engine Service Agent in the project will be
+    /// used.
+    public var identityType: ReasoningEngineSpec.IdentityType = ReasoningEngineSpec.IdentityType()
+
     /// Defines the source for the deployment.
     /// The `package_spec` field should not be set if `deployment_source` is
     /// specified.
@@ -78,6 +84,7 @@
       case deploymentSpec = "deploymentSpec"
       case classMethods = "classMethods"
       case agentFramework = "agentFramework"
+      case identityType = "identityType"
     }
 
     public init(from decoder: Decoder) throws {
@@ -90,6 +97,8 @@
         ReasoningEngineSpec.DeploymentSpec.self, forKey: .deploymentSpec)
       self.classMethods = try container.decode([GoogleCloudWkt.Struct].self, forKey: .classMethods)
       self.agentFramework = try container.decode(Swift.String.self, forKey: .agentFramework)
+      self.identityType = try container.decode(
+        ReasoningEngineSpec.IdentityType.self, forKey: .identityType)
 
       var deploymentSource: OneOf_DeploymentSource? = nil
       let deploymentSourceCheckAndSet = {
@@ -121,6 +130,7 @@
       try container.encode(self.deploymentSpec, forKey: .deploymentSpec)
       try container.encode(self.classMethods, forKey: .classMethods)
       try container.encode(self.agentFramework, forKey: .agentFramework)
+      try container.encode(self.identityType, forKey: .identityType)
 
       if let choice = self.deploymentSource {
         switch choice {
@@ -627,6 +637,115 @@
       }
       public func _pack() throws -> GoogleCloudWkt.Struct {
         return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// The identity type to use for the Reasoning Engine.
+    public enum IdentityType: Codable, Equatable, Sendable {
+      /// Default value. Use a custom service account if the `service_account`
+      /// field is set, otherwise use the default Vertex AI Reasoning Engine
+      /// Service Agent in the project. Same behavior as SERVICE_ACCOUNT.
+      case unspecified
+      /// Use a custom service account if the `service_account` field is set,
+      /// otherwise use the default Vertex AI Reasoning Engine Service Agent in the
+      /// project.
+      case serviceAccount
+      /// Use Agent Identity. The `service_account` field must not be set.
+      case agentIdentity
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .unspecified
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .unspecified: return 0
+        case .serviceAccount: return 2
+        case .agentIdentity: return 3
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .unspecified: return "IDENTITY_TYPE_UNSPECIFIED"
+        case .serviceAccount: return "SERVICE_ACCOUNT"
+        case .agentIdentity: return "AGENT_IDENTITY"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "IDENTITY_TYPE_UNSPECIFIED": self = .unspecified
+        case "SERVICE_ACCOUNT": self = .serviceAccount
+        case "AGENT_IDENTITY": self = .agentIdentity
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .unspecified
+        case 2: self = .serviceAccount
+        case 3: self = .agentIdentity
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .unspecified: return try container.encode(0)
+        case .serviceAccount: return try container.encode(2)
+        case .agentIdentity: return try container.encode(3)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
       }
     }
 

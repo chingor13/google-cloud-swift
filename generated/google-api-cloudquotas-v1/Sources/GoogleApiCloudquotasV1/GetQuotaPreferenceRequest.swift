@@ -21,7 +21,7 @@ import GoogleCloudWkt
 public struct GetQuotaPreferenceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Name of the resource
+  /// Required. Identifier. Name of the resource
   ///
   /// Example name:
   /// `projects/123/locations/global/quota_preferences/my-config-for-us-east1`

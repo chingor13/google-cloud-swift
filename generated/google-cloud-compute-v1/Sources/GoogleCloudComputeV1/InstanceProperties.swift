@@ -56,6 +56,10 @@
     /// Labels to apply to instances that are created from these properties.
     public var labels: [Swift.String: Swift.String] = [:]
 
+    /// Specifies which method should be used for encrypting the
+    /// Local SSDs attached to the VM.
+    public var localSsdEncryptionMode: InstanceProperties.LocalSsdEncryptionMode? = nil
+
     /// The machine type to use for instances that are created from these
     /// properties.
     /// This field only accepts a machine type name, for example `n2-standard-4`.
@@ -244,6 +248,120 @@
         case .unspecified: return try container.encode(0)
         case .`none`: return try container.encode(1)
         case .stop: return try container.encode(2)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
+      }
+    }
+
+    /// The enumerated type for the [localSsdEncryptionMode][google.cloud.compute.v1.InstanceProperties.localSsdEncryptionMode] field.
+    ///
+    /// [google.cloud.compute.v1.InstanceProperties.localSsdEncryptionMode]: <doc:InstanceProperties/LocalSsdEncryptionMode>
+    public enum LocalSsdEncryptionMode: Codable, Equatable, Sendable {
+      /// The given VM will opt-in for using ephemeral key for
+      /// encryption of Local SSDs.
+      /// The Local SSDs will not be able to recover data in case of VM
+      /// crash.
+      case ephemeralKeyEncryption
+      /// The given VM will be encrypted using keys managed by the cloud
+      /// infrastructure and the keys will be deleted when the VM is
+      /// deleted.
+      case unspecified
+      /// The given VM will be encrypted using keys managed by the cloud
+      /// infrastructure and the keys will be deleted when the VM is
+      /// deleted.
+      case standardEncryption
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .ephemeralKeyEncryption
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .ephemeralKeyEncryption: return 0
+        case .unspecified: return 1
+        case .standardEncryption: return 2
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .ephemeralKeyEncryption: return "EPHEMERAL_KEY_ENCRYPTION"
+        case .unspecified: return "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED"
+        case .standardEncryption: return "STANDARD_ENCRYPTION"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "EPHEMERAL_KEY_ENCRYPTION": self = .ephemeralKeyEncryption
+        case "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED": self = .unspecified
+        case "STANDARD_ENCRYPTION": self = .standardEncryption
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .ephemeralKeyEncryption
+        case 1: self = .unspecified
+        case 2: self = .standardEncryption
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .ephemeralKeyEncryption: return try container.encode(0)
+        case .unspecified: return try container.encode(1)
+        case .standardEncryption: return try container.encode(2)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

@@ -40,6 +40,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// consumer, but not for service-initiated operations that are
   /// not related to a specific consumer.
   ///
+  ///
   /// - This can be in one of the following formats:
   ///     - project:PROJECT_ID,
   ///     - project`_`number:PROJECT_NUMBER,
@@ -97,6 +98,12 @@ public struct Operation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// DO NOT USE. This is an experimental field.
   public var importance: Operation.Importance = Operation.Importance()
+
+  /// Private Preview. This feature is only available for approved services.
+  ///
+  /// User defined labels for the resource that this operation is associated
+  /// with.
+  public var userLabels: [Swift.String: Swift.String] = [:]
 
   /// Unimplemented.
   public var extensions: [GoogleCloudWkt.`Any`] = []

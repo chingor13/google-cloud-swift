@@ -28,6 +28,10 @@
         request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
+      func resolveConnectSettings(
+        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudSqlV1.ConnectSettings
+
       func generateEphemeralCert(
         request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
@@ -58,6 +62,29 @@
         ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
         query.append(contentsOf: try encoder.encode(request.readTime, prefix: "readTime"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudSqlV1.ConnectSettings.self, from: data)
+      }
+
+      public func resolveConnectSettings(
+        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudSqlV1.ConnectSettings {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.location as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.location' is not set or is empty")
+          }
+          guard let pathVariable1 = request.dnsName as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.dns_name' is not set or is empty")
+          }
+          return "/v1/locations/\(pathVariable0)/dns/\(pathVariable1):resolveConnectSettings"
+        }()
+        let query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "GET"
         req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")

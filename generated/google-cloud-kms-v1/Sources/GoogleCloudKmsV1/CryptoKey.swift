@@ -318,6 +318,11 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// [google.cloud.kms.v1.KeyManagementService.Decapsulate]: <doc:KeyManagementService/decapsulate(request:)>
     /// [google.cloud.kms.v1.KeyManagementService.GetPublicKey]: <doc:KeyManagementService/getPublicKey(request:)>
     case keyEncapsulation
+    /// [CryptoKeys][google.cloud.kms.v1.CryptoKey] with this purpose may be used
+    /// for AES key
+    ///
+    /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
+    case aesWrapping
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -347,6 +352,7 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rawEncryptDecrypt: return 7
       case .mac: return 9
       case .keyEncapsulation: return 10
+      case .aesWrapping: return 11
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -364,6 +370,7 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rawEncryptDecrypt: return "RAW_ENCRYPT_DECRYPT"
       case .mac: return "MAC"
       case .keyEncapsulation: return "KEY_ENCAPSULATION"
+      case .aesWrapping: return "AES_WRAPPING"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -381,6 +388,7 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "RAW_ENCRYPT_DECRYPT": self = .rawEncryptDecrypt
       case "MAC": self = .mac
       case "KEY_ENCAPSULATION": self = .keyEncapsulation
+      case "AES_WRAPPING": self = .aesWrapping
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -397,6 +405,7 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 7: self = .rawEncryptDecrypt
       case 9: self = .mac
       case 10: self = .keyEncapsulation
+      case 11: self = .aesWrapping
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -429,6 +438,7 @@ public struct CryptoKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rawEncryptDecrypt: return try container.encode(7)
       case .mac: return try container.encode(9)
       case .keyEncapsulation: return try container.encode(10)
+      case .aesWrapping: return try container.encode(11)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

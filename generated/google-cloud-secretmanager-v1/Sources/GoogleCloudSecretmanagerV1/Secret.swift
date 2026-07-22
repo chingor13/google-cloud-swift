@@ -16,6 +16,7 @@
 
 import Foundation
 import GoogleCloudWkt
+import GoogleIamV1
 
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is a logical secret whose
 /// value and versions can be accessed.
@@ -139,6 +140,19 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Tags can be used to control policy evaluation for the resource.
   public var tags: [Swift.String: Swift.String] = [:]
 
+  /// Optional. Immutable. This defines the type of the secret.
+  /// Enforces certain structural requirements on the
+  /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion].
+  /// For secret of type UNSPECIFIED, the SecretVersions can be of any type.
+  ///
+  /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
+  public var secretType: Secret.SecretType = Secret.SecretType()
+
+  /// Output only. Defines the policy member for the secret.
+  /// This will be used to check if the caller has the permission to perform
+  /// certain operations on the typed secret.
+  public var policyMember: GoogleIamV1.ResourcePolicyMember? = nil
+
   /// Expiration policy attached to the
   /// [Secret][google.cloud.secretmanager.v1.Secret]. If specified the
   /// [Secret][google.cloud.secretmanager.v1.Secret] and all
@@ -186,6 +200,8 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case versionDestroyTtl = "versionDestroyTtl"
     case customerManagedEncryption = "customerManagedEncryption"
     case tags = "tags"
+    case secretType = "secretType"
+    case policyMember = "policyMember"
   }
 
   public init(from decoder: Decoder) throws {
@@ -206,6 +222,9 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.customerManagedEncryption = try container.decodeIfPresent(
       CustomerManagedEncryption.self, forKey: .customerManagedEncryption)
     self.tags = try container.decode([Swift.String: Swift.String].self, forKey: .tags)
+    self.secretType = try container.decode(Secret.SecretType.self, forKey: .secretType)
+    self.policyMember = try container.decodeIfPresent(
+      GoogleIamV1.ResourcePolicyMember.self, forKey: .policyMember)
 
     var expiration: OneOf_Expiration? = nil
     let expirationCheckAndSet = {
@@ -242,6 +261,8 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.versionDestroyTtl, forKey: .versionDestroyTtl)
     try container.encode(self.customerManagedEncryption, forKey: .customerManagedEncryption)
     try container.encode(self.tags, forKey: .tags)
+    try container.encode(self.secretType, forKey: .secretType)
+    try container.encode(self.policyMember, forKey: .policyMember)
 
     if let choice = self.expiration {
       switch choice {
@@ -249,6 +270,135 @@ public struct Secret: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         try container.encode(value, forKey: .expireTime)
       case .ttl(let value):
         try container.encode(value, forKey: .ttl)
+      }
+    }
+  }
+
+  /// This defines the various values of the type of secret can be.
+  public enum SecretType: Codable, Equatable, Sendable {
+    /// Applicable to all secrets which do not have any restriction on the
+    /// SecretVersions.
+    case unspecified
+    /// Applicable to secrets which are used for the managed rotation feature
+    /// for Cloud SQL Single User.
+    case cloudSqlDbCredentials
+    /// Applicable to secrets where the payload contains an access key.
+    case accessKey
+    /// Applicable to secrets where the payload contains a certificate.
+    case certificate
+    /// Applicable to secrets where the payload contains database credentials.
+    case otherDbCredentials
+    /// Applicable to secrets whose type doesn't belong to any of the above
+    /// defined types.
+    case other
+    /// Encodes an unknown integer value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownIntValue(Int)
+    /// Encodes an unknown string value.
+    ///
+    /// The most common cause for an unknown values is for the service to send
+    /// a value unknown to the library. We recommend you update your library to
+    /// the latest version.
+    case unknownStringValue(String)
+
+    public init() {
+      self = .unspecified
+    }
+
+    /// Returns the integer value associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+    public var intValue: Int? {
+      switch self {
+      case .unspecified: return 0
+      case .cloudSqlDbCredentials: return 1
+      case .accessKey: return 2
+      case .certificate: return 3
+      case .otherDbCredentials: return 4
+      case .other: return 50
+      case .unknownIntValue(let v): return v
+      case .unknownStringValue: return nil
+      }
+    }
+
+    /// Returns the string value (or name) associated with the enumeration.
+    ///
+    /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+    public var stringValue: Swift.String? {
+      switch self {
+      case .unspecified: return "SECRET_TYPE_UNSPECIFIED"
+      case .cloudSqlDbCredentials: return "CLOUD_SQL_DB_CREDENTIALS"
+      case .accessKey: return "ACCESS_KEY"
+      case .certificate: return "CERTIFICATE"
+      case .otherDbCredentials: return "OTHER_DB_CREDENTIALS"
+      case .other: return "OTHER"
+      case .unknownIntValue: return nil
+      case .unknownStringValue(let v): return v
+      }
+    }
+
+    /// Initialize from a string value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+    public init(stringValue: Swift.String) {
+      switch stringValue {
+      case "SECRET_TYPE_UNSPECIFIED": self = .unspecified
+      case "CLOUD_SQL_DB_CREDENTIALS": self = .cloudSqlDbCredentials
+      case "ACCESS_KEY": self = .accessKey
+      case "CERTIFICATE": self = .certificate
+      case "OTHER_DB_CREDENTIALS": self = .otherDbCredentials
+      case "OTHER": self = .other
+      default: self = .unknownStringValue(stringValue)
+      }
+    }
+
+    /// Initialize from an integer value.
+    ///
+    /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+    public init(intValue: Int) {
+      switch intValue {
+      case 0: self = .unspecified
+      case 1: self = .cloudSqlDbCredentials
+      case 2: self = .accessKey
+      case 3: self = .certificate
+      case 4: self = .otherDbCredentials
+      case 50: self = .other
+      default: self = .unknownIntValue(intValue)
+      }
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+      if let v = try? container.decode(Int.self) {
+        self.init(intValue: v)
+        return
+      }
+      if let s = try? container.decode(String.self) {
+        if let v = Int(s) {
+          self.init(intValue: v)
+        } else {
+          self.init(stringValue: s)
+        }
+        return
+      }
+      throw DecodingError.dataCorruptedError(
+        in: container, debugDescription: "Expected enum value, must be integer or string.")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      switch self {
+      case .unspecified: return try container.encode(0)
+      case .cloudSqlDbCredentials: return try container.encode(1)
+      case .accessKey: return try container.encode(2)
+      case .certificate: return try container.encode(3)
+      case .otherDbCredentials: return try container.encode(4)
+      case .other: return try container.encode(50)
+      case .unknownIntValue(let v): return try container.encode(v)
+      case .unknownStringValue(let v): return try container.encode(v)
       }
     }
   }

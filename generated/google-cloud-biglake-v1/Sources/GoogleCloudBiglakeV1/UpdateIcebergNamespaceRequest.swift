@@ -24,7 +24,7 @@ public struct UpdateIcebergNamespaceRequest: Codable, Equatable, GoogleCloudWkt.
   /// Required. The namespace to update.
   ///
   /// The namespace's `name` field is used to identify the namespace to update.
-  /// Format: projects/{project_id}/namespaces/{namespace}
+  /// Format: projects/{project_id}/catalogs/{catalog_id}/namespaces/{namespace}
   public var name: Swift.String = Swift.String()
 
   /// Required. The update to apply to the namespace.

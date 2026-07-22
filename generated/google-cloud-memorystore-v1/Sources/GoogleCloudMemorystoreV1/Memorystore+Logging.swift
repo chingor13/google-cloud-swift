@@ -284,6 +284,156 @@ extension Clients {
         })
     }
 
+    public func startMigration(
+      request: StartMigrationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "startMigration",
+        action: {
+          (r: StartMigrationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.startMigration(request: r, options: o)
+        })
+    }
+
+    public func finishMigration(
+      request: FinishMigrationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "finishMigration",
+        action: {
+          (r: FinishMigrationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.finishMigration(request: r, options: o)
+        })
+    }
+
+    public func listTokenAuthUsers(
+      request: ListTokenAuthUsersRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudMemorystoreV1.ListTokenAuthUsersResponse {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "listTokenAuthUsers",
+        action: {
+          (r: ListTokenAuthUsersRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudMemorystoreV1.ListTokenAuthUsersResponse
+          in
+          return try await self.inner.listTokenAuthUsers(request: r, options: o)
+        })
+    }
+
+    public func getTokenAuthUser(
+      request: GetTokenAuthUserRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudMemorystoreV1.TokenAuthUser {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "getTokenAuthUser",
+        action: {
+          (r: GetTokenAuthUserRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudMemorystoreV1.TokenAuthUser
+          in
+          return try await self.inner.getTokenAuthUser(request: r, options: o)
+        })
+    }
+
+    public func listAuthTokens(
+      request: ListAuthTokensRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudMemorystoreV1.ListAuthTokensResponse {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "listAuthTokens",
+        action: {
+          (r: ListAuthTokensRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudMemorystoreV1.ListAuthTokensResponse
+          in
+          return try await self.inner.listAuthTokens(request: r, options: o)
+        })
+    }
+
+    public func getAuthToken(
+      request: GetAuthTokenRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudMemorystoreV1.AuthToken {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "getAuthToken",
+        action: {
+          (r: GetAuthTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudMemorystoreV1.AuthToken
+          in
+          return try await self.inner.getAuthToken(request: r, options: o)
+        })
+    }
+
+    public func addTokenAuthUser(
+      request: AddTokenAuthUserRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "addTokenAuthUser",
+        action: {
+          (r: AddTokenAuthUserRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.addTokenAuthUser(request: r, options: o)
+        })
+    }
+
+    public func deleteTokenAuthUser(
+      request: DeleteTokenAuthUserRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "deleteTokenAuthUser",
+        action: {
+          (r: DeleteTokenAuthUserRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.deleteTokenAuthUser(request: r, options: o)
+        })
+    }
+
+    public func addAuthToken(
+      request: AddAuthTokenRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "addAuthToken",
+        action: {
+          (r: AddAuthTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.addAuthToken(request: r, options: o)
+        })
+    }
+
+    public func deleteAuthToken(
+      request: DeleteAuthTokenRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleLongrunning.Operation {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "deleteAuthToken",
+        action: {
+          (r: DeleteAuthTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleLongrunning.Operation
+          in
+          return try await self.inner.deleteAuthToken(request: r, options: o)
+        })
+    }
+
     public func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {

@@ -441,6 +441,15 @@
     public var relevanceThreshold: SearchRequest.RelevanceThreshold =
       SearchRequest.RelevanceThreshold()
 
+    /// Optional. The granular relevance filtering specification.
+    ///
+    /// If not specified, the global `relevance_threshold` will be used for all
+    /// sub-searches. If specified, this overrides the global
+    /// `relevance_threshold` to use thresholds on a per sub-search basis.
+    ///
+    /// This feature is currently supported only for custom and site search.
+    public var relevanceFilterSpec: SearchRequest.RelevanceFilterSpec? = nil
+
     /// Optional. The specification for returning the relevance score.
     public var relevanceScoreSpec: SearchRequest.RelevanceScoreSpec? = nil
 
@@ -2949,6 +2958,136 @@
       public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Relevance filtering specification.
+    public struct RelevanceFilterSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Optional. Relevance filtering threshold specification for keyword search.
+      public var keywordSearchThreshold: SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec? =
+        nil
+
+      /// Optional. Relevance filtering threshold specification for semantic
+      /// search.
+      public var semanticSearchThreshold:
+        SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec? = nil
+
+      /// Initialize a new instance of `RelevanceFilterSpec`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RelevanceFilterSpec().with { $0.keywordSearchThreshold = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      /// Specification for relevance filtering on a specific sub-search.
+      public struct RelevanceThresholdSpec: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+        Sendable
+      {
+        /// Configures how the relevance threshold is determined.
+        public var relevanceThresholdSpec: OneOf_RelevanceThresholdSpec? = nil
+
+        /// Initialize a new instance of `RelevanceThresholdSpec`.
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = RelevanceThresholdSpec().with { $0.relevanceThreshold = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
+        }
+
+        private enum CodingKeys: Swift.String, CodingKey {
+          case relevanceThreshold = "relevanceThreshold"
+          case semanticRelevanceThreshold = "semanticRelevanceThreshold"
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: CodingKeys.self)
+
+          var relevanceThresholdSpec: OneOf_RelevanceThresholdSpec? = nil
+          let relevanceThresholdSpecCheckAndSet = {
+            if relevanceThresholdSpec != nil {
+              throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                  codingPath: decoder.codingPath,
+                  debugDescription: "Multiple values set for oneof 'relevanceThresholdSpec'"))
+            }
+            relevanceThresholdSpec = $0
+          }
+          if let relevanceThreshold = try container.decodeIfPresent(
+            SearchRequest.RelevanceThreshold.self, forKey: .relevanceThreshold)
+          {
+            try relevanceThresholdSpecCheckAndSet(.relevanceThreshold(relevanceThreshold))
+          }
+          if let semanticRelevanceThreshold = try container.decodeIfPresent(
+            Swift.Float.self, forKey: .semanticRelevanceThreshold)
+          {
+            try relevanceThresholdSpecCheckAndSet(
+              .semanticRelevanceThreshold(semanticRelevanceThreshold))
+          }
+          self.relevanceThresholdSpec = relevanceThresholdSpec
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: CodingKeys.self)
+
+          if let choice = self.relevanceThresholdSpec {
+            switch choice {
+            case .relevanceThreshold(let value):
+              try container.encode(value, forKey: .relevanceThreshold)
+            case .semanticRelevanceThreshold(let value):
+              try container.encode(value, forKey: .semanticRelevanceThreshold)
+            }
+          }
+        }
+
+        /// Configures how the relevance threshold is determined.
+        public enum OneOf_RelevanceThresholdSpec: Codable, Equatable, Sendable {
+          /// Pre-defined relevance threshold for the sub-search.
+          case relevanceThreshold(SearchRequest.RelevanceThreshold)
+          /// Custom relevance threshold for the sub-search.
+          /// The value must be in [0.0, 1.0].
+          case semanticRelevanceThreshold(Swift.Float)
+        }
+
+        public static var _anyTypeUrl: Swift.String {
+          return
+            "type.googleapis.com/google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec"
+        }
+        public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+          self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+        }
+        public func _pack() throws -> GoogleCloudWkt.Struct {
+          return try GoogleCloudWkt._slowAnySerialize(message: self)
+        }
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
         self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

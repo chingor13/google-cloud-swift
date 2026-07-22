@@ -22,7 +22,7 @@ public struct CreateIcebergNamespaceRequest: Codable, Equatable, GoogleCloudWkt.
   Sendable
 {
   /// Required. The parent resource where this namespace will be created.
-  /// Format: projects/{project_id}/restcatalog/v1/catalogs/{catalog_id}
+  /// Format: projects/{project_id}/catalogs/{catalog_id}
   public var parent: Swift.String = Swift.String()
 
   /// Required. The namespace to create.

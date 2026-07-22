@@ -248,12 +248,16 @@
         public struct ErrorDetails: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           Sendable
         {
+          /// Error information containing structured domain, reason, and metadata.
           public var errorInfo: ErrorInfo? = nil
 
+          /// Links and information to help the user resolve the error.
           public var help: Help? = nil
 
+          /// A localized human-readable error message intended for end users.
           public var localizedMessage: LocalizedMessage? = nil
 
+          /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
           /// Initialize a new instance of `ErrorDetails`.
@@ -715,8 +719,11 @@
     ///
     /// [google.cloud.compute.v1.Operation.status]: <doc:Operation/Status>
     public enum Status: Codable, Equatable, Sendable {
+      /// The operation has completed processing successfully or with an error.
       case done
+      /// The operation is waiting to be processed.
       case pending
+      /// The operation is actively being processed.
       case running
       /// Encodes an unknown integer value.
       ///

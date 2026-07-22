@@ -184,6 +184,9 @@
       /// Read-only. Login for a service account that belongs to the
       /// Cloud IAM group.
       case cloudIamGroupServiceAccount
+      /// Cloud IAM workforce identity user managed via workforce identity
+      /// federation.
+      case cloudIamWorkforceIdentity
       /// Microsoft Entra ID user.
       case entraidUser
       /// Encodes an unknown integer value.
@@ -214,6 +217,7 @@
         case .cloudIamGroup: return 3
         case .cloudIamGroupUser: return 4
         case .cloudIamGroupServiceAccount: return 5
+        case .cloudIamWorkforceIdentity: return 6
         case .entraidUser: return 7
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
@@ -231,6 +235,7 @@
         case .cloudIamGroup: return "CLOUD_IAM_GROUP"
         case .cloudIamGroupUser: return "CLOUD_IAM_GROUP_USER"
         case .cloudIamGroupServiceAccount: return "CLOUD_IAM_GROUP_SERVICE_ACCOUNT"
+        case .cloudIamWorkforceIdentity: return "CLOUD_IAM_WORKFORCE_IDENTITY"
         case .entraidUser: return "ENTRAID_USER"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
@@ -248,6 +253,7 @@
         case "CLOUD_IAM_GROUP": self = .cloudIamGroup
         case "CLOUD_IAM_GROUP_USER": self = .cloudIamGroupUser
         case "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": self = .cloudIamGroupServiceAccount
+        case "CLOUD_IAM_WORKFORCE_IDENTITY": self = .cloudIamWorkforceIdentity
         case "ENTRAID_USER": self = .entraidUser
         default: self = .unknownStringValue(stringValue)
         }
@@ -264,6 +270,7 @@
         case 3: self = .cloudIamGroup
         case 4: self = .cloudIamGroupUser
         case 5: self = .cloudIamGroupServiceAccount
+        case 6: self = .cloudIamWorkforceIdentity
         case 7: self = .entraidUser
         default: self = .unknownIntValue(intValue)
         }
@@ -296,6 +303,7 @@
         case .cloudIamGroup: return try container.encode(3)
         case .cloudIamGroupUser: return try container.encode(4)
         case .cloudIamGroupServiceAccount: return try container.encode(5)
+        case .cloudIamWorkforceIdentity: return try container.encode(6)
         case .entraidUser: return try container.encode(7)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)

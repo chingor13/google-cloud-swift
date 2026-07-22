@@ -32,9 +32,8 @@ public struct RegisterIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._A
   public var metadataLocation: Swift.String = Swift.String()
 
   /// Optional. Whether to overwrite the table if it already exists. Default is
-  /// false. Currently this field is ignored and an error is returned if the
-  /// table already exists.
-  public var overwrite: Swift.String = Swift.String()
+  /// false.
+  public var overwrite: Swift.Bool = Swift.Bool()
 
   /// Initialize a new instance of `RegisterIcebergTableRequest`.
   public init() {}
@@ -64,7 +63,7 @@ public struct RegisterIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._A
     self.parent = try container.decode(Swift.String.self, forKey: .parent)
     self.name = try container.decode(Swift.String.self, forKey: .name)
     self.metadataLocation = try container.decode(Swift.String.self, forKey: .metadataLocation)
-    self.overwrite = try container.decode(Swift.String.self, forKey: .overwrite)
+    self.overwrite = try container.decode(Swift.Bool.self, forKey: .overwrite)
   }
 
   public func encode(to encoder: Encoder) throws {

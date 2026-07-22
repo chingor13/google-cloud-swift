@@ -83,6 +83,10 @@
     /// must not send an MDX request. The default is empty.
     public var mdxProtocolSupport: [ConnectSettings.MdxProtocolSupport] = []
 
+    /// Optional. Output only. Connection name of the Cloud SQL instance used in
+    /// connection strings, in the format project:region:instance.
+    public var connectionName: Swift.String = Swift.String()
+
     /// Initialize a new instance of `ConnectSettings`.
     public init() {}
 

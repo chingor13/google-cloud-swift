@@ -17,9 +17,9 @@
 import Foundation
 import GoogleCloudWkt
 
-/// An [attestor][google.cloud.binaryauthorization.v1.Attestor] that attests to container image
-/// artifacts. An existing attestor cannot be modified except where
-/// indicated.
+/// An [attestor][google.cloud.binaryauthorization.v1.Attestor] that attests to
+/// container image artifacts. An existing attestor cannot be modified except
+/// where indicated.
 ///
 /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
 public struct Attestor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -35,6 +35,11 @@ public struct Attestor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Output only. Time when the attestor was last updated.
   public var updateTime: GoogleCloudWkt.Timestamp? = nil
+
+  /// Optional. A checksum, returned by the server, that can be sent on update
+  /// requests to ensure the attestor has an up-to-date value before attempting
+  /// to update it. See https://google.aip.dev/154.
+  public var etag: Swift.String = Swift.String()
 
   public var attestorType: OneOf_AttestorType? = nil
 
@@ -59,6 +64,7 @@ public struct Attestor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case description = "description"
     case userOwnedGrafeasNote = "userOwnedGrafeasNote"
     case updateTime = "updateTime"
+    case etag = "etag"
   }
 
   public init(from decoder: Decoder) throws {
@@ -67,6 +73,7 @@ public struct Attestor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.description = try container.decode(Swift.String.self, forKey: .description)
     self.updateTime = try container.decodeIfPresent(
       GoogleCloudWkt.Timestamp.self, forKey: .updateTime)
+    self.etag = try container.decode(Swift.String.self, forKey: .etag)
 
     var attestorType: OneOf_AttestorType? = nil
     let attestorTypeCheckAndSet = {
@@ -91,6 +98,7 @@ public struct Attestor: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.name, forKey: .name)
     try container.encode(self.description, forKey: .description)
     try container.encode(self.updateTime, forKey: .updateTime)
+    try container.encode(self.etag, forKey: .etag)
 
     if let choice = self.attestorType {
       switch choice {

@@ -25,25 +25,26 @@ public struct QuotaPreference: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Required except in the CREATE requests.
   /// The resource name of the quota preference.
-  /// The ID component following "locations/" must be "global".
-  /// Example:
+  /// The path that follows `/locations` must be `/global`.
+  /// For example:
   /// `projects/123/locations/global/quotaPreferences/my-config-for-us-east1`
   public var name: Swift.String = Swift.String()
 
   /// Immutable. The dimensions that this quota preference applies to. The key of
-  /// the map entry is the name of a dimension, such as "region", "zone",
-  /// "network_id", and the value of the map entry is the dimension value.
+  /// the map entry is the name of a dimension, such as `region`, `zone`,
+  /// `network_id`, and the value of the map entry is the dimension value.
   ///
   /// If a dimension is missing from the map of dimensions, the quota preference
   /// applies to all the dimension values except for those that have other quota
   /// preferences configured for the specific value.
   ///
-  /// NOTE: QuotaPreferences can only be applied across all values of "user" and
-  /// "resource" dimension. Do not set values for "user" or "resource" in the
+  /// Note: QuotaPreferences can only be applied across all values of `user` and
+  /// `resource` dimension. Do not set values for `user` or `resource` in the
   /// dimension map.
   ///
-  /// Example: {"provider", "Foo Inc"} where "provider" is a service specific
-  /// dimension.
+  /// For example: `{"provider" : "Example Organization"}` where `provider` is a
+  /// service-specific quota dimension and `Example Organization` is the provider
+  /// name.
   public var dimensions: [Swift.String: Swift.String] = [:]
 
   /// Required. Preferred quota configuration.
@@ -65,7 +66,7 @@ public struct QuotaPreference: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var service: Swift.String = Swift.String()
 
   /// Required. The id of the quota to which the quota preference is applied. A
-  /// quota name is unique in the service. Example: `CpusPerProjectPerRegion`
+  /// quota name is unique in the service. For example, `CpusPerProjectPerRegion`
   public var quotaId: Swift.String = Swift.String()
 
   /// Output only. Is the quota preference pending Google Cloud approval and
@@ -75,9 +76,9 @@ public struct QuotaPreference: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// The reason / justification for this quota preference.
   public var justification: Swift.String = Swift.String()
 
-  /// Input only. An email address that can be used to contact the the user, in
-  /// case Google Cloud needs more information to make a decision before
-  /// additional quota can be granted.
+  /// Input only. An email address that can be used to contact the user, in case
+  /// Google Cloud needs more information to make a decision before additional
+  /// quota can be granted.
   ///
   /// When requesting a quota increase, the email address is required.
   /// When requesting a quota decrease, the email address is optional.

@@ -17,12 +17,16 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.GetAttestor][].
+/// Request message for
+/// [BinauthzManagementServiceV1.GetAttestor][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetAttestor].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetAttestor]: <doc:BinauthzManagementServiceV1/getAttestor(request:)>
 public struct GetAttestorRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The name of the [attestor][google.cloud.binaryauthorization.v1.Attestor] to retrieve, in the format
-  /// `projects/*/attestors/*`.
+  /// Required. The name of the
+  /// [attestor][google.cloud.binaryauthorization.v1.Attestor] to retrieve, in
+  /// the format `projects/*/attestors/*`.
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   public var name: Swift.String = Swift.String()

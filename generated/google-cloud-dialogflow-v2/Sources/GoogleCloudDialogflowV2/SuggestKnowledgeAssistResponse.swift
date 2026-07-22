@@ -43,6 +43,12 @@
     /// [google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse.latest_message]: <doc:SuggestKnowledgeAssistResponse/latestMessage>
     public var contextSize: Swift.Int32 = Swift.Int32()
 
+    /// Optional. The list of additional suggested queries based on the context.
+    /// This is used for the cases when we want to generate multiple queries
+    /// for a single request.
+    public var additionalSuggestedQueryResults:
+      [KnowledgeAssistAnswer.AdditionalSuggestedQueryResult] = []
+
     /// Initialize a new instance of `SuggestKnowledgeAssistResponse`.
     public init() {}
 

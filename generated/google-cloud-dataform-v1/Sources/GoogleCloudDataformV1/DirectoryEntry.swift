@@ -88,9 +88,11 @@ public struct DirectoryEntry: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The entry's contents.
   public enum OneOf_Entry: Codable, Equatable, Sendable {
-    /// A file in the directory.
+    /// A file in the directory. The path is returned including the full
+    /// folder structure from the root.
     case file(Swift.String)
-    /// A child directory in the directory.
+    /// A child directory in the directory. The path is returned including
+    /// the full folder structure from the root.
     case directory(Swift.String)
   }
 

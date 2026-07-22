@@ -28,6 +28,11 @@
     /// Optional. Google search entry for the following-up web searches.
     public var searchEntryPoint: SearchEntryPoint? = nil
 
+    /// Optional. The queries that were executed by the retrieval tools.
+    /// This field is populated only when the grounding source is a retrieval tool,
+    /// such as Vertex AI Search.
+    public var retrievalQueries: [Swift.String] = []
+
     /// List of supporting references retrieved from specified grounding source.
     public var groundingChunks: [GroundingChunk] = []
 

@@ -21,6 +21,26 @@
   public struct SecurityPolicyDdosProtectionConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
+    public var ddosAdaptiveProtection: SecurityPolicyDdosProtectionConfig.DdosAdaptiveProtection? =
+      nil
+
+    /// DDoS Protection for Network Load Balancers (and VMs with public IPs)
+    /// builds DDoS mitigations that minimize collateral damage. It quantifies
+    /// this as the fraction of a non-abuse baseline that's inadvertently
+    /// blocked.
+    ///
+    /// Rules whose collateral damage exceeds ddosImpactedBaselineThreshold will
+    /// not be deployed. Using a lower value will prioritize keeping collateral
+    /// damage low, possibly at the cost of its effectiveness in rate limiting
+    /// some or all of the attack. It should typically be unset, so Advanced DDoS
+    /// (and Adaptive Protection) uses the best mitigation it can find. Setting
+    /// the threshold is advised if there are logs for false positive detections
+    /// with high collateral damage, and will cause Advanced DDoS to attempt to
+    /// find a less aggressive rule that satisfies the constraint. If a suitable
+    /// rule cannot be found, the system falls back to either no mitigation for
+    /// smaller attacks or broader network throttles for larger ones.
+    public var ddosImpactedBaselineThreshold: Swift.Float? = nil
+
     public var ddosProtection: SecurityPolicyDdosProtectionConfig.DdosProtection? = nil
 
     /// Initialize a new instance of `SecurityPolicyDdosProtectionConfig`.
@@ -31,12 +51,129 @@
     /// Commonly used to initialize the value, for example:
     ///
     /// ```
-    /// let value = SecurityPolicyDdosProtectionConfig().with { $0.ddosProtection = ... }
+    /// let value = SecurityPolicyDdosProtectionConfig().with { $0.ddosAdaptiveProtection = ... }
     /// ```
     public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
       var copy = self
       try config(&copy)
       return copy
+    }
+
+    /// The enumerated type for the [ddosAdaptiveProtection][google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig.ddosAdaptiveProtection] field.
+    ///
+    /// [google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig.ddosAdaptiveProtection]: <doc:SecurityPolicyDdosProtectionConfig/DdosAdaptiveProtection>
+    public enum DdosAdaptiveProtection: Codable, Equatable, Sendable {
+      case unspecified
+      case disabled
+      case enabled
+      case preview
+      @available(*, deprecated)
+      case unspecifiedAdaptiveProtection
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .unspecified
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .unspecified: return 0
+        case .disabled: return 1
+        case .enabled: return 2
+        case .preview: return 3
+        case .unspecifiedAdaptiveProtection: return 4
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .unspecified: return "DDOS_ADAPTIVE_PROTECTION_UNSPECIFIED"
+        case .disabled: return "DISABLED"
+        case .enabled: return "ENABLED"
+        case .preview: return "PREVIEW"
+        case .unspecifiedAdaptiveProtection: return "UNSPECIFIED_ADAPTIVE_PROTECTION"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "DDOS_ADAPTIVE_PROTECTION_UNSPECIFIED": self = .unspecified
+        case "DISABLED": self = .disabled
+        case "ENABLED": self = .enabled
+        case "PREVIEW": self = .preview
+        case "UNSPECIFIED_ADAPTIVE_PROTECTION": self = .unspecifiedAdaptiveProtection
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .unspecified
+        case 1: self = .disabled
+        case 2: self = .enabled
+        case 3: self = .preview
+        case 4: self = .unspecifiedAdaptiveProtection
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .unspecified: return try container.encode(0)
+        case .disabled: return try container.encode(1)
+        case .enabled: return try container.encode(2)
+        case .preview: return try container.encode(3)
+        case .unspecifiedAdaptiveProtection: return try container.encode(4)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
+      }
     }
 
     /// The enumerated type for the [ddosProtection][google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig.ddosProtection] field.

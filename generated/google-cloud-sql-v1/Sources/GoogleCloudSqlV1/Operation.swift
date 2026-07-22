@@ -255,6 +255,10 @@
       case createReadPool
       /// Pre-checks the major version upgrade operation.
       case preCheckMajorVersionUpgrade
+      /// This operation type represents individual steps in a multi-step setup
+      /// migration workflow: including configuration, replication,
+      /// switchover/back, and data reseeding, as defined by operation's intent.
+      case setupMigration
       /// Encodes an unknown integer value.
       ///
       /// The most common cause for an unknown values is for the service to send
@@ -330,6 +334,7 @@
         case .repairReadPool: return 52
         case .createReadPool: return 53
         case .preCheckMajorVersionUpgrade: return 54
+        case .setupMigration: return 55
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
         }
@@ -393,6 +398,7 @@
         case .repairReadPool: return "REPAIR_READ_POOL"
         case .createReadPool: return "CREATE_READ_POOL"
         case .preCheckMajorVersionUpgrade: return "PRE_CHECK_MAJOR_VERSION_UPGRADE"
+        case .setupMigration: return "SETUP_MIGRATION"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
         }
@@ -456,6 +462,7 @@
         case "REPAIR_READ_POOL": self = .repairReadPool
         case "CREATE_READ_POOL": self = .createReadPool
         case "PRE_CHECK_MAJOR_VERSION_UPGRADE": self = .preCheckMajorVersionUpgrade
+        case "SETUP_MIGRATION": self = .setupMigration
         default: self = .unknownStringValue(stringValue)
         }
       }
@@ -518,6 +525,7 @@
         case 52: self = .repairReadPool
         case 53: self = .createReadPool
         case 54: self = .preCheckMajorVersionUpgrade
+        case 55: self = .setupMigration
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -596,6 +604,7 @@
         case .repairReadPool: return try container.encode(52)
         case .createReadPool: return try container.encode(53)
         case .preCheckMajorVersionUpgrade: return try container.encode(54)
+        case .setupMigration: return try container.encode(55)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

@@ -38,19 +38,22 @@
   /// finalized transcript values received for the series of results.
   ///
   /// In the following example, single utterance is enabled. In the case where
-  /// single utterance is not enabled, result 7 would not occur.
+  /// single utterance is not enabled, result 8 would not occur.
   ///
   /// ```
-  /// Num | transcript              | message_type            | is_final
-  /// --- | ----------------------- | ----------------------- | --------
-  /// 1   | "tube"                  | TRANSCRIPT              | false
-  /// 2   | "to be a"               | TRANSCRIPT              | false
-  /// 3   | "to be"                 | TRANSCRIPT              | false
-  /// 4   | "to be or not to be"    | TRANSCRIPT              | true
-  /// 5   | "that's"                | TRANSCRIPT              | false
-  /// 6   | "that is                | TRANSCRIPT              | false
-  /// 7   | unset                   | END_OF_SINGLE_UTTERANCE | unset
-  /// 8   | " that is the question" | TRANSCRIPT              | true
+  /// Num | transcript               | message_type            | is_final
+  /// --- | ------------------------ | ----------------------- | --------
+  /// 1   | "tube"                   | TRANSCRIPT              | false
+  /// 2   | "to be a"                | TRANSCRIPT              | false
+  /// 3   | "to be"                  | TRANSCRIPT              | false
+  /// 4   | "to be or not to be"     | TRANSCRIPT              | true
+  /// 5   | "that's"                 | TRANSCRIPT              | false
+  /// 6   | "that is                 | TRANSCRIPT              | false
+  /// 7   | " that is the question"  | TRANSCRIPT              | true
+  /// 8   | unset                    | END_OF_SINGLE_UTTERANCE | unset
+  /// 9   | ". Whether 'tis nobler"  | TRANSCRIPT              | true
+  /// 10  | " in the mind"           | TRANSCRIPT              | false
+  /// 11  | " in the mind to suffer" | TRANSCRIPT              | true
   /// ```
   ///
   /// Concatenating the finalized transcripts with `is_final` set to true,
@@ -127,6 +130,20 @@
       /// message is only sent if `single_utterance` was set to `true`, and is not
       /// used otherwise.
       case endOfSingleUtterance
+      /// Message contains DTMF digits.
+      case dtmfDigits
+      /// Message contains DTMF digits. Before a message with DTMF_DIGITS is sent,
+      /// a message with PARTIAL_DTMF_DIGITS may be sent with DTMF digits collected
+      /// up to the time of sending, which represents an intermediate result.
+      case partialDtmfDigits
+      /// This event indicates that the server has detected the beginning of human
+      /// voice activity in the stream. This event can be returned multiple times
+      /// if speech starts and stops repeatedly throughout the stream.
+      case speechActivityBegin
+      /// This event indicates that the server has detected the end of human voice
+      /// activity in the stream. This event can be returned multiple times if
+      /// speech starts and stops repeatedly throughout the stream.
+      case speechActivityEnd
       /// Encodes an unknown integer value.
       ///
       /// The most common cause for an unknown values is for the service to send
@@ -152,6 +169,10 @@
         case .unspecified: return 0
         case .transcript: return 1
         case .endOfSingleUtterance: return 2
+        case .dtmfDigits: return 3
+        case .partialDtmfDigits: return 4
+        case .speechActivityBegin: return 5
+        case .speechActivityEnd: return 6
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
         }
@@ -165,6 +186,10 @@
         case .unspecified: return "MESSAGE_TYPE_UNSPECIFIED"
         case .transcript: return "TRANSCRIPT"
         case .endOfSingleUtterance: return "END_OF_SINGLE_UTTERANCE"
+        case .dtmfDigits: return "DTMF_DIGITS"
+        case .partialDtmfDigits: return "PARTIAL_DTMF_DIGITS"
+        case .speechActivityBegin: return "SPEECH_ACTIVITY_BEGIN"
+        case .speechActivityEnd: return "SPEECH_ACTIVITY_END"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
         }
@@ -177,7 +202,11 @@
         switch stringValue {
         case "MESSAGE_TYPE_UNSPECIFIED": self = .unspecified
         case "TRANSCRIPT": self = .transcript
+        case "DTMF_DIGITS": self = .dtmfDigits
         case "END_OF_SINGLE_UTTERANCE": self = .endOfSingleUtterance
+        case "PARTIAL_DTMF_DIGITS": self = .partialDtmfDigits
+        case "SPEECH_ACTIVITY_BEGIN": self = .speechActivityBegin
+        case "SPEECH_ACTIVITY_END": self = .speechActivityEnd
         default: self = .unknownStringValue(stringValue)
         }
       }
@@ -190,6 +219,10 @@
         case 0: self = .unspecified
         case 1: self = .transcript
         case 2: self = .endOfSingleUtterance
+        case 3: self = .dtmfDigits
+        case 4: self = .partialDtmfDigits
+        case 5: self = .speechActivityBegin
+        case 6: self = .speechActivityEnd
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -218,6 +251,10 @@
         case .unspecified: return try container.encode(0)
         case .transcript: return try container.encode(1)
         case .endOfSingleUtterance: return try container.encode(2)
+        case .dtmfDigits: return try container.encode(3)
+        case .partialDtmfDigits: return try container.encode(4)
+        case .speechActivityBegin: return try container.encode(5)
+        case .speechActivityEnd: return try container.encode(6)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

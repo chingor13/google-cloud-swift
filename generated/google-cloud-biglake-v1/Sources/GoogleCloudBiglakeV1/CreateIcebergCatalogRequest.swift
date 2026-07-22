@@ -35,6 +35,20 @@ public struct CreateIcebergCatalogRequest: Codable, Equatable, GoogleCloudWkt._A
   /// desired.
   public var icebergCatalog: IcebergCatalog? = nil
 
+  /// Optional. The primary location where the catalog metadata will be stored.
+  ///
+  /// For Google Cloud Storage bucket catalogs and BigLake catalogs, if this
+  /// is not specified, then the region is inferred from the bucket's region
+  /// (`default_location` bucket for BigLake catalogs). If specified, the region
+  /// must be in jurisdiction (near the `default_location` bucket's region and
+  /// the `restricted_locations` buckets' regions for BigLake catalogs).
+  ///
+  /// For federated catalogs, this must be specified and be a Lakehouse-supported
+  /// location (https://docs.cloud.google.com/lakehouse/docs/locations). It
+  /// should be close to the remote catalog's location for the best
+  /// performance and cost.
+  public var primaryLocation: Swift.String = Swift.String()
+
   /// Initialize a new instance of `CreateIcebergCatalogRequest`.
   public init() {}
 
@@ -55,6 +69,7 @@ public struct CreateIcebergCatalogRequest: Codable, Equatable, GoogleCloudWkt._A
     case parent = "parent"
     case icebergCatalogId = "iceberg-catalog-id"
     case icebergCatalog = "icebergCatalog"
+    case primaryLocation = "primary_location"
   }
 
   public init(from decoder: Decoder) throws {
@@ -63,6 +78,7 @@ public struct CreateIcebergCatalogRequest: Codable, Equatable, GoogleCloudWkt._A
     self.icebergCatalogId = try container.decode(Swift.String.self, forKey: .icebergCatalogId)
     self.icebergCatalog = try container.decodeIfPresent(
       IcebergCatalog.self, forKey: .icebergCatalog)
+    self.primaryLocation = try container.decode(Swift.String.self, forKey: .primaryLocation)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -70,6 +86,7 @@ public struct CreateIcebergCatalogRequest: Codable, Equatable, GoogleCloudWkt._A
     try container.encode(self.parent, forKey: .parent)
     try container.encode(self.icebergCatalogId, forKey: .icebergCatalogId)
     try container.encode(self.icebergCatalog, forKey: .icebergCatalog)
+    try container.encode(self.primaryLocation, forKey: .primaryLocation)
   }
 
   public static var _anyTypeUrl: Swift.String {

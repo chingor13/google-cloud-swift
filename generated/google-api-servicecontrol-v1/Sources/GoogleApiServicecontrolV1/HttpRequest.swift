@@ -58,7 +58,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The referer URL of the request, as defined in
   /// [HTTP/1.1 Header Field
-  /// Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+  /// Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
   public var referer: Swift.String = Swift.String()
 
   /// The request processing latency on the server, from the time the request was

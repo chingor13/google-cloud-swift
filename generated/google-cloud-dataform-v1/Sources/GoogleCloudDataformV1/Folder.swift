@@ -31,8 +31,8 @@ public struct Folder: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. The containing Folder resource name. This should take
   /// the format: projects/{project}/locations/{location}/folders/{folder},
   /// projects/{project}/locations/{location}/teamFolders/{teamFolder}, or just
-  /// projects/{project}/locations/{location} if this is a root Folder. This
-  /// field can only be updated through MoveFolder.
+  /// "" if this is a root Folder. This field can only be updated through
+  /// MoveFolder.
   public var containingFolder: Swift.String = Swift.String()
 
   /// Output only. The resource name of the TeamFolder that this Folder is

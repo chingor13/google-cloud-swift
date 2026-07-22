@@ -506,6 +506,52 @@ public class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol {
     try await self.inner.importCryptoKeyVersion(request: request, options: options)
   }
 
+  /// Import wrapped key material into a
+  /// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with a trusted
+  /// key.
+  ///
+  /// All requests must specify a [CryptoKey][google.cloud.kms.v1.CryptoKey]. If
+  /// a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] is additionally
+  /// specified in the request, key material will be reimported into that
+  /// version. Otherwise, a new version will be created, and will be assigned the
+  /// next sequential id within the [CryptoKey][google.cloud.kms.v1.CryptoKey].
+  ///
+  /// The [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] will have
+  /// trusted_wrapping_enabled set to true.
+  ///
+  /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
+  /// [google.cloud.kms.v1.CryptoKeyVersion]: <doc:CryptoKeyVersion>
+  ///
+  /// @Snippet(path: "KeyManagementService_ImportTrustedKeyWrappedCryptoKeyVersion")
+  public func importTrustedKeyWrappedCryptoKeyVersion(
+    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+    try await self.inner.importTrustedKeyWrappedCryptoKeyVersion(request: request, options: options)
+  }
+
+  /// Exports a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with a
+  /// trusted key.
+  ///
+  /// The [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] must have
+  /// trusted_wrapping_enabled set to true. The
+  /// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] of the
+  /// [wrapping_key] must have the
+  /// [AES_WRAPPING][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.AES_WRAPPING]
+  /// purpose. The [wrapping_key] must have the
+  /// [AES_256_KWP][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.AES_256_KWP]
+  /// algorithm.
+  ///
+  /// [google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.AES_WRAPPING]: <doc:CryptoKey/CryptoKeyPurpose/aesWrapping>
+  /// [google.cloud.kms.v1.CryptoKeyVersion]: <doc:CryptoKeyVersion>
+  /// [google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.AES_256_KWP]: <doc:CryptoKeyVersion/CryptoKeyVersionAlgorithm/aes256Kwp>
+  ///
+  /// @Snippet(path: "KeyManagementService_ExportTrustedKeyWrappedCryptoKeyVersion")
+  public func exportTrustedKeyWrappedCryptoKeyVersion(
+    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
+    try await self.inner.exportTrustedKeyWrappedCryptoKeyVersion(request: request, options: options)
+  }
+
   /// Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a
   /// [KeyRing][google.cloud.kms.v1.KeyRing].
   ///
@@ -798,9 +844,8 @@ public class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol {
   /// Lists information about the supported locations for this service.
   ///
   /// This method lists locations based on the resource scope provided in
-  /// the [ListLocationsRequest.name] field:
-  ///
-  /// * **Global locations**: If `name` is empty, the method lists the
+  /// the [ListLocationsRequest.name][google.cloud.location.ListLocationsRequest.name] field: *
+  /// **Global locations**: If `name` is empty, the method lists the
   /// public locations available to all projects. * **Project-specific
   /// locations**: If `name` follows the format
   /// `projects/{project}`, the method lists locations visible to that
@@ -812,6 +857,8 @@ public class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol {
   /// name is
   /// incorporated into the request path based on the specific service
   /// implementation and version.
+  ///
+  /// [google.cloud.location.ListLocationsRequest.name]: https://www.google.com/search?q=Swift+google.cloud.location+GoogleCloudLocation.ListLocationsRequest/name
   ///
   /// @Snippet(path: "KeyManagementService_ListLocations")
   public func listLocations(
@@ -823,9 +870,8 @@ public class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol {
   /// Lists information about the supported locations for this service.
   ///
   /// This method lists locations based on the resource scope provided in
-  /// the [ListLocationsRequest.name] field:
-  ///
-  /// * **Global locations**: If `name` is empty, the method lists the
+  /// the [ListLocationsRequest.name][google.cloud.location.ListLocationsRequest.name] field: *
+  /// **Global locations**: If `name` is empty, the method lists the
   /// public locations available to all projects. * **Project-specific
   /// locations**: If `name` follows the format
   /// `projects/{project}`, the method lists locations visible to that
@@ -837,6 +883,8 @@ public class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol {
   /// name is
   /// incorporated into the request path based on the specific service
   /// implementation and version.
+  ///
+  /// [google.cloud.location.ListLocationsRequest.name]: https://www.google.com/search?q=Swift+google.cloud.location+GoogleCloudLocation.ListLocationsRequest/name
   ///
   /// @Snippet(path: "KeyManagementService_ListLocations")
   public func listLocations(
@@ -1096,6 +1144,16 @@ extension Clients {
     /// See `KeyManagementServiceClient.importCryptoKeyVersion`.
     func importCryptoKeyVersion(request: ImportCryptoKeyVersionRequest) async throws
       -> GoogleCloudKmsV1.CryptoKeyVersion
+
+    /// See `KeyManagementServiceClient.importTrustedKeyWrappedCryptoKeyVersion`.
+    func importTrustedKeyWrappedCryptoKeyVersion(
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest
+    ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion
+
+    /// See `KeyManagementServiceClient.exportTrustedKeyWrappedCryptoKeyVersion`.
+    func exportTrustedKeyWrappedCryptoKeyVersion(
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest
+    ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
 
     /// See `KeyManagementServiceClient.createImportJob`.
     func createImportJob(request: CreateImportJobRequest) async throws -> GoogleCloudKmsV1.ImportJob
@@ -1374,6 +1432,18 @@ extension Clients {
     func importCryptoKeyVersion(
       request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion
+
+    /// See `KeyManagementServiceClient.importTrustedKeyWrappedCryptoKeyVersion`.
+    func importTrustedKeyWrappedCryptoKeyVersion(
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion
+
+    /// See `KeyManagementServiceClient.exportTrustedKeyWrappedCryptoKeyVersion`.
+    func exportTrustedKeyWrappedCryptoKeyVersion(
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
 
     /// See `KeyManagementServiceClient.createImportJob`.
     func createImportJob(
@@ -1947,6 +2017,30 @@ extension Clients.KeyManagementServiceProtocol {
   public func importCryptoKeyVersion(
     request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func importTrustedKeyWrappedCryptoKeyVersion(
+    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest
+  ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+    try await self.importTrustedKeyWrappedCryptoKeyVersion(request: request, options: .init())
+  }
+
+  public func importTrustedKeyWrappedCryptoKeyVersion(
+    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func exportTrustedKeyWrappedCryptoKeyVersion(
+    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest
+  ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
+    try await self.exportTrustedKeyWrappedCryptoKeyVersion(request: request, options: .init())
+  }
+
+  public func exportTrustedKeyWrappedCryptoKeyVersion(
+    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 

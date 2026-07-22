@@ -70,6 +70,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case documentLocation = "documentLocation"
     case metadataLocation = "metadataLocation"
     case conversationLocation = "conversationLocation"
+    case batchContentLocation = "batchContentLocation"
     case containerTimestamp = "containerTimestamp"
     case containerVersion = "containerVersion"
   }
@@ -116,6 +117,11 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     {
       try locationCheckAndSet(.conversationLocation(conversationLocation))
     }
+    if let batchContentLocation = try container.decodeIfPresent(
+      BatchContentLocation?.self, forKey: .batchContentLocation)
+    {
+      try locationCheckAndSet(.batchContentLocation(batchContentLocation))
+    }
     self.location = location
   }
 
@@ -137,6 +143,8 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         try container.encode(value, forKey: .metadataLocation)
       case .conversationLocation(let value):
         try container.encode(value, forKey: .conversationLocation)
+      case .batchContentLocation(let value):
+        try container.encode(value, forKey: .batchContentLocation)
       }
     }
   }
@@ -153,6 +161,8 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     indirect case metadataLocation(MetadataLocation?)
     /// Location within a conversation.
     indirect case conversationLocation(ConversationLocation?)
+    /// Location within a batch of content.
+    indirect case batchContentLocation(BatchContentLocation?)
   }
 
   public static var _anyTypeUrl: Swift.String {

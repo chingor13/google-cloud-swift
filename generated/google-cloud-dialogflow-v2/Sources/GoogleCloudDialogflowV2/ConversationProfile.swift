@@ -83,6 +83,9 @@
     /// language tag. Example: "en-US".
     public var languageCode: Swift.String = Swift.String()
 
+    /// Optional. Configuration for SIP connections.
+    public var sipConfig: SipConfig? = nil
+
     /// The time zone of this conversational profile from the
     /// [time zone database](https://www.iana.org/time-zones), e.g.,
     /// America/New_York, Europe/Paris. Defaults to America/New_York.

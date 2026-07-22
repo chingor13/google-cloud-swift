@@ -39,7 +39,7 @@ public struct PscAutoConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable
   public var projectId: Swift.String = Swift.String()
 
   /// Required. The network where the PSC endpoints are created, in the form of
-  /// projects/{project_id}/global/networks/{network_id}.
+  /// projects/{project_id}/global/networks/{network_name}.
   public var network: Swift.String = Swift.String()
 
   /// Output only. The service attachment which is the target of the PSC

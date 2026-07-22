@@ -17,13 +17,18 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.UpdateAttestor][].
+/// Request message for
+/// [BinauthzManagementServiceV1.UpdateAttestor][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdateAttestor].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdateAttestor]: <doc:BinauthzManagementServiceV1/updateAttestor(request:)>
 public struct UpdateAttestorRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The updated [attestor][google.cloud.binaryauthorization.v1.Attestor] value. The service will
-  /// overwrite the [attestor name][google.cloud.binaryauthorization.v1.Attestor.name] field with the resource name
-  /// in the request URL, in the format `projects/*/attestors/*`.
+  /// Required. The updated
+  /// [attestor][google.cloud.binaryauthorization.v1.Attestor] value. The service
+  /// will overwrite the [attestor
+  /// name][google.cloud.binaryauthorization.v1.Attestor.name] field with the
+  /// resource name in the request URL, in the format `projects/*/attestors/*`.
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   /// [google.cloud.binaryauthorization.v1.Attestor.name]: <doc:Attestor/name>

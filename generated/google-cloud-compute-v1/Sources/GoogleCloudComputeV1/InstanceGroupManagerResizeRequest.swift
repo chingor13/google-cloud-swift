@@ -37,6 +37,12 @@
     /// identifier.
     public var id: Swift.UInt64? = nil
 
+    /// The names of instances to be created by this resize request. The number of
+    /// names specified determines the number of instances to create. The group's
+    /// target size will be increased by this number. This field cannot be used
+    /// together with 'resize_by'.
+    public var instances: [PerInstanceConfig] = []
+
     /// Output only. The resource type, which is alwayscompute#instanceGroupManagerResizeRequest for resize requests.
     public var kind: Swift.String? = nil
 

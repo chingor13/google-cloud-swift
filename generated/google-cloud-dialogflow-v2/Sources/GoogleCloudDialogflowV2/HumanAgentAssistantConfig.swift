@@ -139,6 +139,20 @@
       /// Supported features:  KNOWLEDGE_ASSIST
       public var raiSettings: RaiSettings? = nil
 
+      /// Optional. The trigger event for suggestion.
+      /// If unspecified, it will be `CUSTOMER_MESSAGE`.
+      /// Supported features: KNOWLEDGE_ASSIST
+      /// For KNOWLEDGE_ASSIST, these four trigger events are supported:
+      /// 1. TRIGGER_EVENT_UNSPECIFIED
+      /// 2. END_OF_UTTERANCE
+      /// 3. CUSTOMER_MESSAGE
+      /// 4. AGENT_MESSAGE
+      public var suggestionTriggerEvent: TriggerEvent = TriggerEvent()
+
+      /// Optional. If true, disable appending available search context to the
+      /// search query. Supported features: KNOWLEDGE_ASSIST
+      public var disableQuerySearchContext: Swift.Bool = Swift.Bool()
+
       /// Settings of suggestion trigger.
       ///
       /// Currently, only ARTICLE_SUGGESTION and FAQ will use this field.

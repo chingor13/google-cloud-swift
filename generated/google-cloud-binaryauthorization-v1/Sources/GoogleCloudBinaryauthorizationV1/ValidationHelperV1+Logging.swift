@@ -19,6 +19,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudWkt
+import GoogleIamV1
 import GoogleCloudGax
 import struct Logging.Logger
 
@@ -68,6 +69,51 @@ extension Clients {
             -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
           in
           return try await self.inner.validateAttestationOccurrence(request: r, options: o)
+        })
+    }
+
+    public func setIamPolicy(
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "setIamPolicy",
+        action: {
+          (r: GoogleIamV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
+          in
+          return try await self.inner.setIamPolicy(request: r, options: o)
+        })
+    }
+
+    public func getIamPolicy(
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "getIamPolicy",
+        action: {
+          (r: GoogleIamV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.Policy
+          in
+          return try await self.inner.getIamPolicy(request: r, options: o)
+        })
+    }
+
+    public func testIamPermissions(
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "testIamPermissions",
+        action: {
+          (r: GoogleIamV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleIamV1.TestIamPermissionsResponse
+          in
+          return try await self.inner.testIamPermissions(request: r, options: o)
         })
     }
   }

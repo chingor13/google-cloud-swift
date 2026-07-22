@@ -36,7 +36,13 @@
     /// disabled, binarylog must be disabled as well.
     public var binaryLogEnabled: GoogleCloudWkt.BoolValue? = nil
 
-    /// Reserved for future use.
+    /// Optional. Deprecated: replication_log_archiving_enabled is deprecated and
+    /// will be removed from a future version of the API. Use
+    /// [point_in_time_recovery_enabled][google.cloud.sql.v1.BackupConfiguration.point_in_time_recovery_enabled]
+    /// instead.
+    ///
+    /// [google.cloud.sql.v1.BackupConfiguration.point_in_time_recovery_enabled]: <doc:BackupConfiguration/pointInTimeRecoveryEnabled>
+    @available(*, deprecated)
     public var replicationLogArchivingEnabled: GoogleCloudWkt.BoolValue? = nil
 
     /// Location of the backup

@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if BackendServices || FutureReservations || InstanceGroupManagerResizeRequests || InstanceTemplates || Instances || LicenseCodes || Licenses || MachineImages || NodeGroups || RegionBackendServices || RegionCommitments || RegionInstanceGroupManagerResizeRequests || RegionInstanceTemplates || RegionInstances || RegionNotificationEndpoints || RegionUrlMaps || Reservations || UrlMaps
+#if BackendServices || FutureReservations || InstanceGroupManagerResizeRequests || InstanceGroupManagers || InstanceTemplates || Instances || LicenseCodes || Licenses || MachineImages || NodeGroups || RegionBackendServices || RegionCommitments || RegionInstanceGroupManagerResizeRequests || RegionInstanceGroupManagers || RegionInstanceTemplates || RegionInstances || RegionNotificationEndpoints || RegionUrlMaps || Reservations || UrlMaps
   import Foundation
   import GoogleCloudWkt
 

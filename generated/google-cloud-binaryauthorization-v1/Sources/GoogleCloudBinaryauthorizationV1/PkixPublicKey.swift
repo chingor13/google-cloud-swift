@@ -17,10 +17,9 @@
 import Foundation
 import GoogleCloudWkt
 
-/// A public key in the PkixPublicKey format (see
-/// https://tools.ietf.org/html/rfc5280#section-4.1.2.7 for details).
-/// Public keys of this type are typically textually encoded using the PEM
-/// format.
+/// A public key in the PkixPublicKey
+/// [format](https://tools.ietf.org/html/rfc5280#section-4.1.2.7). Public keys of
+/// this type are typically textually encoded using the PEM format.
 public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
@@ -35,6 +34,22 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// that of the public key).
   public var signatureAlgorithm: PkixPublicKey.SignatureAlgorithm =
     PkixPublicKey.SignatureAlgorithm()
+
+  /// Optional. The ID of this public key.
+  /// Signatures verified by Binary Authorization must include the ID of the
+  /// public key that can be used to verify them. The ID must match exactly
+  /// contents of the `key_id` field exactly.
+  ///
+  /// The ID may be explicitly provided by the caller, but it MUST be a valid
+  /// RFC3986 URI. If `key_id` is left blank and this `PkixPublicKey` is not used
+  /// in the context of a wrapper (see next paragraph), a default key ID will be
+  /// computed based on the digest of the DER encoding of the public key.
+  ///
+  /// If this `PkixPublicKey` is used in the context of a wrapper that has its
+  /// own notion of key ID (e.g. `AttestorPublicKey`), then this field can
+  /// either match that value exactly, or be left blank, in which case it behaves
+  /// exactly as though it is equal to that wrapper value.
+  public var keyId: Swift.String = Swift.String()
 
   /// Initialize a new instance of `PkixPublicKey`.
   public init() {}
@@ -55,9 +70,10 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Represents a signature algorithm and other information necessary to verify
   /// signatures with a given public key.
   /// This is based primarily on the public key types supported by Tink's
-  /// PemKeyType, which is in turn based on KMS's supported signing algorithms.
-  /// See https://cloud.google.com/kms/docs/algorithms. In the future, BinAuthz
-  /// might support additional public key types independently of Tink and/or KMS.
+  /// PemKeyType, which is in turn based on KMS's supported signing
+  /// [algorithms](https://cloud.google.com/kms/docs/algorithms). In the future,
+  /// Binary Authorization might support additional public key types
+  /// independently of Tink and/or KMS.
   public enum SignatureAlgorithm: Codable, Equatable, Sendable {
     /// Not specified.
     case unspecified
@@ -83,6 +99,8 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case ecdsaP384Sha384
     /// ECDSA on the NIST P-521 curve with a SHA512 digest.
     case ecdsaP521Sha512
+    /// ML-DSA-65 Post-Quantum Cryptography signature algorithm.
+    case mlDsa65
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -117,6 +135,7 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .ecdsaP256Sha256: return 9
       case .ecdsaP384Sha384: return 10
       case .ecdsaP521Sha512: return 11
+      case .mlDsa65: return 13
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -139,6 +158,7 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .ecdsaP256Sha256: return "ECDSA_P256_SHA256"
       case .ecdsaP384Sha384: return "ECDSA_P384_SHA384"
       case .ecdsaP521Sha512: return "ECDSA_P521_SHA512"
+      case .mlDsa65: return "ML_DSA_65"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -151,9 +171,13 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch stringValue {
       case "SIGNATURE_ALGORITHM_UNSPECIFIED": self = .unspecified
       case "RSA_PSS_2048_SHA256": self = .rsaPss2048Sha256
+      case "RSA_SIGN_PSS_2048_SHA256": self = .rsaPss2048Sha256
       case "RSA_PSS_3072_SHA256": self = .rsaPss3072Sha256
+      case "RSA_SIGN_PSS_3072_SHA256": self = .rsaPss3072Sha256
       case "RSA_PSS_4096_SHA256": self = .rsaPss4096Sha256
+      case "RSA_SIGN_PSS_4096_SHA256": self = .rsaPss4096Sha256
       case "RSA_PSS_4096_SHA512": self = .rsaPss4096Sha512
+      case "RSA_SIGN_PSS_4096_SHA512": self = .rsaPss4096Sha512
       case "RSA_SIGN_PKCS1_2048_SHA256": self = .rsaSignPkcs12048Sha256
       case "RSA_SIGN_PKCS1_3072_SHA256": self = .rsaSignPkcs13072Sha256
       case "RSA_SIGN_PKCS1_4096_SHA256": self = .rsaSignPkcs14096Sha256
@@ -164,6 +188,7 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "EC_SIGN_P384_SHA384": self = .ecdsaP384Sha384
       case "ECDSA_P521_SHA512": self = .ecdsaP521Sha512
       case "EC_SIGN_P521_SHA512": self = .ecdsaP521Sha512
+      case "ML_DSA_65": self = .mlDsa65
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -185,6 +210,7 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 9: self = .ecdsaP256Sha256
       case 10: self = .ecdsaP384Sha384
       case 11: self = .ecdsaP521Sha512
+      case 13: self = .mlDsa65
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -222,6 +248,7 @@ public struct PkixPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .ecdsaP256Sha256: return try container.encode(9)
       case .ecdsaP384Sha384: return try container.encode(10)
       case .ecdsaP521Sha512: return try container.encode(11)
+      case .mlDsa65: return try container.encode(13)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

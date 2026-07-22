@@ -17,13 +17,18 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.UpdatePolicy][].
+/// Request message for
+/// [BinauthzManagementServiceV1.UpdatePolicy][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdatePolicy].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdatePolicy]: <doc:BinauthzManagementServiceV1/updatePolicy(request:)>
 public struct UpdatePolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. A new or updated [policy][google.cloud.binaryauthorization.v1.Policy] value. The service will
-  /// overwrite the [policy name][google.cloud.binaryauthorization.v1.Policy.name] field with the resource name in
-  /// the request URL, in the format `projects/*/policy`.
+  /// Required. A new or updated
+  /// [policy][google.cloud.binaryauthorization.v1.Policy] value. The service
+  /// will overwrite the [policy
+  /// name][google.cloud.binaryauthorization.v1.Policy.name] field with the
+  /// resource name in the request URL, in the format `projects/*/policy`.
   ///
   /// [google.cloud.binaryauthorization.v1.Policy]: <doc:Policy>
   /// [google.cloud.binaryauthorization.v1.Policy.name]: <doc:Policy/name>

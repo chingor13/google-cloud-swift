@@ -48,6 +48,23 @@
     /// The connection policy status of the consumer network.
     public var consumerNetworkStatus: Swift.String? = nil
 
+    /// Output only. The service connection policy created automatically for the
+    /// consumer network when `psc_auto_connection_policy_enabled` is true. It is
+    /// in the format of:
+    /// `projects/{project}/regions/{region}/serviceConnectionPolicies/{policy_id}`
+    /// The `policy_id` is in format of `$NETWORK-$RANDOM`.
+    public var serviceConnectionPolicy: Swift.String? = nil
+
+    /// Output only. The status of service connection policy creation.
+    public var serviceConnectionPolicyCreationResult: Swift.String? = nil
+
+    /// Output only. The status of automated DNS provisioning.
+    public var instanceAutoDnsStatus: AutoDnsStatus? = nil
+
+    /// Output only. The status of automated DNS provisioning for the write
+    /// endpoint.
+    public var writeEndpointAutoDnsStatus: AutoDnsStatus? = nil
+
     /// Initialize a new instance of `PscAutoConnectionConfig`.
     public init() {}
 

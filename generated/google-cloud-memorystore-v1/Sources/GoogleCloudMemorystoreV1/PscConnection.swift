@@ -39,7 +39,7 @@ public struct PscConnection: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var projectId: Swift.String = Swift.String()
 
   /// Required. The consumer network where the IP address resides, in the form of
-  /// projects/{project_id}/global/networks/{network_id}.
+  /// projects/{project_id}/global/networks/{network_name}.
   public var network: Swift.String = Swift.String()
 
   /// Required. The service attachment which is the target of the PSC connection,

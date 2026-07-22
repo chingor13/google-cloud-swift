@@ -36,6 +36,18 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
   /// call. Provide this to retrieve the subsequent page.
   public var pageToken: Swift.String = Swift.String()
 
+  /// Optional. The filter expression.
+  /// The only parameter currently supported is filtering based on the
+  /// `IcebergCatalog.catalog_type` field.
+  ///
+  /// Examples:
+  /// * `catalog_type = CATALOG_TYPE_BIGLAKE`
+  /// * `catalog_type != CATALOG_TYPE_GCS_BUCKET`
+  /// * `catalog_type = CATALOG_TYPE_BIGLAKE OR catalog_type =
+  /// CATALOG_TYPE_GCS_BUCKET`
+  /// * `NOT catalog_type = CATALOG_TYPE_GCS_BUCKET`
+  public var filter: Swift.String = Swift.String()
+
   /// Initialize a new instance of `ListIcebergCatalogsRequest`.
   public init() {}
 
@@ -57,6 +69,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     case view = "view"
     case pageSize = "page-size"
     case pageToken = "page-token"
+    case filter = "filter"
   }
 
   public init(from decoder: Decoder) throws {
@@ -65,6 +78,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     self.view = try container.decode(ListIcebergCatalogsRequest.CatalogView.self, forKey: .view)
     self.pageSize = try container.decode(Swift.Int32.self, forKey: .pageSize)
     self.pageToken = try container.decode(Swift.String.self, forKey: .pageToken)
+    self.filter = try container.decode(Swift.String.self, forKey: .filter)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -73,6 +87,7 @@ public struct ListIcebergCatalogsRequest: Codable, Equatable, GoogleCloudWkt._An
     try container.encode(self.view, forKey: .view)
     try container.encode(self.pageSize, forKey: .pageSize)
     try container.encode(self.pageToken, forKey: .pageToken)
+    try container.encode(self.filter, forKey: .filter)
   }
 
   /// The enumeration of the views that can be returned.

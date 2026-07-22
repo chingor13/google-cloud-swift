@@ -21,7 +21,7 @@ import GoogleCloudWkt
 public struct CreateQuotaPreferenceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Value for parent.
+  /// Required. Identifier. Value for parent.
   ///
   /// Example:
   /// `projects/123/locations/global`

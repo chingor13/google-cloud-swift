@@ -35,6 +35,9 @@
     /// The latency of the service.
     public var serviceLatency: ServiceLatency? = nil
 
+    /// Optional. Debug info from the Customer Engagement Suite (CES) execution.
+    public var cesDebugInfo: GoogleCloudWkt.Struct? = nil
+
     /// Initialize a new instance of `SearchKnowledgeDebugInfo`.
     public init() {}
 

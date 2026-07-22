@@ -21,8 +21,6 @@
   public struct SslPolicyReference: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     Sendable
   {
-    /// URL of the SSL policy resource. Set this to empty string to clear any
-    /// existing SSL policy associated with the target proxy resource.
     public var sslPolicy: Swift.String? = nil
 
     /// Initialize a new instance of `SslPolicyReference`.

@@ -47,6 +47,16 @@
       try await self.inner.getConnectSettings(request: request, options: options)
     }
 
+    /// Retrieves connect settings about a Cloud SQL instance using the instance
+    /// DNS name.
+    ///
+    /// @Snippet(path: "SqlConnectService_ResolveConnectSettings")
+    public func resolveConnectSettings(
+      request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSqlV1.ConnectSettings {
+      try await self.inner.resolveConnectSettings(request: request, options: options)
+    }
+
     /// Generates a short-lived X509 certificate containing the provided public key
     /// and signed by a private key specific to the target instance. Users may use
     /// the certificate to authenticate as themselves when connecting to the
@@ -71,6 +81,10 @@
       func getConnectSettings(request: GetConnectSettingsRequest) async throws
         -> GoogleCloudSqlV1.ConnectSettings
 
+      /// See `SqlConnectServiceClient.resolveConnectSettings`.
+      func resolveConnectSettings(request: ResolveConnectSettingsRequest) async throws
+        -> GoogleCloudSqlV1.ConnectSettings
+
       /// See `SqlConnectServiceClient.generateEphemeralCert`.
       func generateEphemeralCert(request: GenerateEphemeralCertRequest) async throws
         -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
@@ -78,6 +92,11 @@
       /// See `SqlConnectServiceClient.getConnectSettings`.
       func getConnectSettings(
         request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudSqlV1.ConnectSettings
+
+      /// See `SqlConnectServiceClient.resolveConnectSettings`.
+      func resolveConnectSettings(
+        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
       /// See `SqlConnectServiceClient.generateEphemeralCert`.
@@ -97,6 +116,18 @@
 
     public func getConnectSettings(
       request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSqlV1.ConnectSettings {
+      throw GoogleCloudGax.RequestError.unimplemented
+    }
+
+    public func resolveConnectSettings(request: ResolveConnectSettingsRequest) async throws
+      -> GoogleCloudSqlV1.ConnectSettings
+    {
+      try await self.resolveConnectSettings(request: request, options: .init())
+    }
+
+    public func resolveConnectSettings(
+      request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.ConnectSettings {
       throw GoogleCloudGax.RequestError.unimplemented
     }

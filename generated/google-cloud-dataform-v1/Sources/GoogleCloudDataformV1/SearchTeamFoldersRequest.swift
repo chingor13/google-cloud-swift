@@ -25,9 +25,9 @@ public struct SearchTeamFoldersRequest: Codable, Equatable, GoogleCloudWkt._AnyP
   /// Format: `projects/*/locations/*`.
   public var location: Swift.String = Swift.String()
 
-  /// Optional. Maximum number of TeamFolders to return. The server may return
-  /// fewer items than requested. If unspecified, the server will pick an
-  /// appropriate default.
+  /// Optional. Maximum number of `TeamFolders` to return. The server may return
+  /// fewer items than requested. If unspecified, the server will pick a default
+  /// of `page_size` = 50.
   public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. Page token received from a previous `SearchTeamFolders` call.
@@ -41,15 +41,17 @@ public struct SearchTeamFoldersRequest: Codable, Equatable, GoogleCloudWkt._AnyP
   /// Optional. Field to additionally sort results by.
   /// Supported keywords: `display_name` (default), `create_time`,
   /// `last_modified_time`. Examples:
-  ///   - `orderBy="display_name"`
-  ///   - `orderBy="display_name desc"`
+  ///
+  /// * `orderBy="display_name"`
+  /// * `orderBy="display_name desc"`
   public var orderBy: Swift.String = Swift.String()
 
   /// Optional. Optional filtering for the returned list. Filtering is currently
   /// only supported on the `display_name` field.
   ///
   /// Example:
-  ///  - `filter="display_name="MyFolder""`
+  ///
+  /// * `filter="display_name="MyFolder""`
   public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `SearchTeamFoldersRequest`.

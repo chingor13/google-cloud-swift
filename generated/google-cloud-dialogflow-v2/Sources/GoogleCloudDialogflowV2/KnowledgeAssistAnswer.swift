@@ -61,6 +61,9 @@
       /// Suggested query text.
       public var queryText: Swift.String = Swift.String()
 
+      /// Optional. The search contexts for the query.
+      public var searchContexts: [KnowledgeAssistAnswer.SuggestedQuery.SearchContext] = []
+
       /// Initialize a new instance of `SuggestedQuery`.
       public init() {}
 
@@ -77,8 +80,92 @@
         return copy
       }
 
+      /// Search context is information useful for knowledge search that helps
+      /// enrich the query.
+      /// Example:
+      /// search_context {
+      ///   key: "application name"
+      ///   value: "DesignApp"
+      /// }
+      public struct SearchContext: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+        Sendable
+      {
+        /// Optional. The key of the search context, e.g. "application name".
+        public var key: Swift.String = Swift.String()
+
+        /// Optional. The value of the search context, e.g. "DesignApp".
+        public var value: Swift.String = Swift.String()
+
+        /// Initialize a new instance of `SearchContext`.
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = SearchContext().with { $0.key = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
+        }
+
+        public static var _anyTypeUrl: Swift.String {
+          return
+            "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext"
+        }
+        public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+          self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+        }
+        public func _pack() throws -> GoogleCloudWkt.Struct {
+          return try GoogleCloudWkt._slowAnySerialize(message: self)
+        }
+      }
+
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Represents a single suggested query result.
+    public struct AdditionalSuggestedQueryResult: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Output only. The suggested query based on the context.
+      public var suggestedQuery: KnowledgeAssistAnswer.SuggestedQuery? = nil
+
+      /// Output only. The name of the answer record.
+      /// Format: `projects/<Project ID>/locations/<Location
+      /// ID>/answerRecords/<Answer Record ID>`
+      public var answerRecord: Swift.String = Swift.String()
+
+      /// Initialize a new instance of `AdditionalSuggestedQueryResult`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = AdditionalSuggestedQueryResult().with { $0.suggestedQuery = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
         self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
@@ -119,6 +206,8 @@
         case answerText = "answerText"
         case faqSource = "faqSource"
         case generativeSource = "generativeSource"
+        case playbookSource = "playbookSource"
+        case eventSource = "eventSource"
       }
 
       public init(from decoder: Decoder) throws {
@@ -145,6 +234,16 @@
         {
           try sourceCheckAndSet(.generativeSource(generativeSource))
         }
+        if let playbookSource = try container.decodeIfPresent(
+          KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource?.self, forKey: .playbookSource)
+        {
+          try sourceCheckAndSet(.playbookSource(playbookSource))
+        }
+        if let eventSource = try container.decodeIfPresent(
+          KnowledgeAssistAnswer.KnowledgeAnswer.EventSource?.self, forKey: .eventSource)
+        {
+          try sourceCheckAndSet(.eventSource(eventSource))
+        }
         self.source = source
       }
 
@@ -158,6 +257,10 @@
             try container.encode(value, forKey: .faqSource)
           case .generativeSource(let value):
             try container.encode(value, forKey: .generativeSource)
+          case .playbookSource(let value):
+            try container.encode(value, forKey: .playbookSource)
+          case .eventSource(let value):
+            try container.encode(value, forKey: .eventSource)
           }
         }
       }
@@ -277,12 +380,54 @@
         }
       }
 
+      /// Details about source of Event answer.
+      public struct EventSource: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+        Sendable
+      {
+        /// Name of the triggered event.
+        public var event: Swift.String = Swift.String()
+
+        /// Sources used in event fulfillment.
+        public var snippets: KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource? = nil
+
+        /// Initialize a new instance of `EventSource`.
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = EventSource().with { $0.event = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
+        }
+
+        public static var _anyTypeUrl: Swift.String {
+          return
+            "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource"
+        }
+        public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+          self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+        }
+        public func _pack() throws -> GoogleCloudWkt.Struct {
+          return try GoogleCloudWkt._slowAnySerialize(message: self)
+        }
+      }
+
       /// Source of result.
       public enum OneOf_Source: Codable, Equatable, Sendable {
         /// Populated if the prediction came from FAQ.
         indirect case faqSource(KnowledgeAssistAnswer.KnowledgeAnswer.FaqSource?)
         /// Populated if the prediction was Generative.
         indirect case generativeSource(KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource?)
+        /// Populated if the prediction was from Playbook.
+        indirect case playbookSource(KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource?)
+        /// Populated if the prediction was from an event.
+        indirect case eventSource(KnowledgeAssistAnswer.KnowledgeAnswer.EventSource?)
       }
 
       public static var _anyTypeUrl: Swift.String {

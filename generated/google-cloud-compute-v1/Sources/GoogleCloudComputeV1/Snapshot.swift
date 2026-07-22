@@ -219,11 +219,13 @@
     /// creation/deletion.
     public var storageBytes: Swift.Int64? = nil
 
-    /// Output only. [Output Only] An indicator whether storageBytes is in a
+    /// Output only. [Deprecated] Instead, check the storageBytes field. After
+    /// snapshot creation, the storageBytesStatus field is alwaysUP_TO_DATE.
+    /// [Output Only] An indicator whether storageBytes is in a
     /// stable state or it is being adjusted as a result of shared storage
-    /// reallocation. This status can either be UPDATING, meaning
-    /// the size of the snapshot is being updated, or UP_TO_DATE,
-    /// meaning the size of the snapshot is up-to-date.
+    /// reallocation. This status can either be unset, meaning the snapshot is
+    /// being created, or UP_TO_DATE, meaning the size of the snapshot
+    /// is up-to-date.
     public var storageBytesStatus: Snapshot.StorageBytesStatus? = nil
 
     /// Cloud Storage bucket storage location of the snapshot (regional or

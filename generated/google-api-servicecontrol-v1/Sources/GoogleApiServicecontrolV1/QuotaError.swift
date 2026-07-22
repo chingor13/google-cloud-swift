@@ -18,7 +18,8 @@ import Foundation
 import GoogleCloudWkt
 import GoogleRpc
 
-/// Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation].
+/// Represents error information for
+/// [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation].
 ///
 /// [google.api.servicecontrol.v1.QuotaOperation]: <doc:QuotaOperation>
 public struct QuotaError: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -64,7 +65,8 @@ public struct QuotaError: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// This is never used.
     case unspecified
     /// Quota allocation failed.
-    /// Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+    /// Same as
+    /// [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
     case resourceExhausted
     /// Specified API key is invalid.
     case apiKeyInvalid

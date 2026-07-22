@@ -43,6 +43,17 @@
     /// field.
     public var ipCidrRange: Swift.String? = nil
 
+    /// Reference to a Public Delegated Prefix (PDP) for BYOIP.
+    /// This field should be specified for configuring BYOGUA internal IPv6
+    /// secondary range.
+    /// When specified along with the ip_cidr_range, the ip_cidr_range must lie
+    /// within the PDP referenced by the `ipCollection` field.
+    /// When specified without the ip_cidr_range, the range is auto-allocated
+    /// from the PDP referenced by the `ipCollection` field.
+    public var ipCollection: Swift.String? = nil
+
+    public var ipVersion: SubnetworkSecondaryRange.IpVersion? = nil
+
     /// The name associated with this subnetwork secondary range, used when adding
     /// an alias IP/IPv6 range to a VM instance.
     /// The name must be 1-63 characters long, and comply withRFC1035.
@@ -66,6 +77,111 @@
       var copy = self
       try config(&copy)
       return copy
+    }
+
+    /// The enumerated type for the [ipVersion][google.cloud.compute.v1.SubnetworkSecondaryRange.ipVersion] field.
+    ///
+    /// [google.cloud.compute.v1.SubnetworkSecondaryRange.ipVersion]: <doc:SubnetworkSecondaryRange/IpVersion>
+    public enum IpVersion: Codable, Equatable, Sendable {
+      case ipv4
+      case ipv6
+      /// Treated as IPV4 for backward-compatibility.
+      case unspecified
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .ipv4
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .ipv4: return 0
+        case .ipv6: return 1
+        case .unspecified: return 2
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .ipv4: return "IPV4"
+        case .ipv6: return "IPV6"
+        case .unspecified: return "IP_VERSION_UNSPECIFIED"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "IPV4": self = .ipv4
+        case "IPV6": self = .ipv6
+        case "IP_VERSION_UNSPECIFIED": self = .unspecified
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .ipv4
+        case 1: self = .ipv6
+        case 2: self = .unspecified
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .ipv4: return try container.encode(0)
+        case .ipv6: return try container.encode(1)
+        case .unspecified: return try container.encode(2)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
+      }
     }
 
     public static var _anyTypeUrl: Swift.String {

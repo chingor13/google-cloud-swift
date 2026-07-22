@@ -21,9 +21,9 @@ import GoogleCloudWkt
 public struct QuotaOperation: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Identity of the operation. This is expected to be unique within the scope
-  /// of the service that generated the operation, and guarantees idempotency in
-  /// case of retries.
+  /// Identity of the operation. For Allocation Quota, this is expected to be
+  /// unique within the scope of the service that generated the operation, and
+  /// guarantees idempotency in case of retries.
   ///
   /// In order to ensure best performance and latency in the Quota backends,
   /// operation_ids are optimally associated with time, so that related

@@ -30,6 +30,18 @@
     public var confirmationRequirement: Tool.ConfirmationRequirement =
       Tool.ConfirmationRequirement()
 
+    /// Optional. Only applicable for CompanionAgent.
+    /// Indicates whether the ces app is enabled in proactive mode.
+    /// At least one of `proactive_enabled` or `reactive_enabled` should be
+    /// true; otherwise, the ces app will be ignored.
+    public var proactiveEnabled: Swift.Bool? = nil
+
+    /// Optional. Only applicable for CompanionAgent.
+    /// Indicates whether the ces app is enabled in reactive mode.
+    /// At least one of `proactive_enabled` or `reactive_enabled` should be
+    /// true; otherwise, the ces app will be ignored.
+    public var reactiveEnabled: Swift.Bool? = nil
+
     /// Initialize a new instance of `CesAppSpec`.
     public init() {}
 

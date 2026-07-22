@@ -17,13 +17,15 @@
 import Foundation
 import GoogleCloudWkt
 
-/// An [admission rule][google.cloud.binaryauthorization.v1.AdmissionRule] specifies either that all container images
-/// used in a pod creation request must be attested to by one or more
-/// [attestors][google.cloud.binaryauthorization.v1.Attestor], that all pod creations will be allowed, or that all
-/// pod creations will be denied.
+/// An [admission rule][google.cloud.binaryauthorization.v1.AdmissionRule]
+/// specifies either that all container images used in a pod creation request
+/// must be attested to by one or more
+/// [attestors][google.cloud.binaryauthorization.v1.Attestor], that all pod
+/// creations will be allowed, or that all pod creations will be denied.
 ///
-/// Images matching an [admission allowlist pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern]
-/// are exempted from admission rules and will never block a pod creation.
+/// Images matching an [admission allowlist
+/// pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern] are
+/// exempted from admission rules and will never block a pod creation.
 ///
 /// [google.cloud.binaryauthorization.v1.AdmissionRule]: <doc:AdmissionRule>
 /// [google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern]: <doc:AdmissionWhitelistPattern>
@@ -40,8 +42,8 @@ public struct AdmissionRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// to a policy the principal issuing the policy change request must be able
   /// to read the attestor resource.
   ///
-  /// Note: this field must be non-empty when the evaluation_mode field specifies
-  /// REQUIRE_ATTESTATION, otherwise it must be empty.
+  /// Note: this field must be non-empty when the `evaluation_mode` field
+  /// specifies `REQUIRE_ATTESTATION`, otherwise it must be empty.
   public var requireAttestationsBy: [Swift.String] = []
 
   /// Required. The action when a pod creation is denied by the admission rule.
@@ -66,10 +68,10 @@ public struct AdmissionRule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public enum EvaluationMode: Codable, Equatable, Sendable {
     /// Do not use.
     case unspecified
-    /// This rule allows all all pod creations.
+    /// This rule allows all pod creations.
     case alwaysAllow
     /// This rule allows a pod creation if all the attestors listed in
-    /// 'require_attestations_by' have valid attestations for all of the
+    /// `require_attestations_by` have valid attestations for all of the
     /// images in the pod spec.
     case requireAttestation
     /// This rule denies all pod creations.

@@ -27,7 +27,8 @@ public struct ListIcebergCatalogsResponse: Codable, Equatable, GoogleCloudWkt._A
   /// Output only. The next page token for pagination.
   public var nextPageToken: Swift.String = Swift.String()
 
-  /// Output only. The list of unreachable cloud regions for router fanout.
+  /// Output only. The list of unreachable cloud regions. If non-empty, the
+  /// result set might be incomplete.
   public var unreachable: [Swift.String] = []
 
   /// Initialize a new instance of `ListIcebergCatalogsResponse`.

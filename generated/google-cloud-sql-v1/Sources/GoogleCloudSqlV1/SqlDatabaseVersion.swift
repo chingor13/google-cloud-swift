@@ -132,6 +132,8 @@
     case mysql97
     /// The database version is PostgreSQL 19.
     case postgres19
+    /// The database version is PostgreSQL 20.
+    case postgres20
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -209,6 +211,7 @@
       case .postgres18: return 557
       case .mysql97: return 654
       case .postgres19: return 684
+      case .postgres20: return 781
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -274,6 +277,7 @@
       case .postgres18: return "POSTGRES_18"
       case .mysql97: return "MYSQL_9_7"
       case .postgres19: return "POSTGRES_19"
+      case .postgres20: return "POSTGRES_20"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -328,6 +332,7 @@
       case "POSTGRES_17": self = .postgres17
       case "POSTGRES_18": self = .postgres18
       case "POSTGRES_19": self = .postgres19
+      case "POSTGRES_20": self = .postgres20
       case "SQLSERVER_2019_STANDARD": self = .sqlserver2019Standard
       case "SQLSERVER_2019_ENTERPRISE": self = .sqlserver2019Enterprise
       case "SQLSERVER_2019_EXPRESS": self = .sqlserver2019Express
@@ -403,6 +408,7 @@
       case 557: self = .postgres18
       case 654: self = .mysql97
       case 684: self = .postgres19
+      case 781: self = .postgres20
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -483,6 +489,7 @@
       case .postgres18: return try container.encode(557)
       case .mysql97: return try container.encode(654)
       case .postgres19: return try container.encode(684)
+      case .postgres20: return try container.encode(781)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

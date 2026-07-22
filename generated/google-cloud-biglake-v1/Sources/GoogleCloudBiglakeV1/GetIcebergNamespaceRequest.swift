@@ -22,7 +22,7 @@ public struct GetIcebergNamespaceRequest: Codable, Equatable, GoogleCloudWkt._An
   Sendable
 {
   /// Required. Iceberg namespace to fetch in the format:
-  /// `projects/{project_id}/namespaces/{namespace}`.
+  /// `projects/{project_id}/catalogs/{catalog_id}/namespaces/{namespace}`.
   public var name: Swift.String = Swift.String()
 
   /// Initialize a new instance of `GetIcebergNamespaceRequest`.

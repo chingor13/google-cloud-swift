@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request for [ExportBackup].
+/// Request for `ExportBackup`.
 public struct ExportBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

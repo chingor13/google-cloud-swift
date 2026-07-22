@@ -22,16 +22,15 @@
       ._AnyPackable,
     Sendable
   {
-    /// The action that a MIG performs on a failed or an unhealthy VM.
-    /// A VM is marked as unhealthy when the application running on that
-    /// VM fails a health check.
+    /// The action that a MIG performs on a failed VM. If the value of the
+    /// onFailedHealthCheck field is `DEFAULT_ACTION`, then the same action also
+    /// applies to the VMs on which your application fails a health check.
     /// Valid values are
     ///
-    ///    - REPAIR (default): MIG automatically repairs a failed or
-    ///    an unhealthy VM by recreating it. For more information, see About
+    ///    - REPAIR (default): MIG automatically repairs a failed VM
+    ///    by recreating it. For more information, see About
     ///    repairing VMs in a MIG.
-    ///    - DO_NOTHING: MIG does not repair a failed or an unhealthy
-    ///    VM.
+    ///    - DO_NOTHING: MIG does not repair a failed VM.
     public var defaultActionOnFailure:
       InstanceGroupManagerInstanceLifecyclePolicy.DefaultActionOnFailure? = nil
 
@@ -63,6 +62,9 @@
     public var onFailedHealthCheck:
       InstanceGroupManagerInstanceLifecyclePolicy.OnFailedHealthCheck? = nil
 
+    /// Configuration for VM repairs in the MIG.
+    public var onRepair: InstanceGroupManagerInstanceLifecyclePolicyOnRepair? = nil
+
     /// Initialize a new instance of `InstanceGroupManagerInstanceLifecyclePolicy`.
     public init() {}
 
@@ -83,10 +85,10 @@
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerInstanceLifecyclePolicy.defaultActionOnFailure]: <doc:InstanceGroupManagerInstanceLifecyclePolicy/DefaultActionOnFailure>
     public enum DefaultActionOnFailure: Codable, Equatable, Sendable {
-      /// MIG does not repair a failed or an unhealthy VM.
+      /// MIG does not repair a failed VM.
       case doNothing
-      /// (Default) MIG automatically repairs a failed or an unhealthy
-      /// VM by recreating it. For more information, see About
+      /// (default): MIG automatically repairs a failed VM by recreating it.
+      /// For more information, see About
       /// repairing VMs in a MIG.
       case repair
       /// Encodes an unknown integer value.

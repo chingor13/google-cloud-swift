@@ -189,8 +189,10 @@
       return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
-    /// Retrieves a list of all usable backend services in the specified project in
-    /// the given region.
+    /// Retrieves a list of all usable backend services for Application Load
+    /// Balancers and Proxy Network Load Balancers in the specified project in the
+    /// given region. Backend services for external and internal passthrough
+    /// Network Load Balancers are not included in the response.
     ///
     /// @Snippet(path: "regionBackendServices_listUsable")
     public func listUsable(
@@ -199,8 +201,10 @@
       try await self.inner.listUsable(request: request, options: options)
     }
 
-    /// Retrieves a list of all usable backend services in the specified project in
-    /// the given region.
+    /// Retrieves a list of all usable backend services for Application Load
+    /// Balancers and Proxy Network Load Balancers in the specified project in the
+    /// given region. Backend services for external and internal passthrough
+    /// Network Load Balancers are not included in the response.
     ///
     /// @Snippet(path: "regionBackendServices_listUsable")
     public func listUsable(

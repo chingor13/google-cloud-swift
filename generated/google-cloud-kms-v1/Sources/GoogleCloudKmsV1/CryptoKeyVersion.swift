@@ -169,6 +169,31 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.kms.v1.ImportCryptoKeyVersionRequest.crypto_key_version]: <doc:ImportCryptoKeyVersionRequest/cryptoKeyVersion>
   public var reimportEligible: Swift.Bool = Swift.Bool()
 
+  /// Immutable. Field indicating that the key may be wrapped by a trusted key.
+  /// This field can be set for all key purposes except
+  /// [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT],
+  /// and is only valid for keys with protection level
+  /// [HSM_SINGLE_TENANT][google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT].
+  /// This field can only be set at creation or import time via
+  /// [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion],
+  /// or
+  /// [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+  ///
+  /// [google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT]: <doc:CryptoKey/CryptoKeyPurpose/encryptDecrypt>
+  /// [google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion]: <doc:KeyManagementService/createCryptoKeyVersion(request:)>
+  /// [google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion]: <doc:KeyManagementService/importCryptoKeyVersion(request:)>
+  /// [google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT]: <doc:ProtectionLevel/hsmSingleTenant>
+  public var trustedWrappingEnabled: Swift.Bool = Swift.Bool()
+
+  /// Output only. Field indicating that the key wrapping key is trusted.
+  /// This field is only valid for key purpose
+  /// [AES_256_WRAPPING][CryptoKey.CryptoKeyPurpose.AES_256_WRAPPING], and
+  /// protection level
+  /// [HSM_SINGLE_TENANT][google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT].
+  ///
+  /// [google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT]: <doc:ProtectionLevel/hsmSingleTenant>
+  public var hsmTrusted: Swift.Bool = Swift.Bool()
+
   /// Initialize a new instance of `CryptoKeyVersion`.
   public init() {}
 
@@ -355,6 +380,9 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// security level 5. Randomized version supporting externally-computed
     /// message representatives.
     case pqSignMlDsa87ExternalMu
+    /// AES key wrap with zero padding algorithm (RFC 5649). Can only be used
+    /// by keys with purpose AES_WRAPPING.
+    case aes256Kwp
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -424,6 +452,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .pqSignMlDsa87: return 69
       case .pqSignMlDsa44ExternalMu: return 70
       case .pqSignMlDsa87ExternalMu: return 71
+      case .aes256Kwp: return 73
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -481,6 +510,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .pqSignMlDsa87: return "PQ_SIGN_ML_DSA_87"
       case .pqSignMlDsa44ExternalMu: return "PQ_SIGN_ML_DSA_44_EXTERNAL_MU"
       case .pqSignMlDsa87ExternalMu: return "PQ_SIGN_ML_DSA_87_EXTERNAL_MU"
+      case .aes256Kwp: return "AES_256_KWP"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -538,6 +568,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU": self = .pqSignMlDsa44ExternalMu
       case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU": self = .pqSignMlDsa65ExternalMu
       case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": self = .pqSignMlDsa87ExternalMu
+      case "AES_256_KWP": self = .aes256Kwp
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -594,6 +625,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 69: self = .pqSignMlDsa87
       case 70: self = .pqSignMlDsa44ExternalMu
       case 71: self = .pqSignMlDsa87ExternalMu
+      case 73: self = .aes256Kwp
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -666,6 +698,7 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .pqSignMlDsa87: return try container.encode(69)
       case .pqSignMlDsa44ExternalMu: return try container.encode(70)
       case .pqSignMlDsa87ExternalMu: return try container.encode(71)
+      case .aes256Kwp: return try container.encode(73)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

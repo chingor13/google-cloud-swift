@@ -62,15 +62,19 @@ public struct CheckError: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Error codes for Check responses.
   public enum Code: Codable, Equatable, Sendable {
-    /// This is never used in `CheckResponse`.
+    /// This is the default value if error code is not explicitly set.
+    /// It should not be used directly.
     case errorCodeUnspecified
     /// The consumer's project id, network container, or resource container was
-    /// not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
+    /// not found. Same as
+    /// [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
     case notFound
     /// The consumer doesn't have access to the specified resource.
-    /// Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+    /// Same as
+    /// [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
     case permissionDenied
-    /// Quota check failed. Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+    /// Quota check failed. Same as
+    /// [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
     case resourceExhausted
     /// The consumer hasn't activated the service.
     case serviceNotActivated

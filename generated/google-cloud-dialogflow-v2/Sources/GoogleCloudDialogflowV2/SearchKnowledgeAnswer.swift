@@ -106,6 +106,10 @@
       case generative
       /// The answer is from intent matching.
       case intent
+      /// The answer is from Playbook.
+      case playbook
+      /// The answer is from event.
+      case event
       /// Encodes an unknown integer value.
       ///
       /// The most common cause for an unknown values is for the service to send
@@ -132,6 +136,8 @@
         case .faq: return 1
         case .generative: return 2
         case .intent: return 3
+        case .playbook: return 4
+        case .event: return 5
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
         }
@@ -146,6 +152,8 @@
         case .faq: return "FAQ"
         case .generative: return "GENERATIVE"
         case .intent: return "INTENT"
+        case .playbook: return "PLAYBOOK"
+        case .event: return "EVENT"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
         }
@@ -160,6 +168,8 @@
         case "FAQ": self = .faq
         case "GENERATIVE": self = .generative
         case "INTENT": self = .intent
+        case "PLAYBOOK": self = .playbook
+        case "EVENT": self = .event
         default: self = .unknownStringValue(stringValue)
         }
       }
@@ -173,6 +183,8 @@
         case 1: self = .faq
         case 2: self = .generative
         case 3: self = .intent
+        case 4: self = .playbook
+        case 5: self = .event
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -202,6 +214,8 @@
         case .faq: return try container.encode(1)
         case .generative: return try container.encode(2)
         case .intent: return try container.encode(3)
+        case .playbook: return try container.encode(4)
+        case .event: return try container.encode(5)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

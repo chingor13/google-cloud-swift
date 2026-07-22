@@ -48,6 +48,7 @@ public struct ContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case table = "table"
     case byteItem = "byteItem"
     case conversation = "conversation"
+    case batchContentItem = "batchContentItem"
     case contentMetadata = "contentMetadata"
   }
 
@@ -78,6 +79,11 @@ public struct ContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     if let conversation = try container.decodeIfPresent(Conversation?.self, forKey: .conversation) {
       try dataItemCheckAndSet(.conversation(conversation))
     }
+    if let batchContentItem = try container.decodeIfPresent(
+      BatchContentItem?.self, forKey: .batchContentItem)
+    {
+      try dataItemCheckAndSet(.batchContentItem(batchContentItem))
+    }
     self.dataItem = dataItem
   }
 
@@ -95,6 +101,8 @@ public struct ContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
         try container.encode(value, forKey: .byteItem)
       case .conversation(let value):
         try container.encode(value, forKey: .conversation)
+      case .batchContentItem(let value):
+        try container.encode(value, forKey: .batchContentItem)
       }
     }
   }
@@ -113,6 +121,8 @@ public struct ContentItem: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// It is assumed that all included messages are contiguous and ordered in
     /// chronological order.
     indirect case conversation(Conversation?)
+    /// Represents a batch of items to inspect.
+    indirect case batchContentItem(BatchContentItem?)
   }
 
   public static var _anyTypeUrl: Swift.String {

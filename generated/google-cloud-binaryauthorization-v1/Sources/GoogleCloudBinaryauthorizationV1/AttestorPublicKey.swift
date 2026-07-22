@@ -17,8 +17,9 @@
 import Foundation
 import GoogleCloudWkt
 
-/// An [attestor public key][google.cloud.binaryauthorization.v1.AttestorPublicKey] that will be used to verify
-/// attestations signed by this attestor.
+/// An [attestor public
+/// key][google.cloud.binaryauthorization.v1.AttestorPublicKey] that will be used
+/// to verify attestations signed by this attestor.
 ///
 /// [google.cloud.binaryauthorization.v1.AttestorPublicKey]: <doc:AttestorPublicKey>
 public struct AttestorPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -28,12 +29,11 @@ public struct AttestorPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable
   public var comment: Swift.String = Swift.String()
 
   /// The ID of this public key.
-  /// Signatures verified by BinAuthz must include the ID of the public key that
-  /// can be used to verify them, and that ID must match the contents of this
-  /// field exactly.
-  /// Additional restrictions on this field can be imposed based on which public
-  /// key type is encapsulated. See the documentation on `public_key` cases below
-  /// for details.
+  /// Signatures verified by Binary Authorization must include the ID of the
+  /// public key that can be used to verify them, and that ID must match the
+  /// contents of this field exactly. Additional restrictions on this field can
+  /// be imposed based on which public key type is encapsulated. See the
+  /// documentation on `public_key` cases below for details.
   public var id: Swift.String = Swift.String()
 
   public var publicKey: OneOf_PublicKey? = nil
@@ -108,11 +108,11 @@ public struct AttestorPublicKey: Codable, Equatable, GoogleCloudWkt._AnyPackable
     /// ASCII-armored representation of a PGP public key, as the entire output by
     /// the command `gpg --export --armor foo@example.com` (either LF or CRLF
     /// line endings).
-    /// When using this field, `id` should be left blank.  The BinAuthz API
-    /// handlers will calculate the ID and fill it in automatically.  BinAuthz
-    /// computes this ID as the OpenPGP RFC4880 V4 fingerprint, represented as
-    /// upper-case hex.  If `id` is provided by the caller, it will be
-    /// overwritten by the API-calculated ID.
+    /// When using this field, `id` should be left blank.  The Binary
+    /// Authorization API handlers will calculate the ID and fill it in
+    /// automatically.  Binary Authorization computes this ID as the OpenPGP
+    /// RFC4880 V4 fingerprint, represented as upper-case hex.  If `id` is
+    /// provided by the caller, it will be overwritten by the API-calculated ID.
     case asciiArmoredPgpPublicKey(Swift.String)
     /// A raw PKIX SubjectPublicKeyInfo format public key.
     ///

@@ -25,7 +25,8 @@ import GoogleGrafeasV1
 public struct ValidateAttestationOccurrenceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The resource name of the [Attestor][google.cloud.binaryauthorization.v1.Attestor] of the
+  /// Required. The resource name of the
+  /// [Attestor][google.cloud.binaryauthorization.v1.Attestor] of the
   /// [occurrence][grafeas.v1.Occurrence], in the format
   /// `projects/*/attestors/*`.
   ///
@@ -33,9 +34,9 @@ public struct ValidateAttestationOccurrenceRequest: Codable, Equatable, GoogleCl
   public var attestor: Swift.String = Swift.String()
 
   /// Required. An [AttestationOccurrence][grafeas.v1.AttestationOccurrence] to
-  /// be checked that it can be verified by the Attestor. It does not have to be
-  /// an existing entity in Container Analysis. It must otherwise be a valid
-  /// AttestationOccurrence.
+  /// be checked that it can be verified by the `Attestor`. It does not have to
+  /// be an existing entity in Container Analysis. It must otherwise be a valid
+  /// `AttestationOccurrence`.
   ///
   /// [grafeas.v1.AttestationOccurrence]: https://www.google.com/search?q=Swift+grafeas.v1+GoogleGrafeasV1.AttestationOccurrence
   public var attestation: GoogleGrafeasV1.AttestationOccurrence? = nil

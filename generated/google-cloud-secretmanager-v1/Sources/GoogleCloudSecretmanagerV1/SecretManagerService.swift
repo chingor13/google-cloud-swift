@@ -293,6 +293,34 @@ public class SecretManagerServiceClient: Clients.SecretManagerServiceProtocol {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
 
+  /// Enables the managed rotation feature for a
+  /// [Secret][google.cloud.secretmanager.v1.Secret]. This method can only be
+  /// triggered once for a secret. In order to do further rotations, RotateSecret
+  /// should be used. This method will add a secret version and update the
+  /// password in Cloud SQL.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  ///
+  /// @Snippet(path: "SecretManagerService_EnableManagedRotation")
+  public func enableManagedRotation(
+    request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    try await self.inner.enableManagedRotation(request: request, options: options)
+  }
+
+  /// Do a managed rotation for a [Secret][google.cloud.secretmanager.v1.Secret].
+  /// This can only be triggered after Managed rotation has been enabled.
+  /// This method will add a secret version and update the password in Cloud SQL.
+  ///
+  /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
+  ///
+  /// @Snippet(path: "SecretManagerService_RotateSecret")
+  public func rotateSecret(
+    request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    try await self.inner.rotateSecret(request: request, options: options)
+  }
+
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "SecretManagerService_ListLocations")
@@ -464,6 +492,25 @@ extension Clients {
     func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
       -> GoogleIamV1.TestIamPermissionsResponse
 
+    /// See `SecretManagerServiceClient.enableManagedRotation`.
+    func enableManagedRotation(request: EnableManagedRotationRequest) async throws
+      -> GoogleCloudSecretmanagerV1.SecretVersion
+
+    /// See `SecretManagerServiceClient.enableManagedRotation`.
+    func enableManagedRotation(
+      parent: Swift.String,
+      cloudSqlSingleUserCredentials: EnableManagedRotationRequest.CloudSQLSingleUserCredentials?,
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
+
+    /// See `SecretManagerServiceClient.rotateSecret`.
+    func rotateSecret(request: RotateSecretRequest) async throws
+      -> GoogleCloudSecretmanagerV1.SecretVersion
+
+    /// See `SecretManagerServiceClient.rotateSecret`.
+    func rotateSecret(
+      parent: Swift.String,
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
+
     /// See `SecretManagerServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
       -> GoogleCloudLocation.ListLocationsResponse
@@ -561,6 +608,16 @@ extension Clients {
     func testIamPermissions(
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
+
+    /// See `SecretManagerServiceClient.enableManagedRotation`.
+    func enableManagedRotation(
+      request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
+
+    /// See `SecretManagerServiceClient.rotateSecret`.
+    func rotateSecret(
+      request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
 
     /// See `SecretManagerServiceClient.listLocations`.
     func listLocations(
@@ -904,6 +961,50 @@ extension Clients.SecretManagerServiceProtocol {
     request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func enableManagedRotation(request: EnableManagedRotationRequest) async throws
+    -> GoogleCloudSecretmanagerV1.SecretVersion
+  {
+    try await self.enableManagedRotation(request: request, options: .init())
+  }
+
+  public func enableManagedRotation(
+    request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func enableManagedRotation(
+    parent: Swift.String,
+    cloudSqlSingleUserCredentials: EnableManagedRotationRequest.CloudSQLSingleUserCredentials?,
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    let request = EnableManagedRotationRequest().with {
+      $0.parent = parent
+      $0.credentials = cloudSqlSingleUserCredentials.map { .cloudSqlSingleUserCredentials($0) }
+    }
+    return try await self.enableManagedRotation(request: request)
+  }
+
+  public func rotateSecret(request: RotateSecretRequest) async throws
+    -> GoogleCloudSecretmanagerV1.SecretVersion
+  {
+    try await self.rotateSecret(request: request, options: .init())
+  }
+
+  public func rotateSecret(
+    request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func rotateSecret(
+    parent: Swift.String,
+  ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+    let request = RotateSecretRequest().with {
+      $0.parent = parent
+    }
+    return try await self.rotateSecret(request: request)
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws

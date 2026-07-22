@@ -87,6 +87,21 @@
           })
       }
 
+      public func deleteNamedSet(
+        request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        try await self._intercept(
+          request: request,
+          options: options,
+          name: "deleteNamedSet",
+          action: {
+            (r: RoutersClient.DeleteNamedSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
+            in
+            return try await self.inner.deleteNamedSet(request: r, options: o)
+          })
+      }
+
       public func deleteRoutePolicy(
         request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
@@ -114,6 +129,21 @@
               -> GoogleCloudComputeV1.Router
             in
             return try await self.inner.`get`(request: r, options: o)
+          })
+      }
+
+      public func getNamedSet(
+        request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse {
+        try await self._intercept(
+          request: request,
+          options: options,
+          name: "getNamedSet",
+          action: {
+            (r: RoutersClient.GetNamedSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.RoutersGetNamedSetResponse
+            in
+            return try await self.inner.getNamedSet(request: r, options: o)
           })
       }
 
@@ -222,6 +252,21 @@
           })
       }
 
+      public func listNamedSets(
+        request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets {
+        try await self._intercept(
+          request: request,
+          options: options,
+          name: "listNamedSets",
+          action: {
+            (r: RoutersClient.ListNamedSetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.RoutersListNamedSets
+            in
+            return try await self.inner.listNamedSets(request: r, options: o)
+          })
+      }
+
       public func listRoutePolicies(
         request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
@@ -249,6 +294,21 @@
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
+          })
+      }
+
+      public func patchNamedSet(
+        request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        try await self._intercept(
+          request: request,
+          options: options,
+          name: "patchNamedSet",
+          action: {
+            (r: RoutersClient.PatchNamedSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
+            in
+            return try await self.inner.patchNamedSet(request: r, options: o)
           })
       }
 
@@ -294,6 +354,21 @@
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
+          })
+      }
+
+      public func updateNamedSet(
+        request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        try await self._intercept(
+          request: request,
+          options: options,
+          name: "updateNamedSet",
+          action: {
+            (r: RoutersClient.UpdateNamedSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
+            in
+            return try await self.inner.updateNamedSet(request: r, options: o)
           })
       }
 

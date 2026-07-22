@@ -86,6 +86,13 @@
     public var propertiesFromFlexibilityPolicy: ManagedInstancePropertiesFromFlexibilityPolicy? =
       nil
 
+    /// Output only. Information about the termination timestamp of the instance, if applicable.
+    public var scheduling: ManagedInstanceScheduling? = nil
+
+    /// Output only. Specifies the graceful shutdown details if the instance is in
+    /// `PENDING_STOP` state or there is a programmed stop scheduled.
+    public var shutdownDetails: ManagedInstanceShutdownDetails? = nil
+
     /// Output only. [Output Only] Intended version of this instance.
     public var version: ManagedInstanceVersion? = nil
 

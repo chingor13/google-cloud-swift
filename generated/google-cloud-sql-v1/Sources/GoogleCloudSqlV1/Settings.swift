@@ -137,7 +137,7 @@
     /// SQL Server specific audit configuration.
     public var sqlServerAuditConfig: SqlServerAuditConfig? = nil
 
-    /// Optional. The edition of the instance.
+    /// Optional. The edition type of the Cloud SQL instance.
     public var edition: Settings.Edition = Settings.Edition()
 
     /// Specifies if connections must use Cloud SQL connectors.
@@ -352,7 +352,7 @@
       }
     }
 
-    /// The edition of the instance.
+    /// The list of Cloud SQL editions available to users.
     public enum Edition: Codable, Equatable, Sendable {
       /// The instance did not specify the edition.
       case unspecified
@@ -360,6 +360,8 @@
       case enterprise
       /// The instance is an Enterprise Plus edition.
       case enterprisePlus
+      /// This instance is a Cloud SQL developer edition instance.
+      case developer
       /// Encodes an unknown integer value.
       ///
       /// The most common cause for an unknown values is for the service to send
@@ -385,6 +387,7 @@
         case .unspecified: return 0
         case .enterprise: return 2
         case .enterprisePlus: return 3
+        case .developer: return 5
         case .unknownIntValue(let v): return v
         case .unknownStringValue: return nil
         }
@@ -398,6 +401,7 @@
         case .unspecified: return "EDITION_UNSPECIFIED"
         case .enterprise: return "ENTERPRISE"
         case .enterprisePlus: return "ENTERPRISE_PLUS"
+        case .developer: return "DEVELOPER"
         case .unknownIntValue: return nil
         case .unknownStringValue(let v): return v
         }
@@ -411,6 +415,7 @@
         case "EDITION_UNSPECIFIED": self = .unspecified
         case "ENTERPRISE": self = .enterprise
         case "ENTERPRISE_PLUS": self = .enterprisePlus
+        case "DEVELOPER": self = .developer
         default: self = .unknownStringValue(stringValue)
         }
       }
@@ -423,6 +428,7 @@
         case 0: self = .unspecified
         case 2: self = .enterprise
         case 3: self = .enterprisePlus
+        case 5: self = .developer
         default: self = .unknownIntValue(intValue)
         }
       }
@@ -451,6 +457,7 @@
         case .unspecified: return try container.encode(0)
         case .enterprise: return try container.encode(2)
         case .enterprisePlus: return try container.encode(3)
+        case .developer: return try container.encode(5)
         case .unknownIntValue(let v): return try container.encode(v)
         case .unknownStringValue(let v): return try container.encode(v)
         }

@@ -19,6 +19,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudWkt
+import GoogleIamV1
 import GoogleCloudGax
 
 /// API for working with the system policy.
@@ -45,6 +46,44 @@ public class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol {
   ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
     try await self.inner.getSystemPolicy(request: request, options: options)
   }
+
+  /// Sets the access control policy on the specified resource. Replaces
+  /// any existing policy.
+  ///
+  /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED`
+  /// errors.
+  ///
+  /// @Snippet(path: "SystemPolicyV1_SetIamPolicy")
+  public func setIamPolicy(
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
+
+  /// Gets the access control policy for a resource. Returns an empty policy
+  /// if the resource exists and does not have a policy set.
+  ///
+  /// @Snippet(path: "SystemPolicyV1_GetIamPolicy")
+  public func getIamPolicy(
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
+
+  /// Returns permissions that a caller has on the specified resource. If the
+  /// resource does not exist, this will return an empty set of
+  /// permissions, not a `NOT_FOUND` error.
+  ///
+  /// Note: This operation is designed to be used for building
+  /// permission-aware UIs and command-line tools, not for authorization
+  /// checking. This operation may "fail open" without warning.
+  ///
+  /// @Snippet(path: "SystemPolicyV1_TestIamPermissions")
+  public func testIamPermissions(
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
+  }
 }
 
 extension Clients {
@@ -63,10 +102,35 @@ extension Clients {
       name: Swift.String,
     ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
 
+    /// See `SystemPolicyV1Client.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `SystemPolicyV1Client.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `SystemPolicyV1Client.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
     /// See `SystemPolicyV1Client.getSystemPolicy`.
     func getSystemPolicy(
       request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+
+    /// See `SystemPolicyV1Client.setIamPolicy`.
+    func setIamPolicy(
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `SystemPolicyV1Client.getIamPolicy`.
+    func getIamPolicy(
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `SystemPolicyV1Client.testIamPermissions`.
+    func testIamPermissions(
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
   }
 }
 
@@ -91,5 +155,41 @@ extension Clients.SystemPolicyV1Protocol {
       $0.name = name
     }
     return try await self.getSystemPolicy(request: request)
+  }
+
+  public func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
+    try await self.setIamPolicy(request: request, options: .init())
+  }
+
+  public func setIamPolicy(
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
+    try await self.getIamPolicy(request: request, options: .init())
+  }
+
+  public func getIamPolicy(
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+    -> GoogleIamV1.TestIamPermissionsResponse
+  {
+    try await self.testIamPermissions(request: request, options: .init())
+  }
+
+  public func testIamPermissions(
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    throw GoogleCloudGax.RequestError.unimplemented
   }
 }

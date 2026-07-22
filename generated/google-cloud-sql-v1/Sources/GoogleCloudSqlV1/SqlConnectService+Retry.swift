@@ -64,6 +64,21 @@
           })
       }
 
+      public func resolveConnectSettings(
+        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudSqlV1.ConnectSettings {
+        try await self._intercept(
+          request: request,
+          options: options,
+          idempotent: true,
+          action: {
+            (r: ResolveConnectSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.ConnectSettings
+            in
+            return try await self.inner.resolveConnectSettings(request: r, options: o)
+          })
+      }
+
       public func generateEphemeralCert(
         request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {

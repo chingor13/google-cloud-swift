@@ -112,12 +112,16 @@
         public struct ErrorDetails: Codable, Equatable, GoogleCloudWkt._AnyPackable,
           Sendable
         {
+          /// Error information containing structured domain, reason, and metadata.
           public var errorInfo: ErrorInfo? = nil
 
+          /// Links and information to help the user resolve the error.
           public var help: Help? = nil
 
+          /// A localized human-readable error message intended for end users.
           public var localizedMessage: LocalizedMessage? = nil
 
+          /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
           /// Initialize a new instance of `ErrorDetails`.

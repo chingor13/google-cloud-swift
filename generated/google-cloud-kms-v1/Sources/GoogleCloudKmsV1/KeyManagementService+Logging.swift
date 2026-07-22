@@ -315,6 +315,40 @@ extension Clients {
         })
     }
 
+    public func importTrustedKeyWrappedCryptoKeyVersion(
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "importTrustedKeyWrappedCryptoKeyVersion",
+        action: {
+          (r: ImportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions)
+            async throws -> GoogleCloudKmsV1.CryptoKeyVersion
+          in
+          return try await self.inner.importTrustedKeyWrappedCryptoKeyVersion(
+            request: r, options: o)
+        })
+    }
+
+    public func exportTrustedKeyWrappedCryptoKeyVersion(
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
+      try await self._intercept(
+        request: request,
+        options: options,
+        name: "exportTrustedKeyWrappedCryptoKeyVersion",
+        action: {
+          (r: ExportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions)
+            async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
+          in
+          return try await self.inner.exportTrustedKeyWrappedCryptoKeyVersion(
+            request: r, options: o)
+        })
+    }
+
     public func createImportJob(
       request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudKmsV1.ImportJob {

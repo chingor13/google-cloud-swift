@@ -22,9 +22,10 @@ public struct MetricValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// The labels describing the metric value.
-  /// See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-  /// the overriding relationship.
-  /// Note that this map must not contain monitored resource labels.
+  /// See comments on
+  /// [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels]
+  /// for the overriding relationship. Note that this map must not contain
+  /// monitored resource labels.
   ///
   /// [google.api.servicecontrol.v1.Operation.labels]: <doc:Operation/labels>
   public var labels: [Swift.String: Swift.String] = [:]
@@ -33,14 +34,16 @@ public struct MetricValue: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// applies. The time period has different semantics for different metric
   /// types (cumulative, delta, and gauge). See the metric definition
   /// documentation in the service configuration for details. If not specified,
-  /// [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+  /// [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time]
+  /// will be used.
   ///
   /// [google.api.servicecontrol.v1.Operation.start_time]: <doc:Operation/startTime>
   public var startTime: GoogleCloudWkt.Timestamp? = nil
 
   /// The end of the time period over which this metric value's measurement
   /// applies.  If not specified,
-  /// [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+  /// [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time]
+  /// will be used.
   ///
   /// [google.api.servicecontrol.v1.Operation.end_time]: <doc:Operation/endTime>
   public var endTime: GoogleCloudWkt.Timestamp? = nil

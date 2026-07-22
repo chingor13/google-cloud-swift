@@ -25,7 +25,9 @@
   {
     /// The Action to perform when the client connection triggers the rule.
     /// Valid actions for firewall rules are: "allow", "deny",
-    /// "apply_security_profile_group" and "goto_next".
+    /// "apply_security_profile_group" and "goto_next" (
+    /// "apply_security_profile_group" can be specified only for global
+    /// network firewall policies or hierarchical firewall policies).
     /// Valid actions for packet mirroring rules are: "mirror", "do_not_mirror"
     /// and "goto_next".
     public var action: Swift.String? = nil
@@ -69,11 +71,12 @@
     /// rule.
     public var ruleTupleCount: Swift.Int32? = nil
 
-    /// A fully-qualified URL of a SecurityProfile resource instance.
+    /// A fully-qualified URL of a SecurityProfileGroup resource instance.
     /// Example:
     /// https://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group
     /// Must be specified if action is one of 'apply_security_profile_group' or
-    /// 'mirror'. Cannot be specified for other actions.
+    /// 'mirror'. Cannot be specified for other actions. Can be specified only
+    /// for global network firewall policies or hierarchical firewall policies.
     public var securityProfileGroup: Swift.String? = nil
 
     /// A list of forwarding rules to which this rule applies.

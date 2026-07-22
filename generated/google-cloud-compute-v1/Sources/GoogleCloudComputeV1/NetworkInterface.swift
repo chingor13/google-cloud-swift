@@ -31,6 +31,10 @@
     /// You can only specify this field for network interfaces in VPC networks.
     public var aliasIpRanges: [AliasIpRange] = []
 
+    /// An array of alias IPv6 ranges for this network interface.
+    /// You can only specify this field for network interfaces in VPC networks.
+    public var aliasIpv6Ranges: [AliasIpRange] = []
+
     /// Optional. If true, DNS resolution will be enabled over this interface. Only valid
     /// with network_attachment.
     public var enableVpcScopedDns: Swift.Bool? = nil
@@ -162,6 +166,7 @@
     private enum CodingKeys: Swift.String, CodingKey {
       case accessConfigs = "accessConfigs"
       case aliasIpRanges = "aliasIpRanges"
+      case aliasIpv6Ranges = "aliasIpv6Ranges"
       case enableVpcScopedDns = "enableVpcScopedDns"
       case fingerprint = "fingerprint"
       case igmpQuery = "igmpQuery"
@@ -187,6 +192,7 @@
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.accessConfigs = try container.decode([AccessConfig].self, forKey: .accessConfigs)
       self.aliasIpRanges = try container.decode([AliasIpRange].self, forKey: .aliasIpRanges)
+      self.aliasIpv6Ranges = try container.decode([AliasIpRange].self, forKey: .aliasIpv6Ranges)
       self.enableVpcScopedDns = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .enableVpcScopedDns)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .fingerprint) {
@@ -227,6 +233,7 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encode(self.accessConfigs, forKey: .accessConfigs)
       try container.encode(self.aliasIpRanges, forKey: .aliasIpRanges)
+      try container.encode(self.aliasIpv6Ranges, forKey: .aliasIpv6Ranges)
       try container.encode(self.enableVpcScopedDns, forKey: .enableVpcScopedDns)
       if let v = fingerprint {
         try container.encode(

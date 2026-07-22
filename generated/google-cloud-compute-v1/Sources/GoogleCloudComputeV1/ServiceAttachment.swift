@@ -100,6 +100,10 @@
     /// cannot be a dash.
     public var name: Swift.String? = nil
 
+    /// The number of NAT IP addresses to be allocated per connected endpoint.
+    /// If not specified, the default value is 1.
+    public var natIpsPerEndpoint: Swift.UInt32? = nil
+
     /// An array of URLs where each entry is the URL of a subnet provided
     /// by the service producer to use for NAT in this service attachment.
     public var natSubnets: [Swift.String] = []
@@ -186,6 +190,7 @@
       case kind = "kind"
       case metadata = "metadata"
       case name = "name"
+      case natIpsPerEndpoint = "natIpsPerEndpoint"
       case natSubnets = "natSubnets"
       case producerForwardingRule = "producerForwardingRule"
       case propagatedConnectionLimit = "propagatedConnectionLimit"
@@ -225,6 +230,8 @@
       self.kind = try container.decodeIfPresent(Swift.String.self, forKey: .kind)
       self.metadata = try container.decode([Swift.String: Swift.String].self, forKey: .metadata)
       self.name = try container.decodeIfPresent(Swift.String.self, forKey: .name)
+      self.natIpsPerEndpoint = try container.decodeIfPresent(
+        Swift.UInt32.self, forKey: .natIpsPerEndpoint)
       self.natSubnets = try container.decode([Swift.String].self, forKey: .natSubnets)
       self.producerForwardingRule = try container.decodeIfPresent(
         Swift.String.self, forKey: .producerForwardingRule)
@@ -258,6 +265,7 @@
       try container.encode(self.kind, forKey: .kind)
       try container.encode(self.metadata, forKey: .metadata)
       try container.encode(self.name, forKey: .name)
+      try container.encode(self.natIpsPerEndpoint, forKey: .natIpsPerEndpoint)
       try container.encode(self.natSubnets, forKey: .natSubnets)
       try container.encode(self.producerForwardingRule, forKey: .producerForwardingRule)
       try container.encode(self.propagatedConnectionLimit, forKey: .propagatedConnectionLimit)

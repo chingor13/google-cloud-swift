@@ -32,6 +32,10 @@
         request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
+      func deleteNamedSet(
+        request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
       func deleteRoutePolicy(
         request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
@@ -39,6 +43,10 @@
       func `get`(
         request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Router
+
+      func getNamedSet(
+        request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse
 
       func getNatIpInfo(
         request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
@@ -68,12 +76,20 @@
         request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
 
+      func listNamedSets(
+        request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets
+
       func listRoutePolicies(
         request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
 
       func patch(
         request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      func patchNamedSet(
+        request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRoutePolicy(
@@ -86,6 +102,10 @@
 
       func update(
         request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation
+
+      func updateNamedSet(
+        request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateRoutePolicy(
@@ -167,6 +187,36 @@
           GoogleCloudComputeV1.Operation.self, from: data)
       }
 
+      public func deleteNamedSet(
+        request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.region as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.region' is not set or is empty")
+          }
+          guard let pathVariable2 = request.router as Swift.String?, !pathVariable2.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.router' is not set or is empty")
+          }
+          return
+            "/compute/v1/projects/\(pathVariable0)/regions/\(pathVariable1)/routers/\(pathVariable2)/deleteNamedSet"
+        }()
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(contentsOf: try encoder.encode(request.namedSet, prefix: "namedSet"))
+        query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "POST"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.Operation.self, from: data)
+      }
+
       public func deleteRoutePolicy(
         request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
@@ -222,6 +272,35 @@
         let (data, _) = try await self.inner.rpc(for: req).get()
         return try GoogleCloudWkt._ProtoJSONDecoder().decode(
           GoogleCloudComputeV1.Router.self, from: data)
+      }
+
+      public func getNamedSet(
+        request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.region as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.region' is not set or is empty")
+          }
+          guard let pathVariable2 = request.router as Swift.String?, !pathVariable2.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.router' is not set or is empty")
+          }
+          return
+            "/compute/v1/projects/\(pathVariable0)/regions/\(pathVariable1)/routers/\(pathVariable2)/getNamedSet"
+        }()
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(contentsOf: try encoder.encode(request.namedSet, prefix: "namedSet"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.RoutersGetNamedSetResponse.self, from: data)
       }
 
       public func getNatIpInfo(
@@ -446,6 +525,41 @@
           GoogleCloudComputeV1.RoutersListBgpRoutes.self, from: data)
       }
 
+      public func listNamedSets(
+        request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.region as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.region' is not set or is empty")
+          }
+          guard let pathVariable2 = request.router as Swift.String?, !pathVariable2.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.router' is not set or is empty")
+          }
+          return
+            "/compute/v1/projects/\(pathVariable0)/regions/\(pathVariable1)/routers/\(pathVariable2)/listNamedSets"
+        }()
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
+        query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
+        query.append(contentsOf: try encoder.encode(request.orderBy, prefix: "orderBy"))
+        query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
+        query.append(
+          contentsOf: try encoder.encode(
+            request.returnPartialSuccess, prefix: "returnPartialSuccess"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "GET"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.RoutersListNamedSets.self, from: data)
+      }
+
       public func listRoutePolicies(
         request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
@@ -504,6 +618,39 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "PATCH"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        if let body = request.body {
+          req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+          req.httpBody = try JSONEncoder().encode(body)
+        }
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.Operation.self, from: data)
+      }
+
+      public func patchNamedSet(
+        request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.region as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.region' is not set or is empty")
+          }
+          guard let pathVariable2 = request.router as Swift.String?, !pathVariable2.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.router' is not set or is empty")
+          }
+          return
+            "/compute/v1/projects/\(pathVariable0)/regions/\(pathVariable1)/routers/\(pathVariable2)/patchNamedSet"
+        }()
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "POST"
         req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -601,6 +748,39 @@
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "PUT"
+        req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+        if let body = request.body {
+          req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+          req.httpBody = try JSONEncoder().encode(body)
+        }
+        let (data, _) = try await self.inner.rpc(for: req).get()
+        return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+          GoogleCloudComputeV1.Operation.self, from: data)
+      }
+
+      public func updateNamedSet(
+        request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      ) async throws -> GoogleCloudComputeV1.Operation {
+        let path = try { () throws -> Swift.String in
+          guard let pathVariable0 = request.project as Swift.String?, !pathVariable0.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.project' is not set or is empty")
+          }
+          guard let pathVariable1 = request.region as Swift.String?, !pathVariable1.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.region' is not set or is empty")
+          }
+          guard let pathVariable2 = request.router as Swift.String?, !pathVariable2.isEmpty else {
+            throw GoogleCloudGax.RequestError.binding("'request.router' is not set or is empty")
+          }
+          return
+            "/compute/v1/projects/\(pathVariable0)/regions/\(pathVariable1)/routers/\(pathVariable2)/updateNamedSet"
+        }()
+        var query = [
+          URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+        ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
+        var req = try await self.inner.Request(path: path, query: query)
+        req.httpMethod = "POST"
         req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
         if let body = request.body {
           req.setValue("application/json", forHTTPHeaderField: "Content-Type")

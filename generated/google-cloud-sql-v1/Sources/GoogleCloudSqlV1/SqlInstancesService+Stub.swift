@@ -656,9 +656,16 @@
           }
           return "/v1/projects/\(pathVariable0)/instances/\(pathVariable1)"
         }()
-        let query = [
+        var query = [
           URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
         ]
+        let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(
+          contentsOf: try encoder.encode(
+            request.reconcilePscNetworking, prefix: "reconcilePscNetworking"))
+        query.append(
+          contentsOf: try encoder.encode(
+            request.reconcilePscNetworkingForce, prefix: "reconcilePscNetworkingForce"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "PATCH"
         req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")

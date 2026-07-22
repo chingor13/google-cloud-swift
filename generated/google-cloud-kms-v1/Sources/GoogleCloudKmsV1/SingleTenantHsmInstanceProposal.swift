@@ -127,6 +127,7 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     case addQuorumMember = "addQuorumMember"
     case removeQuorumMember = "removeQuorumMember"
     case refreshSingleTenantHsmInstance = "refreshSingleTenantHsmInstance"
+    case upgradeKeyTrust = "upgradeKeyTrust"
   }
 
   public init(from decoder: Decoder) throws {
@@ -235,6 +236,11 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     {
       try operationCheckAndSet(.refreshSingleTenantHsmInstance(refreshSingleTenantHsmInstance))
     }
+    if let upgradeKeyTrust = try container.decodeIfPresent(
+      SingleTenantHsmInstanceProposal.UpgradeKeyTrust?.self, forKey: .upgradeKeyTrust)
+    {
+      try operationCheckAndSet(.upgradeKeyTrust(upgradeKeyTrust))
+    }
     self.operation = operation
   }
 
@@ -281,6 +287,8 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
         try container.encode(value, forKey: .removeQuorumMember)
       case .refreshSingleTenantHsmInstance(let value):
         try container.encode(value, forKey: .refreshSingleTenantHsmInstance)
+      case .upgradeKeyTrust(let value):
+        try container.encode(value, forKey: .upgradeKeyTrust)
       }
     }
   }
@@ -717,6 +725,52 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     }
   }
 
+  /// Promotes a key with the AES_WRAPPING purpose to a trusted wrapping key.
+  /// The key must be in the
+  /// [ACTIVE][CryptoKeyVersion.CryptoKeyVersionState.ACTIVE] state to perform
+  /// this operation.
+  public struct UpgradeKeyTrust: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the
+    /// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to promote.
+    ///
+    /// [google.cloud.kms.v1.CryptoKeyVersion]: <doc:CryptoKeyVersion>
+    /// [google.cloud.kms.v1.CryptoKeyVersion.name]: <doc:CryptoKeyVersion/name>
+    public var name: Swift.String = Swift.String()
+
+    /// Required. The public key associated with the 2FA key that will sign the
+    /// login nonce for this operation.
+    public var twoFactorPublicKeyPem: Swift.String = Swift.String()
+
+    /// Initialize a new instance of `UpgradeKeyTrust`.
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = UpgradeKeyTrust().with { $0.name = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
+    }
+
+    public static var _anyTypeUrl: Swift.String {
+      return
+        "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
   /// The set of states of a
   /// [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal].
   ///
@@ -1036,6 +1090,11 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleCloudWk
     /// [google.cloud.kms.v1.SingleTenantHsmInstance.unrefreshed_duration_until_disable]: <doc:SingleTenantHsmInstance/unrefreshedDurationUntilDisable>
     indirect case refreshSingleTenantHsmInstance(
       SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance?)
+    /// Promotes a key with the AES_WRAPPING purpose to a trusted wrapping key.
+    /// The key must be in the
+    /// [ACTIVE][CryptoKeyVersion.CryptoKeyVersionState.ACTIVE] state to perform
+    /// this operation.
+    indirect case upgradeKeyTrust(SingleTenantHsmInstanceProposal.UpgradeKeyTrust?)
   }
 
   public static var _anyTypeUrl: Swift.String {

@@ -24,7 +24,8 @@ public struct AllocateQuotaRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   /// Name of the service as specified in the service configuration. For example,
   /// `"pubsub.googleapis.com"`.
   ///
-  /// See [google.api.Service][google.api.Service] for the definition of a service name.
+  /// See [google.api.Service][google.api.Service] for the definition of a
+  /// service name.
   public var serviceName: Swift.String = Swift.String()
 
   /// Operation that describes the quota allocation.

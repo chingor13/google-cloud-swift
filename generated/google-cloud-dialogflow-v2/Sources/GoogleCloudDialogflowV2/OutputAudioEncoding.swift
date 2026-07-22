@@ -24,7 +24,8 @@
     /// Uncompressed 16-bit signed little-endian samples (Linear PCM).
     /// Audio content returned as LINEAR16 also contains a WAV header.
     case linear16
-    /// MP3 audio at 32kbps.
+    /// MP3 audio at 64kbps.
+    @available(*, deprecated)
     case mp3
     /// Opus encoded audio wrapped in an ogg container. The result will be a
     /// file which can be played natively on Android, and in browsers (at least

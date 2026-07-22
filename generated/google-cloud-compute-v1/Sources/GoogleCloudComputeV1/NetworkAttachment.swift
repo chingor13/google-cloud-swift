@@ -65,12 +65,14 @@
     /// to the same network as all the subnetworks.
     public var network: Swift.String? = nil
 
-    /// Projects that are allowed to connect to this network attachment.
-    /// The project can be specified using its id or number.
+    /// Projects or service class ids that are allowed to connect to this network
+    /// attachment. The project can be specified using its id or number. Service
+    /// class id can be specified as "serviceclasses/{service_class_id}".
     public var producerAcceptLists: [Swift.String] = []
 
-    /// Projects that are not allowed to connect to this network attachment.
-    /// The project can be specified using its id or number.
+    /// Projects or service class ids that are not allowed to connect to this
+    /// network attachment. The project can be specified using its id or number.
+    /// Service class id can be specified as "serviceclasses/{service_class_id}".
     public var producerRejectLists: [Swift.String] = []
 
     /// Output only. [Output Only] URL of the region where the network attachment resides.

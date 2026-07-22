@@ -96,6 +96,11 @@
     /// over StreamingDetectIntentRequest.single_utterance.
     public var singleUtterance: Swift.Bool = Swift.Bool()
 
+    /// Optional. If `true`, responses with voice activity speech events will be
+    /// returned as they are detected.
+    /// Note: This setting is relevant only for streaming methods.
+    public var enableVoiceActivityEvents: Swift.Bool = Swift.Bool()
+
     /// Only used in
     /// [Participants.AnalyzeContent][google.cloud.dialogflow.v2.Participants.AnalyzeContent]
     /// and

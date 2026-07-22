@@ -17,8 +17,10 @@
 import Foundation
 import GoogleCloudWkt
 
-/// An [admission allowlist pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern] exempts images
-/// from checks by [admission rules][google.cloud.binaryauthorization.v1.AdmissionRule].
+/// An [admission allowlist
+/// pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern]
+/// exempts images from checks by [admission
+/// rules][google.cloud.binaryauthorization.v1.AdmissionRule].
 ///
 /// [google.cloud.binaryauthorization.v1.AdmissionRule]: <doc:AdmissionRule>
 /// [google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern]: <doc:AdmissionWhitelistPattern>

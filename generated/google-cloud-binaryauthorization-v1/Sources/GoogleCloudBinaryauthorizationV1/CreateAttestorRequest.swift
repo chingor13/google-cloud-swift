@@ -17,11 +17,15 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.CreateAttestor][].
+/// Request message for
+/// [BinauthzManagementServiceV1.CreateAttestor][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.CreateAttestor].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.CreateAttestor]: <doc:BinauthzManagementServiceV1/createAttestor(request:)>
 public struct CreateAttestorRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The parent of this [attestor][google.cloud.binaryauthorization.v1.Attestor].
+  /// Required. The parent of this
+  /// [attestor][google.cloud.binaryauthorization.v1.Attestor].
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   public var parent: Swift.String = Swift.String()
@@ -31,9 +35,11 @@ public struct CreateAttestorRequest: Codable, Equatable, GoogleCloudWkt._AnyPack
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   public var attestorId: Swift.String = Swift.String()
 
-  /// Required. The initial [attestor][google.cloud.binaryauthorization.v1.Attestor] value. The service will
-  /// overwrite the [attestor name][google.cloud.binaryauthorization.v1.Attestor.name] field with the resource name,
-  /// in the format `projects/*/attestors/*`.
+  /// Required. The initial
+  /// [attestor][google.cloud.binaryauthorization.v1.Attestor] value. The service
+  /// will overwrite the [attestor
+  /// name][google.cloud.binaryauthorization.v1.Attestor.name] field with the
+  /// resource name, in the format `projects/*/attestors/*`.
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   /// [google.cloud.binaryauthorization.v1.Attestor.name]: <doc:Attestor/name>

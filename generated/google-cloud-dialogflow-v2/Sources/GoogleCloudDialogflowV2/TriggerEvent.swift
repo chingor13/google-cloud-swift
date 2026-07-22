@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if Conversations || GeneratorEvaluations || Generators
+#if ConversationProfiles || Conversations || GeneratorEvaluations || Generators
   import Foundation
 
   /// The event that triggers the generator and LLM execution.

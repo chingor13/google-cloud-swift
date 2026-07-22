@@ -29,6 +29,7 @@ let package = Package(
     .package(path: "../../packages/gax"),
     .package(path: "../../packages/wkt"),
     .package(path: "../../generated/grafeas-v1"),
+    .package(path: "../../generated/google-iam-v1"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
@@ -39,6 +40,7 @@ let package = Package(
         .product(name: "GoogleCloudGax", package: "gax"),
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "GoogleGrafeasV1", package: "grafeas-v1"),
+        .product(name: "GoogleIamV1", package: "google-iam-v1"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

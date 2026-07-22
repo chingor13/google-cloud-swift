@@ -27,6 +27,10 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWkt.
   /// The next page token for pagination.
   public var nextPageToken: Swift.String = Swift.String()
 
+  /// Output only. A list of skipped locations that were unreachable. If
+  /// non-empty, the result set might be incomplete.
+  public var unreachable: [Swift.String] = []
+
   /// Initialize a new instance of `ListIcebergNamespacesResponse`.
   public init() {}
 
@@ -46,18 +50,21 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWkt.
   private enum CodingKeys: Swift.String, CodingKey {
     case namespaces = "namespaces"
     case nextPageToken = "next-page-token"
+    case unreachable = "unreachable"
   }
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.namespaces = try container.decode([GoogleCloudWkt.ListValue].self, forKey: .namespaces)
     self.nextPageToken = try container.decode(Swift.String.self, forKey: .nextPageToken)
+    self.unreachable = try container.decode([Swift.String].self, forKey: .unreachable)
   }
 
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(self.namespaces, forKey: .namespaces)
     try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    try container.encode(self.unreachable, forKey: .unreachable)
   }
 
   public static var _anyTypeUrl: Swift.String {

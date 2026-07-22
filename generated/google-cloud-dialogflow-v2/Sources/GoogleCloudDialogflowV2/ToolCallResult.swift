@@ -208,12 +208,12 @@
 
     /// The tool call's result.
     public enum OneOf_Result: Codable, Equatable, Sendable {
-      /// The tool call's error.
+      /// Optional. The tool call's error.
       indirect case error(ToolCallResult.Error?)
-      /// Only populated if the response content is not utf-8 encoded.
+      /// Optional. Only populated if the response content is not utf-8 encoded.
       /// (by definition byte fields are base64 encoded).
       case rawContent(Foundation.Data)
-      /// Only populated if the response content is utf-8 encoded.
+      /// Optional. Only populated if the response content is utf-8 encoded.
       case content(Swift.String)
     }
 

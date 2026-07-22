@@ -18,7 +18,7 @@ import Foundation
 import GoogleCloudGax
 import GoogleCloudWkt
 
-/// Response message for [ListInstances][].
+/// Response message for `ListInstances`.
 public struct ListInstancesResponse: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   GoogleCloudGax._PaginatedResponse,
   Sendable

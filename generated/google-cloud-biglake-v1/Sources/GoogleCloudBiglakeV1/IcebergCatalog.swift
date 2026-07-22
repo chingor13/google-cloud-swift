@@ -16,6 +16,7 @@
 
 import Foundation
 import GoogleCloudWkt
+import GoogleRpc
 
 /// The Iceberg REST Catalog information.
 public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -30,26 +31,65 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   public var credentialMode: IcebergCatalog.CredentialMode = IcebergCatalog.CredentialMode()
 
   /// Output only. The service account used for credential vending, output only.
-  /// Might be empty if Credential vending was never enabled for the catalog.
+  /// Might be empty if Credential vending was never enabled for the catalog. For
+  /// federated catalogs, the service account will be always provisioned and will
+  /// be used to access the remote Iceberg REST Catalog using access to Secret
+  /// Manager secret or identity federation.
   public var biglakeServiceAccount: Swift.String = Swift.String()
+
+  /// Output only. The unique ID of the service account. This is used for
+  /// federation scenarios.
+  public var biglakeServiceAccountUniqueId: Swift.String = Swift.String()
 
   /// Required. The catalog type. Required for CreateIcebergCatalog.
   public var catalogType: IcebergCatalog.CatalogType = IcebergCatalog.CatalogType()
 
-  /// Optional. The default location for the catalog. For the Google Cloud
-  /// Storage Bucket catalog this is output only.
+  /// Optional. The default storage location for the catalog, e.g.,
+  /// `gs://my-bucket`. For Google Cloud Storage bucket catalogs, this is output
+  /// only.
+  ///
+  /// For BigLake catalogs, this field must be provided and point to a
+  /// Google Cloud Storage bucket or a path within that bucket. This path serves
+  /// as the base directory for constructing the full path to a table's data and
+  /// metadata directories when a location is not specified at the namespace or
+  /// table level. The full path is formed by appending the namespace and table
+  /// identifiers to the default location.
   public var defaultLocation: Swift.String = Swift.String()
 
-  /// Output only. The GCP region(s) where the catalog metadata is stored.
-  /// This will contain one value for all locations, except for the catalogs that
-  /// are configured to use custom dual region buckets.
-  public var catalogRegions: [Swift.String] = []
+  /// Output only. The GCP region(s) of the default location's bucket, e.g.
+  /// `us-central1`, `nam4` or `us`. This will contain one value for all
+  /// locations, except for the catalogs that are configured to use custom dual
+  /// region buckets, in which case it will contain the two regions of the
+  /// bucket. The region(s) of this field should be in the jurisdiction of or
+  /// nearby the primary location of the catalog.
+  public var storageRegions: [Swift.String] = []
 
   /// Output only. When the catalog was created.
   public var createTime: GoogleCloudWkt.Timestamp? = nil
 
   /// Output only. When the catalog was last updated.
   public var updateTime: GoogleCloudWkt.Timestamp? = nil
+
+  /// Output only. The replicas for the catalog metadata.
+  public var replicas: [IcebergCatalog.Replica] = []
+
+  /// Optional. A user-provided description of the catalog. The description must
+  /// be a UTF-8 string with a maximum length of 1024 characters.
+  public var description: Swift.String = Swift.String()
+
+  /// Optional. Restricted locations configuration. This field is currently only
+  /// used for BigLake catalogs.
+  ///
+  /// If this field is unset, or if
+  /// `restricted_locations_config.restricted_locations` is empty, all
+  /// accessible locations are allowed. If
+  /// `restricted_locations_config.restricted_locations` is not empty, only
+  /// locations in `default_location` and
+  /// `restricted_locations_config.restricted_locations` are allowed.
+  public var restrictedLocationsConfig: IcebergCatalog.RestrictedLocationsConfig? = nil
+
+  /// Optional. Configuration options for federated catalogs.
+  public var federatedCatalogOptions: IcebergCatalog.FederatedCatalogOptions? = nil
 
   /// Initialize a new instance of `IcebergCatalog`.
   public init() {}
@@ -71,11 +111,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case name = "name"
     case credentialMode = "credential-mode"
     case biglakeServiceAccount = "biglake-service-account"
+    case biglakeServiceAccountUniqueId = "biglake-service-account-id"
     case catalogType = "catalog-type"
     case defaultLocation = "default-location"
-    case catalogRegions = "catalog-regions"
+    case storageRegions = "storage-regions"
     case createTime = "create-time"
     case updateTime = "update-time"
+    case replicas = "replicas"
+    case description = "description"
+    case restrictedLocationsConfig = "restricted-locations-config"
+    case federatedCatalogOptions = "federated-catalog-options"
   }
 
   public init(from decoder: Decoder) throws {
@@ -85,13 +130,21 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       IcebergCatalog.CredentialMode.self, forKey: .credentialMode)
     self.biglakeServiceAccount = try container.decode(
       Swift.String.self, forKey: .biglakeServiceAccount)
+    self.biglakeServiceAccountUniqueId = try container.decode(
+      Swift.String.self, forKey: .biglakeServiceAccountUniqueId)
     self.catalogType = try container.decode(IcebergCatalog.CatalogType.self, forKey: .catalogType)
     self.defaultLocation = try container.decode(Swift.String.self, forKey: .defaultLocation)
-    self.catalogRegions = try container.decode([Swift.String].self, forKey: .catalogRegions)
+    self.storageRegions = try container.decode([Swift.String].self, forKey: .storageRegions)
     self.createTime = try container.decodeIfPresent(
       GoogleCloudWkt.Timestamp.self, forKey: .createTime)
     self.updateTime = try container.decodeIfPresent(
       GoogleCloudWkt.Timestamp.self, forKey: .updateTime)
+    self.replicas = try container.decode([IcebergCatalog.Replica].self, forKey: .replicas)
+    self.description = try container.decode(Swift.String.self, forKey: .description)
+    self.restrictedLocationsConfig = try container.decodeIfPresent(
+      IcebergCatalog.RestrictedLocationsConfig.self, forKey: .restrictedLocationsConfig)
+    self.federatedCatalogOptions = try container.decodeIfPresent(
+      IcebergCatalog.FederatedCatalogOptions.self, forKey: .federatedCatalogOptions)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -99,19 +152,827 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.name, forKey: .name)
     try container.encode(self.credentialMode, forKey: .credentialMode)
     try container.encode(self.biglakeServiceAccount, forKey: .biglakeServiceAccount)
+    try container.encode(self.biglakeServiceAccountUniqueId, forKey: .biglakeServiceAccountUniqueId)
     try container.encode(self.catalogType, forKey: .catalogType)
     try container.encode(self.defaultLocation, forKey: .defaultLocation)
-    try container.encode(self.catalogRegions, forKey: .catalogRegions)
+    try container.encode(self.storageRegions, forKey: .storageRegions)
     try container.encode(self.createTime, forKey: .createTime)
     try container.encode(self.updateTime, forKey: .updateTime)
+    try container.encode(self.replicas, forKey: .replicas)
+    try container.encode(self.description, forKey: .description)
+    try container.encode(self.restrictedLocationsConfig, forKey: .restrictedLocationsConfig)
+    try container.encode(self.federatedCatalogOptions, forKey: .federatedCatalogOptions)
+  }
+
+  /// The replica of the Catalog.
+  public struct Replica: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Output only. The region of the replica. For example "us-east1"
+    public var region: Swift.String = Swift.String()
+
+    /// Output only. The current state of the replica.
+    public var state: IcebergCatalog.Replica.State = IcebergCatalog.Replica.State()
+
+    /// Initialize a new instance of `Replica`.
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = Replica().with { $0.region = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
+    }
+
+    /// If the catalog is replicated to multiple regions, this enum describes the
+    /// current state of the replica.
+    public enum State: Codable, Equatable, Sendable {
+      /// The replica state is unknown.
+      case unknown
+      /// The replica is the writable primary.
+      case primary
+      /// The replica has been recently assigned as the primary, but not all
+      /// namespaces are writeable yet.
+      case primaryInProgress
+      /// The replica is a read-only secondary replica.
+      case secondary
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .unknown
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .unknown: return 0
+        case .primary: return 1
+        case .primaryInProgress: return 2
+        case .secondary: return 3
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .unknown: return "STATE_UNKNOWN"
+        case .primary: return "STATE_PRIMARY"
+        case .primaryInProgress: return "STATE_PRIMARY_IN_PROGRESS"
+        case .secondary: return "STATE_SECONDARY"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "STATE_UNKNOWN": self = .unknown
+        case "STATE_PRIMARY": self = .primary
+        case "STATE_PRIMARY_IN_PROGRESS": self = .primaryInProgress
+        case "STATE_SECONDARY": self = .secondary
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .unknown
+        case 1: self = .primary
+        case 2: self = .primaryInProgress
+        case 3: self = .secondary
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .unknown: return try container.encode(0)
+        case .primary: return try container.encode(1)
+        case .primaryInProgress: return try container.encode(2)
+        case .secondary: return try container.encode(3)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
+      }
+    }
+
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.Replica"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// Configuration of location restrictions.
+  public struct RestrictedLocationsConfig: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. Additional Google Cloud Storage buckets and locations (e.g.,
+    /// `gs://my-other-bucket/...`) that are permitted for use by resources
+    /// within a catalog. This field is currently only used for BigLake catalogs.
+    ///
+    /// If `restricted_locations` is empty and unrestricted catalog creation is
+    /// enabled, all accessible locations are allowed.
+    /// Otherwise, only `default_location` and locations in this list are
+    /// allowed.
+    public var restrictedLocations: [Swift.String] = []
+
+    /// Initialize a new instance of `RestrictedLocationsConfig`.
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = RestrictedLocationsConfig().with { $0.restrictedLocations = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
+    }
+
+    private enum CodingKeys: Swift.String, CodingKey {
+      case restrictedLocations = "restricted-locations"
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      self.restrictedLocations = try container.decode(
+        [Swift.String].self, forKey: .restrictedLocations)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(self.restrictedLocations, forKey: .restrictedLocations)
+    }
+
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.RestrictedLocationsConfig"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
+  }
+
+  /// Configuration options for a federated catalog.
+  public struct FederatedCatalogOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+    Sendable
+  {
+    /// Optional. The secret resource name in Secret Manager, in the format
+    /// `projects/{project_id}/locations/{location}/secrets/{secret_id}` or
+    /// `projects/{project_id}/locations/{location}/secrets/{secret_id}/versions/{version_id}`.
+    ///
+    /// The project ID must match the catalog's project and location must match
+    /// the catalog's location.
+    /// If the version is not specified, the latest version will be used.
+    ///
+    /// This field is not used when
+    /// [google.cloud.biglake.v1main.IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo.service_principal_application_id][google.cloud.biglake.v1main.IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo.service_principal_application_id]
+    /// or
+    /// [google.cloud.biglake.v1main.IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo.snowflake_role][google.cloud.biglake.v1main.IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo.snowflake_role]
+    /// is set.
+    public var secretName: Swift.String? = nil
+
+    /// Optional. The service directory resource name for routing traffic over a
+    /// private network connection through Cross-Cloud Interconnect, in the
+    /// format
+    /// `projects/{project_id}/locations/{location_id}/namespaces/{namespace_id}/services/{service_id}`.
+    public var serviceDirectoryName: Swift.String? = nil
+
+    /// Optional. Refresh configuration.
+    public var refreshOptions: IcebergCatalog.FederatedCatalogOptions.RefreshOptions? = nil
+
+    /// Output only. The status of the background refresh operations.
+    public var refreshStatus: IcebergCatalog.FederatedCatalogOptions.RefreshStatus? = nil
+
+    /// Info specific to a remote Iceberg REST catalog.
+    public var remoteCatalogInfo: OneOf_RemoteCatalogInfo? = nil
+
+    /// Initialize a new instance of `FederatedCatalogOptions`.
+    public init() {}
+
+    /// Use `config` to return a new instance of this object, with some fields updated.
+    ///
+    /// Commonly used to initialize the value, for example:
+    ///
+    /// ```
+    /// let value = FederatedCatalogOptions().with { $0.unityCatalogInfo = ... }
+    /// ```
+    public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+      var copy = self
+      try config(&copy)
+      return copy
+    }
+
+    private enum CodingKeys: Swift.String, CodingKey {
+      case unityCatalogInfo = "unity-catalog-info"
+      case glueCatalogInfo = "glue-catalog-info"
+      case snowflakeCatalogInfo = "snowflake-catalog-info"
+      case secretName = "secret-name"
+      case serviceDirectoryName = "service-directory-name"
+      case refreshOptions = "refresh-options"
+      case refreshStatus = "refresh-status"
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      self.secretName = try container.decodeIfPresent(Swift.String.self, forKey: .secretName)
+      self.serviceDirectoryName = try container.decodeIfPresent(
+        Swift.String.self, forKey: .serviceDirectoryName)
+      self.refreshOptions = try container.decodeIfPresent(
+        IcebergCatalog.FederatedCatalogOptions.RefreshOptions.self, forKey: .refreshOptions)
+      self.refreshStatus = try container.decodeIfPresent(
+        IcebergCatalog.FederatedCatalogOptions.RefreshStatus.self, forKey: .refreshStatus)
+
+      var remoteCatalogInfo: OneOf_RemoteCatalogInfo? = nil
+      let remoteCatalogInfoCheckAndSet = {
+        if remoteCatalogInfo != nil {
+          throw DecodingError.dataCorrupted(
+            DecodingError.Context(
+              codingPath: decoder.codingPath,
+              debugDescription: "Multiple values set for oneof 'remoteCatalogInfo'"))
+        }
+        remoteCatalogInfo = $0
+      }
+      if let unityCatalogInfo = try container.decodeIfPresent(
+        IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo?.self, forKey: .unityCatalogInfo)
+      {
+        try remoteCatalogInfoCheckAndSet(.unityCatalogInfo(unityCatalogInfo))
+      }
+      if let glueCatalogInfo = try container.decodeIfPresent(
+        IcebergCatalog.FederatedCatalogOptions.GlueCatalogInfo?.self, forKey: .glueCatalogInfo)
+      {
+        try remoteCatalogInfoCheckAndSet(.glueCatalogInfo(glueCatalogInfo))
+      }
+      if let snowflakeCatalogInfo = try container.decodeIfPresent(
+        IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo?.self,
+        forKey: .snowflakeCatalogInfo)
+      {
+        try remoteCatalogInfoCheckAndSet(.snowflakeCatalogInfo(snowflakeCatalogInfo))
+      }
+      self.remoteCatalogInfo = remoteCatalogInfo
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(self.secretName, forKey: .secretName)
+      try container.encode(self.serviceDirectoryName, forKey: .serviceDirectoryName)
+      try container.encode(self.refreshOptions, forKey: .refreshOptions)
+      try container.encode(self.refreshStatus, forKey: .refreshStatus)
+
+      if let choice = self.remoteCatalogInfo {
+        switch choice {
+        case .unityCatalogInfo(let value):
+          try container.encode(value, forKey: .unityCatalogInfo)
+        case .glueCatalogInfo(let value):
+          try container.encode(value, forKey: .glueCatalogInfo)
+        case .snowflakeCatalogInfo(let value):
+          try container.encode(value, forKey: .snowflakeCatalogInfo)
+        }
+      }
+    }
+
+    /// Unity Catalog info.
+    public struct UnityCatalogInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Required. The instance name is the first part of the URL when logging
+      /// into the Databricks deployment. For example, for a Databricks on GCP
+      /// workspace URL https://1.1.gcp.databricks.com, the instance name is
+      /// 1.1.gcp.databricks.com.
+      public var instanceName: Swift.String? = nil
+
+      /// Required. The catalog name in Unity Catalog.
+      public var catalogName: Swift.String? = nil
+
+      /// Optional. The application ID of the Databricks service principal that
+      /// will be used to access the Unity Catalog in the OIDC authentication
+      /// flow.
+      public var servicePrincipalApplicationId: Swift.String? = nil
+
+      /// Initialize a new instance of `UnityCatalogInfo`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = UnityCatalogInfo().with { $0.instanceName = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case instanceName = "instance-name"
+        case catalogName = "catalog-name"
+        case servicePrincipalApplicationId = "service-principal-application-id"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.instanceName = try container.decodeIfPresent(Swift.String.self, forKey: .instanceName)
+        self.catalogName = try container.decodeIfPresent(Swift.String.self, forKey: .catalogName)
+        self.servicePrincipalApplicationId = try container.decodeIfPresent(
+          Swift.String.self, forKey: .servicePrincipalApplicationId)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.instanceName, forKey: .instanceName)
+        try container.encode(self.catalogName, forKey: .catalogName)
+        try container.encode(
+          self.servicePrincipalApplicationId, forKey: .servicePrincipalApplicationId)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// AWS Glue Catalog info. We support regional AWS Glue default account
+    /// catalog and S3 Table Buckets.
+    public struct GlueCatalogInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Required. Immutable. The warehouse to connect to a regional AWS Glue
+      /// Iceberg REST Catalog. For top level access, use the AWS account ID
+      /// (e.g. 111222333444). For an S3 table bucket, the warehouse is of the
+      /// form: 111222333444:s3tablescatalog/<table-bucket-name>. The URL to
+      /// access catalog will be
+      /// https://glue.{aws_region}.amazonaws.com/iceberg/v1?warehouse={warehouse}.
+      /// Must be non-empty and is immutable.
+      public var warehouse: Swift.String? = nil
+
+      /// Required. Immutable. The AWS region of the Glue catalog to connect to.
+      /// The region should be in the same geographical region and jurisdiction
+      /// as the federated catalog.
+      /// Must be non-empty and is immutable.
+      public var awsRegion: Swift.String? = nil
+
+      /// Required. The AWS role ARN of the Glue catalog that the federated
+      /// catalog will assume to access the catalog. Must be non-empty. Can be
+      /// updated.
+      public var awsRoleArn: Swift.String? = nil
+
+      /// Initialize a new instance of `GlueCatalogInfo`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = GlueCatalogInfo().with { $0.warehouse = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case warehouse = "warehouse"
+        case awsRegion = "aws-region"
+        case awsRoleArn = "aws-role-arn"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.warehouse = try container.decodeIfPresent(Swift.String.self, forKey: .warehouse)
+        self.awsRegion = try container.decodeIfPresent(Swift.String.self, forKey: .awsRegion)
+        self.awsRoleArn = try container.decodeIfPresent(Swift.String.self, forKey: .awsRoleArn)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.warehouse, forKey: .warehouse)
+        try container.encode(self.awsRegion, forKey: .awsRegion)
+        try container.encode(self.awsRoleArn, forKey: .awsRoleArn)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.GlueCatalogInfo"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Snowflake Catalog info.
+    public struct SnowflakeCatalogInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Required. The account identifier in Snowflake (See:
+      /// https://docs.snowflake.com/en/user-guide/admin-account-identifier). It
+      /// is the prefix to log into your Snowflake deployment URL. For example:
+      /// https://<account_identifier>.snowflakecomputing.com.
+      public var accountIdentifier: Swift.String? = nil
+
+      /// Required. The warehouse to connect to in Snowflake REST Catalog.
+      /// https://<account_identifier>.snowflakecomputing.com/polaris/api/catalog/v1/config?warehouse=<database_name>.
+      ///
+      /// This is the Snowflake database name containing the Iceberg metadata to
+      /// be federated.
+      ///
+      /// Must be non-empty.
+      public var warehouse: Swift.String? = nil
+
+      /// Optional. The specific Snowflake role name to request in the OAuth
+      /// token scope (via session:role:$ROLE) for the Iceberg REST Catalog
+      /// session. This role grants the GCP BigLake service account the necessary
+      /// permissions to interact with the Iceberg catalog, namespaces, and
+      /// tables.
+      ///
+      /// Note: The role provided here must be the DEFAULT_ROLE or be granted to,
+      /// the Snowflake service user mapped to the BigLake service account.
+      public var snowflakeRole: Swift.String? = nil
+
+      /// Initialize a new instance of `SnowflakeCatalogInfo`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = SnowflakeCatalogInfo().with { $0.accountIdentifier = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case accountIdentifier = "account-identifier"
+        case warehouse = "warehouse"
+        case snowflakeRole = "snowflake-role"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.accountIdentifier = try container.decodeIfPresent(
+          Swift.String.self, forKey: .accountIdentifier)
+        self.warehouse = try container.decodeIfPresent(Swift.String.self, forKey: .warehouse)
+        self.snowflakeRole = try container.decodeIfPresent(
+          Swift.String.self, forKey: .snowflakeRole)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.accountIdentifier, forKey: .accountIdentifier)
+        try container.encode(self.warehouse, forKey: .warehouse)
+        try container.encode(self.snowflakeRole, forKey: .snowflakeRole)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Schedule defines if and when metadata refresh should be scheduled.
+    public struct RefreshSchedule: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Optional. The interval for refreshing metadata from the remote catalog.
+      /// If unset or if the value is <= 0, the background refresh will be
+      /// disabled. If this field is updated for an existing federated catalog,
+      /// the previous background refresh must complete before the new refresh
+      /// interval will take effect.
+      public var refreshInterval: GoogleCloudWkt.Duration? = nil
+
+      /// Initialize a new instance of `RefreshSchedule`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RefreshSchedule().with { $0.refreshInterval = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case refreshInterval = "refresh-interval"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.refreshInterval = try container.decodeIfPresent(
+          GoogleCloudWkt.Duration.self, forKey: .refreshInterval)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.refreshInterval, forKey: .refreshInterval)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshSchedule"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// The scope defines a subset of namespaces to be refreshed.
+    public struct RefreshScope: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Optional. Filters to determine which namespaces are included in the
+      /// refresh process.
+      /// - empty list means include all namespaces.
+      /// - "[namespaces]" means include the specified namespaces.
+      ///   ['ns1', 'ns2']    : Discover only namespaces 'ns1' and 'ns2'.
+      /// The maximum number of namespace filters allowed is 32.
+      public var namespaceFilters: [Swift.String] = []
+
+      /// Initialize a new instance of `RefreshScope`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RefreshScope().with { $0.namespaceFilters = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case namespaceFilters = "namespace-filters"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.namespaceFilters = try container.decode([Swift.String].self, forKey: .namespaceFilters)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.namespaceFilters, forKey: .namespaceFilters)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshScope"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Refresh configuration.
+    public struct RefreshOptions: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Optional. Schedule defines if and when metadata refresh should be
+      /// scheduled.
+      public var refreshSchedule: IcebergCatalog.FederatedCatalogOptions.RefreshSchedule? = nil
+
+      /// Optional. Refresh scope configurations.
+      public var refreshScope: IcebergCatalog.FederatedCatalogOptions.RefreshScope? = nil
+
+      /// Initialize a new instance of `RefreshOptions`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RefreshOptions().with { $0.refreshSchedule = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case refreshSchedule = "refresh-schedule"
+        case refreshScope = "refresh-scope"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.refreshSchedule = try container.decodeIfPresent(
+          IcebergCatalog.FederatedCatalogOptions.RefreshSchedule.self, forKey: .refreshSchedule)
+        self.refreshScope = try container.decodeIfPresent(
+          IcebergCatalog.FederatedCatalogOptions.RefreshScope.self, forKey: .refreshScope)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.refreshSchedule, forKey: .refreshSchedule)
+        try container.encode(self.refreshScope, forKey: .refreshScope)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshOptions"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Remote catalog background refresh status.
+    public struct RefreshStatus: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// Output only. When the catalog refresh has started, including
+      /// in-progress refreshes.
+      public var startTime: GoogleCloudWkt.Timestamp? = nil
+
+      /// Output only. When the catalog refresh has ended, unset for in-progress
+      /// refreshes.
+      public var endTime: GoogleCloudWkt.Timestamp? = nil
+
+      /// Output only. The status of the last background refresh operation, unset
+      /// for in-progress refreshes.
+      public var status: GoogleRpc.Status? = nil
+
+      /// Initialize a new instance of `RefreshStatus`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = RefreshStatus().with { $0.startTime = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      private enum CodingKeys: Swift.String, CodingKey {
+        case startTime = "start-time"
+        case endTime = "end-time"
+        case status = "status"
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.startTime = try container.decodeIfPresent(
+          GoogleCloudWkt.Timestamp.self, forKey: .startTime)
+        self.endTime = try container.decodeIfPresent(
+          GoogleCloudWkt.Timestamp.self, forKey: .endTime)
+        self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.startTime, forKey: .startTime)
+        try container.encode(self.endTime, forKey: .endTime)
+        try container.encode(self.status, forKey: .status)
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshStatus"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Info specific to a remote Iceberg REST catalog.
+    public enum OneOf_RemoteCatalogInfo: Codable, Equatable, Sendable {
+      /// Optional. Info specific to a Unity Catalog by Databricks.
+      indirect case unityCatalogInfo(IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo?)
+      /// Optional. Info specific to an AWS Glue Catalog.
+      indirect case glueCatalogInfo(IcebergCatalog.FederatedCatalogOptions.GlueCatalogInfo?)
+      /// Optional. Info specific to a Snowflake Catalog.
+      indirect case snowflakeCatalogInfo(
+        IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo?)
+    }
+
+    public static var _anyTypeUrl: Swift.String {
+      return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions"
+    }
+    public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+      self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+    }
+    public func _pack() throws -> GoogleCloudWkt.Struct {
+      return try GoogleCloudWkt._slowAnySerialize(message: self)
+    }
   }
 
   /// Determines the catalog type.
   public enum CatalogType: Codable, Equatable, Sendable {
     /// Default value. This value is unused.
     case unspecified
-    /// Catalog type for Google Cloud Storage Buckets.
+    /// Google Cloud Storage bucket catalog type.
     case gcsBucket
+    /// BigLake catalog type.
+    case biglake
+    /// Federated catalog type.
+    case federated
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -136,6 +997,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch self {
       case .unspecified: return 0
       case .gcsBucket: return 1
+      case .biglake: return 3
+      case .federated: return 4
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -148,6 +1011,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch self {
       case .unspecified: return "CATALOG_TYPE_UNSPECIFIED"
       case .gcsBucket: return "CATALOG_TYPE_GCS_BUCKET"
+      case .biglake: return "CATALOG_TYPE_BIGLAKE"
+      case .federated: return "CATALOG_TYPE_FEDERATED"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -160,6 +1025,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch stringValue {
       case "CATALOG_TYPE_UNSPECIFIED": self = .unspecified
       case "CATALOG_TYPE_GCS_BUCKET": self = .gcsBucket
+      case "CATALOG_TYPE_BIGLAKE": self = .biglake
+      case "CATALOG_TYPE_FEDERATED": self = .federated
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -171,6 +1038,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch intValue {
       case 0: self = .unspecified
       case 1: self = .gcsBucket
+      case 3: self = .biglake
+      case 4: self = .federated
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -198,6 +1067,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       switch self {
       case .unspecified: return try container.encode(0)
       case .gcsBucket: return try container.encode(1)
+      case .biglake: return try container.encode(3)
+      case .federated: return try container.encode(4)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

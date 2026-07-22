@@ -95,6 +95,16 @@ extension Clients {
       request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion
 
+    func importTrustedKeyWrappedCryptoKeyVersion(
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion
+
+    func exportTrustedKeyWrappedCryptoKeyVersion(
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
+
     func createImportJob(
       request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudKmsV1.ImportJob
@@ -409,9 +419,12 @@ extension Clients {
         }
         return "/v1/\(pathVariable0)"
       }()
-      let query = [
+      var query = [
         URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
       ]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(
+        contentsOf: try encoder.encode(request.publicKeyFormat, prefix: "publicKeyFormat"))
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
@@ -483,6 +496,9 @@ extension Clients {
       query.append(
         contentsOf: try encoder.encode(
           request.skipInitialVersionCreation, prefix: "skipInitialVersionCreation"))
+      query.append(
+        contentsOf: try encoder.encode(
+          request.trustedWrappingEnabled, prefix: "trustedWrappingEnabled"))
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
@@ -579,6 +595,52 @@ extension Clients {
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudKmsV1.CryptoKeyVersion.self, from: data)
+    }
+
+    public func importTrustedKeyWrappedCryptoKeyVersion(
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.CryptoKeyVersion {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0)/cryptoKeyVersions:importTrustedKeyWrappedCryptoKeyVersion"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleCloudKmsV1.CryptoKeyVersion.self, from: data)
+    }
+
+    public func exportTrustedKeyWrappedCryptoKeyVersion(
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
+      options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):exportTrustedKeyWrappedCryptoKeyVersion"
+      }()
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.wrappingKey, prefix: "wrappingKey"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleCloudKmsV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse.self, from: data)
     }
 
     public func createImportJob(

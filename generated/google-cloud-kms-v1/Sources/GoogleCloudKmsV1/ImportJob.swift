@@ -128,6 +128,16 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// [google.cloud.kms.v1.ImportJob.state]: <doc:ImportJob/state>
   public var publicKey: ImportJob.WrappingPublicKey? = nil
 
+  /// Output only. Specifies the
+  /// [WrappingPublicKey][google.cloud.kms.v1.ImportJob.WrappingPublicKey] format
+  /// provided by the customer in the
+  /// [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+  /// request.
+  ///
+  /// [google.cloud.kms.v1.ImportJob.WrappingPublicKey]: <doc:ImportJob/WrappingPublicKey>
+  /// [google.cloud.kms.v1.KeyManagementService.GetImportJob]: <doc:KeyManagementService/getImportJob(request:)>
+  public var publicKeyFormat: PublicKey.PublicKeyFormat = PublicKey.PublicKeyFormat()
+
   /// Output only. Statement that was generated and signed by the key creator
   /// (for example, an HSM) at key creation time. Use this statement to verify
   /// attributes of the key as stored on the HSM, independently of Google.
@@ -179,7 +189,26 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// Considerations](https://tools.ietf.org/html/rfc7468#section-2) and
     /// [Textual Encoding of Subject Public Key Info]
     /// (https://tools.ietf.org/html/rfc7468#section-13).
+    /// This field gets populated by default for RSA-based import methods, if no
+    /// public_key_format is specified in the request.
+    /// If you want to retrieve the wrapping key of an
+    /// [ImportJob][google.cloud.kms.v1.ImportJob] in some other format, use
+    /// [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+    /// and set the public_key_format to the desired public key format.
+    ///
+    /// [google.cloud.kms.v1.ImportJob]: <doc:ImportJob>
+    /// [google.cloud.kms.v1.KeyManagementService.GetImportJob]: <doc:KeyManagementService/getImportJob(request:)>
     public var pem: Swift.String = Swift.String()
+
+    /// Output only. Contains the public key, formatted according to the
+    /// [PublicKey.PublicKeyFormat][google.cloud.kms.v1.PublicKey.PublicKeyFormat]
+    /// specified in the
+    /// [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+    /// request.
+    ///
+    /// [google.cloud.kms.v1.KeyManagementService.GetImportJob]: <doc:KeyManagementService/getImportJob(request:)>
+    /// [google.cloud.kms.v1.PublicKey.PublicKeyFormat]: <doc:PublicKey/PublicKeyFormat>
+    public var data: Foundation.Data = Foundation.Data()
 
     /// Initialize a new instance of `WrappingPublicKey`.
     public init() {}
@@ -255,6 +284,30 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// to technical limitations of RSA wrapping, this method cannot be used to
     /// wrap RSA keys for import.
     case rsaOaep4096Sha256
+    /// Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+    /// defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+    /// involves wrapping the raw key with an ephemeral AES key, derived with
+    /// HKDF-SHA256 from an encryption context, that is, in turn obtained from
+    /// the receiver’s public key with the help of the ML-KEM-768 KEM. For more
+    /// details, see the [ML-KEM HPKE
+    /// standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+    case hpkeKemMlKem768HkdfSha256Aes256Gcm
+    /// Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+    /// defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+    /// involves wrapping the raw key with an ephemeral AES key, derived with
+    /// HKDF-SHA256 from an encryption context, that is, in turn obtained from
+    /// the receiver’s public key with the help of the ML-KEM-1024 KEM. For more
+    /// details, see the [ML-KEM HPKE
+    /// standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+    case hpkeKemMlKem1024HkdfSha256Aes256Gcm
+    /// Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+    /// defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+    /// involves wrapping the raw key with an ephemeral AES key, derived with
+    /// HKDF-SHA256 from an encryption context, that is, in turn obtained from
+    /// the receiver’s public key with the help of the X-Wing hybrid KEM. For
+    /// more details, see the [X-Wing
+    /// standard](http://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem/09/).
+    case hpkeKemXwingHkdfSha256Aes256Gcm
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -284,6 +337,9 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rsaOaep4096Sha256Aes256: return 4
       case .rsaOaep3072Sha256: return 5
       case .rsaOaep4096Sha256: return 6
+      case .hpkeKemMlKem768HkdfSha256Aes256Gcm: return 8
+      case .hpkeKemMlKem1024HkdfSha256Aes256Gcm: return 9
+      case .hpkeKemXwingHkdfSha256Aes256Gcm: return 10
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -301,6 +357,10 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rsaOaep4096Sha256Aes256: return "RSA_OAEP_4096_SHA256_AES_256"
       case .rsaOaep3072Sha256: return "RSA_OAEP_3072_SHA256"
       case .rsaOaep4096Sha256: return "RSA_OAEP_4096_SHA256"
+      case .hpkeKemMlKem768HkdfSha256Aes256Gcm: return "HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM"
+      case .hpkeKemMlKem1024HkdfSha256Aes256Gcm:
+        return "HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM"
+      case .hpkeKemXwingHkdfSha256Aes256Gcm: return "HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -318,6 +378,10 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "RSA_OAEP_4096_SHA256_AES_256": self = .rsaOaep4096Sha256Aes256
       case "RSA_OAEP_3072_SHA256": self = .rsaOaep3072Sha256
       case "RSA_OAEP_4096_SHA256": self = .rsaOaep4096Sha256
+      case "HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM": self = .hpkeKemMlKem768HkdfSha256Aes256Gcm
+      case "HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM":
+        self = .hpkeKemMlKem1024HkdfSha256Aes256Gcm
+      case "HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM": self = .hpkeKemXwingHkdfSha256Aes256Gcm
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -334,6 +398,9 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 4: self = .rsaOaep4096Sha256Aes256
       case 5: self = .rsaOaep3072Sha256
       case 6: self = .rsaOaep4096Sha256
+      case 8: self = .hpkeKemMlKem768HkdfSha256Aes256Gcm
+      case 9: self = .hpkeKemMlKem1024HkdfSha256Aes256Gcm
+      case 10: self = .hpkeKemXwingHkdfSha256Aes256Gcm
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -366,6 +433,9 @@ public struct ImportJob: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .rsaOaep4096Sha256Aes256: return try container.encode(4)
       case .rsaOaep3072Sha256: return try container.encode(5)
       case .rsaOaep4096Sha256: return try container.encode(6)
+      case .hpkeKemMlKem768HkdfSha256Aes256Gcm: return try container.encode(8)
+      case .hpkeKemMlKem1024HkdfSha256Aes256Gcm: return try container.encode(9)
+      case .hpkeKemXwingHkdfSha256Aes256Gcm: return try container.encode(10)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }

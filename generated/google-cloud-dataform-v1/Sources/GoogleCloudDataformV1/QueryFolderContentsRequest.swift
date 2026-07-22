@@ -21,7 +21,7 @@ import GoogleCloudWkt
 public struct QueryFolderContentsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Name of the folder whose contents to list.
+  /// Required. Resource name of the Folder to list contents for.
   /// Format: projects/*/locations/*/folders/*
   public var folder: Swift.String = Swift.String()
 
@@ -43,15 +43,17 @@ public struct QueryFolderContentsRequest: Codable, Equatable, GoogleCloudWkt._An
   /// order. Supported keywords: display_name (default), create_time,
   /// last_modified_time.
   /// Examples:
-  ///   - `orderBy="display_name"`
-  ///   - `orderBy="display_name desc"`
+  ///
+  /// * `orderBy="display_name"`
+  /// * `orderBy="display_name desc"`
   public var orderBy: Swift.String = Swift.String()
 
   /// Optional. Optional filtering for the returned list. Filtering is currently
   /// only supported on the `display_name` field.
   ///
   /// Example:
-  ///  - `filter="display_name="MyFolder""`
+  ///
+  /// * `filter="display_name="MyFolder""`
   public var filter: Swift.String = Swift.String()
 
   /// Initialize a new instance of `QueryFolderContentsRequest`.

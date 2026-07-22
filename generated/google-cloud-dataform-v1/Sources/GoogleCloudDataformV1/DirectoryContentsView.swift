@@ -18,7 +18,7 @@ import Foundation
 
 /// Represents the level of detail to return for directory contents.
 public enum DirectoryContentsView: Codable, Equatable, Sendable {
-  /// The default / unset value. Defaults to DIRECTORY_CONTENTS_VIEW_BASIC.
+  /// The default unset value. Defaults to DIRECTORY_CONTENTS_VIEW_BASIC.
   case unspecified
   /// Includes only the file or directory name. This is the default behavior.
   case basic

@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request for [ListBackups].
+/// Request for `ListBackups`.
 public struct ListBackupsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
@@ -30,14 +30,12 @@ public struct ListBackupsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackabl
   /// If not specified, a default value of 1000 will be used by the service.
   /// Regardless of the page_size value, the response may include a partial list
   /// and a caller should only rely on response's
-  /// [`next_page_token`][google.cloud.memorystore.v1.ListBackupsResponse.next_page_token]
+  /// `next_page_token`
   /// to determine if there are more clusters left to be queried.
-  ///
-  /// [google.cloud.memorystore.v1.ListBackupsResponse.next_page_token]: <doc:ListBackupsResponse/nextPageToken>
   public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Optional. The `next_page_token` value returned from a previous
-  /// [ListBackupCollections] request, if any.
+  /// `ListBackupCollections` request, if any.
   public var pageToken: Swift.String = Swift.String()
 
   /// Initialize a new instance of `ListBackupsRequest`.

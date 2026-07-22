@@ -28,6 +28,14 @@
     /// Project ID of the project that contains the instance.
     public var project: Swift.String = Swift.String()
 
+    /// Optional. Set PSC config to the same value as the existing config to
+    /// reconcile the PSC networking.
+    public var reconcilePscNetworking: Swift.Bool? = nil
+
+    /// Optional. Set PSC config to the same value as the existing config and force
+    /// reconcile the PSC networking.
+    public var reconcilePscNetworkingForce: Swift.Bool? = nil
+
     public var body: DatabaseInstance? = nil
 
     /// Initialize a new instance of `SqlInstancesPatchRequest`.

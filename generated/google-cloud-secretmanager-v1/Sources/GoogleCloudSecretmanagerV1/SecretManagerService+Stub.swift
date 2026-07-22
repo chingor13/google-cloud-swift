@@ -85,6 +85,14 @@ extension Clients {
       request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleIamV1.TestIamPermissionsResponse
 
+    func enableManagedRotation(
+      request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
+
+    func rotateSecret(
+      request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion
+
     func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
@@ -434,6 +442,50 @@ extension Clients {
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleIamV1.TestIamPermissionsResponse.self, from: data)
+    }
+
+    public func enableManagedRotation(
+      request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):enableManagedRotation"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
+    }
+
+    public func rotateSecret(
+      request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):rotateSecret"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleCloudSecretmanagerV1.SecretVersion.self, from: data)
     }
 
     public func listLocations(

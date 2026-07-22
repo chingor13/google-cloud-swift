@@ -241,6 +241,20 @@ extension Clients {
         })
     }
 
+    public func reportIcebergTableMetrics(
+      request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws {
+      try await self._intercept(
+        request: request,
+        options: options,
+        idempotent: false,
+        action: {
+          (r: ReportIcebergTableMetricsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> Void in
+          return try await self.inner.reportIcebergTableMetrics(request: r, options: o)
+        })
+    }
+
     public func getIcebergCatalog(
       request: GetIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog {

@@ -23,12 +23,10 @@ public struct CreateIcebergTableRequest: Codable, Equatable, GoogleCloudWkt._Any
   Sendable
 {
   /// Required. The parent resource where this table will be created.
-  /// Format: projects/{project_id}/namespaces/{namespace}
+  /// Format: projects/{project_id}/catalogs/{catalog_id}/namespaces/{namespace}
   public var parent: Swift.String = Swift.String()
 
-  /// Required. The request body that should be in the format of Apache Iceberg's
-  /// `#/components/schemas/CreateTableRequest`. Content type is expected to be
-  /// `application/json`.
+  /// Required.
   public var httpBody: GoogleApi.HttpBody? = nil
 
   /// Initialize a new instance of `CreateIcebergTableRequest`.

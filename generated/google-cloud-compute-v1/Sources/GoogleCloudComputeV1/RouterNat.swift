@@ -37,6 +37,12 @@
     /// These IPs should be used for updating/patching a NAT only.
     public var drainNatIps: [Swift.String] = []
 
+    /// Output only. Effective timeout (in seconds) for TCP connections that are in TIME_WAIT
+    /// state. This value is equal to tcp_time_wait_timeout_sec.
+    /// If tcp_time_wait_timeout_sec isn't set, the effective timeout is 30s or
+    /// 120s. The field is output only.
+    public var effectiveTcpTimeWaitTimeoutSec: Swift.Int32? = nil
+
     /// Enable Dynamic Port Allocation.
     ///
     ///

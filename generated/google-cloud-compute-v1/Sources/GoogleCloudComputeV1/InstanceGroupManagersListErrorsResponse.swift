@@ -24,11 +24,12 @@
     GoogleCloudGax._PaginatedResponse,
     Sendable
   {
-    /// Output only. [Output Only] The list of errors of the managed instance group.
+    /// Output only. The list of errors of the managed instance group.
     public var items: [InstanceManagedByIgmError] = []
 
-    /// Output only. [Output Only] This token allows you to get the next page of results for
-    /// list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+    /// Output only. This token allows you to get the next page of results for list requests.
+    /// If the number of results is larger than maxResults
+    /// , then use the nextPageToken as a value for
     /// the query parameter pageToken in the next list request.
     /// Subsequent list requests will have their own nextPageToken to
     /// continue paging through the results.

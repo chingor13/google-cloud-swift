@@ -21,7 +21,7 @@ import GoogleCloudWkt
 public struct ListQuotaInfosRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Parent value of QuotaInfo resources.
+  /// Required. Identifier. Parent value of QuotaInfo resources.
   /// Listing across different resource containers (such as 'projects/-') is not
   /// allowed.
   ///

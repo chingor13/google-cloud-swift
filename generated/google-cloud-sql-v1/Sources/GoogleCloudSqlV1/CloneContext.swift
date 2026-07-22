@@ -75,7 +75,7 @@
     public var destinationProject: Swift.String? = nil
 
     /// Optional. The fully qualified URI of the VPC network to which the cloned
-    /// instance will be connected via Private Services Access for private IP. For
+    /// instance will be connected via private services access for private IP. For
     /// example:`projects/my-network-project/global/networks/my-network`. This
     /// field is only required for cross-project cloning.
     public var destinationNetwork: Swift.String? = nil

@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request for [BackupInstance].
+/// Request for `BackupInstance`.
 public struct BackupInstanceRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

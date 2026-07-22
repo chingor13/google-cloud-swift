@@ -76,6 +76,10 @@ extension Clients {
       request: RegisterIcebergTableRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
+    func reportIcebergTableMetrics(
+      request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws
+
     func getIcebergCatalog(
       request: GetIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
@@ -391,6 +395,26 @@ extension Clients {
         GoogleApi.HttpBody.self, from: data)
     }
 
+    public func reportIcebergTableMetrics(
+      request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        }
+        return "/iceberg/v1/restcatalog/v1/\(pathVariable0)/metrics"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      _ = try await self.inner.rpc(for: req).get()
+    }
+
     public func getIcebergCatalog(
       request: GetIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog {
@@ -427,6 +451,7 @@ extension Clients {
       query.append(contentsOf: try encoder.encode(request.view, prefix: "view"))
       query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "page-size"))
       query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "page-token"))
+      query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "GET"
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
@@ -496,6 +521,8 @@ extension Clients {
       let encoder = GoogleCloudGax.QueryParameterEncoder()
       query.append(
         contentsOf: try encoder.encode(request.icebergCatalogId, prefix: "iceberg-catalog-id"))
+      query.append(
+        contentsOf: try encoder.encode(request.primaryLocation, prefix: "primary_location"))
       var req = try await self.inner.Request(path: path, query: query)
       req.httpMethod = "POST"
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")

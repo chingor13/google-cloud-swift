@@ -17,12 +17,16 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.ListAttestors][].
+/// Request message for
+/// [BinauthzManagementServiceV1.ListAttestors][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.ListAttestors].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.ListAttestors]: <doc:BinauthzManagementServiceV1/listAttestors(request:)>
 public struct ListAttestorsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the project associated with the
-  /// [attestors][google.cloud.binaryauthorization.v1.Attestor], in the format `projects/*`.
+  /// [attestors][google.cloud.binaryauthorization.v1.Attestor], in the format
+  /// `projects/*`.
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   public var parent: Swift.String = Swift.String()
@@ -32,8 +36,9 @@ public struct ListAttestorsRequest: Codable, Equatable, GoogleCloudWkt._AnyPacka
   public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// A token identifying a page of results the server should return. Typically,
-  /// this is the value of [ListAttestorsResponse.next_page_token][google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token] returned
-  /// from the previous call to the `ListAttestors` method.
+  /// this is the value of
+  /// [ListAttestorsResponse.next_page_token][google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token]
+  /// returned from the previous call to the `ListAttestors` method.
   ///
   /// [google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token]: <doc:ListAttestorsResponse/nextPageToken>
   public var pageToken: Swift.String = Swift.String()

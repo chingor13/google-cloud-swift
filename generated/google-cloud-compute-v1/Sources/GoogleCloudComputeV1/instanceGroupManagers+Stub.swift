@@ -317,6 +317,8 @@
           URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
         ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(
+          contentsOf: try encoder.encode(request.noGracefulShutdown, prefix: "noGracefulShutdown"))
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "DELETE"
@@ -350,6 +352,8 @@
           URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
         ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(
+          contentsOf: try encoder.encode(request.noGracefulShutdown, prefix: "noGracefulShutdown"))
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
@@ -704,6 +708,8 @@
           URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
         ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(
+          contentsOf: try encoder.encode(request.noGracefulShutdown, prefix: "noGracefulShutdown"))
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"
@@ -922,6 +928,8 @@
           URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
         ]
         let encoder = GoogleCloudGax.QueryParameterEncoder()
+        query.append(
+          contentsOf: try encoder.encode(request.noGracefulShutdown, prefix: "noGracefulShutdown"))
         query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
         var req = try await self.inner.Request(path: path, query: query)
         req.httpMethod = "POST"

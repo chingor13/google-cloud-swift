@@ -31,6 +31,17 @@ public struct GetImportJobRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// [google.cloud.kms.v1.ImportJob.name]: <doc:ImportJob/name>
   public var name: Swift.String = Swift.String()
 
+  /// Optional. Specifies the [WrappingPublicKey][] format.
+  /// If not specified:
+  ///   * For RSA-based import methods, the wrapping key will be returned in PEM
+  ///   format
+  ///   * For pure ML-KEM-based import methods, the wrapping key will be returned
+  ///   in the raw bytes format specified in FIPS-203
+  ///   * For X-Wing-based import methods, the wrapping key will be returned in
+  ///   the raw bytes format specified in
+  ///   https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
+  public var publicKeyFormat: PublicKey.PublicKeyFormat = PublicKey.PublicKeyFormat()
+
   /// Initialize a new instance of `GetImportJobRequest`.
   public init() {}
 

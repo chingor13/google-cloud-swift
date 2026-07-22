@@ -19,6 +19,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudWkt
+import GoogleIamV1
 import GoogleCloudGax
 
 extension Clients {
@@ -26,6 +27,18 @@ extension Clients {
     func validateAttestationOccurrence(
       request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+
+    func setIamPolicy(
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    func getIamPolicy(
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    func testIamPermissions(
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
   }
 
   class ValidationHelperV1Transport: ValidationHelperV1Stub {
@@ -56,6 +69,72 @@ extension Clients {
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
         GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse.self, from: data)
+    }
+
+    public func setIamPolicy(
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):setIamPolicy"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
+    }
+
+    public func getIamPolicy(
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):getIamPolicy"
+      }()
+      var query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      let encoder = GoogleCloudGax.QueryParameterEncoder()
+      query.append(contentsOf: try encoder.encode(request.options, prefix: "options"))
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "GET"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.Policy.self, from: data)
+    }
+
+    public func testIamPermissions(
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+      let path = try { () throws -> Swift.String in
+        guard let pathVariable0 = request.resource as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.resource' is not set or is empty")
+        }
+        return "/v1/\(pathVariable0):testIamPermissions"
+      }()
+      let query = [
+        URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
+      ]
+      var req = try await self.inner.Request(path: path, query: query)
+      req.httpMethod = "POST"
+      req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
+      let (data, _) = try await self.inner.rpc(for: req).get()
+      return try GoogleCloudWkt._ProtoJSONDecoder().decode(
+        GoogleIamV1.TestIamPermissionsResponse.self, from: data)
     }
   }
 }

@@ -43,21 +43,25 @@
     /// format: projects/PROJECT/regions/REGION/networkAttachments/ID
     public var networkAttachmentUri: Swift.String = Swift.String()
 
-    /// Optional. Indicates whether PSC DNS automation is enabled for this
-    /// instance. When enabled, Cloud SQL provisions a universal DNS record across
-    /// all networks configured with Private Service Connect (PSC)
-    /// auto-connections. This will default to true for new instances when Private
-    /// Service Connect is enabled.
+    /// Optional. Indicates whether Private Service Connect DNS automation is
+    /// enabled for this instance. When enabled, Cloud SQL provisions a universal
+    /// DNS record across all networks configured with Private Service Connect
+    /// auto-connections. This will default to true for new instances when
+    /// Private Service Connect is enabled.
     public var pscAutoDnsEnabled: Swift.Bool? = nil
 
-    /// Optional. Indicates whether PSC write endpoint DNS automation is enabled
-    /// for this instance. When enabled, Cloud SQL provisions a universal global
-    /// DNS record across all networks configured with Private Service Connect
-    /// (PSC) auto-connections that always points to the cluster primary instance.
-    /// This feature is only supported for Enterprise Plus edition.
-    /// This will default to true for new Enterprise Plus instances when
+    /// Optional. Indicates whether Private Service Connect write endpoint DNS
+    /// automation is enabled for this instance. When enabled, Cloud SQL provisions
+    /// a universal global DNS record across all networks configured with Private
+    /// Service Connect auto-connections that points to the cluster primary
+    /// instance. This feature is only supported for Enterprise Plus edition. This
+    /// will default to true for new Enterprise Plus instances when
     /// `psc_auto_dns_enabled` is enabled.
     public var pscWriteEndpointDnsEnabled: Swift.Bool? = nil
+
+    /// Optional. Whether to set up the PSC service connection policy
+    /// automatically.
+    public var pscAutoConnectionPolicyEnabled: Swift.Bool? = nil
 
     /// Initialize a new instance of `PscConfig`.
     public init() {}

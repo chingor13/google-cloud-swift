@@ -17,10 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request for
-/// [GetSharedRegionalCertificateAuthority][google.cloud.memorystore.v1.Memorystore.GetSharedRegionalCertificateAuthority].
-///
-/// [google.cloud.memorystore.v1.Memorystore.GetSharedRegionalCertificateAuthority]: <doc:Memorystore/getSharedRegionalCertificateAuthority(request:)>
+/// Request for `GetSharedRegionalCertificateAuthority`.
 public struct GetSharedRegionalCertificateAuthorityRequest: Codable, Equatable, GoogleCloudWkt
     ._AnyPackable,
   Sendable

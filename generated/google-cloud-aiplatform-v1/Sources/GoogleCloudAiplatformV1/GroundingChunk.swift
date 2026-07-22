@@ -226,7 +226,9 @@
       }
     }
 
-    /// Chunk from Google Maps.
+    /// A `Maps` chunk is a piece of evidence that comes from Google Maps,
+    /// containing information about places or routes. This is used to provide
+    /// the user with rich, location-based information.
     public struct Maps: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       Sendable
     {
@@ -247,6 +249,9 @@
       /// This includes review snippets and photos that were used to generate the
       /// answer, as well as uris to flag content.
       public var placeAnswerSources: GroundingChunk.Maps.PlaceAnswerSources? = nil
+
+      /// Output only. Route information.
+      public var route: GroundingChunk.Maps.Route? = nil
 
       /// Initialize a new instance of `Maps`.
       public init() {}
@@ -330,6 +335,47 @@
         public static var _anyTypeUrl: Swift.String {
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Maps.PlaceAnswerSources"
+        }
+        public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+          self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+        }
+        public func _pack() throws -> GoogleCloudWkt.Struct {
+          return try GoogleCloudWkt._slowAnySerialize(message: self)
+        }
+      }
+
+      /// Route information from Google Maps.
+      public struct Route: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+        Sendable
+      {
+        /// The total distance of the route, in meters.
+        public var distanceMeters: Swift.Int32 = Swift.Int32()
+
+        /// The total duration of the route.
+        public var duration: GoogleCloudWkt.Duration? = nil
+
+        /// An encoded polyline of the route. See
+        /// https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+        public var encodedPolyline: Swift.String = Swift.String()
+
+        /// Initialize a new instance of `Route`.
+        public init() {}
+
+        /// Use `config` to return a new instance of this object, with some fields updated.
+        ///
+        /// Commonly used to initialize the value, for example:
+        ///
+        /// ```
+        /// let value = Route().with { $0.distanceMeters = ... }
+        /// ```
+        public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+          var copy = self
+          try config(&copy)
+          return copy
+        }
+
+        public static var _anyTypeUrl: Swift.String {
+          return "type.googleapis.com/google.cloud.aiplatform.v1.GroundingChunk.Maps.Route"
         }
         public init(fromAny any: GoogleCloudWkt.`Any`) throws {
           self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

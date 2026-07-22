@@ -31,6 +31,8 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
   case postgres16
   /// The database version is Postgres 17.
   case postgres17
+  /// The database version is Postgres 18.
+  case postgres18
   /// Encodes an unknown integer value.
   ///
   /// The most common cause for an unknown values is for the service to send
@@ -59,6 +61,7 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
     case .postgres15: return 3
     case .postgres16: return 4
     case .postgres17: return 5
+    case .postgres18: return 6
     case .unknownIntValue(let v): return v
     case .unknownStringValue: return nil
     }
@@ -75,6 +78,7 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
     case .postgres15: return "POSTGRES_15"
     case .postgres16: return "POSTGRES_16"
     case .postgres17: return "POSTGRES_17"
+    case .postgres18: return "POSTGRES_18"
     case .unknownIntValue: return nil
     case .unknownStringValue(let v): return v
     }
@@ -91,6 +95,7 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
     case "POSTGRES_15": self = .postgres15
     case "POSTGRES_16": self = .postgres16
     case "POSTGRES_17": self = .postgres17
+    case "POSTGRES_18": self = .postgres18
     default: self = .unknownStringValue(stringValue)
     }
   }
@@ -106,6 +111,7 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
     case 3: self = .postgres15
     case 4: self = .postgres16
     case 5: self = .postgres17
+    case 6: self = .postgres18
     default: self = .unknownIntValue(intValue)
     }
   }
@@ -137,6 +143,7 @@ public enum DatabaseVersion: Codable, Equatable, Sendable {
     case .postgres15: return try container.encode(3)
     case .postgres16: return try container.encode(4)
     case .postgres17: return try container.encode(5)
+    case .postgres18: return try container.encode(6)
     case .unknownIntValue(let v): return try container.encode(v)
     case .unknownStringValue(let v): return try container.encode(v)
     }

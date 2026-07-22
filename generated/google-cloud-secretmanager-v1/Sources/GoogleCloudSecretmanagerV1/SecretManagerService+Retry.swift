@@ -272,6 +272,36 @@ extension Clients {
         })
     }
 
+    public func enableManagedRotation(
+      request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+      try await self._intercept(
+        request: request,
+        options: options,
+        idempotent: false,
+        action: {
+          (r: EnableManagedRotationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecretmanagerV1.SecretVersion
+          in
+          return try await self.inner.enableManagedRotation(request: r, options: o)
+        })
+    }
+
+    public func rotateSecret(
+      request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudSecretmanagerV1.SecretVersion {
+      try await self._intercept(
+        request: request,
+        options: options,
+        idempotent: false,
+        action: {
+          (r: RotateSecretRequest, o: GoogleCloudGax.RequestOptions) async throws
+            -> GoogleCloudSecretmanagerV1.SecretVersion
+          in
+          return try await self.inner.rotateSecret(request: r, options: o)
+        })
+    }
+
     public func listLocations(
       request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {

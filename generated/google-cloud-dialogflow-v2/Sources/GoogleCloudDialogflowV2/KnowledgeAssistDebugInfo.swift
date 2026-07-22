@@ -44,6 +44,12 @@
     /// The latency of the service.
     public var serviceLatency: ServiceLatency? = nil
 
+    /// Token usage metadata for query generation.
+    public var queryGenerationDebugInfo: KnowledgeAssistDebugInfo.QueryGenerationDebugInfo? = nil
+
+    /// Debug information from CES runtime API.
+    public var cesDebugInfo: GoogleCloudWkt.Struct? = nil
+
     /// Initialize a new instance of `KnowledgeAssistDebugInfo`.
     public init() {}
 
@@ -141,6 +147,47 @@
       public static var _anyTypeUrl: Swift.String {
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.KnowledgeAssistBehavior"
+      }
+      public init(fromAny any: GoogleCloudWkt.`Any`) throws {
+        self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
+      }
+      public func _pack() throws -> GoogleCloudWkt.Struct {
+        return try GoogleCloudWkt._slowAnySerialize(message: self)
+      }
+    }
+
+    /// Token usage metadata for query generation.
+    public struct QueryGenerationDebugInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+      Sendable
+    {
+      /// The total number of tokens in the prompt.
+      public var promptTokenCount: Swift.Int32 = Swift.Int32()
+
+      /// The total number of tokens in the generated candidates.
+      public var candidatesTokenCount: Swift.Int32 = Swift.Int32()
+
+      /// The total number of tokens for the entire request.
+      public var totalTokenCount: Swift.Int32 = Swift.Int32()
+
+      /// Initialize a new instance of `QueryGenerationDebugInfo`.
+      public init() {}
+
+      /// Use `config` to return a new instance of this object, with some fields updated.
+      ///
+      /// Commonly used to initialize the value, for example:
+      ///
+      /// ```
+      /// let value = QueryGenerationDebugInfo().with { $0.promptTokenCount = ... }
+      /// ```
+      public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
+        var copy = self
+        try config(&copy)
+        return copy
+      }
+
+      public static var _anyTypeUrl: Swift.String {
+        return
+          "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo"
       }
       public init(fromAny any: GoogleCloudWkt.`Any`) throws {
         self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

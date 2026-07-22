@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [GetCertificateAuthority][].
+/// Request message for `GetCertificateAuthority`.
 public struct GetCertificateAuthorityRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

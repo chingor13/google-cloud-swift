@@ -349,6 +349,10 @@
       /// The name of the managed instance group to delete.
       public var instanceGroupManager: Swift.String = Swift.String()
 
+      /// When set, graceful shutdown is skipped for instance deletion even if it's
+      /// configured for the instances.
+      public var noGracefulShutdown: Swift.Bool? = nil
+
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
 
@@ -406,6 +410,10 @@
     {
       /// The name of the managed instance group.
       public var instanceGroupManager: Swift.String = Swift.String()
+
+      /// When set, graceful shutdown is skipped for instance deletion even if it's
+      /// configured for the instances.
+      public var noGracefulShutdown: Swift.Bool? = nil
 
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
@@ -1303,6 +1311,10 @@
       /// The name of the managed instance group.
       public var instanceGroupManager: Swift.String = Swift.String()
 
+      /// When set, graceful shutdown is skipped for instance recreation even if it's
+      /// configured for the instances.
+      public var noGracefulShutdown: Swift.Bool? = nil
+
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
 
@@ -1685,6 +1697,10 @@
     {
       /// The name of the managed instance group.
       public var instanceGroupManager: Swift.String = Swift.String()
+
+      /// When set, graceful shutdown is skipped for instance stopping even if it's
+      /// configured for the instances.
+      public var noGracefulShutdown: Swift.Bool? = nil
 
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()

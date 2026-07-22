@@ -19,6 +19,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudWkt
+import GoogleIamV1
 import GoogleCloudGax
 
 /// BinAuthz Attestor verification
@@ -37,14 +38,52 @@ public class ValidationHelperV1Client: Clients.ValidationHelperV1Protocol {
     self.inner = inner
   }
 
-  /// Returns whether the given Attestation for the given image URI
-  /// was signed by the given Attestor
+  /// Returns whether the given `Attestation` for the given image URI
+  /// was signed by the given `Attestor`
   ///
   /// @Snippet(path: "ValidationHelperV1_ValidateAttestationOccurrence")
   public func validateAttestationOccurrence(
     request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse {
     try await self.inner.validateAttestationOccurrence(request: request, options: options)
+  }
+
+  /// Sets the access control policy on the specified resource. Replaces
+  /// any existing policy.
+  ///
+  /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED`
+  /// errors.
+  ///
+  /// @Snippet(path: "ValidationHelperV1_SetIamPolicy")
+  public func setIamPolicy(
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.setIamPolicy(request: request, options: options)
+  }
+
+  /// Gets the access control policy for a resource. Returns an empty policy
+  /// if the resource exists and does not have a policy set.
+  ///
+  /// @Snippet(path: "ValidationHelperV1_GetIamPolicy")
+  public func getIamPolicy(
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    try await self.inner.getIamPolicy(request: request, options: options)
+  }
+
+  /// Returns permissions that a caller has on the specified resource. If the
+  /// resource does not exist, this will return an empty set of
+  /// permissions, not a `NOT_FOUND` error.
+  ///
+  /// Note: This operation is designed to be used for building
+  /// permission-aware UIs and command-line tools, not for authorization
+  /// checking. This operation may "fail open" without warning.
+  ///
+  /// @Snippet(path: "ValidationHelperV1_TestIamPermissions")
+  public func testIamPermissions(
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
+    try await self.inner.testIamPermissions(request: request, options: options)
   }
 }
 
@@ -59,10 +98,35 @@ extension Clients {
     func validateAttestationOccurrence(request: ValidateAttestationOccurrenceRequest) async throws
       -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
 
+    /// See `ValidationHelperV1Client.setIamPolicy`.
+    func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `ValidationHelperV1Client.getIamPolicy`.
+    func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws -> GoogleIamV1.Policy
+
+    /// See `ValidationHelperV1Client.testIamPermissions`.
+    func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+      -> GoogleIamV1.TestIamPermissionsResponse
+
     /// See `ValidationHelperV1Client.validateAttestationOccurrence`.
     func validateAttestationOccurrence(
       request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
     ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+
+    /// See `ValidationHelperV1Client.setIamPolicy`.
+    func setIamPolicy(
+      request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `ValidationHelperV1Client.getIamPolicy`.
+    func getIamPolicy(
+      request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.Policy
+
+    /// See `ValidationHelperV1Client.testIamPermissions`.
+    func testIamPermissions(
+      request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleIamV1.TestIamPermissionsResponse
   }
 }
 
@@ -77,6 +141,42 @@ extension Clients.ValidationHelperV1Protocol {
   public func validateAttestationOccurrence(
     request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
   ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func setIamPolicy(request: GoogleIamV1.SetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
+    try await self.setIamPolicy(request: request, options: .init())
+  }
+
+  public func setIamPolicy(
+    request: GoogleIamV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func getIamPolicy(request: GoogleIamV1.GetIamPolicyRequest) async throws
+    -> GoogleIamV1.Policy
+  {
+    try await self.getIamPolicy(request: request, options: .init())
+  }
+
+  public func getIamPolicy(
+    request: GoogleIamV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.Policy {
+    throw GoogleCloudGax.RequestError.unimplemented
+  }
+
+  public func testIamPermissions(request: GoogleIamV1.TestIamPermissionsRequest) async throws
+    -> GoogleIamV1.TestIamPermissionsResponse
+  {
+    try await self.testIamPermissions(request: request, options: .init())
+  }
+
+  public func testIamPermissions(
+    request: GoogleIamV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+  ) async throws -> GoogleIamV1.TestIamPermissionsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 }

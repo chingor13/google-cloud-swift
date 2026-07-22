@@ -185,9 +185,10 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleCloudWkt._AnyP
     /// Output only. The code contents of a Notebook to be run.
     public var contents: Swift.String = Swift.String()
 
-    /// Output only. The ID of the Vertex job that executed the notebook in
-    /// contents and also the ID used for the outputs created in Google Cloud
-    /// Storage buckets. Only set once the job has started to run.
+    /// Output only. The ID of the Gemini Enterprise Agent Platform job that
+    /// executed the notebook in contents and also the ID used for the outputs
+    /// created in Google Cloud Storage buckets. Only set once the job has
+    /// started to run.
     public var jobId: Swift.String = Swift.String()
 
     /// Initialize a new instance of `NotebookAction`.

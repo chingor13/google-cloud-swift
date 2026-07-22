@@ -17,7 +17,7 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request for [DeleteBackup].
+/// Request for `DeleteBackup`.
 public struct DeleteBackupRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {

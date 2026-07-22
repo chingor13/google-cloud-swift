@@ -17,7 +17,8 @@
 import Foundation
 import GoogleCloudWkt
 
-/// A [policy][google.cloud.binaryauthorization.v1.Policy] for container image binary authorization.
+/// A [policy][google.cloud.binaryauthorization.v1.Policy] for container image
+/// binary authorization.
 ///
 /// [google.cloud.binaryauthorization.v1.Policy]: <doc:Policy>
 public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
@@ -42,7 +43,12 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// third-party infrastructure images from Binary Authorization policies.
   public var admissionWhitelistPatterns: [AdmissionWhitelistPattern] = []
 
-  /// Optional. Per-cluster admission rules. Cluster spec format:
+  /// Optional. A valid policy has only one of the following rule maps non-empty,
+  /// i.e. only one of `cluster_admission_rules`,
+  /// `kubernetes_namespace_admission_rules`,
+  /// `kubernetes_service_account_admission_rules`,
+  /// or `istio_service_identity_admission_rules` can be non-empty.
+  /// Per-cluster admission rules. Cluster spec format:
   /// `location.clusterId`. There can be at most one admission rule per cluster
   /// spec.
   /// A `location` is either a compute zone (e.g. us-central1-a) or a region
@@ -51,19 +57,20 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.
   public var clusterAdmissionRules: [Swift.String: AdmissionRule] = [:]
 
-  /// Optional. Per-kubernetes-namespace admission rules. K8s namespace spec format:
-  /// [a-z.-]+, e.g. 'some-namespace'
+  /// Optional. Per-kubernetes-namespace admission rules. K8s namespace spec
+  /// format:
+  /// `[a-z.-]+`, e.g. `some-namespace`
   public var kubernetesNamespaceAdmissionRules: [Swift.String: AdmissionRule] = [:]
 
   /// Optional. Per-kubernetes-service-account admission rules. Service account
-  /// spec format: `namespace:serviceaccount`. e.g. 'test-ns:default'
+  /// spec format: `namespace:serviceaccount`. e.g. `test-ns:default`
   public var kubernetesServiceAccountAdmissionRules: [Swift.String: AdmissionRule] = [:]
 
   /// Optional. Per-istio-service-identity admission rules. Istio service
   /// identity spec format:
-  /// spiffe://<domain>/ns/<namespace>/sa/<serviceaccount> or
-  /// <domain>/ns/<namespace>/sa/<serviceaccount>
-  /// e.g. spiffe://example.com/ns/test-ns/sa/default
+  /// `spiffe://<domain>/ns/<namespace>/sa/<serviceaccount>` or
+  /// `<domain>/ns/<namespace>/sa/<serviceaccount>`
+  /// e.g. `spiffe://example.com/ns/test-ns/sa/default`
   public var istioServiceIdentityAdmissionRules: [Swift.String: AdmissionRule] = [:]
 
   /// Required. Default admission rule for a cluster without a per-cluster, per-
@@ -72,6 +79,11 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// Output only. Time when the policy was last updated.
   public var updateTime: GoogleCloudWkt.Timestamp? = nil
+
+  /// Optional. A checksum, returned by the server, that can be sent on update
+  /// requests to ensure the policy has an up-to-date value before attempting to
+  /// update it. See https://google.aip.dev/154.
+  public var etag: Swift.String = Swift.String()
 
   /// Initialize a new instance of `Policy`.
   public init() {}
@@ -90,7 +102,7 @@ public struct Policy: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   }
 
   public enum GlobalPolicyEvaluationMode: Codable, Equatable, Sendable {
-    /// Not specified: DISABLE is assumed.
+    /// Not specified: `DISABLE` is assumed.
     case unspecified
     /// Enables system policy evaluation.
     case enable

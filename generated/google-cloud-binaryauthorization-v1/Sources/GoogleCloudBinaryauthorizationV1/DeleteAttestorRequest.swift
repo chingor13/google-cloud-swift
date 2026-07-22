@@ -17,12 +17,16 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.DeleteAttestor][].
+/// Request message for
+/// [BinauthzManagementServiceV1.DeleteAttestor][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.DeleteAttestor].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.DeleteAttestor]: <doc:BinauthzManagementServiceV1/deleteAttestor(request:)>
 public struct DeleteAttestorRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The name of the [attestors][google.cloud.binaryauthorization.v1.Attestor] to delete, in the format
-  /// `projects/*/attestors/*`.
+  /// Required. The name of the
+  /// [attestors][google.cloud.binaryauthorization.v1.Attestor] to delete, in the
+  /// format `projects/*/attestors/*`.
   ///
   /// [google.cloud.binaryauthorization.v1.Attestor]: <doc:Attestor>
   public var name: Swift.String = Swift.String()

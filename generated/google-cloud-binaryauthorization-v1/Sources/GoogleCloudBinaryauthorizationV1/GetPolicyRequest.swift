@@ -17,12 +17,16 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Request message for [BinauthzManagementService.GetPolicy][].
+/// Request message for
+/// [BinauthzManagementServiceV1.GetPolicy][google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetPolicy].
+///
+/// [google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetPolicy]: <doc:BinauthzManagementServiceV1/getPolicy(request:)>
 public struct GetPolicyRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. The resource name of the [policy][google.cloud.binaryauthorization.v1.Policy] to retrieve,
-  /// in the format `projects/*/policy`.
+  /// Required. The resource name of the
+  /// [policy][google.cloud.binaryauthorization.v1.Policy] to retrieve, in the
+  /// format `projects/*/policy`.
   ///
   /// [google.cloud.binaryauthorization.v1.Policy]: <doc:Policy>
   public var name: Swift.String = Swift.String()

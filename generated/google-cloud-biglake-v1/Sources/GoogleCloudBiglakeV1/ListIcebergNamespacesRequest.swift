@@ -21,13 +21,14 @@ import GoogleCloudWkt
 public struct ListIcebergNamespacesRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Optional. PageToken
+  /// Optional. Specify the page_token returned in the previous response to
+  /// retrieve the next page of results.
   public var pageToken: Swift.String = Swift.String()
 
   /// Optional. For servers that support pagination, this signals an upper bound
   /// of the number of results that a client will receive. For servers that do
   /// not support pagination, clients may receive results larger than the
-  /// indicated `pageSize`.
+  /// indicated `pageSize`. Defaults to 100 if not set.
   public var pageSize: Swift.Int32 = Swift.Int32()
 
   /// Required. The parent from the resource path.

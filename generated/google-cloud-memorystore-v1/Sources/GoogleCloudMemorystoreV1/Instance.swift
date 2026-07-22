@@ -99,7 +99,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. Endpoints for the instance.
   public var endpoints: [Instance.InstanceEndpoint] = []
 
-  /// Optional. The mode config for the instance.
+  /// Optional. Immutable. The mode config for the instance.
   public var mode: Instance.Mode = Instance.Mode()
 
   /// Optional. Input only. Simulate a maintenance event.
@@ -173,6 +173,9 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Optional. Input only. Rotate the server certificates.
   public var rotateServerCertificate: Swift.Bool? = nil
 
+  /// Output only. Migration config for the instance.
+  public var migrationConfig: MigrationConfig? = nil
+
   /// The source to import from.
   public var importSources: OneOf_ImportSources? = nil
 
@@ -237,6 +240,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case serverCaMode = "serverCaMode"
     case serverCaPool = "serverCaPool"
     case rotateServerCertificate = "rotateServerCertificate"
+    case migrationConfig = "migrationConfig"
   }
 
   public init(from decoder: Decoder) throws {
@@ -309,6 +313,8 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     self.serverCaPool = try container.decodeIfPresent(Swift.String.self, forKey: .serverCaPool)
     self.rotateServerCertificate = try container.decodeIfPresent(
       Swift.Bool.self, forKey: .rotateServerCertificate)
+    self.migrationConfig = try container.decodeIfPresent(
+      MigrationConfig.self, forKey: .migrationConfig)
 
     var importSources: OneOf_ImportSources? = nil
     let importSourcesCheckAndSet = {
@@ -379,6 +385,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     try container.encode(self.serverCaMode, forKey: .serverCaMode)
     try container.encode(self.serverCaPool, forKey: .serverCaPool)
     try container.encode(self.rotateServerCertificate, forKey: .rotateServerCertificate)
+    try container.encode(self.migrationConfig, forKey: .migrationConfig)
 
     if let choice = self.importSources {
       switch choice {
@@ -721,6 +728,8 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case updating
     /// Instance is being deleted.
     case deleting
+    /// Instance is being migrated.
+    case migrating
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -748,6 +757,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .active: return 2
       case .updating: return 3
       case .deleting: return 4
+      case .migrating: return 6
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -763,6 +773,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .active: return "ACTIVE"
       case .updating: return "UPDATING"
       case .deleting: return "DELETING"
+      case .migrating: return "MIGRATING"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -778,6 +789,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "ACTIVE": self = .active
       case "UPDATING": self = .updating
       case "DELETING": self = .deleting
+      case "MIGRATING": self = .migrating
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -792,6 +804,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 2: self = .active
       case 3: self = .updating
       case 4: self = .deleting
+      case 6: self = .migrating
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -822,6 +835,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .active: return try container.encode(2)
       case .updating: return try container.encode(3)
       case .deleting: return try container.encode(4)
+      case .migrating: return try container.encode(6)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }
@@ -836,6 +850,8 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case authDisabled
     /// IAM basic authorization.
     case iamAuth
+    /// Token based authorization.
+    case tokenAuth
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -861,6 +877,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .unspecified: return 0
       case .authDisabled: return 1
       case .iamAuth: return 2
+      case .tokenAuth: return 3
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -874,6 +891,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .unspecified: return "AUTHORIZATION_MODE_UNSPECIFIED"
       case .authDisabled: return "AUTH_DISABLED"
       case .iamAuth: return "IAM_AUTH"
+      case .tokenAuth: return "TOKEN_AUTH"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -887,6 +905,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case "AUTHORIZATION_MODE_UNSPECIFIED": self = .unspecified
       case "AUTH_DISABLED": self = .authDisabled
       case "IAM_AUTH": self = .iamAuth
+      case "TOKEN_AUTH": self = .tokenAuth
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -899,6 +918,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case 0: self = .unspecified
       case 1: self = .authDisabled
       case 2: self = .iamAuth
+      case 3: self = .tokenAuth
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -927,6 +947,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       case .unspecified: return try container.encode(0)
       case .authDisabled: return try container.encode(1)
       case .iamAuth: return try container.encode(2)
+      case .tokenAuth: return try container.encode(3)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }
@@ -1060,7 +1081,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     case highcpuMedium
     /// Standard large.
     case standardLarge
-    /// High memory 2x large.
+    /// High memory 2xlarge.
     case highmem2Xlarge
     /// Custom pico.
     case customPico

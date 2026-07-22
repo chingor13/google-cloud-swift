@@ -45,6 +45,53 @@
     /// to have been open before the watcher starts recording it.
     public var transactionDurationThreshold: Swift.Int32? = nil
 
+    /// Optional. Specifies the minimum percentage of CPU utilization to trigger
+    /// the performance capture. Valid integers range from `10` to `99`. Enter `0`
+    /// to disable the check.
+    public var cpuUtilizationThresholdPercent: Swift.Int32? = nil
+
+    /// Optional. Specifies the minimum percentage of memory usage to trigger the
+    /// performance capture.
+    /// Valid integers range from `10` to `99`. Enter `0` to disable the check.
+    public var memoryUsageThresholdPercent: Swift.Int32? = nil
+
+    /// Optional. Specifies the minimum allowed number of transactions in lock wait
+    /// state to trigger the performance capture. Valid integers range from `10` to
+    /// `10000`. Enter `0` to disable the check.
+    public var transactionLockWaitThresholdCount: Swift.Int32? = nil
+
+    /// Optional. Specifies the minimum allowed number of semaphore waits to
+    /// trigger the performance capture. Valid integers range from `10` to `10000`.
+    /// Enter `0` to disable the check.
+    public var semaphoreWaitThresholdCount: Swift.Int32? = nil
+
+    /// Optional. Specifies the minimum number of undo log entries in the history
+    /// list length to trigger the performance capture. Valid integers range from
+    /// `10000` to `10000000`. Enter `0` to disable the check.
+    public var historyListLengthThresholdCount: Swift.Int32? = nil
+
+    /// Optional. Specifies the amount of time in seconds that a transaction needs
+    /// to have been open before the watcher starts terminating it. Valid integers
+    /// range from `60` to `604800` (7 days). Enter `0` to disable. If enabled
+    /// (i.e., > 0), this value must be greater than or equal to
+    /// `transaction_duration_threshold`. Configurations where
+    /// `0 < transaction_kill_threshold_seconds < transaction_duration_threshold`
+    /// will be rejected.
+    public var transactionKillThresholdSeconds: Swift.Int32? = nil
+
+    /// Optional. Specifies a customer-defined list of users to exclude from
+    /// transaction termination. Entries can be in the format 'user@host' or just
+    /// 'user'. A standalone 'user' implies 'user@%', excluding the user from any
+    /// host. Wildcard '%' is allowed in the host part of the 'user@host' format.
+    /// Example: `["app_user", "db_admin@10.1.2.3", "report_user@%"]`
+    public var transactionKillExcludedUserHosts: [Swift.String] = []
+
+    /// Optional. Determines which transactions are allowed to be terminated when
+    /// they exceed `transaction_kill_threshold_seconds`. This allows protecting
+    /// write-heavy transactions from auto-termination if desired. Defaults to
+    /// `READ_ONLY_TRANSACTIONS` if unspecified.
+    public var transactionKillType: PerformanceCaptureConfig.TransactionKillType? = nil
+
     /// Initialize a new instance of `PerformanceCaptureConfig`.
     public init() {}
 
@@ -59,6 +106,113 @@
       var copy = self
       try config(&copy)
       return copy
+    }
+
+    /// Defines the categories of long-running transactions eligible for automatic
+    /// termination by the Performance Capture.
+    public enum TransactionKillType: Codable, Equatable, Sendable {
+      /// Unspecified.
+      case unspecified
+      /// Only read-only transactions are eligible for termination.
+      case readOnlyTransactions
+      /// All transactions are eligible for termination, including those with write
+      /// operations (such as INSERT, UPDATE, DELETE, or DDL).
+      case allTransactions
+      /// Encodes an unknown integer value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownIntValue(Int)
+      /// Encodes an unknown string value.
+      ///
+      /// The most common cause for an unknown values is for the service to send
+      /// a value unknown to the library. We recommend you update your library to
+      /// the latest version.
+      case unknownStringValue(String)
+
+      public init() {
+        self = .unspecified
+      }
+
+      /// Returns the integer value associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown string value, this returns `nil`.
+      public var intValue: Int? {
+        switch self {
+        case .unspecified: return 0
+        case .readOnlyTransactions: return 1
+        case .allTransactions: return 2
+        case .unknownIntValue(let v): return v
+        case .unknownStringValue: return nil
+        }
+      }
+
+      /// Returns the string value (or name) associated with the enumeration.
+      ///
+      /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
+      public var stringValue: Swift.String? {
+        switch self {
+        case .unspecified: return "TRANSACTION_KILL_TYPE_UNSPECIFIED"
+        case .readOnlyTransactions: return "READ_ONLY_TRANSACTIONS"
+        case .allTransactions: return "ALL_TRANSACTIONS"
+        case .unknownIntValue: return nil
+        case .unknownStringValue(let v): return v
+        }
+      }
+
+      /// Initialize from a string value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
+      public init(stringValue: Swift.String) {
+        switch stringValue {
+        case "TRANSACTION_KILL_TYPE_UNSPECIFIED": self = .unspecified
+        case "READ_ONLY_TRANSACTIONS": self = .readOnlyTransactions
+        case "ALL_TRANSACTIONS": self = .allTransactions
+        default: self = .unknownStringValue(stringValue)
+        }
+      }
+
+      /// Initialize from an integer value.
+      ///
+      /// If the value is unknown, this initializes to ``.unknownIntValue(_:)``.
+      public init(intValue: Int) {
+        switch intValue {
+        case 0: self = .unspecified
+        case 1: self = .readOnlyTransactions
+        case 2: self = .allTransactions
+        default: self = .unknownIntValue(intValue)
+        }
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(Int.self) {
+          self.init(intValue: v)
+          return
+        }
+        if let s = try? container.decode(String.self) {
+          if let v = Int(s) {
+            self.init(intValue: v)
+          } else {
+            self.init(stringValue: s)
+          }
+          return
+        }
+        throw DecodingError.dataCorruptedError(
+          in: container, debugDescription: "Expected enum value, must be integer or string.")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .unspecified: return try container.encode(0)
+        case .readOnlyTransactions: return try container.encode(1)
+        case .allTransactions: return try container.encode(2)
+        case .unknownIntValue(let v): return try container.encode(v)
+        case .unknownStringValue(let v): return try container.encode(v)
+        }
+      }
     }
 
     public static var _anyTypeUrl: Swift.String {

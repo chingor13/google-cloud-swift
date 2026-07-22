@@ -24,21 +24,21 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 {
   /// Resource name of this QuotaInfo.
   /// The ID component following "locations/" must be "global".
-  /// Example:
+  /// For example,
   /// `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
   public var name: Swift.String = Swift.String()
 
   /// The id of the quota, which is unique within the service.
-  /// Example: `CpusPerProjectPerRegion`
+  /// For example, `CpusPerProjectPerRegion`
   public var quotaId: Swift.String = Swift.String()
 
   /// The metric of the quota. It specifies the resources consumption the quota
   /// is defined for.
-  /// Example: `compute.googleapis.com/cpus`
+  /// For example, `compute.googleapis.com/cpus`
   public var metric: Swift.String = Swift.String()
 
   /// The name of the service in which the quota is defined.
-  /// Example: `compute.googleapis.com`
+  /// For example, `compute.googleapis.com`
   public var service: Swift.String = Swift.String()
 
   /// Whether this is a precise quota. A precise quota is tracked with absolute
@@ -47,8 +47,8 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
 
   /// The reset time interval for the quota. Refresh interval applies to rate
   /// quota only.
-  /// Example: "minute" for per minute, "day" for per day, or "10 seconds" for
-  /// every 10 seconds.
+  /// For example, "minute" for per minute, "day" for per day, or "10 seconds"
+  /// for every 10 seconds.
   public var refreshInterval: Swift.String = Swift.String()
 
   /// The container type of the QuotaInfo.
