@@ -630,6 +630,11 @@ libraries:
     apis:
       - path: google/cloud/tpu/v2
     copyright_year: "2026"
+  - name: GoogleCloudTranslateV3
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/translate/v3
+    copyright_year: "2026"
   - name: GoogleCloudVisionV1
     version: 0.0.0-preview
     apis:
