@@ -31,13 +31,14 @@ let package = Package(
       path: "./packages/gax",
       traits: [
         .trait(name: "IntegrationTests", condition: .when(traits: ["IntegrationTests"]))
-      ]
-    ),
+      ]),
     .package(path: "./packages/test-helpers"),
     .package(path: "./packages/wkt"),
     .package(path: "./packages/storage"),
     .package(path: "./guide"),
-    .package(path: "./generated/google-cloud-compute-v1", traits: ["Instances", "Images", "ZoneOperations"]),
+    .package(
+      path: "./generated/google-cloud-compute-v1",
+      traits: ["Instances", "Images", "ZoneOperations"]),
     .package(path: "./generated/google-cloud-location"),
     .package(path: "./generated/google-iam-v1"),
     .package(path: "./generated/google-cloud-secretmanager-v1"),
@@ -54,23 +55,20 @@ let package = Package(
       name: "IntegrationTests",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "auth")
-      ]
-    ),
+      ]),
     .testTarget(
       name: "Discovery",
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt")
       ],
-      exclude: ["disco/"],
-    ),
+      exclude: ["disco/"]),
     .testTarget(
       name: "ProtoJSON",
       dependencies: [
         .product(name: "GoogleCloudGax", package: "gax"),
         .product(name: "GoogleCloudWkt", package: "wkt"),
       ],
-      exclude: ["protos/"],
-    ),
+      exclude: ["protos/"]),
     .testTarget(
       name: "DiscoveryBasedClient",
       dependencies: [
@@ -78,8 +76,7 @@ let package = Package(
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "GoogleCloudTestHelpers", package: "test-helpers"),
       ],
-      exclude: ["README.md"],
-    ),
+      exclude: ["README.md"]),
     .testTarget(
       name: "ProtoBasedClient",
       dependencies: [
@@ -98,8 +95,7 @@ let package = Package(
         .product(name: "CryptoSwift", package: "CryptoSwift"),
         .product(name: "InMemoryLogging", package: "swift-log"),
       ],
-      exclude: ["README.md"],
-    ),
+      exclude: ["README.md"]),
     .testTarget(
       name: "Any",
       dependencies: [
@@ -113,8 +109,6 @@ let package = Package(
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(
           name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1"),
-      ],
-      path: "Tests/QueryParameter"
-    ),
+      ]),
   ]
 )
