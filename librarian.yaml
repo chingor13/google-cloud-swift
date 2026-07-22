@@ -299,6 +299,11 @@ libraries:
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
+  - name: GoogleCloudCesV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/ces/v1
+    copyright_year: "2026"
   - name: GoogleCloudCommon
     version: 0.0.0-preview
     apis:
