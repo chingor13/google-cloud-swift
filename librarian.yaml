@@ -668,6 +668,11 @@ libraries:
     apis:
       - path: google/cloud/workflows/v1
     copyright_year: "2026"
+  - name: GoogleCloudWorkloadmanagerV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/workloadmanager/v1
+    copyright_year: "2026"
   - name: GoogleContainerV1
     apis:
       - path: google/container/v1
