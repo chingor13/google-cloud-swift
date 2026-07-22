@@ -737,6 +737,11 @@ libraries:
     apis:
       - path: google/longrunning
     copyright_year: "2026"
+  - name: GoogleMonitoringDashboardV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/monitoring/dashboard/v1
+    copyright_year: "2026"
   - name: GoogleMonitoringV3
     version: 0.0.0-preview
     apis:
