@@ -210,6 +210,11 @@ libraries:
     apis:
       - path: google/cloud/assuredworkloads/v1
     copyright_year: "2026"
+  - name: GoogleCloudAuditmanagerV1
+    version: 0.0.0-preview
+    apis:
+      - path: google/cloud/auditmanager/v1
+    copyright_year: "2026"
   - name: GoogleCloudAuth
     version: 0.0.0-preview
     copyright_year: "2026"
