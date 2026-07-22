@@ -682,6 +682,11 @@ libraries:
     apis:
       - path: google/devtools/artifactregistry/v1
     copyright_year: "2026"
+  - name: GoogleDevtoolsCloudtraceV2
+    version: 0.0.0-preview
+    apis:
+      - path: google/devtools/cloudtrace/v2
+    copyright_year: "2026"
   - name: GoogleGrafeasV1
     version: 0.0.0-preview
     apis:
