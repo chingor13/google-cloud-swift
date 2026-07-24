@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 name: Swift Format
+permissions: read-all # zizmor: ignore[excessive-permissions]
 on:
   push:
     branches: ["main"]
@@ -20,7 +21,7 @@ on:
 jobs:
   format:
     name: Verify non-Swift Formatting
-    runs-on: self-hosted
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
