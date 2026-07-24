@@ -12,12 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Swift creates many files:
+.build/
+Packages/*/.build/
+.swiftpm/xcode/package.xcworkspace/contents.xcwrappercontents
+.swiftpm/configuration/
+
+*/**/Package.resolved
+
+# The build directory for Rust
+target/
+
 # We use a few Python tools for development [^1]. Reserve `.env/` to install
 # these tools in a local Python virtual environment.
 /.venv/
 
-.vscode
+# Xcode is commonly used with Swift and creates local files:
+# User-specific Xcode settings
+xcuserdata/
+*.xcuserdatad
+*.xcuserstate
+DerivedData/
+*.xcscmblueprint
+
+# Many developers use VS Code, Zed
+.vscode/
+
+# Some developers use IntelliJ-type IDEs.
 .idea/
+
+# And zed.
+.zed/
 
 # Ignore terraform files.
 .terraform/
@@ -26,3 +51,9 @@ terraform.tfstate
 # Ignore code coverage output files.
 cobertura.xml
 coverage.out
+
+# macOS
+.DS_Store
+
+# Use as a common build cache.
+.build-cache/

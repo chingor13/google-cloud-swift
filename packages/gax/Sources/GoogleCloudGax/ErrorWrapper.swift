@@ -1,0 +1,59 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+import GoogleCloudWkt
+import GoogleRpc
+
+/// The services send errors using this structure.
+struct ErrorWrapper: Decodable {
+  init?(data: Data, response: HTTPURLResponse) {
+    let decoder = GoogleCloudWkt._ProtoJSONDecoder()
+    guard let w = try? decoder.decode(Self.self, from: data) else {
+      return nil
+    }
+    self = w
+  }
+
+  let error: WrappedStatus
+
+  struct WrappedStatus: Decodable {
+    /// The HTTP status code.
+    let code: Int32
+    /// The gRPC status code in string form.
+    let status: String?
+    /// The error message, if any.
+    let message: String
+    /// The sequence of error details, wrapped as anys. May be empty or omitted.
+    let details: [GoogleCloudWkt.`Any`]
+  }
+}
+
+extension ServiceError {
+  /// Create a a new `ServiceDetails`.
+  init(
+    wrapper: ErrorWrapper,
+  ) {
+    if let s = wrapper.error.status {
+      self.code = GoogleRpc.Code.init(stringValue: s)
+    } else {
+      self.code = .unknown
+    }
+    self.message = wrapper.error.message
+    self.details = wrapper.error.details.map { StatusDetail(from: $0) }
+  }
+}

@@ -1,0 +1,56 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// [START compute_instances_create]
+import GoogleCloudComputeV1
+import GoogleCloudGax
+import Logging
+
+extension InstanceSamples {
+  static public func create(
+    client: InstancesClient,
+    projectId: String,
+    zoneId: String,
+    name: String,
+    logger: Logger
+  ) async throws {
+    logger.info("Calling Instances::insert()")
+    let bootDisk = AttachedDisk().with {
+      $0.initializeParams = AttachedDiskInitializeParams().with {
+        $0.sourceImage = "projects/cos-cloud/global/images/family/cos-stable"
+      }
+      $0.boot = true
+      $0.autoDelete = true
+    }
+    let nic = NetworkInterface().with {
+      $0.network = "global/networks/default"
+    }
+    let instance = Instance().with {
+      $0.machineType = "zones/\(zoneId)/machineTypes/f1-micro"
+      $0.name = name
+      $0.description = "A test VM created by the Swift client library."
+      $0.labels = ["source": "compute_instances_create"]
+      $0.disks = [bootDisk]
+      $0.networkInterfaces = [nic]
+    }
+    let operation = try await client.insert(
+      request: .init().with {
+        $0.project = projectId
+        $0.zone = zoneId
+        $0.body = instance
+      }, options: .init())
+    logger.info("Instance.insert() - response=\(operation)")
+  }
+}
+// [END compute_instances_create]
