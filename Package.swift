@@ -50,12 +50,14 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
-    .target(name: "UserGuide", dependencies: [.product(name: "UserGuide", package: "guide")]),
     .testTarget(
       name: "IntegrationTests",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "auth")
       ]),
+    .testTarget(
+      name: "AllModules",
+      dependencies: [.product(name: "UserGuide", package: "guide")]),
     .testTarget(
       name: "Discovery",
       dependencies: [
