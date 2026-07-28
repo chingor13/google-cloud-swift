@@ -559,17 +559,17 @@ extension URLRequest {
 extension Array where Element == URLQueryItem {
   package mutating func appendPreconditions(_ preconditions: StoragePreconditions?) {
     guard let preconditions else { return }
-    if let ifGen = preconditions.ifGenerationMatch {
-      append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
+    if let v = preconditions.ifGenerationMatch {
+      append(URLQueryItem(name: "ifGenerationMatch", value: String(v)))
     }
-    if let ifGenNot = preconditions.ifGenerationNotMatch {
-      append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
+    if let v = preconditions.ifGenerationNotMatch {
+      append(URLQueryItem(name: "ifGenerationNotMatch", value: String(v)))
     }
-    if let ifMeta = preconditions.ifMetagenerationMatch {
-      append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
+    if let v = preconditions.ifMetagenerationMatch {
+      append(URLQueryItem(name: "ifMetagenerationMatch", value: String(v)))
     }
-    if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
-      append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
+    if let v = preconditions.ifMetagenerationNotMatch {
+      append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(v)))
     }
   }
 }
