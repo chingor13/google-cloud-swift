@@ -332,7 +332,7 @@ import Testing
       }
 
       let keyBytes: [UInt8] = (0..<32).map { UInt8(($0 * 11 + 17) % 256) }
-      let csek = try CustomerEncryptionKey(keyBytes: keyBytes)
+      let csek = try CustomerEncryptionKeyOptions(keyBytes: keyBytes)
 
       let storage = try StorageClient()
       let options = UploadOptions(customerEncryptionKey: csek)
@@ -365,7 +365,7 @@ import Testing
       }
 
       let keyData = Data((0..<32).map { UInt8(($0 * 13 + 37) % 256) })
-      let csek = try CustomerEncryptionKey(key: keyData)
+      let csek = try CustomerEncryptionKeyOptions(key: keyData)
 
       let storage = try StorageClient()
       let options = UploadOptions(customerEncryptionKey: csek)

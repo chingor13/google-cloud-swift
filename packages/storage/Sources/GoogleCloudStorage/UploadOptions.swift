@@ -77,7 +77,7 @@ public struct ChecksumOptions: Sendable, Hashable {
   }
 }
 
-/// Errors thrown when validating or creating a `CustomerEncryptionKey`.
+/// Errors thrown when validating or creating a `CustomerEncryptionKeyOptions`.
 public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
   CustomStringConvertible
 {
@@ -105,7 +105,7 @@ public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
 /// [standard Cloud Storage encryption]: https://docs.cloud.google.com/storage/docs/encryption/default-keys
 /// [standard Base64]: https://datatracker.ietf.org/doc/html/rfc4648#section-4
 /// [Customer-Supplied Encryption Keys]: https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys
-public struct CustomerEncryptionKey: Sendable, Hashable, Equatable, CustomStringConvertible {
+public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, CustomStringConvertible {
   public let algorithm: String
   public let keyBase64: String
   public let keyHashBase64: String
@@ -114,14 +114,14 @@ public struct CustomerEncryptionKey: Sendable, Hashable, Equatable, CustomString
     keyBase64
   }
 
-  /// Creates a `CustomerEncryptionKey` from pre-computed values.
+  /// Creates a `CustomerEncryptionKeyOptions` from pre-computed values.
   public init(algorithm: String = "AES256", keyBase64: String, keyHashBase64: String) {
     self.algorithm = algorithm
     self.keyBase64 = keyBase64
     self.keyHashBase64 = keyHashBase64
   }
 
-  /// Creates a `CustomerEncryptionKey` from raw key bytes (`Data`).
+  /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`Data`).
   ///
   /// For the default "AES256" algorithm, the key must be exactly 32 bytes (256 bits).
   /// The key and its SHA-256 hash are automatically Base64-encoded.
@@ -135,12 +135,12 @@ public struct CustomerEncryptionKey: Sendable, Hashable, Equatable, CustomString
     self.keyHashBase64 = Data(hash).base64EncodedString()
   }
 
-  /// Creates a `CustomerEncryptionKey` from raw key bytes (`[UInt8]`).
+  /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`[UInt8]`).
   public init(keyBytes: [UInt8], algorithm: String = "AES256") throws {
     try self.init(key: Data(keyBytes), algorithm: algorithm)
   }
 
-  /// Creates a `CustomerEncryptionKey` from a Base64-encoded key string.
+  /// Creates a `CustomerEncryptionKeyOptions` from a Base64-encoded key string.
   ///
   /// For the default "AES256" algorithm, the decoded key must be exactly 32 bytes (256 bits).
   /// The SHA-256 hash is automatically computed and Base64-encoded.
@@ -209,7 +209,7 @@ public struct UploadOptions: Sendable {
   public var chunkSize: Int
   public var preconditions: StoragePreconditions?
   public var kmsKeyName: String?
-  public var customerEncryptionKey: CustomerEncryptionKey?
+  public var customerEncryptionKey: CustomerEncryptionKeyOptions?
   public var checksums: ChecksumOptions
 
   /// Legacy validation enum property for backward compatibility.
@@ -241,7 +241,7 @@ public struct UploadOptions: Sendable {
     chunkSize: Int = 8 * 1024 * 1024,
     preconditions: StoragePreconditions? = nil,
     kmsKeyName: String? = nil,
-    customerEncryptionKey: CustomerEncryptionKey? = nil,
+    customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
     checksums: ChecksumOptions = .default
   ) {
     self.chunkSize = chunkSize
@@ -255,7 +255,7 @@ public struct UploadOptions: Sendable {
     chunkSize: Int = 8 * 1024 * 1024,
     preconditions: StoragePreconditions? = nil,
     kmsKeyName: String? = nil,
-    customerEncryptionKey: CustomerEncryptionKey? = nil,
+    customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
     validation: ChecksumValidation
   ) {
     self.chunkSize = chunkSize

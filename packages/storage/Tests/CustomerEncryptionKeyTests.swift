@@ -21,7 +21,7 @@ import GoogleCloudGax
 @testable import GoogleCloudStorage
 import Testing
 
-@Suite struct CustomerEncryptionKeyTests {
+@Suite struct CustomerEncryptionKeyOptionsTests {
   /// Helper to create a sample 32-byte key and its expected Base64 and SHA-256 Base64 values.
   private func sampleKey() -> (data: Data, keyBase64: String, keyHashBase64: String) {
     let keyData = Data(repeating: 0x42, count: 32)
@@ -33,7 +33,7 @@ import Testing
 
   @Test func createFromData() throws {
     let sample = sampleKey()
-    let csek = try CustomerEncryptionKey(key: sample.data)
+    let csek = try CustomerEncryptionKeyOptions(key: sample.data)
 
     #expect(csek.algorithm == "AES256")
     #expect(csek.keyBase64 == sample.keyBase64)
@@ -44,7 +44,7 @@ import Testing
   @Test func createFromByteArray() throws {
     let sample = sampleKey()
     let bytes = Array(sample.data)
-    let csek = try CustomerEncryptionKey(keyBytes: bytes)
+    let csek = try CustomerEncryptionKeyOptions(keyBytes: bytes)
 
     #expect(csek.algorithm == "AES256")
     #expect(csek.keyBase64 == sample.keyBase64)
@@ -53,7 +53,7 @@ import Testing
 
   @Test func createFromBase64String() throws {
     let sample = sampleKey()
-    let csek = try CustomerEncryptionKey(keyBase64: sample.keyBase64)
+    let csek = try CustomerEncryptionKeyOptions(keyBase64: sample.keyBase64)
 
     #expect(csek.algorithm == "AES256")
     #expect(csek.keyBase64 == sample.keyBase64)
@@ -61,7 +61,7 @@ import Testing
   }
 
   @Test func createFromPrecomputedValues() {
-    let csek = CustomerEncryptionKey(
+    let csek = CustomerEncryptionKeyOptions(
       algorithm: "AES256",
       keyBase64: "customKeyBase64==",
       keyHashBase64: "customHashBase64=="
@@ -74,25 +74,25 @@ import Testing
   @Test func invalidKeyLengthThrows() {
     let shortKey = Data(repeating: 0x01, count: 16)
     #expect(throws: CustomerEncryptionKeyError.invalidKeyLength(actual: 16, expected: 32)) {
-      try CustomerEncryptionKey(key: shortKey)
+      try CustomerEncryptionKeyOptions(key: shortKey)
     }
 
     let longKey = Data(repeating: 0x01, count: 33)
     #expect(throws: CustomerEncryptionKeyError.invalidKeyLength(actual: 33, expected: 32)) {
-      try CustomerEncryptionKey(key: longKey)
+      try CustomerEncryptionKeyOptions(key: longKey)
     }
   }
 
   @Test func invalidBase64StringThrows() {
     #expect(throws: CustomerEncryptionKeyError.invalidBase64Key) {
-      try CustomerEncryptionKey(keyBase64: "not-valid-base64!@#$")
+      try CustomerEncryptionKeyOptions(keyBase64: "not-valid-base64!@#$")
     }
   }
 
   @Test func equatableAndHashable() throws {
     let sample = sampleKey()
-    let key1 = try CustomerEncryptionKey(key: sample.data)
-    let key2 = try CustomerEncryptionKey(keyBase64: sample.keyBase64)
+    let key1 = try CustomerEncryptionKeyOptions(key: sample.data)
+    let key2 = try CustomerEncryptionKeyOptions(keyBase64: sample.keyBase64)
     #expect(key1 == key2)
     #expect(key1.hashValue == key2.hashValue)
   }
@@ -105,7 +105,7 @@ import Testing
     let source = BytesSource(data: data)
 
     let sample = sampleKey()
-    let csek = try CustomerEncryptionKey(key: sample.data)
+    let csek = try CustomerEncryptionKeyOptions(key: sample.data)
 
     let simpleUploadUrl = registry.url(
       "/upload/storage/v1/b/\(bucket)/o?uploadType=multipart&name=\(objectName)")
@@ -171,7 +171,7 @@ import Testing
     let source = BytesSource(data: data)
 
     let sample = sampleKey()
-    let csek = try CustomerEncryptionKey(key: sample.data)
+    let csek = try CustomerEncryptionKeyOptions(key: sample.data)
 
     let startUrl = registry.url(
       "/upload/storage/v1/b/\(bucket)/o?uploadType=resumable&name=\(objectName)")
