@@ -38,7 +38,11 @@ import Testing
     #expect(csek.algorithm == "AES256")
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
-    #expect(csek.description == sample.keyBase64)
+    let expectedDescription =
+      "CustomerEncryptionKeyOptions(algorithm: AES256, keyHashBase64: \(sample.keyHashBase64))"
+    #expect(csek.description == expectedDescription)
+    #expect(csek.debugDescription == expectedDescription)
+    #expect(!csek.description.contains(sample.keyBase64))
   }
 
   @Test func createFromByteArray() throws {

@@ -105,13 +105,19 @@ public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
 /// [standard Cloud Storage encryption]: https://docs.cloud.google.com/storage/docs/encryption/default-keys
 /// [standard Base64]: https://datatracker.ietf.org/doc/html/rfc4648#section-4
 /// [Customer-Supplied Encryption Keys]: https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys
-public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, CustomStringConvertible {
+public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, CustomStringConvertible,
+  CustomDebugStringConvertible
+{
   public let algorithm: String
   public let keyBase64: String
   public let keyHashBase64: String
 
   public var description: String {
-    keyBase64
+    "CustomerEncryptionKeyOptions(algorithm: \(algorithm), keyHashBase64: \(keyHashBase64))"
+  }
+
+  public var debugDescription: String {
+    description
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from pre-computed values.
