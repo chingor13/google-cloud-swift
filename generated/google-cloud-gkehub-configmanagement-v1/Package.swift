@@ -18,18 +18,18 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudGkehubConfigmanagementV1",
+  name: "GoogleCloudGKEHubConfigManagementV1",
   platforms: [.macOS(.v15)],
   products: [
     .library(
-      name: "GoogleCloudGkehubConfigmanagementV1", targets: ["GoogleCloudGkehubConfigmanagementV1"])
+      name: "GoogleCloudGKEHubConfigManagementV1", targets: ["GoogleCloudGKEHubConfigManagementV1"])
   ],
   dependencies: [
     .package(path: "../../packages/wkt")
   ],
   targets: [
     .target(
-      name: "GoogleCloudGkehubConfigmanagementV1",
+      name: "GoogleCloudGKEHubConfigManagementV1",
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt")
       ],

@@ -18,19 +18,19 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudGkehubRbacrolebindingactuationV1",
+  name: "GoogleCloudGKEHubRBACRoleBindingActuationV1",
   platforms: [.macOS(.v15)],
   products: [
     .library(
-      name: "GoogleCloudGkehubRbacrolebindingactuationV1",
-      targets: ["GoogleCloudGkehubRbacrolebindingactuationV1"])
+      name: "GoogleCloudGKEHubRBACRoleBindingActuationV1",
+      targets: ["GoogleCloudGKEHubRBACRoleBindingActuationV1"])
   ],
   dependencies: [
     .package(path: "../../packages/wkt")
   ],
   targets: [
     .target(
-      name: "GoogleCloudGkehubRbacrolebindingactuationV1",
+      name: "GoogleCloudGKEHubRBACRoleBindingActuationV1",
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt")
       ],
