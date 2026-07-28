@@ -244,6 +244,28 @@ public struct StoragePreconditions: Sendable {
   }
 }
 
+extension StoragePreconditions {
+  /// Converts non-nil precondition fields into URL query items.
+  package var queryItems: [URLQueryItem] {
+    var items: [URLQueryItem] = []
+    if let ifGenerationMatch {
+      items.append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGenerationMatch)))
+    }
+    if let ifGenerationNotMatch {
+      items.append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenerationNotMatch)))
+    }
+    if let ifMetagenerationMatch {
+      items.append(
+        URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMetagenerationMatch)))
+    }
+    if let ifMetagenerationNotMatch {
+      items.append(
+        URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetagenerationNotMatch)))
+    }
+    return items
+  }
+}
+
 /// Represents the metadata of the object to be created.
 public struct UploadMetadata: Sendable, Codable {
   /// Content-Type header of the object data (e.g. "application/json", "image/png").

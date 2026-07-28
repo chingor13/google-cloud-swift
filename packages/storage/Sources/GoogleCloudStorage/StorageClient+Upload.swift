@@ -307,7 +307,9 @@ extension HTTPClient {
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
-    queryItems.appendPreconditions(options.preconditions)
+    if let preconditions = options.preconditions {
+      queryItems.append(contentsOf: preconditions.queryItems)
+    }
 
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
@@ -352,7 +354,9 @@ extension HTTPClient {
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
-    queryItems.appendPreconditions(options.preconditions)
+    if let preconditions = options.preconditions {
+      queryItems.append(contentsOf: preconditions.queryItems)
+    }
 
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
@@ -553,23 +557,5 @@ extension URLRequest {
     setValue(key.algorithm.rawValue, forHTTPHeaderField: "x-goog-encryption-algorithm")
     setValue(key.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
     setValue(key.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
-  }
-}
-
-extension Array where Element == URLQueryItem {
-  package mutating func appendPreconditions(_ preconditions: StoragePreconditions?) {
-    guard let preconditions else { return }
-    if let v = preconditions.ifGenerationMatch {
-      append(URLQueryItem(name: "ifGenerationMatch", value: String(v)))
-    }
-    if let v = preconditions.ifGenerationNotMatch {
-      append(URLQueryItem(name: "ifGenerationNotMatch", value: String(v)))
-    }
-    if let v = preconditions.ifMetagenerationMatch {
-      append(URLQueryItem(name: "ifMetagenerationMatch", value: String(v)))
-    }
-    if let v = preconditions.ifMetagenerationNotMatch {
-      append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(v)))
-    }
   }
 }
