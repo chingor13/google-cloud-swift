@@ -81,7 +81,10 @@ public struct ChecksumOptions: Sendable, Hashable {
 public enum CustomerEncryptionKeyError: Error, Sendable, Equatable,
   CustomStringConvertible
 {
+  /// The key length in bytes does not match the expected length required by the algorithm.
   case invalidKeyLength(actual: Int, expected: Int)
+
+  /// The provided key string is not a valid Base64-encoded string.
   case invalidBase64Key
 
   public var description: String {
@@ -125,7 +128,10 @@ public enum CustomerEncryptionAlgorithm: String, Sendable, Equatable, CustomStri
 public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringConvertible,
   CustomDebugStringConvertible
 {
+  /// The encryption algorithm used (e.g. `.aes256`).
   public let algorithm: CustomerEncryptionAlgorithm
+
+  /// The raw symmetric key material.
   public let key: SymmetricKey
 
   public static func == (lhs: CustomerEncryptionKeyOptions, rhs: CustomerEncryptionKeyOptions)
@@ -134,10 +140,12 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
     lhs.algorithm == rhs.algorithm && lhs.key == rhs.key
   }
 
+  /// The Base64-encoded string representation of the encryption key.
   public var keyBase64: String {
     key.withUnsafeBytes { Data($0).base64EncodedString() }
   }
 
+  /// The Base64-encoded SHA-256 digest of the key material used for header validation.
   public var keyHashBase64: String {
     let data = key.withUnsafeBytes { Data($0) }
     let hash = SHA256.hash(data: data)
@@ -211,9 +219,16 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
 
 /// Preconditions for GCS operations.
 public struct StoragePreconditions: Sendable {
+  /// Makes the operation succeed only if the object's current generation matches this value.
   public var ifGenerationMatch: Int64?
+
+  /// Makes the operation succeed only if the object's current generation does not match this value.
   public var ifGenerationNotMatch: Int64?
+
+  /// Makes the operation succeed only if the object's current metageneration matches this value.
   public var ifMetagenerationMatch: Int64?
+
+  /// Makes the operation succeed only if the object's current metageneration does not match this value.
   public var ifMetagenerationNotMatch: Int64?
 
   public init(
@@ -231,11 +246,22 @@ public struct StoragePreconditions: Sendable {
 
 /// Represents the metadata of the object to be created.
 public struct UploadMetadata: Sendable, Codable {
+  /// Content-Type header of the object data (e.g. "application/json", "image/png").
   public var contentType: String?
+
+  /// Content-Encoding header of the object data (e.g. "gzip").
   public var contentEncoding: String?
+
+  /// Content-Disposition header of the object data (e.g. "inline", "attachment; filename=filename.ext").
   public var contentDisposition: String?
+
+  /// Content-Language header of the object data (e.g. "en", "es").
   public var contentLanguage: String?
+
+  /// Cache-Control header of the object data (e.g. "public, max-age=3600").
   public var cacheControl: String?
+
+  /// Custom key-value metadata pairs associated with the object.
   public var customMetadata: [String: String]?
 
   public init(
@@ -257,10 +283,19 @@ public struct UploadMetadata: Sendable, Codable {
 
 /// Configuration options for the upload request/session.
 public struct UploadOptions: Sendable {
+  /// The chunk size in bytes for resumable uploads. Defaults to 8 MB (8 * 1024 * 1024).
   public var chunkSize: Int
+
+  /// Preconditions (e.g. `ifGenerationMatch`) for the upload operation.
   public var preconditions: StoragePreconditions?
+
+  /// Resource name of the Cloud KMS key used to encrypt the object (Customer-Managed Encryption Keys / CMEK).
   public var kmsKeyName: String?
+
+  /// Options for Customer-Supplied Encryption Keys (CSEK).
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
+
+  /// Configuration options for upload checksum validation.
   public var checksums: ChecksumOptions
 
   /// Legacy validation enum property for backward compatibility.
@@ -320,7 +355,10 @@ public struct UploadOptions: Sendable {
 
 /// Customer encryption metadata returned in object responses.
 public struct CustomerEncryption: Sendable, Codable, Equatable {
+  /// The encryption algorithm used to encrypt the object (e.g., "AES256").
   public var encryptionAlgorithm: String?
+
+  /// The Base64-encoded SHA-256 hash of the customer-supplied encryption key.
   public var keySha256: String?
 
   public init(encryptionAlgorithm: String? = nil, keySha256: String? = nil) {
