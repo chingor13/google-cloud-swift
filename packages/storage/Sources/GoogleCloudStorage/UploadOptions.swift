@@ -78,7 +78,7 @@ public struct ChecksumOptions: Sendable, Hashable {
 }
 
 /// Errors thrown when validating or creating a `CustomerEncryptionKeyOptions`.
-public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
+public enum CustomerEncryptionKeyError: Error, Sendable, Equatable,
   CustomStringConvertible
 {
   case invalidKeyLength(actual: Int, expected: Int)
@@ -105,18 +105,11 @@ public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
 /// [standard Cloud Storage encryption]: https://docs.cloud.google.com/storage/docs/encryption/default-keys
 /// [standard Base64]: https://datatracker.ietf.org/doc/html/rfc4648#section-4
 /// [Customer-Supplied Encryption Keys]: https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys
-public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, CustomStringConvertible,
+public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringConvertible,
   CustomDebugStringConvertible
 {
   public let algorithm: String
   public let key: SymmetricKey
-
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(algorithm)
-    key.withUnsafeBytes {
-      hasher.combine(bytes: UnsafeRawBufferPointer($0))
-    }
-  }
 
   public static func == (lhs: CustomerEncryptionKeyOptions, rhs: CustomerEncryptionKeyOptions)
     -> Bool

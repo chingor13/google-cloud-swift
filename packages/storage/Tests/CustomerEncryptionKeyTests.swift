@@ -104,12 +104,11 @@ import Testing
     }
   }
 
-  @Test func equatableAndHashable() throws {
+  @Test func equatable() throws {
     let sample = sampleKey()
     let key1 = try CustomerEncryptionKeyOptions(key: sample.data)
     let key2 = try CustomerEncryptionKeyOptions(keyBase64: sample.keyBase64)
     #expect(key1 == key2)
-    #expect(key1.hashValue == key2.hashValue)
   }
 
   @Test func simpleUploadWithCSEKHeaders() async throws {
