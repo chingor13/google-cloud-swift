@@ -169,7 +169,8 @@ extension StorageClient {
         ? chunkInfo.checksum : nil
 
       let uploadRequest = try await httpClient.buildUploadChunkRequest(
-        uploadId: uploadId, data: chunk, offset: offset, totalSize: totalSize, checksum: checksum)
+        uploadId: uploadId, data: chunk, offset: offset, totalSize: totalSize, options: options,
+        checksum: checksum)
       let (uploadData, uploadResponse) = try await httpClient.data(for: uploadRequest)
 
       if uploadResponse.statusCode == 200 || uploadResponse.statusCode == 201 {
@@ -218,7 +219,7 @@ extension StorageClient {
 
       // 1. Query GCS for current status
       let queryRequest = try await httpClient.buildQueryResumableUploadRequest(
-        uploadId: uploadId)
+        uploadId: uploadId, options: options)
       let (queryData, queryResponse) = try await httpClient.data(for: queryRequest)
 
       var offset: Int64 = 0
@@ -303,12 +304,36 @@ extension HTTPClient {
     var queryItems = [URLQueryItem(name: "uploadType", value: "multipart")]
     queryItems.append(URLQueryItem(name: "name", value: objectName))
 
+    if let kmsKeyName = options.kmsKeyName {
+      queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
+    }
+    if let preconditions = options.preconditions {
+      if let ifGen = preconditions.ifGenerationMatch {
+        queryItems.append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
+      }
+      if let ifGenNot = preconditions.ifGenerationNotMatch {
+        queryItems.append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
+      }
+      if let ifMeta = preconditions.ifMetagenerationMatch {
+        queryItems.append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
+      }
+      if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
+        queryItems.append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
+      }
+    }
+
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
     request.httpMethod = "POST"
 
     if let checksum = checksum {
       request.setValue(checksum, forHTTPHeaderField: "x-goog-hash")
+    }
+
+    if let csek = options.customerEncryptionKey {
+      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
+      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
     }
 
     let boundary = "Boundary-\(UUID().uuidString)"
@@ -341,17 +366,44 @@ extension HTTPClient {
     var queryItems = [URLQueryItem(name: "uploadType", value: "resumable")]
     queryItems.append(URLQueryItem(name: "name", value: objectName))
 
+    if let kmsKeyName = options.kmsKeyName {
+      queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
+    }
+    if let preconditions = options.preconditions {
+      if let ifGen = preconditions.ifGenerationMatch {
+        queryItems.append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
+      }
+      if let ifGenNot = preconditions.ifGenerationNotMatch {
+        queryItems.append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
+      }
+      if let ifMeta = preconditions.ifMetagenerationMatch {
+        queryItems.append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
+      }
+      if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
+        queryItems.append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
+      }
+    }
+
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
     request.httpMethod = "POST"
     request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+
+    if let csek = options.customerEncryptionKey {
+      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
+      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
+    }
 
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     request.httpBody = metadataJson
     return request
   }
 
-  fileprivate func buildQueryResumableUploadRequest(uploadId: String) async throws -> URLRequest {
+  fileprivate func buildQueryResumableUploadRequest(
+    uploadId: String,
+    options: UploadOptions? = nil
+  ) async throws -> URLRequest {
     guard let url = URL(string: uploadId),
       let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
     else {
@@ -364,6 +416,13 @@ extension HTTPClient {
     request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
     request.setValue("bytes */*", forHTTPHeaderField: "Content-Range")
     request.setValue("0", forHTTPHeaderField: "Content-Length")
+
+    if let csek = options?.customerEncryptionKey {
+      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
+      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
+    }
+
     return request
   }
 
@@ -372,6 +431,7 @@ extension HTTPClient {
     data: Data,
     offset: Int64,
     totalSize: Int64?,
+    options: UploadOptions,
     checksum: String? = nil
   ) async throws -> URLRequest {
     guard let url = URL(string: uploadId),
@@ -386,6 +446,12 @@ extension HTTPClient {
 
     if let checksum = checksum {
       request.setValue(checksum, forHTTPHeaderField: "x-goog-hash")
+    }
+
+    if let csek = options.customerEncryptionKey {
+      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
+      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
     }
 
     let end = offset + Int64(data.count) - 1

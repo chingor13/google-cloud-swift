@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Crypto
 import Foundation
 import GoogleCloudWkt
 
@@ -76,6 +77,24 @@ public struct ChecksumOptions: Sendable, Hashable {
   }
 }
 
+/// Errors thrown when validating or creating a `CustomerEncryptionKey`.
+public enum CustomerEncryptionKeyError: Error, Sendable, Hashable, Equatable,
+  CustomStringConvertible
+{
+  case invalidKeyLength(actual: Int, expected: Int)
+  case invalidBase64Key
+
+  public var description: String {
+    switch self {
+    case .invalidKeyLength(let actual, let expected):
+      return
+        "Invalid customer encryption key length: got \(actual) bytes, expected \(expected) bytes."
+    case .invalidBase64Key:
+      return "Customer encryption key is not a valid base64-encoded string."
+    }
+  }
+}
+
 /// Options for [Customer-Supplied Encryption Keys] (CSEK).
 ///
 /// As an additional layer on top of [standard Cloud Storage encryption], you can choose to provide
@@ -86,15 +105,56 @@ public struct ChecksumOptions: Sendable, Hashable {
 /// [standard Cloud Storage encryption]: https://docs.cloud.google.com/storage/docs/encryption/default-keys
 /// [standard Base64]: https://datatracker.ietf.org/doc/html/rfc4648#section-4
 /// [Customer-Supplied Encryption Keys]: https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys
-public struct CustomerEncryptionKey: Sendable {
+public struct CustomerEncryptionKey: Sendable, Hashable, Equatable, CustomStringConvertible {
   public let algorithm: String
   public let keyBase64: String
   public let keyHashBase64: String
 
+  public var description: String {
+    keyBase64
+  }
+
+  /// Creates a `CustomerEncryptionKey` from pre-computed values.
   public init(algorithm: String = "AES256", keyBase64: String, keyHashBase64: String) {
     self.algorithm = algorithm
     self.keyBase64 = keyBase64
     self.keyHashBase64 = keyHashBase64
+  }
+
+  /// Creates a `CustomerEncryptionKey` from raw key bytes (`Data`).
+  ///
+  /// For the default "AES256" algorithm, the key must be exactly 32 bytes (256 bits).
+  /// The key and its SHA-256 hash are automatically Base64-encoded.
+  public init(key: Data, algorithm: String = "AES256") throws {
+    if algorithm == "AES256" && key.count != 32 {
+      throw CustomerEncryptionKeyError.invalidKeyLength(actual: key.count, expected: 32)
+    }
+    self.algorithm = algorithm
+    self.keyBase64 = key.base64EncodedString()
+    let hash = SHA256.hash(data: key)
+    self.keyHashBase64 = Data(hash).base64EncodedString()
+  }
+
+  /// Creates a `CustomerEncryptionKey` from raw key bytes (`[UInt8]`).
+  public init(keyBytes: [UInt8], algorithm: String = "AES256") throws {
+    try self.init(key: Data(keyBytes), algorithm: algorithm)
+  }
+
+  /// Creates a `CustomerEncryptionKey` from a Base64-encoded key string.
+  ///
+  /// For the default "AES256" algorithm, the decoded key must be exactly 32 bytes (256 bits).
+  /// The SHA-256 hash is automatically computed and Base64-encoded.
+  public init(keyBase64: String, algorithm: String = "AES256") throws {
+    guard let keyData = Data(base64Encoded: keyBase64) else {
+      throw CustomerEncryptionKeyError.invalidBase64Key
+    }
+    if algorithm == "AES256" && keyData.count != 32 {
+      throw CustomerEncryptionKeyError.invalidKeyLength(actual: keyData.count, expected: 32)
+    }
+    self.algorithm = algorithm
+    self.keyBase64 = keyBase64
+    let hash = SHA256.hash(data: keyData)
+    self.keyHashBase64 = Data(hash).base64EncodedString()
   }
 }
 
@@ -207,6 +267,17 @@ public struct UploadOptions: Sendable {
   }
 }
 
+/// Customer encryption metadata returned in object responses.
+public struct CustomerEncryption: Sendable, Codable, Equatable {
+  public var encryptionAlgorithm: String?
+  public var keySha256: String?
+
+  public init(encryptionAlgorithm: String? = nil, keySha256: String? = nil) {
+    self.encryptionAlgorithm = encryptionAlgorithm
+    self.keySha256 = keySha256
+  }
+}
+
 /// Represents a GCS Object.
 // TODO(#323): Replace with actual generated struct if available.
 public struct StorageObject: Sendable, Codable {
@@ -216,6 +287,11 @@ public struct StorageObject: Sendable, Codable {
   public var metageneration: Int64 = Int64()
   public var size: Int64 = Int64()
   public var contentType: String?
+  public var customerEncryption: CustomerEncryption?
+  public var md5Hash: String?
+  public var crc32c: String?
+  public var etag: String?
+  public var storageClass: String?
   public var timeCreated: GoogleCloudWkt.Timestamp?
   public var updated: GoogleCloudWkt.Timestamp?
 
@@ -248,6 +324,11 @@ public struct StorageObject: Sendable, Codable {
     }
 
     contentType = try? container.decode(String.self, forKey: .contentType)
+    customerEncryption = try? container.decode(CustomerEncryption.self, forKey: .customerEncryption)
+    md5Hash = try? container.decode(String.self, forKey: .md5Hash)
+    crc32c = try? container.decode(String.self, forKey: .crc32c)
+    etag = try? container.decode(String.self, forKey: .etag)
+    storageClass = try? container.decode(String.self, forKey: .storageClass)
     timeCreated = try? container.decode(GoogleCloudWkt.Timestamp.self, forKey: .timeCreated)
     updated = try? container.decode(GoogleCloudWkt.Timestamp.self, forKey: .updated)
   }
@@ -259,6 +340,11 @@ public struct StorageObject: Sendable, Codable {
     case metageneration
     case size
     case contentType
+    case customerEncryption
+    case md5Hash
+    case crc32c
+    case etag
+    case storageClass
     case timeCreated
     case updated
   }
