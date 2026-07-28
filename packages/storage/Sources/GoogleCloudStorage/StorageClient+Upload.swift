@@ -307,20 +307,7 @@ extension HTTPClient {
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
-    if let preconditions = options.preconditions {
-      if let ifGen = preconditions.ifGenerationMatch {
-        queryItems.append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
-      }
-      if let ifGenNot = preconditions.ifGenerationNotMatch {
-        queryItems.append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
-      }
-      if let ifMeta = preconditions.ifMetagenerationMatch {
-        queryItems.append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
-      }
-      if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
-        queryItems.append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
-      }
-    }
+    queryItems.appendPreconditions(options.preconditions)
 
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
@@ -330,11 +317,7 @@ extension HTTPClient {
       request.setValue(checksum, forHTTPHeaderField: "x-goog-hash")
     }
 
-    if let csek = options.customerEncryptionKey {
-      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
-      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
-      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
-    }
+    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
 
     let boundary = "Boundary-\(UUID().uuidString)"
     request.setValue("multipart/related; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -369,31 +352,14 @@ extension HTTPClient {
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
-    if let preconditions = options.preconditions {
-      if let ifGen = preconditions.ifGenerationMatch {
-        queryItems.append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
-      }
-      if let ifGenNot = preconditions.ifGenerationNotMatch {
-        queryItems.append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
-      }
-      if let ifMeta = preconditions.ifMetagenerationMatch {
-        queryItems.append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
-      }
-      if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
-        queryItems.append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
-      }
-    }
+    queryItems.appendPreconditions(options.preconditions)
 
     var request = try await self.Request(
       path: "/upload/storage/v1/b/\(bucket)/o", query: queryItems)
     request.httpMethod = "POST"
     request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
 
-    if let csek = options.customerEncryptionKey {
-      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
-      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
-      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
-    }
+    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
 
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     request.httpBody = metadataJson
@@ -417,11 +383,7 @@ extension HTTPClient {
     request.setValue("bytes */*", forHTTPHeaderField: "Content-Range")
     request.setValue("0", forHTTPHeaderField: "Content-Length")
 
-    if let csek = options?.customerEncryptionKey {
-      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
-      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
-      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
-    }
+    request.applyCustomerSuppliedEncryptionHeaders(options?.customerEncryptionKey)
 
     return request
   }
@@ -448,11 +410,7 @@ extension HTTPClient {
       request.setValue(checksum, forHTTPHeaderField: "x-goog-hash")
     }
 
-    if let csek = options.customerEncryptionKey {
-      request.setValue(csek.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
-      request.setValue(csek.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
-      request.setValue(csek.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
-    }
+    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
 
     let end = offset + Int64(data.count) - 1
     let totalStr = totalSize.map { String($0) } ?? "*"
@@ -584,5 +542,34 @@ extension StorageClient {
     }
 
     return nil
+  }
+}
+
+extension URLRequest {
+  package mutating func applyCustomerSuppliedEncryptionHeaders(
+    _ key: CustomerEncryptionKeyOptions?
+  ) {
+    guard let key else { return }
+    setValue(key.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+    setValue(key.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
+    setValue(key.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
+  }
+}
+
+extension Array where Element == URLQueryItem {
+  package mutating func appendPreconditions(_ preconditions: StoragePreconditions?) {
+    guard let preconditions else { return }
+    if let ifGen = preconditions.ifGenerationMatch {
+      append(URLQueryItem(name: "ifGenerationMatch", value: String(ifGen)))
+    }
+    if let ifGenNot = preconditions.ifGenerationNotMatch {
+      append(URLQueryItem(name: "ifGenerationNotMatch", value: String(ifGenNot)))
+    }
+    if let ifMeta = preconditions.ifMetagenerationMatch {
+      append(URLQueryItem(name: "ifMetagenerationMatch", value: String(ifMeta)))
+    }
+    if let ifMetaNot = preconditions.ifMetagenerationNotMatch {
+      append(URLQueryItem(name: "ifMetagenerationNotMatch", value: String(ifMetaNot)))
+    }
   }
 }
