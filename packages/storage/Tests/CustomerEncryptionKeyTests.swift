@@ -55,6 +55,16 @@ import Testing
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }
 
+  @Test func createFromSymmetricKey() throws {
+    let sample = sampleKey()
+    let symKey = SymmetricKey(data: sample.data)
+    let csek = try CustomerEncryptionKeyOptions(symmetricKey: symKey)
+
+    #expect(csek.algorithm == "AES256")
+    #expect(csek.keyBase64 == sample.keyBase64)
+    #expect(csek.keyHashBase64 == sample.keyHashBase64)
+  }
+
   @Test func createFromBase64String() throws {
     let sample = sampleKey()
     let csek = try CustomerEncryptionKeyOptions(keyBase64: sample.keyBase64)
@@ -65,14 +75,15 @@ import Testing
   }
 
   @Test func createFromPrecomputedValues() {
+    let sample = sampleKey()
     let csek = CustomerEncryptionKeyOptions(
       algorithm: "AES256",
-      keyBase64: "customKeyBase64==",
-      keyHashBase64: "customHashBase64=="
+      keyBase64: sample.keyBase64,
+      keyHashBase64: sample.keyHashBase64
     )
     #expect(csek.algorithm == "AES256")
-    #expect(csek.keyBase64 == "customKeyBase64==")
-    #expect(csek.keyHashBase64 == "customHashBase64==")
+    #expect(csek.keyBase64 == sample.keyBase64)
+    #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }
 
   @Test func invalidKeyLengthThrows() {

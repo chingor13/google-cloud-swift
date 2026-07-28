@@ -109,8 +109,30 @@ public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, Custo
   CustomDebugStringConvertible
 {
   public let algorithm: String
-  public let keyBase64: String
-  public let keyHashBase64: String
+  public let key: SymmetricKey
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(algorithm)
+    key.withUnsafeBytes {
+      hasher.combine(bytes: UnsafeRawBufferPointer($0))
+    }
+  }
+
+  public static func == (lhs: CustomerEncryptionKeyOptions, rhs: CustomerEncryptionKeyOptions)
+    -> Bool
+  {
+    lhs.algorithm == rhs.algorithm && lhs.key == rhs.key
+  }
+
+  public var keyBase64: String {
+    key.withUnsafeBytes { Data($0).base64EncodedString() }
+  }
+
+  public var keyHashBase64: String {
+    let data = key.withUnsafeBytes { Data($0) }
+    let hash = SHA256.hash(data: data)
+    return Data(hash).base64EncodedString()
+  }
 
   public var description: String {
     "CustomerEncryptionKeyOptions(algorithm: \(algorithm), keyHashBase64: \(keyHashBase64))"
@@ -120,11 +142,28 @@ public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, Custo
     description
   }
 
+  /// Creates a `CustomerEncryptionKeyOptions` from a `SymmetricKey`.
+  ///
+  /// For the default "AES256" algorithm, the key must be exactly 32 bytes (256 bits).
+  public init(key: SymmetricKey, algorithm: String = "AES256") throws {
+    let count = key.withUnsafeBytes { $0.count }
+    if algorithm == "AES256" && count != 32 {
+      throw CustomerEncryptionKeyError.invalidKeyLength(actual: count, expected: 32)
+    }
+    self.algorithm = algorithm
+    self.key = key
+  }
+
+  /// Creates a `CustomerEncryptionKeyOptions` from Apple CryptoKit / Swift Crypto `SymmetricKey`.
+  public init(symmetricKey: SymmetricKey, algorithm: String = "AES256") throws {
+    try self.init(key: symmetricKey, algorithm: algorithm)
+  }
+
   /// Creates a `CustomerEncryptionKeyOptions` from pre-computed values.
   public init(algorithm: String = "AES256", keyBase64: String, keyHashBase64: String) {
+    let keyData = Data(base64Encoded: keyBase64) ?? Data(keyBase64.utf8)
     self.algorithm = algorithm
-    self.keyBase64 = keyBase64
-    self.keyHashBase64 = keyHashBase64
+    self.key = SymmetricKey(data: keyData)
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`Data`).
@@ -136,9 +175,7 @@ public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, Custo
       throw CustomerEncryptionKeyError.invalidKeyLength(actual: key.count, expected: 32)
     }
     self.algorithm = algorithm
-    self.keyBase64 = key.base64EncodedString()
-    let hash = SHA256.hash(data: key)
-    self.keyHashBase64 = Data(hash).base64EncodedString()
+    self.key = SymmetricKey(data: key)
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`[UInt8]`).
@@ -154,13 +191,7 @@ public struct CustomerEncryptionKeyOptions: Sendable, Hashable, Equatable, Custo
     guard let keyData = Data(base64Encoded: keyBase64) else {
       throw CustomerEncryptionKeyError.invalidBase64Key
     }
-    if algorithm == "AES256" && keyData.count != 32 {
-      throw CustomerEncryptionKeyError.invalidKeyLength(actual: keyData.count, expected: 32)
-    }
-    self.algorithm = algorithm
-    self.keyBase64 = keyBase64
-    let hash = SHA256.hash(data: keyData)
-    self.keyHashBase64 = Data(hash).base64EncodedString()
+    try self.init(key: keyData, algorithm: algorithm)
   }
 }
 
