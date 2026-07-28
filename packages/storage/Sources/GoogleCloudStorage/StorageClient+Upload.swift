@@ -550,7 +550,7 @@ extension URLRequest {
     _ key: CustomerEncryptionKeyOptions?
   ) {
     guard let key else { return }
-    setValue(key.algorithm, forHTTPHeaderField: "x-goog-encryption-algorithm")
+    setValue(key.algorithm.rawValue, forHTTPHeaderField: "x-goog-encryption-algorithm")
     setValue(key.keyBase64, forHTTPHeaderField: "x-goog-encryption-key")
     setValue(key.keyHashBase64, forHTTPHeaderField: "x-goog-encryption-key-sha256")
   }

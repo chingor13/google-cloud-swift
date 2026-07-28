@@ -35,7 +35,7 @@ import Testing
     let sample = sampleKey()
     let csek = try CustomerEncryptionKeyOptions(key: sample.data)
 
-    #expect(csek.algorithm == "AES256")
+    #expect(csek.algorithm == .aes256)
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
     let expectedDescription =
@@ -50,7 +50,7 @@ import Testing
     let bytes = Array(sample.data)
     let csek = try CustomerEncryptionKeyOptions(keyBytes: bytes)
 
-    #expect(csek.algorithm == "AES256")
+    #expect(csek.algorithm == .aes256)
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }
@@ -60,7 +60,7 @@ import Testing
     let symKey = SymmetricKey(data: sample.data)
     let csek = try CustomerEncryptionKeyOptions(symmetricKey: symKey)
 
-    #expect(csek.algorithm == "AES256")
+    #expect(csek.algorithm == .aes256)
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }
@@ -69,7 +69,7 @@ import Testing
     let sample = sampleKey()
     let csek = try CustomerEncryptionKeyOptions(keyBase64: sample.keyBase64)
 
-    #expect(csek.algorithm == "AES256")
+    #expect(csek.algorithm == .aes256)
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }
@@ -77,11 +77,11 @@ import Testing
   @Test func createFromPrecomputedValues() {
     let sample = sampleKey()
     let csek = CustomerEncryptionKeyOptions(
-      algorithm: "AES256",
+      algorithm: .aes256,
       keyBase64: sample.keyBase64,
       keyHashBase64: sample.keyHashBase64
     )
-    #expect(csek.algorithm == "AES256")
+    #expect(csek.algorithm == .aes256)
     #expect(csek.keyBase64 == sample.keyBase64)
     #expect(csek.keyHashBase64 == sample.keyHashBase64)
   }

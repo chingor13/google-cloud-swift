@@ -102,13 +102,30 @@ public enum CustomerEncryptionKeyError: Error, Sendable, Equatable,
 /// customer-supplied encryption key. If you provide a customer-supplied encryption key,
 /// Cloud Storage does not permanently store your key in its servers or otherwise manage your key.
 ///
+/// Encryption algorithm used for Customer-Supplied Encryption Keys (CSEK).
+public enum CustomerEncryptionAlgorithm: String, Sendable, Equatable, CustomStringConvertible {
+  /// AES-256 encryption algorithm (default and currently the only supported algorithm in Cloud Storage).
+  case aes256 = "AES256"
+
+  public var description: String {
+    rawValue
+  }
+}
+
+/// Options for [Customer-Supplied Encryption Keys] (CSEK).
+///
+/// As an additional layer on top of [standard Cloud Storage encryption], you can choose to provide
+/// your own AES-256 encryption key, encoded in [standard Base64]. This key is known as a
+/// customer-supplied encryption key. If you provide a customer-supplied encryption key,
+/// Cloud Storage does not permanently store your key in its servers or otherwise manage your key.
+///
 /// [standard Cloud Storage encryption]: https://docs.cloud.google.com/storage/docs/encryption/default-keys
 /// [standard Base64]: https://datatracker.ietf.org/doc/html/rfc4648#section-4
 /// [Customer-Supplied Encryption Keys]: https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys
 public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringConvertible,
   CustomDebugStringConvertible
 {
-  public let algorithm: String
+  public let algorithm: CustomerEncryptionAlgorithm
   public let key: SymmetricKey
 
   public static func == (lhs: CustomerEncryptionKeyOptions, rhs: CustomerEncryptionKeyOptions)
@@ -128,7 +145,7 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
   }
 
   public var description: String {
-    "CustomerEncryptionKeyOptions(algorithm: \(algorithm), keyHashBase64: \(keyHashBase64))"
+    "CustomerEncryptionKeyOptions(algorithm: \(algorithm.rawValue), keyHashBase64: \(keyHashBase64))"
   }
 
   public var debugDescription: String {
@@ -137,10 +154,10 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
 
   /// Creates a `CustomerEncryptionKeyOptions` from a `SymmetricKey`.
   ///
-  /// For the default "AES256" algorithm, the key must be exactly 32 bytes (256 bits).
-  public init(key: SymmetricKey, algorithm: String = "AES256") throws {
+  /// For the default `.aes256` algorithm, the key must be exactly 32 bytes (256 bits).
+  public init(key: SymmetricKey, algorithm: CustomerEncryptionAlgorithm = .aes256) throws {
     let count = key.withUnsafeBytes { $0.count }
-    if algorithm == "AES256" && count != 32 {
+    if algorithm == .aes256 && count != 32 {
       throw CustomerEncryptionKeyError.invalidKeyLength(actual: count, expected: 32)
     }
     self.algorithm = algorithm
@@ -148,12 +165,16 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from Apple CryptoKit / Swift Crypto `SymmetricKey`.
-  public init(symmetricKey: SymmetricKey, algorithm: String = "AES256") throws {
+  public init(symmetricKey: SymmetricKey, algorithm: CustomerEncryptionAlgorithm = .aes256)
+    throws
+  {
     try self.init(key: symmetricKey, algorithm: algorithm)
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from pre-computed values.
-  public init(algorithm: String = "AES256", keyBase64: String, keyHashBase64: String) {
+  public init(
+    algorithm: CustomerEncryptionAlgorithm = .aes256, keyBase64: String, keyHashBase64: String
+  ) {
     let keyData = Data(base64Encoded: keyBase64) ?? Data(keyBase64.utf8)
     self.algorithm = algorithm
     self.key = SymmetricKey(data: keyData)
@@ -161,10 +182,10 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
 
   /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`Data`).
   ///
-  /// For the default "AES256" algorithm, the key must be exactly 32 bytes (256 bits).
+  /// For the default `.aes256` algorithm, the key must be exactly 32 bytes (256 bits).
   /// The key and its SHA-256 hash are automatically Base64-encoded.
-  public init(key: Data, algorithm: String = "AES256") throws {
-    if algorithm == "AES256" && key.count != 32 {
+  public init(key: Data, algorithm: CustomerEncryptionAlgorithm = .aes256) throws {
+    if algorithm == .aes256 && key.count != 32 {
       throw CustomerEncryptionKeyError.invalidKeyLength(actual: key.count, expected: 32)
     }
     self.algorithm = algorithm
@@ -172,15 +193,15 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from raw key bytes (`[UInt8]`).
-  public init(keyBytes: [UInt8], algorithm: String = "AES256") throws {
+  public init(keyBytes: [UInt8], algorithm: CustomerEncryptionAlgorithm = .aes256) throws {
     try self.init(key: Data(keyBytes), algorithm: algorithm)
   }
 
   /// Creates a `CustomerEncryptionKeyOptions` from a Base64-encoded key string.
   ///
-  /// For the default "AES256" algorithm, the decoded key must be exactly 32 bytes (256 bits).
+  /// For the default `.aes256` algorithm, the decoded key must be exactly 32 bytes (256 bits).
   /// The SHA-256 hash is automatically computed and Base64-encoded.
-  public init(keyBase64: String, algorithm: String = "AES256") throws {
+  public init(keyBase64: String, algorithm: CustomerEncryptionAlgorithm = .aes256) throws {
     guard let keyData = Data(base64Encoded: keyBase64) else {
       throw CustomerEncryptionKeyError.invalidBase64Key
     }
