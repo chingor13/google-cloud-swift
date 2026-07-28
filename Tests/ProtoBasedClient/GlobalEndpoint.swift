@@ -19,6 +19,7 @@ import GoogleCloudWkt
 import GoogleIamV1
 import CryptoSwift
 import Logging
+import Foundation
 
 /// Run tests for the global endpoint.
 public enum GlobalEndpoint {
@@ -90,7 +91,7 @@ public enum GlobalEndpoint {
     async throws
   {
     logger.info("\nTesting secret version CRUD")
-    let data = "the quick brown fox jumps over the lazy dog".data(using: .utf8)!
+    let data = Data("the quick brown fox jumps over the lazy dog".utf8)
     let checksum = CryptoSwift.Checksum.crc32c(data.byteArray)
     let version = try await client.addSecretVersion(
       request: .init().with {

@@ -22,7 +22,8 @@ import GoogleRpc
 
 @Suite struct ErrorWrapperTests {
   @Test func validStatus() throws {
-    let json = """
+    let json = Data(
+      """
       {
         "error": {
           "code": 400,
@@ -31,7 +32,7 @@ import GoogleRpc
           "details": []
         }
       }
-      """.data(using: .utf8)!
+      """.utf8)
 
     let response = HTTPURLResponse(
       url: URL(string: "http://example.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)!
@@ -47,7 +48,8 @@ import GoogleRpc
   }
 
   @Test func nilStatus() throws {
-    let json = """
+    let json = Data(
+      """
       {
         "error": {
           "code": 500,
@@ -55,7 +57,7 @@ import GoogleRpc
           "details": []
         }
       }
-      """.data(using: .utf8)!
+      """.utf8)
 
     let response = HTTPURLResponse(
       url: URL(string: "http://example.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
@@ -71,7 +73,8 @@ import GoogleRpc
   }
 
   @Test func unknownStatus() throws {
-    let json = """
+    let json = Data(
+      """
       {
         "error": {
           "code": 500,
@@ -80,7 +83,7 @@ import GoogleRpc
           "details": []
         }
       }
-      """.data(using: .utf8)!
+      """.utf8)
 
     let response = HTTPURLResponse(
       url: URL(string: "http://example.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
@@ -96,7 +99,8 @@ import GoogleRpc
   }
 
   @Test func missingDetails() throws {
-    let json = """
+    let json = Data(
+      """
       {
         "error": {
           "code": 400,
@@ -104,7 +108,7 @@ import GoogleRpc
           "message": "missing details message"
         }
       }
-      """.data(using: .utf8)!
+      """.utf8)
 
     let response = HTTPURLResponse(
       url: URL(string: "http://example.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)!
@@ -121,7 +125,8 @@ import GoogleRpc
   }
 
   @Test func withHelpDetails() throws {
-    let json = """
+    let json = Data(
+      """
       {
         "error": {
           "code": 400,
@@ -140,7 +145,7 @@ import GoogleRpc
           ]
         }
       }
-      """.data(using: .utf8)!
+      """.utf8)
 
     let response = HTTPURLResponse(
       url: URL(string: "http://example.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)!
