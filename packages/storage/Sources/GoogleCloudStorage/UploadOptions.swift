@@ -266,6 +266,84 @@ extension StoragePreconditions {
   }
 }
 
+/// Predefined ACL options for object uploads.
+public enum PredefinedAcl: String, Sendable, Equatable {
+  case authenticatedRead
+  case bucketOwnerFullControl
+  case bucketOwnerRead
+  case `private`
+  case projectPrivate
+  case publicRead
+}
+
+/// Project team info for ObjectAccessControl.
+public struct ProjectTeam: Sendable, Codable, Equatable {
+  public var projectNumber: String?
+  public var team: String?
+
+  public init(projectNumber: String? = nil, team: String? = nil) {
+    self.projectNumber = projectNumber
+    self.team = team
+  }
+}
+
+/// Access Control List (ACL) entry for a GCS Object.
+public struct ObjectAccessControl: Sendable, Codable, Equatable {
+  public var entity: String?
+  public var role: String?
+  public var email: String?
+  public var domain: String?
+  public var entityId: String?
+  public var etag: String?
+  public var id: String?
+  public var projectTeam: ProjectTeam?
+
+  public init(
+    entity: String? = nil,
+    role: String? = nil,
+    email: String? = nil,
+    domain: String? = nil,
+    entityId: String? = nil,
+    etag: String? = nil,
+    id: String? = nil,
+    projectTeam: ProjectTeam? = nil
+  ) {
+    self.entity = entity
+    self.role = role
+    self.email = email
+    self.domain = domain
+    self.entityId = entityId
+    self.etag = etag
+    self.id = id
+    self.projectTeam = projectTeam
+  }
+}
+
+/// Object retention policy configuration for a GCS Object.
+public struct ObjectRetention: Sendable, Codable, Equatable {
+  public var mode: String?
+  public var retainUntilTime: GoogleCloudWkt.Timestamp?
+
+  public init(
+    mode: String? = nil,
+    retainUntilTime: GoogleCloudWkt.Timestamp? = nil
+  ) {
+    self.mode = mode
+    self.retainUntilTime = retainUntilTime
+  }
+}
+
+/// Owner metadata for a GCS Object.
+public struct ObjectOwner: Sendable, Codable, Equatable {
+  public var entity: String?
+  public var entityId: String?
+
+  public init(entity: String? = nil, entityId: String? = nil) {
+    self.entity = entity
+    self.entityId = entityId
+  }
+}
+
 /// Represents the metadata of the object to be created.
 public struct UploadMetadata: Sendable, Codable, Equatable {
   /// Content-Type header of the object data (e.g. "application/json", "image/png").
@@ -298,6 +376,15 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
   /// Temporary hold status for the object.
   public var temporaryHold: Bool?
 
+  /// Access Control List (ACL) entries for the object.
+  public var acl: [ObjectAccessControl]?
+
+  /// Object retention configuration.
+  public var retention: ObjectRetention?
+
+  /// Owner information for the object.
+  public var owner: ObjectOwner?
+
   enum CodingKeys: String, CodingKey {
     case contentType
     case contentEncoding
@@ -309,6 +396,9 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     case customTime
     case eventBasedHold
     case temporaryHold
+    case acl
+    case retention
+    case owner
   }
 
   public init(
@@ -321,7 +411,10 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     storageClass: String? = nil,
     customTime: GoogleCloudWkt.Timestamp? = nil,
     eventBasedHold: Bool? = nil,
-    temporaryHold: Bool? = nil
+    temporaryHold: Bool? = nil,
+    acl: [ObjectAccessControl]? = nil,
+    retention: ObjectRetention? = nil,
+    owner: ObjectOwner? = nil
   ) {
     self.contentType = contentType
     self.contentEncoding = contentEncoding
@@ -333,6 +426,9 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     self.customTime = customTime
     self.eventBasedHold = eventBasedHold
     self.temporaryHold = temporaryHold
+    self.acl = acl
+    self.retention = retention
+    self.owner = owner
   }
 }
 
@@ -355,6 +451,9 @@ public struct UploadOptions: Sendable {
 
   /// Metadata associated with the object to be created.
   public var metadata: UploadMetadata?
+
+  /// Predefined ACL to apply to the uploaded object (e.g. `.publicRead`, `.private`).
+  public var predefinedAcl: PredefinedAcl?
 
   /// Legacy validation enum property for backward compatibility.
   public var validation: ChecksumValidation {
@@ -387,7 +486,8 @@ public struct UploadOptions: Sendable {
     kmsKeyName: String? = nil,
     customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
     checksums: ChecksumOptions = .default,
-    metadata: UploadMetadata? = nil
+    metadata: UploadMetadata? = nil,
+    predefinedAcl: PredefinedAcl? = nil
   ) {
     self.chunkSize = chunkSize
     self.preconditions = preconditions
@@ -395,6 +495,7 @@ public struct UploadOptions: Sendable {
     self.customerEncryptionKey = customerEncryptionKey
     self.checksums = checksums
     self.metadata = metadata
+    self.predefinedAcl = predefinedAcl
   }
 
   public init(
@@ -403,7 +504,8 @@ public struct UploadOptions: Sendable {
     kmsKeyName: String? = nil,
     customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
     validation: ChecksumValidation,
-    metadata: UploadMetadata? = nil
+    metadata: UploadMetadata? = nil,
+    predefinedAcl: PredefinedAcl? = nil
   ) {
     self.chunkSize = chunkSize
     self.preconditions = preconditions
@@ -412,6 +514,7 @@ public struct UploadOptions: Sendable {
     self.checksums = .none
     self.validation = validation
     self.metadata = metadata
+    self.predefinedAcl = predefinedAcl
   }
 }
 
@@ -453,6 +556,9 @@ public struct StorageObject: Sendable, Codable, Equatable {
   public var updated: GoogleCloudWkt.Timestamp?
   public var eventBasedHold: Bool?
   public var temporaryHold: Bool?
+  public var acl: [ObjectAccessControl]?
+  public var retention: ObjectRetention?
+  public var owner: ObjectOwner?
 
   public init() {}
 
@@ -500,6 +606,9 @@ public struct StorageObject: Sendable, Codable, Equatable {
     updated = try? container.decode(GoogleCloudWkt.Timestamp.self, forKey: .updated)
     eventBasedHold = try? container.decode(Bool.self, forKey: .eventBasedHold)
     temporaryHold = try? container.decode(Bool.self, forKey: .temporaryHold)
+    acl = try? container.decode([ObjectAccessControl].self, forKey: .acl)
+    retention = try? container.decode(ObjectRetention.self, forKey: .retention)
+    owner = try? container.decode(ObjectOwner.self, forKey: .owner)
   }
 
   enum CodingKeys: String, CodingKey {
@@ -524,6 +633,9 @@ public struct StorageObject: Sendable, Codable, Equatable {
     case updated
     case eventBasedHold
     case temporaryHold
+    case acl
+    case retention
+    case owner
   }
 
   /// Use `config` to return a new instance of this object, with some fields updated.

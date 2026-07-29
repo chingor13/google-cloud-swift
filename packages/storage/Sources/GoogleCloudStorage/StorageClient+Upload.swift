@@ -302,6 +302,9 @@ extension HTTPClient {
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
+    if let predefinedAcl = options.predefinedAcl {
+      queryItems.append(URLQueryItem(name: "predefinedAcl", value: predefinedAcl.rawValue))
+    }
     if let preconditions = options.preconditions {
       queryItems.append(contentsOf: preconditions.queryItems)
     }
@@ -349,6 +352,9 @@ extension HTTPClient {
 
     if let kmsKeyName = options.kmsKeyName {
       queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
+    }
+    if let predefinedAcl = options.predefinedAcl {
+      queryItems.append(URLQueryItem(name: "predefinedAcl", value: predefinedAcl.rawValue))
     }
     if let preconditions = options.preconditions {
       queryItems.append(contentsOf: preconditions.queryItems)

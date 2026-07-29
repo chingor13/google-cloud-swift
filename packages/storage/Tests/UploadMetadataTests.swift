@@ -24,6 +24,10 @@ import Testing
 @Suite struct UploadMetadataTests {
   @Test func uploadMetadataEncodingAndDecoding() throws {
     let customTime = try GoogleCloudWkt.Timestamp(seconds: 1_700_000_000, nanos: 0)
+    let aclEntry = ObjectAccessControl(entity: "user-test@example.com", role: "READER")
+    let retention = ObjectRetention(mode: "Unlocked", retainUntilTime: customTime)
+    let owner = ObjectOwner(entity: "user-owner@example.com")
+
     let uploadMetadata = UploadMetadata(
       contentType: "text/plain",
       contentEncoding: "gzip",
@@ -34,7 +38,10 @@ import Testing
       storageClass: "NEARLINE",
       customTime: customTime,
       eventBasedHold: true,
-      temporaryHold: false
+      temporaryHold: false,
+      acl: [aclEntry],
+      retention: retention,
+      owner: owner
     )
 
     let encoder = JSONEncoder()
@@ -46,6 +53,7 @@ import Testing
     #expect(!jsonString.contains("\"customMetadata\":"))
     #expect(jsonString.contains("gzip"))
     #expect(jsonString.contains("NEARLINE"))
+    #expect(jsonString.contains("user-test@example.com"))
 
     let decoder = JSONDecoder()
     let decoded = try decoder.decode(UploadMetadata.self, from: data)
@@ -61,6 +69,9 @@ import Testing
     #expect(decoded.customTime == customTime)
     #expect(decoded.eventBasedHold == true)
     #expect(decoded.temporaryHold == false)
+    #expect(decoded.acl == [aclEntry])
+    #expect(decoded.retention == retention)
+    #expect(decoded.owner == owner)
   }
 
   @Test func simpleUploadWithUploadMetadataInUploadOptions() async throws {
@@ -71,7 +82,8 @@ import Testing
     let source = BytesSource(data: data)
 
     let simpleUploadUrl = registry.url(
-      "/upload/storage/v1/b/\(bucket)/o?uploadType=multipart&name=\(objectName)")
+      "/upload/storage/v1/b/\(bucket)/o?uploadType=multipart&name=\(objectName)&predefinedAcl=publicRead"
+    )
 
     let responseJson = """
       {
@@ -111,7 +123,7 @@ import Testing
       contentEncoding: "gzip",
       customMetadata: ["author": "swift-sdk"]
     )
-    let uploadOptions = UploadOptions(metadata: uploadMetadata)
+    let uploadOptions = UploadOptions(metadata: uploadMetadata, predefinedAcl: .publicRead)
 
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
@@ -122,7 +134,7 @@ import Testing
     #expect(object.contentEncoding == "gzip")
     #expect(object.customMetadata == ["author": "swift-sdk"])
 
-    // Inspect recorded HTTP request to verify metadata payload was sent
+    // Inspect recorded HTTP request to verify metadata payload and predefinedAcl query parameter
     let recordedReq = registry.lastRequest(for: simpleUploadUrl)
     #expect(recordedReq != nil)
     if let body = recordedReq?.httpBody, let bodyString = String(data: body, encoding: .utf8) {
@@ -139,7 +151,8 @@ import Testing
     let source = BytesSource(data: data)
 
     let initUrl = registry.url(
-      "/upload/storage/v1/b/\(bucket)/o?uploadType=resumable&name=\(objectName)")
+      "/upload/storage/v1/b/\(bucket)/o?uploadType=resumable&name=\(objectName)&predefinedAcl=private"
+    )
     let sessionUrl = registry.url(
       "/upload/storage/v1/b/\(bucket)/o?uploadType=resumable&upload_id=session123")
 
@@ -186,7 +199,7 @@ import Testing
       customMetadata: ["resolution": "1080p"],
       storageClass: "NEARLINE"
     )
-    let uploadOptions = UploadOptions(metadata: metadata)
+    let uploadOptions = UploadOptions(metadata: metadata, predefinedAcl: .private)
 
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
@@ -227,6 +240,20 @@ import Testing
         "metadata": {
           "app": "swift-storage",
           "version": "1.0"
+        },
+        "acl": [
+          {
+            "entity": "user-test@example.com",
+            "role": "OWNER"
+          }
+        ],
+        "retention": {
+          "mode": "Unlocked",
+          "retainUntilTime": "2027-01-01T00:00:00Z"
+        },
+        "owner": {
+          "entity": "user-owner@example.com",
+          "entityId": "owner123"
         }
       }
       """
@@ -253,5 +280,11 @@ import Testing
     #expect(object.temporaryHold == false)
     #expect(object.customMetadata == ["app": "swift-storage", "version": "1.0"])
     #expect(object.customTime != nil)
+    #expect(object.acl?.count == 1)
+    #expect(object.acl?.first?.entity == "user-test@example.com")
+    #expect(object.acl?.first?.role == "OWNER")
+    #expect(object.retention?.mode == "Unlocked")
+    #expect(object.owner?.entity == "user-owner@example.com")
+    #expect(object.owner?.entityId == "owner123")
   }
 }
