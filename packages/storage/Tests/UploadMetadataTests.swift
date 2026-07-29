@@ -24,25 +24,33 @@ import Testing
 @Suite struct UploadMetadataTests {
   @Test func uploadMetadataEncodingAndDecoding() throws {
     let customTime = try GoogleCloudWkt.Timestamp(seconds: 1_700_000_000, nanos: 0)
-    let aclEntry = ObjectAccessControl(entity: "user-test@example.com", role: "READER")
-    let retention = ObjectRetention(mode: "Unlocked", retainUntilTime: customTime)
-    let owner = ObjectOwner(entity: "user-owner@example.com")
+    let aclEntry = ObjectAccessControl().with {
+      $0.entity = "user-test@example.com"
+      $0.role = "READER"
+    }
+    let retention = ObjectRetention().with {
+      $0.mode = "Unlocked"
+      $0.retainUntilTime = customTime
+    }
+    let owner = ObjectOwner().with {
+      $0.entity = "user-owner@example.com"
+    }
 
-    let uploadMetadata = UploadMetadata(
-      contentType: "text/plain",
-      contentEncoding: "gzip",
-      contentDisposition: "inline",
-      contentLanguage: "en",
-      cacheControl: "public, max-age=3600",
-      customMetadata: ["env": "test", "team": "cloud"],
-      storageClass: "NEARLINE",
-      customTime: customTime,
-      eventBasedHold: true,
-      temporaryHold: false,
-      acl: [aclEntry],
-      retention: retention,
-      owner: owner
-    )
+    let uploadMetadata = UploadMetadata().with {
+      $0.contentType = "text/plain"
+      $0.contentEncoding = "gzip"
+      $0.contentDisposition = "inline"
+      $0.contentLanguage = "en"
+      $0.cacheControl = "public, max-age=3600"
+      $0.customMetadata = ["env": "test", "team": "cloud"]
+      $0.storageClass = "NEARLINE"
+      $0.customTime = customTime
+      $0.eventBasedHold = true
+      $0.temporaryHold = false
+      $0.acl = [aclEntry]
+      $0.retention = retention
+      $0.owner = owner
+    }
 
     let encoder = JSONEncoder()
     let data = try encoder.encode(uploadMetadata)
@@ -118,12 +126,15 @@ import Testing
     }
 
     let client = try StorageClient(options)
-    let uploadMetadata = UploadMetadata(
-      contentType: "text/plain",
-      contentEncoding: "gzip",
-      customMetadata: ["author": "swift-sdk"]
-    )
-    let uploadOptions = UploadOptions(metadata: uploadMetadata, predefinedAcl: .publicRead)
+    let uploadMetadata = UploadMetadata().with {
+      $0.contentType = "text/plain"
+      $0.contentEncoding = "gzip"
+      $0.customMetadata = ["author": "swift-sdk"]
+    }
+    let uploadOptions = UploadOptions().with {
+      $0.metadata = uploadMetadata
+      $0.predefinedAcl = .publicRead
+    }
 
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
@@ -194,12 +205,15 @@ import Testing
     }
 
     let client = try StorageClient(clientOptions)
-    let metadata = UploadMetadata(
-      contentType: "image/png",
-      customMetadata: ["resolution": "1080p"],
-      storageClass: "NEARLINE"
-    )
-    let uploadOptions = UploadOptions(metadata: metadata, predefinedAcl: .private)
+    let metadata = UploadMetadata().with {
+      $0.contentType = "image/png"
+      $0.customMetadata = ["resolution": "1080p"]
+      $0.storageClass = "NEARLINE"
+    }
+    let uploadOptions = UploadOptions().with {
+      $0.metadata = metadata
+      $0.predefinedAcl = .private
+    }
 
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value

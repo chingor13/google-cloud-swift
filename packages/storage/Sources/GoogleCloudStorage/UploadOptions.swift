@@ -231,16 +231,12 @@ public struct StoragePreconditions: Sendable {
   /// Makes the operation succeed only if the object's current metageneration does not match this value.
   public var ifMetagenerationNotMatch: Int64?
 
-  public init(
-    ifGenerationMatch: Int64? = nil,
-    ifGenerationNotMatch: Int64? = nil,
-    ifMetagenerationMatch: Int64? = nil,
-    ifMetagenerationNotMatch: Int64? = nil
-  ) {
-    self.ifGenerationMatch = ifGenerationMatch
-    self.ifGenerationNotMatch = ifGenerationNotMatch
-    self.ifMetagenerationMatch = ifMetagenerationMatch
-    self.ifMetagenerationNotMatch = ifMetagenerationNotMatch
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -281,9 +277,12 @@ public struct ProjectTeam: Sendable, Codable, Equatable {
   public var projectNumber: String?
   public var team: String?
 
-  public init(projectNumber: String? = nil, team: String? = nil) {
-    self.projectNumber = projectNumber
-    self.team = team
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -298,24 +297,12 @@ public struct ObjectAccessControl: Sendable, Codable, Equatable {
   public var id: String?
   public var projectTeam: ProjectTeam?
 
-  public init(
-    entity: String? = nil,
-    role: String? = nil,
-    email: String? = nil,
-    domain: String? = nil,
-    entityId: String? = nil,
-    etag: String? = nil,
-    id: String? = nil,
-    projectTeam: ProjectTeam? = nil
-  ) {
-    self.entity = entity
-    self.role = role
-    self.email = email
-    self.domain = domain
-    self.entityId = entityId
-    self.etag = etag
-    self.id = id
-    self.projectTeam = projectTeam
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -324,12 +311,12 @@ public struct ObjectRetention: Sendable, Codable, Equatable {
   public var mode: String?
   public var retainUntilTime: GoogleCloudWkt.Timestamp?
 
-  public init(
-    mode: String? = nil,
-    retainUntilTime: GoogleCloudWkt.Timestamp? = nil
-  ) {
-    self.mode = mode
-    self.retainUntilTime = retainUntilTime
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -338,9 +325,12 @@ public struct ObjectOwner: Sendable, Codable, Equatable {
   public var entity: String?
   public var entityId: String?
 
-  public init(entity: String? = nil, entityId: String? = nil) {
-    self.entity = entity
-    self.entityId = entityId
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -401,41 +391,19 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     case owner
   }
 
-  public init(
-    contentType: String? = nil,
-    contentEncoding: String? = nil,
-    contentDisposition: String? = nil,
-    contentLanguage: String? = nil,
-    cacheControl: String? = nil,
-    customMetadata: [String: String]? = nil,
-    storageClass: String? = nil,
-    customTime: GoogleCloudWkt.Timestamp? = nil,
-    eventBasedHold: Bool? = nil,
-    temporaryHold: Bool? = nil,
-    acl: [ObjectAccessControl]? = nil,
-    retention: ObjectRetention? = nil,
-    owner: ObjectOwner? = nil
-  ) {
-    self.contentType = contentType
-    self.contentEncoding = contentEncoding
-    self.contentDisposition = contentDisposition
-    self.contentLanguage = contentLanguage
-    self.cacheControl = cacheControl
-    self.customMetadata = customMetadata
-    self.storageClass = storageClass
-    self.customTime = customTime
-    self.eventBasedHold = eventBasedHold
-    self.temporaryHold = temporaryHold
-    self.acl = acl
-    self.retention = retention
-    self.owner = owner
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
 /// Configuration options for the upload request/session.
 public struct UploadOptions: Sendable {
   /// The chunk size in bytes for resumable uploads. Defaults to 8 MB (8 * 1024 * 1024).
-  public var chunkSize: Int
+  public var chunkSize: Int = 8 * 1024 * 1024
 
   /// Preconditions (e.g. `ifGenerationMatch`) for the upload operation.
   public var preconditions: StoragePreconditions?
@@ -447,7 +415,7 @@ public struct UploadOptions: Sendable {
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
 
   /// Configuration options for upload checksum validation.
-  public var checksums: ChecksumOptions
+  public var checksums: ChecksumOptions = .default
 
   /// Metadata associated with the object to be created.
   public var metadata: UploadMetadata?
@@ -480,41 +448,12 @@ public struct UploadOptions: Sendable {
 
   public static var `default`: UploadOptions { UploadOptions() }
 
-  public init(
-    chunkSize: Int = 8 * 1024 * 1024,
-    preconditions: StoragePreconditions? = nil,
-    kmsKeyName: String? = nil,
-    customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
-    checksums: ChecksumOptions = .default,
-    metadata: UploadMetadata? = nil,
-    predefinedAcl: PredefinedAcl? = nil
-  ) {
-    self.chunkSize = chunkSize
-    self.preconditions = preconditions
-    self.kmsKeyName = kmsKeyName
-    self.customerEncryptionKey = customerEncryptionKey
-    self.checksums = checksums
-    self.metadata = metadata
-    self.predefinedAcl = predefinedAcl
-  }
+  public init() {}
 
-  public init(
-    chunkSize: Int = 8 * 1024 * 1024,
-    preconditions: StoragePreconditions? = nil,
-    kmsKeyName: String? = nil,
-    customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
-    validation: ChecksumValidation,
-    metadata: UploadMetadata? = nil,
-    predefinedAcl: PredefinedAcl? = nil
-  ) {
-    self.chunkSize = chunkSize
-    self.preconditions = preconditions
-    self.kmsKeyName = kmsKeyName
-    self.customerEncryptionKey = customerEncryptionKey
-    self.checksums = .none
-    self.validation = validation
-    self.metadata = metadata
-    self.predefinedAcl = predefinedAcl
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
@@ -526,9 +465,12 @@ public struct CustomerEncryption: Sendable, Codable, Equatable {
   /// The Base64-encoded SHA-256 hash of the customer-supplied encryption key.
   public var keySha256: String?
 
-  public init(encryptionAlgorithm: String? = nil, keySha256: String? = nil) {
-    self.encryptionAlgorithm = encryptionAlgorithm
-    self.keySha256 = keySha256
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
