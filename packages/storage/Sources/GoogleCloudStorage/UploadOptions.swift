@@ -298,12 +298,6 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
   /// Temporary hold status for the object.
   public var temporaryHold: Bool?
 
-  /// Alias for `customMetadata`.
-  public var metadata: [String: String]? {
-    get { customMetadata }
-    set { customMetadata = newValue }
-  }
-
   enum CodingKeys: String, CodingKey {
     case contentType
     case contentEncoding
@@ -324,7 +318,6 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     contentLanguage: String? = nil,
     cacheControl: String? = nil,
     customMetadata: [String: String]? = nil,
-    metadata: [String: String]? = nil,
     storageClass: String? = nil,
     customTime: GoogleCloudWkt.Timestamp? = nil,
     eventBasedHold: Bool? = nil,
@@ -335,7 +328,7 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
     self.contentDisposition = contentDisposition
     self.contentLanguage = contentLanguage
     self.cacheControl = cacheControl
-    self.customMetadata = metadata ?? customMetadata
+    self.customMetadata = customMetadata
     self.storageClass = storageClass
     self.customTime = customTime
     self.eventBasedHold = eventBasedHold
@@ -461,11 +454,6 @@ public struct StorageObject: Sendable, Codable, Equatable {
   public var eventBasedHold: Bool?
   public var temporaryHold: Bool?
 
-  public var metadata: [String: String]? {
-    get { customMetadata }
-    set { customMetadata = newValue }
-  }
-
   public init() {}
 
   public init(
@@ -480,7 +468,6 @@ public struct StorageObject: Sendable, Codable, Equatable {
     contentLanguage: String? = nil,
     cacheControl: String? = nil,
     customMetadata: [String: String]? = nil,
-    metadata: [String: String]? = nil,
     customerEncryption: CustomerEncryption? = nil,
     md5Hash: String? = nil,
     crc32c: String? = nil,
@@ -502,7 +489,7 @@ public struct StorageObject: Sendable, Codable, Equatable {
     self.contentDisposition = contentDisposition
     self.contentLanguage = contentLanguage
     self.cacheControl = cacheControl
-    self.customMetadata = metadata ?? customMetadata
+    self.customMetadata = customMetadata
     self.customerEncryption = customerEncryption
     self.md5Hash = md5Hash
     self.crc32c = crc32c

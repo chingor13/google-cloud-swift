@@ -57,21 +57,10 @@ import Testing
     #expect(decoded.contentLanguage == "en")
     #expect(decoded.cacheControl == "public, max-age=3600")
     #expect(decoded.customMetadata == ["env": "test", "team": "cloud"])
-    #expect(decoded.metadata == ["env": "test", "team": "cloud"])
     #expect(decoded.storageClass == "NEARLINE")
     #expect(decoded.customTime == customTime)
     #expect(decoded.eventBasedHold == true)
     #expect(decoded.temporaryHold == false)
-  }
-
-  @Test func uploadMetadataInitAliases() {
-    let metadataParam = UploadMetadata(metadata: ["key": "val1"])
-    #expect(metadataParam.metadata == ["key": "val1"])
-    #expect(metadataParam.customMetadata == ["key": "val1"])
-
-    let customMetadataParam = UploadMetadata(customMetadata: ["key": "val2"])
-    #expect(customMetadataParam.metadata == ["key": "val2"])
-    #expect(customMetadataParam.customMetadata == ["key": "val2"])
   }
 
   @Test func simpleUploadWithUploadMetadataPassedInMethod() async throws {
@@ -130,7 +119,6 @@ import Testing
     #expect(object.bucket == bucket)
     #expect(object.contentType == "text/plain")
     #expect(object.contentEncoding == "gzip")
-    #expect(object.metadata == ["author": "swift-sdk"])
     #expect(object.customMetadata == ["author": "swift-sdk"])
 
     // Inspect recorded HTTP request to verify metadata payload was sent
@@ -185,7 +173,7 @@ import Testing
     let client = try StorageClient(clientOptions)
     let uploadMetadata = UploadMetadata(
       contentType: "application/json",
-      metadata: ["project": "jetski"]
+      customMetadata: ["project": "jetski"]
     )
     let uploadOptions = UploadOptions(metadata: uploadMetadata)
 
@@ -193,7 +181,7 @@ import Testing
     let object = try await task.value
 
     #expect(object.name == objectName)
-    #expect(object.metadata == ["project": "jetski"])
+    #expect(object.customMetadata == ["project": "jetski"])
 
     let recordedReq = registry.lastRequest(for: simpleUploadUrl)
     #expect(recordedReq != nil)
@@ -264,7 +252,7 @@ import Testing
     #expect(object.name == objectName)
     #expect(object.contentType == "image/png")
     #expect(object.storageClass == "NEARLINE")
-    #expect(object.metadata == ["resolution": "1080p"])
+    #expect(object.customMetadata == ["resolution": "1080p"])
 
     // Verify initial POST request contains metadata JSON
     let recordedInitReq = registry.lastRequest(for: initUrl)
@@ -321,7 +309,6 @@ import Testing
     #expect(object.storageClass == "COLDLINE")
     #expect(object.eventBasedHold == true)
     #expect(object.temporaryHold == false)
-    #expect(object.metadata == ["app": "swift-storage", "version": "1.0"])
     #expect(object.customMetadata == ["app": "swift-storage", "version": "1.0"])
     #expect(object.customTime != nil)
   }
