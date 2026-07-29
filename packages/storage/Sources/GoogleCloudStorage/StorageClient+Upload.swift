@@ -27,17 +27,14 @@ extension StorageClient {
   ///   - source: The upload source containing the data.
   ///   - bucket: The destination GCS bucket name.
   ///   - objectName: The destination GCS object name.
-  ///   - metadata: Optional metadata to associate with the object.
   ///   - options: Configuration options for the upload.
   /// - Returns: An `UploadTask` to monitor and control the upload.
   public func upload(
     _ source: some UploadSource,
     to bucket: String,
     as objectName: String,
-    metadata: UploadMetadata? = nil,
     options: UploadOptions = .default
   ) -> UploadTask {
-    let effectiveMetadata = metadata ?? options.metadata
     let clientOptions = self.options.client
     return UploadTask.create { continuation in
       let httpClient = try HTTPClient(
@@ -55,7 +52,7 @@ extension StorageClient {
           source: &source,
           bucket: bucket,
           objectName: objectName,
-          metadata: effectiveMetadata,
+          metadata: options.metadata,
           options: options,
           totalSize: totalSize,
           continuation: continuation
@@ -66,7 +63,7 @@ extension StorageClient {
           source: &source,
           bucket: bucket,
           objectName: objectName,
-          metadata: effectiveMetadata,
+          metadata: options.metadata,
           options: options,
           totalSize: totalSize,
           continuation: continuation
@@ -270,12 +267,10 @@ extension StorageClient {
     _ fileURL: URL,
     to bucket: String,
     as objectName: String,
-    metadata: UploadMetadata? = nil,
     options: UploadOptions = .default
   ) -> UploadTask {
     return self.upload(
-      FileSource(fileURL: fileURL), to: bucket, as: objectName, metadata: metadata,
-      options: options)
+      FileSource(fileURL: fileURL), to: bucket, as: objectName, options: options)
   }
 
   /// Convenience upload method for in-memory Data.
@@ -283,11 +278,10 @@ extension StorageClient {
     _ data: Data,
     to bucket: String,
     as objectName: String,
-    metadata: UploadMetadata? = nil,
     options: UploadOptions = .default
   ) -> UploadTask {
     return self.upload(
-      BytesSource(data: data), to: bucket, as: objectName, metadata: metadata, options: options)
+      BytesSource(data: data), to: bucket, as: objectName, options: options)
   }
 }
 

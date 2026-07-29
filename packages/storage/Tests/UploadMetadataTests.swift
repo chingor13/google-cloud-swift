@@ -63,7 +63,7 @@ import Testing
     #expect(decoded.temporaryHold == false)
   }
 
-  @Test func simpleUploadWithUploadMetadataPassedInMethod() async throws {
+  @Test func simpleUploadWithUploadMetadataInUploadOptions() async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
     let objectName = "test-object"
@@ -111,8 +111,9 @@ import Testing
       contentEncoding: "gzip",
       customMetadata: ["author": "swift-sdk"]
     )
+    let uploadOptions = UploadOptions(metadata: uploadMetadata)
 
-    let task = client.upload(source, to: bucket, as: objectName, metadata: uploadMetadata)
+    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
 
     #expect(object.name == objectName)
@@ -127,66 +128,6 @@ import Testing
     if let body = recordedReq?.httpBody, let bodyString = String(data: body, encoding: .utf8) {
       #expect(bodyString.contains("\"metadata\":{\"author\":\"swift-sdk\"}"))
       #expect(bodyString.contains("Content-Type: text/plain"))
-    }
-  }
-
-  @Test func simpleUploadWithUploadMetadataInUploadOptions() async throws {
-    let registry = MockRegistry.create()
-    let bucket = "test-bucket"
-    let objectName = "test-object"
-    let data = Data(repeating: 66, count: 100)  // 'B's
-    let source = BytesSource(data: data)
-
-    let simpleUploadUrl = registry.url(
-      "/upload/storage/v1/b/\(bucket)/o?uploadType=multipart&name=\(objectName)")
-
-    let responseJson = """
-      {
-        "bucket": "\(bucket)",
-        "name": "\(objectName)",
-        "generation": "1",
-        "metageneration": "1",
-        "size": "\(data.count)",
-        "contentType": "application/json",
-        "metadata": {
-          "project": "jetski"
-        }
-      }
-      """
-
-    registry.register(
-      response: .success(
-        statusCode: 200, data: Data(responseJson.utf8), headers: nil),
-      for: simpleUploadUrl)
-
-    let config = URLSessionConfiguration.ephemeral
-    config.protocolClasses = [MockURLProtocol.self]
-    let session = URLSession(configuration: config)
-
-    let clientOptions = StorageClientOptions().with {
-      $0.client = .init().with {
-        $0.endpoint = registry.endpoint
-        $0._testSession = session
-      }
-    }
-
-    let client = try StorageClient(clientOptions)
-    let uploadMetadata = UploadMetadata(
-      contentType: "application/json",
-      customMetadata: ["project": "jetski"]
-    )
-    let uploadOptions = UploadOptions(metadata: uploadMetadata)
-
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
-
-    #expect(object.name == objectName)
-    #expect(object.customMetadata == ["project": "jetski"])
-
-    let recordedReq = registry.lastRequest(for: simpleUploadUrl)
-    #expect(recordedReq != nil)
-    if let body = recordedReq?.httpBody, let bodyString = String(data: body, encoding: .utf8) {
-      #expect(bodyString.contains("\"metadata\":{\"project\":\"jetski\"}"))
     }
   }
 
@@ -245,8 +186,9 @@ import Testing
       customMetadata: ["resolution": "1080p"],
       storageClass: "NEARLINE"
     )
+    let uploadOptions = UploadOptions(metadata: metadata)
 
-    let task = client.upload(source, to: bucket, as: objectName, metadata: metadata)
+    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
 
     #expect(object.name == objectName)
