@@ -37,6 +37,7 @@ extension StorageClient {
     metadata: UploadMetadata? = nil,
     options: UploadOptions = .default
   ) -> UploadTask {
+    let effectiveMetadata = metadata ?? options.metadata
     let clientOptions = self.options.client
     return UploadTask.create { continuation in
       let httpClient = try HTTPClient(
@@ -54,7 +55,7 @@ extension StorageClient {
           source: &source,
           bucket: bucket,
           objectName: objectName,
-          metadata: metadata,
+          metadata: effectiveMetadata,
           options: options,
           totalSize: totalSize,
           continuation: continuation
@@ -65,7 +66,7 @@ extension StorageClient {
           source: &source,
           bucket: bucket,
           objectName: objectName,
-          metadata: metadata,
+          metadata: effectiveMetadata,
           options: options,
           totalSize: totalSize,
           continuation: continuation
@@ -332,7 +333,8 @@ extension HTTPClient {
     body.append(Data("\r\n".utf8))
 
     body.append(Data("--\(boundary)\r\n".utf8))
-    body.append(Data("Content-Type: application/octet-stream\r\n\r\n".utf8))
+    let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
+    body.append(Data("Content-Type: \(dataPartContentType)\r\n\r\n".utf8))
     body.append(data)
     body.append(Data("\r\n".utf8))
 
