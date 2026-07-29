@@ -456,52 +456,6 @@ public struct StorageObject: Sendable, Codable, Equatable {
 
   public init() {}
 
-  public init(
-    bucket: String = "",
-    name: String = "",
-    generation: Int64 = 0,
-    metageneration: Int64 = 0,
-    size: Int64 = 0,
-    contentType: String? = nil,
-    contentEncoding: String? = nil,
-    contentDisposition: String? = nil,
-    contentLanguage: String? = nil,
-    cacheControl: String? = nil,
-    customMetadata: [String: String]? = nil,
-    customerEncryption: CustomerEncryption? = nil,
-    md5Hash: String? = nil,
-    crc32c: String? = nil,
-    etag: String? = nil,
-    storageClass: String? = nil,
-    customTime: GoogleCloudWkt.Timestamp? = nil,
-    timeCreated: GoogleCloudWkt.Timestamp? = nil,
-    updated: GoogleCloudWkt.Timestamp? = nil,
-    eventBasedHold: Bool? = nil,
-    temporaryHold: Bool? = nil
-  ) {
-    self.bucket = bucket
-    self.name = name
-    self.generation = generation
-    self.metageneration = metageneration
-    self.size = size
-    self.contentType = contentType
-    self.contentEncoding = contentEncoding
-    self.contentDisposition = contentDisposition
-    self.contentLanguage = contentLanguage
-    self.cacheControl = cacheControl
-    self.customMetadata = customMetadata
-    self.customerEncryption = customerEncryption
-    self.md5Hash = md5Hash
-    self.crc32c = crc32c
-    self.etag = etag
-    self.storageClass = storageClass
-    self.customTime = customTime
-    self.timeCreated = timeCreated
-    self.updated = updated
-    self.eventBasedHold = eventBasedHold
-    self.temporaryHold = temporaryHold
-  }
-
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     bucket = (try? container.decode(String.self, forKey: .bucket)) ?? ""
