@@ -122,6 +122,7 @@ import Testing
       $0.client = .init().with {
         $0.endpoint = registry.endpoint
         $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
       }
     }
 
@@ -201,6 +202,7 @@ import Testing
       $0.client = .init().with {
         $0.endpoint = registry.endpoint
         $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
       }
     }
 
