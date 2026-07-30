@@ -238,15 +238,22 @@ extension StorageClient {
           message: String(data: queryData, encoding: .utf8) ?? "")
       }
 
-      // 2. Seek source to GCS offset
+      // 2. If resuming from offset > 0 with auto checksumming, compute full-source checksums
+      var effectiveOptions = options
+      if offset > 0 && (options.checksums.crc32c == .auto || options.checksums.md5 == .auto) {
+        let resolvedChecksums = try await source.computeChecksums(options: options.checksums)
+        effectiveOptions.checksums = resolvedChecksums
+      }
+
+      // 3. Seek source to GCS offset
       try await source.seek(to: offset)
 
       continuation.yield(
         UploadStatus(
           bytesUploaded: offset, totalBytes: totalSize, uploadId: uploadId))
 
-      // 3. Continue upload
-      let chunkSize = options.chunkSize
+      // 4. Continue upload
+      let chunkSize = effectiveOptions.chunkSize
       return try await Self.continueResumableUpload(
         httpClient: httpClient,
         source: &source,
@@ -254,7 +261,7 @@ extension StorageClient {
         offset: offset,
         chunkSize: chunkSize,
         totalSize: totalSize,
-        options: options,
+        options: effectiveOptions,
         continuation: continuation
       )
     }

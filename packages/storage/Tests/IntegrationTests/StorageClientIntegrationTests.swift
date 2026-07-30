@@ -234,16 +234,9 @@ import Testing
         return
       }
 
-      // Compute exact CRC32C Base64 string for the full 10MB file
-      let expectedCRC32C = CRC32C.compute(data)
-      let bigEndian = expectedCRC32C.bigEndian
-      var bytes = [UInt8]()
-      withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
-      let crc32cBase64 = Data(bytes).base64EncodedString()
-
-      // Resume upload from partial offset providing pre-computed full object CRC32C checksum
+      // Resume upload with automatic CRC32C checksum calculation handled by our SDK
       let resumeOptions = UploadOptions().with {
-        $0.checksums = ChecksumOptions(crc32c: .value(crc32cBase64))
+        $0.checksums = ChecksumOptions(crc32c: .auto)
         $0.chunkSize = chunkSize
       }
       let fileSource = FileSource(fileURL: fileURL)
@@ -253,7 +246,7 @@ import Testing
       #expect(object.bucket == bucketName)
       #expect(object.name == objectName)
       #expect(object.size == Int64(fileSize))
-      print("Resumed upload with checksum validation successful: \(object)")
+      print("Resumed upload with automatic checksum validation successful: \(object)")
     }
 
     @Test func testSimpleUploadWithChecksumValidation() async throws {

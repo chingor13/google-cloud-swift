@@ -692,7 +692,7 @@ import Testing
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
     let objectName = "test-object"
-    let data = Data(repeating: 1, count: 1 * 1024 * 1024)  // 1MB payload (fits in single chunk)
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)  // 1MB payload
     let source = BytesSource(data: data)
 
     let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=user-checksum-upload-id")
@@ -749,8 +749,8 @@ import Testing
     #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") == "crc32c=AAAAAA==")
   }
 
-  /// Tests resuming an upload from an intermediate offset with automatic on-the-fly checksumming.
-  /// Because the stream was resumed mid-way, auto checksum for partial data MUST NOT be attached.
+  /// Tests resuming an upload from an intermediate offset with automatic checksumming.
+  /// The SDK automatically calculates full-file checksum and attaches x-goog-hash header.
   @Test func testResumeUploadWithAutoChecksumFromOffset() async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
@@ -808,7 +808,7 @@ import Testing
     let requests = registry.recordedRequests()
     #expect(requests.count == 2)
     let finalChunkReq = requests[1]
-    #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") == nil)
+    #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") != nil)
   }
 
   /// Tests resuming an upload from offset 0 with automatic on-the-fly checksumming.
