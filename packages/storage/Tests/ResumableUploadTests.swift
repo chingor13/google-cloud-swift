@@ -685,4 +685,191 @@ import Testing
     #expect(
       chunkReq.value(forHTTPHeaderField: "x-goog-encryption-key-sha256") == sample.keyHashBase64)
   }
+
+  /// Tests resuming an upload from an intermediate offset when user provided a pre-computed checksum.
+  /// The user-provided checksum MUST be attached to the final chunk PUT request.
+  @Test func testResumeUploadWithUserProvidedChecksum() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)  // 1MB payload (fits in single chunk)
+    let source = BytesSource(data: data)
+
+    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=user-checksum-upload-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(data.count)",
+        "contentType": "application/octet-stream",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: ["Range": "bytes=0-4999"]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let uploadOptions = UploadOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: "AAAAAA==")
+    }
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
+    let object = try await task.value
+
+    #expect(object.name == objectName)
+    #expect(object.bucket == bucket)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let finalChunkReq = requests[1]
+    #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") == "crc32c=AAAAAA==")
+  }
+
+  /// Tests resuming an upload from an intermediate offset with automatic on-the-fly checksumming.
+  /// Because the stream was resumed mid-way, auto checksum for partial data MUST NOT be attached.
+  @Test func testResumeUploadWithAutoChecksumFromOffset() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)
+    let source = BytesSource(data: data)
+
+    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=auto-checksum-upload-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(data.count)",
+        "contentType": "application/octet-stream",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: ["Range": "bytes=0-4999"]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let uploadOptions = UploadOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: .auto)
+    }
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
+    let object = try await task.value
+
+    #expect(object.name == objectName)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let finalChunkReq = requests[1]
+    #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") == nil)
+  }
+
+  /// Tests resuming an upload from offset 0 with automatic on-the-fly checksumming.
+  /// Because the stream starts at byte 0, the auto checksum MUST be attached to the final chunk PUT request.
+  @Test func testResumeUploadFromOffsetZeroWithAutoChecksum() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)
+    let source = BytesSource(data: data)
+
+    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=zero-offset-upload-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(data.count)",
+        "contentType": "application/octet-stream",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: [:]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let uploadOptions = UploadOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: .auto)
+    }
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
+    let object = try await task.value
+
+    #expect(object.name == objectName)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let finalChunkReq = requests[1]
+    #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") != nil)
+  }
 }

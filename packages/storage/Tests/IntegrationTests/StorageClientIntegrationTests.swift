@@ -185,6 +185,77 @@ import Testing
       print("Resumed upload successful: \(object)")
     }
 
+    @Test func testResumedFailedUploadWithChecksumValidation() async throws {
+      guard ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] != nil else {
+        Issue.record("GOOGLE_CLOUD_PROJECT environment variable not set")
+        return
+      }
+      let bucketName =
+        ProcessInfo.processInfo.environment["GOOGLE_CLOUD_SWIFT_TEST_BUCKET"] ?? "test-bucket"
+      let objectName = "test-resumed-checksum-\(UUID().uuidString).bin"
+
+      let fileSize = 10 * 1024 * 1024  // 10MB payload
+      let data = Data(repeating: 55, count: fileSize)
+      let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(objectName)
+      try data.write(to: fileURL)
+      defer {
+        try? FileManager.default.removeItem(at: fileURL)
+      }
+
+      let storage = try StorageClient()
+
+      // Set 2MB chunk size and fail source after 4MB read
+      let chunkSize = 2 * 1024 * 1024
+      let failAfterBytes = Int64(4 * 1024 * 1024)
+      let uploadOptions = UploadOptions().with {
+        $0.checksums = ChecksumOptions(crc32c: .auto)
+        $0.chunkSize = chunkSize
+      }
+      let failingSource = FailingUploadSource(fileURL: fileURL, failAfterBytes: failAfterBytes)
+
+      let task = storage.upload(failingSource, to: bucketName, as: objectName, options: uploadOptions)
+
+      var statusUpdates = [UploadStatus]()
+      for await status in task.makeStatusStream() {
+        statusUpdates.append(status)
+      }
+
+      do {
+        _ = try await task.value
+        Issue.record("Expected upload to fail, but it succeeded")
+      } catch is FailingUploadSource.SimulatedUploadError {
+        // Expected error
+      } catch {
+        Issue.record("Expected SimulatedUploadError, got \(error)")
+      }
+
+      guard let uploadId = statusUpdates.compactMap(\.uploadId).first else {
+        Issue.record("No uploadId captured before failure")
+        return
+      }
+
+      // Compute exact CRC32C Base64 string for the full 10MB file
+      let expectedCRC32C = CRC32C.compute(data)
+      let bigEndian = expectedCRC32C.bigEndian
+      var bytes = [UInt8]()
+      withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
+      let crc32cBase64 = Data(bytes).base64EncodedString()
+
+      // Resume upload from partial offset providing pre-computed full object CRC32C checksum
+      let resumeOptions = UploadOptions().with {
+        $0.checksums = ChecksumOptions(crc32c: .value(crc32cBase64))
+        $0.chunkSize = chunkSize
+      }
+      let fileSource = FileSource(fileURL: fileURL)
+      let resumeTask = storage.resumeUpload(fileSource, uploadId: uploadId, options: resumeOptions)
+
+      let object = try await resumeTask.value
+      #expect(object.bucket == bucketName)
+      #expect(object.name == objectName)
+      #expect(object.size == Int64(fileSize))
+      print("Resumed upload with checksum validation successful: \(object)")
+    }
+
     @Test func testSimpleUploadWithChecksumValidation() async throws {
       guard ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] != nil else {
         Issue.record("GOOGLE_CLOUD_PROJECT environment variable not set")
