@@ -119,7 +119,7 @@ extension ChecksummedSource where S: SeekableUploadSource {
     }
 
     guard offset > 0 else {
-      // we are starting at the beginning of the file, no precompuation needed
+      // we are starting at the beginning of the file, no precomputation needed
       try await source.seek(to: 0)
       return
     }
