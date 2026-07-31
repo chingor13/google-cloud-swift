@@ -109,44 +109,44 @@ struct ChecksummedSource<S: UploadSource> {
 
 extension ChecksummedSource where S: SeekableUploadSource {
   mutating func seek(to offset: Int64) async throws {
+    let needCRC32C = (options.crc32c == .auto)
+    let needMD5 = (options.md5 == .auto)
+
+    guard needCRC32C || needMD5 else {
+      // no checksum calculation needed, directly seek on the underlying source
+      try await source.seek(to: offset)
+      return
+    }
+
+    guard offset > 0 else {
+      // no pre-computation needed for offset 0
+      try await source.seek(to: 0)
+      return
+    }
+
     nextChunk = nil
     isInitialized = false
     isFinished = false
 
-    guard offset > 0 else {
-      try await source.seek(to: 0)
-      md5 = Insecure.MD5()
-      crc32c = CRC32C()
-      return
-    }
+    // Start at the beginning of the file
+    try await source.seek(to: 0)
+    md5 = Insecure.MD5()
+    crc32c = CRC32C()
 
-    let needCRC32C = (options.crc32c == .auto)
-    let needMD5 = (options.md5 == .auto)
-
-    if needCRC32C || needMD5 {
-      try await source.seek(to: offset)
-      try await source.seek(to: 0)
-      md5 = Insecure.MD5()
-      crc32c = CRC32C()
-
-      var bytesRemaining = offset
-      let bufferSize = 8 * 1024 * 1024
-      while bytesRemaining > 0 {
-        let toRead = Int(min(bytesRemaining, Int64(bufferSize)))
-        guard let chunk = try await source.read(maxBytes: toRead), !chunk.isEmpty else {
-          break
-        }
-        if needCRC32C {
-          crc32c.update(chunk)
-        }
-        if needMD5 {
-          md5.update(data: chunk)
-        }
-        bytesRemaining -= Int64(chunk.count)
+    var bytesRemaining = offset
+    let bufferSize = 8 * 1024 * 1024
+    while bytesRemaining > 0 {
+      let toRead = Int(min(bytesRemaining, Int64(bufferSize)))
+      guard let chunk = try await source.read(maxBytes: toRead), !chunk.isEmpty else {
+        break
       }
-      try await source.seek(to: offset)
-    } else {
-      try await source.seek(to: offset)
+      if needCRC32C {
+        crc32c.update(chunk)
+      }
+      if needMD5 {
+        md5.update(data: chunk)
+      }
+      bytesRemaining -= Int64(chunk.count)
     }
   }
 }
