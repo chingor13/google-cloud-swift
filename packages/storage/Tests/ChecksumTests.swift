@@ -223,4 +223,26 @@ import Testing
     #expect(chunk!.isLast == true)
     #expect(chunk!.checksum == "crc32c=TVUQaA==, md5=CUSTOM_MD5")
   }
+
+  /// Tests that calling seek on a ChecksummedSource wrapping a non-seekable UploadSource throws UploadError.cannotSeekNonSeekableSource.
+  @Test func testChecksummedSourceSeekNonSeekableSource() async throws {
+    struct NonSeekableSource: UploadSource {
+      let data: Data
+      var totalSize: Int64? { Int64(data.count) }
+      mutating func read(maxBytes: Int) async throws -> Data? { data }
+    }
+
+    let source = NonSeekableSource(data: Data("test".utf8))
+    var checksummedSource = ChecksummedSource(source: source, options: .default)
+
+    let error = await expectUploadError {
+      try await checksummedSource.seek(to: 5)
+    }
+
+    if case .cannotSeekNonSeekableSource = error {
+      // Expected error
+    } else {
+      Issue.record("Expected .cannotSeekNonSeekableSource, got \(String(describing: error))")
+    }
+  }
 }

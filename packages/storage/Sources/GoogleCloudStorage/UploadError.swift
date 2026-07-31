@@ -20,6 +20,9 @@ public enum UploadError: Error, Sendable {
   /// Indicates the source was modified or truncated.
   case localSourceTooSmall(localSize: Int64, gcsOffset: Int64)
 
+  /// The upload source does not support seeking.
+  case cannotSeekNonSeekableSource
+
   /// The resumable session has expired (usually after 7 days) or was not found.
   case sessionExpired(uploadId: String, underlyingError: Error?)
 

@@ -108,7 +108,7 @@ struct ChecksummedSource<S: UploadSource> {
 
   mutating func seek(to offset: Int64) async throws {
     guard var seekableSource = source as? SeekableUploadSource else {
-      return
+      throw UploadError.cannotSeekNonSeekableSource
     }
     nextChunk = nil
     isInitialized = false
