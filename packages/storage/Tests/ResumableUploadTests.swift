@@ -695,7 +695,8 @@ import Testing
     let data = Data(repeating: 1, count: 1 * 1024 * 1024)  // 1MB payload
     let source = BytesSource(data: data)
 
-    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=user-checksum-upload-id")
+    let queryUrl = registry.url(
+      "/upload/storage/v1/b/\(bucket)/o?upload_id=user-checksum-upload-id")
 
     let objectJSON = """
       {
@@ -758,7 +759,8 @@ import Testing
     let data = Data(repeating: 1, count: 1 * 1024 * 1024)
     let source = BytesSource(data: data)
 
-    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=auto-checksum-upload-id")
+    let queryUrl = registry.url(
+      "/upload/storage/v1/b/\(bucket)/o?upload_id=auto-checksum-upload-id")
 
     let objectJSON = """
       {

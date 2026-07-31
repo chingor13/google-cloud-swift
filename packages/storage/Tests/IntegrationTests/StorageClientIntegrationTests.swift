@@ -213,7 +213,8 @@ import Testing
       }
       let failingSource = FailingUploadSource(fileURL: fileURL, failAfterBytes: failAfterBytes)
 
-      let task = storage.upload(failingSource, to: bucketName, as: objectName, options: uploadOptions)
+      let task = storage.upload(
+        failingSource, to: bucketName, as: objectName, options: uploadOptions)
 
       var statusUpdates = [UploadStatus]()
       for await status in task.makeStatusStream() {
