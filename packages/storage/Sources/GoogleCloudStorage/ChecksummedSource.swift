@@ -105,4 +105,51 @@ struct ChecksummedSource<S: UploadSource> {
 
     return ChunkInfo(data: currentChunk, isLast: isLast, checksum: checksumStr)
   }
+
+  mutating func seek(to offset: Int64) async throws {
+    guard var seekableSource = source as? SeekableUploadSource else {
+      return
+    }
+    nextChunk = nil
+    isInitialized = false
+    isFinished = false
+
+    guard offset > 0 else {
+      try await seekableSource.seek(to: 0)
+      source = seekableSource as! S
+      md5 = Insecure.MD5()
+      crc32c = CRC32C()
+      return
+    }
+
+    let needCRC32C = (options.crc32c == .auto)
+    let needMD5 = (options.md5 == .auto)
+
+    if needCRC32C || needMD5 {
+      try await seekableSource.seek(to: offset)
+      try await seekableSource.seek(to: 0)
+      md5 = Insecure.MD5()
+      crc32c = CRC32C()
+
+      var bytesRemaining = offset
+      let bufferSize = 8 * 1024 * 1024
+      while bytesRemaining > 0 {
+        let toRead = Int(min(bytesRemaining, Int64(bufferSize)))
+        guard let chunk = try await seekableSource.read(maxBytes: toRead), !chunk.isEmpty else {
+          break
+        }
+        if needCRC32C {
+          crc32c.update(chunk)
+        }
+        if needMD5 {
+          md5.update(data: chunk)
+        }
+        bytesRemaining -= Int64(chunk.count)
+      }
+      try await seekableSource.seek(to: offset)
+    } else {
+      try await seekableSource.seek(to: offset)
+    }
+    source = seekableSource as! S
+  }
 }

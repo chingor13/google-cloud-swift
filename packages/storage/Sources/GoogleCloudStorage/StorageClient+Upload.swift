@@ -141,9 +141,9 @@ extension StorageClient {
     )
   }
 
-  fileprivate static func continueResumableUpload(
+  fileprivate static func continueResumableUpload<S: UploadSource>(
     httpClient: HTTPClient,
-    source: inout some UploadSource,
+    source: inout S,
     uploadId: String,
     offset: Int64,
     chunkSize: Int,
@@ -151,9 +151,11 @@ extension StorageClient {
     options: UploadOptions,
     continuation: AsyncStream<UploadStatus>.Continuation
   ) async throws -> StorageObject {
-    let initialOffset = offset
     var offset = offset
     var checksummedSource = ChecksummedSource(source: source, options: options.checksums)
+    if offset > 0 {
+      try await checksummedSource.seek(to: offset)
+    }
     while true {
       guard let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize),
         !chunkInfo.data.isEmpty
@@ -162,9 +164,7 @@ extension StorageClient {
       }
       let chunk = chunkInfo.data
       let isLast = chunkInfo.isLast
-      let checksum =
-        (isLast && (initialOffset == 0 || options.checksums.hasUserProvidedChecksum))
-        ? chunkInfo.checksum : nil
+      let checksum = isLast ? chunkInfo.checksum : nil
 
       let uploadRequest = try await httpClient.buildUploadChunkRequest(
         uploadId: uploadId, data: chunk, offset: offset, totalSize: totalSize, options: options,
@@ -238,22 +238,12 @@ extension StorageClient {
           message: String(data: queryData, encoding: .utf8) ?? "")
       }
 
-      // 2. If resuming from offset > 0 with auto checksumming, compute full-source checksums
-      var effectiveOptions = options
-      if offset > 0 && (options.checksums.crc32c == .auto || options.checksums.md5 == .auto) {
-        let resolvedChecksums = try await source.computeChecksums(options: options.checksums)
-        effectiveOptions.checksums = resolvedChecksums
-      }
-
-      // 3. Seek source to GCS offset
-      try await source.seek(to: offset)
-
       continuation.yield(
         UploadStatus(
           bytesUploaded: offset, totalBytes: totalSize, uploadId: uploadId))
 
-      // 4. Continue upload
-      let chunkSize = effectiveOptions.chunkSize
+      // 2. Continue upload
+      let chunkSize = options.chunkSize
       return try await Self.continueResumableUpload(
         httpClient: httpClient,
         source: &source,
@@ -261,7 +251,7 @@ extension StorageClient {
         offset: offset,
         chunkSize: chunkSize,
         totalSize: totalSize,
-        options: effectiveOptions,
+        options: options,
         continuation: continuation
       )
     }

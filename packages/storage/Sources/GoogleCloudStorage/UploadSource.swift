@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Crypto
 import Foundation
 
 /// Represents a data source that can be read from sequentially.
@@ -30,49 +29,6 @@ public protocol UploadSource: Sendable {
 public protocol SeekableUploadSource: UploadSource {
   /// Seeks to a specific byte offset.
   mutating func seek(to offset: Int64) async throws
-}
-
-extension SeekableUploadSource {
-  /// Computes full-source checksums when resuming an upload from an intermediate offset.
-  package mutating func computeChecksums(options: ChecksumOptions) async throws -> ChecksumOptions {
-    let needCRC32C = (options.crc32c == .auto)
-    let needMD5 = (options.md5 == .auto)
-
-    if !needCRC32C && !needMD5 {
-      return options
-    }
-
-    try await self.seek(to: 0)
-
-    var crc32c = CRC32C()
-    var md5 = Insecure.MD5()
-
-    let bufferSize = 8 * 1024 * 1024
-    while let chunk = try await self.read(maxBytes: bufferSize), !chunk.isEmpty {
-      if needCRC32C {
-        crc32c.update(chunk)
-      }
-      if needMD5 {
-        md5.update(data: chunk)
-      }
-    }
-
-    var resultCRC32C = options.crc32c
-    if needCRC32C {
-      let bigEndian = crc32c.finalize().bigEndian
-      var bytes = [UInt8]()
-      withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
-      resultCRC32C = .value(Data(bytes).base64EncodedString())
-    }
-
-    var resultMD5 = options.md5
-    if needMD5 {
-      let digest = md5.finalize()
-      resultMD5 = .value(Data(digest).base64EncodedString())
-    }
-
-    return ChecksumOptions(crc32c: resultCRC32C, md5: resultMD5)
-  }
 }
 
 /// An upload source that reads from a local file.
