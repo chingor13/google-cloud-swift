@@ -113,23 +113,22 @@ extension ChecksummedSource where S: SeekableUploadSource {
     let needMD5 = (options.md5 == .auto)
 
     guard needCRC32C || needMD5 else {
-      // no checksum calculation needed, directly seek on the underlying source
+      // no checksums requested, nothing more to do
       try await source.seek(to: offset)
       return
     }
 
     guard offset > 0 else {
-      // no pre-computation needed for offset 0
+      // we are starting at the beginning of the file, no precompuation needed
       try await source.seek(to: 0)
       return
     }
 
+    // Start at the beginning of the file to compute checksum up to offset
+    try await source.seek(to: 0)
     nextChunk = nil
     isInitialized = false
     isFinished = false
-
-    // Start at the beginning of the file
-    try await source.seek(to: 0)
     md5 = Insecure.MD5()
     crc32c = CRC32C()
 
@@ -138,7 +137,7 @@ extension ChecksummedSource where S: SeekableUploadSource {
     while bytesRemaining > 0 {
       let toRead = Int(min(bytesRemaining, Int64(bufferSize)))
       guard let chunk = try await source.read(maxBytes: toRead), !chunk.isEmpty else {
-        break
+        throw UploadError.localSourceTooSmall(localSize: offset - bytesRemaining, gcsOffset: offset)
       }
       if needCRC32C {
         crc32c.update(chunk)
