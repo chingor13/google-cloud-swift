@@ -224,25 +224,28 @@ import Testing
     #expect(chunk!.checksum == "crc32c=TVUQaA==, md5=CUSTOM_MD5")
   }
 
-  /// Tests that calling seek on a ChecksummedSource wrapping a non-seekable UploadSource throws UploadError.cannotSeekNonSeekableSource.
-  @Test func testChecksummedSourceSeekNonSeekableSource() async throws {
+  /// Tests that a non-seekable UploadSource can be wrapped in ChecksummedSource and streamed cleanly.
+  @Test func testChecksummedSourceNonSeekableSourceStreaming() async throws {
     struct NonSeekableSource: UploadSource {
       let data: Data
+      private var readCompleted = false
+      init(data: Data) { self.data = data }
       var totalSize: Int64? { Int64(data.count) }
-      mutating func read(maxBytes: Int) async throws -> Data? { data }
+      mutating func read(maxBytes: Int) async throws -> Data? {
+        if readCompleted { return nil }
+        readCompleted = true
+        return data
+      }
     }
 
-    let source = NonSeekableSource(data: Data("test".utf8))
+    let data = Data("streaming non-seekable data".utf8)
+    let source = NonSeekableSource(data: data)
     var checksummedSource = ChecksummedSource(source: source, options: .default)
 
-    let error = await expectUploadError {
-      try await checksummedSource.seek(to: 5)
-    }
-
-    if case .cannotSeekNonSeekableSource = error {
-      // Expected error
-    } else {
-      Issue.record("Expected .cannotSeekNonSeekableSource, got \(String(describing: error))")
-    }
+    let chunk = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk != nil)
+    #expect(chunk?.data == data)
+    #expect(chunk?.isLast == true)
+    #expect(chunk?.checksum != nil)
   }
 }

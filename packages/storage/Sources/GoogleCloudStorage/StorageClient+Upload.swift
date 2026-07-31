@@ -141,9 +141,9 @@ extension StorageClient {
     )
   }
 
-  fileprivate static func continueResumableUpload<S: UploadSource>(
+  fileprivate static func continueStreamingUpload<S: UploadSource>(
     httpClient: HTTPClient,
-    source: inout S,
+    checksummedSource: inout ChecksummedSource<S>,
     uploadId: String,
     offset: Int64,
     chunkSize: Int,
@@ -152,10 +152,6 @@ extension StorageClient {
     continuation: AsyncStream<UploadStatus>.Continuation
   ) async throws -> StorageObject {
     var offset = offset
-    var checksummedSource = ChecksummedSource(source: source, options: options.checksums)
-    if offset > 0 {
-      try await checksummedSource.seek(to: offset)
-    }
     while true {
       guard let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize),
         !chunkInfo.data.isEmpty
@@ -194,6 +190,55 @@ extension StorageClient {
     }
 
     throw UploadError.internalError("Upload completed but object not returned")
+  }
+
+  fileprivate static func continueResumableUpload<S: UploadSource>(
+    httpClient: HTTPClient,
+    source: inout S,
+    uploadId: String,
+    offset: Int64,
+    chunkSize: Int,
+    totalSize: Int64?,
+    options: UploadOptions,
+    continuation: AsyncStream<UploadStatus>.Continuation
+  ) async throws -> StorageObject {
+    var checksummedSource = ChecksummedSource(source: source, options: options.checksums)
+    return try await continueStreamingUpload(
+      httpClient: httpClient,
+      checksummedSource: &checksummedSource,
+      uploadId: uploadId,
+      offset: offset,
+      chunkSize: chunkSize,
+      totalSize: totalSize,
+      options: options,
+      continuation: continuation
+    )
+  }
+
+  fileprivate static func continueResumableUpload<S: SeekableUploadSource>(
+    httpClient: HTTPClient,
+    source: inout S,
+    uploadId: String,
+    offset: Int64,
+    chunkSize: Int,
+    totalSize: Int64?,
+    options: UploadOptions,
+    continuation: AsyncStream<UploadStatus>.Continuation
+  ) async throws -> StorageObject {
+    var checksummedSource = ChecksummedSource(source: source, options: options.checksums)
+    if offset > 0 {
+      try await checksummedSource.seek(to: offset)
+    }
+    return try await continueStreamingUpload(
+      httpClient: httpClient,
+      checksummedSource: &checksummedSource,
+      uploadId: uploadId,
+      offset: offset,
+      chunkSize: chunkSize,
+      totalSize: totalSize,
+      options: options,
+      continuation: continuation
+    )
   }
 
   /// Resumes a previously interrupted file upload using a saved upload ID.
