@@ -19,6 +19,7 @@ import Foundation
 #endif
 import GoogleCloudAuth
 import GoogleCloudGax
+@_spi(GoogleCloudInternal) import struct GoogleCloudGax._CRC32C
 @testable import GoogleCloudStorage
 import Testing
 
@@ -270,7 +271,7 @@ import Testing
     let fullData = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
     let firstPart = Data("Hello, ".utf8)
 
-    let firstPartCRC = CRC32C.compute(firstPart)
+    let firstPartCRC = _CRC32C.compute(firstPart)
     let bigEndian = firstPartCRC.bigEndian
     var bytes = [UInt8]()
     withUnsafeBytes(of: bigEndian) { bytes = Array($0) }

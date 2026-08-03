@@ -52,7 +52,7 @@ struct ChecksummedSource<S: UploadSource> {
 
   mutating func seedCRC32C(seed: UInt32, bytesHashed: Int64) {
     if options.crc32c == .auto {
-      self.crc32c = CRC32C(seed: seed)
+      self.crc32c = _CRC32C(seed: seed)
       self.bytesHashed = bytesHashed
     }
   }
