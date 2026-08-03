@@ -1408,76 +1408,6 @@ import Testing
     #expect(requests.count == 2)
     #expect(requests[1].value(forHTTPHeaderField: "Content-Range") == "bytes */0")
   }
-}
-
-// MARK: - Test Helper Sources
-
-/// A non-seekable computational upload source generating deterministic bytes on-demand.
-private struct DynamicComputationSource: UploadSource {
-  let chunkSize: Int
-  let totalChunks: Int
-  let totalSize: Int64?
-  private var currentChunk: Int = 0
-
-  init(chunkSize: Int, totalChunks: Int, totalSize: Int64?) {
-    self.chunkSize = chunkSize
-    self.totalChunks = totalChunks
-    self.totalSize = totalSize
-  }
-
-  mutating func read(maxBytes: Int) async throws -> Data? {
-    guard currentChunk < totalChunks else { return nil }
-    let count = min(maxBytes, chunkSize)
-    let byteVal = UInt8((currentChunk + 1) % 256)
-    currentChunk += 1
-    return Data(repeating: byteVal, count: count)
-  }
-}
-
-/// A seekable computational upload source that can re-initialize its generator to any offset.
-private struct SeekableComputationSource: SeekableUploadSource {
-  let chunkSize: Int
-  let totalChunks: Int
-  let totalSize: Int64?
-  private var currentOffset: Int64 = 0
-
-  init(chunkSize: Int, totalChunks: Int) {
-    self.chunkSize = chunkSize
-    self.totalChunks = totalChunks
-    self.totalSize = Int64(chunkSize * totalChunks)
-  }
-
-  mutating func read(maxBytes: Int) async throws -> Data? {
-    guard let totalSize = totalSize, currentOffset < totalSize else { return nil }
-    let bytesToRead = min(Int64(maxBytes), totalSize - currentOffset)
-    guard bytesToRead > 0 else { return nil }
-    let chunkIndex = Int(currentOffset / Int64(chunkSize))
-    let byteVal = UInt8((chunkIndex + 1) % 256)
-    currentOffset += bytesToRead
-    return Data(repeating: byteVal, count: Int(bytesToRead))
-  }
-
-  mutating func seek(to offset: Int64) async throws {
-    guard offset >= 0, let total = totalSize, offset <= total else {
-      throw UploadError.localSourceTooSmall(localSize: totalSize ?? 0, gcsOffset: offset)
-    }
-    self.currentOffset = offset
-  }
-}
-
-/// Helper function to create an `AsyncStream<Data>` with asynchronous yielding.
-private func makeAsyncStream(chunks: [Data], delayNanoseconds: UInt64 = 1_000_000) -> AsyncStream<
-  Data
-> {
-  AsyncStream { continuation in
-    Task {
-      for chunk in chunks {
-        try? await Task.sleep(nanoseconds: delayNanoseconds)
-        continuation.yield(chunk)
-      }
-      continuation.finish()
-    }
-  }
 
   /// Tests resuming an upload from an intermediate offset when MD5 checksum was requested (.auto).
   /// Because MD5 is not recoverable from a partial state, MD5 calculation must be skipped,
@@ -1607,5 +1537,75 @@ private func makeAsyncStream(chunks: [Data], delayNanoseconds: UInt64 = 1_000_00
     let hashHeader = finalChunkReq.value(forHTTPHeaderField: "x-goog-hash")
     #expect(hashHeader != nil)
     #expect(hashHeader?.contains("md5=") == true)
+  }
+}
+
+// MARK: - Test Helper Sources
+
+/// A non-seekable computational upload source generating deterministic bytes on-demand.
+private struct DynamicComputationSource: UploadSource {
+  let chunkSize: Int
+  let totalChunks: Int
+  let totalSize: Int64?
+  private var currentChunk: Int = 0
+
+  init(chunkSize: Int, totalChunks: Int, totalSize: Int64?) {
+    self.chunkSize = chunkSize
+    self.totalChunks = totalChunks
+    self.totalSize = totalSize
+  }
+
+  mutating func read(maxBytes: Int) async throws -> Data? {
+    guard currentChunk < totalChunks else { return nil }
+    let count = min(maxBytes, chunkSize)
+    let byteVal = UInt8((currentChunk + 1) % 256)
+    currentChunk += 1
+    return Data(repeating: byteVal, count: count)
+  }
+}
+
+/// A seekable computational upload source that can re-initialize its generator to any offset.
+private struct SeekableComputationSource: SeekableUploadSource {
+  let chunkSize: Int
+  let totalChunks: Int
+  let totalSize: Int64?
+  private var currentOffset: Int64 = 0
+
+  init(chunkSize: Int, totalChunks: Int) {
+    self.chunkSize = chunkSize
+    self.totalChunks = totalChunks
+    self.totalSize = Int64(chunkSize * totalChunks)
+  }
+
+  mutating func read(maxBytes: Int) async throws -> Data? {
+    guard let totalSize = totalSize, currentOffset < totalSize else { return nil }
+    let bytesToRead = min(Int64(maxBytes), totalSize - currentOffset)
+    guard bytesToRead > 0 else { return nil }
+    let chunkIndex = Int(currentOffset / Int64(chunkSize))
+    let byteVal = UInt8((chunkIndex + 1) % 256)
+    currentOffset += bytesToRead
+    return Data(repeating: byteVal, count: Int(bytesToRead))
+  }
+
+  mutating func seek(to offset: Int64) async throws {
+    guard offset >= 0, let total = totalSize, offset <= total else {
+      throw UploadError.localSourceTooSmall(localSize: totalSize ?? 0, gcsOffset: offset)
+    }
+    self.currentOffset = offset
+  }
+}
+
+/// Helper function to create an `AsyncStream<Data>` with asynchronous yielding.
+private func makeAsyncStream(chunks: [Data], delayNanoseconds: UInt64 = 1_000_000) -> AsyncStream<
+  Data
+> {
+  return AsyncStream { continuation in
+    Task {
+      for chunk in chunks {
+        try? await Task.sleep(nanoseconds: delayNanoseconds)
+        continuation.yield(chunk)
+      }
+      continuation.finish()
+    }
   }
 }
