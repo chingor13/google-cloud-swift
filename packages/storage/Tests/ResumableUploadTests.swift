@@ -949,4 +949,134 @@ import Testing
     let finalChunkReq = requests[1]
     #expect(finalChunkReq.value(forHTTPHeaderField: "x-goog-hash") != nil)
   }
+
+  /// Tests resuming an upload from an intermediate offset when MD5 checksum was requested (.auto).
+  /// Because MD5 is not recoverable from a partial state, MD5 calculation must be skipped,
+  /// and no md5 checksum header should be sent in the final chunk upload request.
+  @Test func testResumeUploadPartialWithAutoMD5Skipped() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)
+    let source = BytesSource(data: data)
+
+    let queryUrl = registry.url(
+      "/upload/storage/v1/b/\(bucket)/o?upload_id=auto-md5-partial-upload-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(data.count)",
+        "contentType": "application/octet-stream",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: ["Range": "bytes=0-4999"]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let uploadOptions = UploadOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
+    }
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
+    let object = try await task.value
+
+    #expect(object.name == objectName)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let finalChunkReq = requests[1]
+    let hashHeader = finalChunkReq.value(forHTTPHeaderField: "x-goog-hash")
+    #expect(hashHeader == nil)
+  }
+
+  /// Tests resuming an upload from offset 0 when MD5 checksum was requested (.auto).
+  /// Because the upload starts from byte 0 (not partially complete), MD5 calculation SHOULD occur and be sent.
+  @Test func testResumeUploadFromOffsetZeroWithAutoMD5() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let data = Data(repeating: 1, count: 1 * 1024 * 1024)
+    let source = BytesSource(data: data)
+
+    let queryUrl = registry.url(
+      "/upload/storage/v1/b/\(bucket)/o?upload_id=zero-offset-md5-upload-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(data.count)",
+        "contentType": "application/octet-stream",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: [:]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let uploadOptions = UploadOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
+    }
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
+    let object = try await task.value
+
+    #expect(object.name == objectName)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let finalChunkReq = requests[1]
+    let hashHeader = finalChunkReq.value(forHTTPHeaderField: "x-goog-hash")
+    #expect(hashHeader != nil)
+    #expect(hashHeader?.contains("md5=") == true)
+  }
 }
