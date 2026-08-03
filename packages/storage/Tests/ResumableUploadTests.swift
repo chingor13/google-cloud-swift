@@ -262,6 +262,74 @@ import Testing
     #expect(object.bucket == bucket)
   }
 
+  /// Tests resuming an upload using `X-Goog-Range-Hash` header to seed CRC32C without re-reading bytes 0..<offset locally.
+  @Test func testResumeUploadWithXGoogRangeHash() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+    let fullData = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+    let firstPart = Data("Hello, ".utf8)
+
+    let firstPartCRC = CRC32C.compute(firstPart)
+    let bigEndian = firstPartCRC.bigEndian
+    var bytes = [UInt8]()
+    withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
+    let rangeHashHeader = "crc32c=" + Data(bytes).base64EncodedString()
+
+    let source = BytesSource(data: fullData)
+    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=range-hash-id")
+
+    let objectJSON = """
+      {
+        "name": "\(objectName)",
+        "bucket": "\(bucket)",
+        "generation": "1",
+        "metageneration": "1",
+        "size": "\(fullData.count)",
+        "contentType": "text/plain",
+        "storageClass": "STANDARD"
+      }
+      """
+
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: [
+          "Range": "bytes=0-6",
+          "X-Goog-Range-Hash": rangeHashHeader,
+        ]),
+      for: queryUrl)
+    registry.register(
+      response: .success(
+        statusCode: 200, data: Data(objectJSON.utf8),
+        headers: nil),
+      for: queryUrl)
+
+    let config = URLSessionConfiguration.ephemeral
+    config.protocolClasses = [MockURLProtocol.self]
+    let session = URLSession(configuration: config)
+
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = registry.endpoint
+        $0._testSession = session
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+
+    let client = try StorageClient(options)
+    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
+
+    let object = try await task.value
+    #expect(object.name == objectName)
+
+    let requests = registry.recordedRequests()
+    #expect(requests.count == 2)
+    let putRequest = requests[1]
+    let hashHeader = putRequest.value(forHTTPHeaderField: "X-Goog-Hash")
+    #expect(hashHeader == "crc32c=TVUQaA==")
+  }
+
   /// Tests error handling when `SeekableUploadSource.seek` fails to seek to the server's reported offset.
   @Test func resumeUploadSourceSeekError() async throws {
     let registry = MockRegistry.create()

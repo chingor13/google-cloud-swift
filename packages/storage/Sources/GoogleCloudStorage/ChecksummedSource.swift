@@ -49,6 +49,13 @@ struct ChecksummedSource<S: UploadSource> {
     }
   }
 
+  mutating func seedCRC32C(seed: UInt32, bytesHashed: Int64) {
+    if options.crc32c == .auto {
+      self.crc32c = CRC32C(seed: seed)
+      self.bytesHashed = bytesHashed
+    }
+  }
+
   private mutating func updateChecksums(data: Data, startOffset: Int64) {
     let needCRC32C = (options.crc32c == .auto)
     let needMD5 = (options.md5 == .auto)

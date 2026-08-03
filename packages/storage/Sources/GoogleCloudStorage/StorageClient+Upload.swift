@@ -215,17 +215,35 @@ extension StorageClient {
     )
   }
 
+  fileprivate static func parseCRC32CFromRangeHash(_ headerValue: String) -> UInt32? {
+    let parts = headerValue.split(separator: ",")
+    for part in parts {
+      let trimmed = part.trimmingCharacters(in: .whitespaces)
+      if trimmed.hasPrefix("crc32c=") {
+        let b64 = String(trimmed.dropFirst("crc32c=".count))
+        guard let data = Data(base64Encoded: b64), data.count == 4 else { return nil }
+        let bigEndian = data.withUnsafeBytes { $0.load(as: UInt32.self) }
+        return UInt32(bigEndian: bigEndian)
+      }
+    }
+    return nil
+  }
+
   fileprivate static func continueResumableUpload<S: SeekableUploadSource>(
     httpClient: HTTPClient,
     source: inout S,
     uploadId: String,
     offset: Int64,
+    crc32cSeed: UInt32? = nil,
     chunkSize: Int,
     totalSize: Int64?,
     options: UploadOptions,
     continuation: AsyncStream<UploadStatus>.Continuation
   ) async throws -> StorageObject {
     var checksummedSource = ChecksummedSource(source: source, options: options.checksums)
+    if let seed = crc32cSeed {
+      checksummedSource.seedCRC32C(seed: seed, bytesHashed: offset)
+    }
     if offset > 0 {
       try await checksummedSource.seek(to: offset)
     }
@@ -266,6 +284,7 @@ extension StorageClient {
       let (queryData, queryResponse) = try await httpClient.data(for: queryRequest)
 
       var offset: Int64 = 0
+      var crc32cSeed: UInt32? = nil
       if queryResponse.statusCode == 200 || queryResponse.statusCode == 201 {
         let object = try httpClient.handleObjectResponse(data: queryData, response: queryResponse)
         continuation.yield(
@@ -276,6 +295,9 @@ extension StorageClient {
       } else if queryResponse.statusCode == 308 {
         if let rangeHeader = queryResponse.value(forHTTPHeaderField: "Range") {
           offset = try httpClient.parseNextRangeStart(rangeHeader)
+        }
+        if let rangeHashHeader = queryResponse.value(forHTTPHeaderField: "X-Goog-Range-Hash") {
+          crc32cSeed = Self.parseCRC32CFromRangeHash(rangeHashHeader)
         }
       } else {
         throw UploadError.unexpectedServerResponse(
@@ -294,6 +316,7 @@ extension StorageClient {
         source: &source,
         uploadId: uploadId,
         offset: offset,
+        crc32cSeed: crc32cSeed,
         chunkSize: chunkSize,
         totalSize: totalSize,
         options: options,
