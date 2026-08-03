@@ -265,7 +265,8 @@ extension StorageClient {
       var source = source
       let totalSize = source.totalSize
 
-      // 1. Query GCS for current status
+      // Query GCS for current status - this includes any partially calculated
+      // checksums if available.
       let queryRequest = try await httpClient.buildQueryResumableUploadRequest(
         uploadId: uploadId, options: options)
       let (queryData, queryResponse) = try await httpClient.data(for: queryRequest)
@@ -290,15 +291,14 @@ extension StorageClient {
         UploadStatus(
           bytesUploaded: status.nextOffset, totalBytes: totalSize, uploadId: uploadId))
 
-      // 2. Continue upload
-      let chunkSize = options.chunkSize
+      // Continue the main upload loop
       return try await Self.continueResumableUpload(
         httpClient: httpClient,
         source: &source,
         uploadId: uploadId,
         offset: status.nextOffset,
         crc32cSeed: status.crc32cSeed,
-        chunkSize: chunkSize,
+        chunkSize: options.chunkSize,
         totalSize: totalSize,
         options: options,
         continuation: continuation
