@@ -22,16 +22,14 @@ locals {
   # These builds appear in both the PR (Pull Request) triggers and the
   # PM (Post Merge) triggers. See below for builds that only appear in one.
   common_builds = {
-    # TODO(https://github.com/googleapis/google-cloud-swift/issues/99) - enable
-    # these triggers
-    #    unit-tests = {
-    #      config = "scripted.yaml"
-    #      script = "unit-tests"
-    #    }
-    #    minimum-swift = {
-    #      config = "minimum-swift.yaml"
-    #      script = "unit-tests"
-    #    }
+    unit-tests = {
+      config = "scripted.yaml"
+      script = "unit-tests"
+    }
+    minimum-swift = {
+      config = "minimum-swift.yaml"
+      script = "unit-tests"
+    }
   }
 
   # These are builds that only run during Pull Requests.
@@ -80,7 +78,7 @@ resource "google_cloudbuild_trigger" "pull-request" {
   for_each = tomap(local.pr_builds)
   location = var.region
   name     = "gcb-pr-${each.key}"
-  filename = ".gcb/${each.value.config}"
+  filename = "ci/gcb/${each.value.config}"
   tags     = ["pull-request", "name:${each.key}"]
 
   service_account = var.service_account
@@ -111,7 +109,7 @@ resource "google_cloudbuild_trigger" "post-merge" {
   }
   location       = var.region
   name           = "gcb-pm-${each.key}"
-  filename       = ".gcb/${each.value.config}"
+  filename       = "ci/gcb/${each.value.config}"
   tags           = ["post-merge", "push", "name:${each.key}"]
   included_files = each.value.included_files
 
