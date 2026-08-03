@@ -281,7 +281,7 @@ import Testing
     let source = BytesSource(data: data)
     var checksummedSource = ChecksummedSource(source: source, validation: .crc32c)
 
-    // 1. Seek to byte 3 ("Hel") -> hashes 0..<3
+    // 1. Seek to byte 3 -> hashes 0..<3
     try await checksummedSource.seek(to: 3)
 
     // 2. Seek forward to byte 7 ("Hello, ") -> hashes 3..<7 without re-hashing 0..<3
