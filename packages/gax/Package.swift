@@ -31,6 +31,8 @@ let package = Package(
     .package(path: "../auth"),
     .package(path: "../../generated/google-rpc"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
+    .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+    .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.24.0"),
   ],
   targets: [
     .target(
@@ -39,6 +41,7 @@ let package = Package(
         .product(name: "GoogleCloudAuth", package: "auth"),
         .product(name: "GoogleRpc", package: "google-rpc"),
         .product(name: "Logging", package: "swift-log"),
+        .product(name: "AsyncHTTPClient", package: "async-http-client"),
       ]
     ),
     .testTarget(
@@ -46,6 +49,11 @@ let package = Package(
       dependencies: [
         "GoogleCloudGax",
         .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "AsyncHTTPClient", package: "async-http-client"),
+        .product(name: "NIOCore", package: "swift-nio"),
+        .product(name: "NIOPosix", package: "swift-nio"),
+        .product(name: "NIOHTTP1", package: "swift-nio"),
+        .product(name: "NIOTestUtils", package: "swift-nio"),
       ],
       path: "Tests",
       exclude: ["IntegrationTests"]

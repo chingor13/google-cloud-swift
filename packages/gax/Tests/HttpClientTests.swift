@@ -12,46 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import AsyncHTTPClient
 import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import Testing
-@testable import GoogleCloudGax
 import GoogleCloudAuth
+
+@testable import GoogleCloudGax
 import GoogleRpc
+import NIOCore
+import NIOHTTP1
+import NIOPosix
+import NIOTestUtils
+import Testing
 
 @Suite(.serialized) struct HttpClientTest {
-  // Custom URLProtocol to mock responses
-  class MockURLProtocol: URLProtocol {
-    nonisolated(unsafe) static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
-
-    override class func canInit(with request: URLRequest) -> Bool {
-      return true
-    }
-
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-      return request
-    }
-
-    override func startLoading() {
-      guard let handler = MockURLProtocol.requestHandler else {
-        fatalError("Handler not set.")
-      }
-
-      do {
-        let (response, data) = try handler(request)
-        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-        client?.urlProtocol(self, didLoad: data)
-        client?.urlProtocolDidFinishLoading(self)
-      } catch {
-        client?.urlProtocol(self, didFailWithError: error)
-      }
-    }
-
-    override func stopLoading() {}
-  }
-
   @Test(arguments: [
     // A `?` in the path results in a percent-encoded `?` == %3F
     ("/path?$name=value", "path%3F$name=value"),
@@ -68,7 +44,7 @@ import GoogleRpc
     let request = try await client.Request(path: inputPath, query: query)
     // Note the percent-escaped `?`
     #expect(
-      request.url?.absoluteString == "http://localhost:1234/\(wantPath)?$alt=json")
+      request.url == "http://localhost:1234/\(wantPath)?$alt=json")
   }
 
   @Test(arguments: [
@@ -116,68 +92,101 @@ import GoogleRpc
   }
 
   @Test func postRequest() async throws {
-    let endpoint = "http://localhost:8080"
+    let server = NIOHTTP1TestServer(group: MultiThreadedEventLoopGroup.singleton)
+    defer { try! server.stop() }
+
+    let endpoint = "http://localhost:\(server.serverPort)"
     let path = "/v1/projects/my-project/secrets"
     let query = [URLQueryItem(name: "$alt", value: "json")]
 
-    // Set up mock handler
-    MockURLProtocol.requestHandler = { request in
-      #expect(request.httpMethod == "POST")
-      #expect(request.url?.path == path)
-      #expect(request.url?.query == "$alt=json")
-
-      let response = HTTPURLResponse(
-        url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-      let responseData = Data("{}".utf8)
-      return (response, responseData)
+    let options = ClientOptions().with {
+      $0.endpoint = endpoint
+      $0.credentials = try! Credentials(configuration: .anonymous)
     }
-
-    // Configure session with mock protocol
-    let config = URLSessionConfiguration.ephemeral
-    config.protocolClasses = [MockURLProtocol.self]
-    let session = URLSession(configuration: config)
-
-    let client = try HTTPClient(testSession: session, endpoint: endpoint)
+    let client = try HTTPClient(from: options, withDefaultEndpoint: endpoint)
 
     var request = try await client.Request(path: path, query: query)
-    request.httpMethod = "POST"
-    request.httpBody = "{}".data(using: .utf8)
+    request.method = .POST
+    request.body = .bytes(Data("{}".utf8))
 
-    let (data, response) = try await client.data(for: request)
+    async let clientTask = client.data(for: request)
+
+    let requestHead = try server.readInbound()
+    guard case .head(let head) = requestHead else {
+      Issue.record("Expected head, got \(requestHead)")
+      return
+    }
+    #expect(head.method == .POST)
+    #expect(head.uri == "\(path)?$alt=json")
+
+    let requestBody = try server.readInbound()
+    guard case .body(let buffer) = requestBody else {
+      Issue.record("Expected body, got \(requestBody)")
+      return
+    }
+    #expect(String(buffer: buffer) == "{}")
+
+    let requestEnd = try server.readInbound()
+    guard case .end = requestEnd else {
+      Issue.record("Expected end, got \(requestEnd)")
+      return
+    }
+
+    try server.writeOutbound(
+      .head(
+        HTTPResponseHead(
+          version: .http1_1, status: .ok, headers: ["Content-Type": "application/json"])))
+    try server.writeOutbound(.body(.byteBuffer(ByteBuffer(string: "{}"))))
+    try server.writeOutbound(.end(nil))
+
+    let (data, response) = try await clientTask
 
     #expect(response.statusCode == 200)
     #expect(!data.isEmpty)
   }
 
   @Test func getErrorDetails() async throws {
-    let endpoint = "http://localhost:8080"
+    let server = NIOHTTP1TestServer(group: MultiThreadedEventLoopGroup.singleton)
+    defer { try! server.stop() }
+
+    let endpoint = "http://localhost:\(server.serverPort)"
     let path = "/v1/projects/test-only-project/locations/us-central1/orchestrationClusters"
     let query = [URLQueryItem(name: "$alt", value: "json")]
 
-    // Set up mock handler
-    MockURLProtocol.requestHandler = { request in
-      #expect(request.httpMethod == "GET")
-      #expect(request.url?.path == path)
-      #expect(request.url?.query == "$alt=json")
-
-      let response = HTTPURLResponse(
-        url: request.url!, statusCode: 403, httpVersion: nil,
-        headerFields: ["Content-Type": "application/json; charset=UTF-8"])!
-      let responseData = Data(errorResponseWithDetails.utf8)
-      return (response, responseData)
+    let options = ClientOptions().with {
+      $0.endpoint = endpoint
+      $0.credentials = try! Credentials(configuration: .anonymous)
     }
-
-    // Configure session with mock protocol
-    let config = URLSessionConfiguration.ephemeral
-    config.protocolClasses = [MockURLProtocol.self]
-    let session = URLSession(configuration: config)
-
-    let client = try HTTPClient(testSession: session, endpoint: endpoint)
+    let client = try HTTPClient(from: options, withDefaultEndpoint: endpoint)
 
     var request = try await client.Request(path: path, query: query)
-    request.httpMethod = "GET"
+    request.method = .GET
 
-    let response = await client.rpc(for: request)
+    async let clientTask = client.rpc(for: request)
+
+    let requestHead = try server.readInbound()
+    guard case .head(let head) = requestHead else {
+      Issue.record("Expected head, got \(requestHead)")
+      return
+    }
+    #expect(head.method == .GET)
+    #expect(head.uri == "\(path)?$alt=json")
+
+    let requestEnd = try server.readInbound()
+    guard case .end = requestEnd else {
+      Issue.record("Expected end, got \(requestEnd)")
+      return
+    }
+
+    try server.writeOutbound(
+      .head(
+        HTTPResponseHead(
+          version: .http1_1, status: .forbidden,
+          headers: ["Content-Type": "application/json; charset=UTF-8"])))
+    try server.writeOutbound(.body(.byteBuffer(ByteBuffer(string: errorResponseWithDetails))))
+    try server.writeOutbound(.end(nil))
+
+    let response = await clientTask
     guard case let .failure(.service(serviceError)) = response else {
       Issue.record("expected an service error response, got=\(response)")
       return
@@ -188,35 +197,50 @@ import GoogleRpc
   }
 
   @Test func getHttpError() async throws {
-    let endpoint = "http://localhost:8080"
+    let server = NIOHTTP1TestServer(group: MultiThreadedEventLoopGroup.singleton)
+    defer { try! server.stop() }
+
+    let endpoint = "http://localhost:\(server.serverPort)"
     let path = "/v1/projects//locations/us-central1/orchestrationClusters"
     let query = [URLQueryItem(name: "$alt", value: "json")]
 
-    // Set up mock handler
-    MockURLProtocol.requestHandler = { request in
-      #expect(request.httpMethod == "GET")
-      #expect(request.url?.path == path)
-      #expect(request.url?.query == "$alt=json")
-
-      let response = HTTPURLResponse(
-        url: request.url!, statusCode: 404, httpVersion: nil,
-        headerFields: ["Content-Type": "text/html; charset=UTF-8"])!
-      let responseData = "<!DOCTYPE html><html lang=en><title>Error 404</title></html>".data(
-        using: .utf8)!
-      return (response, responseData)
+    let options = ClientOptions().with {
+      $0.endpoint = endpoint
+      $0.credentials = try! Credentials(configuration: .anonymous)
     }
-
-    // Configure session with mock protocol
-    let config = URLSessionConfiguration.ephemeral
-    config.protocolClasses = [MockURLProtocol.self]
-    let session = URLSession(configuration: config)
-
-    let client = try HTTPClient(testSession: session, endpoint: endpoint)
+    let client = try HTTPClient(from: options, withDefaultEndpoint: endpoint)
 
     var request = try await client.Request(path: path, query: query)
-    request.httpMethod = "GET"
+    request.method = .GET
 
-    let response = await client.rpc(for: request)
+    async let clientTask = client.rpc(for: request)
+
+    let requestHead = try server.readInbound()
+    guard case .head(let head) = requestHead else {
+      Issue.record("Expected head, got \(requestHead)")
+      return
+    }
+    #expect(head.method == .GET)
+    #expect(head.uri == "\(path)?$alt=json")
+
+    let requestEnd = try server.readInbound()
+    guard case .end = requestEnd else {
+      Issue.record("Expected end, got \(requestEnd)")
+      return
+    }
+
+    try server.writeOutbound(
+      .head(
+        HTTPResponseHead(
+          version: .http1_1, status: .notFound,
+          headers: ["Content-Type": "text/html; charset=UTF-8"])))
+    try server.writeOutbound(
+      .body(
+        .byteBuffer(
+          ByteBuffer(string: "<!DOCTYPE html><html lang=en><title>Error 404</title></html>"))))
+    try server.writeOutbound(.end(nil))
+
+    let response = await clientTask
     guard case let .failure(.http(httpError)) = response else {
       Issue.record("expected an http error response, got=\(response)")
       return

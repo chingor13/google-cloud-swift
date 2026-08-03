@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import AsyncHTTPClient
 import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -62,8 +63,8 @@ public struct ClientOptions: Sendable {
   /// [Application Default Credentials]: https://docs.cloud.google.com/docs/authentication/client-libraries
   public var credentials: Credentials? = nil
 
-  /// Overrides the URLSession used by the client for testing purposes.
-  public var _testSession: URLSession? = nil
+  /// Overrides the AsyncHTTPClient.HTTPClient used by the client.
+  public var _httpClient: AsyncHTTPClient.HTTPClient? = nil
 
   /// Enables logging and sets the logger.
   ///

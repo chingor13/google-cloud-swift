@@ -12,34 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import AsyncHTTPClient
 import Foundation
-// On Linux `URLSession` and friends are found in `FoundationNetworking`, ugh.
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
 import GoogleCloudAuth
+import NIOHTTP1
 
 /// Implements a HTTP-only client for the Swift SDK client libraries.
 public struct HTTPClient {
-  private static let sharedSession = URLSession(configuration: .ephemeral)
-
   let baseURL: URLComponents
   let credentials: GoogleCloudAuth.Credentials
-  let inner: URLSession
+  let inner: AsyncHTTPClient.HTTPClient
 
   // Creates a new client.
   public init(from: ClientOptions, withDefaultEndpoint: String) throws {
     self.credentials = try from.credentials ?? GoogleCloudAuth.Credentials()
     let endpoint = from.endpoint ?? withDefaultEndpoint
     self.baseURL = try Self.validateEndpoint(endpoint)
-    self.inner = from._testSession ?? Self.sharedSession
+    self.inner = from._httpClient ?? AsyncHTTPClient.HTTPClient.shared
   }
 
   // Creates a new testing client.
-  init(testSession: URLSession, endpoint: String, credentials: Credentials? = nil) throws {
+  init(httpClient: AsyncHTTPClient.HTTPClient, endpoint: String, credentials: Credentials? = nil)
+    throws
+  {
     self.baseURL = try Self.validateEndpoint(endpoint)
     self.credentials = try credentials ?? GoogleCloudAuth.Credentials(configuration: .anonymous)
-    self.inner = testSession
+    self.inner = httpClient
   }
 
   static func validateEndpoint(_ endpoint: String) throws -> URLComponents {
@@ -57,22 +58,24 @@ public struct HTTPClient {
     return parsed
   }
 
-  public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {
+  public func Request(path: String, query: [URLQueryItem]) async throws -> HTTPClientRequest {
     var components = self.baseURL
     components.path = path
     components.queryItems = query
     guard let url = components.url else {
       throw RequestError.binding("bad URL for path=\(path), baseURL=\(self.baseURL)")
     }
-    var request = URLRequest(url: url)
+    var request = HTTPClientRequest(url: url.absoluteString)
     let headers = try await self.credentials.headers()
     for (key, value) in headers {
-      request.setValue(value, forHTTPHeaderField: key)
+      request.headers.add(name: key, value: value)
     }
     return request
   }
 
-  public func rpc(for request: URLRequest) async -> Result<(Data, HTTPURLResponse), RequestError> {
+  public func rpc(for request: HTTPClientRequest) async -> Result<
+    (Data, HTTPURLResponse), RequestError
+  > {
     do {
       let (data, response) = try await self.data(for: request)
       if !(200..<300).contains(response.statusCode) {
@@ -86,12 +89,31 @@ public struct HTTPClient {
     }
   }
 
-  public func data(for request: URLRequest) async throws -> (Data, HTTPURLResponse) {
-    let (data, response) = try await self.inner.data(for: request)
-    guard let httpResponse = response as? HTTPURLResponse else {
-      throw RequestError.badResponseType
+  public func data(for request: HTTPClientRequest) async throws -> (Data, HTTPURLResponse) {
+    do {
+      let response = try await self.inner.execute(request, timeout: .seconds(30))
+      let buffer = try await response.body.collect(upTo: 100 * 1024 * 1024)
+      let data = Data(buffer.readableBytesView)
+      var headerFields: [String: String] = [:]
+      for header in response.headers {
+        headerFields[header.name] = header.value
+      }
+      guard let url = URL(string: request.url),
+        let httpResponse = HTTPURLResponse(
+          url: url,
+          statusCode: Int(response.status.code),
+          httpVersion: nil,
+          headerFields: headerFields
+        )
+      else {
+        throw RequestError.badResponseType
+      }
+      return (data, httpResponse)
+    } catch let error as RequestError {
+      throw error
+    } catch {
+      throw RequestError.io(error)
     }
-    return (data, httpResponse)
   }
 
   static func parseError(data: Data, response: HTTPURLResponse) -> RequestError {
@@ -100,11 +122,17 @@ public struct HTTPClient {
         return RequestError.service(ServiceError(wrapper: w))
       }
     }
+    var headers: [String: String] = [:]
+    for (k, v) in response.allHeaderFields {
+      if let key = k as? String, let value = v as? String {
+        headers[key] = value
+      }
+    }
     return GoogleCloudGax.RequestError.http(
       GoogleCloudGax.HTTPDetails(
         http_status_code: response.statusCode,
-        headers: [:],
-        payload: data,
+        headers: headers,
+        payload: data
       ))
   }
 }
