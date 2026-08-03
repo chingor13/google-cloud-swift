@@ -29,6 +29,8 @@ struct ChecksummedSource<S: UploadSource> {
   private var nextChunk: Data? = nil
   private var isInitialized = false
   private var isFinished = false
+  private var bytesHashed: Int64 = 0
+  private var nextChunkOffset: Int64 = 0
 
   init(source: S, options: ChecksumOptions) {
     self.source = source
@@ -47,6 +49,32 @@ struct ChecksummedSource<S: UploadSource> {
     }
   }
 
+  private mutating func updateChecksums(data: Data, startOffset: Int64) {
+    let needCRC32C = (options.crc32c == .auto)
+    let needMD5 = (options.md5 == .auto)
+    guard needCRC32C || needMD5 else { return }
+
+    let endOffset = startOffset + Int64(data.count)
+    guard endOffset > bytesHashed else { return }
+
+    let unhashedData: Data
+    if startOffset >= bytesHashed {
+      unhashedData = data
+    } else {
+      let offsetInChunk = Int(bytesHashed - startOffset)
+      unhashedData = data.subdata(in: offsetInChunk..<data.count)
+    }
+
+    if needCRC32C {
+      crc32c.update(unhashedData)
+    }
+    if needMD5 {
+      md5.update(data: unhashedData)
+    }
+
+    bytesHashed = endOffset
+  }
+
   mutating func readChunk(maxBytes: Int) async throws -> ChunkInfo? {
     if !isInitialized {
       nextChunk = try await source.read(maxBytes: maxBytes)
@@ -57,15 +85,13 @@ struct ChecksummedSource<S: UploadSource> {
       return nil
     }
 
+    let currentChunkOffset = nextChunkOffset
+    nextChunkOffset += Int64(currentChunk.count)
+
     nextChunk = try await source.read(maxBytes: maxBytes)
     let isLast = nextChunk == nil || nextChunk!.isEmpty
 
-    if options.crc32c == .auto {
-      crc32c.update(currentChunk)
-    }
-    if options.md5 == .auto {
-      md5.update(data: currentChunk)
-    }
+    updateChecksums(data: currentChunk, startOffset: currentChunkOffset)
 
     var checksumStr: String? = nil
     if isLast {
@@ -109,42 +135,31 @@ struct ChecksummedSource<S: UploadSource> {
 
 extension ChecksummedSource where S: SeekableUploadSource {
   mutating func seek(to offset: Int64) async throws {
+    nextChunk = nil
+    isInitialized = false
+    isFinished = false
+    nextChunkOffset = offset
+
     let needCRC32C = (options.crc32c == .auto)
     let needMD5 = (options.md5 == .auto)
 
-    guard needCRC32C || needMD5 else {
-      // no checksums requested, nothing more to do
+    guard offset > bytesHashed && (needCRC32C || needMD5) else {
       try await source.seek(to: offset)
       return
     }
 
-    guard offset > 0 else {
-      // we are starting at the beginning of the file, no precomputation needed
-      try await source.seek(to: 0)
-      return
-    }
-
-    // Start at the beginning of the file to compute checksum up to offset
-    try await source.seek(to: 0)
-    nextChunk = nil
-    isInitialized = false
-    isFinished = false
-    md5 = Insecure.MD5()
-    crc32c = CRC32C()
-
-    var bytesRemaining = offset
+    // Catch up checksum calculation from `bytesHashed` to `offset`
+    try await source.seek(to: bytesHashed)
+    var currentSeekOffset = bytesHashed
+    var bytesRemaining = offset - bytesHashed
     let bufferSize = 8 * 1024 * 1024
     while bytesRemaining > 0 {
       let toRead = Int(min(bytesRemaining, Int64(bufferSize)))
       guard let chunk = try await source.read(maxBytes: toRead), !chunk.isEmpty else {
-        throw UploadError.localSourceTooSmall(localSize: offset - bytesRemaining, gcsOffset: offset)
+        throw UploadError.localSourceTooSmall(localSize: currentSeekOffset, gcsOffset: offset)
       }
-      if needCRC32C {
-        crc32c.update(chunk)
-      }
-      if needMD5 {
-        md5.update(data: chunk)
-      }
+      updateChecksums(data: chunk, startOffset: currentSeekOffset)
+      currentSeekOffset += Int64(chunk.count)
       bytesRemaining -= Int64(chunk.count)
     }
   }

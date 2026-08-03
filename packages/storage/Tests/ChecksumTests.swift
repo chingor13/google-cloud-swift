@@ -248,4 +248,56 @@ import Testing
     #expect(chunk?.isLast == true)
     #expect(chunk?.checksum != nil)
   }
+
+  /// Tests seeking backwards does not re-hash previously hashed bytes or corrupt the final checksum.
+  @Test func testChecksummedSourceSeekBackwardsDoesNotDuplicateHashes() async throws {
+    let data = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+    let source = BytesSource(data: data)
+    var checksummedSource = ChecksummedSource(source: source, validation: .crc32c)
+
+    // 1. Seek forward to byte 7 ("Hello, ") -> bytesHashed becomes 7
+    try await checksummedSource.seek(to: 7)
+
+    // 2. Seek backward to byte 0 -> should NOT reset bytesHashed (remains 7)
+    try await checksummedSource.seek(to: 0)
+
+    // 3. Read entire file from byte 0 to EOF
+    var allData = Data()
+    var finalChecksum: String? = nil
+    while let chunk = try await checksummedSource.readChunk(maxBytes: 5) {
+      allData.append(chunk.data)
+      if chunk.isLast {
+        finalChecksum = chunk.checksum
+      }
+    }
+
+    #expect(allData == data)
+    #expect(finalChecksum == "crc32c=TVUQaA==")
+  }
+
+  /// Tests seeking forward incrementally from an intermediate offset.
+  @Test func testChecksummedSourceSeekForwardFromIntermediateOffset() async throws {
+    let data = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+    let source = BytesSource(data: data)
+    var checksummedSource = ChecksummedSource(source: source, validation: .crc32c)
+
+    // 1. Seek to byte 3 ("Hel") -> hashes 0..<3
+    try await checksummedSource.seek(to: 3)
+
+    // 2. Seek forward to byte 7 ("Hello, ") -> hashes 3..<7 without re-hashing 0..<3
+    try await checksummedSource.seek(to: 7)
+
+    // 3. Read remaining chunks 7..<13 to EOF
+    var remainingData = Data()
+    var finalChecksum: String? = nil
+    while let chunk = try await checksummedSource.readChunk(maxBytes: 5) {
+      remainingData.append(chunk.data)
+      if chunk.isLast {
+        finalChecksum = chunk.checksum
+      }
+    }
+
+    #expect(remainingData == Data("World!".utf8))
+    #expect(finalChecksum == "crc32c=TVUQaA==")
+  }
 }
