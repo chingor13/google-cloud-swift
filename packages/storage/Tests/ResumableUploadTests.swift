@@ -263,8 +263,8 @@ import Testing
     #expect(object.bucket == bucket)
   }
 
-  /// Tests resuming an upload using `X-Goog-Range-Hash` header to seed CRC32C without re-reading bytes 0..<offset locally.
-  @Test func testResumeUploadWithXGoogRangeHash() async throws {
+  /// Tests resuming an upload using `x-goog-running-hash` header to seed CRC32C without re-reading bytes 0..<offset locally.
+  @Test func testResumeUploadWithXGoogRunningHash() async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
     let objectName = "test-object"
@@ -275,10 +275,10 @@ import Testing
     let bigEndian = firstPartCRC.bigEndian
     var bytes = [UInt8]()
     withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
-    let rangeHashHeader = "crc32c=" + Data(bytes).base64EncodedString()
+    let runningHashHeader = "crc32c=" + Data(bytes).base64EncodedString()
 
     let source = BytesSource(data: fullData)
-    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=range-hash-id")
+    let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=running-hash-id")
 
     let objectJSON = """
       {
@@ -297,7 +297,7 @@ import Testing
         statusCode: 308, data: Data(),
         headers: [
           "Range": "bytes=0-6",
-          "X-Goog-Range-Hash": rangeHashHeader,
+          "x-goog-running-hash": runningHashHeader,
         ]),
       for: queryUrl)
     registry.register(

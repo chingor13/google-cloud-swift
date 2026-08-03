@@ -216,20 +216,6 @@ extension StorageClient {
     )
   }
 
-  fileprivate static func parseCRC32CFromRangeHash(_ headerValue: String) -> UInt32? {
-    let parts = headerValue.split(separator: ",")
-    for part in parts {
-      let trimmed = part.trimmingCharacters(in: .whitespaces)
-      if trimmed.hasPrefix("crc32c=") {
-        let b64 = String(trimmed.dropFirst("crc32c=".count))
-        guard let data = Data(base64Encoded: b64), data.count == 4 else { return nil }
-        let bigEndian = data.withUnsafeBytes { $0.load(as: UInt32.self) }
-        return UInt32(bigEndian: bigEndian)
-      }
-    }
-    return nil
-  }
-
   fileprivate static func continueResumableUpload<S: SeekableUploadSource>(
     httpClient: HTTPClient,
     source: inout S,
@@ -284,8 +270,7 @@ extension StorageClient {
         uploadId: uploadId, options: options)
       let (queryData, queryResponse) = try await httpClient.data(for: queryRequest)
 
-      var offset: Int64 = 0
-      var crc32cSeed: UInt32? = nil
+      var status = ResumableUploadQueryStatus(nextOffset: 0, crc32cSeed: nil)
       if queryResponse.statusCode == 200 || queryResponse.statusCode == 201 {
         let object = try httpClient.handleObjectResponse(data: queryData, response: queryResponse)
         continuation.yield(
@@ -294,12 +279,7 @@ extension StorageClient {
             uploadId: uploadId))
         return object
       } else if queryResponse.statusCode == 308 {
-        if let rangeHeader = queryResponse.value(forHTTPHeaderField: "Range") {
-          offset = try httpClient.parseNextRangeStart(rangeHeader)
-        }
-        if let rangeHashHeader = queryResponse.value(forHTTPHeaderField: "X-Goog-Range-Hash") {
-          crc32cSeed = Self.parseCRC32CFromRangeHash(rangeHashHeader)
-        }
+        status = try httpClient.parseResumableUploadQueryStatus(from: queryResponse)
       } else {
         throw UploadError.unexpectedServerResponse(
           statusCode: queryResponse.statusCode,
@@ -308,7 +288,7 @@ extension StorageClient {
 
       continuation.yield(
         UploadStatus(
-          bytesUploaded: offset, totalBytes: totalSize, uploadId: uploadId))
+          bytesUploaded: status.nextOffset, totalBytes: totalSize, uploadId: uploadId))
 
       // 2. Continue upload
       let chunkSize = options.chunkSize
@@ -316,8 +296,8 @@ extension StorageClient {
         httpClient: httpClient,
         source: &source,
         uploadId: uploadId,
-        offset: offset,
-        crc32cSeed: crc32cSeed,
+        offset: status.nextOffset,
+        crc32cSeed: status.crc32cSeed,
         chunkSize: chunkSize,
         totalSize: totalSize,
         options: options,
@@ -352,6 +332,12 @@ extension StorageClient {
 }
 
 // --- Helper Methods Extension ---
+
+/// Status returned by GCS when querying an in-progress resumable upload.
+struct ResumableUploadQueryStatus: Sendable {
+  let nextOffset: Int64
+  let crc32cSeed: UInt32?
+}
 
 extension HTTPClient {
   fileprivate func buildSimpleUploadRequest(
@@ -489,6 +475,36 @@ extension HTTPClient {
     request.setValue("bytes \(offset)-\(end)/\(totalStr)", forHTTPHeaderField: "Content-Range")
     request.httpBody = data
     return request
+  }
+
+  internal func parseResumableUploadQueryStatus(from response: HTTPURLResponse) throws
+    -> ResumableUploadQueryStatus
+  {
+    var nextOffset: Int64 = 0
+    if let rangeHeader = response.value(forHTTPHeaderField: "Range") {
+      nextOffset = try parseNextRangeStart(rangeHeader)
+    }
+
+    var crc32cSeed: UInt32? = nil
+    if let runningHashHeader = response.value(forHTTPHeaderField: "x-goog-running-hash") {
+      crc32cSeed = parseCRC32CFromRunningHash(runningHashHeader)
+    }
+
+    return ResumableUploadQueryStatus(nextOffset: nextOffset, crc32cSeed: crc32cSeed)
+  }
+
+  internal func parseCRC32CFromRunningHash(_ headerValue: String) -> UInt32? {
+    let parts = headerValue.split(separator: ",")
+    for part in parts {
+      let trimmed = part.trimmingCharacters(in: .whitespaces)
+      if trimmed.hasPrefix("crc32c=") {
+        let b64 = String(trimmed.dropFirst("crc32c=".count))
+        guard let data = Data(base64Encoded: b64), data.count == 4 else { return nil }
+        let bigEndian = data.withUnsafeBytes { $0.load(as: UInt32.self) }
+        return UInt32(bigEndian: bigEndian)
+      }
+    }
+    return nil
   }
 
   internal func parseNextRangeStart(_ rangeHeader: String) throws -> Int64 {
