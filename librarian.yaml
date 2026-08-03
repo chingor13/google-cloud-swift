@@ -524,11 +524,9 @@ libraries:
     copyright_year: "2026"
     swift:
       library_name_override: GoogleCloudOSConfigV1
-  - name: google-cloud-parallelstore-v1
-    version: 0.1.0-preview
+  - name: google-cloud-redis-v1
+    version: 0.0.0-preview
     copyright_year: "2026"
-    swift:
-      library_name_override: GoogleCloudParallelStoreV1
   - name: google-cloud-resourcemanager-v3
     version: 0.1.0-preview
     copyright_year: "2026"
@@ -600,6 +598,9 @@ libraries:
   - name: google-cloud-talent-v4
     version: 0.1.0-preview
     copyright_year: "2026"
+  - name: google-cloud-tasks-v2
+    version: 0.0.0-preview
+    copyright_year: "2026"
   - name: google-cloud-telcoautomation-v1
     version: 0.1.0-preview
     copyright_year: "2026"
@@ -621,6 +622,11 @@ libraries:
   - name: google-cloud-vision-v1
     version: 0.1.0-preview
     copyright_year: "2026"
+  - name: google-cloud-webrisk-v1
+    version: 0.0.0-preview
+    copyright_year: "2026"
+    swift:
+      library_name_override: GoogleCloudWebRiskV1
   - name: google-cloud-wkt
     version: 0.1.0-preview
     copyright_year: "2026"
