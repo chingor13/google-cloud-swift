@@ -412,7 +412,7 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
 ///
 /// ```swift
 /// let options = UploadOptions().with {
-///   $0.chunkSize = 16 * 1024 * 1024  // 16 MB
+///   $0.chunkSize = 16 * 1024 * 1024  // 16 MiB
 ///   $0.predefinedAcl = .publicRead
 ///   $0.metadata = UploadMetadata().with { meta in
 ///     meta.contentType = "application/json"
@@ -425,7 +425,7 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
 ///
 /// ### Object Metadata
 ///
-/// Attach HTTP headers (such as `Content-Type` or `Cache-Control`) and custom key-value pairs to the uploaded object:
+/// Attach fixed key metadata (such as `Content-Type` or `Cache-Control`) and custom key-value pairs to the uploaded object:
 ///
 /// ```swift
 /// let options = UploadOptions().with {
@@ -439,7 +439,7 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
 ///
 /// ### Preconditions
 ///
-/// Apply preconditions to ensure conditional uploads (for instance, guaranteeing an object is only created if it does not already exist):
+/// Apply preconditions to the upload. For example, guaranteeing an object is only created if it does not already exist:
 ///
 /// ```swift
 /// let options = UploadOptions().with {
