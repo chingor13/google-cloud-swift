@@ -268,14 +268,20 @@ import Testing
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
     let objectName = "test-object"
-    let fullData = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
-    let firstPart = Data("Hello, ".utf8)
+    let fullData = Data(repeating: 42, count: 16)
+    let firstPart = Data(repeating: 42, count: 8)
 
     let firstPartCRC = _CRC32C.compute(firstPart)
-    let bigEndian = firstPartCRC.bigEndian
-    var bytes = [UInt8]()
-    withUnsafeBytes(of: bigEndian) { bytes = Array($0) }
-    let runningHashHeader = "crc32c=" + Data(bytes).base64EncodedString()
+    let firstPartBigEndian = firstPartCRC.bigEndian
+    var firstPartBytes = [UInt8]()
+    withUnsafeBytes(of: firstPartBigEndian) { firstPartBytes = Array($0) }
+    let runningHashHeader = "crc32c=" + Data(firstPartBytes).base64EncodedString()
+
+    let fullCRC = _CRC32C.compute(fullData)
+    let fullBigEndian = fullCRC.bigEndian
+    var fullBytes = [UInt8]()
+    withUnsafeBytes(of: fullBigEndian) { fullBytes = Array($0) }
+    let expectedFullHashHeader = "crc32c=" + Data(fullBytes).base64EncodedString()
 
     let source = BytesSource(data: fullData)
     let queryUrl = registry.url("/upload/storage/v1/b/\(bucket)/o?upload_id=running-hash-id")
@@ -287,7 +293,7 @@ import Testing
         "generation": "1",
         "metageneration": "1",
         "size": "\(fullData.count)",
-        "contentType": "text/plain",
+        "contentType": "application/octet-stream",
         "storageClass": "STANDARD"
       }
       """
@@ -296,7 +302,7 @@ import Testing
       response: .success(
         statusCode: 308, data: Data(),
         headers: [
-          "Range": "bytes=0-6",
+          "Range": "bytes=0-7",
           "x-goog-running-hash": runningHashHeader,
         ]),
       for: queryUrl)
@@ -328,7 +334,7 @@ import Testing
     #expect(requests.count == 2)
     let putRequest = requests[1]
     let hashHeader = putRequest.value(forHTTPHeaderField: "X-Goog-Hash")
-    #expect(hashHeader == "crc32c=TVUQaA==")
+    #expect(hashHeader == expectedFullHashHeader)
   }
 
   /// Tests error handling when `SeekableUploadSource.seek` fails to seek to the server's reported offset.
