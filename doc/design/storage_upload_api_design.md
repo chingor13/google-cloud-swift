@@ -227,9 +227,6 @@ public enum UploadError: Error, Sendable {
     /// The upload was cancelled by the user.
     case cancelled
 
-    /// Data integrity validation failed.
-    case checksumMismatch(localChecksum: String, serverChecksum: String)
-
     /// GCS returned an unexpected response.
     case unexpectedServerResponse(statusCode: Int, message: String)
 
