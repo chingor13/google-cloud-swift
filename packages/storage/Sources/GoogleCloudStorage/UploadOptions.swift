@@ -383,7 +383,7 @@ public struct ObjectCustomContextPayload: Sendable, Codable, Equatable, Expressi
 /// Container for object contexts on a Cloud Storage object.
 ///
 /// Object contexts allow attaching custom key-value pairs to Cloud Storage objects
-/// for classification, tracking, and workflow management.
+/// to improve how you categorize, track, and search your data.
 public struct ObjectContexts: Sendable, Codable, Equatable, ExpressibleByDictionaryLiteral {
   /// Map of custom context keys to their payloads.
   public var custom: [String: ObjectCustomContextPayload]?
@@ -516,7 +516,7 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
 ///
 /// ### Object Contexts
 ///
-/// Attach object contexts for classification, tracking, and workflow management:
+/// Attach object contexts to improve how you categorize, track, and search your data:
 ///
 /// ```swift
 /// let options = UploadOptions().with {
