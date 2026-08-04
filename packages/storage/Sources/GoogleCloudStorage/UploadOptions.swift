@@ -506,10 +506,25 @@ public struct UploadMetadata: Sendable, Codable, Equatable {
 ///
 /// ```swift
 /// let options = UploadOptions().with {
-///   $0.metadata = UploadMetadata().with {
-///     $0.contentType = "image/png"
-///     $0.cacheControl = "public, max-age=3600"
-///     $0.customMetadata = ["author": "Jane Doe", "department": "Engineering"]
+///   $0.metadata = UploadMetadata().with { meta in
+///     meta.contentType = "image/png"
+///     meta.cacheControl = "public, max-age=3600"
+///     meta.customMetadata = ["author": "Jane Doe", "department": "Engineering"]
+///   }
+/// }
+/// ```
+///
+/// ### Object Contexts
+///
+/// Attach object contexts for classification, tracking, and workflow management:
+///
+/// ```swift
+/// let options = UploadOptions().with {
+///   $0.metadata = UploadMetadata().with { meta in
+///     meta.contexts = ObjectContexts(custom: [
+///       "environment": ObjectCustomContextPayload(value: "production"),
+///       "team": "Engineering"
+///     ])
 ///   }
 /// }
 /// ```
