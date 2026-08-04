@@ -19,12 +19,35 @@ The primary client method for downloading object content is `readObject`:
 func readObject(
   from bucket: String,
   object: String,
-  options: ReadObjectOptions
+  options: ReadObjectOptions = .init()
 ) -> ReadObjectSequence
 ```
 
 - **Return Type:** Returns a custom struct `ReadObjectSequence` that conforms to `AsyncSequence` where `Element == Data`.
-- **Non-blocking Initialization:** Calling `readObject` immediately returns the `ReadObjectSequence` handle without blocking. Network requests and data streaming begin when the caller iterates over the sequence using `for try await chunk in client.readObject(...)`.
+- **Non-blocking Initialization:** Calling `readObject` immediately returns the `ReadObjectSequence` handle without blocking. Network requests and data streaming begin when the caller iterates over the sequence.
+
+### Example Usage
+
+### Basic download with default options:
+
+```swift
+for try await chunk in client.readObject(from: "my-bucket", object: "file.txt") {
+  // process Data chunk
+}
+```
+
+### Custom download options:
+
+```swift
+let options = ReadObjectOptions().with {
+  $0.range = .bounded(start: 0, end: 1024)
+  $0.autoResume = true
+}
+
+for try await chunk in client.readObject(from: "my-bucket", object: "file.txt", options: options) {
+  // process Data chunk
+}
+```
 
 ---
 
