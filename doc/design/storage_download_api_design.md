@@ -114,18 +114,26 @@ To guarantee data integrity during transfer, Cloud Storage provides CRC32C and M
 ```swift
 public struct DownloadChecksumOptions: Sendable, Hashable, Equatable {
   /// Automatically validate CRC32C checksum on full reads.
-  public var crc32c: Bool
+  public var crc32c: Bool = true
 
   /// Automatically validate MD5 checksum when requested.
-  public var md5: Bool
+  public var md5: Bool = false
 
-  public init(crc32c: Bool = true, md5: Bool = false) {
-    self.crc32c = crc32c
-    self.md5 = md5
+  public init() {}
+
+  public static var `default`: DownloadChecksumOptions { DownloadChecksumOptions() }
+  public static var none: DownloadChecksumOptions {
+    DownloadChecksumOptions().with {
+      $0.crc32c = false
+      $0.md5 = false
+    }
   }
 
-  public static var `default`: DownloadChecksumOptions { DownloadChecksumOptions(crc32c: true, md5: false) }
-  public static var none: DownloadChecksumOptions { DownloadChecksumOptions(crc32c: false, md5: false) }
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
+  }
 }
 ```
 
@@ -163,12 +171,14 @@ public enum ReadRange: Sendable, Hashable, Equatable {
 
 /// Configuration options for download checksum validation.
 public struct DownloadChecksumOptions: Sendable, Hashable, Equatable {
-  public var crc32c: Bool
-  public var md5: Bool
+  public var crc32c: Bool = true
+  public var md5: Bool = false
 
-  public init(crc32c: Bool = true, md5: Bool = false)
+  public init() {}
   public static var `default`: DownloadChecksumOptions { get }
   public static var none: DownloadChecksumOptions { get }
+
+  public func with(_ config: (inout Self) -> Void) -> Self
 }
 
 /// Configuration options for object download (`readObject`) requests.
@@ -176,22 +186,16 @@ public struct ReadObjectOptions: Sendable {
   public var generation: Int64?
   public var preconditions: StoragePreconditions?
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
-  public var range: ReadRange
-  public var disableDecompressiveTranscoding: Bool
-  public var checksums: DownloadChecksumOptions
-  public var autoResume: Bool
+  public var range: ReadRange = .entire
+  public var disableDecompressiveTranscoding: Bool = false
+  public var checksums: DownloadChecksumOptions = .default
+  public var autoResume: Bool = true
 
   public static var `default`: ReadObjectOptions { ReadObjectOptions() }
 
-  public init(
-    generation: Int64? = nil,
-    preconditions: StoragePreconditions? = nil,
-    customerEncryptionKey: CustomerEncryptionKeyOptions? = nil,
-    range: ReadRange = .entire,
-    disableDecompressiveTranscoding: Bool = false,
-    checksums: DownloadChecksumOptions = .default,
-    autoResume: Bool = true
-  )
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self
 }
 ```
 
@@ -273,3 +277,10 @@ extension StorageClient {
 ### Option C: Explicit Resume Token / Manual Handshake
 - *Description:* Require developers to catch errors and manually initiate resume downloads with an offset token.
 - *Why Rejected:* Unnecessary boilerplate for developers. Encapsulating transparent auto-resumption inside `ReadObjectSequence.AsyncIterator` ensures high reliability out of the box while allowing manual control when `autoResume = false`.
+
+### Option D: Opaque Return Type (`some AsyncSequence<Data, any Error> & Sendable`)
+- *Description:* Use Swift 5.7+ opaque return types (`func readObject(...) -> some AsyncSequence<Data, any Error> & Sendable`) instead of exposing `ReadObjectSequence`.
+- *Trade-offs:*
+  - *Pros:* Hides internal implementation details and allows changing the underlying stream implementation in future releases without breaking API signature compatibility.
+  - *Cons:* In Swift protocol declarations (`StorageClientProtocol`), returning `some` forces all conforming implementations (including test mocks) to use the exact same underlying concrete type, or requires adding an `associatedtype` requirement to the protocol.
+- *Recommendation:* If `StorageClientProtocol` needs flexibility across different mock implementations without complex protocol generic constraints, returning `ReadObjectSequence` or `any AsyncSequence<Data, any Error> & Sendable` (or an `AsyncThrowingStream<Data, Error>`) is preferable.
