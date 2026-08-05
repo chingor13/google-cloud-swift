@@ -155,33 +155,37 @@ To guarantee data integrity during transfer, Cloud Storage provides CRC32C and M
 2. **MD5 (Optional):** Applications can explicitly enable MD5 validation in `DownloadChecksumOptions`.
 3. **Automatic Bypass:** Checksum validation is automatically skipped when performing partial/ranged reads or when decompressive transcoding is active, because GCS header hashes reflect the entire raw object payload.
 
-### `DownloadChecksumOptions` Interface
+### Reusing `ChecksumOptions`
+
+The download API reuses the existing `ChecksumOptions` struct defined in `UploadOptions.swift` to ensure a single, consistent checksum options surface across both uploads and downloads:
 
 ```swift
-public struct DownloadChecksumOptions: Sendable, Hashable, Equatable {
-  /// Automatically validate CRC32C checksum on full reads.
-  public var crc32c: Bool = true
+/// Configuration options for checksum validation (reused from `UploadOptions.swift`).
+public struct ChecksumOptions: Sendable, Hashable {
+  public var crc32c: ChecksumValue?
+  public var md5: ChecksumValue?
 
-  /// Automatically validate MD5 checksum when requested.
-  public var md5: Bool = false
+  public enum ChecksumValue: Sendable, Hashable, ExpressibleByStringLiteral, ExpressibleByIntegerLiteral {
+    case auto
+    case value(String)
 
-  public init() {}
-
-  public static var `default`: DownloadChecksumOptions { DownloadChecksumOptions() }
-  public static var none: DownloadChecksumOptions {
-    DownloadChecksumOptions().with {
-      $0.crc32c = false
-      $0.md5 = false
-    }
+    public init(stringLiteral value: String)
+    public init(_ intValue: UInt32)
+    public init(integerLiteral value: UInt64)
   }
 
-  public func with(_ config: (inout Self) -> Void) -> Self {
-    var copy = self
-    config(&copy)
-    return copy
-  }
+  public init(crc32c: ChecksumValue? = .auto, md5: ChecksumValue? = nil)
+
+  public static var `default`: ChecksumOptions { ChecksumOptions(crc32c: .auto, md5: nil) }
+  public static var none: ChecksumOptions { ChecksumOptions(crc32c: nil, md5: nil) }
 }
 ```
+
+When downloading:
+- `checksums.crc32c = .auto` (or `.default`): Automatically validates the received CRC32C stream against `x-goog-hash` upon download completion.
+- `checksums.crc32c = .value("...")` (or `.value(12345)`): Validates the downloaded stream against a specific user-expected CRC32C value.
+- `checksums.md5 = .auto` (or `.value("...")`): Validates MD5 against `x-goog-hash` or a user-provided expected value.
+- `checksums = .none`: Disables client-side checksum validation for the download.
 
 ---
 
@@ -215,18 +219,6 @@ public enum ReadRange: Sendable, Hashable, Equatable {
   public var headerValue: String? { get }
 }
 
-/// Configuration options for download checksum validation.
-public struct DownloadChecksumOptions: Sendable, Hashable, Equatable {
-  public var crc32c: Bool = true
-  public var md5: Bool = false
-
-  public init() {}
-  public static var `default`: DownloadChecksumOptions { get }
-  public static var none: DownloadChecksumOptions { get }
-
-  public func with(_ config: (inout Self) -> Void) -> Self
-}
-
 /// Configuration options for object download (`readObject`) requests.
 public struct ReadObjectOptions: Sendable {
   public var generation: UInt64?
@@ -234,7 +226,7 @@ public struct ReadObjectOptions: Sendable {
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
   public var range: ReadRange = .entire
   public var disableDecompressiveTranscoding: Bool = false
-  public var checksums: DownloadChecksumOptions = .default
+  public var checksums: ChecksumOptions = .default
   public var autoResume: Bool = true
 
   public static var `default`: ReadObjectOptions { ReadObjectOptions() }
